@@ -2,8 +2,9 @@
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
@@ -11,11 +12,6 @@ use PoP\Root\AbstractTestCase;
 
 class VariableTest extends AbstractTestCase
 {
-    protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->getService(FeedbackMessageProvider::class);
-    }
-
     /**
      * Test if variable value equals expected value
      *
@@ -31,7 +27,7 @@ class VariableTest extends AbstractTestCase
     public function testGetNullValueException()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage($this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, 'foo'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(FeedbackItemProvider::class, FeedbackItemProvider::E2, ['foo']))->getMessage());
         $var = new Variable('foo', 'bar', false, false, true, new Location(1, 1));
         $var->getValue()->getValue();
     }

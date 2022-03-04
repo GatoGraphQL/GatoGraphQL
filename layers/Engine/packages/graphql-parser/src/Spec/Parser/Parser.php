@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
@@ -30,17 +31,6 @@ use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
 {
-    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-
-    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
-    {
-        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
-    }
-    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
-    {
-        return $this->graphQLSpecErrorMessageProvider ??= $this->instanceManager->getInstance(GraphQLSpecErrorMessageProvider::class);
-    }
-
     /** @var OperationInterface[] */
     private array $operations = [];
     /** @var Fragment[] */
@@ -68,8 +58,13 @@ class Parser extends Tokenizer implements ParserInterface
 
                 default:
                     throw new SyntaxErrorException(
-                        $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_1, $this->lookAhead->getData()),
-                        $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_1),
+                        new FeedbackItemResolution(
+                            GraphQLParserErrorFeedbackItemProvider::class,
+                            GraphQLParserErrorFeedbackItemProvider::E_1,
+                            [
+                                $this->lookAhead->getData(),
+                            ]
+                        ),
                         $this->getLocation()
                     );
             }
@@ -571,9 +566,6 @@ class Parser extends Tokenizer implements ParserInterface
         throw $this->createUnexpectedException($this->lookAhead);
     }
 
-    /**
-     * @param string|int|float|bool|null $value
-     */
     public function createLiteral(
         string|int|float|bool|null $value,
         Location $location
@@ -628,8 +620,10 @@ class Parser extends Tokenizer implements ParserInterface
                 => $this->parseList(false),
             default
                 => throw new SyntaxErrorException(
-                    $this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_2),
-                    $this->getGraphQLParserErrorMessageProvider()->getNamespacedCode(GraphQLParserErrorMessageProvider::E_2),
+                    new FeedbackItemResolution(
+                        GraphQLParserErrorFeedbackItemProvider::class,
+                        GraphQLParserErrorFeedbackItemProvider::E_2
+                    ),
                     $this->getLocation()
                 ),
         };
@@ -655,8 +649,13 @@ class Parser extends Tokenizer implements ParserInterface
             // Validate no duplicated keys in InputObject
             if (property_exists($object, $key)) {
                 throw new SyntaxErrorException(
-                    $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, $key),
-                    $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_6_2),
+                    new FeedbackItemResolution(
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_6_2,
+                        [
+                            $key,
+                        ]
+                    ),
                     $this->getTokenLocation($keyToken)
                 );
             }

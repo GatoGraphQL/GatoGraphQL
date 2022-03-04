@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -14,14 +15,29 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     {
         $errors = [];
         if (empty($form_data['email'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Email cannot be empty.', 'pop-genericforms');
         } elseif (!filter_var($form_data['email'], FILTER_VALIDATE_EMAIL)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Email format is incorrect.', 'pop-genericforms');
         }
 
         $placeholder_string = $this->__('%s %s', 'pop-genericforms');
         $makesure_string = $this->__('Please make sure you have clicked on the unsubscription link in the newsletter.', 'pop-genericforms');
         if (empty($form_data['verificationcode'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = sprintf(
                 $placeholder_string,
                 $this->__('The verification code is missing.', 'pop-genericforms'),
@@ -36,6 +52,11 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         // Verify that the verification code corresponds to the email
         $verificationcode = \PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($form_data['email']);
         if ($verificationcode != $form_data['verificationcode']) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = sprintf(
                 $placeholder_string,
                 $this->__('The verification code does not match the email.', 'pop-genericforms'),
@@ -95,6 +116,10 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $newsletter_data = $this->getNewsletterData($form_data);

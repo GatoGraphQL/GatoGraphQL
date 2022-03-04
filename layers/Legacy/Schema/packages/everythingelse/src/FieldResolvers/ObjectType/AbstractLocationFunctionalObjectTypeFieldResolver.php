@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Locations\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -54,23 +55,24 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
             case 'locationsmapURL':
-                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $options);
-                if (GeneralUtils::isError($locations)) {
+                $locations = $objectTypeResolver->resolveValue($object, 'locations', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return null;
                 }
                 return
@@ -86,6 +88,6 @@ abstract class AbstractLocationFunctionalObjectTypeFieldResolver extends Abstrac
                     );
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

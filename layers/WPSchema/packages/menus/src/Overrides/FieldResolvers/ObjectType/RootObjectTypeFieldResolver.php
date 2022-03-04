@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Menus\Overrides\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoPCMSSchema\Menus\FieldResolvers\ObjectType\RootObjectTypeFieldResolver as UpstreamRootObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -11,8 +12,8 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
 {
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
@@ -20,8 +21,9 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         object $object,
         string $fieldName,
         array $fieldArgs,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
@@ -38,7 +40,7 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                     }
                 }
                 if ($menuParam === null) {
-                    return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+                    return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 }
                 $menu = wp_get_nav_menu_object($menuParam);
                 if ($menu === false) {
@@ -47,6 +49,6 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 return $menu->term_id;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

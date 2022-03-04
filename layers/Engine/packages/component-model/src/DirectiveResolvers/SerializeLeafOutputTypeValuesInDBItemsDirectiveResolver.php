@@ -6,9 +6,11 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -48,16 +50,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
         array &$dbItems,
         array &$variables,
         array &$messages,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         if (!$objectIDItems) {
             return;
@@ -73,7 +66,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             $targetObjectTypeResolver = $relationalTypeResolver;
         }
 
-        foreach (array_keys($idsDataFields) as $id) {
+        foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
@@ -84,9 +77,18 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
             if ($isUnionTypeResolver) {
                 $targetObjectTypeResolver = $unionTypeResolver->getTargetObjectTypeResolver($object);
             }
-            $dataFields = $idsDataFields[(string)$id]['direct'];
-            foreach ($dataFields as $field) {
-                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field);
+            foreach ($dataFields['direct'] as $field) {
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $fieldTypeResolver = $targetObjectTypeResolver->getFieldTypeResolver($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                    $separateObjectTypeFieldResolutionFeedbackStore,
+                    $targetObjectTypeResolver,
+                    $field,
+                    $id
+                );
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    continue;
+                }
                 if (!($fieldTypeResolver instanceof LeafOutputTypeResolverInterface)) {
                     continue;
                 }
@@ -103,7 +105,16 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                 }
 
                 /** @var int */
-                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field);
+                $fieldTypeModifiers = $targetObjectTypeResolver->getFieldTypeModifiers($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+                $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                    $separateObjectTypeFieldResolutionFeedbackStore,
+                    $targetObjectTypeResolver,
+                    $field,
+                    $id
+                );
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    continue;
+                }
                 $fieldLeafOutputTypeIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
                 $fieldLeafOutputTypeIsArray = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
                 // Serialize the scalar/enum value stored in $dbItems

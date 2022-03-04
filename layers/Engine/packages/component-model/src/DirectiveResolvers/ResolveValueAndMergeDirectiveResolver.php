@@ -4,31 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Container\ServiceTags\MandatoryDirectiveServiceTagInterface;
 use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorServiceInterface;
-use PoP\ComponentModel\Feedback\Tokens;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
 
 final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiveResolver implements MandatoryDirectiveServiceTagInterface
 {
-    private ?ErrorServiceInterface $errorService = null;
-
-    final public function setErrorService(ErrorServiceInterface $errorService): void
-    {
-        $this->errorService = $errorService;
-    }
-    final protected function getErrorService(): ErrorServiceInterface
-    {
-        return $this->errorService ??= $this->instanceManager->getInstance(ErrorServiceInterface::class);
-    }
-
     public function getDirectiveName(): string
     {
         return 'resolveValueAndMerge';
@@ -61,25 +52,25 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array &$dbItems,
         array &$variables,
         array &$messages,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         // Iterate data, extract into final results
         if (!$objectIDItems) {
             return;
         }
-        $this->resolveValueForObjects($relationalTypeResolver, $objectIDItems, $idsDataFields, $dbItems, $previousDBItems, $variables, $messages, $objectErrors, $objectWarnings, $objectDeprecations, $schemaErrors, $schemaWarnings, $schemaDeprecations);
+        $this->resolveValueForObjects(
+            $relationalTypeResolver,
+            $objectIDItems,
+            $idsDataFields,
+            $dbItems,
+            $previousDBItems,
+            $variables,
+            $messages,
+            $engineIterationFeedbackStore,
+        );
     }
 
-    protected function resolveValueForObjects(
+    private function resolveValueForObjects(
         RelationalTypeResolverInterface $relationalTypeResolver,
         array $objectIDItems,
         array $idsDataFields,
@@ -87,27 +78,33 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$messages,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $enqueueFillingObjectsFromIDs = [];
-        foreach (array_keys($idsDataFields) as $id) {
+        foreach ($idsDataFields as $id => $dataFields) {
             // Obtain its ID and the required data-fields for that ID
             $object = $objectIDItems[$id];
             // It could be that the object is NULL. For instance: a post has a location stored a meta value, and the corresponding location object was deleted, so the ID is pointing to a non-existing object
             // In that case, simply return a dbError, and set the result as an empty array
             if ($object === null) {
-                $objectErrors[(string)$id][] = [
-                    Tokens::PATH => ['id'],
-                    Tokens::MESSAGE => sprintf(
-                        $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
-                        $id
-                    ),
-                ];
+                foreach ($dataFields['direct'] as $field) {
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E13,
+                                [
+                                    $id,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $field,
+                            $id,
+                            $this->directive,
+                        )
+                    );
+                }
                 // This is currently pointing to NULL and returning this entry in the database. Remove it
                 // (this will also avoid errors in the Engine, which expects this result to be an array and can't be null)
                 unset($dbItems[(string)$id]);
@@ -115,7 +112,17 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             }
 
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
-            $this->resolveValuesForObject($relationalTypeResolver, $id, $object, $idsDataFields[(string)$id]['direct'], $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
+            $this->resolveValuesForObject(
+                $relationalTypeResolver,
+                $id,
+                $object,
+                $idsDataFields[(string)$id]['direct'],
+                $dbItems,
+                $previousDBItems,
+                $variables,
+                $expressions,
+                $engineIterationFeedbackStore,
+            );
 
             // Add the conditional data fields
             // If the conditionalDataFields are empty, we already reached the end of the tree. Nothing else to do
@@ -148,7 +155,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         }
     }
 
-    protected function resolveValuesForObject(
+    private function resolveValuesForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
@@ -157,16 +164,24 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$expressions,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         foreach ($dataFields as $field) {
-            $this->resolveValueForObject($relationalTypeResolver, $id, $object, $field, $dbItems, $previousDBItems, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
+            $this->resolveValueForObject(
+                $relationalTypeResolver,
+                $id,
+                $object,
+                $field,
+                $dbItems,
+                $previousDBItems,
+                $variables,
+                $expressions,
+                $engineIterationFeedbackStore,
+            );
         }
     }
 
-    protected function resolveValueForObject(
+    private function resolveValueForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string | int $id,
         object $object,
@@ -175,51 +190,33 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         array $previousDBItems,
         array &$variables,
         array &$expressions,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        // Get the value, and add it to the database
-        $value = $this->resolveFieldValue($relationalTypeResolver, $id, $object, $field, $previousDBItems, $variables, $expressions, $objectWarnings, $objectDeprecations);
-        $this->addValueForObject($relationalTypeResolver, $id, $object, $field, $value, $dbItems, $objectErrors);
-    }
+        // 1. Resolve the value against the TypeResolver
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $value = $relationalTypeResolver->resolveValue(
+            $object,
+            $field,
+            $variables,
+            $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
-    protected function resolveFieldValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        $id,
-        object $object,
-        string $field,
-        array $previousDBItems,
-        array &$variables,
-        array &$expressions,
-        array &$objectWarnings,
-        array &$objectDeprecations
-    ) {
-        return $relationalTypeResolver->resolveValue($object, $field, $variables, $expressions);
-    }
+        // 2. Transfer the feedback
+        $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+            $objectTypeFieldResolutionFeedbackStore,
+            $relationalTypeResolver,
+            $field,
+            $id,
+        );
 
-    protected function addValueForObject(
-        RelationalTypeResolverInterface $relationalTypeResolver,
-        string | int $id,
-        object $object,
-        string $field,
-        mixed $value,
-        array &$dbItems,
-        array &$objectErrors,
-    ): void {
+        // 3. Add the output in the DB
         $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey(
             $relationalTypeResolver,
             $field,
             $object,
         );
-        // The dataitem can contain both rightful values and also errors (eg: when the field doesn't exist, or the field validation fails)
-        // Extract the errors and add them on the other array
-        if (GeneralUtils::isError($value)) {
-            // Extract the error message
-            /** @var Error */
-            $error = $value;
-            $objectErrors[(string)$id][] = $this->getErrorService()->getErrorOutput($error, [$field]);
-
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();

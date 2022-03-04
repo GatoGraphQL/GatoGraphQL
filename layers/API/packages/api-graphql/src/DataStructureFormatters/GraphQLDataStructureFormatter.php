@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
-use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
-use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
+use PoP\ComponentModel\Constants\Response;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\Root\App;
+use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormatter;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
@@ -21,135 +23,86 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     {
         $ret = [];
 
-        // Add errors
-        $errors = $warnings = $deprecations = $notices = $traces = [];
-        if (isset($data['generalErrors'])) {
-            $errors = array_merge(
-                $errors,
-                $this->reformatGeneralEntries($data['generalErrors'])
-            );
-        }
-        if (isset($data['documentErrors'])) {
-            $errors = array_merge(
-                $errors,
-                $this->reformatDocumentEntries($data['documentErrors'])
-            );
-        }
-        if (isset($data['schemaErrors'])) {
-            $errors = array_merge(
-                $errors,
-                $this->reformatSchemaEntries($data['schemaErrors'])
-            );
-        }
-        if (isset($data['objectErrors'])) {
-            $errors = array_merge(
-                $errors,
-                $this->reformatDBEntries($data['objectErrors'])
-            );
-        }
-        if ($errors) {
+        // Add feedback
+        $errors = array_merge(
+            $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+        );
+        if ($errors !== []) {
             $ret['errors'] = $errors;
         }
 
-        // Add warnings always, not inside of Proactive Feedback,
-        // because the difference between errors and warnings sometimes is not clear
-        // Eg: `{ posts(searchfor: ["posts"]) { id } }` will fail casting fieldArg `searchfor`,
-        // raising a warning, but field `posts` is still executed, retrieving all results.
-        // If the user is not told that there was an error/warning, it's very confusing
-        if ($data['generalWarnings'] ?? null) {
-            $warnings = array_merge(
-                $warnings,
-                $this->reformatGeneralEntries($data['generalWarnings'])
-            );
-        }
-        if ($data['documentWarnings'] ?? null) {
-            $warnings = array_merge(
-                $warnings,
-                $this->reformatDocumentEntries($data['documentWarnings'])
-            );
-        }
-        if ($data['schemaWarnings'] ?? null) {
-            $warnings = array_merge(
-                $warnings,
-                $this->reformatSchemaEntries($data['schemaWarnings'])
-            );
-        }
-        if ($data['objectWarnings'] ?? null) {
-            $warnings = array_merge(
-                $warnings,
-                $this->reformatDBEntries($data['objectWarnings'])
-            );
-        }
-        if ($warnings) {
-            $ret['extensions']['warnings'] = $warnings;
-        }
-
         /**
-         * "deprecations", and "logEntries" top-level entries:
+         * "warnings", "deprecations", and "logEntries" top-level entries:
          * since they are not part of the spec, place them under the top-level entry "extensions":
          *
          * > This entry is reserved for implementors to extend the protocol however they see fit,
          * > and hence there are no additional restrictions on its contents.
          *
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
-         *
-         * "warnings" are added always (see above)
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            // Add notices
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
-                if ($data['objectNotices'] ?? null) {
-                    $notices = $this->reformatDBEntries($data['objectNotices']);
-                }
-                if ($data['schemaNotices'] ?? null) {
-                    $notices = array_merge(
-                        $notices,
-                        $this->reformatSchemaEntries($data['schemaNotices'])
-                    );
-                }
-                if ($notices) {
-                    $ret['extensions']['notices'] = $notices;
+
+            // Warnings
+            if ($componentConfiguration->enableProactiveFeedbackWarnings()) {
+                $warnings = array_merge(
+                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::WARNING] ?? []),
+                );
+                if ($warnings !== []) {
+                    $ret['extensions']['warnings'] = $warnings;
                 }
             }
 
-            // Add traces
-            if ($componentConfiguration->enableProactiveFeedbackTraces()) {
-                if ($data['objectTraces'] ?? null) {
-                    $traces = $this->reformatDBEntries($data['objectTraces']);
-                }
-                if ($data['schemaTraces'] ?? null) {
-                    $traces = array_merge(
-                        $traces,
-                        $this->reformatSchemaEntries($data['schemaTraces'])
-                    );
-                }
-                if ($traces) {
-                    $ret['extensions']['traces'] = $traces;
-                }
-            }
-
-            // Add deprecations
+            // Deprecations
             if ($componentConfiguration->enableProactiveFeedbackDeprecations()) {
-                if ($data['objectDeprecations'] ?? null) {
-                    $deprecations = $this->reformatDBEntries($data['objectDeprecations']);
-                }
-                if ($data['schemaDeprecations'] ?? null) {
-                    $deprecations = array_merge(
-                        $deprecations,
-                        $this->reformatSchemaEntries($data['schemaDeprecations'])
-                    );
-                }
-                if ($deprecations) {
+                $deprecations = array_merge(
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::DEPRECATION] ?? []),
+                );
+                if ($deprecations !== []) {
                     $ret['extensions']['deprecations'] = $deprecations;
                 }
             }
 
-            // Add logs
+            // Notices
+            if ($componentConfiguration->enableProactiveFeedbackNotices()) {
+                $notices = array_merge(
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::NOTICE] ?? []),
+                );
+                if ($notices !== []) {
+                    $ret['extensions']['notices'] = $notices;
+                }
+            }
+
+            // Suggestions
+            if ($componentConfiguration->enableProactiveFeedbackSuggestions()) {
+                $notices = array_merge(
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::SUGGESTION] ?? []),
+                );
+                if ($notices !== []) {
+                    $ret['extensions']['suggestions'] = $notices;
+                }
+            }
+
+            // Logs
             if ($componentConfiguration->enableProactiveFeedbackLogs()) {
-                if ($data['logEntries'] ?? null) {
-                    $ret['extensions']['logs'] = $data['logEntries'];
+                $logs = array_merge(
+                    $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                    $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::LOG] ?? []),
+                );
+                if ($logs !== []) {
+                    $ret['extensions']['logs'] = $logs;
                 }
             }
         }
@@ -161,13 +114,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $ret;
     }
 
-    protected function reformatDBEntries($entries)
+    protected function reformatObjectEntries($entries)
     {
         $ret = [];
         foreach ($entries as $dbKey => $id_items) {
             foreach ($id_items as $id => $items) {
                 foreach ($items as $item) {
-                    $ret[] = $this->getDBEntry($dbKey, $id, $item);
+                    $ret[] = $this->getObjectEntry($dbKey, $id, $item);
                 }
             }
         }
@@ -182,7 +135,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return true;
     }
 
-    protected function getDBEntry(string $dbKey, string | int $id, array $item): array
+    protected function getObjectEntry(string $dbKey, string | int $id, array $item): array
     {
         $entry = [];
         if ($message = $item[Tokens::MESSAGE] ?? null) {
@@ -197,7 +150,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // if ($this->addTopLevelExtensionsEntryToResponse()) {
         if (
             $extensions = array_merge(
-                $this->getDBEntryExtensions($dbKey, $id, $item),
+                $this->getObjectEntryExtensions($dbKey, $id, $item),
                 $item[Tokens::EXTENSIONS] ?? []
             )
         ) {
@@ -225,7 +178,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         return $extensions;
     }
 
-    protected function getDBEntryExtensions(string $dbKey, int | string $id, array $item): array
+    protected function getObjectEntryExtensions(string $dbKey, int | string $id, array $item): array
     {
         return [
             'type' => 'dataObject',

@@ -4,96 +4,231 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class SchemaFeedbackStore
 {
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaErrors = [];
+    private array $errors = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaWarnings = [];
+    private array $warnings = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaDeprecations = [];
+    private array $deprecations = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaNotices = [];
+    private array $notices = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaLogs = [];
+    private array $suggestions = [];
     /** @var SchemaFeedbackInterface[] */
-    private array $schemaTraces = [];
+    private array $logs = [];
+
+    public function incorporate(
+        SchemaFeedbackStore $schemaFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $schemaFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $schemaFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $schemaFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $schemaFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $schemaFeedbackStore->getSuggestions()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $schemaFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        ?string $directive = null,
+    ): void {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $this->errors[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $this->warnings[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackWarning,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
+            $this->deprecations[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackDeprecation,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
+            $this->notices[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
+            $this->suggestions[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackSuggestion,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
+            $this->logs[] = SchemaFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackLog,
+                $relationalTypeResolver,
+                $field,
+                $directive,
+            );
+        }
+    }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaErrors(): array
+    public function getErrors(): array
     {
-        return $this->schemaErrors;
+        return $this->errors;
     }
 
-    public function addSchemaError(SchemaFeedbackInterface $schemaError): void
+    public function addError(SchemaFeedbackInterface $error): void
     {
-        $this->schemaErrors[] = $schemaError;
+        $this->errors[] = $error;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaWarnings(): array
+    public function getWarnings(): array
     {
-        return $this->schemaWarnings;
+        return $this->warnings;
     }
 
-    public function addSchemaWarning(SchemaFeedbackInterface $schemaWarning): void
+    public function addWarning(SchemaFeedbackInterface $warning): void
     {
-        $this->schemaWarnings[] = $schemaWarning;
+        $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaDeprecations(): array
+    public function getDeprecations(): array
     {
-        return $this->schemaDeprecations;
+        return $this->deprecations;
     }
 
-    public function addSchemaDeprecation(SchemaFeedbackInterface $schemaDeprecation): void
+    public function addDeprecation(SchemaFeedbackInterface $deprecation): void
     {
-        $this->schemaDeprecations[] = $schemaDeprecation;
+        $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaNotices(): array
+    public function getNotices(): array
     {
-        return $this->schemaNotices;
+        return $this->notices;
     }
 
-    public function addSchemaNotice(SchemaFeedbackInterface $schemaNotice): void
+    public function addNotice(SchemaFeedbackInterface $notice): void
     {
-        $this->schemaNotices[] = $schemaNotice;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaLogs(): array
+    public function getSuggestions(): array
     {
-        return $this->schemaLogs;
+        return $this->suggestions;
     }
 
-    public function addSchemaLog(SchemaFeedbackInterface $schemaLog): void
+    public function addSuggestion(SchemaFeedbackInterface $suggestion): void
     {
-        $this->schemaLogs[] = $schemaLog;
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**
      * @return SchemaFeedbackInterface[]
      */
-    public function getSchemaTraces(): array
+    public function getLogs(): array
     {
-        return $this->schemaTraces;
+        return $this->logs;
     }
 
-    public function addSchemaTrace(SchemaFeedbackInterface $schemaTrace): void
+    public function addLog(SchemaFeedbackInterface $log): void
     {
-        $this->schemaTraces[] = $schemaTrace;
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @param SchemaFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
     }
 }

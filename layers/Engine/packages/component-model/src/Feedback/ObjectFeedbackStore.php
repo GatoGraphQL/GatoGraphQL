@@ -4,96 +4,238 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Feedback;
 
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+
 class ObjectFeedbackStore
 {
     /** @var ObjectFeedbackInterface[] */
-    private array $objectErrors = [];
+    private array $errors = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectWarnings = [];
+    private array $warnings = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectDeprecations = [];
+    private array $deprecations = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectNotices = [];
+    private array $notices = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectLogs = [];
+    private array $suggestions = [];
     /** @var ObjectFeedbackInterface[] */
-    private array $objectTraces = [];
+    private array $logs = [];
+
+    public function incorporate(
+        ObjectFeedbackStore $objectFeedbackStore,
+    ): void {
+        $this->errors = array_merge(
+            $this->errors,
+            $objectFeedbackStore->getErrors()
+        );
+        $this->warnings = array_merge(
+            $this->warnings,
+            $objectFeedbackStore->getWarnings()
+        );
+        $this->deprecations = array_merge(
+            $this->deprecations,
+            $objectFeedbackStore->getDeprecations()
+        );
+        $this->notices = array_merge(
+            $this->notices,
+            $objectFeedbackStore->getNotices()
+        );
+        $this->suggestions = array_merge(
+            $this->suggestions,
+            $objectFeedbackStore->getSuggestions()
+        );
+        $this->logs = array_merge(
+            $this->logs,
+            $objectFeedbackStore->getLogs()
+        );
+    }
+
+    public function incorporateFromObjectTypeFieldResolutionFeedbackStore(
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        string|int $objectID,
+        ?string $directive = null,
+    ): void {
+        foreach ($objectTypeFieldResolutionFeedbackStore->getErrors() as $objectTypeFieldResolutionFeedbackError) {
+            $this->errors[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackError,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getWarnings() as $objectTypeFieldResolutionFeedbackWarning) {
+            $this->warnings[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackWarning,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getDeprecations() as $objectTypeFieldResolutionFeedbackDeprecation) {
+            $this->deprecations[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackDeprecation,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getNotices() as $objectTypeFieldResolutionFeedbackNotice) {
+            $this->notices[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackNotice,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getSuggestions() as $objectTypeFieldResolutionFeedbackSuggestion) {
+            $this->suggestions[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackSuggestion,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+        foreach ($objectTypeFieldResolutionFeedbackStore->getLogs() as $objectTypeFieldResolutionFeedbackLog) {
+            $this->logs[] = ObjectFeedback::fromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedbackLog,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive,
+            );
+        }
+    }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectErrors(): array
+    public function getErrors(): array
     {
-        return $this->objectErrors;
+        return $this->errors;
     }
 
-    public function addObjectError(ObjectFeedbackInterface $objectError): void
+    public function addError(ObjectFeedbackInterface $error): void
     {
-        $this->objectErrors[] = $objectError;
+        $this->errors[] = $error;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $errors
+     */
+    public function setErrors(array $errors): void
+    {
+        $this->errors = $errors;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectWarnings(): array
+    public function getWarnings(): array
     {
-        return $this->objectWarnings;
+        return $this->warnings;
     }
 
-    public function addObjectWarning(ObjectFeedbackInterface $objectWarning): void
+    public function addWarning(ObjectFeedbackInterface $warning): void
     {
-        $this->objectWarnings[] = $objectWarning;
+        $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectDeprecations(): array
+    public function getDeprecations(): array
     {
-        return $this->objectDeprecations;
+        return $this->deprecations;
     }
 
-    public function addObjectDeprecation(ObjectFeedbackInterface $objectDeprecation): void
+    public function addDeprecation(ObjectFeedbackInterface $deprecation): void
     {
-        $this->objectDeprecations[] = $objectDeprecation;
+        $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectNotices(): array
+    public function getNotices(): array
     {
-        return $this->objectNotices;
+        return $this->notices;
     }
 
-    public function addObjectNotice(ObjectFeedbackInterface $objectNotice): void
+    public function addNotice(ObjectFeedbackInterface $notice): void
     {
-        $this->objectNotices[] = $objectNotice;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectLogs(): array
+    public function getSuggestions(): array
     {
-        return $this->objectLogs;
+        return $this->suggestions;
     }
 
-    public function addObjectLog(ObjectFeedbackInterface $objectLog): void
+    public function addSuggestion(ObjectFeedbackInterface $suggestion): void
     {
-        $this->objectLogs[] = $objectLog;
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
     }
 
     /**
      * @return ObjectFeedbackInterface[]
      */
-    public function getObjectTraces(): array
+    public function getLogs(): array
     {
-        return $this->objectTraces;
+        return $this->logs;
     }
 
-    public function addObjectTrace(ObjectFeedbackInterface $objectTrace): void
+    public function addLog(ObjectFeedbackInterface $log): void
     {
-        $this->objectTraces[] = $objectTrace;
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @param ObjectFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
     }
 }

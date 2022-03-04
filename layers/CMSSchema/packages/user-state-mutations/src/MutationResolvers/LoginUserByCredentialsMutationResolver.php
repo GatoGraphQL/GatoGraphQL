@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\Exception\UserLoginMutationException;
+use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 
@@ -34,43 +36,55 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         return $this->userStateTypeMutationAPI ??= $this->instanceManager->getInstance(UserStateTypeMutationAPIInterface::class);
     }
 
-    public function validateErrors(array $formData): array
+    public function validateErrors(array $form_data): array
     {
         $errors = [];
-        $username_or_email = $formData[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $formData[MutationInputProperties::PASSWORD];
+        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
+        $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         if (!$username_or_email) {
-            $errors[] = $this->__('Please supply your username or email', 'user-state-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            );
         }
         if (!$pwd) {
-            $errors[] = $this->__('Please supply your password', 'user-state-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            );
         }
 
         if (App::getState('is-user-logged-in')) {
-            $errors[] = $this->getUserAlreadyLoggedInErrorMessage(App::getState('current-user-id'));
+            $errors[] = $this->getUserAlreadyLoggedInError(App::getState('current-user-id'));
         }
         return $errors;
     }
 
-    protected function getUserAlreadyLoggedInErrorMessage(string | int $user_id): string
+    protected function getUserAlreadyLoggedInError(string | int $user_id): FeedbackItemResolution
     {
-        return $this->__('You are already logged in', 'user-state-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+        );
     }
 
-    public function executeMutation(array $formData): mixed
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
+    public function executeMutation(array $form_data): mixed
     {
         // If the user is already logged in, then return the error
-        $username_or_email = $formData[MutationInputProperties::USERNAME_OR_EMAIL];
-        $pwd = $formData[MutationInputProperties::PASSWORD];
+        $username_or_email = $form_data[MutationInputProperties::USERNAME_OR_EMAIL];
+        $pwd = $form_data[MutationInputProperties::PASSWORD];
 
         // Find out if it was a username or an email that was provided
         $is_email = strpos($username_or_email, '@');
         if ($is_email) {
             $user = $this->getUserTypeAPI()->getUserByEmail($username_or_email);
             if (!$user) {
-                return new Error(
-                    'no-user',
+                throw new UserLoginMutationException(
                     $this->__('There is no user registered with that email address.')
                 );
             }
@@ -85,10 +99,6 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             'remember' => true,
         );
         $loginResult = $this->getUserStateTypeMutationAPI()->login($credentials);
-
-        if (GeneralUtils::isError($loginResult)) {
-            return $loginResult;
-        }
 
         $user = $loginResult;
 

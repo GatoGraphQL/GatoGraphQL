@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
@@ -19,6 +20,11 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
             // Check that the logged in user does currently follow that user
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_DOWNVOTESPOSTS);
             if (!in_array($target_id, $value)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = sprintf(
                     $this->__('You had not down-voted <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
@@ -37,7 +43,11 @@ class UndoDownvoteCustomPostMutationResolver extends AbstractDownvoteOrUndoDownv
         App::doAction('gd_undodownvotepost', $target_id, $form_data);
     }
 
-    protected function update($form_data): string | int
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
+    protected function update(array $form_data): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];

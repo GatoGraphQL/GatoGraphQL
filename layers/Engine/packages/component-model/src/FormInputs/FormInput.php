@@ -4,27 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FormInputs;
 
-use Exception;
 use PoP\Root\App;
-use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class FormInput
 {
     public string $name;
-    public mixed $selected = null;
+    public mixed $selected;
+    public array $params;
 
-    public function __construct($params = array())
+    public function __construct(string $name, mixed $selected = null, array $params = [])
     {
-        if (!isset($params['name'])) {
-            $translationAPI = TranslationAPIFacade::getInstance();
-            throw new Exception(
-                $translationAPI->__('Mandatory property \'name\' in \'$params\' is missing', 'component-model')
-            );
-        }
-        $this->name = $params['name'];
+        $this->name = $name;
 
         // Selected value. If provided, use it
-        $this->selected = $params['selected'] ?? null;
+        $this->selected = $selected;
+
+        $this->params = $params;
     }
 
     public function isMultiple(): bool
@@ -74,7 +69,7 @@ class FormInput
     public function getValue(?array $source = null): mixed
     {
         // Empty values (eg: '', array()) can be the value. Only if NULL get a default value
-        if (!is_null($this->selected)) {
+        if ($this->selected !== null) {
             return $this->selected;
         }
 

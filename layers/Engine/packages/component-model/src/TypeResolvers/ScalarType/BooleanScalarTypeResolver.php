@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
 use CastToType;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 /**
@@ -19,10 +20,15 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
         return 'Boolean';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         /**
@@ -35,7 +41,8 @@ class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 
         $castInputValue = CastToType::_bool($inputValue);
         if ($castInputValue === null) {
-            return $this->getError($this->getDefaultErrorMessage($inputValue));
+            $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return (bool) $castInputValue;
     }

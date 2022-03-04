@@ -102,17 +102,18 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $userRoleTypeAPI = UserRoleTypeAPIFacade::getInstance();
@@ -128,14 +129,14 @@ class ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolver
                     $objectTypeResolver->getID($user)
                 );
             case 'hasRole':
-                $role = $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $options);
-                if (GeneralUtils::isError($role)) {
+                $role = $objectTypeResolver->resolveValue($user, 'role', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $role;
                 }
-                return $role == $fieldArgs['role'];
+                return $role === $fieldArgs['role'];
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

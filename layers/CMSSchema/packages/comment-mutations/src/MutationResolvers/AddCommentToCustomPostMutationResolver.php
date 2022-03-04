@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\MutationResolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CommentMutations\Component;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -59,33 +61,50 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
-            $this->validateUserIsLoggedIn($errors);
-            if ($errors) {
-                return $errors;
+            $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+            if ($errorFeedbackItemResolution !== null) {
+                return [
+                    $errorFeedbackItemResolution,
+                ];
             }
         } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
-                $errors[] = $this->__('The comment author\'s name is missing', 'comment-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E2,
+                );
             }
             if (!($form_data[MutationInputProperties::AUTHOR_EMAIL] ?? null)) {
-                $errors[] = $this->__('The comment author\'s email is missing', 'comment-mutations');
+                $errors[] = new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E3,
+                );
             }
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
         if (!($form_data[MutationInputProperties::CUSTOMPOST_ID] ?? null) && !($form_data[MutationInputProperties::PARENT_COMMENT_ID] ?? null)) {
-            $errors[] = $this->__('The custom post ID is missing.', 'comment-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            );
         }
         if (!($form_data[MutationInputProperties::COMMENT] ?? null)) {
-            $errors[] = $this->__('The comment is empty.', 'comment-mutations');
+            $errors[] = new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            );
         }
         return $errors;
     }
 
-    protected function getUserNotLoggedInErrorMessage(): string
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
-        return $this->__('You must be logged in to add comments', 'comment-mutations');
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
+        );
     }
 
     protected function additionals(string | int $comment_id, array $form_data): void
@@ -132,18 +151,22 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         return $comment_data;
     }
 
-    protected function insertComment(array $comment_data): string | int | Error
+    /**
+     * @throws CommentCRUDMutationException In case of error
+     */
+    protected function insertComment(array $comment_data): string | int
     {
         return $this->getCommentTypeMutationAPI()->insertComment($comment_data);
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $comment_data = $this->getCommentData($form_data);
         $comment_id = $this->insertComment($comment_data);
-        if (GeneralUtils::isError($comment_id)) {
-            return $comment_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($comment_id, $form_data);

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\GravityFormsMutations\MutationResolverBridges;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\App;
 use PoP\Root\Constants\HookNames;
+use PoP\Root\Exception\GenericClientException;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceInterface;
 use PoP\Root\Services\AutomaticallyInstantiatedServiceTrait;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -217,8 +217,9 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
                     $captcha_name = $moduleProcessor->getName([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
                     if ($captcha = App::request($captcha_name)) {
                         // Validate the captcha. If it fails, remove the attr "gform_submit" from $_POST
-                        $captcha_validation = \GD_Captcha::validate($captcha);
-                        if (GeneralUtils::isError($captcha_validation)) {
+                        try {
+                            \GD_Captcha::assertIsValid($captcha);
+                        } catch (GenericClientException $e) {
                             // By unsetting this value in the $_POST, the email won't be processed by function RGForms::maybe_process_form
                             App::getRequest()->request->remove('gform_submit');
                         }

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\FilterInputModuleProcessorInterface;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
@@ -23,7 +25,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -40,14 +41,6 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
     {
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
-    }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
-    {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
-    }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
     }
 
     /**
@@ -69,7 +62,10 @@ class DataloadHelperService implements DataloadHelperServiceInterface
         $objectTypeResolver = $relationalTypeResolver;
 
         // If this field doesn't have a typeResolver, show a schema error
-        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field);
+        $variables = [];
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $subcomponentFieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($subcomponent_data_field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        App::getFeedbackStore()->schemaFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore($objectTypeFieldResolutionFeedbackStore, $objectTypeResolver, $subcomponent_data_field);
         if (
             $subcomponentFieldTypeResolver === null
             || !($subcomponentFieldTypeResolver instanceof RelationalTypeResolverInterface)
@@ -81,13 +77,18 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             if ($objectTypeResolver->hasObjectTypeFieldResolversForField($subcomponent_data_field)) {
                 // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
-                App::getFeedbackStore()->schemaFeedbackStore->addSchemaError(
+                App::getFeedbackStore()->schemaFeedbackStore->addError(
                     new SchemaFeedback(
-                        $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E1, $subcomponent_data_field_outputkey),
-                        $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E1),
+                        new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E1,
+                            [
+                                $subcomponent_data_field_outputkey,
+                            ]
+                        ),
                         LocationHelper::getNonSpecificLocation(),
                         $objectTypeResolver,
-                        [$subcomponent_data_field_outputkey],
+                        $subcomponent_data_field,
                     )
                 );
             }

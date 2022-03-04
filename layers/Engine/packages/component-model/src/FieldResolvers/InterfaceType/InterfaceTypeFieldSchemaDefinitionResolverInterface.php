@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
@@ -40,7 +41,7 @@ interface InterfaceTypeFieldSchemaDefinitionResolverInterface
     /**
      * Validate the constraints for a field argument
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     public function validateFieldArgValue(
         string $fieldName,

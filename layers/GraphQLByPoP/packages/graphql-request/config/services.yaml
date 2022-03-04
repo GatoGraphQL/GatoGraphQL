@@ -12,6 +12,3 @@ services:
 
     GraphQLByPoP\GraphQLRequest\State\:
         resource: '../src/State/*'
-
-    GraphQLByPoP\GraphQLRequest\Hooks\:
-        resource: '../src/Hooks/*'

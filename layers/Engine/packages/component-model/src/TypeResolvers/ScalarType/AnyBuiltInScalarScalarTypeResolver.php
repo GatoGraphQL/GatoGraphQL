@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use stdClass;
 
 class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
@@ -21,10 +22,15 @@ class AnyBuiltInScalarScalarTypeResolver extends AbstractScalarTypeResolver
     /**
      * Accept anything and everything, other than arrays and objects
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
         return $inputValue;
     }

@@ -10,9 +10,6 @@ services:
     PoPCMSSchema\SchemaCommons\Formatters\DateFormatterInterface:
         class: \PoPCMSSchema\SchemaCommonsWP\Formatters\DateFormatter
 
-    PoPCMSSchema\SchemaCommons\Error\ErrorManagerInterface:
-        class: \PoPCMSSchema\SchemaCommonsWP\Error\ErrorManager
-
     PoPCMSSchema\SchemaCommonsWP\LooseContracts\:
         resource: '../src/LooseContracts/*'
 

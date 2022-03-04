@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
+use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;
 
 class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpointDirectiveResolver
 {
@@ -20,18 +22,18 @@ class ValidateIsUserLoggedInDirectiveResolver extends AbstractValidateCheckpoint
         return UserStateCheckpointSets::LOGGEDIN_DATAFROMSERVER;
     }
 
-    protected function getValidationFailedMessage(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): string
+    protected function getValidationFailedFeedbackItemResolution(RelationalTypeResolverInterface $relationalTypeResolver, array $failedDataFields): FeedbackItemResolution
     {
-        $errorMessage = $this->isValidatingDirective() ?
-            $this->__('You must be logged in to access directives in field(s) \'%s\' for type \'%s\'', 'user-state') :
-            $this->__('You must be logged in to access field(s) \'%s\' for type \'%s\'', 'user-state');
-        return sprintf(
-            $errorMessage,
-            implode(
-                $this->__('\', \''),
-                $failedDataFields
-            ),
-            $relationalTypeResolver->getMaybeNamespacedTypeName()
+        return new FeedbackItemResolution(
+            FeedbackItemProvider::class,
+            $this->isValidatingDirective() ? FeedbackItemProvider::E1 : FeedbackItemProvider::E2,
+            [
+                implode(
+                    $this->__('\', \''),
+                    $failedDataFields
+                ),
+                $relationalTypeResolver->getMaybeNamespacedTypeName(),
+            ]
         );
     }
 

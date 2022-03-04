@@ -1,9 +1,10 @@
 <?php
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 
 class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecutionQueryInputOutputHandler
 {
-    public function getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs): array
+    public function getQueryParams(array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         $ret = parent::getQueryParams($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
@@ -13,17 +14,6 @@ class GD_DataLoad_QueryInputOutputHandler_EditMembership extends ActionExecution
 
         return $ret;
     }
-
-    // function getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids) {
-
-    //     $ret = parent::getSharedbydomainsQuerystate($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
-
-    //     $uid = App::query(\PoPCMSSchema\Users\Constants\InputNames::USER_ID);
-    //     $ret[ParamConstants::PARAMS][\PoPCMSSchema\Users\Constants\InputNames::USER_ID] = $uid;
-    //     $ret[ParamConstants::PARAMS][POP_INPUTNAME_NONCE] = gdCreateNonce(GD_NONCE_EDITMEMBERSHIPURL, $uid);
-
-    //     return $ret;
-    // }
 }
 
 /**

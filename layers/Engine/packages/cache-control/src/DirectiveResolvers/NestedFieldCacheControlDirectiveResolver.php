@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\CacheControl\DirectiveResolvers;
 
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\FieldQuery\QueryHelpers;
@@ -66,16 +67,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
         array &$dbItems,
         array &$variables,
         array &$messages,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
-        array &$objectNotices,
-        array &$objectTraces,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         if ($idsDataFields) {
             // Iterate through all the arguments, calculate the maxAge for each of them,
@@ -160,16 +152,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
                     $dbItems,
                     $variables,
                     $messages,
-                    $objectErrors,
-                    $objectWarnings,
-                    $objectDeprecations,
-                    $objectNotices,
-                    $objectTraces,
-                    $schemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
-                    $schemaTraces
+                    $engineIterationFeedbackStore,
                 );
             }
             // That's it, we are done!
@@ -188,16 +171,7 @@ class NestedFieldCacheControlDirectiveResolver extends AbstractCacheControlDirec
             $previousDBItems,
             $variables,
             $messages,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
+            $engineIterationFeedbackStore,
         );
     }
 }

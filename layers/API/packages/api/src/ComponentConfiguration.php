@@ -58,19 +58,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function enableMutations(): bool
-    {
-        $envVariable = Environment::ENABLE_MUTATIONS;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function skipExposingGlobalFieldsInFullSchema(): bool
     {
         $envVariable = Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA;
@@ -88,6 +75,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::SORT_FULL_SCHEMA_ALPHABETICALLY;
         $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function addFullSchemaFieldToSchema(): bool
+    {
+        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_SCHEMA;
+        $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         return $this->retrieveConfigurationValueOrUseDefault(

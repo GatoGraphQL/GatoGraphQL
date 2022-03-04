@@ -81,17 +81,18 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
@@ -130,11 +131,11 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_Users extends Abstract
                 return gdUreGetCommunitiesStatusActive($objectTypeResolver->getID($user));
 
             case 'hasActiveCommunities':
-                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $options);
+                $communities = $objectTypeResolver->resolveValue($object, 'activeCommunities', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !empty($communities);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

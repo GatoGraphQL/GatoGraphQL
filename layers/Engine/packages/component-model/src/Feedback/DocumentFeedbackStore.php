@@ -7,93 +7,141 @@ namespace PoP\ComponentModel\Feedback;
 class DocumentFeedbackStore
 {
     /** @var DocumentFeedbackInterface[] */
-    private array $documentErrors = [];
+    private array $errors = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentWarnings = [];
+    private array $warnings = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentDeprecations = [];
+    private array $deprecations = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentNotices = [];
+    private array $notices = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentLogs = [];
+    private array $suggestions = [];
     /** @var DocumentFeedbackInterface[] */
-    private array $documentTraces = [];
+    private array $logs = [];
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentErrors(): array
+    public function getErrors(): array
     {
-        return $this->documentErrors;
+        return $this->errors;
     }
 
-    public function addDocumentError(DocumentFeedbackInterface $documentError): void
+    public function addError(DocumentFeedbackInterface $error): void
     {
-        $this->documentErrors[] = $documentError;
+        $this->errors[] = $error;
     }
 
     /**
-     * @return DocumentFeedbackInterface[]
+     * @param DocumentFeedbackInterface[] $errors
      */
-    public function getDocumentWarnings(): array
+    public function setErrors(array $errors): void
     {
-        return $this->documentWarnings;
-    }
-
-    public function addDocumentWarning(DocumentFeedbackInterface $documentWarning): void
-    {
-        $this->documentWarnings[] = $documentWarning;
+        $this->errors = $errors;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->documentDeprecations;
+        return $this->warnings;
     }
 
-    public function addDocumentDeprecation(DocumentFeedbackInterface $documentDeprecation): void
+    public function addWarning(DocumentFeedbackInterface $warning): void
     {
-        $this->documentDeprecations[] = $documentDeprecation;
+        $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentNotices(): array
+    public function getDeprecations(): array
     {
-        return $this->documentNotices;
+        return $this->deprecations;
     }
 
-    public function addDocumentNotice(DocumentFeedbackInterface $documentNotice): void
+    public function addDeprecation(DocumentFeedbackInterface $deprecation): void
     {
-        $this->documentNotices[] = $documentNotice;
+        $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentLogs(): array
+    public function getNotices(): array
     {
-        return $this->documentLogs;
+        return $this->notices;
     }
 
-    public function addDocumentLog(DocumentFeedbackInterface $documentLog): void
+    public function addNotice(DocumentFeedbackInterface $notice): void
     {
-        $this->documentLogs[] = $documentLog;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
      * @return DocumentFeedbackInterface[]
      */
-    public function getDocumentTraces(): array
+    public function getSuggestions(): array
     {
-        return $this->documentTraces;
+        return $this->suggestions;
     }
 
-    public function addDocumentTrace(DocumentFeedbackInterface $documentTrace): void
+    public function addSuggestion(DocumentFeedbackInterface $suggestion): void
     {
-        $this->documentTraces[] = $documentTrace;
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
+    }
+
+    /**
+     * @return DocumentFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(DocumentFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @param DocumentFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
     }
 }

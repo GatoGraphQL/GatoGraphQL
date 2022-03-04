@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
 
@@ -9,13 +10,13 @@ abstract class PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase ext
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
+    public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
         // Feedback comes from the Action Execution response
         // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
-        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && GeneralUtils::isError($actionexecution_checkpoint_validation)) {
+        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS] && $actionexecution_checkpoint_validation !== null) {
             $msg = array(
                 'codes' => array(
                     $actionexecution_checkpoint_validation->getCode()

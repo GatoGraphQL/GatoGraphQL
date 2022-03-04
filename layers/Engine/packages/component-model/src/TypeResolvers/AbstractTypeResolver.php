@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\Root\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
-use PoP\ComponentModel\Error\Error;
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface;
 use PoP\Root\Services\BasicServiceTrait;
@@ -78,35 +77,5 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
     public function getTypeDescription(): ?string
     {
         return null;
-    }
-
-    /**
-     * @param Error[]|null $nestedErrors
-     */
-    final protected function getError(string $message, ?array $nestedErrors = null): Error
-    {
-        return new Error(
-            $this->getErrorCode(),
-            $message,
-            null,
-            $nestedErrors,
-        );
-    }
-
-    final protected function getErrorCode(): string
-    {
-        return sprintf(
-            '%s-cast',
-            $this->getTypeName()
-        );
-    }
-
-    protected function getDefaultErrorMessage(mixed $inputValue): string
-    {
-        return sprintf(
-            $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
-            $inputValue,
-            $this->getMaybeNamespacedTypeName(),
-        );
     }
 }

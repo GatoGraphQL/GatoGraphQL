@@ -124,7 +124,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {
                     $value = $userSettingsManager->getSetting($optionModule, $option);
-                    if (!is_null($callback)) {
+                    if ($callback !== null) {
                         return $callback($value);
                     }
                     return $value;

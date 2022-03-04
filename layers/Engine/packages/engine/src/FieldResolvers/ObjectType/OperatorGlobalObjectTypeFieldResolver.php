@@ -5,24 +5,27 @@ declare(strict_types=1);
 namespace PoP\Engine\FieldResolvers\ObjectType;
 
 use ArgumentCountError;
-use Exception;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Error\ErrorProviderInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractGlobalObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Misc\OperatorHelpers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Engine\Exception\RuntimeOperationException;
+use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?ErrorProviderInterface $errorProvider = null;
+    private ?ArrayTraversionHelperServiceInterface $arrayTraversionHelperService = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -48,13 +51,13 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     {
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
-    final public function setErrorProvider(ErrorProviderInterface $errorProvider): void
+    final public function setArrayTraversionHelperService(ArrayTraversionHelperServiceInterface $arrayTraversionHelperService): void
     {
-        $this->errorProvider = $errorProvider;
+        $this->arrayTraversionHelperService = $arrayTraversionHelperService;
     }
-    final protected function getErrorProvider(): ErrorProviderInterface
+    final protected function getArrayTraversionHelperService(): ArrayTraversionHelperServiceInterface
     {
-        return $this->errorProvider ??= $this->instanceManager->getInstance(ErrorProviderInterface::class);
+        return $this->arrayTraversionHelperService ??= $this->instanceManager->getInstance(ArrayTraversionHelperServiceInterface::class);
     }
 
     public function getFieldNamesToResolve(): array
@@ -217,8 +220,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
@@ -226,8 +229,9 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         object $object,
         string $fieldName,
         array $fieldArgs,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
@@ -259,13 +263,22 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'extract':
                 try {
                     $array = (array) $fieldArgs['object'];
-                    $pointerToArrayItemUnderPath = OperatorHelpers::getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
-                } catch (Exception $e) {
-                    return $this->getErrorProvider()->getError(
-                        $fieldName,
-                        'path-not-reachable',
-                        $e->getMessage()
+                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
+                } catch (RuntimeOperationException $e) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E7,
+                                [
+                                    $e->getMessage(),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
+                        )
                     );
+                    return null;
                 }
                 return $pointerToArrayItemUnderPath;
             case 'time':
@@ -278,16 +291,23 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 try {
                     return sprintf($fieldArgs['string'], ...$fieldArgs['values']);
                 } catch (ArgumentCountError $e) {
-                    return new Error(
-                        'sprintf-wrong-params',
-                        sprintf(
-                            $this->__('There was an error executing `sprintf`: %s', 'engine'),
-                            $e->getMessage()
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E7,
+                                [
+                                    $e->getMessage(),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $objectTypeResolver,
                         )
                     );
+                    return null;
                 }
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

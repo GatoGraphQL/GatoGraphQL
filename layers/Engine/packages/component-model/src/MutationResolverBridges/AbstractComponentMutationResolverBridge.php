@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
-use PoP\Root\Services\BasicServiceTrait;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use Exception;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component;
+use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
 use PoP\ComponentModel\MutationResolvers\ErrorTypes;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
-use PoP\ComponentModel\App;
+use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractComponentMutationResolverBridge implements ComponentMutationResolverBridgeInterface
 {
@@ -28,7 +31,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
     }
 
-    public function getSuccessString(string | int $result_id): ?string
+    public function getSuccessString(string | int $resultID): ?string
     {
         return null;
     }
@@ -36,9 +39,9 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
     /**
      * @return string[]
      */
-    public function getSuccessStrings(string | int $result_id): array
+    public function getSuccessStrings(string | int $resultID): array
     {
-        $success_string = $this->getSuccessString($result_id);
+        $success_string = $this->getSuccessString($resultID);
         return $success_string !== null ? [$success_string] : [];
     }
 
@@ -71,7 +74,11 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         ];
         $errorTypeKey = $errorTypeKeys[$errorType];
         if ($errors = $mutationResolver->validateErrors($form_data)) {
-            $return[$errorTypeKey] = $errors;
+            // @todo Migrate from string to FeedbackItemProvider
+            $return[$errorTypeKey] = array_map(
+                fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
+                $errors
+            );
             if ($this->skipDataloadIfError()) {
                 // Bring no results
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
@@ -84,38 +91,53 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
                 ErrorTypes::CODES => ResponseConstants::WARNINGCODES,
             ];
             $warningTypeKey = $warningTypeKeys[$errorType];
-            $return[$warningTypeKey] = $warnings;
+            // @todo Migrate from string to FeedbackItemProvider
+            $return[$warningTypeKey] = array_map(
+                fn (FeedbackItemResolution $feedbackItemResolution) => $feedbackItemResolution->getMessage(),
+                $warnings
+            );
         }
-        $result_id = $mutationResolver->executeMutation($form_data);
-        if (GeneralUtils::isError($result_id)) {
-            /** @var Error */
-            $error = $result_id;
-            $errors = [];
-            if ($errorTypeKey == ErrorTypes::DESCRIPTIONS) {
-                $errors[] = $error->getMessageOrCode();
-            } elseif ($errorTypeKey == ErrorTypes::CODES) {
-                $errors[] = $error->getCode();
+
+        $errorMessage = null;
+        $resultID = null;
+        try {
+            $resultID = $mutationResolver->executeMutation($form_data);
+        } catch (AbstractClientException $e) {
+            $errorMessage = $e->getMessage();
+            $errorTypeKey = ResponseConstants::ERRORSTRINGS;
+        } catch (Exception $e) {
+            /** @var ComponentConfiguration */
+            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+            if ($componentConfiguration->logExceptionErrorMessages()) {
+                // @todo: Implement for Log
             }
-            $return[$errorTypeKey] = $errors;
+            $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
+                ? $e->getMessage()
+                : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
+            $errorTypeKey = ResponseConstants::ERRORSTRINGS;
+        }
+        if ($errorMessage !== null) {
             if ($this->skipDataloadIfError()) {
                 // Bring no results
                 $data_properties[DataloadingConstants::SKIPDATALOAD] = true;
             }
+            $return[$errorTypeKey] = [$errorMessage];
             return $return;
         }
-        $this->modifyDataProperties($data_properties, $result_id);
+
+        $this->modifyDataProperties($data_properties, $resultID);
 
         // Save the result for some module to incorporate it into the query args
-        App::getMutationResolutionStore()->setResult($this, $result_id);
+        App::getMutationResolutionStore()->setResult($this, $resultID);
 
         $return[ResponseConstants::SUCCESS] = true;
-        if ($success_strings = $this->getSuccessStrings($result_id)) {
+        if ($success_strings = $this->getSuccessStrings($resultID)) {
             $return[ResponseConstants::SUCCESSSTRINGS] = $success_strings;
         }
         return $return;
     }
 
-    protected function modifyDataProperties(array &$data_properties, string | int $result_id): void
+    protected function modifyDataProperties(array &$data_properties, string | int $resultID): void
     {
     }
 }

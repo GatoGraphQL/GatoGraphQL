@@ -1,4 +1,6 @@
 <?php
+
+use PoP\Root\Exception\GenericSystemException;
 /**
  * Helper functions, they have the same logic as the original javascript helper file wp-content/plugins/pop-engine-webplatform/js/helpers.handlebars.js
  */
@@ -9,7 +11,7 @@ class PoP_ServerSide_CompareHelpers
 
         // Comment Leo: Not needed in PHP => Commented out
         // if (count($arguments) < 3) {
-        //     throw new Exception("Handlerbars Helper 'compare' needs 2 parameters");
+        //     throw new GenericSystemException("Handlerbars Helper 'compare' needs 2 parameters");
         // }
 
         $operator = $options['hash']['operator'] ?? "==";
@@ -51,7 +53,7 @@ class PoP_ServerSide_CompareHelpers
         );
 
         if (!$operators[$operator]) {
-            throw new Exception("Handlerbars Helper 'compare' doesn't know the operator ".$operator);
+            throw new GenericSystemException("Handlerbars Helper 'compare' doesn't know the operator ".$operator);
         }
 
         $result = $operators[$operator]($lvalue, $rvalue);

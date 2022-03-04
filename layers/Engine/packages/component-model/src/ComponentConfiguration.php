@@ -51,6 +51,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function enableMutations(): bool
+    {
+        $envVariable = Environment::ENABLE_MUTATIONS;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function useSingleTypeInsteadOfUnionType(): bool
     {
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
@@ -243,6 +256,48 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         }
 
         $envVariable = Environment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getEnabledFeedbackCategoryExtensions(): array
+    {
+        $envVariable = Environment::ENABLE_FEEDBACK_CATEGORY_EXTENSIONS;
+        $defaultValue = [];
+        $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function sendExceptionErrorMessages(): bool
+    {
+        $envVariable = Environment::SEND_EXCEPTION_ERROR_MESSAGES;
+        $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    public function logExceptionErrorMessages(): bool
+    {
+        $envVariable = Environment::LOG_EXCEPTION_ERROR_MESSAGES;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

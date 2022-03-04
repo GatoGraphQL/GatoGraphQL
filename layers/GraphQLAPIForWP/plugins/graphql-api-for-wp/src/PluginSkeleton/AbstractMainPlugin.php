@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use Exception;
+use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GraphQLAPI\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GraphQLAPI\GraphQLAPI\App;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\Settings\Options;
-use PoP\RootWP\AppLoader;
-use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
-use RuntimeException;
+use PoP\RootWP\AppLoader;
+use PoP\RootWP\StateManagers\HookManager;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
@@ -147,7 +147,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             /** @var MainPluginInfoInterface */
             $mainPluginInfo = App::getMainPlugin()->getInfo();
             $fileSystemWrapper->remove($mainPluginInfo->getCacheDir());
-        } catch (RuntimeException) {
+        } catch (IOException) {
             // If the folder does not exist, do nothing
         }
     }

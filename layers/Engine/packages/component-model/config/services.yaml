@@ -72,11 +72,8 @@ services:
     PoP\ComponentModel\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
-    PoP\ComponentModel\FeedbackMessageProviders\:
-        resource: '../src/FeedbackMessageProviders/*'
-
-    PoP\ComponentModel\FormInputs\:
-        resource: '../src/FormInputs/*'
+    PoP\ComponentModel\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
 
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
@@ -95,9 +92,6 @@ services:
 
     PoP\ComponentModel\Error\ErrorProviderInterface:
         class: \PoP\ComponentModel\Error\ErrorProvider
-
-    PoP\ComponentModel\Error\ErrorServiceInterface:
-        class: \PoP\ComponentModel\Error\ErrorService
 
     PoP\ComponentModel\ModulePath\ModulePathManagerInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathManager
@@ -158,3 +152,6 @@ services:
 
     PoP\ComponentModel\Versioning\VersioningServiceInterface:
         class: \PoP\ComponentModel\Versioning\VersioningService
+
+    PoP\ComponentModel\Response\OutputServiceInterface:
+        class: \PoP\ComponentModel\Response\OutputService

@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Utilities for implementing API clients",
     "keywords": ["PHP", "PoP", "api-clients"],
-    "homepage": "https://github.com/pop-api/api-clients",
+    "homepage": "https://github.com/PoP-PoPAPI/api-clients",
     "license": "GPL-2.0-or-later",
     "authors": [
         {

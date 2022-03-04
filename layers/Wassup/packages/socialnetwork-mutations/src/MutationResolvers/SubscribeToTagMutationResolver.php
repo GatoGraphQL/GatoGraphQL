@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ApplicationTaxonomies\FunctionAPIFactory;
 use PoPCMSSchema\UserMeta\Utils;
@@ -22,6 +23,11 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
             if (in_array($target_id, $value)) {
                 $applicationtaxonomyapi = FunctionAPIFactory::getInstance();
                 $tag = $this->getPostTagTypeAPI()->getTag($target_id);
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = sprintf(
                     $this->__('You have already subscribed to <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $applicationtaxonomyapi->getTagSymbolName($tag)
@@ -40,7 +46,11 @@ class SubscribeToTagMutationResolver extends AbstractSubscribeToOrUnsubscribeFro
         App::doAction('gd_subscribetotag', $target_id, $form_data);
     }
 
-    protected function update($form_data): string | int
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
+    protected function update(array $form_data): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];

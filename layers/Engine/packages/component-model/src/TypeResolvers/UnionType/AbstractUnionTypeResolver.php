@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
-use PoP\Root\App;
-use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Exception\SchemaReferenceException;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\Response\OutputServiceInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
 
 abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver implements UnionTypeResolverInterface
 {
@@ -22,6 +27,17 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
      * @var ObjectTypeResolverPickerInterface[]
      */
     protected ?array $objectTypeResolverPickers = null;
+
+    private ?OutputServiceInterface $outputService = null;
+
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
 
     public function getUnionTypeInterfaceTypeResolvers(): array
     {
@@ -303,7 +319,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                     );
                 }
                 if ($notImplementingInterfaceTypeResolvers) {
-                    throw new Exception(
+                    throw new SchemaReferenceException(
                         sprintf(
                             $this->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
                             $this->getMaybeNamespacedTypeName(),
@@ -369,49 +385,60 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
         return null;
     }
 
-    protected function getUnresolvedObjectIDError(string | int $objectID)
+    protected function getUnresolvedObjectIDErrorFeedbackItemResolution(string | int $objectID): FeedbackItemResolution
     {
-        return new Error(
-            'unresolved-resultitem-id',
-            sprintf(
-                $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'pop-component-model'),
-                (string) $objectID
-            )
-        );
-    }
-
-    protected function getUnresolvedObjectError(object $object): Error
-    {
-        return new Error(
-            'unresolved-resultitem',
-            sprintf(
-                $this->__('No TypeResolver resolves object \'%s\'', 'pop-component-model'),
-                json_encode($object)
-            )
+        return new FeedbackItemResolution(
+            ErrorFeedbackItemProvider::class,
+            ErrorFeedbackItemProvider::E10,
+            [
+                $objectID
+            ]
         );
     }
 
     /**
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         object $object,
         string $field,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         // Check that a typeResolver from this Union can process this object, or return an arror
         $targetObjectTypeResolver = $this->getTargetObjectTypeResolver($object);
         if ($targetObjectTypeResolver === null) {
-            return $this->getUnresolvedObjectError($object);
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E8,
+                        [
+                            $this->getOutputService()->jsonEncodeArrayOrStdClassValue($object),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this,
+                )
+            );
+            return null;
         }
+
         // Delegate to that typeResolver to obtain the value
         // Because the schema validation cannot be performed through the UnionTypeResolver, since it depends on each dbObject, indicate that it must be done in resolveValue
         $options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] = true;
-        return $targetObjectTypeResolver->resolveValue($object, $field, $variables, $expressions, $options);
+        return $targetObjectTypeResolver->resolveValue(
+            $object,
+            $field,
+            $variables,
+            $expressions,
+            $objectTypeFieldResolutionFeedbackStore,
+            $options
+        );
     }
 
     /**

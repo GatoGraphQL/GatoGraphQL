@@ -7,28 +7,12 @@ namespace PoP\ComponentModel\Feedback;
 abstract class AbstractFeedback implements FeedbackInterface
 {
     public function __construct(
-        protected string $message,
-        protected ?string $code,
-        /** @var array<string, mixed> */
-        protected array $data = [],
+        protected FeedbackItemResolution $feedbackItemResolution,
     ) {
     }
 
-    public function getMessage(): string
+    public function getFeedbackItemResolution(): FeedbackItemResolution
     {
-        return $this->message;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getData(): array
-    {
-        return $this->data;
+        return $this->feedbackItemResolution;
     }
 }

@@ -118,7 +118,9 @@ jobs:
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
             ################################################################################
-            # Temporary hack: fix the return type in Trait, not yet handled by Rector: https://github.com/rectorphp/rector/issues/???
+            # Temporary hack: fix the return type in Trait, not yet handled by Rector
+            # @see https://github.com/rectorphp/rector/issues/6962
+            # @see https://github.com/leoloso/PoP/issues/1470
             -   name: Temporary hack - fix the return type in Trait
                 run: |
                     sed -i 's/function getItem($key): CacheItem/function getItem($key): \\Psr\\Cache\\CacheItemInterface/' vendor/symfony/cache/Traits/AbstractAdapterTrait.php

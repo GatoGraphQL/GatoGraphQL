@@ -20,7 +20,7 @@ function maybeGetTitleAsBasicContent($title, $post_id = null)
     }
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
     if (in_array($customPostTypeAPI->getCustomPostType($post_id), $post_types)) {
-        return limitString($customPostTypeAPI->getPlainTextContent($post_id), 100);
+        return limitString($customPostTypeAPI->getRawContent($post_id), 100);
     }
 
     return $title;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
 use PoPCMSSchema\CustomPostMeta\Utils;
@@ -78,6 +79,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         parent::validateContent($errors, $form_data);
 
         if ($this->supportsTitle() && empty($form_data[MutationInputProperties::TITLE])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The title cannot be empty', 'pop-application');
         }
 
@@ -87,10 +93,20 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         }
 
         if (empty($form_data[MutationInputProperties::CONTENT])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
         if ($this->isFeaturedImageMandatory() && empty($form_data[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The featured image has not been set', 'pop-application');
         }
 
@@ -98,26 +114,51 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             $category_error_msgs = $this->getCategoriesErrorMessages();
             if (empty($form_data[MutationInputProperties::CATEGORIES])) {
                 if ($validateCategories == self::VALIDATECATEGORIESTYPE_ATLEASTONE) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $category_error_msgs['empty-categories'];
                 } elseif ($validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                    // @todo Migrate from string to FeedbackItemProvider
+                    // $errors[] = new FeedbackItemResolution(
+                    //     MutationErrorFeedbackItemProvider::class,
+                    //     MutationErrorFeedbackItemProvider::E1,
+                    // );
                     $errors[] = $category_error_msgs['empty-category'];
                 }
             } elseif (count($form_data[MutationInputProperties::CATEGORIES]) > 1 && $validateCategories == self::VALIDATECATEGORIESTYPE_EXACTLYONE) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $category_error_msgs['only-one'];
             }
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
         parent::validateUpdateContent($errors, $form_data);
 
         if (isset($form_data[MutationInputProperties::REFERENCES]) && in_array($form_data[MutationInputProperties::ID], $form_data[MutationInputProperties::REFERENCES])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('The post cannot be a response to itself', 'pop-postscreation');
         }
     }
 
-    // Update Post Validation
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdate(array &$errors, array $form_data): void
     {
         parent::validateUpdate($errors, $form_data);
@@ -125,6 +166,11 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         $customPostID = $form_data[MutationInputProperties::ID];
 
         if (!in_array($this->getCustomPostTypeAPI()->getStatus($customPostID), array(CustomPostStatus::DRAFT, CustomPostStatus::PENDING, CustomPostStatus::PUBLISH))) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->__('Hmmmmm, this post seems to have been deleted...', 'pop-application');
             return;
         }
@@ -201,8 +247,6 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
     protected function getUpdateCustomPostData(array $form_data): array
     {
         $post_data = parent::getUpdateCustomPostData($form_data);
-
-        $this->addCustomPostType($post_data);
 
         // Status: If provided, Validate the value is permitted, or get the default value otherwise
         if ($status = $post_data['status']) {

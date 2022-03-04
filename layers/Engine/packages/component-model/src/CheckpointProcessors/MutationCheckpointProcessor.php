@@ -4,13 +4,24 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\CheckpointProcessors;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG = __CLASS__ . ':MutationsNotSupportedErrorMsg';
     public const ENABLED_MUTATIONS = 'enabled-mutations';
+
+    private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
+
+    final public function setCheckpointErrorFeedbackItemProvider(CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider): void
+    {
+        $this->checkpointErrorFeedbackItemProvider = $checkpointErrorFeedbackItemProvider;
+    }
+    final protected function getCheckpointErrorFeedbackItemProvider(): CheckpointErrorFeedbackItemProvider
+    {
+        return $this->checkpointErrorFeedbackItemProvider ??= $this->instanceManager->getInstance(CheckpointErrorFeedbackItemProvider::class);
+    }
 
     public function getCheckpointsToProcess(): array
     {
@@ -19,18 +30,14 @@ class MutationCheckpointProcessor extends AbstractCheckpointProcessor
         );
     }
 
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         switch ($checkpoint[1]) {
             case self::ENABLED_MUTATIONS:
                 if (!App::getState('are-mutations-enabled')) {
-                    $errorMessage = App::applyFilters(
-                        self::HOOK_MUTATIONS_NOT_SUPPORTED_ERROR_MSG,
-                        $this->__('Mutations cannot be executed', 'component-model')
-                    );
-                    return new Error(
-                        'mutations-not-supported',
-                        $errorMessage
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E1
                     );
                 }
                 break;

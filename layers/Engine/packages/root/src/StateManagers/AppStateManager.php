@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use LogicException;
+use PoP\Root\Exception\AppStateNotExistsException;
 use PoP\Root\Facades\Registries\AppStateProviderRegistryFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
+use PoP\Root\Translation\TranslationAPIInterface;
 
 /**
  * Keep a reference to the global, shared state by the App
@@ -19,6 +20,11 @@ class AppStateManager implements AppStateManagerInterface
      * @var array<string,mixed>
      */
     protected array $state;
+
+    final protected function getTranslationAPI(): TranslationAPIInterface
+    {
+        return TranslationAPIFacade::getInstance();
+    }
 
     /**
      * Called by the AppLoader to initalize the state.
@@ -81,15 +87,14 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
-     * @throws LogicException If there is no state under the provided key
+     * @throws AppStateNotExistsException If there is no state under the provided key
      */
     public function get(string $key): mixed
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         if (!array_key_exists($key, $this->state)) {
-            throw new LogicException(
+            throw new AppStateNotExistsException(
                 \sprintf(
-                    $translationAPI->__('There is no application state under key \'%s\'', 'root'),
+                    $this->getTranslationAPI()->__('There is no application state under key \'%s\'', 'root'),
                     $key
                 )
             );
@@ -98,19 +103,18 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
-     * @throws LogicException If there is no state under the provided path
+     * @throws AppStateNotExistsException If there is no state under the provided path
      */
     public function getUnder(array $path): mixed
     {
-        $translationAPI = TranslationAPIFacade::getInstance();
         $state = &$this->state;
         foreach ($path as $pathItem) {
             if (!array_key_exists($pathItem, $state)) {
-                throw new LogicException(
+                throw new AppStateNotExistsException(
                     \sprintf(
-                        $translationAPI->__('There is no application state under path \'%s\'', 'root'),
+                        $this->getTranslationAPI()->__('There is no application state under path \'%s\'', 'root'),
                         implode(
-                            $translationAPI->__(',', 'root'),
+                            $this->getTranslationAPI()->__(',', 'root'),
                             $path
                         )
                     )

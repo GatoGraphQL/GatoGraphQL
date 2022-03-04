@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -262,17 +263,18 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;
@@ -321,11 +323,11 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $value;
 
             case 'isStatusRead':
-                $status = $objectTypeResolver->resolveValue($object, 'status', $variables, $expressions, $options);
+                $status = $objectTypeResolver->resolveValue($object, 'status', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return ($status == AAL_POP_STATUS_READ);
 
             case 'isStatusNotRead':
-                $is_read = $objectTypeResolver->resolveValue($object, 'isStatusRead', $variables, $expressions, $options);
+                $is_read = $objectTypeResolver->resolveValue($object, 'isStatusRead', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
                 return !$is_read;
 
             case 'markAsReadURL':
@@ -387,6 +389,6 @@ class NotificationObjectTypeFieldResolver extends AbstractObjectTypeFieldResolve
                 return $fieldArgs['action'] == $notification->action;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

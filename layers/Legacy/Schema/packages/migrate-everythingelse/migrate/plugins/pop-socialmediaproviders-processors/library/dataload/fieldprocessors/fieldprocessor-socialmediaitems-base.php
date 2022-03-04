@@ -92,33 +92,34 @@ abstract class PoP_SocialMediaProviders_DataLoad_ObjectTypeFieldResolver_Functio
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         switch ($fieldName) {
             case 'shareURL':
-                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $options);
-                if (GeneralUtils::isError($url)) {
+                $url = $objectTypeResolver->resolveValue($object, 'url', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $url;
                 }
-                $title = $objectTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $options);
-                if (GeneralUtils::isError($title)) {
+                $title = $objectTypeResolver->resolveValue($object, $this->getTitleField(), $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     return $title;
                 }
                 $providerURLs = $this->socialMediaProviderEnumTypeResolver->getEnumValues();
                 return $this->getShareUrl($url, $title, $providerURLs[$fieldArgs['provider']]);
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }

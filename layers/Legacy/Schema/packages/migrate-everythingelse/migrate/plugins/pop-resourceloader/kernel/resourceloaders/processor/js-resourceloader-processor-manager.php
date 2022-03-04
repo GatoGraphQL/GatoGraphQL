@@ -542,7 +542,7 @@ class PoP_JSResourceLoaderProcessorManager {
 			// - In that same page, it will already read the configuration from resourceloader-mapping.json to load all needed resources,
 			// - However, the ResourceLoader class is itself not loaded (the plugin was just activated), so then the line below would fail
 			// Because of this, instead of throwing an Exception, simply skip loading resources for this $jsObject
-			// throw new Exception(sprintf('No Resource for $jsobject \'%s\' (%s)', $jsobject, RequestUtils::getRequestedFullURL()));
+			// throw new \PoP\Root\Exception\GenericSystemException(sprintf('No Resource for $jsobject \'%s\' (%s)', $jsobject, RequestUtils::getRequestedFullURL()));
 			return;
 		}
 

@@ -98,8 +98,11 @@ class UserSettingsManager implements UserSettingsManagerInterface
         \delete_option(Options::TIMESTAMPS);
     }
 
-    public function hasSetting(string $item): bool
+    public function hasSetting(string $module, string $option): bool
     {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $item = $moduleResolver->getSettingOptionName($module, $option);
         return $this->hasItem(Options::SETTINGS, $item);
     }
 

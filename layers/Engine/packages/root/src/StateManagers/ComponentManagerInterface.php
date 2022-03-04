@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use LogicException;
 use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Exception\ComponentNotExistsException;
 
 interface ComponentManagerInterface
 {
@@ -15,7 +15,7 @@ interface ComponentManagerInterface
     public function register(string $componentClass): ComponentInterface;
 
     /**
-     * @throws LogicException If the class of the component does not exist or has not been initialized
+     * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
     public function getComponent(string $componentClass): ComponentInterface;
 

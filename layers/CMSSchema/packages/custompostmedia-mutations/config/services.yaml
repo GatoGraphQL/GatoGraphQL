@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\CustomPostMediaMutations\Hooks\:
         resource: '../src/Hooks/*'
+
+    PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

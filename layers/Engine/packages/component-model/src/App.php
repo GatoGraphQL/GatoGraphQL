@@ -9,6 +9,7 @@ use PoP\ComponentModel\Engine\EngineState;
 use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
+use PoP\ComponentModel\Tracing\TracingStore;
 
 /**
  * Keep all state in the application stored and accessible
@@ -21,6 +22,7 @@ class App extends AbstractRootAppProxy implements AppInterface
 {
     protected static EngineState $engineState;
     protected static FeedbackStore $feedbackStore;
+    protected static TracingStore $tracingStore;
     protected static MutationResolutionStoreInterface $mutationResolutionStore;
 
     public static function getEngineState(): EngineState
@@ -31,6 +33,11 @@ class App extends AbstractRootAppProxy implements AppInterface
     public static function getFeedbackStore(): FeedbackStore
     {
         return self::$feedbackStore;
+    }
+
+    public static function getTracingStore(): TracingStore
+    {
+        return self::$tracingStore;
     }
 
     public static function getMutationResolutionStore(): MutationResolutionStoreInterface
@@ -46,6 +53,11 @@ class App extends AbstractRootAppProxy implements AppInterface
     public static function regenerateFeedbackStore(): void
     {
         self::$feedbackStore = new FeedbackStore();
+    }
+
+    public static function regenerateTracingStore(): void
+    {
+        self::$tracingStore = new TracingStore();
     }
 
     public static function regenerateMutationResolutionStore(): void

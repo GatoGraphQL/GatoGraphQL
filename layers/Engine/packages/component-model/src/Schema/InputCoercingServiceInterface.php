@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
@@ -31,17 +31,17 @@ interface InputCoercingServiceInterface
      * checking that the WrappingType is respected.
      *
      * Eg: `["hello"]` must be `[String]`, can't be `[[String]]` or `String`.
-     *
-     * @return string|null The error message if the validation fails, or null otherwise
      */
     public function validateInputArrayModifiers(
+        InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         string $inputName,
         bool $inputIsArrayType,
         bool $inputIsNonNullArrayItemsType,
         bool $inputIsArrayOfArraysType,
         bool $inputIsNonNullArrayOfArraysItemsType,
-    ): ?string;
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void;
 
     /**
      * Coerce the input value, corresponding to the array type
@@ -51,19 +51,9 @@ interface InputCoercingServiceInterface
         InputTypeResolverInterface $inputTypeResolver,
         mixed $inputValue,
         bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
+        bool $inputIsArrayOfArraysType,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): mixed;
-
-    /**
-     * Extract the Errors produced when coercing the input values
-     *
-     * @return Error[] Errors from coercing the input value
-     */
-    public function extractErrorsFromCoercedInputValue(
-        mixed $inputValue,
-        bool $inputIsArrayType,
-        bool $inputIsArrayOfArraysType
-    ): array;
 
     /**
      * If applicable, get the deprecation messages for the input value

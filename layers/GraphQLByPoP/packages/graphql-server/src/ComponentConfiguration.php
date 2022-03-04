@@ -51,6 +51,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function enableProactiveFeedbackWarnings(): bool
+    {
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_WARNINGS;
+        $defaultValue = true;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableProactiveFeedbackDeprecations(): bool
     {
         $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS;
@@ -77,9 +90,9 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function enableProactiveFeedbackTraces(): bool
+    public function enableProactiveFeedbackSuggestions(): bool
     {
-        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_TRACES;
+        $envVariable = Environment::ENABLE_PROACTIVE_FEEDBACK_SUGGESTIONS;
         $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
@@ -136,19 +149,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function exposeSelfFieldInGraphQLSchema(): bool
     {
         $envVariable = Environment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA;
-        $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
-    public function addFullSchemaFieldToGraphQLSchema(): bool
-    {
-        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_GRAPHQL_SCHEMA;
         $defaultValue = false;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 

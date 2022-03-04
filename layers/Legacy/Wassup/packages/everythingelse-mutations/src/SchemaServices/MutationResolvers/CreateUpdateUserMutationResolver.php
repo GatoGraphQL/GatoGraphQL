@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
-use PoP\Root\App;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Misc\GeneralUtils;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\EditUsers\FunctionAPIFactory;
+use PoP\Root\App;
+use PoP\Root\Exception\AbstractException;
+use PoP\Root\Exception\GenericClientException;
 
 class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 {
@@ -20,14 +21,29 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
     protected function validateContent(array &$errors, array $form_data): void
     {
         if (empty($form_data['first_name'])) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The name cannot be empty', 'pop-application');
         }
 
         // Validate email
         $user_email = $form_data['user_email'];
         if ($user_email == '') {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The e-mail cannot be empty', 'pop-application');
         } elseif (! is_email($user_email)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The email address isn&#8217;t correct.', 'pop-application');
         }
 
@@ -35,6 +51,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         if (is_array($limited_email_domains) && empty($limited_email_domains) == false) {
             $emaildomain = substr($user_email, 1 + strpos($user_email, '@'));
             if (in_array($emaildomain, $limited_email_domains) == false) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('That email address is not allowed!', 'pop-application');
             }
         }
@@ -42,20 +63,39 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     protected function validateCreateContent(array &$errors, array $form_data): void
     {
-
         // Check the username
         $user_login = $form_data['username'];
         if ($user_login == '') {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The username cannot be empty.', 'pop-application');
-        } elseif (! validate_username($user_login)) {
+        } elseif (!validate_username($user_login)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This username is invalid because it uses illegal characters. Please enter a valid username.', 'pop-application');
         } elseif (username_exists($user_login)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This username is already registered. Please choose another one.', 'pop-application');
         }
 
         // Check the e-mail address
         $user_email = $form_data['user_email'];
         if (email_exists($user_email)) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('This email is already registered, please choose another one.', 'pop-application');
         }
 
@@ -64,13 +104,33 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $repeatpassword =  $form_data['repeat_password'];
 
         if (!$password) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The password cannot be emtpy.', 'pop-application');
         } elseif (strlen($password) < 8) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The password must be at least 8 characters long.', 'pop-application');
         } else {
             if (!$repeatpassword) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('Please confirm the password.', 'pop-application');
             } elseif ($password !== $repeatpassword) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->getTranslationAPI()->__('Passwords do not match.', 'pop-application');
             }
         }
@@ -78,16 +138,22 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         // Validate the captcha
         if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
-
-            $captcha_validation = GD_Captcha::validate($captcha);
-            if (GeneralUtils::isError($captcha_validation)) {
-                /** @var Error */
-                $error = $captcha_validation;
-                $errors[] = $error->getMessageOrCode();
+            try {
+                \GD_Captcha::assertIsValid($captcha);
+            } catch (GenericClientException $e) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
+                $errors[] = $e->getMessage();
             }
         }
     }
 
+    /**
+     * @param FeedbackItemResolution[] $errors
+     */
     protected function validateUpdateContent(array &$errors, array $form_data): void
     {
         $user_id = $form_data['user_id'];
@@ -95,6 +161,11 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $email_user_id = email_exists($user_email);
         if ($email_user_id && $email_user_id !== $user_id) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('That email address already exists in our system!', 'pop-application');
         }
     }
@@ -148,10 +219,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
         $result = $this->executeUpdateuser($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $this->createupdateuser($user_id, $form_data);
 
         return $user_id;
@@ -168,10 +235,6 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         $user_data = $this->getCreateuserData($form_data);
         $result = $this->executeCreateuser($user_data);
 
-        if (GeneralUtils::isError($result)) {
-            return $result;
-        }
-
         $user_id = $result;
 
         $this->createupdateuser($user_id, $form_data);
@@ -179,6 +242,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         return $user_id;
     }
 
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         // If user is logged in => It's Update
@@ -217,33 +284,29 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
 
     /**
      * @return mixed The ID of the updated entity, or an Error
+     * @throws AbstractException In case of error
      */
-    protected function update(array $form_data): string | int | Error
+    protected function update(array $form_data): string | int
     {
         // Do the Post update
         $user_id = $this->updateuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsUpdate($user_id, $form_data);
         $this->additionals($user_id, $form_data);
 
         // Trigger to update the display_name and nickname
-        userNameUpdated($user_id);
+        \userNameUpdated($user_id);
         return $user_id;
     }
 
     /**
      * @return mixed The ID of the created entity, or an Error
+     * @throws AbstractException In case of error
      */
-    protected function create(array $form_data): string | int | Error
+    protected function create(array $form_data): string | int
     {
         $user_id = $this->createuser($form_data);
-        if (GeneralUtils::isError($user_id)) {
-            return $user_id;
-        }
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionalsCreate($user_id, $form_data);

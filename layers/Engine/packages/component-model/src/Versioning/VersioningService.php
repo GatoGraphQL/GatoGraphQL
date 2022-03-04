@@ -6,8 +6,9 @@ namespace PoP\ComponentModel\Versioning;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
-use PoP\ComponentModel\FeedbackMessageProviders\FeedbackMessageProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;
 
 class VersioningService implements VersioningServiceInterface
@@ -16,17 +17,6 @@ class VersioningService implements VersioningServiceInterface
 
     private ?array $versionConstraintsForFields = null;
     private ?array $versionConstraintsForDirectives = null;
-
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
-
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
-    {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
-    }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
-    }
 
     /**
      * Initialize the dictionary with the version constraints for specific fields in the schema
@@ -41,10 +31,15 @@ class VersioningService implements VersioningServiceInterface
             // All fields are defined as "$type.$fieldName". If not, it's an error
             $entry = explode(Constants::TYPE_FIELD_SEPARATOR, $typeField);
             if (count($entry) !== 2) {
-                $generalFeedbackStore->addGeneralWarning(
+                $generalFeedbackStore->addWarning(
                     new GeneralFeedback(
-                        $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::W1, $typeField),
-                        $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::W1)
+                        new FeedbackItemResolution(
+                            WarningFeedbackItemProvider::class,
+                            WarningFeedbackItemProvider::W1,
+                            [
+                                $typeField,
+                            ]
+                        )
                     )
                 );
                 continue;

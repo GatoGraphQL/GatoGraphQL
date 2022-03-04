@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
 use stdClass;
 
@@ -30,16 +31,13 @@ class JSONObjectScalarTypeResolver extends AbstractScalarTypeResolver
         return 'https://datatracker.ietf.org/doc/html/rfc7159';
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Cannot cast value \'%s\' to type \'%s\'', 'component-model'),
-                    $inputValue,
-                    $this->getMaybeNamespacedTypeName()
-                )
-            );
+            $this->addDefaultError($inputValue, $schemaInputValidationFeedbackStore);
+            return null;
         }
         return $inputValue;
     }

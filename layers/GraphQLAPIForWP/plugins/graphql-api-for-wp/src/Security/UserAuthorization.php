@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Security;
 
-use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Component;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Exception\UserAuthorizationException;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
-use InvalidArgumentException;
+use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 /**
@@ -42,7 +42,7 @@ class UserAuthorization implements UserAuthorizationInterface
             // If the capability does not exist, catch the exception
             try {
                 $accessSchemeCapability = $this->getUserAuthorizationSchemeRegistry()->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();
-            } catch (InvalidArgumentException) {
+            } catch (UserAuthorizationException) {
             }
         }
 

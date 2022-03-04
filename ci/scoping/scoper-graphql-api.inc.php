@@ -95,7 +95,7 @@ return [
         // (unless adding the files to the autoload path)
         'PoPContainer\*',
     ])),
-    'files-whitelist' => [
+    'exclude-files' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
         convertRelativeToFullPath('vendor/composer/InstalledVersions.php'),
@@ -173,42 +173,6 @@ return [
                 }
 
                 return $content;
-            }
-            /**
-             * In these files, it prefixes the return type `parent`.
-             * Undo it!
-             */
-            $symfonyPolyfillFilesWithParentReturnType = array_map(
-                'convertRelativeToFullPath',
-                [
-                    'vendor/symfony/string/AbstractUnicodeString.php',
-                    'vendor/symfony/string/ByteString.php',
-                    'vendor/symfony/string/UnicodeString.php',
-                ]
-            );
-            if (in_array($filePath, $symfonyPolyfillFilesWithParentReturnType)) {
-                return str_replace(
-                    "\\${prefix}\\parent",
-                    'parent',
-                    $content
-                );
-            }
-            /**
-             * In these files, it prefixes the return type `self`.
-             * Undo it!
-             */
-            $symfonyPolyfillFilesWithSelfReturnType = array_map(
-                'convertRelativeToFullPath',
-                [
-                    'vendor/symfony/dependency-injection/Compiler/AutowirePass.php',
-                ]
-            );
-            if (in_array($filePath, $symfonyPolyfillFilesWithSelfReturnType)) {
-                return str_replace(
-                    "\\${prefix}\\self",
-                    'self',
-                    $content
-                );
             }
 
             return $content;

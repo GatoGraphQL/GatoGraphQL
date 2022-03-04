@@ -56,39 +56,34 @@ class GD_URE_Custom_DataLoad_ObjectTypeFieldResolver_FunctionalOrganizationUsers
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
         switch ($fieldName) {
             case 'organizationTypesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $organizationtypes = new GD_FormInput_OrganizationTypes($params);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationtypes', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $organizationtypes = new GD_FormInput_OrganizationTypes('', $selected);
                 return $organizationtypes->getSelectedValue();
 
             case 'organizationCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $organizationcategories = new GD_FormInput_OrganizationCategories($params);
+                $selected = $objectTypeResolver->resolveValue($user, 'organizationcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $organizationcategories = new GD_FormInput_OrganizationCategories('', $selected);
                 return $organizationcategories->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

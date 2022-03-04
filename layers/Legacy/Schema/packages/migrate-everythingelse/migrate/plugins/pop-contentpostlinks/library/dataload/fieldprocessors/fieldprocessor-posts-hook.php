@@ -132,17 +132,18 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $post = $object;
@@ -160,32 +161,26 @@ class PoP_ContentPostLinks_DataLoad_ObjectTypeFieldResolver_Posts extends Abstra
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKACCESS, true);
 
             case 'linkAccessByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $linkaccess = new GD_FormInput_LinkAccessDescription($params);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkaccess', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $linkaccess = new GD_FormInput_LinkAccessDescription('', $selected);
                 return $linkaccess->getSelectedValue();
 
             case 'linkcategories':
                 return \PoPCMSSchema\CustomPostMeta\Utils::getCustomPostMeta($objectTypeResolver->getID($post), GD_METAKEY_POST_LINKCATEGORIES);
 
             case 'linkCategoriesByName':
-                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $linkcategories = new GD_FormInput_LinkCategories($params);
+                $selected = $objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $linkcategories = new GD_FormInput_LinkCategories('', $selected);
                 return $linkcategories->getSelectedValue();
 
             case 'hasLinkCategories':
-                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $options)) {
+                if ($objectTypeResolver->resolveValue($post, 'linkcategories', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options)) {
                     return true;
                 }
                 return false;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

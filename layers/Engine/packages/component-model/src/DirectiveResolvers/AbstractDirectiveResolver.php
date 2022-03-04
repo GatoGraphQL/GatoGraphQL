@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use Exception;
-use PoP\Root\Services\BasicServiceTrait;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
@@ -13,7 +12,13 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\ComponentModel\HelperServices\SemverHelperServiceInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveResolverTrait;
@@ -27,8 +32,11 @@ use PoP\ComponentModel\TypeResolvers\PipelinePositions;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
 use PoP\ComponentModel\Versioning\VersioningServiceInterface;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
-use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Exception\AbstractClientException;
+use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 {
@@ -167,44 +175,26 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         RelationalTypeResolverInterface $relationalTypeResolver,
         array &$fieldDirectiveFields,
         array &$variables,
-        array &$schemaErrors,
-        array &$schemaWarnings,
-        array &$schemaDeprecations,
-        array &$schemaNotices,
-        array &$schemaTraces
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // First validate schema (eg of error in schema: ?query=posts<include(if:this-field-doesnt-exist())>)
         list(
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $directiveSchemaErrors,
-            $directiveSchemaWarnings,
-            $directiveSchemaDeprecations
         ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForSchema(
             $this,
             $relationalTypeResolver,
             $this->directive,
+            $fieldDirectiveFields,
             $variables,
+            $engineIterationFeedbackStore,
             $this->disableDynamicFieldsFromDirectiveArgs()
         );
 
         // Store the args, they may be used in `resolveDirective`
         $this->directiveArgsForSchema = $directiveArgs;
 
-        // If there were errors, warning or deprecations, integrate them into the feedback objects
-        $schemaErrors = array_merge(
-            $schemaErrors,
-            $directiveSchemaErrors
-        );
-        $schemaWarnings = array_merge(
-            $schemaWarnings,
-            $directiveSchemaWarnings
-        );
-        $schemaDeprecations = array_merge(
-            $schemaDeprecations,
-            $directiveSchemaDeprecations
-        );
         return [
             $validDirective,
             $directiveName,
@@ -213,34 +203,27 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * Add the directive to the head of the error path, for all nested errors
-     */
-    protected function prependPathOnNestedErrors(array &$nestedDirectiveSchemaError): void
-    {
-
-        if (isset($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED])) {
-            foreach ($nestedDirectiveSchemaError[Tokens::EXTENSIONS][Tokens::NESTED] as &$deeplyNestedDirectiveSchemaError) {
-                array_unshift($deeplyNestedDirectiveSchemaError[Tokens::PATH], $this->directive);
-                $this->prependPathOnNestedErrors($deeplyNestedDirectiveSchemaError);
-            }
-        }
-    }
-
-    /**
      * By default, validate if there are deprecated fields
      */
-    public function validateDirectiveArgumentsForSchema(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs, array &$schemaErrors, array &$schemaWarnings, array &$schemaDeprecations): array
-    {
-        $deprecationMessages = $this->resolveDirectiveValidationDeprecationMessages(
+    public function validateDirectiveArgumentsForSchema(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $directiveName,
+        array $directiveArgs,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): array {
+        $deprecationFeedbackItemResolutions = $this->resolveDirectiveValidationDeprecations(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs
         );
-        foreach ($deprecationMessages as $deprecationMessage) {
-            $schemaDeprecations[] = [
-                Tokens::PATH => [$this->directive],
-                Tokens::MESSAGE => $deprecationMessage,
-            ];
+        foreach ($deprecationFeedbackItemResolutions as $deprecationFeedbackItemResolution) {
+            $objectTypeFieldResolutionFeedbackStore->addDeprecation(
+                new ObjectTypeFieldResolutionFeedback(
+                    $deprecationFeedbackItemResolution,
+                    LocationHelper::getNonSpecificLocation(),
+                    $relationalTypeResolver,
+                )
+            );
         }
         return $directiveArgs;
     }
@@ -248,61 +231,45 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function dissectAndValidateDirectiveForObject(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
+        array $fields,
         array &$variables,
         array &$expressions,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         list(
             $validDirective,
             $directiveName,
             $directiveArgs,
-            $nestedObjectErrors,
-            $nestedObjectWarnings,
-            $nestedObjectDeprecationMessages,
-        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $this->directive, $variables, $expressions);
+        ) = $this->getFieldQueryInterpreter()->extractDirectiveArgumentsForObject($this, $relationalTypeResolver, $object, $fields, $this->directive, $variables, $expressions, $engineIterationFeedbackStore);
 
         // Store the args, they may be used in `resolveDirective`
         $objectID = $relationalTypeResolver->getID($object);
         $this->directiveArgsForObjects[$objectID] = $directiveArgs;
 
-        // Store errors (if any)
-        foreach ($nestedObjectErrors as $id => $fieldOutputKeyErrorMessages) {
-            $objectErrors[$id] = array_merge(
-                $objectErrors[$id] ?? [],
-                $fieldOutputKeyErrorMessages
-            );
-        }
-        foreach ($nestedObjectWarnings as $id => $fieldOutputKeyWarningMessages) {
-            $objectWarnings[$id] = array_merge(
-                $objectWarnings[$id] ?? [],
-                $fieldOutputKeyWarningMessages
-            );
-        }
-        foreach ($nestedObjectDeprecationMessages as $id => $fieldOutputKeyDeprecationMessages) {
-            $objectDeprecations[$id] = array_merge(
-                $objectDeprecations[$id] ?? [],
-                $fieldOutputKeyDeprecationMessages
-            );
-        }
-
         /**
          * Validate directive argument constraints, only if there are no previous errors
          */
-        if (!$nestedObjectErrors) {
+        if (!$engineIterationFeedbackStore->hasErrors()) {
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
-                foreach ($maybeErrors as $errorMessage) {
-                    $objectErrors[$objectID][] = [
-                        Tokens::PATH => [$this->directive],
-                        Tokens::MESSAGE => $errorMessage,
-                    ];
+                foreach ($fields as $field) {
+                    foreach ($maybeErrorFeedbackItemResolutions as $errorFeedbackItemResolution) {
+                        $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                            new ObjectFeedback(
+                                $errorFeedbackItemResolution,
+                                LocationHelper::getNonSpecificLocation(),
+                                $relationalTypeResolver,
+                                $field,
+                                $objectID,
+                                $this->directive,
+                            )
+                        );
+                    }
                 }
             }
         }
@@ -370,18 +337,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
             /**
              * Compare using semantic versioning constraint rules, as used by Composer
-             * If passing a wrong value to validate against (eg: "saraza" instead of "1.0.0"), it will throw an Exception
              */
-            try {
-                return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
-            } catch (Exception) {
-                return false;
-            }
+            return $this->getSemverHelperService()->satisfies($schemaDirectiveVersion, $versionConstraint);
         }
         return true;
     }
 
-    public function resolveDirectiveValidationErrorDescriptions(
+    /**
+     * @return FeedbackItemResolution[] Errors
+     */
+    public function resolveDirectiveValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
@@ -396,14 +361,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ARRAY_FILTER_USE_KEY
         ));
         if (
-            $maybeError = $this->validateNotMissingFieldOrDirectiveArguments(
+            $maybeErrorFeedbackItemResolution = $this->validateNotMissingFieldOrDirectiveArguments(
                 $mandatoryConsolidatedDirectiveArgNames,
                 $directiveName,
                 $directiveArgs,
                 ResolverTypes::DIRECTIVE
             )
         ) {
-            return [$maybeError];
+            return [$maybeErrorFeedbackItemResolution];
         }
 
         if ($this->canValidateFieldOrDirectiveArgumentsWithValuesForSchema($directiveArgs)) {
@@ -411,18 +376,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
              * Validate directive argument constraints
              */
             if (
-                $maybeErrors = $this->resolveDirectiveArgumentErrors(
+                $maybeErrorFeedbackItemResolutions = $this->resolveDirectiveArgumentErrors(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgs
                 )
             ) {
-                return $maybeErrors;
+                return $maybeErrorFeedbackItemResolutions;
             }
         }
 
         // Custom validations
-        return $this->doResolveSchemaValidationErrorDescriptions(
+        return $this->doResolveSchemaValidationErrors(
             $relationalTypeResolver,
             $directiveName,
             $directiveArgs,
@@ -431,6 +396,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for the directive arguments
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     final protected function resolveDirectiveArgumentErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -440,7 +407,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $errors = [];
         foreach ($directiveArgs as $directiveArgName => $directiveArgValue) {
             if (
-                $maybeErrors = $this->validateDirectiveArgValue(
+                $maybeErrorFeedbackItemResolutions = $this->validateDirectiveArgValue(
                     $relationalTypeResolver,
                     $directiveName,
                     $directiveArgName,
@@ -449,7 +416,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             ) {
                 $errors = array_merge(
                     $errors,
-                    $maybeErrors
+                    $maybeErrorFeedbackItemResolutions
                 );
             }
         }
@@ -458,6 +425,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Validate the constraints for a directive argument
+     *
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateDirectiveArgValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -470,8 +439,10 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
 
     /**
      * Custom validations. Function to override
+     *
+     * @return FeedbackItemResolution[] Errors
      */
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         RelationalTypeResolverInterface $relationalTypeResolver,
         string $directiveName,
         array $directiveArgs
@@ -778,18 +749,18 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     }
 
     /**
-     * @return string[]
+     * @return FeedbackItemResolution[]
      */
-    public function resolveDirectiveValidationDeprecationMessages(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
+    public function resolveDirectiveValidationDeprecations(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveName, array $directiveArgs): array
     {
         return [];
     }
 
-    public function getDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function getDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($relationalTypeResolver);
         if ($schemaDefinitionResolver !== $this) {
-            return $schemaDefinitionResolver->getDirectiveWarningDescription($relationalTypeResolver);
+            return $schemaDefinitionResolver->getDirectiveWarning($relationalTypeResolver);
         }
         return null;
     }
@@ -803,7 +774,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         return null;
     }
 
-    public function resolveDirectiveWarningDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
+    public function resolveDirectiveWarning(RelationalTypeResolverInterface $relationalTypeResolver): ?FeedbackItemResolution
     {
         if (Environment::enableSemanticVersionConstraints()) {
             /**
@@ -814,16 +785,19 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                  * If this fieldResolver doesn't have versioning, then it accepts everything
                  */
                 if (!$this->decideCanProcessBasedOnVersionConstraint($relationalTypeResolver)) {
-                    return sprintf(
-                        $this->__('The DirectiveResolver used to process directive \'%s\' (which has version \'%s\') does not pay attention to the version constraint; hence, argument \'versionConstraint\', with value \'%s\', was ignored', 'component-model'),
-                        $this->getDirectiveName(),
-                        $this->getDirectiveVersion($relationalTypeResolver) ?? '',
-                        $versionConstraint
+                    return new FeedbackItemResolution(
+                        WarningFeedbackItemProvider::class,
+                        WarningFeedbackItemProvider::W3,
+                        [
+                            $this->getDirectiveName(),
+                            $this->getDirectiveVersion($relationalTypeResolver) ?? '',
+                            $versionConstraint,
+                        ]
                     );
                 }
             }
         }
-        return $this->getDirectiveWarningDescription($relationalTypeResolver);
+        return $this->getDirectiveWarning($relationalTypeResolver);
     }
 
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
@@ -866,6 +840,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         // The one corresponding to the current stage is at the head. Take it out from there,
         // and keep passing down the rest of the array to the next stages
         list(
+            /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver,
             $pipelineDirectiveResolverInstances,
             $objectIDItems,
@@ -875,16 +850,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $dbItems,
             $variables,
             $messages,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
+            /** @var EngineIterationFeedbackStore */
+            $engineIterationFeedbackStore,
         ) = DirectivePipelineUtils::extractArgumentsFromPayload($payload);
 
         // Extract the head, keep passing down the rest
@@ -905,16 +872,6 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         //     $previousDBItems,
         //     $variables,
         //     $messages,
-        //     $objectErrors,
-        //     $objectWarnings,
-        //     $objectDeprecations,
-        //     $objectNotices,
-        //     $objectTraces,
-        //     $schemaErrors,
-        //     $schemaWarnings,
-        //     $schemaDeprecations,
-        //     $schemaNotices,
-        //     $schemaTraces
         // );
 
         // 2. Execute operation.
@@ -924,6 +881,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         if (!$this->needsIDsDataFieldsToExecute() || $this->hasIDsDataFields($idsDataFields)) {
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
+            $feedbackItemResolution = null;
             try {
                 $this->resolveDirective(
                     $relationalTypeResolver,
@@ -936,36 +894,69 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     $dbItems,
                     $variables,
                     $messages,
-                    $objectErrors,
-                    $objectWarnings,
-                    $objectDeprecations,
-                    $objectNotices,
-                    $objectTraces,
-                    $schemaErrors,
-                    $schemaWarnings,
-                    $schemaDeprecations,
-                    $schemaNotices,
-                    $schemaTraces
+                    $engineIterationFeedbackStore,
+                );
+            } catch (AbstractClientException $e) {
+                $feedbackItemResolution = new FeedbackItemResolution(
+                    GenericFeedbackItemProvider::class,
+                    GenericFeedbackItemProvider::E1,
+                    [
+                        $e->getMessage(),
+                    ]
                 );
             } catch (Exception $e) {
-                if (RootEnvironment::isApplicationEnvironmentDev()) {
-                    throw $e;
+                /** @var ComponentConfiguration */
+                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                if ($componentConfiguration->logExceptionErrorMessages()) {
+                    foreach ($idsDataFields as $id => $dataFields) {
+                        foreach ($dataFields['direct'] as $field) {
+                            $engineIterationFeedbackStore->objectFeedbackStore->addLog(
+                                new ObjectFeedback(
+                                    new FeedbackItemResolution(
+                                        ErrorFeedbackItemProvider::class,
+                                        ErrorFeedbackItemProvider::E11,
+                                        [
+                                            $this->directive,
+                                            $e->getMessage(),
+                                        ]
+                                    ),
+                                    LocationHelper::getNonSpecificLocation(),
+                                    $relationalTypeResolver,
+                                    $field,
+                                    $id,
+                                    $this->directive
+                                )
+                            );
+                        }
+                    }
                 }
-                $failureMessage = sprintf(
-                    $this->__('Resolving directive \'%s\' produced an exception, with message: \'%s\'', 'component-model'),
-                    $this->directive,
-                    $e->getMessage()
-                );
+                $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
+                    ? new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E11,
+                        [
+                            $this->directive,
+                            $e->getMessage(),
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E12,
+                        [
+                            $this->directive,
+                        ]
+                    );
+            }
+            if ($feedbackItemResolution !== null) {
                 $this->processFailure(
                     $relationalTypeResolver,
-                    $failureMessage,
+                    $feedbackItemResolution,
                     [],
                     $idsDataFields,
                     $pipelineIDsDataFields,
                     $objectIDItems,
                     $dbItems,
-                    $objectErrors,
-                    $objectWarnings
+                    $engineIterationFeedbackStore,
                 );
             }
         }
@@ -981,16 +972,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             $dbItems,
             $variables,
             $messages,
-            $objectErrors,
-            $objectWarnings,
-            $objectDeprecations,
-            $objectNotices,
-            $objectTraces,
-            $schemaErrors,
-            $schemaWarnings,
-            $schemaDeprecations,
-            $schemaNotices,
-            $schemaTraces
+            $engineIterationFeedbackStore,
         );
     }
 
@@ -1000,14 +982,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      */
     protected function processFailure(
         RelationalTypeResolverInterface $relationalTypeResolver,
-        string $failureMessage,
+        FeedbackItemResolution $feedbackItemResolution,
         array $failedFields,
         array $idsDataFields,
         array &$succeedingPipelineIDsDataFields,
         array $objectIDItems,
         array &$dbItems,
-        array &$objectErrors,
-        array &$objectWarnings
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
         $allFieldsFailed = empty($failedFields);
         if ($allFieldsFailed) {
@@ -1052,53 +1033,71 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
 
         // Show the failureMessage either as error or as warning
-        $directiveName = $this->getDirectiveName();
         if ($setFailingFieldResponseAsNull) {
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => $failureMessage,
-                    ];
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $feedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $failedField,
+                            $id,
+                            $this->directive,
+                        )
+                    );
                 }
             }
         } elseif ($removeFieldIfDirectiveFailed) {
-            if (count($failedFields) == 1) {
-                $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
-            } else {
-                $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
-            }
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // if (count($failedFields) == 1) {
+            //     $message = $this->__('%s. Field \'%s\' has been removed from the directive pipeline', 'component-model');
+            // } else {
+            //     $message = $this->__('%s. Fields \'%s\' have been removed from the directive pipeline', 'component-model');
+            // }
             foreach ($idsDataFieldsToRemove as $id => $dataFields) {
                 foreach ($dataFields['direct'] as $failedField) {
-                    $objectErrors[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => sprintf(
-                            $message,
-                            $failureMessage,
-                            implode($this->__('\', \''), $failedFields)
-                        ),
-                    ];
+                    $engineIterationFeedbackStore->objectFeedbackStore->addError(
+                        new ObjectFeedback(
+                            $feedbackItemResolution,
+                            LocationHelper::getNonSpecificLocation(),
+                            $relationalTypeResolver,
+                            $failedField,
+                            $id,
+                            $this->directive,
+                        )
+                    );
+                    // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+                    // $objectErrors[(string)$id][] = [
+                    //     Tokens::PATH => [$failedField, $this->directive],
+                    //     Tokens::MESSAGE => sprintf(
+                    //         $message,
+                    //         $failureMessage,
+                    //         implode($this->__('\', \''), $failedFields)
+                    //     ),
+                    // ];
                 }
             }
         } else {
-            if (count($failedFields) === 1) {
-                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
-            } else {
-                $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
-            }
-            foreach ($idsDataFieldsToRemove as $id => $dataFields) {
-                foreach ($dataFields['direct'] as $failedField) {
-                    $objectWarnings[(string)$id][] = [
-                        Tokens::PATH => [$failedField, $this->directive],
-                        Tokens::MESSAGE => sprintf(
-                            $message,
-                            $failureMessage,
-                            $directiveName,
-                            implode($this->__('\', \''), $failedFields)
-                        ),
-                    ];
-                }
-            }
+            // @todo Remove the code below, which was commented because it must/should be removed alongside "$removeFieldIfDirectiveFailed"
+            // if (count($failedFields) === 1) {
+            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on field \'%s\'', 'component-model');
+            // } else {
+            //     $message = $this->__('%s. Execution of directive \'%s\' has been ignored on fields \'%s\'', 'component-model');
+            // }
+            // foreach ($idsDataFieldsToRemove as $id => $dataFields) {
+            //     foreach ($dataFields['direct'] as $failedField) {
+            //         $objectWarnings[(string)$id][] = [
+            //             Tokens::PATH => [$failedField, $this->directive],
+            //             Tokens::MESSAGE => sprintf(
+            //                 $message,
+            //                 $failureMessage,
+            //                 $directiveName,
+            //                 implode($this->__('\', \''), $failedFields)
+            //             ),
+            //         ];
+            //     }
+            // }
         }
     }
 

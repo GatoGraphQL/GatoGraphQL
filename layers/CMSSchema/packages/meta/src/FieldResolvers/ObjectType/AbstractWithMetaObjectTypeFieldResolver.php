@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\FieldResolvers\ObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPCMSSchema\Meta\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\Meta\FieldResolvers\InterfaceType\WithMetaInterfaceTypeFieldResolver;
 use PoPCMSSchema\Meta\TypeAPIs\MetaTypeAPIInterface;
 
@@ -39,7 +41,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
 
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
-    protected function doResolveSchemaValidationErrorDescriptions(
+    protected function doResolveSchemaValidationErrors(
         ObjectTypeResolverInterface $objectTypeResolver,
         string $fieldName,
         array $fieldArgs
@@ -50,9 +52,12 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
             case 'metaValues':
                 if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($fieldArgs['key'])) {
                     return [
-                        sprintf(
-                            $this->__('There is no key with name \'%s\'', 'commentmeta'),
-                            $fieldArgs['key']
+                        new FeedbackItemResolution(
+                            FeedbackItemProvider::class,
+                            FeedbackItemProvider::E1,
+                            [
+                                $fieldArgs['key'],
+                            ]
                         ),
                     ];
                 }
@@ -60,7 +65,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
         }
         // }
 
-        return parent::doResolveSchemaValidationErrorDescriptions($objectTypeResolver, $fieldName, $fieldArgs);
+        return parent::doResolveSchemaValidationErrors($objectTypeResolver, $fieldName, $fieldArgs);
     }
 
     public function validateResolvedFieldType(

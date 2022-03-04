@@ -7,93 +7,141 @@ namespace PoP\ComponentModel\Feedback;
 class GeneralFeedbackStore
 {
     /** @var GeneralFeedbackInterface[] */
-    private array $generalErrors = [];
+    private array $errors = [];
     /** @var GeneralFeedbackInterface[] */
-    private array $generalWarnings = [];
+    private array $warnings = [];
     /** @var GeneralFeedbackInterface[] */
-    private array $generalDeprecations = [];
+    private array $deprecations = [];
     /** @var GeneralFeedbackInterface[] */
-    private array $generalNotices = [];
+    private array $notices = [];
     /** @var GeneralFeedbackInterface[] */
-    private array $generalLogs = [];
+    private array $suggestions = [];
     /** @var GeneralFeedbackInterface[] */
-    private array $generalTraces = [];
+    private array $logs = [];
 
     /**
      * @return GeneralFeedbackInterface[]
      */
-    public function getGeneralErrors(): array
+    public function getErrors(): array
     {
-        return $this->generalErrors;
+        return $this->errors;
     }
 
-    public function addGeneralError(GeneralFeedbackInterface $generalError): void
+    public function addError(GeneralFeedbackInterface $error): void
     {
-        $this->generalErrors[] = $generalError;
+        $this->errors[] = $error;
     }
 
     /**
-     * @return GeneralFeedbackInterface[]
+     * @param GeneralFeedbackInterface[] $errors
      */
-    public function getGeneralWarnings(): array
+    public function setErrors(array $errors): void
     {
-        return $this->generalWarnings;
-    }
-
-    public function addGeneralWarning(GeneralFeedbackInterface $generalWarning): void
-    {
-        $this->generalWarnings[] = $generalWarning;
+        $this->errors = $errors;
     }
 
     /**
      * @return GeneralFeedbackInterface[]
      */
-    public function getGeneralDeprecations(): array
+    public function getWarnings(): array
     {
-        return $this->generalDeprecations;
+        return $this->warnings;
     }
 
-    public function addGeneralDeprecation(GeneralFeedbackInterface $generalDeprecation): void
+    public function addWarning(GeneralFeedbackInterface $warning): void
     {
-        $this->generalDeprecations[] = $generalDeprecation;
+        $this->warnings[] = $warning;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $warnings
+     */
+    public function setWarnings(array $warnings): void
+    {
+        $this->warnings = $warnings;
     }
 
     /**
      * @return GeneralFeedbackInterface[]
      */
-    public function getGeneralNotices(): array
+    public function getDeprecations(): array
     {
-        return $this->generalNotices;
+        return $this->deprecations;
     }
 
-    public function addGeneralNotice(GeneralFeedbackInterface $generalNotice): void
+    public function addDeprecation(GeneralFeedbackInterface $deprecation): void
     {
-        $this->generalNotices[] = $generalNotice;
+        $this->deprecations[] = $deprecation;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $deprecations
+     */
+    public function setDeprecations(array $deprecations): void
+    {
+        $this->deprecations = $deprecations;
     }
 
     /**
      * @return GeneralFeedbackInterface[]
      */
-    public function getGeneralLogs(): array
+    public function getNotices(): array
     {
-        return $this->generalLogs;
+        return $this->notices;
     }
 
-    public function addGeneralLog(GeneralFeedbackInterface $generalLog): void
+    public function addNotice(GeneralFeedbackInterface $notice): void
     {
-        $this->generalLogs[] = $generalLog;
+        $this->notices[] = $notice;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $notices
+     */
+    public function setNotices(array $notices): void
+    {
+        $this->notices = $notices;
     }
 
     /**
      * @return GeneralFeedbackInterface[]
      */
-    public function getGeneralTraces(): array
+    public function getSuggestions(): array
     {
-        return $this->generalTraces;
+        return $this->suggestions;
     }
 
-    public function addGeneralTrace(GeneralFeedbackInterface $generalTrace): void
+    public function addSuggestion(GeneralFeedbackInterface $suggestion): void
     {
-        $this->generalTraces[] = $generalTrace;
+        $this->suggestions[] = $suggestion;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $suggestions
+     */
+    public function setSuggestions(array $suggestions): void
+    {
+        $this->suggestions = $suggestions;
+    }
+
+    /**
+     * @return GeneralFeedbackInterface[]
+     */
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function addLog(GeneralFeedbackInterface $log): void
+    {
+        $this->logs[] = $log;
+    }
+
+    /**
+     * @param GeneralFeedbackInterface[] $logs
+     */
+    public function setLogs(array $logs): void
+    {
+        $this->logs = $logs;
     }
 }

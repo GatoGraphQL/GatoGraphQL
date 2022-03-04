@@ -12,3 +12,6 @@ services:
 
     PoPCMSSchema\UserState\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
+
+    PoPCMSSchema\UserState\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

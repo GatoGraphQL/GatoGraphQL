@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
@@ -26,10 +27,18 @@ class LogoutUserMutationResolver extends AbstractMutationResolver
 
     public function validateErrors(array $form_data): array
     {
-        $errors = [];
-        $this->validateUserIsLoggedIn($errors);
-        return $errors;
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            return [
+                $errorFeedbackItemResolution,
+            ];
+        }
+        return [];
     }
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $user_id = App::getState('current-user-id');

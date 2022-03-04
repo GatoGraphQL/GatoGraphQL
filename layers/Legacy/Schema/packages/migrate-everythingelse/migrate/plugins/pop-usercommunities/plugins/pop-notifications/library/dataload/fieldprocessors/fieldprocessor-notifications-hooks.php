@@ -119,17 +119,18 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $notification = $object;
@@ -154,11 +155,8 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($status, $notification->user_id);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $status = new GD_URE_FormInput_MultiMemberStatus($params);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
             case 'memberprivileges':
@@ -168,11 +166,8 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($privileges, $notification->user_id);
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $privileges = new GD_URE_FormInput_FilterMemberPrivileges($params);
+                $selected = $objectTypeResolver->resolveValue($notification, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
             case 'membertags':
@@ -182,11 +177,8 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return gdUreCommunityMembershipstatusFilterbycommunity($tags, $notification->user_id);
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $tags = new GD_URE_FormInput_FilterMemberTags($params);
+                $selected = $objectTypeResolver->resolveValue($notification, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
          // ----------------------------------------
 
@@ -244,7 +236,7 @@ class URE_AAL_PoP_DataLoad_ObjectTypeFieldResolver_Notifications extends Abstrac
                 return null;
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

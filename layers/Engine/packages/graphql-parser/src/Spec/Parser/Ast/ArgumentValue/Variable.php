@@ -4,40 +4,20 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\FeedbackMessageProviders\FeedbackMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Services\StandaloneServiceTrait;
 use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-
-    private ?GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider = null;
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
-
-    final public function setGraphQLSpecErrorMessageProvider(GraphQLSpecErrorMessageProvider $graphQLSpecErrorMessageProvider): void
-    {
-        $this->graphQLSpecErrorMessageProvider = $graphQLSpecErrorMessageProvider;
-    }
-    final protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
-    {
-        return $this->graphQLSpecErrorMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLSpecErrorMessageProvider::class);
-    }
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
-    {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
-    }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->feedbackMessageProvider ??= InstanceManagerFacade::getInstance()->getInstance(FeedbackMessageProvider::class);
-    }
 
     private ?Context $context = null;
 
@@ -137,8 +117,13 @@ class Variable extends AbstractAst implements WithValueInterface
     {
         if ($this->context === null) {
             throw new InvalidRequestException(
-                $this->getFeedbackMessageProvider()->getMessage(FeedbackMessageProvider::E2, $this->name),
-                $this->getFeedbackMessageProvider()->getNamespacedCode(FeedbackMessageProvider::E2),
+                new FeedbackItemResolution(
+                    FeedbackItemProvider::class,
+                    FeedbackItemProvider::E2,
+                    [
+                        $this->name,
+                    ]
+                ),
                 $this->getLocation()
             );
         }
@@ -157,8 +142,13 @@ class Variable extends AbstractAst implements WithValueInterface
         }
         if ($this->isRequired()) {
             throw new InvalidRequestException(
-                $this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_8_5, $this->name),
-                $this->getGraphQLSpecErrorMessageProvider()->getNamespacedCode(GraphQLSpecErrorMessageProvider::E_5_8_5),
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_8_5,
+                    [
+                        $this->name,
+                    ]
+                ),
                 $this->getLocation()
             );
         }

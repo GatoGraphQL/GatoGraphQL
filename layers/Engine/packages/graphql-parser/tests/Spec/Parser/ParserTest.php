@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLParserErrorMessageProvider;
-use PoP\GraphQLParser\FeedbackMessageProviders\GraphQLSpecErrorMessageProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -34,16 +35,6 @@ class ParserTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    protected function getGraphQLSpecErrorMessageProvider(): GraphQLSpecErrorMessageProvider
-    {
-        return $this->getService(GraphQLSpecErrorMessageProvider::class);
-    }
-
-    protected function getGraphQLParserErrorMessageProvider(): GraphQLParserErrorMessageProvider
-    {
-        return $this->getService(GraphQLParserErrorMessageProvider::class);
-    }
-
     public function testEmptyParser()
     {
         $parser = $this->getParser();
@@ -55,7 +46,7 @@ class ParserTest extends AbstractTestCase
     public function testInvalidSelection()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLParserErrorMessageProvider()->getMessage(GraphQLParserErrorMessageProvider::E_6, Token::tokenName(Token::TYPE_RBRACE)));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, [Token::tokenName(Token::TYPE_RBRACE)]))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
         {
@@ -738,9 +729,9 @@ GRAPHQL;
                                 'user',
                                 null,
                                 [
-                                    new Argument('id', new Literal('10', new Location(1, 13)), new Location(1, 9)),
+                                    new Argument('id', new Literal(10, new Location(1, 13)), new Location(1, 9)),
                                     new Argument('name', new Literal('max', new Location(1, 24)), new Location(1, 17)),
-                                    new Argument('float', new Literal('123.123', new Location(1, 37)), new Location(1, 30)),
+                                    new Argument('float', new Literal(123.123, new Location(1, 37)), new Location(1, 30)),
                                 ],
                                 [
                                     new LeafField('id', null, [], [], new Location(1, 49)),
@@ -775,7 +766,7 @@ GRAPHQL;
                 ),
             ],
             [
-                '{ allUsers : users ( id: [ 1, "2", true, null] ) { id } }',
+                '{ allUsers : users ( id: [ 1, 1.5, "2", true, null] ) { id } }',
                 new Document(
                     [
                         new QueryOperation(
@@ -787,10 +778,10 @@ GRAPHQL;
                                     'users',
                                     'allUsers',
                                     [
-                                        new Argument('id', new InputList([1, "2", true, null], new Location(1, 26)), new Location(1, 22)),
+                                        new Argument('id', new InputList([1, 1.5, "2", true, null], new Location(1, 26)), new Location(1, 22)),
                                     ],
                                     [
-                                        new LeafField('id', null, [], [], new Location(1, 52)),
+                                        new LeafField('id', null, [], [], new Location(1, 57)),
                                     ],
                                     [],
                                     new Location(1, 14)
@@ -1235,7 +1226,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInVariable()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, ['name']))->getMessage());
         $parser = $this->getParser();
         $parser->parse('
             query FilterUsers($filter: UserFilterInput = { name: "Pedro", name: "Juancho" }) {
@@ -1250,7 +1241,7 @@ GRAPHQL;
     public function testNoDuplicateKeysInInputObjectInArgument()
     {
         $this->expectException(SyntaxErrorException::class);
-        $this->expectExceptionMessage($this->getGraphQLSpecErrorMessageProvider()->getMessage(GraphQLSpecErrorMessageProvider::E_5_6_2, 'name'));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_6_2, ['name']))->getMessage());
         $parser          = $this->getParser();
         $parser->parse('
             query FilterUsers {

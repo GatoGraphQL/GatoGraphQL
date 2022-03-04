@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoPCMSSchema\SchemaCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 
 class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
@@ -68,7 +70,7 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     /**
      * Validate constraints on the input field's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
     {
@@ -76,13 +78,13 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
 
         if ($inputFieldName === 'limit' && $this->getMaxLimit() !== null) {
             if (
-                $maybeError = $this->validateLimitInputField(
+                $maybeErrorFeedbackItemResolution = $this->validateLimitInputField(
                     $this->getMaxLimit(),
                     $inputFieldName,
                     $inputFieldValue
                 )
             ) {
-                $errors[] = $maybeError;
+                $errors[] = $maybeErrorFeedbackItemResolution;
             }
         }
         return $errors;
@@ -100,26 +102,32 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
         int $maxLimit,
         string $inputFieldName,
         mixed $inputFieldValue
-    ): ?string {
+    ): ?FeedbackItemResolution {
         // Check the value is not below what is accepted
         $minLimit = $maxLimit === -1 ? -1 : 1;
         if ($inputFieldValue < $minLimit) {
-            return sprintf(
-                $this->__('The value for input field \'%s\' in input object \'%s\' cannot be below \'%s\'', 'schema-commons'),
-                $inputFieldName,
-                $this->getMaybeNamespacedTypeName(),
-                $minLimit
+            return new FeedbackItemResolution(
+                FeedbackItemProvider::class,
+                FeedbackItemProvider::E1,
+                [
+                    $inputFieldName,
+                    $this->getMaybeNamespacedTypeName(),
+                    $minLimit,
+                ]
             );
         }
 
         // Check the value is not below the max limit
         if ($maxLimit !== -1 && $inputFieldValue > $maxLimit) {
-            return sprintf(
-                $this->__('The value for input field \'%s\' in input object \'%s\' cannot be above \'%s\', but \'%s\' was provided', 'posts'),
-                $inputFieldName,
-                $this->getMaybeNamespacedTypeName(),
-                $maxLimit,
-                $inputFieldValue
+            return new FeedbackItemResolution(
+                FeedbackItemProvider::class,
+                FeedbackItemProvider::E2,
+                [
+                    $inputFieldName,
+                    $this->getMaybeNamespacedTypeName(),
+                    $maxLimit,
+                    $inputFieldValue,
+                ]
             );
         }
 

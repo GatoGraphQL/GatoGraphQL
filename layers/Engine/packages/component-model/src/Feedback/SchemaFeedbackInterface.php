@@ -9,8 +9,10 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 interface SchemaFeedbackInterface extends QueryFeedbackInterface
 {
     public function getRelationalTypeResolver(): RelationalTypeResolverInterface;
+    public function getField(): string;
+    public function getDirective(): ?string;
     /**
-     * @return string[]
+     * @return SchemaFeedbackInterface[]
      */
-    public function getFields(): array;
+    public function getNested(): array;
 }

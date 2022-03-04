@@ -23,4 +23,16 @@ class Component extends AbstractComponent
             \PoPCMSSchema\Categories\Component::class,
         ];
     }
+
+    /**
+     * Initialize services
+     *
+     * @param string[] $skipSchemaComponentClasses
+     */
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaComponentClasses,
+    ): void {
+        $this->initServices(dirname(__DIR__));
+    }
 }

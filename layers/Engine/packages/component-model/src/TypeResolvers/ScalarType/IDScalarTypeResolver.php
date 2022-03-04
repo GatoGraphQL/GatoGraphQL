@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use stdClass;
 
 /**
@@ -34,23 +39,37 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
      *
      * @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
      */
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsNotStdClass($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
+
         /**
          * Type ID in GraphQL spec: only String or Int allowed.
          *
          * @see https://spec.graphql.org/draft/#sec-ID.Input-Coercion
          */
         if (is_float($inputValue) || is_bool($inputValue)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName()
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E17,
+                        [
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
         return $inputValue;
     }

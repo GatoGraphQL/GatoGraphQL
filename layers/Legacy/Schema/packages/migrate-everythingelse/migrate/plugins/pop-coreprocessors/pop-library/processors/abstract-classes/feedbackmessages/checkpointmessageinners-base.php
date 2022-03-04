@@ -1,5 +1,6 @@
 <?php
 
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase /*PoP_Module_Processor_StructureInnersBase*/
@@ -15,15 +16,15 @@ abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Modu
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $module, array &$props, array $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids): array
+    public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = parent::getDataFeedback($module, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
         // Checkpoint validation required?
-        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] && GeneralUtils::isError($dataaccess_checkpoint_validation)) {
+        if ($data_properties[\PoP\ComponentModel\Constants\DataLoading::DATA_ACCESS_CHECKPOINTS] && $dataaccess_checkpoint_validation !== null) {
             $msg = array(
                 'codes' => array(
-                    $dataaccess_checkpoint_validation->getCode()
+                    $dataaccess_checkpoint_validation->getFeedbackItemProvider()->getNamespacedCode()
                 ),
                 'header' => array(
                     'code' => 'error-header',

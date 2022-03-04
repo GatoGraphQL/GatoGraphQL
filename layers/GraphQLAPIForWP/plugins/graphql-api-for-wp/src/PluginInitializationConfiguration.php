@@ -423,13 +423,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
-            // Add "self" fields to the schema?
-            [
-                'class' => GraphQLServerComponent::class,
-                'envVariable' => GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA,
-                'module' => SchemaTypeModuleResolver::SCHEMA_SELF_FIELDS,
-                'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
-            ],
             // White/Blacklisted entries to CustomPost.meta
             [
                 'class' => CustomPostMetaComponent::class,
@@ -618,6 +611,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              * Do not expose the `DangerouslyDynamic` scalar type
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,
+            /**
+             * Enable Mutations?
+             */
+            ComponentModelEnvironment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
         $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
@@ -635,8 +632,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $componentClassConfiguration[\PoPAPI\API\Component::class] = [
             // Do not expose global fields
             \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
-            // Enable Mutations?
-            \PoPAPI\API\Environment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
 
         // If doing ?behavior=unrestricted, always enable certain features

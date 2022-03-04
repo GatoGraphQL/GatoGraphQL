@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\UserMeta\Utils;
@@ -16,6 +17,10 @@ use PoPCMSSchema\UserMeta\Utils;
  */
 class EditMembershipMutationResolver extends AbstractMutationResolver
 {
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
     public function executeMutation(array $form_data): mixed
     {
         $user_id = $form_data['user_id'];
@@ -86,6 +91,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         $errors = [];
         $user_id = $form_data['user_id'];
         if (!$user_id) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The user is missing', 'ure-pop');
             return $errors;
         }
@@ -98,6 +108,11 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
 
         $status = $form_data['status'];
         if (!$status) {
+            // @todo Migrate from string to FeedbackItemProvider
+            // $errors[] = new FeedbackItemResolution(
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E1,
+            // );
             $errors[] = $this->getTranslationAPI()->__('The status has not been set', 'ure-pop');
         }
         return $errors;

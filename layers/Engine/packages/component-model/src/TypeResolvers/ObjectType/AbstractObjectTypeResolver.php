@@ -7,14 +7,18 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
+use PoP\ComponentModel\Component;
+use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Environment;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Feedback\ObjectFeedback;
-use PoP\ComponentModel\Feedback\SchemaFeedback;
-use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
+use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -22,8 +26,10 @@ use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
-use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Exception\AbstractClientException;
+use stdClass;
 
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
@@ -56,10 +62,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     /**
      * @var array<string, array>
      */
-    private array $dissectedFieldForSchemaCache = [];
-    /**
-     * @var array<string, array>
-     */
     private array $fieldNamesResolvedByObjectTypeFieldResolver = [];
     /**
      * @var InterfaceTypeFieldResolverInterface[]|null
@@ -67,6 +69,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?OutputServiceInterface $outputService = null;
+    private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
     final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
@@ -75,6 +79,22 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
     {
         return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+    }
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
+    final public function setObjectSerializationManager(ObjectSerializationManagerInterface $objectSerializationManager): void
+    {
+        $this->objectSerializationManager = $objectSerializationManager;
+    }
+    final protected function getObjectSerializationManager(): ObjectSerializationManagerInterface
+    {
+        return $this->objectSerializationManager ??= $this->instanceManager->getInstance(ObjectSerializationManagerInterface::class);
     }
 
     /**
@@ -124,500 +144,639 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final public function getFieldSchemaDefinition(string $field): ?array
     {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
-            $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field);
-            return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return null;
         }
 
-        return null;
+        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+        $fieldArgs = $this->getFieldQueryInterpreter()->extractStaticFieldArguments($field);
+        return $executableObjectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
     }
 
-    final public function resolveFieldValidationErrorQualifiedEntries(string $field, array &$variables = null): array
-    {
+    final public function collectFieldValidationErrors(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore
+    ): void {
         list(
             $validField,
             $fieldName,
             $fieldArgs,
-            $schemaErrors,
-        ) = $this->dissectFieldForSchema($field);
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         // Dissecting the field may already fail, then already return the error
-        if ($schemaErrors) {
-            return $schemaErrors;
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
         }
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            if ($maybeErrors = $executableObjectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                foreach ($maybeErrors as $error) {
-                    $schemaErrors[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $error,
-                    ];
-                }
-            }
-            return $schemaErrors;
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            /**
+             * If the error happened from requesting a version that doesn't exist, show an appropriate error message
+             */
+            $useSemanticVersionConstraints = Environment::enableSemanticVersionConstraints()
+                && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null);
+            $feedbackItemResolution = $useSemanticVersionConstraints
+                ? new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E26,
+                    [
+                        $fieldName,
+                        $this->getMaybeNamespacedTypeName(),
+                        $versionConstraint,
+                    ]
+                )
+                : new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E27,
+                    [
+                        $fieldName,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                );
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $feedbackItemResolution,
+                    LocationHelper::getNonSpecificLocation(),
+                    $this,
+                )
+            );
+            return;
         }
 
-        // If we reach here, no fieldResolver processes this field, which is an error
+        $executableObjectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    final public function collectFieldValidationWarnings(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return;
+        }
+
+        // @todo Fix: deprecations and warnings are already added with errors, then don't add again
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+            $fieldArgs,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
         /**
-         * If the error happened from requesting a version that doesn't exist, show an appropriate error message
+         * If the field is not valid, the fieldArgs may be empty,
+         * and getting warnings on the field may not work correctly
          */
-        if (
-            Environment::enableSemanticVersionConstraints()
-            && ($versionConstraint = $fieldArgs[SchemaDefinition::VERSION_CONSTRAINT] ?? null)
-        ) {
-            $errorMessage = sprintf(
-                $this->__(
-                    'There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'',
-                    'pop-component-model'
-                ),
-                $fieldName,
-                $this->getMaybeNamespacedTypeName(),
-                $versionConstraint,
-            );
-        } else {
-            $errorMessage = sprintf(
-                $this->__(
-                    'There is no field \'%s\' on type \'%s\'',
-                    'pop-component-model'
-                ),
-                $fieldName,
-                $this->getMaybeNamespacedTypeName()
-            );
+        if ($validField === null) {
+            return;
         }
-        return [
-            [
-                Tokens::PATH => [$field],
-                Tokens::MESSAGE => $errorMessage,
-            ],
-        ];
-    }
-
-    final public function resolveFieldValidationWarningQualifiedEntries(string $field, array &$variables = null): array
-    {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-                $fieldArgs,
-                $schemaErrors,
-                $schemaWarnings,
-            ) = $this->dissectFieldForSchema($field);
-            /**
-             * If the field is not valid, the fieldArgs may be empty,
-             * and getting warnings on the field may not work correctly
-             */
-            if ($validField === null) {
-                return $schemaWarnings;
+        if ($maybeWarningFeedbackItemResolutions = $executableObjectTypeFieldResolver->resolveFieldValidationWarnings($this, $fieldName, $fieldArgs)) {
+            foreach ($maybeWarningFeedbackItemResolutions as $warningFeedbackItemResolution) {
+                $objectTypeFieldResolutionFeedbackStore->addWarning(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $warningFeedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
+                    )
+                );
             }
-            if ($maybeWarnings = $executableObjectTypeFieldResolver->resolveFieldValidationWarningDescriptions($this, $fieldName, $fieldArgs)) {
-                foreach ($maybeWarnings as $warning) {
-                    $schemaWarnings[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $warning,
-                    ];
-                }
-            }
-            return $schemaWarnings;
         }
-
-        return [];
     }
 
-    final public function resolveFieldDeprecationQualifiedEntries(string $field, array &$variables = null): array
-    {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-                $fieldArgs,
-                $schemaErrors,
-                $schemaWarnings,
-                $schemaDeprecations,
-            ) = $this->dissectFieldForSchema($field);
-            /**
-             * If the field is not valid, the fieldArgs may be empty,
-             * and getting deprecations on the field may not work correctly
-             */
-            if ($validField === null) {
-                return $schemaDeprecations;
-            }
-            if ($maybeDeprecationMessages = $executableObjectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
-                foreach ($maybeDeprecationMessages as $deprecationMessage) {
-                    $schemaDeprecations[] = [
-                        Tokens::PATH => [$field],
-                        Tokens::MESSAGE => $deprecationMessage,
-                    ];
-                }
-            }
-            return $schemaDeprecations;
+    final public function collectFieldDeprecations(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return;
         }
 
-        return [];
+        // @todo Fix: deprecations and warnings are already added with errors, then don't add again
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+            $fieldArgs,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        /**
+         * If the field is not valid, the fieldArgs may be empty,
+         * and getting deprecations on the field may not work correctly
+         */
+        if ($validField === null) {
+            return;
+        }
+        $executableObjectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    final public function getFieldTypeResolver(string $field): ?ConcreteTypeResolverInterface
-    {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-            ) = $this->dissectFieldForSchema($field);
-            return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
+    final public function getFieldTypeResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?ConcreteTypeResolverInterface {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return null;
         }
 
-        return null;
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        return $executableObjectTypeFieldResolver->getFieldTypeResolver($this, $fieldName);
     }
 
-    final public function getFieldTypeModifiers(string $field): ?int
-    {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-            ) = $this->dissectFieldForSchema($field);
-            return $executableObjectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
+    final public function getFieldTypeModifiers(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?int {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return null;
         }
 
-        return null;
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        return $executableObjectTypeFieldResolver->getFieldTypeModifiers($this, $fieldName);
     }
 
-    final public function getFieldMutationResolver(string $field): ?MutationResolverInterface
-    {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-            ) = $this->dissectFieldForSchema($field);
-            return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
+    final public function getFieldMutationResolver(
+        string $field,
+        array $variables,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?MutationResolverInterface {
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return null;
         }
 
-        return null;
+        // @todo Fix: filling the FeedbackStore is already done in collectFieldValidationErrors, so don't duplicate output
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        return $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
     }
 
     final public function isFieldAMutation(string $field): ?bool
     {
-        if ($executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field)) {
-            list(
-                $validField,
-                $fieldName,
-            ) = $this->dissectFieldForSchema($field);
-            $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
-            return $fieldMutationResolver !== null;
+        $executableObjectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+        if ($executableObjectTypeFieldResolver === null) {
+            return null;
         }
 
-        return null;
+        // @todo Hack to provide needed vars
+        $variables = [];
+        $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $validField,
+            $fieldName,
+        ) = $this->dissectFieldForSchema($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        $fieldMutationResolver = $executableObjectTypeFieldResolver->getFieldMutationResolver($this, $fieldName);
+        return $fieldMutationResolver !== null;
     }
 
-    final protected function dissectFieldForSchema(string $field): array
+    final protected function dissectFieldForSchema(string $field, array $variables, ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore): array
     {
-        if (!isset($this->dissectedFieldForSchemaCache[$field])) {
-            $this->dissectedFieldForSchemaCache[$field] = $this->doDissectFieldForSchema($field);
-        }
-        return $this->dissectedFieldForSchemaCache[$field];
-    }
-
-    private function doDissectFieldForSchema(string $field): array
-    {
-        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field);
+        return $this->getFieldQueryInterpreter()->extractFieldArgumentsForSchema($this, $field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     final public function resolveValue(
         object $object,
         string $field,
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
+        $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field);
+        if ($objectTypeFieldResolvers === []) {
+            /**
+             * Return an error to indicate that no fieldResolver processes this field,
+             * which is different than returning a null value.
+             * Needed for compatibility with CustomPostUnionTypeResolver
+             * (so that data-fields aimed for another post_type are not retrieved)
+             */
+            $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        FieldResolutionErrorFeedbackItemProvider::class,
+                        FieldResolutionErrorFeedbackItemProvider::E1,
+                        [
+                            $fieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                            $this->getID($object),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this,
+                )
+            );
+            return null;
+        }
+
         // Get the value from a fieldResolver, from the first one who can deliver the value
         // (The fact that they resolve the fieldName doesn't mean that they will always resolve it for that specific $object)
-        if ($objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field)) {
-            // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
-            list(
-                $field,
-                $fieldName,
-                $fieldArgs,
-                $schemaErrors,
-                $schemaWarnings,
-            ) = $this->dissectFieldForSchema($field);
+        // Important: $validField becomes $field: remove all invalid fieldArgs before executing `resolveValue` on the fieldResolver
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $field,
+            $fieldName,
+            $fieldArgs,
+        ) = $this->dissectFieldForSchema($field, $variables, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
 
-            // Store the warnings to be read if needed
-            if ($schemaWarnings) {
-                $schemaFeedbackStore = App::getFeedbackStore()->schemaFeedbackStore;
-                foreach ($schemaWarnings as $warningEntry) {
-                    $schemaFeedbackStore->addSchemaWarning(
-                        new SchemaFeedback(
-                            $warningEntry[Tokens::MESSAGE],
-                            null,
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
+        // That is because if when resolving there is an error, the fieldArgValue will be removed completely, then we don't know that we must validate the schema again
+        // Eg: doing /?query=arrayUnique(extract(..., 0)) and extract fails, arrayUnique will have no fieldArgs. However its fieldArg is mandatory, but by then it doesn't know it needs to validate it
+        // Before resolving the fieldArgValues which are fields:
+        // Calculate $validateSchemaOnObject: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
+        // For instance: After resolving a field and being casted it may be incorrect, so the value is invalidated, and after the schemaValidation the proper error is shown
+        // Also need to check for variables, since these must be resolved too
+        // For instance: ?query=posts(limit:3),post(id:$id).id|title&id=112
+        // We can also force it through an option. This is needed when the field is created on runtime.
+        // Eg: through the <transform> directive, in which case no parameter is dynamic anymore by the time it reaches here, yet it was not validated statically either
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $validateSchemaOnObject =
+            ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
+            FieldQueryUtils::isAnyFieldArgumentValueDynamic(
+                array_values(
+                    $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field, $variables, $separateObjectTypeFieldResolutionFeedbackStore) ?? []
+                )
+            );
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        // Once again, the $validField becomes the $field
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        list(
+            $field,
+            $fieldName,
+            $fieldArgs,
+        ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
+        $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
+        foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
+            // Also send the typeResolver along, as to get the id of the $object being passed
+            if (!$objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
+                continue;
+            }
+            if ($validateSchemaOnObject) {
+                $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                $objectTypeFieldResolver->collectFieldValidationErrors($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolver->collectFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+                $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+                if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    return null;
+                }
+            }
+
+            $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $objectTypeFieldResolver->collectValidationErrors($this, $object, $fieldName, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
+            $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
+            if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+
+            // Resolve the value. If the field resolver throws an Exception,
+            // catch it and return the equivalent GraphQL error so that it
+            // fails gracefully in production (but not on development!)
+            $value = null;
+            try {
+                $value = $objectTypeFieldResolver->resolveValue(
+                    $this,
+                    $object,
+                    $fieldName,
+                    $fieldArgs,
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
+            } catch (Exception $e) {
+                /** @var ComponentConfiguration */
+                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                if ($componentConfiguration->logExceptionErrorMessages()) {
+                    $objectTypeFieldResolutionFeedbackStore->addLog(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                ErrorFeedbackItemProvider::class,
+                                ErrorFeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                    $e->getMessage(),
+                                ]
+                            ),
                             LocationHelper::getNonSpecificLocation(),
                             $this,
-                            $warningEntry[Tokens::PATH],
-                            $warningEntry[Tokens::EXTENSIONS] ?? [],
                         )
                     );
                 }
-            }
-            if ($schemaErrors) {
-                return $this->getErrorProvider()->getNestedSchemaErrorsFieldError($schemaErrors, $fieldName);
-            }
-
-            // Important: calculate 'isAnyFieldArgumentValueDynamic' before resolving the args for the object
-            // That is because if when resolving there is an error, the fieldArgValue will be removed completely, then we don't know that we must validate the schema again
-            // Eg: doing /?query=arrayUnique(extract(..., 0)) and extract fails, arrayUnique will have no fieldArgs. However its fieldArg is mandatory, but by then it doesn't know it needs to validate it
-            // Before resolving the fieldArgValues which are fields:
-            // Calculate $validateSchemaOnObject: if any value containes a field, then we must perform the schemaValidation on the item, such as checking that all mandatory fields are there
-            // For instance: After resolving a field and being casted it may be incorrect, so the value is invalidated, and after the schemaValidation the proper error is shown
-            // Also need to check for variables, since these must be resolved too
-            // For instance: ?query=posts(limit:3),post(id:$id).id|title&id=112
-            // We can also force it through an option. This is needed when the field is created on runtime.
-            // Eg: through the <transform> directive, in which case no parameter is dynamic anymore by the time it reaches here, yet it was not validated statically either
-            $validateSchemaOnObject =
-                ($options[self::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM] ?? null) ||
-                FieldQueryUtils::isAnyFieldArgumentValueDynamic(
-                    array_values(
-                        $this->getFieldQueryInterpreter()->extractFieldArguments($this, $field) ?? []
+                $sendExceptionErrorMessages = $e instanceof AbstractClientException
+                    || $componentConfiguration->sendExceptionErrorMessages();
+                $feedbackItemResolution = $sendExceptionErrorMessages
+                    ? new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E3,
+                        [
+                            $fieldName,
+                            $e->getMessage(),
+                        ]
+                    )
+                    : new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E4,
+                        [
+                            $fieldName,
+                        ]
+                    );
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        $feedbackItemResolution,
+                        LocationHelper::getNonSpecificLocation(),
+                        $this,
                     )
                 );
+                return null;
+            }
 
-            // Once again, the $validField becomes the $field
-            list(
-                $field,
-                $fieldName,
-                $fieldArgs,
-                $maybeObjectErrors,
-                $maybeObjectWarnings,
-                $maybeObjectDeprecations,
-            ) = $this->getFieldQueryInterpreter()->extractFieldArgumentsForObject($this, $object, $field, $variables, $expressions);
+            /**
+             * If there were errors, return already
+             */
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
 
-            // Store the warnings to be read if needed
-            if ($maybeObjectWarnings) {
-                $id = $this->getID($object);
-                $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
-                foreach ($maybeObjectWarnings as $warningEntry) {
-                    $objectFeedbackStore->addObjectWarning(
-                        new ObjectFeedback(
-                            $warningEntry[Tokens::MESSAGE],
-                            null,
+            /**
+             * Validate that the value is what was defined in the schema, or throw a corresponding error.
+             *
+             * Items being validated:
+             *
+             * - Is it null?
+             * - Is it an array when it should be?
+             * - Is it not an array when it should not be?
+             *
+             * Items NOT being validated:
+             *
+             * - Is the returned type (String, Int, some Object, etc) the expected one?
+             *
+             * According to the GraphQL speck, checking if a non-null field returns null
+             * is handled always:
+             *
+             *   If the result of resolving a field is null (either because the function
+             *   to resolve the field returned null or because a field error was raised),
+             *   and that field is of a Non-Null type, then a field error is raised.
+             *   The error must be added to the "errors" list in the response.
+             *
+             * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
+             *
+             * All other conditions, check them when enabled by configuration.
+             */
+            if ($value === null) {
+                $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
+                $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
+                if ($fieldTypeIsNonNullable) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E3,
+                                [
+                                    $fieldName,
+                                ]
+                            ),
                             LocationHelper::getNonSpecificLocation(),
                             $this,
-                            $warningEntry[Tokens::PATH],
-                            [$id],
-                            $warningEntry[Tokens::EXTENSIONS] ?? [],
                         )
                     );
+                    return null;
                 }
-            }
-            if ($maybeObjectErrors) {
-                return $this->getErrorProvider()->getNestedObjectErrorsFieldError($maybeObjectErrors, $fieldName);
-            }
-            if ($maybeObjectDeprecations) {
-                $id = $this->getID($object);
-                $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
-                foreach ($maybeObjectDeprecations as $deprecationEntry) {
-                    $objectFeedbackStore->addObjectDeprecation(
-                        new ObjectFeedback(
-                            $deprecationEntry[Tokens::MESSAGE],
-                            null,
-                            LocationHelper::getNonSpecificLocation(),
-                            $this,
-                            $deprecationEntry[Tokens::PATH],
-                            [$id],
-                            $deprecationEntry[Tokens::EXTENSIONS] ?? [],
-                        )
-                    );
-                }
-            }
+            } elseif (
+                $objectTypeFieldResolver->validateResolvedFieldType(
+                    $this,
+                    $fieldName,
+                    $fieldArgs,
+                )
+            ) {
+                $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
+                $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
 
-            foreach ($objectTypeFieldResolvers as $objectTypeFieldResolver) {
-                // Also send the typeResolver along, as to get the id of the $object being passed
-                if (!$objectTypeFieldResolver->resolveCanProcessObject($this, $object, $fieldName, $fieldArgs)) {
-                    continue;
-                }
-                if ($validateSchemaOnObject) {
-                    if ($maybeErrors = $objectTypeFieldResolver->resolveFieldValidationErrorDescriptions($this, $fieldName, $fieldArgs)) {
-                        return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $maybeErrors);
-                    }
-                    if ($maybeDeprecations = $objectTypeFieldResolver->resolveFieldValidationDeprecationMessages($this, $fieldName, $fieldArgs)) {
-                        $id = $this->getID($object);
-                        $objectFeedbackStore = App::getFeedbackStore()->objectFeedbackStore;
-                        foreach ($maybeDeprecations as $deprecation) {
-                            $objectFeedbackStore->addObjectDeprecation(
-                                new ObjectFeedback(
-                                    $deprecation,
-                                    null,
-                                    LocationHelper::getNonSpecificLocation(),
-                                    $this,
-                                    [$field],
-                                    [$id],
-                                )
-                            );
-                        }
-                    }
-                }
-                if ($validationErrorDescriptions = $objectTypeFieldResolver->getValidationErrorDescriptions($this, $object, $fieldName, $fieldArgs)) {
-                    return $this->getErrorProvider()->getValidationFailedError($fieldName, $fieldArgs, $validationErrorDescriptions);
-                }
-
-                // Resolve the value. If the field resolver throws an Exception,
-                // catch it and return the equivalent GraphQL error so that it
-                // fails gracefully in production (but not on development!)
-                try {
-                    $value = $objectTypeFieldResolver->resolveValue($this, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
-                } catch (Exception $e) {
-                    if (RootEnvironment::isApplicationEnvironmentDev()) {
-                        throw $e;
-                    }
-                    return new Error(
-                        'exception',
-                        sprintf(
-                            $this->__('Resolving field \'%s\' produced an exception, with message: \'%s\'. Please contact the admin.', 'component-model'),
-                            $field,
-                            $e->getMessage()
-                        )
-                    );
+                /**
+                 * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+                 * In particular, it does not need to validate if it is an array or not,
+                 * as according to the applied WrappingType.
+                 *
+                 * This is to enable it to have an array as value, which is not
+                 * allowed by GraphQL unless the array is explicitly defined.
+                 *
+                 * For instance, type `DangerouslyDynamic` could have values
+                 * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
+                 * these values by types `String` and `[String]`.
+                 */
+                if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+                    return $value;
                 }
 
                 /**
-                 * Validate that the value is what was defined in the schema, or throw a corresponding error.
-                 *
-                 * Items being validated:
-                 *
-                 * - Is it null?
-                 * - Is it an array when it should be?
-                 * - Is it not an array when it should not be?
-                 *
-                 * Items NOT being validated:
-                 *
-                 * - Is the returned type (String, Int, some Object, etc) the expected one?
-                 *
-                 * According to the GraphQL speck, checking if a non-null field returns null
-                 * is handled always:
-                 *
-                 *   If the result of resolving a field is null (either because the function
-                 *   to resolve the field returned null or because a field error was raised),
-                 *   and that field is of a Non-Null type, then a field error is raised.
-                 *   The error must be added to the "errors" list in the response.
-                 *
-                 * @see https://spec.graphql.org/draft/#sec-Handling-Field-Errors
-                 *
-                 * All other conditions, check them when enabled by configuration.
+                 * Execute the validation, return an error if it fails
                  */
-                if ($value === null) {
-                    $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field);
-                    $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
-                    if ($fieldTypeIsNonNullable) {
-                        return $this->getErrorProvider()->getNonNullableFieldError($fieldName);
+                $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
+                if (
+                    !$fieldIsArrayType
+                    && is_array($value)
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E4,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value)
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
+                    return null;
+                }
+                if (
+                    $fieldIsArrayType
+                    && !is_array($value)
+                ) {
+                    if ($value instanceof stdClass) {
+                        $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value);
+                    } elseif (is_object($value)) {
+                        $valueAsString = $this->getObjectSerializationManager()->serialize($value);
+                    } else {
+                        $valueAsString = (string) $value;
                     }
-                } elseif (
-                    $objectTypeFieldResolver->validateResolvedFieldType(
-                        $this,
-                        $fieldName,
-                        $fieldArgs,
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E5,
+                                [
+                                    $fieldName,
+                                    $valueAsString,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
+                    return null;
+                }
+                $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
+                if (
+                    $fieldIsNonNullArrayItemsType
+                    && is_array($value)
+                    && array_filter(
+                        $value,
+                        fn (mixed $arrayItem) => $arrayItem === null
                     )
                 ) {
-                    $fieldSchemaDefinition = $objectTypeFieldResolver->getFieldSchemaDefinition($this, $fieldName, $fieldArgs);
-                    $fieldTypeResolver = $fieldSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
-
-                    /**
-                     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
-                     * In particular, it does not need to validate if it is an array or not,
-                     * as according to the applied WrappingType.
-                     *
-                     * This is to enable it to have an array as value, which is not
-                     * allowed by GraphQL unless the array is explicitly defined.
-                     *
-                     * For instance, type `DangerouslyDynamic` could have values
-                     * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
-                     * these values by types `String` and `[String]`.
-                     */
-                    if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                        return $value;
-                    }
-
-                    /**
-                     * Execute the validation, return an error if it fails
-                     */
-                    $fieldIsArrayType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY] ?? false;
-                    if (
-                        !$fieldIsArrayType
-                        && is_array($value)
-                    ) {
-                        return $this->getErrorProvider()->getMustNotBeArrayFieldError($fieldName, $value);
-                    }
-                    if (
-                        $fieldIsArrayType
-                        && !is_array($value)
-                    ) {
-                        return $this->getErrorProvider()->getMustBeArrayFieldError($fieldName, $value);
-                    }
-                    $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-                    if (
-                        $fieldIsNonNullArrayItemsType
-                        && is_array($value)
-                        && array_filter(
-                            $value,
-                            fn (mixed $arrayItem) => $arrayItem === null
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E6,
+                                [
+                                    $fieldName,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
                         )
-                    ) {
-                        return $this->getErrorProvider()->getArrayMustNotHaveNullItemsFieldError($fieldName, $value);
-                    }
-                    $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
-                    if (
-                        !$fieldIsArrayOfArraysType
-                        && is_array($value)
-                        && array_filter(
-                            $value,
-                            fn (mixed $arrayItem) => is_array($arrayItem)
-                        )
-                    ) {
-                        return $this->getErrorProvider()->getMustNotBeArrayOfArraysFieldError($fieldName, $value);
-                    }
-                    if (
-                        $fieldIsArrayOfArraysType
-                        && is_array($value)
-                        && array_filter(
-                            $value,
-                            // `null` could be accepted as an array! (Validation against null comes next)
-                            fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
-                        )
-                    ) {
-                        return $this->getErrorProvider()->getMustBeArrayOfArraysFieldError($fieldName, $value);
-                    }
-                    $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-                    if (
-                        $fieldIsNonNullArrayOfArraysItemsType
-                        && is_array($value)
-                        && array_filter(
-                            $value,
-                            fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                                $arrayItem,
-                                fn (mixed $arrayItemItem) => $arrayItemItem === null
-                            ) !== [],
-                        )
-                    ) {
-                        return $this->getErrorProvider()->getArrayOfArraysMustNotHaveNullItemsFieldError($fieldName, $value);
-                    }
+                    );
+                    return null;
                 }
-
-                // Everything is good, return the value (which could also be an Error!)
-                return $value;
+                $fieldIsArrayOfArraysType = $fieldSchemaDefinition[SchemaDefinition::IS_ARRAY_OF_ARRAYS] ?? false;
+                if (
+                    !$fieldIsArrayOfArraysType
+                    && is_array($value)
+                    && array_filter(
+                        $value,
+                        fn (mixed $arrayItem) => is_array($arrayItem)
+                    )
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E7,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
+                    return null;
+                }
+                if (
+                    $fieldIsArrayOfArraysType
+                    && is_array($value)
+                    && array_filter(
+                        $value,
+                        // `null` could be accepted as an array! (Validation against null comes next)
+                        fn (mixed $arrayItem) => !is_array($arrayItem) && $arrayItem !== null
+                    )
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E8,
+                                [
+                                    $fieldName,
+                                    $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value),
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
+                    return null;
+                }
+                $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
+                if (
+                    $fieldIsNonNullArrayOfArraysItemsType
+                    && is_array($value)
+                    && array_filter(
+                        $value,
+                        fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
+                            $arrayItem,
+                            fn (mixed $arrayItemItem) => $arrayItemItem === null
+                        ) !== [],
+                    )
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FieldResolutionErrorFeedbackItemProvider::class,
+                                FieldResolutionErrorFeedbackItemProvider::E9,
+                                [
+                                    $fieldName,
+                                ]
+                            ),
+                            LocationHelper::getNonSpecificLocation(),
+                            $this,
+                        )
+                    );
+                    return null;
+                }
             }
-            return $this->getErrorProvider()->getNoObjectTypeFieldResolverProcessesFieldError(
-                $this->getMaybeNamespacedTypeName(),
-                $this->getID($object),
-                $fieldName,
-                $fieldArgs,
-            );
+
+            // Everything is good, return the value
+            return $value;
         }
 
-        // Return an error to indicate that no fieldResolver processes this field, which is different than returning a null value.
-        // Needed for compatibility with CustomPostUnionTypeResolver (so that data-fields aimed for another post_type are not retrieved)
-        $fieldName = $this->getFieldQueryInterpreter()->getFieldName($field);
-        return $this->getErrorProvider()->getNoFieldError($this->getID($object), $fieldName, $this->getMaybeNamespacedTypeName());
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    FieldResolutionErrorFeedbackItemProvider::class,
+                    FieldResolutionErrorFeedbackItemProvider::E10,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                        $fieldName,
+                        $this->getID($object)
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this,
+            )
+        );
+        return null;
     }
 
     final public function getExecutableObjectTypeFieldResolversByField(bool $global): array
@@ -810,10 +969,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     final protected function getExecutableObjectTypeFieldResolverForField(string $field): ?ObjectTypeFieldResolverInterface
     {
-        if ($objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($field)) {
-            return $objectTypeFieldResolversForField[0];
+        $objectTypeFieldResolversForField = $this->getObjectTypeFieldResolversForField($field);
+        if ($objectTypeFieldResolversForField === []) {
+            return null;
         }
-        return null;
+        return $objectTypeFieldResolversForField[0];
     }
 
     /**

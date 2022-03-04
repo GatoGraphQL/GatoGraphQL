@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\QueryParsing;
 
-use Exception;
+use PoP\Root\Exception\GenericSystemException;
 use PoP\Root\Services\BasicServiceTrait;
 
 class QueryParser implements QueryParserInterface
@@ -58,7 +58,7 @@ class QueryParser implements QueryParserInterface
                 fn ($string) => strlen($string) > 1
             )
         ) {
-            throw new Exception(
+            throw new GenericSystemException(
                 sprintf(
                     $this->__('Only strings of length 1 are valid in function `splitElements`, for params `$skipFromChars` and `$skipUntilChars`. The following string(s) are not valid: \'%s\''),
                     implode(

@@ -64,17 +64,18 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
 
     /**
      * @param array<string, mixed> $fieldArgs
-     * @param array<string, mixed>|null $variables
-     * @param array<string, mixed>|null $expressions
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
      * @param array<string, mixed> $options
      */
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $fieldName,
-        array $fieldArgs = [],
-        ?array $variables = null,
-        ?array $expressions = null,
+        array $fieldArgs,
+        array $variables,
+        array $expressions,
+        \PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
         $user = $object;
@@ -86,31 +87,22 @@ class GD_UserCommunities_DataLoad_ObjectTypeFieldResolver_FunctionalUsers extend
                 return gdUreEditMembershipUrl($objectTypeResolver->getID($user), true);
 
             case 'memberStatusByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $status = new GD_URE_FormInput_MultiMemberStatus($params);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberstatus', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $status = new GD_URE_FormInput_MultiMemberStatus('', $selected);
                 return $status->getSelectedValue();
 
             case 'memberPrivilegesByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $privileges = new GD_URE_FormInput_FilterMemberPrivileges($params);
+                $selected = $objectTypeResolver->resolveValue($user, 'memberprivileges', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $privileges = new GD_URE_FormInput_FilterMemberPrivileges('', $selected);
                 return $privileges->getSelectedValue();
 
             case 'memberTagsByName':
-                $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $options);
-                $params = array(
-                    'selected' => $selected
-                );
-                $tags = new GD_URE_FormInput_FilterMemberTags($params);
+                $selected = $objectTypeResolver->resolveValue($user, 'membertags', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
+                $tags = new GD_URE_FormInput_FilterMemberTags('', $selected);
                 return $tags->getSelectedValue();
         }
 
-        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $options);
+        return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
     }
 }
 

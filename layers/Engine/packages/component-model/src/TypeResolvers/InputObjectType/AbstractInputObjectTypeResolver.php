@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
-use PoP\Root\App;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Error\Error;
-use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Resolvers\TypeSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Schema\InputCoercingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -17,6 +18,8 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\App;
 use stdClass;
 
 abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver implements InputObjectTypeResolverInterface
@@ -179,22 +182,34 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         return $this->consolidatedInputFieldTypeModifiersCache[$inputFieldName];
     }
 
-    final public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
+    final public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
         if (!($inputValue instanceof stdClass)) {
-            return $this->getError(
-                sprintf(
-                    $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
-                    $this->getMaybeNamespacedTypeName(),
-                    $inputValue
-                )
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E15,
+                        [
+                            $this->getMaybeNamespacedTypeName(),
+                            $inputValue
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
+                ),
             );
+            return null;
         }
-        return $this->coerceInputObjectValue($inputValue);
+        return $this->coerceInputObjectValue($inputValue, $schemaInputValidationFeedbackStore);
     }
 
-    protected function coerceInputObjectValue(stdClass $inputValue): stdClass|Error
-    {
+    protected function coerceInputObjectValue(
+        stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): ?stdClass {
         $coercedInputValue = new stdClass();
         $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
 
@@ -239,22 +254,23 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
         }
 
-        /** @var Error[] */
-        $errors = [];
         foreach ((array)$inputValue as $inputFieldName => $inputFieldValue) {
             // Check that the input field exists
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName] ?? null;
             if ($inputFieldTypeResolver === null) {
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    sprintf(
-                        $this->__('There is no input field \'%s\' in input object \'%s\''),
-                        $inputFieldName,
-                        $this->getMaybeNamespacedTypeName()
+                $schemaInputValidationFeedbackStore->addError(
+                    new SchemaInputValidationFeedback(
+                        new FeedbackItemResolution(
+                            InputValueCoercionErrorFeedbackItemProvider::class,
+                            InputValueCoercionErrorFeedbackItemProvider::E4,
+                            [
+                                $inputFieldName,
+                                $this->getMaybeNamespacedTypeName(),
+                            ]
+                        ),
+                        LocationHelper::getNonSpecificLocation(),
+                        $this
                     ),
-                    [
-                        Tokens::ARGUMENT_PATH => [$inputFieldName],
-                    ]
                 );
                 continue;
             }
@@ -272,7 +288,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * these values by types `String` and `[String]`.
              */
             if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
-                $coercedInputValue->$inputFieldName = $this->getDangerouslyDynamicScalarTypeResolver()->coerceValue($inputFieldValue);
+                $coercedInputValue->$inputFieldName = $inputFieldValue;
                 continue;
             }
 
@@ -297,64 +313,46 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             );
 
             // Validate that the expected array/non-array input is provided
-            $maybeErrorMessage = $this->getInputCoercingService()->validateInputArrayModifiers(
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->getInputCoercingService()->validateInputArrayModifiers(
+                $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldName,
                 $inputFieldIsArrayType,
                 $inputFieldIsNonNullArrayItemsType,
                 $inputFieldIsArrayOfArraysType,
                 $inputFieldIsNonNullArrayOfArraysItemsType,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($maybeErrorMessage !== null) {
-                $errors[] = new Error(
-                    $this->getErrorCode(),
-                    $maybeErrorMessage,
-                    [
-                        Tokens::ARGUMENT_PATH => [$inputFieldName],
-                    ]
-                );
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
             // Cast (or "coerce" in GraphQL terms) the value
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
             $coercedInputFieldValue = $this->getInputCoercingService()->coerceInputValue(
                 $inputFieldTypeResolver,
                 $inputFieldValue,
                 $inputFieldIsArrayType,
                 $inputFieldIsArrayOfArraysType,
+                $separateSchemaInputValidationFeedbackStore,
             );
-
-            // Check if the coercion produced errors
-            $maybeCoercedInputFieldValueErrors = $this->getInputCoercingService()->extractErrorsFromCoercedInputValue(
-                $coercedInputFieldValue,
-                $inputFieldIsArrayType,
-                $inputFieldIsArrayOfArraysType,
-            );
-            if ($maybeCoercedInputFieldValueErrors !== []) {
-                $errors[] = $this->convergeCoercedInputFieldValueError(
-                    $inputFieldTypeResolver,
-                    $inputFieldName,
-                    $maybeCoercedInputFieldValueErrors,
-                );
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
             // Custom validations for the field
-            $maybeCoercedInputFieldValueErrorMessages = $this->resolveCoercedInputFieldValueErrorMessages(
+            $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+            $this->validateCoercedInputFieldValue(
                 $inputFieldTypeResolver,
                 $inputFieldName,
                 $coercedInputFieldValue,
+                $separateSchemaInputValidationFeedbackStore,
             );
-            if ($maybeCoercedInputFieldValueErrorMessages !== []) {
-                foreach ($maybeCoercedInputFieldValueErrorMessages as $coercedInputFieldValueErrorMessage) {
-                    $errors[] = new Error(
-                        $this->getErrorCode(),
-                        $coercedInputFieldValueErrorMessage,
-                        [
-                            Tokens::ARGUMENT_PATH => [$inputFieldName],
-                        ]
-                    );
-                }
+            $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+            if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
                 continue;
             }
 
@@ -375,31 +373,26 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             if (!$inputFieldTypeModifiersIsMandatory) {
                 continue;
             }
-            $errors[] = new Error(
-                $this->getErrorCode(),
-                sprintf(
-                    $this->__('Mandatory input field \'%s\' in input object \'%s\' has not been provided'),
-                    $inputFieldName,
-                    $this->getMaybeNamespacedTypeName()
+            $schemaInputValidationFeedbackStore->addError(
+                new SchemaInputValidationFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionErrorFeedbackItemProvider::class,
+                        InputValueCoercionErrorFeedbackItemProvider::E5,
+                        [
+                            $inputFieldName,
+                            $this->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $this
                 ),
-                [
-                    Tokens::ARGUMENT_PATH => [$inputFieldName],
-                ]
             );
             continue;
         }
 
         // If there was any error, return it
-        if ($errors) {
-            return count($errors) === 1 ?
-                $errors[0]
-                : $this->getError(
-                    sprintf(
-                        $this->__('Casting input object of type \'%s\' produced errors', 'component-model'),
-                        $this->getMaybeNamespacedTypeName()
-                    ),
-                    $errors
-                );
+        if ($schemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         // Add all missing properties which have a default value
@@ -429,63 +422,14 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     }
 
     /**
-     * Converge multiple Errors as nested under a single Error
-     *
-     * @param Error[] $coercedInputFieldValueErrors
-     */
-    protected function convergeCoercedInputFieldValueError(
-        InputTypeResolverInterface $inputFieldTypeResolver,
-        string $inputFieldName,
-        array $coercedInputFieldValueErrors,
-    ): Error {
-        // Prepend the arg path to the error(s)
-        foreach ($coercedInputFieldValueErrors as $error) {
-            $this->prependArgPathToError($error, [$inputFieldName]);
-        }
-
-        // Only 1 Error: bubble it up directly
-        if (count($coercedInputFieldValueErrors) === 1) {
-            return $coercedInputFieldValueErrors[0];
-        }
-
-        // Many nested errors: Create a new Error with all of them
-        return new Error(
-            $this->getErrorCode(),
-            sprintf(
-                $this->__('Casting input field \'%s\' of type \'%s\' produced errors', 'component-model'),
-                $inputFieldName,
-                $inputFieldTypeResolver->getMaybeNamespacedTypeName()
-            ),
-            [
-                Tokens::ARGUMENT_PATH => [$inputFieldName],
-            ],
-            $coercedInputFieldValueErrors
-        );
-    }
-
-    /**
      * Custom validations to execute on the input field.
-     *
-     * @return string[] The produced error messages, if any
      */
-    protected function resolveCoercedInputFieldValueErrorMessages(
+    protected function validateCoercedInputFieldValue(
         InputTypeResolverInterface $inputFieldTypeResolver,
         string $inputFieldName,
         mixed $coercedInputFieldValue,
-    ): array {
-        return [];
-    }
-
-    /**
-     * @param string[] $argPath
-     */
-    protected function prependArgPathToError(Error &$error, array $argPath): void
-    {
-        $errorData = $error->getData();
-        $error->addData(Tokens::ARGUMENT_PATH, array_merge(
-            $argPath,
-            $errorData[Tokens::ARGUMENT_PATH] ?? []
-        ));
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
     }
 
     /**
@@ -602,7 +546,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Validate constraints on the input field's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     final public function validateInputValue(stdClass $inputValue): array
     {
@@ -618,7 +562,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /**
      * Validate constraints on the input field's value
      *
-     * @return string[] Error messages
+     * @return FeedbackItemResolution[] Errors
      */
     protected function validateInputFieldValue(string $inputFieldName, mixed $inputFieldValue): array
     {

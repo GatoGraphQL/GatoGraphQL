@@ -8,7 +8,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
-use PoP\ComponentModel\Error\Error;
+use PoP\GuzzleHelpers\Exception\GuzzleInvalidResponseException;
+use PoP\GuzzleHelpers\Exception\GuzzleRequestException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Psr\Http\Message\ResponseInterface;
 
@@ -18,33 +19,38 @@ class GuzzleHelpers
      * Execute a JSON request to the passed endpoint URL and form params
      *
      * @param string $url The Endpoint URL
-     * @param array $bodyJSONQuery The form params
-     * @return array|Error The payload if successful as an array, or an Error object containing the error message in case of failure
+     * @param array<string,mixed> $bodyJSONQuery The form params
+     * @return array<string,mixed> The payload if successful as an array
+     * @throws GuzzleRequestException
+     * @throws GuzzleInvalidResponseException
      */
-    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array|Error
+    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
     {
         $client = new Client();
+        $options = [
+            RequestOptions::JSON => $bodyJSONQuery,
+        ];
         try {
-            $options = [
-                RequestOptions::JSON => $bodyJSONQuery,
-            ];
             $response = $client->request($method, $url, $options);
-            return self::validateAndDecodeJSONResponse($response);
         } catch (RequestException $exception) {
-            return new Error(
-                'request-failed',
-                $exception->getMessage()
+            throw new GuzzleRequestException(
+                $exception->getMessage(),
+                0,
+                $exception
             );
         }
+        return self::validateAndDecodeJSONResponse($response);
     }
 
-    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): mixed
+    /**
+     * @return array<string,mixed>
+     * @throws GuzzleInvalidResponseException
+     */
+    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        if ($response->getStatusCode() != 200) {
-            // Throw an error
-            return new Error(
-                'request-failed',
+        if ($response->getStatusCode() !== 200) {
+            throw new GuzzleInvalidResponseException(
                 sprintf(
                     $translationAPI->__('The response status code is \'%s\' instead of the expected \'%s\'', 'guzzle-helpers'),
                     $response->getStatusCode(),
@@ -64,9 +70,7 @@ class GuzzleHelpers
                 && str_contains($contentType, '+json')
             );
         if (!$isJSONContentType) {
-            // Throw an error
-            return new Error(
-                'request-failed',
+            throw new GuzzleInvalidResponseException(
                 sprintf(
                     $translationAPI->__('The response content type \'%s\' is unsupported', 'guzzle-helpers'),
                     $contentType
@@ -75,9 +79,7 @@ class GuzzleHelpers
         }
         $bodyResponse = $response->getBody()->__toString();
         if (!$bodyResponse) {
-            // Throw an error
-            return new Error(
-                'request-failed',
+            throw new GuzzleInvalidResponseException(
                 $translationAPI->__('The body of the response is empty', 'guzzle-helpers')
             );
         }
@@ -88,10 +90,11 @@ class GuzzleHelpers
      * Execute several JSON requests asynchronously using the same endpoint URL and different queries
      *
      * @param string $url The Endpoint URL
-     * @param array $bodyJSONQueries The form params
-     * @return mixed The payload if successful as an array, or an Error object containing the error message in case of failure
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries The form params
+     * @return array<string,mixed> The payload if successful
+     * @throws GuzzleInvalidResponseException
      */
-    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): mixed
+    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         $urls = [];
         for ($i = 0; $i < count($bodyJSONQueries); $i++) {
@@ -103,10 +106,12 @@ class GuzzleHelpers
     /**
      * Execute several JSON requests asynchronously
      *
-     * @param array $urls The endpoints to fetch
-     * @param array $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
+     * @param string[] $urls The endpoints to fetch
+     * @param array<int|string,array<string,mixed>> $bodyJSONQueries the bodyJSONQuery to attach to each URL, on the same order provided in param $urls
+     * @return array<string,mixed> The payload if successful
+     * @throws GuzzleInvalidResponseException
      */
-    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): mixed
+    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         if (!$urls) {
             return [];
@@ -131,21 +136,20 @@ class GuzzleHelpers
 
             // Wait for the requests to complete, even if some of them fail
             $results = Utils::settle($promises)->wait();
-
-            // You can access each result using the key provided to the unwrap function.
-            return array_map(
-                function ($result) {
-                    return self::validateAndDecodeJSONResponse($result['value']);
-                },
-                $results
-            );
         } catch (RequestException $exception) {
-            return [
-                new Error(
-                    'request-failed',
-                    $exception->getMessage()
-                )
-            ];
+            throw new GuzzleRequestException(
+                $exception->getMessage(),
+                0,
+                $exception
+            );
         }
+
+        // You can access each result using the key provided to the unwrap function.
+        return array_map(
+            function ($result) {
+                return self::validateAndDecodeJSONResponse($result['value']);
+            },
+            $results
+        );
     }
 }

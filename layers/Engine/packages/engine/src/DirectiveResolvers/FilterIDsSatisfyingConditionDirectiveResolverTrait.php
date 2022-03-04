@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\RemoveIDsDataFieldsDirectiveResolverTrait;
+use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 trait FilterIDsSatisfyingConditionDirectiveResolverTrait
@@ -20,13 +21,11 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
         array $idsDataFields,
         array &$variables,
         array &$messages,
-        array &$objectErrors,
-        array &$objectWarnings,
-        array &$objectDeprecations,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
         // Check the condition field. If it is satisfied, then skip those fields
         $idsSatisfyingCondition = [];
-        foreach (array_keys($idsDataFields) as $id) {
+        foreach ($idsDataFields as $id => $dataFields) {
             // Validate directive args for the object
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
             $object = $objectIDItems[$id];
@@ -34,7 +33,7 @@ trait FilterIDsSatisfyingConditionDirectiveResolverTrait
                 $objectValidDirective,
                 $objectDirectiveName,
                 $objectDirectiveArgs
-            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $variables, $expressions, $objectErrors, $objectWarnings, $objectDeprecations);
+            ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, $dataFields['direct'], $variables, $expressions, $engineIterationFeedbackStore);
             // Check that the directive is valid. If it is not, $objectErrors will have the error already added
             if (is_null($objectValidDirective)) {
                 continue;

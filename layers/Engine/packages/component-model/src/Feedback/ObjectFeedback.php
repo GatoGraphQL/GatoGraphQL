@@ -10,25 +10,51 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInterface
 {
     public function __construct(
-        string $message,
-        ?string $code,
+        FeedbackItemResolution $feedbackItemResolution,
         Location $location,
         protected RelationalTypeResolverInterface $relationalTypeResolver,
-        /** @var string[] */
-        protected array $fields,
-        /** @var array<string|int> */
-        protected array $objectIDs,
+        protected string $field,
+        protected string|int $objectID,
+        protected ?string $directive = null,
         /** @var array<string, mixed> */
         array $extensions = [],
-        /** @var array<string, mixed> */
-        array $data = [],
+        /** @var ObjectFeedbackInterface[] */
+        protected array $nested = [],
     ) {
         parent::__construct(
-            $message,
-            $code,
+            $feedbackItemResolution,
             $location,
             $extensions,
-            $data,
+        );
+    }
+
+    public static function fromObjectTypeFieldResolutionFeedback(
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        string $field,
+        string|int $objectID,
+        ?string $directive
+    ): self {
+        /** @var ObjectFeedbackInterface[] */
+        $nestedObjectFeedbackEntries = [];
+        foreach ($objectTypeFieldResolutionFeedback->getNested() as $nestedObjectTypeFieldResolutionFeedback) {
+            $nestedObjectFeedbackEntries[] = static::fromObjectTypeFieldResolutionFeedback(
+                $nestedObjectTypeFieldResolutionFeedback,
+                $relationalTypeResolver,
+                $field,
+                $objectID,
+                $directive
+            );
+        }
+        return new self(
+            $objectTypeFieldResolutionFeedback->getFeedbackItemResolution(),
+            $objectTypeFieldResolutionFeedback->getLocation(),
+            $relationalTypeResolver,
+            $field,
+            $objectID,
+            $directive,
+            $objectTypeFieldResolutionFeedback->getExtensions(),
+            $nestedObjectFeedbackEntries
         );
     }
 
@@ -37,19 +63,26 @@ class ObjectFeedback extends AbstractQueryFeedback implements ObjectFeedbackInte
         return $this->relationalTypeResolver;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getFields(): array
+    public function getField(): string
     {
-        return $this->fields;
+        return $this->field;
+    }
+
+    public function getObjectID(): string|int
+    {
+        return $this->objectID;
+    }
+
+    public function getDirective(): ?string
+    {
+        return $this->directive;
     }
 
     /**
-     * @return array<string|int>
+     * @return ObjectFeedbackInterface[]
      */
-    public function getObjectIDs(): array
+    public function getNested(): array
     {
-        return $this->objectIDs;
+        return $this->nested;
     }
 }

@@ -6,7 +6,12 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
 use DateTimeInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
+use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoPSchema\SchemaCommons\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
 use stdClass;
 
 /**
@@ -25,10 +30,15 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         );
     }
 
-    public function coerceValue(string|int|float|bool|stdClass $inputValue): string|int|float|bool|object
-    {
-        if ($error = $this->validateIsString($inputValue)) {
-            return $error;
+    public function coerceValue(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
         }
 
         /**
@@ -43,13 +53,22 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
             }
             return $dt;
         }
-        return $this->getError(
-            sprintf(
-                $this->__('Type \'%s\' must be provided with format \'%s\'', 'component-model'),
-                $this->getMaybeNamespacedTypeName(),
-                $this->getDateTimeFormat()
-            )
+
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E1,
+                    [
+                        $this->getMaybeNamespacedTypeName(),
+                        $this->getDateTimeFormat(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
         );
+        return null;
     }
 
     abstract protected function getDateTimeFormat(): string;

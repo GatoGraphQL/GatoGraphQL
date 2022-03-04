@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Utils;
 
@@ -19,6 +20,11 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
             // Check that the logged in user has not already recommended this post
             $value = Utils::getUserMeta($user_id, \GD_METAKEY_PROFILE_RECOMMENDSPOSTS);
             if (in_array($target_id, $value)) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = sprintf(
                     $this->__('You have already recommended <em><strong>%s</strong></em>.', 'pop-coreprocessors'),
                     $this->getCustomPostTypeAPI()->getTitle($target_id)
@@ -38,13 +44,15 @@ class RecommendCustomPostMutationResolver extends AbstractRecommendOrUnrecommend
     }
 
     // protected function updateValue($value, $form_data) {
-
     //     // Add the user to follow to the list
     //     $target_id = $form_data['target_id'];
     //     $value[] = $target_id;
     // }
-
-    protected function update($form_data): string | int
+    /**
+     * @param array<string,mixed> $form_data
+     * @throws AbstractException In case of error
+     */
+    protected function update(array $form_data): string | int
     {
         $user_id = App::getState('current-user-id');
         $target_id = $form_data['target_id'];

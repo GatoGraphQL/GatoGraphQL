@@ -12,28 +12,14 @@ use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
 use PoP\Root\State\AbstractAppStateProvider;
-use PoPAPI\API\Component as APIComponent;
-use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;
-use PoPAPI\API\FeedbackMessageProviders\FeedbackMessageProvider;
 use PoPAPI\API\PersistedQueries\PersistedQueryUtils;
 use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
-    private ?FeedbackMessageProvider $feedbackMessageProvider = null;
-
-    final public function setFeedbackMessageProvider(FeedbackMessageProvider $feedbackMessageProvider): void
-    {
-        $this->feedbackMessageProvider = $feedbackMessageProvider;
-    }
-    final protected function getFeedbackMessageProvider(): FeedbackMessageProvider
-    {
-        return $this->feedbackMessageProvider ??= $this->instanceManager->getInstance(FeedbackMessageProvider::class);
-    }
-
     public function initialize(array &$state): void
     {
         $state['executable-query'] = null;
@@ -72,11 +58,6 @@ class AppStateProvider extends AbstractAppStateProvider
 
         // Do not print the entry module
         $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
-
-        // Enable mutations?
-        /** @var APIComponentConfiguration */
-        $apiComponentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
-        $state['are-mutations-enabled'] = $apiComponentConfiguration->enableMutations();
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;

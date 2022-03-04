@@ -27,7 +27,7 @@ Via Composer
 composer require graphql-by-pop/graphql-server
 ```
 
-To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/pop-api/api#enable-pretty-permalinks)
+To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
 <!-- > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented). -->
 
@@ -91,13 +91,13 @@ GraphQL by PoP supports query batching. This query contains all queries from abo
 
 ## Extended GraphQL
 
-An upgraded implementation of the GraphQL server, which enables to resolve [queries as a scripting language](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/), is found under [this repo](https://github.com/pop-api/api-graphql).
+An upgraded implementation of the GraphQL server, which enables to resolve [queries as a scripting language](https://leoloso.com/posts/demonstrating-pop-api-graphql-on-steroids/), is found under [this repo](https://github.com/PoP-PoPAPI/api-graphql).
 
-It supports several [features](https://leoloso.com/posts/pop-api-features/) not currently defined by the GraphQL spec, including [composable fields](https://github.com/pop-api/api-graphql#composable-fields) and [composable directives](https://github.com/pop-api/api-graphql#composable-directives).
+It supports several [features](https://leoloso.com/posts/pop-api-features/) not currently defined by the GraphQL spec, including [composable fields](https://github.com/PoP-PoPAPI/api#composable-fields) and [composable directives](https://github.com/PoP-PoPAPI/api#composable-directives).
 
 ## Support for REST
 
-By installing the [REST package](https://github.com/pop-api/api-rest), the GraphQL server can also satisfy REST endpoints, from a single source of truth. Check out these example links:
+By installing the [REST package](https://github.com/PoP-PoPAPI/api-rest), the GraphQL server can also satisfy REST endpoints, from a single source of truth. Check out these example links:
 
 - [List of posts](https://newapi.getpop.org/posts/api/rest/)
 - [Single post](https://newapi.getpop.org/posts/cope-with-wordpress-post-demo-containing-plenty-of-blocks/api/rest/)

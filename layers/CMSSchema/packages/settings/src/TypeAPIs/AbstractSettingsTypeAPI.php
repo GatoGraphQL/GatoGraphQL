@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use PoP\Root\App;
-use InvalidArgumentException;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 use PoPCMSSchema\Settings\Component;
 use PoPCMSSchema\Settings\ComponentConfiguration;
+use PoPCMSSchema\Settings\Exception\OptionNotAllowedException;
+use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
 {
@@ -31,7 +31,7 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
      * then throw an exception.
      *
      * @param array<string,mixed> $options
-     * @throws InvalidArgumentException When the option name is not in the allowlist. Enabled by passing option "assert-is-option-allowed"
+     * @throws OptionNotAllowedException When the option name is not in the allowlist. Enabled by passing option "assert-is-option-allowed"
      */
     final public function getOption(string $name, array $options = []): mixed
     {
@@ -69,12 +69,12 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     /**
      * If the allow/denylist validation fails, throw an exception.
      *
-     * @throws InvalidArgumentException
+     * @throws OptionNotAllowedException
      */
     final protected function assertIsOptionAllowed(string $name): void
     {
         if (!$this->validateIsOptionAllowed($name)) {
-            throw new InvalidArgumentException(
+            throw new OptionNotAllowedException(
                 sprintf(
                     $this->__('There is no option with name \'%s\'', 'settings'),
                     $name

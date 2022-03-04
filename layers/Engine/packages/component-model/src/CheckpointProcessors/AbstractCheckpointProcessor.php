@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\CheckpointProcessors;
 
-use PoP\ComponentModel\Error\Error;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterface
@@ -14,7 +14,7 @@ abstract class AbstractCheckpointProcessor implements CheckpointProcessorInterfa
     /**
      * By default there's no problem
      */
-    public function validateCheckpoint(array $checkpoint): ?Error
+    public function validateCheckpoint(array $checkpoint): ?FeedbackItemResolution
     {
         return null;
     }

@@ -20,9 +20,6 @@ services:
     PoP\Engine\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoP\Engine\FormInputs\:
-        resource: '../src/FormInputs/*'
-
     PoP\Engine\CheckpointProcessors\:
         resource: '../src/CheckpointProcessors/*'
 
@@ -31,3 +28,9 @@ services:
 
     PoP\Engine\Schema\SchemaDefinitionServiceInterface:
         class: \PoP\Engine\Schema\SchemaDefinitionService
+
+    PoP\Engine\HelperServices\ArrayTraversionHelperServiceInterface:
+        class: \PoP\Engine\HelperServices\ArrayTraversionHelperService
+
+    PoP\Engine\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

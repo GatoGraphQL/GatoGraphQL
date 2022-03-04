@@ -29,6 +29,11 @@ abstract class AbstractSubscribeToOrUnsubscribeFromTagMutationResolver extends A
             // Make sure the post exists
             $target = $this->getPostTagTypeAPI()->getTag($target_id);
             if (!$target) {
+                // @todo Migrate from string to FeedbackItemProvider
+                // $errors[] = new FeedbackItemResolution(
+                //     MutationErrorFeedbackItemProvider::class,
+                //     MutationErrorFeedbackItemProvider::E1,
+                // );
                 $errors[] = $this->__('The requested topic/tag does not exist.', 'pop-coreprocessors');
             }
         }
