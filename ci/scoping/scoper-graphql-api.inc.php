@@ -95,7 +95,7 @@ return [
         // (unless adding the files to the autoload path)
         'PoPContainer\*',
     ])),
-    'files-whitelist' => [
+    'exclude-files' => [
         // Class Composer\InstalledVersions will be regenerated without scope when
         // doing `composer dumpautoload`, so skip it
         convertRelativeToFullPath('vendor/composer/InstalledVersions.php'),
