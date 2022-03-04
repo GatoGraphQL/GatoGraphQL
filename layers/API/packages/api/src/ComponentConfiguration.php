@@ -83,4 +83,17 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    public function addFullSchemaFieldToSchema(): bool
+    {
+        $envVariable = Environment::ADD_FULLSCHEMA_FIELD_TO_SCHEMA;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

@@ -207,12 +207,6 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
                 }
             }
         }
-        if (!$componentConfiguration->addFullSchemaFieldToGraphQLSchema()) {
-            unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$rootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
-            if ($queryRootTypeName !== null) {
-                unset($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES][TypeKinds::OBJECT][$queryRootTypeName][SchemaDefinition::FIELDS]['fullSchema']);
-            }
-        }
 
         // Maybe append the field/directive's version to its description, since this field is missing in GraphQL
         $addVersionToGraphQLSchemaFieldDescription = $componentConfiguration->addVersionToGraphQLSchemaFieldDescription();

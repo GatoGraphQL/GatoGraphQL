@@ -1514,16 +1514,6 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                             ],
                             [
                                 "kind" => "SCALAR",
-                                "name" => "JSONObject",
-                                "description" => "Custom scalar representing a JSON Object of unrestricted shape",
-                                "fields" => null,
-                                "inputFields" => null,
-                                "interfaces" => null,
-                                "enumValues" => null,
-                                "possibleTypes" => null
-                            ],
-                            [
-                                "kind" => "SCALAR",
                                 "name" => "String",
                                 "description" => "The String scalar type represents textual data, represented as UTF-8 character sequences.",
                                 "fields" => null,
