@@ -40,6 +40,8 @@ trait FieldOrDirectiveResolverTrait
                     ErrorFeedbackItemProvider::E24,
                     [
                         $missing[0],
+                        $type,
+                        $fieldOrDirectiveName
                     ]
                 )
                 : new FeedbackItemResolution(
@@ -47,6 +49,8 @@ trait FieldOrDirectiveResolverTrait
                     ErrorFeedbackItemProvider::E25,
                     [
                         implode($this->getTranslationAPI()->__('\', \''), $missing),
+                        $type,
+                        $fieldOrDirectiveName
                     ]
                 );
         }
