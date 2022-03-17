@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\QuerySyntax;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
+use PoP\ComponentModel\HelperServices\QueryHelperServiceInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
@@ -21,6 +21,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class Parser extends AbstractParser
 {
     private ?MetaDirectiveRegistryInterface $metaDirectiveRegistry = null;
+    private ?QueryHelperServiceInterface $queryHelperService = null;
 
     final public function setMetaDirectiveRegistry(MetaDirectiveRegistryInterface $metaDirectiveRegistry): void
     {
@@ -29,6 +30,14 @@ class Parser extends AbstractParser
     final protected function getMetaDirectiveRegistry(): MetaDirectiveRegistryInterface
     {
         return $this->metaDirectiveRegistry ??= $this->instanceManager->getInstance(MetaDirectiveRegistryInterface::class);
+    }
+    final public function setQueryHelperService(QueryHelperServiceInterface $queryHelperService): void
+    {
+        $this->queryHelperService = $queryHelperService;
+    }
+    final protected function getQueryHelperService(): QueryHelperServiceInterface
+    {
+        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryHelperServiceInterface::class);
     }
 
     protected function isMetaDirective(string $directiveName): bool
@@ -65,13 +74,6 @@ class Parser extends AbstractParser
         return $metaDirectiveResolver->getAffectDirectivesUnderPosArgumentDefaultValue();
     }
 
-    final protected function isDynamicVariableReference(
-        string $name,
-        ?Variable $variable,
-    ): bool {
-        return $variable === null && \str_starts_with($name, QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX);
-    }
-
     protected function createVariableReference(
         string $name,
         ?Variable $variable,
@@ -80,7 +82,7 @@ class Parser extends AbstractParser
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->enableDynamicVariables()
-            && $this->isDynamicVariableReference($name, $variable)
+            && $this->getQueryHelperService()->isDynamicVariableReference($name, $variable)
         ) {
             return new DynamicVariableReference($name, $variable, $location);
         }
