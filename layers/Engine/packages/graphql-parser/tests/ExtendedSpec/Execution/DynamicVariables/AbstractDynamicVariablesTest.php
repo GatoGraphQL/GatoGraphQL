@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution\DynamicVariables;
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -74,21 +75,24 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         return new Context('Op', $variableValues);
     }
 
-    protected function getQuery(bool $variableInOperation): string
-    {
+    protected function getQuery(
+        bool $addVariableInOperation,
+        bool $useDynamicVariableName,
+    ): string {
         return sprintf(
             '
-            query Op(%s) {
-                film(id: $_id) {
+            query Op%s {
+                film(id: $%sid) {
                     title
                 }
             }
             ',
-            $variableInOperation ? '$_id: ID' : ''
+            $addVariableInOperation ? '($_id: ID)' : '',
+            $useDynamicVariableName ? QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX : ''
         );
     }
 
-    public function testStaticVariable(): void
+    public function testStaticVariableWithDynamicVariableName(): void
     {
         $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
         $context = $this->getContext([
@@ -96,7 +100,7 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         ]);
         $variable->setContext($context);
         $variableReference = new VariableReference('_id', $variable, new Location(3, 26));
-        $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery(true)), $context);
+        $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery(true, true)), $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             [
