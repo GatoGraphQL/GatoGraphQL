@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Constants;
 
-class ClientSymbols
+class QuerySymbols
 {
     /**
      * Hack to add support for query batching from GraphiQL:

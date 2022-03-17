@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Query;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\ExtendedSpec\Constants\ClientSymbols;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
@@ -33,11 +33,11 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
 
         $nonAllOperations = array_values(array_filter(
             $operations,
-            fn (OperationInterface $operation) => $operation->getName() !== ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+            fn (OperationInterface $operation) => $operation->getName() !== QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
         ));
         if (
             // Passing operationName=__ALL
-            strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
+            strtoupper($operationName) === QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
             // Passing no operationName and __ALL exists in the document
             || ($operationName === '' && count($operations) > count($nonAllOperations))
         ) {
