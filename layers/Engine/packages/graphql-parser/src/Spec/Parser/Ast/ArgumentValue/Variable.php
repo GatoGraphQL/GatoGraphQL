@@ -13,11 +13,11 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
-use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
+    use AccessVariableValueTrait;
 
     private ?Context $context = null;
 
@@ -129,13 +129,10 @@ class Variable extends AbstractAst implements WithValueInterface
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
-            if (is_array($variableValue)) {
-                return new InputList($variableValue, $this->getLocation());
-            }
-            if ($variableValue instanceof stdClass) {
-                return new InputObject($variableValue, $this->getLocation());
-            }
-            return new Literal($variableValue, $this->getLocation());
+            return $this->convertVariableValueToAst(
+                $variableValue,
+                $this->getLocation()
+            );
         }
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();

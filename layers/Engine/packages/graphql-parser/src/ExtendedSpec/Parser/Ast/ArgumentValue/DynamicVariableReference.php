@@ -9,14 +9,14 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\AccessVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use stdClass;
 
 class DynamicVariableReference extends VariableReference
 {
+    use AccessVariableValueTrait;
+
     private ?Context $context = null;
 
     public function setContext(?Context $context): void
@@ -57,12 +57,9 @@ class DynamicVariableReference extends VariableReference
             );
         }
         $variableValue = $this->context->getVariableValue($this->name);
-        if (is_array($variableValue)) {
-            return new InputList($variableValue, $this->getLocation());
-        }
-        if ($variableValue instanceof stdClass) {
-            return new InputObject($variableValue, $this->getLocation());
-        }
-        return new Literal($variableValue, $this->getLocation());
+        return $this->convertVariableValueToAst(
+            $variableValue,
+            $this->getLocation()
+        );
     }
 }
