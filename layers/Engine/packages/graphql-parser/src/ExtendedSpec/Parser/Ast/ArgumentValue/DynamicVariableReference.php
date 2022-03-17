@@ -24,26 +24,13 @@ class DynamicVariableReference extends VariableReference
         $this->context = $context;
     }
 
-    final public function isDynamicVariable(): bool
-    {
-        return \str_starts_with($this->name, '_');
-    }
-
     /**
-     * Override to handle dynamic variables too
+     * Override to get the value directly from the context
+     * as to handle dynamic variables
      *
      * @throws InvalidRequestException
      */
     public function getValue(): mixed
-    {
-        if ($this->variable === null && $this->isDynamicVariable()) {
-            return $this->getDynamicVariableValue();
-        }
-
-        return parent::getValue();
-    }
-
-    public function getDynamicVariableValue(): mixed
     {
         if ($this->context === null) {
             throw new InvalidRequestException(
