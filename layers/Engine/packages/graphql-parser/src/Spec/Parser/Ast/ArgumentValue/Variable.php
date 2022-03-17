@@ -41,11 +41,6 @@ class Variable extends AbstractAst implements WithValueInterface
         $this->context = $context;
     }
 
-    public function getContext(): ?Context
-    {
-        return $this->context;
-    }
-
     public function getName(): string
     {
         return $this->name;
@@ -120,7 +115,7 @@ class Variable extends AbstractAst implements WithValueInterface
      */
     public function getValue(): mixed
     {
-        if ($this->getContext() === null) {
+        if ($this->context === null) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
                     FeedbackItemProvider::class,

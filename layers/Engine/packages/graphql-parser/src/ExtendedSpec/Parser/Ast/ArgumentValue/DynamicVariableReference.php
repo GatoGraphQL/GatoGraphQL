@@ -23,11 +23,6 @@ class DynamicVariableReference extends VariableReference
         $this->context = $context;
     }
 
-    public function getContext(): ?Context
-    {
-        return $this->context;
-    }
-
     /**
      * Get the value directly from the context
      * as to handle dynamic variables
