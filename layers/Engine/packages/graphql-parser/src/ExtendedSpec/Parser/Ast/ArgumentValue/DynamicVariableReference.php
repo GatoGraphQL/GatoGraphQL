@@ -9,18 +9,23 @@ use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableValueAstTrait;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 
 class DynamicVariableReference extends VariableReference
 {
-    use VariableValueAstTrait;
+    use WithVariableValueTrait;
 
     private ?Context $context = null;
 
     public function setContext(?Context $context): void
     {
         $this->context = $context;
+    }
+
+    public function getContext(): ?Context
+    {
+        return $this->context;
     }
 
     /**

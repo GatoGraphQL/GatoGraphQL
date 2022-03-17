@@ -17,7 +17,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    use VariableValueAstTrait;
+    use WithVariableValueTrait;
 
     private ?Context $context = null;
 
@@ -39,6 +39,11 @@ class Variable extends AbstractAst implements WithValueInterface
     public function setContext(?Context $context): void
     {
         $this->context = $context;
+    }
+
+    public function getContext(): ?Context
+    {
+        return $this->context;
     }
 
     public function getName(): string
@@ -115,7 +120,7 @@ class Variable extends AbstractAst implements WithValueInterface
      */
     public function getValue(): mixed
     {
-        if ($this->context === null) {
+        if ($this->getContext() === null) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
                     FeedbackItemProvider::class,

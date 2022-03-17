@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
-trait VariableValueAstTrait
+trait WithVariableValueTrait
 {
     protected function convertVariableValueToAst(
         mixed $variableValue,
