@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 

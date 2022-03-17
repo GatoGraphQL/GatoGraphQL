@@ -6,7 +6,7 @@ namespace PoP\Application\ModuleProcessors;
 
 use PoP\Application\Constants\Actions;
 use PoP\Application\Environment;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
 use PoP\Root\App;
 use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;

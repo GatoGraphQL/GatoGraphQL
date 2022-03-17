@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 
 class GD_DataLoad_QueryInputOutputHandler_EditPost extends ActionExecutionQueryInputOutputHandler

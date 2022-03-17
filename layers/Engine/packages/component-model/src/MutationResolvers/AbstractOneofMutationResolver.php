@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\MutationResolvers;
 
 use PoP\ComponentModel\Exception\QueryResolutionException;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;

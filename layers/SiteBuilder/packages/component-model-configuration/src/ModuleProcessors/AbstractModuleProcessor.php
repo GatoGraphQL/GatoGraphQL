@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
 use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;

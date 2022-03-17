@@ -1,7 +1,7 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Engine\Route\RouteUtils;
 
 abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataModuleProcessorBase
