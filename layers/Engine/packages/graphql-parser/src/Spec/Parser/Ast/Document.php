@@ -365,7 +365,7 @@ class Document implements DocumentInterface
     {
         foreach ($this->getOperations() as $operation) {
             foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
-                if ($variableReference->getVariable() !== null) {
+                if ($this->isVariableDefined($variableReference)) {
                     continue;
                 }
                 throw new InvalidRequestException(
@@ -380,6 +380,15 @@ class Document implements DocumentInterface
                 );
             }
         }
+    }
+
+    /**
+     * Can override for the Extended Spec
+     */
+    protected function isVariableDefined(
+        VariableReference $variableReference,
+    ): bool {
+        return $variableReference->getVariable() !== null;
     }
 
     /**

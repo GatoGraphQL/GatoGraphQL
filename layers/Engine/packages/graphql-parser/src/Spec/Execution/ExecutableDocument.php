@@ -123,6 +123,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
         foreach ($this->document->getOperations() as $operation) {
             foreach ($this->document->getVariableReferencesInOperation($operation) as $variableReference) {
                 $variable = $variableReference->getVariable();
+                /**
+                 * Extended Spec: dynamic variable references will contain
+                 * no variable. No need to return error here, since for
+                 * static variables it will already fail in `assertAllVariablesExist`
+                 */
+                if ($variable === null) {
+                    continue;
+                }
                 if (
                     !$variable->isRequired()
                     || array_key_exists($variable->getName(), $this->context->getVariableValues())

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
@@ -19,6 +19,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
@@ -264,6 +265,18 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $name,
             $variable,
             $location,
+        );
+    }
+
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
         );
     }
 }
