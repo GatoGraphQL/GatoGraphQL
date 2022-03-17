@@ -7,7 +7,7 @@ namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvider;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
@@ -46,8 +46,8 @@ class DynamicVariableReference extends VariableReference
         if (!$this->context->hasVariableValue($this->name)) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(
-                    GraphQLSpecErrorFeedbackItemProvider::class,
-                    GraphQLSpecErrorFeedbackItemProvider::E_5_8_3,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3,
                     [
                         $this->name,
                     ]
