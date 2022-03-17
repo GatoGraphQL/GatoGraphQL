@@ -23,7 +23,7 @@ use PoP\Root\App;
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
     private ?QueryAugmenterServiceInterface $queryHelperService = null;
-    
+
     final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
     {
         $this->queryHelperService = $queryHelperService;
