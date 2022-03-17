@@ -93,10 +93,15 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         );
     }
 
+    protected function getVariable(string $variableName): Variable
+    {
+        return new Variable($variableName, 'ID', false, false, false, new Location(2, 22));
+    }
+
     public function testVariableDefinedInOperationAndDynamicVariableName(): void
     {
         $variableName = '_id';
-        $variable = new Variable($variableName, 'ID', false, false, false, new Location(2, 22));
+        $variable = $this->getVariable($variableName);
         $context = $this->getContext([
             $variableName => 1,
         ]);
@@ -115,7 +120,7 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
     public function testVariableDefinedInOperationAndStaticVariableName(): void
     {
         $variableName = 'id';
-        $variable = new Variable($variableName, 'ID', false, false, false, new Location(2, 22));
+        $variable = $this->getVariable($variableName);
         $context = $this->getContext([
             $variableName => 1,
         ]);
