@@ -25,7 +25,7 @@ class DynamicVariableReference extends VariableReference
     }
 
     /**
-     * Override to get the value directly from the context
+     * Get the value directly from the context
      * as to handle dynamic variables
      *
      * @throws InvalidRequestException
