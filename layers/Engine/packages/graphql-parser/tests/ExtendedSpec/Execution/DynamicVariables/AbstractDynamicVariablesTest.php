@@ -79,28 +79,49 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         bool $addVariableInOperation,
         bool $useDynamicVariableName,
     ): string {
+        $variableName = $useDynamicVariableName ? '$_id' : '$id';
         return sprintf(
             '
             query Op%s {
-                film(id: $%sid) {
+                film(id: %s) {
                     title
                 }
             }
             ',
-            $addVariableInOperation ? '($_id: ID)' : '',
-            $useDynamicVariableName ? QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX : ''
+            $addVariableInOperation ? sprintf('(%s: ID)', $variableName) : '',
+            $variableName
         );
     }
 
-    public function testStaticVariableWithDynamicVariableName(): void
+    public function testVariableDefinedInOperationAndDynamicVariableName(): void
     {
-        $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
+        $variableName = '_id';
+        $variable = new Variable($variableName, 'ID', false, false, false, new Location(2, 22));
         $context = $this->getContext([
-            '_id' => 1,
+            $variableName => 1,
         ]);
         $variable->setContext($context);
-        $variableReference = new VariableReference('_id', $variable, new Location(3, 26));
+        $variableReference = new VariableReference($variableName, $variable, new Location(3, 26));
         $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery(true, true)), $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
+            [
+                $this->getQueryOperation($variable, $variableReference),
+            ],
+            $executableDocument->getRequestedOperations()
+        );
+    }
+
+    public function testVariableDefinedInOperationAndStaticVariableName(): void
+    {
+        $variableName = 'id';
+        $variable = new Variable($variableName, 'ID', false, false, false, new Location(2, 22));
+        $context = $this->getContext([
+            $variableName => 1,
+        ]);
+        $variable->setContext($context);
+        $variableReference = new VariableReference($variableName, $variable, new Location(3, 26));
+        $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery(true, false)), $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             [
