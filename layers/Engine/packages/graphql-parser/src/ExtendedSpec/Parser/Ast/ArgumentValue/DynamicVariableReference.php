@@ -28,6 +28,8 @@ class DynamicVariableReference extends VariableReference
      * as to handle dynamic variables
      *
      * @throws InvalidRequestException
+     *
+     * @todo Review this logic, it must not work! How to pass the context to the AST? Checking for the variable must instead be done against $variable in ->resolveValue
      */
     public function getValue(): mixed
     {
