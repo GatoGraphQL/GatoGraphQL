@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Constants;
+namespace PoP\GraphQLParser\ExtendedSpec\Constants;
 
 class QuerySyntax
 {

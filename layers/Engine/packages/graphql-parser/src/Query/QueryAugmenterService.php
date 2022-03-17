@@ -6,8 +6,8 @@ namespace PoP\GraphQLParser\Query;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\GraphQLParser\Constants\ClientSymbols;
-use PoP\GraphQLParser\Constants\QuerySyntax;
+use PoP\GraphQLParser\ExtendedSpec\Constants\ClientSymbols;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;

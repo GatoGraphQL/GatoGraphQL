@@ -17,7 +17,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
-use PoP\GraphQLParser\Constants\ClientSymbols;
+use PoP\GraphQLParser\ExtendedSpec\Constants\ClientSymbols;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
