@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\Dynam
 
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -154,9 +155,6 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
             $variableName => 1,
         ]);
         $variable->setContext($context);
-        // $variableReference = $this->enabled()
-        //     ? new DynamicVariableReference($variableName, $variable, new Location(3, 26))
-        //     : new VariableReference($variableName, $variable, new Location(3, 26));
         $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery($addVariableInOperation, $useDynamicVariableName)), $context);
         if (!$this->enabled()) {
             $feedbackItemResolution = new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName]);
@@ -165,8 +163,32 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         }
         $executableDocument->validateAndInitialize();
         if ($this->enabled()) {
-            $this->assertTrue(true);
+            $variableReference = new DynamicVariableReference($variableName, null, new Location(3, 26));
+            $variableReference->setContext($context);
+            $this->assertEquals(
+                [
+                    $this->getQueryOperation(null, $variableReference),
+                ],
+                $executableDocument->getRequestedOperations()
+            );
         }
+    }
+
+    public function testVariableNotDefinedInOperationAndStaticVariableName(): void
+    {
+        $addVariableInOperation = false;
+        $useDynamicVariableName = false;
+        $variableName = $this->getVariableName($useDynamicVariableName);
+        $variable = $this->getVariable($variableName);
+        $context = $this->getContext([
+            $variableName => 1,
+        ]);
+        $variable->setContext($context);
+        $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery($addVariableInOperation, $useDynamicVariableName)), $context);
+        $feedbackItemResolution = new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName]);
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage($feedbackItemResolution->getMessage());
+        $executableDocument->validateAndInitialize();
     }
 
     // public function testVariablesNotDefinedInOperation(): void
