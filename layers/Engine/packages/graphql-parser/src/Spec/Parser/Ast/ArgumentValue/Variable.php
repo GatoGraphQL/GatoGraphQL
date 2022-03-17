@@ -17,7 +17,7 @@ use PoP\Root\Services\StandaloneServiceTrait;
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
-    use AccessVariableValueTrait;
+    use VariableValueAstTrait;
 
     private ?Context $context = null;
 
