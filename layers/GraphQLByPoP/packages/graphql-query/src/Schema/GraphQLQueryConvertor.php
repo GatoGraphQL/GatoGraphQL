@@ -18,6 +18,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
@@ -490,7 +491,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                             SuggestionFeedbackItemProvider::class,
                             SuggestionFeedbackItemProvider::S1,
                             [
-                                QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+                                GraphQLParserQuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
                             ]
                         ),
                         LocationHelper::getNonSpecificLocation()
