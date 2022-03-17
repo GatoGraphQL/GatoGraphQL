@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Execution\DynamicVariables;
+namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\DynamicVariables;
 
 class DynamicVariablesDisabledTest extends AbstractDynamicVariablesTest
 {
