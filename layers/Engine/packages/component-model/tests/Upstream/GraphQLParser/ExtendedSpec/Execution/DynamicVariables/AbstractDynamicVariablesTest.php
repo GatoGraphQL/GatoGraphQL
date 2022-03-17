@@ -151,7 +151,7 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         $variableName = $this->getVariableName($useDynamicVariableName);
         $variable = $this->getVariable($variableName);
         $context = $this->getContext([
-            $variableName => 1,
+            // $variableName => 1,
         ]);
         $variable->setContext($context);
         // $variableReference = $this->enabled()
@@ -159,8 +159,8 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         //     : new VariableReference($variableName, $variable, new Location(3, 26));
         $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery($addVariableInOperation, $useDynamicVariableName)), $context);
         $feedbackItemResolution = $this->enabled()
-            ? new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName])
-            : new FeedbackItemResolution(GraphQLExtendedSpecErrorFeedbackItemProvider::class, GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName]);
+            ? new FeedbackItemResolution(GraphQLExtendedSpecErrorFeedbackItemProvider::class, GraphQLExtendedSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName])
+            : new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_8_3, [$variableName]);
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage($feedbackItemResolution->getMessage());
         $executableDocument->validateAndInitialize();
