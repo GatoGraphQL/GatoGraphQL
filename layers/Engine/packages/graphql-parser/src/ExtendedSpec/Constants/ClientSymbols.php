@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\Query;
+namespace PoP\GraphQLParser\Constants;
 
 class ClientSymbols
 {

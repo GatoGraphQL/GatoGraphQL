@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\HelperServices\QueryHelperServiceInterface;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
@@ -22,15 +22,15 @@ use PoP\Root\App;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
-    private ?QueryHelperServiceInterface $queryHelperService = null;
+    private ?QueryAugmenterServiceInterface $queryHelperService = null;
     
-    final public function setQueryHelperService(QueryHelperServiceInterface $queryHelperService): void
+    final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
     {
         $this->queryHelperService = $queryHelperService;
     }
-    final protected function getQueryHelperService(): QueryHelperServiceInterface
+    final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
     {
-        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryHelperServiceInterface::class);
+        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        if ($this->getQueryHelperService()->isDynamicVariableReference($name, $variable)) {
+        if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
             return new DynamicVariableReference($name, $variable, $location);
         }
 

@@ -6,6 +6,9 @@ namespace PoP\GraphQLParser\Query;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\Constants\ClientSymbols;
+use PoP\GraphQLParser\Constants\QuerySyntax;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
@@ -41,5 +44,22 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
             return $nonAllOperations;
         }
         return null;
+    }
+
+    public function isDynamicVariableReference(
+        string $name,
+        ?Variable $variable,
+    ): bool {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableDynamicVariables()) {
+            return false;
+        }
+
+        return $variable === null
+            && \str_starts_with(
+                $name,
+                QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
+            );
     }
 }

@@ -60,9 +60,6 @@ services:
     PoP\ComponentModel\HelperServices\RequestHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\RequestHelperService
 
-    PoP\ComponentModel\HelperServices\QueryHelperServiceInterface:
-        class: \PoP\ComponentModel\HelperServices\QueryHelperService
-
     PoP\ComponentModel\HelperServices\SemverHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\SemverHelperService
 
