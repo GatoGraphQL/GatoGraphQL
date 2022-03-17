@@ -9,8 +9,8 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class Argument extends AbstractAst
 {
     public function __construct(
-        private string $name,
-        private WithValueInterface $value,
+        protected string $name,
+        protected WithValueInterface $value,
         Location $location,
     ) {
         parent::__construct($location);

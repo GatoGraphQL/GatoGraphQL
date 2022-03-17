@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractAst implements LocatableInterface
 {
-    public function __construct(private Location $location)
+    public function __construct(protected Location $location)
     {
     }
 

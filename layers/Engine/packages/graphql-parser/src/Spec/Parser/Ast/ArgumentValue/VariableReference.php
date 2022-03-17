@@ -17,8 +17,8 @@ class VariableReference extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
 
     public function __construct(
-        private string $name,
-        private ?Variable $variable,
+        protected string $name,
+        protected ?Variable $variable,
         Location $location,
     ) {
         parent::__construct($location);

@@ -14,7 +14,7 @@ class Directive extends AbstractAst
      * @param Argument[] $arguments
      */
     public function __construct(
-        private $name,
+        protected $name,
         array $arguments,
         Location $location,
     ) {

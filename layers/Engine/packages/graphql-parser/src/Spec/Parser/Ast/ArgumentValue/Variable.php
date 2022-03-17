@@ -19,18 +19,18 @@ class Variable extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
     use WithVariableValueTrait;
 
-    private ?Context $context = null;
+    protected ?Context $context = null;
 
-    private bool $hasDefaultValue = false;
+    protected bool $hasDefaultValue = false;
 
-    private InputList|InputObject|Literal|null $defaultValue = null;
+    protected InputList|InputObject|Literal|null $defaultValue = null;
 
     public function __construct(
-        private string $name,
-        private string $type,
-        private bool $isRequired,
-        private bool $isArray,
-        private bool $isArrayElementRequired,
+        protected string $name,
+        protected string $type,
+        protected bool $isRequired,
+        protected bool $isArray,
+        protected bool $isArrayElementRequired,
         Location $location,
     ) {
         parent::__construct($location);

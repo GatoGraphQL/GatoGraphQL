@@ -32,11 +32,11 @@ use stdClass;
 class Parser extends Tokenizer implements ParserInterface
 {
     /** @var OperationInterface[] */
-    private array $operations = [];
+    protected array $operations = [];
     /** @var Fragment[] */
-    private array $fragments = [];
+    protected array $fragments = [];
     /** @var Variable[] */
-    private array $variables = [];
+    protected array $variables = [];
 
     public function parse(string $source): Document
     {

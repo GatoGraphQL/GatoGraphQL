@@ -19,9 +19,9 @@ class Document implements DocumentInterface
 
     public function __construct(
         /** @var OperationInterface[] */
-        private array $operations,
+        protected array $operations,
         /** @var Fragment[] */
-        private array $fragments = [],
+        protected array $fragments = [],
     ) {
     }
 
