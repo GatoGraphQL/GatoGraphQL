@@ -40,28 +40,16 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         return $this->getService(ParserInterface::class);
     }
 
-    public function testVariablesDefinedInOperation(): void
+    protected function getQueryOperation(?Variable $variable, VariableReference $variableReference): QueryOperation
     {
-        $parser = $this->getParser();
-        $query = '
-            query Op($_id: ID) {
-                film(id: $_id) {
-                    title
-                }
-            }
-        ';
-        $document = $parser->parse($query);
-        $context = new Context('Op', [
-            '_id' => 1,
-        ]);
-        $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
-        $variable->setContext($context);
-        $variableReference = new VariableReference('_id', $variable, new Location(3, 26));
-        $queryOperation = new QueryOperation(
-            'Op',
-            [
+        $variables = $variable !== null
+            ? [
                 $variable,
-            ],
+            ]
+            : [];
+        return new QueryOperation(
+            'Op',
+            $variables,
             [],
             [
                 new RelationalField(
@@ -79,7 +67,26 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
             ],
             new Location(2, 19)
         );
+    }
 
+    public function testVariablesDefinedInOperation(): void
+    {
+        $parser = $this->getParser();
+        $query = '
+            query Op($_id: ID) {
+                film(id: $_id) {
+                    title
+                }
+            }
+        ';
+        $document = $parser->parse($query);
+        $context = new Context('Op', [
+            '_id' => 1,
+        ]);
+        $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
+        $variable->setContext($context);
+        $variableReference = new VariableReference('_id', $variable, new Location(3, 26));
+        $queryOperation = $this->getQueryOperation($variable, $variableReference);
         $executableDocument = new ExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
@@ -94,7 +101,7 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
     // {
     //     $parser = $this->getParser();
     //     $query = '
-    //         query Op($_id: ID) {
+    //         query Op {
     //             film(id: $_id) {
     //                 title
     //             }
