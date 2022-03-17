@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class SchemaFeedback extends AbstractQueryFeedback implements SchemaFeedbackInterface
 {

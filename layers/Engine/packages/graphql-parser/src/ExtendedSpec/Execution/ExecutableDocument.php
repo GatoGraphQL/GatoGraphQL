@@ -6,7 +6,9 @@ namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
+use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
@@ -40,5 +42,25 @@ class ExecutableDocument extends UpstreamExecutableDocument
         }
 
         return parent::assertAndGetRequestedOperations();
+    }
+
+    protected function propagateContext(OperationInterface $operation, ?Context $context): void
+    {
+        parent::propagateContext($operation, $context);
+
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableDynamicVariables()) {
+            return;
+        }
+
+        foreach ($this->document->getOperations() as $operation) {
+            foreach ($this->document->getVariableReferencesInOperation($operation) as $variableReference) {
+                if (!($variableReference instanceof DynamicVariableReference)) {
+                    continue;
+                }
+                $variableReference->setContext($context);
+            }
+        }
     }
 }

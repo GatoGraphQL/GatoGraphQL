@@ -1,7 +1,7 @@
 <?php
 use PoP\Application\ModuleProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\Utils;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;

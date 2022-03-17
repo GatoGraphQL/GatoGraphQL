@@ -16,8 +16,8 @@ class LeafField extends AbstractAst implements FieldInterface
      * @param Directive[] $directives
      */
     public function __construct(
-        private string $name,
-        private ?string $alias,
+        protected string $name,
+        protected ?string $alias,
         array $arguments,
         array $directives,
         Location $location,

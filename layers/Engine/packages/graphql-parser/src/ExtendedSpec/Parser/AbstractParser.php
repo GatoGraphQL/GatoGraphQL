@@ -4,20 +4,36 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Query\QueryAugmenterServiceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractParser extends UpstreamParser implements ParserInterface
 {
+    private ?QueryAugmenterServiceInterface $queryHelperService = null;
+
+    final public function setQueryAugmenterService(QueryAugmenterServiceInterface $queryHelperService): void
+    {
+        $this->queryHelperService = $queryHelperService;
+    }
+    final protected function getQueryAugmenterService(): QueryAugmenterServiceInterface
+    {
+        return $this->queryHelperService ??= $this->instanceManager->getInstance(QueryAugmenterServiceInterface::class);
+    }
+
     /**
      * Replace `Directive` with `MetaDirective`, and nest the affected
      * directives inside.
@@ -234,5 +250,33 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         Location $location,
     ): MetaDirective {
         return new MetaDirective($name, $arguments, $nestedDirectives, $location);
+    }
+
+    protected function createVariableReference(
+        string $name,
+        ?Variable $variable,
+        Location $location,
+    ): VariableReference {
+        if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
+            return new DynamicVariableReference($name, $variable, $location);
+        }
+
+        return parent::createVariableReference(
+            $name,
+            $variable,
+            $location,
+        );
+    }
+
+    public function createDocument(
+        /** @var OperationInterface[] */
+        array $operations,
+        /** @var Fragment[] */
+        array $fragments,
+    ) {
+        return new Document(
+            $operations,
+            $fragments,
+        );
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\CheckpointProcessors;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
 use PoP\Engine\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\Root\App;

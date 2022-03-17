@@ -6,6 +6,9 @@ namespace PoP\GraphQLParser\Query;
 
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
@@ -30,16 +33,33 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
 
         $nonAllOperations = array_values(array_filter(
             $operations,
-            fn (OperationInterface $operation) => $operation->getName() !== ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+            fn (OperationInterface $operation) => $operation->getName() !== QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
         ));
         if (
             // Passing operationName=__ALL
-            strtoupper($operationName) === ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
+            strtoupper($operationName) === QuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME
             // Passing no operationName and __ALL exists in the document
             || ($operationName === '' && count($operations) > count($nonAllOperations))
         ) {
             return $nonAllOperations;
         }
         return null;
+    }
+
+    public function isDynamicVariableReference(
+        string $name,
+        ?Variable $variable,
+    ): bool {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        if (!$componentConfiguration->enableDynamicVariables()) {
+            return false;
+        }
+
+        return $variable === null
+            && \str_starts_with(
+                $name,
+                QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
+            );
     }
 }

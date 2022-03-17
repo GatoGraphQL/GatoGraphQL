@@ -11,7 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class Literal extends AbstractAst implements WithValueInterface
 {
     public function __construct(
-        private string|int|float|bool|null $value,
+        protected string|int|float|bool|null $value,
         Location $location
     ) {
         parent::__construct($location);

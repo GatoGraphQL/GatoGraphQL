@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -19,9 +19,9 @@ class Document implements DocumentInterface
 
     public function __construct(
         /** @var OperationInterface[] */
-        private array $operations,
+        protected array $operations,
         /** @var Fragment[] */
-        private array $fragments = [],
+        protected array $fragments = [],
     ) {
     }
 
@@ -365,7 +365,7 @@ class Document implements DocumentInterface
     {
         foreach ($this->getOperations() as $operation) {
             foreach ($this->getVariableReferencesInOperation($operation) as $variableReference) {
-                if ($variableReference->getVariable() !== null) {
+                if ($this->isVariableDefined($variableReference)) {
                     continue;
                 }
                 throw new InvalidRequestException(
@@ -380,6 +380,15 @@ class Document implements DocumentInterface
                 );
             }
         }
+    }
+
+    /**
+     * Can override for the Extended Spec
+     */
+    protected function isVariableDefined(
+        VariableReference $variableReference,
+    ): bool {
+        return $variableReference->getVariable() !== null;
     }
 
     /**

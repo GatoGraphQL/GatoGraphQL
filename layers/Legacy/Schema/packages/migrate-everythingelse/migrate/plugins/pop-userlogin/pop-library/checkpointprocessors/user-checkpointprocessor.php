@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor

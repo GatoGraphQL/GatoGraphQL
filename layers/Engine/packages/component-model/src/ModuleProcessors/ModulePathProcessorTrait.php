@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Root\App;

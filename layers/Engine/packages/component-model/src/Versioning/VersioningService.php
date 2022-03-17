@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Versioning;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Constants;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\ComponentModel\FeedbackItemProviders\WarningFeedbackItemProvider;
 use PoP\Root\Services\BasicServiceTrait;

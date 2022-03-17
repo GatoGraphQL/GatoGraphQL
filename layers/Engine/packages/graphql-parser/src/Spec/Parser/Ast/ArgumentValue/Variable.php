@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -13,24 +13,24 @@ use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
-use stdClass;
 
 class Variable extends AbstractAst implements WithValueInterface
 {
     use StandaloneServiceTrait;
+    use WithVariableValueTrait;
 
-    private ?Context $context = null;
+    protected ?Context $context = null;
 
-    private bool $hasDefaultValue = false;
+    protected bool $hasDefaultValue = false;
 
-    private InputList|InputObject|Literal|null $defaultValue = null;
+    protected InputList|InputObject|Literal|null $defaultValue = null;
 
     public function __construct(
-        private string $name,
-        private string $type,
-        private bool $isRequired,
-        private bool $isArray,
-        private bool $isArrayElementRequired,
+        protected string $name,
+        protected string $type,
+        protected bool $isRequired,
+        protected bool $isArray,
+        protected bool $isArrayElementRequired,
         Location $location,
     ) {
         parent::__construct($location);
@@ -129,13 +129,10 @@ class Variable extends AbstractAst implements WithValueInterface
         }
         if ($this->context->hasVariableValue($this->name)) {
             $variableValue = $this->context->getVariableValue($this->name);
-            if (is_array($variableValue)) {
-                return new InputList($variableValue, $this->getLocation());
-            }
-            if ($variableValue instanceof stdClass) {
-                return new InputObject($variableValue, $this->getLocation());
-            }
-            return new Literal($variableValue, $this->getLocation());
+            return $this->convertVariableValueToAst(
+                $variableValue,
+                $this->getLocation()
+            );
         }
         if ($this->hasDefaultValue()) {
             return $this->getDefaultValue();

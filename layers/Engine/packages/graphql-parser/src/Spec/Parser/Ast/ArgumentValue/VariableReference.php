@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
@@ -17,8 +17,8 @@ class VariableReference extends AbstractAst implements WithValueInterface
     use StandaloneServiceTrait;
 
     public function __construct(
-        private string $name,
-        private ?Variable $variable,
+        protected string $name,
+        protected ?Variable $variable,
         Location $location,
     ) {
         parent::__construct($location);
