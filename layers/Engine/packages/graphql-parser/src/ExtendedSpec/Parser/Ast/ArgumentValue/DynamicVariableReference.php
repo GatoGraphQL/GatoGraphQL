@@ -12,10 +12,10 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference as UpstreamVariableReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use stdClass;
 
-class VariableReference extends UpstreamVariableReference
+class DynamicVariableReference extends VariableReference
 {
     private ?Context $context = null;
 
