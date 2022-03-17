@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\Constants\QuerySyntax;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
 use PoP\GraphQLParser\Component;
@@ -68,7 +69,7 @@ class Parser extends AbstractParser
         string $name,
         ?Variable $variable,
     ): bool {
-        return $variable === null && \str_starts_with($name, '_');
+        return $variable === null && \str_starts_with($name, QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX);
     }
 
     protected function createVariableReference(
