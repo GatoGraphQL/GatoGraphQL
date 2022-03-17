@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\ComponentModel\App;
 use PoP\ComponentModel\DirectiveResolvers\MetaDirectiveResolverInterface;
 use PoP\ComponentModel\HelperServices\QueryHelperServiceInterface;
 use PoP\ComponentModel\Registries\MetaDirectiveRegistryInterface;
-use PoP\GraphQLParser\Component;
-use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
@@ -79,11 +76,7 @@ class Parser extends AbstractParser
         ?Variable $variable,
         Location $location,
     ): VariableReference {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableDynamicVariables()
-            && $this->getQueryHelperService()->isDynamicVariableReference($name, $variable)
-        ) {
+        if ($this->getQueryHelperService()->isDynamicVariableReference($name, $variable)) {
             return new DynamicVariableReference($name, $variable, $location);
         }
 
