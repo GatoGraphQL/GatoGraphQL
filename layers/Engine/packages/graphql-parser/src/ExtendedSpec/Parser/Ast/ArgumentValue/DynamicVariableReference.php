@@ -12,7 +12,10 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 
-class DynamicVariableReference extends VariableReference
+/**
+ * @todo Remove `abstract` after migrating AST to resolve queries
+ */
+abstract class DynamicVariableReference extends VariableReference
 {
     use WithVariableValueTrait;
 
