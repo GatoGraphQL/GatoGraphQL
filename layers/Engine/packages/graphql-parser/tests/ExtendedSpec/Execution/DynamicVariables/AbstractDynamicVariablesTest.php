@@ -69,29 +69,38 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
         );
     }
 
-    public function testVariablesDefinedInOperation(): void
+    protected function getContext(array $variableValues): Context
     {
-        $parser = $this->getParser();
-        $query = '
-            query Op($_id: ID) {
+        return new Context('Op', $variableValues);
+    }
+
+    protected function getQuery(bool $variableInOperation): string
+    {
+        return sprintf(
+            '
+            query Op(%s) {
                 film(id: $_id) {
                     title
                 }
             }
-        ';
-        $document = $parser->parse($query);
-        $context = new Context('Op', [
+            ',
+            $variableInOperation ? '$_id: ID' : ''
+        );
+    }
+
+    public function testStaticVariable(): void
+    {
+        $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
+        $context = $this->getContext([
             '_id' => 1,
         ]);
-        $variable = new Variable('_id', 'ID', false, false, false, new Location(2, 22));
         $variable->setContext($context);
         $variableReference = new VariableReference('_id', $variable, new Location(3, 26));
-        $queryOperation = $this->getQueryOperation($variable, $variableReference);
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = new ExecutableDocument($this->getParser()->parse($this->getQuery(true)), $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             [
-                $queryOperation,
+                $this->getQueryOperation($variable, $variableReference),
             ],
             $executableDocument->getRequestedOperations()
         );
