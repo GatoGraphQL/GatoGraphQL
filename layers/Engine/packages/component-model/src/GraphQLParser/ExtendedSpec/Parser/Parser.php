@@ -68,7 +68,7 @@ class Parser extends AbstractParser
         string $name,
         ?Variable $variable,
     ): bool {
-        return $variable === null && \str_starts_with($this->name, '_');
+        return $variable === null && \str_starts_with($name, '_');
     }
 
     protected function createVariableReference(
