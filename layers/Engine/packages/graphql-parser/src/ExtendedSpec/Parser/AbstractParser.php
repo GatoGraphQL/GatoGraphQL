@@ -286,8 +286,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableResolvedFieldValueVariableReferences()) {
-            $this->replaceResolvedFieldValueVariableReferences($document);
+        if ($componentConfiguration->enableResolvedFieldVariableReferences()) {
+            $this->replaceResolvedFieldVariableReferences($document);
         }
 
         return $document;
@@ -295,24 +295,23 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * Iterate the elements in the Document AST, and replace the
-     * "Dynamic Variables References" with
-     * "Resolved Field Value Variable References"
+     * "Dynamic Variables References" with "Resolved Field Variable References"
      */
-    protected function replaceResolvedFieldValueVariableReferences(
+    protected function replaceResolvedFieldVariableReferences(
         Document $document,
     ): void {
         foreach ($document->getOperations() as $operation) {
-            $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
+            $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
         }
         foreach ($document->getFragments() as $fragment) {
-            $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
+            $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
         }
     }
 
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    protected function replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
+    protected function replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
     {
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
             if ($fieldOrFragmentBond instanceof FragmentReference) {
@@ -321,17 +320,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
+                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
                 continue;
             }
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
-            $this->replaceResolvedFieldValueVariableReferencesInArguments($field->getArguments());
-            $this->replaceResolvedFieldValueVariableReferencesInDirectives($field->getDirectives());
+            $this->replaceResolvedFieldVariableReferencesInArguments($field->getArguments());
+            $this->replaceResolvedFieldVariableReferencesInDirectives($field->getDirectives());
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
-                $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
+                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
             }
         }
     }
@@ -339,17 +338,17 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     /**
      * @param Directive[] $directives
      */
-    protected function replaceResolvedFieldValueVariableReferencesInDirectives(array $directives): void
+    protected function replaceResolvedFieldVariableReferencesInDirectives(array $directives): void
     {
         foreach ($directives as $directive) {
-            $this->replaceResolvedFieldValueVariableReferencesInArguments($directive->getArguments());
+            $this->replaceResolvedFieldVariableReferencesInArguments($directive->getArguments());
         }
     }
 
     /**
      * @param Argument[] $arguments
      */
-    protected function replaceResolvedFieldValueVariableReferencesInArguments(array $arguments): void
+    protected function replaceResolvedFieldVariableReferencesInArguments(array $arguments): void
     {
         foreach ($arguments as $argument) {
             $this->replaceDynamicVariableReferenceWithResolvedFieldValueVariableReference($argument);
