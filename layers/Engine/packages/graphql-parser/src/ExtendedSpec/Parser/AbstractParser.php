@@ -415,12 +415,37 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Find the field in the same query block,
      * or return `null` if there is none.
      *
+     * The referenced field is the field alias, if it is defined,
+     * or the field name otherwise.
+     *
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     protected function findFieldInQueryBlock(
         string $referencedFieldNameOrAlias,
         array $fieldsOrFragmentBonds,
     ): ?FieldInterface {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $referencedField = $this->findFieldInQueryBlock($referencedFieldNameOrAlias, $inlineFragment->getFieldsOrFragmentBonds());
+                if ($referencedField !== null) {
+                    return $referencedField;
+                }
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            if (
+                ($field->getAlias() !== null && $field->getAlias() === $referencedFieldNameOrAlias)
+                || ($field->getAlias() === null && $field->getName() === $referencedFieldNameOrAlias)
+            ) {
+                return $field;
+            }
+        }
         return null;
     }
 }
