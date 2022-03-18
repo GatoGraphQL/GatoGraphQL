@@ -331,7 +331,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
+                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+                    $inlineFragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
                 continue;
             }
             /** @var FieldInterface */
@@ -349,7 +352,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
-                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
+                $this->replaceResolvedFieldVariableReferencesInFieldsOrInlineFragments(
+                    $relationalField->getFieldsOrFragmentBonds(),
+                    $fragments,
+                );
             }
         }
     }
