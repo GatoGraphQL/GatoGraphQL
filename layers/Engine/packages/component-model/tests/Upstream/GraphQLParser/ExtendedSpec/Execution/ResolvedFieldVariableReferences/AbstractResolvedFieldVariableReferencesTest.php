@@ -504,4 +504,71 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
 
         $this->executeValidation($query, $context, $queryOperation);
     }
+
+    public function testDifferentQueryBlock(): void
+    {
+        $query = '
+            {
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            
+                self {
+                    userListLang: extract(
+                        object: $_userList,
+                        path: "lang"
+                    )
+                }
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [],
+            new Location(3, 27)
+        );
+        $dynamicVariableReference = new DynamicVariableReference('_userList', new Location(9, 33));
+        $dynamicVariableReference->setContext($context);
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new RelationalField(
+                    'self',
+                    null,
+                    [],
+                    [
+                        new LeafField(
+                            'extract',
+                            'userListLang',
+                            [
+                                new Argument('object', $dynamicVariableReference, new Location(9, 25)),
+                                new Argument('path', new Literal('lang', new Location(10, 32)), new Location(10, 25)),
+                            ],
+                            [],
+                            new Location(8, 35)
+                        ),
+                    ],
+                    [],
+                    new Location(7, 17)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
 }
