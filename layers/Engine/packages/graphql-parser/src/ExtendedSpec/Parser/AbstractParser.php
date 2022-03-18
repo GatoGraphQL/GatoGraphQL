@@ -17,11 +17,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
-use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
@@ -286,7 +284,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $fragments,
         );
 
-        if (false) {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        if ($componentConfiguration->enableResolvedFieldValueVariableReferences()) {
             $this->replaceResolvedFieldValueVariableReferences($document);
         }
 
