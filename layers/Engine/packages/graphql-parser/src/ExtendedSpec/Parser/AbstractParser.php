@@ -263,7 +263,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         Location $location,
     ): VariableReference {
         if ($this->getQueryAugmenterService()->isDynamicVariableReference($name, $variable)) {
-            return new DynamicVariableReference($name, $variable, $location);
+            return new DynamicVariableReference($name, $location);
         }
 
         return parent::createVariableReference(
