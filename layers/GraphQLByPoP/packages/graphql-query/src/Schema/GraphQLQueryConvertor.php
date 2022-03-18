@@ -220,14 +220,20 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof Literal) {
+        }
+        
+        if ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
-        } elseif ($value instanceof VariableReference || $value instanceof Variable) {
+        }
+        
+        if ($value instanceof VariableReference || $value instanceof Variable) {
             return $this->convertArgumentValue($value->getValue());
-        } elseif (is_array($value)) {
+        }
+        
+        if (is_array($value)) {
             /**
              * When coming from the InputList, its `getValue` is an array of Variables
              */
@@ -235,17 +241,23 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 [$this, 'convertArgumentValue'],
                 $value
             );
-        } elseif ($value instanceof stdClass) {
+        }
+        
+        if ($value instanceof stdClass) {
             return (object) array_map(
                 [$this, 'convertArgumentValue'],
                 (array) $value
             );
-        } elseif ($value instanceof InputList) {
+        }
+        
+        if ($value instanceof InputList) {
             return array_map(
                 [$this, 'convertArgumentValue'],
                 $value->getValue()
             );
-        } elseif ($value instanceof InputObject) {
+        }
+        
+        if ($value instanceof InputObject) {
             // Convert from array back to stdClass
             return (object) array_map(
                 [$this, 'convertArgumentValue'],
@@ -253,10 +265,12 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 (array) $value->getValue()
             );
         }
+
         // Otherwise it may be a scalar value
         if (is_string($value)) {
             return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value);
         }
+        
         return $value;
     }
 
