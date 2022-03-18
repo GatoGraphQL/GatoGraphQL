@@ -234,6 +234,62 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    public function testMatchingFieldNameButNotAlias(): void
+    {
+        $query = '
+            {
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            
+                userListLang: extract(
+                    object: $_getJSON,
+                    path: "lang"
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [],
+            new Location(3, 27)
+        );
+        $dynamicVariableReference = new DynamicVariableReference('_getJSON', new Location(8, 29));
+        $dynamicVariableReference->setContext($context);
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [
+                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
+                    ],
+                    [],
+                    new Location(7, 31)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
     public function testInFragments(): void
     {
         $query = '
