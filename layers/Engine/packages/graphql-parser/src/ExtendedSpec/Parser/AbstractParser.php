@@ -326,8 +326,14 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             }
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
-            $this->replaceResolvedFieldVariableReferencesInArguments($field->getArguments());
-            $this->replaceResolvedFieldVariableReferencesInDirectives($field->getDirectives());
+            $this->replaceResolvedFieldVariableReferencesInArguments(
+                $field->getArguments(),
+                $fieldsOrFragmentBonds
+            );
+            $this->replaceResolvedFieldVariableReferencesInDirectives(
+                $field->getDirectives(),
+                $fieldsOrFragmentBonds
+            );
             if ($field instanceof RelationalField) {
                 /** @var RelationalField */
                 $relationalField = $field;
@@ -338,21 +344,33 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * @param Directive[] $directives
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    protected function replaceResolvedFieldVariableReferencesInDirectives(array $directives): void
-    {
+    protected function replaceResolvedFieldVariableReferencesInDirectives(
+        array $directives,
+        array $fieldsOrFragmentBonds,
+    ): void {
         foreach ($directives as $directive) {
-            $this->replaceResolvedFieldVariableReferencesInArguments($directive->getArguments());
+            $this->replaceResolvedFieldVariableReferencesInArguments(
+                $directive->getArguments(),
+                $fieldsOrFragmentBonds,
+            );
         }
     }
 
     /**
      * @param Argument[] $arguments
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    protected function replaceResolvedFieldVariableReferencesInArguments(array $arguments): void
-    {
+    protected function replaceResolvedFieldVariableReferencesInArguments(
+        array $arguments,
+        array $fieldsOrFragmentBonds,
+    ): void {
         foreach ($arguments as $argument) {
-            $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference($argument);
+            $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
+                $argument,
+                $fieldsOrFragmentBonds,
+            );
         }
     }
 
@@ -360,10 +378,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * If a Dynamic Variable Reference has the same name as a
      * field resolved in the same query block, then replace it
      * with the corresponding Resolved Field Variable Reference
-     * to that field
+     * to that field.
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
-        Argument $argument
+        Argument $argument,
+        array $fieldsOrFragmentBonds,
     ): void {
         if (!($argument->getValue() instanceof DynamicVariableReference)) {
             return;
@@ -373,7 +394,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
         // Check if there is a field with the variable name
         $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
-        $field = $this->findFieldInQueryBlock($referencedFieldNameOrAlias);
+        $field = $this->findFieldInQueryBlock(
+            $referencedFieldNameOrAlias,
+            $fieldsOrFragmentBonds,
+        );
         if ($field === null) {
             return;
         }
@@ -389,10 +413,13 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
 
     /**
      * Find the field in the same query block,
-     * or return `null` if there is none
+     * or return `null` if there is none.
+     *
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
     protected function findFieldInQueryBlock(
-        string $referencedFieldNameOrAlias
+        string $referencedFieldNameOrAlias,
+        array $fieldsOrFragmentBonds,
     ): ?FieldInterface {
         return null;
     }
