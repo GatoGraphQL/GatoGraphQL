@@ -276,16 +276,31 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var Fragment[] */
         array $fragments,
     ) {
-        /**
-         * Iterate the document, and replace Runtime Variables with "Resolved Field Value Variable References"
-         */
-        foreach ($operations as $operation) {
-            
-        }
-
-        return new Document(
+        $document = new Document(
             $operations,
             $fragments,
         );
+
+        if (false) {
+            $this->replaceResolvedFieldValueVariableReferences($document);
+        }
+
+        return $document;
+    }
+
+    /**
+     * Iterate the elements in the Document AST, and replace the
+     * "Dynamic Variables References" with
+     * "Resolved Field Value Variable References"
+     */
+    protected function replaceResolvedFieldValueVariableReferences(
+        Document $document,
+    ): void {
+        foreach ($document->getOperations() as $operation) {
+            $operation->getFieldsOrFragmentBonds();
+        }
+        foreach ($document->getFragments() as $fragment) {
+            $fragment->getFieldsOrFragmentBonds();
+        }
     }
 }
