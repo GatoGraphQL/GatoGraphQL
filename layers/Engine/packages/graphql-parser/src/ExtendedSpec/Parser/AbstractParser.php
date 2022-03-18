@@ -391,8 +391,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Find the field in the same query block,
      * or return `null` if there is none
      */
-    protected function findFieldInQueryBlock(string $referencedFieldNameOrAlias): ?FieldInterface
-    {
+    protected function findFieldInQueryBlock(
+        string $referencedFieldNameOrAlias
+    ): ?FieldInterface {
         return null;
     }
 }
