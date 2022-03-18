@@ -118,6 +118,66 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         );
     }
 
+    public function testInverseOrder(): void
+    {
+        $query = '
+            {
+                userListLang: extract(
+                    object: $_userList,
+                    path: "lang"
+                )
+
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(9, 27)
+                    ),
+                    new Location(9, 21)
+                ),
+            ],
+            [],
+            new Location(8, 27)
+        );
+        $dynamicVariableReference = static::enabled()
+            ? new ResolvedFieldVariableReference('_userList', $field, new Location(4, 29))
+            : new DynamicVariableReference('_userList', new Location(4, 29));
+        if (!static::enabled()) {
+            $dynamicVariableReference->setContext($context);
+        }
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [
+                        new Argument('object', $dynamicVariableReference, new Location(4, 21)),
+                        new Argument('path', new Literal('lang', new Location(5, 28)), new Location(5, 21)),
+                    ],
+                    [],
+                    new Location(3, 31)
+                ),
+                $field,
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
     public function testWithoutAlias(): void
     {
         $query = '
