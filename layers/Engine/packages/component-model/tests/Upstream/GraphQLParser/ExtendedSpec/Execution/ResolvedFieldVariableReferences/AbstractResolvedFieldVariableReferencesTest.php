@@ -19,6 +19,22 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\AbstractTestCase;
 
+/**
+ * When ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES is enabled:
+ *
+ *   If the "Field Value Reference" is valid:
+ *   - Reference by alias
+ *   - Reference by fieldName
+ *   - Reference appearing before resolution
+ *  * 
+ *   Then:
+ *     AST entity `DynamicVariableReference` must be replaced with
+ *     AST entity `ResolvedFieldVariableReference`
+ *
+ * When disabled:
+ *
+ *   AST entity `DynamicVariableReference` remains as is
+ */
 abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestCase
 {
     /**
@@ -40,6 +56,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         return $this->getService(ParserInterface::class);
     }
 
+    /**
+     * Referencing by alias.
+     */
     public function testResolvedFieldVariableReferences(): void
     {
         $query = '
@@ -118,6 +137,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         );
     }
 
+    /**
+     * Adding the reference first, the field resolution after.
+     */
     public function testInverseOrder(): void
     {
         $query = '
@@ -178,6 +200,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * Referencing the fieldName.
+     */
     public function testWithoutAlias(): void
     {
         $query = '
@@ -238,6 +263,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * The referenced field does not exist (whether as fieldName or alias).
+     */
     public function testNonExistingFieldVariableReferences(): void
     {
         $query = '
@@ -294,6 +322,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * Referencing the fieldName does not work if the field has an alias;
+     */
     public function testMatchingFieldNameButNotAlias(): void
     {
         $query = '
@@ -350,6 +381,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * The field can be resolved within a fragment.
+     */
     public function testInFragments(): void
     {
         $query = '
@@ -425,6 +459,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * The field can be resolved within an inline fragment.
+     */
     public function testInInlineFragments(): void
     {
         $query = '
@@ -505,6 +542,10 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $this->executeValidation($query, $context, $queryOperation);
     }
 
+    /**
+     * The reference must be done for a field on the same query block
+     * (so that it will be resolved on the same Engine Iteration).
+     */
     public function testDifferentQueryBlock(): void
     {
         $query = '
