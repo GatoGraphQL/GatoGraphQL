@@ -351,11 +351,11 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function replaceResolvedFieldVariableReferencesInArguments(array $arguments): void
     {
         foreach ($arguments as $argument) {
-            $this->replaceDynamicVariableReferenceWithResolvedFieldValueVariableReference($argument);
+            $this->replaceDynamicVariableReferenceWithResolvedFieldVariableReference($argument);
         }
     }
 
-    protected function replaceDynamicVariableReferenceWithResolvedFieldValueVariableReference(
+    protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
         Argument $argument
     ): void {
         if (!($argument->getValue() instanceof DynamicVariableReference)) {
