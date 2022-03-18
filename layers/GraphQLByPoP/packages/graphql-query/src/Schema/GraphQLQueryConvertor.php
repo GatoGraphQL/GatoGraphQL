@@ -205,9 +205,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertArgumentValue($value)
     {
-        /**
-         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
-         */
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
         if (
@@ -250,6 +247,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             );
         }
         
+        /**
+         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
+         */
         if ($value instanceof InputList) {
             return array_map(
                 [$this, 'convertArgumentValue'],
