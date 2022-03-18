@@ -16,6 +16,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
@@ -274,15 +276,16 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var Fragment[] */
         array $fragments,
     ) {
-        $document = new Document(
+        /**
+         * Iterate the document, and replace Runtime Variables with "Resolved Field Value Variable References"
+         */
+        foreach ($operations as $operation) {
+            
+        }
+
+        return new Document(
             $operations,
             $fragments,
         );
-
-        /**
-         * @todo Iterate the document, and replace Runtime Variables with "Resolved Field Value Variable References"
-         */
-
-        return $document;
     }
 }
