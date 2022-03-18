@@ -205,9 +205,6 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertArgumentValue($value)
     {
-        /**
-         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
-         */
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
         if (
@@ -221,18 +218,18 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              */
             return QueryHelpers::getExpressionQuery($value->getName());
         }
-        
+
         if ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
         }
-        
+
         if ($value instanceof VariableReference || $value instanceof Variable) {
             return $this->convertArgumentValue($value->getValue());
         }
-        
+
         if (is_array($value)) {
             /**
              * When coming from the InputList, its `getValue` is an array of Variables
@@ -242,21 +239,24 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $value
             );
         }
-        
+
         if ($value instanceof stdClass) {
             return (object) array_map(
                 [$this, 'convertArgumentValue'],
                 (array) $value
             );
         }
-        
+
+        /**
+         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
+         */
         if ($value instanceof InputList) {
             return array_map(
                 [$this, 'convertArgumentValue'],
                 $value->getValue()
             );
         }
-        
+
         if ($value instanceof InputObject) {
             // Convert from array back to stdClass
             return (object) array_map(
@@ -270,7 +270,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         if (is_string($value)) {
             return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value);
         }
-        
+
         return $value;
     }
 

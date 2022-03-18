@@ -8,11 +8,10 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class VariableReference extends AbstractAst implements WithValueInterface
+class VariableReference extends AbstractAst implements VariableReferenceInterface
 {
     use StandaloneServiceTrait;
 

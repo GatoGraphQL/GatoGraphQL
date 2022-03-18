@@ -28,4 +28,9 @@ interface QueryAugmenterServiceInterface
         string $name,
         ?Variable $variable,
     ): bool;
+
+    /**
+     * Actual name of the dynamic variable (without the leading "_")
+     */
+    public function extractDynamicVariableName(string $name): string;
 }

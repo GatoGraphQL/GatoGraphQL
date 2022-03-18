@@ -47,4 +47,21 @@ class ComponentConfiguration extends AbstractComponentConfiguration
             $callback,
         );
     }
+
+    public function enableResolvedFieldVariableReferences(): bool
+    {
+        if (!$this->enableDynamicVariables()) {
+            return false;
+        }
+
+        $envVariable = Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

@@ -10,9 +10,8 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecFeedbackItemProvi
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\WithVariableValueTrait;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 
-class DynamicVariableReference extends VariableReference
+class DynamicVariableReference extends AbstractDynamicVariableReference
 {
     use WithVariableValueTrait;
 
