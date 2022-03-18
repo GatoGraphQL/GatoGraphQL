@@ -118,6 +118,66 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         );
     }
 
+    public function testWithoutAlias(): void
+    {
+        $query = '
+            {
+                getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            
+                userListLang: extract(
+                    object: $_getJSON,
+                    path: "lang"
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            null,
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [],
+            new Location(3, 17)
+        );
+        $dynamicVariableReference = static::enabled()
+            ? new ResolvedFieldVariableReference('_getJSON', $field, new Location(8, 29))
+            : new DynamicVariableReference('_getJSON', new Location(8, 29));
+        if (!static::enabled()) {
+            $dynamicVariableReference->setContext($context);
+        }
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [
+                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
+                    ],
+                    [],
+                    new Location(7, 31)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
     public function testNonExistingFieldVariableReferences(): void
     {
         $query = '
