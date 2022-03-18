@@ -59,7 +59,14 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             'getJSON',
             'userList',
             [
-                new Argument('url', new Literal('https://someurl.com/rest/users', new Location(4, 27)), new Location(4, 21)),
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
             ],
             [],
             new Location(3, 27)
@@ -130,7 +137,14 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             'getJSON',
             'userList',
             [
-                new Argument('url', new Literal('https://someurl.com/rest/users', new Location(4, 27)), new Location(4, 21)),
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
             ],
             [],
             new Location(3, 27)
@@ -185,7 +199,14 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             'getJSON',
             'userList',
             [
-                new Argument('url', new Literal('https://someurl.com/rest/users', new Location(15, 27)), new Location(15, 21)),
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(15, 27)
+                    ),
+                    new Location(15, 21)
+                ),
             ],
             [],
             new Location(14, 27)
@@ -251,7 +272,14 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             'getJSON',
             'userList',
             [
-                new Argument('url', new Literal('https://someurl.com/rest/users', new Location(6, 35)), new Location(6, 29)),
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(6, 35)
+                    ),
+                    new Location(6, 29)
+                ),
             ],
             [],
             new Location(5, 35)
