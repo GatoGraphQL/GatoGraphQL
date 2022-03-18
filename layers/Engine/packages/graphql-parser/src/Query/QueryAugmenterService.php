@@ -62,4 +62,15 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
                 QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX
             );
     }
+
+    /**
+     * Actual name of the dynamic variable (without the leading "_")
+     */
+    public function extractDynamicVariableName(string $name): string
+    {
+        return substr(
+            $name,
+            strlen(QuerySyntax::DYNAMIC_VARIABLE_NAME_PREFIX)
+        );
+    }
 }

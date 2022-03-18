@@ -372,7 +372,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         $dynamicVariableReference = $argument->getValue();
 
         // Check if there is a field with the variable name
-        $field = $this->findFieldInQueryBlock($dynamicVariableReference->getName());
+        $referencedFieldNameOrAlias = $this->getQueryAugmenterService()->extractDynamicVariableName($dynamicVariableReference->getName());
+        $field = $this->findFieldInQueryBlock($referencedFieldNameOrAlias);
         if ($field === null) {
             return;
         }
@@ -390,7 +391,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * Find the field in the same query block,
      * or return `null` if there is none
      */
-    protected function findFieldInQueryBlock(string $referencedField): ?FieldInterface
+    protected function findFieldInQueryBlock(string $referencedFieldNameOrAlias): ?FieldInterface
     {
         return null;
     }
