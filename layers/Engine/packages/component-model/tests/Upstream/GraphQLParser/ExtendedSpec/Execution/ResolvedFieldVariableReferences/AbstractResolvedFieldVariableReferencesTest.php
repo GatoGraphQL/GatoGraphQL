@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ResolvedFieldVariableReferences;
 
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
-use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -20,7 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\AbstractTestCase;
-use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestCase
 {
@@ -45,7 +42,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
 
     public function testResolvedFieldVariableReferences(): void
     {
-        $parser = $this->getParser();
         $query = '
             {
                 userList: getJSON(
@@ -58,7 +54,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
                 )
             }
         ';
-        $document = $parser->parse($query);
         $context = new Context('');
         $field = new LeafField(
             'getJSON',
@@ -95,7 +90,18 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(2, 13)
         );
 
-        $executableDocument = new ExecutableDocument($document, $context);
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
+    protected function executeValidation(
+        string $query,
+        Context $context,
+        QueryOperation $queryOperation
+    ): void {
+        $executableDocument = new ExecutableDocument(
+            $this->getParser()->parse($query),
+            $context,
+        );
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             [
@@ -107,7 +113,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
 
     public function testNonExistingFieldVariableReferences(): void
     {
-        $parser = $this->getParser();
         $query = '
             {
                 userList: getJSON(
@@ -120,7 +125,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
                 )
             }
         ';
-        $document = $parser->parse($query);
         $context = new Context('');
         $field = new LeafField(
             'getJSON',
@@ -153,19 +157,11 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(2, 13)
         );
 
-        $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $this->assertEquals(
-            [
-                $queryOperation,
-            ],
-            $executableDocument->getRequestedOperations()
-        );
+        $this->executeValidation($query, $context, $queryOperation);
     }
 
     public function testInFragments(): void
     {
-        $parser = $this->getParser();
         $query = '
             query {
                 self {
@@ -184,7 +180,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
                 )
             }
         ';
-        $document = $parser->parse($query);
         $context = new Context('');
         $field = new LeafField(
             'getJSON',
@@ -230,19 +225,11 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(2, 19)
         );
 
-        $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $this->assertEquals(
-            [
-                $queryOperation,
-            ],
-            $executableDocument->getRequestedOperations()
-        );
+        $this->executeValidation($query, $context, $queryOperation);
     }
 
     public function testInInlineFragments(): void
     {
-        $parser = $this->getParser();
         $query = '
             query {
                 self {
@@ -259,7 +246,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
                 }
             }
         ';
-        $document = $parser->parse($query);
         $context = new Context('');
         $field = new LeafField(
             'getJSON',
@@ -312,13 +298,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
             new Location(2, 19)
         );
 
-        $executableDocument = new ExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $this->assertEquals(
-            [
-                $queryOperation,
-            ],
-            $executableDocument->getRequestedOperations()
-        );
+        $this->executeValidation($query, $context, $queryOperation);
     }
 }
