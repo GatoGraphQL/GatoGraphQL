@@ -16,8 +16,13 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\Parser as UpstreamParser;
 use PoP\Root\App;
@@ -297,10 +302,68 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         Document $document,
     ): void {
         foreach ($document->getOperations() as $operation) {
-            $operation->getFieldsOrFragmentBonds();
+            $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($operation->getFieldsOrFragmentBonds());
         }
         foreach ($document->getFragments() as $fragment) {
-            $fragment->getFieldsOrFragmentBonds();
+            $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($fragment->getFieldsOrFragmentBonds());
         }
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     */
+    protected function replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments(array $fieldsOrFragmentBonds): void
+    {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($inlineFragment->getFieldsOrFragmentBonds());
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $this->replaceResolvedFieldValueVariableReferencesInArguments($field->getArguments());
+            $this->replaceResolvedFieldValueVariableReferencesInDirectives($field->getDirectives());
+            if ($field instanceof RelationalField) {
+                /** @var RelationalField */
+                $relationalField = $field;
+                $this->replaceResolvedFieldValueVariableReferencesInFieldsOrInlineFragments($relationalField->getFieldsOrFragmentBonds());
+            }
+        }
+    }
+
+    /**
+     * @param Directive[] $directives
+     */
+    protected function replaceResolvedFieldValueVariableReferencesInDirectives(array $directives): void
+    {
+        foreach ($directives as $directive) {
+            $this->replaceResolvedFieldValueVariableReferencesInArguments($directive->getArguments());
+        }
+    }
+
+    /**
+     * @param Argument[] $arguments
+     */
+    protected function replaceResolvedFieldValueVariableReferencesInArguments(array $arguments): void
+    {
+        foreach ($arguments as $argument) {
+            $this->replaceDynamicVariableReferenceWithResolvedFieldValueVariableReference($argument);
+        }
+    }
+
+    protected function replaceDynamicVariableReferenceWithResolvedFieldValueVariableReference(
+        Argument $argument
+    ): void {
+        if (!($argument->getValue() instanceof DynamicVariableReference)) {
+            return;
+        }
+        /** @var DynamicVariableReference */
+        $dynamicVariableReference = $argument->getValue();
+        // $argument->setValue($dynamicVariableReference);
     }
 }
