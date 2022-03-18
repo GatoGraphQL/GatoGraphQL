@@ -14,6 +14,7 @@ use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
@@ -162,6 +163,88 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
                             ],
                             [],
                             new Location(6, 35)
+                        ),
+                    ],
+                    [],
+                    new Location(3, 17)
+                )
+            ],
+            new Location(2, 19)
+        );
+
+        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertEquals(
+            [
+                $queryOperation,
+            ],
+            $executableDocument->getRequestedOperations()
+        );
+    }
+
+    public function testInInlineFragments(): void
+    {
+        $parser = $this->getParser();
+        $query = '
+            query {
+                self {
+                    ... on QueryRoot {
+                        userList: getJSON(
+                            url: "https://someurl.com/rest/users"
+                        )
+                    }
+
+                    userListLang: extract(
+                        object: $_userList,
+                        path: "lang"
+                    )
+                }
+            }
+        ';
+        $document = $parser->parse($query);
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument('url', new Literal('https://someurl.com/rest/users', new Location(6, 35)), new Location(6, 29)),
+            ],
+            [],
+            new Location(5, 35)
+        );
+        $dynamicVariableReference = static::enabled()
+            ? new ResolvedFieldVariableReference('_userList', $field, new Location(11, 33))
+            : new DynamicVariableReference('_userList', new Location(11, 33));
+        if (!static::enabled()) {
+            $dynamicVariableReference->setContext($context);
+        }
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                new RelationalField(
+                    'self',
+                    null,
+                    [],
+                    [
+                        new InlineFragment(
+                            'QueryRoot',
+                            [
+                                $field,
+                            ],
+                            [],
+                            new Location(4, 28)
+                        ),
+                        new LeafField(
+                            'extract',
+                            'userListLang',
+                            [
+                                new Argument('object', $dynamicVariableReference, new Location(11, 25)),
+                                new Argument('path', new Literal('lang', new Location(12, 32)), new Location(12, 25)),
+                            ],
+                            [],
+                            new Location(10, 35)
                         ),
                     ],
                     [],
