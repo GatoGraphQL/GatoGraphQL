@@ -274,9 +274,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var Fragment[] */
         array $fragments,
     ) {
-        return new Document(
+        $document = new Document(
             $operations,
             $fragments,
         );
+
+        /**
+         * @todo Iterate the document, and replace Runtime Variables with "Resolved Field Value Variable References"
+         */
+
+        return $document;
     }
 }
