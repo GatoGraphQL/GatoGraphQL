@@ -26,7 +26,7 @@ use PoP\Root\AbstractTestCase;
  *   - Reference by alias
  *   - Reference by fieldName
  *   - Reference appearing before resolution
- *  * 
+ *  *
  *   Then:
  *     AST entity `DynamicVariableReference` must be replaced with
  *     AST entity `ResolvedFieldVariableReference`
