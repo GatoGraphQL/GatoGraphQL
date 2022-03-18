@@ -11,10 +11,15 @@ class ResolvedFieldVariableReference extends AbstractDynamicVariableReference
 {
     public function __construct(
         string $name,
-        protected ?FieldInterface $field,
+        protected FieldInterface $field,
         Location $location,
     ) {
         parent::__construct($name, $location);
+    }
+
+    public function getField(): FieldInterface
+    {
+        return $this->field;
     }
 
     /**

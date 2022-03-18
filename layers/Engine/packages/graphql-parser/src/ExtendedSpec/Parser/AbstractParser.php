@@ -8,6 +8,7 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\Document;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLExtendedSpecErrorFeedbackItemProvider;
@@ -355,6 +356,12 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
     }
 
+    /**
+     * If a Dynamic Variable Reference has the same name as a
+     * field resolved in the same query block, then replace it
+     * with the corresponding Resolved Field Variable Reference
+     * to that field
+     */
     protected function replaceDynamicVariableReferenceWithResolvedFieldVariableReference(
         Argument $argument
     ): void {
@@ -363,6 +370,28 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         }
         /** @var DynamicVariableReference */
         $dynamicVariableReference = $argument->getValue();
-        // $argument->setValue($dynamicVariableReference);
+
+        // Check if there is a field with the variable name
+        $field = $this->findFieldInQueryBlock($dynamicVariableReference->getName());
+        if ($field === null) {
+            return;
+        }
+
+        // Replace the "Dynamic Variables Reference" with "Resolved Field Variable Reference"
+        $resolvedFieldVariableReference = new ResolvedFieldVariableReference(
+            $dynamicVariableReference->getName(),
+            $field,
+            $dynamicVariableReference->getLocation()
+        );
+        $argument->setValue($resolvedFieldVariableReference);
+    }
+
+    /**
+     * Find the field in the same query block,
+     * or return `null` if there is none
+     */
+    protected function findFieldInQueryBlock(string $referencedField): ?FieldInterface
+    {
+        return null;
     }
 }
