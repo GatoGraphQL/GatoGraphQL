@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Execution\ResolvedFieldVariableReferences;
+namespace PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ResolvedFieldVariableReferences;
 
 class ResolvedFieldVariableReferencesEnabledTest extends AbstractResolvedFieldVariableReferencesTest
 {
