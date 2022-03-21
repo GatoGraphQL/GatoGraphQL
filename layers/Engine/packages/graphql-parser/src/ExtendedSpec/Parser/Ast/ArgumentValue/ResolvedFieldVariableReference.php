@@ -17,10 +17,10 @@ class ResolvedFieldVariableReference extends AbstractDynamicVariableReference
         FieldInterface $field,
         Location $location,
     ) {
-        // Remove the alias and directives from the field
+        // Remove the directives from the field
         $this->field = new LeafField(
             $field->getName(),
-            null,
+            $field->getAlias(),
             $field->getArguments(),
             [],
             $location
