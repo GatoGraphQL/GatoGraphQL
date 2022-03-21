@@ -209,16 +209,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        /**
+         * Generate the field AST as composable field `{{ field }}`,
+         * so its value can be computed on runtime.
+         *
+         * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+         */
         if ($value instanceof ResolvedFieldVariableReference) {
-            /**
-             * Generate the field AST as composable field `{{ field }}`,
-             * so its value can be computed on runtime.
-             *
-             * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
-             */
             $field = $value->getField();
-            // $queryField = new LeafField($field->getName(), null, $field->getArguments(), [], $field->getLocation());
-            // $fieldQuery = $this->convertField($queryField);
             $fieldQuery = $field->getName();
             if ($field->getArguments() !== []) {
                 $fieldQueryArguments = [];
