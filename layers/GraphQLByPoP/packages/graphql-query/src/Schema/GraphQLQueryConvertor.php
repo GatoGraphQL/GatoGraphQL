@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
@@ -18,9 +17,10 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
-use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
@@ -42,7 +42,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
 use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -207,6 +209,43 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        /**
+         * Generate the field AST as composable field `{{ field }}`,
+         * so its value can be computed on runtime.
+         *
+         * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+         */
+        if ($value instanceof ResolvedFieldVariableReference) {
+            $field = $value->getField();
+            $fieldQuery = $field->getName();
+            if ($field->getArguments() !== []) {
+                $fieldQueryArguments = [];
+                foreach ($field->getArguments() as $argument) {
+                    $argumentValue = $this->convertArgumentValue($argument->getValue());
+                    if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
+                        $argumentValue = substr($argumentValue, 2, -2);
+                    } elseif (is_array($argumentValue)) {
+                        $argumentValueItems = [];
+                        foreach ($argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '[' . implode(',', $argumentValueItems) . ']';
+                    } elseif ($argumentValue instanceof stdClass) {
+                        $argumentValueItems = [];
+                        foreach ((array) $argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '{' . implode(',', $argumentValueItems) . '}';
+                    }
+                    $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
+                }
+                $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
+            }
+            return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
+                . $fieldQuery
+                . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
+        }
+
         if (
             $value instanceof VariableReference &&
             $componentConfiguration->enableVariablesAsExpressions() &&
