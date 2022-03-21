@@ -217,6 +217,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
              */
             $field = $value->getField();
+            // $queryField = new LeafField($field->getName(), null, $field->getArguments(), [], $field->getLocation());
+            // $fieldQuery = $this->convertField($queryField);
             $fieldQuery = $field->getName();
             if ($field->getArguments() !== []) {
                 $fieldQueryArguments = [];
@@ -224,6 +226,18 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     $argumentValue = $this->convertArgumentValue($argument->getValue());
                     if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
                         $argumentValue = substr($argumentValue, 2, -2);
+                    } elseif (is_array($argumentValue)) {
+                        $argumentValueItems = [];
+                        foreach ($argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '[' . implode(',', $argumentValueItems) . ']';
+                    } elseif ($argumentValue instanceof stdClass) {
+                        $argumentValueItems = [];
+                        foreach ((array) $argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '{' . implode(',', $argumentValueItems) . '}';
                     }
                     $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
                 }
