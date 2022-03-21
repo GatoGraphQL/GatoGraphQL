@@ -212,19 +212,25 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         if ($value instanceof ResolvedFieldVariableReference) {
             /**
              * Generate the field AST as composable field `{{ field }}`,
-             * so its value can be computed on runtime
+             * so its value can be computed on runtime.
+             *
+             * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
              */
             $field = $value->getField();
             $fieldQuery = $field->getName();
             if ($field->getArguments() !== []) {
                 $fieldQueryArguments = [];
                 foreach ($field->getArguments() as $argument) {
-                    $fieldQueryArguments[$argument->getName()] = $this->convertArgumentValue($argument->getValue());
+                    $argumentValue = $this->convertArgumentValue($argument->getValue());
+                    if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
+                        $argumentValue = substr($argumentValue, 2, -2);
+                    }
+                    $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
                 }
                 $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
             }
             return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
-                . $this->convertFromGraphQLToFieldQuery($fieldQuery)
+                . $fieldQuery
                 . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
         }
 
