@@ -10,7 +10,6 @@ use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentCon
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
@@ -18,9 +17,10 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
-use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
@@ -42,7 +42,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
 use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -207,6 +209,25 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     {
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        if ($value instanceof ResolvedFieldVariableReference) {
+            /**
+             * Generate the field AST as composable field `{{ field }}`,
+             * so its value can be computed on runtime
+             */
+            $field = $value->getField();
+            $fieldQuery = $field->getName();
+            if ($field->getArguments() !== []) {
+                $fieldQueryArguments = [];
+                foreach ($field->getArguments() as $argument) {
+                    $fieldQueryArguments[$argument->getName()] = $this->convertArgumentValue($argument->getValue());
+                }
+                $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
+            }
+            return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
+                . $this->convertFromGraphQLToFieldQuery($fieldQuery)
+                . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
+        }
+
         if (
             $value instanceof VariableReference &&
             $componentConfiguration->enableVariablesAsExpressions() &&
