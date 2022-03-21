@@ -265,9 +265,9 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
-     * Referencing by alias.
+     * Remove the directives added to the resolved field from its reference.
      */
-    public function testRemoveAliasAndDirectives(): void
+    public function testRemoveDirectives(): void
     {
         $query = '
             {
