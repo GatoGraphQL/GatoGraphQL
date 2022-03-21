@@ -11,6 +11,7 @@ use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
@@ -237,6 +238,86 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
         $dynamicVariableReference = static::enabled()
             ? new ResolvedFieldVariableReference('_getJSON', $field, new Location(8, 29))
             : new DynamicVariableReference('_getJSON', new Location(8, 29));
+        if (!static::enabled()) {
+            $dynamicVariableReference->setContext($context);
+        }
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [
+                        new Argument('object', $dynamicVariableReference, new Location(8, 21)),
+                        new Argument('path', new Literal('lang', new Location(9, 28)), new Location(9, 21)),
+                    ],
+                    [],
+                    new Location(7, 31)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
+    /**
+     * Referencing by alias.
+     */
+    public function testRemoveAliasAndDirectives(): void
+    {
+        $query = '
+            {
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                ) @skip(if: true)
+            
+                userListLang: extract(
+                    object: $_userList,
+                    path: "lang"
+                )
+            }
+        ';
+        $context = new Context('');
+        $directive = new Directive(
+            'skip',
+            [
+                new Argument('if', new Literal(true, new Location(5, 29)), new Location(5, 25)),
+            ],
+            new Location(5, 20)
+        );
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [
+                $directive
+            ],
+            new Location(3, 27)
+        );
+        // Remove the directives
+        $referencedField = new LeafField(
+            $field->getName(),
+            $field->getAlias(),
+            $field->getArguments(),
+            [],
+            $field->getLocation()
+        );
+        $dynamicVariableReference = static::enabled()
+            ? new ResolvedFieldVariableReference('_userList', $referencedField, new Location(8, 29))
+            : new DynamicVariableReference('_userList', new Location(8, 29));
         if (!static::enabled()) {
             $dynamicVariableReference->setContext($context);
         }
