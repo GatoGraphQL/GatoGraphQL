@@ -1543,6 +1543,7 @@ class Engine implements EngineInterface
             // Move the pointer to the first element, and get it
             reset($engineState->relationalTypeOutputDBKeyIDsDataFields);
             $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDsDataFields);
+            /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
             $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
 
