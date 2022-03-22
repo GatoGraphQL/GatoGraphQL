@@ -499,6 +499,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $relationalTypeResolver,
                         $objectTypeFieldResolutionFeedbackStore,
                     );
+                    $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $relationalTypeResolver,
+                        $field,
+                        $id
+                    );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
                     }
