@@ -290,19 +290,30 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
          */
         if ($value instanceof InputList) {
-            return array_map(
-                [$this, 'convertArgumentValue'],
-                $value->getValue()
-            );
+            $array = [];
+            foreach ($value->getAstValue() as $key => $value) {
+                $array[$key] = $this->convertArgumentValue($value);
+            }
+            return $array;
+            // return array_map(
+            //     [$this, 'convertArgumentValue'],
+            //     $value->getValue()
+            // );
         }
 
         if ($value instanceof InputObject) {
-            // Convert from array back to stdClass
-            return (object) array_map(
-                [$this, 'convertArgumentValue'],
-                // Convert from stdClass to array
-                (array) $value->getValue()
-            );
+            // Copied from `InputObject->getValue`
+            $object = new stdClass();
+            foreach ((array) $value->getAstValue() as $key => $value) {
+                $object->$key = $this->convertArgumentValue($value);
+            }
+            return $object;
+            // // Convert from array back to stdClass
+            // return (object) array_map(
+            //     [$this, 'convertArgumentValue'],
+            //     // Convert from stdClass to array
+            //     (array) $value->getValue()
+            // );
         }
 
         // Otherwise it may be a scalar value
