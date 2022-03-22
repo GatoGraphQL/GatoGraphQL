@@ -587,8 +587,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             $value = $isValueInDBItems ?
                 $dbItems[(string)$id][$fieldOutputKey] :
                 $previousDBItems[$dbKey][(string)$id][$fieldOutputKey];
-            $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
-            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $this->addExpressionForObjectAndField($id, $fieldOutputKey, Expressions::NAME_VALUE, $value, $messages);
+            $expressions = $this->getExpressionsForObjectAndField($id, $fieldOutputKey, $variables, $messages);
 
             $options = [
                 AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
