@@ -454,7 +454,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForObject(int | string $id, array &$variables, array &$messages): array
+    protected function getExpressionsForObject(int | string $id, array $variables, array $messages): array
     {
         // Create a custom $variables containing all the properties from $dbItems for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
@@ -468,7 +468,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array &$variables, array &$messages): array
+    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array $variables, array $messages): array
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
@@ -487,12 +487,12 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] = $value;
     }
 
-    protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
+    protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] ?? null;
     }
 
-    protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array &$messages): mixed
+    protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array $messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }
