@@ -279,6 +279,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 if ($this->addIfDirectiveArgument()) {
                     $arrayItems = $this->filterIfArrayItems(
                         $arrayItems,
+                        $object,
                         $id,
                         $field,
                         $relationalTypeResolver,
@@ -439,6 +440,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
     final protected function filterIfArrayItems(
         array &$array,
+        object $object,
         int | string $id,
         string $field,
         RelationalTypeResolverInterface $relationalTypeResolver,
@@ -448,8 +450,18 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$variables,
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
-    ): ?array {
-        $if = $this->directiveArgsForSchema['if'] ?? null;
+    ): array {
+        $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+        list(
+            $objectValidDirective,
+            $objectDirectiveName,
+            $objectDirectiveArgs
+        ) = $this->dissectAndValidateDirectiveForObject($relationalTypeResolver, $object, [$field], $variables, $expressions, $engineIterationFeedbackStore);
+        // Check that the directive is valid. If it is not, $objectErrors will have the error already added
+        if ($objectValidDirective === null) {
+            return [];
+        }
+        $if = $objectDirectiveArgs['if'] ?? null;
         if ($if === null) {
             return $array;
         }
