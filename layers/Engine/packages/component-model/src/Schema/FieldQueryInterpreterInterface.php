@@ -107,4 +107,10 @@ interface FieldQueryInterpreterInterface extends UpstreamFieldQueryInterpreterIn
     ): array;
     public function maybeConvertFieldArgumentValue(mixed $fieldArgValue, ?array $variables = null): mixed;
     public function maybeConvertFieldArgumentArrayOrObjectValue(mixed $fieldArgValue, ?array $variables = null): mixed;
+    public function resolveExpression(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        mixed $fieldArgValue,
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed;
 }
