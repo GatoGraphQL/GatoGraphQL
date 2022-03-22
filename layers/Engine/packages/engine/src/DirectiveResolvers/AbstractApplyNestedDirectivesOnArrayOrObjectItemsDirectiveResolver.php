@@ -651,6 +651,29 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         continue;
                     }
                     $existingValue[] = $resolvedValue;
+                } elseif ($this->getFieldQueryInterpreter()->isFieldArgumentValueAnExpression($value)) {
+                    $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+                    $resolvedValue = $this->getFieldQueryInterpreter()->resolveExpression(
+                        $relationalTypeResolver,
+                        $value,
+                        $expressions,
+                        $objectTypeFieldResolutionFeedbackStore
+                    );
+                    $this->maybeNestDirectiveFeedback(
+                        $relationalTypeResolver,
+                        $objectTypeFieldResolutionFeedbackStore,
+                    );
+                    $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                        $objectTypeFieldResolutionFeedbackStore,
+                        $relationalTypeResolver,
+                        $field,
+                        $id,
+                        $this->directive
+                    );
+                    if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                        continue;
+                    }
+                    $existingValue[] = $resolvedValue;
                 }
                 $this->addExpressionForObject($id, (string) $key, $existingValue, $messages);
             }
