@@ -194,7 +194,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
 
         // Store the args, they may be used in `resolveDirective`
-        $this->directiveArgsForSchema = $directiveArgs;
+        if ($directiveArgs !== null) {
+            $this->directiveArgsForSchema = $directiveArgs;
+        }
 
         return [
             $validDirective,
