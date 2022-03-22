@@ -472,7 +472,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         return array_merge(
             $this->getExpressionsForObject($id, $variables, $messages),
-            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string) $id][$fieldOutputKey] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey] ?? []
         );
     }
 
@@ -484,12 +484,17 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
     {
         $this->addExpressionForObject($id, $key, $value, $messages);
-        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string) $id][$fieldOutputKey][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] = $value;
     }
 
     protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
     {
         return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] ?? null;
+    }
+
+    protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array &$messages): mixed
+    {
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }
 
     /**
