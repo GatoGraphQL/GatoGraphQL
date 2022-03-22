@@ -263,7 +263,7 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
             case 'extract':
                 try {
                     $array = (array) $fieldArgs['object'];
-                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToArrayItemUnderPath($array, $fieldArgs['path']);
+                    $pointerToArrayItemUnderPath = $this->getArrayTraversionHelperService()->getPointerToElementItemUnderPath($array, $fieldArgs['path']);
                 } catch (RuntimeOperationException $e) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
