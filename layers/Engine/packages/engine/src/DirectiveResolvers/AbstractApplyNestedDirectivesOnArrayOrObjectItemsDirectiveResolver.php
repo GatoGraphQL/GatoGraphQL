@@ -503,7 +503,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $relationalTypeResolver,
                         $field,
-                        $id
+                        $id,
+                        $this->directive
                     );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
@@ -533,7 +534,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                         $objectTypeFieldResolutionFeedbackStore,
                         $relationalTypeResolver,
                         $field,
-                        $id
+                        $id,
+                        $this->directive
                     );
                     if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                         continue;
