@@ -451,7 +451,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         array &$messages,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): array {
-        $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+        $fieldOutputKey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $field, $object);
+        $expressions = $this->getExpressionsForObjectAndField($id, $fieldOutputKey, $variables, $messages);
         list(
             $objectValidDirective,
             $objectDirectiveName,
@@ -476,8 +477,8 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
         ];
         foreach ($array as $key => $value) {
-            $this->addExpressionForObject($id, Expressions::NAME_KEY, $key, $messages);
-            $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
+            $this->addExpressionForObjectAndField($id, $fieldOutputKey, Expressions::NAME_KEY, $key, $messages);
+            $this->addExpressionForObjectAndField($id, $fieldOutputKey, Expressions::NAME_VALUE, $value, $messages);
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
             $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
             $resolvedValue = $relationalTypeResolver->resolveValue(
