@@ -9,12 +9,12 @@ use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfigur
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface;
 use PoP\ComponentModel\DirectiveResolvers\AbstractGlobalMetaDirectiveResolver;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Feedback\SchemaFeedback;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\Component;
 use PoP\Engine\ComponentConfiguration;
 use PoP\Engine\Dataloading\Expressions;
@@ -24,6 +24,7 @@ use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolver extends AbstractGlobalMetaDirectiveResolver
@@ -37,6 +38,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
     private ?DirectivePipelineServiceInterface $directivePipelineService = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setDirectivePipelineService(DirectivePipelineServiceInterface $directivePipelineService): void
     {
@@ -54,6 +56,14 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     {
         return $this->jsonObjectScalarTypeResolver ??= $this->instanceManager->getInstance(JSONObjectScalarTypeResolver::class);
     }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        return $this->booleanScalarTypeResolver ??= $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+    }
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
@@ -65,6 +75,9 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         }
         return array_merge(
             $directiveArgNameTypeResolvers,
+            $this->addIfDirectiveArgument() ? [
+                'if' => $this->getBooleanScalarTypeResolver(),
+            ] : [],
             [
                 'addExpressions' => $this->getJSONObjectScalarTypeResolver(),
                 'appendExpressions' => $this->getJSONObjectScalarTypeResolver(),
@@ -75,6 +88,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
+            'if' => $this->__('If provided, iterate only those items that satisfy this condition `%s`', 'component-model'),
             'addExpressions' => sprintf(
                 $this->__('Expressions to inject to the composed directive. The value of the affected field can be provided under special expression `%s`', 'component-model'),
                 QueryHelpers::getExpressionQuery(Expressions::NAME_VALUE)
@@ -89,6 +103,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
     public function getDirectiveExpressions(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
+        if ($this->addIfDirectiveArgument()) {
+            return [
+                Expressions::NAME_KEY => $this->__('Key of the array element from the current iteration', 'component-model'),
+                Expressions::NAME_VALUE => $this->__('Value of the array element from the current iteration', 'component-model'),
+            ];
+        }
         return [
             Expressions::NAME_VALUE => sprintf(
                 $this->__('Value of the array element from the current iteration, available for params \'%s\' and \'%s\'', 'component-model'),
@@ -256,6 +276,20 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     $messages,
                     $engineIterationFeedbackStore,
                 );
+                if ($this->addIfDirectiveArgument()) {
+                    $arrayItems = $this->filterIfArrayItems(
+                        $arrayItems,
+                        $id,
+                        $field,
+                        $relationalTypeResolver,
+                        $objectIDItems,
+                        $previousDBItems,
+                        $dbItems,
+                        $variables,
+                        $messages,
+                        $engineIterationFeedbackStore,
+                    );
+                }
                 if ($arrayItems !== []) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
@@ -399,6 +433,70 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 }
             }
         }
+    }
+
+    abstract protected function addIfDirectiveArgument(): bool;
+
+    final protected function filterIfArrayItems(
+        array &$array,
+        int | string $id,
+        string $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $previousDBItems,
+        array &$dbItems,
+        array &$variables,
+        array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): ?array {
+        $if = $this->directiveArgsForSchema['if'] ?? null;
+        if ($if === null) {
+            return $array;
+        }
+        if (!$this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
+            return $if ? $array : [];
+        }
+        // If it is a field, execute the function against all the values in the array
+        // Those that satisfy the condition stay, the others are filtered out
+        // We must add each item in the array as expression `%{value}%`, over which the if function can be evaluated
+        $arrayItems = [];
+        $options = [
+            AbstractRelationalTypeResolver::OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM => true,
+        ];
+        foreach ($array as $key => $value) {
+            $this->addExpressionForObject($id, Expressions::NAME_KEY, $key, $messages);
+            $this->addExpressionForObject($id, Expressions::NAME_VALUE, $value, $messages);
+            $expressions = $this->getExpressionsForObject($id, $variables, $messages);
+            $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+            $resolvedValue = $relationalTypeResolver->resolveValue(
+                $objectIDItems[(string)$id],
+                $if,
+                $variables,
+                $expressions,
+                $objectTypeFieldResolutionFeedbackStore,
+                $options
+            );
+            $this->maybeNestDirectiveFeedback(
+                $relationalTypeResolver,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            $engineIterationFeedbackStore->objectFeedbackStore->incorporateFromObjectTypeFieldResolutionFeedbackStore(
+                $objectTypeFieldResolutionFeedbackStore,
+                $relationalTypeResolver,
+                $field,
+                $id,
+                $this->directive
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                continue;
+            }
+            // Evaluate it
+            if (!$resolvedValue) {
+                continue;
+            }
+            $arrayItems[$key] = $value;
+        }
+        return $arrayItems;
     }
     /**
      * Place the result for the array in the original property
