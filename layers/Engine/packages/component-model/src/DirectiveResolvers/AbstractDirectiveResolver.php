@@ -47,7 +47,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use BasicServiceTrait;
     use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
-    const MESSAGE_EXPRESSIONS = 'expressions';
+    public const MESSAGE_EXPRESSIONS = 'expressions';
+    public const EXPRESSION_ID_FIELD_SEPARATOR = '|';
 
     protected string $directive;
     /** @var array<string, array<string, InputTypeResolverInterface>> */
@@ -464,9 +465,26 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
     }
 
+    /**
+     * @return mixed[]
+     */
+    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array &$variables, array &$messages): array
+    {
+        return array_merge(
+            $this->getExpressionsForObject($id, $variables, $messages),
+            $messages[self::MESSAGE_EXPRESSIONS][((string)$id) . self::EXPRESSION_ID_FIELD_SEPARATOR . $fieldOutputKey] ?? []
+        );
+    }
+
     protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
     {
         $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] = $value;
+    }
+
+    protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
+    {
+        $this->addExpressionForObject($id, $key, $value, $messages);
+        $messages[self::MESSAGE_EXPRESSIONS][((string)$id) . self::EXPRESSION_ID_FIELD_SEPARATOR . $fieldOutputKey][$key] = $value;
     }
 
     protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
