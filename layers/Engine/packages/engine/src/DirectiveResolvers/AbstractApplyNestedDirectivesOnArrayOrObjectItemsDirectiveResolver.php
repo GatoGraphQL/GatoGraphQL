@@ -244,20 +244,19 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
                 // The value is an array or an stdClass. Unpack all the elements into their own property
                 $array = (array) $value;
-                if (
-                    $arrayItems = $this->getArrayItems(
-                        $array,
-                        $id,
-                        $field,
-                        $relationalTypeResolver,
-                        $objectIDItems,
-                        $previousDBItems,
-                        $dbItems,
-                        $variables,
-                        $messages,
-                        $engineIterationFeedbackStore,
-                    )
-                ) {
+                $arrayItems = $this->getArrayItems(
+                    $array,
+                    $id,
+                    $field,
+                    $relationalTypeResolver,
+                    $objectIDItems,
+                    $previousDBItems,
+                    $dbItems,
+                    $variables,
+                    $messages,
+                    $engineIterationFeedbackStore,
+                );
+                if ($arrayItems !== []) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
                         // Add into the $idsDataFields object for the array items
