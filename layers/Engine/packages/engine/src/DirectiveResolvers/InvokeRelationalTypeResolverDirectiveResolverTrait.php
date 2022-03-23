@@ -19,8 +19,13 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
         RelationalTypeResolverInterface $relationalTypeResolver,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // @todo Display the nested errors in the output, currently they are not
-        return;
+        // @todo Display the nested errors in the output, currently they are not!
+        // @todo Also integrate it with "why" in errors:
+        // @see https://github.com/graphql/graphql-spec/issues/893
+        $disabled = true;
+        if ($disabled) {
+            return;
+        }
         // If there was an error, add it as nested
         $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
         if ($errors !== []) {
