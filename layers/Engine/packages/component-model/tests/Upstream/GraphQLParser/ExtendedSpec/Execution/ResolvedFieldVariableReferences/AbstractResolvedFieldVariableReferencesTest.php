@@ -345,6 +345,73 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
+     * Variable references inside directives must also be resolved.
+     */
+    public function testReferenceInDirectives(): void
+    {
+        $query = '
+            {
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            
+                userListLang: extract @default(
+                    value: $_userList,
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [],
+            new Location(3, 27)
+        );
+        $dynamicVariableReference = static::enabled()
+            ? new ResolvedFieldVariableReference('_userList', $field, new Location(8, 28))
+            : new DynamicVariableReference('_userList', new Location(8, 28));
+        if (!static::enabled()) {
+            $dynamicVariableReference->setContext($context);
+        }
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [],
+                    [
+                        new Directive(
+                            'default',
+                            [
+                                new Argument('value', $dynamicVariableReference, new Location(8, 21)),
+                            ],
+                            new Location(7, 40)
+                        )
+                    ],
+                    new Location(7, 31)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
+    /**
      * The referenced field does not exist (whether as fieldName or alias).
      */
     public function testNonExistingFieldVariableReferences(): void
