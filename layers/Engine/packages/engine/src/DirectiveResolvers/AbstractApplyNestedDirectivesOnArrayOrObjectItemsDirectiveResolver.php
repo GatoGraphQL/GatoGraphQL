@@ -466,9 +466,11 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         if ($if === null) {
             return $array;
         }
-        if (!$this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
+        if (!$this->getFieldQueryInterpreter()->isFieldArgumentValueDynamic($if)) {
             return $if ? $array : [];
         }
+        $isFieldArgumentValueAField = $this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if);
+        $isFieldArgumentValueAnExpression = $this->getFieldQueryInterpreter()->isFieldArgumentValueAnExpression($if);
         // If it is a field, execute the function against all the values in the array
         // Those that satisfy the condition stay, the others are filtered out
         // We must add each item in the array as expression `%{value}%`, over which the if function can be evaluated
@@ -481,14 +483,23 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
             $this->addExpressionForObjectAndField($id, $fieldOutputKey, Expressions::NAME_VALUE, $value, $messages);
             $expressions = $this->getExpressionsForObject($id, $variables, $messages);
             $objectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-            $resolvedValue = $relationalTypeResolver->resolveValue(
-                $objectIDItems[(string)$id],
-                $if,
-                $variables,
-                $expressions,
-                $objectTypeFieldResolutionFeedbackStore,
-                $options
-            );
+            if ($isFieldArgumentValueAField) {
+                $resolvedValue = $relationalTypeResolver->resolveValue(
+                    $objectIDItems[(string)$id],
+                    $if,
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
+            } elseif ($isFieldArgumentValueAnExpression) {
+                $resolvedValue = $this->getFieldQueryInterpreter()->resolveExpression(
+                    $relationalTypeResolver,
+                    $if,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore
+                );
+            }
             $this->maybeNestDirectiveFeedback(
                 $relationalTypeResolver,
                 $objectTypeFieldResolutionFeedbackStore,
