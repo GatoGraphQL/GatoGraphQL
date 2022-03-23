@@ -471,6 +471,69 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     }
 
     /**
+     * Variable references inside directives must also be resolved.
+     */
+    public function testNonExistingFieldVariableReferencesInDirectives(): void
+    {
+        $query = '
+            {
+                userList: getJSON(
+                    url: "https://someurl.com/rest/users"
+                )
+            
+                userListLang: extract @default(
+                    value: $_nonExistingField,
+                )
+            }
+        ';
+        $context = new Context('');
+        $field = new LeafField(
+            'getJSON',
+            'userList',
+            [
+                new Argument(
+                    'url',
+                    new Literal(
+                        'https://someurl.com/rest/users',
+                        new Location(4, 27)
+                    ),
+                    new Location(4, 21)
+                ),
+            ],
+            [],
+            new Location(3, 27)
+        );
+        $dynamicVariableReference = new DynamicVariableReference('_nonExistingField', new Location(8, 28));
+        $dynamicVariableReference->setContext($context);
+        $queryOperation = new QueryOperation(
+            '',
+            [],
+            [],
+            [
+                $field,
+                new LeafField(
+                    'extract',
+                    'userListLang',
+                    [],
+                    [
+                        new Directive(
+                            'default',
+                            [
+                                new Argument('value', $dynamicVariableReference, new Location(8, 21)),
+                            ],
+                            new Location(7, 40)
+                        )
+                    ],
+                    new Location(7, 31)
+                )
+            ],
+            new Location(2, 13)
+        );
+
+        $this->executeValidation($query, $context, $queryOperation);
+    }
+
+    /**
      * Referencing the fieldName does not work if the field has an alias;
      */
     public function testMatchingFieldNameButNotAlias(): void
