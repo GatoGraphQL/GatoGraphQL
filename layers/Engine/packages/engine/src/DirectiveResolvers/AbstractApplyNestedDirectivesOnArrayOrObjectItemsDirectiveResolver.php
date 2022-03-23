@@ -499,6 +499,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         if (!$this->getFieldQueryInterpreter()->isFieldArgumentValueAField($if)) {
             return $if ? $array : [];
         }
+        // @todo Together with removing `isFieldArgumentValueAField`, all the code below should be removed!
         // If it is a field, execute the function against all the values in the array
         // Those that satisfy the condition stay, the others are filtered out
         // We must add each item in the array as expression `%{value}%`, over which the if function can be evaluated
