@@ -15,5 +15,9 @@ interface ArrayTraversionHelperServiceInterface
     /**
      * @throws RuntimeOperationException If the path cannot be reached under the array
      */
+    public function &getPointerToElementItemUnderPath(array &$data, string $path): mixed;
+    /**
+     * @throws RuntimeOperationException If the path cannot be reached under the array
+     */
     public function setValueToArrayItemUnderPath(array &$data, string $path, mixed $value): void;
 }

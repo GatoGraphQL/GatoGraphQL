@@ -47,7 +47,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     use BasicServiceTrait;
     use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
 
-    const MESSAGE_EXPRESSIONS = 'expressions';
+    private const MESSAGE_EXPRESSIONS_FOR_OBJECT = 'expressionsForObject';
+    private const MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD = 'expressionsForObjectAndField';
 
     protected string $directive;
     /** @var array<string, array<string, InputTypeResolverInterface>> */
@@ -193,7 +194,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         );
 
         // Store the args, they may be used in `resolveDirective`
-        $this->directiveArgsForSchema = $directiveArgs;
+        if ($directiveArgs !== null) {
+            $this->directiveArgsForSchema = $directiveArgs;
+        }
 
         return [
             $validDirective,
@@ -453,25 +456,89 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     /**
      * @return mixed[]
      */
-    protected function getExpressionsForObject(int | string $id, array &$variables, array &$messages): array
+    protected function getExpressionsForObject(int | string $id, array $variables, array $messages): array
     {
         // Create a custom $variables containing all the properties from $dbItems for this object
         // This way, when encountering $propName in a fieldArg in a fieldResolver, it can resolve that value
         // Otherwise it can't, since the fieldResolver doesn't have access to either $dbItems
         return array_merge(
             $variables,
-            $messages[self::MESSAGE_EXPRESSIONS][(string)$id] ?? []
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id] ?? []
+        );
+    }
+
+    /**
+     * This function is needed to use in combination with @forEach
+     * and inner nested directives. @forEach works by
+     * setting all entries in the array under distinct fields
+     * (["userPostData.0", "userPostData.1", "userPostData.2", etc]).
+     *
+     * Then, directives can target the value of an expression
+     * to their nested directives, without fear of that value being overriden.
+     *
+     * Eg: in this query, the 1st @applyFunction is exporting the value
+     * of `userLang` as an expression, to be read by the 2nd @applyFunction.
+     * They can communicate passing data across,
+     * because with `getExpressionsForObjectAndField`
+     * they operate on the same expressions set by both ID and field:
+     *
+     * ```graphql
+     *   userPostData: getSelfProp(self: "%{self}%", property: "userData")
+     *     @forEach(affectDirectivesUnderPos: [1, 2])
+     *       @applyFunction(
+     *         name: "extract",
+     *         arguments: {
+     *           object: "%{value}%",
+     *           path: "lang",
+     *         },
+     *         target: "userLang",
+     *         targetType: EXPRESSION
+     *       )
+     *       @applyFunction(
+     *         name: "sprintf",
+     *         arguments: {
+     *           string: "postContent-%s",
+     *           values: ["%{userLang}%"]
+     *         },
+     *         target: "userPostContentKey",
+     *         targetType: EXPRESSION
+     *       )
+     * ```
+     *
+     * If using `getExpressionsForObject` instead, each element in the array
+     * traversed by @forEach would override the value of `userLang`, and so
+     * only the value of the last item in the array will be made available as
+     * `userLang` to ALL entries in the next @applyFunction.
+     *
+     * @return mixed[]
+     */
+    protected function getExpressionsForObjectAndField(int | string $id, string $fieldOutputKey, array $variables, array $messages): array
+    {
+        return array_merge(
+            $this->getExpressionsForObject($id, $variables, $messages),
+            $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey] ?? []
         );
     }
 
     protected function addExpressionForObject(int | string $id, string $key, mixed $value, array &$messages): void
     {
-        $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] = $value;
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] = $value;
     }
 
-    protected function getExpressionForObject(int | string $id, string $key, array &$messages): mixed
+    protected function addExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, mixed $value, array &$messages): void
     {
-        return $messages[self::MESSAGE_EXPRESSIONS][(string)$id][$key] ?? null;
+        $this->addExpressionForObject($id, $key, $value, $messages);
+        $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] = $value;
+    }
+
+    protected function getExpressionForObject(int | string $id, string $key, array $messages): mixed
+    {
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT][(string)$id][$key] ?? null;
+    }
+
+    protected function getExpressionForObjectAndField(int | string $id, string $fieldOutputKey, string $key, array $messages): mixed
+    {
+        return $messages[self::MESSAGE_EXPRESSIONS_FOR_OBJECT_AND_FIELD][(string)$id][$fieldOutputKey][$key] ?? $this->getExpressionForObject($id, $key, $messages);
     }
 
     /**

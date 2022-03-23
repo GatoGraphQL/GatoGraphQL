@@ -208,6 +208,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
             $relationalTypeResolver,
             $field,
             $id,
+            $this->directive
         );
 
         // 3. Add the output in the DB

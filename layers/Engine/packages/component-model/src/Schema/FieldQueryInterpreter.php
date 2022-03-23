@@ -755,7 +755,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $fieldArgs = $this->extractFieldOrDirectiveArgumentsForObject($objectTypeResolver, $object, $fieldArgs, $fieldOutputKey, $variables, $expressions, $separateObjectTypeFieldResolutionFeedbackStore);
         // Cast the values to their appropriate type. If casting fails, the value returns as null
-        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
+        $fieldArgs = $this->castAndValidateFieldArgumentsForObject($objectTypeResolver, $field, $fieldArgs, $separateObjectTypeFieldResolutionFeedbackStore);
         $objectTypeFieldResolutionFeedbackStore->incorporate($separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             $validAndResolvedField = null;
@@ -1524,25 +1524,12 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         if ($this->isFieldArgumentValueAnExpression($fieldArgValue)) {
             // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
             // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
-            $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
-            if (!isset($expressions[$expressionName])) {
-                // If the expression is not set, then show the error under entry "expressionErrors"
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E14,
-                            [
-                                $expressionName,
-                            ]
-                        ),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                    )
-                );
-                return null;
-            }
-            return $expressions[$expressionName];
+            return $this->resolveExpression(
+                $relationalTypeResolver,
+                $fieldArgValue,
+                $expressions,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
         if ($this->isFieldArgumentValueAField($fieldArgValue)) {
             // Execute as field
@@ -1566,6 +1553,35 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
 
         return $fieldArgValue;
+    }
+
+    public function resolveExpression(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        mixed $fieldArgValue,
+        ?array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
+        // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
+        $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
+        if (!isset($expressions[$expressionName])) {
+            // If the expression is not set, then show the error under entry "expressionErrors"
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E14,
+                        [
+                            $expressionName,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $relationalTypeResolver,
+                )
+            );
+            return null;
+        }
+        return $expressions[$expressionName];
     }
 
     protected function collectFieldArgumentValueErrorQualifiedEntriesForSchema(
