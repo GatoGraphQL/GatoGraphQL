@@ -266,6 +266,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                 $array = (array) $value;
                 $arrayItems = $this->getArrayItems(
                     $array,
+                    $object,
                     $id,
                     $field,
                     $relationalTypeResolver,
@@ -276,21 +277,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     $messages,
                     $engineIterationFeedbackStore,
                 );
-                if ($this->addIfDirectiveArgument()) {
-                    $arrayItems = $this->filterIfArrayItems(
-                        $arrayItems,
-                        $object,
-                        $id,
-                        $field,
-                        $relationalTypeResolver,
-                        $objectIDItems,
-                        $previousDBItems,
-                        $dbItems,
-                        $variables,
-                        $messages,
-                        $engineIterationFeedbackStore,
-                    );
-                }
                 if ($arrayItems !== []) {
                     $execute = true;
                     foreach ($arrayItems as $key => &$value) {
@@ -403,6 +389,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
                     $array = (array) $value;
                     $arrayItems = $this->getArrayItems(
                         $array,
+                        $object,
                         $id,
                         $field,
                         $relationalTypeResolver,
@@ -437,6 +424,49 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     }
 
     abstract protected function addIfDirectiveArgument(): bool;
+
+    final protected function getArrayItems(
+        array &$array,
+        object $object,
+        int | string $id,
+        string $field,
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $objectIDItems,
+        array $previousDBItems,
+        array &$dbItems,
+        array &$variables,
+        array &$messages,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): array {
+        $arrayItems = $this->doGetArrayItems(
+            $array,
+            $id,
+            $field,
+            $relationalTypeResolver,
+            $objectIDItems,
+            $previousDBItems,
+            $dbItems,
+            $variables,
+            $messages,
+            $engineIterationFeedbackStore,
+        );
+        if ($this->addIfDirectiveArgument()) {
+            $arrayItems = $this->filterIfArrayItems(
+                $arrayItems,
+                $object,
+                $id,
+                $field,
+                $relationalTypeResolver,
+                $objectIDItems,
+                $previousDBItems,
+                $dbItems,
+                $variables,
+                $messages,
+                $engineIterationFeedbackStore,
+            );
+        }
+        return $arrayItems;
+    }
 
     final protected function filterIfArrayItems(
         array &$array,
@@ -535,7 +565,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
     /**
      * Return the items to iterate on
      */
-    abstract protected function getArrayItems(
+    abstract protected function doGetArrayItems(
         array &$array,
         int | string $id,
         string $field,
