@@ -23,10 +23,12 @@ trait InvokeRelationalTypeResolverDirectiveResolverTrait
         // @todo Also integrate it with "why" in errors:
         // @see https://github.com/graphql/graphql-spec/issues/893
         $disabled = true;
+        /** @phpstan-ignore-next-line */
         if ($disabled) {
             return;
         }
         // If there was an error, add it as nested
+        /** @phpstan-ignore-next-line */
         $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
         if ($errors !== []) {
             $objectTypeFieldResolutionFeedbackStore->setErrors([]);

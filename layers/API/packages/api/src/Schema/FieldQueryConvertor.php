@@ -1021,20 +1021,6 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             );
         }
 
-        // --------------------------------------------------------
-        // Validate correctness of order of elements: ...(...)[...]<...>
-        // (0. field name, 1. field args, 2. bookmarks, 3. skip output if null?, 4. field directives)
-        // --------------------------------------------------------
-        if ($fieldArgsOpeningSymbolPos !== false) {
-            if ($fieldArgsOpeningSymbolPos == 0) {
-                return sprintf(
-                    $this->__('Name is missing in property \'%s\'. %s', 'api'),
-                    $property,
-                    $errorMessageEnd
-                );
-            }
-        }
-
         // After the ")", it must be either the end, "@", "[", "?" or "<"
         $aliasSymbolPos = QueryHelpers::findFieldAliasSymbolPosition($property);
         $skipOutputIfNullSymbolPos = QueryHelpers::findSkipOutputIfNullSymbolPosition($property);
