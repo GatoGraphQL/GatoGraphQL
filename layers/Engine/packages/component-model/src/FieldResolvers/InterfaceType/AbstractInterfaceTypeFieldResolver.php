@@ -8,7 +8,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;

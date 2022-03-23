@@ -26,7 +26,7 @@ use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\GeneralFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectFeedbackStore;
@@ -1543,6 +1543,7 @@ class Engine implements EngineInterface
             // Move the pointer to the first element, and get it
             reset($engineState->relationalTypeOutputDBKeyIDsDataFields);
             $relationalTypeOutputDBKey = key($engineState->relationalTypeOutputDBKeyIDsDataFields);
+            /** @var RelationalTypeResolverInterface */
             $relationalTypeResolver = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['relationalTypeResolver'];
             $ids_data_fields = $engineState->relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'];
 

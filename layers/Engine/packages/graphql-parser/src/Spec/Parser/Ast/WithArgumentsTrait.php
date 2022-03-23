@@ -10,7 +10,7 @@ trait WithArgumentsTrait
     protected array $arguments;
 
     /** @var array<string,mixed>|null */
-    private ?array $keyValueArguments = null;
+    protected ?array $keyValueArguments = null;
 
 
     public function hasArguments(): bool

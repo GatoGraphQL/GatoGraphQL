@@ -84,7 +84,8 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
                     $field,
-                    $id
+                    $id,
+                    $this->directive
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;
@@ -110,7 +111,8 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
                     $separateObjectTypeFieldResolutionFeedbackStore,
                     $targetObjectTypeResolver,
                     $field,
-                    $id
+                    $id,
+                    $this->directive
                 );
                 if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
                     continue;

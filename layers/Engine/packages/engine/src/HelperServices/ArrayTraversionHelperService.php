@@ -29,6 +29,20 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
      */
     public function &getPointerToArrayItemUnderPath(array &$data, string $path): array
     {
+        $dataPointer = $this->getPointerToElementItemUnderPath($data, $path);
+
+        if (!is_array($dataPointer)) {
+            $this->throwItemUnderPathIsNotArrayException($dataPointer, $path);
+        }
+
+        return $dataPointer;
+    }
+
+    /**
+     * @throws RuntimeOperationException If the path cannot be reached under the array
+     */
+    public function &getPointerToElementItemUnderPath(array &$data, string $path): mixed
+    {
         $dataPointer = &$data;
 
         // Iterate the data array to the provided path.
@@ -53,10 +67,6 @@ class ArrayTraversionHelperService implements ArrayTraversionHelperServiceInterf
             // We are accessing a level that doesn't exist
             // If we reached the end of the array and can't keep going down any level more, then it's an error
             $this->throwNoArrayItemUnderPathException($data, $path);
-        }
-
-        if (!is_array($dataPointer)) {
-            $this->throwItemUnderPathIsNotArrayException($dataPointer, $path);
         }
 
         return $dataPointer;

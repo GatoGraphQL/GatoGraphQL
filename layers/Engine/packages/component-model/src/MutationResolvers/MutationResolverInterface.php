@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolvers;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Exception\AbstractException;
 
 interface MutationResolverInterface

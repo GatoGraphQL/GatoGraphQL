@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\UserAccount\FunctionAPIFactory;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\LoginUserByCredentialsMutationResolver as UpstreamLoginUserByCredentialsMutationResolver;
 

@@ -6,7 +6,7 @@ namespace PoP\AccessControl\DirectiveResolvers;
 
 use PoP\AccessControl\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateConditionDirectiveResolver;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveResolver

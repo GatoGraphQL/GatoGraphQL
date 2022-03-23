@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\Feedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ObjectTypeFieldResolutionFeedback extends AbstractQueryFeedback implements ObjectTypeFieldResolutionFeedbackInterface
 {

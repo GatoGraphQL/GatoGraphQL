@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
@@ -44,7 +44,7 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;

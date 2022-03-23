@@ -30,7 +30,7 @@ class FloatScalarTypeResolver extends AbstractScalarTypeResolver
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsNotStdClass($inputValue, $schemaInputValidationFeedbackStore);
+        $this->validateIsNotStdClass($inputValue, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;

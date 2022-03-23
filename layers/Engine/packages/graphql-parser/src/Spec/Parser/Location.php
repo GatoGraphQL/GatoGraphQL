@@ -7,8 +7,8 @@ namespace PoP\GraphQLParser\Spec\Parser;
 class Location
 {
     public function __construct(
-        private int $line,
-        private int $column,
+        protected int $line,
+        protected int $column,
     ) {
     }
 

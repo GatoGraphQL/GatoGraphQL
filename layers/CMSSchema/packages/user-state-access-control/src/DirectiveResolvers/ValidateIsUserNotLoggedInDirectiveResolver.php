@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserStateAccessControl\DirectiveResolvers;
 
 use PoP\ComponentModel\DirectiveResolvers\AbstractValidateCheckpointDirectiveResolver;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 use PoPCMSSchema\UserStateAccessControl\FeedbackItemProviders\FeedbackItemProvider;

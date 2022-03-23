@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Feedback;
+namespace PoP\Root\Feedback;
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\FeedbackItemProviders\FeedbackItemProviderInterface;

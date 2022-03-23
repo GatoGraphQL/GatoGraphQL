@@ -7,9 +7,9 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
 use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
@@ -18,11 +18,12 @@ use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Component as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
+use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\MetaDirective;
 use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\SuggestionFeedbackItemProvider;
-use PoP\GraphQLParser\Query\ClientSymbols;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -41,7 +42,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
 use stdClass;
 
 class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
@@ -204,11 +207,45 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertArgumentValue($value)
     {
-        /**
-         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
-         */
         /** @var GraphQLQueryComponentConfiguration */
         $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        /**
+         * Generate the field AST as composable field `{{ field }}`,
+         * so its value can be computed on runtime.
+         *
+         * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+         */
+        if ($value instanceof ResolvedFieldVariableReference) {
+            $field = $value->getField();
+            $fieldQuery = $field->getName();
+            if ($field->getArguments() !== []) {
+                $fieldQueryArguments = [];
+                foreach ($field->getArguments() as $argument) {
+                    $argumentValue = $this->convertArgumentValue($argument->getValue());
+                    if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
+                        $argumentValue = substr($argumentValue, 2, -2);
+                    } elseif (is_array($argumentValue)) {
+                        $argumentValueItems = [];
+                        foreach ($argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '[' . implode(',', $argumentValueItems) . ']';
+                    } elseif ($argumentValue instanceof stdClass) {
+                        $argumentValueItems = [];
+                        foreach ((array) $argumentValue as $argumentValueKey => $argumentValueValue) {
+                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
+                        }
+                        $argumentValue = '{' . implode(',', $argumentValueItems) . '}';
+                    }
+                    $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
+                }
+                $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
+            }
+            return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
+                . $fieldQuery
+                . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
+        }
+
         if (
             $value instanceof VariableReference &&
             $componentConfiguration->enableVariablesAsExpressions() &&
@@ -219,14 +256,20 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * then replace it with an expression, so its value can be computed on runtime
              */
             return QueryHelpers::getExpressionQuery($value->getName());
-        } elseif ($value instanceof Literal) {
+        }
+
+        if ($value instanceof Literal) {
             if (is_string($value->getValue())) {
                 return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value->getValue());
             }
             return $value->getValue();
-        } elseif ($value instanceof VariableReference || $value instanceof Variable) {
+        }
+
+        if ($value instanceof VariableReference || $value instanceof Variable) {
             return $this->convertArgumentValue($value->getValue());
-        } elseif (is_array($value)) {
+        }
+
+        if (is_array($value)) {
             /**
              * When coming from the InputList, its `getValue` is an array of Variables
              */
@@ -234,28 +277,50 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 [$this, 'convertArgumentValue'],
                 $value
             );
-        } elseif ($value instanceof stdClass) {
+        }
+
+        if ($value instanceof stdClass) {
             return (object) array_map(
                 [$this, 'convertArgumentValue'],
                 (array) $value
             );
-        } elseif ($value instanceof InputList) {
-            return array_map(
-                [$this, 'convertArgumentValue'],
-                $value->getValue()
-            );
-        } elseif ($value instanceof InputObject) {
-            // Convert from array back to stdClass
-            return (object) array_map(
-                [$this, 'convertArgumentValue'],
-                // Convert from stdClass to array
-                (array) $value->getValue()
-            );
         }
+
+        /**
+         * If the value is of type InputList, then resolve the array with its variables (under `getValue`)
+         */
+        if ($value instanceof InputList) {
+            $array = [];
+            foreach ($value->getAstValue() as $key => $value) {
+                $array[$key] = $this->convertArgumentValue($value);
+            }
+            return $array;
+            // return array_map(
+            //     [$this, 'convertArgumentValue'],
+            //     $value->getValue()
+            // );
+        }
+
+        if ($value instanceof InputObject) {
+            // Copied from `InputObject->getValue`
+            $object = new stdClass();
+            foreach ((array) $value->getAstValue() as $key => $value) {
+                $object->$key = $this->convertArgumentValue($value);
+            }
+            return $object;
+            // // Convert from array back to stdClass
+            // return (object) array_map(
+            //     [$this, 'convertArgumentValue'],
+            //     // Convert from stdClass to array
+            //     (array) $value->getValue()
+            // );
+        }
+
         // Otherwise it may be a scalar value
         if (is_string($value)) {
             return $this->maybeWrapStringInQuotesToAvoidExecutingAsAField($value);
         }
+
         return $value;
     }
 
@@ -490,7 +555,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                             SuggestionFeedbackItemProvider::class,
                             SuggestionFeedbackItemProvider::S1,
                             [
-                                ClientSymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
+                                GraphQLParserQuerySymbols::GRAPHIQL_QUERY_BATCHING_OPERATION_NAME,
                             ]
                         ),
                         LocationHelper::getNonSpecificLocation()

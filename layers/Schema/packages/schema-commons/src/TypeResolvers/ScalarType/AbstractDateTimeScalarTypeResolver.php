@@ -6,7 +6,7 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
 use DateTimeInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AbstractScalarTypeResolver;
@@ -35,7 +35,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
         $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
-        $this->validateIsString($inputValue, $schemaInputValidationFeedbackStore);
+        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
         $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
         if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
             return null;

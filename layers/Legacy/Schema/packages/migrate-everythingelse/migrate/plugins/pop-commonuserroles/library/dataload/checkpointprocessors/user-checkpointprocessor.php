@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\CheckpointProcessors\AbstractCheckpointProcessor;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class GD_URE_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {

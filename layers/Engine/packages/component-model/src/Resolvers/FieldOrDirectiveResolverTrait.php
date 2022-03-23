@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Resolvers;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\Schema\FieldQueryUtils;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
@@ -40,6 +40,8 @@ trait FieldOrDirectiveResolverTrait
                     ErrorFeedbackItemProvider::E24,
                     [
                         $missing[0],
+                        $type,
+                        $fieldOrDirectiveName
                     ]
                 )
                 : new FeedbackItemResolution(
@@ -47,6 +49,8 @@ trait FieldOrDirectiveResolverTrait
                     ErrorFeedbackItemProvider::E25,
                     [
                         implode($this->getTranslationAPI()->__('\', \''), $missing),
+                        $type,
+                        $fieldOrDirectiveName
                     ]
                 );
         }

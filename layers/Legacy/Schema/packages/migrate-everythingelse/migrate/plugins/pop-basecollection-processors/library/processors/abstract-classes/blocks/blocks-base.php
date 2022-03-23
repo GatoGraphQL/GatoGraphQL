@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_BasicBlocksBase

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class PoP_Module_Processor_CheckpointMessageInnersBase extends PoP_Module_Processor_FeedbackMessageInnersBase /*PoP_Module_Processor_StructureInnersBase*/

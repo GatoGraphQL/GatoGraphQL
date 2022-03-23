@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -32,11 +32,11 @@ use stdClass;
 class Parser extends Tokenizer implements ParserInterface
 {
     /** @var OperationInterface[] */
-    private array $operations = [];
+    protected array $operations = [];
     /** @var Fragment[] */
-    private array $fragments = [];
+    protected array $fragments = [];
     /** @var Variable[] */
-    private array $variables = [];
+    protected array $variables = [];
 
     public function parse(string $source): Document
     {

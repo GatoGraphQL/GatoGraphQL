@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\LooseContracts\Facades\NameResolverFacade;

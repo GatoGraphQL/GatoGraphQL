@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 
 interface QueryAugmenterServiceInterface
@@ -18,4 +19,18 @@ interface QueryAugmenterServiceInterface
      * @return OperationInterface[]|null
      */
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array;
+
+    /**
+     * If referencing a variable that starts with "_", and the variable
+     * has not been defined in the operation, then it's a dynamic variable
+     */
+    public function isDynamicVariableReference(
+        string $name,
+        ?Variable $variable,
+    ): bool;
+
+    /**
+     * Actual name of the dynamic variable (without the leading "_")
+     */
+    public function extractDynamicVariableName(string $name): string;
 }
