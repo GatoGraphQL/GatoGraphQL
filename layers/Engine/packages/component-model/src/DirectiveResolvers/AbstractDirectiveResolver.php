@@ -481,7 +481,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
      * They can communicate passing data across,
      * because with `getExpressionsForObjectAndField`
      * they operate on the same expressions set by both ID and field:
-     * 
+     *
      * ```graphql
      *   userPostData: getSelfProp(self: "%{self}%", property: "userData")
      *     @forEach(affectDirectivesUnderPos: [1, 2])
