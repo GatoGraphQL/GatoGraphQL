@@ -181,6 +181,7 @@ class QueryHelpers
     {
         /**
          * Switched from "%{...}%" to "$__..."
+         * @todo Convert expressions from "$__" to "$"
          */
         // return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
         return '$__' . $expressionName;

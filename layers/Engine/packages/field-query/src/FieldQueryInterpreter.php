@@ -256,6 +256,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     {
         /**
          * Switched from "%{...}%" to "$__..."
+         * @todo Convert expressions from "$__" to "$"
          */
         // // If it starts with "%{" and ends with "}%", it is an expression
         // return

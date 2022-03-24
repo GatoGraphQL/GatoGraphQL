@@ -1565,6 +1565,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
 
         /**
          * Switched from "%{...}%" to "$__..."
+         * @todo Convert expressions from "$__" to "$"
          */
         // // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
         // $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));

@@ -25,6 +25,7 @@ class QuerySyntax
     const SYMBOL_FRAGMENT_PREFIX = '--';
     /**
      * Switched from "%{...}%" to "$__..."
+     * @todo Convert expressions from "$__" to "$"
      */
     // const SYMBOL_EXPRESSION_OPENING = '%{';
     // const SYMBOL_EXPRESSION_CLOSING = '}%';
