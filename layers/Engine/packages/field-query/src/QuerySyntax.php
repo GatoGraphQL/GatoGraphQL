@@ -24,7 +24,7 @@ class QuerySyntax
     const SYMBOL_VARIABLE_PREFIX = '$';
     const SYMBOL_FRAGMENT_PREFIX = '--';
     /**
-     * Switched from "%{...}%" to "$_..."
+     * Switched from "%{...}%" to "$__..."
      */
     // const SYMBOL_EXPRESSION_OPENING = '%{';
     // const SYMBOL_EXPRESSION_CLOSING = '}%';

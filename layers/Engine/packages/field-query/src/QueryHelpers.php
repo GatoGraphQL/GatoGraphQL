@@ -180,10 +180,10 @@ class QueryHelpers
     public static function getExpressionQuery(string $expressionName): string
     {
         /**
-         * Switched from "%{...}%" to "$_..."
+         * Switched from "%{...}%" to "$__..."
          */
         // return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
-        return '$_' . $expressionName;
+        return '$__' . $expressionName;
     }
 
     /**

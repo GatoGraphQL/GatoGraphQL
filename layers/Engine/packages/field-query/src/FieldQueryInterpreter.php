@@ -255,7 +255,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     public function isFieldArgumentValueAnExpression(mixed $fieldArgValue): bool
     {
         /**
-         * Switched from "%{...}%" to "$_..."
+         * Switched from "%{...}%" to "$__..."
          */
         // // If it starts with "%{" and ends with "}%", it is an expression
         // return
@@ -271,7 +271,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         //     ) == QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
 
         // If it starts with "$_", it is a dynamic variable
-        return is_string($fieldArgValue) && str_starts_with($fieldArgValue, '$_');
+        return is_string($fieldArgValue) && str_starts_with($fieldArgValue, '$__');
     }
 
     public function isFieldArgumentValueAVariable(mixed $fieldArgValue): bool
@@ -283,7 +283,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $fieldArgValue,
                 0,
                 strlen(QuerySyntax::SYMBOL_VARIABLE_PREFIX)
-            ) == QuerySyntax::SYMBOL_VARIABLE_PREFIX;
+            ) == QuerySyntax::SYMBOL_VARIABLE_PREFIX
+            && !$this->$this->isFieldArgumentValueAnExpression($fieldArgValue);
     }
 
     public function isFieldArgumentValueDynamic(mixed $fieldArgValue): bool
