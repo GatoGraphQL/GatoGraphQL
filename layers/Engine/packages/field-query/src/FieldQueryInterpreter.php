@@ -285,6 +285,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 0,
                 strlen(QuerySyntax::SYMBOL_VARIABLE_PREFIX)
             ) == QuerySyntax::SYMBOL_VARIABLE_PREFIX
+            // If it starts with "$__", it is an expression, not a variable
             && !$this->$this->isFieldArgumentValueAnExpression($fieldArgValue);
     }
 
