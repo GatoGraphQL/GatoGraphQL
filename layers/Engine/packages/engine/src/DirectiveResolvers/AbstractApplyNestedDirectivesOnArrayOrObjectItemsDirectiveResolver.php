@@ -423,7 +423,10 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         }
     }
 
-    abstract protected function addIfDirectiveArgument(): bool;
+    protected function addIfDirectiveArgument(): bool
+    {
+        return true;
+    }
 
     final protected function getArrayItems(
         array &$array,
