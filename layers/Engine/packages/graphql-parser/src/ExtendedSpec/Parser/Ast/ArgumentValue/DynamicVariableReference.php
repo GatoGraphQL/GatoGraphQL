@@ -32,6 +32,19 @@ class DynamicVariableReference extends AbstractDynamicVariableReference
      */
     public function getValue(): mixed
     {
+        /**
+         * @todo Remove this temporary hack to support expressions (until the engine is migrated to AST).
+         *
+         * This temporary logic returns value "$__expressionName",
+         * to be processed as an expression on runtime.
+         *
+         * Switched from "%{...}%" to "$__..."
+         * @todo Convert expressions from "$__" to "$"
+         */
+        if (str_starts_with($this->name, '__')) {
+            return '$' . $this->name;
+        }
+
         if ($this->context === null) {
             throw new InvalidRequestException(
                 new FeedbackItemResolution(

@@ -1512,16 +1512,16 @@ class IntrospectionQueryGraphQLServerTest extends AbstractGraphQLServerTestCase
                                 "enumValues" => null,
                                 "possibleTypes" => null
                             ],
-                            [
-                                "description" => "Custom scalar representing a JSON Object of unrestricted shape",
-                                "enumValues" => null,
-                                "fields" => null,
-                                "inputFields" => null,
-                                "interfaces" => null,
-                                "kind" => "SCALAR",
-                                "name" => "JSONObject",
-                                "possibleTypes" => null
-                            ],
+                            // [
+                            //     "description" => "Custom scalar representing a JSON Object of unrestricted shape",
+                            //     "enumValues" => null,
+                            //     "fields" => null,
+                            //     "inputFields" => null,
+                            //     "interfaces" => null,
+                            //     "kind" => "SCALAR",
+                            //     "name" => "JSONObject",
+                            //     "possibleTypes" => null
+                            // ],
                             [
                                 "kind" => "SCALAR",
                                 "name" => "String",

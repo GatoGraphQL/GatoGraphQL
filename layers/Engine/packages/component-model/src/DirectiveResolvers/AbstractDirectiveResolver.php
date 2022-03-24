@@ -1279,4 +1279,39 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             SchemaDefinition::DIRECTIVE_NEEDS_DATA_TO_EXECUTE => $this->needsIDsDataFieldsToExecute(),
         ];
     }
+
+    protected function maybeNestDirectiveFeedback(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        // @todo Display the nested errors in the output, currently they are not!
+        // @todo Also integrate it with "why" in errors:
+        // @see https://github.com/graphql/graphql-spec/issues/893
+        $disabled = true;
+        /** @phpstan-ignore-next-line */
+        if ($disabled) {
+            return;
+        }
+        // If there was an error, add it as nested
+        /** @phpstan-ignore-next-line */
+        $errors = $objectTypeFieldResolutionFeedbackStore->getErrors();
+        if ($errors !== []) {
+            $objectTypeFieldResolutionFeedbackStore->setErrors([]);
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        ErrorFeedbackItemProvider::class,
+                        ErrorFeedbackItemProvider::E5,
+                        [
+                            $this->directive,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation(),
+                    $relationalTypeResolver,
+                    [],
+                    $errors
+                )
+            );
+        }
+    }
 }
