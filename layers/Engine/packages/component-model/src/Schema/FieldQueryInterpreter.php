@@ -1562,8 +1562,13 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         // Expressions: allow to pass a field argument "key:%input%", which is passed when executing the directive through $expressions
-        // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
-        $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
+
+        /**
+         * Switched from "%{...}%" to "$_..."
+         */
+        // // Trim it so that "%{ self }%" is equivalent to "%{self}%". This is needed to set expressions through Symfony's DependencyInjection component (since %...% is reserved for its own parameters!)
+        // $expressionName = trim(substr($fieldArgValue, strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING), strlen($fieldArgValue) - strlen(QuerySyntax::SYMBOL_EXPRESSION_OPENING) - strlen(QuerySyntax::SYMBOL_EXPRESSION_CLOSING)));
+        $expressionName = substr($fieldArgValue, 2);
         if (!isset($expressions[$expressionName])) {
             // If the expression is not set, then show the error under entry "expressionErrors"
             $objectTypeFieldResolutionFeedbackStore->addError(
