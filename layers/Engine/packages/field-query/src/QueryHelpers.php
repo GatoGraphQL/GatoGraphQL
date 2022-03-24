@@ -179,7 +179,12 @@ class QueryHelpers
 
     public static function getExpressionQuery(string $expressionName): string
     {
-        return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
+        /**
+         * Switched from "%{...}%" to "$__..."
+         * @todo Convert expressions from "$__" to "$"
+         */
+        // return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
+        return '$__' . $expressionName;
     }
 
     /**
