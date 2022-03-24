@@ -22,19 +22,6 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function enablePassingExpressionsByArgInNestedDirectives(): bool
-    {
-        $envVariable = Environment::ENABLE_PASSING_EXPRESSIONS_BY_ARG_IN_NESTED_DIRECTIVES;
-        $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     public function enableQueryingAppStateFields(): bool
     {
         $envVariable = Environment::ENABLE_QUERYING_APP_STATE_FIELDS;
