@@ -202,7 +202,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
      */
     public function treatVariableAsExpression(string $variableName): bool
     {
-        return substr($variableName, 0, strlen(QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX)) == QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX;
+        return
+            substr($variableName, 0, strlen(QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX)) == QuerySymbols::VARIABLE_AS_EXPRESSION_NAME_PREFIX
+            /**
+             * Switched from "%{...}%" to "$__..."
+             * @todo Convert expressions from "$__" to "$"
+             */
+            && !str_starts_with($variableName, '__');
     }
 
     protected function convertArgumentValue($value)
