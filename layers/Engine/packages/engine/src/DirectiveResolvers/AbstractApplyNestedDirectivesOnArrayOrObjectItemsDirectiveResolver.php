@@ -67,7 +67,12 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
 
     public function getDirectiveArgNameTypeResolvers(RelationalTypeResolverInterface $relationalTypeResolver): array
     {
-        $directiveArgNameTypeResolvers = parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver);
+        $directiveArgNameTypeResolvers = array_merge(
+            parent::getDirectiveArgNameTypeResolvers($relationalTypeResolver),
+            $this->addIfDirectiveArgument() ? [
+                'if' => $this->getBooleanScalarTypeResolver(),
+            ] : []
+        );
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if (!$componentConfiguration->enablePassingExpressionsByArgInNestedDirectives()) {
@@ -75,9 +80,6 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsDirectiveResolve
         }
         return array_merge(
             $directiveArgNameTypeResolvers,
-            $this->addIfDirectiveArgument() ? [
-                'if' => $this->getBooleanScalarTypeResolver(),
-            ] : [],
             [
                 'addExpressions' => $this->getJSONObjectScalarTypeResolver(),
                 'appendExpressions' => $this->getJSONObjectScalarTypeResolver(),
