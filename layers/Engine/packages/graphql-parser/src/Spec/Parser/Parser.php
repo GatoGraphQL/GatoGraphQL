@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -27,6 +27,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 class Parser extends Tokenizer implements ParserInterface
@@ -540,7 +541,7 @@ class Parser extends Tokenizer implements ParserInterface
     /**
      * @throws SyntaxErrorException
      */
-    protected function parseValue(): array|InputList|InputObject|Literal|VariableReference
+    protected function parseValue(): array|InputList|InputObject|Literal|Enum|VariableReference
     {
         switch ($this->lookAhead->getType()) {
             case Token::TYPE_LSQUARE_BRACE:
@@ -554,13 +555,15 @@ class Parser extends Tokenizer implements ParserInterface
 
             case Token::TYPE_NUMBER:
             case Token::TYPE_STRING:
-            case Token::TYPE_IDENTIFIER:
             case Token::TYPE_NULL:
             case Token::TYPE_TRUE:
             case Token::TYPE_FALSE:
                 $token = $this->lex();
-
                 return $this->createLiteral($token->getData(), $this->getTokenLocation($token));
+
+            case Token::TYPE_IDENTIFIER:
+                $token = $this->lex();
+                return $this->createEnum($token->getData(), $this->getTokenLocation($token));
         }
 
         throw $this->createUnexpectedException($this->lookAhead);
@@ -571,6 +574,13 @@ class Parser extends Tokenizer implements ParserInterface
         Location $location
     ): Literal {
         return new Literal($value, $location);
+    }
+
+    public function createEnum(
+        string $enumValue,
+        Location $location
+    ): Enum {
+        return new Enum($enumValue, $location);
     }
 
     protected function parseList(bool $createType): InputList|array

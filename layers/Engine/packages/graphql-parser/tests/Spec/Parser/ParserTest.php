@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLParserErrorFeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -26,6 +26,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 class ParserTest extends AbstractTestCase
@@ -721,7 +722,7 @@ GRAPHQL;
                     [
                         new QueryOperation('CheckTypeOfLuke', [], [], [
                             new RelationalField('hero', null, [
-                                new Argument('episode', new Literal('EMPIRE', new Location(2, 33)), new Location(2, 24)),
+                                new Argument('episode', new Enum('EMPIRE', new Location(2, 33)), new Location(2, 24)),
                             ], [
                                 new LeafField('__typename', null, [], [], new Location(3, 21)),
                                 new LeafField('name', null, [], [], new Location(4, 21)),
@@ -729,8 +730,7 @@ GRAPHQL;
                         ], new Location(1, 7))
                     ]
                 ),
-                // @todo Fix: it should be `EMPIRE`, not `"EMPIRE"`, but ENUM is currently not mapped in the AST!
-                'query CheckTypeOfLuke { hero(episode: "EMPIRE") { __typename name } }',
+                'query CheckTypeOfLuke { hero(episode: EMPIRE) { __typename name } }',
             ],
             [
                 '{ test { __typename, id } }',

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class Variable extends AbstractAst implements WithValueInterface
@@ -23,7 +24,7 @@ class Variable extends AbstractAst implements WithValueInterface
 
     protected bool $hasDefaultValue = false;
 
-    protected InputList|InputObject|Literal|null $defaultValue = null;
+    protected InputList|InputObject|Literal|Enum|null $defaultValue = null;
 
     public function __construct(
         protected string $name,
@@ -106,12 +107,12 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->hasDefaultValue;
     }
 
-    public function getDefaultValue(): InputList|InputObject|Literal|null
+    public function getDefaultValue(): InputList|InputObject|Literal|Enum|null
     {
         return $this->defaultValue;
     }
 
-    public function setDefaultValue(InputList|InputObject|Literal|null $defaultValue): void
+    public function setDefaultValue(InputList|InputObject|Literal|Enum|null $defaultValue): void
     {
         $this->hasDefaultValue = true;
         $this->defaultValue = $defaultValue;
@@ -130,7 +131,7 @@ class Variable extends AbstractAst implements WithValueInterface
     /**
      * Get the value from the context or from the variable
      *
-     * @return InputList|InputObject|Literal|null
+     * @return InputList|InputObject|Literal|Enum|null
      * @throws InvalidRequestException
      */
     public function getValue(): mixed
