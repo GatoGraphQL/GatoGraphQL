@@ -59,7 +59,7 @@ class GraphQLQueryStringFormatter implements GraphQLQueryStringFormatterInterfac
             return $literal ? 'true' : 'false';
         }
         if (is_numeric($literal)) {
-            return $literal;
+            return (string)$literal;
         }
         // String, wrap between quotes
         return sprintf('"%s"', $literal);
