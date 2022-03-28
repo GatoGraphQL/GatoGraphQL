@@ -21,6 +21,43 @@ class InputList extends AbstractAst implements WithValueInterface, WithAstValueI
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return $this->getListAsQueryString($this->list);
+    }
+
+    /**
+     * @param mixed[] $list
+     */
+    protected function getListAsQueryString(array $list): string
+    {
+        $listStrElems = [];
+        foreach ($list as $elem) {
+            if (is_array($elem)) {
+                $listStrElems[] = $this->getListAsQueryString($elem);
+                continue;
+            }
+            if ($elem === null) {
+                $listStrElems[] = 'null';
+                continue;
+            }
+            if (is_bool($elem)) {
+                $listStrElems[] = $elem ? 'true' : 'false';
+                continue;
+            }
+            if (is_numeric($elem)) {
+                $listStrElems[] = $elem;
+                continue;
+            }
+            // String, wrap between quotes
+            $listStrElems[] = sprintf('"%s"', $elem);
+        }
+        return sprintf(
+            '[%s]',
+            implode(',', $listStrElems)
+        );
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,
