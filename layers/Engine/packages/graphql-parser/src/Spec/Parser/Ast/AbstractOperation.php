@@ -41,7 +41,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 implode(', ', $strVariables)
             );
         }
-        
+
         // Generate the string for directives
         $strOperationDirectives = '';
         if ($this->directives !== []) {
@@ -54,7 +54,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 implode(' ', $strDirectives)
             );
         }
-        
+
         // Generate the string for the body of the operation
         $strOperationFieldsOrFragmentBonds = '';
         if ($this->fieldsOrFragmentBonds !== []) {

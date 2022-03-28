@@ -58,7 +58,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
                 implode(' ', $strDirectives)
             );
         }
-        
+
         // Generate the string for the body of the operation
         $strFieldFieldsOrFragmentBonds = '';
         if ($this->fieldsOrFragmentBonds !== []) {

@@ -23,7 +23,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     {
         return $this->graphQLQueryStringFormatter ??= InstanceManagerFacade::getInstance()->getInstance(GraphQLQueryStringFormatterInterface::class);
     }
- 
+
     public function __construct(protected Location $location)
     {
     }

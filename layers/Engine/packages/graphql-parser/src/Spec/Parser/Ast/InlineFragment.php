@@ -40,7 +40,7 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
                 implode(' ', $strDirectives)
             );
         }
-        
+
         // Generate the string for the body of the fragment
         $strInlineFragmentFieldsOrFragmentBonds = '';
         if ($this->fieldsOrFragmentBonds !== []) {

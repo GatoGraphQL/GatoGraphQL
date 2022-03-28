@@ -41,7 +41,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
                 implode(' ', $strDirectives)
             );
         }
-        
+
         // Generate the string for the body of the fragment
         $strFragmentFieldsOrFragmentBonds = '';
         if ($this->fieldsOrFragmentBonds !== []) {
