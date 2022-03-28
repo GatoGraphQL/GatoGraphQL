@@ -468,13 +468,19 @@ GRAPHQL;
     /**
      * @dataProvider mutationProvider
      */
-    public function testMutations(string $query, Document $document): void
-    {
+    public function testMutations(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
         $parser = $this->getParser();
 
+        // 1st test: Parsing is right
         $parsedDocument = $parser->parse($query);
-
         $this->assertEquals($parsedDocument, $document);
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals($documentAsStr, $document->asDocumentString());
     }
 
     public function mutationProvider()
@@ -509,7 +515,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                // 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
+                'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
             ],
             [
                 '{ query { alias: name } }',
@@ -520,6 +526,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { query { alias: name } }',
             ],
             [
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
@@ -548,6 +555,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'mutation { createUser(email: "test@test.com", active: true) { id } }',
             ],
             [
                 'mutation { test : createUser (id: 4) }',
@@ -572,6 +580,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'mutation { test : createUser (id: 4) }',
             ],
         ];
     }
