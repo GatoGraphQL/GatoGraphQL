@@ -596,12 +596,20 @@ GRAPHQL;
     public function testParser(
         string $query,
         Document $document,
+        string $documentAsStr
     ): void {
         $parser = $this->getParser();
 
+        // 1st test: Parsing is right
         $this->assertEquals(
             $document,
             $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
         );
     }
 
@@ -628,6 +636,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { film(id: 1, filmID: 2) { title } }',
             ],
             [
                 '{ test (id: -5) { id } } ',
@@ -642,6 +651,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { test(id: -5) { id } }',
             ],
             [
                 "{ test (id: -5) \r\n { id } } ",
@@ -656,6 +666,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                "query { test(id: -5) { id } }",
             ],
             [
                 'query CheckTypeOfLuke {
@@ -676,6 +687,7 @@ GRAPHQL;
                         ], new Location(1, 7))
                     ]
                 ),
+                'query CheckTypeOfLuke { hero(episode: EMPIRE) { __typename name } }',
             ],
             [
                 '{ test { __typename, id } }',
@@ -689,6 +701,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { test { __typename id } }',
             ],
             [
                 '{}',
@@ -697,6 +710,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 1))
                     ]
                 ),
+                'query { }',
             ],
             [
                 'query test {}',
@@ -705,6 +719,7 @@ GRAPHQL;
                         new QueryOperation('test', [], [], [], new Location(1, 7))
                     ]
                 ),
+                'query test { }',
             ],
             [
                 'query {}',
@@ -713,6 +728,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 7))
                     ]
                 ),
+                'query { }',
             ],
             [
                 'mutation setName { setUserName }',
@@ -723,6 +739,7 @@ GRAPHQL;
                         ], new Location(1, 10))
                     ]
                 ),
+                'mutation setName { setUserName }',
             ],
             [
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
@@ -740,6 +757,9 @@ GRAPHQL;
                         ], new Location(1, 43)),
                     ]
                 ),
+                'query { test { ...userDataFragment } }
+                
+                fragment userDataFragment on User { id, name, email }',
             ],
             [
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
@@ -764,6 +784,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { user(id: 10, name: "max", float: 123.123) { id, name } }',
             ],
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
@@ -785,6 +806,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { allUsers: users(id: [1, 2, 3]) { id } }',
             ],
             [
                 '{ allUsers : users ( id: [ 1, 1.5, "2", true, null] ) { id } }',
@@ -812,6 +834,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query { allUsers: users( id: [1, 1.5, "2", true, null]) { id } }',
             ],
             [
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
@@ -841,6 +864,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { allUsers: users(object: {"a": 123, "d": "asd", "b": [1, 2, 4 ], "c": {"a" : 123, "b":  "asd"} }) { id } }',
             ],
             [
                 '{ films(filter: {title: "unrequested", director: "steven", attrs: { stars: 5 } } ) { title } }',
@@ -855,6 +879,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5} } ) { title } }',
             ],
         ];
     }
