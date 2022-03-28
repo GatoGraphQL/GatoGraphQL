@@ -71,6 +71,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return 'thumb';
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $thumb = $this->getThumbField($module, $props);

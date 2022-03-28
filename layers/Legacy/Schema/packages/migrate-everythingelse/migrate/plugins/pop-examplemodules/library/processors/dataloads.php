@@ -131,6 +131,11 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $data_fields = array(

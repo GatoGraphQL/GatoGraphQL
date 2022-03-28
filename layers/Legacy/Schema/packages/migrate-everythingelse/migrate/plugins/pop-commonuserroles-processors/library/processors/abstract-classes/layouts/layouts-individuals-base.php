@@ -8,6 +8,11 @@ abstract class GD_URE_Custom_Module_Processor_ProfileIndividualLayoutsBase exten
         return [PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS];
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('individualInterestsByName');

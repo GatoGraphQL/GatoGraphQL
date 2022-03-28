@@ -92,6 +92,11 @@ abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataMo
     //     return false;
     // }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);

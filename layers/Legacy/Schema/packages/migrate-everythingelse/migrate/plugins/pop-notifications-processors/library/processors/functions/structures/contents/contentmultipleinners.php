@@ -56,6 +56,11 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);

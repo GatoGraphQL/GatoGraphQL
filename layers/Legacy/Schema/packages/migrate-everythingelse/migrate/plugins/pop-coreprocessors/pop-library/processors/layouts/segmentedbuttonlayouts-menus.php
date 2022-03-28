@@ -27,6 +27,11 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         switch ($module[1]) {

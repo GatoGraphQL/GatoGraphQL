@@ -13,6 +13,11 @@ abstract class PoP_Module_Processor_UserViewComponentHeadersBase extends PoPEngi
         return GD_AVATAR_SIZE_40;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $data_fields = array('id', 'displayName');

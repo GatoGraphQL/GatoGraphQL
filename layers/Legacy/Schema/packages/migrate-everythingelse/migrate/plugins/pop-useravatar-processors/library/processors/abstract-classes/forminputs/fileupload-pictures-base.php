@@ -92,6 +92,11 @@ abstract class PoP_Module_Processor_FileUploadPicturesBase extends PoPEngine_Que
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array(

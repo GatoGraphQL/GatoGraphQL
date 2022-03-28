@@ -22,6 +22,11 @@ abstract class PoP_Module_Processor_ContentLayoutsBase extends PoPEngine_QueryDa
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array_merge(

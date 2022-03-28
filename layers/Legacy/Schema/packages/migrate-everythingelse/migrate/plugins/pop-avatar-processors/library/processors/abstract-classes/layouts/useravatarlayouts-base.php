@@ -13,6 +13,11 @@ abstract class PoP_Module_Processor_UserAvatarLayoutsBase extends PoPEngine_Quer
         return 'url';
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $avatar_size = $this->getAvatarSize($module);

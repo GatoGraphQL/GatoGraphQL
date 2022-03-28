@@ -7,6 +7,11 @@ abstract class PoP_Module_Processor_IndentMenuLayoutsBase extends PoPEngine_Quer
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_INDENT];
     }
 
+    /**
+     * @todo Migrate from string to LeafField
+     *
+     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('id', 'itemDataEntries(flat:true)@itemDataEntries');
