@@ -123,7 +123,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getSubmodules(array $module): array
     {
-        return array();
+        return [];
     }
 
     final public function getAllSubmodules(array $module): array
@@ -296,12 +296,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getRequestPropsForDescendantModules(array $module, array &$props): array
     {
-        return array();
+        return [];
     }
 
     public function getRequestPropsForDescendantDatasetmodules(array $module, array &$props): array
     {
-        return array();
+        return [];
     }
 
     public function initRequestProps(array $module, array &$props): void
@@ -357,7 +357,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // This function is used to get the path to the current module, or to a module path
         // It is not used for getting the path to a single module which is not the current one (since we do not know its path)
         if (!$props) {
-            return array();
+            return [];
         }
 
         // From the root of the $props we obtain the current module
@@ -490,7 +490,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     protected function getPropGroup(string $group, array $module, array &$props, array $starting_from_modulepath = array()): array
     {
         if (!$props) {
-            return array();
+            return [];
         }
 
         $module_props = &$props;
@@ -689,7 +689,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getObjectIDOrIDs(array $module, array &$props, &$data_properties): string | int | array | null
     {
-        return array();
+        return [];
     }
 
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
@@ -722,22 +722,22 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
      */
     public function getDataFields(array $module, array &$props): array
     {
-        return array();
+        return [];
     }
 
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        return array();
+        return [];
     }
 
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
-        return array();
+        return [];
     }
 
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
     {
-        return array();
+        return [];
     }
 
     //-------------------------------------------------
@@ -1002,7 +1002,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getDataFeedback(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        return array();
+        return [];
     }
 
     public function getDataFeedbackInterreferencedModulepath(array $module, array &$props): ?array
@@ -1021,7 +1021,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getBackgroundurls(array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        return array();
+        return [];
     }
 
     //-------------------------------------------------
@@ -1227,7 +1227,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getModelSupplementaryDBObjectData(array $module, array &$props): array
     {
-        return array();
+        return [];
     }
 
     //-------------------------------------------------
@@ -1241,7 +1241,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array
     {
-        return array();
+        return [];
     }
 
     private function getSubmodulesByGroup(array $module, $components = array()): array
