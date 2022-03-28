@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-abstract class AbstractAst implements LocatableInterface
+abstract class AbstractAst implements AstInterface, LocatableInterface
 {
     public function __construct(protected Location $location)
     {
@@ -20,5 +20,10 @@ abstract class AbstractAst implements LocatableInterface
     public function setLocation(Location $location): void
     {
         $this->location = $location;
+    }
+
+    public function __toString(): string
+    {
+        return $this->asQueryString();
     }
 }
