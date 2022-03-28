@@ -468,13 +468,13 @@ GRAPHQL;
     /**
      * @dataProvider mutationProvider
      */
-    public function testMutations($query, $structure)
+    public function testMutations(string $query, Document $document): void
     {
         $parser = $this->getParser();
 
-        $document = $parser->parse($query);
+        $parsedDocument = $parser->parse($query);
 
-        $this->assertEquals($document, $structure);
+        $this->assertEquals($parsedDocument, $document);
     }
 
     public function mutationProvider()
@@ -509,6 +509,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                // 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
             ],
             [
                 '{ query { alias: name } }',
