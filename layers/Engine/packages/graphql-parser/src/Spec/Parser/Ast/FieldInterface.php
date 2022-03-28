@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-interface FieldInterface extends LocatableInterface, WithDirectivesInterface
+interface FieldInterface extends AstInterface, LocatableInterface, WithDirectivesInterface
 {
     public function getName(): string;
 
