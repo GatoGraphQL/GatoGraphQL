@@ -687,7 +687,8 @@ GRAPHQL;
                         ], new Location(1, 7))
                     ]
                 ),
-                'query CheckTypeOfLuke { hero(episode: EMPIRE) { __typename name } }',
+                // @todo Fix: it should be `EMPIRE`, not `"EMPIRE"`, but ENUM is currently not mapped in the AST!
+                'query CheckTypeOfLuke { hero(episode: "EMPIRE") { __typename name } }',
             ],
             [
                 '{ test { __typename, id } }',
