@@ -476,11 +476,16 @@ GRAPHQL;
         $parser = $this->getParser();
 
         // 1st test: Parsing is right
-        $parsedDocument = $parser->parse($query);
-        $this->assertEquals($parsedDocument, $document);
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
 
         // 2nd test: Converting document back to query string is right
-        $this->assertEquals($documentAsStr, $document->asDocumentString());
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function mutationProvider()
@@ -515,7 +520,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
+                'query ($variable: Int) { query(teas: $variable) { alias: name } }',
             ],
             [
                 '{ query { alias: name } }',
@@ -580,7 +585,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                'mutation { test : createUser (id: 4) }',
+                'mutation { test: createUser(id: 4) }',
             ],
         ];
     }
