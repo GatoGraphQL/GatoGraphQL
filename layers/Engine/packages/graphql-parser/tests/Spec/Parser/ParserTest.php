@@ -757,9 +757,11 @@ GRAPHQL;
                         ], new Location(1, 43)),
                     ]
                 ),
-                'query { test { ...userDataFragment } }
+                <<<GRAPHQL
+                query { test { ...userDataFragment } }
                 
-                fragment userDataFragment on User { id, name, email }',
+                fragment userDataFragment on User { id name email }
+                GRAPHQL,
             ],
             [
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
@@ -784,7 +786,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
-                'query { user(id: 10, name: "max", float: 123.123) { id, name } }',
+                'query { user(id: 10, name: "max", float: 123.123) { id name } }',
             ],
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
@@ -834,7 +836,7 @@ GRAPHQL;
                         )
                     ]
                 ),
-                'query { allUsers: users( id: [1, 1.5, "2", true, null]) { id } }',
+                'query { allUsers: users(id: [1, 1.5, "2", true, null]) { id } }',
             ],
             [
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
