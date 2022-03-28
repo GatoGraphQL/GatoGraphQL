@@ -593,12 +593,16 @@ GRAPHQL;
     /**
      * @dataProvider queryProvider
      */
-    public function testParser($query, $structure)
-    {
-        $parser          = $this->getParser();
-        $document = $parser->parse($query);
+    public function testParser(
+        string $query,
+        Document $document,
+    ): void {
+        $parser = $this->getParser();
 
-        $this->assertEquals($structure, $document);
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
     }
 
     public function queryProvider()
