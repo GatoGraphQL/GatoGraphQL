@@ -54,7 +54,7 @@ class InputList extends AbstractAst implements WithValueInterface, WithAstValueI
         }
         return sprintf(
             '[%s]',
-            implode(',', $listStrElems)
+            implode(', ', $listStrElems)
         );
     }
 
