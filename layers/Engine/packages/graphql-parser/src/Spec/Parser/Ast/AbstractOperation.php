@@ -67,12 +67,16 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
                 implode(' ', $strFieldsOrFragmentBonds)
             );
         }
-        return sprintf(
-            '%s%s%s%s {%s}',
-            $this->getOperationType(),
-            $this->name !== '' ? sprintf(' %s', $this->name) : '',
+        $operationDefinition = sprintf(
+            '%s%s%s',
+            $this->name,
             $strOperationVariables,
             $strOperationDirectives,
+        );
+        return sprintf(
+            '%s%s{%s}',
+            $this->getOperationType(),
+            $operationDefinition !== '' ? sprintf(' %s ', $operationDefinition) : ' ',
             $strOperationFieldsOrFragmentBonds,
         );
     }
