@@ -593,7 +593,7 @@ GRAPHQL;
     /**
      * @dataProvider queryProvider
      */
-    public function testParser(
+    public function testQueries(
         string $query,
         Document $document,
         string $documentAsStr
