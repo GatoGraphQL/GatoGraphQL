@@ -28,6 +28,11 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     {
     }
 
+    final public function __toString(): string
+    {
+        return $this->asQueryString();
+    }
+
     public function getLocation(): Location
     {
         return $this->location;
@@ -36,10 +41,5 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     public function setLocation(Location $location): void
     {
         $this->location = $location;
-    }
-
-    final public function __toString(): string
-    {
-        return $this->asQueryString();
     }
 }
