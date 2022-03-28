@@ -21,9 +21,7 @@ class Argument extends AbstractAst
         return sprintf(
             '%s: %s',
             $this->name,
-            $this->value->getValue() instanceof AstInterface
-                ? $this->value->getValue()->asQueryString()
-                : $this->getGraphQLQueryStringFormatter()->getElementAsQueryString($this->value->getValue())
+            $this->value->asQueryString()
         );
     }
 
