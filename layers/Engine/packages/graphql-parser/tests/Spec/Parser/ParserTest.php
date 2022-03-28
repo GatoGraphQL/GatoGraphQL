@@ -867,7 +867,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
-                'query { allUsers: users(object: {"a": 123, "d": "asd", "b": [1, 2, 4 ], "c": {"a" : 123, "b":  "asd"} }) { id } }',
+                'query { allUsers: users(object: {a: 123, d: "asd", b: [1, 2, 4], c: {a: 123, b: "asd"}}) { id } }',
             ],
             [
                 '{ films(filter: {title: "unrequested", director: "steven", attrs: { stars: 5 } } ) { title } }',
@@ -882,7 +882,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
-                'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5} } ) { title } }',
+                'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5}}) { title } }',
             ],
         ];
     }
