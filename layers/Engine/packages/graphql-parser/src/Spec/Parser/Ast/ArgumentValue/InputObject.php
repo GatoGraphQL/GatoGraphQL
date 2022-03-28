@@ -19,6 +19,11 @@ class InputObject extends AbstractAst implements WithValueInterface, WithAstValu
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getObjectAsQueryString($this->object);
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,

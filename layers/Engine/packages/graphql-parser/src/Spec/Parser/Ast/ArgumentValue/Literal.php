@@ -17,6 +17,11 @@ class Literal extends AbstractAst implements WithValueInterface
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getLiteralAsQueryString($this->value);
+    }
+
     /**
      * @return string|int|float|bool|null
      */
