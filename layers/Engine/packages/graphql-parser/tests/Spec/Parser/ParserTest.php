@@ -710,7 +710,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 1))
                     ]
                 ),
-                'query { }',
+                'query {}',
             ],
             [
                 'query test {}',
@@ -719,7 +719,7 @@ GRAPHQL;
                         new QueryOperation('test', [], [], [], new Location(1, 7))
                     ]
                 ),
-                'query test { }',
+                'query test {}',
             ],
             [
                 'query {}',
@@ -728,7 +728,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 7))
                     ]
                 ),
-                'query { }',
+                'query {}',
             ],
             [
                 'mutation setName { setUserName }',
