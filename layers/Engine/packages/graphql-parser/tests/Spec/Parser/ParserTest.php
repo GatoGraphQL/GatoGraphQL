@@ -483,7 +483,8 @@ GRAPHQL;
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
-                new Document([
+                new Document(
+                    [
                         new QueryOperation(
                             '',
                             [
@@ -506,7 +507,8 @@ GRAPHQL;
                             ],
                             new Location(1, 7)
                         )
-                    ]),
+                    ]
+                ),
             ],
             [
                 '{ query { alias: name } }',
