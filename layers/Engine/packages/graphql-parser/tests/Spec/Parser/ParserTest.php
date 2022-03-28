@@ -893,7 +893,7 @@ GRAPHQL;
     public function testDirectives(
         string $query,
         Document $document,
-        // string $documentAsStr
+        string $documentAsStr
     ): void {
         $parser = $this->getParser();
 
@@ -903,11 +903,11 @@ GRAPHQL;
             $parser->parse($query)
         );
 
-        // // 2nd test: Converting document back to query string is right
-        // $this->assertEquals(
-        //     $documentAsStr,
-        //     $document->asDocumentString()
-        // );
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function queryWithDirectiveProvider()
@@ -949,6 +949,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query { users @include(if: true) { name } }'
             ],
             // Directive in operation
             [
@@ -983,6 +984,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName @someOperationDirective { users { name } }'
             ],
             // Directive in operation and leaf field
             [
@@ -1023,6 +1025,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName($format: String!) @someOperationDirective { users { name @style(format: $format) } }'
             ],
             // Repeatable directives
             [
@@ -1066,6 +1069,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName($format: String!) { users { name @style(format: $format) @someOtherDirective @style(format: $format) @someOtherDirective } }'
             ],
             // Directive in fragment
             [
@@ -1115,6 +1119,11 @@ GRAPHQL;
                         ], new Location(7, 14)),
                     ]
                 ),
+                <<<GRAPHQL
+                query GetUsersName { users { ...UserProps } }
+
+                fragment UserProps on User { id posts @someOperationDirective { id } }
+                GRAPHQL,
             ],
             // Directive in inline fragment
             [
@@ -1166,6 +1175,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName { users { ...on User @outside { id posts @inside { id } } } }'
             ],
         ];
     }
