@@ -27,6 +27,42 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
+    public function asQueryString(): string
+    {
+        // Generate the string for directives
+        $strFragmentDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strFragmentDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
+        // Generate the string for the body of the fragment
+        $strFragmentFieldsOrFragmentBonds = '';
+        if ($this->fieldsOrFragmentBonds !== []) {
+            $strFieldsOrFragmentBonds = [];
+            foreach ($this->fieldsOrFragmentBonds as $fieldsOrFragmentBond) {
+                $strFieldsOrFragmentBonds[] = $fieldsOrFragmentBond->asQueryString();
+            }
+            $strFragmentFieldsOrFragmentBonds = sprintf(
+                ' %s ',
+                implode(' ', $strFieldsOrFragmentBonds)
+            );
+        }
+        return sprintf(
+            'fragment %s on %s%s {%s}',
+            $this->name,
+            $this->model,
+            $strFragmentDirectives,
+            $strFragmentFieldsOrFragmentBonds,
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

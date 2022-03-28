@@ -23,6 +23,14 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return sprintf(
+            '$%s',
+            $this->name
+        );
+    }
+
     public function getVariable(): ?Variable
     {
         return $this->variable;

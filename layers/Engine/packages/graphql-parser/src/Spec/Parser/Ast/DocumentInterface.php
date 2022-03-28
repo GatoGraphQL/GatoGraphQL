@@ -18,4 +18,5 @@ interface DocumentInterface
      * @return VariableReference[]
      */
     public function getVariableReferencesInOperation(OperationInterface $operation): array;
+    public function asDocumentString(): string;
 }
