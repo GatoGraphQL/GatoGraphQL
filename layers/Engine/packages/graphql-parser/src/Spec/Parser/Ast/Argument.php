@@ -16,6 +16,17 @@ class Argument extends AbstractAst
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return sprintf(
+            '%s: %s',
+            $this->name,
+            $this->value->getValue() instanceof AstInterface
+                ? $this->value->getValue()->asQueryString()
+                : $this->getGraphQLQueryStringFormatter()->getElementAsQueryString($this->value->getValue())
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;
