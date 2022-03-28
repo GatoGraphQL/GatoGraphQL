@@ -27,6 +27,56 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
+    public function asQueryString(): string
+    {
+        // Generate the string for variables
+        $strOperationVariables = '';
+        if ($this->variables !== []) {
+            $strVariables = [];
+            foreach ($this->variables as $variable) {
+                $strVariables[] = $variable->asQueryString();
+            }
+            $strOperationVariables = sprintf(
+                '(%s)',
+                implode(', ', $strVariables)
+            );
+        }
+        
+        // Generate the string for directives
+        $strOperationDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strOperationDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+        
+        // Generate the string for the body of the operation
+        $strOperationFieldsOrFragmentBonds = '';
+        if ($this->fieldsOrFragmentBonds !== []) {
+            $strFieldsOrFragmentBonds = [];
+            foreach ($this->fieldsOrFragmentBonds as $fieldsOrFragmentBond) {
+                $strFieldsOrFragmentBonds[] = $fieldsOrFragmentBond->asQueryString();
+            }
+            $strOperationFieldsOrFragmentBonds = sprintf(
+                ' %s ',
+                implode(' ', $strFieldsOrFragmentBonds)
+            );
+        }
+        return sprintf(
+            '%s %s%s%s {%s}',
+            $this->getOperationType(),
+            $this->name,
+            $strOperationVariables,
+            $strOperationDirectives,
+            $strOperationFieldsOrFragmentBonds,
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;
