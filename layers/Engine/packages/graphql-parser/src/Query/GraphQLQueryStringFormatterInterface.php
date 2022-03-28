@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Query;
 
 use stdClass;
 
-interface AstQueryPrinterInterface
+interface GraphQLQueryStringFormatterInterface
 {
     public function getElementAsQueryString(null|int|float|bool|string|array|stdClass $elem): string;
     public function getListAsQueryString(array $list): string;
