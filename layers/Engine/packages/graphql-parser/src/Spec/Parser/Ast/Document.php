@@ -39,7 +39,7 @@ class Document implements DocumentInterface
         foreach ($this->fragments as $fragment) {
             $strOperationAndFragments[] = $fragment->asQueryString();
         }
-        return implode('\n', $strOperationAndFragments);
+        return implode(PHP_EOL . PHP_EOL, $strOperationAndFragments);
     }
 
     /**
