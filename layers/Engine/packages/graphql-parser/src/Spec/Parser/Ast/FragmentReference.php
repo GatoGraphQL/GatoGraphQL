@@ -15,6 +15,14 @@ class FragmentReference extends AbstractAst implements FragmentBondInterface
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return sprintf(
+            '...%s',
+            $this->name
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;
