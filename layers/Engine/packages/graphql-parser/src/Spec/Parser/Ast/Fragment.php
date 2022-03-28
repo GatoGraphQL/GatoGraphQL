@@ -55,7 +55,7 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
             );
         }
         return sprintf(
-            'fragment %s on %s {%s}',
+            'fragment %s on %s%s {%s}',
             $this->name,
             $this->model,
             $strFragmentDirectives,
