@@ -890,13 +890,24 @@ GRAPHQL;
     /**
      * @dataProvider queryWithDirectiveProvider
      */
-    public function testDirectives($query, $structure)
-    {
+    public function testDirectives(
+        string $query,
+        Document $document,
+        // string $documentAsStr
+    ): void {
         $parser = $this->getParser();
 
-        $document = $parser->parse($query);
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
 
-        $this->assertEquals($document, $structure);
+        // // 2nd test: Converting document back to query string is right
+        // $this->assertEquals(
+        //     $documentAsStr,
+        //     $document->asDocumentString()
+        // );
     }
 
     public function queryWithDirectiveProvider()
