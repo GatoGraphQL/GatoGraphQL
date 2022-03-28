@@ -25,6 +25,23 @@ class Document implements DocumentInterface
     ) {
     }
 
+    final public function __toString(): string
+    {
+        return $this->asDocumentString();
+    }
+
+    public function asDocumentString(): string
+    {
+        $strOperationAndFragments = [];
+        foreach ($this->operations as $operation) {
+            $strOperationAndFragments[] = $operation->asQueryString();
+        }
+        foreach ($this->fragments as $fragment) {
+            $strOperationAndFragments[] = $fragment->asQueryString();
+        }
+        return implode(PHP_EOL . PHP_EOL, $strOperationAndFragments);
+    }
+
     /**
      * @return OperationInterface[]
      */

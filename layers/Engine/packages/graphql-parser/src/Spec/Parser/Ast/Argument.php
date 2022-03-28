@@ -16,6 +16,15 @@ class Argument extends AbstractAst
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return sprintf(
+            '%s: %s',
+            $this->name,
+            $this->value->asQueryString()
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

@@ -31,6 +31,56 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
         $this->setDirectives($directives);
     }
 
+    public function asQueryString(): string
+    {
+        // Generate the string for arguments
+        $strFieldArguments = '';
+        if ($this->arguments !== []) {
+            $strArguments = [];
+            foreach ($this->arguments as $argument) {
+                $strArguments[] = $argument->asQueryString();
+            }
+            $strFieldArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+
+        // Generate the string for directives
+        $strFieldDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strFieldDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+
+        // Generate the string for the body of the operation
+        $strFieldFieldsOrFragmentBonds = '';
+        if ($this->fieldsOrFragmentBonds !== []) {
+            $strFieldsOrFragmentBonds = [];
+            foreach ($this->fieldsOrFragmentBonds as $fieldsOrFragmentBond) {
+                $strFieldsOrFragmentBonds[] = $fieldsOrFragmentBond->asQueryString();
+            }
+            $strFieldFieldsOrFragmentBonds = sprintf(
+                ' %s ',
+                implode(' ', $strFieldsOrFragmentBonds)
+            );
+        }
+        return sprintf(
+            '%s%s%s%s {%s}',
+            $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
+            $this->name,
+            $strFieldArguments,
+            $strFieldDirectives,
+            $strFieldFieldsOrFragmentBonds,
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

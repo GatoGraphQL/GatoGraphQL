@@ -21,6 +21,11 @@ class InputList extends AbstractAst implements WithValueInterface, WithAstValueI
         parent::__construct($location);
     }
 
+    public function asQueryString(): string
+    {
+        return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,

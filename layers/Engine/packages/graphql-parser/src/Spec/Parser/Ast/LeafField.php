@@ -27,6 +27,42 @@ class LeafField extends AbstractAst implements FieldInterface
         $this->setDirectives($directives);
     }
 
+    public function asQueryString(): string
+    {
+        // Generate the string for arguments
+        $strFieldArguments = '';
+        if ($this->arguments !== []) {
+            $strArguments = [];
+            foreach ($this->arguments as $argument) {
+                $strArguments[] = $argument->asQueryString();
+            }
+            $strFieldArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+
+        // Generate the string for directives
+        $strFieldDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strFieldDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+        return sprintf(
+            '%s%s%s%s',
+            $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
+            $this->name,
+            $strFieldArguments,
+            $strFieldDirectives,
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

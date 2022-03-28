@@ -22,6 +22,26 @@ class Directive extends AbstractAst
         $this->setArguments($arguments);
     }
 
+    public function asQueryString(): string
+    {
+        $strDirectiveArguments = '';
+        if ($this->arguments !== []) {
+            $strArguments = [];
+            foreach ($this->arguments as $argument) {
+                $strArguments[] = $argument->asQueryString();
+            }
+            $strDirectiveArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+        return sprintf(
+            '@%s%s',
+            $this->name,
+            $strDirectiveArguments
+        );
+    }
+
     public function getName(): string
     {
         return $this->name;

@@ -100,6 +100,13 @@ GRAPHQL;
                 )
             ]
         ));
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query { authors(category: "#2") { _id } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     private function tokenizeStringContents($graphQLString)
@@ -183,6 +190,13 @@ GRAPHQL;
                 )
             ]
         ), $document);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query { foo bar }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testQueryWithNoFields()
@@ -202,6 +216,13 @@ GRAPHQL;
                 )
             ]
         ), $document);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query { name }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testQueryWithFields()
@@ -224,6 +245,13 @@ GRAPHQL;
                 )
             ]
         ), $document);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query { post user { name } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testFragmentWithFields()
@@ -247,6 +275,13 @@ GRAPHQL;
                 ], new Location(2, 22)),
             ]
         ), $document);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'fragment FullType on __Type { kind fields { name } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testInspectionQuery()
@@ -428,7 +463,7 @@ GRAPHQL;
 
     public function testInlineFragment()
     {
-        $parser          = $this->getParser();
+        $parser = $this->getParser();
         $document = $parser->parse('
             {
                 test: test {
@@ -463,18 +498,36 @@ GRAPHQL;
                 )
             ]
         ));
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query { test: test { name ...on UnionType { unionName } } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     /**
      * @dataProvider mutationProvider
      */
-    public function testMutations($query, $structure)
-    {
+    public function testMutations(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
         $parser = $this->getParser();
 
-        $document = $parser->parse($query);
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
 
-        $this->assertEquals($document, $structure);
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function mutationProvider()
@@ -483,7 +536,8 @@ GRAPHQL;
         return [
             [
                 'query ($variable: Int){ query ( teas: $variable ) { alias: name } }',
-                new Document([
+                new Document(
+                    [
                         new QueryOperation(
                             '',
                             [
@@ -506,7 +560,9 @@ GRAPHQL;
                             ],
                             new Location(1, 7)
                         )
-                    ]),
+                    ]
+                ),
+                'query ($variable: Int) { query(teas: $variable) { alias: name } }',
             ],
             [
                 '{ query { alias: name } }',
@@ -517,6 +573,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { query { alias: name } }',
             ],
             [
                 'mutation { createUser ( email: "test@test.com", active: true ) { id } }',
@@ -545,6 +602,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'mutation { createUser(email: "test@test.com", active: true) { id } }',
             ],
             [
                 'mutation { test : createUser (id: 4) }',
@@ -569,6 +627,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'mutation { test: createUser(id: 4) }',
             ],
         ];
     }
@@ -576,12 +635,24 @@ GRAPHQL;
     /**
      * @dataProvider queryProvider
      */
-    public function testParser($query, $structure)
-    {
-        $parser          = $this->getParser();
-        $document = $parser->parse($query);
+    public function testQueries(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
+        $parser = $this->getParser();
 
-        $this->assertEquals($structure, $document);
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
+
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function queryProvider()
@@ -607,6 +678,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { film(id: 1, filmID: 2) { title } }',
             ],
             [
                 '{ test (id: -5) { id } } ',
@@ -621,6 +693,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { test(id: -5) { id } }',
             ],
             [
                 "{ test (id: -5) \r\n { id } } ",
@@ -635,6 +708,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                "query { test(id: -5) { id } }",
             ],
             [
                 'query CheckTypeOfLuke {
@@ -655,6 +729,8 @@ GRAPHQL;
                         ], new Location(1, 7))
                     ]
                 ),
+                // @todo Fix: it should be `EMPIRE`, not `"EMPIRE"`, but ENUM is currently not mapped in the AST!
+                'query CheckTypeOfLuke { hero(episode: "EMPIRE") { __typename name } }',
             ],
             [
                 '{ test { __typename, id } }',
@@ -668,6 +744,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { test { __typename id } }',
             ],
             [
                 '{}',
@@ -676,6 +753,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 1))
                     ]
                 ),
+                'query {}',
             ],
             [
                 'query test {}',
@@ -684,6 +762,7 @@ GRAPHQL;
                         new QueryOperation('test', [], [], [], new Location(1, 7))
                     ]
                 ),
+                'query test {}',
             ],
             [
                 'query {}',
@@ -692,6 +771,7 @@ GRAPHQL;
                         new QueryOperation('', [], [], [], new Location(1, 7))
                     ]
                 ),
+                'query {}',
             ],
             [
                 'mutation setName { setUserName }',
@@ -702,6 +782,7 @@ GRAPHQL;
                         ], new Location(1, 10))
                     ]
                 ),
+                'mutation setName { setUserName }',
             ],
             [
                 '{ test { ...userDataFragment } } fragment userDataFragment on User { id, name, email }',
@@ -719,6 +800,11 @@ GRAPHQL;
                         ], new Location(1, 43)),
                     ]
                 ),
+                <<<GRAPHQL
+                query { test { ...userDataFragment } }
+                
+                fragment userDataFragment on User { id name email }
+                GRAPHQL,
             ],
             [
                 '{ user (id: 10, name: "max", float: 123.123 ) { id, name } }',
@@ -743,6 +829,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { user(id: 10, name: "max", float: 123.123) { id name } }',
             ],
             [
                 '{ allUsers : users ( id: [ 1, 2, 3] ) { id } }',
@@ -764,6 +851,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { allUsers: users(id: [1, 2, 3]) { id } }',
             ],
             [
                 '{ allUsers : users ( id: [ 1, 1.5, "2", true, null] ) { id } }',
@@ -791,6 +879,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query { allUsers: users(id: [1, 1.5, "2", true, null]) { id } }',
             ],
             [
                 '{ allUsers : users ( object: { "a": 123, "d": "asd",  "b" : [ 1, 2, 4 ], "c": { "a" : 123, "b":  "asd" } } ) { id } }',
@@ -820,6 +909,7 @@ GRAPHQL;
                         ], new Location(1, 1))
                     ]
                 ),
+                'query { allUsers: users(object: {a: 123, d: "asd", b: [1, 2, 4], c: {a: 123, b: "asd"}}) { id } }',
             ],
             [
                 '{ films(filter: {title: "unrequested", director: "steven", attrs: { stars: 5 } } ) { title } }',
@@ -834,6 +924,7 @@ GRAPHQL;
                         ], new Location(1, 1)),
                     ]
                 ),
+                'query { films(filter: {title: "unrequested", director: "steven", attrs: {stars: 5}}) { title } }',
             ],
         ];
     }
@@ -841,13 +932,24 @@ GRAPHQL;
     /**
      * @dataProvider queryWithDirectiveProvider
      */
-    public function testDirectives($query, $structure)
-    {
+    public function testDirectives(
+        string $query,
+        Document $document,
+        string $documentAsStr
+    ): void {
         $parser = $this->getParser();
 
-        $document = $parser->parse($query);
+        // 1st test: Parsing is right
+        $this->assertEquals(
+            $document,
+            $parser->parse($query)
+        );
 
-        $this->assertEquals($document, $structure);
+        // 2nd test: Converting document back to query string is right
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function queryWithDirectiveProvider()
@@ -889,6 +991,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query { users @include(if: true) { name } }'
             ],
             // Directive in operation
             [
@@ -923,6 +1026,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName @someOperationDirective { users { name } }'
             ],
             // Directive in operation and leaf field
             [
@@ -963,6 +1067,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName($format: String!) @someOperationDirective { users { name @style(format: $format) } }'
             ],
             // Repeatable directives
             [
@@ -1006,6 +1111,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName($format: String!) { users { name @style(format: $format) @someOtherDirective @style(format: $format) @someOtherDirective } }'
             ],
             // Directive in fragment
             [
@@ -1055,6 +1161,11 @@ GRAPHQL;
                         ], new Location(7, 14)),
                     ]
                 ),
+                <<<GRAPHQL
+                query GetUsersName { users { ...UserProps } }
+
+                fragment UserProps on User { id posts @someOperationDirective { id } }
+                GRAPHQL,
             ],
             // Directive in inline fragment
             [
@@ -1106,6 +1217,7 @@ GRAPHQL;
                         )
                     ]
                 ),
+                'query GetUsersName { users { ...on User @outside { id posts @inside { id } } } }'
             ],
         ];
     }
@@ -1143,6 +1255,13 @@ GRAPHQL;
         $this->assertTrue($var->hasDefaultValue());
         $this->assertNull($var->getDefaultValue()->getValue());
         $this->assertNull($var->getValue()->getValue());
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query ($format: String = null) { user { avatar(format: $format) } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testInputObjectVariableValue()
@@ -1183,6 +1302,13 @@ GRAPHQL;
         $var->setContext(new Context(null, ['filter' => $filter]));
         $this->assertFalse($var->hasDefaultValue());
         $this->assertEquals($var->getValue()->getValue(), $filter);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query FilterUsers($filter: UserFilterInput!) { users(filter: $filter) { id name } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testInputListVariableValue()
@@ -1206,6 +1332,13 @@ GRAPHQL;
         $ids = [3, 5, $idObject];
         $this->assertEquals($var->getDefaultValue()->getValue(), $ids);
 
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query FilterPosts($ids: [ID!]! = [3, 5, {id: 5}]) { posts(ids: $ids) { id title } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
+
         // Test injecting in Context
         $parser          = $this->getParser();
         $document = $parser->parse('
@@ -1221,6 +1354,13 @@ GRAPHQL;
         $var->setContext(new Context(null, ['ids' => $ids]));
         $this->assertFalse($var->hasDefaultValue());
         $this->assertEquals($var->getValue()->getValue(), $ids);
+
+        // 2nd test: Converting document back to query string is right
+        $documentAsStr = 'query FilterPosts($ids: [ID!]!) { posts(ids: $ids) { id title } }';
+        $this->assertEquals(
+            $documentAsStr,
+            $document->asDocumentString()
+        );
     }
 
     public function testNoDuplicateKeysInInputObjectInVariable()
