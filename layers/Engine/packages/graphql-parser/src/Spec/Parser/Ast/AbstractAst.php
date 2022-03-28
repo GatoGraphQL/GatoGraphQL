@@ -22,7 +22,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
         $this->location = $location;
     }
 
-    public function __toString(): string
+    final public function __toString(): string
     {
         return $this->asQueryString();
     }
