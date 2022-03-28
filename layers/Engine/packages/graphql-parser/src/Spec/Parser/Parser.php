@@ -560,7 +560,7 @@ class Parser extends Tokenizer implements ParserInterface
             case Token::TYPE_FALSE:
                 $token = $this->lex();
                 return $this->createLiteral($token->getData(), $this->getTokenLocation($token));
-            
+
             case Token::TYPE_IDENTIFIER:
                 $token = $this->lex();
                 return $this->createEnum($token->getData(), $this->getTokenLocation($token));
