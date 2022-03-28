@@ -26,6 +26,41 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
         $this->setFieldsOrFragmentBonds($fieldsOrFragmentBonds);
     }
 
+    public function asQueryString(): string
+    {
+        // Generate the string for directives
+        $strInlineFragmentDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = [];
+            foreach ($this->directives as $directive) {
+                $strDirectives[] = $directive->asQueryString();
+            }
+            $strInlineFragmentDirectives = sprintf(
+                ' %s',
+                implode(' ', $strDirectives)
+            );
+        }
+        
+        // Generate the string for the body of the fragment
+        $strInlineFragmentFieldsOrFragmentBonds = '';
+        if ($this->fieldsOrFragmentBonds !== []) {
+            $strFieldsOrFragmentBonds = [];
+            foreach ($this->fieldsOrFragmentBonds as $fieldsOrFragmentBond) {
+                $strFieldsOrFragmentBonds[] = $fieldsOrFragmentBond->asQueryString();
+            }
+            $strInlineFragmentFieldsOrFragmentBonds = sprintf(
+                ' %s ',
+                implode(' ', $strFieldsOrFragmentBonds)
+            );
+        }
+        return sprintf(
+            '...on %s%s {%s}',
+            $this->typeName,
+            $strInlineFragmentDirectives,
+            $strInlineFragmentFieldsOrFragmentBonds,
+        );
+    }
+
     public function getTypeName(): string
     {
         return $this->typeName;
