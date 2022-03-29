@@ -32,7 +32,7 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
         return parent::getLabelText($module, $props);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:

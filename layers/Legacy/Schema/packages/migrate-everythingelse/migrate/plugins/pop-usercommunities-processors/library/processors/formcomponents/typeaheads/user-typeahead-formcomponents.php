@@ -12,7 +12,7 @@ class GD_URE_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         );
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES:

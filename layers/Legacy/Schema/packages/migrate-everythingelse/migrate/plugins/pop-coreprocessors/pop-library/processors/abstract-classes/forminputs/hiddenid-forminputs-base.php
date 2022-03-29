@@ -7,7 +7,7 @@ abstract class PoP_Module_Processor_HiddenIDTextFormInputsBase extends PoP_Modul
         return true;
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         return 'id';
     }

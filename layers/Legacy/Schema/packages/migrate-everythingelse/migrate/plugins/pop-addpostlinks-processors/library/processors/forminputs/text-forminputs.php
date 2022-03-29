@@ -32,7 +32,7 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
         return parent::isMandatory($module, $props);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_ADDPOSTLINKS_FORMINPUT_LINK:

@@ -38,7 +38,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
         return [GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::class, GD_URE_Module_Processor_UserSelectableTypeaheadFilterInputs::MODULE_URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST];
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:

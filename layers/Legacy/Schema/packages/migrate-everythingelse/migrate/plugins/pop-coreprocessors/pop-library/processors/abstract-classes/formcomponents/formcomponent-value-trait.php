@@ -7,7 +7,7 @@ trait FormComponentValueTrait
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         return null;
     }

@@ -92,7 +92,7 @@ class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Pro
         return parent::getType($module, $props);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUU_USERNAME:

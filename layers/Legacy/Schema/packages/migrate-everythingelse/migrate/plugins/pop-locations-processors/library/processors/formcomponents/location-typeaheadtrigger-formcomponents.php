@@ -28,7 +28,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
         return parent::getTriggerSubmodule($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:

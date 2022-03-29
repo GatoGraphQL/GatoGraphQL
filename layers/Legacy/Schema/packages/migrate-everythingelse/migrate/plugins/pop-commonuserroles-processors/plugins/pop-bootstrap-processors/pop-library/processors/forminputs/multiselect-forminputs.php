@@ -56,7 +56,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
         return parent::getInputClass($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
