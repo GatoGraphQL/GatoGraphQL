@@ -24,6 +24,7 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $directives,
+        protected bool $skipOutputIfNull = false,
     ) {
         parent::__construct(
             $name,
@@ -37,6 +38,6 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
 
     public function isSkipOutputIfNull(): bool
     {
-        return false;
+        return $this->skipOutputIfNull;
     }
 }

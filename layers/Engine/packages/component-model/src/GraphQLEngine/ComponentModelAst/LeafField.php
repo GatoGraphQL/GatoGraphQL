@@ -21,6 +21,7 @@ class LeafField extends UpstreamLeafField implements FieldInterface
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
+        protected bool $skipOutputIfNull = false,
     ) {
         parent::__construct(
             $name,
@@ -33,6 +34,6 @@ class LeafField extends UpstreamLeafField implements FieldInterface
 
     public function isSkipOutputIfNull(): bool
     {
-        return false;
+        return $this->skipOutputIfNull;
     }
 }
