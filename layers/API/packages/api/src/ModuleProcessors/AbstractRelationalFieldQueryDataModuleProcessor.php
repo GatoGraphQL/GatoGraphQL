@@ -13,6 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
@@ -50,30 +51,48 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
-     * Nested fields: Those fields which have a field as key and an array of submodules as value
-     * @return RelationalField[]
-     */
-    protected function getFieldsWithNestedSubfields(array $module): array
-    {
-        $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_filter(
-            $fields,
-            fn (string|int $key) => !is_numeric($key),
-            ARRAY_FILTER_USE_KEY
-        );
-    }
-
-    /**
      * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {
-        /**
-         * The fields which have a numeric key only are the data-fields
-         * for the current module level.
-         */
-        return $this->getPropertyFields($module);
+        // @todo Provide fragments from the parsed query!
+        $fragments = [];
+        $moduleAtts = $module[2] ?? null;
+        $fields = $this->getFields($module, $moduleAtts);
+        return array_filter(
+            $fields,
+            fn (FieldInterface $field) => $field instanceof LeafField
+        );
+    }
+
+    /**
+     * @return LeafField[]
+     */
+    protected function getLeafFields(array $module): array
+    {
+        // @todo Provide fragments from the parsed query!
+        $fragments = [];
+        $moduleAtts = $module[2] ?? null;
+        $fields = $this->getFields($module, $moduleAtts);
+        return array_filter(
+            $fields,
+            fn (FieldInterface $field) => $field instanceof LeafField
+        );
+    }
+
+    /**
+     * @return RelationalField[]
+     */
+    protected function getRelationalFields(array $module): array
+    {
+        // @todo Provide fragments from the parsed query!
+        $fragments = [];
+        $moduleAtts = $module[2] ?? null;
+        $fields = $this->getFields($module, $moduleAtts);
+        return array_filter(
+            $fields,
+            fn (FieldInterface $field) => $field instanceof RelationalField
+        );
     }
 
     /**
@@ -83,13 +102,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
 
-        // The fields which are not numeric are the keys from which to switch database domain
-        $fieldNestedFields = $this->getFieldsWithNestedSubfields($module);
-
+        // @todo Provide fragments from the parsed query!
         $fragments = [];
+        
+        $relationalFields = $this->getRelationalFields($module);
 
         // Create a "virtual" module with the fields corresponding to the next level module
-        foreach ($fieldNestedFields as $relationalField) {
+        foreach ($relationalFields as $relationalField) {
             $field = $relationalField->asQueryString();
             $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
