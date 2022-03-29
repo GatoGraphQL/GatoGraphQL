@@ -782,16 +782,17 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $ret = array();
 
         // Calculate the data-fields from merging them with the subcomponent modules' keys, which are data-fields too
+        // @todo Check if `array_unique` is needed
         if (
             /** @var ModuleFieldInterface[] */
-            $data_fields = array_unique(
+            $data_fields = //array_unique(
                 array_merge(
                     $this->getDataFields($module, $props),
                     array_keys($this->getDomainSwitchingSubmodules($module)),
                     array_keys($this->getConditionalOnDataFieldSubmodules($module)),
                     array_keys($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module))
                 )
-            )
+            //)
         ) {
             $ret['data-fields'] = $data_fields;
         }
