@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ModuleProcessorInterface
 {
@@ -43,7 +43,7 @@ interface ModuleProcessorInterface
     public function getComponentMutationResolverBridge(array $module): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
     /**
-     * @return LeafField[]
+     * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array;
     public function getDomainSwitchingSubmodules(array $module): array;

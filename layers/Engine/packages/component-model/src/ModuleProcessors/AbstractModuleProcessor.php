@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -17,11 +17,11 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Component as RootComponent;
 use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleProcessor implements ModuleProcessorInterface
@@ -718,7 +718,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     }
 
     /**
-     * @return LeafField[]
+     * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {
