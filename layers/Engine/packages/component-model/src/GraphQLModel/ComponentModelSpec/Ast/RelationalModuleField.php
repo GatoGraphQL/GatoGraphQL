@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as QueryRelationalField;
 
-class RelationalModuleField extends LeafField
+class RelationalModuleField extends LeafField implements ModuleFieldInterface
 {
     /**
      * If passing QueryRelationalField, then retrieve all the properties from there.
