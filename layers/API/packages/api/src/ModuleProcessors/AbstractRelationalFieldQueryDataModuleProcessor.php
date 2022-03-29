@@ -9,6 +9,11 @@ use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -46,7 +51,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
     /**
      * Nested fields: Those fields which have a field as key and an array of submodules as value
-     * @return RelationalModuleField[]
+     * @return RelationalField[]
      */
     protected function getFieldsWithNestedSubfields(array $module): array
     {
@@ -81,8 +86,15 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // The fields which are not numeric are the keys from which to switch database domain
         $fieldNestedFields = $this->getFieldsWithNestedSubfields($module);
 
+        $fragments = [];
+
         // Create a "virtual" module with the fields corresponding to the next level module
-        foreach ($fieldNestedFields as $field => $nestedFields) {
+        foreach ($fieldNestedFields as $relationalField) {
+            $field = $relationalField->asQueryString();
+            $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
+                $relationalField->getFieldsOrFragmentBonds(),
+                $fragments
+            );
             $nestedModule = [$module[0], $module[1], ['fields' => $nestedFields]];
             $ret[] = new RelationalModuleField(
                 $field,
@@ -92,5 +104,66 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             );
         }
         return $ret;
+    }
+
+    /**
+     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
+     * @param Fragment[] $fragments
+     * @return FieldInterface[]
+     */
+    protected function getAllFieldsFromFieldsOrFragmentBonds(
+        array $fieldsOrFragmentBonds,
+        array $fragments,
+    ): array {
+        $fields = [];
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                /** @var FragmentReference */
+                $fragmentReference = $fieldOrFragmentBond;
+                $fragment = $this->getFragment($fragmentReference->getName(), $fragments);
+                if ($fragment === null) {
+                    continue;
+                }
+                $fields = array_merge(
+                    $fields,
+                    $this->getAllFieldsFromFieldsOrFragmentBonds(
+                        $fragment->getFieldsOrFragmentBonds(),
+                        $fragments
+                    )
+                );
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                /** @var InlineFragment */
+                $inlineFragment = $fieldOrFragmentBond;
+                $fields = array_merge(
+                    $fields,
+                    $this->getAllFieldsFromFieldsOrFragmentBonds(
+                        $inlineFragment->getFieldsOrFragmentBonds(),
+                        $fragments
+                    )
+                );
+                continue;
+            }
+            /** @var FieldInterface */
+            $field = $fieldOrFragmentBond;
+            $fields[] = $field;
+        }
+        return $fields;
+    }
+
+    /**
+     * @param Fragment[] $fragments
+     */
+    protected function getFragment(
+        string $fragmentName,
+        array $fragments,
+    ): ?Fragment {
+        foreach ($fragments as $fragment) {
+            if ($fragment->getName() === $fragmentName) {
+                return $fragment;
+            }
+        }
+        return null;
     }
 }
