@@ -99,13 +99,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         /**
          * The fields which have a numeric key only are the data-fields
          * for the current module level.
-         * Process only the fields without "skip output if null".
-         * Those will be processed on function `getConditionalOnDataFieldSubmodules`
          */
-        return array_filter(
-            $this->getPropertyFields($module),
-            fn (LeafModuleField $field) => !$field->isSkipOutputIfNull(),
-        );
+        return $this->getPropertyFields($module);
     }
 
     /**
@@ -118,13 +113,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         // The fields which are not numeric are the keys from which to switch database domain
         $fieldNestedFields = $this->getFieldsWithNestedSubfields($module);
 
-        // Process only the fields without "skip output if null". Those will be processed on function `getConditionalOnDataFieldDomainSwitchingSubmodules`
-        $fieldNestedFields = array_filter(
-            $this->getFieldsWithNestedSubfields($module),
-            fn (RelationalModuleField $field) => !$field->isSkipOutputIfNull(),
-            ARRAY_FILTER_USE_KEY
-        );
-
         // Create a "virtual" module with the fields corresponding to the next level module
         foreach ($fieldNestedFields as $field => $nestedFields) {
             $ret[$field] = array(
@@ -135,69 +123,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 ],
             );
         }
-        return $ret;
-    }
-
-    public function getConditionalOnDataFieldSubmodules(array $module): array
-    {
-        $ret = parent::getConditionalOnDataFieldSubmodules($module);
-
-        // Calculate the property fields with "skip output if null" on true
-        $propertyFields = array_filter(
-            $this->getPropertyFields($module),
-            fn (LeafModuleField $field) => $field->isSkipOutputIfNull(),
-        );
-        $relationalFields = array_keys(array_filter(
-            $this->getFieldsWithNestedSubfields($module),
-            fn (RelationalModuleField $field) => $field->isSkipOutputIfNull(),
-            ARRAY_FILTER_USE_KEY
-        ));
-        $fields = array_values(array_unique(array_merge(
-            $propertyFields,
-            $relationalFields
-        )));
-
-        // Create a "virtual" module with the fields corresponding to the next level module
-        foreach ($fields as $field) {
-            $conditionField = $this->getNotIsEmptyConditionField($field);
-            $field = $field->asQueryString();
-            $conditionalField = $this->getFieldQueryInterpreter()->removeSkipOuputIfNullFromField($field);
-            $ret[$conditionField][] = [
-                $module[0],
-                $module[1],
-                ['fields' => [$conditionalField]]
-            ];
-        }
-
-        return $ret;
-    }
-
-    public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
-    {
-        $ret = parent::getConditionalOnDataFieldDomainSwitchingSubmodules($module);
-
-        // Calculate the nested fields with "skip output if null" on true
-        $fieldNestedFields = array_filter(
-            $this->getFieldsWithNestedSubfields($module),
-            fn (RelationalModuleField $field) => $field->isSkipOutputIfNull(),
-            ARRAY_FILTER_USE_KEY
-        );
-
-        foreach ($fieldNestedFields as $field) {
-            $conditionField = $this->getNotIsEmptyConditionField($field);
-            // @todo Fix this!!!!
-            $nestedFields = $field->getNestedModules();
-            $field = $field->asQueryString();
-            $conditionalField = $this->getFieldQueryInterpreter()->removeSkipOuputIfNullFromField($field);
-            $ret[$conditionField][$conditionalField] = array(
-                [
-                    $module[0],
-                    $module[1],
-                    ['fields' => $nestedFields]
-                ],
-            );
-        }
-
         return $ret;
     }
 }
