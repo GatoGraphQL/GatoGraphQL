@@ -23,7 +23,7 @@ class Directive extends UpstreamDirective
         parent::__construct(
             $name,
             $arguments,
-            $this->getLocationOrPseudoLocation($location),
+            $this->createPseudoLocation(),
         );
     }
 }

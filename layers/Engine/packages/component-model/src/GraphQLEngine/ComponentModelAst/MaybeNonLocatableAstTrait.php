@@ -13,8 +13,8 @@ trait MaybeNonLocatableAstTrait
      * Because the parent class does need a Location, create a "dummy" one,
      * with coordinates [0, 0]
      */
-    public function getLocationOrPseudoLocation(?Location $location = null): Location
+    public function createPseudoLocation(): Location
     {
-        return $location ?? new Location(0, 0);
+        return new Location(0, 0);
     }
 }
