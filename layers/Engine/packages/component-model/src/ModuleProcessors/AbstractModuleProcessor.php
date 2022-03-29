@@ -807,6 +807,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 )
             //)
         ) {
+            // @todo Temporarily calling ->asQueryString, must work with AST directly!
+            $data_fields = array_map(
+                fn (ModuleFieldInterface $field) => $field->asQueryString(),
+                $data_fields
+            );
             $ret['data-fields'] = $data_fields;
         }
 
