@@ -54,11 +54,6 @@ class LeafField extends UpstreamLeafField implements FieldInterface
         );
     }
 
-    public function getQueryField(): ?UpstreamLeafField
-    {
-        return $this->queryField;
-    }
-
     public function isSkipOutputIfNull(): bool
     {
         return $this->skipOutputIfNull;
