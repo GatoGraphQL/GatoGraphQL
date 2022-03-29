@@ -8,6 +8,7 @@ use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -782,6 +783,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Calculate the data-fields from merging them with the subcomponent modules' keys, which are data-fields too
         if (
+            /** @var ModuleFieldInterface[] */
             $data_fields = array_unique(
                 array_merge(
                     $this->getDataFields($module, $props),
