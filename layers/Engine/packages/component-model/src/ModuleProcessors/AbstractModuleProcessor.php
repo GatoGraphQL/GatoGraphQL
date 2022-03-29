@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
@@ -266,8 +267,8 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                     }
                 }
             }
-            foreach ($this->getConditionalOnDataFieldSubmodules($module) as $conditionDataField => $conditionalSubmodules) {
-                foreach ($conditionalSubmodules as $conditionalSubmodule) {
+            foreach ($this->getConditionalOnDataFieldSubmodules($module) as $conditionalLeafModuleField) {
+                foreach ($conditionalLeafModuleField->getConditionalNestedModules() as $conditionalSubmodule) {
                     $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
@@ -801,7 +802,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 array_merge(
                     $this->getDataFields($module, $props),
                     $this->getDomainSwitchingSubmodules($module),
-                    array_keys($this->getConditionalOnDataFieldSubmodules($module)),
+                    $this->getConditionalOnDataFieldSubmodules($module),
                     array_keys($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module))
                 )
             //)
@@ -1092,10 +1093,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
-            if ($conditionalOnDataFieldSubmodules = $this->getConditionalOnDataFieldSubmodules($module)) {
+            if ($conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($module)) {
                 $directSubmodules = $this->getSubmodules($module);
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
-                foreach ($conditionalOnDataFieldSubmodules as $conditionDataField => $conditionalSubmodules) {
+                foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
+                    $conditionDataField = $conditionalLeafModuleField->asQueryString();
+                    $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedModules();
                     // Calculate those fields which are certainly to be propagated, and not part of the direct submodules
                     // Using this really ugly way because, for comparing modules, using `array_diff` and `intersect` fail
                     for ($i = count($conditionalSubmodules) - 1; $i >= 0; $i--) {
@@ -1303,11 +1306,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
-            foreach ($this->getConditionalOnDataFieldSubmodules($module) as $data_field => $submodules) {
+            foreach ($this->getConditionalOnDataFieldSubmodules($module) as $conditionalLeafModuleField) {
                 $ret = array_unique(
                     array_merge(
                         $ret,
-                        $submodules
+                        $conditionalLeafModuleField->getConditionalNestedModules()
                     ),
                     SORT_REGULAR
                 );
