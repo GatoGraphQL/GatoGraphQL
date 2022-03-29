@@ -142,7 +142,7 @@ abstract class PoP_Module_Processor_EditorFormInputsBase extends PoP_Module_Proc
         return TranslationAPIFacade::getInstance()->__('Please write the content here...', 'pop-coreprocessors');
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         return 'contentEditor';
     }

@@ -21,7 +21,7 @@ class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues exten
         return parent::getTriggerSubmodule($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_STANCETARGET:

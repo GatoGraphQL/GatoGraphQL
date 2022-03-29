@@ -50,7 +50,7 @@ class PoP_Module_Processor_CreateUpdatePostButtonGroupFormInputs extends PoP_Mod
         return parent::isMultiple($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_POSTSECTION:

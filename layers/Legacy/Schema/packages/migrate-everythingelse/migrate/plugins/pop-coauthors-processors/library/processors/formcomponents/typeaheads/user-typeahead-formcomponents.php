@@ -64,7 +64,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         return parent::getTriggerLayoutSubmodule($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:

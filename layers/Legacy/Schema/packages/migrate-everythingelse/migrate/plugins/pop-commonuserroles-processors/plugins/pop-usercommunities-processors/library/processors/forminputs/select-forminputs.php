@@ -32,7 +32,7 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
         return parent::getInputClass($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:

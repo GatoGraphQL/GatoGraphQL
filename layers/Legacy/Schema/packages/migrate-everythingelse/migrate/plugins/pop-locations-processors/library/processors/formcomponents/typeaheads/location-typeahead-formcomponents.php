@@ -49,7 +49,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         return parent::isMultiple($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:

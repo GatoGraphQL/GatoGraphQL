@@ -21,7 +21,7 @@ class UserStance_Module_Processor_ButtonGroupFormInputs extends PoP_Module_Proce
         return parent::getInputClass($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_BUTTONGROUP_STANCE:

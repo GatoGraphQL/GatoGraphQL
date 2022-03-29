@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_P
         return DateRangeFormInput::class;
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         if ($this->useTime($module)) {
             return 'daterangetime';

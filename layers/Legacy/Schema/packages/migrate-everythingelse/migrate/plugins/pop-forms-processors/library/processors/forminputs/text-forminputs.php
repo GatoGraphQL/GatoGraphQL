@@ -51,7 +51,7 @@ class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormI
         return $ret;
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_POSTTITLE:

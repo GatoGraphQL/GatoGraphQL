@@ -47,7 +47,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         return parent::getLabelText($module, $props);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:

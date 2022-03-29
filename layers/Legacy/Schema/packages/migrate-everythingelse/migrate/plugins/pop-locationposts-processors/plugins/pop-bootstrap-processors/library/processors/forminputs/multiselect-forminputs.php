@@ -46,7 +46,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
         return parent::getInputClass($module);
     }
 
-    public function getDbobjectField(array $module)
+    public function getDbobjectField(array $module): ?string
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
