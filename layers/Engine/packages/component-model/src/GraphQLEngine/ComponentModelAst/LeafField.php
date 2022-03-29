@@ -22,7 +22,6 @@ class LeafField extends UpstreamLeafField implements FieldInterface
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
-        ?Location $location = null,
     ) {
         parent::__construct(
             $name,
