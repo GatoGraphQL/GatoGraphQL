@@ -16,6 +16,7 @@ class RelationalModuleField extends LeafField implements ModuleFieldInterface
      * If passing QueryRelationalField, then retrieve all the properties from there.
      * Otherwise, use the ones passed to the constructor.
      *
+     * @param array<array> $nestedModules
      * @param Argument[] $arguments
      * @param Directive[] $directives
      */
