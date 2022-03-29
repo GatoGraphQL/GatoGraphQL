@@ -744,6 +744,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return [];
     }
 
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
         return [];

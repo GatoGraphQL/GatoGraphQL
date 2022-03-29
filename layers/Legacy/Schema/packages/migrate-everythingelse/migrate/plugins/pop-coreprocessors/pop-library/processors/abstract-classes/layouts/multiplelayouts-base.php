@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
+
 abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
@@ -28,6 +30,9 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return $ret;
     }
 
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
         $ret = parent::getConditionalOnDataFieldSubmodules($module);
@@ -35,8 +40,8 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         // The function below returns an array with value => $submodule.
         // It must be converted to value => [$submodule]
         foreach ($this->getMultipleLayoutSubmodules($module) as $conditionDataField => $conditionalSubmodule) {
-            $ret[$conditionDataField] = array_merge(
-                $ret[$conditionDataField] ?? [],
+            $ret[] = new ConditionalLeafModuleField(
+                $conditionDataField,
                 [
                     $conditionalSubmodule,
                 ]

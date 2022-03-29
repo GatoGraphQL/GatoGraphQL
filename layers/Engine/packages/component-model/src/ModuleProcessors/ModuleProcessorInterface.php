@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
@@ -51,6 +52,9 @@ interface ModuleProcessorInterface
      * @return RelationalModuleField[]
      */
     public function getDomainSwitchingSubmodules(array $module): array;
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array;
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array;
     public function getImmutableDataPropertiesDatasetmoduletree(array $module, array &$props): array;

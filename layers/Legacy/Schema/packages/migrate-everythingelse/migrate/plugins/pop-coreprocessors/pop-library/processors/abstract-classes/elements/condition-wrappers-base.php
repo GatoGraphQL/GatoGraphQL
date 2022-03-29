@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
 
 abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -8,25 +9,26 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_CONDITIONWRAPPER];
     }
 
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
         $ret = parent::getConditionalOnDataFieldSubmodules($module);
 
         if ($conditionDataField = $this->getConditionField($module)) {
-
             if ($layouts = $this->getConditionSucceededSubmodules($module)) {
-                $ret[$conditionDataField] = array_merge(
-                    $ret[$conditionDataField] ?? [],
+                $ret[] = new ConditionalLeafModuleField(
+                    $conditionDataField,
                     $layouts
                 );
             }
 
             if ($conditionfailed_layouts = $this->getConditionFailedSubmodules($module)) {
-
                 // Calculate the "not" data field for the conditionDataField
                 $notConditionDataField = $this->getNotConditionField($module);
-                $ret[$notConditionDataField] = array_merge(
-                    $ret[$notConditionDataField] ?? [],
+                $ret[] = new ConditionalLeafModuleField(
+                    $notConditionDataField,
                     $conditionfailed_layouts
                 );
             }
