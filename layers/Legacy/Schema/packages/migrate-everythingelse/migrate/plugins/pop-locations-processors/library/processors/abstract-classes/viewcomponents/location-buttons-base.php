@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -45,10 +46,13 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($this->showEachLocation($module)) {
-            $modules = array();
+            $modules = [];
             if ($location_module = $this->getLocationModule($module)) {
                 $modules[] = $location_module;
             }
@@ -57,9 +61,12 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             }
 
             if ($modules) {
-                return array(
-                    'locations' => $modules,
-                );
+                return [
+                    new RelationalModuleField(
+                        'locations',
+                        $modules
+                    ),
+                ];
             }
         }
 

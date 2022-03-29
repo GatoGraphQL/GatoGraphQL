@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -34,14 +35,20 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($authors_module = $this->getAuthorsModule($module)) {
-            return array(
-                'author' => array(
-                    $authors_module,
+            return [
+                new RelationalModuleField(
+                    'author',
+                    [
+                        $authors_module,
+                    ]
                 ),
-            );
+            ];
         }
 
         return parent::getDomainSwitchingSubmodules($module);

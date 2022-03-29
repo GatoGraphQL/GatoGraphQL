@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {
     public function getTargetDynamicallyRenderedSubmodules(array $module)
@@ -7,11 +9,17 @@ abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Mod
         return array();
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $module)
     {
         return array();
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);

@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -53,6 +54,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
@@ -67,7 +71,10 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($modules) {
-            $ret['userID'] = $modules;
+            $ret[] = new RelationalModuleField(
+                'userID',
+                $modules
+            );
         }
 
         return $ret;

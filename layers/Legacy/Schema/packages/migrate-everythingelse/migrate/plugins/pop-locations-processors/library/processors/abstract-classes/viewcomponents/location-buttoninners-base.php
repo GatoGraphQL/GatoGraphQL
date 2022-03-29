@@ -1,4 +1,5 @@
 <?php
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
@@ -38,14 +39,20 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($location_module = $this->getLocationModule($module)) {
-            return array(
-                'locations' => array(
-                    $location_module,
+            return [
+                new RelationalModuleField(
+                    'locations',
+                    [
+                        $location_module,
+                    ]
                 ),
-            );
+            ];
         }
         return parent::getDomainSwitchingSubmodules($module);
     }

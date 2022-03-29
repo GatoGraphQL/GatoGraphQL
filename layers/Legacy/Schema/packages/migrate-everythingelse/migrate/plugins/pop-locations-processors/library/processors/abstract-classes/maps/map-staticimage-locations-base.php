@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 
 abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -8,14 +9,20 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_STATICIMAGE_LOCATIONS];
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $urlparam = $this->getUrlparamSubmodule($module);
-        return array(
-            'locations' => array(
-                $urlparam,
+        return [
+            new RelationalModuleField(
+                'locations',
+                [
+                    $urlparam,
+                ]
             ),
-        );
+        ];
     }
 
     public function getUrlparamSubmodule(array $module)
