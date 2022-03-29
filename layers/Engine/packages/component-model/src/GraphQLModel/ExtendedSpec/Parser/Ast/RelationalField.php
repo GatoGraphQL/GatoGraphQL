@@ -24,7 +24,7 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
         array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
-        protected bool $skipOutputIfNull = false,
+        protected bool $skipOutputIfNull,
     ) {
         parent::__construct(
             $name,

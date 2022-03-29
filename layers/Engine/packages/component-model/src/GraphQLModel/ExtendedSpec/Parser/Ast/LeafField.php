@@ -16,12 +16,12 @@ class LeafField extends UpstreamLeafField implements FieldInterface
      * @param Directive[] $directives
      */
     public function __construct(
-        string $name = null,
-        ?string $alias = null,
-        array $arguments = [],
-        array $directives = [],
+        string $name,
+        ?string $alias,
+        array $arguments,
+        array $directives,
         Location $location,
-        protected bool $skipOutputIfNull = false,
+        protected bool $skipOutputIfNull,
     ) {
         parent::__construct(
             $name,
