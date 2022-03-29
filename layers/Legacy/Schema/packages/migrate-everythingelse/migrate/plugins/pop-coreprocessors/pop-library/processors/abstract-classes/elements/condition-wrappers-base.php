@@ -51,9 +51,9 @@ abstract class PoP_Module_Processor_ConditionWrapperBase extends PoPEngine_Query
     }
 
     /**
-     * @todo Migrate from string to LeafField
+     * @todo Migrate from string to LeafModuleField
      *
-     * @return \PoP\GraphQLParser\Spec\Parser\Ast\LeafField[]
+     * @return \PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {
