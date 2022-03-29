@@ -2,27 +2,24 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Ast;
+namespace PoP\ComponentModel\GraphQLModel\ExtendedSpec\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
-use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as UpstreamRelationalField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField as UpstreamLeafField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class RelationalField extends UpstreamRelationalField implements FieldInterface
+class LeafField extends UpstreamLeafField implements FieldInterface
 {
     /**
      * @param Argument[] $arguments
-     * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(
-        string $name,
-        ?string $alias,
-        array $arguments,
-        array $fieldsOrFragmentBonds,
-        array $directives,
+        string $name = null,
+        ?string $alias = null,
+        array $arguments = [],
+        array $directives = [],
         Location $location,
         protected bool $skipOutputIfNull = false,
     ) {
@@ -30,7 +27,6 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
             $name,
             $alias,
             $arguments,
-            $fieldsOrFragmentBonds,
             $directives,
             $location,
         );
