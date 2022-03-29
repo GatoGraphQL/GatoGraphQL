@@ -6,7 +6,6 @@ namespace PoPAPI\API\ModuleProcessors;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -19,7 +18,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
     /**
-     * @return ModuleFieldInterface[]
+     * @return FieldInterface[]
      */
     protected function getFields(array $module, ?array $moduleAtts): array
     {
@@ -36,32 +35,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
-     * Property fields: Those fields which have a numeric key only
-     * @return LeafModuleField[]
-     */
-    protected function getPropertyFields(array $module): array
-    {
-        $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_values(array_filter(
-            $fields,
-            fn (string|int $key) => is_numeric($key),
-            ARRAY_FILTER_USE_KEY
-        ));
-    }
-
-    /**
      * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {
-        // @todo Provide fragments from the parsed query!
-        $fragments = [];
-        $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_filter(
-            $fields,
-            fn (FieldInterface $field) => $field instanceof LeafField
+        return array_map(
+            fn (LeafField $leafField) => LeafModuleField::fromLeafField($leafField),
+            $this->getLeafFields($module)
         );
     }
 
@@ -81,6 +61,35 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
+     * @return RelationalModuleField[]
+     */
+    public function getDomainSwitchingSubmodules(array $module): array
+    {
+        $ret = parent::getDomainSwitchingSubmodules($module);
+
+        // @todo Provide fragments from the parsed query!
+        $fragments = [];
+
+        $relationalFields = $this->getRelationalFields($module);
+
+        // Create a "virtual" module with the fields corresponding to the next level module
+        foreach ($relationalFields as $relationalField) {
+            $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
+                $relationalField->getFieldsOrFragmentBonds(),
+                $fragments
+            );
+            $nestedModule = [$module[0], $module[1], ['fields' => $nestedFields]];
+            $ret[] = RelationalModuleField::fromRelationalField(
+                $relationalField,
+                [
+                    $nestedModule,
+                ]
+            );
+        }
+        return $ret;
+    }
+
+    /**
      * @return RelationalField[]
      */
     protected function getRelationalFields(array $module): array
@@ -93,36 +102,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             $fields,
             fn (FieldInterface $field) => $field instanceof RelationalField
         );
-    }
-
-    /**
-     * @return RelationalModuleField[]
-     */
-    public function getDomainSwitchingSubmodules(array $module): array
-    {
-        $ret = parent::getDomainSwitchingSubmodules($module);
-
-        // @todo Provide fragments from the parsed query!
-        $fragments = [];
-        
-        $relationalFields = $this->getRelationalFields($module);
-
-        // Create a "virtual" module with the fields corresponding to the next level module
-        foreach ($relationalFields as $relationalField) {
-            $field = $relationalField->asQueryString();
-            $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
-                $relationalField->getFieldsOrFragmentBonds(),
-                $fragments
-            );
-            $nestedModule = [$module[0], $module[1], ['fields' => $nestedFields]];
-            $ret[] = new RelationalModuleField(
-                $field,
-                [
-                    $nestedModule,
-                ]
-            );
-        }
-        return $ret;
     }
 
     /**
