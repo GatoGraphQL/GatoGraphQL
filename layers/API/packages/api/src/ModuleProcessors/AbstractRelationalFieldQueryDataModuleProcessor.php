@@ -108,6 +108,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         );
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);

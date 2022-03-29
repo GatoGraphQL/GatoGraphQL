@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ModuleProcessors;
 
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -46,6 +47,9 @@ interface ModuleProcessorInterface
      * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array;
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array;
     public function getConditionalOnDataFieldSubmodules(array $module): array;
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array;

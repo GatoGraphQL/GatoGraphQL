@@ -8,6 +8,7 @@ use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -725,6 +726,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return [];
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         return [];
