@@ -14,7 +14,9 @@ class LeafField extends UpstreamLeafField implements FieldInterface
     use NonLocatableAstTrait;
 
     /**
-     * If $queryField is provided, obtain all the properties from it.
+     * If $queryField is provided, obtain all the properties from it,
+     * ignoring the other provided arguments. Otherwise, use the arguments.
+     *
      * Either one of $queryField or $name must be provided.
      *
      * @param Argument[] $arguments
