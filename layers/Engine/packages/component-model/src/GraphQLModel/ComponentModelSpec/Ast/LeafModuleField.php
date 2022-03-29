@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast;
 
-use PoP\ComponentModel\GraphQLModel\ExtendedSpec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField as QueryLeafField;
+use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class LeafModuleField extends LeafField implements ModuleFieldInterface
 {
@@ -25,7 +25,6 @@ class LeafModuleField extends LeafField implements ModuleFieldInterface
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
-        bool $skipOutputIfNull = false,
     ) {
         if ($leafField !== null) {
             parent::__construct(
@@ -34,7 +33,6 @@ class LeafModuleField extends LeafField implements ModuleFieldInterface
                 $leafField->getArguments(),
                 $leafField->getDirectives(),
                 $leafField->getLocation(),
-                false,
             );
             return;
         }
@@ -44,7 +42,6 @@ class LeafModuleField extends LeafField implements ModuleFieldInterface
             $arguments,
             $directives,
             LocationHelper::getNonSpecificLocation(),
-            $skipOutputIfNull,
         );
     }
 }
