@@ -83,12 +83,12 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
         // Create a "virtual" module with the fields corresponding to the next level module
         foreach ($fieldNestedFields as $field => $nestedFields) {
-            $ret[$field] = array(
+            $nestedModule = [$module[0], $module[1], ['fields' => $nestedFields]];
+            $ret[] = new RelationalModuleField(
+                $field,
                 [
-                    $module[0],
-                    $module[1],
-                    ['fields' => $nestedFields]
-                ],
+                    $nestedModule,
+                ]
             );
         }
         return $ret;
