@@ -36,6 +36,9 @@ class ConditionalRelationalModuleField extends LeafField implements ModuleFieldI
         );
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getConditionalRelationalModuleFields(): array
     {
         return $this->conditionalRelationalModuleFields;
