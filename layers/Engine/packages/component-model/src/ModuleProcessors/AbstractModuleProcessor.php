@@ -257,9 +257,11 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             foreach ($this->getSubmodules($module) as $submodule) {
                 $this->setProp($submodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
-            foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
+            foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+                // @todo Pass the ModuleField directly, do not convert to string first
+                $subcomponent_data_field = $relationalModuleField->asQueryString();
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                    foreach ($subcomponent_modules as $subcomponent_module) {
+                    foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
                 }
@@ -565,7 +567,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // This prop is set for both dataloading and non-dataloading modules
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
-            foreach (array_keys($this->getDomainSwitchingSubmodules($module)) as $subcomponent_data_field) {
+            foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+                // @todo Pass the ModuleField directly, do not convert to string first
+                $subcomponent_data_field = $relationalModuleField->asQueryString();
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
@@ -633,14 +637,19 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             $this->getModuleFilterManager()->prepareForPropagation($module, $props);
-            foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
+            foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+                // @todo Pass the ModuleField directly, do not convert to string first
+                $subcomponent_data_field = $relationalModuleField->asQueryString();
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 // Only modules which do not load data
-                $subcomponent_modules = array_filter($subcomponent_modules, function ($submodule) {
-                    return !$this->getModuleProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
-                });
+                $subcomponent_modules = array_filter(
+                    $relationalModuleField->getNestedModules(),
+                    function ($submodule) {
+                        return !$this->getModuleProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
+                    }
+                );
                 foreach ($subcomponent_modules as $subcomponent_module) {
                     $this->getModuleProcessorManager()->getProcessor($subcomponent_module)->addToDatasetDatabaseKeys($subcomponent_module, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
@@ -1165,11 +1174,16 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
-        $domainSwitchingSubmodules = $this->getDomainSwitchingSubmodules($module);
+        $domainSwitchingSubmodules = [];
+        foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+            // @todo Pass the ModuleField directly, do not convert to string first
+            $subcomponent_data_field = $relationalModuleField->asQueryString();
+            $domainSwitchingSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
+        }        
         foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionDataField => $dataFieldTypeResolverOptionsConditionalSubmodules) {
             foreach ($dataFieldTypeResolverOptionsConditionalSubmodules as $conditionalDataField => $conditionalSubmodules) {
                 $domainSwitchingSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
-                    $conditionalDataField[$conditionalDataField] ?? [],
+                    $domainSwitchingSubmodules[$conditionalDataField] ?? [],
                     $conditionalSubmodules
                 )));
             }
@@ -1273,16 +1287,14 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         }
 
         if (in_array(self::MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES, $components)) {
-            foreach ($this->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
-                $ret = array_values(
-                    array_unique(
-                        array_merge(
-                            $subcomponent_modules,
-                            $ret
-                        ),
-                        SORT_REGULAR
-                    )
-                );
+            foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+                $ret = array_values(array_unique(
+                    array_merge(
+                        $relationalModuleField->getNestedModules(),
+                        $ret
+                    ),
+                    SORT_REGULAR
+                ));
             }
         }
 
