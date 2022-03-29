@@ -52,7 +52,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
-
         return array_filter(
             $fields,
             fn (string|int $key) => !is_numeric($key),
