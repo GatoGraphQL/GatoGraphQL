@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\GraphQLEngine\ComponentModelAst;
+namespace PoP\ComponentModel\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as UpstreamRelationalField;
+use PoP\GraphQLParser\Spec\Parser\Location;
 
 class RelationalField extends UpstreamRelationalField implements FieldInterface
 {
-    use NonLocatableAstTrait;
-
     /**
      * @param Argument[] $arguments
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
@@ -24,6 +23,7 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $directives,
+        Location $location,
         protected bool $skipOutputIfNull = false,
     ) {
         parent::__construct(
@@ -32,7 +32,7 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
             $arguments,
             $fieldsOrFragmentBonds,
             $directives,
-            $this->createPseudoLocation(),
+            $location,
         );
     }
 
