@@ -788,7 +788,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $data_fields = //array_unique(
                 array_merge(
                     $this->getDataFields($module, $props),
-                    array_keys($this->getDomainSwitchingSubmodules($module)),
+                    $this->getDomainSwitchingSubmodules($module),
                     array_keys($this->getConditionalOnDataFieldSubmodules($module)),
                     array_keys($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module))
                 )
