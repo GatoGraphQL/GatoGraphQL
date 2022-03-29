@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\GraphQLEngine\ComponentModelAst;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-trait MaybeNonLocatableAstTrait
+trait NonLocatableAstTrait
 {
     /**
      * For the SiteBuilder, the generated GraphQL query will have no Location.

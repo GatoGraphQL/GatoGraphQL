@@ -11,7 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as UpstreamRelationalField
 
 class RelationalField extends UpstreamRelationalField implements FieldInterface
 {
-    use MaybeNonLocatableAstTrait;
+    use NonLocatableAstTrait;
 
     /**
      * @param Argument[] $arguments

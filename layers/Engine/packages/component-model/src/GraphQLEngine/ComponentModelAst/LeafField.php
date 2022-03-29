@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField as UpstreamLeafField;
 
 class LeafField extends UpstreamLeafField implements FieldInterface
 {
-    use MaybeNonLocatableAstTrait;
+    use NonLocatableAstTrait;
 
     /**
      * @param Argument[] $arguments

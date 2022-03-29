@@ -9,7 +9,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Directive as UpstreamDirective;
 
 class Directive extends UpstreamDirective
 {
-    use MaybeNonLocatableAstTrait;
+    use NonLocatableAstTrait;
 
     /**
      * @param Argument[] $arguments
