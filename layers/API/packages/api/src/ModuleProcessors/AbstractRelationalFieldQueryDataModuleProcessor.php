@@ -9,7 +9,6 @@ use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
-use PoP\FieldQuery\QueryHelpers;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -58,36 +57,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             $fields,
             fn (string|int $key) => !is_numeric($key),
             ARRAY_FILTER_USE_KEY
-        );
-    }
-
-    /**
-     * Given a field, return its corresponding "not(isEmpty($field))
-     */
-    protected function getNotIsEmptyConditionField(ModuleFieldInterface $field): string
-    {
-        $field = $field->asQueryString();
-        $conditionFieldAlias = null;
-        // Convert the field into its "not is null" version
-        if ($fieldAlias = $this->getFieldQueryInterpreter()->getFieldAlias($field)) {
-            $conditionFieldAlias = 'not-isnull-' . $fieldAlias;
-        }
-        return $this->getFieldQueryInterpreter()->getField(
-            'not',
-            [
-                'value' => $this->getFieldQueryInterpreter()->getField(
-                    'isNull',
-                    [
-                        'value' => $this->getFieldQueryInterpreter()->composeField(
-                            $this->getFieldQueryInterpreter()->getFieldName($field),
-                            $this->getFieldQueryInterpreter()->getFieldArgs($field) ?? QueryHelpers::getEmptyFieldArgs()
-                        ),
-                    ]
-                ),
-            ],
-            $conditionFieldAlias,
-            false,
-            $this->getFieldQueryInterpreter()->getDirectives($field)
         );
     }
 
