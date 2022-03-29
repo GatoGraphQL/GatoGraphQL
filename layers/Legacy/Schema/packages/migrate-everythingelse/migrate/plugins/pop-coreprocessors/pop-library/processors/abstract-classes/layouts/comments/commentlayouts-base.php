@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -54,6 +55,9 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         return null;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
@@ -68,7 +72,10 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
             }
         }
 
-        $ret['author'] = $modules;
+        $ret[] = new RelationalModuleField(
+            'author',
+            $modules
+        );
 
         return $ret;
     }
