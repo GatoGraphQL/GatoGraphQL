@@ -18,7 +18,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getFields(array $module, $moduleAtts): array
     {
         // If it is a virtual module, the fields are coded inside the virtual module atts
-        if (!is_null($moduleAtts)) {
+        if ($moduleAtts !== null) {
             return $moduleAtts['fields'];
         }
 
