@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GraphQLParser\ExtendedSpec\Runtime\Ast;
+namespace PoP\ComponentModel\GraphQLModel\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
@@ -12,8 +12,6 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 
 class RelationalField extends UpstreamRelationalField implements FieldInterface
 {
-    use MaybeNonLocatableAstTrait;
-
     /**
      * @param Argument[] $arguments
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
@@ -25,7 +23,8 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $directives,
-        ?Location $location = null,
+        Location $location,
+        protected bool $skipOutputIfNull,
     ) {
         parent::__construct(
             $name,
@@ -33,12 +32,12 @@ class RelationalField extends UpstreamRelationalField implements FieldInterface
             $arguments,
             $fieldsOrFragmentBonds,
             $directives,
-            $this->getLocationOrPseudoLocation($location),
+            $location,
         );
     }
 
     public function isSkipOutputIfNull(): bool
     {
-        return false;
+        return $this->skipOutputIfNull;
     }
 }
