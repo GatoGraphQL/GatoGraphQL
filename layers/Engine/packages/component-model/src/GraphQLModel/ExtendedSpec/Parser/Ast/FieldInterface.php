@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\GraphQLEngine\ComponentModelAst;
+namespace PoP\ComponentModel\GraphQLModel\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface as UpstreamFieldInterface;
 
