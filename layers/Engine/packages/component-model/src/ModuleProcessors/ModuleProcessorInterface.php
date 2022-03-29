@@ -56,6 +56,9 @@ interface ModuleProcessorInterface
      * @return ConditionalLeafModuleField[]
      */
     public function getConditionalOnDataFieldSubmodules(array $module): array;
+    /**
+     * @return ConditionalRelationalModuleField[]
+     */
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array;
     public function getImmutableDataPropertiesDatasetmoduletree(array $module, array &$props): array;
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $module, array &$props): array;

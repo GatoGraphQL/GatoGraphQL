@@ -8,6 +8,7 @@ use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalRelationalModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ModuleFieldInterface;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
@@ -753,6 +754,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         return [];
     }
 
+    /**
+     * @return ConditionalRelationalModuleField[]
+     */
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
     {
         return [];
