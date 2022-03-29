@@ -7,7 +7,6 @@ namespace PoP\ComponentModel\GraphQLEngine\ComponentModelAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField as UpstreamLeafField;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 class LeafField extends UpstreamLeafField implements FieldInterface
 {

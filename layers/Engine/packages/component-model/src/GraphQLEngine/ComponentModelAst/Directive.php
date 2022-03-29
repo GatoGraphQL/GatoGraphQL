@@ -6,7 +6,6 @@ namespace PoP\ComponentModel\GraphQLEngine\ComponentModelAst;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive as UpstreamDirective;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 class Directive extends UpstreamDirective
 {

@@ -8,7 +8,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField as UpstreamRelationalField;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 class RelationalField extends UpstreamRelationalField implements FieldInterface
 {
