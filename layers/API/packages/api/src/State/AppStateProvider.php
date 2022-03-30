@@ -128,11 +128,12 @@ class AppStateProvider extends AbstractAppStateProvider
         // @todo Remove all code below!!!
 
         // If the query starts with "!", then it is the query name to a persisted query
-        $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+        $fieldQuery = $state['field-query'];
+        $fieldQuery = PersistedQueryUtils::maybeGetPersistedQuery($fieldQuery);
 
         // Parse the query from string into the format needed to work with it
         $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($fieldQuery);
         $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
         if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
             $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
