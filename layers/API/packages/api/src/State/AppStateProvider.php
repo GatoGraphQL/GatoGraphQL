@@ -125,6 +125,8 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['does-api-query-have-errors'] = true;
         }
 
+        // @todo Remove all code below!!!
+
         // If the query starts with "!", then it is the query name to a persisted query
         $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
 
