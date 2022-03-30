@@ -11,6 +11,8 @@ class LeafField extends AbstractAst implements FieldInterface
     use WithArgumentsTrait;
     use WithDirectivesTrait;
 
+    protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
+
     /**
      * @param Argument[] $arguments
      * @param Directive[] $directives
@@ -61,6 +63,11 @@ class LeafField extends AbstractAst implements FieldInterface
             $strFieldArguments,
             $strFieldDirectives,
         );
+    }
+
+    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function getName(): string

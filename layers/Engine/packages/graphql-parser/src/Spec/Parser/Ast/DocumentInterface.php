@@ -19,4 +19,10 @@ interface DocumentInterface
      */
     public function getVariableReferencesInOperation(OperationInterface $operation): array;
     public function asDocumentString(): string;
+    /**
+     * For all elements in the AST, inject them their parent.
+     * This enables them to re-create the path to them,
+     * from the root of the document.
+     */
+    public function setAncestorsInAST(): self;
 }

@@ -10,6 +10,7 @@ use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
+use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -25,6 +26,8 @@ class Variable extends AbstractAst implements WithValueInterface
     protected bool $hasDefaultValue = false;
 
     protected InputList|InputObject|Literal|Enum|null $defaultValue = null;
+
+    protected OperationInterface $parent;
 
     public function __construct(
         protected string $name,
@@ -55,6 +58,11 @@ class Variable extends AbstractAst implements WithValueInterface
             $strType,
             $this->hasDefaultValue ? sprintf(' = %s', $this->defaultValue) : ''
         );
+    }
+
+    public function setParent(OperationInterface $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function setContext(?Context $context): void
