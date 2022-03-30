@@ -666,7 +666,7 @@ class Document implements DocumentInterface
      * This enables them to re-create the path to them,
      * from the root of the document.
      */
-    public function setAncestorsInAST(): void
+    public function setAncestorsInAST(): self
     {
         foreach ($this->operations as $operation) {
             $operation->setParent($this);
@@ -676,6 +676,7 @@ class Document implements DocumentInterface
             $fragment->setParent($this);
             $this->setAncestorsUnderFragment($fragment);
         }
+        return $this;
     }
 
     private function setAncestorsUnderOperation(OperationInterface $operation): void
