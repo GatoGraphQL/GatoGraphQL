@@ -14,12 +14,12 @@ class ProcessorItemUtils
         // $item[0]: class
         // $item[1]: name
         // $item[2]: extra atts (optional)
-        $itemFullNameElems = [$item[0], $item[1]];
-        $itemAtts = $item[2] ?? null;
-        if ($itemAtts !== null) {
-            $itemAtts[] = serialize($itemAtts);
+        $itemFullName = $item[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $item[1];
+        if (count($item) >= 3) {
+            $itemFullName .= Constants::SEPARATOR_PROCESSORITEMFULLNAME . serialize($item[2]);
         }
-        return implode(Constants::SEPARATOR_PROCESSORITEMFULLNAME, $itemFullNameElems);
+
+        return $itemFullName;
     }
     public static function getItemFromFullName(string $itemFullName): ?array
     {
@@ -29,23 +29,23 @@ class ProcessorItemUtils
             return null;
         }
 
-        $item = [
-            $parts[0], // class
-            $parts[1], // name
-        ];
         // Does it have itematts? If so, unserialize them.
-        if (($parts[2] ?? null) !== null) {
-            $item[] = unserialize(
-                // Just in case itematts contains the same SEPARATOR_PROCESSORITEMFULLNAME string inside of it, simply recalculate the whole itematts from the $itemFullName string
-                substr(
-                    $itemFullName,
-                    strlen(
-                        $parts[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $parts[1] . Constants::SEPARATOR_PROCESSORITEMFULLNAME
+        return (count($parts) >= 3) ?
+            [
+                $parts[0], // class
+                $parts[1], // name
+                unserialize(
+                    // Just in case itematts contains the same SEPARATOR_PROCESSORITEMFULLNAME string inside of it, simply recalculate the whole itematts from the $itemFullName string
+                    substr(
+                        $itemFullName,
+                        strlen(
+                            $parts[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $parts[1] . Constants::SEPARATOR_PROCESSORITEMFULLNAME
+                        )
                     )
                 )
-            );
-        }
-        return $item;
+            ] :
+            // Otherwise, the parts are already the item
+            $parts;
     }
     public static function getItemOutputName(array $item, string $definitionGroup): string
     {
