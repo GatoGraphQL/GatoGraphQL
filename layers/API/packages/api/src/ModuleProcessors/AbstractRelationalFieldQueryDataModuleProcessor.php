@@ -8,11 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
 use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
-use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
-use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
-use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
-use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
@@ -22,17 +18,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
-    private ?ParserInterface $parser = null;
-    
-    final public function setParser(ParserInterface $parser): void
-    {
-        $this->parser = $parser;
-    }
-    final protected function getParser(): ParserInterface
-    {
-        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
-    }
-
     /**
      * @return FieldInterface[]
      */
@@ -51,44 +36,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * (i.e. for the fields at the root level).
          *
          * Parse the requested GraphQL query, and extract
-         * the root fields. Save the parsed AST in the AppState
-         * for if anybody else needs to read it, and also
-         * for storing the fragments (needed below).
+         * the root fields.
          */
-        $appStateManager = App::getAppStateManager();
-        $executableDocument = null;
-        if ($appStateManager->has('executable-document-ast')) {
-            /**
-             * The GraphQL query has already been parsed
-             */
-            $executableDocument = $appStateManager->get('executable-document-ast');
-        } else {
-            /**
-             * Parse the GraphQL query, and store the AST in the state
-             */
-            $query = App::getState('query');
-            if ($query === null || trim($query) === '') {
-                $appStateManager->override('executable-document-ast', null);
-                return [];
-            }
-
-            $variableValues = App::getState('variables');
-            $operationName = App::getState('graphql-operation-name');
-
-            try {
-                $executableDocument = $this->parseGraphQLQuery(
-                    $query,
-                    $variableValues,
-                    $operationName
-                );
-            } catch (SyntaxErrorException | InvalidRequestException $e) {
-                $appStateManager->override('executable-document-ast', null);
-                // @todo Show GraphQL error in client
-                // ...
-            }
-        }
-
-        // If there was an error, nothing to do
+        $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
             return [];
         }
@@ -108,25 +58,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
 
         return $fields;
-    }
-
-    /**
-     * @throws SyntaxErrorException
-     * @throws InvalidRequestException
-     */
-    protected function parseGraphQLQuery(
-        string $query,
-        array $variableValues,
-        ?string $operationName,
-    ): ExecutableDocument {    
-        $document = $this->getParser()->parse($query);
-        $executableDocument = (
-            new ExecutableDocument(
-                $document,
-                new Context($operationName, $variableValues)
-            )
-        )->validateAndInitialize();
-        return $executableDocument;
     }
 
     /**
@@ -160,7 +91,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $relationalFields = $this->getRelationalFields($module);
         
-        // By now this variable has been set
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
             return [];
