@@ -11,7 +11,7 @@ class Directive extends AbstractAst
     use WithArgumentsTrait;
 
     protected FieldInterface|OperationInterface|Fragment|InlineFragment $parent;
-    
+
     /**
      * @param Argument[] $arguments
      */

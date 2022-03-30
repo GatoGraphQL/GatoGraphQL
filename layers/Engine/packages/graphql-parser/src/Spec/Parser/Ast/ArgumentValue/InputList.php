@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class InputList extends AbstractAst implements WithValueInterface, WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
-    
+
     /**
      * @param mixed[] $list
      */

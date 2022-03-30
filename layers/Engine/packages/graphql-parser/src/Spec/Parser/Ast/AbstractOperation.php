@@ -13,7 +13,7 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     use WithFieldsOrFragmentBondsTrait;
 
     protected Document $parent;
-    
+
     public function __construct(
         protected string $name,
         /** @var Variable[] */

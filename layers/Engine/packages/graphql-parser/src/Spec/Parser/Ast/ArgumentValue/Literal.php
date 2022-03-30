@@ -12,7 +12,7 @@ use PoP\GraphQLParser\Spec\Parser\Location;
 class Literal extends AbstractAst implements WithValueInterface
 {
     protected InputList|InputObject|Argument $parent;
-    
+
     public function __construct(
         protected string|int|float|bool|null $value,
         Location $location
