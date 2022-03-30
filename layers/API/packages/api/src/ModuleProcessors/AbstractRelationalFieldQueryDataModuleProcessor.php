@@ -51,28 +51,63 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * (i.e. for the fields at the root level).
          *
          * Parse the requested GraphQL query, and extract
-         * the root fields.
+         * the root fields. Save the parsed AST in the AppState
+         * for if anybody else needs to read it, and also
+         * for storing the fragments (needed below).
          */
-        $query = App::getState('query');
-        if ($query === null || trim($query) === '') {
+        $appStateManager = App::getAppStateManager();
+        $executableDocument = null;
+        if ($appStateManager->has('executable-document-ast')) {
+            /**
+             * The GraphQL query has already been parsed
+             */
+            $executableDocument = $appStateManager->get('executable-document-ast');
+        } else {
+            /**
+             * Parse the GraphQL query, and store the AST in the state
+             */
+            $query = App::getState('query');
+            if ($query === null || trim($query) === '') {
+                $appStateManager->override('executable-document-ast', null);
+                return [];
+            }
+
+            $variableValues = App::getState('variables');
+            $operationName = App::getState('graphql-operation-name');
+
+            try {
+                $executableDocument = $this->parseGraphQLQuery(
+                    $query,
+                    $variableValues,
+                    $operationName
+                );
+            } catch (SyntaxErrorException | InvalidRequestException $e) {
+                $appStateManager->override('executable-document-ast', null);
+                // @todo Show GraphQL error in client
+                // ...
+            }
+        }
+
+        // If there was an error, nothing to do
+        if ($executableDocument === null) {
             return [];
         }
 
-        $variableValues = App::getState('variables');
-        $operationName = App::getState('graphql-operation-name');
+        $fields = [];
 
-        try {
-            $document = $this->getParser()->parse($query);
-            $executableDocument = (
-                new ExecutableDocument(
-                    $document,
-                    new Context($operationName, $variableValues)
+        /** @var ExecutableDocument $executableDocument */
+        $fragments = $executableDocument->getDocument()->getFragments();
+        foreach ($executableDocument->getRequestedOperations() as $operation) {
+            $fields = array_merge(
+                $fields,
+                $this->getAllFieldsFromFieldsOrFragmentBonds(
+                    $operation->getFieldsOrFragmentBonds(),
+                    $fragments
                 )
-            )->validateAndInitialize();
-        } catch (SyntaxErrorException | InvalidRequestException $e) {
-            // @todo Show GraphQL error in client
-            return [];
+            );
         }
+
+        return $fields;
 
         /**
          * If it is a normal module, it is the first added,
@@ -80,6 +115,25 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * its fields within the ensuing component model
          */
         return App::getState('executable-query') ?? [];
+    }
+
+    /**
+     * @throws SyntaxErrorException
+     * @throws InvalidRequestException
+     */
+    protected function parseGraphQLQuery(
+        string $query,
+        array $variableValues,
+        ?string $operationName,
+    ): ExecutableDocument {    
+        $document = $this->getParser()->parse($query);
+        $executableDocument = (
+            new ExecutableDocument(
+                $document,
+                new Context($operationName, $variableValues)
+            )
+        )->validateAndInitialize();
+        return $executableDocument;
     }
 
     /**
@@ -111,14 +165,22 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        $ret = parent::getDomainSwitchingSubmodules($module);
-
-        // @todo Provide fragments from the parsed query!
-        $fragments = [];
-
         $relationalFields = $this->getRelationalFields($module);
+        
+        // By now this variable has been set
+        $executableDocument = App::getState('executable-document-ast');
+        if ($executableDocument === null) {
+            return [];
+        }
 
-        // Create a "virtual" module with the fields corresponding to the next level module
+        /** @var ExecutableDocument $executableDocument */
+        $fragments = $executableDocument->getDocument()->getFragments();
+        $ret = [];
+
+        /**
+         * Create a "virtual" module with the fields
+         * corresponding to the next level module
+         */
         foreach ($relationalFields as $relationalField) {
             $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
