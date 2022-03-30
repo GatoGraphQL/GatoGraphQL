@@ -42,19 +42,26 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
      */
     final public function getID(): string
     {
+        $idUniqueName = $this->getIDUniqueName();
         $parentAST = $this->getParentAST();
-        if ($parentAST !== null) {
-            return sprintf(
-                '%s.%s',
-                $parentAST->getID(),
-                $this->getUniqueName()
-            );
+        if ($parentAST === null) {
+            return $idUniqueName;
         }
-        return $this->getUniqueName();
+        return sprintf(
+            $this->getIDFormat(),
+            $parentAST->getID(),
+            $idUniqueName
+        );
     }
 
-    abstract protected function getParentAST(): AstInterface;
-    abstract protected function getUniqueName(): string;
+    abstract protected function getParentAST(): ?AstInterface;
+
+    abstract protected function getIDUniqueName(): string;
+    
+    protected function getIDFormat(): string
+    {
+        return '%s.%s';
+    }
 
 
 
