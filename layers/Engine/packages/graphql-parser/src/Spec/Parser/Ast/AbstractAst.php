@@ -43,10 +43,10 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     public function getID(): string
     {
         $class = get_called_class();
-        $className = substr($class, strrpos($class, '\\'));
+        $className = substr($class, strrpos($class, '\\') + 1);
         return sprintf(
             '%s([%s,%s])',
-            strtolower($className),
+            $className,
             $this->getLocation()->getLine(),
             $this->getLocation()->getColumn()
         );
