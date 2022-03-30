@@ -149,7 +149,7 @@ class AppStateProvider extends AbstractAppStateProvider
         array $variableValues,
         ?string $operationName,
     ): ExecutableDocument {    
-        $document = $this->getParser()->parse($query);
+        $document = $this->getParser()->parse($query)->setAncestorsInAST();
         $executableDocument = (
             new ExecutableDocument(
                 $document,
