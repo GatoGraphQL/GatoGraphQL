@@ -12,6 +12,8 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
+    protected Document $parent;
+    
     public function __construct(
         protected string $name,
         /** @var Variable[] */
@@ -80,6 +82,11 @@ abstract class AbstractOperation extends AbstractAst implements OperationInterfa
             $operationDefinition !== '' ? sprintf(' %s ', $operationDefinition) : ' ',
             $strOperationFieldsOrFragmentBonds,
         );
+    }
+
+    public function setParent(Document $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function getName(): string
