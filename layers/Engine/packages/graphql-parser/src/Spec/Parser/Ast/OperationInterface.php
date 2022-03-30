@@ -15,4 +15,5 @@ interface OperationInterface extends AstInterface, LocatableInterface, WithDirec
      * @return Variable[]
      */
     public function getVariables(): array;
+    public function setParent(Document $parent): void;
 }

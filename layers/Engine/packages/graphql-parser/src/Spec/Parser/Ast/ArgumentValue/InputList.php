@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
 class InputList extends AbstractAst implements WithValueInterface, WithAstValueInterface
 {
+    protected InputList|InputObject|Argument $parent;
+
     /**
      * @param mixed[] $list
      */
@@ -24,6 +27,11 @@ class InputList extends AbstractAst implements WithValueInterface, WithAstValueI
     public function asQueryString(): string
     {
         return $this->getGraphQLQueryStringFormatter()->getListAsQueryString($this->list);
+    }
+
+    public function setParent(InputList|InputObject|Argument $parent): void
+    {
+        $this->parent = $parent;
     }
 
     /**

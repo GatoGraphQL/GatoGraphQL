@@ -12,6 +12,8 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
+    protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
+
     /**
      * @param Argument[] $arguments
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
@@ -79,6 +81,11 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
             $strFieldDirectives,
             $strFieldFieldsOrFragmentBonds,
         );
+    }
+
+    public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
+    {
+        $this->parent = $parent;
     }
 
     public function getName(): string
