@@ -33,6 +33,31 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
         return $this->asQueryString();
     }
 
+    /**
+     * ID to uniquely identify the AST element
+     * from all other elements in the GraphQL query.
+     *
+     * In order to invoke this function,
+     * `Document.setAncestorsInAST` must first be invoked.
+     */
+    final public function getID(): string
+    {
+        $parentAST = $this->getParentAST();
+        if ($parentAST !== null) {
+            return sprintf(
+                '%s.%s',
+                $parentAST->getID(),
+                $this->getUniqueName()
+            );
+        }
+        return $this->getUniqueName();
+    }
+
+    abstract protected function getParentAST(): AstInterface;
+    abstract protected function getUniqueName(): string;
+
+
+
     public function getLocation(): Location
     {
         return $this->location;
