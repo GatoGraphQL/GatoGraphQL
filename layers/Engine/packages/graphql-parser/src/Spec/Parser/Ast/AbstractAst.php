@@ -37,28 +37,20 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
      * ID to uniquely identify the AST element
      * from all other elements in the GraphQL query.
      *
-     * In order to invoke this function,
-     * `Document.setAncestorsInAST` must first be invoked.
+     * By default, the location of the element in the
+     * query is used.
      */
-    final public function getID(): string
+    public function getID(): string
     {
-        $idUniqueName = $this->getIDUniqueName();
-        $parentAST = $this->getParentAST();
-        if ($parentAST === null) {
-            return $idUniqueName;
-        }
+        $class = get_called_class();
+        $className = substr($class, strrpos($class, '\\'));
         return sprintf(
-            $this->getFromParentToSelfIDFormat(),
-            $parentAST->getID(),
-            $idUniqueName
+            '%s([%s,%s])',
+            strtolower($className),
+            $this->getLocation()->getLine(),
+            $this->getLocation()->getColumn()
         );
     }
-
-    abstract protected function getParentAST(): ?AstInterface;
-
-    abstract protected function getIDUniqueName(): string;
-
-    abstract protected function getFromParentToSelfIDFormat(): string;
 
 
 
