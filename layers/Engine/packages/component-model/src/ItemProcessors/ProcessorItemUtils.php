@@ -14,12 +14,12 @@ class ProcessorItemUtils
         // $item[0]: class
         // $item[1]: name
         // $item[2]: extra atts (optional)
-        $itemFullName = $item[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $item[1];
-        if (count($item) >= 3) {
-            $itemFullName .= Constants::SEPARATOR_PROCESSORITEMFULLNAME . serialize($item[2]);
+        $itemFullNameElems = [$item[0], $item[1]];
+        $itemAtts = $item[2] ?? null;
+        if ($itemAtts !== null) {
+            $itemAtts[] = serialize($itemAtts);
         }
-
-        return $itemFullName;
+        return implode(Constants::SEPARATOR_PROCESSORITEMFULLNAME, $itemFullNameElems);
     }
     public static function getItemFromFullName(string $itemFullName): ?array
     {
