@@ -98,8 +98,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getLeafFields(array $module): array
     {
-        // @todo Provide fragments from the parsed query!
-        $fragments = [];
         $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
         return array_filter(
@@ -142,8 +140,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getRelationalFields(array $module): array
     {
-        // @todo Provide fragments from the parsed query!
-        $fragments = [];
         $moduleAtts = $module[2] ?? null;
         $fields = $this->getFields($module, $moduleAtts);
         return array_filter(
