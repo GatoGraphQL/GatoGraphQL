@@ -108,13 +108,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
 
         return $fields;
-
-        /**
-         * If it is a normal module, it is the first added,
-         * then parse the requested GraphQL query, and fill
-         * its fields within the ensuing component model
-         */
-        return App::getState('executable-query') ?? [];
     }
 
     /**
