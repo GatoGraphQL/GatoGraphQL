@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Enum;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\StandaloneServiceTrait;
 
 class Document implements DocumentInterface
@@ -656,6 +658,115 @@ class Document implements DocumentInterface
                 );
             }
             $argumentNames[] = $argumentName;
+        }
+    }
+
+    /**
+     * For all elements in the AST, inject them their parent.
+     * This enables them to re-create the path to them,
+     * from the root of the document.
+     */
+    public function setAncestorsInAST(): void
+    {
+        foreach ($this->operations as $operation) {
+            $operation->setParent($this);
+            $this->setAncestorsUnderOperation($operation);
+        }
+        foreach ($this->fragments as $fragment) {
+            $fragment->setParent($this);
+            $this->setAncestorsUnderFragment($fragment);
+        }
+    }
+
+    private function setAncestorsUnderOperation(OperationInterface $operation): void
+    {
+        foreach ($operation->getVariables() as $variable) {
+            $variable->setParent($operation);
+        }
+        foreach ($operation->getDirectives() as $directive) {
+            $directive->setParent($operation);
+            $this->setAncestorsUnderDirective($directive);
+        }
+        foreach ($operation->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
+            $fieldOrFragmentBond->setParent($operation);
+            $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
+        }
+    }
+
+    private function setAncestorsUnderDirective(Directive $directive): void
+    {
+        foreach ($directive->getArguments() as $argument) {
+            $argument->setParent($directive);
+            $this->setAncestorsUnderArgument($argument);
+        }
+    }
+
+    private function setAncestorsUnderArgument(Argument $argument): void
+    {
+        /** @var Enum|InputList|InputObject|Literal|VariableReference */
+        $argumentValue = $argument->getValue();
+        $argumentValue->setParent($argument);
+    }
+
+    private function setAncestorsUnderFieldOrFragmentBond(FieldInterface|FragmentBondInterface $fieldOrFragmentBond): void
+    {
+        if ($fieldOrFragmentBond instanceof LeafField) {
+            /** @var LeafField */
+            $leafField = $fieldOrFragmentBond;
+            foreach ($leafField->getArguments() as $argument) {
+                $argument->setParent($leafField);
+                $this->setAncestorsUnderArgument($argument);
+            }
+            foreach ($leafField->getDirectives() as $directive) {
+                $directive->setParent($leafField);
+                $this->setAncestorsUnderDirective($directive);
+            }
+            return;
+        }
+        if ($fieldOrFragmentBond instanceof RelationalField) {
+            /** @var RelationalField */
+            $relationalField = $fieldOrFragmentBond;
+            foreach ($relationalField->getArguments() as $argument) {
+                $argument->setParent($relationalField);
+                $this->setAncestorsUnderArgument($argument);
+            }
+            foreach ($relationalField->getDirectives() as $directive) {
+                $directive->setParent($relationalField);
+                $this->setAncestorsUnderDirective($directive);
+            }
+            foreach ($relationalField->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
+                $fieldOrFragmentBond->setParent($relationalField);
+                $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
+            }
+            return;
+        }
+        if ($fieldOrFragmentBond instanceof InlineFragment) {
+            /** @var InlineFragment */
+            $inlineFragment = $fieldOrFragmentBond;
+            foreach ($inlineFragment->getDirectives() as $directive) {
+                $directive->setParent($inlineFragment);
+                $this->setAncestorsUnderDirective($directive);
+            }
+            foreach ($inlineFragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
+                $fieldOrFragmentBond->setParent($inlineFragment);
+                $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
+            }
+            return;
+        }
+        /** @var FragmentReference */
+        $fragmentReference = $fieldOrFragmentBond;
+        // Nothing to set here
+    }
+
+    private function setAncestorsUnderFragment(Fragment $fragment): void
+    {
+        foreach ($fragment->getDirectives() as $directive) {
+            $directive->setParent($fragment);
+            $this->setAncestorsUnderDirective($directive);
+        }
+        foreach ($fragment->getFieldsOrFragmentBonds() as $fieldOrFragmentBond) {
+            $fieldOrFragmentBond->setParent($fragment);
+            $this->setAncestorsUnderFieldOrFragmentBond($fieldOrFragmentBond);
         }
     }
 }
