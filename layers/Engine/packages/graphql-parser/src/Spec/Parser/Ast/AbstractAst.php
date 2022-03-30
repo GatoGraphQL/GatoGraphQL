@@ -48,7 +48,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
             return $idUniqueName;
         }
         return sprintf(
-            $this->getIDFormat(),
+            $this->getFromParentToSelfIDFormat(),
             $parentAST->getID(),
             $idUniqueName
         );
@@ -57,11 +57,8 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     abstract protected function getParentAST(): ?AstInterface;
 
     abstract protected function getIDUniqueName(): string;
-    
-    protected function getIDFormat(): string
-    {
-        return '%s.%s';
-    }
+
+    abstract protected function getFromParentToSelfIDFormat(): string;
 
 
 
