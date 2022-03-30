@@ -11,8 +11,6 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
 
-    protected Document $parent;
-
     /**
      * @param Directive[] $directives
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
@@ -63,11 +61,6 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
             $strFragmentDirectives,
             $strFragmentFieldsOrFragmentBonds,
         );
-    }
-
-    public function setParent(Document $parent): void
-    {
-        $this->parent = $parent;
     }
 
     public function getName(): string
