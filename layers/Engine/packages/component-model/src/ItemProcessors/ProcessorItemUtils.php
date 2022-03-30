@@ -29,23 +29,23 @@ class ProcessorItemUtils
             return null;
         }
 
+        $item = [
+            $parts[0], // class
+            $parts[1], // name
+        ];
         // Does it have itematts? If so, unserialize them.
-        return (count($parts) >= 3) ?
-            [
-                $parts[0], // class
-                $parts[1], // name
-                unserialize(
-                    // Just in case itematts contains the same SEPARATOR_PROCESSORITEMFULLNAME string inside of it, simply recalculate the whole itematts from the $itemFullName string
-                    substr(
-                        $itemFullName,
-                        strlen(
-                            $parts[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $parts[1] . Constants::SEPARATOR_PROCESSORITEMFULLNAME
-                        )
+        if (($parts[2] ?? null) !== null) {
+            $item[] = unserialize(
+                // Just in case itematts contains the same SEPARATOR_PROCESSORITEMFULLNAME string inside of it, simply recalculate the whole itematts from the $itemFullName string
+                substr(
+                    $itemFullName,
+                    strlen(
+                        $parts[0] . Constants::SEPARATOR_PROCESSORITEMFULLNAME . $parts[1] . Constants::SEPARATOR_PROCESSORITEMFULLNAME
                     )
                 )
-            ] :
-            // Otherwise, the parts are already the item
-            $parts;
+            );
+        }
+        return $item;
     }
     public static function getItemOutputName(array $item, string $definitionGroup): string
     {
