@@ -669,11 +669,9 @@ class Document implements DocumentInterface
     public function setAncestorsInAST(): self
     {
         foreach ($this->operations as $operation) {
-            $operation->setParent($this);
             $this->setAncestorsUnderOperation($operation);
         }
         foreach ($this->fragments as $fragment) {
-            $fragment->setParent($this);
             $this->setAncestorsUnderFragment($fragment);
         }
         return $this;
