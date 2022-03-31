@@ -89,11 +89,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     ): void {
         $appStateManager = App::getAppStateManager();
         $fields = $this->getRequestedGraphQLQueryFields($executableDocument, true);
-        $executableDocumentFields = [];
+        $appStateFields = [];
         foreach ($fields as $field) {
-            $executableDocumentFields[$this->getFieldUniqueID($field)] = $field;
+            $appStateFields[$this->getFieldUniqueID($field)] = $field;
         }
-        $appStateManager->override('executable-document-ast-fields', $executableDocumentFields);
+        $appStateManager->override('executable-document-ast-fields', $appStateFields);
     }
 
     /**
