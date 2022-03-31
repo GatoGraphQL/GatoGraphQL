@@ -28,7 +28,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * inside the virtual module atts
          */
         if ($moduleAtts !== null) {
-            return $moduleAtts['fields'];
+            return $moduleAtts['fieldIDs'];
         }
 
         /**
@@ -122,7 +122,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments
             );
-            $nestedModule = [$module[0], $module[1], ['fields' => $nestedFields]];
+            $nestedFieldIDs = array_map(
+                $nestedFields,
+                [$this, 'getFieldUniqueID']
+            );
+            $nestedModule = [$module[0], $module[1], ['fieldIDs' => $nestedFieldIDs]];
             $ret[] = RelationalModuleField::fromRelationalField(
                 $relationalField,
                 [
