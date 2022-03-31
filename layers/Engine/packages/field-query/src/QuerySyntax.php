@@ -12,7 +12,7 @@ class QuerySyntax
     const SYMBOL_RELATIONALFIELDS_NEXTLEVEL = '.';
     const SYMBOL_FIELDARGS_OPENING = '(';
     const SYMBOL_FIELDARGS_CLOSING = ')';
-    const SYMBOL_FIELDALIAS_PREFIX = '@';
+    const SYMBOL_FIELDALIAS_PREFIX = ':';
     const SYMBOL_BOOKMARK_OPENING = '[';
     const SYMBOL_BOOKMARK_CLOSING = ']';
     const SYMBOL_SKIPOUTPUTIFNULL = '?';

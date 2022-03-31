@@ -752,11 +752,12 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 $pos = $fieldDirectivesOpeningSymbolPos;
             }
             // Extract the alias, without the "@" symbol
-            if ($pos !== false) {
-                $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX), $pos - strlen($fragmentName));
-            } else {
-                $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
-            }
+            // if ($pos !== false) {
+            //     $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX), $pos - strlen($fragmentName));
+            // } else {
+            //     $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+            // }
+            $alias = substr($fragmentName, 0, $aliasSymbolPos);
         }
         // If it has the "skip output if null" symbol, transfer it to the resolved fragments
         $skipOutputIfNull = false;
@@ -780,7 +781,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         }
         // Extract the fragment name
         if ($aliasSymbolPos !== false) {
-            $fragmentName = substr($fragmentName, 0, $aliasSymbolPos);
+            // $fragmentName = substr($fragmentName, 0, $aliasSymbolPos);
+            $fragmentName = substr($fragmentName, $aliasSymbolPos+1);
         } elseif ($skipOutputIfNullSymbolPos !== false) {
             $fragmentName = substr($fragmentName, 0, $skipOutputIfNullSymbolPos);
         } elseif ($fieldDirectivesOpeningSymbolPos !== false) {
@@ -807,7 +809,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     $fragmentAliasSymbolPos = QueryHelpers::findFieldAliasSymbolPosition($fragmentField);
                     $addAliasToFragmentField = $fragmentAliasSymbolPos === false;
                     if ($addAliasToFragmentField) {
-                        $fragmentFieldAliasWithSymbol = FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $alias . array_search($fragmentField, $fragmentPipeFields);
+                        $fragmentFieldAliasWithSymbol = $alias .FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . array_search($fragmentField, $fragmentPipeFields);
                     }
                 }
                 // Calculate if to add "?"

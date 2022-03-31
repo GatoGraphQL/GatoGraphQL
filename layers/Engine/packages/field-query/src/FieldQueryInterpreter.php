@@ -93,12 +93,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected function doGetFieldName(string $field): string
     {
         // Successively search for the position of some edge symbol
+        // Everything before "@" (for the alias)
+        $pos = QueryHelpers::findFieldAliasSymbolPosition($field);        
+        if ($pos !== false) {
+            $field = trim(substr($field, $pos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)));
+        }
+
         // Everything before "(" (for the fieldArgs)
         list($pos) = QueryHelpers::listFieldArgsSymbolPositions($field);
-        // Everything before "@" (for the alias)
-        if ($pos === false) {
-            $pos = QueryHelpers::findFieldAliasSymbolPosition($field);
-        }
         // Everything before "?" (for "skip output if null")
         if ($pos === false) {
             $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
@@ -364,10 +366,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
             // Extract the alias, without the "@" symbol
             $aliasSymbolLength = $fieldAliasPositionSpan[self::ALIAS_LENGTH_KEY];
+            // return substr(
+            //     $field,
+            //     $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
+            //     $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
+            // );
             return substr(
                 $field,
-                $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
-                $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
+                0,
+                $aliasSymbolLength-strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
             );
         }
         return null;
@@ -401,7 +408,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
 
         // Extract the alias, without the "@" symbol
-        $alias = substr($field, $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+        // $alias = substr($field, $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+        $alias = substr($field, 0, $aliasSymbolPos);
 
         // If there is a "]", "?" or "<" after the alias, remove the string from then on
         // Everything before "]" (for if the alias is inside the bookmark)
@@ -658,7 +666,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     public function listField(string $field): array
     {
         if ($fieldAlias = $this->getFieldAlias($field)) {
-            $fieldAlias = QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldAlias;
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            $fieldAlias = $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
         }
         return [
             $this->getFieldName($field),
@@ -682,9 +694,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         bool $addFieldArgSymbolsIfEmpty = false
     ): string {
         return
+            $this->getFieldAliasAsString($fieldAlias) .
             $fieldName .
             $this->getFieldArgsAsString($fieldArgs, $addFieldArgSymbolsIfEmpty) .
-            $this->getFieldAliasAsString($fieldAlias) .
             $this->getFieldSkipOutputIfNullAsString($skipOutputIfNull) .
             $this->getFieldDirectivesAsString($fieldDirectives ?? []);
     }
@@ -696,7 +708,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ?string $skipOutputIfNull = '',
         ?string $fieldDirectives = ''
     ): string {
-        return $fieldName . ($fieldArgs ?? '') . ($fieldAlias ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
+        return ($fieldAlias ?? '') . $fieldName . ($fieldArgs ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
     }
 
     /**
@@ -969,7 +981,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if (!$fieldAlias) {
             return '';
         }
-        return QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldAlias;
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Added an extra " "
+         */
+        return $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
     }
 
     protected function getFieldSkipOutputIfNullAsString(?bool $skipOutputIfNull = false): string
