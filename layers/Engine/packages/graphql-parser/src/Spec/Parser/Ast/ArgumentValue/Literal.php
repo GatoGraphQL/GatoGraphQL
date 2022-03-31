@@ -30,6 +30,11 @@ class Literal extends AbstractAst implements WithValueInterface
         $this->parent = $parent;
     }
 
+    public function getParent(): InputList|InputObject|Argument
+    {
+        return $this->parent;
+    }
+
     /**
      * @return string|int|float|bool|null
      */

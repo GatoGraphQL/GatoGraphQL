@@ -65,6 +65,11 @@ class Variable extends AbstractAst implements WithValueInterface
         $this->parent = $parent;
     }
 
+    public function getParent(): OperationInterface
+    {
+        return $this->parent;
+    }
+
     public function setContext(?Context $context): void
     {
         $this->context = $context;

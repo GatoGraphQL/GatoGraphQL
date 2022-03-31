@@ -32,6 +32,11 @@ class InputObject extends AbstractAst implements WithValueInterface, WithAstValu
         $this->parent = $parent;
     }
 
+    public function getParent(): InputList|InputObject|Argument
+    {
+        return $this->parent;
+    }
+
     /**
      * Transform from Ast to actual value.
      * Eg: replace VariableReferences with their value,

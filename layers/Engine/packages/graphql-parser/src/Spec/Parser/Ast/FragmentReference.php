@@ -30,6 +30,11 @@ class FragmentReference extends AbstractAst implements FragmentBondInterface
         $this->parent = $parent;
     }
 
+    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
+    {
+        return $this->parent;
+    }
+
     public function getName(): string
     {
         return $this->name;

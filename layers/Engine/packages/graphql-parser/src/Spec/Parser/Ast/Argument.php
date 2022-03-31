@@ -32,6 +32,11 @@ class Argument extends AbstractAst
         $this->parent = $parent;
     }
 
+    public function getParent(): FieldInterface|Directive
+    {
+        return $this->parent;
+    }
+
     public function getName(): string
     {
         return $this->name;
