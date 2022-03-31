@@ -103,10 +103,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         ExecutableDocument $executableDocument,
         bool $recursive,
     ): array {
-        $fields = [];
-
-        /** @var ExecutableDocument $executableDocument */
         $fragments = $executableDocument->getDocument()->getFragments();
+        $fields = [];
         foreach ($executableDocument->getRequestedOperations() as $operation) {
             $fields = array_merge(
                 $fields,
@@ -117,7 +115,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 )
             );
         }
-
         return $fields;
     }
 
