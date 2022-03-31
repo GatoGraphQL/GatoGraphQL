@@ -11,6 +11,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
     use WithArgumentsTrait;
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
+    use FieldTrait;
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
 
@@ -35,32 +36,6 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
 
     public function asQueryString(): string
     {
-        // Generate the string for arguments
-        $strFieldArguments = '';
-        if ($this->arguments !== []) {
-            $strArguments = [];
-            foreach ($this->arguments as $argument) {
-                $strArguments[] = $argument->asQueryString();
-            }
-            $strFieldArguments = sprintf(
-                '(%s)',
-                implode(', ', $strArguments)
-            );
-        }
-
-        // Generate the string for directives
-        $strFieldDirectives = '';
-        if ($this->directives !== []) {
-            $strDirectives = [];
-            foreach ($this->directives as $directive) {
-                $strDirectives[] = $directive->asQueryString();
-            }
-            $strFieldDirectives = sprintf(
-                ' %s',
-                implode(' ', $strDirectives)
-            );
-        }
-
         // Generate the string for the body of the operation
         $strFieldFieldsOrFragmentBonds = '';
         if ($this->fieldsOrFragmentBonds !== []) {
@@ -74,11 +49,8 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
             );
         }
         return sprintf(
-            '%s%s%s%s {%s}',
-            $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
-            $this->name,
-            $strFieldArguments,
-            $strFieldDirectives,
+            '%s {%s}',
+            $this->asFieldOutputQueryString(),
             $strFieldFieldsOrFragmentBonds,
         );
     }

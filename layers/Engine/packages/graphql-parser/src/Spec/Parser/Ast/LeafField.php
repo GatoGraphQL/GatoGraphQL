@@ -10,6 +10,7 @@ class LeafField extends AbstractAst implements FieldInterface
 {
     use WithArgumentsTrait;
     use WithDirectivesTrait;
+    use FieldTrait;
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
 
@@ -31,38 +32,7 @@ class LeafField extends AbstractAst implements FieldInterface
 
     public function asQueryString(): string
     {
-        // Generate the string for arguments
-        $strFieldArguments = '';
-        if ($this->arguments !== []) {
-            $strArguments = [];
-            foreach ($this->arguments as $argument) {
-                $strArguments[] = $argument->asQueryString();
-            }
-            $strFieldArguments = sprintf(
-                '(%s)',
-                implode(', ', $strArguments)
-            );
-        }
-
-        // Generate the string for directives
-        $strFieldDirectives = '';
-        if ($this->directives !== []) {
-            $strDirectives = [];
-            foreach ($this->directives as $directive) {
-                $strDirectives[] = $directive->asQueryString();
-            }
-            $strFieldDirectives = sprintf(
-                ' %s',
-                implode(' ', $strDirectives)
-            );
-        }
-        return sprintf(
-            '%s%s%s%s',
-            $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
-            $this->name,
-            $strFieldArguments,
-            $strFieldDirectives,
-        );
+        return $this->asFieldOutputQueryString();
     }
 
     public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
