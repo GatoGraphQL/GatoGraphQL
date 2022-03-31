@@ -53,7 +53,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          */
         $this->storeAstFieldsInAppState($executableDocument);
 
-        // Return the "fieldIDs" for the root level Fields
+        /**
+         * Return the "fieldIDs" for the root level Fields
+         */
         $rootFields = $this->getRequestedGraphQLQueryFields($executableDocument, false);
         return array_map(
             $rootFields,
