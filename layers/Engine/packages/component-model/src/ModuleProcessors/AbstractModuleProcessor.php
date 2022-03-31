@@ -262,7 +262,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
-                $subcomponent_data_field = $relationalModuleField->asQueryString();
+                $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
                         $this->setProp($subcomponent_module, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
@@ -276,7 +276,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
-                    $conditionalDataField = $relationalModuleField->asQueryString();
+                    $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
                         foreach ($relationalModuleField->getNestedModules() as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
@@ -573,7 +573,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($relationalTypeResolver = $this->getProp($module, $props, 'succeeding-typeResolver')) {
             foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
-                $subcomponent_data_field = $relationalModuleField->asQueryString();
+                $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
                     // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
@@ -585,7 +585,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
-                    $conditionalDataField = $relationalModuleField->asQueryString();
+                    $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
                     if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
                         // If there is an alias, store the results under this. Otherwise, on the fieldName+fieldArgs
@@ -644,7 +644,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $this->getModuleFilterManager()->prepareForPropagation($module, $props);
             foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
-                $subcomponent_data_field = $relationalModuleField->asQueryString();
+                $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
@@ -661,7 +661,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
-                    $conditionalDataField = $relationalModuleField->asQueryString();
+                    $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
                     $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
@@ -826,7 +826,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
              */
             $data_fields = array_map(
-                fn (ModuleFieldInterface $field) => $field->asQueryString(),
+                fn (ModuleFieldInterface $field) => $field->asFieldOutputQueryString(),
                 $data_fields
             );
             $ret['data-fields'] = $data_fields;
@@ -1119,7 +1119,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 $directSubmodules = $this->getSubmodules($module);
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
-                    $conditionDataField = $conditionalLeafModuleField->asQueryString();
+                    $conditionDataField = $conditionalLeafModuleField->asFieldOutputQueryString();
                     $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedModules();
                     // Calculate those fields which are certainly to be propagated, and not part of the direct submodules
                     // Using this really ugly way because, for comparing modules, using `array_diff` and `intersect` fail
@@ -1205,13 +1205,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $domainSwitchingSubmodules = [];
         foreach ($this->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
-            $subcomponent_data_field = $relationalModuleField->asQueryString();
+            $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
             $domainSwitchingSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
         }        
         foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
-            $conditionDataField = $conditionalRelationalModuleField->asQueryString();
+            $conditionDataField = $conditionalRelationalModuleField->asFieldOutputQueryString();
             foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
-                $conditionalDataField = $relationalModuleField->asQueryString();
+                $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                 $domainSwitchingSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
                     $domainSwitchingSubmodules[$conditionalDataField] ?? [],
                     $relationalModuleField->getNestedModules()
