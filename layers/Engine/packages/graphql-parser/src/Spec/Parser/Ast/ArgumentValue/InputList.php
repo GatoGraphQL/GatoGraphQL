@@ -10,7 +10,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class InputList extends AbstractAst implements WithValueInterface, WithAstValueInterface
+class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
 

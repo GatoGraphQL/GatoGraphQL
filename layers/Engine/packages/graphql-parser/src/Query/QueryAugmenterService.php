@@ -8,7 +8,7 @@ use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
+use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 

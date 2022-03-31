@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Variable;
-
 interface OperationInterface extends AstInterface, LocatableInterface, WithDirectivesInterface, WithFieldsOrFragmentBondsInterface
 {
     public function getName(): string;
