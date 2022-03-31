@@ -58,8 +58,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          */
         $rootFields = $this->getAstFields($executableDocument, false);
         return array_map(
-            $rootFields,
-            [$this, 'getFieldUniqueID']
+            [$this, 'getFieldUniqueID'],
+            $rootFields
         );
     }
 
@@ -182,8 +182,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 false
             );
             $nestedFieldIDs = array_map(
-                $nestedFields,
-                [$this, 'getFieldUniqueID']
+                [$this, 'getFieldUniqueID'],
+                $nestedFields
             );
             $nestedModule = [$module[0], $module[1], ['fieldIDs' => $nestedFieldIDs]];
             $ret[] = RelationalModuleField::fromRelationalField(
