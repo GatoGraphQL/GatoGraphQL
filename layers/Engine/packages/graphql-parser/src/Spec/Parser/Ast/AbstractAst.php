@@ -28,11 +28,6 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     {
     }
 
-    final public function __toString(): string
-    {
-        return $this->asQueryString();
-    }
-
     /**
      * ID to uniquely identify the AST element
      * from all other elements in the GraphQL query.
