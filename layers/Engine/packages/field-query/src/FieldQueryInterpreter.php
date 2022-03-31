@@ -777,7 +777,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 // from string to array in `getField`)
                 $fieldArgValue = $this->maybeWrapStringInQuotes($fieldArgValue);
             }
-            $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . $fieldArgValue;
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . ' ' . $fieldArgValue;
         }
         return
             QuerySyntax::SYMBOL_FIELDARGS_OPENING .
