@@ -18,6 +18,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
+    protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
     /**
      * @return FieldInterface[]
      */
@@ -28,7 +29,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * inside the virtual module atts.
          */
         if ($moduleAtts !== null) {
-            return $this->retrieveAstFieldsFromAppState($moduleAtts['fieldIDs']);
+            return $this->retrieveAstFieldsFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
         }
 
         /**
@@ -185,7 +186,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 [$this, 'getFieldUniqueID'],
                 $nestedFields
             );
-            $nestedModule = [$module[0], $module[1], ['fieldIDs' => $nestedFieldIDs]];
+            $nestedModule = [$module[0], $module[1], [self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs]];
             $ret[] = RelationalModuleField::fromRelationalField(
                 $relationalField,
                 [
