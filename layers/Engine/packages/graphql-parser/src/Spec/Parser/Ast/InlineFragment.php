@@ -68,6 +68,11 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
         $this->parent = $parent;
     }
 
+    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
+    {
+        return $this->parent;
+    }
+
     public function getTypeName(): string
     {
         return $this->typeName;

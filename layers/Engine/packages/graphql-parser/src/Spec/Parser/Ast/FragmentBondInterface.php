@@ -10,4 +10,6 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 interface FragmentBondInterface extends AstInterface
 {
     public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void;
+
+    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface;
 }
