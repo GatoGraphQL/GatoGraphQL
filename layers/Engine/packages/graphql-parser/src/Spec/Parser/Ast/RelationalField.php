@@ -49,17 +49,6 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
             );
         }
 
-        /**
-         * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
-         */
-        // return sprintf(
-        //     '%s%s%s%s {%s}',
-        //     $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
-        //     $this->name,
-        //     $strFieldArguments,
-        //     $strFieldDirectives,
-        //     $strFieldFieldsOrFragmentBonds,
-        // );
         return sprintf(
             '%s {%s}',
             $this->asFieldOutputQueryString(),
