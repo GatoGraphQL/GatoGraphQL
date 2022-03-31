@@ -58,6 +58,46 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
         );
     }
 
+    /**
+     * @todo Temporarily calling ->asQueryString, must work with AST directly!
+     */
+    public function asFieldOutputQueryString(): string
+    {
+        // Generate the string for arguments
+        $strFieldArguments = '';
+        if ($this->getArguments() !== []) {
+            $strArguments = [];
+            foreach ($this->getArguments() as $argument) {
+                $strArguments[] = $argument->asQueryString();
+            }
+            $strFieldArguments = sprintf(
+                '(%s)',
+                implode(', ', $strArguments)
+            );
+        }
+        
+        /**
+         * @todo Temporarily calling ->asQueryString, must work with AST directly!
+         */
+        $strFieldDirectives = '';
+        if ($this->getDirectives() !== []) {
+            $directiveQueryString = [];
+            foreach ($this->getDirectives() as $directive) {
+                // Remove the initial "@"
+                $directiveQueryString[] = substr($directive->asQueryString(), 1);
+            }
+            $strFieldDirectives .= '<' . implode(', ', $directiveQueryString) . '>';
+        }
+
+        return sprintf(
+            '%s%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
+            $this->getName(),
+            $strFieldArguments,
+            $strFieldDirectives,
+        );
+    }
+
     public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
     {
         $this->parent = $parent;
