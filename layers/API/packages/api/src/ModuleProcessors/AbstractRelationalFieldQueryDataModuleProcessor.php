@@ -61,6 +61,19 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
+     * ID to uniquely identify the AST element
+     */
+    protected function getFieldUniqueID(FieldInterface $field): string
+    {
+        return sprintf(
+            '%s([%s,%s])',
+            $field->getAlias() ?? $field->getName(),
+            $field->getLocation()->getLine(),
+            $field->getLocation()->getColumn()
+        );
+    }
+
+    /**
      * @return LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
