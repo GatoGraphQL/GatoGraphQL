@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\ArgumentValueAstInterface;
 use stdClass;
 
 class GraphQLQueryStringFormatter implements GraphQLQueryStringFormatterInterface
@@ -27,7 +27,7 @@ class GraphQLQueryStringFormatter implements GraphQLQueryStringFormatterInterfac
     {
         $listStrElems = [];
         foreach ($list as $elem) {
-            $listStrElems[] = $elem instanceof AstInterface
+            $listStrElems[] = $elem instanceof ArgumentValueAstInterface
                 ? $elem->asQueryString()
                 : $this->getElementAsQueryString($elem);
         }
@@ -44,7 +44,7 @@ class GraphQLQueryStringFormatter implements GraphQLQueryStringFormatterInterfac
             $objectStrElems[] = sprintf(
                 '%s: %s',
                 $key,
-                $value instanceof AstInterface
+                $value instanceof ArgumentValueAstInterface
                     ? $value->asQueryString()
                     : $this->getElementAsQueryString($value)
             );
