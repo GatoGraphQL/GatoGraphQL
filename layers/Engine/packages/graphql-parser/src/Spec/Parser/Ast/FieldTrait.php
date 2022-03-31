@@ -34,21 +34,11 @@ trait FieldTrait
             );
         }
         
-        /**
-         * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
-         */
-        // return sprintf(
-        //     '%s%s%s%s',
-        //     $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
-        //     $this->getName(),
-        //     $strFieldArguments,
-        //     $strFieldDirectives,
-        // );
         return sprintf(
             '%s%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
             $this->getName(),
             $strFieldArguments,
-            $this->getAlias() !== null ? sprintf('@%s', $this->getAlias()) : '',
             $strFieldDirectives,
         );
     }

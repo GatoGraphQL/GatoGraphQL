@@ -820,10 +820,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         ) {
             /**
              * @todo Temporarily calling ->asQueryString, must work with AST directly!
-             * 
-             * This hack works together with another hack:
-             *
-             * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
              */
             $data_fields = array_map(
                 function (ModuleFieldInterface $field) {
