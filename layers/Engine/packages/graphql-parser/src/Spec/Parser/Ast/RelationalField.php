@@ -11,7 +11,9 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
     use WithArgumentsTrait;
     use WithDirectivesTrait;
     use WithFieldsOrFragmentBondsTrait;
-    use FieldTrait;
+    use FieldTrait {
+        FieldTrait::asQueryString as upstreamAsQueryString;
+    }
 
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
 
@@ -51,7 +53,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
 
         return sprintf(
             '%s {%s}',
-            $this->asFieldOutputQueryString(),
+            $this->upstreamAsQueryString(),
             $strFieldFieldsOrFragmentBonds,
         );
     }

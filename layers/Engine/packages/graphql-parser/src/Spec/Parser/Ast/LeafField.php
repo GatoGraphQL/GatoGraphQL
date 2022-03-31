@@ -30,11 +30,6 @@ class LeafField extends AbstractAst implements FieldInterface
         $this->setDirectives($directives);
     }
 
-    public function asQueryString(): string
-    {
-        return $this->asFieldOutputQueryString();
-    }
-
     public function setParent(RelationalField|Fragment|InlineFragment|OperationInterface $parent): void
     {
         $this->parent = $parent;
