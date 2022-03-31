@@ -266,10 +266,15 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $recursiveFields = [];
         foreach ($fields as $field) {
             $recursiveFields[] = $field;
+            if ($field instanceof LeafField) {
+                continue;
+            }
+            /** @var RelationalField */
+            $relationalField = $field;
             $recursiveFields = array_merge(
                 $recursiveFields,
                 $this->getAllFieldsFromFieldsOrFragmentBonds(
-                    $field->getFieldsOrFragmentBonds(),
+                    $relationalField->getFieldsOrFragmentBonds(),
                     $fragments,
                     $recursive
                 )
