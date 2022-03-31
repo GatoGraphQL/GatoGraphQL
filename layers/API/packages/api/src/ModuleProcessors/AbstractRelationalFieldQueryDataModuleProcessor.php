@@ -24,11 +24,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getFields(array $module, ?array $moduleAtts): array
     {
         /**
-         * If it is a virtual module, the fields are coded
-         * inside the virtual module atts
+         * If it is a virtual module, the field IDs are coded
+         * inside the virtual module atts.
          */
         if ($moduleAtts !== null) {
-            return $moduleAtts['fieldIDs'];
+            return $this->getAstFieldsFromAppState($moduleAtts['fieldIDs']);
         }
 
         /**
@@ -59,6 +59,22 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             $rootFields,
             [$this, 'getFieldUniqueID']
         );
+    }
+
+    /**
+     * Retrieve the Fields stored in the AppState from the passed "fieldIDs".
+     *
+     * @param string[] $fieldIDs
+     * @return FieldInterface[]
+     */
+    protected function getAstFieldsFromAppState(array $fieldIDs): array
+    {
+        $executableDocumentFields = App::getState('executable-document-ast-fields');
+        $fields = [];
+        foreach ($fieldIDs as $fieldID) {
+            $fields[] = $executableDocumentFields[$fieldID];
+        }
+        return $fields;
     }
 
     /**
