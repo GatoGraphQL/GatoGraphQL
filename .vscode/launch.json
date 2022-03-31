@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [        
         {
-            "name": "Listen for Xdebug",
+            "name": "[Lando webserver] Listen for Xdebug",
             "type": "php",
             "request": "launch",
             "port": 9003,
@@ -136,6 +136,13 @@
               "/app/wordpress/WPSchema/": "${workspaceFolder}/layers/WPSchema/",
               "/app": "${workspaceFolder}/webservers/graphql-api-for-wp"
             }
+        },
+        {
+            "name": "[PHPUnit] Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 8000,
+            "${workspaceFolder}": "${workspaceFolder}"
         }
     ]
 }
