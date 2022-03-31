@@ -35,14 +35,27 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * It is a normal module when calling the first time
          * (i.e. for the fields at the root level).
          *
-         * Parse the requested GraphQL query, and extract
-         * the root fields.
+         * Extract the root fields from the requested GraphQL query.
          */
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
             return [];
         }
+        /** @var ExecutableDocument $executableDocument */
 
+        // Return the "fieldIDs"
+        return array_map(
+            $this->getRequestedGraphQLQueryRootFields($executableDocument),
+            [$this, 'getFieldUniqueID']
+        );
+    }
+
+    /**
+     * @return FieldInterface[]
+     */
+    protected function getRequestedGraphQLQueryRootFields(
+        ExecutableDocument $executableDocument,
+    ): array {
         $fields = [];
 
         /** @var ExecutableDocument $executableDocument */
@@ -115,7 +128,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
 
         /**
          * Create a "virtual" module with the fields
-         * corresponding to the next level module
+         * corresponding to the next level module.
          */
         foreach ($relationalFields as $relationalField) {
             $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
