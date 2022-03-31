@@ -72,10 +72,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function retrieveAstFieldsFromAppState(array $fieldIDs): array
     {
-        $executableDocumentFields = App::getState('executable-document-ast-fields');
+        $appStateFields = App::getState('executable-document-ast-fields');
         $fields = [];
         foreach ($fieldIDs as $fieldID) {
-            $fields[] = $executableDocumentFields[$fieldID];
+            $fields[] = $appStateFields[$fieldID];
         }
         return $fields;
     }
