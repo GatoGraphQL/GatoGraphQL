@@ -56,11 +56,22 @@ class LeafField extends AbstractAst implements FieldInterface
                 implode(' ', $strDirectives)
             );
         }
+
+        /**
+         * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
+         */
+        // return sprintf(
+        //     '%s%s%s%s',
+        //     $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
+        //     $this->name,
+        //     $strFieldArguments,
+        //     $strFieldDirectives,
+        // );
         return sprintf(
             '%s%s%s%s',
-            $this->alias !== null ? sprintf('%s: ', $this->alias) : '',
-            $this->name,
+            $this->getName(),
             $strFieldArguments,
+            $this->getAlias() !== null ? sprintf('@%s', $this->getAlias()) : '',
             $strFieldDirectives,
         );
     }

@@ -21,6 +21,7 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Component as RootComponent;
@@ -817,7 +818,13 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
                 )
             //)
         ) {
-            // @todo Temporarily calling ->asQueryString, must work with AST directly!
+            /**
+             * @todo Temporarily calling ->asQueryString, must work with AST directly!
+             * 
+             * This hack works together with another hack:
+             *
+             * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
+             */
             $data_fields = array_map(
                 fn (ModuleFieldInterface $field) => $field->asQueryString(),
                 $data_fields
