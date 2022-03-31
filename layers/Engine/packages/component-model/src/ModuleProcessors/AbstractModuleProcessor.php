@@ -823,9 +823,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              */
             $data_fields = array_map(
                 function (ModuleFieldInterface $field) {
-                    // if ($field->getAlias() !== null) {
-                    //     return $field->getAlias();
-                    // }
                     return $field->asFieldOutputQueryString();
                 },
                 $data_fields
