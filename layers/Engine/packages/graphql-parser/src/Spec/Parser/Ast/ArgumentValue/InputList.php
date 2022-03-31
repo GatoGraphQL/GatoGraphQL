@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
-use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithAstValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
+class InputList extends AbstractArgumentValueAst implements WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
 
