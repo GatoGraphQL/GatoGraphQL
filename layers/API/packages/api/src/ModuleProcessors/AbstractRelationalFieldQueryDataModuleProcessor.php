@@ -51,7 +51,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * in the GraphQL query, and place them under a unique ID.
          * Then this "fieldID" will be passed in the moduleAtts
          */
-        $this->placeAstFieldsInAppState($executableDocument);
+        $this->storeAstFieldsInAppState($executableDocument);
 
         // Return the "fieldIDs" for the root level Fields
         $rootFields = $this->getRequestedGraphQLQueryFields($executableDocument, false);
@@ -82,7 +82,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      * in the GraphQL query, placed under their unique ID,
      * and set it in the AppState
      */
-    protected function placeAstFieldsInAppState(
+    protected function storeAstFieldsInAppState(
         ExecutableDocument $executableDocument,
     ): void {
         $appStateManager = App::getAppStateManager();
