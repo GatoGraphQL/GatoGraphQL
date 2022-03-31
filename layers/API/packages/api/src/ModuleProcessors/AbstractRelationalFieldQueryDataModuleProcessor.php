@@ -69,9 +69,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function retrieveAstFieldsFromAppState(array $fieldIDs): array
     {
         $appStateFields = App::getState('executable-document-ast-fields');
+        $query = App::getState('query');
         $fields = [];
         foreach ($fieldIDs as $fieldID) {
-            $fields[] = $appStateFields[$fieldID];
+            $fields[] = $appStateFields[$query][$fieldID];
         }
         return $fields;
     }
@@ -84,16 +85,21 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function maybeStoreAstFieldsInAppState(
         ExecutableDocument $executableDocument,
     ): void {
-        // Only do it the first time
+        // Only do it the first time the query is parsed
         $appStateManager = App::getAppStateManager();
+        $appStateFields = [];
         if ($appStateManager->has('executable-document-ast-fields')) {
+            $appStateFields = $appStateManager->get('executable-document-ast-fields');
+        }
+        $query = App::getState('query');
+        if (isset($appStateFields[$query])) {
             return;
         }
         
         $fields = $this->getAstFields($executableDocument, true);
-        $appStateFields = [];
+        $appStateFields[$query] = [];
         foreach ($fields as $field) {
-            $appStateFields[$this->getFieldUniqueID($field)] = $field;
+            $appStateFields[$query][$this->getFieldUniqueID($field)] = $field;
         }
         $appStateManager->override('executable-document-ast-fields', $appStateFields);
     }
