@@ -43,9 +43,21 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
         /** @var ExecutableDocument $executableDocument */
 
+        /**
+         * Because moduleAtts are serialized/unserialized,
+         * cannot pass the Field object directly in them.
+         *
+         * Instead, first generate a dictionary with all the Fields
+         * in the GraphQL query, and place them under a unique ID.
+         * Then this "fieldID" will be passed in the moduleAtts
+         */
+        $allFields = $this->getRequestedGraphQLQueryFields($executableDocument, true);
+
+
         // Return the "fieldIDs"
+        $rootFields = $this->getRequestedGraphQLQueryFields($executableDocument, false);
         return array_map(
-            $this->getRequestedGraphQLQueryRootFields($executableDocument),
+            $rootFields,
             [$this, 'getFieldUniqueID']
         );
     }
@@ -53,8 +65,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return FieldInterface[]
      */
-    protected function getRequestedGraphQLQueryRootFields(
+    protected function getRequestedGraphQLQueryFields(
         ExecutableDocument $executableDocument,
+        bool $recursive,
     ): array {
         $fields = [];
 
@@ -65,7 +78,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 $fields,
                 $this->getAllFieldsFromFieldsOrFragmentBonds(
                     $operation->getFieldsOrFragmentBonds(),
-                    $fragments
+                    $fragments,
+                    $recursive
                 )
             );
         }
@@ -133,7 +147,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         foreach ($relationalFields as $relationalField) {
             $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
-                $fragments
+                $fragments,
+                false
             );
             $nestedFieldIDs = array_map(
                 $nestedFields,
@@ -171,6 +186,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getAllFieldsFromFieldsOrFragmentBonds(
         array $fieldsOrFragmentBonds,
         array $fragments,
+        bool $recursive
     ): array {
         $fields = [];
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
@@ -185,7 +201,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                     $fields,
                     $this->getAllFieldsFromFieldsOrFragmentBonds(
                         $fragment->getFieldsOrFragmentBonds(),
-                        $fragments
+                        $fragments,
+                        $recursive
                     )
                 );
                 continue;
@@ -197,7 +214,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                     $fields,
                     $this->getAllFieldsFromFieldsOrFragmentBonds(
                         $inlineFragment->getFieldsOrFragmentBonds(),
-                        $fragments
+                        $fragments,
+                        $recursive
                     )
                 );
                 continue;
@@ -206,7 +224,26 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             $field = $fieldOrFragmentBond;
             $fields[] = $field;
         }
-        return $fields;
+        if (!$recursive) {
+            return $fields;
+        }
+
+        /**
+         * Recursive: also obtain the fields nested within the fields
+         */
+        $recursiveFields = [];
+        foreach ($fields as $field) {
+            $recursiveFields[] = $field;
+            $recursiveFields = array_merge(
+                $recursiveFields,
+                $this->getAllFieldsFromFieldsOrFragmentBonds(
+                    $field->getFieldsOrFragmentBonds(),
+                    $fragments,
+                    $recursive
+                )
+            );
+        }
+        return $recursiveFields;
     }
 
     /**
