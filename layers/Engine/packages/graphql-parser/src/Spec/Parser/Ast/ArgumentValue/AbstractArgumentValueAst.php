@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
+use PoP\GraphQLParser\Spec\Parser\Ast\WithoutInnerElementsAstTrait;
 
 abstract class AbstractArgumentValueAst extends AbstractAst implements ArgumentValueAstInterface
 {
+    use WithoutInnerElementsAstTrait;
 }
