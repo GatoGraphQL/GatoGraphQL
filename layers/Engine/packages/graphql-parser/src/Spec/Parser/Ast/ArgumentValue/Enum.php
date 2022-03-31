@@ -30,6 +30,11 @@ class Enum extends AbstractAst implements WithValueInterface
         $this->parent = $parent;
     }
 
+    public function getParent(): InputList|InputObject|Argument
+    {
+        return $this->parent;
+    }
+
     /**
      * @return string
      */

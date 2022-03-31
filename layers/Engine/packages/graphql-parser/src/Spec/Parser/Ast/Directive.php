@@ -49,6 +49,11 @@ class Directive extends AbstractAst
         $this->parent = $parent;
     }
 
+    public function getParent(): FieldInterface|OperationInterface|Fragment|InlineFragment
+    {
+        return $this->parent;
+    }
+
     public function getName(): string
     {
         return $this->name;

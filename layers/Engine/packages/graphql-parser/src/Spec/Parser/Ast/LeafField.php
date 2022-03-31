@@ -70,6 +70,11 @@ class LeafField extends AbstractAst implements FieldInterface
         $this->parent = $parent;
     }
 
+    public function getParent(): RelationalField|Fragment|InlineFragment|OperationInterface
+    {
+        return $this->parent;
+    }
+
     public function getName(): string
     {
         return $this->name;

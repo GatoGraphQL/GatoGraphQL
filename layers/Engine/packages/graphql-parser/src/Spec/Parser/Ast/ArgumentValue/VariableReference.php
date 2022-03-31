@@ -39,6 +39,11 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
         $this->parent = $parent;
     }
 
+    public function getParent(): InputList|InputObject|Argument
+    {
+        return $this->parent;
+    }
+
     public function getVariable(): ?Variable
     {
         return $this->variable;
