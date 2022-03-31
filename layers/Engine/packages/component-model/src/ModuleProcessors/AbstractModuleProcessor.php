@@ -826,7 +826,12 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
              * @todo Temporarily changed the code to match expectation by PQL; Uncomment this code below, delete the one under!
              */
             $data_fields = array_map(
-                fn (ModuleFieldInterface $field) => $field->asFieldOutputQueryString(),
+                function (ModuleFieldInterface $field) {
+                    // if ($field->getAlias() !== null) {
+                    //     return $field->getAlias();
+                    // }
+                    return $field->asFieldOutputQueryString();
+                },
                 $data_fields
             );
             $ret['data-fields'] = $data_fields;
