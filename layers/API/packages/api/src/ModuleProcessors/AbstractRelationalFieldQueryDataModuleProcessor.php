@@ -56,7 +56,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         /**
          * Return the "fieldIDs" for the root level Fields
          */
-        $rootFields = $this->getRequestedGraphQLQueryFields($executableDocument, false);
+        $rootFields = $this->getAstFields($executableDocument, false);
         return array_map(
             $rootFields,
             [$this, 'getFieldUniqueID']
@@ -88,7 +88,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         ExecutableDocument $executableDocument,
     ): void {
         $appStateManager = App::getAppStateManager();
-        $fields = $this->getRequestedGraphQLQueryFields($executableDocument, true);
+        $fields = $this->getAstFields($executableDocument, true);
         $appStateFields = [];
         foreach ($fields as $field) {
             $appStateFields[$this->getFieldUniqueID($field)] = $field;
@@ -99,7 +99,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return FieldInterface[]
      */
-    protected function getRequestedGraphQLQueryFields(
+    protected function getAstFields(
         ExecutableDocument $executableDocument,
         bool $recursive,
     ): array {
