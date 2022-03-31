@@ -850,11 +850,21 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getArrayAsStringForQuery($value);
             } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
@@ -868,7 +878,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
                 }
-                $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER . $value;
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
+                    $value;
             }
         }
         return
@@ -891,11 +909,21 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getArrayAsStringForQuery($value);
             } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
@@ -916,7 +944,15 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                      */
                     $value = $this->wrapStringInQuotes($this->serializeObject($value));
                 }
-                $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
+                    $value;
             }
         }
         return
