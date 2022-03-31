@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use GraphQLByPoP\GraphQLServer\Component;
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
+use GraphQLByPoP\GraphQLServer\Component;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\Root\App;
 use PoP\Root\HttpFoundation\Response;
 use PoPAPI\API\Facades\FieldQueryConvertorFacade;
@@ -89,6 +94,10 @@ class GraphQLServer implements GraphQLServerInterface
     {
         return App::getContainer()->get(GraphQLDataStructureFormatter::class);
     }
+    protected function getParser(): ParserInterface
+    {
+        return App::getContainer()->get(ParserInterface::class);
+    }
 
     /**
      * The basic state for executing GraphQL queries is already set.
@@ -97,8 +106,11 @@ class GraphQLServer implements GraphQLServerInterface
      *
      * @param array<string,mixed> $variables
      */
-    public function execute(string $query, array $variables = []): Response
-    {
+    public function execute(
+        string $query,
+        array $variables = [],
+        ?string $operationName = null
+    ): Response {
         // Override the previous response, if any
         App::regenerateResponse();
 
@@ -106,6 +118,20 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
+
+        // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
+        try {
+            $executableDocument = $this->parseGraphQLQuery(
+                $query,
+                $variables,
+                $operationName
+            );
+            $appStateManager->override('executable-document-ast', $executableDocument);
+        } catch (SyntaxErrorException | InvalidRequestException $e) {
+            // @todo Show GraphQL error in client
+            // ...
+            $appStateManager->override('does-api-query-have-errors', true);
+        }
 
         // Convert the query to AST and set on the state
         [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
@@ -128,5 +154,24 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Return the Response, so the client can retrieve content and headers
         return App::getResponse();
+    }
+
+    /**
+     * @throws SyntaxErrorException
+     * @throws InvalidRequestException
+     */
+    protected function parseGraphQLQuery(
+        string $query,
+        array $variableValues,
+        ?string $operationName,
+    ): ExecutableDocument {    
+        $document = $this->getParser()->parse($query)->setAncestorsInAST();
+        $executableDocument = (
+            new ExecutableDocument(
+                $document,
+                new Context($operationName, $variableValues)
+            )
+        )->validateAndInitialize();
+        return $executableDocument;
     }
 }

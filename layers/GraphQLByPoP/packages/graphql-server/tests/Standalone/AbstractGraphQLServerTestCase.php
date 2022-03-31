@@ -46,9 +46,13 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         return [];
     }
 
-    protected function assertGraphQLQueryExecution(string $query, array $expectedResponse, array $variables = []): void
-    {
-        $response = self::getGraphQLServer()->execute($query, $variables);
+    protected function assertGraphQLQueryExecution(
+        string $query,
+        array $expectedResponse,
+        array $variables = [],
+        ?string $operationName = null
+    ): void {
+        $response = self::getGraphQLServer()->execute($query, $variables, $operationName);
         $this->assertJsonStringEqualsJsonString(
             json_encode($expectedResponse),
             $response->getContent()
