@@ -57,11 +57,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         /**
          * Return the "fieldIDs" for the root level Fields
          */
-        $rootFields = $this->getAstFields($executableDocument, false);
-        return array_map(
-            [$this, 'getFieldUniqueID'],
-            $rootFields
-        );
+        return $this->getAstFields($executableDocument, false);
     }
 
     /**
