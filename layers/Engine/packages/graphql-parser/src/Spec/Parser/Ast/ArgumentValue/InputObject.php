@@ -11,7 +11,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use stdClass;
 
-class InputObject extends AbstractAst implements WithValueInterface, WithAstValueInterface
+class InputObject extends AbstractAst implements ArgumentValueAstInterface, WithAstValueInterface
 {
     protected InputList|InputObject|Argument $parent;
 

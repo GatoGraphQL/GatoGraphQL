@@ -6,10 +6,9 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\AbstractAst;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\WithValueInterface;
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class Enum extends AbstractAst implements WithValueInterface
+class Enum extends AbstractAst implements ArgumentValueAstInterface
 {
     protected InputList|InputObject|Argument $parent;
 
