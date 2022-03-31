@@ -555,6 +555,7 @@
             "@fix-style"
         ],
         "test": "phpunit",
+        "debug": "XDEBUG_TRIGGER=1 phpunit",
         "check-style": "phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style": "phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --ansi",
@@ -595,6 +596,7 @@
     "scripts-descriptions": {
         "all": "Execute all required tests (except downgrade)",
         "test": "Execute PHPUnit tests",
+        "debug": "Debug PHPUnit tests",
         "check-style": "Validate PSR-12 coding standards (via phpcs)",
         "fix-style": "Fix PSR-12 coding standards (via phpcbf)",
         "analyse": "Run PHPStan static analysis of the code",
