@@ -1207,7 +1207,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $domainSwitchingSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
         }        
         foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
-            $conditionDataField = $conditionalRelationalModuleField->asFieldOutputQueryString();
             foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                 $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                 $domainSwitchingSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
