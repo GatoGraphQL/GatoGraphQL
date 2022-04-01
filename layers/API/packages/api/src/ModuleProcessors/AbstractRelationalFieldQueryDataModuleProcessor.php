@@ -321,7 +321,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 ),
                 [
                     new Argument(
-                        'typeOrInterfaces',
+                        'typesOrInterfaces',
                         new InputList(
                             $fieldFragmentModelsTuple->getFragmentModels(),
                             $location
