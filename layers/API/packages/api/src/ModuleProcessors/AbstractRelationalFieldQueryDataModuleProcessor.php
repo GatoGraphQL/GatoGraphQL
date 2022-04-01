@@ -13,7 +13,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
-use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
@@ -309,21 +309,21 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              * the field within the fragment will be resolved
              */
             $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
-                'isTypeOrImplements',
+                'isTypeOrImplementsAll',
                 [
                     $nestedModule
                 ],
                 // Create a unique alias to avoid conflicts
                 sprintf(
-                    '_isTypeOrImplements_%s_%s_',
+                    '_isTypeOrImplementsAll_%s_%s_',
                     $location->getLine(),
                     $location->getColumn()
                 ),
                 [
                     new Argument(
-                        'typeOrInterface',
-                        new Literal(
-                            $fieldFragmentModelsTuple->getFragmentModels()[0],
+                        'typeOrInterfaces',
+                        new InputList(
+                            $fieldFragmentModelsTuple->getFragmentModels(),
                             $location
                         ),
                         $location
