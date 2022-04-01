@@ -43,6 +43,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'qualifiedTypeName',
             'isType',
             'implements',
+            'isTypeOrImplements',
         ];
     }
 
@@ -54,6 +55,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
             'isType' => $this->getBooleanScalarTypeResolver(),
             'implements' => $this->getBooleanScalarTypeResolver(),
+            'isTypeOrImplements' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -65,7 +67,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'namespace',
             'qualifiedTypeName',
             'isType',
-            'implements'
+            'implements',
+            'isTypeOrImplements'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -75,11 +78,12 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'typeName' => $this->__('The object\'s type', 'pop-component-model'),
-            'namespace' => $this->__('The object\'s namespace', 'pop-component-model'),
-            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'pop-component-model'),
-            'isType' => $this->__('Indicate if the object is of a given type', 'pop-component-model'),
-            'implements' => $this->__('Indicate if the object implements a given interface', 'pop-component-model'),
+            'typeName' => $this->__('The object\'s type', 'component-model'),
+            'namespace' => $this->__('The object\'s namespace', 'component-model'),
+            'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
+            'isType' => $this->__('Indicate if the object is of a given type', 'component-model'),
+            'implements' => $this->__('Indicate if the object implements a given interface', 'component-model'),
+            'isTypeOrImplements' => $this->__('Indicate if the object is of a given type or implements a given interface', 'component-model'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -93,6 +97,9 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'implements' => [
                 'interface' => $this->getStringScalarTypeResolver(),
             ],
+            'isTypeOrImplements' => [
+                'typeOrInterface' => $this->getStringScalarTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -102,6 +109,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         return match ([$fieldName => $fieldArgName]) {
             ['isType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
             ['implements' => 'interface'] => $this->__('The interface name to compare against', 'component-model'),
+            ['isTypeOrImplements' => 'typeOrInterface'] => $this->__('The type or interface name to compare against', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -110,7 +118,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     {
         return match ([$fieldName => $fieldArgName]) {
             ['isType' => 'type'],
-            ['implements' => 'interface']
+            ['implements' => 'interface'],
+            ['isTypeOrImplements' => 'typeOrInterface']
                 => SchemaTypeModifiers::MANDATORY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
@@ -204,6 +213,46 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                  * -- End code --
                  */
                 return in_array($interface, $implementedInterfaceNames);
+            case 'isTypeOrImplements':
+                $isType = $objectTypeResolver->resolveValue(
+                    $object,
+                    $this->getFieldQueryInterpreter()->getField(
+                        'isType',
+                        [
+                            'type' => $fieldArgs['typeOrInterface'],
+                        ]
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    return null;
+                }
+                if ($isType) {
+                    return true;
+                }
+                $implements = $objectTypeResolver->resolveValue(
+                    $object,
+                    $this->getFieldQueryInterpreter()->getField(
+                        'implements',
+                        [
+                            'interface' => $fieldArgs['typeOrInterface'],
+                        ]
+                    ),
+                    $variables,
+                    $expressions,
+                    $objectTypeFieldResolutionFeedbackStore,
+                    $options
+                );
+                if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                    return null;
+                }
+                if ($implements) {
+                    return true;
+                }
+                return false;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
