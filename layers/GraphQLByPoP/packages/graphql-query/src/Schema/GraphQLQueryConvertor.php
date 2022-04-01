@@ -513,7 +513,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $this->processAndAddFieldPaths($executableDocument, $fragmentConvertedFieldPaths, $fragmentFields);
 
                 // Restrain those fields to the indicated type
-                $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * @todo Watch out: Here directive <include(if:isTypeOrImplements(...))> was removed,
+                 * since it's already resolved via AST, and `->asFieldOutputQueryString` does not print
+                 * the directive in the fieldOutput
+                 */
+                // $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
 
                 // Add them to the list of fields in the query
                 foreach ($fragmentConvertedFieldPaths as $fragmentFieldPath) {
