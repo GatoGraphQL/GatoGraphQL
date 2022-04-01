@@ -248,7 +248,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 [$this, 'getFieldUniqueID'],
                 $nestedFields
             );
-            $nestedModule = [$module[0], $module[1], [self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs]];
+            $nestedModule = [
+                $module[0],
+                $module[1],
+                [
+                    self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs,
+                ]
+            ];
             $ret[] = RelationalModuleField::fromRelationalField(
                 $relationalField,
                 [
