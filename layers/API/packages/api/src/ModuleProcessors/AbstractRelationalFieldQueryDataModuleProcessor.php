@@ -22,6 +22,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
     protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
+    protected const MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';
 
     /**
      * @return FieldFragmentModelsTuple[]
@@ -150,14 +151,16 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $moduleAtts = $module[2] ?? null;
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
         
-        /**
-         * Only retrieve fields not contained within fragments
-         * (those will be handled via a conditional on the fragment model)
-         */
-        $leafFieldFragmentModelsTuples = array_filter(
-            $leafFieldFragmentModelsTuples,
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
-        );
+        if ($this->ignoreConditionalFields($moduleAtts)) {
+            /**
+             * Only retrieve fields not contained within fragments
+             * (those will be handled via a conditional on the fragment model)
+             */
+            $leafFieldFragmentModelsTuples = array_filter(
+                $leafFieldFragmentModelsTuples,
+                fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
+            );
+        }
         
         /** @var LeafField[] */
         $leafFields = array_map(
@@ -169,6 +172,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             fn (LeafField $leafField) => LeafModuleField::fromLeafField($leafField),
             $leafFields
         );
+    }
+
+    /**
+     * Flag used to process the conditional field from the module or not
+     */
+    public function ignoreConditionalFields(?array $moduleAtts): bool
+    {
+        return $moduleAtts === null ? true : $moduleAtts[self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS] ?? true;
     }
 
     /**
@@ -191,14 +202,16 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $moduleAtts = $module[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
         
-        /**
-         * Only retrieve fields not contained within fragments
-         * (those will be handled via a conditional on the fragment model)
-         */
-        $relationalFieldFragmentModelsTuples = array_filter(
-            $relationalFieldFragmentModelsTuples,
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
-        );        
+        if ($this->ignoreConditionalFields($moduleAtts)) {
+            /**
+             * Only retrieve fields not contained within fragments
+             * (those will be handled via a conditional on the fragment model)
+             */
+            $relationalFieldFragmentModelsTuples = array_filter(
+                $relationalFieldFragmentModelsTuples,
+                fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
+            );
+        }
         
         /** @var RelationalField[] */
         $relationalFields = array_map(
@@ -262,6 +275,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
+        if (!$this->ignoreConditionalFields($moduleAtts)) {
+            return [];
+        }
+
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
         
         /**
@@ -276,7 +293,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
             $location = $field->getLocation();
-            $nestedModule = [$module[0], $module[1], [self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)]]];
+            $nestedModule = [
+                $module[0],
+                $module[1],
+                [
+                    self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
+                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+                ]
+            ];
             /**
              * Create a new field that will evaluate if the fragment
              * must be applied or not. If applied, only then
