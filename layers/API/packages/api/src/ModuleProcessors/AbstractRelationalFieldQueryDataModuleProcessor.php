@@ -31,43 +31,34 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              * There are not virtual module atts when loading the module
              * the first time (i.e. for the fields at the root level).
              */
-            return $this->getQueryRootLevelFields();
+            $executableDocument = App::getState('executable-document-ast');
+            
+            // Make sure the GraphQL query exists and was parsed properly into an AST
+            if ($executableDocument === null) {
+                return [];
+            }
+            /** @var ExecutableDocument $executableDocument */
+
+            /**
+             * Because moduleAtts are serialized/unserialized,
+             * cannot pass the Field object directly in them.
+             *
+             * Instead, first generate a dictionary with all the Fields
+             * in the GraphQL query, and place them under a unique ID.
+             * Then this "fieldID" will be passed in the moduleAtts
+             */
+            $this->maybeStoreAstFieldsInAppState($executableDocument);
+
+            /**
+             * Return the root level Fields
+             */
+            return $this->getAstFields($executableDocument, false);
         }
 
         /**
          * When the virtual module has atts, the field IDs are coded within.
          */
         return $this->retrieveAstFieldsFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
-    }
-
-    /**
-     * Extract the root fields from the requested GraphQL query.
-     *
-     * @return FieldInterface[]
-     */
-    protected function getQueryRootLevelFields(): array
-    {
-        // Make sure the GraphQL query exists and was parsed properly into an AST
-        $executableDocument = App::getState('executable-document-ast');
-        if ($executableDocument === null) {
-            return [];
-        }
-        /** @var ExecutableDocument $executableDocument */
-
-        /**
-         * Because moduleAtts are serialized/unserialized,
-         * cannot pass the Field object directly in them.
-         *
-         * Instead, first generate a dictionary with all the Fields
-         * in the GraphQL query, and place them under a unique ID.
-         * Then this "fieldID" will be passed in the moduleAtts
-         */
-        $this->maybeStoreAstFieldsInAppState($executableDocument);
-
-        /**
-         * Return the "fieldIDs" for the root level Fields
-         */
-        return $this->getAstFields($executableDocument, false);
     }
 
     /**
