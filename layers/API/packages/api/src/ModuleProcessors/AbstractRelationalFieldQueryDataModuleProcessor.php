@@ -147,7 +147,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDataFields(array $module, array &$props): array
     {
-        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($module);
+        $moduleAtts = $module[2] ?? null;
+        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
         
         /**
          * Only retrieve fields not contained within fragments
@@ -173,9 +174,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getLeafFieldFragmentModelsTuples(array $module): array
+    protected function getLeafFieldFragmentModelsTuples(?array $moduleAtts): array
     {
-        $moduleAtts = $module[2] ?? null;
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
         return array_filter(
             $fieldFragmentModelsTuples,
@@ -188,7 +188,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($module);
+        $moduleAtts = $module[2] ?? null;
+        $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
         
         /**
          * Only retrieve fields not contained within fragments
@@ -246,9 +247,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getRelationalFieldFragmentModelsTuples(array $module): array
+    protected function getRelationalFieldFragmentModelsTuples(?array $moduleAtts): array
     {
-        $moduleAtts = $module[2] ?? null;
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
         return array_filter(
             $fieldFragmentModelsTuples,
@@ -261,7 +261,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
-        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($module);
+        $moduleAtts = $module[2] ?? null;
+        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
         
         /**
          * Only retrieve fields contained within fragments
