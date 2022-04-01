@@ -411,22 +411,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             $this->getIncludeDirectiveResolver()->getDirectiveName(),
             $this->getFieldQueryInterpreter()->getFieldArgsAsString([
                 'if' => $this->getFieldQueryInterpreter()->getField(
-                    'or',
+                    'isTypeOrImplements',
                     [
-                        'values' => [
-                            $this->getFieldQueryInterpreter()->getField(
-                                'isType',
-                                [
-                                    'type' => $fragmentModel
-                                ]
-                            ),
-                            $this->getFieldQueryInterpreter()->getField(
-                                'implements',
-                                [
-                                    'interface' => $fragmentModel
-                                ]
-                            )
-                        ],
+                        'typeOrInterface' => $fragmentModel
                     ]
                 ),
             ])
