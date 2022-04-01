@@ -112,24 +112,36 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         ExecutableDocument $executableDocument,
         bool $recursive,
     ): array {
+        $fieldFragmentModelsTuples = $this->getAllFieldFragmentModelsTuples(
+            $executableDocument,
+            $recursive,
+        );
+        return array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+            $fieldFragmentModelsTuples
+        );
+    }
+
+    /**
+     * @return FieldFragmentModelsTuple[]
+     */
+    protected function getAllFieldFragmentModelsTuples(
+        ExecutableDocument $executableDocument,
+        bool $recursive,
+    ): array {
         $fragments = $executableDocument->getDocument()->getFragments();
-        $fields = [];
+        $fieldFragmentModelsTuples = [];
         foreach ($executableDocument->getRequestedOperations() as $operation) {
-            $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
-                $operation->getFieldsOrFragmentBonds(),
-                $fragments,
-                $recursive
-            );
-            $allFieldsFromFieldsOrFragmentBonds = array_map(
-                fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
-                $allFieldFragmentModelsFromFieldsOrFragmentBonds
-            );
-            $fields = array_merge(
-                $fields,
-                $allFieldsFromFieldsOrFragmentBonds
+            $fieldFragmentModelsTuples = array_merge(
+                $fieldFragmentModelsTuples,
+                $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
+                    $operation->getFieldsOrFragmentBonds(),
+                    $fragments,
+                    $recursive
+                )
             );
         }
-        return $fields;
+        return $fieldFragmentModelsTuples;
     }
 
     /**
