@@ -15,7 +15,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
  * { ...on IsCustomPost { posts } } => ["IsCustomPost"]
  * { ...on IsCustomPost { ...on Post { posts } } } => ["IsCustomPost", "Post"]
  */
-class FieldFragmentModels
+class FieldFragmentModelsTuple
 {
     /**
      * @param string[] $fragmentModels For fields within fragments, this value represents all the fragment "Model(s)" that must be satisfied to resolve the field
