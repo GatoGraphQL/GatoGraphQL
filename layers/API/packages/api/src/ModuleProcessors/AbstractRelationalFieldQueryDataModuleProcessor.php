@@ -22,9 +22,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
 
     /**
-     * @return FieldInterface[]
+     * @return FieldFragmentModelsTuple[]
      */
-    protected function getFields(array $module, ?array $moduleAtts): array
+    protected function getFieldFragmentModelsTuples(array $module, ?array $moduleAtts): array
     {
         if ($moduleAtts === null) {
             /**
@@ -47,35 +47,35 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              * in the GraphQL query, and place them under a unique ID.
              * Then this "fieldID" will be passed in the moduleAtts
              */
-            $this->maybeStoreAstFieldsInAppState($executableDocument);
+            $this->maybeStoreAstFieldFragmentModelsTuplesInAppState($executableDocument);
 
             /**
              * Return the root level Fields
              */
-            return $this->getAstFields($executableDocument, false);
+            return $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, false);
         }
 
         /**
          * When the virtual module has atts, the field IDs are coded within.
          */
-        return $this->retrieveAstFieldsFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
+        return $this->retrieveAstFieldFragmentModelsTuplesFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
     }
 
     /**
      * Retrieve the Fields stored in the AppState from the passed "fieldIDs".
      *
      * @param string[] $fieldIDs
-     * @return FieldInterface[]
+     * @return FieldFragmentModelsTuple[]
      */
-    protected function retrieveAstFieldsFromAppState(array $fieldIDs): array
+    protected function retrieveAstFieldFragmentModelsTuplesFromAppState(array $fieldIDs): array
     {
-        $appStateFields = App::getState('executable-document-ast-fields');
+        $appStateFieldFragmentModelsTuples = App::getState('executable-document-ast-field-fragmentmodels-tuples');
         $query = App::getState('query');
-        $fields = [];
+        $fieldFragmentModelsTuples = [];
         foreach ($fieldIDs as $fieldID) {
-            $fields[] = $appStateFields[$query][$fieldID];
+            $fieldFragmentModelsTuples[] = $appStateFieldFragmentModelsTuples[$query][$fieldID];
         }
-        return $fields;
+        return $fieldFragmentModelsTuples;
     }
 
     /**
@@ -83,49 +83,32 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      * in the GraphQL query, placed under their unique ID,
      * and set it in the AppState
      */
-    protected function maybeStoreAstFieldsInAppState(
+    protected function maybeStoreAstFieldFragmentModelsTuplesInAppState(
         ExecutableDocument $executableDocument,
     ): void {
         // Only do it the first time the query is parsed
         $appStateManager = App::getAppStateManager();
-        $appStateFields = [];
-        if ($appStateManager->has('executable-document-ast-fields')) {
-            $appStateFields = $appStateManager->get('executable-document-ast-fields');
+        $appStateFieldFragmentModelsTuples = [];
+        if ($appStateManager->has('executable-document-ast-field-fragmentmodels-tuples')) {
+            $appStateFieldFragmentModelsTuples = $appStateManager->get('executable-document-ast-field-fragmentmodels-tuples');
         }
         $query = App::getState('query');
-        if (isset($appStateFields[$query])) {
+        if (isset($appStateFieldFragmentModelsTuples[$query])) {
             return;
         }
         
-        $fields = $this->getAstFields($executableDocument, true);
-        $appStateFields[$query] = [];
-        foreach ($fields as $field) {
-            $appStateFields[$query][$this->getFieldUniqueID($field)] = $field;
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true);
+        $appStateFieldFragmentModelsTuples[$query] = [];
+        foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+            $appStateFieldFragmentModelsTuples[$query][$this->getFieldUniqueID($fieldFragmentModelsTuple->getField())] = $fieldFragmentModelsTuple;
         }
-        $appStateManager->override('executable-document-ast-fields', $appStateFields);
-    }
-
-    /**
-     * @return FieldInterface[]
-     */
-    protected function getAstFields(
-        ExecutableDocument $executableDocument,
-        bool $recursive,
-    ): array {
-        $fieldFragmentModelsTuples = $this->getAllFieldFragmentModelsTuples(
-            $executableDocument,
-            $recursive,
-        );
-        return array_map(
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
-            $fieldFragmentModelsTuples
-        );
+        $appStateManager->override('executable-document-ast-field-fragmentmodels-tuples', $appStateFieldFragmentModelsTuples);
     }
 
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getAllFieldFragmentModelsTuples(
+    protected function getFieldFragmentModelsTuplesFromExecutableDocument(
         ExecutableDocument $executableDocument,
         bool $recursive,
     ): array {
@@ -174,10 +157,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getLeafFields(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_filter(
-            $fields,
-            fn (FieldInterface $field) => $field instanceof LeafField
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
+        $leafFieldFragmentModelsTuples = array_filter(
+            $fieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof LeafField
+        );
+        return array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+            $leafFieldFragmentModelsTuples
         );
     }
 
@@ -232,10 +219,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getRelationalFields(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
-        $fields = $this->getFields($module, $moduleAtts);
-        return array_filter(
-            $fields,
-            fn (FieldInterface $field) => $field instanceof RelationalField
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
+        $relationalFieldFragmentModelsTuples = array_filter(
+            $fieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof RelationalField
+        );
+        return array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+            $relationalFieldFragmentModelsTuples
         );
     }
 
