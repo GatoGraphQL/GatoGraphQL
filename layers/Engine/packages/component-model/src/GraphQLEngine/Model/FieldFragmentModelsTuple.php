@@ -22,7 +22,7 @@ class FieldFragmentModelsTuple
      */
     public function __construct(
         protected FieldInterface $field,
-        protected array $fragmentModels,
+        protected array $fragmentModels = [],
     ) {
     }
 
