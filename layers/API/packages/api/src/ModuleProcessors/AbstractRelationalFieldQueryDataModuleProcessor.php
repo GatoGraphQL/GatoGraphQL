@@ -145,26 +145,28 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDataFields(array $module, array &$props): array
     {
+        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($module);
+        /** @var LeafField[] */
+        $leafFields = array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+            $leafFieldFragmentModelsTuples
+        );
         return array_map(
             fn (LeafField $leafField) => LeafModuleField::fromLeafField($leafField),
-            $this->getLeafFields($module)
+            $leafFields
         );
     }
 
     /**
-     * @return LeafField[]
+     * @return FieldFragmentModelsTuple[]
      */
-    protected function getLeafFields(array $module): array
+    protected function getLeafFieldFragmentModelsTuples(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
-        $leafFieldFragmentModelsTuples = array_filter(
+        return array_filter(
             $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof LeafField
-        );
-        return array_map(
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
-            $leafFieldFragmentModelsTuples
         );
     }
 
@@ -173,7 +175,12 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        $relationalFields = $this->getRelationalFields($module);
+        $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($module);
+        /** @var RelationalField[] */
+        $relationalFields = array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+            $relationalFieldFragmentModelsTuples
+        );
         
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
@@ -214,19 +221,15 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
-     * @return RelationalField[]
+     * @return FieldFragmentModelsTuple[]
      */
-    protected function getRelationalFields(array $module): array
+    protected function getRelationalFieldFragmentModelsTuples(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
-        $relationalFieldFragmentModelsTuples = array_filter(
+        return array_filter(
             $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof RelationalField
-        );
-        return array_map(
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
-            $relationalFieldFragmentModelsTuples
         );
     }
 
