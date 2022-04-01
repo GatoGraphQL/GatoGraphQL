@@ -20,7 +20,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -325,9 +324,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                         'typeOrInterface',
                         new Literal(
                             $fieldFragmentModelsTuple->getFragmentModels()[0],
-                            LocationHelper::getNonSpecificLocation()
+                            $location
                         ),
-                        LocationHelper::getNonSpecificLocation()
+                        $location
                     ),
                 ]
             );
