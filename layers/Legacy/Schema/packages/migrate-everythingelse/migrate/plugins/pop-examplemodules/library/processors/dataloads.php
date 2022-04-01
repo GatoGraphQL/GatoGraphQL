@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
@@ -144,7 +144,7 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
     /**
      * @todo Migrate from string to LeafModuleField
      *
-     * @return \PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {

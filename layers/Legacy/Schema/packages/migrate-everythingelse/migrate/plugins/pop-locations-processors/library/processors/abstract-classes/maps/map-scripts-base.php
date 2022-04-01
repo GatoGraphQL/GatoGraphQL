@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataModuleProcessorBase
 {

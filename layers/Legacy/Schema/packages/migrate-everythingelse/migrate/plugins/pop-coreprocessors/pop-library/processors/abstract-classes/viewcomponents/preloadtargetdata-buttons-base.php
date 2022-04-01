@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PreloadTargetDataButtonsBase extends PoP_Module_Processor_ButtonsBase
 {

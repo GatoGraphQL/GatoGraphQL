@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;

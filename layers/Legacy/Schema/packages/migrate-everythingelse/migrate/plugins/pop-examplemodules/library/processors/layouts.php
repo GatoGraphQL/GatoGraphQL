@@ -1,7 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
 
 class ModuleProcessor_Layouts extends AbstractModuleProcessor
@@ -26,7 +26,7 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
     /**
      * @todo Migrate from string to LeafModuleField
      *
-     * @return \PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {

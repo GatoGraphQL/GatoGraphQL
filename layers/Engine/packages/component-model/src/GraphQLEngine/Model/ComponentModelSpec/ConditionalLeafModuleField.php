@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast;
+namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;

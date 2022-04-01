@@ -30,7 +30,7 @@ class PoP_Module_Processor_SegmentedButtonMenuLayouts extends PoP_Module_Process
     /**
      * @todo Migrate from string to LeafModuleField
      *
-     * @return \PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {

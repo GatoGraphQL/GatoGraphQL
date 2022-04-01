@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {

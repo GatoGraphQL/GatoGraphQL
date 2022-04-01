@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -88,7 +88,7 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     /**
      * @todo Migrate from string to LeafModuleField
      *
-     * @return \PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField[]
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
     public function getDataFields(array $module, array &$props): array
     {

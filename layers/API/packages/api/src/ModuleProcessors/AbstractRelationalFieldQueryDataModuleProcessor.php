@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\ModuleProcessors;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\LeafModuleField;
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;

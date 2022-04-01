@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\GraphQLModel\ComponentModelSpec\Ast\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 
 class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
