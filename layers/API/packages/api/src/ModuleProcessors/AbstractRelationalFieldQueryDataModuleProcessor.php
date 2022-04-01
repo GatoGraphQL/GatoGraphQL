@@ -146,11 +146,22 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     public function getDataFields(array $module, array &$props): array
     {
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($module);
+        
+        /**
+         * Only retrieve fields not contained within fragments
+         * (those will be handled via a conditional on the fragment model)
+         */
+        $leafFieldFragmentModelsTuples = array_filter(
+            $leafFieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
+        );
+        
         /** @var LeafField[] */
         $leafFields = array_map(
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
             $leafFieldFragmentModelsTuples
         );
+        
         return array_map(
             fn (LeafField $leafField) => LeafModuleField::fromLeafField($leafField),
             $leafFields
@@ -176,6 +187,16 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($module);
+        
+        /**
+         * Only retrieve fields not contained within fragments
+         * (those will be handled via a conditional on the fragment model)
+         */
+        $relationalFieldFragmentModelsTuples = array_filter(
+            $relationalFieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
+        );        
+        
         /** @var RelationalField[] */
         $relationalFields = array_map(
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
