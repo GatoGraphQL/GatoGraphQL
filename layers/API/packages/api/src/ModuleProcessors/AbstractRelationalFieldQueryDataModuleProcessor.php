@@ -24,7 +24,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return FieldFragmentModelsTuple[]
      */
-    protected function getFieldFragmentModelsTuples(array $module, ?array $moduleAtts): array
+    protected function getFieldFragmentModelsTuples(?array $moduleAtts): array
     {
         if ($moduleAtts === null) {
             /**
@@ -163,7 +163,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getLeafFieldFragmentModelsTuples(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
-        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
         return array_filter(
             $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof LeafField
@@ -226,7 +226,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getRelationalFieldFragmentModelsTuples(array $module): array
     {
         $moduleAtts = $module[2] ?? null;
-        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($module, $moduleAtts);
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
         return array_filter(
             $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof RelationalField
