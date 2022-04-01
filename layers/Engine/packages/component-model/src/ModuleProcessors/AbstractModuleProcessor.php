@@ -1341,7 +1341,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES, $components)) {
             foreach ($this->getConditionalOnDataFieldDomainSwitchingSubmodules($module) as $conditionalRelationalModuleField) {
-                foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleFields) {
+                foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(
                         array_unique(
                             array_merge(
