@@ -339,7 +339,69 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
     {
-        return [];
+        $moduleAtts = $module[2] ?? null;
+        if (!$this->ignoreConditionalFields($moduleAtts)) {
+            return [];
+        }
+
+        $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
+        
+        /**
+         * Only retrieve fields contained within fragments
+         */
+        $relationalFieldFragmentModelsTuples = array_filter(
+            $relationalFieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
+        );
+
+        $conditionalRelationalModuleFields = [];
+        foreach ($relationalFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+            /** @var RelationalField */
+            $relationalField = $fieldFragmentModelsTuple->getField();
+            $location = $relationalField->getLocation();
+            $nestedModule = [
+                $module[0],
+                $module[1],
+                [
+                    self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
+                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+                ]
+            ];
+            $nestedRelationalModuleField = RelationalModuleField::fromRelationalField(
+                $relationalField,
+                [
+                    $nestedModule
+                ],
+            );
+            /**
+             * Create a new field that will evaluate if the fragment
+             * must be applied or not. If applied, only then
+             * the field within the fragment will be resolved
+             */
+            $conditionalRelationalModuleFields[] = new ConditionalRelationalModuleField(
+                'isTypeOrImplementsAll',
+                [
+                    $nestedRelationalModuleField
+                ],
+                // Create a unique alias to avoid conflicts
+                sprintf(
+                    '_isTypeOrImplementsAll_%s_%s_',
+                    $location->getLine(),
+                    $location->getColumn()
+                ),
+                [
+                    new Argument(
+                        'typesOrInterfaces',
+                        new InputList(
+                            $fieldFragmentModelsTuple->getFragmentModels(),
+                            $location
+                        ),
+                        $location
+                    ),
+                ]
+            );
+        }
+        return $conditionalRelationalModuleFields;
     }
 
     /**
