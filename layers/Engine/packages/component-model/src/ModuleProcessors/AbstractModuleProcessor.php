@@ -809,7 +809,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         // @todo Check if `array_unique` is needed
         if (
             /** @var ModuleFieldInterface[] */
-            $data_fields = //array_unique(
+            $astModuleFields = //array_unique(
                 array_merge(
                     $this->getDataFields($module, $props),
                     $this->getDomainSwitchingSubmodules($module),
@@ -821,12 +821,16 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             /**
              * @todo Temporarily calling ->asQueryString, must work with AST directly!
              */
-            $data_fields = array_map(
-                function (ModuleFieldInterface $field) {
-                    return $field->asFieldOutputQueryString();
-                },
-                $data_fields
-            );
+            $data_fields = [];
+            foreach ($astModuleFields as $astModuleField) {
+                $data_fields[] = $astModuleField->asFieldOutputQueryString();
+                // // Also load the conditioned field
+                // if ($astModuleField instanceof ConditionalRelationalModuleField) {
+                //     foreach ($astModuleField->getConditionalRelationalModuleFields() as $conditionalRelationalModuleFields) {
+                //         $data_fields[] = $conditionalRelationalModuleFields->asFieldOutputQueryString();
+                //     }
+                // }
+            }
             $ret['data-fields'] = $data_fields;
         }
 
@@ -1113,12 +1117,29 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if ($submodules = $this->getModulesToPropagateDataProperties($module)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
-            if ($conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($module)) {
+            $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($module);
+            $conditionalRelationalModuleFields = $this->getConditionalOnDataFieldDomainSwitchingSubmodules($module);
+            if ($conditionalLeafModuleFields !== [] || $conditionalRelationalModuleFields !== []) {
                 $directSubmodules = $this->getSubmodules($module);
+                $conditionalModuleFields = [];
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
                     $conditionDataField = $conditionalLeafModuleField->asFieldOutputQueryString();
                     $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedModules();
+                    $conditionalModuleFields[$conditionDataField] = $conditionalSubmodules;
+                }
+                foreach ($conditionalRelationalModuleFields as $conditionalRelationalModuleField) {
+                    $conditionDataField = $conditionalRelationalModuleField->asFieldOutputQueryString();
+                    $conditionalModuleFields[$conditionDataField] = [];
+                    foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $subConditionalRelationalModuleField) {
+                        $conditionalSubmodules = $subConditionalRelationalModuleField->getNestedModules();
+                        $conditionalModuleFields[$conditionDataField] = array_merge(
+                            $conditionalModuleFields[$conditionDataField],
+                            $conditionalSubmodules
+                        );
+                    }
+                }
+                foreach ($conditionalModuleFields as $conditionDataField => $conditionalSubmodules) {
                     // Calculate those fields which are certainly to be propagated, and not part of the direct submodules
                     // Using this really ugly way because, for comparing modules, using `array_diff` and `intersect` fail
                     for ($i = count($conditionalSubmodules) - 1; $i >= 0; $i--) {
