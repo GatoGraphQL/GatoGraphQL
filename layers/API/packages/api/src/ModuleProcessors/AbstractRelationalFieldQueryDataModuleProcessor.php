@@ -6,7 +6,6 @@ namespace PoPAPI\API\ModuleProcessors;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
-use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
@@ -278,7 +277,24 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     }
 
     /**
+     * Watch out! This function loads both leaf fields (eg: "date") and
+     * relational fields (eg: "author").
+     *
+     * Using `getConditionalOnDataFieldDomainSwitchingSubmodules` to
+     * load relational fields does not work, because the module to
+     * process entry "author" is added twice
+     * (once "ignoreConditionalFields" => true, once => false) and both
+     * of them will add their entry "author" under 'conditional-data-fields',
+     * so it tries to retrieve field "author" from type "User", which is an error.
+     *
+     * As a solution, also treat "author" as a leaf, which works well:
+     * author(ignoreConditionalFields=>true) is the simple shortcut to
+     * author(ignoreConditionalFields=>false), so there's no domain
+     * switching required.
+     *
      * @return ConditionalLeafModuleField[]
+     *
+     * @todo Remove all commented code below this function
      */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
@@ -287,18 +303,18 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             return [];
         }
 
-        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
+        $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
         
         /**
          * Only retrieve fields contained within fragments
          */
-        $leafFieldFragmentModelsTuples = array_filter(
-            $leafFieldFragmentModelsTuples,
+        $fieldFragmentModelsTuples = array_filter(
+            $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
         );
 
         $conditionalLeafModuleFields = [];
-        foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+        foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
             $location = $field->getLocation();
             $nestedModule = [
@@ -339,76 +355,137 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
         return $conditionalLeafModuleFields;
     }
+    // /**
+    //  * @return ConditionalLeafModuleField[]
+    //  */
+    // public function getConditionalOnDataFieldSubmodules(array $module): array
+    // {
+    //     $moduleAtts = $module[2] ?? null;
+    //     if (!$this->ignoreConditionalFields($moduleAtts)) {
+    //         return [];
+    //     }
 
-    /**
-     * @return ConditionalRelationalModuleField[]
-     */
-    public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
-    {
-        $moduleAtts = $module[2] ?? null;
-        if (!$this->ignoreConditionalFields($moduleAtts)) {
-            return [];
-        }
-
-        $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
+    //     $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
         
-        /**
-         * Only retrieve fields contained within fragments
-         */
-        $relationalFieldFragmentModelsTuples = array_filter(
-            $relationalFieldFragmentModelsTuples,
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
-        );
+    //     /**
+    //      * Only retrieve fields contained within fragments
+    //      */
+    //     $leafFieldFragmentModelsTuples = array_filter(
+    //         $leafFieldFragmentModelsTuples,
+    //         fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
+    //     );
 
-        $conditionalRelationalModuleFields = [];
-        foreach ($relationalFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
-            /** @var RelationalField */
-            $relationalField = $fieldFragmentModelsTuple->getField();
-            $location = $relationalField->getLocation();
-            $nestedModule = [
-                $module[0],
-                $module[1],
-                [
-                    self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
-                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
-                ]
-            ];
-            $nestedRelationalModuleField = RelationalModuleField::fromRelationalField(
-                $relationalField,
-                [
-                    $nestedModule
-                ],
-            );
-            /**
-             * Create a new field that will evaluate if the fragment
-             * must be applied or not. If applied, only then
-             * the field within the fragment will be resolved
-             */
-            $conditionalRelationalModuleFields[] = new ConditionalRelationalModuleField(
-                'isTypeOrImplementsAll',
-                [
-                    $nestedRelationalModuleField
-                ],
-                // Create a unique alias to avoid conflicts
-                sprintf(
-                    '_isTypeOrImplementsAll_%s_%s_',
-                    $location->getLine(),
-                    $location->getColumn()
-                ),
-                [
-                    new Argument(
-                        'typesOrInterfaces',
-                        new InputList(
-                            $fieldFragmentModelsTuple->getFragmentModels(),
-                            $location
-                        ),
-                        $location
-                    ),
-                ]
-            );
-        }
-        return $conditionalRelationalModuleFields;
-    }
+    //     $conditionalLeafModuleFields = [];
+    //     foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+    //         $field = $fieldFragmentModelsTuple->getField();
+    //         $location = $field->getLocation();
+    //         $nestedModule = [
+    //             $module[0],
+    //             $module[1],
+    //             [
+    //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
+    //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+    //             ]
+    //         ];
+    //         /**
+    //          * Create a new field that will evaluate if the fragment
+    //          * must be applied or not. If applied, only then
+    //          * the field within the fragment will be resolved
+    //          */
+    //         $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+    //             'isTypeOrImplementsAll',
+    //             [
+    //                 $nestedModule
+    //             ],
+    //             // Create a unique alias to avoid conflicts
+    //             sprintf(
+    //                 '_isTypeOrImplementsAll_%s_%s_',
+    //                 $location->getLine(),
+    //                 $location->getColumn()
+    //             ),
+    //             [
+    //                 new Argument(
+    //                     'typesOrInterfaces',
+    //                     new InputList(
+    //                         $fieldFragmentModelsTuple->getFragmentModels(),
+    //                         $location
+    //                     ),
+    //                     $location
+    //                 ),
+    //             ]
+    //         );
+    //     }
+    //     return $conditionalLeafModuleFields;
+    // }
+    // /**
+    //  * @return ConditionalRelationalModuleField[]
+    //  */
+    // public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
+    // {
+    //     $moduleAtts = $module[2] ?? null;
+    //     if (!$this->ignoreConditionalFields($moduleAtts)) {
+    //         return [];
+    //     }
+
+    //     $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
+        
+    //     /**
+    //      * Only retrieve fields contained within fragments
+    //      */
+    //     $relationalFieldFragmentModelsTuples = array_filter(
+    //         $relationalFieldFragmentModelsTuples,
+    //         fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
+    //     );
+
+    //     $conditionalRelationalModuleFields = [];
+    //     foreach ($relationalFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+    //         /** @var RelationalField */
+    //         $relationalField = $fieldFragmentModelsTuple->getField();
+    //         $location = $relationalField->getLocation();
+    //         $nestedModule = [
+    //             $module[0],
+    //             $module[1],
+    //             [
+    //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
+    //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+    //             ]
+    //         ];
+    //         $nestedRelationalModuleField = RelationalModuleField::fromRelationalField(
+    //             $relationalField,
+    //             [
+    //                 $nestedModule
+    //             ],
+    //         );
+    //         /**
+    //          * Create a new field that will evaluate if the fragment
+    //          * must be applied or not. If applied, only then
+    //          * the field within the fragment will be resolved
+    //          */
+    //         $conditionalRelationalModuleFields[] = new ConditionalRelationalModuleField(
+    //             'isTypeOrImplementsAll',
+    //             [
+    //                 $nestedRelationalModuleField
+    //             ],
+    //             // Create a unique alias to avoid conflicts
+    //             sprintf(
+    //                 '_isTypeOrImplementsAll_%s_%s_',
+    //                 $location->getLine(),
+    //                 $location->getColumn()
+    //             ),
+    //             [
+    //                 new Argument(
+    //                     'typesOrInterfaces',
+    //                     new InputList(
+    //                         $fieldFragmentModelsTuple->getFragmentModels(),
+    //                         $location
+    //                     ),
+    //                     $location
+    //                 ),
+    //             ]
+    //         );
+    //     }
+    //     return $conditionalRelationalModuleFields;
+    // }
 
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
