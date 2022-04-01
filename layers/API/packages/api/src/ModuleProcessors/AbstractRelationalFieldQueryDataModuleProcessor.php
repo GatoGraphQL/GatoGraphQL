@@ -26,19 +26,18 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     protected function getFields(array $module, ?array $moduleAtts): array
     {
-        /**
-         * If it is a virtual module, the field IDs are coded
-         * inside the virtual module atts.
-         */
-        if ($moduleAtts !== null) {
-            return $this->retrieveAstFieldsFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
+        if ($moduleAtts === null) {
+            /**
+             * There are not virtual module atts when loading the module
+             * the first time (i.e. for the fields at the root level).
+             */
+            return $this->getQueryRootLevelFields();
         }
 
         /**
-         * It is a normal module when calling the first time
-         * (i.e. for the fields at the root level).
+         * When the virtual module has atts, the field IDs are coded within.
          */
-        return $this->getQueryRootLevelFields();
+        return $this->retrieveAstFieldsFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
     }
 
     /**
