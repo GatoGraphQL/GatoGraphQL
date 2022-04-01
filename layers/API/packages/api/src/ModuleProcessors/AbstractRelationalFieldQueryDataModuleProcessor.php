@@ -12,12 +12,15 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -318,7 +321,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                     $location->getColumn()
                 ),
                 [
-                    'typeOrInterface' => $fieldFragmentModelsTuple->getFragmentModels()[0]
+                    new Argument(
+                        'typeOrInterface',
+                        new Literal(
+                            $fieldFragmentModelsTuple->getFragmentModels()[0],
+                            LocationHelper::getNonSpecificLocation()
+                        ),
+                        LocationHelper::getNonSpecificLocation()
+                    ),
                 ]
             );
         }
