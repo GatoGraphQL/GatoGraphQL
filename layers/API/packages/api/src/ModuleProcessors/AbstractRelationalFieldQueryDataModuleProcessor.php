@@ -412,23 +412,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             }
             /** @var RelationalField */
             $relationalField = $fieldFragmentModelsTuple->getField();
-            $allFieldFragmentModelsTuplesFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
-                $relationalField->getFieldsOrFragmentBonds(),
-                $fragments,
-                $recursive
-            );
-            // Append the fragment models to the relational members under the recursion
-            foreach ($allFieldFragmentModelsTuplesFromFieldsOrFragmentBonds as $relationalFieldFragmentModelsTuple) {
-                $relationalFieldFragmentModelsTuple->setFragmentModels(
-                    array_merge(
-                        $fieldFragmentModelsTuple->getFragmentModels(),
-                        $relationalFieldFragmentModelsTuple->getFragmentModels()
-                    )
-                );
-            }
             $recursiveFieldFragmentModelsTuples = array_merge(
                 $recursiveFieldFragmentModelsTuples,
-                $allFieldFragmentModelsTuplesFromFieldsOrFragmentBonds
+                $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
+                    $relationalField->getFieldsOrFragmentBonds(),
+                    $fragments,
+                    $recursive
+                )
             );
         }
         return $recursiveFieldFragmentModelsTuples;
