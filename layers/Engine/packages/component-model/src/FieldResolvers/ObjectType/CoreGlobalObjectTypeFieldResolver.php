@@ -105,7 +105,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 'typeOrInterface' => $this->getStringScalarTypeResolver(),
             ],
             'isTypeOrImplementsAll' => [
-                'typeOrInterfaces' => $this->getStringScalarTypeResolver(),
+                'typesOrInterfaces' => $this->getStringScalarTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -117,7 +117,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             ['isType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
             ['implements' => 'interface'] => $this->__('The interface name to compare against', 'component-model'),
             ['isTypeOrImplements' => 'typeOrInterface'] => $this->__('The type or interface name to compare against', 'component-model'),
-            ['isTypeOrImplementsAll' => 'typeOrInterfaces'] => $this->__('The types and interface names to compare against', 'component-model'),
+            ['isTypeOrImplementsAll' => 'typesOrInterfaces'] => $this->__('The types and interface names to compare against', 'component-model'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -129,7 +129,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             ['implements' => 'interface'],
             ['isTypeOrImplements' => 'typeOrInterface']
                 => SchemaTypeModifiers::MANDATORY,
-            ['isTypeOrImplementsAll' => 'typeOrInterfaces']
+            ['isTypeOrImplementsAll' => 'typesOrInterfaces']
                 => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
@@ -270,7 +270,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 return false;
                 
             case 'isTypeOrImplementsAll':
-                foreach ($fieldArgs['typeOrInterfaces'] as $typeOrInterface) {
+                foreach ($fieldArgs['typesOrInterfaces'] as $typeOrInterface) {
                     $isTypeOrInterface = $objectTypeResolver->resolveValue(
                         $object,
                         $this->getFieldQueryInterpreter()->getField(
