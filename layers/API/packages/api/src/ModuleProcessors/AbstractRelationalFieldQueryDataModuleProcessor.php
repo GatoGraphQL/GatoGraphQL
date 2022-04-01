@@ -7,6 +7,7 @@ namespace PoPAPI\API\ModuleProcessors;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
 use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -124,13 +125,18 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $fragments = $executableDocument->getDocument()->getFragments();
         $fields = [];
         foreach ($executableDocument->getRequestedOperations() as $operation) {
+            $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
+                $operation->getFieldsOrFragmentBonds(),
+                $fragments,
+                $recursive
+            );
+            $allFieldsFromFieldsOrFragmentBonds = array_map(
+                fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+                $allFieldFragmentModelsFromFieldsOrFragmentBonds
+            );
             $fields = array_merge(
                 $fields,
-                $this->getAllFieldsFromFieldsOrFragmentBonds(
-                    $operation->getFieldsOrFragmentBonds(),
-                    $fragments,
-                    $recursive
-                )
+                $allFieldsFromFieldsOrFragmentBonds
             );
         }
         return $fields;
@@ -194,10 +200,14 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          * corresponding to the next level module.
          */
         foreach ($relationalFields as $relationalField) {
-            $nestedFields = $this->getAllFieldsFromFieldsOrFragmentBonds(
+            $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
                 $relationalField->getFieldsOrFragmentBonds(),
                 $fragments,
                 false
+            );
+            $nestedFields = array_map(
+                fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
+                $allFieldFragmentModelsFromFieldsOrFragmentBonds
             );
             $nestedFieldIDs = array_map(
                 [$this, 'getFieldUniqueID'],
@@ -230,14 +240,15 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      * @param Fragment[] $fragments
-     * @return FieldInterface[]
+     * @return FieldFragmentModelsTuple[] A list of the fields and what fragment "models" they need to satisfy to be resolved
      */
-    protected function getAllFieldsFromFieldsOrFragmentBonds(
+    protected function getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
         array $fieldsOrFragmentBonds,
         array $fragments,
         bool $recursive
     ): array {
-        $fields = [];
+        /** @var FieldFragmentModelsTuple[] */
+        $fieldFragmentModelsTuples = [];
         foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
@@ -246,58 +257,66 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 if ($fragment === null) {
                     continue;
                 }
-                $fields = array_merge(
-                    $fields,
-                    $this->getAllFieldsFromFieldsOrFragmentBonds(
-                        $fragment->getFieldsOrFragmentBonds(),
-                        $fragments,
-                        $recursive
-                    )
+                $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
+                    $fragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                    $recursive
+                );
+                foreach ($allFieldFragmentModelsFromFieldsOrFragmentBonds as $fieldFragmentModelsTuple) {
+                    $fieldFragmentModelsTuple->addFragmentModel($fragment->getModel());
+                }
+                $fieldFragmentModelsTuples = array_merge(
+                    $fieldFragmentModelsTuples,
+                    $allFieldFragmentModelsFromFieldsOrFragmentBonds
                 );
                 continue;
             }
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $fields = array_merge(
-                    $fields,
-                    $this->getAllFieldsFromFieldsOrFragmentBonds(
-                        $inlineFragment->getFieldsOrFragmentBonds(),
-                        $fragments,
-                        $recursive
-                    )
+                $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
+                    $inlineFragment->getFieldsOrFragmentBonds(),
+                    $fragments,
+                    $recursive
+                );
+                foreach ($allFieldFragmentModelsFromFieldsOrFragmentBonds as $fieldFragmentModelsTuple) {
+                    $fieldFragmentModelsTuple->addFragmentModel($inlineFragment->getTypeName());
+                }
+                $fieldFragmentModelsTuples = array_merge(
+                    $fieldFragmentModelsTuples,
+                    $allFieldFragmentModelsFromFieldsOrFragmentBonds
                 );
                 continue;
             }
             /** @var FieldInterface */
             $field = $fieldOrFragmentBond;
-            $fields[] = $field;
+            $fieldFragmentModelsTuples[] = new FieldFragmentModelsTuple($field);
         }
         if (!$recursive) {
-            return $fields;
+            return $fieldFragmentModelsTuples;
         }
 
         /**
          * Recursive: also obtain the fields nested within the fields
          */
-        $recursiveFields = [];
-        foreach ($fields as $field) {
-            $recursiveFields[] = $field;
-            if ($field instanceof LeafField) {
+        $recursiveFieldFragmentModelsTuples = [];
+        foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+            $recursiveFieldFragmentModelsTuples[] = $fieldFragmentModelsTuple;
+            if ($fieldFragmentModelsTuple->getField() instanceof LeafField) {
                 continue;
             }
             /** @var RelationalField */
-            $relationalField = $field;
-            $recursiveFields = array_merge(
-                $recursiveFields,
-                $this->getAllFieldsFromFieldsOrFragmentBonds(
+            $relationalField = $fieldFragmentModelsTuple->getField();
+            $recursiveFieldFragmentModelsTuples = array_merge(
+                $recursiveFieldFragmentModelsTuples,
+                $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
                     $relationalField->getFieldsOrFragmentBonds(),
                     $fragments,
                     $recursive
                 )
             );
         }
-        return $recursiveFields;
+        return $recursiveFieldFragmentModelsTuples;
     }
 
     /**
