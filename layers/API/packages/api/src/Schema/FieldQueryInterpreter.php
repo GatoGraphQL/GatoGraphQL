@@ -45,6 +45,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             if ($fieldArgElems = $this->getQueryParser()->splitElements($fieldOrDirectiveArgsStr, QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING)) {
                 for ($i = 0; $i < count($fieldArgElems); $i++) {
                     $fieldArg = $fieldArgElems[$i];
+                    $fieldArg = trim($fieldArg);
                     // If there is no separator, then the element is the value
                     $separatorPos = QueryUtils::findFirstSymbolPosition(
                         $fieldArg,

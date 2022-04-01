@@ -534,7 +534,10 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return [];
         }
         return array_map(
-            [$this, 'listFieldDirective'],
+            function ($fieldDirective) {
+                $fieldDirective = trim($fieldDirective);
+                return $this->listFieldDirective($fieldDirective);
+            },
             $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
@@ -559,7 +562,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function composeFieldDirectives(array $fieldDirectives): string
     {
-        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR, $fieldDirectives);
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Added an extra " "
+         */
+        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', $fieldDirectives);
     }
 
     /**
@@ -797,7 +804,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return
             QuerySyntax::SYMBOL_FIELDARGS_OPENING .
-            implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, $elems) .
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR . ' ', $elems) .
             QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
     }
 
@@ -904,7 +915,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING .
             implode(
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_SEPARATOR,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_SEPARATOR
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                . ' ',
                 $elems
             ) .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
@@ -970,7 +986,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         return
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING .
             implode(
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                . ' ',
                 $elems
             ) .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
@@ -1006,7 +1027,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return
             QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR, array_map(
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', array_map(
                 function ($fieldDirective) {
                     return $this->composeFieldDirective(
                         (string)$fieldDirective[0],

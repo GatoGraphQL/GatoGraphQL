@@ -118,7 +118,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             }
             // Join all fields at the same level with ","
             $fieldQueries[] = implode(
-                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR,
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR. ' ',
                 $operationFieldQueries
             );
         }
@@ -381,7 +385,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $nestedDirectives
             );
             $directiveComposableDirectives = QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING . implode(
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
                 $nestedDirectives
             ) . QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
         }
@@ -452,7 +460,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     // so if it evals to false the upcoming directives are not executed
                     $rootFieldDirectives =
                         $includeDirective .
-                        QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR .
+                        /**
+                         * @todo Temporary addition to match `asQueryString` in the AST
+                         * Added an extra " "
+                         */
+                        QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ' .
                         $rootFieldDirectives;
                     // Also remove the directive from the root field, since it will be added again below
                     list(

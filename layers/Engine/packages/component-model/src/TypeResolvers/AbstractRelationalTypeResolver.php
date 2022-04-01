@@ -847,7 +847,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Convert from directive to fieldDirective
                 $fieldDirectives = implode(
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
                     array_map(
                         [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
                         $directives

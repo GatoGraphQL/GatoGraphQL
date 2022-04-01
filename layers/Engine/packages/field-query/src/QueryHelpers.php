@@ -151,7 +151,7 @@ class QueryHelpers
             // Use `strlen` to allow for "0" as value. Eg: <skip(0)> meaning false
             if (!empty($fieldArgsAsString) || strlen($fieldArgsAsString)) {
                 $queryParser = QueryParserFacade::getInstance();
-                return $queryParser->splitElements(
+                $fieldArgElements = $queryParser->splitElements(
                     $fieldArgsAsString,
                     QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR,
                     [
@@ -167,6 +167,11 @@ class QueryHelpers
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
                 );
+                $fieldArgElements = array_map(
+                    'trim',
+                    $fieldArgElements
+                );
+                return $fieldArgElements;
             }
         }
         return [];

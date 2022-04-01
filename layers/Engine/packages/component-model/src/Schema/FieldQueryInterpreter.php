@@ -295,6 +295,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 if ($fieldArgElems = $this->getQueryParser()->splitElements($fieldArgsStr, QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING)) {
                     for ($i = 0; $i < count($fieldArgElems); $i++) {
                         $fieldArg = $fieldArgElems[$i];
+                        $fieldArg = trim($fieldArg);
                         // If there is no separator, then skip this arg, since it is not static (without the schema, we can't know which fieldArgName it is)
                         $separatorPos = QueryUtils::findFirstSymbolPosition(
                             $fieldArg,
@@ -1431,6 +1432,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             // These 2 can be combined, and the corresponding array will mix elements: [value1,key2=value2]
             $fieldArgValue = [];
             foreach ($fieldArgValueElems as $fieldArgValueElem) {
+                $fieldArgValueElem = trim($fieldArgValueElem);
                 $fieldArgValueElemComponents = $this->getQueryParser()->splitElements($fieldArgValueElem, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
                 if (count($fieldArgValueElemComponents) === 1) {
                     // Remove the string quotes if it has them
@@ -1458,6 +1460,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldArgValueElems = $this->getQueryParser()->splitElements($objectValue, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
             // Iterate all the elements and assign them to the fieldArgValue variable
             foreach ($fieldArgValueElems as $fieldArgValueElem) {
+                $fieldArgValueElem = trim($fieldArgValueElem);
                 $fieldArgValueElemComponents = $this->getQueryParser()->splitElements($fieldArgValueElem, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER, [QuerySyntax::SYMBOL_FIELDARGS_OPENING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING], [QuerySyntax::SYMBOL_FIELDARGS_CLOSING, QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING], QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
                 $fieldArgValueElemKey = $fieldArgValueElemComponents[0];
                 $fieldArgValueElemValue = $fieldArgValueElemComponents[1];
