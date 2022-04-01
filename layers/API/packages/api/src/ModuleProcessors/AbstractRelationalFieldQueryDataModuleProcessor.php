@@ -253,7 +253,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
                     $fragment->getFieldsOrFragmentBonds(),
                     $fragments,
-                    $recursive
+                    false // Fragments: Stop the recursion to avoid adding duplicate items
                 );
                 foreach ($allFieldFragmentModelsFromFieldsOrFragmentBonds as $fieldFragmentModelsTuple) {
                     $fieldFragmentModelsTuple->addFragmentModel($fragment->getModel());
@@ -270,7 +270,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
                     $inlineFragment->getFieldsOrFragmentBonds(),
                     $fragments,
-                    $recursive
+                    false // Fragments: Stop the recursion to avoid adding duplicate items
                 );
                 foreach ($allFieldFragmentModelsFromFieldsOrFragmentBonds as $fieldFragmentModelsTuple) {
                     $fieldFragmentModelsTuple->addFragmentModel($inlineFragment->getTypeName());
