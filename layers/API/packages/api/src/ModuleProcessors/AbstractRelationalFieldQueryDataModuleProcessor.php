@@ -19,6 +19,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
     protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
+
     /**
      * @return FieldInterface[]
      */
@@ -35,9 +36,18 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         /**
          * It is a normal module when calling the first time
          * (i.e. for the fields at the root level).
-         *
-         * Extract the root fields from the requested GraphQL query.
          */
+        return $this->getQueryRootLevelFields();
+    }
+
+    /**
+     * Extract the root fields from the requested GraphQL query.
+     *
+     * @return FieldInterface[]
+     */
+    protected function getQueryRootLevelFields(): array
+    {
+        // Make sure the GraphQL query exists and was parsed properly into an AST
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
             return [];
