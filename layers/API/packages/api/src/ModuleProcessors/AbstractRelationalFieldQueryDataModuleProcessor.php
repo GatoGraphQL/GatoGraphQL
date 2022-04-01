@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\ModuleProcessors;
 
 use PoP\ComponentModel\App;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
@@ -252,6 +254,58 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             $fieldFragmentModelsTuples,
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField() instanceof RelationalField
         );
+    }
+
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
+    public function getConditionalOnDataFieldSubmodules(array $module): array
+    {
+        $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($module);
+        
+        /**
+         * Only retrieve fields contained within fragments
+         */
+        $leafFieldFragmentModelsTuples = array_filter(
+            $leafFieldFragmentModelsTuples,
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
+        );
+
+        $conditionalLeafModuleFields = [];
+        foreach ($leafFieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
+            $field = $fieldFragmentModelsTuple->getField();
+            $location = $field->getLocation();
+            $nestedModule = [$module[0], $module[1], [self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)]]];
+            /**
+             * Create a new field that will evaluate if the fragment
+             * must be applied or not. If applied, only then
+             * the field within the fragment will be resolved
+             */
+            $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+                'isTypeOrImplements',
+                [
+                    $nestedModule
+                ],
+                // Create a unique alias to avoid conflicts
+                sprintf(
+                    '_isTypeOrImplements_%s_%s_',
+                    $location->getLine(),
+                    $location->getColumn()
+                ),
+                [
+                    'typeOrInterface' => $fieldFragmentModelsTuple->getFragmentModels()[0]
+                ]
+            );
+        }
+        return $conditionalLeafModuleFields;
+    }
+
+    /**
+     * @return ConditionalRelationalModuleField[]
+     */
+    public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
+    {
+        return [];
     }
 
     /**
