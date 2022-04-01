@@ -39,6 +39,14 @@ class FieldFragmentModelsTuple
         return $this->fragmentModels;
     }
 
+    /**
+     * @param string[] $fragmentModels
+     */
+    public function setFragmentModels(array $fragmentModels): void
+    {
+        $this->fragmentModels = $fragmentModels;
+    }
+
     public function addFragmentModel(string $fragmentModel): void
     {
         $this->fragmentModels[] = $fragmentModel;
