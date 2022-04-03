@@ -282,10 +282,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         if ($value instanceof VariableReference) {
             return '$' . $value->getName();
         }
-
-        if ($value instanceof VariableReference || $value instanceof Variable) {
-            return $this->convertArgumentValue($value->getValue());
-        }
+        // if ($value instanceof VariableReference || $value instanceof Variable) {
+        //     return $this->convertArgumentValue($value->getValue());
+        // }
 
         if (is_array($value)) {
             /**

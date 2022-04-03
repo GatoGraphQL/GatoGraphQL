@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
+use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class LeafModuleField extends LeafField implements ModuleFieldInterface
@@ -20,13 +21,14 @@ class LeafModuleField extends LeafField implements ModuleFieldInterface
         ?string $alias = null,
         array $arguments = [],
         array $directives = [],
+        ?Location $location = null,
     ) {
         parent::__construct(
             $name,
             $alias,
             $arguments,
             $directives,
-            LocationHelper::getNonSpecificLocation(),
+            $location ?? LocationHelper::getNonSpecificLocation(),
         );
     }
 
