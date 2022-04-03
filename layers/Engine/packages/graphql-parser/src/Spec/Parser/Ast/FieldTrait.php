@@ -43,7 +43,7 @@ trait FieldTrait
                 implode(' ', $strDirectives)
             );
         }
-        
+
         return sprintf(
             '%s%s',
             $this->asFieldOutputQueryString(),

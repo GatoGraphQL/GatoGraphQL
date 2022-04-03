@@ -164,7 +164,7 @@ class GraphQLServer implements GraphQLServerInterface
         string $query,
         array $variableValues,
         ?string $operationName,
-    ): ExecutableDocument {    
+    ): ExecutableDocument {
         $document = $this->getParser()->parse($query)->setAncestorsInAST();
         $executableDocument = (
             new ExecutableDocument(

@@ -78,7 +78,7 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
                 implode(', ', $strArguments)
             );
         }
-        
+
         /**
          * @todo Temporarily calling ->asQueryString, must work with AST directly!
          */

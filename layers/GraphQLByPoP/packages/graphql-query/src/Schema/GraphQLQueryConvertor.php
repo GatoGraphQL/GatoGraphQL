@@ -122,7 +122,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                  * @todo Temporary addition to match `asQueryString` in the AST
                  * Added an extra " "
                  */
-                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR. ' ',
+                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR . ' ',
                 $operationFieldQueries
             );
         }
@@ -280,9 +280,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * Print again the variable, don't resolve it yet, so the fieldName is found on $dbObject
          */
         if ($value instanceof VariableReference) {
-            return '$'.$value->getName();
+            return '$' . $value->getName();
         }
-        
+
         if ($value instanceof VariableReference || $value instanceof Variable) {
             return $this->convertArgumentValue($value->getValue());
         }

@@ -26,7 +26,7 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?ParserInterface $parser = null;
-    
+
     final public function setParser(ParserInterface $parser): void
     {
         $this->parser = $parser;
@@ -35,7 +35,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
     }
-    
+
     public function initialize(array &$state): void
     {
         $state['executable-document-ast'] = null;
@@ -148,7 +148,7 @@ class AppStateProvider extends AbstractAppStateProvider
         string $query,
         array $variableValues,
         ?string $operationName,
-    ): ExecutableDocument {    
+    ): ExecutableDocument {
         $document = $this->getParser()->parse($query)->setAncestorsInAST();
         $executableDocument = (
             new ExecutableDocument(

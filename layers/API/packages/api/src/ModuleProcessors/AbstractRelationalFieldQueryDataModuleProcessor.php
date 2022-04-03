@@ -36,7 +36,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              * the first time (i.e. for the fields at the root level).
              */
             $executableDocument = App::getState('executable-document-ast');
-            
+
             // Make sure the GraphQL query exists and was parsed properly into an AST
             if ($executableDocument === null) {
                 return [];
@@ -100,7 +100,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if (isset($appStateFieldFragmentModelsTuples[$query])) {
             return;
         }
-        
+
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuplesFromExecutableDocument($executableDocument, true);
         $appStateFieldFragmentModelsTuples[$query] = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
@@ -151,7 +151,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $moduleAtts = $module[2] ?? null;
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
-        
+
         if ($this->ignoreConditionalFields($moduleAtts)) {
             /**
              * Only retrieve fields not contained within fragments
@@ -162,13 +162,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
             );
         }
-        
+
         /** @var LeafField[] */
         $leafFields = array_map(
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
             $leafFieldFragmentModelsTuples
         );
-        
+
         return array_map(
             fn (LeafField $leafField) => LeafModuleField::fromLeafField($leafField),
             $leafFields
@@ -202,7 +202,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     {
         $moduleAtts = $module[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
-        
+
         if ($this->ignoreConditionalFields($moduleAtts)) {
             /**
              * Only retrieve fields not contained within fragments
@@ -213,13 +213,13 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() === []
             );
         }
-        
+
         /** @var RelationalField[] */
         $relationalFields = array_map(
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField(),
             $relationalFieldFragmentModelsTuples
         );
-        
+
         $executableDocument = App::getState('executable-document-ast');
         if ($executableDocument === null) {
             return [];
@@ -304,7 +304,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         }
 
         $fieldFragmentModelsTuples = $this->getFieldFragmentModelsTuples($moduleAtts);
-        
+
         /**
          * Only retrieve fields contained within fragments
          */
@@ -366,7 +366,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     //     }
 
     //     $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
-        
+
     //     /**
     //      * Only retrieve fields contained within fragments
     //      */
@@ -428,7 +428,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     //     }
 
     //     $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
-        
+
     //     /**
     //      * Only retrieve fields contained within fragments
     //      */

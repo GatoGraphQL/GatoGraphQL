@@ -94,7 +94,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     {
         // Successively search for the position of some edge symbol
         // Everything before "@" (for the alias)
-        $pos = QueryHelpers::findFieldAliasSymbolPosition($field);        
+        $pos = QueryHelpers::findFieldAliasSymbolPosition($field);
         if ($pos !== false) {
             $field = trim(substr($field, $pos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)));
         }
@@ -374,7 +374,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return substr(
                 $field,
                 0,
-                $aliasSymbolLength-strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
+                $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
             );
         }
         return null;

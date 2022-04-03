@@ -268,7 +268,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                     return true;
                 }
                 return false;
-                
+
             case 'isTypeOrImplementsAll':
                 foreach ($fieldArgs['typesOrInterfaces'] as $typeOrInterface) {
                     $isTypeOrInterface = $objectTypeResolver->resolveValue(

@@ -699,7 +699,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
          * @todo Temporary addition to match `asQueryString` in the AST
          * Added an extra " "
          */
-        return implode(FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR. ' ', $expandedDotNotations);
+        return implode(FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR . ' ', $expandedDotNotations);
     }
 
     protected function getFragment($fragmentName, array $fragments): ?string
@@ -791,7 +791,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // Extract the fragment name
         if ($aliasSymbolPos !== false) {
             // $fragmentName = substr($fragmentName, 0, $aliasSymbolPos);
-            $fragmentName = substr($fragmentName, $aliasSymbolPos+1);
+            $fragmentName = substr($fragmentName, $aliasSymbolPos + 1);
         } elseif ($skipOutputIfNullSymbolPos !== false) {
             $fragmentName = substr($fragmentName, 0, $skipOutputIfNullSymbolPos);
         } elseif ($fieldDirectivesOpeningSymbolPos !== false) {
@@ -818,7 +818,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     $fragmentAliasSymbolPos = QueryHelpers::findFieldAliasSymbolPosition($fragmentField);
                     $addAliasToFragmentField = $fragmentAliasSymbolPos === false;
                     if ($addAliasToFragmentField) {
-                        $fragmentFieldAliasWithSymbol = $alias .FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . array_search($fragmentField, $fragmentPipeFields);
+                        $fragmentFieldAliasWithSymbol = $alias . FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . array_search($fragmentField, $fragmentPipeFields);
                     }
                 }
                 // Calculate if to add "?"
