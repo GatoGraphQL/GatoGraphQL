@@ -314,6 +314,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
         );
 
+        $allFieldNames = array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getField()->getAlias() ?? $fieldFragmentModelsTuple->getField()->getName(),
+            $fieldFragmentModelsTuples,
+        );
+
         $conditionalLeafModuleFields = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
@@ -359,7 +364,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  * ```
                  */
                 sprintf(
-                    '___isTypeOrImplementsAll___%s___',
+                    '___%s___%s___%s___',
+                    implode('_', $allFieldNames),
+                    'isTypeOrImplementsAll',
                     implode('_', $fieldFragmentModelsTuple->getFragmentModels())
                 ),
                 [
