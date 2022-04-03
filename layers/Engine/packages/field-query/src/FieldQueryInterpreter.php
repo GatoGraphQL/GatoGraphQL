@@ -963,13 +963,13 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 // If it is null, the unquoted `null` string will be represented as null
                 if ($value === null) {
                     $value = 'null';
+                } elseif (is_bool($value)) {
+                    $value = $value ? 'true' : 'false';
                 } elseif (is_string($value)) {
                     // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                     // inside of it (eg: it if has a ",", it will split the element there when decoding again
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
-                } elseif (is_bool($value)) {
-                    $value = $value ? 'true' : 'false';
                 } elseif (is_object($value)) {
                     /**
                      * This function accepts objects because it is called
