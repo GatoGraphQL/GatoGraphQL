@@ -20,6 +20,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
+use PoP\GraphQLParser\Spec\Parser\Location;
+use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -314,23 +316,44 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
         );
 
-        $allFieldNames = array_map(
-            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $this->getFieldUniqueID($fieldFragmentModelsTuple->getField(), true),
-            $fieldFragmentModelsTuples,
-        );
-
-        $conditionalLeafModuleFields = [];
+        /**
+         * First collect all fields for each combination of fragment models
+         */
+        /** @var array<string, string[]> */
+        $fragmentModelListNameItems = [];
+        /** @var array<string, FieldInterface> */
+        $fragmentModelListNameFields = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
-            $location = $field->getLocation();
-            $nestedModule = [
-                $module[0],
-                $module[1],
-                [
-                    self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
-                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
-                ]
-            ];
+            $fragmentModelListName = implode('_', $fieldFragmentModelsTuple->getFragmentModels());
+            $fragmentModelListNameItems[$fragmentModelListName] = $fieldFragmentModelsTuple->getFragmentModels();
+            $fragmentModelListNameFields[$fragmentModelListName][] = $field;
+        }
+
+        /**
+         * Then iterate the list of all fragment model sets and, for each,
+         * create a Conditional object with all the nested modules,
+         * and with a single conditional field (to be used for retrieving
+         * the data for all nested modules)
+         */
+        $conditionalLeafModuleFields = [];
+        foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
+            $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
+            $fragmentModelListNestedModules = array_map(
+                fn (FieldInterface $field) => [
+                    $module[0],
+                    $module[1],
+                    [
+                        self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
+                        self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+                    ]
+                ],
+                $fragmentModelListFields
+            );
+            $fragmentModelListFieldNames = array_map(
+                fn (FieldInterface $field) => $this->getFieldUniqueID($field, true),
+                $fragmentModelListFields,
+            );
             /**
              * Create a new field that will evaluate if the fragment
              * must be applied or not. If applied, only then
@@ -338,9 +361,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              */
             $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
                 'isTypeOrImplementsAll',
-                [
-                    $nestedModule
-                ],
+                $fragmentModelListNestedModules,
                 /**
                  * Create a unique alias to avoid conflicts.
                  *
@@ -350,7 +371,8 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  * by the GraphQL spec.
                  *
                  * Embedded in the alias are the required fragment models
-                 * to satisfy, so that if two fields have the same dependency,
+                 * to satisfy, and all the fields that depend on it,
+                 * so that if two fields have the same dependency,
                  * this field is resolved once, not twice.
                  *
                  * Eg: 2 fields on the same fragment will have the same
@@ -364,19 +386,18 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  * ```
                  */
                 sprintf(
-                    '___%s___%s___%s___',
-                    implode('_', $allFieldNames),
-                    'isTypeOrImplementsAll',
-                    implode('_', $fieldFragmentModelsTuple->getFragmentModels())
+                    '___isTypeOrImplementsAll___%s___%s___',
+                    implode('__', $fragmentModelListFieldNames),
+                    $fragmentModelListName
                 ),
                 [
                     new Argument(
                         'typesOrInterfaces',
                         new InputList(
-                            $fieldFragmentModelsTuple->getFragmentModels(),
-                            $location
+                            $fragmentModels,
+                            LocationHelper::getNonSpecificLocation()
                         ),
-                        $location
+                        LocationHelper::getNonSpecificLocation()
                     ),
                 ]
             );
