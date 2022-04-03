@@ -140,7 +140,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
         return sprintf(
-            $aliasFriendly ? '%s_%sx%s' : '%s([%s,%s])',
+            $aliasFriendly ? '%s%sx%s' : '%s([%s,%s])',
             $field->getAlias() ?? $field->getName(),
             $field->getLocation()->getLine(),
             $field->getLocation()->getColumn()
@@ -368,11 +368,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 /**
                  * Create a unique alias to avoid conflicts.
                  *
-                 * By starting with "___" we don't expect any other field
-                 * (by sheer coincidence) to have the same name,
-                 * since names starting with "__" are prohibited
-                 * by the GraphQL spec.
-                 *
                  * Embedded in the alias are the required fragment models
                  * to satisfy, and all the fields that depend on it,
                  * so that if two fields have the same dependency,
@@ -389,8 +384,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  * ```
                  */
                 sprintf(
-                    '___isTypeOrImplementsAll___%s___%s___',
-                    implode('__', $fragmentModelListFieldAliasFriendlyIDs),
+                    '_%s_%s_%s_',
+                    implode('_', $fragmentModelListFieldAliasFriendlyIDs),
+                    'isTypeOrImplementsAll',
                     $fragmentModelListName
                 ),
                 [
