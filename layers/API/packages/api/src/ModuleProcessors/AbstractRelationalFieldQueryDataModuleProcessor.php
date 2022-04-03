@@ -339,18 +339,19 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         $conditionalLeafModuleFields = [];
         foreach ($fragmentModelListNameFields as $fragmentModelListName => $fragmentModelListFields) {
             $fragmentModels = $fragmentModelListNameItems[$fragmentModelListName];
-            $fragmentModelListNestedModules = array_map(
-                fn (FieldInterface $field) => [
-                    $module[0],
-                    $module[1],
-                    [
-                        self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
-                        self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
-                    ]
-                ],
-                $fragmentModelListFields
+            $fragmentModelListFieldIDs = array_map(
+                fn (FieldInterface $field) => $this->getFieldUniqueID($field),
+                $fragmentModelListFields,
             );
-            $fragmentModelListFieldNames = array_map(
+            $fragmentModelListNestedModule = [
+                $module[0],
+                $module[1],
+                [
+                    self::MODULE_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
+                    self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
+                ]
+            ];
+            $fragmentModelListFieldAliasFriendlyIDs = array_map(
                 fn (FieldInterface $field) => $this->getFieldUniqueID($field, true),
                 $fragmentModelListFields,
             );
@@ -361,7 +362,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              */
             $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
                 'isTypeOrImplementsAll',
-                $fragmentModelListNestedModules,
+                [
+                    $fragmentModelListNestedModule,
+                ],
                 /**
                  * Create a unique alias to avoid conflicts.
                  *
@@ -387,7 +390,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  */
                 sprintf(
                     '___isTypeOrImplementsAll___%s___%s___',
-                    implode('__', $fragmentModelListFieldNames),
+                    implode('__', $fragmentModelListFieldAliasFriendlyIDs),
                     $fragmentModelListName
                 ),
                 [
