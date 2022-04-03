@@ -804,18 +804,25 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     {
         $ret = array();
 
-        // Calculate the data-fields from merging them with the subcomponent modules' keys, which are data-fields too
-        // @todo Check if `array_unique` is needed
+        /**
+         * Calculate the data-fields from merging them with the
+         * subcomponent modules' keys, which are data-fields too.
+         *
+         * Doing `array_unique` works because the ModuleFields
+         * implement __toString() as the fieldOutputQueryString,
+         * so if two fields are the same, we need to process
+         * one AST element only.
+         */
         if (
             /** @var ModuleFieldInterface[] */
-            $astModuleFields = //array_unique(
+            $astModuleFields = array_unique(
                 array_merge(
                     $this->getDataFields($module, $props),
                     $this->getDomainSwitchingSubmodules($module),
                     $this->getConditionalOnDataFieldSubmodules($module),
                     $this->getConditionalOnDataFieldDomainSwitchingSubmodules($module),
                 )
-            //)
+            )
         ) {
             /**
              * @todo Temporarily calling ->asQueryString, must work with AST directly!
