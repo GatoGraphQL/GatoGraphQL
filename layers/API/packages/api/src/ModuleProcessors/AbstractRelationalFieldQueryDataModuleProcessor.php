@@ -20,7 +20,6 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
-use PoP\GraphQLParser\Spec\Parser\Location;
 
 abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
 {
@@ -136,10 +135,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * ID to uniquely identify the AST element
      */
-    protected function getFieldUniqueID(FieldInterface $field): string
+    protected function getFieldUniqueID(FieldInterface $field, bool $aliasFriendly = false): string
     {
         return sprintf(
-            '%s([%s,%s])',
+            $aliasFriendly ? '%s_%sx%s' : '%s([%s,%s])',
             $field->getAlias() ?? $field->getName(),
             $field->getLocation()->getLine(),
             $field->getLocation()->getColumn()
@@ -315,10 +314,11 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
             fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $fieldFragmentModelsTuple->getFragmentModels() !== []
         );
 
-        /**
-         * First generate all the nested modules for each combination of fragment models
-         */
-        $fragmentModelListNameData = [];
+        $allFieldNames = array_map(
+            fn (FieldFragmentModelsTuple $fieldFragmentModelsTuple) => $this->getFieldUniqueID($fieldFragmentModelsTuple->getField(), true),
+            $fieldFragmentModelsTuples,
+        );
+
         $conditionalLeafModuleFields = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
@@ -331,27 +331,6 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                     self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
                 ]
             ];
-            $fragmentModelListName = implode('_', $fieldFragmentModelsTuple->getFragmentModels());
-            $fragmentModelListNameData[$fragmentModelListName] ??= [
-                'fragmentModels' => $fieldFragmentModelsTuple->getFragmentModels(),
-                'nestedModules' => [],
-                'locations' => [],
-            ];
-            $fragmentModelListNameData[$fragmentModelListName]['nestedModules'][] = $nestedModule;
-            $fragmentModelListNameData[$fragmentModelListName]['locations'][] = $location;
-        }
-
-        /**
-         * Then iterate the list of all fragment model sets and, for each,
-         * create a Conditional object with all the nested modules,
-         * and with a single conditional field (to be used for retrieving
-         * the data for all nested modules)
-         */
-        foreach ($fragmentModelListNameData as $fragmentModelListName => $fragmentModelListData) {
-            $locationsBadge = implode('_', array_map(
-                fn (Location $location) => sprintf('[%sx%s]', $location->getLine(), $location->getColumn()),
-                $fragmentModelListData['locations']
-            ));
             /**
              * Create a new field that will evaluate if the fragment
              * must be applied or not. If applied, only then
@@ -359,7 +338,9 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
              */
             $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
                 'isTypeOrImplementsAll',
-                $fragmentModelListData['nestedModules'],
+                [
+                    $nestedModule
+                ],
                 /**
                  * Create a unique alias to avoid conflicts.
                  *
@@ -383,16 +364,16 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                  * ```
                  */
                 sprintf(
-                    '___isTypeOrImplementsAll___%s___%s___',
-                    // '',
-                    $locationsBadge,
-                    $fragmentModelListName
+                    '___%s___%s___%s___',
+                    implode('_', $allFieldNames),
+                    'isTypeOrImplementsAll',
+                    implode('_', $fieldFragmentModelsTuple->getFragmentModels())
                 ),
                 [
                     new Argument(
                         'typesOrInterfaces',
                         new InputList(
-                            $fragmentModelListData['fragmentModels'],
+                            $fieldFragmentModelsTuple->getFragmentModels(),
                             $location
                         ),
                         $location
