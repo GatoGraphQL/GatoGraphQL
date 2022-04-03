@@ -12,6 +12,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class LeafModuleField extends LeafField implements ModuleFieldInterface
 {
+    use ModuleFieldTrait;
+    
     /**
      * @param Argument[] $arguments
      * @param Directive[] $directives

@@ -28,7 +28,7 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     {
     }
 
-    final public function __toString(): string
+    public function __toString(): string
     {
         return $this->asQueryString();
     }

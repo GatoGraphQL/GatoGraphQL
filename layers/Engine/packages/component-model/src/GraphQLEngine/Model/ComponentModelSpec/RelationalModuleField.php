@@ -13,6 +13,8 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
 class RelationalModuleField extends LeafField implements ModuleFieldInterface
 {
+    use ModuleFieldTrait;
+    
     /**
      * @param array<array> $nestedModules
      * @param Argument[] $arguments
