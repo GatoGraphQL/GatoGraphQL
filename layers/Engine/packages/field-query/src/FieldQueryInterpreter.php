@@ -777,6 +777,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             // If it is null, the unquoted `null` string will be represented as null
             if ($fieldArgValue === null) {
                 $fieldArgValue = 'null';
+            } elseif (is_bool($fieldArgValue)) {
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Before it printed "1" and "0" as true/false
+                 */
+                $fieldArgValue = $fieldArgValue ? 'true' : 'false';
             } elseif (is_array($fieldArgValue)) {
                 // Convert from array to its representation of array in a string
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
