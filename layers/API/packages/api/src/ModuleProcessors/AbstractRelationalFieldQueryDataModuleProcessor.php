@@ -321,7 +321,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
          */
         /** @var array<string, string[]> */
         $fragmentModelListNameItems = [];
-        /** @var array<string, FieldInterface> */
+        /** @var array<string, FieldInterface[]> */
         $fragmentModelListNameFields = [];
         foreach ($fieldFragmentModelsTuples as $fieldFragmentModelsTuple) {
             $field = $fieldFragmentModelsTuple->getField();
