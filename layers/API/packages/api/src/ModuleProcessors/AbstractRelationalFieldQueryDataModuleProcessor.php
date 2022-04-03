@@ -336,11 +336,31 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
                 [
                     $nestedModule
                 ],
-                // Create a unique alias to avoid conflicts
+                /**
+                 * Create a unique alias to avoid conflicts.
+                 *
+                 * By starting with "___" we don't expect any other field
+                 * (by sheer coincidence) to have the same name,
+                 * since names starting with "__" are prohibited
+                 * by the GraphQL spec.
+                 *
+                 * Embedded in the alias are the required fragment models
+                 * to satisfy, so that if two fields have the same dependency,
+                 * this field is resolved once, not twice.
+                 *
+                 * Eg: 2 fields on the same fragment will have the same
+                 * dependency, and will re-use it:
+                 *
+                 * ```graphql
+                 * fragment PostData on Post {
+                 *   title
+                 *   date
+                 * }
+                 * ```
+                 */
                 sprintf(
-                    '_isTypeOrImplementsAll_%s_%s_',
-                    $location->getLine(),
-                    $location->getColumn()
+                    '___isTypeOrImplementsAll___%s___',
+                    implode('_', $fieldFragmentModelsTuple->getFragmentModels())
                 ),
                 [
                     new Argument(
