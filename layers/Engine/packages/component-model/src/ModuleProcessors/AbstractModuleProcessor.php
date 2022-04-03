@@ -830,12 +830,6 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             $data_fields = [];
             foreach ($astModuleFields as $astModuleField) {
                 $data_fields[] = $astModuleField->asFieldOutputQueryString();
-                // // Also load the conditioned field
-                // if ($astModuleField instanceof ConditionalRelationalModuleField) {
-                //     foreach ($astModuleField->getConditionalRelationalModuleFields() as $conditionalRelationalModuleFields) {
-                //         $data_fields[] = $conditionalRelationalModuleFields->asFieldOutputQueryString();
-                //     }
-                // }
             }
             $ret['data-fields'] = $data_fields;
         }
