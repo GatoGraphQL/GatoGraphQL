@@ -41,6 +41,9 @@ class FieldFragmentModelsTuple
 
     public function addFragmentModel(string $fragmentModel): void
     {
+        if (in_array($fragmentModel, $this->fragmentModels)) {
+            return;
+        }
         $this->fragmentModels[] = $fragmentModel;
     }
 }
