@@ -877,23 +877,31 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             // Add the keyValueDelimiter
             if (is_array($value)) {
                 $elems[] =
-                    $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
                     /**
                      * @todo Temporary addition to match `asQueryString` in the AST
-                     * Added an extra " "
+                     * Do not print the array index
                      */
-                    ' ' .
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
                     $this->getArrayAsStringForQuery($value);
             } elseif ($value instanceof stdClass) {
                 $elems[] =
-                    $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
                     /**
                      * @todo Temporary addition to match `asQueryString` in the AST
-                     * Added an extra " "
+                     * Do not print the array index
                      */
-                    ' ' .
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
@@ -908,13 +916,17 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     $value = $this->maybeWrapStringInQuotes($value);
                 }
                 $elems[] =
-                    $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
                     /**
                      * @todo Temporary addition to match `asQueryString` in the AST
-                     * Added an extra " "
+                     * Do not print the array index
                      */
-                    ' ' .
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
                     $value;
             }
         }
