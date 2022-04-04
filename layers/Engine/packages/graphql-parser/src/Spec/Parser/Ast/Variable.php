@@ -84,19 +84,9 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->name;
     }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getTypeName(): string
     {
         return $this->type;
-    }
-
-    public function setTypeName(string $type): void
-    {
-        $this->type = $type;
     }
 
     public function isArray(): bool
@@ -104,19 +94,9 @@ class Variable extends AbstractAst implements WithValueInterface
         return $this->isArray;
     }
 
-    public function setIsArray(bool $isArray): void
-    {
-        $this->isArray = $isArray;
-    }
-
     public function isRequired(): bool
     {
         return $this->isRequired;
-    }
-
-    public function setRequired(bool $isRequired): void
-    {
-        $this->isRequired = $isRequired;
     }
 
     public function hasDefaultValue(): bool
@@ -138,11 +118,6 @@ class Variable extends AbstractAst implements WithValueInterface
     public function isArrayElementRequired(): bool
     {
         return $this->isArrayElementRequired;
-    }
-
-    public function setArrayElementRequired(bool $isArrayElementRequired): void
-    {
-        $this->isArrayElementRequired = $isArrayElementRequired;
     }
 
     /**
