@@ -60,14 +60,6 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
     }
 
     /**
-     * @param mixed[] $value
-     */
-    public function setValue(mixed $value): void
-    {
-        $this->list = $value;
-    }
-
-    /**
      * @return mixed[]
      */
     public function getAstValue(): mixed

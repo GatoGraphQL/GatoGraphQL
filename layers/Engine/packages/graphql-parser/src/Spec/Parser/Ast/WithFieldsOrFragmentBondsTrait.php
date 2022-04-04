@@ -20,7 +20,7 @@ trait WithFieldsOrFragmentBondsTrait
     /**
      * @param FieldInterface[]|FragmentBondInterface[] $fieldsOrFragmentBonds
      */
-    public function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
+    private function setFieldsOrFragmentBonds(array $fieldsOrFragmentBonds): void
     {
         $this->fieldsOrFragmentBonds = $fieldsOrFragmentBonds;
     }

@@ -41,12 +41,4 @@ class Enum extends AbstractAst implements ArgumentValueAstInterface
     {
         return $this->enumValue;
     }
-
-    /**
-     * @param string $enumValue
-     */
-    public function setValue(mixed $enumValue): void
-    {
-        $this->enumValue = $enumValue;
-    }
 }

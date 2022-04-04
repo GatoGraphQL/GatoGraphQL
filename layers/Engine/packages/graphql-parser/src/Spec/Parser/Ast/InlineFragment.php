@@ -77,9 +77,4 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     {
         return $this->typeName;
     }
-
-    public function setTypeName(string $typeName): void
-    {
-        $this->typeName = $typeName;
-    }
 }

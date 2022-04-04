@@ -58,14 +58,6 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
     }
 
     /**
-     * @param stdClass $value
-     */
-    public function setValue(mixed $value): void
-    {
-        $this->object = $value;
-    }
-
-    /**
      * @return stdClass
      */
     public function getAstValue(): mixed
