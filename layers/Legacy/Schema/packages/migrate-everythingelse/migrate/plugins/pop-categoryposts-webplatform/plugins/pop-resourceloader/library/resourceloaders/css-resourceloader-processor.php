@@ -2,7 +2,7 @@
 
 class PoP_CategoryPostsWebPlatform_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_CATEGORYLAYOUT = 'css-categorylayout';
+    public final const RESOURCE_CSS_CATEGORYLAYOUT = 'css-categorylayout';
 
     public function getResourcesToProcess()
     {

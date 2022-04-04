@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Pages\Constants;
 
 class ModelInstanceComponentTypes
 {
-    public const SINGLE_PAGE = 'single-page';
+    public final const SINGLE_PAGE = 'single-page';
 }

@@ -13,7 +13,7 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
 {
     use QueriedDBObjectModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_PAGE = 'dataload-relationalfields-page';
 
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
 

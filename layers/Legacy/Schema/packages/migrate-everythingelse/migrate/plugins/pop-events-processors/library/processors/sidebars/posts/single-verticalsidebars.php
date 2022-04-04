@@ -2,8 +2,8 @@
 
 class GD_EM_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_VERTICALSIDEBAR_SINGLE_EVENT = 'vertical-sidebar-single-event';
-    public const MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT = 'vertical-sidebar-single-pastevent';
+    public final const MODULE_VERTICALSIDEBAR_SINGLE_EVENT = 'vertical-sidebar-single-event';
+    public final const MODULE_VERTICALSIDEBAR_SINGLE_PASTEVENT = 'vertical-sidebar-single-pastevent';
 
     public function getModulesToProcess(): array
     {

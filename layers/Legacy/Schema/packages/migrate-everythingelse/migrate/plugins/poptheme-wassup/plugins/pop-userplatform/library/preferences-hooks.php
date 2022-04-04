@@ -6,7 +6,7 @@ class PoPThemeWassup_PreferencesHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_UserPlatform_Preferences:default:values',
-            array($this, 'getDefaultPreferencesValues')
+            $this->getDefaultPreferencesValues(...)
         );
     }
 

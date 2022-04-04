@@ -20,7 +20,7 @@ class PoP_UserAvatar
     {
 
         // Priority: after PoP Notifications
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888350);
     }
     public function init()
     {

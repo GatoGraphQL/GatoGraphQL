@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Users\Constants;
 
 class InputNames
 {
-    public const USER_ID = 'uid';
+    public final const USER_ID = 'uid';
 }

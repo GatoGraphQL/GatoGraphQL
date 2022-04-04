@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileUploadPicturesBase
 {
-    public const MODULE_FILEUPLOAD_PICTURE = 'fileupload-picture';
+    public final const MODULE_FILEUPLOAD_PICTURE = 'fileupload-picture';
 
     public function getModulesToProcess(): array
     {

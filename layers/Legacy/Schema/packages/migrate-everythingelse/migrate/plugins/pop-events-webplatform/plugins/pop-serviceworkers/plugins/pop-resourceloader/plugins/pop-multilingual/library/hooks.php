@@ -6,7 +6,7 @@ class PoP_ServiceWorkers_ResourceLoader_EM_QTransX_Resources
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_WebPlatform_ResourceLoader_ScriptsAndStylesRegistration:registerScripts',
-            array($this, 'modifyResources')
+            $this->modifyResources(...)
         );
     }
 

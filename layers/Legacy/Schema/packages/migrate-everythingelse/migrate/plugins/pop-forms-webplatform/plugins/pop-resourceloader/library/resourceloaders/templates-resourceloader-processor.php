@@ -2,20 +2,20 @@
 
 class PoP_Forms_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FORM = 'form';
-    public const RESOURCE_FORM_INNER = 'form_inner';
-    public const RESOURCE_FORMINPUT_BUTTONGROUP = 'forminput_buttongroup';
-    public const RESOURCE_FORMINPUT_CHECKBOX = 'forminput_checkbox';
-    public const RESOURCE_FORMINPUT_DATERANGE = 'forminput_daterange';
-    public const RESOURCE_FORMINPUT_EDITOR = 'forminput_editor';
-    public const RESOURCE_FORMINPUT_SELECT = 'forminput_select';
-    public const RESOURCE_FORMINPUT_TEXT = 'forminput_text';
-    public const RESOURCE_FORMINPUT_TEXTAREA = 'forminput_textarea';
-    public const RESOURCE_FORMCOMPONENT_INPUTGROUP = 'formcomponent_inputgroup';
-    public const RESOURCE_FORMCOMPONENT_SELECTABLETYPEAHEAD = 'formcomponent_selectabletypeahead';
-    public const RESOURCE_FORMCOMPONENTVALUE_TRIGGERLAYOUT = 'formcomponentvalue_triggerlayout';
-    public const RESOURCE_FORMGROUP = 'formgroup';
-    public const RESOURCE_EXTENSIONTYPEAHEADSUGGESTIONS = 'extensiontypeaheadsuggestions';
+    public final const RESOURCE_FORM = 'form';
+    public final const RESOURCE_FORM_INNER = 'form_inner';
+    public final const RESOURCE_FORMINPUT_BUTTONGROUP = 'forminput_buttongroup';
+    public final const RESOURCE_FORMINPUT_CHECKBOX = 'forminput_checkbox';
+    public final const RESOURCE_FORMINPUT_DATERANGE = 'forminput_daterange';
+    public final const RESOURCE_FORMINPUT_EDITOR = 'forminput_editor';
+    public final const RESOURCE_FORMINPUT_SELECT = 'forminput_select';
+    public final const RESOURCE_FORMINPUT_TEXT = 'forminput_text';
+    public final const RESOURCE_FORMINPUT_TEXTAREA = 'forminput_textarea';
+    public final const RESOURCE_FORMCOMPONENT_INPUTGROUP = 'formcomponent_inputgroup';
+    public final const RESOURCE_FORMCOMPONENT_SELECTABLETYPEAHEAD = 'formcomponent_selectabletypeahead';
+    public final const RESOURCE_FORMCOMPONENTVALUE_TRIGGERLAYOUT = 'formcomponentvalue_triggerlayout';
+    public final const RESOURCE_FORMGROUP = 'formgroup';
+    public final const RESOURCE_EXTENSIONTYPEAHEADSUGGESTIONS = 'extensiontypeaheadsuggestions';
 
     public function getResourcesToProcess()
     {

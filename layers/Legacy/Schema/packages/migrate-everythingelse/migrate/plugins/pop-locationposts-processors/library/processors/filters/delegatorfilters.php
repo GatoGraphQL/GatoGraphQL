@@ -2,9 +2,9 @@
 
 class PoP_LocationPosts_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public const MODULE_DELEGATORFILTER_AUTHORLOCATIONPOSTS = 'delegatorfilter-authorlocationposts';
-    public const MODULE_DELEGATORFILTER_LOCATIONPOSTS = 'delegatorfilter-locationposts';
-    public const MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS = 'delegatorfilter-taglocationposts';
+    public final const MODULE_DELEGATORFILTER_AUTHORLOCATIONPOSTS = 'delegatorfilter-authorlocationposts';
+    public final const MODULE_DELEGATORFILTER_LOCATIONPOSTS = 'delegatorfilter-locationposts';
+    public final const MODULE_DELEGATORFILTER_TAGLOCATIONPOSTS = 'delegatorfilter-taglocationposts';
 
     public function getModulesToProcess(): array
     {

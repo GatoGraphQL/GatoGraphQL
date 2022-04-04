@@ -8,8 +8,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
-    public const FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
+    public final const FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
+    public final const FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 
     public function getFilterInputsToProcess(): array
     {

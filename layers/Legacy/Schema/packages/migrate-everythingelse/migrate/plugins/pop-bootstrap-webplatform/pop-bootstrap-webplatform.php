@@ -21,7 +21,7 @@ class PoP_BootstrapWebPlatform
     {
 
         // Priority: after PoP Service Workers
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888440);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888440);
     }
     public function init()
     {

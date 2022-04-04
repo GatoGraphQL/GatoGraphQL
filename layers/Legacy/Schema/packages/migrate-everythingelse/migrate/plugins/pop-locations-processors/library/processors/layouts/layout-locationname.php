@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_LocationNameLayoutsBase
 {
-    public const MODULE_EM_LAYOUT_LOCATIONNAME = 'em-layout-locationname';
-    public const MODULE_EM_LAYOUT_LOCATIONICONNAME = 'em-layout-locationiconname';
+    public final const MODULE_EM_LAYOUT_LOCATIONNAME = 'em-layout-locationname';
+    public final const MODULE_EM_LAYOUT_LOCATIONICONNAME = 'em-layout-locationiconname';
 
     public function getModulesToProcess(): array
     {

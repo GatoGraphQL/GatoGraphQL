@@ -2,9 +2,9 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_LINKS = 'filterinputcontainer-links';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHORLINKS = 'filterinputcontainer-authorlinks';
-    public const MODULE_FILTERINPUTCONTAINER_TAGLINKS = 'filterinputcontainer-taglinks';
+    public final const MODULE_FILTERINPUTCONTAINER_LINKS = 'filterinputcontainer-links';
+    public final const MODULE_FILTERINPUTCONTAINER_AUTHORLINKS = 'filterinputcontainer-authorlinks';
+    public final const MODULE_FILTERINPUTCONTAINER_TAGLINKS = 'filterinputcontainer-taglinks';
 
     public function getModulesToProcess(): array
     {

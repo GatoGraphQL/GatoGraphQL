@@ -11,13 +11,13 @@ namespace PoPWPSchema\Meta\Constants;
  */
 class MetaQueryValueTypes
 {
-    public const NUMERIC = 'NUMERIC';
-    public const BINARY = 'BINARY';
-    public const CHAR = 'CHAR';
-    public const DATE = 'DATE';
-    public const DATETIME = 'DATETIME';
-    public const DECIMAL = 'DECIMAL';
-    public const SIGNED = 'SIGNED';
-    public const TIME = 'TIME';
-    public const UNSIGNED = 'UNSIGNED';
+    public final const NUMERIC = 'NUMERIC';
+    public final const BINARY = 'BINARY';
+    public final const CHAR = 'CHAR';
+    public final const DATE = 'DATE';
+    public final const DATETIME = 'DATETIME';
+    public final const DECIMAL = 'DECIMAL';
+    public final const SIGNED = 'SIGNED';
+    public final const TIME = 'TIME';
+    public final const UNSIGNED = 'UNSIGNED';
 }

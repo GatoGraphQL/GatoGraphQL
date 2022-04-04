@@ -12,7 +12,7 @@ use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
+    public final const FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 
     public function getFilterInputsToProcess(): array
     {

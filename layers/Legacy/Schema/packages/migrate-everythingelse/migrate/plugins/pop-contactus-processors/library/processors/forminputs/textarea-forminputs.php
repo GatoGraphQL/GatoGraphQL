@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContactUs_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public const MODULE_FORMINPUT_MESSAGE = 'gf-field-message';
+    public final const MODULE_FORMINPUT_MESSAGE = 'gf-field-message';
 
     public function getModulesToProcess(): array
     {

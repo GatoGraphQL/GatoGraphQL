@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHORLINKS = 'block-tabpanel-authorlinks';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORLINKS = 'block-tabpanel-authorlinks';
 
     public function getModulesToProcess(): array
     {

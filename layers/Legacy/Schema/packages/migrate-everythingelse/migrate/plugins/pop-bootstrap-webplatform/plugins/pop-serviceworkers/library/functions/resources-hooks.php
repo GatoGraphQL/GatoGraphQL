@@ -6,7 +6,7 @@ class PoPTheme_Wassup_Core_ServiceWorkers_Hooks_Resources
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
-            array($this, 'getPrecacheList'),
+            $this->getPrecacheList(...),
             10,
             2
         );

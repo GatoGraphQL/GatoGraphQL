@@ -6,6 +6,6 @@ namespace PoPCMSSchema\UserRolesAccessControl\Services;
 
 class AccessControlGroups
 {
-    public const ROLES = 'roles';
-    public const CAPABILITIES = 'capabilities';
+    public final const ROLES = 'roles';
+    public final const CAPABILITIES = 'capabilities';
 }

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_EM_WebPlatform_PageSectionHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
-            array($this, 'initModelProps'),
+            $this->initModelProps(...),
             10,
             3
         );

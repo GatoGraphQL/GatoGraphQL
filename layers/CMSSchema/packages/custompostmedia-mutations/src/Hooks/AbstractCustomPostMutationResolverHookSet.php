@@ -41,13 +41,13 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
-            array($this, 'maybeAddInputFieldNameTypeResolvers'),
+            $this->maybeAddInputFieldNameTypeResolvers(...),
             10,
             2
         );
         App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
-            array($this, 'maybeAddInputFieldDescription'),
+            $this->maybeAddInputFieldDescription(...),
             10,
             3
         );

@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_ReferencesScriptFrameLayoutsBase
 {
-    public const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'layout-referencedby-appendtoscript-details';
-    public const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS = 'layout-referencedbyempty-appendtoscript-details';
-    public const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'layout-referencedby-appendtoscript-simpleview';
-    public const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW = 'layout-referencedbyempty-appendtoscript-simpleview';
-    public const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedby-appendtoscript-fullview';
-    public const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedbyempty-appendtoscript-fullview';
+    public final const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'layout-referencedby-appendtoscript-details';
+    public final const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS = 'layout-referencedbyempty-appendtoscript-details';
+    public final const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'layout-referencedby-appendtoscript-simpleview';
+    public final const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW = 'layout-referencedbyempty-appendtoscript-simpleview';
+    public final const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedby-appendtoscript-fullview';
+    public final const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedbyempty-appendtoscript-fullview';
 
     public function getModulesToProcess(): array
     {

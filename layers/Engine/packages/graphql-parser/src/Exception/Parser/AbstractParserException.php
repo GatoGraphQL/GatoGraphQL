@@ -12,8 +12,8 @@ use PoP\Root\Exception\AbstractClientException;
 abstract class AbstractParserException extends AbstractClientException implements LocationableExceptionInterface
 {
     public function __construct(
-        private FeedbackItemResolution $feedbackItemResolution,
-        private Location $location,
+        private readonly FeedbackItemResolution $feedbackItemResolution,
+        private readonly Location $location,
     ) {
         parent::__construct($feedbackItemResolution->getMessage());
     }

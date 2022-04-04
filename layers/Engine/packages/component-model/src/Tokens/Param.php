@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\Tokens;
 
 class Param
 {
-    public const VALUE_SEPARATOR = ',';
+    public final const VALUE_SEPARATOR = ',';
 }

@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_PostHiddenInputAlertFormComponents extends PoP_Module_Processor_PostHiddenInputAlertFormComponentsBase
 {
-    public const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST = 'formcomponent-hiddeninputalert-layoutpost';
-    public const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST = 'formcomponent-hiddeninputalert-layoutcommentpost';
+    public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST = 'formcomponent-hiddeninputalert-layoutpost';
+    public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST = 'formcomponent-hiddeninputalert-layoutcommentpost';
 
     public function getModulesToProcess(): array
     {

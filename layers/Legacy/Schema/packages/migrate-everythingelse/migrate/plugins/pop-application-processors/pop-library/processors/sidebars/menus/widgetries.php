@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGET_MENU_ABOUT = 'widget-menu-about';
+    public final const MODULE_WIDGET_MENU_ABOUT = 'widget-menu-about';
 
     public function getModulesToProcess(): array
     {

@@ -8,8 +8,8 @@ use PoP\Root\Feedback\FeedbackCategories as UpstreamFeedbackCategories;
 
 class FeedbackCategories extends UpstreamFeedbackCategories
 {
-    public const NOTICE = 'notice';
-    public const WARNING = 'warning';
-    public const SUGGESTION = 'suggestion';
-    public const TRACE = 'trace';
+    public final const NOTICE = 'notice';
+    public final const WARNING = 'warning';
+    public final const SUGGESTION = 'suggestion';
+    public final const TRACE = 'trace';
 }

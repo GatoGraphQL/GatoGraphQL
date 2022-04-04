@@ -23,14 +23,14 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
         if (\is_wp_version_compatible('5.8')) {
             \add_filter(
                 'block_categories_all',
-                [$this, 'getBlockCategoriesViaBlockEditorContext'],
+                $this->getBlockCategoriesViaBlockEditorContext(...),
                 10,
                 2
             );
         } else {
             \add_filter(
                 'block_categories',
-                [$this, 'getBlockCategories'],
+                $this->getBlockCategories(...),
                 10,
                 2
             );

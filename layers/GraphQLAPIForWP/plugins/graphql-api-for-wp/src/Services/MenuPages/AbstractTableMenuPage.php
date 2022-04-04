@@ -126,7 +126,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
                  */
                 \add_action(
                     'load-' . $this->getHookName(),
-                    [$this, 'initializeTable']
+                    $this->initializeTable(...)
                 );
             },
             PHP_INT_MAX

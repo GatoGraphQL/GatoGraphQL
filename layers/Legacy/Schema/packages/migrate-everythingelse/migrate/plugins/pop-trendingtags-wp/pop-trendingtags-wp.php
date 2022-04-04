@@ -21,11 +21,11 @@ class Plugin
         include_once 'validation.php';
         \PoP\Root\App::addFilter(
             'PoP_TrendingTags_Validation:provider-validation-class',
-            array($this, 'getProviderValidationClass')
+            $this->getProviderValidationClass(...)
         );
 
         // Priority: mid section, after PoP Tags WP
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888260);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888260);
     }
     public function getProviderValidationClass($class)
     {

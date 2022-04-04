@@ -13,8 +13,8 @@ class PoP_SocialNetwork_Notifications_Hook_Tags /* extends AAL_Hook_Base*/
     {
 
         // Subscribed to/Unsubscribed from
-        \PoP\Root\App::addAction('gd_subscribetotag', array($this, 'subscribedtoTag'));
-        \PoP\Root\App::addAction('gd_unsubscribefromtag', array($this, 'unsubscribedfromTag'));
+        \PoP\Root\App::addAction('gd_subscribetotag', $this->subscribedtoTag(...));
+        \PoP\Root\App::addAction('gd_unsubscribefromtag', $this->unsubscribedfromTag(...));
 
         // parent::__construct();
     }

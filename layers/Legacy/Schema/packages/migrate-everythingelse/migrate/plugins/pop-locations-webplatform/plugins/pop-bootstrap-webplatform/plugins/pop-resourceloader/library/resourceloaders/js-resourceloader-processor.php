@@ -2,8 +2,8 @@
 
 class PoP_Locations_Bootstrap_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPMAPCOLLECTION = 'em-bootstrap-map-collection';
-    public const RESOURCE_BOOTSTRAPMAP = 'em-bootstrap-map';
+    public final const RESOURCE_BOOTSTRAPMAPCOLLECTION = 'em-bootstrap-map-collection';
+    public final const RESOURCE_BOOTSTRAPMAP = 'em-bootstrap-map';
 
     public function getResourcesToProcess()
     {

@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_MapDrawMarkerScriptsBase
 {
-    public const MODULE_MAP_SCRIPT_DRAWMARKERS = 'em-map-script-drawmarkers';
-    public const MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS = 'em-map-staticimage-script-drawmarkers';
-    public const MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS = 'em-map-staticimage-userorpost-script-drawmarkers';
+    public final const MODULE_MAP_SCRIPT_DRAWMARKERS = 'em-map-script-drawmarkers';
+    public final const MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS = 'em-map-staticimage-script-drawmarkers';
+    public final const MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS = 'em-map-staticimage-userorpost-script-drawmarkers';
 
     public function getModulesToProcess(): array
     {

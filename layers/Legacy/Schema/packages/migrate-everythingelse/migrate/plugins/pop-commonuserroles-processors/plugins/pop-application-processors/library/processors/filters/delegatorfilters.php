@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public const MODULE_DELEGATORFILTER_INDIVIDUALS = 'delegatorfilter-individuals';
-    public const MODULE_DELEGATORFILTER_ORGANIZATIONS = 'delegatorfilter-organizations';
+    public final const MODULE_DELEGATORFILTER_INDIVIDUALS = 'delegatorfilter-individuals';
+    public final const MODULE_DELEGATORFILTER_ORGANIZATIONS = 'delegatorfilter-organizations';
 
     public function getModulesToProcess(): array
     {

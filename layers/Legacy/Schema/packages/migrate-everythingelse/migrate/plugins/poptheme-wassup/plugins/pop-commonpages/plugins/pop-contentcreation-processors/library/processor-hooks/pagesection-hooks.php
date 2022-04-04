@@ -7,7 +7,7 @@ class PoPTheme_Wassup_CommonPages_ContentCreation_PageSectionHooks
     {
         // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getHeaderTitles:modals',
-        //     array($this, 'modalHeaderTitles')
+        //     $this->modalHeaderTitles(...)
         // );
     }
 

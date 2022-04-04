@@ -2,8 +2,8 @@
 
 class Wassup_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_VERTICALSIDEBAR_SINGLE_HIGHLIGHT = 'vertical-sidebar-single-highlight';
-    public const MODULE_VERTICALSIDEBAR_SINGLE_POST = 'vertical-sidebar-single-post';
+    public final const MODULE_VERTICALSIDEBAR_SINGLE_HIGHLIGHT = 'vertical-sidebar-single-highlight';
+    public final const MODULE_VERTICALSIDEBAR_SINGLE_POST = 'vertical-sidebar-single-post';
 
     public function getModulesToProcess(): array
     {

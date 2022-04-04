@@ -10,8 +10,9 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 class DirectivePipelineDecorator
 {
-    public function __construct(private PipelineInterface $pipeline)
-    {
+    public function __construct(
+        private readonly PipelineInterface $pipeline
+    ) {
     }
 
     public function resolveDirectivePipeline(

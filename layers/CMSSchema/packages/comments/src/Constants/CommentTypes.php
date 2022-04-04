@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Comments\Constants;
 
 class CommentTypes
 {
-    public const COMMENT = 'comment';
-    public const TRACKBACK = 'trackback';
-    public const PINGBACK = 'pingback';
+    public final const COMMENT = 'comment';
+    public final const TRACKBACK = 'trackback';
+    public final const PINGBACK = 'pingback';
 }

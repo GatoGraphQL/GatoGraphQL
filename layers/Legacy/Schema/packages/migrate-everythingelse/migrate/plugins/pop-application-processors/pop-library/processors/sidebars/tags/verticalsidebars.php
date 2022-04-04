@@ -2,7 +2,7 @@
 
 class Wassup_Module_Processor_CustomVerticalTagSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_VERTICALSIDEBAR_TAG = 'vertical-sidebar-tag';
+    public final const MODULE_VERTICALSIDEBAR_TAG = 'vertical-sidebar-tag';
 
     public function getModulesToProcess(): array
     {

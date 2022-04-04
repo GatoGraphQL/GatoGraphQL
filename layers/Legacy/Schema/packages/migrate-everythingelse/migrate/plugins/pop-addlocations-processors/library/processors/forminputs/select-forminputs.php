@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public const MODULE_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
+    public final const MODULE_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
 
     public function getModulesToProcess(): array
     {

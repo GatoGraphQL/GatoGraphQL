@@ -19,7 +19,7 @@ class PoP_ThemeHelpers
     {
 
         // Priority: new section, after PoP Application Processors section
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888900);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888900);
     }
     public function init()
     {

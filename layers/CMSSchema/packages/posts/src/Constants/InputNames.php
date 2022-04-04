@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Posts\Constants;
 
 class InputNames
 {
-    public const POST_ID = 'pid';
+    public final const POST_ID = 'pid';
 }

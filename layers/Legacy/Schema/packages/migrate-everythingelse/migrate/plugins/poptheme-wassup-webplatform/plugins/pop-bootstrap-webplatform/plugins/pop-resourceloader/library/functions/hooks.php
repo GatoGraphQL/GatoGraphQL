@@ -6,7 +6,7 @@ class PoPTheme_Wassup_Bootstrap_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor:dependencies:multiselect',
-            array($this, 'getMultiselectDependencies')
+            $this->getMultiselectDependencies(...)
         );
     }
 

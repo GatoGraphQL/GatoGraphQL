@@ -18,7 +18,7 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
      * @param Directive[] $directives
      */
     public function __construct(
-        protected string $typeName,
+        protected readonly string $typeName,
         array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,

@@ -29,7 +29,7 @@ define('GD_JSPLACEHOLDER_QUERY', '*QUERY*'); // Replaced from '%QUERY' because u
 
 define('POP_KEYS_THUMBPRINT', 'thumbprint');
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdPopcoreJqueryConstantsModulemanagerImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdPopcoreJqueryConstantsModulemanagerImpl(...));
 function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
 {
     $jqueryConstants['JSPLACEHOLDER_QUERY'] = GD_JSPLACEHOLDER_QUERY;

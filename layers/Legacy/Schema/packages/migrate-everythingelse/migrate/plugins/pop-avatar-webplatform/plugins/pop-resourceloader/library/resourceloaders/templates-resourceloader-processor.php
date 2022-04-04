@@ -2,9 +2,9 @@
 
 class PoP_AvatarWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_AUTHOR_USERPHOTO = 'layout_author_userphoto';
-    public const RESOURCE_LAYOUT_USERAVATAR = 'layout_useravatar';
-    public const RESOURCE_LAYOUTPOST_AUTHORAVATAR = 'layoutpost_authoravatar';
+    public final const RESOURCE_LAYOUT_AUTHOR_USERPHOTO = 'layout_author_userphoto';
+    public final const RESOURCE_LAYOUT_USERAVATAR = 'layout_useravatar';
+    public final const RESOURCE_LAYOUTPOST_AUTHORAVATAR = 'layoutpost_authoravatar';
 
     public function getResourcesToProcess()
     {

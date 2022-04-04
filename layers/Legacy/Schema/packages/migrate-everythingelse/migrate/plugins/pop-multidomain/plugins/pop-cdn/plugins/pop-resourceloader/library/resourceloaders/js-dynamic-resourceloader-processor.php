@@ -5,7 +5,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_MultiDomain_CDN_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_CDNCONFIG_EXTERNAL = 'cdn-config-external';
+    public final const RESOURCE_CDNCONFIG_EXTERNAL = 'cdn-config-external';
 
     public function getResourcesToProcess()
     {

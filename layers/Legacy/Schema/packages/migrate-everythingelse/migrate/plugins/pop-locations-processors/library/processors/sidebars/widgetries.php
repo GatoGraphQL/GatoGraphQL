@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Locations_Module_Processor_SidebarComponents extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_EM_WIDGET_POSTLOCATIONSMAP = 'em-widget-postlocationsmap';
-    public const MODULE_EM_WIDGET_USERLOCATIONSMAP = 'em-widget-userlocationsmap';
+    public final const MODULE_EM_WIDGET_POSTLOCATIONSMAP = 'em-widget-postlocationsmap';
+    public final const MODULE_EM_WIDGET_USERLOCATIONSMAP = 'em-widget-userlocationsmap';
 
     public function getModulesToProcess(): array
     {

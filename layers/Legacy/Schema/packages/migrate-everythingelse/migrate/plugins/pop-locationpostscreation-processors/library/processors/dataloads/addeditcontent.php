@@ -5,8 +5,8 @@ use PoPSitesWassup\LocationPostMutations\MutationResolverBridges\UpdateLocationP
 
 class GD_Custom_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public const MODULE_DATALOAD_LOCATIONPOST_UPDATE = 'dataload-locationpost-update';
-    public const MODULE_DATALOAD_LOCATIONPOST_CREATE = 'dataload-locationpost-create';
+    public final const MODULE_DATALOAD_LOCATIONPOST_UPDATE = 'dataload-locationpost-update';
+    public final const MODULE_DATALOAD_LOCATIONPOST_CREATE = 'dataload-locationpost-create';
 
     public function getModulesToProcess(): array
     {

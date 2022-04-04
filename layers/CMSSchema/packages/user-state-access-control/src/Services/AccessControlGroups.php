@@ -6,5 +6,5 @@ namespace PoPCMSSchema\UserStateAccessControl\Services;
 
 class AccessControlGroups
 {
-    public const STATE = 'state';
+    public final const STATE = 'state';
 }

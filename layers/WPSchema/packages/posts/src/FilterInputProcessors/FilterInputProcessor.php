@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_IS_STICKY = 'filterinput-is-sticky';
+    public final const FILTERINPUT_IS_STICKY = 'filterinput-is-sticky';
 
     public function getFilterInputsToProcess(): array
     {

@@ -7,7 +7,7 @@ class PoP_ServiceWorkers_WebPlatformEngineOptimization_ResourceLoader_Initializa
     {
 
         // Priority 70: after the `enqueueScripts` function in wp-content/plugins/pop-engine/kernel/pop-engine.php
-        \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'deregisterScripts'), 70);
+        \PoP\Root\App::addAction('popcms:enqueueScripts', $this->deregisterScripts(...), 70);
     }
 
     public function deregisterScripts()

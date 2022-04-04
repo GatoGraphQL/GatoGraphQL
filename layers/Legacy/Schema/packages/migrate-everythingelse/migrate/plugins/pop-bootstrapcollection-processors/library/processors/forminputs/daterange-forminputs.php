@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor_DateRangeFormInputsBase
 {
-    public const MODULE_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
-    public const MODULE_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
+    public final const MODULE_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
+    public final const MODULE_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
 
     public function getModulesToProcess(): array
     {

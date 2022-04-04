@@ -2,10 +2,10 @@
 
 class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS = 'multicomponent-event-datelocationdownloadlinks';
-    public const MODULE_MULTICOMPONENT_EVENT_DATELOCATION = 'multicomponent-event-datelocation';
-    public const MODULE_MULTICOMPONENT_LOCATIONVOLUNTEER = 'multicomponent-locationvolunteer';
-    public const MODULE_MULTICOMPONENT_LOCATION = 'multicomponent-location';
+    public final const MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS = 'multicomponent-event-datelocationdownloadlinks';
+    public final const MODULE_MULTICOMPONENT_EVENT_DATELOCATION = 'multicomponent-event-datelocation';
+    public final const MODULE_MULTICOMPONENT_LOCATIONVOLUNTEER = 'multicomponent-locationvolunteer';
+    public final const MODULE_MULTICOMPONENT_LOCATION = 'multicomponent-location';
 
     public function getModulesToProcess(): array
     {

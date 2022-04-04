@@ -2,15 +2,15 @@
 
 class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS = 'multiple-sidebarinner-section-events';
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS = 'multiple-sidebarinner-section-pastevents';
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR = 'multiple-sidebarinner-section-events-calendar';
-    public const MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS = 'multiple-sidebarinner-tag-events';
-    public const MODULE_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS = 'multiple-sidebarinner-tag-pastevents';
-    public const MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR = 'multiple-sidebarinner-tag-events-calendar';
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS = 'multiple-sidebarinner-section-authorevents';
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS = 'multiple-sidebarinner-section-authorpastevents';
-    public const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR = 'multiple-sidebarinner-section-authoreventscalendar';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS = 'multiple-sidebarinner-section-events';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS = 'multiple-sidebarinner-section-pastevents';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS_CALENDAR = 'multiple-sidebarinner-section-events-calendar';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS = 'multiple-sidebarinner-tag-events';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_TAG_PASTEVENTS = 'multiple-sidebarinner-tag-pastevents';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_TAG_EVENTS_CALENDAR = 'multiple-sidebarinner-tag-events-calendar';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTS = 'multiple-sidebarinner-section-authorevents';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS = 'multiple-sidebarinner-section-authorpastevents';
+    public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR = 'multiple-sidebarinner-section-authoreventscalendar';
 
     public function getModulesToProcess(): array
     {

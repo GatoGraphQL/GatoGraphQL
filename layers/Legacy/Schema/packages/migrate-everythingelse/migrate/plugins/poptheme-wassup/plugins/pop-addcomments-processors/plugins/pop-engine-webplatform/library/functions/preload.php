@@ -6,7 +6,7 @@ class PoPTheme_Wassup_AddComments_WebPlatform_PreloadHooks
     {
         \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_ADDONS,
-            array($this, 'getRoutesForAddons')
+            $this->getRoutesForAddons(...)
         );
     }
 

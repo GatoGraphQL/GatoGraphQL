@@ -2,9 +2,9 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public const MODULE_LAYOUT_FULLVIEW_LINK = 'layout-fullview-link';
-    public const MODULE_AUTHORLAYOUT_FULLVIEW_LINK = 'authorlayout-fullview-link';
-    public const MODULE_SINGLELAYOUT_FULLVIEW_LINK = 'singlelayout-fullview-link';
+    public final const MODULE_LAYOUT_FULLVIEW_LINK = 'layout-fullview-link';
+    public final const MODULE_AUTHORLAYOUT_FULLVIEW_LINK = 'authorlayout-fullview-link';
+    public final const MODULE_SINGLELAYOUT_FULLVIEW_LINK = 'singlelayout-fullview-link';
 
     public function getModulesToProcess(): array
     {

@@ -17,7 +17,7 @@ abstract class AbstractContentParser implements ContentParserInterface
 {
     use BasicServiceTrait;
 
-    public const PATH_URL_TO_DOCS = 'pathURLToDocs';
+    public final const PATH_URL_TO_DOCS = 'pathURLToDocs';
 
     protected string $baseDir = '';
     protected string $baseURL = '';

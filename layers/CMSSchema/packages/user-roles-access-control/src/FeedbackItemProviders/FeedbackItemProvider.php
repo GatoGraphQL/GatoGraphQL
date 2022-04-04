@@ -9,14 +9,14 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class FeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = 'e1';
-    public const E2 = 'e2';
-    public const E3 = 'e3';
-    public const E4 = 'e4';
-    public const E5 = 'e5';
-    public const E6 = 'e6';
-    public const E7 = 'e7';
-    public const E8 = 'e8';
+    public final const E1 = 'e1';
+    public final const E2 = 'e2';
+    public final const E3 = 'e3';
+    public final const E4 = 'e4';
+    public final const E5 = 'e5';
+    public final const E6 = 'e6';
+    public final const E7 = 'e7';
+    public final const E8 = 'e8';
 
     /**
      * @return string[]

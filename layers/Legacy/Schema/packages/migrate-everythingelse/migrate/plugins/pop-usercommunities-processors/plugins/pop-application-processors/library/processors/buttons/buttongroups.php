@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_ModuleProcessor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
-    public const MODULE_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
+    public final const MODULE_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 
     public function getModulesToProcess(): array
     {

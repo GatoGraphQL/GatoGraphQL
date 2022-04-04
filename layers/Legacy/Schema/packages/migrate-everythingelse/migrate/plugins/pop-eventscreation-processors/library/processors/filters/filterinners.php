@@ -2,7 +2,7 @@
 
 class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_MYEVENTS = 'filterinputcontainer-myevents';
+    public final const MODULE_FILTERINPUTCONTAINER_MYEVENTS = 'filterinputcontainer-myevents';
 
     public function getModulesToProcess(): array
     {

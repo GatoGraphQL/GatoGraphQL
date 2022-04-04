@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_Dividers extends PoP_Module_Processor_DividersBase
 {
-    public const MODULE_DIVIDER = 'divider';
-    public const MODULE_COLLAPSIBLEDIVIDER = 'collapsible-divider';
+    public final const MODULE_DIVIDER = 'divider';
+    public final const MODULE_COLLAPSIBLEDIVIDER = 'collapsible-divider';
 
     public function getModulesToProcess(): array
     {

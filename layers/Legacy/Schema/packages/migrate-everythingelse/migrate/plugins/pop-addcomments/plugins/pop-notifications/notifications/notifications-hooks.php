@@ -9,7 +9,7 @@ class PoP_AddComments_Notifications_NotificationHooks
         // Hook into the API: Where statements
         \PoP\Root\App::addFilter(
             'PoP_Notifications_API:sql:wheres',
-            array($this, 'getWhereStatements'),
+            $this->getWhereStatements(...),
             10,
             7
         );
@@ -17,14 +17,14 @@ class PoP_AddComments_Notifications_NotificationHooks
         // Hook into the API: Set Status for multiple notifications
         \PoP\Root\App::addFilter(
             'PoP_Notifications_API:multiple-status:objectids-sql',
-            array($this, 'getStatusMultipleNotificationsWhereStatements'),
+            $this->getStatusMultipleNotificationsWhereStatements(...),
             10,
             2
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityposts:object_id_unions',
-            array($this, 'getUseractivitypostsObjectIdUnions'),
+            $this->getUseractivitypostsObjectIdUnions(...),
             10,
             2
         );

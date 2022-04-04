@@ -19,9 +19,9 @@ class PoP_LocationPostsProcessors
     {
 
         // // Priority: after PoP Locations Processors
-        // \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
+        // \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888850);
         // Priority: after PoP Locations Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888890);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888890);
     }
     public function init()
     {

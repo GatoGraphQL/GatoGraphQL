@@ -14,7 +14,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         App::addFilter(
             '\PoP\ComponentModel\Engine:getExtraRoutes',
-            array($this, 'getExtraRoutes'),
+            $this->getExtraRoutes(...),
             10,
             1
         );

@@ -6,7 +6,7 @@ class PoP_ResourceLoader_SSR_HandlebarsHelpersHooks
     {
         \PoP\Root\App::addFilter(
             'handlebars-helpers:enterModule:response',
-            array($this, 'getEntermoduleResponse'),
+            $this->getEntermoduleResponse(...),
             10,
             8
         );

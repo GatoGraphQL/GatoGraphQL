@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_DomainFeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public const MODULE_FEEDBACKMESSAGEINNER_EMPTY = 'feedbackmessageinner-empty';
+    public final const MODULE_FEEDBACKMESSAGEINNER_EMPTY = 'feedbackmessageinner-empty';
 
     public function getModulesToProcess(): array
     {

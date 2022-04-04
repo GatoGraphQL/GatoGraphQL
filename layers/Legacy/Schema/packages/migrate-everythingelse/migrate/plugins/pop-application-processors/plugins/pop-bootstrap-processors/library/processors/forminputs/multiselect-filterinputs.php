@@ -12,10 +12,10 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFilterInputs extends PoP_M
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
-    public const MODULE_FILTERINPUT_CATEGORIES = 'filterinput-categories';
-    public const MODULE_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
-    public const MODULE_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
+    public final const MODULE_FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
+    public final const MODULE_FILTERINPUT_CATEGORIES = 'filterinput-categories';
+    public final const MODULE_FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
+    public final const MODULE_FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

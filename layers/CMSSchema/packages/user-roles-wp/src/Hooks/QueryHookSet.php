@@ -14,7 +14,7 @@ class QueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             UserTypeAPI::HOOK_QUERY,
-            [$this, 'convertUsersQuery'],
+            $this->convertUsersQuery(...),
             10,
             2
         );

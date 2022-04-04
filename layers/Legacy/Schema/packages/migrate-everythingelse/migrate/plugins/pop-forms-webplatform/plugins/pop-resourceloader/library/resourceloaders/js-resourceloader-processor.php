@@ -2,7 +2,7 @@
 
 class PoP_Forms_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_FORMS = 'forms';
+    public final const RESOURCE_FORMS = 'forms';
 
     public function getResourcesToProcess()
     {

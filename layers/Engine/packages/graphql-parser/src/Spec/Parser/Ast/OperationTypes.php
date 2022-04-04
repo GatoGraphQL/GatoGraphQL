@@ -6,7 +6,7 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 class OperationTypes
 {
-    public const QUERY = 'query';
-    public const MUTATION = 'mutation';
-    // public const SUBSCRIPTION = 'subscription';
+    public final const QUERY = 'query';
+    public final const MUTATION = 'mutation';
+    // public final const SUBSCRIPTION = 'subscription';
 }

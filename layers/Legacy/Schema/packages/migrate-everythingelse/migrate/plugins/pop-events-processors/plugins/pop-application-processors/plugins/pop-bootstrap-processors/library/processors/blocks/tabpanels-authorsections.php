@@ -4,9 +4,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHOREVENTS = 'block-tabpanel-authorevents';
-    public const MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS = 'block-tabpanel-authorpastevents';
-    public const MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR = 'block-tabpanel-authoreventscalendar';
+    public final const MODULE_BLOCK_TABPANEL_AUTHOREVENTS = 'block-tabpanel-authorevents';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS = 'block-tabpanel-authorpastevents';
+    public final const MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR = 'block-tabpanel-authoreventscalendar';
 
     public function getModulesToProcess(): array
     {

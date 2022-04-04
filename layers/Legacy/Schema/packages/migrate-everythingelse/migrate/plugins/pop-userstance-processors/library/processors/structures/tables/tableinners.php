@@ -2,7 +2,7 @@
 
 class UserStance_Module_Processor_TableInners extends PoP_Module_Processor_TableInnersBase
 {
-    public const MODULE_TABLEINNER_MYSTANCES = 'tableinner-mystances';
+    public final const MODULE_TABLEINNER_MYSTANCES = 'tableinner-mystances';
 
     public function getModulesToProcess(): array
     {

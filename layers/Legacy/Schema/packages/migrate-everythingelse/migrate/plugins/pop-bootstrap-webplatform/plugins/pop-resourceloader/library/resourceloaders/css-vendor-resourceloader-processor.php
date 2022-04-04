@@ -2,7 +2,7 @@
 
 class PoP_BootstrapWebPlatform_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_BOOTSTRAP = 'css-external-bootstrap';
+    public final const RESOURCE_EXTERNAL_CSS_BOOTSTRAP = 'css-external-bootstrap';
 
     public function getResourcesToProcess()
     {

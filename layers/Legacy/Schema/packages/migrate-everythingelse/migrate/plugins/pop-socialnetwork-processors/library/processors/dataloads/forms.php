@@ -8,7 +8,7 @@ class PoP_SocialNetwork_Module_Processor_Dataloads extends PoP_Module_Processor_
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_CONTACTUSER = 'dataload-contactuser';
+    public final const MODULE_DATALOAD_CONTACTUSER = 'dataload-contactuser';
 
     public function getModulesToProcess(): array
     {

@@ -20,7 +20,7 @@ class PoP_AvatarProcessors
     {
 
         // Priority: after PoP Base Collection Processors (even though it doesn't depend on it)
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888620);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888620);
     }
     public function init()
     {

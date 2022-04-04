@@ -18,19 +18,19 @@ abstract class AbstractAddMetaQueryInputFieldsInputObjectTypeHookSet extends Abs
     {
         App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
-            [$this, 'getInputFieldNameTypeResolvers'],
+            $this->getInputFieldNameTypeResolvers(...),
             10,
             2
         );
         App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
-            [$this, 'getInputFieldDescription'],
+            $this->getInputFieldDescription(...),
             10,
             3
         );
         App::addFilter(
             HookNames::INPUT_FIELD_TYPE_MODIFIERS,
-            [$this, 'getInputFieldTypeModifiers'],
+            $this->getInputFieldTypeModifiers(...),
             10,
             3
         );

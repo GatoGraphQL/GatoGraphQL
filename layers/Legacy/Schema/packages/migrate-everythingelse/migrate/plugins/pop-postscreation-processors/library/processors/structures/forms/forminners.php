@@ -2,7 +2,7 @@
 
 class PoP_PostsCreation_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public const MODULE_FORMINNER_POST = 'forminner-post';
+    public final const MODULE_FORMINNER_POST = 'forminner-post';
 
     public function getModulesToProcess(): array
     {

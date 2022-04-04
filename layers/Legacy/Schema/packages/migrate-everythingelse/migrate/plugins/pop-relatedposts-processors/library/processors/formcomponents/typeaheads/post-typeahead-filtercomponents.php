@@ -12,7 +12,7 @@ class PoP_Module_Processor_PostSelectableTypeaheadFilterComponents extends PoP_M
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
+    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

@@ -8,9 +8,9 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_NAME = 'filterinput-name';
-    public const FILTERINPUT_USERNAME_OR_USERNAMES = 'filterinput-username-or-usernames';
-    public const FILTERINPUT_EMAIL_OR_EMAILS = 'filterinput-email-or-emails';
+    public final const FILTERINPUT_NAME = 'filterinput-name';
+    public final const FILTERINPUT_USERNAME_OR_USERNAMES = 'filterinput-username-or-usernames';
+    public final const FILTERINPUT_EMAIL_OR_EMAILS = 'filterinput-email-or-emails';
 
     public function getFilterInputsToProcess(): array
     {

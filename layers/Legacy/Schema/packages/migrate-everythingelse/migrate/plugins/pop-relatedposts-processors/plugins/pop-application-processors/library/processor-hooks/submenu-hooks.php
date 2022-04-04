@@ -6,7 +6,7 @@ class PoP_RelatedPosts_SubmenuHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:routes',
-            array($this, 'addSingleRoutes')
+            $this->addSingleRoutes(...)
         );
     }
 

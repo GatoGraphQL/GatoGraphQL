@@ -8,9 +8,9 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class Site
 {
-    private string $id;
-    private string $domain;
-    private string $host;
+    private readonly string $id;
+    private readonly string $domain;
+    private readonly string $host;
     // private string $name;
     // private string $description;
     public function __construct(

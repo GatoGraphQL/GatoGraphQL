@@ -2,26 +2,26 @@
 
 class CPP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor_TagTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 = 'block-tabpanel-tagcategoryposts00';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 = 'block-tabpanel-tagcategoryposts01';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 = 'block-tabpanel-tagcategoryposts02';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 = 'block-tabpanel-tagcategoryposts03';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 = 'block-tabpanel-tagcategoryposts04';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 = 'block-tabpanel-tagcategoryposts05';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 = 'block-tabpanel-tagcategoryposts06';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 = 'block-tabpanel-tagcategoryposts07';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 = 'block-tabpanel-tagcategoryposts08';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 = 'block-tabpanel-tagcategoryposts09';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 = 'block-tabpanel-tagcategoryposts10';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 = 'block-tabpanel-tagcategoryposts11';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 = 'block-tabpanel-tagcategoryposts12';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 = 'block-tabpanel-tagcategoryposts13';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 = 'block-tabpanel-tagcategoryposts14';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 = 'block-tabpanel-tagcategoryposts15';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 = 'block-tabpanel-tagcategoryposts16';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 = 'block-tabpanel-tagcategoryposts17';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 = 'block-tabpanel-tagcategoryposts18';
-    public const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 = 'block-tabpanel-tagcategoryposts19';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS00 = 'block-tabpanel-tagcategoryposts00';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS01 = 'block-tabpanel-tagcategoryposts01';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS02 = 'block-tabpanel-tagcategoryposts02';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS03 = 'block-tabpanel-tagcategoryposts03';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS04 = 'block-tabpanel-tagcategoryposts04';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS05 = 'block-tabpanel-tagcategoryposts05';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS06 = 'block-tabpanel-tagcategoryposts06';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS07 = 'block-tabpanel-tagcategoryposts07';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS08 = 'block-tabpanel-tagcategoryposts08';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS09 = 'block-tabpanel-tagcategoryposts09';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS10 = 'block-tabpanel-tagcategoryposts10';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS11 = 'block-tabpanel-tagcategoryposts11';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS12 = 'block-tabpanel-tagcategoryposts12';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS13 = 'block-tabpanel-tagcategoryposts13';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS14 = 'block-tabpanel-tagcategoryposts14';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS15 = 'block-tabpanel-tagcategoryposts15';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS16 = 'block-tabpanel-tagcategoryposts16';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS17 = 'block-tabpanel-tagcategoryposts17';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS18 = 'block-tabpanel-tagcategoryposts18';
+    public final const MODULE_BLOCK_TABPANEL_TAGCATEGORYPOSTS19 = 'block-tabpanel-tagcategoryposts19';
 
     public function getModulesToProcess(): array
     {

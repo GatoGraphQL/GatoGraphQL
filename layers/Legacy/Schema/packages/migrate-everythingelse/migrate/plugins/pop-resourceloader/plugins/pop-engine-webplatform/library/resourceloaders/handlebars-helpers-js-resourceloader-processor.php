@@ -2,7 +2,7 @@
 
 class PoP_FrontEnd_HandlebarsHelpersJSResourceLoaderProcessor extends PoP_HandlebarsHelpersJSResourceLoaderProcessor
 {
-    public const RESOURCE_HANDLEBARSHELPERS_KERNEL = 'handlebars-helpers-kernel';
+    public final const RESOURCE_HANDLEBARSHELPERS_KERNEL = 'handlebars-helpers-kernel';
 
     public function getResourcesToProcess()
     {

@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_MultipleLayoutsBase
 {
-    public const MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS = 'layout-multipleuser-mapdetails';
+    public final const MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS = 'layout-multipleuser-mapdetails';
 
     public function getModulesToProcess(): array
     {

@@ -5,7 +5,7 @@ class PoP_ResourceLoader_ProcessorHooks {
 
 		\PoP\Root\App::addFilter(
 			'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
-			array($this, 'getImmutableSettings'),
+			$this->getImmutableSettings(...),
 			10,
 			4
 		);

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_AnnouncementSpeechBubbles extends PoP_Module_Processor_AnnouncementSpeechBubblesBase
 {
-    public const MODULE_ANNOUNCEMENTSPEECHBUBBLE_STICKY = 'announcementspeechbubble-sticky';
+    public final const MODULE_ANNOUNCEMENTSPEECHBUBBLE_STICKY = 'announcementspeechbubble-sticky';
 
     public function getModulesToProcess(): array
     {

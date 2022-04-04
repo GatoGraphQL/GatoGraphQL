@@ -2,7 +2,7 @@
 
 class PoP_AddLocations_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FRAME_CREATELOCATIONMAP = 'frame_createlocationmap';
+    public final const RESOURCE_FRAME_CREATELOCATIONMAP = 'frame_createlocationmap';
 
     public function getResourcesToProcess()
     {

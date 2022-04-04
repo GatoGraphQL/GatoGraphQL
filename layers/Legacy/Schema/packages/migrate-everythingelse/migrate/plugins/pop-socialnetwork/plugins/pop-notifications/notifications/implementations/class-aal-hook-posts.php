@@ -11,12 +11,12 @@ class PoP_SocialNetwork_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
         
         // Recommended/Unrecommend/Upvote/Downvote Post
-        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'recommendedPost'));
-        \PoP\Root\App::addAction('gd_unrecommendpost', array($this, 'unrecommendedPost'));
-        \PoP\Root\App::addAction('gd_upvotepost', array($this, 'upvotedPost'));
-        \PoP\Root\App::addAction('gd_undoupvotepost', array($this, 'undidUpvotePost'));
-        \PoP\Root\App::addAction('gd_downvotepost', array($this, 'downvotedPost'));
-        \PoP\Root\App::addAction('gd_undodownvotepost', array($this, 'undidDownvotePost'));
+        \PoP\Root\App::addAction('gd_recommendpost', $this->recommendedPost(...));
+        \PoP\Root\App::addAction('gd_unrecommendpost', $this->unrecommendedPost(...));
+        \PoP\Root\App::addAction('gd_upvotepost', $this->upvotedPost(...));
+        \PoP\Root\App::addAction('gd_undoupvotepost', $this->undidUpvotePost(...));
+        \PoP\Root\App::addAction('gd_downvotepost', $this->downvotedPost(...));
+        \PoP\Root\App::addAction('gd_undodownvotepost', $this->undidDownvotePost(...));
         
         // parent::__construct();
     }

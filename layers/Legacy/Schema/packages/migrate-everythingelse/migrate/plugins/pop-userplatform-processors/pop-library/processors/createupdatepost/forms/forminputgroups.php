@@ -3,26 +3,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_CUP_TITLE = 'forminputgroup-cup-title';
-    public const MODULE_FORMINPUTGROUP_CUP_STATUS = 'forminputgroup-cup-status';
-    public const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-link';
-    public const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE = 'forminputgroup-linktitle';
-    public const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS = 'forminputgroup-linkaccess';
-    public const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES = 'forminputgroup-linkcategories';
-    public const MODULE_FORMINPUTGROUP_APPLIESTO = 'forminputgroup-appliesto';
-    public const MODULE_FORMINPUTGROUP_CATEGORIES = 'forminputgroup-categories';
-    public const MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR = 'forminput-highlighteditorgroup';
-    public const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION = 'forminputgroup-buttongroup-postsection';
-    public const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'forminputgroup-buttongroup-postsections';
-    public const MODULE_FILTERINPUTGROUP_LINKACCESS = 'filterinputgroup-linkaccess';
-    public const MODULE_FILTERINPUTGROUP_LINKCATEGORIES = 'filterinputgroup-linkcategories';
-    public const MODULE_FILTERINPUTGROUP_APPLIESTO = 'filterinputgroup-appliesto';
-    public const MODULE_FILTERINPUTGROUP_CATEGORIES = 'filterinputgroup-categories';
-    public const MODULE_FILTERINPUTGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections';
-    public const MODULE_FILTERINPUTGROUP_POSTSECTIONS = 'filterinputgroup-postsections';
-    public const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES = 'filterinputgroup-categories-btngroup';
-    public const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections-btngroup';
-    public const MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'filterinputgroup-postsections-btngroup';
+    public final const MODULE_FORMINPUTGROUP_CUP_TITLE = 'forminputgroup-cup-title';
+    public final const MODULE_FORMINPUTGROUP_CUP_STATUS = 'forminputgroup-cup-status';
+    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-link';
+    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE = 'forminputgroup-linktitle';
+    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS = 'forminputgroup-linkaccess';
+    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES = 'forminputgroup-linkcategories';
+    public final const MODULE_FORMINPUTGROUP_APPLIESTO = 'forminputgroup-appliesto';
+    public final const MODULE_FORMINPUTGROUP_CATEGORIES = 'forminputgroup-categories';
+    public final const MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR = 'forminput-highlighteditorgroup';
+    public final const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION = 'forminputgroup-buttongroup-postsection';
+    public final const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'forminputgroup-buttongroup-postsections';
+    public final const MODULE_FILTERINPUTGROUP_LINKACCESS = 'filterinputgroup-linkaccess';
+    public final const MODULE_FILTERINPUTGROUP_LINKCATEGORIES = 'filterinputgroup-linkcategories';
+    public final const MODULE_FILTERINPUTGROUP_APPLIESTO = 'filterinputgroup-appliesto';
+    public final const MODULE_FILTERINPUTGROUP_CATEGORIES = 'filterinputgroup-categories';
+    public final const MODULE_FILTERINPUTGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections';
+    public final const MODULE_FILTERINPUTGROUP_POSTSECTIONS = 'filterinputgroup-postsections';
+    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES = 'filterinputgroup-categories-btngroup';
+    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections-btngroup';
+    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'filterinputgroup-postsections-btngroup';
 
     public function getModulesToProcess(): array
     {

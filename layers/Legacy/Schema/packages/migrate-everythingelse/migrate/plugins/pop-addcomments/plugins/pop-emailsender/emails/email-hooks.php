@@ -16,7 +16,7 @@ class PoP_AddComments_EmailSender_Hooks
         //----------------------------------------------------------------------
         \PoP\Root\App::addAction(
             'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
-            array($this, 'sendemailToUsersFromComment'),
+            $this->sendemailToUsersFromComment(...),
             10,
             2
         );

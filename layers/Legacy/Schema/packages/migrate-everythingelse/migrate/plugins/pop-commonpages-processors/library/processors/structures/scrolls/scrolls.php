@@ -2,10 +2,10 @@
 
 class GD_Custom_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_WHOWEARE_DETAILS = 'scroll-whoweare-details';
-    public const MODULE_SCROLL_WHOWEARE_THUMBNAIL = 'scroll-whoweare-thumbnail';
-    public const MODULE_SCROLL_WHOWEARE_LIST = 'scroll-whoweare-list';
-    public const MODULE_SCROLL_WHOWEARE_FULLVIEW = 'scroll-whoweare-fullview';
+    public final const MODULE_SCROLL_WHOWEARE_DETAILS = 'scroll-whoweare-details';
+    public final const MODULE_SCROLL_WHOWEARE_THUMBNAIL = 'scroll-whoweare-thumbnail';
+    public final const MODULE_SCROLL_WHOWEARE_LIST = 'scroll-whoweare-list';
+    public final const MODULE_SCROLL_WHOWEARE_FULLVIEW = 'scroll-whoweare-fullview';
 
     public function getModulesToProcess(): array
     {

@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_SP_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public const MODULE_BUTTON_LOCATIONPOSTLINK_CREATE = 'postbutton-locationpostlink-create';
+    public final const MODULE_BUTTON_LOCATIONPOSTLINK_CREATE = 'postbutton-locationpostlink-create';
 
     public function getModulesToProcess(): array
     {

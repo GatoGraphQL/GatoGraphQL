@@ -10,7 +10,7 @@ use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 
 class CacheUtils
 {
-    public const HOOK_SCHEMA_CACHE_KEY_COMPONENTS = __CLASS__ . ':schema-cache-key-components';
+    public final const HOOK_SCHEMA_CACHE_KEY_COMPONENTS = __CLASS__ . ':schema-cache-key-components';
 
     public static function getSchemaCacheKeyComponents(): array
     {

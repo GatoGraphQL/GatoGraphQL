@@ -7,15 +7,15 @@ class PoP_AddLocations_PageSectionHooks
     {
         // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getDialogClasses:modals',
-        //     array($this, 'modalDialogClasses')
+        //     $this->modalDialogClasses(...)
         // );
         // \PoP\Root\App::addFilter(
         //     'PoP_Module_Processor_CustomModalPageSections:getHeaderTitles:modals',
-        //     array($this, 'modalHeaderTitles')
+        //     $this->modalHeaderTitles(...)
         // );
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomModalPageSections:get_props_block_initial:modals',
-            array($this, 'initModelProps'),
+            $this->initModelProps(...),
             10,
             3
         );

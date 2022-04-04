@@ -3,22 +3,22 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR = 'layout-previewpost-event-navigator';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS = 'layout-previewpost-event-addons';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS = 'layout-previewpost-event-details';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL = 'layout-previewpost-event-thumbnail';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST = 'layout-previewpost-event-list';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED = 'layout-previewpost-event-related';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT = 'layout-previewpost-event-edit';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER = 'layout-previewpost-event-popover';
-    public const MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL = 'layout-previewpost-event-carousel';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR = 'layout-previewost-pastevent-navigator';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS = 'layout-previewost-pastevent-addons';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS = 'layout-previewost-pastevent-details';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL = 'layout-previewost-pastevent-thumbnail';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST = 'layout-previewost-pastevent-list';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED = 'layout-previewost-pastevent-related';
-    public const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT = 'layout-previewost-pastevent-edit';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_NAVIGATOR = 'layout-previewpost-event-navigator';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_ADDONS = 'layout-previewpost-event-addons';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_DETAILS = 'layout-previewpost-event-details';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_THUMBNAIL = 'layout-previewpost-event-thumbnail';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_LIST = 'layout-previewpost-event-list';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_RELATED = 'layout-previewpost-event-related';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT = 'layout-previewpost-event-edit';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_POPOVER = 'layout-previewpost-event-popover';
+    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_CAROUSEL = 'layout-previewpost-event-carousel';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR = 'layout-previewost-pastevent-navigator';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_ADDONS = 'layout-previewost-pastevent-addons';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_DETAILS = 'layout-previewost-pastevent-details';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_THUMBNAIL = 'layout-previewost-pastevent-thumbnail';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_LIST = 'layout-previewost-pastevent-list';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_RELATED = 'layout-previewost-pastevent-related';
+    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_EDIT = 'layout-previewost-pastevent-edit';
 
     public function getModulesToProcess(): array
     {

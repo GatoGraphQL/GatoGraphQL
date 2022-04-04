@@ -6,11 +6,11 @@ class PoP_Bootstrap_ResourceLoader_Hooks
     {
         \PoP\Root\App::addFilter(
             'getBootstrapFontUrl:pathkey',
-            array($this, 'getPathkey')
+            $this->getPathkey(...)
         );
         \PoP\Root\App::addFilter(
             'getBootstrapFontPath',
-            array($this, 'getFontPath'),
+            $this->getFontPath(...),
             10,
             2
         );

@@ -14,8 +14,8 @@ class CustomPostStatus
      * to transform from one to the other value and back,
      * between 'publish' and a potential 'published' (generic value for a CMS).
      */
-    public const PUBLISH = 'publish';
-    public const PENDING = 'pending';
-    public const DRAFT = 'draft';
-    public const TRASH = 'trash';
+    public final const PUBLISH = 'publish';
+    public final const PENDING = 'pending';
+    public final const DRAFT = 'draft';
+    public final const TRASH = 'trash';
 }

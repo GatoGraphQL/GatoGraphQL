@@ -8,9 +8,9 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
-    public const FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
-    public const FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
+    public final const FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
+    public final const FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
+    public final const FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
 
     public function getFilterInputsToProcess(): array
     {

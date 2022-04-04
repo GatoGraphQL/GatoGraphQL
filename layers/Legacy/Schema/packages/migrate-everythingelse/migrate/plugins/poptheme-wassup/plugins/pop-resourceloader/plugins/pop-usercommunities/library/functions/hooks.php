@@ -7,7 +7,7 @@ class PoPThemeWassup_UserCommunities_ResourceLoader_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoPThemeWassup_ResourceLoader_Hooks:extra-vars',
-            array($this, 'getAuthorResourcesExtraVars'),
+            $this->getAuthorResourcesExtraVars(...),
             10,
             3
         );

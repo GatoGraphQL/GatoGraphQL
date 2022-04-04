@@ -6,7 +6,7 @@ class PoP_LocationPosts_LatestCounts_Hooks
     {
         \PoP\Root\App::addFilter(
             'latestcounts:locationposts:classes',
-            array($this, 'getSectionClasses')
+            $this->getSectionClasses(...)
         );
     }
 

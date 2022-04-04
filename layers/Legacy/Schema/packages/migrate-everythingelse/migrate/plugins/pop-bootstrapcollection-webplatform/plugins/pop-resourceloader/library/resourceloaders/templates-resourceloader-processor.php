@@ -2,10 +2,10 @@
 
 class PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_ALERT = 'alert';
-    public const RESOURCE_CAROUSEL = 'carousel';
-    public const RESOURCE_CAROUSEL_CONTROLS = 'carousel_controls';
-    public const RESOURCE_CAROUSEL_INNER = 'carousel_inner';
+    public final const RESOURCE_ALERT = 'alert';
+    public final const RESOURCE_CAROUSEL = 'carousel';
+    public final const RESOURCE_CAROUSEL_CONTROLS = 'carousel_controls';
+    public final const RESOURCE_CAROUSEL_INNER = 'carousel_inner';
 
     public function getResourcesToProcess()
     {

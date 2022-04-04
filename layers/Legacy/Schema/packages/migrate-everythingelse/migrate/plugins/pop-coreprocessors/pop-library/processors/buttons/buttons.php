@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public const MODULE_BUTTON_PRINT_PREVIEWDROPDOWN = 'button-print-previewdropdown';
-    public const MODULE_BUTTON_PRINT_SOCIALMEDIA = 'button-print-socialmedia';
-    public const MODULE_BUTTON_POSTPERMALINK = 'button-postpermalink';
-    public const MODULE_BUTTON_POSTCOMMENTS = 'postbutton-comments';
-    public const MODULE_BUTTON_POSTCOMMENTS_LABEL = 'postbutton-comments-label';
+    public final const MODULE_BUTTON_PRINT_PREVIEWDROPDOWN = 'button-print-previewdropdown';
+    public final const MODULE_BUTTON_PRINT_SOCIALMEDIA = 'button-print-socialmedia';
+    public final const MODULE_BUTTON_POSTPERMALINK = 'button-postpermalink';
+    public final const MODULE_BUTTON_POSTCOMMENTS = 'postbutton-comments';
+    public final const MODULE_BUTTON_POSTCOMMENTS_LABEL = 'postbutton-comments-label';
 
     public function getModulesToProcess(): array
     {

@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLPersistedQueryEndpoint
  */
 class EndpointBlockCategory extends AbstractBlockCategory
 {
-    public const ENDPOINT_BLOCK_CATEGORY = 'graphql-api-query-exec';
+    public final const ENDPOINT_BLOCK_CATEGORY = 'graphql-api-query-exec';
 
     private ?GraphQLPersistedQueryEndpointCustomPostType $graphQLPersistedQueryEndpointCustomPostType = null;
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;

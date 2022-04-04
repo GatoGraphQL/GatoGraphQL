@@ -32,7 +32,7 @@ class EndpointExecuterService extends AbstractAutomaticallyInstantiatedService
          */
         \add_action(
             HookNames::AFTER_BOOT_APPLICATION,
-            [$this, 'executeRequestedEndpoint']
+            $this->executeRequestedEndpoint(...)
         );
     }
 

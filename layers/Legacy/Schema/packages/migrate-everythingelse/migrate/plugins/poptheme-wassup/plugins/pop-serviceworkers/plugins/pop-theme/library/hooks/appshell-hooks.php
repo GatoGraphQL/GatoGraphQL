@@ -6,7 +6,7 @@ class PoPTheme_Wassup_ServiceWorkers_Theme_Hooks_AppShell
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:appshell_pages',
-            array($this, 'getAppshellPages'),
+            $this->getAppshellPages(...),
             10,
             2
         );

@@ -2,10 +2,10 @@
 
 class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_CHECKPOINTMESSAGE_NOTLOGGEDIN = 'checkpointmessage-notloggedin';
-    public const MODULE_CHECKPOINTMESSAGE_LOGGEDIN = 'checkpointmessage-loggedin';
-    public const MODULE_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'checkpointmessage-loggedincanedit';
-    public const MODULE_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'checkpointmessage-loggedinisadmin';
+    public final const MODULE_CHECKPOINTMESSAGE_NOTLOGGEDIN = 'checkpointmessage-notloggedin';
+    public final const MODULE_CHECKPOINTMESSAGE_LOGGEDIN = 'checkpointmessage-loggedin';
+    public final const MODULE_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'checkpointmessage-loggedincanedit';
+    public final const MODULE_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'checkpointmessage-loggedinisadmin';
 
     public function getModulesToProcess(): array
     {

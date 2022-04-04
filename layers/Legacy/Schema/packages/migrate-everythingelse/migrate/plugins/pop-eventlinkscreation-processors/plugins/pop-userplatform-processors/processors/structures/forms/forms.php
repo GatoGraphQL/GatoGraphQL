@@ -2,7 +2,7 @@
 
 class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_EVENTLINK = 'form-eventlink';
+    public final const MODULE_FORM_EVENTLINK = 'form-eventlink';
 
     public function getModulesToProcess(): array
     {

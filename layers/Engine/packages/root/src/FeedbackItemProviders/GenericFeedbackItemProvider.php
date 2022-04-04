@@ -8,9 +8,9 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class GenericFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = 'e1';
-    public const D1 = 'd1';
-    public const L1 = 'l1';
+    public final const E1 = 'e1';
+    public final const D1 = 'd1';
+    public final const L1 = 'l1';
 
     /**
      * @return string[]

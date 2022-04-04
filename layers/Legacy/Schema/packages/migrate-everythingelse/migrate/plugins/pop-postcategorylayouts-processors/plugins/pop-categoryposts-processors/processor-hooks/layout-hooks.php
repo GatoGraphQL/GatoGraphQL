@@ -6,7 +6,7 @@ class PoP_PostCategoryLayouts_CategoryPosts_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CategoryPosts_Module_Processor_ScrollInners:layout',
-            array($this, 'getCategoryLayout'),
+            $this->getCategoryLayout(...),
             10,
             2
         );

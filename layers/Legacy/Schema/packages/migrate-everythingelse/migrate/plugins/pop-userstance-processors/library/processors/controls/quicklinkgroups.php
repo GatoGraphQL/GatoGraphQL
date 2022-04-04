@@ -2,8 +2,8 @@
 
 class UserStance_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_QUICKLINKGROUP_STANCEEDIT = 'quicklinkgroup-stanceedit';
-    public const MODULE_QUICKLINKGROUP_STANCECONTENT = 'quicklinkgroup-stancecontent';
+    public final const MODULE_QUICKLINKGROUP_STANCEEDIT = 'quicklinkgroup-stanceedit';
+    public final const MODULE_QUICKLINKGROUP_STANCECONTENT = 'quicklinkgroup-stancecontent';
 
     public function getModulesToProcess(): array
     {

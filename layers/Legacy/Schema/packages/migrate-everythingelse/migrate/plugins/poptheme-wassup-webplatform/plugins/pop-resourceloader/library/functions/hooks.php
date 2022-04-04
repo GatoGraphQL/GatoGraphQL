@@ -6,17 +6,17 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
-            array($this, 'getManagerDependencies')
+            $this->getManagerDependencies(...)
         );
 
         \PoP\Root\App::addFilter(
             'PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor:dependencies:multiselect',
-            array($this, 'getMultiselectDependencies')
+            $this->getMultiselectDependencies(...)
         );
 
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
-            array($this, 'getModuleCssResources'),
+            $this->getModuleCssResources(...),
             10,
             6
         );

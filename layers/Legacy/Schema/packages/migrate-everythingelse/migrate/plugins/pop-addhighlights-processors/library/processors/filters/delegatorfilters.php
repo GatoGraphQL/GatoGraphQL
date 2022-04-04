@@ -2,9 +2,9 @@
 
 class PoP_AddHighlights_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public const MODULE_DELEGATORFILTER_AUTHORHIGHLIGHTS = 'delegatorfilter-authorhighlights';
-    public const MODULE_DELEGATORFILTER_HIGHLIGHTS = 'delegatorfilter-highlights';
-    public const MODULE_DELEGATORFILTER_MYHIGHLIGHTS = 'delegatorfilter-myhighlights';
+    public final const MODULE_DELEGATORFILTER_AUTHORHIGHLIGHTS = 'delegatorfilter-authorhighlights';
+    public final const MODULE_DELEGATORFILTER_HIGHLIGHTS = 'delegatorfilter-highlights';
+    public final const MODULE_DELEGATORFILTER_MYHIGHLIGHTS = 'delegatorfilter-myhighlights';
 
     public function getModulesToProcess(): array
     {

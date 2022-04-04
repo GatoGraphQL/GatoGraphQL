@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS = 'block-singleauthors-scroll-details';
-    public const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW = 'block-singleauthors-scroll-fullview';
-    public const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'block-singleauthors-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST = 'block-singleauthors-scroll-list';
+    public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS = 'block-singleauthors-scroll-details';
+    public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW = 'block-singleauthors-scroll-fullview';
+    public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'block-singleauthors-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST = 'block-singleauthors-scroll-list';
 
     public function getModulesToProcess(): array
     {

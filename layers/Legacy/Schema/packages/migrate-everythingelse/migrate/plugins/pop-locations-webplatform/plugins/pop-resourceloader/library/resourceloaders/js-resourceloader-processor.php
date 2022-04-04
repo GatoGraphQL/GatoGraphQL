@@ -2,8 +2,8 @@
 
 class EM_PoPProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_MAPCOLLECTION = 'em-map-collection';
-    public const RESOURCE_TYPEAHEADMAPSELECTABLE = 'em-typeahead-map-selectable';
+    public final const RESOURCE_MAPCOLLECTION = 'em-map-collection';
+    public final const RESOURCE_TYPEAHEADMAPSELECTABLE = 'em-typeahead-map-selectable';
 
     public function getResourcesToProcess()
     {

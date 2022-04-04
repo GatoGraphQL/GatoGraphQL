@@ -8,12 +8,12 @@ class PoP_RelatedPosts_Notifications_NotificationHooks
         // Hook into the API: Notification Actions
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityposts:actions',
-            array($this, 'getUseractivitypostsActions')
+            $this->getUseractivitypostsActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
-            array($this, 'getMarkasreadPostActions')
+            $this->getMarkasreadPostActions(...)
         );
     }
 

@@ -2,9 +2,9 @@
 
 class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST = 'layout-postsidebarinner-vertical-locationpost';
-    public const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST = 'layout-postsidebarinner-horizontal-locationpost';
-    public const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST = 'layout-postsidebarinner-compacthorizontal-locationpost';
+    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST = 'layout-postsidebarinner-vertical-locationpost';
+    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LOCATIONPOST = 'layout-postsidebarinner-horizontal-locationpost';
+    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST = 'layout-postsidebarinner-compacthorizontal-locationpost';
 
     public function getModulesToProcess(): array
     {

@@ -19,7 +19,7 @@ class PoP_Domain
     {
 
         // Priority: after PoP CDN
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888419);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888419);
         // \PoP\Root\App::addAction('PoP:system-generate', array($this,'systemGenerate'));
     }
     public function init()

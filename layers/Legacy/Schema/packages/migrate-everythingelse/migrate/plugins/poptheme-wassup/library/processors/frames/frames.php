@@ -8,11 +8,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
 {
-    public const MODULE_FRAME_TOP = 'frame-top';
-    public const MODULE_FRAME_SIDE = 'frame-side';
-    public const MODULE_FRAME_BACKGROUND = 'frame-background';
-    public const MODULE_FRAME_TOPSIMPLE = 'frame-topsimple';
-    public const MODULE_FRAME_TOPEMBED = 'frame-topembed';
+    public final const MODULE_FRAME_TOP = 'frame-top';
+    public final const MODULE_FRAME_SIDE = 'frame-side';
+    public final const MODULE_FRAME_BACKGROUND = 'frame-background';
+    public final const MODULE_FRAME_TOPSIMPLE = 'frame-topsimple';
+    public final const MODULE_FRAME_TOPEMBED = 'frame-topembed';
 
     public function getModulesToProcess(): array
     {

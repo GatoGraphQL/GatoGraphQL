@@ -9,17 +9,17 @@ class PluginLifecycleHooks
     /**
      * Hook to initalize extensions
      */
-    public const INITIALIZE_EXTENSION = __CLASS__ . ':initializeExtension';
+    public final const INITIALIZE_EXTENSION = __CLASS__ . ':initializeExtension';
     /**
      * Hook to configure extensions
      */
-    public const CONFIGURE_EXTENSION_COMPONENTS = __CLASS__ . ':configureExtensionComponents';
+    public final const CONFIGURE_EXTENSION_COMPONENTS = __CLASS__ . ':configureExtensionComponents';
     /**
      * Hook to configure extensions
      */
-    public const CONFIGURE_EXTENSION = __CLASS__ . ':configureExtension';
+    public final const CONFIGURE_EXTENSION = __CLASS__ . ':configureExtension';
     /**
      * Hook to boot extensions
      */
-    public const BOOT_EXTENSION = __CLASS__ . ':bootExtension';
+    public final const BOOT_EXTENSION = __CLASS__ . ':bootExtension';
 }

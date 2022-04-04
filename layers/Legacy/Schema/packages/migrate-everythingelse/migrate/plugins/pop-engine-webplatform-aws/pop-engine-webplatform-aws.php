@@ -19,7 +19,7 @@ class PoP_WebPlatformEngine_AWS
     {
 
         // Priority: after PoP CDN
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888420);
     }
 
     public function init()

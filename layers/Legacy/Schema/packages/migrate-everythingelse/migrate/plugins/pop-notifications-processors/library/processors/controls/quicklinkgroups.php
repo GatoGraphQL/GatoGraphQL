@@ -2,7 +2,7 @@
 
 class GD_AAL_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_AAL_QUICKLINKGROUP_NOTIFICATION = 'notifications-quicklinkgroup-notification';
+    public final const MODULE_AAL_QUICKLINKGROUP_NOTIFICATION = 'notifications-quicklinkgroup-notification';
 
     public function getModulesToProcess(): array
     {

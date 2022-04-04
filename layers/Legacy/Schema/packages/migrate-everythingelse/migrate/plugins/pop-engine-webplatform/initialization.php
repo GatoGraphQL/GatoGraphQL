@@ -48,12 +48,12 @@ class PoPWebPlatform_Initialization
         // If it is a search engine, there's no need to output the scripts or initialize pop.Manager
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()/* && !RequestUtils::isSearchEngine()*/) {
-            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...));
 
             // Print all jQuery functions, execute after all the plugin scripts have loaded
             // Load before we start printing the footer scripts, so we can add the 'after' data to the required scripts
-            \PoP\Root\App::addAction('popcms:printFooterScripts', array($this, 'initScripts'), 0);
-            \PoP\Root\App::addAction('popcms:printFooterScripts', array($this, 'printScripts'), PHP_INT_MAX);
+            \PoP\Root\App::addAction('popcms:printFooterScripts', $this->initScripts(...), 0);
+            \PoP\Root\App::addAction('popcms:printFooterScripts', $this->printScripts(...), PHP_INT_MAX);
         }
     }
 

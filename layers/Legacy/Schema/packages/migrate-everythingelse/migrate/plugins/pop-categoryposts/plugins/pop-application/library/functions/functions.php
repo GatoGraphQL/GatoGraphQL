@@ -5,7 +5,7 @@ use PoPCMSSchema\Posts\Facades\PostTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
-\PoP\Root\App::addFilter('gd_postname', 'blogPostname', 10, 3);
+\PoP\Root\App::addFilter('gd_postname', blogPostname(...), 10, 3);
 function blogPostname($name, $post_id, $format)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();
@@ -23,7 +23,7 @@ function blogPostname($name, $post_id, $format)
 }
 
 
-\PoP\Root\App::addFilter('gd_posticon', 'blogPosticon', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', blogPosticon(...), 10, 2);
 function blogPosticon($icon, $post_id)
 {
     $postTypeAPI = PostTypeAPIFacade::getInstance();

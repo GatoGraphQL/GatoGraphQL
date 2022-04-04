@@ -2,8 +2,8 @@
 
 class GD_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public const MODULE_BLOCK_EVENT_UPDATE = 'block-event-update';
-    public const MODULE_BLOCK_EVENT_CREATE = 'block-event-create';
+    public final const MODULE_BLOCK_EVENT_UPDATE = 'block-event-update';
+    public final const MODULE_BLOCK_EVENT_CREATE = 'block-event-create';
 
     public function getModulesToProcess(): array
     {

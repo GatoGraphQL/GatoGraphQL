@@ -2,26 +2,26 @@
 
 class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS00 = 'tabpanel-authorcategoryposts00';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS01 = 'tabpanel-authorcategoryposts01';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS02 = 'tabpanel-authorcategoryposts02';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS03 = 'tabpanel-authorcategoryposts03';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS04 = 'tabpanel-authorcategoryposts04';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS05 = 'tabpanel-authorcategoryposts05';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS06 = 'tabpanel-authorcategoryposts06';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS07 = 'tabpanel-authorcategoryposts07';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS08 = 'tabpanel-authorcategoryposts08';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS09 = 'tabpanel-authorcategoryposts09';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS10 = 'tabpanel-authorcategoryposts10';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS11 = 'tabpanel-authorcategoryposts11';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS12 = 'tabpanel-authorcategoryposts12';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS13 = 'tabpanel-authorcategoryposts13';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS14 = 'tabpanel-authorcategoryposts14';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS15 = 'tabpanel-authorcategoryposts15';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS16 = 'tabpanel-authorcategoryposts16';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS17 = 'tabpanel-authorcategoryposts17';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS18 = 'tabpanel-authorcategoryposts18';
-    public const MODULE_TABPANEL_AUTHORCATEGORYPOSTS19 = 'tabpanel-authorcategoryposts19';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS00 = 'tabpanel-authorcategoryposts00';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS01 = 'tabpanel-authorcategoryposts01';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS02 = 'tabpanel-authorcategoryposts02';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS03 = 'tabpanel-authorcategoryposts03';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS04 = 'tabpanel-authorcategoryposts04';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS05 = 'tabpanel-authorcategoryposts05';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS06 = 'tabpanel-authorcategoryposts06';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS07 = 'tabpanel-authorcategoryposts07';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS08 = 'tabpanel-authorcategoryposts08';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS09 = 'tabpanel-authorcategoryposts09';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS10 = 'tabpanel-authorcategoryposts10';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS11 = 'tabpanel-authorcategoryposts11';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS12 = 'tabpanel-authorcategoryposts12';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS13 = 'tabpanel-authorcategoryposts13';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS14 = 'tabpanel-authorcategoryposts14';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS15 = 'tabpanel-authorcategoryposts15';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS16 = 'tabpanel-authorcategoryposts16';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS17 = 'tabpanel-authorcategoryposts17';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS18 = 'tabpanel-authorcategoryposts18';
+    public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS19 = 'tabpanel-authorcategoryposts19';
 
     public function getModulesToProcess(): array
     {

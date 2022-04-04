@@ -8,7 +8,7 @@ class PoP_ApplicationProcessors_UserLogin_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_MultidomainProcessors_Module_Processor_Dataloads:backgroundurls',
-            array($this, 'addBackgroundurls'),
+            $this->addBackgroundurls(...),
             10,
             2
         );

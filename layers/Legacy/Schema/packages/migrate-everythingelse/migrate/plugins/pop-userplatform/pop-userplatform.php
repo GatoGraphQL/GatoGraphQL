@@ -19,7 +19,7 @@ class PoP_UserPlatform
     {
 
         // Priority: after PoP User Login
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888330);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888330);
     }
     public function init()
     {

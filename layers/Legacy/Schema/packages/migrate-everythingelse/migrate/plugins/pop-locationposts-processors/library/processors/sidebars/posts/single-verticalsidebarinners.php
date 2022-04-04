@@ -2,7 +2,7 @@
 
 class GD_SP_EM_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST = 'vertical-sidebarinner-single-locationpost';
+    public final const MODULE_VERTICALSIDEBARINNER_SINGLE_LOCATIONPOST = 'vertical-sidebarinner-single-locationpost';
 
     public function getModulesToProcess(): array
     {

@@ -13,7 +13,7 @@ class PoP_ResourceLoader_GeneratedResourcesManager {
 		// If the state changes, save it at the end of the execution
         \PoP\Root\App::addAction(
         	'shutdown', // This is a WP hook, must migrate to a PoP one
-        	array($this, 'maybeSave')
+        	$this->maybeSave(...)
         );
 	}
 

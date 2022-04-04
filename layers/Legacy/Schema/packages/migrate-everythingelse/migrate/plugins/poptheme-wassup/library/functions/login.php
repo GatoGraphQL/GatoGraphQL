@@ -31,13 +31,13 @@ function gdLoginLogo()
     </style>
     <?php
 }
-\PoP\Root\App::addFilter('login_headerurl', 'gdLoginLogoUrl');
+\PoP\Root\App::addFilter('login_headerurl', gdLoginLogoUrl(...));
 function gdLoginLogoUrl()
 {
     $cmsService = CMSServiceFacade::getInstance();
     return $cmsService->getHomeURL();
 }
-\PoP\Root\App::addFilter('login_headertitle', 'gdLoginLogoUrlTitle');
+\PoP\Root\App::addFilter('login_headertitle', gdLoginLogoUrlTitle(...));
 function gdLoginLogoUrlTitle()
 {
     $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();

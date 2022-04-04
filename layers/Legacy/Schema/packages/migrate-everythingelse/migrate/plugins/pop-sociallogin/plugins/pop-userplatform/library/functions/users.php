@@ -6,14 +6,14 @@ define('POP_SOCIALLOGIN_USERATTRIBUTE_SOCIALLOGIN', 'sociallogin-user');
  * User Attributes
  */
 // Add a class to the body to identify the user as WSL, to hide the "Change Password" link
-\PoP\Root\App::addFilter('gdUserAttributes', 'gdWslUserAttributes');
+\PoP\Root\App::addFilter('gdUserAttributes', gdWslUserAttributes(...));
 function gdWslUserAttributes($userattributes)
 {
     $userattributes[] = POP_SOCIALLOGIN_USERATTRIBUTE_SOCIALLOGIN;
     return $userattributes;
 }
 
-\PoP\Root\App::addFilter('gdGetUserattributes', 'gdWslGetUserattributes', 10, 2);
+\PoP\Root\App::addFilter('gdGetUserattributes', gdWslGetUserattributes(...), 10, 2);
 function gdWslGetUserattributes($userattributes, $user_id)
 {
     if (isSocialloginUser($user_id)) {

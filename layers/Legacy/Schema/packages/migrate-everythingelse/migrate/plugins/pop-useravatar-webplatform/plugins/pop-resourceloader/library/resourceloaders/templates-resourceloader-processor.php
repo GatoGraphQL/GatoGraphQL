@@ -2,10 +2,10 @@
 
 class PoP_UserAvatarWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_LOGGEDINUSERAVATAR = 'layout_loggedinuseravatar';
-    public const RESOURCE_FILEUPLOAD_PICTURE = 'fileupload_picture';
-    public const RESOURCE_FILEUPLOAD_PICTURE_UPLOAD = 'fileupload_picture_upload';
-    public const RESOURCE_FILEUPLOAD_PICTURE_DOWNLOAD = 'fileupload_picture_download';
+    public final const RESOURCE_LAYOUT_LOGGEDINUSERAVATAR = 'layout_loggedinuseravatar';
+    public final const RESOURCE_FILEUPLOAD_PICTURE = 'fileupload_picture';
+    public final const RESOURCE_FILEUPLOAD_PICTURE_UPLOAD = 'fileupload_picture_upload';
+    public final const RESOURCE_FILEUPLOAD_PICTURE_DOWNLOAD = 'fileupload_picture_download';
 
     public function getResourcesToProcess()
     {

@@ -2,14 +2,14 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_LINKS_NAVIGATOR = 'scroll-links-navigator';
-    public const MODULE_SCROLL_LINKS_ADDONS = 'scroll-links-addons';
-    public const MODULE_SCROLL_LINKS_DETAILS = 'scroll-links-details';
-    public const MODULE_SCROLL_LINKS_SIMPLEVIEW = 'scroll-links-simpleview';
-    public const MODULE_SCROLL_LINKS_FULLVIEW = 'scroll-links-fullview';
-    public const MODULE_SCROLL_AUTHORLINKS_FULLVIEW = 'scroll-authorlinks-fullview';
-    public const MODULE_SCROLL_LINKS_THUMBNAIL = 'scroll-links-thumbnail';
-    public const MODULE_SCROLL_LINKS_LIST = 'scroll-links-list';
+    public final const MODULE_SCROLL_LINKS_NAVIGATOR = 'scroll-links-navigator';
+    public final const MODULE_SCROLL_LINKS_ADDONS = 'scroll-links-addons';
+    public final const MODULE_SCROLL_LINKS_DETAILS = 'scroll-links-details';
+    public final const MODULE_SCROLL_LINKS_SIMPLEVIEW = 'scroll-links-simpleview';
+    public final const MODULE_SCROLL_LINKS_FULLVIEW = 'scroll-links-fullview';
+    public final const MODULE_SCROLL_AUTHORLINKS_FULLVIEW = 'scroll-authorlinks-fullview';
+    public final const MODULE_SCROLL_LINKS_THUMBNAIL = 'scroll-links-thumbnail';
+    public final const MODULE_SCROLL_LINKS_LIST = 'scroll-links-list';
 
     public function getModulesToProcess(): array
     {

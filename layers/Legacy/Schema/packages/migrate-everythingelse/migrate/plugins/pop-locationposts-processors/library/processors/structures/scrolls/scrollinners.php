@@ -2,16 +2,16 @@
 
 class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_MAP = 'scrollinner-locationposts-map';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP = 'scrollinner-locationposts-horizontalmap';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR = 'scrollinner-locationposts-navigator';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_ADDONS = 'scrollinner-locationposts-addons';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_DETAILS = 'scrollinner-locationposts-details';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW = 'scrollinner-locationposts-simpleview';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_FULLVIEW = 'scrollinner-locationposts-fullview';
-    public const MODULE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW = 'scrollinner-authorlocationposts-fullview';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL = 'scrollinner-locationposts-thumbnail';
-    public const MODULE_SCROLLINNER_LOCATIONPOSTS_LIST = 'scrollinner-locationposts-list';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_MAP = 'scrollinner-locationposts-map';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_HORIZONTALMAP = 'scrollinner-locationposts-horizontalmap';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_NAVIGATOR = 'scrollinner-locationposts-navigator';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_ADDONS = 'scrollinner-locationposts-addons';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_DETAILS = 'scrollinner-locationposts-details';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_SIMPLEVIEW = 'scrollinner-locationposts-simpleview';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_FULLVIEW = 'scrollinner-locationposts-fullview';
+    public final const MODULE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW = 'scrollinner-authorlocationposts-fullview';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL = 'scrollinner-locationposts-thumbnail';
+    public final const MODULE_SCROLLINNER_LOCATIONPOSTS_LIST = 'scrollinner-locationposts-list';
 
     public function getModulesToProcess(): array
     {

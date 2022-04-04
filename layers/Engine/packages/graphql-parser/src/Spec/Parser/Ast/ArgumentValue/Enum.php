@@ -13,7 +13,7 @@ class Enum extends AbstractAst implements ArgumentValueAstInterface
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected string $enumValue,
+        protected readonly string $enumValue,
         Location $location
     ) {
         parent::__construct($location);

@@ -6,5 +6,5 @@ namespace PoP\ConfigurationComponentModel\Constants;
 
 class Stratum
 {
-    public const DATA = 'data';
+    public final const DATA = 'data';
 }

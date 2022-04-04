@@ -9,7 +9,7 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class GraphQLExtendedSpecFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = '1';
+    public final const E1 = '1';
 
     /**
      * @return string[]

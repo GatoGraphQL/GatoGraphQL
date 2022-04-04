@@ -6,7 +6,7 @@ class PoP_LocationPostLinksCreation_PageSectionHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
-            array($this, 'initModelPropsAddons'),
+            $this->initModelPropsAddons(...),
             10,
             3
         );

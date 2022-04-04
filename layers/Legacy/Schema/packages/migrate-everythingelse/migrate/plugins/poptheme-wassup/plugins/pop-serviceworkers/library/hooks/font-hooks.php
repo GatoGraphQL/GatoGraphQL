@@ -6,7 +6,7 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Fonts
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
-            array($this, 'getPrecacheList'),
+            $this->getPrecacheList(...),
             10,
             2
         );

@@ -6,7 +6,7 @@ namespace PoPWPSchema\CustomPosts\Enums;
 
 class CustomPostStatus
 {
-    public const FUTURE = 'future';
-    public const PRIVATE = 'private';
-    // public const ANY = 'any';
+    public final const FUTURE = 'future';
+    public final const PRIVATE = 'private';
+    // public final const ANY = 'any';
 }

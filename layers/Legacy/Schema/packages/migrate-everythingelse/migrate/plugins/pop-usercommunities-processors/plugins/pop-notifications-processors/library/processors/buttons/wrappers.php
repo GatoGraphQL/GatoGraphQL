@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP = 'ure-aal-buttonwrapper-editmembership';
-    public const MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS = 'ure-aal-buttonwrapper-viewallmembers';
+    public final const MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP = 'ure-aal-buttonwrapper-editmembership';
+    public final const MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS = 'ure-aal-buttonwrapper-viewallmembers';
 
     public function getModulesToProcess(): array
     {

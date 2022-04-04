@@ -2,7 +2,7 @@
 
 class GD_Custom_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public const MODULE_LAYOUT_FULLVIEW_LOCATIONPOST = 'layout-fullview-locationpost';
+    public final const MODULE_LAYOUT_FULLVIEW_LOCATIONPOST = 'layout-fullview-locationpost';
 
     public function getModulesToProcess(): array
     {

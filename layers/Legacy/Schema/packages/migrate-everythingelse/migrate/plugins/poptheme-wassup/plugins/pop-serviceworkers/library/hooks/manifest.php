@@ -6,15 +6,15 @@ class PoPTheme_Wassup_ServiceWorkers_Hooks_Manifest
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:icons',
-            array($this, 'icons')
+            $this->icons(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:theme_color',
-            array($this, 'color')
+            $this->color(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkersManager:manifest:background_color',
-            array($this, 'color')
+            $this->color(...)
         );
     }
 

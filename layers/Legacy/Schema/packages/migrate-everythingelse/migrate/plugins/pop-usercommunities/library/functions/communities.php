@@ -125,7 +125,7 @@ function gdUreGetCommunitiesStatusActive($user_id): array
 {
     // Filter the community roles where the user is accepted as a member
     if ($community_status = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS)) {
-        $statusactive_communities = array_values(array_filter(array_map('gdUreGetCommunitiesStatusActiveFilter', $community_status)));
+        $statusactive_communities = array_values(array_filter(array_map(gdUreGetCommunitiesStatusActiveFilter(...), $community_status)));
 
         // Get the communities the user says he/she belongs to
         $userchosen_communities = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_URE_METAKEY_PROFILE_COMMUNITIES) ?? [];

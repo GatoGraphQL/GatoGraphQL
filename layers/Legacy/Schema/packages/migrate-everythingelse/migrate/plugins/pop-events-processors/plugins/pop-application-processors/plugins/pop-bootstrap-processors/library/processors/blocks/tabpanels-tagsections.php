@@ -2,9 +2,9 @@
 
 class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Processor_TagTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_TAGEVENTS = 'block-tabpanel-tagevents';
-    public const MODULE_BLOCK_TABPANEL_TAGPASTEVENTS = 'block-tabpanel-tagpastevents';
-    public const MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR = 'block-tabpanel-tageventscalendar';
+    public final const MODULE_BLOCK_TABPANEL_TAGEVENTS = 'block-tabpanel-tagevents';
+    public final const MODULE_BLOCK_TABPANEL_TAGPASTEVENTS = 'block-tabpanel-tagpastevents';
+    public final const MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR = 'block-tabpanel-tageventscalendar';
 
     public function getModulesToProcess(): array
     {

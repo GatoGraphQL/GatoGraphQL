@@ -5,13 +5,13 @@ class PoP_WebPlatform_CSSConverter_Hooks
     {
         \PoP\Root\App::addAction(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
-            array($this, 'getImmutableConfiguration'),
+            $this->getImmutableConfiguration(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
-            array($this, 'getMutableonrequestConfiguration'),
+            $this->getMutableonrequestConfiguration(...),
             10,
             4
         );

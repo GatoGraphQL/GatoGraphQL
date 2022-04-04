@@ -4,10 +4,10 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT = 'viewcomponent-postbuttonwrapper-addcomment';
-    public const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG = 'viewcomponent-postbuttonwrapper-addcomment-big';
-    public const MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-postconclusionsidebar-horizontal';
-    public const MODULE_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-subjugatedpostconclusionsidebar-horizontal';
+    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT = 'viewcomponent-postbuttonwrapper-addcomment';
+    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_ADDCOMMENT_BIG = 'viewcomponent-postbuttonwrapper-addcomment-big';
+    public final const MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-postconclusionsidebar-horizontal';
+    public final const MODULE_LAYOUTWRAPPER_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'layoutwrapper-subjugatedpostconclusionsidebar-horizontal';
 
     public function getModulesToProcess(): array
     {

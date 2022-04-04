@@ -15,14 +15,14 @@ class QueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             CommentTypeAPI::HOOK_QUERY,
-            [$this, 'convertCommentQuery'],
+            $this->convertCommentQuery(...),
             10,
             2
         );
 
         App::addFilter(
             CommentTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
-            [$this, 'getOrderByQueryArgValue']
+            $this->getOrderByQueryArgValue(...)
         );
     }
 

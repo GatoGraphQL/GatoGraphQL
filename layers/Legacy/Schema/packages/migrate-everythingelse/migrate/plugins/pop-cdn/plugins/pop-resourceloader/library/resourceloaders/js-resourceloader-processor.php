@@ -2,7 +2,7 @@
 
 class PoP_CDN_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_CDN = 'cdn';
+    public final const RESOURCE_CDN = 'cdn';
     
     public function getResourcesToProcess()
     {

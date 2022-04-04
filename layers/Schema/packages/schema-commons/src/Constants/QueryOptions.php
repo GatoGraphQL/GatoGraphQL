@@ -6,5 +6,5 @@ namespace PoPSchema\SchemaCommons\Constants;
 
 class QueryOptions
 {
-    public const RETURN_TYPE = 'return-type';
+    public final const RETURN_TYPE = 'return-type';
 }

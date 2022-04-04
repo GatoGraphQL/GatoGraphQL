@@ -34,11 +34,11 @@ class Variable extends AbstractAst implements WithValueInterface
     protected OperationInterface $parent;
 
     public function __construct(
-        protected string $name,
-        protected string $type,
-        protected bool $isRequired,
-        protected bool $isArray,
-        protected bool $isArrayElementRequired,
+        protected readonly string $name,
+        protected readonly string $type,
+        protected readonly bool $isRequired,
+        protected readonly bool $isArray,
+        protected readonly bool $isArrayElementRequired,
         Location $location,
     ) {
         parent::__construct($location);

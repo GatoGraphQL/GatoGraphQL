@@ -2,22 +2,22 @@
 
 class PoP_Events_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_EVENTS_NAVIGATOR = 'scroll-events-navigator';
-    public const MODULE_SCROLL_PASTEVENTS_NAVIGATOR = 'scroll-pastevents-navigator';
-    public const MODULE_SCROLL_EVENTS_ADDONS = 'scroll-events-addons';
-    public const MODULE_SCROLL_PASTEVENTS_ADDONS = 'scroll-pastevents-addons';
-    public const MODULE_SCROLL_EVENTS_DETAILS = 'scroll-events-details';
-    public const MODULE_SCROLL_PASTEVENTS_DETAILS = 'scroll-pastevents-details';
-    public const MODULE_SCROLL_EVENTS_SIMPLEVIEW = 'scroll-events-simpleview';
-    public const MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW = 'scroll-pastevents-simpleview';
-    public const MODULE_SCROLL_EVENTS_FULLVIEW = 'scroll-events-fullview';
-    public const MODULE_SCROLL_PASTEVENTS_FULLVIEW = 'scroll-pastevents-fullview';
-    public const MODULE_SCROLL_AUTHOREVENTS_FULLVIEW = 'scroll-authorevents-fullview';
-    public const MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW = 'scroll-authorpastevents-fullview';
-    public const MODULE_SCROLL_EVENTS_THUMBNAIL = 'scroll-events-thumbnail';
-    public const MODULE_SCROLL_PASTEVENTS_THUMBNAIL = 'scroll-pastevents-thumbnail';
-    public const MODULE_SCROLL_EVENTS_LIST = 'scroll-events-list';
-    public const MODULE_SCROLL_PASTEVENTS_LIST = 'scroll-pastevents-list';
+    public final const MODULE_SCROLL_EVENTS_NAVIGATOR = 'scroll-events-navigator';
+    public final const MODULE_SCROLL_PASTEVENTS_NAVIGATOR = 'scroll-pastevents-navigator';
+    public final const MODULE_SCROLL_EVENTS_ADDONS = 'scroll-events-addons';
+    public final const MODULE_SCROLL_PASTEVENTS_ADDONS = 'scroll-pastevents-addons';
+    public final const MODULE_SCROLL_EVENTS_DETAILS = 'scroll-events-details';
+    public final const MODULE_SCROLL_PASTEVENTS_DETAILS = 'scroll-pastevents-details';
+    public final const MODULE_SCROLL_EVENTS_SIMPLEVIEW = 'scroll-events-simpleview';
+    public final const MODULE_SCROLL_PASTEVENTS_SIMPLEVIEW = 'scroll-pastevents-simpleview';
+    public final const MODULE_SCROLL_EVENTS_FULLVIEW = 'scroll-events-fullview';
+    public final const MODULE_SCROLL_PASTEVENTS_FULLVIEW = 'scroll-pastevents-fullview';
+    public final const MODULE_SCROLL_AUTHOREVENTS_FULLVIEW = 'scroll-authorevents-fullview';
+    public final const MODULE_SCROLL_AUTHORPASTEVENTS_FULLVIEW = 'scroll-authorpastevents-fullview';
+    public final const MODULE_SCROLL_EVENTS_THUMBNAIL = 'scroll-events-thumbnail';
+    public final const MODULE_SCROLL_PASTEVENTS_THUMBNAIL = 'scroll-pastevents-thumbnail';
+    public final const MODULE_SCROLL_EVENTS_LIST = 'scroll-events-list';
+    public final const MODULE_SCROLL_PASTEVENTS_LIST = 'scroll-pastevents-list';
 
     public function getModulesToProcess(): array
     {

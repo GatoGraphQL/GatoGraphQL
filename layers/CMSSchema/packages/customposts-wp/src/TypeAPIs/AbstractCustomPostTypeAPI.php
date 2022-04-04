@@ -22,7 +22,7 @@ use function get_post_status;
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
-    public const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
+    public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     /**
      * Return the post's ID
@@ -323,14 +323,14 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // @see wp-includes/default-filters.php
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
         $wp_embed = $GLOBALS['wp_embed'];
-        App::removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        App::removeFilter('the_content', 'wpautop');
+        App::removeFilter('the_content', $wp_embed->autoembed(...), 8);
+        App::removeFilter('the_content', wpautop(...));
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
         $ret = App::applyFilters('the_content', $ret);
-        App::addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        App::addFilter('the_content', 'wpautop');
+        App::addFilter('the_content', $wp_embed->autoembed(...), 8);
+        App::addFilter('the_content', wpautop(...));
 
         return strip_tags($ret);
     }

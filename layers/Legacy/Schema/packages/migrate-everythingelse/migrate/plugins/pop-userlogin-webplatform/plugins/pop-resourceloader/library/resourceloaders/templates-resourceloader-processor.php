@@ -2,7 +2,7 @@
 
 class PoP_UserLogin_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_USERLOGGEDIN = 'userloggedin';
+    public final const RESOURCE_USERLOGGEDIN = 'userloggedin';
 
     public function getResourcesToProcess()
     {

@@ -2,8 +2,8 @@
 
 class PoP_CoreProcessors_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_PERFECTSCROLLBAR = 'css-external-perfectscrollbar';
-    public const RESOURCE_EXTERNAL_CSS_DYNAMICMAXHEIGHT = 'css-external-dynamicmaxheight';
+    public final const RESOURCE_EXTERNAL_CSS_PERFECTSCROLLBAR = 'css-external-perfectscrollbar';
+    public final const RESOURCE_EXTERNAL_CSS_DYNAMICMAXHEIGHT = 'css-external-dynamicmaxheight';
 
     public function getResourcesToProcess()
     {

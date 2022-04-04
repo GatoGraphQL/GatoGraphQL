@@ -2,7 +2,7 @@
 
 class PoP_ContactUs_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS = 'layout-feedbackmessagealert-contactus';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUS = 'layout-feedbackmessagealert-contactus';
 
     public function getModulesToProcess(): array
     {

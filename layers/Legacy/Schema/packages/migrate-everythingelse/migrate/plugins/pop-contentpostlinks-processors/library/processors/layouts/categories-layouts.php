@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_CategoriesLayoutsBase
 {
-    public const MODULE_LAYOUT_LINK_CATEGORIES = 'layout-link-categories';
+    public final const MODULE_LAYOUT_LINK_CATEGORIES = 'layout-link-categories';
 
     public function getModulesToProcess(): array
     {

@@ -12,9 +12,9 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     use ModuleResolverTrait;
     use UserInterfaceFunctionalityModuleResolverTrait;
 
-    public const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
-    public const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
-    public const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
+    public final const EXCERPT_AS_DESCRIPTION = Plugin::NAMESPACE . '\excerpt-as-description';
+    public final const LOW_LEVEL_PERSISTED_QUERY_EDITING = Plugin::NAMESPACE . '\low-level-persisted-query-editing';
+    public final const WELCOME_GUIDES = Plugin::NAMESPACE . '\welcome-guides';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

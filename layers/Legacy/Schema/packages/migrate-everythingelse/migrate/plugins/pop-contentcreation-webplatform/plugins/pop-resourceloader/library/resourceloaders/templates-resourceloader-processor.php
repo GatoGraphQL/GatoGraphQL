@@ -2,7 +2,7 @@
 
 class PoP_ContentCreation_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FORMINPUT_FEATUREDIMAGE_INNER = 'forminput_featuredimage_inner';
+    public final const RESOURCE_FORMINPUT_FEATUREDIMAGE_INNER = 'forminput_featuredimage_inner';
 
     public function getResourcesToProcess()
     {

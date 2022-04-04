@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
+    public final const FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
 
     public function getFilterInputsToProcess(): array
     {

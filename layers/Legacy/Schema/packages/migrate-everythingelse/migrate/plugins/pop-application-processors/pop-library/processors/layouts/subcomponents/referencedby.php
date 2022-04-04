@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_SubcomponentLayoutsBase
 {
-    public const MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS = 'subcomponent-referencedby-details';
-    public const MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW = 'subcomponent-referencedby-simpleview';
-    public const MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW = 'subcomponent-referencedby-fullview';
-    public const MODULE_LAZYSUBCOMPONENT_REFERENCEDBY = 'lazysubcomponent-referencedby';
+    public final const MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS = 'subcomponent-referencedby-details';
+    public final const MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW = 'subcomponent-referencedby-simpleview';
+    public final const MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW = 'subcomponent-referencedby-fullview';
+    public final const MODULE_LAZYSUBCOMPONENT_REFERENCEDBY = 'lazysubcomponent-referencedby';
 
     public function getModulesToProcess(): array
     {

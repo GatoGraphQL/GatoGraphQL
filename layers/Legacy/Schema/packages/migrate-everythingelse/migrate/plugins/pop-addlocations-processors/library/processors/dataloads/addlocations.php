@@ -7,8 +7,8 @@ use PoPSitesWassup\LocationMutations\MutationResolverBridges\CreateLocationMutat
 
 class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public const MODULE_DATALOAD_CREATELOCATION = 'dataload-createlocation';
-    public const MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION = 'dataload-triggertypeaheadselect-location';
+    public final const MODULE_DATALOAD_CREATELOCATION = 'dataload-createlocation';
+    public final const MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION = 'dataload-triggertypeaheadselect-location';
 
     public function getModulesToProcess(): array
     {

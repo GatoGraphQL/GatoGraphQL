@@ -9,15 +9,15 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    public const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST = 'blog-dataload-relationalfields-custompostlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST = 'blog-dataload-relationalfields-postlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_USERLIST = 'blog-dataload-relationalfields-userlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'blog-dataload-relationalfields-taglist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'blog-dataload-relationalfields-authorpostlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST = 'blog-dataload-relationalfields-authorcontentlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'blog-dataload-relationalfields-tagpostlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST = 'blog-dataload-relationalfields-tagcontentlist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST = 'blog-dataload-relationalfields-singleauthorlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST = 'blog-dataload-relationalfields-custompostlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST = 'blog-dataload-relationalfields-postlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_USERLIST = 'blog-dataload-relationalfields-userlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'blog-dataload-relationalfields-taglist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'blog-dataload-relationalfields-authorpostlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST = 'blog-dataload-relationalfields-authorcontentlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'blog-dataload-relationalfields-tagpostlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST = 'blog-dataload-relationalfields-tagcontentlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST = 'blog-dataload-relationalfields-singleauthorlist';
 
     public function getModulesToProcess(): array
     {

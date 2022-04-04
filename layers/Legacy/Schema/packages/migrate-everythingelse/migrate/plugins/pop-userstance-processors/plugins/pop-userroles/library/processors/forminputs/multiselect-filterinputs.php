@@ -11,7 +11,7 @@ class UserStance_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
+    public final const MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

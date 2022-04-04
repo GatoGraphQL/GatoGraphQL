@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_ORGANIZATIONS = 'tabpanel-organizations';
-    public const MODULE_TABPANEL_INDIVIDUALS = 'tabpanel-individuals';
+    public final const MODULE_TABPANEL_ORGANIZATIONS = 'tabpanel-organizations';
+    public final const MODULE_TABPANEL_INDIVIDUALS = 'tabpanel-individuals';
 
     public function getModulesToProcess(): array
     {

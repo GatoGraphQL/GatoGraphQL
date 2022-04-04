@@ -9,7 +9,7 @@ class PoP_PostCategoryLayouts_LayoutDataloadHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Application:TypeResolver_Posts:multilayout-keys',
-            array($this, 'addMultilayoutKeys'),
+            $this->addMultilayoutKeys(...),
             10,
             3
         );

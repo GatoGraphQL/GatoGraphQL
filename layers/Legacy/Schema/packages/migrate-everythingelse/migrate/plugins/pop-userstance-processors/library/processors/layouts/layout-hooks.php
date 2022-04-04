@@ -7,23 +7,23 @@ class PoPTheme_UserStance_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_modules',
-            array($this, 'getFeedBottomSubmodules')
+            $this->getFeedBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_modules',
-            array($this, 'getFeedBottomSubmodules')
+            $this->getFeedBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules',
-            array($this, 'singleComponents')
+            $this->singleComponents(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules',
-            array($this, 'singleComponents')
+            $this->singleComponents(...)
         );
         \PoP\Root\App::addFilter(
             'Wassup_Module_Processor_UserPostInteractionLayouts:userpostinteraction:layouts',
-            array($this, 'userpostinteraction')
+            $this->userpostinteraction(...)
         );
     }
 

@@ -2,7 +2,7 @@
 
 class PoP_FrontEndOptimization_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_INITIALIZEDATA = 'initializedata';
+    public final const RESOURCE_INITIALIZEDATA = 'initializedata';
 
     public function getResourcesToProcess()
     {

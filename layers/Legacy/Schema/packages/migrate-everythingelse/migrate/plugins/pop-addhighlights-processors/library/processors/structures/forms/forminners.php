@@ -2,7 +2,7 @@
 
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public const MODULE_FORMINNER_HIGHLIGHT = 'forminner-highlight';
+    public final const MODULE_FORMINNER_HIGHLIGHT = 'forminner-highlight';
 
     public function getModulesToProcess(): array
     {

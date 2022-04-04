@@ -6,7 +6,7 @@ class PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
-            array($this, 'getModuleCssResources'),
+            $this->getModuleCssResources(...),
             10,
             5
         );

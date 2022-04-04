@@ -6,7 +6,7 @@ class PoP_Events_AddHighlights_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
-            array($this, 'getFooterSubmodules'),
+            $this->getFooterSubmodules(...),
             0
         );
     }

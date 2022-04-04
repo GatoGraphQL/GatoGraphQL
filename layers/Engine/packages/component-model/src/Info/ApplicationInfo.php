@@ -8,7 +8,7 @@ use PoP\Root\Environment;
 
 class ApplicationInfo implements ApplicationInfoInterface
 {
-    private string $version;
+    private readonly string $version;
 
     /**
      * Inject the version from the environment

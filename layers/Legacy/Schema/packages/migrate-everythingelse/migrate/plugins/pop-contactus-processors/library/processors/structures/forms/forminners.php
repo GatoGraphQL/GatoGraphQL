@@ -2,7 +2,7 @@
 
 class PoP_ContactUs_Module_Processor_GFFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public const MODULE_FORMINNER_CONTACTUS = 'forminner-contactus';
+    public final const MODULE_FORMINNER_CONTACTUS = 'forminner-contactus';
 
     public function getModulesToProcess(): array
     {

@@ -17,32 +17,32 @@ class PoP_ContentCreation_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToAdminUpdatepost'), 100, 1);
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToAdminCreatepost'), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, $this->sendemailToAdminUpdatepost(...), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, $this->sendemailToAdminCreatepost(...), 100, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // Late priority, so they send the email if PoP SocialNetwork has not done so before
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'emailnotificationsGeneralNewpostCreate'), 100, 1);
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'emailnotificationsGeneralNewpostUpdate'), 100, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, $this->emailnotificationsGeneralNewpostCreate(...), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, $this->emailnotificationsGeneralNewpostUpdate(...), 100, 2);
 
         //----------------------------------------------------------------------
         // Functional emails
         //----------------------------------------------------------------------
         // Post created/updated/approved
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostCreate'), 100, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, $this->sendemailToUsersFromPostCreate(...), 100, 1);
         \PoP\Root\App::addAction(
             'popcms:pendingToPublish',
-            array($this, 'sendemailToUsersFromPostPostapproved'),
+            $this->sendemailToUsersFromPostPostapproved(...),
             10,
             1
         );
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'sendemailToUsersFromPostReferencescreate'), 10, 1);
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'sendemailToUsersFromPostReferencesupdate'), 10, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, $this->sendemailToUsersFromPostReferencescreate(...), 10, 1);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, $this->sendemailToUsersFromPostReferencesupdate(...), 10, 2);
         \PoP\Root\App::addAction(
             'popcms:pendingToPublish',
-            array($this, 'sendemailToUsersFromPostReferencestransition'),
+            $this->sendemailToUsersFromPostReferencestransition(...),
             10,
             1
         );

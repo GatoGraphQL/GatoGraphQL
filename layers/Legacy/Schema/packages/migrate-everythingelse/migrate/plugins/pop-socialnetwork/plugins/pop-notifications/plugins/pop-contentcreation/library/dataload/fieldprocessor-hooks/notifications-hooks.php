@@ -11,7 +11,7 @@ class PoP_ContentCreation_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
     {
         \PoP\Root\App::addFilter(
             'PoP_ContentCreation_DataLoad_TypeResolver_Notifications_Hook:post-created:message',
-            array($this, 'getMessage'),
+            $this->getMessage(...),
             10,
             2
         );

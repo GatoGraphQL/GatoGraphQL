@@ -59,8 +59,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     private ?array $variablesFromRequestCache = null;
 
-    public const ALIAS_POSITION_KEY = 'pos';
-    public const ALIAS_LENGTH_KEY = 'length';
+    public final const ALIAS_POSITION_KEY = 'pos';
+    public final const ALIAS_LENGTH_KEY = 'length';
 
     private ?FeedbackMessageStoreInterface $feedbackMessageStore = null;
     private ?QueryParserInterface $queryParser = null;
@@ -526,7 +526,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return [];
         }
         return array_map(
-            [$this, 'listFieldDirective'],
+            $this->listFieldDirective(...),
             $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,

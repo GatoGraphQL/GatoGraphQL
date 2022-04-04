@@ -14,7 +14,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             AbstractCustomPostTypeAPI::HOOK_QUERY,
-            [$this, 'convertCustomPostsQuery'],
+            $this->convertCustomPostsQuery(...),
             10,
             2
         );

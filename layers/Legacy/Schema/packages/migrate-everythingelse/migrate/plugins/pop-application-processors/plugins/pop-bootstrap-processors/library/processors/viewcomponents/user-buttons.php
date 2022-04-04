@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor_UserHeaderViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-userbutton-sharebyemail-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-userbutton-sharebyemail-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-userbutton-sharebyemail-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-userbutton-sharebyemail-previewdropdown';
 
     public function getModulesToProcess(): array
     {

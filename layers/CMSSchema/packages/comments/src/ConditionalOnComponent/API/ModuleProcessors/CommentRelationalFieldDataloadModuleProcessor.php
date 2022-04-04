@@ -13,7 +13,7 @@ use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 
 class CommentRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    public const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_COMMENTS = 'dataload-relationalfields-comments';
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;

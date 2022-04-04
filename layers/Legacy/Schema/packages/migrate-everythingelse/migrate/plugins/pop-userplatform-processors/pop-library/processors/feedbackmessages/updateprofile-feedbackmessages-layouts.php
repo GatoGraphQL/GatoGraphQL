@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UpdateProfileFeedbackMessageLayouts extends PoP_Module_Processor_UpdateUserFormMesageFeedbackLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE = 'layout-feedbackmessage-updateprofile';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEPROFILE = 'layout-feedbackmessage-updateprofile';
 
     public function getModulesToProcess(): array
     {

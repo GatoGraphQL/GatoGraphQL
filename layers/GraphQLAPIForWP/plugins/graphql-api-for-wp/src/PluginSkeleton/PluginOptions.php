@@ -12,5 +12,5 @@ class PluginOptions
      *
      * It is stored as an array of "plugin/extension baseName" => "version"
      */
-    public const PLUGIN_VERSIONS = 'graphql-api-plugin-versions';
+    public final const PLUGIN_VERSIONS = 'graphql-api-plugin-versions';
 }

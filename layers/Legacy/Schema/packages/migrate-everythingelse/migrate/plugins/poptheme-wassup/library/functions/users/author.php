@@ -22,7 +22,7 @@ function changeAuthorPermalinks()
     }
 }
 
-\PoP\Root\App::addFilter('query_vars', 'usersQueryVars');
+\PoP\Root\App::addFilter('query_vars', usersQueryVars(...));
 function usersQueryVars($queryVars)
 {
 
@@ -33,7 +33,7 @@ function usersQueryVars($queryVars)
     }
     return $queryVars;
 }
-\PoP\Root\App::addFilter('generate_rewrite_rules', 'userRewriteRules');
+\PoP\Root\App::addFilter('generate_rewrite_rules', userRewriteRules(...));
 function userRewriteRules($wp_rewrite)
 {
     if ($authorBase = getAuthorBase()) {

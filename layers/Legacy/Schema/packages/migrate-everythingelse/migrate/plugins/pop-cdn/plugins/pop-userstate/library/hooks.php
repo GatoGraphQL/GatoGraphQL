@@ -7,7 +7,7 @@ class PoP_CDN_UserState_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:rejected:hasParamValues',
-            array($this, 'getRejectedParamvalues')
+            $this->getRejectedParamvalues(...)
         );
     }
 

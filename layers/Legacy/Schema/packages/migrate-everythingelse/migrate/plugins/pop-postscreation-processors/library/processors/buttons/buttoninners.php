@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentPostLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE = 'buttoninner-postlink-create';
+    public final const MODULE_BUTTONINNER_CONTENTPOSTLINK_CREATE = 'buttoninner-postlink-create';
 
     public function getModulesToProcess(): array
     {

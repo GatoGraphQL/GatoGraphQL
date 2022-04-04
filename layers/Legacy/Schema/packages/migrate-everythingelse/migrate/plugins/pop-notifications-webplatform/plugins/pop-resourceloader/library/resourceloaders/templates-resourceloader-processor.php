@@ -2,9 +2,9 @@
 
 class PoP_AAL_Processors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_PREVIEWNOTIFICATION = 'layout_previewnotification';
-    public const RESOURCE_LAYOUT_NOTIFICATIONTIME = 'layout_notificationtime';
-    public const RESOURCE_LAYOUT_NOTIFICATIONICON = 'layout_notificationicon';
+    public final const RESOURCE_LAYOUT_PREVIEWNOTIFICATION = 'layout_previewnotification';
+    public final const RESOURCE_LAYOUT_NOTIFICATIONTIME = 'layout_notificationtime';
+    public final const RESOURCE_LAYOUT_NOTIFICATIONICON = 'layout_notificationicon';
 
     public function getResourcesToProcess()
     {

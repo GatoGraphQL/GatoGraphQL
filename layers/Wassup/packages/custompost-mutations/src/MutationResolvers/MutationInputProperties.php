@@ -8,13 +8,13 @@ use PoPCMSSchema\CustomPostMutations\MutationResolvers\MutationInputProperties a
 
 class MutationInputProperties extends UpstreamMutationInputProperties
 {
-    public const REFERENCES = 'references';
-    public const TOPICS = 'topics';
-    public const VOLUNTEERSNEEDED = 'volunteersneeded';
-    public const APPLIESTO = 'appliesto';
+    public final const REFERENCES = 'references';
+    public final const TOPICS = 'topics';
+    public final const VOLUNTEERSNEEDED = 'volunteersneeded';
+    public final const APPLIESTO = 'appliesto';
 
     // Watch out! This functionality is duplicated!
     // Adding categories is handled by custompost-category-mutations
     // via some hook. Check!
-    public const CATEGORIES = 'categories';
+    public final const CATEGORIES = 'categories';
 }

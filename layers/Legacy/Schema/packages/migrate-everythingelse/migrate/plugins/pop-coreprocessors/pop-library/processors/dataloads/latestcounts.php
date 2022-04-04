@@ -6,7 +6,7 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public const MODULE_DATALOAD_LATESTCOUNTS = 'dataload-latestcounts';
+    public final const MODULE_DATALOAD_LATESTCOUNTS = 'dataload-latestcounts';
 
     public function getModulesToProcess(): array
     {

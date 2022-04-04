@@ -30,7 +30,7 @@ abstract class AbstractSelectableStringScalarTypeResolver extends AbstractScalar
     /** @var string[]|null */
     protected ?array $consolidatedPossibleValuesCache = null;
 
-    public const HOOK_POSSIBLE_VALUES = __CLASS__ . ':possible-values';
+    public final const HOOK_POSSIBLE_VALUES = __CLASS__ . ':possible-values';
 
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,

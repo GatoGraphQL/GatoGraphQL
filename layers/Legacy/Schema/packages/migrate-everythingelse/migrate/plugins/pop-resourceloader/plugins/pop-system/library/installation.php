@@ -6,13 +6,13 @@ class PoPWebPlatform_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('PoP:system-build', array($this, 'systemBuild'));
+        \PoP\Root\App::addAction('PoP:system-build', $this->systemBuild(...));
 
         // Depending on PoP Theme active or not, generate the resources on "theme" or standard hook
         if (defined('POP_THEME_INITIALIZED')) {
-            \PoP\Root\App::addAction('PoP:system-generate:theme', array($this, 'systemGenerateTheme'));
+            \PoP\Root\App::addAction('PoP:system-generate:theme', $this->systemGenerateTheme(...));
         } else {
-            \PoP\Root\App::addAction('PoP:system-generate', array($this, 'systemGenerate'));
+            \PoP\Root\App::addAction('PoP:system-generate', $this->systemGenerate(...));
         }
     }
 

@@ -6,5 +6,5 @@ namespace PoPCMSSchema\UserRoles\Constants;
 
 class ModelInstanceComponentTypes
 {
-    public const USER_ROLE = 'user-role';
+    public final const USER_ROLE = 'user-role';
 }

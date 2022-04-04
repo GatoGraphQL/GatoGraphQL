@@ -5,15 +5,15 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_GROUP_HOMETOP = 'group-hometop';
-    public const MODULE_GROUP_HOME_WELCOME = 'group-home-welcome';
-    public const MODULE_GROUP_HOME_COMPACTWELCOME = 'group-home-compactwelcome';
-    public const MODULE_GROUP_HOME_WIDGETAREA = 'group-home-widgetarea';
-    public const MODULE_GROUP_HOME_WELCOMEACCOUNT = 'group-home-welcomeaccount';
-    public const MODULE_GROUP_AUTHORTOP = 'group-authortop';
-    public const MODULE_GROUP_AUTHOR_DESCRIPTION = 'group-author-description';
-    public const MODULE_GROUP_AUTHOR_WIDGETAREA = 'group-author-widgetarea';
-    public const MODULE_GROUP_TAG_WIDGETAREA = 'group-tag-widgetarea';
+    public final const MODULE_GROUP_HOMETOP = 'group-hometop';
+    public final const MODULE_GROUP_HOME_WELCOME = 'group-home-welcome';
+    public final const MODULE_GROUP_HOME_COMPACTWELCOME = 'group-home-compactwelcome';
+    public final const MODULE_GROUP_HOME_WIDGETAREA = 'group-home-widgetarea';
+    public final const MODULE_GROUP_HOME_WELCOMEACCOUNT = 'group-home-welcomeaccount';
+    public final const MODULE_GROUP_AUTHORTOP = 'group-authortop';
+    public final const MODULE_GROUP_AUTHOR_DESCRIPTION = 'group-author-description';
+    public final const MODULE_GROUP_AUTHOR_WIDGETAREA = 'group-author-widgetarea';
+    public final const MODULE_GROUP_TAG_WIDGETAREA = 'group-tag-widgetarea';
 
     public function getModulesToProcess(): array
     {

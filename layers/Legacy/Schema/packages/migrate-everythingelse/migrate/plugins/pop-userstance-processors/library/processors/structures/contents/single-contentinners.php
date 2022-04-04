@@ -4,8 +4,8 @@ use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 
 class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public const MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION = 'contentinner-userstancepostinteraction';
-    public const MODULE_CONTENTINNER_STANCESINGLE = 'contentinner-stancesingle';
+    public final const MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION = 'contentinner-userstancepostinteraction';
+    public final const MODULE_CONTENTINNER_STANCESINGLE = 'contentinner-stancesingle';
 
     public function getModulesToProcess(): array
     {

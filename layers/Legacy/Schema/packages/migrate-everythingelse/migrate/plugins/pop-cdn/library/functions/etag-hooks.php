@@ -6,7 +6,7 @@ class PoP_CDN_Hooks
     {
         \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:etag_header:commoncode',
-            array($this, 'getCommoncode')
+            $this->getCommoncode(...)
         );
     }
 

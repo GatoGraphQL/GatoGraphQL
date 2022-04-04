@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_CommentViewComponentHeaders extends PoP_Module_Processor_CommentViewComponentHeadersBase
 {
-    public const MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST = 'viewcomponent-header-commentpost';
-    public const MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL = 'viewcomponent-header-commentpost-url';
+    public final const MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST = 'viewcomponent-header-commentpost';
+    public final const MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL = 'viewcomponent-header-commentpost-url';
 
     public function getModulesToProcess(): array
     {

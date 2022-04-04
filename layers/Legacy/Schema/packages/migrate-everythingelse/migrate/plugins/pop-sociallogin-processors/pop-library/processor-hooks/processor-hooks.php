@@ -7,11 +7,11 @@ class GD_WSL_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
-            array($this, 'loginchannels')
+            $this->loginchannels(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_LoginGroups:props:hooks',
-            array($this, 'addHook')
+            $this->addHook(...)
         );
     }
 

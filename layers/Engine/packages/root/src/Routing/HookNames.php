@@ -6,5 +6,5 @@ namespace PoP\Root\Routing;
 
 class HookNames
 {
-    public const REQUEST_URI = __CLASS__ . ':request-uri';
+    public final const REQUEST_URI = __CLASS__ . ':request-uri';
 }

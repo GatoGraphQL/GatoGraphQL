@@ -21,16 +21,16 @@ class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_Dataload
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOADACTION_FOLLOWUSER = 'dataloadaction-followuser';
-    public const MODULE_DATALOADACTION_UNFOLLOWUSER = 'dataloadaction-unfollowuser';
-    public const MODULE_DATALOADACTION_RECOMMENDPOST = 'dataloadaction-recommendpost';
-    public const MODULE_DATALOADACTION_UNRECOMMENDPOST = 'dataloadaction-unrecommendpost';
-    public const MODULE_DATALOADACTION_SUBSCRIBETOTAG = 'dataloadaction-subscribetotag';
-    public const MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG = 'dataloadaction-unsubscribefromtag';
-    public const MODULE_DATALOADACTION_UPVOTEPOST = 'dataloadaction-upvotepost';
-    public const MODULE_DATALOADACTION_UNDOUPVOTEPOST = 'dataloadaction-undoupvotepost';
-    public const MODULE_DATALOADACTION_DOWNVOTEPOST = 'dataloadaction-downvotepost';
-    public const MODULE_DATALOADACTION_UNDODOWNVOTEPOST = 'dataloadaction-undodownvotepost';
+    public final const MODULE_DATALOADACTION_FOLLOWUSER = 'dataloadaction-followuser';
+    public final const MODULE_DATALOADACTION_UNFOLLOWUSER = 'dataloadaction-unfollowuser';
+    public final const MODULE_DATALOADACTION_RECOMMENDPOST = 'dataloadaction-recommendpost';
+    public final const MODULE_DATALOADACTION_UNRECOMMENDPOST = 'dataloadaction-unrecommendpost';
+    public final const MODULE_DATALOADACTION_SUBSCRIBETOTAG = 'dataloadaction-subscribetotag';
+    public final const MODULE_DATALOADACTION_UNSUBSCRIBEFROMTAG = 'dataloadaction-unsubscribefromtag';
+    public final const MODULE_DATALOADACTION_UPVOTEPOST = 'dataloadaction-upvotepost';
+    public final const MODULE_DATALOADACTION_UNDOUPVOTEPOST = 'dataloadaction-undoupvotepost';
+    public final const MODULE_DATALOADACTION_DOWNVOTEPOST = 'dataloadaction-downvotepost';
+    public final const MODULE_DATALOADACTION_UNDODOWNVOTEPOST = 'dataloadaction-undodownvotepost';
 
     public function getModulesToProcess(): array
     {

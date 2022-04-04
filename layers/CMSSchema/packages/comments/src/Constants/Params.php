@@ -7,5 +7,5 @@ namespace PoPCMSSchema\Comments\Constants;
 class Params
 {
     // Used for the Comments to know what post to fetch comments from when filtering
-    public const COMMENT_POST_ID = 'commentpid';
+    public final const COMMENT_POST_ID = 'commentpid';
 }

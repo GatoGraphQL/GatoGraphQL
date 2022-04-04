@@ -6,7 +6,7 @@ namespace PoP\Root\Routing;
 
 class RequestNature
 {
-    public const GENERIC = 'generic';
-    public const HOME = 'home';
-    public const NOTFOUND = '404';
+    public final const GENERIC = 'generic';
+    public final const HOME = 'home';
+    public final const NOTFOUND = '404';
 }

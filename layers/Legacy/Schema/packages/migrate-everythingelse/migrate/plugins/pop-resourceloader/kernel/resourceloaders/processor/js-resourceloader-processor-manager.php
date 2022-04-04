@@ -21,11 +21,11 @@ class PoP_JSResourceLoaderProcessorManager {
 		$this->scripttag_attributes = array();
 
 		$this->inline_resources = array();
-		\PoP\Root\App::addAction('popcms:head', array($this, 'printScripts'));
+		\PoP\Root\App::addAction('popcms:head', $this->printScripts(...));
 
 		\PoP\Root\App::addFilter(
             'PoP_WebPlatform_ResourceLoaderMappingManager:resources',
-            array($this, 'addResourcesToMap')
+            $this->addResourcesToMap(...)
         );
 
         // Prepare the htmltag attributes before they are printed in the footer, but after all resources have been enqueued
@@ -33,7 +33,7 @@ class PoP_JSResourceLoaderProcessorManager {
         \PoP\Root\App::addAction(
             // 'popcms:printFooterScripts',
             'popcms:enqueueScripts',
-            array($this, 'prepareScripttagAttributes'),
+            $this->prepareScripttagAttributes(...),
             (PHP_INT_MAX-20)
         );
 
@@ -41,7 +41,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		// Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
 		\PoP\Root\App::addFilter(
 			'PoP_HTMLTags_Utils:scripttag_attributes',
-			array($this, 'getScripttagAttributes')
+			$this->getScripttagAttributes(...)
 		);
 	}
 
@@ -150,7 +150,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 		if ($this->inline_resources) {
 
-			echo implode(PHP_EOL, array_map(array($this, 'printScript'), $this->inline_resources));
+			echo implode(PHP_EOL, array_map($this->printScript(...), $this->inline_resources));
 		}
 	}
 
@@ -363,7 +363,7 @@ class PoP_JSResourceLoaderProcessorManager {
 
 	function filterAsync($resources) {
 
-		return array_filter($resources, array($this, 'isAsync'));
+		return array_filter($resources, $this->isAsync(...));
 	}
 
 	function isAsync(array $resource) {
@@ -386,7 +386,7 @@ class PoP_JSResourceLoaderProcessorManager {
 		}
 
 		return $defer;
-		// return array_filter($resources, array($this, 'isDefer'));
+		// return array_filter($resources, $this->isDefer(...));
 	}
 
 	// function isDefer(array $resource) {

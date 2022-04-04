@@ -6,7 +6,7 @@ namespace PoP\Root\Component;
 
 class ApplicationEvents
 {
-    public const COMPONENT_LOADED = 'componentLoaded';
-    public const BOOT = 'boot';
-    public const AFTER_BOOT = 'afterBoot';
+    public final const COMPONENT_LOADED = 'componentLoaded';
+    public final const BOOT = 'boot';
+    public final const AFTER_BOOT = 'afterBoot';
 }

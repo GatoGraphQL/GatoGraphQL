@@ -11,17 +11,17 @@ namespace PoPCMSSchema\Taxonomies\Constants;
  */
 class TaxonomyOrderBy
 {
-    public const NAME = 'NAME';
-    public const SLUG = 'SLUG';
-    public const ID = 'ID';
-    public const PARENT = 'PARENT';
-    public const COUNT = 'COUNT';
-    public const NONE = 'NONE';
-    public const INCLUDE = 'INCLUDE';
-    public const SLUG__IN = 'SLUG__IN';
-    public const DESCRIPTION = 'DESCRIPTION';
+    public final const NAME = 'NAME';
+    public final const SLUG = 'SLUG';
+    public final const ID = 'ID';
+    public final const PARENT = 'PARENT';
+    public final const COUNT = 'COUNT';
+    public final const NONE = 'NONE';
+    public final const INCLUDE = 'INCLUDE';
+    public final const SLUG__IN = 'SLUG__IN';
+    public final const DESCRIPTION = 'DESCRIPTION';
 
-    // public const TERM_GROUP = 'TERM_GROUP';
-    // public const TERM_ID = 'TERM_ID';
-    // public const TERM_ORDER = 'TERM_ORDER';
+    // public final const TERM_GROUP = 'TERM_GROUP';
+    // public final const TERM_ID = 'TERM_ID';
+    // public final const TERM_ORDER = 'TERM_ORDER';
 }

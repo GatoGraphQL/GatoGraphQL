@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_DropdownMenuLayouts extends PoP_Module_Processor_DropdownMenuLayoutsBase
 {
-    public const MODULE_LAYOUT_MENU_DROPDOWN = 'layout-menu-dropdown';
+    public final const MODULE_LAYOUT_MENU_DROPDOWN = 'layout-menu-dropdown';
 
     public function getModulesToProcess(): array
     {

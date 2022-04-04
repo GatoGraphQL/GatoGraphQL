@@ -11,7 +11,7 @@ class PoP_Theme_Meta_Hooks
     {
         \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:site-meta',
-            array($this, 'getSiteMeta')
+            $this->getSiteMeta(...)
         );
     }
 

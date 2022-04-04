@@ -14,8 +14,8 @@ class PoP_MultidomainProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_MASTERCOLLECTIONPROCESSORS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_MULTIDOMAINPROCESSORS_POP_MASTERCOLLECTIONPROCESSORS_MIN_VERSION > POP_MASTERCOLLECTIONPROCESSORS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -27,8 +27,8 @@ class PoP_MultidomainProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_MULTIDOMAIN_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POP_MULTIDOMAINPROCESSORS_POP_MULTIDOMAIN_MIN_VERSION > POP_MULTIDOMAIN_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));

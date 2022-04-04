@@ -6,7 +6,7 @@ class PoP_AddHighlights_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:userpostinteraction:layouts',
-            array($this, 'addUserpostinteractionLayouts')
+            $this->addUserpostinteractionLayouts(...)
         );
     }
 

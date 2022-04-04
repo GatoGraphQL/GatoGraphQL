@@ -13,21 +13,21 @@ class PoP_ServiceWorkers_Hooks_WP
 
         \PoP\Root\App::addFilter(
             'popcms:scriptTag',
-            array($this, 'scriptLoaderTag')
+            $this->scriptLoaderTag(...)
         );
         \PoP\Root\App::addFilter(
             'popcms:styleTag',
-            array($this, 'styleLoaderTag')
+            $this->styleLoaderTag(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
-            array($this, 'getPrecacheList'),
+            $this->getPrecacheList(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude:full',
-            array($this, 'getExcludedFullpaths'),
+            $this->getExcludedFullpaths(...),
             10,
             2
         );

@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 
-\PoP\Root\App::addFilter('gdAuthorParentpageid', 'gdUreAuthorParentpageidImpl', 10, 2);
+\PoP\Root\App::addFilter('gdAuthorParentpageid', gdUreAuthorParentpageidImpl(...), 10, 2);
 function gdUreAuthorParentpageidImpl($pageid, $author_id = null)
 {
     if (is_null($author_id)) {

@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Tags\Constants;
 
 class InputNames
 {
-    public const TAG_ID = 'tid';
+    public final const TAG_ID = 'tid';
 }

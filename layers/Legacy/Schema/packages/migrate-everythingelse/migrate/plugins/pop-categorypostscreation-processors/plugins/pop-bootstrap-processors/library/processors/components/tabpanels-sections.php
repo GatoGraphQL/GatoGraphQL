@@ -2,26 +2,26 @@
 
 class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS00 = 'tabpanel-mycategoryposts00';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS01 = 'tabpanel-mycategoryposts01';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS02 = 'tabpanel-mycategoryposts02';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS03 = 'tabpanel-mycategoryposts03';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS04 = 'tabpanel-mycategoryposts04';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS05 = 'tabpanel-mycategoryposts05';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS06 = 'tabpanel-mycategoryposts06';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS07 = 'tabpanel-mycategoryposts07';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS08 = 'tabpanel-mycategoryposts08';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS09 = 'tabpanel-mycategoryposts09';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS10 = 'tabpanel-mycategoryposts10';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS11 = 'tabpanel-mycategoryposts11';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS12 = 'tabpanel-mycategoryposts12';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS13 = 'tabpanel-mycategoryposts13';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS14 = 'tabpanel-mycategoryposts14';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS15 = 'tabpanel-mycategoryposts15';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS16 = 'tabpanel-mycategoryposts16';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS17 = 'tabpanel-mycategoryposts17';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS18 = 'tabpanel-mycategoryposts18';
-    public const MODULE_TABPANEL_MYCATEGORYPOSTS19 = 'tabpanel-mycategoryposts19';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS00 = 'tabpanel-mycategoryposts00';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS01 = 'tabpanel-mycategoryposts01';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS02 = 'tabpanel-mycategoryposts02';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS03 = 'tabpanel-mycategoryposts03';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS04 = 'tabpanel-mycategoryposts04';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS05 = 'tabpanel-mycategoryposts05';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS06 = 'tabpanel-mycategoryposts06';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS07 = 'tabpanel-mycategoryposts07';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS08 = 'tabpanel-mycategoryposts08';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS09 = 'tabpanel-mycategoryposts09';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS10 = 'tabpanel-mycategoryposts10';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS11 = 'tabpanel-mycategoryposts11';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS12 = 'tabpanel-mycategoryposts12';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS13 = 'tabpanel-mycategoryposts13';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS14 = 'tabpanel-mycategoryposts14';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS15 = 'tabpanel-mycategoryposts15';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS16 = 'tabpanel-mycategoryposts16';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS17 = 'tabpanel-mycategoryposts17';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS18 = 'tabpanel-mycategoryposts18';
+    public final const MODULE_TABPANEL_MYCATEGORYPOSTS19 = 'tabpanel-mycategoryposts19';
 
     public function getModulesToProcess(): array
     {

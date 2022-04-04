@@ -9,8 +9,8 @@ class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends 
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_EVENTLINK_UPDATE = 'dataload-eventlink-update';
-    public const MODULE_DATALOAD_EVENTLINK_CREATE = 'dataload-eventlink-create';
+    public final const MODULE_DATALOAD_EVENTLINK_UPDATE = 'dataload-eventlink-update';
+    public final const MODULE_DATALOAD_EVENTLINK_CREATE = 'dataload-eventlink-create';
 
     public function getModulesToProcess(): array
     {

@@ -13,7 +13,7 @@ use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class ModelInstanceHookSet extends AbstractHookSet
 {
-    public const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
+    public final const HOOK_VARY_MODEL_INSTANCE_BY_CATEGORY = __CLASS__ . ':vary-model-instance-by-category';
 
     private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
@@ -39,7 +39,7 @@ class ModelInstanceHookSet extends AbstractHookSet
     {
         App::addFilter(
             ModelInstance::HOOK_COMPONENTS_RESULT,
-            array($this, 'getModelInstanceComponentsFromAppState')
+            $this->getModelInstanceComponentsFromAppState(...)
         );
     }
 

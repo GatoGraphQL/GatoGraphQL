@@ -4,12 +4,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public const MODULE_CODE_REFERENCEDAFTERREADING = 'code-referencedafterreading';
-    public const MODULE_CODE_AUTHORREFERENCEDAFTERREADING = 'code-authorreferencedafterreading';
-    public const MODULE_CODE_STANCECOUNT_GENERAL = 'code-stancecount-general';
-    public const MODULE_CODE_STANCECOUNT_ARTICLE = 'code-stancecount-article';
-    public const MODULE_CODE_STANCECOUNT = 'code-stancecount';
-    public const MODULE_CODE_POSTSTANCE = 'code-poststance';
+    public final const MODULE_CODE_REFERENCEDAFTERREADING = 'code-referencedafterreading';
+    public final const MODULE_CODE_AUTHORREFERENCEDAFTERREADING = 'code-authorreferencedafterreading';
+    public final const MODULE_CODE_STANCECOUNT_GENERAL = 'code-stancecount-general';
+    public final const MODULE_CODE_STANCECOUNT_ARTICLE = 'code-stancecount-article';
+    public final const MODULE_CODE_STANCECOUNT = 'code-stancecount';
+    public final const MODULE_CODE_POSTSTANCE = 'code-poststance';
 
     public function getModulesToProcess(): array
     {

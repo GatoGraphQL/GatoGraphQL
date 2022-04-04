@@ -2,7 +2,7 @@
 
 class PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents extends PoP_Module_Processor_PostHiddenInputAlertFormComponentsBase
 {
-    public const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST = 'formcomponent-hiddeninputalert-highlightedpost';
+    public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST = 'formcomponent-hiddeninputalert-highlightedpost';
 
     public function getModulesToProcess(): array
     {

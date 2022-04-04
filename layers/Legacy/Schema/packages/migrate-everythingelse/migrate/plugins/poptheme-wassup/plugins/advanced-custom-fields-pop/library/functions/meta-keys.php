@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', 'wassupAcfGetKeysStoreAsArrayCustom');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', wassupAcfGetKeysStoreAsArrayCustom(...));
 function wassupAcfGetKeysStoreAsArrayCustom($keys)
 {
     $keys[] = GD_METAKEY_POST_LINKCATEGORIES;
@@ -9,7 +9,7 @@ function wassupAcfGetKeysStoreAsArrayCustom($keys)
     return $keys;
 }
 
-\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsSingle', 'wassupAcfGetKeysStoreAsSingleCustom');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsSingle', wassupAcfGetKeysStoreAsSingleCustom(...));
 function wassupAcfGetKeysStoreAsSingleCustom($keys)
 {
     $keys[] = GD_METAKEY_POST_LINKACCESS;

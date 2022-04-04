@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // // Override what sizes can be chosen for the Gallery: this was added using a Change PoP
-// \PoP\Root\App::addFilter('popGalleryimageSizeNamesChoose', 'popGalleryimageSizeNamesChoose');
+// \PoP\Root\App::addFilter('popGalleryimageSizeNamesChoose', popGalleryimageSizeNamesChoose(...));
 // function popGalleryimageSizeNamesChoose($sizes) {
 
 //     // Remove all other sizes, only keep below 2 which have a perfect fit for a Gallery
@@ -13,7 +13,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 // }
 
 // // Add the thumb-pagewide image size everywhere
-// \PoP\Root\App::addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
+// \PoP\Root\App::addFilter('image_size_names_choose', popImageSizeNamesChoose(...), 1000);
 // function popImageSizeNamesChoose($sizes) {
 
 //     $sizes['thumb-pagewide'] = TranslationAPIFacade::getInstance()->__('Wide', 'poptheme-wassup');
@@ -25,7 +25,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 // }
 
 // Override what sizes can be chosen for the Gallery
-\PoP\Root\App::addFilter('image_size_names_choose', 'popImageSizeNamesChoose', 1000);
+\PoP\Root\App::addFilter('image_size_names_choose', popImageSizeNamesChoose(...), 1000);
 function popImageSizeNamesChoose($sizes)
 {
     if (is_admin()) {
@@ -41,7 +41,7 @@ function popImageSizeNamesChoose($sizes)
         'thumbnail' => TranslationAPIFacade::getInstance()->__('Thumbnail', 'poptheme-wassup'),
     );
 }
-\PoP\Root\App::addFilter('media_view_settings', 'popMediaViewSettingsDefaultthumb');
+\PoP\Root\App::addFilter('media_view_settings', popMediaViewSettingsDefaultthumb(...));
 function popMediaViewSettingsDefaultthumb($settings)
 {
 
@@ -51,7 +51,7 @@ function popMediaViewSettingsDefaultthumb($settings)
 }
 
 // // Override the default WP Post Gallery (function galleryShortcode( $attr ) in wp-includes/media.php)
-// \PoP\Root\App::addFilter('post_gallery', 'gdPostGallery', 10, 2);
+// \PoP\Root\App::addFilter('post_gallery', gdPostGallery(...), 10, 2);
 // function gdPostGallery($output, $attr) {
 
 //     // From here onwards, copied from media.php, and made needed customizations

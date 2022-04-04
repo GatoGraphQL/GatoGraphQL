@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_TypeaheadComponentFormInputsBase extends PoP
             $this->resources = array();
             \PoP\Root\App::addFilter(
                 'PoP_CoreProcessors_ResourceLoaderProcessor:typeahead:templates',
-                array($this, 'getDependencies')
+                $this->getDependencies(...)
             );
         }
     }

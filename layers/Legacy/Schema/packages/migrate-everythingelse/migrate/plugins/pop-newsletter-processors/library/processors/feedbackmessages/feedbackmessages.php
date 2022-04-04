@@ -2,8 +2,8 @@
 
 class PoP_Newsletter_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_FEEDBACKMESSAGE_NEWSLETTER = 'feedbackmessage-newsletter';
-    public const MODULE_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION = 'feedbackmessage-newsletterunsubscription';
+    public final const MODULE_FEEDBACKMESSAGE_NEWSLETTER = 'feedbackmessage-newsletter';
+    public final const MODULE_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION = 'feedbackmessage-newsletterunsubscription';
 
     public function getModulesToProcess(): array
     {

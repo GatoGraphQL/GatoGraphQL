@@ -20,7 +20,7 @@ class PoP_EventsCreationProcessors
     {
 
         // Priority: after PoP Events Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888890);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888890);
     }
     public function init()
     {

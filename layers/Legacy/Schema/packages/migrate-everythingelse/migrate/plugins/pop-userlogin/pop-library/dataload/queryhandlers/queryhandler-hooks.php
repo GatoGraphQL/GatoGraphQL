@@ -16,7 +16,7 @@ class PoP_UserLogin_DataLoad_QueryInputOutputHandler_Hooks
     {
         \PoP\Root\App::addFilter(
             '\PoP\ComponentModel\Engine:session-meta',
-            array($this, 'getSessionMeta')
+            $this->getSessionMeta(...)
         );
     }
 

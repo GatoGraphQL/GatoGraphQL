@@ -2,7 +2,7 @@
 
 class PoP_PreviewContentWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_PREVIEWCONTENT = 'previewcontent';
+    public final const RESOURCE_PREVIEWCONTENT = 'previewcontent';
 
     public function getResourcesToProcess()
     {

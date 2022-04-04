@@ -2,8 +2,8 @@
 
 class PoP_FrontEnd_DynamicJSSPAResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_SPARESOURCELOADERCONFIG = 'resourceloader-config';
-    public const RESOURCE_SPARESOURCELOADERCONFIG_RESOURCES = 'resourceloader-config-resources';
+    public final const RESOURCE_SPARESOURCELOADERCONFIG = 'resourceloader-config';
+    public final const RESOURCE_SPARESOURCELOADERCONFIG_RESOURCES = 'resourceloader-config-resources';
 
     public function getResourcesToProcess()
     {

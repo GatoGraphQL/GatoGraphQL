@@ -6,7 +6,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_Processor_PostTypeaheadComponentFormInputsBase
 {
-    public const MODULE_TYPEAHEAD_COMPONENT_CONTENT = 'forminput-typeaheadcomponent-content';
+    public final const MODULE_TYPEAHEAD_COMPONENT_CONTENT = 'forminput-typeaheadcomponent-content';
 
     public function getModulesToProcess(): array
     {

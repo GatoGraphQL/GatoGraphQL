@@ -18,7 +18,7 @@ class PoP_Notifications_UserPlatform_Hook_Users /* extends AAL_Hook_Base*/
         // Changed password
         \PoP\Root\App::addAction(
             'gd_changepassword_user',
-            array($this, 'changedPassword'),
+            $this->changedPassword(...),
             10,
             1
         );
@@ -26,7 +26,7 @@ class PoP_Notifications_UserPlatform_Hook_Users /* extends AAL_Hook_Base*/
         // Updated profile
         \PoP\Root\App::addAction(
             'gd_createupdate_user:additionalsUpdate',
-            array($this, 'updatedProfile'),
+            $this->updatedProfile(...),
             10,
             1
         );

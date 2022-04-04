@@ -5,8 +5,8 @@ use PoP\Root\App;
 
 class GD_ContentCreation_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
-    public const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';
+    public final const CHECKPOINT_USERCANEDIT = 'checkpoint-usercanedit';
+    public final const CHECKPOINT_EDITPOSTNONCE = 'checkpoint-editpostnonce';
 
     public function getCheckpointsToProcess(): array
     {

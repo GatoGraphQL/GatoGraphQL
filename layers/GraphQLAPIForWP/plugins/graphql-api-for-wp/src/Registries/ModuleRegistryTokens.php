@@ -10,5 +10,5 @@ class ModuleRegistryTokens
      * Indicate that a module is dependent on another module being disabled
      * (not enabled, as is the normal behavior)
      */
-    public const INVERSE_DEPENDENCY = '!';
+    public final const INVERSE_DEPENDENCY = '!';
 }

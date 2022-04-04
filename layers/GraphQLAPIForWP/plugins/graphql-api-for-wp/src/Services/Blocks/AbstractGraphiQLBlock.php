@@ -15,8 +15,8 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
 {
     use MainPluginBlockTrait;
 
-    public const ATTRIBUTE_NAME_QUERY = 'query';
-    public const ATTRIBUTE_NAME_VARIABLES = 'variables';
+    public final const ATTRIBUTE_NAME_QUERY = 'query';
+    public final const ATTRIBUTE_NAME_VARIABLES = 'variables';
 
     private ?EndpointHelpers $endpointHelpers = null;
     private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;

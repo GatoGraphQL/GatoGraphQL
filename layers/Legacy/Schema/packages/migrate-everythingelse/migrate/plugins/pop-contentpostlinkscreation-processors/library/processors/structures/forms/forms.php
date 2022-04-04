@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_CONTENTPOSTLINK = 'form-contentpostlink';
+    public final const MODULE_FORM_CONTENTPOSTLINK = 'form-contentpostlink';
 
     public function getModulesToProcess(): array
     {

@@ -6,5 +6,5 @@ namespace PoPAPI\API\Constants;
 
 class Formats
 {
-    public const FIELDS = 'fields';
+    public final const FIELDS = 'fields';
 }

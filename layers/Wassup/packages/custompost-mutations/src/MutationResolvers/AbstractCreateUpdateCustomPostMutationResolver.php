@@ -14,8 +14,8 @@ use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 
 abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAbstractCreateUpdateCustomPostMutationResolver
 {
-    public const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
-    public const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
+    public final const VALIDATECATEGORIESTYPE_ATLEASTONE = 1;
+    public final const VALIDATECATEGORIESTYPE_EXACTLYONE = 2;
 
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 

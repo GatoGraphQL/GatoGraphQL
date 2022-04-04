@@ -5,8 +5,8 @@ use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfigurati
 
 class PoP_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_ANCHORCONTROL_ADDPOST = 'buttoncontrol-addpost';
-    public const MODULE_ANCHORCONTROL_TAGSLINK = 'buttoncontrol-tagslink';
+    public final const MODULE_ANCHORCONTROL_ADDPOST = 'buttoncontrol-addpost';
+    public final const MODULE_ANCHORCONTROL_TAGSLINK = 'buttoncontrol-tagslink';
 
     public function getModulesToProcess(): array
     {

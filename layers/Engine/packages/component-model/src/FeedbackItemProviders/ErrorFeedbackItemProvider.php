@@ -9,33 +9,33 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = 'e1';
-    public const E2 = 'e2';
-    public const E3 = 'e3';
-    public const E4 = 'e4';
-    public const E5 = 'e5';
-    public const E6 = 'e6';
-    public const E7 = 'e7';
-    public const E8 = 'e8';
-    public const E9 = 'e9';
-    public const E10 = 'e10';
-    public const E11 = 'e11';
-    public const E12 = 'e12';
-    public const E13 = 'e13';
-    public const E14 = 'e14';
-    public const E15 = 'e15';
-    public const E16 = 'e16';
-    public const E17 = 'e17';
-    public const E18 = 'e18';
-    public const E19 = 'e19';
-    public const E20 = 'e20';
-    public const E21 = 'e21';
-    public const E22 = 'e22';
-    public const E23 = 'e23';
-    public const E24 = 'e24';
-    public const E25 = 'e25';
-    public const E26 = 'e26';
-    public const E27 = 'e27';
+    public final const E1 = 'e1';
+    public final const E2 = 'e2';
+    public final const E3 = 'e3';
+    public final const E4 = 'e4';
+    public final const E5 = 'e5';
+    public final const E6 = 'e6';
+    public final const E7 = 'e7';
+    public final const E8 = 'e8';
+    public final const E9 = 'e9';
+    public final const E10 = 'e10';
+    public final const E11 = 'e11';
+    public final const E12 = 'e12';
+    public final const E13 = 'e13';
+    public final const E14 = 'e14';
+    public final const E15 = 'e15';
+    public final const E16 = 'e16';
+    public final const E17 = 'e17';
+    public final const E18 = 'e18';
+    public final const E19 = 'e19';
+    public final const E20 = 'e20';
+    public final const E21 = 'e21';
+    public final const E22 = 'e22';
+    public final const E23 = 'e23';
+    public final const E24 = 'e24';
+    public final const E25 = 'e25';
+    public final const E26 = 'e26';
+    public final const E27 = 'e27';
 
     /**
      * @return string[]

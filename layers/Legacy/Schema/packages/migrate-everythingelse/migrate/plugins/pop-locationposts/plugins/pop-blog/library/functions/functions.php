@@ -4,7 +4,7 @@ use PoP\Engine\Route\RouteUtils;
 /**
  * Section Filters
  */
-\PoP\Root\App::addFilter('wassup_section_taxonomyterms', 'popLocationpostsSectionTaxonomyterms', 0);
+\PoP\Root\App::addFilter('wassup_section_taxonomyterms', popLocationpostsSectionTaxonomyterms(...), 0);
 function popLocationpostsSectionTaxonomyterms($section_taxonomyterms)
 {
     if (POP_LOCATIONPOSTS_CAT_ALL) {

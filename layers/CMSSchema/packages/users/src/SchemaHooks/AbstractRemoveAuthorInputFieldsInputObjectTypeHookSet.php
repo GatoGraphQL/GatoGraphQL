@@ -40,7 +40,7 @@ abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends Abs
     {
         App::addFilter(
             HookNames::INPUT_FIELD_NAME_TYPE_RESOLVERS,
-            [$this, 'getInputFieldNameTypeResolvers'],
+            $this->getInputFieldNameTypeResolvers(...),
             100,
             2
         );

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Configuration;
 
 class MutationSchemes
 {
-    public const STANDARD = 'standard';
-    public const NESTED_WITH_REDUNDANT_ROOT_FIELDS = 'nested';
-    public const NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS = 'lean_nested';
+    public final const STANDARD = 'standard';
+    public final const NESTED_WITH_REDUNDANT_ROOT_FIELDS = 'nested';
+    public final const NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS = 'lean_nested';
 }

@@ -4,7 +4,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\ActivatePluginsMutati
 
 class PoP_SystemWP_WP_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {
-    public const MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
+    public final const MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS = 'dataloadaction-system-activateplugins';
 
     // use PoP_SystemWP_WP_Module_Processor_SystemActionsTrait;
     public function getModulesToProcess(): array

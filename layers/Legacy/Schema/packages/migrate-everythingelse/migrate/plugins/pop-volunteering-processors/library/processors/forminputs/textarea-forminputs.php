@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Volunteering_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public const MODULE_FORMINPUT_WHYVOLUNTEER = 'gf-field-whyvolunteer';
+    public final const MODULE_FORMINPUT_WHYVOLUNTEER = 'gf-field-whyvolunteer';
 
     public function getModulesToProcess(): array
     {

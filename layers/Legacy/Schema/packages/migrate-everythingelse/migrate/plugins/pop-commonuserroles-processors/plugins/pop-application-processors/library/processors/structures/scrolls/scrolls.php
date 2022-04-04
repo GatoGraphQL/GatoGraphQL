@@ -2,10 +2,10 @@
 
 class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_ORGANIZATIONS_DETAILS = 'scroll-organizations-details';
-    public const MODULE_SCROLL_INDIVIDUALS_DETAILS = 'scroll-individuals-details';
-    public const MODULE_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
-    public const MODULE_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
+    public final const MODULE_SCROLL_ORGANIZATIONS_DETAILS = 'scroll-organizations-details';
+    public final const MODULE_SCROLL_INDIVIDUALS_DETAILS = 'scroll-individuals-details';
+    public final const MODULE_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
+    public final const MODULE_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
     public function getModulesToProcess(): array
     {

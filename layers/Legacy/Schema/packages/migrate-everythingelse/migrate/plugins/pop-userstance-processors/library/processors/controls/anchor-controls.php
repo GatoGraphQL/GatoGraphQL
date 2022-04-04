@@ -6,15 +6,15 @@ use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT = 'buttoncontrol-stance-pro-generalcount';
-    public const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT = 'buttoncontrol-stance-neutral-generalcount';
-    public const MODULE_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT = 'buttoncontrol-stance-against-generalcount';
-    public const MODULE_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT = 'buttoncontrol-stance-pro-articlecount';
-    public const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT = 'buttoncontrol-stance-neutral-articlecount';
-    public const MODULE_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT = 'buttoncontrol-stance-against-articlecount';
-    public const MODULE_ANCHORCONTROL_STANCE_PRO_COUNT = 'buttoncontrol-stance-pro-count';
-    public const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
-    public const MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
+    public final const MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT = 'buttoncontrol-stance-pro-generalcount';
+    public final const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT = 'buttoncontrol-stance-neutral-generalcount';
+    public final const MODULE_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT = 'buttoncontrol-stance-against-generalcount';
+    public final const MODULE_ANCHORCONTROL_STANCE_PRO_ARTICLECOUNT = 'buttoncontrol-stance-pro-articlecount';
+    public final const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_ARTICLECOUNT = 'buttoncontrol-stance-neutral-articlecount';
+    public final const MODULE_ANCHORCONTROL_STANCE_AGAINST_ARTICLECOUNT = 'buttoncontrol-stance-against-articlecount';
+    public final const MODULE_ANCHORCONTROL_STANCE_PRO_COUNT = 'buttoncontrol-stance-pro-count';
+    public final const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
+    public final const MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
 
     public function getModulesToProcess(): array
     {

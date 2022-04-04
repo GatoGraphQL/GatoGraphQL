@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps extends PoP_Module_Processor_ScrollMapsBase
 {
-    public const MODULE_SCROLL_COMMUNITIES_MAP = 'scroll-communities-map';
+    public final const MODULE_SCROLL_COMMUNITIES_MAP = 'scroll-communities-map';
 
     public function getModulesToProcess(): array
     {

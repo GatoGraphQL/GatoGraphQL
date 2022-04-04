@@ -2,9 +2,9 @@
 
 class PoP_BootstrapProcessors_CarouselResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPCAROUSEL = 'bootstrap-carousel';
-    public const RESOURCE_BOOTSTRAPCAROUSELSTATIC = 'bootstrap-carousel-static';
-    public const RESOURCE_BOOTSTRAPCAROUSELAUTOMATIC = 'bootstrap-carousel-automatic';
+    public final const RESOURCE_BOOTSTRAPCAROUSEL = 'bootstrap-carousel';
+    public final const RESOURCE_BOOTSTRAPCAROUSELSTATIC = 'bootstrap-carousel-static';
+    public final const RESOURCE_BOOTSTRAPCAROUSELAUTOMATIC = 'bootstrap-carousel-automatic';
 
     public function getResourcesToProcess()
     {

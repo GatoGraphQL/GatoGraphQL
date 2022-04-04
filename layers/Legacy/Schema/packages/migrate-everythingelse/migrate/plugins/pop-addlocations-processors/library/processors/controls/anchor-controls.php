@@ -4,7 +4,7 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_Module_Processor_TypeaheadAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
+    public final const MODULE_ANCHORCONTROL_CREATELOCATION = 'anchorcontrol-createlocation';
 
     public function getModulesToProcess(): array
     {

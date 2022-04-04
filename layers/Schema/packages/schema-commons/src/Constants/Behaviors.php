@@ -6,6 +6,6 @@ namespace PoPSchema\SchemaCommons\Constants;
 
 class Behaviors
 {
-    public const ALLOWLIST = 'allowlist';
-    public const DENYLIST = 'deny';
+    public final const ALLOWLIST = 'allowlist';
+    public final const DENYLIST = 'deny';
 }

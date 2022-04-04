@@ -2,8 +2,8 @@
 
 class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues extends PoP_Module_Processor_PostTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
-    public const MODULE_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
+    public final const MODULE_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
+    public final const MODULE_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
 
     public function getModulesToProcess(): array
     {

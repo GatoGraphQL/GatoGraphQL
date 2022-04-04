@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\MutationResolvers;
 
 class ErrorTypes
 {
-    public const DESCRIPTIONS = 0;
-    public const CODES = 1;
+    public final const DESCRIPTIONS = 0;
+    public final const CODES = 1;
 }

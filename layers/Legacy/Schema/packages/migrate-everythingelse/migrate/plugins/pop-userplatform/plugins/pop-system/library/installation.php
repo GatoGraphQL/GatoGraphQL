@@ -4,7 +4,7 @@ class PoP_UserPlatform_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('PoP:system-install', array($this, 'install'));
+        \PoP\Root\App::addAction('PoP:system-install', $this->install(...));
     }
 
     public function install()

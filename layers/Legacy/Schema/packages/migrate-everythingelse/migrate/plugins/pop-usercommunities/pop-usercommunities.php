@@ -19,7 +19,7 @@ class PoP_UserCommunities
     {
 
         // Priority: after PoP Social Network
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888370);
     }
     public function init()
     {

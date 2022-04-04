@@ -2,7 +2,7 @@
 
 class PoP_Locations_CoAuthors_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public const MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP = 'scrollmap-singleauthors-scrollmap';
+    public final const MODULE_SCROLLMAP_SINGLEAUTHORS_SCROLLMAP = 'scrollmap-singleauthors-scrollmap';
 
     public function getModulesToProcess(): array
     {

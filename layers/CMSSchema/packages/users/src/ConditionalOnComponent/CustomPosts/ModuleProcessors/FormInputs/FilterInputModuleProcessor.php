@@ -14,9 +14,9 @@ use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
-    public const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
-    public const MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
+    public final const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
+    public final const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';
+    public final const MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS = 'filterinput-exclude-author-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

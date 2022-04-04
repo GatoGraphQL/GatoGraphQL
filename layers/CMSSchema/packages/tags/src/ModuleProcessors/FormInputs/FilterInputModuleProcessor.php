@@ -15,8 +15,8 @@ use PoPCMSSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
-    public const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
+    public final const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
+    public final const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

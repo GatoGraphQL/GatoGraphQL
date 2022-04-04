@@ -2,12 +2,12 @@
 
 class PoP_CoreProcessors_WaypointsResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_WAYPOINTS = 'waypoints';
-    public const RESOURCE_WAYPOINTSFETCHMORE = 'waypoints-fetchmore';
-    public const RESOURCE_WAYPOINTSHISTORYSTATE = 'waypoints-historystate';
-    public const RESOURCE_WAYPOINTSTHEATER = 'waypoints-theater';
-    public const RESOURCE_WAYPOINTSTOGGLECLASS = 'waypoints-toggleclass';
-    public const RESOURCE_WAYPOINTSTOGGLECOLLAPSE = 'waypoints-togglecollapse';
+    public final const RESOURCE_WAYPOINTS = 'waypoints';
+    public final const RESOURCE_WAYPOINTSFETCHMORE = 'waypoints-fetchmore';
+    public final const RESOURCE_WAYPOINTSHISTORYSTATE = 'waypoints-historystate';
+    public final const RESOURCE_WAYPOINTSTHEATER = 'waypoints-theater';
+    public final const RESOURCE_WAYPOINTSTOGGLECLASS = 'waypoints-toggleclass';
+    public final const RESOURCE_WAYPOINTSTOGGLECOLLAPSE = 'waypoints-togglecollapse';
 
     public function getResourcesToProcess()
     {

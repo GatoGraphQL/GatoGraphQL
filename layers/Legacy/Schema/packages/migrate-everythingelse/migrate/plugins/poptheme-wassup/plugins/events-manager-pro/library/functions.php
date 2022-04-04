@@ -7,7 +7,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 \PoP\Root\App::removeAction('edit_user_profile', array('EM_User_Fields','show_profile_fields'), 1);
 
 
-\PoP\Root\App::addFilter('em_booking_output_placeholder', 'gdEmBookingOutputPlaceholder', 10, 4);
+\PoP\Root\App::addFilter('em_booking_output_placeholder', gdEmBookingOutputPlaceholder(...), 10, 4);
 function gdEmBookingOutputPlaceholder($result, $EM_Booking, $placeholder, $target = 'html')
 {
     $cmsService = CMSServiceFacade::getInstance();
@@ -22,7 +22,7 @@ function gdEmBookingOutputPlaceholder($result, $EM_Booking, $placeholder, $targe
  * Order the Gateway Payments
  */
 /*
-\PoP\Root\App::addFilter('em_payment_gateways', 'gdEmPaymentGatewaysReorderGateways');
+\PoP\Root\App::addFilter('em_payment_gateways', gdEmPaymentGatewaysReorderGateways(...));
 function gdEmPaymentGatewaysReorderGateways($gateways) {
 
     $ordered_gateways = array();
@@ -58,7 +58,7 @@ function gdPluginsLoadedReorderGateways()
 }
 
 
-\PoP\Root\App::addFilter('emp_forms_output_field', 'gdEmpFormsOutputFieldTranslateLabel', 10, 3);
+\PoP\Root\App::addFilter('emp_forms_output_field', gdEmpFormsOutputFieldTranslateLabel(...), 10, 3);
 function gdEmpFormsOutputFieldTranslateLabel($content, $EM_Form, $field)
 {
     $content = str_replace($field['label'], \PoP\Root\App::applyFilters("gd_translate", $field['label']), $content);

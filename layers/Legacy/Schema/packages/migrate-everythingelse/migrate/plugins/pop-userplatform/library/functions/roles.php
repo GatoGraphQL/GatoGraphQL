@@ -19,7 +19,7 @@ function gdUreMaybeProfileRole($query)
     return $query;
 }
 
-\PoP\Root\App::addFilter('gdRoles', 'gdUreAddProfileRole');
+\PoP\Root\App::addFilter('gdRoles', gdUreAddProfileRole(...));
 function gdUreAddProfileRole($roles)
 {
     $roles[] = GD_ROLE_PROFILE;
@@ -27,7 +27,7 @@ function gdUreAddProfileRole($roles)
 }
 
 // Priority 0: before anything else
-\PoP\Root\App::addFilter('getUserRoleCombinations', 'getUserRoleCombinationsProfileRole', 0);
+\PoP\Root\App::addFilter('getUserRoleCombinations', getUserRoleCombinationsProfileRole(...), 0);
 function getUserRoleCombinationsProfileRole($user_role_combinations)
 {
     $user_role_combinations = array(

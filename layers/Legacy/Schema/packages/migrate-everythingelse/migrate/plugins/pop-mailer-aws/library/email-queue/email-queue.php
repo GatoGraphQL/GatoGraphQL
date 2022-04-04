@@ -38,7 +38,7 @@ class PoP_Mailer_EmailQueueImpl extends PoP_Mailer_EmailQueueBase
             $to = explode(',', $to);
         }
         // Trim the values
-        $to = array_map('trim', $to);
+        $to = array_map(trim(...), $to);
         $this->queue[$headers][] = array(
             'to' => $to,
             'subject' => $subject,

@@ -6,7 +6,7 @@ class PoP_CommonAutomatedEmails_ResourceLoader_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_AutomatedEmails_WebPlatform_ResourceLoader_Utils:automatedemail-routes',
-            array($this, 'getAutomatedEmailRoutes')
+            $this->getAutomatedEmailRoutes(...)
         );
     }
 

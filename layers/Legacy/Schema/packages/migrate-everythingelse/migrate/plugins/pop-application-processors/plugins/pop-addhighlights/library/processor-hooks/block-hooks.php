@@ -7,13 +7,13 @@ class PoP_ApplicationProcessors_AddHighlights_BlockHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
-            array($this, 'getTopSidebar'),
+            $this->getTopSidebar(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom',
-            array($this, 'getBottomSidebar'),
+            $this->getBottomSidebar(...),
             10,
             2
         );

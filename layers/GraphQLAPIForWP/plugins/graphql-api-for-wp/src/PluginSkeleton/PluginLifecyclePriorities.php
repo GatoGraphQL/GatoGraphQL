@@ -30,17 +30,17 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
  */
 class PluginLifecyclePriorities
 {
-    public const HANDLE_NEW_ACTIVATIONS = 80;
-    public const SETUP_EXTENSIONS = 90;
-    public const INITIALIZE_APP = 100;
-    public const INITIALIZE_PLUGIN = 110;
-    public const INITIALIZE_EXTENSIONS = 120;
-    public const CONFIGURE_COMPONENTS = 130;
-    public const BOOT_SYSTEM = 140;
-    public const CONFIGURE_PLUGIN = 150;
-    public const CONFIGURE_EXTENSIONS = 160;
-    public const BOOT_APPLICATION = 170;
-    public const BOOT_PLUGIN = 180;
-    public const BOOT_EXTENSIONS = 190;
-    public const AFTER_EVERYTHING = 200;
+    public final const HANDLE_NEW_ACTIVATIONS = 80;
+    public final const SETUP_EXTENSIONS = 90;
+    public final const INITIALIZE_APP = 100;
+    public final const INITIALIZE_PLUGIN = 110;
+    public final const INITIALIZE_EXTENSIONS = 120;
+    public final const CONFIGURE_COMPONENTS = 130;
+    public final const BOOT_SYSTEM = 140;
+    public final const CONFIGURE_PLUGIN = 150;
+    public final const CONFIGURE_EXTENSIONS = 160;
+    public final const BOOT_APPLICATION = 170;
+    public final const BOOT_PLUGIN = 180;
+    public final const BOOT_EXTENSIONS = 190;
+    public final const AFTER_EVERYTHING = 200;
 }

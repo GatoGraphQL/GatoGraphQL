@@ -5,9 +5,9 @@ use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 class ModuleProcessor_Groups extends AbstractModuleProcessor
 {
-    public const MODULE_EXAMPLE_HOME = 'example-home';
-    public const MODULE_EXAMPLE_AUTHOR = 'example-author';
-    public const MODULE_EXAMPLE_TAG = 'example-tag';
+    public final const MODULE_EXAMPLE_HOME = 'example-home';
+    public final const MODULE_EXAMPLE_AUTHOR = 'example-author';
+    public final const MODULE_EXAMPLE_TAG = 'example-tag';
 
     public function getModulesToProcess(): array
     {

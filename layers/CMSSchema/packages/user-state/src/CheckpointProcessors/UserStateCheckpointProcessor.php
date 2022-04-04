@@ -11,8 +11,8 @@ use PoPCMSSchema\UserState\FeedbackItemProviders\CheckpointErrorFeedbackItemProv
 
 class UserStateCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const USERLOGGEDIN = 'userloggedin';
-    public const USERNOTLOGGEDIN = 'usernotloggedin';
+    public final const USERLOGGEDIN = 'userloggedin';
+    public final const USERNOTLOGGEDIN = 'usernotloggedin';
 
     private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 

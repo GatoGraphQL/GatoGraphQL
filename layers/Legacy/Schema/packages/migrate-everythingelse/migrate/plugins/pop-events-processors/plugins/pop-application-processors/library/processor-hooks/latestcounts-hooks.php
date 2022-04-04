@@ -8,7 +8,7 @@ class PoP_Events_Events_LatestCounts_Hooks
     {
         \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
-            array($this, 'getAllcontentClasses')
+            $this->getAllcontentClasses(...)
         );
     }
 

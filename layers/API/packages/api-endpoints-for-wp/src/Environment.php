@@ -6,6 +6,6 @@ namespace PoPAPI\APIEndpointsForWP;
 
 class Environment
 {
-    public const DISABLE_NATIVE_API_ENDPOINT = 'DISABLE_NATIVE_API_ENDPOINT';
-    public const NATIVE_API_ENDPOINT = 'NATIVE_API_ENDPOINT';
+    public final const DISABLE_NATIVE_API_ENDPOINT = 'DISABLE_NATIVE_API_ENDPOINT';
+    public final const NATIVE_API_ENDPOINT = 'NATIVE_API_ENDPOINT';
 }

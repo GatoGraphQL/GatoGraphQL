@@ -6,5 +6,5 @@ namespace PoP\Definitions\Constants;
 
 class Params
 {
-    public const MANGLED = 'mangled';
+    public final const MANGLED = 'mangled';
 }

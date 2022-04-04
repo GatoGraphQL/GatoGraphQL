@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_TagInfoLayouts extends PoP_Module_Processor_TagInfoLayoutsBase
 {
-    public const MODULE_LAYOUT_TAGINFO = 'layout-taginfo';
+    public final const MODULE_LAYOUT_TAGINFO = 'layout-taginfo';
 
     public function getModulesToProcess(): array
     {

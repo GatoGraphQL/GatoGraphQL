@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public const MODULE_BLOCK_STANCE_UPDATE = 'block-stance-update';
-    public const MODULE_BLOCK_STANCE_CREATE = 'block-stance-create';
-    public const MODULE_BLOCK_STANCE_CREATEORUPDATE = 'block-stance-createorupdate';
-    public const MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE = 'block-singlepoststance-createorupdate';
+    public final const MODULE_BLOCK_STANCE_UPDATE = 'block-stance-update';
+    public final const MODULE_BLOCK_STANCE_CREATE = 'block-stance-create';
+    public final const MODULE_BLOCK_STANCE_CREATEORUPDATE = 'block-stance-createorupdate';
+    public final const MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE = 'block-singlepoststance-createorupdate';
 
     public function getModulesToProcess(): array
     {

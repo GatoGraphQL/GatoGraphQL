@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Captcha_Module_Processor_FormInputGroups extends PoP_Module_Processor_SubcomponentFormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_CAPTCHA = 'forminputgroup-captcha';
+    public final const MODULE_FORMINPUTGROUP_CAPTCHA = 'forminputgroup-captcha';
 
     public function getModulesToProcess(): array
     {

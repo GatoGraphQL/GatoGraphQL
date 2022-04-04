@@ -12,7 +12,7 @@ class StratumManager
         StratumManagerFactory::setInstance($this);
         \PoP\Root\App::addAction(
             'plugins_loaded',
-            array($this, 'init'),
+            $this->init(...),
             888395
         );
     }

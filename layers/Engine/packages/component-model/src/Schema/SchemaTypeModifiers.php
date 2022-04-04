@@ -11,11 +11,11 @@ namespace PoP\ComponentModel\Schema;
  */
 class SchemaTypeModifiers
 {
-    public const NONE = 0;
-    public const NON_NULLABLE = 1;
-    public const IS_ARRAY = 2;
-    public const IS_NON_NULLABLE_ITEMS_IN_ARRAY = 4;
-    public const IS_ARRAY_OF_ARRAYS = 8;
-    public const IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS = 16;
-    public const MANDATORY = 32;
+    public final const NONE = 0;
+    public final const NON_NULLABLE = 1;
+    public final const IS_ARRAY = 2;
+    public final const IS_NON_NULLABLE_ITEMS_IN_ARRAY = 4;
+    public final const IS_ARRAY_OF_ARRAYS = 8;
+    public final const IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS = 16;
+    public final const MANDATORY = 32;
 }

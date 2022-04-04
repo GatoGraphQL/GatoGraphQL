@@ -5,19 +5,19 @@ use PoP\SPA\Modules\PageInterface;
 
 class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageInterface
 {
-    public const MODULE_PAGE_QUICKVIEW = 'page-quickview';
-    public const MODULE_PAGE_QUICKVIEWSIDEINFO = 'page-quickviewsideinfo';
-    public const MODULE_PAGE_ADDONS = 'page-addons';
-    public const MODULE_PAGE_BACKGROUND = 'page-background';
-    public const MODULE_PAGE_FRAMECOMPONENTS = 'page-framecomponents';
-    public const MODULE_PAGE_HOLE = 'page-hole';
-    public const MODULE_PAGE_HOVER = 'page-hover';
-    public const MODULE_PAGE_NAVIGATOR = 'page-navigator';
-    public const MODULE_PAGE_MODALS = 'page-modals';
-    public const MODULE_PAGE_SIDE = 'page-side';
-    public const MODULE_PAGE_TOP = 'page-top';
-    public const MODULE_PAGE_BODYSIDEINFO = 'page-bodysideinfo';
-    public const MODULE_PAGE_BODY = 'page-body';
+    public final const MODULE_PAGE_QUICKVIEW = 'page-quickview';
+    public final const MODULE_PAGE_QUICKVIEWSIDEINFO = 'page-quickviewsideinfo';
+    public final const MODULE_PAGE_ADDONS = 'page-addons';
+    public final const MODULE_PAGE_BACKGROUND = 'page-background';
+    public final const MODULE_PAGE_FRAMECOMPONENTS = 'page-framecomponents';
+    public final const MODULE_PAGE_HOLE = 'page-hole';
+    public final const MODULE_PAGE_HOVER = 'page-hover';
+    public final const MODULE_PAGE_NAVIGATOR = 'page-navigator';
+    public final const MODULE_PAGE_MODALS = 'page-modals';
+    public final const MODULE_PAGE_SIDE = 'page-side';
+    public final const MODULE_PAGE_TOP = 'page-top';
+    public final const MODULE_PAGE_BODYSIDEINFO = 'page-bodysideinfo';
+    public final const MODULE_PAGE_BODY = 'page-body';
     public function getModulesToProcess(): array
     {
         return array(

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_CommonUserRoles_WebPlatform_PreloadHooks
     {
         \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
-            array($this, 'getRoutesForMain')
+            $this->getRoutesForMain(...)
         );
     }
 

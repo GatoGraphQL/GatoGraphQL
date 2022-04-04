@@ -3,7 +3,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Events_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
+    public final const FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
 
     public function getFilterInputsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_PrettyPrint_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_CODEPRETTIFY = 'css-external-code-prettify';
+    public final const RESOURCE_EXTERNAL_CSS_CODEPRETTIFY = 'css-external-code-prettify';
 
     public function getResourcesToProcess()
     {

@@ -20,12 +20,12 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     use ModuleResolverTrait;
     use PerformanceFunctionalityModuleResolverTrait;
 
-    public const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
+    public final const CACHE_CONTROL = Plugin::NAMESPACE . '\cache-control';
 
     /**
      * Setting options
      */
-    public const OPTION_MAX_AGE = 'max-age';
+    public final const OPTION_MAX_AGE = 'max-age';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

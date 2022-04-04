@@ -2,24 +2,24 @@
 
 class PoP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public const MODULE_DELEGATORFILTER_AUTHORCATEGORYPOSTS = 'delegatorfilter-authorcategoryposts';
-    public const MODULE_DELEGATORFILTER_AUTHORMAINCONTENT = 'delegatorfilter-authormaincontent';
-    public const MODULE_DELEGATORFILTER_AUTHORPOSTS = 'delegatorfilter-authorposts';
-    public const MODULE_DELEGATORFILTER_AUTHORCONTENT = 'delegatorfilter-authorcontent';
-    public const MODULE_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS = 'delegatorfilter-authorcommunitymembers';
-    public const MODULE_DELEGATORFILTER_CATEGORYPOSTS = 'delegatorfilter-categoryposts';
-    public const MODULE_DELEGATORFILTER_HOMECONTENT = 'delegatorfilter-homecontent';
-    public const MODULE_DELEGATORFILTER_MYCATEGORYPOSTS = 'delegatorfilter-mycategoryposts';
-    public const MODULE_DELEGATORFILTER_MYPOSTS = 'delegatorfilter-myposts';
-    public const MODULE_DELEGATORFILTER_POSTS = 'delegatorfilter-posts';
-    public const MODULE_DELEGATORFILTER_TAGCATEGORYPOSTS = 'delegatorfilter-tagcategoryposts';
-    public const MODULE_DELEGATORFILTER_TAGCONTENT = 'delegatorfilter-tagcontent';
-    public const MODULE_DELEGATORFILTER_TAGMAINCONTENT = 'delegatorfilter-tagmaincontent';
-    public const MODULE_DELEGATORFILTER_TAGPOSTS = 'delegatorfilter-tagposts';
-    public const MODULE_DELEGATORFILTER_MYCONTENT = 'delegatorfilter-mycontent';
-    public const MODULE_DELEGATORFILTER_CONTENT = 'delegatorfilter-content';
-    public const MODULE_DELEGATORFILTER_TAGS = 'delegatorfilter-tags';
-    public const MODULE_DELEGATORFILTER_USERS = 'delegatorfilter-users';
+    public final const MODULE_DELEGATORFILTER_AUTHORCATEGORYPOSTS = 'delegatorfilter-authorcategoryposts';
+    public final const MODULE_DELEGATORFILTER_AUTHORMAINCONTENT = 'delegatorfilter-authormaincontent';
+    public final const MODULE_DELEGATORFILTER_AUTHORPOSTS = 'delegatorfilter-authorposts';
+    public final const MODULE_DELEGATORFILTER_AUTHORCONTENT = 'delegatorfilter-authorcontent';
+    public final const MODULE_DELEGATORFILTER_AUTHORCOMMUNITYMEMBERS = 'delegatorfilter-authorcommunitymembers';
+    public final const MODULE_DELEGATORFILTER_CATEGORYPOSTS = 'delegatorfilter-categoryposts';
+    public final const MODULE_DELEGATORFILTER_HOMECONTENT = 'delegatorfilter-homecontent';
+    public final const MODULE_DELEGATORFILTER_MYCATEGORYPOSTS = 'delegatorfilter-mycategoryposts';
+    public final const MODULE_DELEGATORFILTER_MYPOSTS = 'delegatorfilter-myposts';
+    public final const MODULE_DELEGATORFILTER_POSTS = 'delegatorfilter-posts';
+    public final const MODULE_DELEGATORFILTER_TAGCATEGORYPOSTS = 'delegatorfilter-tagcategoryposts';
+    public final const MODULE_DELEGATORFILTER_TAGCONTENT = 'delegatorfilter-tagcontent';
+    public final const MODULE_DELEGATORFILTER_TAGMAINCONTENT = 'delegatorfilter-tagmaincontent';
+    public final const MODULE_DELEGATORFILTER_TAGPOSTS = 'delegatorfilter-tagposts';
+    public final const MODULE_DELEGATORFILTER_MYCONTENT = 'delegatorfilter-mycontent';
+    public final const MODULE_DELEGATORFILTER_CONTENT = 'delegatorfilter-content';
+    public final const MODULE_DELEGATORFILTER_TAGS = 'delegatorfilter-tags';
+    public final const MODULE_DELEGATORFILTER_USERS = 'delegatorfilter-users';
 
     public function getModulesToProcess(): array
     {

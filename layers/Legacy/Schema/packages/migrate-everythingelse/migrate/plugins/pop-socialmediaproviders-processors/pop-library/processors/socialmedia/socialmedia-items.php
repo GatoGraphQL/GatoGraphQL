@@ -4,24 +4,24 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialMediaItemsBase
 {
-    public const MODULE_POSTSOCIALMEDIA_FB = 'post-socialmediaproviders-fb';
-    public const MODULE_TAGSOCIALMEDIA_FB = 'tag-socialmediaproviders-fb';
-    public const MODULE_USERSOCIALMEDIA_FB = 'user-socialmediaproviders-fb';
-    public const MODULE_POSTSOCIALMEDIA_TWITTER = 'post-socialmediaproviders-twitter';
-    public const MODULE_TAGSOCIALMEDIA_TWITTER = 'tag-socialmediaproviders-twitter';
-    public const MODULE_USERSOCIALMEDIA_TWITTER = 'user-socialmediaproviders-twitter';
-    public const MODULE_POSTSOCIALMEDIA_LINKEDIN = 'post-socialmediaproviders-linkedin';
-    public const MODULE_TAGSOCIALMEDIA_LINKEDIN = 'tag-socialmediaproviders-linkedin';
-    public const MODULE_USERSOCIALMEDIA_LINKEDIN = 'user-socialmediaproviders-linkedin';
-    public const MODULE_POSTSOCIALMEDIA_FB_PREVIEW = 'post-socialmediaproviders-fb-preview';
-    public const MODULE_TAGSOCIALMEDIA_FB_PREVIEW = 'tag-socialmediaproviders-fb-preview';
-    public const MODULE_USERSOCIALMEDIA_FB_PREVIEW = 'user-socialmediaproviders-fb-preview';
-    public const MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW = 'post-socialmediaproviders-twitter-preview';
-    public const MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW = 'tag-socialmediaproviders-twitter-preview';
-    public const MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW = 'user-socialmediaproviders-twitter-preview';
-    public const MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW = 'post-socialmediaproviders-linkedin-preview';
-    public const MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
-    public const MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
+    public final const MODULE_POSTSOCIALMEDIA_FB = 'post-socialmediaproviders-fb';
+    public final const MODULE_TAGSOCIALMEDIA_FB = 'tag-socialmediaproviders-fb';
+    public final const MODULE_USERSOCIALMEDIA_FB = 'user-socialmediaproviders-fb';
+    public final const MODULE_POSTSOCIALMEDIA_TWITTER = 'post-socialmediaproviders-twitter';
+    public final const MODULE_TAGSOCIALMEDIA_TWITTER = 'tag-socialmediaproviders-twitter';
+    public final const MODULE_USERSOCIALMEDIA_TWITTER = 'user-socialmediaproviders-twitter';
+    public final const MODULE_POSTSOCIALMEDIA_LINKEDIN = 'post-socialmediaproviders-linkedin';
+    public final const MODULE_TAGSOCIALMEDIA_LINKEDIN = 'tag-socialmediaproviders-linkedin';
+    public final const MODULE_USERSOCIALMEDIA_LINKEDIN = 'user-socialmediaproviders-linkedin';
+    public final const MODULE_POSTSOCIALMEDIA_FB_PREVIEW = 'post-socialmediaproviders-fb-preview';
+    public final const MODULE_TAGSOCIALMEDIA_FB_PREVIEW = 'tag-socialmediaproviders-fb-preview';
+    public final const MODULE_USERSOCIALMEDIA_FB_PREVIEW = 'user-socialmediaproviders-fb-preview';
+    public final const MODULE_POSTSOCIALMEDIA_TWITTER_PREVIEW = 'post-socialmediaproviders-twitter-preview';
+    public final const MODULE_TAGSOCIALMEDIA_TWITTER_PREVIEW = 'tag-socialmediaproviders-twitter-preview';
+    public final const MODULE_USERSOCIALMEDIA_TWITTER_PREVIEW = 'user-socialmediaproviders-twitter-preview';
+    public final const MODULE_POSTSOCIALMEDIA_LINKEDIN_PREVIEW = 'post-socialmediaproviders-linkedin-preview';
+    public final const MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
+    public final const MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
 
     public function getModulesToProcess(): array
     {

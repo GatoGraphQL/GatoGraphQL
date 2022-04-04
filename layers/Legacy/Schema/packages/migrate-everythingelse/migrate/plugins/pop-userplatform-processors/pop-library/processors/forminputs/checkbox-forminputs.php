@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdateProfileCheckboxFormInputs extends PoP_Module_Processor_BooleanCheckboxFormInputsBase
 {
-    public const MODULE_FORMINPUT_CUP_DISPLAYEMAIL = 'forminput-cup-displayemail';
+    public final const MODULE_FORMINPUT_CUP_DISPLAYEMAIL = 'forminput-cup-displayemail';
 
     public function getModulesToProcess(): array
     {

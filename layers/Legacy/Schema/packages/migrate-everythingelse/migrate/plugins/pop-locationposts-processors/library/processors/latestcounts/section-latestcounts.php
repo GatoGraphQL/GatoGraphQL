@@ -2,9 +2,9 @@
 
 class PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public const MODULE_LATESTCOUNT_LOCATIONPOSTS = 'latestcount-locationposts';
-    public const MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
-    public const MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
+    public final const MODULE_LATESTCOUNT_LOCATIONPOSTS = 'latestcount-locationposts';
+    public final const MODULE_LATESTCOUNT_AUTHOR_LOCATIONPOSTS = 'latestcount-author-locationposts';
+    public final const MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS = 'latestcount-tag-locationposts';
 
     public function getModulesToProcess(): array
     {

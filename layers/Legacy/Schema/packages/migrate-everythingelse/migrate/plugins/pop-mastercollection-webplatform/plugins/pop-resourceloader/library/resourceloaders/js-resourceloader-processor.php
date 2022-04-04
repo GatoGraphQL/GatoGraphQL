@@ -2,40 +2,40 @@
 
 class PoP_CoreProcessors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_DATERANGE = 'daterange';
-    public const RESOURCE_MULTISELECT = 'multiselect';
-    public const RESOURCE_DYNAMICMAXHEIGHT = 'dynamicmaxheight';
-    public const RESOURCE_PERFECTSCROLLBAR = 'perfectscrollbar';
-    public const RESOURCE_ADDEDITPOST = 'addeditpost';
-    public const RESOURCE_CONTROLS = 'controls';
-    public const RESOURCE_COOKIES = 'cookies';
-    public const RESOURCE_FUNCTIONS = 'functions';
-    public const RESOURCE_EXPAND = 'expand';
-    public const RESOURCE_INPUTFUNCTIONS = 'input-functions';
-    public const RESOURCE_EMBEDFUNCTIONS = 'embed-functions';
-    public const RESOURCE_PRINTFUNCTIONS = 'print-functions';
-    public const RESOURCE_DYNAMICRENDER = 'dynamic-render';
-    public const RESOURCE_DYNAMICRENDERURLFUNCTIONS = 'dynamic-render-urlfunctions';
-    public const RESOURCE_TARGETFUNCTIONS = 'target-functions';
-    public const RESOURCE_SOCIALMEDIA = 'socialmedia';
-    public const RESOURCE_EMBEDDABLE = 'embeddable';
-    public const RESOURCE_BLOCKDATAQUERY = 'block-dataquery';
-    public const RESOURCE_BLOCKDATAQUERYUSERSTATE = 'block-dataquery-userstate';
-    public const RESOURCE_BLOCKGROUPDATAQUERY = 'blockgroup-dataquery';
-    public const RESOURCE_MENUS = 'menus';
-    public const RESOURCE_DATASETCOUNT = 'dataset-count';
-    public const RESOURCE_LINKS = 'links';
-    public const RESOURCE_CLASSES = 'classes';
-    public const RESOURCE_SCROLLS = 'scrolls';
-    public const RESOURCE_ONLINEOFFLINE = 'onlineoffline';
-    public const RESOURCE_EVENTREACTIONS = 'event-reactions';
-    public const RESOURCE_EVENTREACTIONSUSERSTATE = 'event-reactions-userstate';
-    public const RESOURCE_FEEDBACKMESSAGE = 'feedback-message';
-    public const RESOURCE_MENTIONS = 'mentions';
-    public const RESOURCE_SYSTEM = 'system';
-    public const RESOURCE_TABS = 'tabs';
-    public const RESOURCE_WINDOWS = 'windows';
-    public const RESOURCE_APPSHELL = 'appshell';
+    public final const RESOURCE_DATERANGE = 'daterange';
+    public final const RESOURCE_MULTISELECT = 'multiselect';
+    public final const RESOURCE_DYNAMICMAXHEIGHT = 'dynamicmaxheight';
+    public final const RESOURCE_PERFECTSCROLLBAR = 'perfectscrollbar';
+    public final const RESOURCE_ADDEDITPOST = 'addeditpost';
+    public final const RESOURCE_CONTROLS = 'controls';
+    public final const RESOURCE_COOKIES = 'cookies';
+    public final const RESOURCE_FUNCTIONS = 'functions';
+    public final const RESOURCE_EXPAND = 'expand';
+    public final const RESOURCE_INPUTFUNCTIONS = 'input-functions';
+    public final const RESOURCE_EMBEDFUNCTIONS = 'embed-functions';
+    public final const RESOURCE_PRINTFUNCTIONS = 'print-functions';
+    public final const RESOURCE_DYNAMICRENDER = 'dynamic-render';
+    public final const RESOURCE_DYNAMICRENDERURLFUNCTIONS = 'dynamic-render-urlfunctions';
+    public final const RESOURCE_TARGETFUNCTIONS = 'target-functions';
+    public final const RESOURCE_SOCIALMEDIA = 'socialmedia';
+    public final const RESOURCE_EMBEDDABLE = 'embeddable';
+    public final const RESOURCE_BLOCKDATAQUERY = 'block-dataquery';
+    public final const RESOURCE_BLOCKDATAQUERYUSERSTATE = 'block-dataquery-userstate';
+    public final const RESOURCE_BLOCKGROUPDATAQUERY = 'blockgroup-dataquery';
+    public final const RESOURCE_MENUS = 'menus';
+    public final const RESOURCE_DATASETCOUNT = 'dataset-count';
+    public final const RESOURCE_LINKS = 'links';
+    public final const RESOURCE_CLASSES = 'classes';
+    public final const RESOURCE_SCROLLS = 'scrolls';
+    public final const RESOURCE_ONLINEOFFLINE = 'onlineoffline';
+    public final const RESOURCE_EVENTREACTIONS = 'event-reactions';
+    public final const RESOURCE_EVENTREACTIONSUSERSTATE = 'event-reactions-userstate';
+    public final const RESOURCE_FEEDBACKMESSAGE = 'feedback-message';
+    public final const RESOURCE_MENTIONS = 'mentions';
+    public final const RESOURCE_SYSTEM = 'system';
+    public final const RESOURCE_TABS = 'tabs';
+    public final const RESOURCE_WINDOWS = 'windows';
+    public final const RESOURCE_APPSHELL = 'appshell';
     
     public function getResourcesToProcess()
     {

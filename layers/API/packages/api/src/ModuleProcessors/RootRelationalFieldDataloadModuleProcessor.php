@@ -11,7 +11,7 @@ use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
 
 class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    public const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
 
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 

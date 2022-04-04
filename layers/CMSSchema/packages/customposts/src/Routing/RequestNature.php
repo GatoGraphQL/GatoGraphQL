@@ -6,5 +6,5 @@ namespace PoPCMSSchema\CustomPosts\Routing;
 
 class RequestNature
 {
-    public const CUSTOMPOST = 'custompost';
+    public final const CUSTOMPOST = 'custompost';
 }

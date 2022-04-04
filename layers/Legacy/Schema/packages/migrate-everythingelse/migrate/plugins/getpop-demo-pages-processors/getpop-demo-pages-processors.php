@@ -19,7 +19,7 @@ class GetPoPDemo_PagesProcessors
     {
 
         // Priority: after PoP GetPoP Demo Pages
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888830);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888830);
     }
 
     public function init()

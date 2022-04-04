@@ -6,5 +6,5 @@ namespace GraphQLByPoP\GraphQLServer\Cache;
 
 class CacheTypes
 {
-    public const GRAPHQL_SCHEMA_DEFINITION = 'graphql-schema-definition';
+    public final const GRAPHQL_SCHEMA_DEFINITION = 'graphql-schema-definition';
 }

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentUserMentionsLayouts extends PoP_Module_Processor_CommentUserMentionsLayoutsBase
 {
-    public const MODULE_LAYOUT_COMMENTUSERMENTIONS = 'layout-commentusermentions';
+    public final const MODULE_LAYOUT_COMMENTUSERMENTIONS = 'layout-commentusermentions';
 
     public function getModulesToProcess(): array
     {

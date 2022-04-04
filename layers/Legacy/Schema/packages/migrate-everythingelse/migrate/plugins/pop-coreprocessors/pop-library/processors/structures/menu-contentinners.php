@@ -2,14 +2,14 @@
 
 class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public const MODULE_CONTENTINNER_MENU_BUTTON = 'contentinner-menu-button';
-    public const MODULE_CONTENTINNER_MENU_DROPDOWN = 'contentinner-menu-dropdown';
-    public const MODULE_CONTENTINNER_MENU_INDENT = 'contentinner-menu-indent';
-    public const MODULE_CONTENTINNER_MENU_SEGMENTEDBUTTON = 'contentinner-menu-segmentedbutton';
-    public const MODULE_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON = 'contentinner-menu-navigatorsegmentedbutton';
-    public const MODULE_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP = 'contentinner-menu-dropdownbutton-top';
-    public const MODULE_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE = 'contentinner-menu-dropdownbutton-side';
-    public const MODULE_CONTENTINNER_MENU_MULTITARGETINDENT = 'contentinner-menu-multitargetindent';
+    public final const MODULE_CONTENTINNER_MENU_BUTTON = 'contentinner-menu-button';
+    public final const MODULE_CONTENTINNER_MENU_DROPDOWN = 'contentinner-menu-dropdown';
+    public final const MODULE_CONTENTINNER_MENU_INDENT = 'contentinner-menu-indent';
+    public final const MODULE_CONTENTINNER_MENU_SEGMENTEDBUTTON = 'contentinner-menu-segmentedbutton';
+    public final const MODULE_CONTENTINNER_MENU_NAVIGATORSEGMENTEDBUTTON = 'contentinner-menu-navigatorsegmentedbutton';
+    public final const MODULE_CONTENTINNER_MENU_DROPDOWNBUTTON_TOP = 'contentinner-menu-dropdownbutton-top';
+    public final const MODULE_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE = 'contentinner-menu-dropdownbutton-side';
+    public final const MODULE_CONTENTINNER_MENU_MULTITARGETINDENT = 'contentinner-menu-multitargetindent';
 
     public function getModulesToProcess(): array
     {

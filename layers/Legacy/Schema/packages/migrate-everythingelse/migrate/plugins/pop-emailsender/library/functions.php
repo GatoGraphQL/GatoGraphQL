@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('wp_mail', 'popEmailsenderDecodeSubject');
+\PoP\Root\App::addFilter('wp_mail', popEmailsenderDecodeSubject(...));
 function popEmailsenderDecodeSubject($props)
 {
 

@@ -2,10 +2,10 @@
 
 class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_WHOWEARE_DETAILS = 'scrollinner-whoweare-details';
-    public const MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL = 'scrollinner-whoweare-thumbnail';
-    public const MODULE_SCROLLINNER_WHOWEARE_LIST = 'scrollinner-whoweare-list';
-    public const MODULE_SCROLLINNER_WHOWEARE_FULLVIEW = 'scrollinner-whoweare-fullview';
+    public final const MODULE_SCROLLINNER_WHOWEARE_DETAILS = 'scrollinner-whoweare-details';
+    public final const MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL = 'scrollinner-whoweare-thumbnail';
+    public final const MODULE_SCROLLINNER_WHOWEARE_LIST = 'scrollinner-whoweare-list';
+    public final const MODULE_SCROLLINNER_WHOWEARE_FULLVIEW = 'scrollinner-whoweare-fullview';
 
     public function getModulesToProcess(): array
     {

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_GenericForms_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules',
-            array($this, 'singleComponents')
+            $this->singleComponents(...)
         );
     }
 

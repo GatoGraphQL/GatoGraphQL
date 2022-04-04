@@ -8,8 +8,8 @@ use PoP\ComponentModel\Constants\Params as UpstreamParams;
 
 class Params extends UpstreamParams
 {
-    public const STRATUM = 'stratum';
-    public const TARGET = 'target';
-    public const FORMAT = 'format';
-    public const SETTINGSFORMAT = 'settingsformat';
+    public final const STRATUM = 'stratum';
+    public final const TARGET = 'target';
+    public final const FORMAT = 'format';
+    public final const SETTINGSFORMAT = 'settingsformat';
 }

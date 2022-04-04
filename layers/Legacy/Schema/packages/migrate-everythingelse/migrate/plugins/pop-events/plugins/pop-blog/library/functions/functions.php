@@ -2,7 +2,7 @@
 use PoP\Engine\Route\RouteUtils;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
-\PoP\Root\App::addFilter('wassup_section_taxonomyterms', 'popEmSectionTaxonomyterms', 0);
+\PoP\Root\App::addFilter('wassup_section_taxonomyterms', popEmSectionTaxonomyterms(...), 0);
 function popEmSectionTaxonomyterms($section_taxonomyterms)
 {
     if (POP_EVENTS_CAT_ALL) {

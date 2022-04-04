@@ -14,7 +14,7 @@ class ApplicationStateHookSet extends AbstractHookSet
     {
         App::addFilter(
             ModelInstance::HOOK_COMPONENTSFROMVARS_RESULT,
-            [$this, 'maybeAddComponent']
+            $this->maybeAddComponent(...)
         );
     }
 

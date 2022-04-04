@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentFilters extends PoP_Module_Processor_FiltersBase
 {
-    public const MODULE_FILTER_COMMENTS = 'filter-comments';
+    public final const MODULE_FILTER_COMMENTS = 'filter-comments';
 
     public function getModulesToProcess(): array
     {

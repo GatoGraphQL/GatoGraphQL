@@ -6,6 +6,6 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
 
 class BlockAttributeNames
 {
-    public const IS_ENABLED = 'isEnabled';
-    public const ENABLED_CONST = 'enabledConst';
+    public final const IS_ENABLED = 'isEnabled';
+    public final const ENABLED_CONST = 'enabledConst';
 }

@@ -2,37 +2,37 @@
 
 class PoP_SocialNetwork_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS = 'block-authorfollowers-scroll-details';
-    public const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS = 'block-authorfollowingusers-scroll-details';
-    public const MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS = 'block-authorsubscribedtotags-scroll-details';
-    public const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS = 'block-authorrecommendedposts-scroll-details';
-    public const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS = 'block-tagsubscribers-scroll-details';
-    public const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_DETAILS = 'block-singlerecommendedby-scroll-details';
-    public const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_DETAILS = 'block-singleupvotedby-scroll-details';
-    public const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_DETAILS = 'block-singledownvotedby-scroll-details';
-    public const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW = 'block-authorrecommendedposts-scroll-simpleview';
-    public const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_FULLVIEW = 'block-authorfollowers-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW = 'block-authorfollowingusers-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW = 'block-authorrecommendedposts-scroll-fullview';
-    public const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW = 'block-tagsubscribers-scroll-fullview';
-    public const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW = 'block-singlerecommendedby-scroll-fullview';
-    public const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_FULLVIEW = 'block-singleupvotedby-scroll-fullview';
-    public const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW = 'block-singledownvotedby-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_THUMBNAIL = 'block-authorfollowers-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL = 'block-authorfollowingusers-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL = 'block-authorrecommendedposts-scroll-thumbnail';
-    public const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL = 'block-tagsubscribers-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL = 'block-singlerecommendedby-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_THUMBNAIL = 'block-singleupvotedby-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL = 'block-singledownvotedby-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_LIST = 'block-authorfollowers-scroll-list';
-    public const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_LIST = 'block-authorfollowingusers-scroll-list';
-    public const MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST = 'block-authorsubscribedtotags-scroll-list';
-    public const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST = 'block-authorrecommendedposts-scroll-list';
-    public const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST = 'block-tagsubscribers-scroll-list';
-    public const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_LIST = 'block-singlerecommendedby-scroll-list';
-    public const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_LIST = 'block-singleupvotedby-scroll-list';
-    public const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'block-singledownvotedby-scroll-list';
+    public final const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS = 'block-authorfollowers-scroll-details';
+    public final const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS = 'block-authorfollowingusers-scroll-details';
+    public final const MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS = 'block-authorsubscribedtotags-scroll-details';
+    public final const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS = 'block-authorrecommendedposts-scroll-details';
+    public final const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS = 'block-tagsubscribers-scroll-details';
+    public final const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_DETAILS = 'block-singlerecommendedby-scroll-details';
+    public final const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_DETAILS = 'block-singleupvotedby-scroll-details';
+    public final const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_DETAILS = 'block-singledownvotedby-scroll-details';
+    public final const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW = 'block-authorrecommendedposts-scroll-simpleview';
+    public final const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_FULLVIEW = 'block-authorfollowers-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW = 'block-authorfollowingusers-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW = 'block-authorrecommendedposts-scroll-fullview';
+    public final const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW = 'block-tagsubscribers-scroll-fullview';
+    public final const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW = 'block-singlerecommendedby-scroll-fullview';
+    public final const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_FULLVIEW = 'block-singleupvotedby-scroll-fullview';
+    public final const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW = 'block-singledownvotedby-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_THUMBNAIL = 'block-authorfollowers-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL = 'block-authorfollowingusers-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL = 'block-authorrecommendedposts-scroll-thumbnail';
+    public final const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL = 'block-tagsubscribers-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL = 'block-singlerecommendedby-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_THUMBNAIL = 'block-singleupvotedby-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL = 'block-singledownvotedby-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTHORFOLLOWERS_SCROLL_LIST = 'block-authorfollowers-scroll-list';
+    public final const MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_LIST = 'block-authorfollowingusers-scroll-list';
+    public final const MODULE_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST = 'block-authorsubscribedtotags-scroll-list';
+    public final const MODULE_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST = 'block-authorrecommendedposts-scroll-list';
+    public final const MODULE_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST = 'block-tagsubscribers-scroll-list';
+    public final const MODULE_BLOCK_SINGLERECOMMENDEDBY_SCROLL_LIST = 'block-singlerecommendedby-scroll-list';
+    public final const MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLL_LIST = 'block-singleupvotedby-scroll-list';
+    public final const MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'block-singledownvotedby-scroll-list';
 
     public function getModulesToProcess(): array
     {

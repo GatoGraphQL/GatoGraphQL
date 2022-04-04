@@ -7,13 +7,13 @@ class PoP_URE_Engine_Hooks
     {
         \PoP\Root\App::addAction(
             'ApplicationState:addVars',
-            [$this, 'addVars'],
+            $this->addVars(...),
             10,
             1
         );
         \PoP\Root\App::addAction(
             'augmentVarsProperties',
-            [$this, 'augmentVarsProperties'],
+            $this->augmentVarsProperties(...),
             10,
             1
         );

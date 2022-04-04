@@ -2,9 +2,9 @@
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_FormModalViewComponentsBase
 {
-    public const MODULE_MODAL_EMBED = 'modal-embed';
-    public const MODULE_MODAL_API = 'modal-api';
-    public const MODULE_MODAL_COPYSEARCHURL = 'modal-copysearchurl';
+    public final const MODULE_MODAL_EMBED = 'modal-embed';
+    public final const MODULE_MODAL_API = 'modal-api';
+    public final const MODULE_MODAL_COPYSEARCHURL = 'modal-copysearchurl';
 
     public function getModulesToProcess(): array
     {

@@ -18,7 +18,7 @@ class PhotoSwipe_PoP
     {
 
         // Priority: after PoP Application Web Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888510);
     }
 
     public function init()

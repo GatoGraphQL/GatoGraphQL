@@ -22,11 +22,11 @@ class WSL_PoP
         include_once 'validation.php';
         \PoP\Root\App::addFilter(
             'PoP_SocialLogin_Validation:provider-validation-class',
-            array($this, 'getProviderValidationClass')
+            $this->getProviderValidationClass(...)
         );
 
         // Priority: after PoP Social Login
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888370);
     }
     public function getProviderValidationClass($class)
     {

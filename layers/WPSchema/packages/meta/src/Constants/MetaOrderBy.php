@@ -6,5 +6,5 @@ namespace PoPWPSchema\Meta\Constants;
 
 class MetaOrderBy
 {
-    public const META_VALUE = 'META_VALUE';
+    public final const META_VALUE = 'META_VALUE';
 }

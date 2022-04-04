@@ -2,7 +2,7 @@
 
 class PoP_ResourceLoader_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_HANDLEBARSHELPERSRESOURCELOADERHOOKS = 'handlebarshelpers-resourceloader-hooks';
+    public final const RESOURCE_HANDLEBARSHELPERSRESOURCELOADERHOOKS = 'handlebarshelpers-resourceloader-hooks';
 
     public function getResourcesToProcess()
     {

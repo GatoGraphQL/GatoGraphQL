@@ -21,21 +21,21 @@ use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
 class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_SORT = 'filterinput-sort';
-    public const MODULE_FILTERINPUT_LIMIT = 'filterinput-limit';
-    public const MODULE_FILTERINPUT_OFFSET = 'filterinput-offset';
-    public const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
-    public const MODULE_FILTERINPUT_IDS = 'filterinput-ids';
-    public const MODULE_FILTERINPUT_ID = 'filterinput-id';
-    public const MODULE_FILTERINPUT_COMMASEPARATED_IDS = 'filterinput-commaseparated-ids';
-    public const MODULE_FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
-    public const MODULE_FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
-    public const MODULE_FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
-    public const MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
-    public const MODULE_FILTERINPUT_SLUGS = 'filterinput-slugs';
-    public const MODULE_FILTERINPUT_SLUG = 'filterinput-slug';
-    public const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
-    public const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
+    public final const MODULE_FILTERINPUT_SORT = 'filterinput-sort';
+    public final const MODULE_FILTERINPUT_LIMIT = 'filterinput-limit';
+    public final const MODULE_FILTERINPUT_OFFSET = 'filterinput-offset';
+    public final const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
+    public final const MODULE_FILTERINPUT_IDS = 'filterinput-ids';
+    public final const MODULE_FILTERINPUT_ID = 'filterinput-id';
+    public final const MODULE_FILTERINPUT_COMMASEPARATED_IDS = 'filterinput-commaseparated-ids';
+    public final const MODULE_FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
+    public final const MODULE_FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
+    public final const MODULE_FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
+    public final const MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
+    public final const MODULE_FILTERINPUT_SLUGS = 'filterinput-slugs';
+    public final const MODULE_FILTERINPUT_SLUG = 'filterinput-slug';
+    public final const MODULE_FILTERINPUT_DATEFORMAT = 'filterinput-date-format';
+    public final const MODULE_FILTERINPUT_GMT = 'filterinput-date-gmt';
 
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;

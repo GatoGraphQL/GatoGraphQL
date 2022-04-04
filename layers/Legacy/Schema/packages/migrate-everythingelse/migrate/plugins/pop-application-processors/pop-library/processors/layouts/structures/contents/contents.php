@@ -2,8 +2,8 @@
 
 class Wassup_Module_Processor_LayoutContents extends PoP_Module_Processor_ContentsBase
 {
-    public const MODULE_CONTENTLAYOUT_HIGHLIGHTS = 'contentlayout-highlights';
-    public const MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE = 'contentlayout-highlights-appendable';
+    public final const MODULE_CONTENTLAYOUT_HIGHLIGHTS = 'contentlayout-highlights';
+    public final const MODULE_CONTENTLAYOUT_HIGHLIGHTS_APPENDABLE = 'contentlayout-highlights-appendable';
 
     public function getModulesToProcess(): array
     {

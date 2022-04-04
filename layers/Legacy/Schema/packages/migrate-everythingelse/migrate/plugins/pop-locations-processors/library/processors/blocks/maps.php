@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_LocationsMapBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_LOCATIONSMAP = 'block-locationsmap';
-    public const MODULE_BLOCK_STATICLOCATIONSMAP = 'block-staticlocationsmap';
+    public final const MODULE_BLOCK_LOCATIONSMAP = 'block-locationsmap';
+    public final const MODULE_BLOCK_STATICLOCATIONSMAP = 'block-staticlocationsmap';
 
     public function getModulesToProcess(): array
     {

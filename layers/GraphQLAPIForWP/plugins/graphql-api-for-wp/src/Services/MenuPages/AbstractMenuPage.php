@@ -52,7 +52,7 @@ abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService
     {
         \add_action(
             'admin_enqueue_scripts',
-            [$this, 'maybeEnqueueAssets']
+            $this->maybeEnqueueAssets(...)
         );
     }
 

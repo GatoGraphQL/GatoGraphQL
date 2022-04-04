@@ -81,7 +81,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final public function initialize(): void
     {
-        \add_action('init', [$this, 'initBlock']);
+        \add_action('init', $this->initBlock(...));
     }
 
     public function getEnablingModule(): ?string
@@ -368,9 +368,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
              * Show only if the user has the right permission
              */
             if ($this->getUserAuthorization()->canAccessSchemaEditor()) {
-                $blockConfiguration['render_callback'] = [$this, 'renderBlock'];
+                $blockConfiguration['render_callback'] = $this->renderBlock(...);
             } else {
-                $blockConfiguration['render_callback'] = [$this, 'renderUnauthorizedAccess'];
+                $blockConfiguration['render_callback'] = $this->renderUnauthorizedAccess(...);
             }
         }
 

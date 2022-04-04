@@ -5,7 +5,7 @@ use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public const MODULE_CAROUSELCONTROLS_USERS = 'carouselcontrols-users';
+    public final const MODULE_CAROUSELCONTROLS_USERS = 'carouselcontrols-users';
 
     public function getModulesToProcess(): array
     {

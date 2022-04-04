@@ -2,7 +2,7 @@
 
 class PoP_LocationPosts_RelatedContent_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR = 'multiple-single-locationpost-relatedcontentsidebar';
+    public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_RELATEDCONTENTSIDEBAR = 'multiple-single-locationpost-relatedcontentsidebar';
 
     public function getModulesToProcess(): array
     {

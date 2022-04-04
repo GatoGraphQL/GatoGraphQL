@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_MapScripts extends PoP_Module_Processor_MapScriptsBase
 {
-    public const MODULE_MAP_SCRIPT = 'em-map-script';
-    public const MODULE_MAP_SCRIPT_POST = 'em-map-script-post';
-    public const MODULE_MAP_SCRIPT_USER = 'em-map-script-user';
+    public final const MODULE_MAP_SCRIPT = 'em-map-script';
+    public final const MODULE_MAP_SCRIPT_POST = 'em-map-script-post';
+    public final const MODULE_MAP_SCRIPT_USER = 'em-map-script-user';
 
     public function getModulesToProcess(): array
     {

@@ -12,7 +12,7 @@ abstract class SettingsProcessorBase
         // it is not treated as false if the constant has not been defined)
         \PoP\Root\App::addAction(
             'init', // Must migrate this WP hook to one from PoP (which executes before AFTER_BOOT_APPLICATION
-            array($this, 'init'), 
+            $this->init(...), 
             PHP_INT_MAX
         );
     }

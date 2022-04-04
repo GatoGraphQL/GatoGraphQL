@@ -6,7 +6,7 @@ class PoPTheme_Wassup_EM_SidebarHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
-            array($this, 'getSidebarSubmodules'),
+            $this->getSidebarSubmodules(...),
             0,
             4
         );

@@ -2,9 +2,9 @@
 
 class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public const MODULE_LATESTCOUNT_POSTLINKS = 'latestcount-postlinks';
-    public const MODULE_LATESTCOUNT_AUTHOR_POSTLINKS = 'latestcount-author-postlinks';
-    public const MODULE_LATESTCOUNT_TAG_POSTLINKS = 'latestcount-tag-postlinks';
+    public final const MODULE_LATESTCOUNT_POSTLINKS = 'latestcount-postlinks';
+    public final const MODULE_LATESTCOUNT_AUTHOR_POSTLINKS = 'latestcount-author-postlinks';
+    public final const MODULE_LATESTCOUNT_TAG_POSTLINKS = 'latestcount-tag-postlinks';
 
     public function getModulesToProcess(): array
     {

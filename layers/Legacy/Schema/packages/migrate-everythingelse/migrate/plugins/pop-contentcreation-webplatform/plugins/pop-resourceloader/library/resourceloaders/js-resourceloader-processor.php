@@ -2,10 +2,10 @@
 
 class PoP_ContentCreation_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_FEATUREDIMAGE = 'featuredimage';
-    public const RESOURCE_MEDIAMANAGERCORS = 'mediamanager-cors';
-    public const RESOURCE_MEDIAMANAGER = 'mediamanager';
-    public const RESOURCE_MEDIAMANAGERSTATE = 'mediamanager-state';
+    public final const RESOURCE_FEATUREDIMAGE = 'featuredimage';
+    public final const RESOURCE_MEDIAMANAGERCORS = 'mediamanager-cors';
+    public final const RESOURCE_MEDIAMANAGER = 'mediamanager';
+    public final const RESOURCE_MEDIAMANAGERSTATE = 'mediamanager-state';
 
     public function getResourcesToProcess()
     {

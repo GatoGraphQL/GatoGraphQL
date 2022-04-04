@@ -6,7 +6,7 @@ class PoP_CommonUserRolesProcessors_UserCommunities_CreateUpdateProfileHooks
     {
         \PoP\Root\App::addFilter(
             'GD_CommonUserRole_UserCommunities_CreateUpdate_ProfileOrganization:form-inputs',
-            array($this, 'getFormInputs')
+            $this->getFormInputs(...)
         );
     }
 

@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\Constants;
 
 class Outputs
 {
-    public const HTML = 'html';
-    public const JSON = 'json';
+    public final const HTML = 'html';
+    public final const JSON = 'json';
 }

@@ -20,7 +20,7 @@ class PoP_FormsWebPlatform
     {
 
         // Priority: after PoP Captcha
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888520);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888520);
     }
     public function init()
     {

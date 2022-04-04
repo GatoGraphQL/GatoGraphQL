@@ -2,12 +2,12 @@
 
 class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_EVENTS = 'filterinputcontainer-events';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHOREVENTS = 'filterinputcontainer-authorevents';
-    public const MODULE_FILTERINPUTCONTAINER_TAGEVENTS = 'filterinputcontainer-tagevents';
-    public const MODULE_FILTERINPUTCONTAINER_EVENTSCALENDAR = 'filterinputcontainer-eventscalendar';
-    public const MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'filterinputcontainer-authoreventscalendar';
-    public const MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'filterinputcontainer-tageventscalendar';
+    public final const MODULE_FILTERINPUTCONTAINER_EVENTS = 'filterinputcontainer-events';
+    public final const MODULE_FILTERINPUTCONTAINER_AUTHOREVENTS = 'filterinputcontainer-authorevents';
+    public final const MODULE_FILTERINPUTCONTAINER_TAGEVENTS = 'filterinputcontainer-tagevents';
+    public final const MODULE_FILTERINPUTCONTAINER_EVENTSCALENDAR = 'filterinputcontainer-eventscalendar';
+    public final const MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'filterinputcontainer-authoreventscalendar';
+    public final const MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'filterinputcontainer-tageventscalendar';
 
     public function getModulesToProcess(): array
     {

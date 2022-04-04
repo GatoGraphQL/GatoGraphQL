@@ -2,7 +2,7 @@
 
 class PoP_UserCommunitiesWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_USERCOMMUNITIESACCOUNT = 'user-communities-account';
+    public final const RESOURCE_USERCOMMUNITIESACCOUNT = 'user-communities-account';
 
     public function getResourcesToProcess()
     {

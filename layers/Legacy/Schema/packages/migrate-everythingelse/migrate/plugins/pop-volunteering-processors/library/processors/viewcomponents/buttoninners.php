@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Volunteering_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL = 'viewcomponent-buttoninner-volunteer-full';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-volunteer-previewdropdown';
-    public const MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG = 'viewcomponent-compactbuttoninner-volunteer-big';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL = 'viewcomponent-buttoninner-volunteer-full';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-volunteer-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG = 'viewcomponent-compactbuttoninner-volunteer-big';
 
     public function getModulesToProcess(): array
     {

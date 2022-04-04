@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventLinksCreation_Custom_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGET_FORM_EVENTLINKDETAILS = 'widget-form-eventlink-details';
+    public final const MODULE_WIDGET_FORM_EVENTLINKDETAILS = 'widget-form-eventlink-details';
 
     public function getModulesToProcess(): array
     {

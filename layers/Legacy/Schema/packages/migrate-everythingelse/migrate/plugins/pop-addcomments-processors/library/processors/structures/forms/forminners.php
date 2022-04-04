@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentsFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public const MODULE_FORMINNER_ADDCOMMENT = 'forminner-addcomment';
+    public final const MODULE_FORMINNER_ADDCOMMENT = 'forminner-addcomment';
 
     public function getModulesToProcess(): array
     {

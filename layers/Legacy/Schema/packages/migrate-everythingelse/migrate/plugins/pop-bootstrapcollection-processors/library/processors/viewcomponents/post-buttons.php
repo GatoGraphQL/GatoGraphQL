@@ -4,10 +4,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor_PostHeaderViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA = 'viewcomponent-postbutton-embed-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN = 'viewcomponent-postbutton-embed-previewdropdown';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA = 'viewcomponent-postbutton-api-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN = 'viewcomponent-postbutton-api-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA = 'viewcomponent-postbutton-embed-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN = 'viewcomponent-postbutton-embed-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA = 'viewcomponent-postbutton-api-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_API_PREVIEWDROPDOWN = 'viewcomponent-postbutton-api-previewdropdown';
 
     public function getModulesToProcess(): array
     {

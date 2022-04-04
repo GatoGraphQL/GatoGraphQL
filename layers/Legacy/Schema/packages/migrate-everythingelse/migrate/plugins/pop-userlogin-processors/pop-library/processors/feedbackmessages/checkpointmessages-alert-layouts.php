@@ -2,10 +2,10 @@
 
 class GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN = 'layout-checkpointmessagealert-notloggedin';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN = 'layout-checkpointmessagealert-loggedin';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT = 'layout-checkpointmessagealert-loggedincanedit';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN = 'layout-checkpointmessagealert-loggedinisadmin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN = 'layout-checkpointmessagealert-notloggedin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDIN = 'layout-checkpointmessagealert-loggedin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINCANEDIT = 'layout-checkpointmessagealert-loggedincanedit';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN = 'layout-checkpointmessagealert-loggedinisadmin';
 
     public function getModulesToProcess(): array
     {

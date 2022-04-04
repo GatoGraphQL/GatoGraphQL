@@ -6,7 +6,7 @@ class PoP_ThemeWassupWebPlatform_CSSConverter_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CSSConverter_ConversionManager:css-files',
-            array($this, 'addCssFiles')
+            $this->addCssFiles(...)
         );
     }
 

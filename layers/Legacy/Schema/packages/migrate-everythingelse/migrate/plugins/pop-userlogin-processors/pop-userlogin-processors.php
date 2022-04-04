@@ -20,7 +20,7 @@ class PoP_UserLoginProcessors
     {
 
         // Priority: after PoP Email Sender Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888820);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888820);
     }
     public function init()
     {

@@ -2,7 +2,7 @@
 
 class PoP_ContactUs_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_FEEDBACKMESSAGE_CONTACTUS = 'feedbackmessage-contactus';
+    public final const MODULE_FEEDBACKMESSAGE_CONTACTUS = 'feedbackmessage-contactus';
 
     public function getModulesToProcess(): array
     {

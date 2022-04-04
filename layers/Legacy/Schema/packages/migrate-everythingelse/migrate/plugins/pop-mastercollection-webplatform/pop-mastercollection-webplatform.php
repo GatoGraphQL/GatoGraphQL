@@ -21,7 +21,7 @@ class PoP_MasterCollectionWebPlatform
     {
 
         // Priority: after PoP Server-Side Rendering
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888420);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888420);
     }
     public function init()
     {

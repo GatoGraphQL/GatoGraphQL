@@ -7,7 +7,7 @@ class PoP_Application_TaxonomyQuery_Hooks
     {
         \PoP\Root\App::addFilter(
             'useAllcontentCategories',
-            array($this, 'useAllcontentCategories')
+            $this->useAllcontentCategories(...)
         );
     }
 

@@ -11,7 +11,7 @@ class FragmentReference extends AbstractAst implements FragmentBondInterface
     protected RelationalField|Fragment|InlineFragment|OperationInterface $parent;
 
     public function __construct(
-        protected string $name,
+        protected readonly string $name,
         Location $location,
     ) {
         parent::__construct($location);

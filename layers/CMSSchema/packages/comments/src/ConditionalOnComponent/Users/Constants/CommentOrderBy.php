@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\Constants;
 
 class CommentOrderBy
 {
-    public const AUTHOR = 'AUTHOR';
+    public final const AUTHOR = 'AUTHOR';
 }

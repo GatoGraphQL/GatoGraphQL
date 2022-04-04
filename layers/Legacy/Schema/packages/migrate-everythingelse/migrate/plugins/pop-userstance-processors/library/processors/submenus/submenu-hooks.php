@@ -9,15 +9,15 @@ class PoPTheme_UserStance_SubmenuHooks
         // Before Events Manager sets its own links
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
-            array($this, 'addRoutes')
+            $this->addRoutes(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
-            array($this, 'addRoutes')
+            $this->addRoutes(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:routes',
-            array($this, 'addRoutes')
+            $this->addRoutes(...)
         );
     }
 

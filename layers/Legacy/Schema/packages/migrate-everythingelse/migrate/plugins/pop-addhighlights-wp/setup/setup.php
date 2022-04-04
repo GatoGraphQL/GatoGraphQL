@@ -7,12 +7,12 @@ class PoP_AddHighlightsWP_Setup
     {
         register_activation_hook(
             POP_ADDHIGHLIGHTSWP_BASE,
-            array($this, 'rewriteFlush')
+            $this->rewriteFlush(...)
         );
     
         \PoP\Root\App::addAction(
             'init',
-            array($this, 'installPostType')
+            $this->installPostType(...)
         );
     }
 

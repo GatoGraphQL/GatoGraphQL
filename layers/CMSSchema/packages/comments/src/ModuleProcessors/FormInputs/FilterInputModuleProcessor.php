@@ -18,11 +18,11 @@ use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
-    public const MODULE_FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
-    public const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
-    public const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
-    public const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+    public final const MODULE_FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
+    public final const MODULE_FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
+    public final const MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
+    public final const MODULE_FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
+    public final const MODULE_FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
 
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;

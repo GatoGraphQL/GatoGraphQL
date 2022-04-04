@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ShareTextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public const MODULE_FORMINPUT_EMBEDCODE = 'embedcode';
+    public final const MODULE_FORMINPUT_EMBEDCODE = 'embedcode';
 
     public function getModulesToProcess(): array
     {

@@ -18,7 +18,7 @@ class PoP_AddHighlights
     public function __construct()
     {
         // Priority: after PoP Add Related Posts
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888370);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888370);
     }
     public function init()
     {

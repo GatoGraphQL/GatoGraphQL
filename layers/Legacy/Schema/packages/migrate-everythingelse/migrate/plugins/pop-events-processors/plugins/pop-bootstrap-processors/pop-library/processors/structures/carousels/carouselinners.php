@@ -2,9 +2,9 @@
 
 class GD_EM_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_CarouselInnersBase
 {
-    public const MODULE_CAROUSELINNER_EVENTS = 'carouselinner-events';
-    public const MODULE_CAROUSELINNER_AUTHOREVENTS = 'carouselinner-authorevents';
-    public const MODULE_CAROUSELINNER_TAGEVENTS = 'carouselinner-tagevents';
+    public final const MODULE_CAROUSELINNER_EVENTS = 'carouselinner-events';
+    public final const MODULE_CAROUSELINNER_AUTHOREVENTS = 'carouselinner-authorevents';
+    public final const MODULE_CAROUSELINNER_TAGEVENTS = 'carouselinner-tagevents';
 
     public function getModulesToProcess(): array
     {

@@ -8,7 +8,7 @@ class PoP_SocialLogin_Notifications_ImplementationHooks
         // Add this library's hooks for AAL
         \PoP\Root\App::addAction(
             'popcomponent:notifications:init',
-            array($this, 'addNotificationHooks')
+            $this->addNotificationHooks(...)
         );
     }
 

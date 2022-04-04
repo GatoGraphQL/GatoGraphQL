@@ -2,21 +2,21 @@
 
 class GD_Custom_Module_Processor_PostThumbLayoutWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON = 'layoutwrapper-postthumb-favicon';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE = 'layoutwrapper-postthumb-originalfeaturedimage';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE = 'layoutwrapper-postthumb-featuredimage';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER = 'layoutwrapper-postthumb-featuredimage-volunteer';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL = 'layoutwrapper-postthumb-xsmall';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL = 'layoutwrapper-postthumb-croppedsmall';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM = 'layoutwrapper-postthumb-croppedmedium';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED = 'layoutwrapper-postthumb-croppedfeed';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT = 'layoutwrapper-postthumb-croppedsmall-edit';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER = 'layoutwrapper-postthumb-croppedsmall-volunteer';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER = 'layoutwrapper-postthumb-croppedmedium-volunteer';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER = 'layoutwrapper-postthumb-croppedfeed-volunteer';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE = 'layoutwrapper-postthumb-linkselforiginalfeaturedimage';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED = 'layoutwrapper-postthumb-linkselfcroppedfeed';
-    public const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER = 'layoutwrapper-postthumb-linkselfcroppedfeed-volunteer';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_FAVICON = 'layoutwrapper-postthumb-favicon';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_ORIGINALFEATUREDIMAGE = 'layoutwrapper-postthumb-originalfeaturedimage';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE = 'layoutwrapper-postthumb-featuredimage';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER = 'layoutwrapper-postthumb-featuredimage-volunteer';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_XSMALL = 'layoutwrapper-postthumb-xsmall';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL = 'layoutwrapper-postthumb-croppedsmall';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM = 'layoutwrapper-postthumb-croppedmedium';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED = 'layoutwrapper-postthumb-croppedfeed';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_EDIT = 'layoutwrapper-postthumb-croppedsmall-edit';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDSMALL_VOLUNTEER = 'layoutwrapper-postthumb-croppedsmall-volunteer';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER = 'layoutwrapper-postthumb-croppedmedium-volunteer';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_CROPPEDFEED_VOLUNTEER = 'layoutwrapper-postthumb-croppedfeed-volunteer';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE = 'layoutwrapper-postthumb-linkselforiginalfeaturedimage';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED = 'layoutwrapper-postthumb-linkselfcroppedfeed';
+    public final const MODULE_LAYOUTWRAPPER_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER = 'layoutwrapper-postthumb-linkselfcroppedfeed-volunteer';
 
     public function getModulesToProcess(): array
     {

@@ -2,10 +2,10 @@
 
 class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS = 'scrollinner-organizations-details';
-    public const MODULE_SCROLLINNER_INDIVIDUALS_DETAILS = 'scrollinner-individuals-details';
-    public const MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW = 'scrollinner-organizations-fullview';
-    public const MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW = 'scrollinner-individuals-fullview';
+    public final const MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS = 'scrollinner-organizations-details';
+    public final const MODULE_SCROLLINNER_INDIVIDUALS_DETAILS = 'scrollinner-individuals-details';
+    public final const MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW = 'scrollinner-organizations-fullview';
+    public final const MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW = 'scrollinner-individuals-fullview';
 
     public function getModulesToProcess(): array
     {

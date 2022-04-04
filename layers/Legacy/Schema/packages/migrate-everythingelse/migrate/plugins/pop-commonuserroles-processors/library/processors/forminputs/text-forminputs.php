@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_URE_FORMINPUT_CUP_CONTACTPERSON = 'forminput-ure-cup-contactperson';
-    public const MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
-    public const MODULE_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
+    public final const MODULE_URE_FORMINPUT_CUP_CONTACTPERSON = 'forminput-ure-cup-contactperson';
+    public final const MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
+    public final const MODULE_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
 
     public function getModulesToProcess(): array
     {

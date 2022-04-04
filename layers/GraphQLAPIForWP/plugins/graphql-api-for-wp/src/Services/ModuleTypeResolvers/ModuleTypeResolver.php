@@ -11,18 +11,18 @@ use GraphQLAPI\GraphQLAPI\Plugin;
  */
 class ModuleTypeResolver extends AbstractModuleTypeResolver
 {
-    public const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
-    public const CLIENT = Plugin::NAMESPACE . '\client';
-    public const ENDPOINT = Plugin::NAMESPACE . '\endpoint';
-    public const FUNCTIONALITY = Plugin::NAMESPACE . '\functionality';
-    public const OPERATIONAL = Plugin::NAMESPACE . '\operational';
-    public const PERFORMANCE = Plugin::NAMESPACE . '\performance';
-    public const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
-    public const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
-    public const SCHEMA_TYPE = Plugin::NAMESPACE . '\schema-type';
-    public const SCHEMA_DIRECTIVE = Plugin::NAMESPACE . '\schema-directive';
-    public const USER_INTERFACE = Plugin::NAMESPACE . '\user-interface';
-    public const VERSIONING = Plugin::NAMESPACE . '\versioning';
+    public final const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
+    public final const CLIENT = Plugin::NAMESPACE . '\client';
+    public final const ENDPOINT = Plugin::NAMESPACE . '\endpoint';
+    public final const FUNCTIONALITY = Plugin::NAMESPACE . '\functionality';
+    public final const OPERATIONAL = Plugin::NAMESPACE . '\operational';
+    public final const PERFORMANCE = Plugin::NAMESPACE . '\performance';
+    public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
+    public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
+    public final const SCHEMA_TYPE = Plugin::NAMESPACE . '\schema-type';
+    public final const SCHEMA_DIRECTIVE = Plugin::NAMESPACE . '\schema-directive';
+    public final const USER_INTERFACE = Plugin::NAMESPACE . '\user-interface';
+    public final const VERSIONING = Plugin::NAMESPACE . '\versioning';
 
     /**
      * @return string[]

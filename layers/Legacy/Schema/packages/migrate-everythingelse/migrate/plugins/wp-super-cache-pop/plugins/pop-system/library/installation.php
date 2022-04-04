@@ -13,7 +13,7 @@ class WPSC_PoP_Installation
          * Allow to override what files to ignore to cache: all the ones with checkpoint needed
          */
         // Priority 20: After the config file has been created
-        \PoP\Root\App::addAction('PoP:system-generate', array($this, 'setRejectedUri'), 20);
+        \PoP\Root\App::addAction('PoP:system-generate', $this->setRejectedUri(...), 20);
     }
 
     public function setRejectedUri()

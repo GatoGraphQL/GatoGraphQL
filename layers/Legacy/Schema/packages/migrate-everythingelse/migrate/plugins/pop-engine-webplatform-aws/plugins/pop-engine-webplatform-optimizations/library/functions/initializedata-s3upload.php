@@ -8,14 +8,14 @@ class PoP_WebPlatformEngine_AWS_InitializeData_S3Upload extends PoP_WebPlatformE
 
         \PoP\Root\App::addAction(
             '\PoP\ComponentModel\Engine:optimizeEncodedData:file_stored',
-            array($this, 'maybeUploadToS3'),
+            $this->maybeUploadToS3(...),
             10,
             3
         );
 
         \PoP\Root\App::addFilter(
             'PoP_Module_RuntimeContentManager:cache-baseurl',
-            array($this, 'modifyFileurlDomain')
+            $this->modifyFileurlDomain(...)
         );
     }
 

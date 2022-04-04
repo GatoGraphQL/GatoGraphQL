@@ -6,7 +6,7 @@ class PoP_UserPlatform_Preferences
     {
         \PoP\Root\App::addAction(
             'popcms:userRegister',
-            array($this, 'grantDefaultPreferences'),
+            $this->grantDefaultPreferences(...),
             10,
             1
         );

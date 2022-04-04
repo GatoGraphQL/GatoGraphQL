@@ -2,8 +2,8 @@
 
 class PoP_Application_UserStance_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_VOTINGSTYLES = 'css-votingstyles';
-    public const RESOURCE_CSS_VOTINGLAYOUT = 'css-votinglayout';
+    public final const RESOURCE_CSS_VOTINGSTYLES = 'css-votingstyles';
+    public final const RESOURCE_CSS_VOTINGLAYOUT = 'css-votinglayout';
 
     public function getResourcesToProcess()
     {

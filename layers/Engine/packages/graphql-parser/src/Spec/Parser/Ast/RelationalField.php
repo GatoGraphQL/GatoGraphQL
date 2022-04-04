@@ -21,8 +21,8 @@ class RelationalField extends AbstractAst implements FieldInterface, WithFieldsO
      * @param Directive[] $directives
      */
     public function __construct(
-        protected string $name,
-        protected ?string $alias,
+        protected readonly string $name,
+        protected readonly ?string $alias,
         array $arguments,
         array $fieldsOrFragmentBonds,
         array $directives,

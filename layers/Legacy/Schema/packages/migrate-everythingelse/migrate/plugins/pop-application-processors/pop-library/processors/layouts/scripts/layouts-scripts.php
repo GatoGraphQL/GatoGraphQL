@@ -2,8 +2,8 @@
 
 class Wassup_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScriptsLayoutsBase
 {
-    public const MODULE_SCRIPT_HIGHLIGHTS = 'script-highlights';
-    public const MODULE_SCRIPT_HIGHLIGHTSEMPTY = 'script-highlightsempty';
+    public final const MODULE_SCRIPT_HIGHLIGHTS = 'script-highlights';
+    public final const MODULE_SCRIPT_HIGHLIGHTSEMPTY = 'script-highlightsempty';
 
     public function getModulesToProcess(): array
     {

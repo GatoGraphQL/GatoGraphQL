@@ -7,7 +7,7 @@ class PoP_LocationPosts_CommonUserRoles_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoPSP_URE_EM_Module_Processor_SidebarMultiples:inner-modules:author',
-            array($this, 'getInnerSubmodules')
+            $this->getInnerSubmodules(...)
         );
     }
 

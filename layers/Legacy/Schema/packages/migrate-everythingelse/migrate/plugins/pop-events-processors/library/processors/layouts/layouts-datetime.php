@@ -2,9 +2,9 @@
 
 class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_DateTimeLayoutsBase
 {
-    public const MODULE_EM_LAYOUT_DATETIME = 'em-layout-datetime';
-    public const MODULE_EM_LAYOUT_DATETIMEHORIZONTAL = 'em-layout-datetimehorizontal';
-    public const MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS = 'em-layout-datetimedownloadlinks';
+    public final const MODULE_EM_LAYOUT_DATETIME = 'em-layout-datetime';
+    public final const MODULE_EM_LAYOUT_DATETIMEHORIZONTAL = 'em-layout-datetimehorizontal';
+    public final const MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS = 'em-layout-datetimedownloadlinks';
 
     public function getModulesToProcess(): array
     {

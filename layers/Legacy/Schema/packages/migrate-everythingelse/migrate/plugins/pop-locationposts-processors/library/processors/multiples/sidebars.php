@@ -3,10 +3,10 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR = 'multiple-authorlocationposts-sidebar';
-    public const MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR = 'multiple-section-locationposts-sidebar';
-    public const MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR = 'multiple-tag-locationposts-sidebar';
-    public const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR = 'multiple-single-locationpost-sidebar';
+    public final const MODULE_MULTIPLE_AUTHORLOCATIONPOSTS_SIDEBAR = 'multiple-authorlocationposts-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_LOCATIONPOSTS_SIDEBAR = 'multiple-section-locationposts-sidebar';
+    public final const MODULE_MULTIPLE_TAG_LOCATIONPOSTS_SIDEBAR = 'multiple-tag-locationposts-sidebar';
+    public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR = 'multiple-single-locationpost-sidebar';
 
     public function getModulesToProcess(): array
     {

@@ -2,9 +2,9 @@
 
 class PoP_ServiceWorkers_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_SW = 'sw';
-    public const RESOURCE_SWINITIAL = 'sw-initial';
-    public const RESOURCE_CORESW = 'core-sw';
+    public final const RESOURCE_SW = 'sw';
+    public final const RESOURCE_SWINITIAL = 'sw-initial';
+    public final const RESOURCE_CORESW = 'core-sw';
 
     public function getResourcesToProcess()
     {

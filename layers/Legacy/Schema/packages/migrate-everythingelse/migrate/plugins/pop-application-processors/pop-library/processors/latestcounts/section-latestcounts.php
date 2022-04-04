@@ -2,9 +2,9 @@
 
 class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public const MODULE_LATESTCOUNT_POSTS = 'latestcount-posts';
-    public const MODULE_LATESTCOUNT_AUTHOR_POSTS = 'latestcount-author-posts';
-    public const MODULE_LATESTCOUNT_TAG_POSTS = 'latestcount-tag-posts';
+    public final const MODULE_LATESTCOUNT_POSTS = 'latestcount-posts';
+    public final const MODULE_LATESTCOUNT_AUTHOR_POSTS = 'latestcount-author-posts';
+    public final const MODULE_LATESTCOUNT_TAG_POSTS = 'latestcount-tag-posts';
 
     public function getModulesToProcess(): array
     {

@@ -2,14 +2,14 @@
 
 class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_USERS_MAP = 'scrollinner-users-map';
-    public const MODULE_SCROLLINNER_USER_MAP = 'scrollinner-user-map';
-    public const MODULE_SCROLLINNER_USERS_HORIZONTALMAP = 'scrollinner-users-horizontalmap';
-    public const MODULE_SCROLLINNER_LOCATIONS = 'scrollinner-locations';
-    public const MODULE_SCROLLINNER_LOCATIONS_MAP = 'scrollinner-locations-map';
-    public const MODULE_SCROLLINNER_EVENTS_MAP = 'scrollinner-events-map';
-    public const MODULE_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
-    public const MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
+    public final const MODULE_SCROLLINNER_USERS_MAP = 'scrollinner-users-map';
+    public final const MODULE_SCROLLINNER_USER_MAP = 'scrollinner-user-map';
+    public final const MODULE_SCROLLINNER_USERS_HORIZONTALMAP = 'scrollinner-users-horizontalmap';
+    public final const MODULE_SCROLLINNER_LOCATIONS = 'scrollinner-locations';
+    public final const MODULE_SCROLLINNER_LOCATIONS_MAP = 'scrollinner-locations-map';
+    public final const MODULE_SCROLLINNER_EVENTS_MAP = 'scrollinner-events-map';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
+    public final const MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
 
     public function getModulesToProcess(): array
     {

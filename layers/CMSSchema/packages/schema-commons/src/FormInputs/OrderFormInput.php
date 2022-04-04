@@ -8,7 +8,7 @@ use PoP\Engine\FormInputs\SelectFormInput;
 
 class OrderFormInput extends SelectFormInput
 {
-    public const SEPARATOR = '|';
+    public final const SEPARATOR = '|';
 
     public function getValue(?array $source = null): mixed
     {

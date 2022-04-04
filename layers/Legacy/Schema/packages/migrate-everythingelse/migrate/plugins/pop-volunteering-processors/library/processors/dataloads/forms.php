@@ -8,7 +8,7 @@ class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_F
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_VOLUNTEER = 'dataload-volunteer';
+    public final const MODULE_DATALOAD_VOLUNTEER = 'dataload-volunteer';
 
     public function getModulesToProcess(): array
     {

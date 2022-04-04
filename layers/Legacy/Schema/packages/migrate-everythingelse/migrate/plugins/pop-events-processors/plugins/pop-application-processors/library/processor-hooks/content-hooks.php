@@ -8,13 +8,13 @@ class PoPTheme_Wassup_EM_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:top',
-            array($this, 'getTopSidebar'),
+            $this->getTopSidebar(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomContentBlocks:single-sidebar:bottom',
-            array($this, 'getBottomSidebar'),
+            $this->getBottomSidebar(...),
             10,
             2
         );

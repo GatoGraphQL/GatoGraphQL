@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Constants;
 
 class CustomPostOrderBy
 {
-    public const AUTHOR = 'AUTHOR';
+    public final const AUTHOR = 'AUTHOR';
 }

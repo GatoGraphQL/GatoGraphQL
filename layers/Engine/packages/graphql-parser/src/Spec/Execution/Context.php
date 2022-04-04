@@ -6,12 +6,12 @@ namespace PoP\GraphQLParser\Spec\Execution;
 
 class Context
 {
-    private string $operationName;
+    private readonly string $operationName;
 
     public function __construct(
         ?string $operationName = null,
         /** @var array<string, mixed> */
-        private array $variableValues = [],
+        private readonly array $variableValues = [],
     ) {
         $this->operationName = $operationName !== null ? trim($operationName) : '';
     }

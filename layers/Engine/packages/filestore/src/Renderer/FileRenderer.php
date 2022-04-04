@@ -11,8 +11,8 @@ use PoP\FileStore\Store\FileStoreInterface;
 class FileRenderer implements FileRendererInterface
 {
     public function __construct(
-        private FileStoreInterface $fileStore,
-        private string $separator = PHP_EOL
+        private readonly FileStoreInterface $fileStore,
+        private readonly string $separator = PHP_EOL
     ) {
     }
     public function render(AbstractAccessibleRenderableFile $file): string

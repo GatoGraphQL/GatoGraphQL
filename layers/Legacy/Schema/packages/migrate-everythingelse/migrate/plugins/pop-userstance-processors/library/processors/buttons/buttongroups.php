@@ -2,10 +2,10 @@
 
 class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
-    public const MODULE_BUTTONGROUP_STANCES = 'buttongroup-stances';
-    public const MODULE_BUTTONGROUP_MYSTANCES = 'buttongroup-mystances';
-    public const MODULE_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
-    public const MODULE_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
+    public final const MODULE_BUTTONGROUP_STANCES = 'buttongroup-stances';
+    public final const MODULE_BUTTONGROUP_MYSTANCES = 'buttongroup-mystances';
+    public final const MODULE_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
+    public final const MODULE_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
 
     public function getModulesToProcess(): array
     {

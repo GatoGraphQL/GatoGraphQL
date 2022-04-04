@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_PostUserMentionsLayouts extends PoP_Module_Processor_PostUserMentionsLayoutsBase
 {
-    public const MODULE_LAYOUT_POSTUSERMENTIONS = 'layout-postusermentions';
+    public final const MODULE_LAYOUT_POSTUSERMENTIONS = 'layout-postusermentions';
 
     public function getModulesToProcess(): array
     {

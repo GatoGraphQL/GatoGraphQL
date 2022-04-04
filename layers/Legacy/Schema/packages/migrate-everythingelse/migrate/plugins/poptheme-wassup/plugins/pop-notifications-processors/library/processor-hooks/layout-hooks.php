@@ -6,11 +6,11 @@ class PoPTheme_AAL_LayoutHooks
     {
         \PoP\Root\App::addFilter(
             'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
-            array($this, 'markasreadLayouts')
+            $this->markasreadLayouts(...)
         );
         \PoP\Root\App::addFilter(
             'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
-            array($this, 'markasunreadLayouts')
+            $this->markasunreadLayouts(...)
         );
     }
 

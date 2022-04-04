@@ -3,9 +3,9 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class GD_URE_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
-    public const URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
-    public const URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
+    public final const URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
+    public final const URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
+    public final const URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
 
     public function getFilterInputsToProcess(): array
     {

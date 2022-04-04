@@ -2,8 +2,8 @@
 
 class PhotoSwipe_PoP_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_PHOTOSWIPE = 'css-external-photoswipe';
-    public const RESOURCE_EXTERNAL_CSS_PHOTOSWIPESKIN = 'css-external-photoswipeskin';
+    public final const RESOURCE_EXTERNAL_CSS_PHOTOSWIPE = 'css-external-photoswipe';
+    public final const RESOURCE_EXTERNAL_CSS_PHOTOSWIPESKIN = 'css-external-photoswipeskin';
 
     public function getResourcesToProcess()
     {

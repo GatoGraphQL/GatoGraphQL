@@ -2,9 +2,9 @@
 
 class PoP_Locations_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_LOCATIONS = 'scroll-locations';
-    public const MODULE_SCROLL_STATICIMAGE = 'scroll-staticimage';
-    public const MODULE_SCROLL_STATICIMAGE_USERORPOST = 'scroll-staticimage-userorpost';
+    public final const MODULE_SCROLL_LOCATIONS = 'scroll-locations';
+    public final const MODULE_SCROLL_STATICIMAGE = 'scroll-staticimage';
+    public final const MODULE_SCROLL_STATICIMAGE_USERORPOST = 'scroll-staticimage-userorpost';
 
     public function getModulesToProcess(): array
     {

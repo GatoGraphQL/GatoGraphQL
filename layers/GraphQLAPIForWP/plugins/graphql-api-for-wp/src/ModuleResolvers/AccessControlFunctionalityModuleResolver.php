@@ -14,11 +14,11 @@ class AccessControlFunctionalityModuleResolver extends AbstractFunctionalityModu
     }
     use AccessControlFunctionalityModuleResolverTrait;
 
-    public const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
-    public const ACCESS_CONTROL_RULE_DISABLE_ACCESS = Plugin::NAMESPACE . '\access-control-rule-disable-access';
-    public const ACCESS_CONTROL_RULE_USER_STATE = Plugin::NAMESPACE . '\access-control-rule-user-state';
-    public const ACCESS_CONTROL_RULE_USER_ROLES = Plugin::NAMESPACE . '\access-control-rule-user-roles';
-    public const ACCESS_CONTROL_RULE_USER_CAPABILITIES = Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
+    public final const ACCESS_CONTROL = Plugin::NAMESPACE . '\access-control';
+    public final const ACCESS_CONTROL_RULE_DISABLE_ACCESS = Plugin::NAMESPACE . '\access-control-rule-disable-access';
+    public final const ACCESS_CONTROL_RULE_USER_STATE = Plugin::NAMESPACE . '\access-control-rule-user-state';
+    public final const ACCESS_CONTROL_RULE_USER_ROLES = Plugin::NAMESPACE . '\access-control-rule-user-roles';
+    public final const ACCESS_CONTROL_RULE_USER_CAPABILITIES = Plugin::NAMESPACE . '\access-control-rule-user-capabilities';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

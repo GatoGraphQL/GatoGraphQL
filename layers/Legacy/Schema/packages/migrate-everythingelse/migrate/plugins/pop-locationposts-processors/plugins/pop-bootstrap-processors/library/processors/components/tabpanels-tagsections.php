@@ -2,7 +2,7 @@
 
 class PoP_LocationPosts_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Processor_TagSectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_TAGLOCATIONPOSTS = 'tabpanel-taglocationposts';
+    public final const MODULE_TABPANEL_TAGLOCATIONPOSTS = 'tabpanel-taglocationposts';
 
     public function getModulesToProcess(): array
     {

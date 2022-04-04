@@ -9,8 +9,8 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const D1 = 'd1';
-    public const D2 = 'd2';
+    public final const D1 = 'd1';
+    public final const D2 = 'd2';
 
     /**
      * @return string[]

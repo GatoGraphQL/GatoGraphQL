@@ -2,14 +2,14 @@
 
 class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaBase
 {
-    public const MODULE_POSTSOCIALMEDIA = 'post-socialmedia';
-    public const MODULE_POSTSOCIALMEDIA_COUNTER = 'post-socialmedia-counter';
-    public const MODULE_SUBJUGATEDPOSTSOCIALMEDIA = 'subjugatedpost-socialmedia';
-    public const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER = 'subjugatedpost-socialmedia-counter';
-    public const MODULE_USERSOCIALMEDIA = 'user-socialmedia';
-    public const MODULE_USERSOCIALMEDIA_COUNTER = 'user-socialmedia-counter';
-    public const MODULE_TAGSOCIALMEDIA = 'tag-socialmedia';
-    public const MODULE_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
+    public final const MODULE_POSTSOCIALMEDIA = 'post-socialmedia';
+    public final const MODULE_POSTSOCIALMEDIA_COUNTER = 'post-socialmedia-counter';
+    public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA = 'subjugatedpost-socialmedia';
+    public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER = 'subjugatedpost-socialmedia-counter';
+    public final const MODULE_USERSOCIALMEDIA = 'user-socialmedia';
+    public final const MODULE_USERSOCIALMEDIA_COUNTER = 'user-socialmedia-counter';
+    public final const MODULE_TAGSOCIALMEDIA = 'tag-socialmedia';
+    public final const MODULE_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
 
     public function getModulesToProcess(): array
     {

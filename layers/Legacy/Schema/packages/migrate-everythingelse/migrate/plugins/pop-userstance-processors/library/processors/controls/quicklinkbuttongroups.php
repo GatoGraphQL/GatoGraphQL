@@ -2,9 +2,9 @@
 
 class UserStance_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT = 'quicklinkbuttongroup-stanceedit';
-    public const MODULE_QUICKLINKBUTTONGROUP_STANCEVIEW = 'quicklinkbuttongroup-stanceview';
-    public const MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE = 'quicklinkbuttongroup-poststance';
+    public final const MODULE_QUICKLINKBUTTONGROUP_STANCEEDIT = 'quicklinkbuttongroup-stanceedit';
+    public final const MODULE_QUICKLINKBUTTONGROUP_STANCEVIEW = 'quicklinkbuttongroup-stanceview';
+    public final const MODULE_QUICKLINKBUTTONGROUP_POSTSTANCE = 'quicklinkbuttongroup-poststance';
 
     public function getModulesToProcess(): array
     {
