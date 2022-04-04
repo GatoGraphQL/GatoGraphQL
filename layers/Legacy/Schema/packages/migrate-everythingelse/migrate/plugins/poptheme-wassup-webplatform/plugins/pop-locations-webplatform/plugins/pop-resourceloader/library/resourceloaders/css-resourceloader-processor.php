@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_EM_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_MAP = 'css-em-map';
+    public final const RESOURCE_CSS_MAP = 'css-em-map';
 
     public function getResourcesToProcess()
     {

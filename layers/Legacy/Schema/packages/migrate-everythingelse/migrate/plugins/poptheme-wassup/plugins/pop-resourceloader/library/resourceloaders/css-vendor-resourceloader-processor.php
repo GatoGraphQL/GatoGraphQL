@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_FONTAWESOME = 'css-external-fontawesome';
+    public final const RESOURCE_EXTERNAL_CSS_FONTAWESOME = 'css-external-fontawesome';
 
     public function getResourcesToProcess()
     {

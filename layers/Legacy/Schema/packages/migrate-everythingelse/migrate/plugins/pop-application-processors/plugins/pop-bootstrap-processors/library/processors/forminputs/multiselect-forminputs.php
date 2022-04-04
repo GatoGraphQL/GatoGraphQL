@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Module_Processor_MultiSelectFormInputsBase
 {
-    public const MODULE_FORMINPUT_APPLIESTO = 'forminput-appliesto';
-    public const MODULE_FORMINPUT_CATEGORIES = 'forminput-categories';
+    public final const MODULE_FORMINPUT_APPLIESTO = 'forminput-appliesto';
+    public final const MODULE_FORMINPUT_CATEGORIES = 'forminput-categories';
 
     public function getModulesToProcess(): array
     {

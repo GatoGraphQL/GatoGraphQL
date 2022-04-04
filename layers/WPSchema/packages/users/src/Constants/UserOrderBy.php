@@ -8,8 +8,8 @@ use PoPCMSSchema\Users\Constants\UserOrderBy as UpstreamUserOrderBy;
 
 class UserOrderBy extends UpstreamUserOrderBy
 {
-    public const INCLUDE = 'INCLUDE';
-    public const WEBSITE_URL = 'WEBSITE_URL';
-    public const NICENAME = 'NICENAME';
-    public const EMAIL = 'EMAIL';
+    public final const INCLUDE = 'INCLUDE';
+    public final const WEBSITE_URL = 'WEBSITE_URL';
+    public final const NICENAME = 'NICENAME';
+    public final const EMAIL = 'EMAIL';
 }

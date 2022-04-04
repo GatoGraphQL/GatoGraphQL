@@ -2,8 +2,8 @@
 
 class GD_URE_AAL_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP = 'ure-aal-quicklinkbuttongroup-editusermembership';
-    public const MODULE_UREAAL_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS = 'ure-aal-quicklinkbuttongroup-viewallmembers';
+    public final const MODULE_UREAAL_QUICKLINKBUTTONGROUP_EDITUSERMEMBERSHIP = 'ure-aal-quicklinkbuttongroup-editusermembership';
+    public final const MODULE_UREAAL_QUICKLINKBUTTONGROUP_VIEWALLMEMBERS = 'ure-aal-quicklinkbuttongroup-viewallmembers';
 
     public function getModulesToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_IndentMenus extends PoP_Module_Processor_IndentMenusBase
 {
-    public const MODULE_INDENTMENU = 'indentmenu';
+    public final const MODULE_INDENTMENU = 'indentmenu';
 
     public function getModulesToProcess(): array
     {

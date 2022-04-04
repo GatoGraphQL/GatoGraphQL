@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Posts\ModuleProcessors;
 
 class PostFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     /**
      * @return string[]

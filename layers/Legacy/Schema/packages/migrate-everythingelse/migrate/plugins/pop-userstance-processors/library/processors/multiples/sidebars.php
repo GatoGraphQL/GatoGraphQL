@@ -2,16 +2,16 @@
 
 class PoPVP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR = 'multiple-section-mystances-sidebar';
-    public const MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR = 'multiple-section-stances-authorrole-sidebar';
-    public const MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR = 'multiple-section-stances-generalstance-sidebar';
-    public const MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR = 'multiple-section-stances-sidebar';
-    public const MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR = 'multiple-section-stances-stance-sidebar';
-    public const MODULE_MULTIPLE_TAG_STANCES_SIDEBAR = 'multiple-tag-stances-sidebar';
-    public const MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR = 'multiple-tag-stances-stance-sidebar';
-    public const MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR = 'multiple-author-stances-sidebar';
-    public const MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR = 'multiple-author-stances-stance-sidebar';
-    public const MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR = 'multiple-single-stance-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR = 'multiple-section-mystances-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_STANCES_AUTHORROLE_SIDEBAR = 'multiple-section-stances-authorrole-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR = 'multiple-section-stances-generalstance-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR = 'multiple-section-stances-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR = 'multiple-section-stances-stance-sidebar';
+    public final const MODULE_MULTIPLE_TAG_STANCES_SIDEBAR = 'multiple-tag-stances-sidebar';
+    public final const MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR = 'multiple-tag-stances-stance-sidebar';
+    public final const MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR = 'multiple-author-stances-sidebar';
+    public final const MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR = 'multiple-author-stances-stance-sidebar';
+    public final const MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR = 'multiple-single-stance-sidebar';
 
     public function getModulesToProcess(): array
     {

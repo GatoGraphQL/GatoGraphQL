@@ -6,5 +6,5 @@ namespace PoPAPI\API\Constants;
 
 class Actions
 {
-    public const REMOVE_ENTRYMODULE_FROM_OUTPUT = 'no-entrymodule';
+    public final const REMOVE_ENTRYMODULE_FROM_OUTPUT = 'no-entrymodule';
 }

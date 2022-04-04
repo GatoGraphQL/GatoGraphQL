@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySectionBlocksBase
 {
-    public const MODULE_BLOCK_MYHIGHLIGHTS_TABLE_EDIT = 'block-myhighlights-table-edit';
-    public const MODULE_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW = 'block-myhighlights-scroll-fullviewpreview';
+    public final const MODULE_BLOCK_MYHIGHLIGHTS_TABLE_EDIT = 'block-myhighlights-table-edit';
+    public final const MODULE_BLOCK_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW = 'block-myhighlights-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

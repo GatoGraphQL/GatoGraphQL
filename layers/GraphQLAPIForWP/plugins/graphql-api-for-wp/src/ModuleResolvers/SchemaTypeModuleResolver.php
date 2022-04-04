@@ -32,41 +32,41 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     }
     use SchemaTypeModuleResolverTrait;
 
-    public const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
-    public const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
-    public const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
-    public const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
-    public const SCHEMA_COMMENTS = Plugin::NAMESPACE . '\schema-comments';
-    public const SCHEMA_USERS = Plugin::NAMESPACE . '\schema-users';
-    public const SCHEMA_USER_ROLES = Plugin::NAMESPACE . '\schema-user-roles';
-    public const SCHEMA_USER_AVATARS = Plugin::NAMESPACE . '\schema-user-avatars';
-    public const SCHEMA_PAGES = Plugin::NAMESPACE . '\schema-pages';
-    public const SCHEMA_MEDIA = Plugin::NAMESPACE . '\schema-media';
-    public const SCHEMA_TAGS = Plugin::NAMESPACE . '\schema-tags';
-    public const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
-    public const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
-    public const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
-    public const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
-    public const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
+    public final const SCHEMA_EXPOSE_ADMIN_DATA = Plugin::NAMESPACE . '\schema-expose-admin-data';
+    public final const SCHEMA_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-customposts';
+    public final const SCHEMA_GENERIC_CUSTOMPOSTS = Plugin::NAMESPACE . '\schema-generic-customposts';
+    public final const SCHEMA_POSTS = Plugin::NAMESPACE . '\schema-posts';
+    public final const SCHEMA_COMMENTS = Plugin::NAMESPACE . '\schema-comments';
+    public final const SCHEMA_USERS = Plugin::NAMESPACE . '\schema-users';
+    public final const SCHEMA_USER_ROLES = Plugin::NAMESPACE . '\schema-user-roles';
+    public final const SCHEMA_USER_AVATARS = Plugin::NAMESPACE . '\schema-user-avatars';
+    public final const SCHEMA_PAGES = Plugin::NAMESPACE . '\schema-pages';
+    public final const SCHEMA_MEDIA = Plugin::NAMESPACE . '\schema-media';
+    public final const SCHEMA_TAGS = Plugin::NAMESPACE . '\schema-tags';
+    public final const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
+    public final const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
+    public final const SCHEMA_POST_CATEGORIES = Plugin::NAMESPACE . '\schema-post-categories';
+    public final const SCHEMA_MENUS = Plugin::NAMESPACE . '\schema-menus';
+    public final const SCHEMA_SETTINGS = Plugin::NAMESPACE . '\schema-settings';
 
     /**
      * Setting options
      */
-    public const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
-    public const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
-    public const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
-    public const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
-    public const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
-    public const OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA = 'treat-comment-status-as-admin-data';
-    public const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
-    public const OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA = 'treat-user-role-as-admin-data';
-    public const OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA = 'treat-user-capability-as-admin-data';
+    public final const OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE = 'use-single-type-instead-of-union-type';
+    public final const OPTION_DEFAULT_AVATAR_SIZE = 'default-avatar-size';
+    public final const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
+    public final const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
+    public final const OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA = 'treat-custompost-status-as-admin-data';
+    public final const OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA = 'treat-comment-status-as-admin-data';
+    public final const OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA = 'treat-user-email-as-admin-data';
+    public final const OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA = 'treat-user-role-as-admin-data';
+    public final const OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA = 'treat-user-capability-as-admin-data';
 
     /**
      * Hooks
      */
-    public const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
-    public const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
+    public final const HOOK_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':generic-custompost-types';
+    public final const HOOK_REJECTED_GENERIC_CUSTOMPOST_TYPES = __CLASS__ . ':rejected-generic-custompost-types';
 
     /**
      * This comment used to be valid when using `autowire` functions

@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_UserAvatarLayouts extends PoP_Module_Processor_UserAvatarLayoutsBase
 {
-    public const MODULE_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
-    public const MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
+    public final const MODULE_LAYOUT_USERAVATAR_60 = 'layout-useravatar-60';
+    public final const MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE = 'layout-useravatar-60-responsive';
 
     public function getModulesToProcess(): array
     {

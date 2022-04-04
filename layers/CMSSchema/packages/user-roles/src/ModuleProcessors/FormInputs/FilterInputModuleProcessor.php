@@ -13,8 +13,8 @@ use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
-    public const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
+    public final const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
+    public final const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

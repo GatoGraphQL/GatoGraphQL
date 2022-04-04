@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_SidebarComponentWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_WIDGETWRAPPER_REFERENCES = 'widgetwrapper-references';
-    public const MODULE_WIDGETWRAPPER_REFERENCES_LINE = 'widgetwrapper-references-line';
-    public const MODULE_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
-    public const MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
+    public final const MODULE_WIDGETWRAPPER_REFERENCES = 'widgetwrapper-references';
+    public final const MODULE_WIDGETWRAPPER_REFERENCES_LINE = 'widgetwrapper-references-line';
+    public final const MODULE_WIDGETWRAPPER_AUTHOR_CONTACT = 'widgetwrapper-author-contact';
+    public final const MODULE_LAYOUTWRAPPER_COMMENTS_APPENDTOSCRIPT = 'layoutwrapper-comments-appendtoscript';
 
     public function getModulesToProcess(): array
     {

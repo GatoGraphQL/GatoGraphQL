@@ -2,27 +2,27 @@
 
 class PoP_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SECTION_CONTENT_SIDEBAR = 'multiple-section-content-sidebar';
-    public const MODULE_MULTIPLE_SECTION_POSTS_SIDEBAR = 'multiple-section-posts-sidebar';
-    public const MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR = 'multiple-section-categoryposts-sidebar';
-    public const MODULE_MULTIPLE_SECTION_USERS_SIDEBAR = 'multiple-section-users-sidebar';
-    public const MODULE_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR = 'multiple-section-trendingtags-sidebar';
-    public const MODULE_MULTIPLE_SECTION_TAGS_SIDEBAR = 'multiple-section-tags-sidebar';
-    public const MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR = 'multiple-singlepage-about-sidebar';
-    public const MODULE_MULTIPLE_SINGLEPAGE_SIDEBAR = 'multiple-singlepage-sidebar';
-    public const MODULE_MULTIPLE_SECTION_MYCONTENT_SIDEBAR = 'multiple-section-mycontent-sidebar';
-    public const MODULE_MULTIPLE_SECTION_MYPOSTS_SIDEBAR = 'multiple-section-myposts-sidebar';
-    public const MODULE_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR = 'multiple-section-mycategoryposts-sidebar';
-    public const MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR = 'multiple-tag-mainallcontent-sidebar';
-    public const MODULE_MULTIPLE_TAG_CONTENT_SIDEBAR = 'multiple-tag-content-sidebar';
-    public const MODULE_MULTIPLE_TAG_POSTS_SIDEBAR = 'multiple-tag-posts-sidebar';
-    public const MODULE_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR = 'multiple-tag-categoryposts-sidebar';
-    public const MODULE_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR = 'multiple-tag-subscribers-sidebar';
-    public const MODULE_MULTIPLE_SINGLE_POST_SIDEBAR = 'multiple-single-post-sidebar';
-    public const MODULE_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR = 'multiple-single-post-relatedcontentsidebar';
-    public const MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR = 'multiple-single-post-postauthorssidebar';
-    public const MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR = 'multiple-single-post-recommendedbysidebar';
-    public const MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR = 'multiple-homesection-content-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_CONTENT_SIDEBAR = 'multiple-section-content-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_POSTS_SIDEBAR = 'multiple-section-posts-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_CATEGORYPOSTS_SIDEBAR = 'multiple-section-categoryposts-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_USERS_SIDEBAR = 'multiple-section-users-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_TRENDINGTAGS_SIDEBAR = 'multiple-section-trendingtags-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_TAGS_SIDEBAR = 'multiple-section-tags-sidebar';
+    public final const MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR = 'multiple-singlepage-about-sidebar';
+    public final const MODULE_MULTIPLE_SINGLEPAGE_SIDEBAR = 'multiple-singlepage-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_MYCONTENT_SIDEBAR = 'multiple-section-mycontent-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_MYPOSTS_SIDEBAR = 'multiple-section-myposts-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_MYCATEGORYPOSTS_SIDEBAR = 'multiple-section-mycategoryposts-sidebar';
+    public final const MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR = 'multiple-tag-mainallcontent-sidebar';
+    public final const MODULE_MULTIPLE_TAG_CONTENT_SIDEBAR = 'multiple-tag-content-sidebar';
+    public final const MODULE_MULTIPLE_TAG_POSTS_SIDEBAR = 'multiple-tag-posts-sidebar';
+    public final const MODULE_MULTIPLE_TAG_CATEGORYPOSTS_SIDEBAR = 'multiple-tag-categoryposts-sidebar';
+    public final const MODULE_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR = 'multiple-tag-subscribers-sidebar';
+    public final const MODULE_MULTIPLE_SINGLE_POST_SIDEBAR = 'multiple-single-post-sidebar';
+    public final const MODULE_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR = 'multiple-single-post-relatedcontentsidebar';
+    public final const MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR = 'multiple-single-post-postauthorssidebar';
+    public final const MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR = 'multiple-single-post-recommendedbysidebar';
+    public final const MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR = 'multiple-homesection-content-sidebar';
 
     public function getModulesToProcess(): array
     {

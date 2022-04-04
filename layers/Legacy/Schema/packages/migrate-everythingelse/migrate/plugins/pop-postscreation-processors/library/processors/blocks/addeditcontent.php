@@ -2,8 +2,8 @@
 
 class PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public const MODULE_BLOCK_POST_UPDATE = 'block-post-update';
-    public const MODULE_BLOCK_POST_CREATE = 'block-post-create';
+    public final const MODULE_BLOCK_POST_UPDATE = 'block-post-update';
+    public final const MODULE_BLOCK_POST_CREATE = 'block-post-create';
 
     public function getModulesToProcess(): array
     {

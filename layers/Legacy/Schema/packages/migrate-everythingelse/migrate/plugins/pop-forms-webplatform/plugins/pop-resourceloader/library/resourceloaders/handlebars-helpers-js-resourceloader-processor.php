@@ -2,8 +2,8 @@
 
 class PoP_Forms_HandlebarsHelpersJSResourceLoaderProcessor extends PoP_HandlebarsHelpersJSResourceLoaderProcessor
 {
-    public const RESOURCE_HANDLEBARSHELPERS_FORMCOMPONENTS = 'helpers-handlebars-formcomponents';
-    public const RESOURCE_HANDLEBARSHELPERS_FORMATVALUE = 'handlebars-helpers-formatvalue';
+    public final const RESOURCE_HANDLEBARSHELPERS_FORMCOMPONENTS = 'helpers-handlebars-formcomponents';
+    public final const RESOURCE_HANDLEBARSHELPERS_FORMATVALUE = 'handlebars-helpers-formatvalue';
 
     public function getResourcesToProcess()
     {

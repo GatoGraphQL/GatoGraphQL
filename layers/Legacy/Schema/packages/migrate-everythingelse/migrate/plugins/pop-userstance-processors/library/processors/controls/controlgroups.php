@@ -3,10 +3,10 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class UserStance_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_CONTROLGROUP_STANCESTATS = 'controlgroup-stancestats';
-    public const MODULE_CONTROLGROUP_MYSTANCELIST = 'controlgroup-mystancelist';
-    public const MODULE_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION = 'userstance-controlgroup-userpostinteraction';
-    public const MODULE_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION = 'userstance-controlgroup-userfullviewinteraction';
+    public final const MODULE_CONTROLGROUP_STANCESTATS = 'controlgroup-stancestats';
+    public final const MODULE_CONTROLGROUP_MYSTANCELIST = 'controlgroup-mystancelist';
+    public final const MODULE_USERSTANCE_CONTROLGROUP_USERPOSTINTERACTION = 'userstance-controlgroup-userpostinteraction';
+    public final const MODULE_USERSTANCE_CONTROLGROUP_USERFULLVIEWINTERACTION = 'userstance-controlgroup-userfullviewinteraction';
 
     public function getModulesToProcess(): array
     {

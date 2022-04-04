@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_BUTTONINNER_HIGHLIGHT_CREATE = 'buttoninner-highlight-create';
-    public const MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN = 'buttoninner-highlight-createbtn';
+    public final const MODULE_BUTTONINNER_HIGHLIGHT_CREATE = 'buttoninner-highlight-create';
+    public final const MODULE_BUTTONINNER_HIGHLIGHT_CREATEBTN = 'buttoninner-highlight-createbtn';
 
     public function getModulesToProcess(): array
     {

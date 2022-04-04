@@ -2,9 +2,9 @@
 
 class PoP_BootstrapWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAP = 'bootstrap';
-    public const RESOURCE_CUSTOMBOOTSTRAP = 'custombootstrap';
-    public const RESOURCE_MODALS = 'modals';
+    public final const RESOURCE_BOOTSTRAP = 'bootstrap';
+    public final const RESOURCE_CUSTOMBOOTSTRAP = 'custombootstrap';
+    public final const RESOURCE_MODALS = 'modals';
 
     public function getResourcesToProcess()
     {

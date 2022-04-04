@@ -5,7 +5,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class Wassup_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
+    public final const MODULE_BUTTONWRAPPER_HIGHLIGHTVIEW = 'buttonwrapper-highlightview';
 
     public function getModulesToProcess(): array
     {

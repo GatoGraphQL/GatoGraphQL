@@ -2,9 +2,9 @@
 
 class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES = 'layout-feedbackmessagealert-updatemycommunities';
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS = 'layout-feedbackmessagealert-invitemembers';
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP = 'layout-feedbackmessagealert-editmembership';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES = 'layout-feedbackmessagealert-updatemycommunities';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS = 'layout-feedbackmessagealert-invitemembers';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP = 'layout-feedbackmessagealert-editmembership';
 
     public function getModulesToProcess(): array
     {

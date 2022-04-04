@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_PopoverLayoutsBase
 {
-    public const MODULE_LAYOUT_POPOVER_EVENT = 'layout-popover-event';
+    public final const MODULE_LAYOUT_POPOVER_EVENT = 'layout-popover-event';
 
     public function getModulesToProcess(): array
     {

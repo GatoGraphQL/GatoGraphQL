@@ -2,7 +2,7 @@
 
 class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelFormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS = 'forminputgroup-emaildigests-dailynotifications';
+    public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS = 'forminputgroup-emaildigests-dailynotifications';
 
     public function getModulesToProcess(): array
     {

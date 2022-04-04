@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TagTabPanelSectionBlocks extends PoP_Module_Processor_TagTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_TAGCONTENT = 'block-tabpanel-tagcontent';
-    public const MODULE_BLOCK_TABPANEL_TAGPOSTS = 'block-tabpanel-tagposts';
-    public const MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS = 'block-tabpanel-tagsubscribers';
+    public final const MODULE_BLOCK_TABPANEL_TAGCONTENT = 'block-tabpanel-tagcontent';
+    public final const MODULE_BLOCK_TABPANEL_TAGPOSTS = 'block-tabpanel-tagposts';
+    public final const MODULE_BLOCK_TABPANEL_TAGSUBSCRIBERS = 'block-tabpanel-tagsubscribers';
 
     public function getModulesToProcess(): array
     {

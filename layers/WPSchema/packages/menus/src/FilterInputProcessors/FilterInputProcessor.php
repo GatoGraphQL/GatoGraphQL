@@ -8,7 +8,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_LOCATIONS = 'filterinput-locations';
+    public final const FILTERINPUT_LOCATIONS = 'filterinput-locations';
 
     public function getFilterInputsToProcess(): array
     {

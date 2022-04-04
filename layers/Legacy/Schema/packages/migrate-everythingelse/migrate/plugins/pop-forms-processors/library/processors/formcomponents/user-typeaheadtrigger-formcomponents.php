@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS = 'formcomponent-selectabletypeaheadtrigger-authors';
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS = 'formcomponent-selectabletypeaheadtrigger-coauthors';
-    public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES = 'filtercomponent-selectableprofiles';
-    public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS = 'filtercomponent-communityusers';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS = 'formcomponent-selectabletypeaheadtrigger-authors';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS = 'formcomponent-selectabletypeaheadtrigger-coauthors';
+    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES = 'filtercomponent-selectableprofiles';
+    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITYUSERS = 'filtercomponent-communityusers';
 
     public function getModulesToProcess(): array
     {

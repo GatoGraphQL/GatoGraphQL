@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_PostCardLayouts extends PoP_Module_Processor_PostCardLayoutsBase
 {
-    public const MODULE_LAYOUTPOST_CARD = 'layoutpost-card';
+    public final const MODULE_LAYOUTPOST_CARD = 'layoutpost-card';
 
     public function getModulesToProcess(): array
     {

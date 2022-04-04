@@ -2,11 +2,11 @@
 
 class PoP_UserCommunities_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW = 'scrollinner-mymembers-fullviewpreview';
-    public const MODULE_SCROLLINNER_COMMUNITIES_DETAILS = 'scrollinner-communities-details';
-    public const MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW = 'scrollinner-communities-fullview';
-    public const MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL = 'scrollinner-communities-thumbnail';
-    public const MODULE_SCROLLINNER_COMMUNITIES_LIST = 'scrollinner-communities-list';
+    public final const MODULE_SCROLLINNER_MYMEMBERS_FULLVIEWPREVIEW = 'scrollinner-mymembers-fullviewpreview';
+    public final const MODULE_SCROLLINNER_COMMUNITIES_DETAILS = 'scrollinner-communities-details';
+    public final const MODULE_SCROLLINNER_COMMUNITIES_FULLVIEW = 'scrollinner-communities-fullview';
+    public final const MODULE_SCROLLINNER_COMMUNITIES_THUMBNAIL = 'scrollinner-communities-thumbnail';
+    public final const MODULE_SCROLLINNER_COMMUNITIES_LIST = 'scrollinner-communities-list';
 
     public function getModulesToProcess(): array
     {

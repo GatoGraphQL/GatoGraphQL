@@ -2,7 +2,7 @@
 
 class EM_PoPProcessors_QTX_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_FULLCALENDARLOCALE = 'external-fullcalendar-locale';
+    public final const RESOURCE_EXTERNAL_FULLCALENDARLOCALE = 'external-fullcalendar-locale';
 
     public function getResourcesToProcess()
     {

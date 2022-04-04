@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA = 'viewcomponent-buttoninner-embed-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-embed-socialmedia-previewdropdown';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA = 'viewcomponent-buttoninner-api-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-api-socialmedia-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA = 'viewcomponent-buttoninner-embed-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-embed-socialmedia-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA = 'viewcomponent-buttoninner-api-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-api-socialmedia-previewdropdown';
 
     public function getModulesToProcess(): array
     {

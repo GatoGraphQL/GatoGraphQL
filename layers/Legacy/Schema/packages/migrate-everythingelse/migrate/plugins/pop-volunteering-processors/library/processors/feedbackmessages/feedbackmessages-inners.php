@@ -2,7 +2,7 @@
 
 class PoP_Volunteering_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public const MODULE_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
+    public final const MODULE_FEEDBACKMESSAGEINNER_VOLUNTEER = 'feedbackmessageinner-volunteer';
 
     public function getModulesToProcess(): array
     {

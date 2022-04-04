@@ -2,18 +2,18 @@
 
 class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR = 'block-organizations-scroll-navigator';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR = 'block-individuals-scroll-navigator';
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS = 'block-organizations-scroll-addons';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_ADDONS = 'block-individuals-scroll-addons';
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS = 'block-organizations-scroll-details';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_DETAILS = 'block-individuals-scroll-details';
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW = 'block-organizations-scroll-fullview';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW = 'block-individuals-scroll-fullview';
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL = 'block-organizations-scroll-thumbnail';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL = 'block-individuals-scroll-thumbnail';
-    public const MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
-    public const MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR = 'block-organizations-scroll-navigator';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR = 'block-individuals-scroll-navigator';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS = 'block-organizations-scroll-addons';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_ADDONS = 'block-individuals-scroll-addons';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS = 'block-organizations-scroll-details';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_DETAILS = 'block-individuals-scroll-details';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW = 'block-organizations-scroll-fullview';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW = 'block-individuals-scroll-fullview';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL = 'block-organizations-scroll-thumbnail';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_THUMBNAIL = 'block-individuals-scroll-thumbnail';
+    public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
+    public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
 
     public function getModulesToProcess(): array
     {

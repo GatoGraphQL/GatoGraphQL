@@ -2,7 +2,7 @@
 
 class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_LOCATIONPOSTLINK = 'form-locationpostlink';
+    public final const MODULE_FORM_LOCATIONPOSTLINK = 'form-locationpostlink';
 
     public function getModulesToProcess(): array
     {

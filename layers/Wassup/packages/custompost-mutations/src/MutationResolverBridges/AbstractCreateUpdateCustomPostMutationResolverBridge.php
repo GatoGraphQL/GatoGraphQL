@@ -16,7 +16,7 @@ use PoPSitesWassup\CustomPostMutations\MutationResolvers\MutationInputProperties
 
 abstract class AbstractCreateUpdateCustomPostMutationResolverBridge extends AbstractCRUDComponentMutationResolverBridge
 {
-    public const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
+    public final const HOOK_FORM_DATA_CREATE_OR_UPDATE = __CLASS__ . ':form-data-create-or-update';
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 

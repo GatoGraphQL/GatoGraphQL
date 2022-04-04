@@ -2,26 +2,26 @@
 
 class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00 = 'tabpanel-nosearchcategoryposts00';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS01 = 'tabpanel-nosearchcategoryposts01';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS02 = 'tabpanel-nosearchcategoryposts02';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS03 = 'tabpanel-nosearchcategoryposts03';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS04 = 'tabpanel-nosearchcategoryposts04';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS05 = 'tabpanel-nosearchcategoryposts05';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS06 = 'tabpanel-nosearchcategoryposts06';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS07 = 'tabpanel-nosearchcategoryposts07';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS08 = 'tabpanel-nosearchcategoryposts08';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS09 = 'tabpanel-nosearchcategoryposts09';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS10 = 'tabpanel-nosearchcategoryposts10';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS11 = 'tabpanel-nosearchcategoryposts11';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS12 = 'tabpanel-nosearchcategoryposts12';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS13 = 'tabpanel-nosearchcategoryposts13';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS14 = 'tabpanel-nosearchcategoryposts14';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS15 = 'tabpanel-nosearchcategoryposts15';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS16 = 'tabpanel-nosearchcategoryposts16';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS17 = 'tabpanel-nosearchcategoryposts17';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'tabpanel-nosearchcategoryposts18';
-    public const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'tabpanel-nosearchcategoryposts19';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00 = 'tabpanel-nosearchcategoryposts00';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS01 = 'tabpanel-nosearchcategoryposts01';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS02 = 'tabpanel-nosearchcategoryposts02';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS03 = 'tabpanel-nosearchcategoryposts03';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS04 = 'tabpanel-nosearchcategoryposts04';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS05 = 'tabpanel-nosearchcategoryposts05';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS06 = 'tabpanel-nosearchcategoryposts06';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS07 = 'tabpanel-nosearchcategoryposts07';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS08 = 'tabpanel-nosearchcategoryposts08';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS09 = 'tabpanel-nosearchcategoryposts09';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS10 = 'tabpanel-nosearchcategoryposts10';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS11 = 'tabpanel-nosearchcategoryposts11';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS12 = 'tabpanel-nosearchcategoryposts12';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS13 = 'tabpanel-nosearchcategoryposts13';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS14 = 'tabpanel-nosearchcategoryposts14';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS15 = 'tabpanel-nosearchcategoryposts15';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS16 = 'tabpanel-nosearchcategoryposts16';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS17 = 'tabpanel-nosearchcategoryposts17';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'tabpanel-nosearchcategoryposts18';
+    public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'tabpanel-nosearchcategoryposts19';
 
     public function getModulesToProcess(): array
     {

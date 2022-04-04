@@ -6,10 +6,10 @@ namespace PoPAPI\API\Schema;
 
 class TypeKinds
 {
-    public const OBJECT = 'Object';
-    public const INTERFACE = 'Interface';
-    public const UNION = 'Union';
-    public const SCALAR = 'Scalar';
-    public const ENUM = 'Enum';
-    public const INPUT_OBJECT = 'InputObject';
+    public final const OBJECT = 'Object';
+    public final const INTERFACE = 'Interface';
+    public final const UNION = 'Union';
+    public final const SCALAR = 'Scalar';
+    public final const ENUM = 'Enum';
+    public final const INPUT_OBJECT = 'InputObject';
 }

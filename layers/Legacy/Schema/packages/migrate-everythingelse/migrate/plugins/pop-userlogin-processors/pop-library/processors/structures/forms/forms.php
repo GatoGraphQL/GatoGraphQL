@@ -5,11 +5,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_LOGIN = 'form-login';
-    public const MODULE_FORM_LOSTPWD = 'form-lostpwd';
-    public const MODULE_FORM_LOSTPWDRESET = 'form-lostpwdreset';
-    public const MODULE_FORM_LOGOUT = 'form-logout';
-    public const MODULE_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
+    public final const MODULE_FORM_LOGIN = 'form-login';
+    public final const MODULE_FORM_LOSTPWD = 'form-lostpwd';
+    public final const MODULE_FORM_LOSTPWDRESET = 'form-lostpwdreset';
+    public final const MODULE_FORM_LOGOUT = 'form-logout';
+    public final const MODULE_FORM_USER_CHANGEPASSWORD = 'form-user-changepwd';
 
     public function getModulesToProcess(): array
     {

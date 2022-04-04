@@ -11,13 +11,13 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
-    public const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
-    public const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
-    public const MODULE_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
-    public const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
+    public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
+    public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';
+    public final const MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING = 'filterinputcontainer-date-as-string';
+    public final const MODULE_FILTERINPUTCONTAINER_GMTDATE = 'filterinputcontainer-utcdate';
+    public final const MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING = 'filterinputcontainer-utcdate-as-string';
 
     private ?CMSServiceInterface $cmsService = null;
 

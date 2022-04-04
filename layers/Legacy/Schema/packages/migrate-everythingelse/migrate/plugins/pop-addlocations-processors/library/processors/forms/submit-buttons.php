@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public const MODULE_EM_SUBMITBUTTON_ADDLOCATION = 'em-submitbutton-addlocation';
+    public final const MODULE_EM_SUBMITBUTTON_ADDLOCATION = 'em-submitbutton-addlocation';
 
     public function getModulesToProcess(): array
     {

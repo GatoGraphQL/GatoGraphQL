@@ -2,7 +2,7 @@
 
 class GetPoPDemo_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_GETPOPDEMO_GROUP_HOMETOP = 'group-getpopdemo-hometop';
+    public final const MODULE_GETPOPDEMO_GROUP_HOMETOP = 'group-getpopdemo-hometop';
 
     public function getModulesToProcess(): array
     {

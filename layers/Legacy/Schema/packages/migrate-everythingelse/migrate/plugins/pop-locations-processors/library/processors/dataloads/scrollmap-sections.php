@@ -12,18 +12,18 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
 {
     use PastEventModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP = 'dataload-searchusers-scrollmap';
-    public const MODULE_DATALOAD_USERS_SCROLLMAP = 'dataload-users-scrollmap';
-    public const MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP = 'dataload-users-horizontalscrollmap';
-    public const MODULE_DATALOAD_EVENTS_SCROLLMAP = 'dataload-events-scrollmap';
-    public const MODULE_DATALOAD_PASTEVENTS_SCROLLMAP = 'dataload-pastevents-scrollmap';
-    public const MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP = 'dataload-events-horizontalscrollmap';
-    public const MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP = 'dataload-authorevents-scrollmap';
-    public const MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP = 'dataload-authorpastevents-scrollmap';
-    public const MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'dataload-authorevents-horizontalscrollmap';
-    public const MODULE_DATALOAD_TAGEVENTS_SCROLLMAP = 'dataload-tagevents-scrollmap';
-    public const MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP = 'dataload-tagpastevents-scrollmap';
-    public const MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP = 'dataload-tagevents-horizontalscrollmap';
+    public final const MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP = 'dataload-searchusers-scrollmap';
+    public final const MODULE_DATALOAD_USERS_SCROLLMAP = 'dataload-users-scrollmap';
+    public final const MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP = 'dataload-users-horizontalscrollmap';
+    public final const MODULE_DATALOAD_EVENTS_SCROLLMAP = 'dataload-events-scrollmap';
+    public final const MODULE_DATALOAD_PASTEVENTS_SCROLLMAP = 'dataload-pastevents-scrollmap';
+    public final const MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP = 'dataload-events-horizontalscrollmap';
+    public final const MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP = 'dataload-authorevents-scrollmap';
+    public final const MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP = 'dataload-authorpastevents-scrollmap';
+    public final const MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'dataload-authorevents-horizontalscrollmap';
+    public final const MODULE_DATALOAD_TAGEVENTS_SCROLLMAP = 'dataload-tagevents-scrollmap';
+    public final const MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP = 'dataload-tagpastevents-scrollmap';
+    public final const MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP = 'dataload-tagevents-horizontalscrollmap';
 
     public function getModulesToProcess(): array
     {

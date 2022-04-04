@@ -3,13 +3,13 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGET_POST_AUTHORS = 'widget-post-authors';
-    public const MODULE_WIDGETCOMPACT_POST_AUTHORS = 'widgetcompact-post-authors';
-    public const MODULE_WIDGETCOMPACT_AUTHORDESCRIPTION = 'widgetcompact-authordescription';
-    public const MODULE_WIDGET_AUTHOR_CONTACT = 'widget-author-contact';
-    public const MODULE_WIDGET_REFERENCES = 'widget-references';
-    public const MODULE_WIDGET_REFERENCES_LINE = 'widget-references-line';
-    public const MODULE_WIDGET_HIGHLIGHTEDPOST_LINE = 'widget-highlightedpost-line';
+    public final const MODULE_WIDGET_POST_AUTHORS = 'widget-post-authors';
+    public final const MODULE_WIDGETCOMPACT_POST_AUTHORS = 'widgetcompact-post-authors';
+    public final const MODULE_WIDGETCOMPACT_AUTHORDESCRIPTION = 'widgetcompact-authordescription';
+    public final const MODULE_WIDGET_AUTHOR_CONTACT = 'widget-author-contact';
+    public final const MODULE_WIDGET_REFERENCES = 'widget-references';
+    public final const MODULE_WIDGET_REFERENCES_LINE = 'widget-references-line';
+    public final const MODULE_WIDGET_HIGHLIGHTEDPOST_LINE = 'widget-highlightedpost-line';
 
     public function getModulesToProcess(): array
     {

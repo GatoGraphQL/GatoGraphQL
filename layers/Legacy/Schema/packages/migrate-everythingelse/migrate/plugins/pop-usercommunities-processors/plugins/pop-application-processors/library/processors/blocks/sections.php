@@ -2,15 +2,15 @@
 
 class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS = 'block-communities-scroll-details';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS = 'block-authormembers-scroll-details';
-    public const MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW = 'block-communities-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW = 'block-authormembers-scroll-fullview';
-    public const MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL = 'block-communities-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL = 'block-authormembers-scroll-thumbnail';
-    public const MODULE_BLOCK_COMMUNITIES_SCROLL_LIST = 'block-communities-scroll-list';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
+    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS = 'block-communities-scroll-details';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS = 'block-authormembers-scroll-details';
+    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW = 'block-communities-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW = 'block-authormembers-scroll-fullview';
+    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL = 'block-communities-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL = 'block-authormembers-scroll-thumbnail';
+    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_LIST = 'block-communities-scroll-list';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
 
     public function getModulesToProcess(): array
     {

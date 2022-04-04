@@ -59,10 +59,10 @@ class Engine implements EngineInterface
 {
     use BasicServiceTrait;
 
-    public const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
-    public const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
-    public const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
-    public const CACHETYPE_PROPS = 'props';
+    public final const CACHETYPE_IMMUTABLEDATASETSETTINGS = 'static-datasetsettings';
+    public final const CACHETYPE_STATICDATAPROPERTIES = 'static-data-properties';
+    public final const CACHETYPE_STATEFULDATAPROPERTIES = 'stateful-data-properties';
+    public final const CACHETYPE_PROPS = 'props';
 
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;

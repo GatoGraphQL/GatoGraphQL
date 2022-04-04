@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_Events_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_CALENDAR = 'css-em-calendar';
+    public final const RESOURCE_CSS_CALENDAR = 'css-em-calendar';
 
     public function getResourcesToProcess()
     {

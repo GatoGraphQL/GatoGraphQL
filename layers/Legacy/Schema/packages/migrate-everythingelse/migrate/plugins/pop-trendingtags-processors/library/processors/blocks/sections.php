@@ -2,8 +2,8 @@
 
 class PoP_TrendingTags_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS = 'block-trendingtags-scroll-details';
-    public const MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST = 'block-trendingtags-scroll-list';
+    public final const MODULE_BLOCK_TRENDINGTAGS_SCROLL_DETAILS = 'block-trendingtags-scroll-details';
+    public final const MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST = 'block-trendingtags-scroll-list';
 
     public function getModulesToProcess(): array
     {

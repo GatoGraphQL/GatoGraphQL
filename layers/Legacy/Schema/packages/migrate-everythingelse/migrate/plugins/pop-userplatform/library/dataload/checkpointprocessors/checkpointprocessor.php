@@ -4,8 +4,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoPCore_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
-    public const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';
+    public final const CHECKPOINT_PROFILEACCESS = 'checkpoint-profileaccess';
+    public final const CHECKPOINT_PROFILEACCESS_SUBMIT = 'checkpoint-profileaccess-submit';
 
     public function getCheckpointsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_SettingsFeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public const MODULE_FEEDBACKMESSAGEINNER_SETTINGS = 'feedbackmessageinner-settings';
+    public final const MODULE_FEEDBACKMESSAGEINNER_SETTINGS = 'feedbackmessageinner-settings';
 
     public function getModulesToProcess(): array
     {

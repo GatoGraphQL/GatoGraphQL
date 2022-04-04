@@ -2,7 +2,7 @@
 
 class PoP_Share_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL = 'layout-feedbackmessagealert-sharebyemail';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_SHAREBYEMAIL = 'layout-feedbackmessagealert-sharebyemail';
 
     public function getModulesToProcess(): array
     {

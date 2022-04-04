@@ -4,12 +4,12 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHORCONTENT = 'block-tabpanel-authorcontent';
-    public const MODULE_BLOCK_TABPANEL_AUTHORPOSTS = 'block-tabpanel-authorposts';
-    public const MODULE_BLOCK_TABPANEL_AUTHORFOLLOWERS = 'block-tabpanel-authorfollowers';
-    public const MODULE_BLOCK_TABPANEL_AUTHORFOLLOWINGUSERS = 'block-tabpanel-authorfollowingusers';
-    public const MODULE_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'block-tabpanel-authorsubscribedtotags';
-    public const MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'block-tabpanel-authorrecommendedposts';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCONTENT = 'block-tabpanel-authorcontent';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORPOSTS = 'block-tabpanel-authorposts';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORFOLLOWERS = 'block-tabpanel-authorfollowers';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORFOLLOWINGUSERS = 'block-tabpanel-authorfollowingusers';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'block-tabpanel-authorsubscribedtotags';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'block-tabpanel-authorrecommendedposts';
 
     public function getModulesToProcess(): array
     {

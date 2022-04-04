@@ -2,7 +2,7 @@
 
 class PoP_TinyMCE_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_EDITOR = 'editor';
+    public final const RESOURCE_EDITOR = 'editor';
 
     public function getResourcesToProcess()
     {

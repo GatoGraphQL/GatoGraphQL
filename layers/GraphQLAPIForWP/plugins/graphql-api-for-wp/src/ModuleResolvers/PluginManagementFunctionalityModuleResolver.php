@@ -13,13 +13,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
 
-    public const GENERAL = Plugin::NAMESPACE . '\general';
+    public final const GENERAL = Plugin::NAMESPACE . '\general';
 
     /**
      * Setting options
      */
-    public const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
-    public const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
+    public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
+    public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

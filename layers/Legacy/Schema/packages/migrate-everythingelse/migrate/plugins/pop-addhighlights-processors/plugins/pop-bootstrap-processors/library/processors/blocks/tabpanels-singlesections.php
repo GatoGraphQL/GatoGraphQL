@@ -6,7 +6,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT = 'block-tabpanel-singlerelatedhighlightcontent';
+    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT = 'block-tabpanel-singlerelatedhighlightcontent';
 
     public function getModulesToProcess(): array
     {

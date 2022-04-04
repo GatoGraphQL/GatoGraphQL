@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_QT_Module_Processor_SelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public const MODULE_QT_FORMINPUT_LANGUAGE = 'qt-forminput-language';
+    public final const MODULE_QT_FORMINPUT_LANGUAGE = 'qt-forminput-language';
 
     public function getModulesToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_UserAvatarProcessors_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_FILEUPLOAD = 'css-external-fileupload';
+    public final const RESOURCE_EXTERNAL_CSS_FILEUPLOAD = 'css-external-fileupload';
 
     public function getResourcesToProcess()
     {

@@ -8,7 +8,7 @@ use PoP\Root\App;
 
 class CustomPostTypeAPI extends AbstractCustomPostTypeAPI
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
+    public final const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
      * @param array<string, mixed> $query

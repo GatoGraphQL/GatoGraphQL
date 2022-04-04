@@ -28,9 +28,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     use ModulePathProcessorTrait;
     use BasicServiceTrait;
 
-    public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
-    public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
-    public const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
+    public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
+    public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
+    public final const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
 
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
     protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';

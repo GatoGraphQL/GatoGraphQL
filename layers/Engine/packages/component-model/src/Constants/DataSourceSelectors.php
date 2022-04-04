@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\Constants;
 
 class DataSourceSelectors
 {
-    public const ONLYMODEL = 'onlymodel';
-    public const MODELANDREQUEST = 'modelandrequest';
+    public final const ONLYMODEL = 'onlymodel';
+    public final const MODELANDREQUEST = 'modelandrequest';
 }

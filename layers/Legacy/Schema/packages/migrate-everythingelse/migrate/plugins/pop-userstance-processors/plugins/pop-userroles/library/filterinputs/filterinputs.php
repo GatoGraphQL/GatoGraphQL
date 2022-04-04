@@ -3,7 +3,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_UserStanceUserRolesFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
+    public final const FILTERINPUT_AUTHORROLE_MULTISELECT = 'filterinput-multiselect-authorrole';
 
     public function getFilterInputsToProcess(): array
     {

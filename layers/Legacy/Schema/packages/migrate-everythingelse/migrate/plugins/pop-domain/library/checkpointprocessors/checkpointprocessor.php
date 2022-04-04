@@ -4,7 +4,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoP_Domain_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_DOMAINVALID = 'checkpoint-domainvalid';
+    public final const CHECKPOINT_DOMAINVALID = 'checkpoint-domainvalid';
 
     public function getCheckpointsToProcess(): array
     {

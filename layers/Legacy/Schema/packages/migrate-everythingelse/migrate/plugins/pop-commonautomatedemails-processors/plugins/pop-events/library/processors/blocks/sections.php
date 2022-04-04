@@ -6,11 +6,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAutomatedEmails_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS = 'block-automatedemails-events-scroll-details';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW = 'block-automatedemails-events-scroll-simpleview';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW = 'block-automatedemails-events-scroll-fullview';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'block-automatedemails-events-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'block-automatedemails-events-scroll-list';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS = 'block-automatedemails-events-scroll-details';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW = 'block-automatedemails-events-scroll-simpleview';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW = 'block-automatedemails-events-scroll-fullview';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'block-automatedemails-events-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'block-automatedemails-events-scroll-list';
 
     public function getModulesToProcess(): array
     {

@@ -2,9 +2,9 @@
 
 class PoP_LocationPosts_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public const MODULE_FILTER_AUTHORLOCATIONPOSTS = 'filter-authorlocationposts';
-    public const MODULE_FILTER_TAGLOCATIONPOSTS = 'filter-taglocationposts';
-    public const MODULE_FILTER_LOCATIONPOSTS = 'filter-locationposts';
+    public final const MODULE_FILTER_AUTHORLOCATIONPOSTS = 'filter-authorlocationposts';
+    public final const MODULE_FILTER_TAGLOCATIONPOSTS = 'filter-taglocationposts';
+    public final const MODULE_FILTER_LOCATIONPOSTS = 'filter-locationposts';
 
     public function getModulesToProcess(): array
     {

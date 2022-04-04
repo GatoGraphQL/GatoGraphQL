@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_LAYOUT_USERSIDEBAR_VERTICAL = 'layout-usersidebar-vertical';
-    public const MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL = 'layout-usersidebar-horizontal';
-    public const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL = 'layout-usersidebar-compacthorizontal';
+    public final const MODULE_LAYOUT_USERSIDEBAR_VERTICAL = 'layout-usersidebar-vertical';
+    public final const MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL = 'layout-usersidebar-horizontal';
+    public final const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL = 'layout-usersidebar-compacthorizontal';
 
     public function getModulesToProcess(): array
     {

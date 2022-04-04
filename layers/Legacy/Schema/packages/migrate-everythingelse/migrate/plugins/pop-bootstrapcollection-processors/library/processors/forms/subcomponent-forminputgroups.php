@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Core_Bootstrap_Module_Processor_SubcomponentFormInputGroups extends PoP_Module_Processor_SubcomponentFormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER = 'forminputgroup-daterangetimepicker';
-    public const MODULE_FILTERINPUTGROUP_POSTDATES = 'filterinputgroup-date';
+    public final const MODULE_FORMINPUTGROUP_DATERANGETIMEPICKER = 'forminputgroup-daterangetimepicker';
+    public final const MODULE_FILTERINPUTGROUP_POSTDATES = 'filterinputgroup-date';
 
     public function getModulesToProcess(): array
     {

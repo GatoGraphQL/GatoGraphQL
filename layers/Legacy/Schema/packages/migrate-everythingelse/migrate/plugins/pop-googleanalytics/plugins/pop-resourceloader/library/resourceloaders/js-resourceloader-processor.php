@@ -2,7 +2,7 @@
 
 class PoP_GoogleAnalytics_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_GAFUNCTIONS = 'ga-functions';
+    public final const RESOURCE_GAFUNCTIONS = 'ga-functions';
 
     public function getResourcesToProcess()
     {

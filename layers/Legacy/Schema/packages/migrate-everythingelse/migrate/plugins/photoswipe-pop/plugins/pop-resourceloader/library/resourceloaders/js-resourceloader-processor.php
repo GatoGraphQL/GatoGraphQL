@@ -2,7 +2,7 @@
 
 class PhotoSwipe_PoP_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_PHOTOSWIPE = 'photoswipe';
+    public final const RESOURCE_PHOTOSWIPE = 'photoswipe';
 
     public function getResourcesToProcess()
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_TagMentionComponentLayouts extends PoP_Module_Processor_TagMentionComponentLayoutsBase
 {
-    public const MODULE_LAYOUTTAG_MENTION_COMPONENT = 'layouttag-mention-component';
+    public final const MODULE_LAYOUTTAG_MENTION_COMPONENT = 'layouttag-mention-component';
 
     public function getModulesToProcess(): array
     {

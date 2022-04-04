@@ -22,10 +22,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     use ModuleResolverTrait;
     use SchemaConfigurationFunctionalityModuleResolverTrait;
 
-    public const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
-    public const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
-    public const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
-    public const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
+    public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
+    public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
+    public final const PUBLIC_PRIVATE_SCHEMA = Plugin::NAMESPACE . '\public-private-schema';
+    public final const NESTED_MUTATIONS = Plugin::NAMESPACE . '\nested-mutations';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -50,8 +50,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public const OPTION_MODE = 'mode';
-    public const OPTION_ENABLE_GRANULAR = 'granular';
+    public final const OPTION_MODE = 'mode';
+    public final const OPTION_ENABLE_GRANULAR = 'granular';
 
     /**
      * @return string[]

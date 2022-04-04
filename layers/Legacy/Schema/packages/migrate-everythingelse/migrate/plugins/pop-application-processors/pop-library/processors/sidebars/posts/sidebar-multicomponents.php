@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE = 'sidebarmulticomponent-featuredimage';
-    public const MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER = 'sidebarmulticomponent-featuredimagevolunteer';
-    public const MODULE_SIDEBARMULTICOMPONENT_GENERIC = 'sidebarmulticomponent-generic';
-    public const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT = 'sidebarmulticomponent-highlightleft';
-    public const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
-    public const MODULE_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
+    public final const MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE = 'sidebarmulticomponent-featuredimage';
+    public final const MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGEVOLUNTEER = 'sidebarmulticomponent-featuredimagevolunteer';
+    public final const MODULE_SIDEBARMULTICOMPONENT_GENERIC = 'sidebarmulticomponent-generic';
+    public final const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTLEFT = 'sidebarmulticomponent-highlightleft';
+    public final const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
+    public final const MODULE_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
 
     public function getModulesToProcess(): array
     {

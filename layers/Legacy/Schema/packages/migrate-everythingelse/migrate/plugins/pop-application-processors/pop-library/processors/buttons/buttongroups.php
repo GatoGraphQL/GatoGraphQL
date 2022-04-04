@@ -2,18 +2,18 @@
 
 class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
-    public const MODULE_BUTTONGROUP_SECTION = 'buttongroup-section';
-    public const MODULE_BUTTONGROUP_SECTIONWITHMAP = 'buttongroup-sectionwithmap';
-    public const MODULE_BUTTONGROUP_TAGSECTION = 'buttongroup-tagsection';
-    public const MODULE_BUTTONGROUP_TAGSECTIONWITHMAP = 'buttongroup-tagsectionwithmap';
-    public const MODULE_BUTTONGROUP_USERS = 'buttongroup-users';
-    public const MODULE_BUTTONGROUP_MYCONTENT = 'buttongroup-mycontent';
-    public const MODULE_BUTTONGROUP_HOMESECTION = 'buttongroup-homesection';
-    public const MODULE_BUTTONGROUP_AUTHORSECTION = 'buttongroup-authorsection';
-    public const MODULE_BUTTONGROUP_AUTHORSECTIONWITHMAP = 'buttongroup-authorsectionwithmap';
-    public const MODULE_BUTTONGROUP_AUTHORUSERS = 'buttongroup-authorusers';
-    public const MODULE_BUTTONGROUP_TAGS = 'buttongroup-tags';
-    public const MODULE_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
+    public final const MODULE_BUTTONGROUP_SECTION = 'buttongroup-section';
+    public final const MODULE_BUTTONGROUP_SECTIONWITHMAP = 'buttongroup-sectionwithmap';
+    public final const MODULE_BUTTONGROUP_TAGSECTION = 'buttongroup-tagsection';
+    public final const MODULE_BUTTONGROUP_TAGSECTIONWITHMAP = 'buttongroup-tagsectionwithmap';
+    public final const MODULE_BUTTONGROUP_USERS = 'buttongroup-users';
+    public final const MODULE_BUTTONGROUP_MYCONTENT = 'buttongroup-mycontent';
+    public final const MODULE_BUTTONGROUP_HOMESECTION = 'buttongroup-homesection';
+    public final const MODULE_BUTTONGROUP_AUTHORSECTION = 'buttongroup-authorsection';
+    public final const MODULE_BUTTONGROUP_AUTHORSECTIONWITHMAP = 'buttongroup-authorsectionwithmap';
+    public final const MODULE_BUTTONGROUP_AUTHORUSERS = 'buttongroup-authorusers';
+    public final const MODULE_BUTTONGROUP_TAGS = 'buttongroup-tags';
+    public final const MODULE_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
 
     public function getModulesToProcess(): array
     {

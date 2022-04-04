@@ -17,7 +17,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 {
     use BasicServiceTrait;
 
-    public const HOOK_QUERY = __CLASS__ . ':query';
+    public final const HOOK_QUERY = __CLASS__ . ':query';
 
     public function getMenu(string | int $menuID): ?object
     {

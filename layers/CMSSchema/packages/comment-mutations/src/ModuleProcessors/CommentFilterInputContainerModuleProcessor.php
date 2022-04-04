@@ -8,10 +8,10 @@ use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProc
 
 class CommentFilterInputContainerModuleProcessor extends UpstreamCommentFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_MYCOMMENTS = 'filterinputcontainer-mycomments';
-    public const MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT = 'filterinputcontainer-mycommentcount';
+    public final const MODULE_FILTERINPUTCONTAINER_MYCOMMENTS = 'filterinputcontainer-mycomments';
+    public final const MODULE_FILTERINPUTCONTAINER_MYCOMMENTCOUNT = 'filterinputcontainer-mycommentcount';
 
     public function getModulesToProcess(): array
     {

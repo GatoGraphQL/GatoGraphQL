@@ -8,14 +8,14 @@ use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy as UpstreamCustomPostOr
 
 class CustomPostOrderBy extends UpstreamCustomPostOrderBy
 {
-    public const NONE = 'NONE';
-    public const COMMENT_COUNT = 'COMMENT_COUNT';
-    public const RANDOM = 'RANDOM';
-    public const MODIFIED_DATE = 'MODIFIED_DATE';
-    public const RELEVANCE = 'RELEVANCE';
-    public const TYPE = 'TYPE';
-    public const PARENT = 'PARENT';
-    public const MENU_ORDER = 'MENU_ORDER';
-    // public const POST__IN = 'POST__IN';
-    // public const POST_PARENT__IN = 'POST_PARENT__IN';
+    public final const NONE = 'NONE';
+    public final const COMMENT_COUNT = 'COMMENT_COUNT';
+    public final const RANDOM = 'RANDOM';
+    public final const MODIFIED_DATE = 'MODIFIED_DATE';
+    public final const RELEVANCE = 'RELEVANCE';
+    public final const TYPE = 'TYPE';
+    public final const PARENT = 'PARENT';
+    public final const MENU_ORDER = 'MENU_ORDER';
+    // public final const POST__IN = 'POST__IN';
+    // public final const POST_PARENT__IN = 'POST_PARENT__IN';
 }

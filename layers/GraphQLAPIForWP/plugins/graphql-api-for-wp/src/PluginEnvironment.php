@@ -8,9 +8,9 @@ use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 
 class PluginEnvironment
 {
-    public const DISABLE_CACHING = 'DISABLE_CACHING';
-    public const CACHE_DIR = 'CACHE_DIR';
-    public const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
+    public final const DISABLE_CACHING = 'DISABLE_CACHING';
+    public final const CACHE_DIR = 'CACHE_DIR';
+    public final const ENABLE_UNSAFE_DEFAULTS = 'ENABLE_UNSAFE_DEFAULTS';
 
     /**
      * If the information is provided by either environment variable

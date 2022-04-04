@@ -6,5 +6,5 @@ namespace PoP\ConfigurationComponentModel\Constants;
 
 class Targets
 {
-    public const MAIN = 'main';
+    public final const MAIN = 'main';
 }

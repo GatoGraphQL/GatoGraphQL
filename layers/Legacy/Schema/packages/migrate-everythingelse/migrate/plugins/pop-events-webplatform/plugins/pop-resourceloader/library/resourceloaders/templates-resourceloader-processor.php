@@ -2,11 +2,11 @@
 
 class PoP_Events_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_CALENDAR = 'calendar';
-    public const RESOURCE_CALENDAR_INNER = 'calendar_inner';
-    public const RESOURCE_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE = 'layout_carousel_indicators_eventdate';
-    public const RESOURCE_LAYOUT_DATETIME = 'layout_datetime';
-    public const RESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER = 'layoutcalendar_content_popover';
+    public final const RESOURCE_CALENDAR = 'calendar';
+    public final const RESOURCE_CALENDAR_INNER = 'calendar_inner';
+    public final const RESOURCE_LAYOUT_CAROUSEL_INDICATORS_EVENTDATE = 'layout_carousel_indicators_eventdate';
+    public final const RESOURCE_LAYOUT_DATETIME = 'layout_datetime';
+    public final const RESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER = 'layoutcalendar_content_popover';
 
     public function getResourcesToProcess()
     {

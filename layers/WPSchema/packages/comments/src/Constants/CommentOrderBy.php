@@ -8,9 +8,9 @@ use PoPCMSSchema\Comments\Constants\CommentOrderBy as UpstreamCommentOrderBy;
 
 class CommentOrderBy extends UpstreamCommentOrderBy
 {
-    public const AUTHOR_EMAIL = 'AUTHOR_EMAIL';
-    public const AUTHOR_IP = 'AUTHOR_IP';
-    public const AUTHOR_URL = 'AUTHOR_URL';
-    public const KARMA = 'KARMA';
-    public const NONE = 'NONE';
+    public final const AUTHOR_EMAIL = 'AUTHOR_EMAIL';
+    public final const AUTHOR_IP = 'AUTHOR_IP';
+    public final const AUTHOR_URL = 'AUTHOR_URL';
+    public final const KARMA = 'KARMA';
+    public final const NONE = 'NONE';
 }

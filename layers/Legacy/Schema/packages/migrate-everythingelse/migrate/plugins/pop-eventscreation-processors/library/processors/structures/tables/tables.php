@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
-    public const MODULE_TABLE_MYEVENTS = 'table-myevents';
-    public const MODULE_TABLE_MYPASTEVENTS = 'table-mypastevents';
+    public final const MODULE_TABLE_MYEVENTS = 'table-myevents';
+    public final const MODULE_TABLE_MYPASTEVENTS = 'table-mypastevents';
 
     public function getModulesToProcess(): array
     {

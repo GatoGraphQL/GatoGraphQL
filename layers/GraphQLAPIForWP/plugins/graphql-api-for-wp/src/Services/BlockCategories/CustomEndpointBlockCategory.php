@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
-    public const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
+    public final const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'graphql-api-endpoint';
 
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 

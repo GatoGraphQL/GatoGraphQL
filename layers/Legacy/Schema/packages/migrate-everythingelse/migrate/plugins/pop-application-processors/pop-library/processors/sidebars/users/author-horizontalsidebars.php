@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomHorizontalAuthorSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_HORIZONTALSIDEBAR_AUTHOR_GENERIC = 'horizontal-sidebar-author-generic';
+    public final const MODULE_HORIZONTALSIDEBAR_AUTHOR_GENERIC = 'horizontal-sidebar-author-generic';
     public function getModulesToProcess(): array
     {
         return array(

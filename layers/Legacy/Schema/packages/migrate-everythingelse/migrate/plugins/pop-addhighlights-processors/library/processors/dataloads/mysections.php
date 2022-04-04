@@ -4,8 +4,8 @@ use PoPSchema\Highlights\TypeResolvers\ObjectType\HighlightObjectTypeResolver;
 
 class PoP_AddHighlights_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public const MODULE_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT = 'dataload-myhighlights-table-edit';
-    public const MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myhighlights-scroll-fullviewpreview';
+    public final const MODULE_DATALOAD_MYHIGHLIGHTS_TABLE_EDIT = 'dataload-myhighlights-table-edit';
+    public final const MODULE_DATALOAD_MYHIGHLIGHTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myhighlights-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

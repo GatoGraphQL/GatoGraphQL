@@ -9,12 +9,12 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_PAGELISTLIST = 'filterinputcontainer-pagelist';
-    public const MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT = 'filterinputcontainer-pagecount';
-    public const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST = 'filterinputcontainer-adminpagelist';
-    public const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT = 'filterinputcontainer-adminpagecount';
+    public final const MODULE_FILTERINPUTCONTAINER_PAGELISTLIST = 'filterinputcontainer-pagelist';
+    public final const MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT = 'filterinputcontainer-pagecount';
+    public final const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTLIST = 'filterinputcontainer-adminpagelist';
+    public final const MODULE_FILTERINPUTCONTAINER_ADMINPAGELISTCOUNT = 'filterinputcontainer-adminpagecount';
 
     public function getModulesToProcess(): array
     {

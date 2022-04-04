@@ -22,7 +22,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * Plugin's namespace
      */
-    public const NAMESPACE = __NAMESPACE__;
+    public final const NAMESPACE = __NAMESPACE__;
 
     /**
      * Show an admin notice with a link to the latest release notes

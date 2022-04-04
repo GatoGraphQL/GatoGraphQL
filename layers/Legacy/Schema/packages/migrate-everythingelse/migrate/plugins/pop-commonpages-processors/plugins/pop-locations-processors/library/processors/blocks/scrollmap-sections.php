@@ -2,7 +2,7 @@
 
 class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
-    public const MODULE_BLOCK_WHOWEARE_SCROLLMAP = 'block-whoweare-scrollmap';
+    public final const MODULE_BLOCK_WHOWEARE_SCROLLMAP = 'block-whoweare-scrollmap';
 
     public function getModulesToProcess(): array
     {

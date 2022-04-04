@@ -11,7 +11,7 @@ use PoPCMSSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\Entr
 
 class PostHookSet extends AbstractHookSet
 {
-    public const USER_RESTFIELDS = 'posts.id|title|date|url';
+    public final const USER_RESTFIELDS = 'posts.id|title|date|url';
 
     protected function init(): void
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_FeaturedImageInnerComponentInputs extends PoP_Module_Processor_FeaturedImageInnerFormInputsBase
 {
-    public const MODULE_FORMINPUT_FEATUREDIMAGEINNER = 'forminput-featuredimage-inner';
+    public final const MODULE_FORMINPUT_FEATUREDIMAGEINNER = 'forminput-featuredimage-inner';
 
     public function getModulesToProcess(): array
     {

@@ -14,8 +14,8 @@ use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_NAME = 'filterinput-name';
-    public const MODULE_FILTERINPUT_EMAILS = 'filterinput-emails';
+    public final const MODULE_FILTERINPUT_NAME = 'filterinput-name';
+    public final const MODULE_FILTERINPUT_EMAILS = 'filterinput-emails';
 
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

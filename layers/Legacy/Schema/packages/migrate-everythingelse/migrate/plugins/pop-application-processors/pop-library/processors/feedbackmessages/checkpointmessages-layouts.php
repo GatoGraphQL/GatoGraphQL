@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Application_Module_Processor_UserCheckpointMessageLayouts extends PoP_Module_Processor_CheckpointMessageLayoutsBase
 {
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_DOMAIN = 'layout-checkpointmessage-domain';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_DOMAIN = 'layout-checkpointmessage-domain';
 
     public function getModulesToProcess(): array
     {

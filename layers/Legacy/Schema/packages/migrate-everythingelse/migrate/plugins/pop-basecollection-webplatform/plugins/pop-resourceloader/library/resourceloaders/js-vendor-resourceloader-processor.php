@@ -2,7 +2,7 @@
 
 class PoP_BaseCollectionWebPlatform_VendorJSResourceLoaderProcessor extends PoP_VendorJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_MOMENT = 'external-moment';
+    public final const RESOURCE_EXTERNAL_MOMENT = 'external-moment';
 
     public function getResourcesToProcess()
     {

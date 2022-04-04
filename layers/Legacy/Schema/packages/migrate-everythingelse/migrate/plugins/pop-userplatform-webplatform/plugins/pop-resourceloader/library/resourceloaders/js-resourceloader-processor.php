@@ -2,7 +2,7 @@
 
 class PoP_UserPlatformWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_USERPLATFORMACCOUNT = 'user-platform-account';
+    public final const RESOURCE_USERPLATFORMACCOUNT = 'user-platform-account';
 
     public function getResourcesToProcess()
     {

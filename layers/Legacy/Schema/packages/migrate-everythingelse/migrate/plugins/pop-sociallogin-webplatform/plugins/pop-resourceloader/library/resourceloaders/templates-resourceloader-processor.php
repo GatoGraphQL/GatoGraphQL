@@ -2,7 +2,7 @@
 
 class PoP_SocialLoginWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_SOCIALLOGIN_NETWORKLINKS = 'sociallogin_networklinks';
+    public final const RESOURCE_SOCIALLOGIN_NETWORKLINKS = 'sociallogin_networklinks';
 
     public function getResourcesToProcess()
     {

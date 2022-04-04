@@ -8,8 +8,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_HAS_PASSWORD = 'filterinput-has-password';
-    public const FILTERINPUT_PASSWORD = 'filterinput-password';
+    public final const FILTERINPUT_HAS_PASSWORD = 'filterinput-has-password';
+    public final const FILTERINPUT_PASSWORD = 'filterinput-password';
 
     public function getFilterInputsToProcess(): array
     {

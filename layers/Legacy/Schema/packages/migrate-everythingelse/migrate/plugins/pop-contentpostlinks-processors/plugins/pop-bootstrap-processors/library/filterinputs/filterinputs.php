@@ -3,8 +3,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
-    public const FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
+    public final const FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
+    public final const FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
 
     public function getFilterInputsToProcess(): array
     {

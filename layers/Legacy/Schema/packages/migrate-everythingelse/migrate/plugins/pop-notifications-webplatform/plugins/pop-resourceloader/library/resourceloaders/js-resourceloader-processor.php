@@ -2,7 +2,7 @@
 
 class PoP_AAL_Processors_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_NOTIFICATIONS = 'notifications';
+    public final const RESOURCE_NOTIFICATIONS = 'notifications';
 
     public function getResourcesToProcess()
     {

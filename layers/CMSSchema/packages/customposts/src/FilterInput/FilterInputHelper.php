@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPosts\FilterInput;
 
 class FilterInputHelper
 {
-    public const NON_EXISTING_CUSTOM_POST_TYPE = 'non-existing-customp-post-type';
+    public final const NON_EXISTING_CUSTOM_POST_TYPE = 'non-existing-customp-post-type';
 
     /**
      * If there are no valid postTypes, then force the query to

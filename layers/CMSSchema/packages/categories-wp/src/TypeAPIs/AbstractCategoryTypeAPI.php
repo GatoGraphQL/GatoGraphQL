@@ -20,7 +20,7 @@ use WP_Term;
  */
 abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements CategoryTypeAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
+    public final const HOOK_QUERY = __CLASS__ . ':query';
 
     private ?CMSHelperServiceInterface $cmsHelperService = null;
     private ?CMSServiceInterface $cmsService = null;

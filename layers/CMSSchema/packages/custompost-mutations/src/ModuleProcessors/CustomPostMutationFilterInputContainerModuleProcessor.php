@@ -10,10 +10,10 @@ use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProces
 
 class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
-    public const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
+    public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
+    public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
 
     public function getModulesToProcess(): array
     {

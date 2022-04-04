@@ -6,5 +6,5 @@ namespace PoP\AccessControl\Services;
 
 class AccessControlGroups
 {
-    public const DISABLED = 'disabled';
+    public final const DISABLED = 'disabled';
 }

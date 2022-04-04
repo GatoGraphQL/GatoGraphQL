@@ -2,9 +2,9 @@
 
 class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public const MODULE_CAROUSEL_STANCES = 'carousel-stances';
-    public const MODULE_CAROUSEL_AUTHORSTANCES = 'carousel-authorstances';
-    public const MODULE_CAROUSEL_TAGSTANCES = 'carousel-tagstances';
+    public final const MODULE_CAROUSEL_STANCES = 'carousel-stances';
+    public final const MODULE_CAROUSEL_AUTHORSTANCES = 'carousel-authorstances';
+    public final const MODULE_CAROUSEL_TAGSTANCES = 'carousel-tagstances';
 
     public function getModulesToProcess(): array
     {

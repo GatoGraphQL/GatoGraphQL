@@ -17,9 +17,9 @@ namespace PoP\ComponentModel\TypeResolvers;
  */
 class PipelinePositions
 {
-    public const BEGINNING = 'beginning';
-    public const BEFORE_VALIDATE = 'before-validate';
-    public const AFTER_VALIDATE_BEFORE_RESOLVE = 'after-validate-before-resolve';
-    public const AFTER_RESOLVE = 'after-resolve';
-    public const END = 'end';
+    public final const BEGINNING = 'beginning';
+    public final const BEFORE_VALIDATE = 'before-validate';
+    public final const AFTER_VALIDATE_BEFORE_RESOLVE = 'after-validate-before-resolve';
+    public final const AFTER_RESOLVE = 'after-resolve';
+    public final const END = 'end';
 }

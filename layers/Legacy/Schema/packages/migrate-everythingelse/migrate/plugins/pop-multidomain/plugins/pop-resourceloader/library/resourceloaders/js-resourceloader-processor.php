@@ -2,7 +2,7 @@
 
 class PoP_MultiDomain_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_MULTIDOMAIN = 'multidomain';
+    public final const RESOURCE_MULTIDOMAIN = 'multidomain';
 
     public function getResourcesToProcess()
     {

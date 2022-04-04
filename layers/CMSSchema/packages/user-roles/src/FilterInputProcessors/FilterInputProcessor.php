@@ -8,8 +8,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
-    public const FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
+    public final const FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
+    public final const FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';
 
     public function getFilterInputsToProcess(): array
     {

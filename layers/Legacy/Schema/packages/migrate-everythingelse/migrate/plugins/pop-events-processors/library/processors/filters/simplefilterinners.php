@@ -2,12 +2,12 @@
 
 class PoP_Events_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTS = 'simplefilterinputcontainer-events';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHOREVENTS = 'simplefilterinputcontainer-authorevents';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTS = 'simplefilterinputcontainer-tagevents';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTSCALENDAR = 'simplefilterinputcontainer-eventscalendar';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'simplefilterinputcontainer-authoreventscalendar';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'simplefilterinputcontainer-tageventscalendar';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTS = 'simplefilterinputcontainer-events';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHOREVENTS = 'simplefilterinputcontainer-authorevents';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTS = 'simplefilterinputcontainer-tagevents';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTSCALENDAR = 'simplefilterinputcontainer-eventscalendar';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'simplefilterinputcontainer-authoreventscalendar';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'simplefilterinputcontainer-tageventscalendar';
 
     public function getModulesToProcess(): array
     {

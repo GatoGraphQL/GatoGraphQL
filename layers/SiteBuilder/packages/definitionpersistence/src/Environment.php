@@ -6,5 +6,5 @@ namespace PoP\DefinitionPersistence;
 
 class Environment
 {
-    public const DEFINITION_PERSISTENCE_BUILD_DIR = 'DEFINITION_PERSISTENCE_BUILD_DIR';
+    public final const DEFINITION_PERSISTENCE_BUILD_DIR = 'DEFINITION_PERSISTENCE_BUILD_DIR';
 }

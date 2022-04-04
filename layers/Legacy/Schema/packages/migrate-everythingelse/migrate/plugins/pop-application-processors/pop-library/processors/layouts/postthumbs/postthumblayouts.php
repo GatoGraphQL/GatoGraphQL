@@ -2,21 +2,21 @@
 
 class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_PostThumbLayoutsBase
 {
-    public const MODULE_LAYOUT_POSTTHUMB_FAVICON = 'layout-postthumb-favicon';
-    public const MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE = 'layout-postthumb-originalfeaturedimage';
-    public const MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE = 'layout-postthumb-featuredimage';
-    public const MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER = 'layout-postthumb-featuredimage-volunteer';
-    public const MODULE_LAYOUT_POSTTHUMB_XSMALL = 'layout-postthumb-xsmall';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL = 'layout-postthumb-croppedsmall';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM = 'layout-postthumb-croppedmedium';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED = 'layout-postthumb-croppedfeed';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT = 'layout-postthumb-croppedsmall-edit';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER = 'layout-postthumb-croppedsmall-volunteer';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER = 'layout-postthumb-croppedmedium-volunteer';
-    public const MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER = 'layout-postthumb-croppedfeed-volunteer';
-    public const MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE = 'layout-postthumb-linkselforiginalfeaturedimage';
-    public const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED = 'layout-postthumb-linkselfcroppedfeed';
-    public const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER = 'layout-postthumb-linkselfcroppedfeed-volunteer';
+    public final const MODULE_LAYOUT_POSTTHUMB_FAVICON = 'layout-postthumb-favicon';
+    public final const MODULE_LAYOUT_POSTTHUMB_ORIGINALFEATUREDIMAGE = 'layout-postthumb-originalfeaturedimage';
+    public final const MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE = 'layout-postthumb-featuredimage';
+    public final const MODULE_LAYOUT_POSTTHUMB_FEATUREDIMAGE_VOLUNTEER = 'layout-postthumb-featuredimage-volunteer';
+    public final const MODULE_LAYOUT_POSTTHUMB_XSMALL = 'layout-postthumb-xsmall';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL = 'layout-postthumb-croppedsmall';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM = 'layout-postthumb-croppedmedium';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED = 'layout-postthumb-croppedfeed';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT = 'layout-postthumb-croppedsmall-edit';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_VOLUNTEER = 'layout-postthumb-croppedsmall-volunteer';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM_VOLUNTEER = 'layout-postthumb-croppedmedium-volunteer';
+    public final const MODULE_LAYOUT_POSTTHUMB_CROPPEDFEED_VOLUNTEER = 'layout-postthumb-croppedfeed-volunteer';
+    public final const MODULE_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE = 'layout-postthumb-linkselforiginalfeaturedimage';
+    public final const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED = 'layout-postthumb-linkselfcroppedfeed';
+    public final const MODULE_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER = 'layout-postthumb-linkselfcroppedfeed-volunteer';
 
     public function getModulesToProcess(): array
     {

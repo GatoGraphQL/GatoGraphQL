@@ -2,7 +2,7 @@
 
 class PoP_Volunteering_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER = 'layout-feedbackmessagealert-volunteer';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_VOLUNTEER = 'layout-feedbackmessagealert-volunteer';
 
     public function getModulesToProcess(): array
     {

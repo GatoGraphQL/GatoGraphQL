@@ -4,8 +4,8 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class GD_ContentCreation_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
-    public const MODULE_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
+    public final const MODULE_BUTTONWRAPPER_POSTVIEW = 'buttonwrapper-postview';
+    public final const MODULE_BUTTONWRAPPER_POSTPREVIEW = 'buttonwrapper-postpreview';
 
     public function getModulesToProcess(): array
     {

@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR = 'multiple-section-individuals-sidebar';
-    public const MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR = 'multiple-section-organizations-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_INDIVIDUALS_SIDEBAR = 'multiple-section-individuals-sidebar';
+    public final const MODULE_MULTIPLE_SECTION_ORGANIZATIONS_SIDEBAR = 'multiple-section-organizations-sidebar';
 
     public function getModulesToProcess(): array
     {

@@ -2,11 +2,11 @@
 
 class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER = 'quicklinkbuttongroup-userfollowunfollowuser';
-    public const MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND = 'quicklinkbuttongroup-postrecommendunrecommend';
-    public const MODULE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE = 'quicklinkbuttongroup-postupvoteundoupvote';
-    public const MODULE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE = 'quicklinkbuttongroup-postdownvoteundodownvote';
-    public const MODULE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM = 'quicklinkbuttongroup-tagsubscribetounsubscribefrom';
+    public final const MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER = 'quicklinkbuttongroup-userfollowunfollowuser';
+    public final const MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND = 'quicklinkbuttongroup-postrecommendunrecommend';
+    public final const MODULE_QUICKLINKBUTTONGROUP_POSTUPVOTEUNDOUPVOTE = 'quicklinkbuttongroup-postupvoteundoupvote';
+    public final const MODULE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE = 'quicklinkbuttongroup-postdownvoteundodownvote';
+    public final const MODULE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM = 'quicklinkbuttongroup-tagsubscribetounsubscribefrom';
 
     public function getModulesToProcess(): array
     {

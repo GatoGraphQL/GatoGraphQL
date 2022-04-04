@@ -7,7 +7,7 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public const MODULE_CAROUSELCONTROLS_AUTHORMEMBERS = 'carouselcontrols-members';
+    public final const MODULE_CAROUSELCONTROLS_AUTHORMEMBERS = 'carouselcontrols-members';
 
     public function getModulesToProcess(): array
     {

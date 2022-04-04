@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Constants;
 
 class DataSources
 {
-    public const IMMUTABLE = 'immutable';
-    public const MUTABLEONMODEL = 'mutableonmodel';
-    public const MUTABLEONREQUEST = 'mutableonrequest';
+    public final const IMMUTABLE = 'immutable';
+    public final const MUTABLEONMODEL = 'mutableonmodel';
+    public final const MUTABLEONREQUEST = 'mutableonrequest';
 }

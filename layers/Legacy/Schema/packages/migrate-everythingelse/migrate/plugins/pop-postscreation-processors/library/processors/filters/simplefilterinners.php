@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS = 'simplefilterinputcontainer-mylinks';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLINKS = 'simplefilterinputcontainer-mylinks';
 
     public function getModulesToProcess(): array
     {

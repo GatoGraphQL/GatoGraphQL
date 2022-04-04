@@ -2,7 +2,7 @@
 
 class PoP_CoreProcessors_DynamicCSSResourceLoaderProcessor extends PoP_DynamicCSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_USERLOGGEDIN = 'user-loggedin';
+    public final const RESOURCE_CSS_USERLOGGEDIN = 'user-loggedin';
 
     public function getResourcesToProcess()
     {

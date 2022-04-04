@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_PostAuthorAvatarLayoutsBase
 {
-    public const MODULE_LAYOUTPOST_AUTHORAVATAR = 'layoutpost-authoravatar';
-    public const MODULE_LAYOUTPOST_AUTHORAVATAR26 = 'layoutpost-authoravatar26';
-    public const MODULE_LAYOUTPOST_AUTHORAVATAR60 = 'layoutpost-authoravatar60';
-    public const MODULE_LAYOUTPOST_AUTHORAVATAR82 = 'layoutpost-authoravatar82';
-    public const MODULE_LAYOUTPOST_AUTHORAVATAR120 = 'layoutpost-authoravatar120';
+    public final const MODULE_LAYOUTPOST_AUTHORAVATAR = 'layoutpost-authoravatar';
+    public final const MODULE_LAYOUTPOST_AUTHORAVATAR26 = 'layoutpost-authoravatar26';
+    public final const MODULE_LAYOUTPOST_AUTHORAVATAR60 = 'layoutpost-authoravatar60';
+    public final const MODULE_LAYOUTPOST_AUTHORAVATAR82 = 'layoutpost-authoravatar82';
+    public final const MODULE_LAYOUTPOST_AUTHORAVATAR120 = 'layoutpost-authoravatar120';
 
     public function getModulesToProcess(): array
     {

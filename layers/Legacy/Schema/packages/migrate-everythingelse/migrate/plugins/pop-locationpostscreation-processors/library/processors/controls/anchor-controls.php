@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class CommonPagesEM_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST = 'custombuttoncontrol-addlocationpost';
+    public final const MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOST = 'custombuttoncontrol-addlocationpost';
 
     public function getModulesToProcess(): array
     {

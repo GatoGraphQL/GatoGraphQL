@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventLinksCreation_Module_Processor_Buttons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public const MODULE_BUTTON_EVENTLINK_CREATE = 'postbutton-eventlink-create';
+    public final const MODULE_BUTTON_EVENTLINK_CREATE = 'postbutton-eventlink-create';
 
     public function getModulesToProcess(): array
     {

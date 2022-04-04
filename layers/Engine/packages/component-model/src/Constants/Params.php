@@ -6,24 +6,24 @@ namespace PoP\ComponentModel\Constants;
 
 class Params
 {
-    public const VERSION = 'version';
-    public const DATASTRUCTURE = 'datastructure';
-    public const DATAOUTPUTMODE = 'dataoutputmode';
-    public const DATABASESOUTPUTMODE = 'dboutputmode';
-    public const ACTIONS = 'actions';
-    public const SCHEME = 'scheme';
-    public const ACTION_PATH = 'actionpath';
-    public const DATA_OUTPUT_ITEMS = 'dataoutputitems';
-    public const DATA_SOURCE = 'datasource';
-    public const EXTRA_ROUTES = 'extraroutes';
-    public const OUTPUT = 'output';
-    public const MODULEFILTER = 'modulefilter';
-    public const MODULEPATHS = 'modulepaths';
+    public final const VERSION = 'version';
+    public final const DATASTRUCTURE = 'datastructure';
+    public final const DATAOUTPUTMODE = 'dataoutputmode';
+    public final const DATABASESOUTPUTMODE = 'dboutputmode';
+    public final const ACTIONS = 'actions';
+    public final const SCHEME = 'scheme';
+    public final const ACTION_PATH = 'actionpath';
+    public final const DATA_OUTPUT_ITEMS = 'dataoutputitems';
+    public final const DATA_SOURCE = 'datasource';
+    public final const EXTRA_ROUTES = 'extraroutes';
+    public final const OUTPUT = 'output';
+    public final const MODULEFILTER = 'modulefilter';
+    public final const MODULEPATHS = 'modulepaths';
 
     /**
      * What version constraint to use for the API
      */
-    public const VERSION_CONSTRAINT = 'versionConstraints';
-    public const VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
-    public const VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
+    public final const VERSION_CONSTRAINT = 'versionConstraints';
+    public final const VERSION_CONSTRAINT_FOR_FIELDS = 'fieldVersionConstraints';
+    public final const VERSION_CONSTRAINT_FOR_DIRECTIVES = 'directiveVersionConstraints';
 }

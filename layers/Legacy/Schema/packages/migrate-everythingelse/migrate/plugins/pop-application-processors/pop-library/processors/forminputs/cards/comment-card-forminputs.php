@@ -2,7 +2,7 @@
 
 class PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues extends PoP_Module_Processor_CommentTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
+    public final const MODULE_FORMCOMPONENT_CARD_COMMENT = 'forminput-comment-card';
 
     public function getModulesToProcess(): array
     {

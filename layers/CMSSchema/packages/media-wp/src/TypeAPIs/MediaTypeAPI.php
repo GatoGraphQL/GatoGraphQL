@@ -18,7 +18,7 @@ use function wp_get_attachment_image_src;
  */
 class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
+    public final const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
      * Indicates if the passed object is of type Media

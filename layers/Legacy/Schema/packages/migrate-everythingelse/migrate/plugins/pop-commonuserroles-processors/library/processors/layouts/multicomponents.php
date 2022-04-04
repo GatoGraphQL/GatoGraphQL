@@ -2,7 +2,7 @@
 
 class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
+    public final const MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
 
     public function getModulesToProcess(): array
     {

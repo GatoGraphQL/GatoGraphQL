@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_AUTHORLINKS = 'tabpanel-authorlinks';
+    public final const MODULE_TABPANEL_AUTHORLINKS = 'tabpanel-authorlinks';
 
     public function getModulesToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP = 'ure-aal-buttoninner-editmembership';
-    public const MODULE_UREAAL_BUTTONINNER_VIEWALLMEMBERS = 'ure-aal-buttoninner-viewallmembers';
+    public final const MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP = 'ure-aal-buttoninner-editmembership';
+    public final const MODULE_UREAAL_BUTTONINNER_VIEWALLMEMBERS = 'ure-aal-buttoninner-viewallmembers';
 
     public function getModulesToProcess(): array
     {

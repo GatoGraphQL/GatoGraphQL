@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_SettingsFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS = 'layout-feedbackmessage-settings';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_SETTINGS = 'layout-feedbackmessage-settings';
 
     public function getModulesToProcess(): array
     {

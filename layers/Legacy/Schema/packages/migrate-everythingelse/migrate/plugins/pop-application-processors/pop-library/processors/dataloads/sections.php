@@ -5,10 +5,10 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS = 'dataload-singleauthors-scroll-details';
-    public const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW = 'dataload-singleauthors-scroll-fullview';
-    public const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'dataload-singleauthors-scroll-thumbnail';
-    public const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST = 'dataload-singleauthors-scroll-list';
+    public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS = 'dataload-singleauthors-scroll-details';
+    public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW = 'dataload-singleauthors-scroll-fullview';
+    public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'dataload-singleauthors-scroll-thumbnail';
+    public final const MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST = 'dataload-singleauthors-scroll-list';
 
     public function getModulesToProcess(): array
     {

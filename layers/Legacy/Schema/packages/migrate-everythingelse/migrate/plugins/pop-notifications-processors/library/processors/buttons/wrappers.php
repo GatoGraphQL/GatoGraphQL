@@ -2,7 +2,7 @@
 
 class GD_AAL_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD = 'notifications-buttonwrapper-notification-markasread';
+    public final const MODULE_AAL_BUTTONWRAPPER_NOTIFICATION_MARKASREAD = 'notifications-buttonwrapper-notification-markasread';
 
     public function getModulesToProcess(): array
     {

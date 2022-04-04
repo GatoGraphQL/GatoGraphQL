@@ -3,7 +3,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_UserStanceFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
+    public final const FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 
     public function getFilterInputsToProcess(): array
     {

@@ -6,11 +6,11 @@ namespace PoPCMSSchema\Comments\Constants;
 
 class CommentOrderBy
 {
-    public const ID = 'ID';
-    public const DATE = 'DATE';
-    public const CONTENT = 'CONTENT';
-    public const PARENT = 'PARENT';
-    public const CUSTOM_POST = 'CUSTOM_POST';
-    public const TYPE = 'TYPE';
-    public const STATUS = 'STATUS';
+    public final const ID = 'ID';
+    public final const DATE = 'DATE';
+    public final const CONTENT = 'CONTENT';
+    public final const PARENT = 'PARENT';
+    public final const CUSTOM_POST = 'CUSTOM_POST';
+    public final const TYPE = 'TYPE';
+    public final const STATUS = 'STATUS';
 }

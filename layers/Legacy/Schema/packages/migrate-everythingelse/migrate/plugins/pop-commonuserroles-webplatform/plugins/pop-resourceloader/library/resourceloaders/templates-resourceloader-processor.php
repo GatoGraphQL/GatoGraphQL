@@ -2,8 +2,8 @@
 
 class PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS = 'layout_profileindividual_details';
-    public const RESOURCE_LAYOUT_PROFILEORGANIZATION_DETAILS = 'layout_profileorganization_details';
+    public final const RESOURCE_LAYOUT_PROFILEINDIVIDUAL_DETAILS = 'layout_profileindividual_details';
+    public final const RESOURCE_LAYOUT_PROFILEORGANIZATION_DETAILS = 'layout_profileorganization_details';
 
     public function getResourcesToProcess()
     {

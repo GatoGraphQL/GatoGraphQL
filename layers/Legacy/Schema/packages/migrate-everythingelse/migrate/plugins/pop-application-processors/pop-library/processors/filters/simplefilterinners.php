@@ -2,21 +2,21 @@
 
 class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS = 'simplefilterinputcontainer-tags';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_CONTENT = 'simplefilterinputcontainer-content';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT = 'simplefilterinputcontainer-authorcontent';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS = 'simplefilterinputcontainer-posts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS = 'simplefilterinputcontainer-categoryposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS = 'simplefilterinputcontainer-authorposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'simplefilterinputcontainer-authorcategoryposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS = 'simplefilterinputcontainer-tagposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'simplefilterinputcontainer-tagcategoryposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_USERS = 'simplefilterinputcontainer-users';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'simplefilterinputcontainer-authorcommunitymembers';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCONTENT = 'simplefilterinputcontainer-mycontent';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYPOSTS = 'simplefilterinputcontainer-myposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
-    public const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS = 'simplefilterinputcontainer-tags';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_CONTENT = 'simplefilterinputcontainer-content';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT = 'simplefilterinputcontainer-authorcontent';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS = 'simplefilterinputcontainer-posts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS = 'simplefilterinputcontainer-categoryposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS = 'simplefilterinputcontainer-authorposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'simplefilterinputcontainer-authorcategoryposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS = 'simplefilterinputcontainer-tagposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'simplefilterinputcontainer-tagcategoryposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_USERS = 'simplefilterinputcontainer-users';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'simplefilterinputcontainer-authorcommunitymembers';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCONTENT = 'simplefilterinputcontainer-mycontent';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYPOSTS = 'simplefilterinputcontainer-myposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
+    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
 
     public function getModulesToProcess(): array
     {

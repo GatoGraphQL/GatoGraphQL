@@ -2,9 +2,9 @@
 
 class PoP_Newsletter_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_NEWSLETTERNAME = 'forminputgroup-field-newslettername';
-    public const MODULE_FORMINPUTGROUP_NEWSLETTEREMAIL = 'forminputgroup-field-newsletteremail';
-    public const MODULE_FORMINPUTGROUP_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminputgroup-field-newsletteremailverificationemail';
+    public final const MODULE_FORMINPUTGROUP_NEWSLETTERNAME = 'forminputgroup-field-newslettername';
+    public final const MODULE_FORMINPUTGROUP_NEWSLETTEREMAIL = 'forminputgroup-field-newsletteremail';
+    public final const MODULE_FORMINPUTGROUP_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminputgroup-field-newsletteremailverificationemail';
 
     public function getModulesToProcess(): array
     {

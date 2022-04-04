@@ -6,5 +6,5 @@ namespace PoPCMSSchema\CustomPosts\Constants;
 
 class ModelInstanceComponentTypes
 {
-    public const SINGLE_CUSTOMPOST = 'single-custompost';
+    public final const SINGLE_CUSTOMPOST = 'single-custompost';
 }

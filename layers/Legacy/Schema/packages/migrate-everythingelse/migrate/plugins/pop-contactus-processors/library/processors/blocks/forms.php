@@ -2,7 +2,7 @@
 
 class PoP_ContactUs_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {
-    public const MODULE_BLOCK_CONTACTUS = 'block-contactus';
+    public final const MODULE_BLOCK_CONTACTUS = 'block-contactus';
 
     public function getModulesToProcess(): array
     {

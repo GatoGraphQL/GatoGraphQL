@@ -2,15 +2,15 @@
 
 class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public const MODULE_FILTER_STANCES = 'filter-stances';
-    public const MODULE_FILTER_AUTHORSTANCES = 'filter-authorstance';
-    public const MODULE_FILTER_MYSTANCES = 'filter-mystances';
-    public const MODULE_FILTER_STANCES_AUTHORROLE = 'filter-stances-authorrole';
-    public const MODULE_FILTER_STANCES_STANCE = 'filter-stances-stance';
-    public const MODULE_FILTER_AUTHORSTANCES_STANCE = 'filter-authorstances-stance';
-    public const MODULE_FILTER_STANCES_GENERALSTANCE = 'filter-stances-generalstance';
-    public const MODULE_FILTER_TAGSTANCES = 'filter-tagstances';
-    public const MODULE_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
+    public final const MODULE_FILTER_STANCES = 'filter-stances';
+    public final const MODULE_FILTER_AUTHORSTANCES = 'filter-authorstance';
+    public final const MODULE_FILTER_MYSTANCES = 'filter-mystances';
+    public final const MODULE_FILTER_STANCES_AUTHORROLE = 'filter-stances-authorrole';
+    public final const MODULE_FILTER_STANCES_STANCE = 'filter-stances-stance';
+    public final const MODULE_FILTER_AUTHORSTANCES_STANCE = 'filter-authorstances-stance';
+    public final const MODULE_FILTER_STANCES_GENERALSTANCE = 'filter-stances-generalstance';
+    public final const MODULE_FILTER_TAGSTANCES = 'filter-tagstances';
+    public final const MODULE_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
 
     public function getModulesToProcess(): array
     {

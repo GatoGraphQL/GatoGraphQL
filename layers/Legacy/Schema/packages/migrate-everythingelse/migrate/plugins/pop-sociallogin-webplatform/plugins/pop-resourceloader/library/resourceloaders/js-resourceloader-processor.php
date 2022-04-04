@@ -2,7 +2,7 @@
 
 class PoP_SocialLoginWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_SOCIALLOGINFUNCTIONS = 'sociallogin-functions';
+    public final const RESOURCE_SOCIALLOGINFUNCTIONS = 'sociallogin-functions';
 
     public function getResourcesToProcess()
     {

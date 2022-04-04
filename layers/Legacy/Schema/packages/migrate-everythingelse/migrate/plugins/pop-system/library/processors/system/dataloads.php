@@ -6,9 +6,9 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\InstallSystemMutation
 
 class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
 {
-    public const MODULE_DATALOADACTION_SYSTEM_BUILD = 'dataloadaction-system-build';
-    public const MODULE_DATALOADACTION_SYSTEM_GENERATE = 'dataloadaction-system-generate';
-    public const MODULE_DATALOADACTION_SYSTEM_INSTALL = 'dataloadaction-system-install';
+    public final const MODULE_DATALOADACTION_SYSTEM_BUILD = 'dataloadaction-system-build';
+    public final const MODULE_DATALOADACTION_SYSTEM_GENERATE = 'dataloadaction-system-generate';
+    public final const MODULE_DATALOADACTION_SYSTEM_INSTALL = 'dataloadaction-system-install';
 
     // use PoP_System_Module_Processor_SystemActionsTrait;
     public function getModulesToProcess(): array

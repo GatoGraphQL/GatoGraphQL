@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_MYLINKS = 'tabpanel-mylinks';
+    public final const MODULE_TABPANEL_MYLINKS = 'tabpanel-mylinks';
 
     public function getModulesToProcess(): array
     {

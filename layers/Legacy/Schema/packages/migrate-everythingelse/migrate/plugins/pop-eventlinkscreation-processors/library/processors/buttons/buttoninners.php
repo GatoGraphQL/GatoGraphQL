@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventLinksCreation_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_BUTTONINNER_EVENTLINK_CREATE = 'buttoninner-eventlink-create';
+    public final const MODULE_BUTTONINNER_EVENTLINK_CREATE = 'buttoninner-eventlink-create';
 
     public function getModulesToProcess(): array
     {

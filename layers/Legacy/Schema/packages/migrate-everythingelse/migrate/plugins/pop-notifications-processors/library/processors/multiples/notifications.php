@@ -4,7 +4,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTIPLE_LATESTNOTIFICATIONS = 'multiple-notifications-latestnotifications';
+    public final const MODULE_MULTIPLE_LATESTNOTIFICATIONS = 'multiple-notifications-latestnotifications';
 
     public function getModulesToProcess(): array
     {

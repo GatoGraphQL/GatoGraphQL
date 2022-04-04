@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
-    public const MODULE_TABLE_MYLOCATIONPOSTS = 'table-mylocationposts';
+    public final const MODULE_TABLE_MYLOCATIONPOSTS = 'table-mylocationposts';
 
     public function getModulesToProcess(): array
     {

@@ -6,7 +6,7 @@ namespace PoP\Root\Feedback;
 
 class FeedbackCategories
 {
-    public const ERROR = 'error';
-    public const DEPRECATION = 'deprecation';
-    public const LOG = 'log';
+    public final const ERROR = 'error';
+    public final const DEPRECATION = 'deprecation';
+    public final const LOG = 'log';
 }

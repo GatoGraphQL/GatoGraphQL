@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK = 'notifications-buttoninner-notificationpreviewlink';
-    public const MODULE_AAL_BUTTONINNER_USERVIEW = 'notifications-buttoninner-userview';
-    public const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD = 'notifications-buttoninner-notification-markasread';
-    public const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD = 'notifications-buttoninner-notification-markasunread';
+    public final const MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK = 'notifications-buttoninner-notificationpreviewlink';
+    public final const MODULE_AAL_BUTTONINNER_USERVIEW = 'notifications-buttoninner-userview';
+    public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD = 'notifications-buttoninner-notification-markasread';
+    public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD = 'notifications-buttoninner-notification-markasunread';
 
     public function getModulesToProcess(): array
     {

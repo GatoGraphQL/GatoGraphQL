@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_FeedButtonWrappers extends PoP_Module_Processor_ShowIfNotEmptyConditionWrapperBase
 {
-    public const MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY = 'buttonwrapper-userpostactivity';
+    public final const MODULE_BUTTONWRAPPER_TOGGLEUSERPOSTACTIVITY = 'buttonwrapper-userpostactivity';
 
     public function getModulesToProcess(): array
     {

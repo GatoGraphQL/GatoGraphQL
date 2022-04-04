@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCacheControlListCustom
 
 class CacheControlBlockCategory extends AbstractBlockCategory
 {
-    public const CACHE_CONTROL_BLOCK_CATEGORY = 'graphql-api-cache-control';
+    public final const CACHE_CONTROL_BLOCK_CATEGORY = 'graphql-api-cache-control';
 
     private ?GraphQLCacheControlListCustomPostType $graphQLCacheControlListCustomPostType = null;
 

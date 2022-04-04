@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserPlatform_Module_Processor_SelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public const MODULE_FORMINPUT_SETTINGSFORMAT = 'forminput-settingsformat';
+    public final const MODULE_FORMINPUT_SETTINGSFORMAT = 'forminput-settingsformat';
 
     public function getModulesToProcess(): array
     {

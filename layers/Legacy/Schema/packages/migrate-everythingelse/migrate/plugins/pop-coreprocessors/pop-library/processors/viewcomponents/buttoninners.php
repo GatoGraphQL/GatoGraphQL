@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT = 'viewcomponent-buttoninner-replycomment';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT = 'viewcomponent-buttoninner-addcomment';
-    public const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL = 'viewcomponent-buttoninner-addcomment-full';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT = 'viewcomponent-buttoninner-replycomment';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT = 'viewcomponent-buttoninner-addcomment';
+    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL = 'viewcomponent-buttoninner-addcomment-full';
 
     public function getModulesToProcess(): array
     {

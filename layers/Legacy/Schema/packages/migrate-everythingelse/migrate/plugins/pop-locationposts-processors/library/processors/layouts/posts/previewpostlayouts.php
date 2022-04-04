@@ -3,14 +3,14 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR = 'layout-previewpost-locationpost-navigator';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS = 'layout-previewpost-locationpost-addons';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS = 'layout-previewpost-locationpost-details';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL = 'layout-previewpost-locationpost-thumbnail';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST = 'layout-previewpost-locationpost-list';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS = 'layout-previewpost-locationpost-mapdetails';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS = 'layout-previewpost-locationpost-horizontalmapdetails';
-    public const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED = 'layout-previewpost-locationpost-related';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR = 'layout-previewpost-locationpost-navigator';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS = 'layout-previewpost-locationpost-addons';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS = 'layout-previewpost-locationpost-details';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_THUMBNAIL = 'layout-previewpost-locationpost-thumbnail';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_LIST = 'layout-previewpost-locationpost-list';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS = 'layout-previewpost-locationpost-mapdetails';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_HORIZONTALMAPDETAILS = 'layout-previewpost-locationpost-horizontalmapdetails';
+    public final const MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_RELATED = 'layout-previewpost-locationpost-related';
 
     public function getModulesToProcess(): array
     {

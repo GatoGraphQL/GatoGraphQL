@@ -3,11 +3,11 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_CRUDMultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
-    public const FILTERINPUT_CATEGORIES = 'filterinput-categories';
-    public const FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
-    public const FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
-    public const FILTERINPUT_VOLUNTEERSNEEDED = 'filterinput-volunteersneeded';
+    public final const FILTERINPUT_APPLIESTO = 'filterinput-appliesto';
+    public final const FILTERINPUT_CATEGORIES = 'filterinput-categories';
+    public final const FILTERINPUT_CONTENTSECTIONS = 'filterinput-contentsections';
+    public final const FILTERINPUT_POSTSECTIONS = 'filterinput-postsections';
+    public final const FILTERINPUT_VOLUNTEERSNEEDED = 'filterinput-volunteersneeded';
 
     public function getFilterInputsToProcess(): array
     {

@@ -2,8 +2,8 @@
 
 class PoPThemeWassup_DynamicCSSResourceLoaderProcessor extends PoP_DynamicCSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_BACKGROUNDIMAGE = 'background-image';
-    public const RESOURCE_CSS_FEEDTHUMB = 'feed-thumb';
+    public final const RESOURCE_CSS_BACKGROUNDIMAGE = 'background-image';
+    public final const RESOURCE_CSS_FEEDTHUMB = 'feed-thumb';
 
     public function getResourcesToProcess()
     {

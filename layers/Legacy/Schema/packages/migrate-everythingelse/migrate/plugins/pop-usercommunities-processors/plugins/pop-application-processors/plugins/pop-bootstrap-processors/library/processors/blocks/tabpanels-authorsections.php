@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
 
     public function getModulesToProcess(): array
     {

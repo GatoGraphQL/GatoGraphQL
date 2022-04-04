@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public const MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER = 'gf-submitbutton-sendmessagetouser';
+    public final const MODULE_GF_SUBMITBUTTON_SENDMESSAGETOUSER = 'gf-submitbutton-sendmessagetouser';
 
     public function getModulesToProcess(): array
     {

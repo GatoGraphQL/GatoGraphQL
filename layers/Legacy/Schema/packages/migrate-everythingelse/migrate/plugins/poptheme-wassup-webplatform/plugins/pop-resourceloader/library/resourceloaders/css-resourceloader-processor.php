@@ -2,38 +2,38 @@
 
 class PoPTheme_Wassup_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_PAGESECTIONGROUP = 'css-pagesectiongroup';
-    public const RESOURCE_CSS_THEMEWASSUP = 'css-theme-wassup';
-    public const RESOURCE_CSS_THEMEWASSUPBOOTSTRAP = 'css-themebootstrap';
-    public const RESOURCE_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP = 'css-themetypeaheadbootstrap';
-    public const RESOURCE_CSS_GROUPHOMEWELCOME = 'css-group-home-welcome';
-    public const RESOURCE_CSS_COLLAPSEHOMETOP = 'css-collapse-hometop';
-    public const RESOURCE_CSS_QUICKLINKGROUPS = 'css-quicklinkgroups';
-    public const RESOURCE_CSS_DATERANGEPICKER = 'css-daterangepicker';
-    public const RESOURCE_CSS_SKELETONSCREEN = 'css-skeletonscreen';
-    public const RESOURCE_CSS_BLOCKCAROUSEL = 'css-blockcarousel';
-    public const RESOURCE_CSS_FETCHMORE = 'css-fetchmore';
-    public const RESOURCE_CSS_GROUPAUTHOR = 'css-group-author';
-    public const RESOURCE_CSS_GROUPAUTHORSECTIONS = 'css-group-authorsections';
-    public const RESOURCE_CSS_BLOCK = 'css-block';
-    public const RESOURCE_CSS_FUNCTIONALBLOCK = 'css-functionalblock';
-    public const RESOURCE_CSS_FUNCTIONBUTTON = 'css-functionbutton';
-    public const RESOURCE_CSS_SOCIALMEDIA = 'css-socialmedia';
-    public const RESOURCE_CSS_FORMMYPREFERENCES = 'css-form-mypreferences';
-    public const RESOURCE_CSS_BLOCKCOMMENTS = 'css-block-comments';
-    public const RESOURCE_CSS_FRAMEADDCOMMENTS = 'css-frame-addcomments';
-    public const RESOURCE_CSS_SIDESECTIONSMENU = 'css-side-sections-menu';
-    public const RESOURCE_CSS_LITTLEGUY = 'css-littleguy';
-    public const RESOURCE_CSS_SPEECHBUBBLE = 'css-speechbubble';
-    public const RESOURCE_CSS_FEATUREDIMAGE = 'css-featuredimage';
-    public const RESOURCE_CSS_HOMEMESSAGE = 'css-homemessage';
-    public const RESOURCE_CSS_BLOCKNOTIFICATIONS = 'css-block-notifications';
-    public const RESOURCE_CSS_SCROLLNOTIFICATIONS = 'css-scroll-notifications';
-    public const RESOURCE_CSS_WIDGET = 'css-widget';
-    public const RESOURCE_CSS_DYNAMICMAXHEIGHT = 'css-dynamicmaxheight';
-    public const RESOURCE_CSS_STRUCTURE = 'css-structure';
-    public const RESOURCE_CSS_LAYOUT = 'css-layout';
-    public const RESOURCE_CSS_SECTIONLAYOUT = 'css-sectionlayout';
+    public final const RESOURCE_CSS_PAGESECTIONGROUP = 'css-pagesectiongroup';
+    public final const RESOURCE_CSS_THEMEWASSUP = 'css-theme-wassup';
+    public final const RESOURCE_CSS_THEMEWASSUPBOOTSTRAP = 'css-themebootstrap';
+    public final const RESOURCE_CSS_THEMEWASSUPTYPEAHEADBOOTSTRAP = 'css-themetypeaheadbootstrap';
+    public final const RESOURCE_CSS_GROUPHOMEWELCOME = 'css-group-home-welcome';
+    public final const RESOURCE_CSS_COLLAPSEHOMETOP = 'css-collapse-hometop';
+    public final const RESOURCE_CSS_QUICKLINKGROUPS = 'css-quicklinkgroups';
+    public final const RESOURCE_CSS_DATERANGEPICKER = 'css-daterangepicker';
+    public final const RESOURCE_CSS_SKELETONSCREEN = 'css-skeletonscreen';
+    public final const RESOURCE_CSS_BLOCKCAROUSEL = 'css-blockcarousel';
+    public final const RESOURCE_CSS_FETCHMORE = 'css-fetchmore';
+    public final const RESOURCE_CSS_GROUPAUTHOR = 'css-group-author';
+    public final const RESOURCE_CSS_GROUPAUTHORSECTIONS = 'css-group-authorsections';
+    public final const RESOURCE_CSS_BLOCK = 'css-block';
+    public final const RESOURCE_CSS_FUNCTIONALBLOCK = 'css-functionalblock';
+    public final const RESOURCE_CSS_FUNCTIONBUTTON = 'css-functionbutton';
+    public final const RESOURCE_CSS_SOCIALMEDIA = 'css-socialmedia';
+    public final const RESOURCE_CSS_FORMMYPREFERENCES = 'css-form-mypreferences';
+    public final const RESOURCE_CSS_BLOCKCOMMENTS = 'css-block-comments';
+    public final const RESOURCE_CSS_FRAMEADDCOMMENTS = 'css-frame-addcomments';
+    public final const RESOURCE_CSS_SIDESECTIONSMENU = 'css-side-sections-menu';
+    public final const RESOURCE_CSS_LITTLEGUY = 'css-littleguy';
+    public final const RESOURCE_CSS_SPEECHBUBBLE = 'css-speechbubble';
+    public final const RESOURCE_CSS_FEATUREDIMAGE = 'css-featuredimage';
+    public final const RESOURCE_CSS_HOMEMESSAGE = 'css-homemessage';
+    public final const RESOURCE_CSS_BLOCKNOTIFICATIONS = 'css-block-notifications';
+    public final const RESOURCE_CSS_SCROLLNOTIFICATIONS = 'css-scroll-notifications';
+    public final const RESOURCE_CSS_WIDGET = 'css-widget';
+    public final const RESOURCE_CSS_DYNAMICMAXHEIGHT = 'css-dynamicmaxheight';
+    public final const RESOURCE_CSS_STRUCTURE = 'css-structure';
+    public final const RESOURCE_CSS_LAYOUT = 'css-layout';
+    public final const RESOURCE_CSS_SECTIONLAYOUT = 'css-sectionlayout';
 
     public function getResourcesToProcess()
     {

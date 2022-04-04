@@ -4,8 +4,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoPSystem_Dataload_CheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_SYSTEMACCESSKEYVALID = 'system-checkpoint-systemaccesskeyvalid';
-    public const CHECKPOINT_SYSTEMACCESSIPVALID = 'system-checkpoint-systemaccessipvalid';
+    public final const CHECKPOINT_SYSTEMACCESSKEYVALID = 'system-checkpoint-systemaccesskeyvalid';
+    public final const CHECKPOINT_SYSTEMACCESSIPVALID = 'system-checkpoint-systemaccessipvalid';
 
     public function getCheckpointsToProcess(): array
     {

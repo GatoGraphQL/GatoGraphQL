@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ModuleProcessors;
 
 class RootModuleProcessors extends AbstractModuleProcessor
 {
-    public const MODULE_EMPTY = 'empty';
+    public final const MODULE_EMPTY = 'empty';
 
     public function getModulesToProcess(): array
     {

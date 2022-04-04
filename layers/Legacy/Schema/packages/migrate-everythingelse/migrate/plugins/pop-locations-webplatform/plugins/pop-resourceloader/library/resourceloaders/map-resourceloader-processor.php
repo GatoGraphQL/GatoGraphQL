@@ -5,11 +5,11 @@
 // from calling pop.MapInitMarker.initMarker in some .tmpl files and the consequent dependencies
 class EM_PoPProcessors_MapResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_MAP = 'em-mapa';
-    public const RESOURCE_MAPMEMORY = 'em-map-memory';
-    public const RESOURCE_MAPINITMARKER = 'em-map-initmarker';
-    public const RESOURCE_MAPRUNTIME = 'em-map-runtime';
-    public const RESOURCE_MAPRUNTIMEMEMORY = 'em-map-runtime-memory';
+    public final const RESOURCE_MAP = 'em-mapa';
+    public final const RESOURCE_MAPMEMORY = 'em-map-memory';
+    public final const RESOURCE_MAPINITMARKER = 'em-map-initmarker';
+    public final const RESOURCE_MAPRUNTIME = 'em-map-runtime';
+    public final const RESOURCE_MAPRUNTIMEMEMORY = 'em-map-runtime-memory';
 
     public function getResourcesToProcess()
     {

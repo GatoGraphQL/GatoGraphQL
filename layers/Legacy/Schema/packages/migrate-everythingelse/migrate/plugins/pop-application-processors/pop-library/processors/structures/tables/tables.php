@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
-    public const MODULE_TABLE_MYCONTENT = 'table-mycontent';
-    public const MODULE_TABLE_MYHIGHLIGHTS = 'table-myhighlights';
-    public const MODULE_TABLE_MYPOSTS = 'table-myposts';
+    public final const MODULE_TABLE_MYCONTENT = 'table-mycontent';
+    public final const MODULE_TABLE_MYHIGHLIGHTS = 'table-myhighlights';
+    public final const MODULE_TABLE_MYPOSTS = 'table-myposts';
 
     public function getModulesToProcess(): array
     {

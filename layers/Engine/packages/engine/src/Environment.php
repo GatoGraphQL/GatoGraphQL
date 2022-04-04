@@ -6,8 +6,8 @@ namespace PoP\Engine;
 
 class Environment
 {
-    public const DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS = 'DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS';
-    public const ENABLE_QUERYING_APP_STATE_FIELDS = 'ENABLE_QUERYING_APP_STATE_FIELDS';
+    public final const DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS = 'DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS';
+    public final const ENABLE_QUERYING_APP_STATE_FIELDS = 'ENABLE_QUERYING_APP_STATE_FIELDS';
 
     public static function disablePersistingDefinitionsOnEachRequest(): bool
     {

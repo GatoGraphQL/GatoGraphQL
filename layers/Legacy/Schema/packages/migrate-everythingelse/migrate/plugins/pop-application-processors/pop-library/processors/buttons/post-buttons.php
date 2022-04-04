@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public const MODULE_BUTTON_POST_CREATE = 'postbutton-post-create';
+    public final const MODULE_BUTTON_POST_CREATE = 'postbutton-post-create';
 
     public function getModulesToProcess(): array
     {

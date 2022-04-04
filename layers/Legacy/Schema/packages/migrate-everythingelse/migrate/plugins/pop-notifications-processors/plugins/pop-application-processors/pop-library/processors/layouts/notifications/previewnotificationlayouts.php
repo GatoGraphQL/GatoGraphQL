@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Processor_PreviewNotificationLayoutsBase
 {
-    public const MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS = 'layout-previewnotification-details';
-    public const MODULE_LAYOUT_PREVIEWNOTIFICATION_LIST = 'layout-previewnotification-list';
+    public final const MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS = 'layout-previewnotification-details';
+    public final const MODULE_LAYOUT_PREVIEWNOTIFICATION_LIST = 'layout-previewnotification-list';
 
     public function getModulesToProcess(): array
     {

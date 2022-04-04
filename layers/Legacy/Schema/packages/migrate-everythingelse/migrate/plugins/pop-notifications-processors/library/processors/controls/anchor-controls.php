@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS = 'buttoncontrol-notifications';
-    public const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD = 'buttoncontrol-notifications-markallasread';
+    public final const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS = 'buttoncontrol-notifications';
+    public final const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD = 'buttoncontrol-notifications-markallasread';
 
     public function getModulesToProcess(): array
     {

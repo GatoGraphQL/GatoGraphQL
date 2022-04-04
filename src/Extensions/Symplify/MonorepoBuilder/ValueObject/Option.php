@@ -9,61 +9,61 @@ final class Option
     /**
      * @var string
      */
-    public const PACKAGE_ORGANIZATIONS = 'package-organizations';
+    public final const PACKAGE_ORGANIZATIONS = 'package-organizations';
     /**
      * @var string
      */
-    public const PLUGIN_CONFIG_ENTRIES = 'plugin-config-entries';
+    public final const PLUGIN_CONFIG_ENTRIES = 'plugin-config-entries';
     /**
      * @var string
      */
-    public const SKIP_DOWNGRADE_TEST_FILES = 'skip-downgrade-test-files';
+    public final const SKIP_DOWNGRADE_TEST_FILES = 'skip-downgrade-test-files';
     /**
      * @var string
      */
-    public const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional-downgrade-rector-configs';
+    public final const ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS = 'additional-downgrade-rector-configs';
     /**
      * @var string
      */
-    public const ENVIRONMENT_VARIABLES = 'environment-variables';
+    public final const ENVIRONMENT_VARIABLES = 'environment-variables';
     /**
      * @var string
      */
-    public const ENVIRONMENT_VARIABLE_NAME = 'environment-variable-name';
+    public final const ENVIRONMENT_VARIABLE_NAME = 'environment-variable-name';
     /**
      * @var string
      */
-    public const JSON = 'json';
+    public final const JSON = 'json';
     /**
      * @var string
      */
-    public const PSR4_ONLY = 'psr4-only';
+    public final const PSR4_ONLY = 'psr4-only';
     /**
      * @var string
      */
-    public const SKIP_UNMIGRATED = 'skip-unmigrated';
+    public final const SKIP_UNMIGRATED = 'skip-unmigrated';
     /**
      * @var string
      */
-    public const UNMIGRATED_FAILING_PACKAGES = 'unmigrated-failing-packages';
+    public final const UNMIGRATED_FAILING_PACKAGES = 'unmigrated-failing-packages';
     /**
      * @var string
      */
-    public const LEVEL = 'level';
+    public final const LEVEL = 'level';
     /**
      * @var string
      */
-    public const SUBFOLDER = 'subfolder';
+    public final const SUBFOLDER = 'subfolder';
     /**
      * @var string
      */
-    public const FILTER = 'filter';
+    public final const FILTER = 'filter';
     /**
      * @var string
      */
-    public const OUTPUT_FILE = 'output-file';
+    public final const OUTPUT_FILE = 'output-file';
     /**
      * @var string
      */
-    public const SCOPED_ONLY = 'scoped-only';
+    public final const SCOPED_ONLY = 'scoped-only';
 }

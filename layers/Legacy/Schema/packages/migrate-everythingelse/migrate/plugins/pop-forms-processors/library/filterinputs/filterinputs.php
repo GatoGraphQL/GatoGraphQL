@@ -3,8 +3,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_FormsFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
-    public const FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
+    public final const FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponent-selectabletypeahead-profiles';
+    public final const FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
 
     public function getFilterInputsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_SubMenus extends PoP_Module_Processor_SubMenusBase
 {
-    public const MODULE_SUBMENU_ACCOUNT = 'submenu-account';
+    public final const MODULE_SUBMENU_ACCOUNT = 'submenu-account';
 
     public function getModulesToProcess(): array
     {

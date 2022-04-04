@@ -8,7 +8,7 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModu
 
 abstract class AbstractCustomPostFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     /**
      * @return string[]

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayouts extends PoP_Module_Processor_CreateOrUpdateStanceButtonScriptFrameLayoutsBase
 {
-    public const MODULE_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'postbutton-stance-createorupdate-appendtoscript';
+    public final const MODULE_BUTTON_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'postbutton-stance-createorupdate-appendtoscript';
 
     public function getModulesToProcess(): array
     {

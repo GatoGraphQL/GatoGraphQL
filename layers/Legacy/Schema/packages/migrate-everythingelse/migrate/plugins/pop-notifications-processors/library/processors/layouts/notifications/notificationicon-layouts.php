@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_NotificationActionIconLayouts extends PoP_Module_Processor_NotificationActionIconLayoutsBase
 {
-    public const MODULE_LAYOUT_NOTIFICATIONICON = 'layout-notificationicon';
+    public final const MODULE_LAYOUT_NOTIFICATIONICON = 'layout-notificationicon';
 
     public function getModulesToProcess(): array
     {

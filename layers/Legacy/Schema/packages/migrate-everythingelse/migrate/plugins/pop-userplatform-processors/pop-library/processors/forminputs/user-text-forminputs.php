@@ -3,15 +3,15 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdateUserTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_FORMINPUT_CUU_USERNAME = 'forminput-cuu-username';
-    public const MODULE_FORMINPUT_CUU_EMAIL = 'forminput-cuu-email';
-    public const MODULE_FORMINPUT_CUU_CURRENTPASSWORD = 'forminput-cuu-currentpassword';
-    public const MODULE_FORMINPUT_CUU_PASSWORD = 'forminput-cuu-password';
-    public const MODULE_FORMINPUT_CUU_NEWPASSWORD = 'forminput-cuu-newpassword';
-    public const MODULE_FORMINPUT_CUU_PASSWORDREPEAT = 'forminput-cuu-passwordrepeat';
-    public const MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT = 'forminput-cuu-newpasswordrepeat';
-    public const MODULE_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstName';
-    public const MODULE_FORMINPUT_CUU_USERWEBSITEURL = 'forminput-cuu-userwebsiteurl';
+    public final const MODULE_FORMINPUT_CUU_USERNAME = 'forminput-cuu-username';
+    public final const MODULE_FORMINPUT_CUU_EMAIL = 'forminput-cuu-email';
+    public final const MODULE_FORMINPUT_CUU_CURRENTPASSWORD = 'forminput-cuu-currentpassword';
+    public final const MODULE_FORMINPUT_CUU_PASSWORD = 'forminput-cuu-password';
+    public final const MODULE_FORMINPUT_CUU_NEWPASSWORD = 'forminput-cuu-newpassword';
+    public final const MODULE_FORMINPUT_CUU_PASSWORDREPEAT = 'forminput-cuu-passwordrepeat';
+    public final const MODULE_FORMINPUT_CUU_NEWPASSWORDREPEAT = 'forminput-cuu-newpasswordrepeat';
+    public final const MODULE_FORMINPUT_CUU_FIRSTNAME = 'forminput-cuu-firstName';
+    public final const MODULE_FORMINPUT_CUU_USERWEBSITEURL = 'forminput-cuu-userwebsiteurl';
 
     public function getModulesToProcess(): array
     {

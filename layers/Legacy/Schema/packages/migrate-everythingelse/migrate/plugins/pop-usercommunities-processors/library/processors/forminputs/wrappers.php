@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_Module_Processor_FormInputInputWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY = 'filterinputwrapper-communities';
+    public final const MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY = 'filterinputwrapper-communities';
 
     public function getModulesToProcess(): array
     {

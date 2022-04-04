@@ -5,7 +5,7 @@ use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 class GD_UserLogin_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
+    public final const CHECKPOINT_LOGGEDINUSER_ISADMINISTRATOR = 'checkpoint-loggedinuser-isadministrator';
 
     public function getCheckpointsToProcess(): array
     {

@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_ProfileFeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public const MODULE_FEEDBACKMESSAGEINNER_CREATEPROFILE = 'feedbackmessageinner-createprofile';
-    public const MODULE_FEEDBACKMESSAGEINNER_UPDATEPROFILE = 'feedbackmessageinner-updateprofile';
+    public final const MODULE_FEEDBACKMESSAGEINNER_CREATEPROFILE = 'feedbackmessageinner-createprofile';
+    public final const MODULE_FEEDBACKMESSAGEINNER_UPDATEPROFILE = 'feedbackmessageinner-updateprofile';
 
     public function getModulesToProcess(): array
     {

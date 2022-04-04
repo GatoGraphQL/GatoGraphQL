@@ -2,7 +2,7 @@
 
 class PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues extends PoP_Module_Processor_PostTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_CARD_STANCETARGET = 'formcomponent-card-stancetarget';
+    public final const MODULE_FORMCOMPONENT_CARD_STANCETARGET = 'formcomponent-card-stancetarget';
 
     public function getModulesToProcess(): array
     {

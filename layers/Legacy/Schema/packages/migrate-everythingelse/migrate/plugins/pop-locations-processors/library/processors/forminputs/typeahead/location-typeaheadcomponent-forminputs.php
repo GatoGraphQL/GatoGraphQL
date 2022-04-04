@@ -4,7 +4,7 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Module_Processor_LocationTypeaheadComponentFormInputsBase
 {
-    public const MODULE_TYPEAHEAD_COMPONENT_LOCATIONS = 'forminput-typeaheadcomponent-locations';
+    public final const MODULE_TYPEAHEAD_COMPONENT_LOCATIONS = 'forminput-typeaheadcomponent-locations';
 
     public function getModulesToProcess(): array
     {

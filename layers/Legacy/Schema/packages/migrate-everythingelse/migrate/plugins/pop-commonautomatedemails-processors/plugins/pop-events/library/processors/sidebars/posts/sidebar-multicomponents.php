@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT = 'sidebarmulticomponent-automatedemails-event';
+    public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT = 'sidebarmulticomponent-automatedemails-event';
     
     public function getModulesToProcess(): array
     {

@@ -4,9 +4,9 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION = 'layoutwrapper-userstancepostinteraction';
-    public const MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
-    public const MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
+    public final const MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION = 'layoutwrapper-userstancepostinteraction';
+    public final const MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
+    public final const MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
 
     public function getModulesToProcess(): array
     {

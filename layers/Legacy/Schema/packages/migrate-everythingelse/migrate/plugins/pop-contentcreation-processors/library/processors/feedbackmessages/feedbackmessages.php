@@ -2,9 +2,9 @@
 
 class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_FEEDBACKMESSAGE_FLAG = 'feedbackmessage-flag';
-    public const MODULE_FEEDBACKMESSAGE_CREATECONTENT = 'feedbackmessage-createcontent';
-    public const MODULE_FEEDBACKMESSAGE_UPDATECONTENT = 'feedbackmessage-updatecontent';
+    public final const MODULE_FEEDBACKMESSAGE_FLAG = 'feedbackmessage-flag';
+    public final const MODULE_FEEDBACKMESSAGE_CREATECONTENT = 'feedbackmessage-createcontent';
+    public final const MODULE_FEEDBACKMESSAGE_UPDATECONTENT = 'feedbackmessage-updatecontent';
 
     public function getModulesToProcess(): array
     {

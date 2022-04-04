@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_FLAG = 'form-flag';
+    public final const MODULE_FORM_FLAG = 'form-flag';
 
     public function getModulesToProcess(): array
     {

@@ -6,7 +6,7 @@ namespace PoP\Root\Feedback;
 
 class FeedbackItemEntryKeys
 {
-    public const CATEGORY = 'category';
-    public const MESSAGE_PLACEHOLDER = 'messagePlaceholder';
-    public const SPECIFIED_BY_URL = 'specifiedByURL';
+    public final const CATEGORY = 'category';
+    public final const MESSAGE_PLACEHOLDER = 'messagePlaceholder';
+    public final const SPECIFIED_BY_URL = 'specifiedByURL';
 }

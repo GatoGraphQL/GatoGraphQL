@@ -13,10 +13,10 @@ use PoPSitesWassup\StanceMutations\MutationResolverBridges\UpdateStanceMutationR
 
 class UserStance_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public const MODULE_DATALOAD_STANCE_UPDATE = 'dataload-stance-update';
-    public const MODULE_DATALOAD_STANCE_CREATE = 'dataload-stance-create';
-    public const MODULE_DATALOAD_STANCE_CREATEORUPDATE = 'dataload-stance-createorupdate';
-    public const MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE = 'dataload-singlepoststance-createorupdate';
+    public final const MODULE_DATALOAD_STANCE_UPDATE = 'dataload-stance-update';
+    public final const MODULE_DATALOAD_STANCE_CREATE = 'dataload-stance-create';
+    public final const MODULE_DATALOAD_STANCE_CREATEORUPDATE = 'dataload-stance-createorupdate';
+    public final const MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE = 'dataload-singlepoststance-createorupdate';
 
     public function getModulesToProcess(): array
     {

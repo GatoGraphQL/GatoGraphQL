@@ -2,9 +2,9 @@
 
 class UserStance_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_CarouselInnersBase
 {
-    public const MODULE_CAROUSELINNER_STANCES = 'carouselinner-stances';
-    public const MODULE_CAROUSELINNER_AUTHORSTANCES = 'carouselinner-authorstances';
-    public const MODULE_CAROUSELINNER_TAGSTANCES = 'carouselinner-tagstances';
+    public final const MODULE_CAROUSELINNER_STANCES = 'carouselinner-stances';
+    public final const MODULE_CAROUSELINNER_AUTHORSTANCES = 'carouselinner-authorstances';
+    public final const MODULE_CAROUSELINNER_TAGSTANCES = 'carouselinner-tagstances';
 
     public function getModulesToProcess(): array
     {

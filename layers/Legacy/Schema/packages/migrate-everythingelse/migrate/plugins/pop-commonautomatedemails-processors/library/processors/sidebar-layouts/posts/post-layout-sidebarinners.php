@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-automatedemails-postsidebarinner-compacthorizontal-post';
+    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-automatedemails-postsidebarinner-compacthorizontal-post';
 
     public function getModulesToProcess(): array
     {

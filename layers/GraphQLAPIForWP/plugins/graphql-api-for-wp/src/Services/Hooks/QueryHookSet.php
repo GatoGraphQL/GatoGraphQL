@@ -15,7 +15,7 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHookSet extends AbstractHookSet
 {
-    public const NON_EXISTING_ID = "non-existing";
+    public final const NON_EXISTING_ID = "non-existing";
 
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 

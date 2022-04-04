@@ -4,9 +4,9 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolv
 
 class PoP_PostsCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public const MODULE_DATALOAD_MYPOSTS_TABLE_EDIT = 'dataload-myposts-table-edit';
-    public const MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myposts-scroll-simpleviewpreview';
-    public const MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myposts-scroll-fullviewpreview';
+    public final const MODULE_DATALOAD_MYPOSTS_TABLE_EDIT = 'dataload-myposts-table-edit';
+    public final const MODULE_DATALOAD_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myposts-scroll-simpleviewpreview';
+    public final const MODULE_DATALOAD_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myposts-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

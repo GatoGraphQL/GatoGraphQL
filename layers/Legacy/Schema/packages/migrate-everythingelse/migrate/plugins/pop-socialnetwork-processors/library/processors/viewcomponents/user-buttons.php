@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_UserViewComponentButtons extends PoP_Module_Processor_UserViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW = 'viewcomponent-userbutton-sendmessage-preview';
-    public const MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL = 'viewcomponent-userbutton-sidebar-sendmessage-full';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_PREVIEW = 'viewcomponent-userbutton-sendmessage-preview';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_USER_SENDMESSAGE_FULL = 'viewcomponent-userbutton-sidebar-sendmessage-full';
 
     public function getModulesToProcess(): array
     {

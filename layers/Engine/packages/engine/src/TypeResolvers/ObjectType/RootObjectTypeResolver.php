@@ -15,7 +15,7 @@ class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
 
-    public const HOOK_DESCRIPTION = __CLASS__ . ':description';
+    public final const HOOK_DESCRIPTION = __CLASS__ . ':description';
 
     private ?RootTypeDataLoader $rootTypeDataLoader = null;
 

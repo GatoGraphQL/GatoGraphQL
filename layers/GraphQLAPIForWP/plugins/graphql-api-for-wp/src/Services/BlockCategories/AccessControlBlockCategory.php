@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLAccessControlListCusto
 
 class AccessControlBlockCategory extends AbstractBlockCategory
 {
-    public const ACCESS_CONTROL_BLOCK_CATEGORY = 'graphql-api-access-control';
+    public final const ACCESS_CONTROL_BLOCK_CATEGORY = 'graphql-api-access-control';
 
     private ?GraphQLAccessControlListCustomPostType $graphQLAccessControlListCustomPostType = null;
 

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentHiddenInputAlertFormComponents extends PoP_Module_Processor_CommentHiddenInputAlertFormComponentsBase
 {
-    public const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT = 'formcomponent-hiddeninputalert-layoutcomment';
+    public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENT = 'formcomponent-hiddeninputalert-layoutcomment';
 
     public function getModulesToProcess(): array
     {

@@ -20,7 +20,7 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
 {
     use AutomaticallyInstantiatedServiceTrait;
 
-    public const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
+    public final const HOOK_FORM_FIELDNAMES = __CLASS__ . ':form-fieldnames';
 
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?GravityFormsAddEntryToFormMutationResolver $gravityFormsAddEntryToFormMutationResolver = null;

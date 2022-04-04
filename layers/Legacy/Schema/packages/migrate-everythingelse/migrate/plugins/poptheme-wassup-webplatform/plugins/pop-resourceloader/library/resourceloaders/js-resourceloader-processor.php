@@ -2,8 +2,8 @@
 
 class PoPTheme_Wassup_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_CUSTOMFUNCTIONS = 'custom-functions';
-    public const RESOURCE_CUSTOMPAGESECTIONMANAGER = 'custom-pagesection-manager';
+    public final const RESOURCE_CUSTOMFUNCTIONS = 'custom-functions';
+    public final const RESOURCE_CUSTOMPAGESECTIONMANAGER = 'custom-pagesection-manager';
 
     public function getResourcesToProcess()
     {

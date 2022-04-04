@@ -20,8 +20,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 {
     use UseTabpanelMenuPageTrait;
 
-    public const FORM_ORIGIN = 'form-origin';
-    public const SETTINGS_FIELD = 'graphql-api-settings';
+    public final const FORM_ORIGIN = 'form-origin';
+    public final const SETTINGS_FIELD = 'graphql-api-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;

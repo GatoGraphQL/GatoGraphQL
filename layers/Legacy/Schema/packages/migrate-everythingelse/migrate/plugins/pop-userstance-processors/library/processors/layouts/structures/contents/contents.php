@@ -2,8 +2,8 @@
 
 class UserStance_Module_Processor_LayoutContents extends PoP_Module_Processor_ContentsBase
 {
-    public const MODULE_CONTENTLAYOUT_STANCES = 'contentlayout-stances';
-    public const MODULE_CONTENTLAYOUT_STANCES_APPENDABLE = 'contentlayout-stances-appendable';
+    public final const MODULE_CONTENTLAYOUT_STANCES = 'contentlayout-stances';
+    public final const MODULE_CONTENTLAYOUT_STANCES_APPENDABLE = 'contentlayout-stances-appendable';
 
     public function getModulesToProcess(): array
     {

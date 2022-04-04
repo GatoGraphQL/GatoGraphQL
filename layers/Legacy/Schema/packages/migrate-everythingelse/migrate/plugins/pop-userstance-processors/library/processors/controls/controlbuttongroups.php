@@ -2,9 +2,9 @@
 
 class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL = 'controlbuttongroup-stancestats-general';
-    public const MODULE_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE = 'controlbuttongroup-stancestats-article';
-    public const MODULE_CONTROLBUTTONGROUP_STANCESTATS = 'controlbuttongroup-stancestats';
+    public final const MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL = 'controlbuttongroup-stancestats-general';
+    public final const MODULE_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE = 'controlbuttongroup-stancestats-article';
+    public final const MODULE_CONTROLBUTTONGROUP_STANCESTATS = 'controlbuttongroup-stancestats';
 
     public function getModulesToProcess(): array
     {

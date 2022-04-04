@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_TagViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-tagbutton-sharebyemail-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-sharebyemail-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-tagbutton-sharebyemail-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-sharebyemail-previewdropdown';
 
     public function getModulesToProcess(): array
     {

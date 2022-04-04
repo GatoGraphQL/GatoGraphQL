@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_LocationContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public const MODULE_TRIGGERTYPEAHEADSELECTINNER_LOCATION = 'triggertypeaheadselectinner-location';
+    public final const MODULE_TRIGGERTYPEAHEADSELECTINNER_LOCATION = 'triggertypeaheadselectinner-location';
 
     public function getModulesToProcess(): array
     {

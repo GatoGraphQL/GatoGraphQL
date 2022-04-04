@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_EventLinksCreation_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE = 'multicomponent-form-eventlink-rightside';
+    public final const MODULE_MULTICOMPONENT_FORM_EVENTLINK_RIGHTSIDE = 'multicomponent-form-eventlink-rightside';
 
     public function getModulesToProcess(): array
     {

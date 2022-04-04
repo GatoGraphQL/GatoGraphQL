@@ -5,8 +5,8 @@ use PoPSitesWassup\PostMutations\MutationResolverBridges\UpdatePostMutationResol
 
 class PoP_PostsCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public const MODULE_DATALOAD_POST_UPDATE = 'dataload-post-update';
-    public const MODULE_DATALOAD_POST_CREATE = 'dataload-post-create';
+    public final const MODULE_DATALOAD_POST_UPDATE = 'dataload-post-update';
+    public final const MODULE_DATALOAD_POST_CREATE = 'dataload-post-create';
 
     public function getModulesToProcess(): array
     {

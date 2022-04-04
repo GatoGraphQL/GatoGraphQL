@@ -6,6 +6,6 @@ namespace PoPSchema\SchemaCommons\Constants;
 
 class Order
 {
-    public const ASC = 'ASC';
-    public const DESC = 'DESC';
+    public final const ASC = 'ASC';
+    public final const DESC = 'DESC';
 }

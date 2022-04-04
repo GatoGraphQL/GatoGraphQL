@@ -6,12 +6,12 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filterinput-typeahead-communities-user';
-    public const URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
-    public const URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
-    public const URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filterinput-typeahead-communities-user';
+    public final const URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
+    public final const URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
+    public final const URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
     public function getFilterInputsToProcess(): array
     {

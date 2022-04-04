@@ -2,7 +2,7 @@
 
 class PoP_Application_Module_Processor_UserTriggerLayoutFormComponentValues extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
+    public final const MODULE_FORMCOMPONENT_CARD_USER = 'forminput-user-card';
 
     public function getModulesToProcess(): array
     {

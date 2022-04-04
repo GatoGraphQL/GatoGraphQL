@@ -2,10 +2,10 @@
 
 class PoP_SPAResourceLoader_JSSPAResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_CODESPLITJSLIBRARYMANAGER = 'codesplit-jslibrary-manager';
-    public const RESOURCE_SPARESOURCELOADER = 'sparesourceloader';
-    public const RESOURCE_SPARESOURCELOADERMANAGEROVERRIDE = 'sparesourceloader-manager-override';
-    public const RESOURCE_HANDLEBARSHELPERSSPARESOURCELOADERHOOKS = 'handlebarshelpers-sparesourceloader-hooks';
+    public final const RESOURCE_CODESPLITJSLIBRARYMANAGER = 'codesplit-jslibrary-manager';
+    public final const RESOURCE_SPARESOURCELOADER = 'sparesourceloader';
+    public final const RESOURCE_SPARESOURCELOADERMANAGEROVERRIDE = 'sparesourceloader-manager-override';
+    public final const RESOURCE_HANDLEBARSHELPERSSPARESOURCELOADERHOOKS = 'handlebarshelpers-sparesourceloader-hooks';
 
     public function getResourcesToProcess()
     {

@@ -2,14 +2,14 @@
 
 class PoP_CoreProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_GOOGLEMAPS = 'external-googlemaps';
-    public const RESOURCE_EXTERNAL_GMAPS = 'external-gmaps';
-    public const RESOURCE_EXTERNAL_PERFECTSCROLLBAR = 'external-perfectscrollbar';
-    public const RESOURCE_EXTERNAL_JQUERYCOOKIE = 'external-jquerycookie';
-    public const RESOURCE_EXTERNAL_WAYPOINTS = 'external-waypoints';
-    public const RESOURCE_EXTERNAL_TYPEAHEAD = 'external-typeahead';
-    public const RESOURCE_EXTERNAL_FULLSCREEN = 'external-fullscreen';
-    public const RESOURCE_EXTERNAL_DYNAMICMAXHEIGHT = 'external-dynamicmaxheight';
+    public final const RESOURCE_EXTERNAL_GOOGLEMAPS = 'external-googlemaps';
+    public final const RESOURCE_EXTERNAL_GMAPS = 'external-gmaps';
+    public final const RESOURCE_EXTERNAL_PERFECTSCROLLBAR = 'external-perfectscrollbar';
+    public final const RESOURCE_EXTERNAL_JQUERYCOOKIE = 'external-jquerycookie';
+    public final const RESOURCE_EXTERNAL_WAYPOINTS = 'external-waypoints';
+    public final const RESOURCE_EXTERNAL_TYPEAHEAD = 'external-typeahead';
+    public final const RESOURCE_EXTERNAL_FULLSCREEN = 'external-fullscreen';
+    public final const RESOURCE_EXTERNAL_DYNAMICMAXHEIGHT = 'external-dynamicmaxheight';
 
     public function getResourcesToProcess()
     {

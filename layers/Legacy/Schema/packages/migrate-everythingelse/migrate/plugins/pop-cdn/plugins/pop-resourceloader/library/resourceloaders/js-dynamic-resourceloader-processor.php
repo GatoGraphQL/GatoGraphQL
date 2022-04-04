@@ -2,7 +2,7 @@
 
 class PoP_CDN_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_CDNCONFIG = 'cdn-config';
+    public final const RESOURCE_CDNCONFIG = 'cdn-config';
 
     public function getResourcesToProcess()
     {

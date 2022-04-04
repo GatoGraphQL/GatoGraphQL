@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_UserSelectableTypeaheadTriggerFormComponents extends PoP_Module_Processor_UserTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES = 'formcomponent-selectabletypeaheadtrigger-usercommunities';
-    public const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES = 'filtercomponent-selectabletypeaheadtrigger-communities';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_USERCOMMUNITIES = 'formcomponent-selectabletypeaheadtrigger-usercommunities';
+    public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COMMUNITIES = 'filtercomponent-selectabletypeaheadtrigger-communities';
 
     public function getModulesToProcess(): array
     {

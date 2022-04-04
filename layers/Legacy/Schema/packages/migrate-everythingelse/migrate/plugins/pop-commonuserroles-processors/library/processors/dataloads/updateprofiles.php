@@ -7,8 +7,8 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class GD_URE_Module_Processor_UpdateProfileDataloads extends PoP_Module_Processor_UpdateProfileDataloadsBase
 {
-    public const MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE = 'dataload-profileorganization-update';
-    public const MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE = 'dataload-profileindividual-update';
+    public final const MODULE_DATALOAD_PROFILEORGANIZATION_UPDATE = 'dataload-profileorganization-update';
+    public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_UPDATE = 'dataload-profileindividual-update';
 
     public function getModulesToProcess(): array
     {

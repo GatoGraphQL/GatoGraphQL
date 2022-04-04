@@ -6,6 +6,6 @@ namespace PoPCMSSchema\Media;
 
 class Environment
 {
-    public const MEDIA_LIST_DEFAULT_LIMIT = 'MEDIA_LIST_DEFAULT_LIMIT';
-    public const MEDIA_LIST_MAX_LIMIT = 'MEDIA_LIST_MAX_LIMIT';
+    public final const MEDIA_LIST_DEFAULT_LIMIT = 'MEDIA_LIST_DEFAULT_LIMIT';
+    public final const MEDIA_LIST_MAX_LIMIT = 'MEDIA_LIST_MAX_LIMIT';
 }

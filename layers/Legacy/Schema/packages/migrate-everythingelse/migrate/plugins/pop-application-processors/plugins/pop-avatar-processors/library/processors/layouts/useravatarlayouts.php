@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_UserAvatarLayoutsBase
 {
-    public const MODULE_LAYOUT_USERAVATAR_40 = 'layout-useravatar-40';
-    public const MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE = 'layout-useravatar-40-responsive';
-    public const MODULE_LAYOUT_USERAVATAR_120 = 'layout-useravatar-120';
-    public const MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE = 'layout-useravatar-120-responsive';
-    public const MODULE_LAYOUT_USERAVATAR_150 = 'layout-useravatar-150';
-    public const MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE = 'layout-useravatar-150-responsive';
+    public final const MODULE_LAYOUT_USERAVATAR_40 = 'layout-useravatar-40';
+    public final const MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE = 'layout-useravatar-40-responsive';
+    public final const MODULE_LAYOUT_USERAVATAR_120 = 'layout-useravatar-120';
+    public final const MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE = 'layout-useravatar-120-responsive';
+    public final const MODULE_LAYOUT_USERAVATAR_150 = 'layout-useravatar-150';
+    public final const MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE = 'layout-useravatar-150-responsive';
 
     public function getModulesToProcess(): array
     {

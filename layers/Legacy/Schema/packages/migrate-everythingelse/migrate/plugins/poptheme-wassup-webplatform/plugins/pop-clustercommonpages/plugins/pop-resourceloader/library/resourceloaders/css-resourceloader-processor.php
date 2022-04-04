@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_CommonPages_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_SMALLDETAILS = 'css-smalldetails';
+    public final const RESOURCE_CSS_SMALLDETAILS = 'css-smalldetails';
 
     public function getResourcesToProcess()
     {

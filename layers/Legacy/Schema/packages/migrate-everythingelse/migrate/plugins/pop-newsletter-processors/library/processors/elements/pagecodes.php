@@ -2,7 +2,7 @@
 
 class GenericForms_Module_Processor_PageCodes extends PoP_Module_Processor_HTMLPageCodesBase
 {
-    public const MODULE_PAGECODE_NEWSLETTER = 'pagecode-newsletter';
+    public final const MODULE_PAGECODE_NEWSLETTER = 'pagecode-newsletter';
 
     public function getModulesToProcess(): array
     {

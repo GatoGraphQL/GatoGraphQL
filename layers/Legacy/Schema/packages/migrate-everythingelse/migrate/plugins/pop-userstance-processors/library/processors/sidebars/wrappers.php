@@ -2,14 +2,14 @@
 
 class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_WIDGETWRAPPER_STANCETARGET = 'widgetwrapper-stancetarget';
-    public const MODULE_WIDGETWRAPPER_STANCES = 'widgetwrapper-stances';
-    public const MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE = 'lazypostbuttonwrapper-stance-createorupdate';
-    public const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE = 'postbuttonwrapper-stance-createorcreate';
-    public const MODULE_BUTTONGROUPWRAPPER_STANCECOUNT = 'postbuttongroupwrapper-stancecount';
-    public const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-opvotereferencedby-fullview';
-    public const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
-    public const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
+    public final const MODULE_WIDGETWRAPPER_STANCETARGET = 'widgetwrapper-stancetarget';
+    public final const MODULE_WIDGETWRAPPER_STANCES = 'widgetwrapper-stances';
+    public final const MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE = 'lazypostbuttonwrapper-stance-createorupdate';
+    public final const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE = 'postbuttonwrapper-stance-createorcreate';
+    public final const MODULE_BUTTONGROUPWRAPPER_STANCECOUNT = 'postbuttongroupwrapper-stancecount';
+    public final const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-opvotereferencedby-fullview';
+    public final const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
+    public final const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
 
     public function getModulesToProcess(): array
     {

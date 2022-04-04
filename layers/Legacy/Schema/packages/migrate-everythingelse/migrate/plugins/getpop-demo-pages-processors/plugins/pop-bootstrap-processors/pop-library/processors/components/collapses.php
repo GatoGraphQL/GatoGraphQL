@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_Processor_CollapsePanelGroupComponentsBase
 {
-    public const MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP = 'getpopdemo-collapsecomponent-hometop';
+    public final const MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP = 'getpopdemo-collapsecomponent-hometop';
 
     public function getModulesToProcess(): array
     {

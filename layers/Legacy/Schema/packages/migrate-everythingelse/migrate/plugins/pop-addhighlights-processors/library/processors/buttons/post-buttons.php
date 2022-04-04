@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public const MODULE_BUTTON_HIGHLIGHT_CREATE = 'postbutton-highlight-create';
-    public const MODULE_BUTTON_HIGHLIGHT_CREATEBTN = 'postbutton-highlight-createbtn';
+    public final const MODULE_BUTTON_HIGHLIGHT_CREATE = 'postbutton-highlight-create';
+    public final const MODULE_BUTTON_HIGHLIGHT_CREATEBTN = 'postbutton-highlight-createbtn';
 
     public function getModulesToProcess(): array
     {

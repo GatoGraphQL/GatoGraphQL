@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\ItemProcessors;
 
 class Constants
 {
-    public const SEPARATOR_PROCESSORITEMFULLNAME = "::";
+    public final const SEPARATOR_PROCESSORITEMFULLNAME = "::";
 }

@@ -9,12 +9,12 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class CategoryFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_CATEGORIES = 'filterinputcontainer-categories';
-    public const MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
-    public const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
-    public const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
+    public final const MODULE_FILTERINPUTCONTAINER_CATEGORIES = 'filterinputcontainer-categories';
+    public final const MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT = 'filterinputcontainer-categorycount';
+    public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
+    public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
 
     public function getModulesToProcess(): array
     {

@@ -9,9 +9,9 @@ use PoP\Root\FeedbackItemProviders\GenericFeedbackItemProvider as UpstreamGeneri
 
 class GenericFeedbackItemProvider extends UpstreamGenericFeedbackItemProvider
 {
-    public const W1 = 'w1';
-    public const N1 = 'n1';
-    public const S1 = 's1';
+    public final const W1 = 'w1';
+    public final const N1 = 'n1';
+    public final const S1 = 's1';
 
     /**
      * @return string[]

@@ -12,10 +12,10 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class SingleCommentFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
-    public const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
+    public final const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
+    public final const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
 
     public function getModulesToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_EventsCreation_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUTEVENT_TABLECOL = 'layoutevent_tablecol';
+    public final const RESOURCE_LAYOUTEVENT_TABLECOL = 'layoutevent_tablecol';
 
     public function getResourcesToProcess()
     {

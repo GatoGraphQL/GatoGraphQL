@@ -2,19 +2,19 @@
 
 class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_QUICKLINKGROUP_POST = 'quicklinkgroup-post';
-    public const MODULE_QUICKLINKGROUP_POSTBOTTOM = 'quicklinkgroup-postbottom';
-    public const MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER = 'quicklinkgroup-postbottomvolunteer';
-    public const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED = 'quicklinkgroup-postbottom-extended';
-    public const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER = 'quicklinkgroup-postbottom-extendedvolunteer';
-    public const MODULE_QUICKLINKGROUP_POSTEDIT = 'quicklinkgroup-postedit';
-    public const MODULE_QUICKLINKGROUP_ADDONSPOSTEDIT = 'quicklinkgroup-addonspostedit';
-    public const MODULE_QUICKLINKGROUP_USERCOMPACT = 'quicklinkgroup-usercompact';
-    public const MODULE_QUICKLINKGROUP_USER = 'quicklinkgroup-user';
-    public const MODULE_QUICKLINKGROUP_USERBOTTOM = 'quicklinkgroup-userbottom';
-    public const MODULE_QUICKLINKGROUP_USER_EDITMEMBERS = 'quicklinkgroup-user-editmembers';
-    public const MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
-    public const MODULE_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
+    public final const MODULE_QUICKLINKGROUP_POST = 'quicklinkgroup-post';
+    public final const MODULE_QUICKLINKGROUP_POSTBOTTOM = 'quicklinkgroup-postbottom';
+    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER = 'quicklinkgroup-postbottomvolunteer';
+    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED = 'quicklinkgroup-postbottom-extended';
+    public final const MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER = 'quicklinkgroup-postbottom-extendedvolunteer';
+    public final const MODULE_QUICKLINKGROUP_POSTEDIT = 'quicklinkgroup-postedit';
+    public final const MODULE_QUICKLINKGROUP_ADDONSPOSTEDIT = 'quicklinkgroup-addonspostedit';
+    public final const MODULE_QUICKLINKGROUP_USERCOMPACT = 'quicklinkgroup-usercompact';
+    public final const MODULE_QUICKLINKGROUP_USER = 'quicklinkgroup-user';
+    public final const MODULE_QUICKLINKGROUP_USERBOTTOM = 'quicklinkgroup-userbottom';
+    public final const MODULE_QUICKLINKGROUP_USER_EDITMEMBERS = 'quicklinkgroup-user-editmembers';
+    public final const MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
+    public final const MODULE_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
 
     public function getModulesToProcess(): array
     {

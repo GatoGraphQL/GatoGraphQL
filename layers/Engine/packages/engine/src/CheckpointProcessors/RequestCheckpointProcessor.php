@@ -11,7 +11,7 @@ use PoP\Root\App;
 
 class RequestCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const DOING_POST = 'doing-post';
+    public final const DOING_POST = 'doing-post';
 
     private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 

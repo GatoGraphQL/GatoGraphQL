@@ -2,8 +2,8 @@
 
 class PoP_UserCommunities_Module_Processor_MySectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_MYMEMBERS_TABLE_EDIT = 'block-mymembers-table-edit';
-    public const MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW = 'block-mymembers-scroll-fullviewpreview';
+    public final const MODULE_BLOCK_MYMEMBERS_TABLE_EDIT = 'block-mymembers-table-edit';
+    public final const MODULE_BLOCK_MYMEMBERS_SCROLL_FULLVIEW = 'block-mymembers-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Module_Processor_SelectableTypeaheadMapFormComponentsBase
 {
-    public const MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent-locationsmap';
-    public const MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP = 'formcomponent-singlelocationlocationsmap';
+    public final const MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent-locationsmap';
+    public final const MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP = 'formcomponent-singlelocationlocationsmap';
 
     public function getModulesToProcess(): array
     {

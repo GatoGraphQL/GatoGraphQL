@@ -10,12 +10,12 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
 {
     use QueriedDBObjectModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_AUTHOR_CONTENT = 'dataload-author-content';
-    public const MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT = 'dataload-author-summarycontent';
-    public const MODULE_DATALOAD_TAG_CONTENT = 'dataload-tag-content';
-    public const MODULE_DATALOAD_SINGLE_CONTENT = 'dataload-single-content';
-    public const MODULE_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
-    public const MODULE_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
+    public final const MODULE_DATALOAD_AUTHOR_CONTENT = 'dataload-author-content';
+    public final const MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT = 'dataload-author-summarycontent';
+    public final const MODULE_DATALOAD_TAG_CONTENT = 'dataload-tag-content';
+    public final const MODULE_DATALOAD_SINGLE_CONTENT = 'dataload-single-content';
+    public final const MODULE_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
+    public final const MODULE_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
 
     public function getModulesToProcess(): array
     {

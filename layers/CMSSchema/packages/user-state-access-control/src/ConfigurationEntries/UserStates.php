@@ -6,6 +6,6 @@ namespace PoPCMSSchema\UserStateAccessControl\ConfigurationEntries;
 
 class UserStates
 {
-    public const IN = 'in';
-    public const OUT = 'out';
+    public final const IN = 'in';
+    public final const OUT = 'out';
 }

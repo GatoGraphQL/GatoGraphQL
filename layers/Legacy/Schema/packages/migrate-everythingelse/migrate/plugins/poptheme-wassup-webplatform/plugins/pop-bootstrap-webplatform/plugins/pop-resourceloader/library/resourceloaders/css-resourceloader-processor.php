@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_Core_Bootstrap_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_MULTISELECT = 'css-multiselect';
+    public final const RESOURCE_CSS_MULTISELECT = 'css-multiselect';
 
     public function getResourcesToProcess()
     {

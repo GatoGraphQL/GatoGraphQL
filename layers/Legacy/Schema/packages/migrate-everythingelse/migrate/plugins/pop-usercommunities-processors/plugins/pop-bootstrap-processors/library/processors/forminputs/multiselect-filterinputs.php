@@ -12,9 +12,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFilterInputs extends PoP_Module_
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
-    public const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
-    public const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
+    public final const MODULE_URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
+    public final const MODULE_URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
+    public final const MODULE_URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
     private ?MemberPrivilegeEnumTypeResolver $memberPrivilegeEnumTypeResolver = null;
     private ?MemberTagEnumTypeResolver $memberTagEnumTypeResolver = null;

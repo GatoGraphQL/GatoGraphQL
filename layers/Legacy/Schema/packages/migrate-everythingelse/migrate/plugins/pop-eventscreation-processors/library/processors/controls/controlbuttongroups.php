@@ -2,11 +2,11 @@
 
 class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_CONTROLBUTTONGROUP_ADDEVENT = 'customcontrolbuttongroup-addevent';
-    public const MODULE_CONTROLBUTTONGROUP_EVENTLINKS = 'customcontrolbuttongroup-eventlinks';
-    public const MODULE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS = 'customcontrolbuttongroup-authoreventlinks';
-    public const MODULE_CONTROLBUTTONGROUP_TAGEVENTLINKS = 'customcontrolbuttongroup-tageventlinks';
-    public const MODULE_CONTROLBUTTONGROUP_MYEVENTLINKS = 'customcontrolbuttongroup-myeventlinks';
+    public final const MODULE_CONTROLBUTTONGROUP_ADDEVENT = 'customcontrolbuttongroup-addevent';
+    public final const MODULE_CONTROLBUTTONGROUP_EVENTLINKS = 'customcontrolbuttongroup-eventlinks';
+    public final const MODULE_CONTROLBUTTONGROUP_AUTHOREVENTLINKS = 'customcontrolbuttongroup-authoreventlinks';
+    public final const MODULE_CONTROLBUTTONGROUP_TAGEVENTLINKS = 'customcontrolbuttongroup-tageventlinks';
+    public final const MODULE_CONTROLBUTTONGROUP_MYEVENTLINKS = 'customcontrolbuttongroup-myeventlinks';
 
     public function getModulesToProcess(): array
     {

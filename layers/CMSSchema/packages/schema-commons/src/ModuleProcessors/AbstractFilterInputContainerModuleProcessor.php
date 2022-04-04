@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstractFilterInputContainerModuleProcessor
 {
-    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     /**
      * @return string[]

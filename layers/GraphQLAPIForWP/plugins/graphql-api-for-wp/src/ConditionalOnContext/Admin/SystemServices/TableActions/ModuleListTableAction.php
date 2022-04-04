@@ -13,9 +13,9 @@ use PoP\Root\App;
  */
 class ModuleListTableAction extends AbstractListTableAction
 {
-    public const ACTION_ENABLE = 'enable';
-    public const ACTION_DISABLE = 'disable';
-    public const INPUT_BULK_ACTION_IDS = 'bulk-action-items';
+    public final const ACTION_ENABLE = 'enable';
+    public final const ACTION_DISABLE = 'disable';
+    public final const INPUT_BULK_ACTION_IDS = 'bulk-action-items';
 
     private bool $processed = false;
     /**

@@ -19,7 +19,7 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
  */
 class ModuleListTable extends AbstractItemListTable
 {
-    public const URL_PARAM_MODULE_TYPE = 'module-type';
+    public final const URL_PARAM_MODULE_TYPE = 'module-type';
 
     /**
      * Singular name of the listed records

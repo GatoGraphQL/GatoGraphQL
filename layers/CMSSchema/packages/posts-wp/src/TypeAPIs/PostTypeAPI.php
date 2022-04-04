@@ -18,7 +18,7 @@ use function get_post;
  */
 class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterface
 {
-    public const HOOK_QUERY = __CLASS__ . ':query';
+    public final const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
      * Add an extra hook just to modify posts

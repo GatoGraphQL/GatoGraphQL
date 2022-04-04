@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_LocationPostLinksCreation_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE = 'multicomponent-form-locationpostlink-rightside';
+    public final const MODULE_MULTICOMPONENT_FORM_LOCATIONPOSTLINK_RIGHTSIDE = 'multicomponent-form-locationpostlink-rightside';
 
     public function getModulesToProcess(): array
     {
