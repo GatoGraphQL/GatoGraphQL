@@ -37,9 +37,4 @@ abstract class AbstractAst implements AstInterface, LocatableInterface
     {
         return $this->location;
     }
-
-    public function setLocation(Location $location): void
-    {
-        $this->location = $location;
-    }
 }
