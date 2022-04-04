@@ -9,7 +9,7 @@ use PoPCMSSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModulePr
 
 class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public final const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT = 'filterinputcontainer-mypostcount';

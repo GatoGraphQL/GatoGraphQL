@@ -18,7 +18,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
 
-    public final const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
     protected function getTermObjectAndID(string | int | object $termObjectOrID): array

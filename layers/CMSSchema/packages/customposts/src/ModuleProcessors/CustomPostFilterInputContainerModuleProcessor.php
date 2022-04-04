@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class CustomPostFilterInputContainerModuleProcessor extends AbstractCustomPostFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public final const MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST = 'filterinputcontainer-unioncustompostlist';
     public final const MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT = 'filterinputcontainer-unioncustompostcount';

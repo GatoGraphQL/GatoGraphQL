@@ -22,7 +22,7 @@ use function get_post;
  */
 class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterface
 {
-    public final const HOOK_QUERY = __CLASS__ . ':query';
+    public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
      * @param array<string, mixed> $query

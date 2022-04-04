@@ -8,7 +8,7 @@ use PoPCMSSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleP
 
 class PostCategoryFilterInputContainerModuleProcessor extends CategoryFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     /**
      * @return string[]

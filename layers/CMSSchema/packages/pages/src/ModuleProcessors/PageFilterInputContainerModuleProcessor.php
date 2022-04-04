@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public final const MODULE_FILTERINPUTCONTAINER_PAGELISTLIST = 'filterinputcontainer-pagelist';
     public final const MODULE_FILTERINPUTCONTAINER_PAGELISTCOUNT = 'filterinputcontainer-pagecount';

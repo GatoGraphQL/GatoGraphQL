@@ -11,7 +11,7 @@ use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModu
 
 class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID = 'filterinputcontainer-entity-by-id';
     public final const MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG = 'filterinputcontainer-entity-by-slug';

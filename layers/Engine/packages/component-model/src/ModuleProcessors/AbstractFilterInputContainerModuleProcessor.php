@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
 abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     final public function getSubmodules(array $module): array
     {

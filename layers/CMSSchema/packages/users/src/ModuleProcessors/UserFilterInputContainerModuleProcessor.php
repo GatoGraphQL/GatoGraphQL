@@ -9,7 +9,7 @@ use PoPCMSSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 
 class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     public final const MODULE_FILTERINPUTCONTAINER_USERS = 'filterinputcontainer-users';
     public final const MODULE_FILTERINPUTCONTAINER_USERCOUNT = 'filterinputcontainer-usercount';

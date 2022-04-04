@@ -8,7 +8,7 @@ use PoPCMSSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
 
 class PostTagFilterInputContainerModuleProcessor extends TagFilterInputContainerModuleProcessor
 {
-    public final const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
+    public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
     /**
      * @return string[]
