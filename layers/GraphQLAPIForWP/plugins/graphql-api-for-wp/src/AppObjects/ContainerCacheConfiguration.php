@@ -14,9 +14,6 @@ class ContainerCacheConfiguration
         private readonly ?string $containerConfigurationCacheNamespace,
         private readonly ?string $containerConfigurationCacheDirectory,
     ) {
-        $this->cacheContainerConfiguration = $cacheContainerConfiguration;
-        $this->containerConfigurationCacheNamespace = $containerConfigurationCacheNamespace;
-        $this->containerConfigurationCacheDirectory = $containerConfigurationCacheDirectory;
     }
 
     public function cacheContainerConfiguration(): bool
