@@ -407,7 +407,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+                'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
                 'class' => SettingsComponent::class,
@@ -430,7 +430,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+                'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
                 'class' => CustomPostMetaComponent::class,
@@ -445,7 +445,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
                 'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+                'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
                 'class' => UserMetaComponent::class,
@@ -460,7 +460,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+                'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
                 'class' => CommentMetaComponent::class,
@@ -475,7 +475,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::ENTRIES,
                 // Remove whitespaces, and empty entries (they mess up with regex)
-                'callback' => fn (array $value) => array_filter(array_map('trim', $value)),
+                'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
                 'class' => TaxonomyMetaComponent::class,

@@ -177,7 +177,7 @@ class QueryParser implements QueryParserInterface
                                 $stack[] = $restStr;
                                 if ($startFromEnd) {
                                     // Reverse each result, and the order of the results
-                                    $stack = array_reverse(array_map('strrev', $stack));
+                                    $stack = array_reverse(array_map(strrev(...), $stack));
                                 }
                                 return $stack;
                             }
@@ -196,7 +196,7 @@ class QueryParser implements QueryParserInterface
         }
         if ($startFromEnd) {
             // Reverse each result, and the order of the results
-            $stack = array_reverse(array_map('strrev', $stack));
+            $stack = array_reverse(array_map(strrev(...), $stack));
         }
         return $stack;
     }
