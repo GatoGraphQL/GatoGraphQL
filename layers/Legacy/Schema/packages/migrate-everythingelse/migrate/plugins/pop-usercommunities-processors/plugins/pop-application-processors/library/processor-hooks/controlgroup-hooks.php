@@ -7,7 +7,7 @@ class UREPoP_RoleProcessors_ControlGroup_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:blockauthorpostlist:layouts',
-            array($this, 'getLayoutSubmodules')
+            $this->getLayoutSubmodules(...)
         );
     }
 

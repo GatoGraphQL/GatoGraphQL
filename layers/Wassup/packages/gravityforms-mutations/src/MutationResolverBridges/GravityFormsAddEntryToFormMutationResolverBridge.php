@@ -48,24 +48,24 @@ class GravityFormsAddEntryToFormMutationResolverBridge extends AbstractFormCompo
         if ('POST' === App::server('REQUEST_METHOD')) {
             App::addAction(
                 HookNames::AFTER_BOOT_APPLICATION,
-                array($this, 'setup'),
+                $this->setup(...),
                 5
             );
 
             // The 2 functions below must be executed in this order, otherwise 'renameFields' may remove the value filled by 'maybeFillFields'
             App::addAction(
                 HookNames::AFTER_BOOT_APPLICATION,
-                array($this, 'renameFields'),
+                $this->renameFields(...),
                 6
             );
             App::addAction(
                 HookNames::AFTER_BOOT_APPLICATION,
-                array($this, 'maybeFillFields'),
+                $this->maybeFillFields(...),
                 7
             );
             App::addAction(
                 HookNames::AFTER_BOOT_APPLICATION,
-                array($this, 'maybeValidateCaptcha'),
+                $this->maybeValidateCaptcha(...),
                 8
             );
         }

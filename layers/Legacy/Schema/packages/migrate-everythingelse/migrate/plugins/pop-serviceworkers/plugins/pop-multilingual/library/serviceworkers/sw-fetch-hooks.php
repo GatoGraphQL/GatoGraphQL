@@ -8,21 +8,21 @@ class PoP_ServiceWorkers_QtransX_Job_Fetch_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:locales',
-            array($this, 'getLocales')
+            $this->getLocales(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:appshell_url',
-            array($this, 'getAppshellUrl'),
+            $this->getAppshellUrl(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:locales_byurl',
-            array($this, 'getLocalesByurl')
+            $this->getLocalesByurl(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:default_locale',
-            array($this, 'getDefaultLocale')
+            $this->getDefaultLocale(...)
         );
     }
 

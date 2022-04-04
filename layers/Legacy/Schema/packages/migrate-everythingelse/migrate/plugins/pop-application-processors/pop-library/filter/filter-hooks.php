@@ -7,13 +7,13 @@ class PoPThemeWassup_DataLoad_FilterHooks
     {
         \PoP\Root\App::addFilter(
             'Blog:FilterInnerModuleProcessor:inputmodules',
-            array($this, 'modifyPostFilterInputs'),
+            $this->modifyPostFilterInputs(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'Blog:SimpleFilterInners:inputmodules',
-            array($this, 'modifyPostSimpleFilterInputs'),
+            $this->modifyPostSimpleFilterInputs(...),
             10,
             2
         );

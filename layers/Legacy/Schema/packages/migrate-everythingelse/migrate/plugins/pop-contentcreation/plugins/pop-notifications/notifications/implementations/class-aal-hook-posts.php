@@ -16,11 +16,11 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
 
         // Created/Updated/Removed Post
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, array($this, 'createdPost'));
-        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, array($this, 'updatedPost'), 10, 2);
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE, $this->createdPost(...));
+        \PoP\Root\App::addAction(AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_UPDATE, $this->updatedPost(...), 10, 2);
         \PoP\Root\App::addAction(
             'popcms:transitionPostStatus',
-            array($this, 'removedPost'),
+            $this->removedPost(...),
             10,
             3
         );
@@ -30,7 +30,7 @@ class PoP_ContentCreation_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
         if ($cmsapplicationapi->isAdminPanel()) {
             \PoP\Root\App::addAction(
                 'popcms:transitionPostStatus',
-                array($this, 'adminApprovalPost'),
+                $this->adminApprovalPost(...),
                 10,
                 3
             );

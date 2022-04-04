@@ -22,7 +22,7 @@ class PoP_UserStanceWP
     {
 
         // Priority: after PoP Add Related Posts
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888372);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888372);
     }
     public function init()
     {

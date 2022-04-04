@@ -15,7 +15,7 @@ abstract class AbstractDefinitionPersistenceHookSet extends AbstractHookSet
     {
         App::addAction(
             $this->getHookName(),
-            array($this, 'maybePersist')
+            $this->maybePersist(...)
         );
     }
     

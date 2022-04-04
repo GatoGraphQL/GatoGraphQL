@@ -6,7 +6,7 @@ class PoP_ServiceWorkers_UserState_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude:partial',
-            array($this, 'getExcludedPartialpaths'),
+            $this->getExcludedPartialpaths(...),
             10,
             2
         );
@@ -14,12 +14,12 @@ class PoP_ServiceWorkers_UserState_Hooks
         $resourceType = 'json';
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:strategies:'.$resourceType.':networkFirst:startsWith:partial',
-            array($this, 'getNetworkfirstJsonPartialpaths')
+            $this->getNetworkfirstJsonPartialpaths(...)
         );
 
         // \PoP\Root\App::addFilter(
         //     'popSwAddEtagHeader',
-        //     array($this, 'addEtagHeader')
+        //     $this->addEtagHeader(...)
         // );
     }
 

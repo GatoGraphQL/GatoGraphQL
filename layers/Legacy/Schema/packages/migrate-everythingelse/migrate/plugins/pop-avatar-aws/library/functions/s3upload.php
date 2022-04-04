@@ -10,21 +10,21 @@ class PoP_Avatar_AWS_S3Upload extends PoP_AWS_S3UploadBase
 
         \PoP\Root\App::addAction(
             'user_avatar_add_photo:file-uploaded',
-            array($this, 'maybeUploadToS3'),
+            $this->maybeUploadToS3(...),
             10,
             2
         );
 
         \PoP\Root\App::addAction(
             'user_avatar_add_photo:image-url',
-            array($this, 'getImageUrl'),
+            $this->getImageUrl(...),
             10,
             3
         );
 
         \PoP\Root\App::addAction(
             'user_avatar_add_photo:retrieve-file',
-            array($this, 'maybeDownloadFromS3'),
+            $this->maybeDownloadFromS3(...),
             10,
             2
         );

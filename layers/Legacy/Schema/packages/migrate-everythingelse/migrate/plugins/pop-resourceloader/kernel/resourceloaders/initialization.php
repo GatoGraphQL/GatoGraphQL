@@ -8,9 +8,9 @@ class PoPWebPlatform_ResourceLoader_Initialization {
 		// Wait until the system is initialized, so we can access the application state
 		// These 2 functions (register and localize) are separated into 2 calls, so that they can independently 
 		// be unhooked (eg: by Service Workers)
-		\PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'), 50);
-		\PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'localizeScripts'), 70);
-		\PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
+		\PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...), 50);
+		\PoP\Root\App::addAction('popcms:enqueueScripts', $this->localizeScripts(...), 70);
+		\PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...), 50);
 	}
 
 	function registerScripts() {

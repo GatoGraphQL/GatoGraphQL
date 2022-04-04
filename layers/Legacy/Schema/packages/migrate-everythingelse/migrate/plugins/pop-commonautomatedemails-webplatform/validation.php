@@ -14,8 +14,8 @@ class PoP_CommonAutomatedEmailsWebPlatform_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_APPLICATIONWEBPLATFORM_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (PTWAE_POP_APPLICATIONWEBPLATFORM_MIN_VERSION > POP_APPLICATIONWEBPLATFORM_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -27,8 +27,8 @@ class PoP_CommonAutomatedEmailsWebPlatform_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_COMMONAUTOMATEDEMAILS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (PTWAE_POP_COMMONAUTOMATEDEMAILS_MIN_VERSION > POP_COMMONAUTOMATEDEMAILS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));

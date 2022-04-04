@@ -19,7 +19,7 @@ class Plugins
     public function __construct()
     {
         // Priority: new section, after PoP Posts
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888205);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888205);
     }
     public function init()
     {

@@ -6,7 +6,7 @@ class PoP_UserCommunitiesProcessors_MyPreferencesHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserMultipleComponents:emailnotifications:network:modules',
-            array($this, 'getForminputgroups')
+            $this->getForminputgroups(...)
         );
     }
 

@@ -15,19 +15,19 @@ class PoP_Avatar_AWSFunctions
         // Make the AWS functions take over the original ones
         \PoP\Root\App::addFilter(
             'popcomponent:avatar:avatarexists',
-            array($this, 'avatarExists'),
+            $this->avatarExists(...),
             10,
             3
         );
         \PoP\Root\App::addAction(
             'popcomponent:avatar:avataruploaded',
-            array($this, 'uploadToS3'),
+            $this->uploadToS3(...),
             10,
             3
         );
         \PoP\Root\App::addFilter(
             'gdGetAvatarPhotoinfo:override',
-            array($this, 'getPhotoInfo'),
+            $this->getPhotoInfo(...),
             10,
             3
         );
@@ -35,7 +35,7 @@ class PoP_Avatar_AWSFunctions
         // Register the AWS S3 domain in the Allowed Domains list
         \PoP\Root\App::addFilter(
             'pop_modulemanager:allowed_domains',
-            array($this, 'getAllowedDomains')
+            $this->getAllowedDomains(...)
         );
     }
 

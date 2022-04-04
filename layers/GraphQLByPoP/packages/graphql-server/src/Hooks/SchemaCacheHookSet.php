@@ -14,7 +14,7 @@ class SchemaCacheHookSet extends AbstractHookSet
     {
         App::addFilter(
             CacheUtils::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
-            array($this, 'getSchemaCacheKeyComponents')
+            $this->getSchemaCacheKeyComponents(...)
         );
     }
 

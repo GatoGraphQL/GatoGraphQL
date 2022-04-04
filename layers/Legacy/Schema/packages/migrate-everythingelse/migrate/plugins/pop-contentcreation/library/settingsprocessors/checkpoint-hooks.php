@@ -6,7 +6,7 @@ class PoP_ContentCreation_SettingsProcessor_CheckpointHooks
     {
         \PoP\Root\App::addFilter(
             'ModuleProcessor:checkpoints',
-            array($this, 'overrideCheckpoints')
+            $this->overrideCheckpoints(...)
         );
     }
 

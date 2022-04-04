@@ -6,7 +6,7 @@ class PoP_UserAvatarProcessors_UserPlatformProcessors_CreateUpdateUser_Hooks
     {
         \PoP\Root\App::addFilter(
             'pop_module:createuser:components', 
-            array($this, 'getComponentSubmodules'), 
+            $this->getComponentSubmodules(...), 
             10, 
             3
         );

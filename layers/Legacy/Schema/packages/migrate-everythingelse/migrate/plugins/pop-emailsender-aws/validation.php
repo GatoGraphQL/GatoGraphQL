@@ -14,8 +14,8 @@ class PoP_EmailSender_AWS_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_MAILER_AWS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POPMAILERAWS_POP_MAILER_AWS_MIN_VERSION > POP_MAILER_AWS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -27,8 +27,8 @@ class PoP_EmailSender_AWS_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_EMAILSENDER_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POPMAILERAWS_POP_EMAILSENDER_MIN_VERSION > POP_EMAILSENDER_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));

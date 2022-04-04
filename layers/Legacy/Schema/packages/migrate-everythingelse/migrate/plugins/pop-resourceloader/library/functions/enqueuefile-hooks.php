@@ -5,7 +5,7 @@ class PoP_ResourceLoader_EnqueueFileHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', $this->getEnqueuefileType(...));
     }
 
     public function getEnqueuefileType($type)

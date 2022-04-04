@@ -6,7 +6,7 @@ class WSL_SettingsProcessor_CheckpointHooks
     {
         \PoP\Root\App::addFilter(
             'Wassup_Module_SettingsProcessor:changepwdprofile:checkpoints',
-            array($this, 'getChangepwdCheckpoints')
+            $this->getChangepwdCheckpoints(...)
         );
     }
 

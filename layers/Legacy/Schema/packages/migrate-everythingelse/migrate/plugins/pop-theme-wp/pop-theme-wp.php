@@ -21,11 +21,11 @@ class Plugins
         include_once 'validation.php';
         \PoP\Root\App::addFilter(
             'PoP_Theme_Validation:provider-validation-class',
-            array($this, 'getProviderValidationClass')
+            $this->getProviderValidationClass(...)
         );
 
         // Priority: after PoP Theme, inner circle
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888401);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888401);
     }
     public function getProviderValidationClass($class)
     {

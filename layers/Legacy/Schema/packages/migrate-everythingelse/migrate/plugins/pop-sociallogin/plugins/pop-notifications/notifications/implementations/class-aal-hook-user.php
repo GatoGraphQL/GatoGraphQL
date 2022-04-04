@@ -19,7 +19,7 @@ class WSL_AAL_PoP_Hook_Users /* extends AAL_Hook_Base*/
         // Prompt the user to change the email
         \PoP\Root\App::addAction(
             'popcomponent:sociallogin:usercreated',
-            array($this, 'requestChangeEmail'),
+            $this->requestChangeEmail(...),
             20, // Execute after the User Welcome Message
             2
         );

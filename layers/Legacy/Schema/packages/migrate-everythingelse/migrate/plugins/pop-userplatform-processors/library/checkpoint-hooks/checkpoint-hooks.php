@@ -7,7 +7,7 @@ class PoP_UserPlatform_CheckpointHooks
     {
         \PoP\Root\App::addFilter(
             'GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts:checkpoint-messages:loggedin',
-            array($this, 'getCheckpointMessages')
+            $this->getCheckpointMessages(...)
         );
     }
 

@@ -77,7 +77,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 		// Return the list of all resources which are decorating the given $resource
 		$resources = $this->getLoadedResources();
 		$this->maybe_decorated_resource = $resource;
-		$decorators = array_values(array_filter(array_map(array($this, 'decoratesResource'), $resources)));
+		$decorators = array_values(array_filter(array_map($this->decoratesResource(...), $resources)));
 		return $decorators;
 	}
 
@@ -152,7 +152,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterJs($resources) {
 
-		return array_values(array_filter($resources, array($this, 'isJs')));
+		return array_values(array_filter($resources, $this->isJs(...)));
 	}
 
 	function isJs(array $resource) {
@@ -162,7 +162,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterCss($resources) {
 
-		return array_values(array_filter($resources, array($this, 'isCss')));
+		return array_values(array_filter($resources, $this->isCss(...)));
 	}
 
 	function isCss(array $resource) {
@@ -172,7 +172,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterVendor($resources) {
 
-		return array_values(array_filter($resources, array($this, 'isVendor')));
+		return array_values(array_filter($resources, $this->isVendor(...)));
 	}
 
 	function isVendor(array $resource) {
@@ -182,7 +182,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterDynamic($resources) {
 
-		return array_values(array_filter($resources, array($this, 'isDynamic')));
+		return array_values(array_filter($resources, $this->isDynamic(...)));
 	}
 
 	function isDynamic(array $resource) {
@@ -192,7 +192,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterTemplate($resources) {
 
-		return array_values(array_filter($resources, array($this, 'isTemplate')));
+		return array_values(array_filter($resources, $this->isTemplate(...)));
 	}
 
 	function isTemplate(array $resource) {
@@ -214,7 +214,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 		return array();
 
-		// return array_filter($resources, array($this, 'inBody'));
+		// return array_filter($resources, $this->inBody(...));
 	}
 
 	// function inBody(array $resource) {
@@ -224,7 +224,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 
 	function filterInline($resources) {
 
-		return array_values(array_filter($resources, array($this, 'inline')));
+		return array_values(array_filter($resources, $this->inline(...)));
 	}
 
 	function inline(array $resource) {
@@ -250,7 +250,7 @@ class PoP_ResourceLoaderProcessorManager implements ResourceLoaderProcessorManag
 			));
 		}
 		
-		return array_values(array_filter($resources, array($this, 'canBundle')));
+		return array_values(array_filter($resources, $this->canBundle(...)));
 	}
 
 	function canBundle(array $resource) {

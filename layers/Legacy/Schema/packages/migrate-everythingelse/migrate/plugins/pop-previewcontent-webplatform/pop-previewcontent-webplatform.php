@@ -16,7 +16,7 @@ class PoP_PreviewContentWebPlatform
     {
 
         // Priority: after PoP Application Web Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888510);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888510);
     }
 
     public function init()

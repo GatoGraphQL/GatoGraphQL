@@ -6,13 +6,13 @@ class PoP_Volunteering_Module_Processor_GFFormInnerHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_GFFormInners:init-props',
-            array($this, 'initModelProps'),
+            $this->initModelProps(...),
             10,
             3
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_GFFormInners:layouts',
-            array($this, 'getLayoutSubmodules'),
+            $this->getLayoutSubmodules(...),
             10,
             2
         );

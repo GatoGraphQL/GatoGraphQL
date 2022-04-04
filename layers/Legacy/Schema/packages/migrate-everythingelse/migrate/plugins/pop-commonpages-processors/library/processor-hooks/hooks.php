@@ -6,7 +6,7 @@ class PoP_CommonPagesProcessors_Application_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomControlGroups:layouts',
-            array($this, 'getSubmodules'),
+            $this->getSubmodules(...),
             0,
             2
         );

@@ -7,7 +7,7 @@ class Notifications_Hooks
     {
         \PoP\Root\App::addFilter(
             'loadingLatestRoutes',
-            array($this, 'getLoadingLatestRoutes')
+            $this->getLoadingLatestRoutes(...)
         );
     }
 

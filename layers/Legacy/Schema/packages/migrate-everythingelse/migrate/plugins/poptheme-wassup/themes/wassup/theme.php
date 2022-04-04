@@ -10,26 +10,26 @@ class GD_Theme_Wassup extends \PoP\Theme\Themes\ThemeBase
 {
     public function __construct()
     {
-        App::addFilter('\PoP\Theme\Themes\ThemeManagerUtils:getThemeDir:'.$this->getName(), array($this, 'themeDir'));
+        App::addFilter('\PoP\Theme\Themes\ThemeManagerUtils:getThemeDir:'.$this->getName(), $this->themeDir(...));
 
         // Hooks to allow the thememodes to do some functionality
-        App::addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getName(), array($this, 'backgroundLoad'));
-        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getName(), array($this, 'filteringbyShowfilter'));
-        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getName(), array($this, 'getSidebarOrientation'));
+        App::addFilter(POP_HOOK_POPWEBPLATFORM_BACKGROUNDLOAD.':'.$this->getName(), $this->backgroundLoad(...));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getName(), $this->filteringbyShowfilter(...));
+        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getName(), $this->getSidebarOrientation(...));
 
-        App::addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->getName(), array($this, 'getEmbedUrl'));
-        App::addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->getName(), array($this, 'getPrintUrl'));
-        App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getName(), array($this, 'isMainScrollable'));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_EMBEDURL.':'.$this->getName(), $this->getEmbedUrl(...));
+        App::addFilter(POP_HOOK_POPMANAGERUTILS_PRINTURL.':'.$this->getName(), $this->getPrintUrl(...));
+        App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getName(), $this->isMainScrollable(...));
 
         // ThemeStyle
-        App::addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->getName(), array($this, 'getPagesectionsideLogosize'));
-        App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getName(), array($this, 'getCarouselUsersGridclass'));
-        App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), array($this, 'getScrollinnerThumbnailGrid'));
+        App::addFilter(POP_HOOK_PAGESECTIONS_SIDE_LOGOSIZE.':'.$this->getName(), $this->getPagesectionsideLogosize(...));
+        App::addFilter(POP_HOOK_CAROUSEL_USERS_GRIDCLASS.':'.$this->getName(), $this->getCarouselUsersGridclass(...));
+        App::addFilter(POP_HOOK_SCROLLINNER_THUMBNAIL_GRID.':'.$this->getName(), $this->getScrollinnerThumbnailGrid(...));
 
         App::addAction(HookNames::AFTER_BOOT_APPLICATION, function() {
             if (in_array(POP_STRATUM_WEB, App::getState('strata'))) {
-                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
-                App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), array($this, 'keepOpenTabs'));
+                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getName(), $this->getPagesectionJsmethod(...), 10, 2);
+                App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getName(), $this->keepOpenTabs(...));
             }
         });
 

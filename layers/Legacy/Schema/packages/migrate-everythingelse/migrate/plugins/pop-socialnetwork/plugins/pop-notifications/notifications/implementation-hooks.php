@@ -6,7 +6,7 @@ class PoP_SocialNetwork_Notifications_ImplementationHooks
     {
         \PoP\Root\App::addAction(
             'popcomponent:notifications:init',
-            array($this, 'addNotificationHooks')
+            $this->addNotificationHooks(...)
         );
     }
 

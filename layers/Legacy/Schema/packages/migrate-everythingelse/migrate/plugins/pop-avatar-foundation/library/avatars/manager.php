@@ -33,7 +33,7 @@ class PoP_AvatarFoundationManager
 
     // public function getNames()
     // {
-    //     return array_map(array($this, 'getName'), $this->sizes);
+    //     return array_map($this->getName(...), $this->sizes);
     // }
 
     public function getAvatarField($size)

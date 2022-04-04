@@ -6,7 +6,7 @@ class PoPTheme_Wassup_WebPlatform_PageSectionHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:hover',
-            array($this, 'initModelPropsHover'),
+            $this->initModelPropsHover(...),
             10,
             3
         );

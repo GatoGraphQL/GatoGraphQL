@@ -38,7 +38,7 @@ class RoutingHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookNames::REQUEST_URI,
-            array($this, 'maybeOverrideURIRoute')
+            $this->maybeOverrideURIRoute(...)
         );
     }
 

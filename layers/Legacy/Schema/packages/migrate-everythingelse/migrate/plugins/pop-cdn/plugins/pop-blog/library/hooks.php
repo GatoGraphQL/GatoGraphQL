@@ -9,13 +9,13 @@ class PoP_CDN_Blog_CDNHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
-            array($this, 'getThumbprintPartialpaths'),
+            $this->getThumbprintPartialpaths(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:hasParamValues',
-            array($this, 'getThumbprintParamvalues'),
+            $this->getThumbprintParamvalues(...),
             10,
             2
         );

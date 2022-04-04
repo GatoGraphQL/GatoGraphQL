@@ -19,7 +19,7 @@ class PoP_PostsCreation
     {
 
         // Priority: after PoP Related Posts
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888350);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888350);
     }
     public function init()
     {

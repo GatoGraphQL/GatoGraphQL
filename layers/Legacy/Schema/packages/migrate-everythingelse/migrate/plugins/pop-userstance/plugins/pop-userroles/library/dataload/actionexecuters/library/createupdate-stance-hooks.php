@@ -7,7 +7,7 @@ class UserStance_DataLoad_CreateUpdateStanceHooks
     {
         \PoP\Root\App::addFilter(
             'GD_CreateUpdate_Stance:createAdditionals',
-            array($this, 'createAdditionals')
+            $this->createAdditionals(...)
         );
     }
 

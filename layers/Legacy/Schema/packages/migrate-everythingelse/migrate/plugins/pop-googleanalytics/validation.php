@@ -20,26 +20,26 @@ class PoP_GoogleAnalytics_Validation
 
         $provider_validation_class = $this->getProviderValidationClass();
         if (is_null($provider_validation_class)) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'providerinstall_warning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'providerinstall_warning'));
+            \PoP\Root\App::addAction('admin_notices', $this->providerinstall_warning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->providerinstall_warning(...));
             $success = false;
         } elseif (!(new $provider_validation_class())->validate()) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'providerinitialize_warning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'providerinitialize_warning'));
+            \PoP\Root\App::addAction('admin_notices', $this->providerinitialize_warning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->providerinitialize_warning(...));
             $success = false;
         }
 
         if (!defined('POP_APPLICATIONWEBPLATFORM_VERSION')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->installWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->installWarning(...));
             $success = false;
         } elseif (!defined('POP_APPLICATIONWEBPLATFORM_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POPGA_POP_APPLICATIONWEBPLATFORM_MIN_VERSION > POP_APPLICATIONWEBPLATFORM_VERSION) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->versionWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->versionWarning(...));
         }
 
         return $success;

@@ -8,7 +8,7 @@ class PoP_AutomatedEmails_Operator
     {
         \PoP\Root\App::addAction(
             'shutdown', // This is a WP hook, must migrate to a PoP one
-            array($this, 'maybeSendAutomatedemail')
+            $this->maybeSendAutomatedemail(...)
         );
     }
     

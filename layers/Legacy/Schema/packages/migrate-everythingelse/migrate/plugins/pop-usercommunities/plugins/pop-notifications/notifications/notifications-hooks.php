@@ -8,13 +8,13 @@ class URE_PoP_Notifications_NotificationHooks
         // Hook into the API: User Network Meta keys
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:usernetwork:metakeys',
-            array($this, 'getUsernetworkMetakeys')
+            $this->getUsernetworkMetakeys(...)
         );
 
         // Hook into the API: User Network Conditions
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:usernetwork:conditions',
-            array($this, 'getUsernetworkConditions'),
+            $this->getUsernetworkConditions(...),
             10,
             2
         );
@@ -22,21 +22,21 @@ class URE_PoP_Notifications_NotificationHooks
         // Hook into the API: Notification Actions
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:userplusnetwork-user:actions',
-            array($this, 'getUserplusnetworkActions')
+            $this->getUserplusnetworkActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useristarget:actions',
-            array($this, 'getUseristargetActions')
+            $this->getUseristargetActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:users:actions',
-            array($this, 'addUseractions')
+            $this->addUseractions(...)
         );
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:users:actions',
-            array($this, 'addSameuseractions')
+            $this->addSameuseractions(...)
         );
     }
 

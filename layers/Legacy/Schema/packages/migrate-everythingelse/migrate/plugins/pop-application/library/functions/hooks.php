@@ -6,17 +6,17 @@ class PoP_Application_Hooks
     {
         \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent',
-            array($this, 'addAllcontentQueryargs')
+            $this->addAllcontentQueryargs(...)
         );
 
         \PoP\Root\App::addAction(
             'PoP_Application_SectionUtils:dataloadqueryargs-allcontent-bysingletag',
-            array($this, 'addAllcontentBySingleTagQueryargs')
+            $this->addAllcontentBySingleTagQueryargs(...)
         );
 
         \PoP\Root\App::addFilter(
             'latestcounts:allcontent:classes',
-            array($this, 'getAllcontentClasses')
+            $this->getAllcontentClasses(...)
         );
     }
 

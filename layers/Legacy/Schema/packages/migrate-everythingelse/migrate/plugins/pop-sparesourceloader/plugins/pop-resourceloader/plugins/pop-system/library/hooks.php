@@ -6,7 +6,7 @@ class PoPWebPlatform_SPAResourceLoader_InstallationHooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('PoPWebPlatform_Installation:generateResources', array($this, 'generateResources'));
+        \PoP\Root\App::addAction('PoPWebPlatform_Installation:generateResources', $this->generateResources(...));
     }
 
     public function generateResources()

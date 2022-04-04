@@ -19,7 +19,7 @@ class PoP_AutomatedEmails
     {
 
         // Priority: after PoP Server-Side Rendering
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888412);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888412);
     }
     public function init()
     {

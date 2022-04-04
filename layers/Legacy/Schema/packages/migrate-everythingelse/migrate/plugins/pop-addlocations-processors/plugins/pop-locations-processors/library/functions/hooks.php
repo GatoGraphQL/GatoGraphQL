@@ -6,7 +6,7 @@ class PoP_AddLocations_LocationsProcessors_Hooks
     {
         \PoP\Root\App::addFilter(
             'GD_EM_Module_Processor_InputGroupFormComponents:control-layout',
-            array($this, 'getControlLayout')
+            $this->getControlLayout(...)
         );
     }
 

@@ -15,8 +15,8 @@ class PoP_ContactUsProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_CONTACTUSPROCESSORS_POP_APPLICATIONPROCESSORS_MIN_VERSION > POP_APPLICATIONPROCESSORS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -28,8 +28,8 @@ class PoP_ContactUsProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_CONTACTUS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POP_CONTACTUSPROCESSORS_POP_CONTACTUS_MIN_VERSION > POP_CONTACTUS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));
@@ -41,8 +41,8 @@ class PoP_ContactUsProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_3'));
             $success = false;
         } elseif (!defined('POP_FORMSPROCESSORS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_3'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_3'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_3(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_3(...));
             $success = false;
         } elseif (POP_CONTACTUSPROCESSORS_POP_FORMSPROCESSORS_MIN_VERSION > POP_FORMSPROCESSORS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_3'));

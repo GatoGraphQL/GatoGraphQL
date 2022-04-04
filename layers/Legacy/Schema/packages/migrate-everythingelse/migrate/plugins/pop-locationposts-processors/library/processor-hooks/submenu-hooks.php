@@ -8,12 +8,12 @@ class PoP_CommonPages_EM_SubmenuHooks
         // Execute before the Events, so it can add the page right next to "All Content" button
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
-            array($this, 'addRoutes'),
+            $this->addRoutes(...),
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
-            array($this, 'addRoutes'),
+            $this->addRoutes(...),
             2
         );
     }

@@ -20,7 +20,7 @@ class PoP_LocationPostsCreationWebPlatform
     {
 
         // Priority: after PoP Location Posts Web Platform and PoP Posts Creation Web Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888560);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888560);
     }
     public function init()
     {

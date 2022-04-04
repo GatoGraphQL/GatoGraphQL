@@ -10,18 +10,18 @@ class PoP_AddPostLinks_DataLoad_ActionExecuter_Hook
     {
         \PoP\Root\App::addFilter(
             AbstractCreateUpdateCustomPostMutationResolverBridge::HOOK_FORM_DATA_CREATE_OR_UPDATE,
-            array($this, 'getFormData'),
+            $this->getFormData(...),
             10
         );
         \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_VALIDATE_CONTENT,
-            array($this, 'validateContent'),
+            $this->validateContent(...),
             10,
             2
         );
         \PoP\Root\App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'createUpdate'),
+            $this->createUpdate(...),
             10,
             2
         );

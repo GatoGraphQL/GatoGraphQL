@@ -19,7 +19,7 @@ class PoP_LocationPostsCreation
     {
 
         // Priority: after PoP Location Posts and PoP Posts Creation
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888360);
     }
     public function init()
     {

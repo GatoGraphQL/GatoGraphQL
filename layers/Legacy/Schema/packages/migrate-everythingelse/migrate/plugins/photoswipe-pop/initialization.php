@@ -17,13 +17,13 @@ class PhotoSwipe_PoP_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'));
-            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...));
         }
 
         \PoP\Root\App::addAction(
             'popcms:footer', 
-            array($this, 'printFooterModule')
+            $this->printFooterModule(...)
         );
     }
 

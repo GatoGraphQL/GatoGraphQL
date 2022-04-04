@@ -10,10 +10,10 @@ class GD_ThemeMode_Wassup_Embed extends GD_ThemeMode_Wassup_Simple
     public function __construct()
     {
 
-        // App::addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
+        // App::addFilter('gd_jquery_constants', $this->jqueryConstants(...));
 
         // Hooks to allow the thememodes to do some functionality
-        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), $this->filteringbyShowfilter(...));
 
         // The embed must make the main pageSection scrollable using perfect-scrollbar, so that the fullscreen mode works fine
         App::addFilter(POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_true');

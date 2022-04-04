@@ -8,19 +8,19 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 
 		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Engine:enqueue-scripts:first-script-handle',
-			array($this, 'getFirstScriptHandle')
+			$this->getFirstScriptHandle(...)
 		);
 
 		\PoP\Root\App::addAction(
 			'\PoP\ComponentModel\Engine:helperCalculations',
-			array($this, 'generateHelperCalculations'),
+			$this->generateHelperCalculations(...),
 			10,
 			3
 		);
 
 		\PoP\Root\App::addFilter(
 			'PoPWebPlatform_Initialization:init-scripts',
-			array($this, 'initScripts'),
+			$this->initScripts(...),
 			20
 		);
 	}

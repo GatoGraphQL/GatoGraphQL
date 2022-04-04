@@ -7,7 +7,7 @@ class PoP_SocialNetworkWebPlatform_CDN_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
-            array($this, 'getThumbprintNoparamvalues'),
+            $this->getThumbprintNoparamvalues(...),
             10,
             2
         );

@@ -8,11 +8,11 @@ class PoP_Blog_SubmenuHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:author:routes',
-            array($this, 'addRoutes')
+            $this->addRoutes(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:tag:routes',
-            array($this, 'addRoutes')
+            $this->addRoutes(...)
         );
     }
 

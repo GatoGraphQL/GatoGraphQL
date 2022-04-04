@@ -20,7 +20,7 @@ class PoP_EmailSender
     {
 
         // Priority: after PoP Application
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888310);
     }
     public function init()
     {

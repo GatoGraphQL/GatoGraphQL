@@ -20,7 +20,7 @@ class PoP_CSSConverter
     {
 
         // Priority: after PoP System
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888130);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888130);
     }
     public function init()
     {

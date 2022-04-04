@@ -24,16 +24,16 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     {
         // Print needed scripts
         $this->scripts = $this->enqueue = $this->scripttag_attributes = array();
-        \PoP\Root\App::addAction('popcms:printFooterScripts', array($this, 'printScripts'));
+        \PoP\Root\App::addAction('popcms:printFooterScripts', $this->printScripts(...));
 
         // Priority 60: after priority 50 in wp-content/plugins/pop-engine-webplatform/kernel/resourceloader/initialization.php
-        \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'enqueueScripts'), 60);
+        \PoP\Root\App::addAction('popcms:enqueueScripts', $this->enqueueScripts(...), 60);
 
         // Allow to add attributes crossorigin="anonymous"
         // Taken from https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
         \PoP\Root\App::addFilter(
             'PoP_HTMLTags_Utils:scripttag_attributes',
-            array($this, 'getScripttagAttributes')
+            $this->getScripttagAttributes(...)
         );
     }
 

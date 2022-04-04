@@ -7,19 +7,19 @@ class PoP_Application_DataloaderHooks
     {
         \PoP\Root\App::addFilter(
             'GD_Dataloader_List:query:pagenumber',
-            array($this, 'maybeGetLoadinglatestPagenumber')
+            $this->maybeGetLoadinglatestPagenumber(...)
         );
         \PoP\Root\App::addFilter(
             'GD_Dataloader_List:query:limit',
-            array($this, 'maybeGetLoadinglatestLimit')
+            $this->maybeGetLoadinglatestLimit(...)
         );
         \PoP\Root\App::addFilter(
             'CustomPostTypeDataLoader:query:limit',
-            array($this, 'maybeGetLoadinglatestLimitForPost')
+            $this->maybeGetLoadinglatestLimitForPost(...)
         );
         \PoP\Root\App::addFilter(
             'CustomPostTypeDataLoader:query',
-            array($this, 'maybeAddLoadinglatestTimestamp'),
+            $this->maybeAddLoadinglatestTimestamp(...),
             10,
             2
         );

@@ -10,7 +10,7 @@ class PoPTheme_LocationPostLinks_ContentHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_Contents:inner_module',
-            array($this, 'contentInner'),
+            $this->contentInner(...),
             10,
             2
         );

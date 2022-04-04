@@ -19,7 +19,7 @@ class PoP_CommonUserRoles
     {
 
         // Priority: after PoP User Communities
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888380);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888380);
     }
     public function init()
     {

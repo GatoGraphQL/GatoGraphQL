@@ -8,7 +8,7 @@ class PoP_ContentCreation_Notifications_NotificationHooks
         // Hook into the API: Where statements
         \PoP\Root\App::addFilter(
             'PoP_Notifications_API:sql:wheres',
-            array($this, 'getWhereStatements'),
+            $this->getWhereStatements(...),
             10,
             5
         );
@@ -16,12 +16,12 @@ class PoP_ContentCreation_Notifications_NotificationHooks
         // Hook into the API: Notification Actions
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
-            array($this, 'getUseractivityplusnetworkActions')
+            $this->getUseractivityplusnetworkActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
-            array($this, 'getMarkasreadPostActions')
+            $this->getMarkasreadPostActions(...)
         );
     }
 

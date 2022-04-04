@@ -32,12 +32,12 @@ class PoP_CSSConverter_ConversionManager
         $this->init();
         
         // Add a dot to all classes, to convert them into a CSS selector
-        $classes = array_map(array($this, 'getClassSelector'), $classes);
+        $classes = array_map($this->getClassSelector(...), $classes);
     
         // Obtain the styles
         $intersected = array_values(array_intersect($this->getClasses(), $classes));
         
-        return array_map(array($this, 'convert'), $intersected);
+        return array_map($this->convert(...), $intersected);
     }
 
     public function getClasses()

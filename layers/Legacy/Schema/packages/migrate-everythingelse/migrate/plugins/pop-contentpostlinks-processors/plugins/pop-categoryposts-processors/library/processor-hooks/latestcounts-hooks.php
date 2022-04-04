@@ -6,7 +6,7 @@ class PoP_ContentPostLinks_CategoryPosts_LatestCounts_Hooks
     {
         \PoP\Root\App::addFilter(
             'latestcounts:categoryposts:classes',
-            array($this, 'getSectionClasses')
+            $this->getSectionClasses(...)
         );
     }
 

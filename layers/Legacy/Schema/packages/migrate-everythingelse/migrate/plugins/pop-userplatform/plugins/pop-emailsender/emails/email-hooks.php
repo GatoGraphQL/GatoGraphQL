@@ -11,13 +11,13 @@ class PoP_UserPlatform_EmailSender_Hooks
         //----------------------------------------------------------------------
         // Notifications to the admin
         //----------------------------------------------------------------------
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailToAdminCreateuser'), 100, 1);
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsUpdate', array($this, 'sendemailToAdminUpdateuser'), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->sendemailToAdminCreateuser(...), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsUpdate', $this->sendemailToAdminUpdateuser(...), 100, 1);
     
         //----------------------------------------------------------------------
         // User registration
         //----------------------------------------------------------------------
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', array($this, 'sendemailUserwelcome'), 100, 1);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->sendemailUserwelcome(...), 100, 1);
     }
 
     /**

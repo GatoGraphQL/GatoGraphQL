@@ -20,7 +20,7 @@ class Plugin
     {
         // Allow the Theme to override definitions.
         // Priority: new section, after PoP CMS section
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 88823);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 88823);
     }
     public function init()
     {
@@ -29,7 +29,7 @@ class Plugin
             define('POP_ENGINE_INITIALIZED', true);
 
             // Allow plug-ins to override values
-            \PoP\Root\App::addAction('plugins_loaded', array($this, 'defineConstants'), 888110);
+            \PoP\Root\App::addAction('plugins_loaded', $this->defineConstants(...), 888110);
         }
     }
     public function defineConstants()

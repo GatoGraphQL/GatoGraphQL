@@ -14,8 +14,8 @@ class PoP_EventLinksCreationProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_EVENTSCREATIONPROCESSORS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_EVENTLINKSCREATIONPROCESSORS_POP_EVENTSCREATIONPROCESSORS_MIN_VERSION > POP_EVENTSCREATIONPROCESSORS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -27,8 +27,8 @@ class PoP_EventLinksCreationProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_EVENTLINKSCREATION_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POP_EVENTLINKSCREATIONPROCESSORS_POP_EVENTLINKSCREATION_MIN_VERSION > POP_EVENTLINKSCREATION_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));

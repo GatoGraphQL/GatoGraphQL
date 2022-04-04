@@ -8,7 +8,7 @@ class PoP_UserStateModuleDecoratorProcessorHooks
     {
         \PoP\Root\App::addAction(
             AbstractModuleProcessor::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
-            array($this, 'addHeaddatasetmoduleDataProperties'),
+            $this->addHeaddatasetmoduleDataProperties(...),
             10,
             4
         );

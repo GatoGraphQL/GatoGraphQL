@@ -11,19 +11,19 @@ class PoP_UserState_EngineHooks
     {
         \PoP\Root\App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
-            array($this, 'start'),
+            $this->start(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
-            array($this, 'calculateDataloadingModuleData'),
+            $this->calculateDataloadingModuleData(...),
             10,
             8
         );
         \PoP\Root\App::addAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
-            array($this, 'end'),
+            $this->end(...),
             10,
             5
         );
