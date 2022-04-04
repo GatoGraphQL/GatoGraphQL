@@ -38,7 +38,7 @@ function popSwJqueryConstants($jqueryConstants)
 
     // We don't want to fetch it from the network, but from the cache, so remove the filter that we've added
 
-    \PoP\Root\App::removeFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+    \PoP\Root\App::removeFilter('getReloadurlLinkattrs', popSwReloadurlLinkattrs(...));
     $reloadurl_linkattrs = getReloadurlLinkattrs();
     \PoP\Root\App::addFilter('getReloadurlLinkattrs', popSwReloadurlLinkattrs(...));
 

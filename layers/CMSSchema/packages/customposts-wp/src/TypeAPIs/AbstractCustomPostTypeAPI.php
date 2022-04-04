@@ -324,7 +324,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
         $wp_embed = $GLOBALS['wp_embed'];
         App::removeFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        App::removeFilter('the_content', 'wpautop');
+        App::removeFilter('the_content', wpautop(...));
 
         // Do not allow HTML tags or shortcodes
         $ret = \strip_shortcodes($customPost->post_content);
