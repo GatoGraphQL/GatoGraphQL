@@ -13,7 +13,7 @@ class Literal extends AbstractAst implements ArgumentValueAstInterface
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected string|int|float|bool|null $value,
+        protected readonly string|int|float|bool|null $value,
         Location $location
     ) {
         parent::__construct($location);

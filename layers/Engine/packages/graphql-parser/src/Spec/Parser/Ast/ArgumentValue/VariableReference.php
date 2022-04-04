@@ -20,8 +20,8 @@ class VariableReference extends AbstractAst implements VariableReferenceInterfac
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected string $name,
-        protected ?Variable $variable,
+        protected readonly string $name,
+        protected readonly ?Variable $variable,
         Location $location,
     ) {
         parent::__construct($location);
