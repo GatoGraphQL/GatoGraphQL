@@ -2,9 +2,9 @@
 
 class URE_PoPProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUTUSER_MEMBERPRIVILEGES = 'layoutuser_memberprivileges';
-    public const RESOURCE_LAYOUTUSER_MEMBERSTATUS = 'layoutuser_memberstatus';
-    public const RESOURCE_LAYOUTUSER_MEMBERTAGS = 'layoutuser_membertags';
+    public final const RESOURCE_LAYOUTUSER_MEMBERPRIVILEGES = 'layoutuser_memberprivileges';
+    public final const RESOURCE_LAYOUTUSER_MEMBERSTATUS = 'layoutuser_memberstatus';
+    public final const RESOURCE_LAYOUTUSER_MEMBERTAGS = 'layoutuser_membertags';
 
     public function getResourcesToProcess()
     {

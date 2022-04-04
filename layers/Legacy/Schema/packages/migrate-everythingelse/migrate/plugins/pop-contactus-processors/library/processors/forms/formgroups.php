@@ -2,9 +2,9 @@
 
 class PoP_ContactUs_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_TOPIC = 'gf-forminputgroup-field-topic';
-    public const MODULE_FORMINPUTGROUP_SUBJECT = 'gf-forminputgroup-field-subject';
-    public const MODULE_FORMINPUTGROUP_MESSAGE = 'gf-forminputgroup-field-message';
+    public final const MODULE_FORMINPUTGROUP_TOPIC = 'gf-forminputgroup-field-topic';
+    public final const MODULE_FORMINPUTGROUP_SUBJECT = 'gf-forminputgroup-field-subject';
+    public final const MODULE_FORMINPUTGROUP_MESSAGE = 'gf-forminputgroup-field-message';
 
     public function getModulesToProcess(): array
     {

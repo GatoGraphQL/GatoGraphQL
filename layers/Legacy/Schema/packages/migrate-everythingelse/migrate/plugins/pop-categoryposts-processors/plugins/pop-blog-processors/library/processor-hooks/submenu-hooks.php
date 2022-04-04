@@ -6,7 +6,7 @@ class PoP_CategoryPostsProcessors_Blog_SubmenuHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Blog_SubmenuHooks:mainsubheaders',
-            array($this, 'addMainsubheaders')
+            $this->addMainsubheaders(...)
         );
     }
 

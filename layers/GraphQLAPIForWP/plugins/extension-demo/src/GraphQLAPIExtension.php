@@ -11,7 +11,7 @@ class GraphQLAPIExtension extends AbstractExtension
     /**
      * Plugin's namespace
      */
-    public const NAMESPACE = __NAMESPACE__;
+    public final const NAMESPACE = __NAMESPACE__;
 
     /**
      * Add Component classes to be initialized

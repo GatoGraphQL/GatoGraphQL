@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
+    public final const MODULE_VERTICALSIDEBARINNER_SINGLE_LINK = 'vertical-sidebarinner-single-link';
 
     public function getModulesToProcess(): array
     {

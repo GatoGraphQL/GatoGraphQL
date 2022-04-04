@@ -28,7 +28,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     {
         App::addAction(
             AbstractCreateUpdateCustomPostMutationResolver::HOOK_EXECUTE_CREATE_OR_UPDATE,
-            array($this, 'maybeSetCategories'),
+            $this->maybeSetCategories(...),
             10,
             2
         );

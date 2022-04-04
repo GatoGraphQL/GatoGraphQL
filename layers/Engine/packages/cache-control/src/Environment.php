@@ -6,7 +6,7 @@ namespace PoP\CacheControl;
 
 class Environment
 {
-    public const DEFAULT_CACHE_CONTROL_MAX_AGE = 'DEFAULT_CACHE_CONTROL_MAX_AGE';
+    public final const DEFAULT_CACHE_CONTROL_MAX_AGE = 'DEFAULT_CACHE_CONTROL_MAX_AGE';
 
     public static function disableCacheControl(): bool
     {

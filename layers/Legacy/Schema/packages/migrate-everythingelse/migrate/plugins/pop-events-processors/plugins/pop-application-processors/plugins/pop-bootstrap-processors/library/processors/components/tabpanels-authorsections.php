@@ -2,9 +2,9 @@
 
 class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_AUTHOREVENTS = 'tabpanel-authorevents';
-    public const MODULE_TABPANEL_AUTHORPASTEVENTS = 'tabpanel-authorpastevents';
-    public const MODULE_TABPANEL_AUTHOREVENTSCALENDAR = 'tabpanel-authoreventscalendar';
+    public final const MODULE_TABPANEL_AUTHOREVENTS = 'tabpanel-authorevents';
+    public final const MODULE_TABPANEL_AUTHORPASTEVENTS = 'tabpanel-authorpastevents';
+    public final const MODULE_TABPANEL_AUTHOREVENTSCALENDAR = 'tabpanel-authoreventscalendar';
 
     public function getModulesToProcess(): array
     {

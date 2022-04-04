@@ -6,5 +6,5 @@ namespace PoPAPI\API\Constants;
 
 class Params
 {
-    public const USE_NAMESPACE = 'use_namespace';
+    public final const USE_NAMESPACE = 'use_namespace';
 }

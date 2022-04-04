@@ -2,7 +2,7 @@
 
 class PopThemeWassup_CPL_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_CONTENTPOSTLINKSSTYLES = 'css-contentpostlinks-styles';
+    public final const RESOURCE_CSS_CONTENTPOSTLINKSSTYLES = 'css-contentpostlinks-styles';
 
     public function getResourcesToProcess()
     {

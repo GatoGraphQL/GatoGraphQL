@@ -3,17 +3,17 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW = 'block-authorhighlights-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST = 'block-authorhighlights-scroll-list';
-    public const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL = 'block-authorhighlights-scroll-thumbnail';
-    public const MODULE_BLOCK_HIGHLIGHTS_SCROLL_ADDONS = 'block-highlights-scroll-addons';
-    public const MODULE_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW = 'block-highlights-scroll-fullview';
-    public const MODULE_BLOCK_HIGHLIGHTS_SCROLL_LIST = 'block-highlights-scroll-list';
-    public const MODULE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR = 'block-highlights-scroll-navigator';
-    public const MODULE_BLOCK_HIGHLIGHTS_SCROLL_THUMBNAIL = 'block-highlights-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW = 'block-singlerelatedhighlightcontent-scroll-fullview';
-    public const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedhighlightcontent-scroll-thumbnail';
-    public const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'block-singlerelatedhighlightcontent-scroll-list';
+    public final const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW = 'block-authorhighlights-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_LIST = 'block-authorhighlights-scroll-list';
+    public final const MODULE_BLOCK_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL = 'block-authorhighlights-scroll-thumbnail';
+    public final const MODULE_BLOCK_HIGHLIGHTS_SCROLL_ADDONS = 'block-highlights-scroll-addons';
+    public final const MODULE_BLOCK_HIGHLIGHTS_SCROLL_FULLVIEW = 'block-highlights-scroll-fullview';
+    public final const MODULE_BLOCK_HIGHLIGHTS_SCROLL_LIST = 'block-highlights-scroll-list';
+    public final const MODULE_BLOCK_HIGHLIGHTS_SCROLL_NAVIGATOR = 'block-highlights-scroll-navigator';
+    public final const MODULE_BLOCK_HIGHLIGHTS_SCROLL_THUMBNAIL = 'block-highlights-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW = 'block-singlerelatedhighlightcontent-scroll-fullview';
+    public final const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedhighlightcontent-scroll-thumbnail';
+    public final const MODULE_BLOCK_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'block-singlerelatedhighlightcontent-scroll-list';
 
     public function getModulesToProcess(): array
     {

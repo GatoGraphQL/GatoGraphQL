@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_PostSelectableTypeaheadFormComponents extends PoP_Module_Processor_PostSelectableTypeaheadFormComponentsBase
 {
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponent-selectabletypeahead-references';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponent-selectabletypeahead-references';
 
     public function getModulesToProcess(): array
     {

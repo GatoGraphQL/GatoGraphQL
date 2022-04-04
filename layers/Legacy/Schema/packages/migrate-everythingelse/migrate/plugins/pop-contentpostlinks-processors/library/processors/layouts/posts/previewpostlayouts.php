@@ -3,13 +3,13 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR = 'layout-previewpost-contentpostlink-navigator';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS = 'layout-previewpost-contentpostlink-addons';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS = 'layout-previewpost-contentpostlink-details';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL = 'layout-previewpost-contentpostlink-thumbnail';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST = 'layout-previewpost-contentpostlink-list';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
-    public const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR = 'layout-previewpost-contentpostlink-navigator';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS = 'layout-previewpost-contentpostlink-addons';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS = 'layout-previewpost-contentpostlink-details';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL = 'layout-previewpost-contentpostlink-thumbnail';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST = 'layout-previewpost-contentpostlink-list';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
+    public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
 
     public function getModulesToProcess(): array
     {

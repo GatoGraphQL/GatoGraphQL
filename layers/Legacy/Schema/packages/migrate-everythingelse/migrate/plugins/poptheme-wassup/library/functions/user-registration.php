@@ -9,7 +9,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 \PoP\Root\App::addAction('personal_options_update', 'saveExtraUserProfileFields');
 \PoP\Root\App::addAction('edit_user_profile_update', 'saveExtraUserProfileFields');
 
-\PoP\Root\App::addFilter('insert_user_meta', 'adduserSetNickname', 10, 2);
+\PoP\Root\App::addFilter('insert_user_meta', adduserSetNickname(...), 10, 2);
 function adduserSetNickname($meta, $user)
 {
 
@@ -209,7 +209,7 @@ function saveExtraUserProfileFields($user_id)
 
 
 /* Contact Methods for the Edit User Page for the WP backend*/
-\PoP\Root\App::addFilter('user_contactmethods', 'gdUserContactmethods');
+\PoP\Root\App::addFilter('user_contactmethods', gdUserContactmethods(...));
 function gdUserContactmethods()
 {
     $contact = array(

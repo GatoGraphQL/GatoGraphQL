@@ -10,15 +10,15 @@ class PoP_ServiceWorkers_WebPlatform_ResourceLoader_Initialization
         // but all of them! This way, all resources will make it to the precache list and be cached in SW
         global $popwebplatform_resourceloader_initialization;
         \PoP\Root\App::removeAction('popcms:enqueueScripts', array($popwebplatform_resourceloader_initialization, 'registerScripts'));
-        \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+        \PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...));
         \PoP\Root\App::removeAction('popcms:printStyles', array($popwebplatform_resourceloader_initialization, 'registerStyles'));
-        \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'));
+        \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...));
 
         // When generating the Service Workers, we need to register all of the CSS files to output them in the precache list
-        \PoP\Root\App::addFilter('getResourcesIncludeType', array($this, 'getResourcesIncludeType'));
+        \PoP\Root\App::addFilter('getResourcesIncludeType', $this->getResourcesIncludeType(...));
 
         // Always use the SW creation in 'resource' mode, to avoid $bundle(group)s being enqueued instead of $resources
-        \PoP\Root\App::addFilter('getEnqueuefileType', array($this, 'getEnqueuefileType'));
+        \PoP\Root\App::addFilter('getEnqueuefileType', $this->getEnqueuefileType(...));
     }
 
     public function getResourcesIncludeType($type)

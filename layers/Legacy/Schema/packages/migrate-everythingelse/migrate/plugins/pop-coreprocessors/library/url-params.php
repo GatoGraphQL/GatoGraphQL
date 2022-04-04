@@ -11,7 +11,7 @@ define('GD_URLPARAM_ACTION_PRINT', 'print');
 define('GD_URLPARAM_TARGET_PRINT', 'print');
 define('GD_URLPARAM_TARGET_SOCIALMEDIA', 'socialmedia');
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsUrlparams');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsUrlparams(...));
 function gdJqueryConstantsUrlparams($jqueryConstants)
 {
     $jqueryConstants['UNIQUEID'] = \PoP\ComponentModel\Constants\Response::UNIQUE_ID;

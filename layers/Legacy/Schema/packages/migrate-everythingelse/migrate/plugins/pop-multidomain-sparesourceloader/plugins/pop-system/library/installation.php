@@ -5,7 +5,7 @@ class PoP_MultiDomainSPAResourceLoader_Installation
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('PoP:system-generate', array($this, 'systemGenerate'));
+        \PoP\Root\App::addAction('PoP:system-generate', $this->systemGenerate(...));
     }
 
     public function systemGenerate()

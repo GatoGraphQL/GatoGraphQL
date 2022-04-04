@@ -3,19 +3,19 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGET_HIGHLIGHTS = 'widget-highlights';
-    public const MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW = 'widget-highlights-simpleview';
-    public const MODULE_WIDGET_HIGHLIGHTS_FULLVIEW = 'widget-highlights-fullview';
-    public const MODULE_WIDGET_HIGHLIGHTS_DETAILS = 'widget-highlights-details';
-    public const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-highlights-appendtoscript-simpleview';
-    public const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW = 'widget-highlights-appendtoscript-fullview';
-    public const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS = 'widget-highlights-appendtoscript-details';
-    public const MODULE_WIDGET_REFERENCEDBY_SIMPLEVIEW = 'widget-referencedby-simpleview';
-    public const MODULE_WIDGET_REFERENCEDBY_FULLVIEW = 'widget-referencedby-fullview';
-    public const MODULE_WIDGET_REFERENCEDBY_DETAILS = 'widget-referencedby-details';
-    public const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'widget-referencedby-appendtoscript-details';
-    public const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-referencedby-appendtoscript-simpleview';
-    public const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widget-referencedby-appendtoscript-fullview';
+    public final const MODULE_WIDGET_HIGHLIGHTS = 'widget-highlights';
+    public final const MODULE_WIDGET_HIGHLIGHTS_SIMPLEVIEW = 'widget-highlights-simpleview';
+    public final const MODULE_WIDGET_HIGHLIGHTS_FULLVIEW = 'widget-highlights-fullview';
+    public final const MODULE_WIDGET_HIGHLIGHTS_DETAILS = 'widget-highlights-details';
+    public final const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-highlights-appendtoscript-simpleview';
+    public final const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW = 'widget-highlights-appendtoscript-fullview';
+    public final const MODULE_WIDGET_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS = 'widget-highlights-appendtoscript-details';
+    public final const MODULE_WIDGET_REFERENCEDBY_SIMPLEVIEW = 'widget-referencedby-simpleview';
+    public final const MODULE_WIDGET_REFERENCEDBY_FULLVIEW = 'widget-referencedby-fullview';
+    public final const MODULE_WIDGET_REFERENCEDBY_DETAILS = 'widget-referencedby-details';
+    public final const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'widget-referencedby-appendtoscript-details';
+    public final const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widget-referencedby-appendtoscript-simpleview';
+    public final const MODULE_WIDGET_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widget-referencedby-appendtoscript-fullview';
 
     public function getModulesToProcess(): array
     {

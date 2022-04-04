@@ -22,19 +22,19 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     use ModuleResolverTrait;
     use ClientFunctionalityModuleResolverTrait;
 
-    public const GRAPHIQL_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\graphiql-for-single-endpoint';
-    public const GRAPHIQL_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\graphiql-for-custom-endpoints';
-    public const INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\interactive-schema-for-single-endpoint';
-    public const INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\interactive-schema-for-custom-endpoints';
-    public const GRAPHIQL_EXPLORER = Plugin::NAMESPACE . '\graphiql-explorer';
+    public final const GRAPHIQL_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\graphiql-for-single-endpoint';
+    public final const GRAPHIQL_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\graphiql-for-custom-endpoints';
+    public final const INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT = Plugin::NAMESPACE . '\interactive-schema-for-single-endpoint';
+    public final const INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\interactive-schema-for-custom-endpoints';
+    public final const GRAPHIQL_EXPLORER = Plugin::NAMESPACE . '\graphiql-explorer';
 
     /**
      * Setting options
      */
-    public const OPTION_USE_IN_ADMIN_CLIENT = 'use-in-admin-client';
-    public const OPTION_USE_IN_ADMIN_PERSISTED_QUERIES = 'use-in-admin-persisted-queries';
-    public const OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT = 'use-in-public-client-for-single-endpoint';
-    public const OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS = 'use-in-public-client-for-custom-endpoints';
+    public final const OPTION_USE_IN_ADMIN_CLIENT = 'use-in-admin-client';
+    public final const OPTION_USE_IN_ADMIN_PERSISTED_QUERIES = 'use-in-admin-persisted-queries';
+    public final const OPTION_USE_IN_PUBLIC_CLIENT_FOR_SINGLE_ENDPOINT = 'use-in-public-client-for-single-endpoint';
+    public final const OPTION_USE_IN_PUBLIC_CLIENT_FOR_CUSTOM_ENDPOINTS = 'use-in-public-client-for-custom-endpoints';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

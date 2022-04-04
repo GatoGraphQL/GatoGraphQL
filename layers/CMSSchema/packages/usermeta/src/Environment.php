@@ -6,6 +6,6 @@ namespace PoPCMSSchema\UserMeta;
 
 class Environment
 {
-    public const USER_META_ENTRIES = 'USER_META_ENTRIES';
-    public const USER_META_BEHAVIOR = 'USER_META_BEHAVIOR';
+    public final const USER_META_ENTRIES = 'USER_META_ENTRIES';
+    public final const USER_META_BEHAVIOR = 'USER_META_BEHAVIOR';
 }

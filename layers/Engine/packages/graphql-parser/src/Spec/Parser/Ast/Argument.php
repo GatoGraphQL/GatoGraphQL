@@ -11,7 +11,7 @@ class Argument extends AbstractAst
     protected FieldInterface|Directive $parent;
 
     public function __construct(
-        protected string $name,
+        protected readonly string $name,
         protected WithValueInterface $value,
         Location $location,
     ) {

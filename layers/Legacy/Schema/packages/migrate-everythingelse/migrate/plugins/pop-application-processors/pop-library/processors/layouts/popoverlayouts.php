@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_CustomPopoverLayouts extends PoP_Module_Processor_PopoverLayoutsBase
 {
-    public const MODULE_LAYOUT_POPOVER_USER = 'layout-popover-user';
-    public const MODULE_LAYOUT_POPOVER_USER_AVATAR = 'layout-popover-user-avatar';
-    public const MODULE_LAYOUT_POPOVER_USER_AVATAR60 = 'layout-popover-user-avatar60';
-    public const MODULE_LAYOUT_POPOVER_USER_AVATAR40 = 'layout-popover-user-avatar40';
-    public const MODULE_LAYOUT_POPOVER_USER_AVATAR26 = 'layout-popover-user-avatar26';
+    public final const MODULE_LAYOUT_POPOVER_USER = 'layout-popover-user';
+    public final const MODULE_LAYOUT_POPOVER_USER_AVATAR = 'layout-popover-user-avatar';
+    public final const MODULE_LAYOUT_POPOVER_USER_AVATAR60 = 'layout-popover-user-avatar60';
+    public final const MODULE_LAYOUT_POPOVER_USER_AVATAR40 = 'layout-popover-user-avatar40';
+    public final const MODULE_LAYOUT_POPOVER_USER_AVATAR26 = 'layout-popover-user-avatar26';
 
     public function getModulesToProcess(): array
     {

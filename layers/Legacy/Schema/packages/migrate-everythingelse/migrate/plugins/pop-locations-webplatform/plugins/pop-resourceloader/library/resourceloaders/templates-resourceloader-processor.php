@@ -2,30 +2,30 @@
 
 class PoP_Locations_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent_typeaheadmap';
-    public const RESOURCE_LAYOUT_LOCATIONADDRESS = 'layout_locationaddress';
-    public const RESOURCE_LAYOUT_LOCATIONNAME = 'layout_locationname';
-    public const RESOURCE_LAYOUT_LOCATIONS = 'layout_locations';
-    public const RESOURCE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT = 'layoutlocation_typeahead_component';
-    public const RESOURCE_LAYOUTLOCATION_CARD = 'layoutlocation_card';
-    public const RESOURCE_MAP = 'map';
-    public const RESOURCE_MAP_ADDMARKER = 'map_addmarker';
-    public const RESOURCE_MAP_DIV = 'map_div';
-    public const RESOURCE_MAP_INDIVIDUAL = 'map_individual';
-    public const RESOURCE_MAP_INNER = 'map_inner';
-    public const RESOURCE_MAP_SCRIPT = 'map_script';
-    public const RESOURCE_MAP_SCRIPT_DRAWMARKERS = 'map_script_drawmarkers';
-    public const RESOURCE_MAP_SCRIPT_MARKERS = 'map_script_markers';
-    public const RESOURCE_MAP_SCRIPT_RESETMARKERS = 'map_script_resetmarkers';
-    public const RESOURCE_MAP_SCRIPTCUSTOMIZATION_POST = 'map_scriptcustomization_post';
-    public const RESOURCE_MAP_SCRIPTCUSTOMIZATION_USER = 'map_scriptcustomization_user';
-    public const RESOURCE_MAP_STATICIMAGE = 'map_staticimage';
-    public const RESOURCE_MAP_STATICIMAGE_URLPARAM = 'map_staticimage_urlparam';
-    public const RESOURCE_MAP_STATICIMAGE_LOCATIONS = 'map_staticimage_locations';
-    public const RESOURCE_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION = 'script_triggertypeaheadselect_location';
-    public const RESOURCE_VIEWCOMPONENT_LOCATIONLINK = 'viewcomponent_locationlink';
-    public const RESOURCE_VIEWCOMPONENT_LOCATIONBUTTON = 'viewcomponent_locationbutton';
-    public const RESOURCE_VIEWCOMPONENT_LOCATIONBUTTONINNER = 'viewcomponent_locationbuttoninner';
+    public final const RESOURCE_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent_typeaheadmap';
+    public final const RESOURCE_LAYOUT_LOCATIONADDRESS = 'layout_locationaddress';
+    public final const RESOURCE_LAYOUT_LOCATIONNAME = 'layout_locationname';
+    public final const RESOURCE_LAYOUT_LOCATIONS = 'layout_locations';
+    public final const RESOURCE_LAYOUTLOCATION_TYPEAHEAD_COMPONENT = 'layoutlocation_typeahead_component';
+    public final const RESOURCE_LAYOUTLOCATION_CARD = 'layoutlocation_card';
+    public final const RESOURCE_MAP = 'map';
+    public final const RESOURCE_MAP_ADDMARKER = 'map_addmarker';
+    public final const RESOURCE_MAP_DIV = 'map_div';
+    public final const RESOURCE_MAP_INDIVIDUAL = 'map_individual';
+    public final const RESOURCE_MAP_INNER = 'map_inner';
+    public final const RESOURCE_MAP_SCRIPT = 'map_script';
+    public final const RESOURCE_MAP_SCRIPT_DRAWMARKERS = 'map_script_drawmarkers';
+    public final const RESOURCE_MAP_SCRIPT_MARKERS = 'map_script_markers';
+    public final const RESOURCE_MAP_SCRIPT_RESETMARKERS = 'map_script_resetmarkers';
+    public final const RESOURCE_MAP_SCRIPTCUSTOMIZATION_POST = 'map_scriptcustomization_post';
+    public final const RESOURCE_MAP_SCRIPTCUSTOMIZATION_USER = 'map_scriptcustomization_user';
+    public final const RESOURCE_MAP_STATICIMAGE = 'map_staticimage';
+    public final const RESOURCE_MAP_STATICIMAGE_URLPARAM = 'map_staticimage_urlparam';
+    public final const RESOURCE_MAP_STATICIMAGE_LOCATIONS = 'map_staticimage_locations';
+    public final const RESOURCE_SCRIPT_TRIGGERTYPEAHEADSELECT_LOCATION = 'script_triggertypeaheadselect_location';
+    public final const RESOURCE_VIEWCOMPONENT_LOCATIONLINK = 'viewcomponent_locationlink';
+    public final const RESOURCE_VIEWCOMPONENT_LOCATIONBUTTON = 'viewcomponent_locationbutton';
+    public final const RESOURCE_VIEWCOMPONENT_LOCATIONBUTTONINNER = 'viewcomponent_locationbuttoninner';
 
     public function getResourcesToProcess()
     {

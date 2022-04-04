@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor_PostViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-compactpostbutton-volunteer-big';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-postbutton-volunteer-big';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY = 'viewcomponent-postbutton-volunteer-tiny';
+    public final const MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-compactpostbutton-volunteer-big';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-postbutton-volunteer-big';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY = 'viewcomponent-postbutton-volunteer-tiny';
 
     public function getModulesToProcess(): array
     {

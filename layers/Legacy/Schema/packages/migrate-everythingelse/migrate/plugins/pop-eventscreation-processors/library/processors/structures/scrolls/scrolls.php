@@ -2,10 +2,10 @@
 
 class PoP_EventsCreation_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW = 'scroll-myevents-simpleviewpreview';
-    public const MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW = 'scroll-mypastevents-simpleviewpreview';
-    public const MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW = 'scroll-myevents-fullviewpreview';
-    public const MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW = 'scroll-mypastevents-fullviewpreview';
+    public final const MODULE_SCROLL_MYEVENTS_SIMPLEVIEWPREVIEW = 'scroll-myevents-simpleviewpreview';
+    public final const MODULE_SCROLL_MYPASTEVENTS_SIMPLEVIEWPREVIEW = 'scroll-mypastevents-simpleviewpreview';
+    public final const MODULE_SCROLL_MYEVENTS_FULLVIEWPREVIEW = 'scroll-myevents-fullviewpreview';
+    public final const MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW = 'scroll-mypastevents-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

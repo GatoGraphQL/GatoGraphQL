@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public const MODULE_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
-    public const MODULE_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
+    public final const MODULE_FILTERINPUTCONTAINER_MYMEMBERS = 'filterinputcontainer-mymembers';
+    public final const MODULE_FILTERINPUTCONTAINER_COMMUNITIES = 'filterinputcontainer-communities';
 
     public function getModulesToProcess(): array
     {

@@ -4,9 +4,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_STANCEEDITOR = 'forminput-stanceeditorgroup';
-    public const MODULE_FORMINPUTGROUP_BUTTONGROUP_STANCE = 'forminputgroup-buttongroup-stance';
-    public const MODULE_FILTERINPUTGROUP_BUTTONGROUP_STANCE = 'filterinputgroup-buttongroup-stance';
+    public final const MODULE_FORMINPUTGROUP_STANCEEDITOR = 'forminput-stanceeditorgroup';
+    public final const MODULE_FORMINPUTGROUP_BUTTONGROUP_STANCE = 'forminputgroup-buttongroup-stance';
+    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_STANCE = 'filterinputgroup-buttongroup-stance';
 
     public function getModulesToProcess(): array
     {

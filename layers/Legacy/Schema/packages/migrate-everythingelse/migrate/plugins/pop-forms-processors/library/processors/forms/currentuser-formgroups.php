@@ -2,8 +2,8 @@
 
 class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
-    public const MODULE_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
+    public final const MODULE_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
+    public final const MODULE_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
 
     public function getModulesToProcess(): array
     {

@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\Constants;
 
 class DataOutputModes
 {
-    public const SPLITBYSOURCES = 'splitbysources';
-    public const COMBINED = 'combined';
+    public final const SPLITBYSOURCES = 'splitbysources';
+    public final const COMBINED = 'combined';
 }

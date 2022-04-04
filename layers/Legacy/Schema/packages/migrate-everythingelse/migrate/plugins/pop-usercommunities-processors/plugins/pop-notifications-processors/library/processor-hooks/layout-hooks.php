@@ -8,11 +8,11 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
-            array($this, 'getConditionalBottomSubmodules')
+            $this->getConditionalBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_MultipleComponentLayouts:modules',
-            array($this, 'getQuicklinkgroupBottomSubmodule')
+            $this->getQuicklinkgroupBottomSubmodule(...)
         );
     }
 

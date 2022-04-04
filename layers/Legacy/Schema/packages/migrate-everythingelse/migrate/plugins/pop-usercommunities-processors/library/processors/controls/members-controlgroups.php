@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_CONTROLGROUP_MYMEMBERS = 'controlgroup-mymembers';
-    public const MODULE_CONTROLGROUP_MYBLOCKMEMBERS = 'controlgroup-myblockmembers';
+    public final const MODULE_CONTROLGROUP_MYMEMBERS = 'controlgroup-mymembers';
+    public final const MODULE_CONTROLGROUP_MYBLOCKMEMBERS = 'controlgroup-myblockmembers';
 
     public function getModulesToProcess(): array
     {

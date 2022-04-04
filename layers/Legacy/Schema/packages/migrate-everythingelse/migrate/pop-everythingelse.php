@@ -6,8 +6,8 @@ class Plugins
     public function __construct()
     {
         // Priority: new section, after PoP CMS Model and PoP Meta
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888100);
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'initMigratePackages'), 88820);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888100);
+        \PoP\Root\App::addAction('plugins_loaded', $this->initMigratePackages(...), 88820);
     }
     public function init()
     {

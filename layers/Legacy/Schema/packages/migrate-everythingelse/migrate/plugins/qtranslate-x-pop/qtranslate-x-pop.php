@@ -17,11 +17,11 @@ class QTX_PoP
         include_once 'validation.php';
         \PoP\Root\App::addFilter(
             'PoP_Multilingual_Validation:provider-validation-class',
-            array($this, 'getProviderValidationClass')
+            $this->getProviderValidationClass(...)
         );
 
         // Priority: after PoP WordPress Application
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888360);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888360);
     }
     public function getProviderValidationClass($class)
     {

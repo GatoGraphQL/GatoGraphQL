@@ -19,7 +19,7 @@ class PoP_SocialNetworkProcessors
     {
 
         // Priority: after PoP Add Comments TinyMCE Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888860);
     }
     public function init()
     {

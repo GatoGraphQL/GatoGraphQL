@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public const MODULE_BUTTONINNER_POST_CREATE = 'buttoninner-post-create';
+    public final const MODULE_BUTTONINNER_POST_CREATE = 'buttoninner-post-create';
 
     public function getModulesToProcess(): array
     {

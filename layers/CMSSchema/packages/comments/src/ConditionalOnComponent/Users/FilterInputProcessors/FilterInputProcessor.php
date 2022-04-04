@@ -8,8 +8,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_CUSTOMPOST_AUTHOR_IDS = 'filterinput-custompost-author-ids';
-    public const FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS = 'filterinput-exclude-custompost-author-ids';
+    public final const FILTERINPUT_CUSTOMPOST_AUTHOR_IDS = 'filterinput-custompost-author-ids';
+    public final const FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS = 'filterinput-exclude-custompost-author-ids';
 
     public function getFilterInputsToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_MultiSelectFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
-    public const FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
+    public final const FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
+    public final const FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
 
     public function getFilterInputsToProcess(): array
     {

@@ -15,7 +15,7 @@ class UserQueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             UserTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
-            [$this, 'getOrderByQueryArgValue']
+            $this->getOrderByQueryArgValue(...)
         );
     }
 

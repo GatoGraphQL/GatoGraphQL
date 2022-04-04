@@ -2,7 +2,7 @@
 
 class GD_URE_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
+    public final const MODULE_URE_CONTROLBUTTONGROUP_CONTENTSOURCE = 'ure-controlbuttongroup-contentsource';
 
     public function getModulesToProcess(): array
     {

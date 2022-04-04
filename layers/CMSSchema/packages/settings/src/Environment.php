@@ -6,6 +6,6 @@ namespace PoPCMSSchema\Settings;
 
 class Environment
 {
-    public const SETTINGS_ENTRIES = 'SETTINGS_ENTRIES';
-    public const SETTINGS_BEHAVIOR = 'SETTINGS_BEHAVIOR';
+    public final const SETTINGS_ENTRIES = 'SETTINGS_ENTRIES';
+    public final const SETTINGS_BEHAVIOR = 'SETTINGS_BEHAVIOR';
 }

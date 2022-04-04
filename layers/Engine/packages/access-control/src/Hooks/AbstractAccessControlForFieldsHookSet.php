@@ -44,7 +44,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
             foreach ($fieldNames as $fieldName) {
                 App::addFilter(
                     HookHelpers::getHookNameToFilterField($fieldName),
-                    array($this, 'maybeFilterFieldName'),
+                    $this->maybeFilterFieldName(...),
                     10,
                     5
                 );
@@ -52,7 +52,7 @@ abstract class AbstractAccessControlForFieldsHookSet extends AbstractAfterAppBoo
         } else {
             App::addFilter(
                 HookHelpers::getHookNameToFilterField(),
-                array($this, 'maybeFilterFieldName'),
+                $this->maybeFilterFieldName(...),
                 10,
                 5
             );

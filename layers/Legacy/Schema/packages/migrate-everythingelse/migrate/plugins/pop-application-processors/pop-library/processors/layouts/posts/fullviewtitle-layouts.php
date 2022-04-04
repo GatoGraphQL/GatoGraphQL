@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Processor_FullViewTitleLayoutsBase
 {
-    public const MODULE_LAYOUT_FULLVIEWTITLE = 'layout-fullviewtitle';
-    public const MODULE_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
-    public const MODULE_LAYOUT_POSTTITLE = 'layout-posttitle';
+    public final const MODULE_LAYOUT_FULLVIEWTITLE = 'layout-fullviewtitle';
+    public final const MODULE_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
+    public final const MODULE_LAYOUT_POSTTITLE = 'layout-posttitle';
 
     public function getModulesToProcess(): array
     {

@@ -2,13 +2,13 @@
 
 class PoP_CoreProcessors_TypeaheadResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_TYPEAHEAD = 'typeahead';
-    public const RESOURCE_TYPEAHEADSEARCH = 'typeahead-search';
-    public const RESOURCE_TYPEAHEADFETCHLINK = 'typeahead-fetchlink';
-    public const RESOURCE_TYPEAHEADSELECTABLE = 'typeahead-selectable';
-    public const RESOURCE_TYPEAHEADVALIDATE = 'typeahead-validate';
-    public const RESOURCE_TYPEAHEADSTORAGE = 'typeahead-storage';
-    public const RESOURCE_TYPEAHEADSUGGESTIONS = 'typeahead-suggestions';
+    public final const RESOURCE_TYPEAHEAD = 'typeahead';
+    public final const RESOURCE_TYPEAHEADSEARCH = 'typeahead-search';
+    public final const RESOURCE_TYPEAHEADFETCHLINK = 'typeahead-fetchlink';
+    public final const RESOURCE_TYPEAHEADSELECTABLE = 'typeahead-selectable';
+    public final const RESOURCE_TYPEAHEADVALIDATE = 'typeahead-validate';
+    public final const RESOURCE_TYPEAHEADSTORAGE = 'typeahead-storage';
+    public final const RESOURCE_TYPEAHEADSUGGESTIONS = 'typeahead-suggestions';
 
     public function getResourcesToProcess()
     {

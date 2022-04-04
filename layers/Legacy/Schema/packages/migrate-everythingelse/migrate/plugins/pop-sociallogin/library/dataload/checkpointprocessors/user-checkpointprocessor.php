@@ -4,7 +4,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class GD_WSL_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
+    public final const CHECKPOINT_NONSOCIALLOGINUSER = 'wsl-checkpoint-nonsocialloginuser';
 
     public function getCheckpointsToProcess(): array
     {

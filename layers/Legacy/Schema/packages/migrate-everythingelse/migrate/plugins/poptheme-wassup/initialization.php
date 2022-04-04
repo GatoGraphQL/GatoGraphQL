@@ -40,10 +40,10 @@ class PoPTheme_Wassup_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-                \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'optimizeScripts'), 0);
+                \PoP\Root\App::addAction('popcms:enqueueScripts', $this->optimizeScripts(...), 0);
 
                 // Priority 0: print "style.css" immediately, so it starts rendering and applying these styles before anything else
-                \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 0);
+                \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...), 0);
             }
         }
     }

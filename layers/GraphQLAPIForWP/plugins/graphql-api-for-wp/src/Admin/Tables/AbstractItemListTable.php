@@ -54,11 +54,11 @@ abstract class AbstractItemListTable extends WP_List_Table
 
         \add_action(
             'admin_enqueue_scripts',
-            [$this, 'enqueueAssets']
+            $this->enqueueAssets(...)
         );
         add_action(
             'admin_head',
-            [$this, 'printStyles']
+            $this->printStyles(...)
         );
     }
 

@@ -12,13 +12,13 @@ class PoP_Notifications_UserLogin_Hook_Users /* extends AAL_Hook_Base*/
         // Logged in/out
         \PoP\Root\App::addAction(
             'gd:user:loggedin',
-            array($this, 'loggedIn'),
+            $this->loggedIn(...),
             10,
             1
         );
         \PoP\Root\App::addAction(
             'gd:user:loggedout',
-            array($this, 'loggedOut'),
+            $this->loggedOut(...),
             10,
             1
         );

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_QuicklinksBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_EVERYTHING_QUICKLINKS = 'block-everything-quicklinks';
+    public final const MODULE_BLOCK_EVERYTHING_QUICKLINKS = 'block-everything-quicklinks';
 
     public function getModulesToProcess(): array
     {

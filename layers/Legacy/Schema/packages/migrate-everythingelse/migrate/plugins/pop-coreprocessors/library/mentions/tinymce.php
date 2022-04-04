@@ -8,10 +8,10 @@ class PoP_TinyMCEHashtags
     public function __construct()
     {
         if (!is_admin()) {
-            \PoP\Root\App::addFilter('mce_buttons', array($this, 'registerButton'));
-            \PoP\Root\App::addFilter('mce_external_plugins', array($this, 'externalPlugins'));
-            \PoP\Root\App::addFilter('teeny_mce_before_init', array($this, 'beforeInit'));
-            \PoP\Root\App::addFilter('tiny_mce_before_init', array($this, 'beforeInit'));
+            \PoP\Root\App::addFilter('mce_buttons', $this->registerButton(...));
+            \PoP\Root\App::addFilter('mce_external_plugins', $this->externalPlugins(...));
+            \PoP\Root\App::addFilter('teeny_mce_before_init', $this->beforeInit(...));
+            \PoP\Root\App::addFilter('tiny_mce_before_init', $this->beforeInit(...));
         }
     }
 

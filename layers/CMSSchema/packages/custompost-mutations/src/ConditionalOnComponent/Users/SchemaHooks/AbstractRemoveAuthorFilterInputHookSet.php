@@ -25,7 +25,7 @@ abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             $this->getHookNameToRemoveFilterInput(),
-            [$this, 'getFilterInputModules']
+            $this->getFilterInputModules(...)
         );
     }
 

@@ -9,12 +9,12 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E_1 = '1';
-    public const E_2 = '2';
-    public const E_3 = '3';
-    public const E_4 = '4';
-    public const E_5 = '5';
-    public const E_6 = '6';
+    public final const E_1 = '1';
+    public final const E_2 = '2';
+    public final const E_3 = '3';
+    public final const E_4 = '4';
+    public final const E_5 = '5';
+    public final const E_6 = '6';
 
     protected function getNamespace(): string
     {

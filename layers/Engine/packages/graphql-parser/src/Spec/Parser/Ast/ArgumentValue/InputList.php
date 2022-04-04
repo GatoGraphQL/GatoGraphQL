@@ -18,7 +18,7 @@ class InputList extends AbstractAst implements ArgumentValueAstInterface, WithAs
      * @param mixed[] $list
      */
     public function __construct(
-        protected array $list,
+        protected readonly array $list,
         Location $location,
     ) {
         parent::__construct($location);

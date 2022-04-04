@@ -2,8 +2,8 @@
 
 class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_ADDCONTENTFAQ = 'block-addcontentfaq';
-    public const MODULE_BLOCK_ACCOUNTFAQ = 'block-accountfaq';
+    public final const MODULE_BLOCK_ADDCONTENTFAQ = 'block-addcontentfaq';
+    public final const MODULE_BLOCK_ACCOUNTFAQ = 'block-accountfaq';
 
     public function getModulesToProcess(): array
     {

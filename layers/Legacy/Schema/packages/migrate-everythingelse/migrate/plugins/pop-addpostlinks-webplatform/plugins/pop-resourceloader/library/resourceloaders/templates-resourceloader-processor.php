@@ -2,7 +2,7 @@
 
 class PoP_AddPostLinksWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_LINKFRAME = 'layout_linkframe';
+    public final const RESOURCE_LAYOUT_LINKFRAME = 'layout_linkframe';
 
     public function getResourcesToProcess()
     {

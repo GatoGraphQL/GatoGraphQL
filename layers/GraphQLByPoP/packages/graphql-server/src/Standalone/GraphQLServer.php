@@ -22,7 +22,7 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer implements GraphQLServerInterface
 {
-    private array $componentClasses;
+    private readonly array $componentClasses;
 
     /**
      * @param string[] $componentClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
@@ -30,10 +30,10 @@ class GraphQLServer implements GraphQLServerInterface
      */
     public function __construct(
         array $componentClasses,
-        private array $componentClassConfiguration = [],
-        private ?bool $cacheContainerConfiguration = null,
-        private ?string $containerNamespace = null,
-        private ?string $containerDirectory = null,
+        private readonly array $componentClassConfiguration = [],
+        private readonly ?bool $cacheContainerConfiguration = null,
+        private readonly ?string $containerNamespace = null,
+        private readonly ?string $containerDirectory = null,
     ) {
         $this->componentClasses = array_merge(
             $componentClasses,

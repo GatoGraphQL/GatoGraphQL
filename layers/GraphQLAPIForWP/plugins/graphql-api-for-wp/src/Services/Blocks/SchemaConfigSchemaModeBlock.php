@@ -15,7 +15,7 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
+    public final const ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE = 'defaultSchemaMode';
 
     protected function getBlockName(): string
     {

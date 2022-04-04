@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor_MultiSelectFormInputsBase
 {
-    public const MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES = 'forminput-locationpostcategories';
-    public const MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES = 'filterinput-locationpostcategories';
+    public final const MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES = 'forminput-locationpostcategories';
+    public final const MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES = 'filterinput-locationpostcategories';
 
     public function getModulesToProcess(): array
     {

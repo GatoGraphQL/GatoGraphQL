@@ -17,7 +17,7 @@ abstract class AbstractAfterAppBootHookSet extends AbstractHookSet
     {
         App::addAction(
             HookNames::AFTER_BOOT_APPLICATION,
-            [$this, 'cmsBoot'],
+            $this->cmsBoot(...),
             $this->getPriority()
         );
     }

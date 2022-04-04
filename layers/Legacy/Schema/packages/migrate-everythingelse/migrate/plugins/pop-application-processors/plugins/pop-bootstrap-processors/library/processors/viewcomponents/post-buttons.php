@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor_PostHeaderViewComponentButtonsBase
 {
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-postbutton-sharebyemail-socialmedia';
-    public const MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-postbutton-sharebyemail-previewdropdown';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-postbutton-sharebyemail-socialmedia';
+    public final const MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-postbutton-sharebyemail-previewdropdown';
 
     public function getModulesToProcess(): array
     {

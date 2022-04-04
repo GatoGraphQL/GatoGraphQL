@@ -11,7 +11,7 @@ class PoPTheme_Wassup_Module_Processor_MultiSelectFilterInputs extends PoP_Modul
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT = 'filterinput-volunteersneededmulti';
+    public final const MODULE_FILTERINPUT_VOLUNTEERSNEEDED_MULTISELECT = 'filterinput-volunteersneededmulti';
 
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 

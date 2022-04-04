@@ -18,7 +18,7 @@ class PoP_Mailer_AWS_Engine
         // Send the queue at the end
         \PoP\Root\App::addAction(
             'shutdown', // This is a WP hook, must migrate to a PoP one
-            array($this, 'sendQueue'),
+            $this->sendQueue(...),
             10000
         );
     }

@@ -87,7 +87,7 @@ class AdminEndpointExecuter extends AbstractEndpointExecuter implements AdminEnd
     {
         \add_action(
             'admin_init',
-            [$this, 'includeJSONOutputTemplateAndExit']
+            $this->includeJSONOutputTemplateAndExit(...)
         );
     }
 

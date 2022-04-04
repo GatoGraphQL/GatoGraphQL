@@ -2,12 +2,12 @@
 
 class PoP_CoreProcessors_Bootstrap_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPCONTENT = 'bootstrap-content';
-    public const RESOURCE_BOOTSTRAPEMBED = 'bootstrap-embed';
-    public const RESOURCE_BOOTSTRAPFUNCTIONS = 'bootstrap-functions';
-    public const RESOURCE_BOOTSTRAPTYPEAHEAD = 'bootstrap-typeahead';
-    public const RESOURCE_BOOTSTRAPHOOKS = 'bootstrap-hooks';
-    public const RESOURCE_BOOTSTRAPINPUT = 'bootstrap-input';
+    public final const RESOURCE_BOOTSTRAPCONTENT = 'bootstrap-content';
+    public final const RESOURCE_BOOTSTRAPEMBED = 'bootstrap-embed';
+    public final const RESOURCE_BOOTSTRAPFUNCTIONS = 'bootstrap-functions';
+    public final const RESOURCE_BOOTSTRAPTYPEAHEAD = 'bootstrap-typeahead';
+    public final const RESOURCE_BOOTSTRAPHOOKS = 'bootstrap-hooks';
+    public final const RESOURCE_BOOTSTRAPINPUT = 'bootstrap-input';
 
     public function getResourcesToProcess()
     {

@@ -6,7 +6,7 @@ namespace PoP\AccessControl\Schema;
 
 class SchemaModes
 {
-    // public const DEFAULT_MODE = 'default';
-    public const PUBLIC_SCHEMA_MODE = 'public';
-    public const PRIVATE_SCHEMA_MODE = 'private';
+    // public final const DEFAULT_MODE = 'default';
+    public final const PUBLIC_SCHEMA_MODE = 'public';
+    public final const PRIVATE_SCHEMA_MODE = 'private';
 }

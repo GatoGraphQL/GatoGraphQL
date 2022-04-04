@@ -2,20 +2,20 @@
 
 class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_MenuMultiplesBase
 {
-    public const MODULE_MULTIPLE_MENU_SIDEBAR_ABOUT = 'multiple-menu-sidebar-about';
-    public const MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN = 'multiple-menu-top-userloggedin';
-    public const MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN = 'multiple-menu-top-usernotloggedin';
-    public const MODULE_MULTIPLE_MENU_TOPNAV_ABOUT = 'multiple-menu-top-about';
-    public const MODULE_MULTIPLE_MENU_TOP_ADDNEW = 'multiple-menu-top-addnew';
-    public const MODULE_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN = 'multiple-menu-home-usernotloggedin';
-    public const MODULE_MULTIPLE_MENU_SIDE_ADDNEW = 'multiple-menu-side-addnew';
-    public const MODULE_MULTIPLE_MENU_SIDE_SECTIONS = 'multiple-menu-side-sections';
-    public const MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET = 'multiple-menu-side-sections-multitarget';
-    public const MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS = 'multiple-menu-side-mysections';
-    public const MODULE_MULTIPLE_MENU_BODY_ADDCONTENT = 'multiple-menu-body-addcontent';
-    public const MODULE_MULTIPLE_MENU_BODY_SECTIONS = 'multiple-menu-body-sections';
-    public const MODULE_MULTIPLE_MENU_BODY_MYSECTIONS = 'multiple-menu-body-mysections';
-    public const MODULE_MULTIPLE_MENU_BODY_ABOUT = 'multiple-menu-body-about';
+    public final const MODULE_MULTIPLE_MENU_SIDEBAR_ABOUT = 'multiple-menu-sidebar-about';
+    public final const MODULE_MULTIPLE_MENU_TOPNAV_USERLOGGEDIN = 'multiple-menu-top-userloggedin';
+    public final const MODULE_MULTIPLE_MENU_TOPNAV_USERNOTLOGGEDIN = 'multiple-menu-top-usernotloggedin';
+    public final const MODULE_MULTIPLE_MENU_TOPNAV_ABOUT = 'multiple-menu-top-about';
+    public final const MODULE_MULTIPLE_MENU_TOP_ADDNEW = 'multiple-menu-top-addnew';
+    public final const MODULE_MULTIPLE_MENU_HOME_USERNOTLOGGEDIN = 'multiple-menu-home-usernotloggedin';
+    public final const MODULE_MULTIPLE_MENU_SIDE_ADDNEW = 'multiple-menu-side-addnew';
+    public final const MODULE_MULTIPLE_MENU_SIDE_SECTIONS = 'multiple-menu-side-sections';
+    public final const MODULE_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET = 'multiple-menu-side-sections-multitarget';
+    public final const MODULE_MULTIPLE_MENU_SIDE_MYSECTIONS = 'multiple-menu-side-mysections';
+    public final const MODULE_MULTIPLE_MENU_BODY_ADDCONTENT = 'multiple-menu-body-addcontent';
+    public final const MODULE_MULTIPLE_MENU_BODY_SECTIONS = 'multiple-menu-body-sections';
+    public final const MODULE_MULTIPLE_MENU_BODY_MYSECTIONS = 'multiple-menu-body-mysections';
+    public final const MODULE_MULTIPLE_MENU_BODY_ABOUT = 'multiple-menu-body-about';
 
     public function getModulesToProcess(): array
     {

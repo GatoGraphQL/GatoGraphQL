@@ -7,7 +7,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoPWebPlatform_Engine:encoded-data-object',
-            array($this, 'getEncodedDataObject'),
+            $this->getEncodedDataObject(...),
             10,
             2
         );

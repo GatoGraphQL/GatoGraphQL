@@ -17,7 +17,7 @@ class PostHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookHelpers::getHookName(EntryRouteModuleProcessor::class),
-            [$this, 'getRESTFields']
+            $this->getRESTFields(...)
         );
     }
 

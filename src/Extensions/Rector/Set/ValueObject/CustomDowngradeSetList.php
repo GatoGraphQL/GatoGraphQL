@@ -18,5 +18,5 @@ final class CustomDowngradeSetList implements SetListInterface
     /**
      * @var string
      */
-    public const PHP_72 = __DIR__ . '/../../../../../config/extensions/rector/set/downgrade-php72.php';
+    public final const PHP_72 = __DIR__ . '/../../../../../config/extensions/rector/set/downgrade-php72.php';
 }

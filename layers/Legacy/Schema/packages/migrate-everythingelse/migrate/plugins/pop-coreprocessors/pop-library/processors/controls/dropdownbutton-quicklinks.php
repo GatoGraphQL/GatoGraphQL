@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor_DropdownButtonControlsBase
 {
-    public const MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE = 'dropdownbuttonquicklink-postshare';
-    public const MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE = 'dropdownbuttonquicklink-usershare';
-    public const MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
-    public const MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
+    public final const MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE = 'dropdownbuttonquicklink-postshare';
+    public final const MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE = 'dropdownbuttonquicklink-usershare';
+    public final const MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
+    public final const MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
 
     public function getModulesToProcess(): array
     {

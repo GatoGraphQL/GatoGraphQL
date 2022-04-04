@@ -2,8 +2,8 @@
 
 class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScriptsLayoutsBase
 {
-    public const MODULE_SCRIPT_STANCES = 'script-stances';
-    public const MODULE_SCRIPT_STANCESEMPTY = 'script-stancesempty';
+    public final const MODULE_SCRIPT_STANCES = 'script-stances';
+    public final const MODULE_SCRIPT_STANCESEMPTY = 'script-stancesempty';
 
     public function getModulesToProcess(): array
     {

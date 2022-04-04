@@ -18,7 +18,7 @@ class Plugin
 {
     public function __construct()
     {
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 88825);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 88825);
     }
     public function init()
     {

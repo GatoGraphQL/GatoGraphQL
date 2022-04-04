@@ -7,7 +7,7 @@ class PoP_UserAvatarProcessors_UserPlatform_ActionExecuter_Hooks
     {
         \PoP\Root\App::addAction(
             'gd_createupdate_user:additionalsCreate',
-            array($this, 'additionalsCreate'),
+            $this->additionalsCreate(...),
             10,
             2
         );

@@ -8,5 +8,5 @@ use PoP\ComponentModel\Constants\DataOutputItems as UpstreamDataOutputItems;
 
 class DataOutputItems extends UpstreamDataOutputItems
 {
-    public const MODULESETTINGS = 'modulesettings';
+    public final const MODULESETTINGS = 'modulesettings';
 }

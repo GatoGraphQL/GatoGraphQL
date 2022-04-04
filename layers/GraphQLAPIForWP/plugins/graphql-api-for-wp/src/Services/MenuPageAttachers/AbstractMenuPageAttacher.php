@@ -38,7 +38,7 @@ abstract class AbstractMenuPageAttacher extends AbstractAutomaticallyInstantiate
     {
         \add_action(
             'admin_menu',
-            [$this, 'addMenuPages'],
+            $this->addMenuPages(...),
             $this->getPriority()
         );
     }

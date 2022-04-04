@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends PoP_Module_Processor_CheckpointMessageLayoutsBase
 {
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'layout-checkpointmessage-profileorganization';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'layout-checkpointmessage-profileindividual';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'layout-checkpointmessage-profileorganization';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'layout-checkpointmessage-profileindividual';
 
     public function getModulesToProcess(): array
     {

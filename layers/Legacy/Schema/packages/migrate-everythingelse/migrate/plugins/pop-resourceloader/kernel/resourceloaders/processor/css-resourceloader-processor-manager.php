@@ -9,7 +9,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		$this->inline_resources = array();
 
-		\PoP\Root\App::addAction('popcms:head', array($this, 'printStyles'));
+		\PoP\Root\App::addAction('popcms:head', $this->printStyles(...));
 	}
 
 	function printStyle(array $resource) {
@@ -31,7 +31,7 @@ class PoP_CSSResourceLoaderProcessorManager {
 
 		if ($this->inline_resources) {
 
-			echo implode(PHP_EOL, array_map(array($this, 'printStyle'), $this->inline_resources));
+			echo implode(PHP_EOL, array_map($this->printStyle(...), $this->inline_resources));
 		}
 	}
 

@@ -40,7 +40,7 @@ final class AddParamTypeDeclarationInTraitRector extends AbstractRector implemen
     /**
      * @var string
      */
-    public const PARAMETER_TYPEHINTS = 'parameter_typehints';
+    public final const PARAMETER_TYPEHINTS = 'parameter_typehints';
 
     /**
      * @var AddParamTypeDeclaration[]

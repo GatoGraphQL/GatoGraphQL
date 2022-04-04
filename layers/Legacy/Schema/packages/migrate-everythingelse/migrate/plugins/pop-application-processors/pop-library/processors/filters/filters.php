@@ -2,21 +2,21 @@
 
 class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public const MODULE_FILTER_TAGS = 'filter-tags';
-    public const MODULE_FILTER_CONTENT = 'filter-content';
-    public const MODULE_FILTER_AUTHORCONTENT = 'filter-authorcontent';
-    public const MODULE_FILTER_TAGCONTENT = 'filter-tagcontent';
-    public const MODULE_FILTER_POSTS = 'filter-posts';
-    public const MODULE_FILTER_CATEGORYPOSTS = 'filter-categoryposts';
-    public const MODULE_FILTER_AUTHORPOSTS = 'filter-authorposts';
-    public const MODULE_FILTER_AUTHORCATEGORYPOSTS = 'filter-authorcategoryposts';
-    public const MODULE_FILTER_TAGPOSTS = 'filter-tagposts';
-    public const MODULE_FILTER_TAGCATEGORYPOSTS = 'filter-tagcategoryposts';
-    public const MODULE_FILTER_USERS = 'filter-users';
-    public const MODULE_FILTER_AUTHORCOMMUNITYMEMBERS = 'filter-authorcommunitymembers';
-    public const MODULE_FILTER_MYCONTENT = 'filter-mycontent';
-    public const MODULE_FILTER_MYPOSTS = 'filter-myposts';
-    public const MODULE_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
+    public final const MODULE_FILTER_TAGS = 'filter-tags';
+    public final const MODULE_FILTER_CONTENT = 'filter-content';
+    public final const MODULE_FILTER_AUTHORCONTENT = 'filter-authorcontent';
+    public final const MODULE_FILTER_TAGCONTENT = 'filter-tagcontent';
+    public final const MODULE_FILTER_POSTS = 'filter-posts';
+    public final const MODULE_FILTER_CATEGORYPOSTS = 'filter-categoryposts';
+    public final const MODULE_FILTER_AUTHORPOSTS = 'filter-authorposts';
+    public final const MODULE_FILTER_AUTHORCATEGORYPOSTS = 'filter-authorcategoryposts';
+    public final const MODULE_FILTER_TAGPOSTS = 'filter-tagposts';
+    public final const MODULE_FILTER_TAGCATEGORYPOSTS = 'filter-tagcategoryposts';
+    public final const MODULE_FILTER_USERS = 'filter-users';
+    public final const MODULE_FILTER_AUTHORCOMMUNITYMEMBERS = 'filter-authorcommunitymembers';
+    public final const MODULE_FILTER_MYCONTENT = 'filter-mycontent';
+    public final const MODULE_FILTER_MYPOSTS = 'filter-myposts';
+    public final const MODULE_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
 
     public function getModulesToProcess(): array
     {

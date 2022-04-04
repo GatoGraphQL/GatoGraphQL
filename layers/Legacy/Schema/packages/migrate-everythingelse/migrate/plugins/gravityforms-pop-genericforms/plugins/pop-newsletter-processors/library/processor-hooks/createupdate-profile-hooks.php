@@ -6,9 +6,9 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter('gd_createupdate_profile:form_data', array($this, 'getFormData'), 10);
-        \PoP\Root\App::addFilter('pop_module:createprofile:components', array($this, 'getComponentSubmodules'), 10, 3);
-        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', array($this, 'additionals'), 10, 1);
+        \PoP\Root\App::addFilter('gd_createupdate_profile:form_data', $this->getFormData(...), 10);
+        \PoP\Root\App::addFilter('pop_module:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addAction('gd_createupdate_profile:additionalsCreate', $this->additionals(...), 10, 1);
     }
 
     public function enabled()

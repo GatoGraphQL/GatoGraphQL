@@ -8,13 +8,13 @@ class PoP_UserCommunities_CDN_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
-            array($this, 'getThumbprintPartialpaths'),
+            $this->getThumbprintPartialpaths(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:noParamValues',
-            array($this, 'getThumbprintNoparamvalues'),
+            $this->getThumbprintNoparamvalues(...),
             10,
             2
         );

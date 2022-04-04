@@ -5,8 +5,8 @@ use PoPSitesWassup\LocationPostLinkMutations\MutationResolvers\UpdateLocationPos
 
 class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public const MODULE_DATALOAD_LOCATIONPOSTLINK_UPDATE = 'dataload-locationpostlink-update';
-    public const MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE = 'dataload-locationpostlink-create';
+    public final const MODULE_DATALOAD_LOCATIONPOSTLINK_UPDATE = 'dataload-locationpostlink-update';
+    public final const MODULE_DATALOAD_LOCATIONPOSTLINK_CREATE = 'dataload-locationpostlink-create';
 
     public function getModulesToProcess(): array
     {

@@ -2,16 +2,16 @@
 
 class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_FOLLOWUSER = 'block-followuser';
-    public const MODULE_BLOCK_UNFOLLOWUSER = 'block-unfollowuser';
-    public const MODULE_BLOCK_RECOMMENDPOST = 'block-recommendpost';
-    public const MODULE_BLOCK_UNRECOMMENDPOST = 'block-unrecommendpost';
-    public const MODULE_BLOCK_SUBSCRIBETOTAG = 'block-subscribetotag';
-    public const MODULE_BLOCK_UNSUBSCRIBEFROMTAG = 'block-unsubscribefromtag';
-    public const MODULE_BLOCK_UPVOTEPOST = 'block-upvotepost';
-    public const MODULE_BLOCK_UNDOUPVOTEPOST = 'block-undoupvotepost';
-    public const MODULE_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
-    public const MODULE_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
+    public final const MODULE_BLOCK_FOLLOWUSER = 'block-followuser';
+    public final const MODULE_BLOCK_UNFOLLOWUSER = 'block-unfollowuser';
+    public final const MODULE_BLOCK_RECOMMENDPOST = 'block-recommendpost';
+    public final const MODULE_BLOCK_UNRECOMMENDPOST = 'block-unrecommendpost';
+    public final const MODULE_BLOCK_SUBSCRIBETOTAG = 'block-subscribetotag';
+    public final const MODULE_BLOCK_UNSUBSCRIBEFROMTAG = 'block-unsubscribefromtag';
+    public final const MODULE_BLOCK_UPVOTEPOST = 'block-upvotepost';
+    public final const MODULE_BLOCK_UNDOUPVOTEPOST = 'block-undoupvotepost';
+    public final const MODULE_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
+    public final const MODULE_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
     public function getModulesToProcess(): array
     {

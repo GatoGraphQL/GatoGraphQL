@@ -4,26 +4,26 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00 = 'block-tabpanel-authornosearchcategoryposts00';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01 = 'block-tabpanel-authornosearchcategoryposts01';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02 = 'block-tabpanel-authornosearchcategoryposts02';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03 = 'block-tabpanel-authornosearchcategoryposts03';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04 = 'block-tabpanel-authornosearchcategoryposts04';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05 = 'block-tabpanel-authornosearchcategoryposts05';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06 = 'block-tabpanel-authornosearchcategoryposts06';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07 = 'block-tabpanel-authornosearchcategoryposts07';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08 = 'block-tabpanel-authornosearchcategoryposts08';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09 = 'block-tabpanel-authornosearchcategoryposts09';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10 = 'block-tabpanel-authornosearchcategoryposts10';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11 = 'block-tabpanel-authornosearchcategoryposts11';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12 = 'block-tabpanel-authornosearchcategoryposts12';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13 = 'block-tabpanel-authornosearchcategoryposts13';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14 = 'block-tabpanel-authornosearchcategoryposts14';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15 = 'block-tabpanel-authornosearchcategoryposts15';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16 = 'block-tabpanel-authornosearchcategoryposts16';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17 = 'block-tabpanel-authornosearchcategoryposts17';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-authornosearchcategoryposts18';
-    public const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-authornosearchcategoryposts19';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00 = 'block-tabpanel-authornosearchcategoryposts00';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01 = 'block-tabpanel-authornosearchcategoryposts01';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02 = 'block-tabpanel-authornosearchcategoryposts02';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03 = 'block-tabpanel-authornosearchcategoryposts03';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04 = 'block-tabpanel-authornosearchcategoryposts04';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05 = 'block-tabpanel-authornosearchcategoryposts05';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06 = 'block-tabpanel-authornosearchcategoryposts06';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07 = 'block-tabpanel-authornosearchcategoryposts07';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08 = 'block-tabpanel-authornosearchcategoryposts08';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09 = 'block-tabpanel-authornosearchcategoryposts09';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10 = 'block-tabpanel-authornosearchcategoryposts10';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11 = 'block-tabpanel-authornosearchcategoryposts11';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12 = 'block-tabpanel-authornosearchcategoryposts12';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13 = 'block-tabpanel-authornosearchcategoryposts13';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14 = 'block-tabpanel-authornosearchcategoryposts14';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15 = 'block-tabpanel-authornosearchcategoryposts15';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16 = 'block-tabpanel-authornosearchcategoryposts16';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17 = 'block-tabpanel-authornosearchcategoryposts17';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-authornosearchcategoryposts18';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-authornosearchcategoryposts19';
 
     public function getModulesToProcess(): array
     {

@@ -2,8 +2,8 @@
 
 class PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-event-relatedcontentsidebar';
-    public const MODULE_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-pastevent-relatedcontentsidebar';
+    public final const MODULE_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-event-relatedcontentsidebar';
+    public final const MODULE_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR = 'multiple-single-pastevent-relatedcontentsidebar';
 
     public function getModulesToProcess(): array
     {

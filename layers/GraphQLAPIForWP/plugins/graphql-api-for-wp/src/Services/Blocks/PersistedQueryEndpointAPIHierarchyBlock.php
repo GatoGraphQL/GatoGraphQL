@@ -16,7 +16,7 @@ class PersistedQueryEndpointAPIHierarchyBlock extends AbstractBlock implements P
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
+    public final const ATTRIBUTE_NAME_INHERIT_QUERY = 'inheritQuery';
 
     private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 

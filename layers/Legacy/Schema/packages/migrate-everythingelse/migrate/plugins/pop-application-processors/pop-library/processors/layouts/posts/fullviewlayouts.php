@@ -5,15 +5,15 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public const MODULE_LAYOUT_FULLVIEW = 'layout-fullview';
-    public const MODULE_LAYOUT_FULLVIEW_HIGHLIGHT = 'layout-fullview-highlight';
-    public const MODULE_LAYOUT_FULLVIEW_POST = 'layout-fullview-post';
-    public const MODULE_AUTHORLAYOUT_FULLVIEW = 'authorlayout-fullview';
-    public const MODULE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT = 'authorlayout-fullview-highlight';
-    public const MODULE_AUTHORLAYOUT_FULLVIEW_POST = 'authorlayout-fullview-post';
-    public const MODULE_SINGLELAYOUT_FULLVIEW = 'singlelayout-fullview';
-    public const MODULE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT = 'singlelayout-fullview-highlight';
-    public const MODULE_SINGLELAYOUT_FULLVIEW_POST = 'singlelayout-fullview-post';
+    public final const MODULE_LAYOUT_FULLVIEW = 'layout-fullview';
+    public final const MODULE_LAYOUT_FULLVIEW_HIGHLIGHT = 'layout-fullview-highlight';
+    public final const MODULE_LAYOUT_FULLVIEW_POST = 'layout-fullview-post';
+    public final const MODULE_AUTHORLAYOUT_FULLVIEW = 'authorlayout-fullview';
+    public final const MODULE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT = 'authorlayout-fullview-highlight';
+    public final const MODULE_AUTHORLAYOUT_FULLVIEW_POST = 'authorlayout-fullview-post';
+    public final const MODULE_SINGLELAYOUT_FULLVIEW = 'singlelayout-fullview';
+    public final const MODULE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT = 'singlelayout-fullview-highlight';
+    public final const MODULE_SINGLELAYOUT_FULLVIEW_POST = 'singlelayout-fullview-post';
 
     public function getModulesToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class GD_URE_AAL_Module_Processor_QuicklinkButtonGroupWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public const MODULE_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP = 'ure-aal-quicklinkbuttongroupwrapper-editusermembership';
-    public const MODULE_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_VIEWALLMEMBERS = 'ure-aal-quicklinkbuttongroupwrapper-viewallmembers';
+    public final const MODULE_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_EDITUSERMEMBERSHIP = 'ure-aal-quicklinkbuttongroupwrapper-editusermembership';
+    public final const MODULE_UREAAL_QUICKLINKBUTTONGROUPWRAPPER_VIEWALLMEMBERS = 'ure-aal-quicklinkbuttongroupwrapper-viewallmembers';
 
     public function getModulesToProcess(): array
     {

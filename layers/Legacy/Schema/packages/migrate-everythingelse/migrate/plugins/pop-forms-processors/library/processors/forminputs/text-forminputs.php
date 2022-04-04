@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_FORMINPUT_TARGETURL = 'forminput-targeturl';
-    public const MODULE_FORMINPUT_TARGETTITLE = 'forminput-targettitle';
-    public const MODULE_FORMINPUT_POSTTITLE = 'forminput-posttitle';
-    public const MODULE_FORMINPUT_USERNICENAME = 'forminput-usernicename';
-    public const MODULE_FORMINPUT_SENDERNAME = 'forminput-sendername';
-    public const MODULE_FORMINPUT_BROWSERURL = 'forminput-browserurl';
+    public final const MODULE_FORMINPUT_TARGETURL = 'forminput-targeturl';
+    public final const MODULE_FORMINPUT_TARGETTITLE = 'forminput-targettitle';
+    public final const MODULE_FORMINPUT_POSTTITLE = 'forminput-posttitle';
+    public final const MODULE_FORMINPUT_USERNICENAME = 'forminput-usernicename';
+    public final const MODULE_FORMINPUT_SENDERNAME = 'forminput-sendername';
+    public final const MODULE_FORMINPUT_BROWSERURL = 'forminput-browserurl';
 
     public function getModulesToProcess(): array
     {

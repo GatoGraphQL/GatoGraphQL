@@ -4,7 +4,7 @@ use PoPSitesWassup\ContactUsMutations\MutationResolverBridges\ContactUsComponent
 
 class PoP_ContactUs_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
-    public const MODULE_DATALOAD_CONTACTUS = 'dataload-contactus';
+    public final const MODULE_DATALOAD_CONTACTUS = 'dataload-contactus';
 
     public function getModulesToProcess(): array
     {

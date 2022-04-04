@@ -40,7 +40,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
             foreach ($directiveNames as $directiveName) {
                 App::addFilter(
                     HookHelpers::getHookNameToFilterDirective($directiveName),
-                    array($this, 'maybeFilterDirectiveName'),
+                    $this->maybeFilterDirectiveName(...),
                     10,
                     4
                 );
@@ -48,7 +48,7 @@ abstract class AbstractAccessControlForDirectivesHookSet extends AbstractAfterAp
         } else {
             App::addFilter(
                 HookHelpers::getHookNameToFilterDirective(),
-                array($this, 'maybeFilterDirectiveName'),
+                $this->maybeFilterDirectiveName(...),
                 10,
                 4
             );

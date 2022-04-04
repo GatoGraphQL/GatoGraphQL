@@ -4,7 +4,7 @@ use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGETCOMPACT_GENERICUSERINFO = 'widgetcompact-genericuserinfo';
+    public final const MODULE_WIDGETCOMPACT_GENERICUSERINFO = 'widgetcompact-genericuserinfo';
 
     public function getModulesToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_CAP_Module_Processor_FormComponentGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS = 'formcomponentgroup-selectabletypeahead-postauthors';
-    public const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS = 'formcomponentgroup-selectabletypeahead-postcoauthors';
+    public final const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTAUTHORS = 'formcomponentgroup-selectabletypeahead-postauthors';
+    public final const MODULE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_POSTCOAUTHORS = 'formcomponentgroup-selectabletypeahead-postcoauthors';
 
     public function getModulesToProcess(): array
     {

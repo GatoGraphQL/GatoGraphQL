@@ -19,7 +19,7 @@ class PoP_Notifications
     {
 
         // Priority: after PoP User Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888340);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888340);
     }
     public function init()
     {

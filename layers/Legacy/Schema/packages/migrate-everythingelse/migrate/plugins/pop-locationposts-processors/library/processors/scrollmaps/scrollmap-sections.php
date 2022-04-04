@@ -2,12 +2,12 @@
 
 class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public const MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP = 'scrollmap-locationposts-scrollmap';
-    public const MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-locationposts-horizontalscrollmap';
-    public const MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP = 'scrollmap-authorlocationposts-scrollmap';
-    public const MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-authorlocationposts-horizontalscrollmap';
-    public const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP = 'scrollmap-taglocationposts-scrollmap';
-    public const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-taglocationposts-horizontalscrollmap';
+    public final const MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP = 'scrollmap-locationposts-scrollmap';
+    public final const MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-locationposts-horizontalscrollmap';
+    public final const MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP = 'scrollmap-authorlocationposts-scrollmap';
+    public final const MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-authorlocationposts-horizontalscrollmap';
+    public final const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP = 'scrollmap-taglocationposts-scrollmap';
+    public final const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-taglocationposts-horizontalscrollmap';
 
     public function getModulesToProcess(): array
     {

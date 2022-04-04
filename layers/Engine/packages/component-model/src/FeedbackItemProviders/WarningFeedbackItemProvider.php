@@ -11,9 +11,9 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class WarningFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const W1 = 'w1';
-    public const W2 = 'w2';
-    public const W3 = 'w3';
+    public final const W1 = 'w1';
+    public final const W2 = 'w2';
+    public final const W3 = 'w3';
 
     /**
      * @return string[]

@@ -57,12 +57,12 @@ class PoP_Mentions
         // Save the tags immediately
         \PoP\Root\App::addAction(
             'popcms:savePost',
-            array($this, 'generatePostTags'),
+            $this->generatePostTags(...),
             0
         );
         \PoP\Root\App::addAction(
             'wp_insert_comment',// Must add a loose contract instead: 'popcms:insertComment'
-            array($this, 'generateCommentTags'),
+            $this->generateCommentTags(...),
             0,
             2
         );
@@ -72,12 +72,12 @@ class PoP_Mentions
             // Can't use filter "the_content" because it doesn't work with page How to use website on MESYM
             // So quick fix: ignore for pages. Since the_content does not pass the post_id, we use another hook
             // Execute before wpautop, or otherwise the hashtags after <p> don't work
-            \PoP\Root\App::addFilter('pop_content', array($this, 'processContentPost'), 5, 2);
+            \PoP\Root\App::addFilter('pop_content', $this->processContentPost(...), 5, 2);
 
             // Comment Leo 08/05/2016: Do not enable for excerpts, because somehow sometimes it fails (eg: with MESYM Documentary Night event) deleting everything
-            // \PoP\Root\App::addFilter('pop_excerpt', array($this, 'processContentPost'), 9999, 2);
+            // \PoP\Root\App::addFilter('pop_excerpt', $this->processContentPost(...), 9999, 2);
             // Execute before wpautop
-            \PoP\Root\App::addFilter('gd_comments_content', array($this, 'processContent'), 5);
+            \PoP\Root\App::addFilter('gd_comments_content', $this->processContent(...), 5);
         }
     }
 

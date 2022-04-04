@@ -8,8 +8,8 @@ use PoPSchema\Notifications\TypeResolvers\ObjectType\NotificationObjectTypeResol
 
 class AAL_PoPProcessors_Module_Processor_NotificationDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS = 'dataload-notifications-scroll-details';
-    public const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST = 'dataload-notifications-scroll-list';
+    public final const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_DETAILS = 'dataload-notifications-scroll-details';
+    public final const MODULE_DATALOAD_NOTIFICATIONS_SCROLL_LIST = 'dataload-notifications-scroll-list';
 
     public function getModulesToProcess(): array
     {

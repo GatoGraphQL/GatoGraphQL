@@ -6,12 +6,12 @@ class PoP_WebPlatform_UserLogin_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_FrontEnd_ResourceLoaderProcessor:dependencies:manager',
-            array($this, 'getManagerDependencies')
+            $this->getManagerDependencies(...)
         );
 
         \PoP\Root\App::addFilter(
             'PoP_SPAResourceLoader_FileReproduction_InitialResourcesConfig:routes',
-            array($this, 'getInitialRoutes')
+            $this->getInitialRoutes(...)
         );
     }
 

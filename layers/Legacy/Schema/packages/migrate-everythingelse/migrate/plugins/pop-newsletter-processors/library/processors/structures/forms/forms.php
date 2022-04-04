@@ -2,8 +2,8 @@
 
 class PoP_Newsletter_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_NEWSLETTER = 'form-newsletter';
-    public const MODULE_FORM_NEWSLETTERUNSUBSCRIPTION = 'form-newsletterunsubscription';
+    public final const MODULE_FORM_NEWSLETTER = 'form-newsletter';
+    public final const MODULE_FORM_NEWSLETTERUNSUBSCRIPTION = 'form-newsletterunsubscription';
 
     public function getModulesToProcess(): array
     {

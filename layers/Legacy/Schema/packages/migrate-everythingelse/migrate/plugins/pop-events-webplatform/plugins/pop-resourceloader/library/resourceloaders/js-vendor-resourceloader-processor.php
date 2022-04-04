@@ -2,7 +2,7 @@
 
 class PoP_Events_VendorJSResourceLoaderProcessor extends PoP_VendorJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_FULLCALENDAR = 'external-fullcalendar';
+    public final const RESOURCE_EXTERNAL_FULLCALENDAR = 'external-fullcalendar';
 
     public function getResourcesToProcess()
     {

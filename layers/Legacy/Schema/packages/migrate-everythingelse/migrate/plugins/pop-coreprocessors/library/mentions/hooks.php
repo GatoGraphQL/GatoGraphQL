@@ -6,7 +6,7 @@ class PoP_Mentions_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_EditorFormInputsBase:editor_layouts',
-            array($this, 'addLayoutSubmodules')
+            $this->addLayoutSubmodules(...)
         );
     }
 

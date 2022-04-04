@@ -7,9 +7,9 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 	    // Use the assets url instead of the site url for all the scripts and styles
 		$cmsService = CMSServiceFacade::getInstance();
 	    if (POP_CDNFOUNDATION_CDN_ASSETS_URI && (POP_CDNFOUNDATION_CDN_ASSETS_URI != $cmsService->getSiteURL())) {
-	        \PoP\Root\App::addFilter('includes_url', 'popCdnfoundationAssetsrc');
-	        \PoP\Root\App::addFilter('plugins_url', 'popCdnfoundationAssetsrc');
-	        \PoP\Root\App::addFilter('stylesheet_directory_uri', 'popCdnfoundationAssetsrc');
+	        \PoP\Root\App::addFilter('includes_url', popCdnfoundationAssetsrc(...));
+	        \PoP\Root\App::addFilter('plugins_url', popCdnfoundationAssetsrc(...));
+	        \PoP\Root\App::addFilter('stylesheet_directory_uri', popCdnfoundationAssetsrc(...));
 	    }
 	},
 	88830

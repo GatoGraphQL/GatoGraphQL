@@ -4,7 +4,7 @@
 // Load Plugin-specific Libraries
 //-------------------------------------------------------------------------------------
 
-\PoP\Root\App::addFilter('pop_sw_main_pagesection_container_ids', 'popthemeWassupSwMainPagesectionContainerIds');
+\PoP\Root\App::addFilter('pop_sw_main_pagesection_container_ids', popthemeWassupSwMainPagesectionContainerIds(...));
 function popthemeWassupSwMainPagesectionContainerIds($pagesection_container_ids)
 {
 

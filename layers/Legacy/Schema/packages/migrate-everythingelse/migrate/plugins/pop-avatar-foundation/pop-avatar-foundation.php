@@ -19,7 +19,7 @@ class PoP_AvatarFoundation
     {
 
         // Priority: after PoP Engine
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888110);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888110);
     }
     public function init()
     {

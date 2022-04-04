@@ -8,7 +8,7 @@ class PoP_GSG_Installation
         // (currently it deals only with pages)
         // \PoP\Root\App::addAction(
         //     'PoP:system-install', 
-        //     [$this, 'systemInstall']
+        //     $this->systemInstall(...)
         // );
     }
 

@@ -6,5 +6,5 @@ namespace PoP\ConfigurationComponentModel\Constants;
 
 class Values
 {
-    public const DEFAULT = 'default';
+    public final const DEFAULT = 'default';
 }

@@ -6,7 +6,7 @@ class PoPTheme_Wassup_CommonPages_ResourceLoaderProcessor_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
-            array($this, 'getModuleCssResources'),
+            $this->getModuleCssResources(...),
             10,
             6
         );

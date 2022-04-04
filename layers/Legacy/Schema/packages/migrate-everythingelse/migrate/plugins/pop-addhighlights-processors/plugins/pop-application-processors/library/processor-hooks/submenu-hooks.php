@@ -6,7 +6,7 @@ class PoP_AddHighlights_SubmenuHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_CustomSubMenus:single:mainsubheaders',
-            array($this, 'addSingleMainsubheaders')
+            $this->addSingleMainsubheaders(...)
         );
     }
 

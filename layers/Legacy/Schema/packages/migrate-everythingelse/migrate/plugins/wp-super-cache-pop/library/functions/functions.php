@@ -153,7 +153,7 @@ function gdWpCacheUserEdit()
 // Do not print the $buffer
 global $wp_super_cache_comments;
 $wp_super_cache_comments = false;
-\PoP\Root\App::addFilter('wp_cache_eof_tags', 'gdWpCacheEofTagsJsonResponse');
+\PoP\Root\App::addFilter('wp_cache_eof_tags', gdWpCacheEofTagsJsonResponse(...));
 function gdWpCacheEofTagsJsonResponse()
 {
 

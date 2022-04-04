@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_SettingsFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public const MODULE_FORMINNER_SETTINGS = 'forminner-settings';
+    public final const MODULE_FORMINNER_SETTINGS = 'forminner-settings';
 
     public function getModulesToProcess(): array
     {

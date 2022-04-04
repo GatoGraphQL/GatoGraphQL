@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES = 'ure-forminputgroup-memberprivileges';
-    public const MODULE_URE_FORMINPUTGROUP_MEMBERTAGS = 'ure-forminputgroup-membertags';
-    public const MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS = 'ure-forminputgroup-memberstatus';
-    public const MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES = 'ure-filterinputgroup-memberprivileges';
-    public const MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS = 'ure-filterinputgroup-membertags';
-    public const MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS = 'ure-filterinputgroup-memberstatus';
+    public final const MODULE_URE_FORMINPUTGROUP_MEMBERPRIVILEGES = 'ure-forminputgroup-memberprivileges';
+    public final const MODULE_URE_FORMINPUTGROUP_MEMBERTAGS = 'ure-forminputgroup-membertags';
+    public final const MODULE_URE_FORMINPUTGROUP_MEMBERSTATUS = 'ure-forminputgroup-memberstatus';
+    public final const MODULE_URE_FILTERINPUTGROUP_MEMBERPRIVILEGES = 'ure-filterinputgroup-memberprivileges';
+    public final const MODULE_URE_FILTERINPUTGROUP_MEMBERTAGS = 'ure-filterinputgroup-membertags';
+    public final const MODULE_URE_FILTERINPUTGROUP_MEMBERSTATUS = 'ure-filterinputgroup-memberstatus';
 
     public function getModulesToProcess(): array
     {

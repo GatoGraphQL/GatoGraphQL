@@ -4,7 +4,7 @@ use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfigurati
 
 class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGETCOMPACT_TAGINFO = 'widgetcompact-taginfo';
+    public final const MODULE_WIDGETCOMPACT_TAGINFO = 'widgetcompact-taginfo';
 
     public function getModulesToProcess(): array
     {

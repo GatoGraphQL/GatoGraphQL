@@ -22,7 +22,7 @@ class MultiValueFromStringFormInput extends FormInput
         $value = parent::getValue($source);
         // Only if it is not null process it
         if (!is_null($value)) {
-            return array_map('trim', explode($this->separator, $value));
+            return array_map(trim(...), explode($this->separator, $value));
         }
         return $value;
     }

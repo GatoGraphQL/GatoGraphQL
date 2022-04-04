@@ -5,8 +5,8 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Forms_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_FORMINPUT_NAME = 'gf-field-name';
-    public const MODULE_FORMINPUT_EMAIL = 'gf-field-email';
+    public final const MODULE_FORMINPUT_NAME = 'gf-field-name';
+    public final const MODULE_FORMINPUT_EMAIL = 'gf-field-email';
 
     public function getModulesToProcess(): array
     {

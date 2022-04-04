@@ -14,7 +14,7 @@ use PoPCMSSchema\Categories\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
+    public final const MODULE_FILTERINPUT_CATEGORY_IDS = 'filterinput-category-ids';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

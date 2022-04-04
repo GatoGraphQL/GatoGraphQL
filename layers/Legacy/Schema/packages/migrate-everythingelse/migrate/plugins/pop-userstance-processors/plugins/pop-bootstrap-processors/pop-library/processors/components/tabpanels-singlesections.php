@@ -2,10 +2,10 @@
 
 class UserStance_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Processor_SingleSectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT = 'tabpanel-singlerelatedstancecontent';
-    public const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'tabpanel-singlerelatedstancecontent-pro';
-    public const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'tabpanel-singlerelatedstancecontent-against';
-    public const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'tabpanel-singlerelatedstancecontent-neutral';
+    public final const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT = 'tabpanel-singlerelatedstancecontent';
+    public final const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'tabpanel-singlerelatedstancecontent-pro';
+    public final const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'tabpanel-singlerelatedstancecontent-against';
+    public final const MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'tabpanel-singlerelatedstancecontent-neutral';
 
     public function getModulesToProcess(): array
     {

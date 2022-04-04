@@ -21,21 +21,21 @@ class PoP_SocialNetwork_EmailSender_Hooks
         // Functional emails
         //----------------------------------------------------------------------
         // User followed
-        \PoP\Root\App::addAction('gd_followuser', array($this, 'followuser'), 10, 1);
+        \PoP\Root\App::addAction('gd_followuser', $this->followuser(...), 10, 1);
 
         // Post recommended
-        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'recommendpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_recommendpost', $this->recommendpost(...), 10, 1);
 
         //----------------------------------------------------------------------
         // Email Notifications
         //----------------------------------------------------------------------
         // EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
-        \PoP\Root\App::addAction('gd_recommendpost', array($this, 'emailnotificationsNetworkRecommendedpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_recommendpost', $this->emailnotificationsNetworkRecommendedpost(...), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
-        \PoP\Root\App::addAction('gd_followuser', array($this, 'emailnotificationsNetworkFolloweduser'), 10, 1);
+        \PoP\Root\App::addAction('gd_followuser', $this->emailnotificationsNetworkFolloweduser(...), 10, 1);
         // EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST:
-        \PoP\Root\App::addAction('gd_upvotepost', array($this, 'emailnotificationsNetworkUpvotedpost'), 10, 1);
-        \PoP\Root\App::addAction('gd_downvotepost', array($this, 'emailnotificationsNetworkDownvotedpost'), 10, 1);
+        \PoP\Root\App::addAction('gd_upvotepost', $this->emailnotificationsNetworkUpvotedpost(...), 10, 1);
+        \PoP\Root\App::addAction('gd_downvotepost', $this->emailnotificationsNetworkDownvotedpost(...), 10, 1);
     }
 
     /**

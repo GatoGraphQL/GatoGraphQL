@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGET_CATEGORIES = 'widget-categories';
-    public const MODULE_WIDGET_APPLIESTO = 'widget-appliesto';
-    public const MODULE_WIDGETCOMPACT_GENERICINFO = 'widgetcompact-generic-info';
-    public const MODULE_WIDGETCOMPACT_HIGHLIGHTINFO = 'widgetcompact-highlight-info';
-    public const MODULE_WIDGETCOMPACT_POSTINFO = 'widgetcompact-post-info';
+    public final const MODULE_WIDGET_CATEGORIES = 'widget-categories';
+    public final const MODULE_WIDGET_APPLIESTO = 'widget-appliesto';
+    public final const MODULE_WIDGETCOMPACT_GENERICINFO = 'widgetcompact-generic-info';
+    public final const MODULE_WIDGETCOMPACT_HIGHLIGHTINFO = 'widgetcompact-highlight-info';
+    public final const MODULE_WIDGETCOMPACT_POSTINFO = 'widgetcompact-post-info';
 
     public function getModulesToProcess(): array
     {

@@ -3,9 +3,9 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {
-    public const MODULE_BLOCK_NEWSLETTER = 'block-newsletter';
-    public const MODULE_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
-    public const MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
+    public final const MODULE_BLOCK_NEWSLETTER = 'block-newsletter';
+    public final const MODULE_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
+    public final const MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
 
     public function getModulesToProcess(): array
     {

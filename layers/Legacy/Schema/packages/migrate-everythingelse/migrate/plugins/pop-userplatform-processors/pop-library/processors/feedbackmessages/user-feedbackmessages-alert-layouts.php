@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES = 'layout-feedbackmessagealert-mypreferences';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_MYPREFERENCES = 'layout-feedbackmessagealert-mypreferences';
 
     public function getModulesToProcess(): array
     {

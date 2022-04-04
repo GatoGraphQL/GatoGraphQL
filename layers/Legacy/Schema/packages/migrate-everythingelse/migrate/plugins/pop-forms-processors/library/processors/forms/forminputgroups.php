@@ -3,18 +3,18 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_EDITOR = 'forminputeditorgroup';
-    public const MODULE_FORMINPUTGROUP_TEXTAREAEDITOR = 'forminput-textarea-editorgroup';
-    public const MODULE_FILTERINPUTGROUP_ORDERUSER = 'filterinputgroup-order-user';
-    public const MODULE_FILTERINPUTGROUP_ORDERPOST = 'filterinputgroup-order-post';
-    public const MODULE_FILTERINPUTGROUP_ORDERTAG = 'filterinputgroup-order-tag';
-    public const MODULE_FILTERINPUTGROUP_ORDERCOMMENT = 'filterinputgroup-order-comment';
-    public const MODULE_FILTERINPUTGROUP_SEARCH = 'filterinputgroup-searchfor';
-    public const MODULE_FILTERINPUTGROUP_HASHTAGS = 'filterinputgroup-hashtags';
-    public const MODULE_FILTERINPUTGROUP_NAME = 'filterinputgroup-nombre';
-    public const MODULE_FORMINPUTGROUP_EMAILS = 'ure-forminputgroup-emails';
-    public const MODULE_FORMINPUTGROUP_SENDERNAME = 'ure-forminputgroup-sendername';
-    public const MODULE_FORMINPUTGROUP_ADDITIONALMESSAGE = 'ure-forminputgroup-additionalmessage';
+    public final const MODULE_FORMINPUTGROUP_EDITOR = 'forminputeditorgroup';
+    public final const MODULE_FORMINPUTGROUP_TEXTAREAEDITOR = 'forminput-textarea-editorgroup';
+    public final const MODULE_FILTERINPUTGROUP_ORDERUSER = 'filterinputgroup-order-user';
+    public final const MODULE_FILTERINPUTGROUP_ORDERPOST = 'filterinputgroup-order-post';
+    public final const MODULE_FILTERINPUTGROUP_ORDERTAG = 'filterinputgroup-order-tag';
+    public final const MODULE_FILTERINPUTGROUP_ORDERCOMMENT = 'filterinputgroup-order-comment';
+    public final const MODULE_FILTERINPUTGROUP_SEARCH = 'filterinputgroup-searchfor';
+    public final const MODULE_FILTERINPUTGROUP_HASHTAGS = 'filterinputgroup-hashtags';
+    public final const MODULE_FILTERINPUTGROUP_NAME = 'filterinputgroup-nombre';
+    public final const MODULE_FORMINPUTGROUP_EMAILS = 'ure-forminputgroup-emails';
+    public final const MODULE_FORMINPUTGROUP_SENDERNAME = 'ure-forminputgroup-sendername';
+    public final const MODULE_FORMINPUTGROUP_ADDITIONALMESSAGE = 'ure-forminputgroup-additionalmessage';
 
     public function getModulesToProcess(): array
     {

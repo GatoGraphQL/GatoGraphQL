@@ -2,7 +2,7 @@
 
 class PoP_LocationPosts_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_LOCATIONPOSTS = 'tabpanel-locationposts';
+    public final const MODULE_TABPANEL_LOCATIONPOSTS = 'tabpanel-locationposts';
 
     public function getModulesToProcess(): array
     {

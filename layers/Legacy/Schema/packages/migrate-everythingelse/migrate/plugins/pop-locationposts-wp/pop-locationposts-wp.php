@@ -21,7 +21,7 @@ class PoP_LocationPostsWP
     public function __construct()
     {
         // Priority: after PoP Locations
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888352);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888352);
     }
     public function init()
     {

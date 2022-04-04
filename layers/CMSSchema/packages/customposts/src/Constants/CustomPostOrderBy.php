@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPosts\Constants;
 
 class CustomPostOrderBy
 {
-    public const ID = 'ID';
-    public const TITLE = 'TITLE';
-    public const DATE = 'DATE';
+    public final const ID = 'ID';
+    public final const TITLE = 'TITLE';
+    public final const DATE = 'DATE';
 }

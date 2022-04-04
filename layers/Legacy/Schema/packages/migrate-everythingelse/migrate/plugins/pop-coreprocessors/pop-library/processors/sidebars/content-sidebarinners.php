@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_SIDEBARINNER_CONTENT_HORIZONTAL = 'contentsidebarinner-horizontal';
-    public const MODULE_SIDEBARINNER_CONTENT_VERTICAL = 'contentsidebarinner-vertical';
+    public final const MODULE_SIDEBARINNER_CONTENT_HORIZONTAL = 'contentsidebarinner-horizontal';
+    public final const MODULE_SIDEBARINNER_CONTENT_VERTICAL = 'contentsidebarinner-vertical';
 
     public function getModulesToProcess(): array
     {

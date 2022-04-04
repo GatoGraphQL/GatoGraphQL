@@ -9,16 +9,16 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = '1';
-    public const E2 = '2';
-    public const E3 = '3';
-    public const E4 = '4';
-    public const E5 = '5';
-    public const E6 = '6';
-    public const E7 = '7';
-    public const E8 = '8';
-    public const E9 = '9';
-    public const E10 = '10';
+    public final const E1 = '1';
+    public final const E2 = '2';
+    public final const E3 = '3';
+    public final const E4 = '4';
+    public final const E5 = '5';
+    public final const E6 = '6';
+    public final const E7 = '7';
+    public final const E8 = '8';
+    public final const E9 = '9';
+    public final const E10 = '10';
 
     /**
      * @return string[]

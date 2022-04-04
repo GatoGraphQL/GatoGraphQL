@@ -18,24 +18,24 @@ class PoP_SSR_EngineInitialization_Hooks
     {
         \PoP\Root\App::addFilter(
             'webplatform-engine:main_html',
-            array($this, 'getMainHtml')
+            $this->getMainHtml(...)
         );
 
         \PoP\Root\App::addFilter(
             'PoPWebPlatform_Initialization:init-scripts',
-            array($this, 'initScripts')
+            $this->initScripts(...)
         );
 
         \PoP\Root\App::addFilter(
             'PoPWebPlatform_Engine:encoded-data-object',
-            array($this, 'getEncodedDataObject'),
+            $this->getEncodedDataObject(...),
             10,
             2
         );
 
         \PoP\Root\App::addFilter(
             'add-scripts:where',
-            array($this, 'getScriptsWhere')
+            $this->getScriptsWhere(...)
         );
     }
 

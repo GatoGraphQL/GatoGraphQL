@@ -5,7 +5,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 /**
  * login.php
  */
-\PoP\Root\App::addFilter('gdGetLoginHtml', 'gdUreGetLoginHtml', 10, 2);
+\PoP\Root\App::addFilter('gdGetLoginHtml', gdUreGetLoginHtml(...), 10, 2);
 function gdUreGetLoginHtml($html, $capitalize = false)
 {
     $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();

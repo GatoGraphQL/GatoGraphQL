@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT = 'quicklinkgroup-highlightedit';
-    public const MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT = 'quicklinkgroup-highlightcontent';
+    public final const MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT = 'quicklinkgroup-highlightedit';
+    public final const MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT = 'quicklinkgroup-highlightcontent';
 
     public function getModulesToProcess(): array
     {

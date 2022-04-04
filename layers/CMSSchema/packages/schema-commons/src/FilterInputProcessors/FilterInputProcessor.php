@@ -8,23 +8,23 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_SORT = 'filterinput-sort';
-    public const FILTERINPUT_ORDER = 'filterinput-order';
-    public const FILTERINPUT_ORDERBY = 'filterinput-orderby';
-    public const FILTERINPUT_LIMIT = 'filterinput-limit';
-    public const FILTERINPUT_OFFSET = 'filterinput-offset';
-    public const FILTERINPUT_SEARCH = 'filterinput-search';
-    public const FILTERINPUT_DATES = 'filterinput-dates';
-    public const FILTERINPUT_INCLUDE = 'filterinput-include';
-    public const FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
-    public const FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
-    public const FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
-    public const FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
-    public const FILTERINPUT_SLUGS = 'filterinput-slugs';
-    public const FILTERINPUT_SLUG = 'filterinput-slug';
-    public const FILTERINPUT_PATH_OR_PATHS = 'filterinput-path-or-paths';
-    public const FILTERINPUT_DATEFORMAT = 'filterinput-dateformat';
-    public const FILTERINPUT_GMT = 'filterinput-gmt';
+    public final const FILTERINPUT_SORT = 'filterinput-sort';
+    public final const FILTERINPUT_ORDER = 'filterinput-order';
+    public final const FILTERINPUT_ORDERBY = 'filterinput-orderby';
+    public final const FILTERINPUT_LIMIT = 'filterinput-limit';
+    public final const FILTERINPUT_OFFSET = 'filterinput-offset';
+    public final const FILTERINPUT_SEARCH = 'filterinput-search';
+    public final const FILTERINPUT_DATES = 'filterinput-dates';
+    public final const FILTERINPUT_INCLUDE = 'filterinput-include';
+    public final const FILTERINPUT_EXCLUDE_IDS = 'filterinput-exclude-ids';
+    public final const FILTERINPUT_PARENT_IDS = 'filterinput-parent-ids';
+    public final const FILTERINPUT_PARENT_ID = 'filterinput-parent-id';
+    public final const FILTERINPUT_EXCLUDE_PARENT_IDS = 'filterinput-exclude-parent-ids';
+    public final const FILTERINPUT_SLUGS = 'filterinput-slugs';
+    public final const FILTERINPUT_SLUG = 'filterinput-slug';
+    public final const FILTERINPUT_PATH_OR_PATHS = 'filterinput-path-or-paths';
+    public final const FILTERINPUT_DATEFORMAT = 'filterinput-dateformat';
+    public final const FILTERINPUT_GMT = 'filterinput-gmt';
 
     public function getFilterInputsToProcess(): array
     {

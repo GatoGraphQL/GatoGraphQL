@@ -6,12 +6,12 @@ class UserStance_DataLoad_FilterHooks
     {
         \PoP\Root\App::addFilter(
             'Stances:FilterInnerModuleProcessor:inputmodules',
-            array($this, 'filtercomponents'),
+            $this->filtercomponents(...),
             10,
             2
         );\PoP\Root\App::addFilter(
             'Stances:SimpleFilterInners:inputmodules',
-            array($this, 'simplefiltercomponents'),
+            $this->simplefiltercomponents(...),
             10,
             2
         );

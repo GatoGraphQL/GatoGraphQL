@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module_Processor_CustomPreviewUserLayoutsBase
 {
-    public const MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
+    public final const MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
 
     public function getModulesToProcess(): array
     {

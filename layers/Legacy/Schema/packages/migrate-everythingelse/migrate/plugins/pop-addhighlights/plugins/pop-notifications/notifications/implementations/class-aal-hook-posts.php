@@ -16,11 +16,11 @@ class PoP_AddHighlights_Notifications_Hook_Posts /* extends AAL_Hook_Base*/
     {
         \PoP\Root\App::addAction(
             'GD_CreateUpdate_Highlight:createAdditionals',
-            array($this, 'createdHighlight')
+            $this->createdHighlight(...)
         );
         \PoP\Root\App::addAction(
             'GD_CreateUpdate_Highlight:updateAdditionals',
-            array($this, 'updatedHighlight'),
+            $this->updatedHighlight(...),
             10,
             3
         );

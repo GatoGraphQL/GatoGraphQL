@@ -16,8 +16,8 @@ abstract class AbstractControlBlock extends AbstractBlock
 {
     use WithTypeFieldControlBlockTrait;
 
-    public const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
-    public const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
+    public final const ATTRIBUTE_NAME_TYPE_FIELDS = 'typeFields';
+    public final const ATTRIBUTE_NAME_DIRECTIVES = 'directives';
 
     private ?TypeRegistryInterface $typeRegistry = null;
 

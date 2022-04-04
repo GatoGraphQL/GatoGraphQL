@@ -6,7 +6,7 @@ namespace PoPAPI\API\ModuleProcessors;
 
 class RelationalFieldQueryDataModuleProcessor extends AbstractRelationalFieldQueryDataModuleProcessor
 {
-    public const MODULE_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
+    public final const MODULE_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
 
     public function getModulesToProcess(): array
     {

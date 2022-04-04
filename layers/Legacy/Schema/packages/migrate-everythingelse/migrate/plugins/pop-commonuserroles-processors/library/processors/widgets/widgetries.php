@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Custom_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS = 'ure-widget-profileorganization-details';
-    public const MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS = 'ure-widget-profileindividual-details';
+    public final const MODULE_URE_WIDGET_PROFILEORGANIZATION_DETAILS = 'ure-widget-profileorganization-details';
+    public final const MODULE_URE_WIDGET_PROFILEINDIVIDUAL_DETAILS = 'ure-widget-profileindividual-details';
 
     public function getModulesToProcess(): array
     {

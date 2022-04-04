@@ -3,7 +3,7 @@
 /**
  * No need from any avatar size from this plugin
  */
-\PoP\Root\App::addFilter('coauthors_guest_author_avatar_sizes', 'emptyArray', 10000);
+\PoP\Root\App::addFilter('coauthors_guest_author_avatar_sizes', emptyArray(...), 10000);
 function emptyArray($anything)
 {
     return array();

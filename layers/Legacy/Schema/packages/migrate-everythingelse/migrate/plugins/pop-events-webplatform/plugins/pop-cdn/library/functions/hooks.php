@@ -7,7 +7,7 @@ class PoP_Events_CDN_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
-            array($this, 'getThumbprintPartialpaths'),
+            $this->getThumbprintPartialpaths(...),
             10,
             2
         );

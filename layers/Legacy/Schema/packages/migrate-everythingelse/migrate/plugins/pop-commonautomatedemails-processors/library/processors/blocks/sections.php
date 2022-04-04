@@ -6,11 +6,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionBlocks extends PoP_CommonAutomatedEmails_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'block-automatedemails-latestcontent-scroll-details';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'block-automatedemails-latestcontent-scroll-simpleview';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'block-automatedemails-latestcontent-scroll-fullview';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'block-automatedemails-latestcontent-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'block-automatedemails-latestcontent-scroll-list';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'block-automatedemails-latestcontent-scroll-details';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'block-automatedemails-latestcontent-scroll-simpleview';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'block-automatedemails-latestcontent-scroll-fullview';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'block-automatedemails-latestcontent-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'block-automatedemails-latestcontent-scroll-list';
 
     public function getModulesToProcess(): array
     {

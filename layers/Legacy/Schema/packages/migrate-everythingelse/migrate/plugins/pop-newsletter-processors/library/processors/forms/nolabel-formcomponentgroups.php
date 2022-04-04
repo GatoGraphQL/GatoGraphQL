@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Newsletter_Module_Processor_NoLabelFormComponentGroups extends PoP_Module_Processor_NoLabelFormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_CUP_NEWSLETTER = 'forminputgroup-cup-newsletter';
+    public final const MODULE_FORMINPUTGROUP_CUP_NEWSLETTER = 'forminputgroup-cup-newsletter';
 
     public function getModulesToProcess(): array
     {

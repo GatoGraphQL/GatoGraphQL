@@ -2,7 +2,7 @@
 use PoP\Engine\Route\RouteUtils;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
-\PoP\Root\App::addFilter('gd_postname', 'userstancePostname', 10, 2);
+\PoP\Root\App::addFilter('gd_postname', userstancePostname(...), 10, 2);
 function userstancePostname($name, $post_id = null)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -12,7 +12,7 @@ function userstancePostname($name, $post_id = null)
 
     return $name;
 }
-\PoP\Root\App::addFilter('gd_format_postname', 'userstanceFormatPostname', 10, 3);
+\PoP\Root\App::addFilter('gd_format_postname', userstanceFormatPostname(...), 10, 3);
 function userstanceFormatPostname($name, $post_id, $format)
 {
     $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -26,7 +26,7 @@ function userstanceFormatPostname($name, $post_id, $format)
 
     return $name;
 }
-\PoP\Root\App::addFilter('gd_posticon', 'userstancePosticon', 10, 2);
+\PoP\Root\App::addFilter('gd_posticon', userstancePosticon(...), 10, 2);
 function userstancePosticon($icon, $post_id = null)
 {
     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {
@@ -39,7 +39,7 @@ function userstancePosticon($icon, $post_id = null)
     return $icon;
 }
 
-// \PoP\Root\App::addFilter('gdPostParentpageid', 'userstancePostParentpageid', 10, 2);
+// \PoP\Root\App::addFilter('gdPostParentpageid', userstancePostParentpageid(...), 10, 2);
 // function userstancePostParentpageid($pageid, $post_id)
 // {
 //     if (defined('POP_USERSTANCE_ROUTE_STANCES') && POP_USERSTANCE_ROUTE_STANCES) {

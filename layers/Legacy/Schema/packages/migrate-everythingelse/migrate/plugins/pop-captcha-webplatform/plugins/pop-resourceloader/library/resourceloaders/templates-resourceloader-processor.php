@@ -2,7 +2,7 @@
 
 class PoP_CaptchaWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FORMINPUT_CAPTCHA = 'forminput_captcha';
+    public final const RESOURCE_FORMINPUT_CAPTCHA = 'forminput_captcha';
 
     public function getResourcesToProcess()
     {

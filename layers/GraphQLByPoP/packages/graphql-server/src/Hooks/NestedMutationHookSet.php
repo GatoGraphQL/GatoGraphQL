@@ -30,7 +30,7 @@ class NestedMutationHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookHelpers::getHookNameToFilterField(),
-            array($this, 'maybeFilterFieldName'),
+            $this->maybeFilterFieldName(...),
             10,
             4
         );

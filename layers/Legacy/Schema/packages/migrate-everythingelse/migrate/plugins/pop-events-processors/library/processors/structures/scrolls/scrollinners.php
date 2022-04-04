@@ -2,22 +2,22 @@
 
 class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_EVENTS_NAVIGATOR = 'scrollinner-events-navigator';
-    public const MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR = 'scrollinner-pastevents-navigator';
-    public const MODULE_SCROLLINNER_EVENTS_ADDONS = 'scrollinner-events-addons';
-    public const MODULE_SCROLLINNER_PASTEVENTS_ADDONS = 'scrollinner-pastevents-addons';
-    public const MODULE_SCROLLINNER_EVENTS_DETAILS = 'scrollinner-events-details';
-    public const MODULE_SCROLLINNER_PASTEVENTS_DETAILS = 'scrollinner-pastevents-details';
-    public const MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW = 'scrollinner-events-simpleview';
-    public const MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW = 'scrollinner-pastevents-simpleview';
-    public const MODULE_SCROLLINNER_EVENTS_FULLVIEW = 'scrollinner-events-fullview';
-    public const MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW = 'scrollinner-pastevents-fullview';
-    public const MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW = 'scrollinner-authorevents-fullview';
-    public const MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW = 'scrollinner-authorpastevents-fullview';
-    public const MODULE_SCROLLINNER_EVENTS_THUMBNAIL = 'scrollinner-events-thumbnail';
-    public const MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL = 'scrollinner-pastevents-thumbnail';
-    public const MODULE_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
-    public const MODULE_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
+    public final const MODULE_SCROLLINNER_EVENTS_NAVIGATOR = 'scrollinner-events-navigator';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR = 'scrollinner-pastevents-navigator';
+    public final const MODULE_SCROLLINNER_EVENTS_ADDONS = 'scrollinner-events-addons';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_ADDONS = 'scrollinner-pastevents-addons';
+    public final const MODULE_SCROLLINNER_EVENTS_DETAILS = 'scrollinner-events-details';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_DETAILS = 'scrollinner-pastevents-details';
+    public final const MODULE_SCROLLINNER_EVENTS_SIMPLEVIEW = 'scrollinner-events-simpleview';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_SIMPLEVIEW = 'scrollinner-pastevents-simpleview';
+    public final const MODULE_SCROLLINNER_EVENTS_FULLVIEW = 'scrollinner-events-fullview';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_FULLVIEW = 'scrollinner-pastevents-fullview';
+    public final const MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW = 'scrollinner-authorevents-fullview';
+    public final const MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW = 'scrollinner-authorpastevents-fullview';
+    public final const MODULE_SCROLLINNER_EVENTS_THUMBNAIL = 'scrollinner-events-thumbnail';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL = 'scrollinner-pastevents-thumbnail';
+    public final const MODULE_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
+    public final const MODULE_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
 
     public function getModulesToProcess(): array
     {

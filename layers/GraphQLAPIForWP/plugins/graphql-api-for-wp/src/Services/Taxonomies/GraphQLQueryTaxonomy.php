@@ -9,7 +9,7 @@ class GraphQLQueryTaxonomy extends AbstractTaxonomy
     /**
      * "Category" taxonomy
      */
-    public const TAXONOMY_CATEGORY = 'graphql-category';
+    public final const TAXONOMY_CATEGORY = 'graphql-category';
 
     /**
      * Taxonomy

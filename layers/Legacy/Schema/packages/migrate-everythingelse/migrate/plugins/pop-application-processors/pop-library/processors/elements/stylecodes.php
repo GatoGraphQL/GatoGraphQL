@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_DomainStyleCodes extends PoP_Module_Processor_StyleCodesBase
 {
-    public const MODULE_CODE_DOMAINSTYLES = 'code-domainstyles';
+    public final const MODULE_CODE_DOMAINSTYLES = 'code-domainstyles';
 
     public function getModulesToProcess(): array
     {

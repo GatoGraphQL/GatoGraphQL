@@ -8,9 +8,9 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class UserStance_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public const MODULE_CAROUSELCONTROLS_STANCES = 'carouselcontrols-stances';
-    public const MODULE_CAROUSELCONTROLS_AUTHORSTANCES = 'carouselcontrols-authorstances';
-    public const MODULE_CAROUSELCONTROLS_TAGSTANCES = 'carouselcontrols-tagstances';
+    public final const MODULE_CAROUSELCONTROLS_STANCES = 'carouselcontrols-stances';
+    public final const MODULE_CAROUSELCONTROLS_AUTHORSTANCES = 'carouselcontrols-authorstances';
+    public final const MODULE_CAROUSELCONTROLS_TAGSTANCES = 'carouselcontrols-tagstances';
 
     public function getModulesToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoPSPEM_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public const MODULE_DELEGATORFILTER_MYLOCATIONPOSTS = 'delegatorfilter-mylocationposts';
+    public final const MODULE_DELEGATORFILTER_MYLOCATIONPOSTS = 'delegatorfilter-mylocationposts';
 
     public function getModulesToProcess(): array
     {

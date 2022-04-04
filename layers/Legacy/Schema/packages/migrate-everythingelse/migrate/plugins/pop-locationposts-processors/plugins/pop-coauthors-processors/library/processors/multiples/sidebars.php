@@ -2,7 +2,7 @@
 
 class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR = 'multiple-single-locationpost-postauthorssidebar';
+    public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR = 'multiple-single-locationpost-postauthorssidebar';
 
     public function getModulesToProcess(): array
     {

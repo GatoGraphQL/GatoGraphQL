@@ -15,7 +15,7 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 
 class QueryHookSet extends AbstractHookSet
 {
-    public const NON_EXISTING_ID = "non-existing";
+    public final const NON_EXISTING_ID = "non-existing";
 
     private ?CustomPostTypeRegistryInterface $customPostTypeRegistry = null;
 
@@ -32,7 +32,7 @@ class QueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             CustomPostTypeAPI::HOOK_QUERY,
-            [$this, 'convertCustomPostsQuery'],
+            $this->convertCustomPostsQuery(...),
             10,
             2
         );

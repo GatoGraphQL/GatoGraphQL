@@ -3,26 +3,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsBase
 {
-    public const MODULE_BUTTON_FOLLOWUSER_PREVIEW = 'button-followuser-preview';
-    public const MODULE_BUTTON_FOLLOWUSER_FULL = 'button-sidebar-followuser-full';
-    public const MODULE_BUTTON_UNFOLLOWUSER_PREVIEW = 'button-unfollowuser-preview';
-    public const MODULE_BUTTON_UNFOLLOWUSER_FULL = 'button-sidebar-unfollowuser-full';
-    public const MODULE_BUTTON_RECOMMENDPOST_FULL = 'button-recommendpost-full';
-    public const MODULE_BUTTON_RECOMMENDPOST_PREVIEW = 'button-recommendpost-preview';
-    public const MODULE_BUTTON_UNRECOMMENDPOST_FULL = 'button-unrecommendpost-full';
-    public const MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW = 'button-unrecommendpost-preview';
-    public const MODULE_BUTTON_SUBSCRIBETOTAG_FULL = 'button-subscribetotag-full';
-    public const MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW = 'button-subscribetotag-preview';
-    public const MODULE_BUTTON_UNSUBSCRIBEFROMTAG_FULL = 'button-unsubscribefromtag-full';
-    public const MODULE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW = 'button-unsubscribefromtag-preview';
-    public const MODULE_BUTTON_UPVOTEPOST_PREVIEW = 'button-upvotepost-preview';
-    public const MODULE_BUTTON_UPVOTEPOST_FULL = 'button-sidebar-upvotepost-full';
-    public const MODULE_BUTTON_UNDOUPVOTEPOST_PREVIEW = 'button-undoupvotepost-preview';
-    public const MODULE_BUTTON_UNDOUPVOTEPOST_FULL = 'button-sidebar-undoupvotepost-full';
-    public const MODULE_BUTTON_DOWNVOTEPOST_FULL = 'button-downvotepost-full';
-    public const MODULE_BUTTON_DOWNVOTEPOST_PREVIEW = 'button-downvotepost-preview';
-    public const MODULE_BUTTON_UNDODOWNVOTEPOST_FULL = 'button-undodownvotepost-full';
-    public const MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW = 'button-undodownvotepost-preview';
+    public final const MODULE_BUTTON_FOLLOWUSER_PREVIEW = 'button-followuser-preview';
+    public final const MODULE_BUTTON_FOLLOWUSER_FULL = 'button-sidebar-followuser-full';
+    public final const MODULE_BUTTON_UNFOLLOWUSER_PREVIEW = 'button-unfollowuser-preview';
+    public final const MODULE_BUTTON_UNFOLLOWUSER_FULL = 'button-sidebar-unfollowuser-full';
+    public final const MODULE_BUTTON_RECOMMENDPOST_FULL = 'button-recommendpost-full';
+    public final const MODULE_BUTTON_RECOMMENDPOST_PREVIEW = 'button-recommendpost-preview';
+    public final const MODULE_BUTTON_UNRECOMMENDPOST_FULL = 'button-unrecommendpost-full';
+    public final const MODULE_BUTTON_UNRECOMMENDPOST_PREVIEW = 'button-unrecommendpost-preview';
+    public final const MODULE_BUTTON_SUBSCRIBETOTAG_FULL = 'button-subscribetotag-full';
+    public final const MODULE_BUTTON_SUBSCRIBETOTAG_PREVIEW = 'button-subscribetotag-preview';
+    public final const MODULE_BUTTON_UNSUBSCRIBEFROMTAG_FULL = 'button-unsubscribefromtag-full';
+    public final const MODULE_BUTTON_UNSUBSCRIBEFROMTAG_PREVIEW = 'button-unsubscribefromtag-preview';
+    public final const MODULE_BUTTON_UPVOTEPOST_PREVIEW = 'button-upvotepost-preview';
+    public final const MODULE_BUTTON_UPVOTEPOST_FULL = 'button-sidebar-upvotepost-full';
+    public final const MODULE_BUTTON_UNDOUPVOTEPOST_PREVIEW = 'button-undoupvotepost-preview';
+    public final const MODULE_BUTTON_UNDOUPVOTEPOST_FULL = 'button-sidebar-undoupvotepost-full';
+    public final const MODULE_BUTTON_DOWNVOTEPOST_FULL = 'button-downvotepost-full';
+    public final const MODULE_BUTTON_DOWNVOTEPOST_PREVIEW = 'button-downvotepost-preview';
+    public final const MODULE_BUTTON_UNDODOWNVOTEPOST_FULL = 'button-undodownvotepost-full';
+    public final const MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW = 'button-undodownvotepost-preview';
 
     public function getModulesToProcess(): array
     {

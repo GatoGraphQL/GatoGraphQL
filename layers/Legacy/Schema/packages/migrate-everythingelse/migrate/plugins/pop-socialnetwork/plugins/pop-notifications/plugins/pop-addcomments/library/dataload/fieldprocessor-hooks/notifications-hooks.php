@@ -10,7 +10,7 @@ class PoP_AddComments_SocialNetwork_DataLoad_TypeResolver_Notifications_Hook
     {
         \PoP\Root\App::addFilter(
             'PoP_AddComments_DataLoad_TypeResolver_Notifications_Hook:comment-added:message',
-            array($this, 'getMessage'),
+            $this->getMessage(...),
             10,
             2
         );

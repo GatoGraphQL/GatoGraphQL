@@ -16,14 +16,14 @@ class CustomPostQueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             AbstractCustomPostTypeAPI::HOOK_QUERY,
-            [$this, 'convertCustomPostsQuery'],
+            $this->convertCustomPostsQuery(...),
             10,
             2
         );
 
         App::addFilter(
             CustomPostTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
-            [$this, 'getOrderByQueryArgValue']
+            $this->getOrderByQueryArgValue(...)
         );
     }
 

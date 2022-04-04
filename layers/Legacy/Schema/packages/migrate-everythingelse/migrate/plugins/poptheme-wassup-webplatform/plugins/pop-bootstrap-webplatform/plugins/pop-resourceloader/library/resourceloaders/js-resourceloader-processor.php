@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_Bootstrap_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPCUSTOMFUNCTIONS = 'bootstrap-custom-functions';
+    public final const RESOURCE_BOOTSTRAPCUSTOMFUNCTIONS = 'bootstrap-custom-functions';
 
     public function getResourcesToProcess()
     {

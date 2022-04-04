@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_CreateLocationForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_CREATELOCATION = 'em-form-createlocation';
+    public final const MODULE_FORM_CREATELOCATION = 'em-form-createlocation';
 
     public function getModulesToProcess(): array
     {

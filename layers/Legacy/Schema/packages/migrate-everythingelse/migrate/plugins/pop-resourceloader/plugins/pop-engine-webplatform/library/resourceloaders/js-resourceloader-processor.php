@@ -2,17 +2,17 @@
 
 class PoP_FrontEnd_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_COMPATIBILITY = 'compatibility';
-    public const RESOURCE_HISTORY = 'history';
-    public const RESOURCE_INTERCEPTORS = 'interceptors';
-    public const RESOURCE_JSLIBRARYMANAGER = 'jslibrary-manager';
-    public const RESOURCE_JSRUNTIMEMANAGER = 'jsruntime-manager';
-    public const RESOURCE_PAGESECTIONMANAGER = 'pagesection-manager';
-    public const RESOURCE_POPMANAGER = 'pop-manager';
-    public const RESOURCE_DATASTORE = 'data-store';
-    public const RESOURCE_POPUTILS = 'pop-utils';
-    public const RESOURCE_UTILS = 'utils';
-    public const RESOURCE_LIFECYCLE = 'lifecycle';
+    public final const RESOURCE_COMPATIBILITY = 'compatibility';
+    public final const RESOURCE_HISTORY = 'history';
+    public final const RESOURCE_INTERCEPTORS = 'interceptors';
+    public final const RESOURCE_JSLIBRARYMANAGER = 'jslibrary-manager';
+    public final const RESOURCE_JSRUNTIMEMANAGER = 'jsruntime-manager';
+    public final const RESOURCE_PAGESECTIONMANAGER = 'pagesection-manager';
+    public final const RESOURCE_POPMANAGER = 'pop-manager';
+    public final const RESOURCE_DATASTORE = 'data-store';
+    public final const RESOURCE_POPUTILS = 'pop-utils';
+    public final const RESOURCE_UTILS = 'utils';
+    public final const RESOURCE_LIFECYCLE = 'lifecycle';
 
     public function getResourcesToProcess()
     {

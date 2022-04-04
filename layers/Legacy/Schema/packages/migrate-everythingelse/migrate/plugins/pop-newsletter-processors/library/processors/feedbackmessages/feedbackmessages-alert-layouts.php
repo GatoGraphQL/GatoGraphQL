@@ -2,8 +2,8 @@
 
 class PoP_Newsletter_Module_Processor_FeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_NEWSLETTER = 'layout-feedbackmessagealert-newsletter';
-    public const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_NEWSLETTERUNSUBSCRIPTION = 'layout-feedbackmessagealert-newsletterunsubscription';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_NEWSLETTER = 'layout-feedbackmessagealert-newsletter';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_NEWSLETTERUNSUBSCRIPTION = 'layout-feedbackmessagealert-newsletterunsubscription';
 
     public function getModulesToProcess(): array
     {

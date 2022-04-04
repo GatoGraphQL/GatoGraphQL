@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public const MODULE_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE = 'layout-feedbackmessage-useravatar-update';
+    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE = 'layout-feedbackmessage-useravatar-update';
 
     public function getModulesToProcess(): array
     {

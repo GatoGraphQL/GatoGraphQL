@@ -2,8 +2,8 @@
 
 class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
-    public const MODULE_BLOCK_COMMUNITIES_SCROLLMAP = 'block-communities-scrollmap';
-    public const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'block-authormembers-scrollmap';
+    public final const MODULE_BLOCK_COMMUNITIES_SCROLLMAP = 'block-communities-scrollmap';
+    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'block-authormembers-scrollmap';
 
     public function getModulesToProcess(): array
     {

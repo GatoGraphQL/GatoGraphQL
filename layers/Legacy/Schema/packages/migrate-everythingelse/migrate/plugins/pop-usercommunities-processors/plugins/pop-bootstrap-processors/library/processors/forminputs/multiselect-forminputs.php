@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Processor_MultiSelectFormInputsBase
 {
-    public const MODULE_URE_FORMINPUT_MEMBERPRIVILEGES = 'ure-forminput-memberprivileges';
-    public const MODULE_URE_FORMINPUT_MEMBERTAGS = 'ure-forminput-membertags';
+    public final const MODULE_URE_FORMINPUT_MEMBERPRIVILEGES = 'ure-forminput-memberprivileges';
+    public final const MODULE_URE_FORMINPUT_MEMBERTAGS = 'ure-forminput-membertags';
 
     public function getModulesToProcess(): array
     {

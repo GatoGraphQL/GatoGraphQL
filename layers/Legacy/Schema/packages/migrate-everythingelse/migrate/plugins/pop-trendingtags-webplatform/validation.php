@@ -10,29 +10,29 @@ class PoP_TrendingTagsWebPlatform_Validation
     {
         $success = true;
         if (!defined('POP_TRENDINGTAGS_VERSION')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->installWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->installWarning(...));
             $success = false;
         } elseif (!defined('POP_TRENDINGTAGS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_TRENDINGTAGSWEBPLATFORM_POP_TRENDINGTAGS_MIN_VERSION > POP_TRENDINGTAGS_VERSION) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->versionWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->versionWarning(...));
         }
 
         if (!defined('POP_ENGINEWEBPLATFORM_VERSION')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'install_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'install_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->install_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->install_warning_2(...));
             $success = false;
         } elseif (!defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POP_TRENDINGTAGSWEBPLATFORM_POP_ENGINEWEBPLATFORM_MIN_VERSION > POP_ENGINEWEBPLATFORM_VERSION) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'version_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'version_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->version_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->version_warning_2(...));
         }
 
         return $success;

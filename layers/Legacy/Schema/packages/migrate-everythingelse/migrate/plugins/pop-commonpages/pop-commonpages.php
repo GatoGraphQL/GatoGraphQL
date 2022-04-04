@@ -19,7 +19,7 @@ class PoP_CommonPages
     {
 
         // Priority: after ...
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888880);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888880);
     }
 
     public function init()

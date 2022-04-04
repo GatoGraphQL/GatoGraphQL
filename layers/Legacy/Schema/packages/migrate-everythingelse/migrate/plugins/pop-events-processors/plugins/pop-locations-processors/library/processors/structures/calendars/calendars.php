@@ -2,7 +2,7 @@
 
 class PoP_Events_Locations_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBase
 {
-    public const MODULE_CALENDAR_EVENTSMAP = 'calendar-eventsmap';
+    public final const MODULE_CALENDAR_EVENTSMAP = 'calendar-eventsmap';
 
     public function getModulesToProcess(): array
     {

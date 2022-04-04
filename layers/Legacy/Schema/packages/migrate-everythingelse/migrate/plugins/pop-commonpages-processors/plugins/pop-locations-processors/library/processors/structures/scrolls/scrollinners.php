@@ -2,7 +2,7 @@
 
 class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_WHOWEARE_MAP = 'scrollinner-whoweare-map';
+    public final const MODULE_SCROLLINNER_WHOWEARE_MAP = 'scrollinner-whoweare-map';
 
     public function getModulesToProcess(): array
     {

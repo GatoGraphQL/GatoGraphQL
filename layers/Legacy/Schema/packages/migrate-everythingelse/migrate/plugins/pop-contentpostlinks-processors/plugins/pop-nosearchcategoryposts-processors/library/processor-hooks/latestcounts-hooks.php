@@ -6,7 +6,7 @@ class PoP_ContentPostLinks_NoSearchCategoryPosts_LatestCounts_Hooks
     {
         \PoP\Root\App::addFilter(
             'latestcounts:nosearchcategoryposts:classes',
-            array($this, 'getSectionClasses')
+            $this->getSectionClasses(...)
         );
     }
 

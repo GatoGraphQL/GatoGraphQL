@@ -9,16 +9,16 @@ class PoP_System_Validation
     {
         $success = true;
         if (!defined('POP_ENGINE_VERSION')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'installWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'installWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->installWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->installWarning(...));
             $success = false;
         } elseif (!defined('POP_ENGINE_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_SYSTEM_POP_ENGINE_MIN_VERSION > POP_ENGINE_VERSION) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'versionWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'versionWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->versionWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->versionWarning(...));
         }
 
         return $success;

@@ -19,7 +19,7 @@ class PoP_ContentPostLinks
     {
 
         // Priority: after PoP Blog
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888320);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888320);
     }
     public function init()
     {

@@ -11,13 +11,13 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabsLayoutsBase
 {
-    public const MODULE_LAYOUT_PAGETABS_HOME = 'layout-pagetabs-home';
-    public const MODULE_LAYOUT_PAGETABS_TAG = 'layout-pagetabs-tag';
-    public const MODULE_LAYOUT_PAGETABS_PAGE = 'layout-pagetabs-page';
-    public const MODULE_LAYOUT_PAGETABS_ROUTE = 'layout-pagetabs-route';
-    public const MODULE_LAYOUT_PAGETABS_SINGLE = 'layout-pagetabs-single';
-    public const MODULE_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
-    public const MODULE_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
+    public final const MODULE_LAYOUT_PAGETABS_HOME = 'layout-pagetabs-home';
+    public final const MODULE_LAYOUT_PAGETABS_TAG = 'layout-pagetabs-tag';
+    public final const MODULE_LAYOUT_PAGETABS_PAGE = 'layout-pagetabs-page';
+    public final const MODULE_LAYOUT_PAGETABS_ROUTE = 'layout-pagetabs-route';
+    public final const MODULE_LAYOUT_PAGETABS_SINGLE = 'layout-pagetabs-single';
+    public final const MODULE_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
+    public final const MODULE_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
 
     public function getModulesToProcess(): array
     {

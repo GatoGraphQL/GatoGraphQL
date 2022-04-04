@@ -45,7 +45,7 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
         foreach ($this->getClearHookNames() as $hookName) {
             App::addAction(
                 $hookName,
-                [$this, 'clear']
+                $this->clear(...)
             );
         }
 
@@ -58,7 +58,7 @@ abstract class AbstractCacheHookSet extends AbstractHookSet
          */
         App::addAction(
             $this->getCommitHookName(),
-            [$this, 'commit']
+            $this->commit(...)
         );
     }
 

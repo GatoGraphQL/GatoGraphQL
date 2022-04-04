@@ -2,7 +2,7 @@
 
 class GD_Custom_EM_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_LOCATIONPOST = 'form-locationpost';
+    public final const MODULE_FORM_LOCATIONPOST = 'form-locationpost';
 
     public function getModulesToProcess(): array
     {

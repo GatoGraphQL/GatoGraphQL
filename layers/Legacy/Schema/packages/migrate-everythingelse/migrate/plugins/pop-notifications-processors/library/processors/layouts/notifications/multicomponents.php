@@ -4,7 +4,7 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafMod
 
 class PoP_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
+    public final const MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM = 'notifications-multicomponent-quicklinkgroup-bottom';
 
     public function getModulesToProcess(): array
     {

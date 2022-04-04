@@ -2,9 +2,9 @@
 
 class PoP_Events_CalendarResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_FULLCALENDAR = 'em-fullcalendar';
-    public const RESOURCE_FULLCALENDARMEMORY = 'em-fullcalendar-memory';
-    public const RESOURCE_FULLCALENDARADDEVENTS = 'em-fullcalendar-addevents';
+    public final const RESOURCE_FULLCALENDAR = 'em-fullcalendar';
+    public final const RESOURCE_FULLCALENDARMEMORY = 'em-fullcalendar-memory';
+    public final const RESOURCE_FULLCALENDARADDEVENTS = 'em-fullcalendar-addevents';
 
     public function getResourcesToProcess()
     {

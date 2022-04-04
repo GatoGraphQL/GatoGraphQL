@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLoggedInsBase
 {
-    public const MODULE_USERACCOUNT_USERLOGGEDINWELCOME = 'useraccount-userloggedinwelcome';
-    public const MODULE_USERACCOUNT_USERLOGGEDINPROMPT = 'useraccount-userloggedinprompt';
+    public final const MODULE_USERACCOUNT_USERLOGGEDINWELCOME = 'useraccount-userloggedinwelcome';
+    public final const MODULE_USERACCOUNT_USERLOGGEDINPROMPT = 'useraccount-userloggedinprompt';
 
     public function getModulesToProcess(): array
     {

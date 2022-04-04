@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomVerticalSingleSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_VERTICALSIDEBAR_SINGLE_LINK = 'vertical-sidebar-single-link';
+    public final const MODULE_VERTICALSIDEBAR_SINGLE_LINK = 'vertical-sidebar-single-link';
 
     public function getModulesToProcess(): array
     {

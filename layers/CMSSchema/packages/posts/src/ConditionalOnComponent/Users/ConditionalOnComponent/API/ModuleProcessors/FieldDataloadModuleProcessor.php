@@ -14,7 +14,7 @@ use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 
 class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
 {
-    public const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST = 'dataload-relationalfields-authorpostlist';
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;

@@ -12,9 +12,9 @@ class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_Data
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_MYCOMMUNITIES_UPDATE = 'dataload-mycommunities-update';
-    public const MODULE_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';
-    public const MODULE_DATALOAD_EDITMEMBERSHIP = 'dataload-editmembership';
+    public final const MODULE_DATALOAD_MYCOMMUNITIES_UPDATE = 'dataload-mycommunities-update';
+    public final const MODULE_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';
+    public final const MODULE_DATALOAD_EDITMEMBERSHIP = 'dataload-editmembership';
 
     public function getModulesToProcess(): array
     {

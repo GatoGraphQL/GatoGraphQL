@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Constants;
 
 class Props
 {
-    public const DESCENDANT_ATTRIBUTES = 'descendantattributes';
-    public const ATTRIBUTES = 'attributes';
-    public const SUBMODULES = 'submodules';
+    public final const DESCENDANT_ATTRIBUTES = 'descendantattributes';
+    public final const ATTRIBUTES = 'attributes';
+    public final const SUBMODULES = 'submodules';
 }

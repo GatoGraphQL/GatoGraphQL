@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES = 'forminputgroup-locationpostcategories';
-    public const MODULE_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES = 'filterinputgroup-locationpostcategories';
+    public final const MODULE_FORMINPUTGROUP_LOCATIONPOSTCATEGORIES = 'forminputgroup-locationpostcategories';
+    public final const MODULE_FILTERINPUTGROUP_LOCATIONPOSTCATEGORIES = 'filterinputgroup-locationpostcategories';
 
     public function getModulesToProcess(): array
     {

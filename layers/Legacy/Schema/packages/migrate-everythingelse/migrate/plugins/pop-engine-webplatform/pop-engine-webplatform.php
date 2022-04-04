@@ -28,7 +28,7 @@ class PoPWebPlatform
             },
             392
         );
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888400);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888400);
     }
     public function init()
     {

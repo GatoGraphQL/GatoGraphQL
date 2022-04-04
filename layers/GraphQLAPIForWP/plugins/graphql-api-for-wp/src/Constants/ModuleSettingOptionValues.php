@@ -9,5 +9,5 @@ class ModuleSettingOptionValues
     /**
      * Setting option values
      */
-    public const NO_VALUE_ID = 0;
+    public final const NO_VALUE_ID = 0;
 }

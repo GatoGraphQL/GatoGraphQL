@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\Constants;
 
 class DatabasesOutputModes
 {
-    public const SPLITBYDATABASES = 'splitbydbs';
-    public const COMBINED = 'combined';
+    public final const SPLITBYDATABASES = 'splitbydbs';
+    public final const COMBINED = 'combined';
 }

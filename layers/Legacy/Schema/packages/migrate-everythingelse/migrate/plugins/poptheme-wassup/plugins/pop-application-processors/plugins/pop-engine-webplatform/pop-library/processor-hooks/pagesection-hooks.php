@@ -6,13 +6,13 @@ class PoPTheme_Wassup_ApplicationProcessors_WebPlatform_PageSectionHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
-            array($this, 'initModelPropsHover'),
+            $this->initModelPropsHover(...),
             10,
             3
         );
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:addons',
-            array($this, 'initModelPropsAddons'),
+            $this->initModelPropsAddons(...),
             10,
             3
         );

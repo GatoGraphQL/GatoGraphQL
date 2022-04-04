@@ -6,7 +6,7 @@ class PoPTheme_Wassup_PageSectionHooks
     {
         \PoP\Root\App::addAction(
             'PoP_Module_Processor_CustomTabPanePageSections:get_props_block_initial:sideinfo',
-            array($this, 'initModelPropsSideinfo'),
+            $this->initModelPropsSideinfo(...),
             10,
             3
         );

@@ -6,11 +6,11 @@ class PoP_CommonUserRolesProcessors_CreateUpdateProfileHooks
     {
         \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileOrganization_Trait:form-inputs',
-            array($this, 'getProfileorganizationFormInputs')
+            $this->getProfileorganizationFormInputs(...)
         );
         \PoP\Root\App::addFilter(
             'GD_CreateUpdate_ProfileIndividual_Trait:form-inputs',
-            array($this, 'getProfileindividualFormInputs')
+            $this->getProfileindividualFormInputs(...)
         );
     }
 

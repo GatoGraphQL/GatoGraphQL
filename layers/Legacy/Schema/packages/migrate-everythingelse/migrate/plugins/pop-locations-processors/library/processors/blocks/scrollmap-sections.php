@@ -3,18 +3,18 @@ use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
-    public const MODULE_BLOCK_SEARCHUSERS_SCROLLMAP = 'block-searchusers-scrollmap';
-    public const MODULE_BLOCK_USERS_SCROLLMAP = 'block-users-scrollmap';
-    public const MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP = 'block-users-horizontalscrollmap';
-    public const MODULE_BLOCK_EVENTS_SCROLLMAP = 'block-events-scrollmap';
-    public const MODULE_BLOCK_PASTEVENTS_SCROLLMAP = 'block-pastevents-scrollmap';
-    public const MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP = 'block-events-horizontalscrollmap';
-    public const MODULE_BLOCK_AUTHOREVENTS_SCROLLMAP = 'block-authorevents-scrollmap';
-    public const MODULE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP = 'block-authorpastevents-scrollmap';
-    public const MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'block-authorevents-horizontalscrollmap';
-    public const MODULE_BLOCK_TAGEVENTS_SCROLLMAP = 'block-tagevents-scrollmap';
-    public const MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP = 'block-tagpastevents-scrollmap';
-    public const MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP = 'block-tagevents-horizontalscrollmap';
+    public final const MODULE_BLOCK_SEARCHUSERS_SCROLLMAP = 'block-searchusers-scrollmap';
+    public final const MODULE_BLOCK_USERS_SCROLLMAP = 'block-users-scrollmap';
+    public final const MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP = 'block-users-horizontalscrollmap';
+    public final const MODULE_BLOCK_EVENTS_SCROLLMAP = 'block-events-scrollmap';
+    public final const MODULE_BLOCK_PASTEVENTS_SCROLLMAP = 'block-pastevents-scrollmap';
+    public final const MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP = 'block-events-horizontalscrollmap';
+    public final const MODULE_BLOCK_AUTHOREVENTS_SCROLLMAP = 'block-authorevents-scrollmap';
+    public final const MODULE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP = 'block-authorpastevents-scrollmap';
+    public final const MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'block-authorevents-horizontalscrollmap';
+    public final const MODULE_BLOCK_TAGEVENTS_SCROLLMAP = 'block-tagevents-scrollmap';
+    public final const MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP = 'block-tagpastevents-scrollmap';
+    public final const MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP = 'block-tagevents-horizontalscrollmap';
 
     public function getModulesToProcess(): array
     {

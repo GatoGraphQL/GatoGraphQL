@@ -2,7 +2,7 @@
 
 class PoP_SocialNetwork_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_FEEDBACKMESSAGE_CONTACTUSER = 'feedbackmessage-contactuser';
+    public final const MODULE_FEEDBACKMESSAGE_CONTACTUSER = 'feedbackmessage-contactuser';
 
     public function getModulesToProcess(): array
     {

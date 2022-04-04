@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Module_Processor_LocationSelectableTypeaheadFormComponentsBase
 {
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS = 'formcomponent-selectabletypeahead-locations';
-    public const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION = 'formcomponent-selectabletypeahead-location';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS = 'formcomponent-selectabletypeahead-locations';
+    public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION = 'formcomponent-selectabletypeahead-location';
 
     public function getModulesToProcess(): array
     {

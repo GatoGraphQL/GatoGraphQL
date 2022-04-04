@@ -7,7 +7,7 @@ class PoP_SPAResourceLoader_EngineInitialization_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoPWebPlatform_Initialization:init-scripts',
-            array($this, 'initScripts'),
+            $this->initScripts(...),
             20
         );
     }

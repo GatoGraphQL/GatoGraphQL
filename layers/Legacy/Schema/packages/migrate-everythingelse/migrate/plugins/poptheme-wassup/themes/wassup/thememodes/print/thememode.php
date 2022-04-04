@@ -10,15 +10,15 @@ class GD_ThemeMode_Wassup_Print extends GD_WassupThemeMode_Base
     public function __construct()
     {
 
-        // App::addFilter('gd_jquery_constants', array($this, 'jqueryConstants'));
+        // App::addFilter('gd_jquery_constants', $this->jqueryConstants(...));
 
         // Hooks to allow the thememodes to do some functionality
-        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'filteringbyShowfilter'));
-        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getSidebarOrientation'));
+        App::addFilter(POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER.':'.$this->getTheme()->getName().':'.$this->getName(), $this->filteringbyShowfilter(...));
+        App::addFilter(POP_HOOK_BLOCKSIDEBARS_ORIENTATION.':'.$this->getTheme()->getName().':'.$this->getName(), $this->getSidebarOrientation(...));
 
         App::addAction(HookNames::AFTER_BOOT_APPLICATION, function() {
             if (in_array(POP_STRATUM_WEB, App::getState('strata'))) {
-                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getTheme()->getName().':'.$this->getName(), array($this, 'getPagesectionJsmethod'), 10, 2);
+                App::addFilter(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD.':'.$this->getTheme()->getName().':'.$this->getName(), $this->getPagesectionJsmethod(...), 10, 2);
                 App::addFilter(POP_HOOK_POPWEBPLATFORM_KEEPOPENTABS.':'.$this->getTheme()->getName().':'.$this->getName(), '__return_false');
             }
         });

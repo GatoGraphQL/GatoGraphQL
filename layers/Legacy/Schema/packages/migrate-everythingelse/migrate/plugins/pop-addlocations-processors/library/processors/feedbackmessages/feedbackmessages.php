@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CreateLocationFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public const MODULE_FEEDBACKMESSAGE_CREATELOCATION = 'feedbackmessage-createlocation';
+    public final const MODULE_FEEDBACKMESSAGE_CREATELOCATION = 'feedbackmessage-createlocation';
 
     public function getModulesToProcess(): array
     {

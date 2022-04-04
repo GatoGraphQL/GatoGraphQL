@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public const MODULE_CODE_INVITENEWMEMBERSHELP = 'code-invitenewmembershelp';
+    public final const MODULE_CODE_INVITENEWMEMBERSHELP = 'code-invitenewmembershelp';
 
     public function getModulesToProcess(): array
     {

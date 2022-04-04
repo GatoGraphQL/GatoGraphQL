@@ -2,8 +2,8 @@
 
 class PoP_UserCommunities_ModuleProcessor_SectionBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_COMMUNITIES = 'block-communities-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_MYMEMBERS = 'block-mymembers-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_COMMUNITIES = 'block-communities-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_MYMEMBERS = 'block-mymembers-tabpanel';
 
     public function getModulesToProcess(): array
     {

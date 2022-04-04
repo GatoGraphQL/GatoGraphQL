@@ -6,8 +6,8 @@ namespace PoPSchema\Stances;
 
 class Environment
 {
-    public const STANCE_LIST_DEFAULT_LIMIT = 'STANCE_LIST_DEFAULT_LIMIT';
-    public const STANCE_LIST_MAX_LIMIT = 'STANCE_LIST_MAX_LIMIT';
+    public final const STANCE_LIST_DEFAULT_LIMIT = 'STANCE_LIST_DEFAULT_LIMIT';
+    public final const STANCE_LIST_MAX_LIMIT = 'STANCE_LIST_MAX_LIMIT';
 
     public static function addStanceTypeToCustomPostUnionTypes(): bool
     {

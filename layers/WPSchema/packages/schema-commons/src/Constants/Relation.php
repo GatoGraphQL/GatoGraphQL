@@ -6,6 +6,6 @@ namespace PoPWPSchema\SchemaCommons\Constants;
 
 class Relation
 {
-    public const OR = 'OR';
-    public const AND = 'AND';
+    public final const OR = 'OR';
+    public final const AND = 'AND';
 }

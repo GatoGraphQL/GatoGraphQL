@@ -20,7 +20,7 @@ class AWSS3CFPoP
     {
 
         // Priority: after PoP Application
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888310);
     }
 
     public function init()
@@ -29,7 +29,7 @@ class AWSS3CFPoP
 
         if ($this->validate()) {
             // Execute after function as3cf_init in amazon-s3-and-cloudfront/wordpress-s3.php
-            \PoP\Root\App::addAction('aws_init', array($this, 'initialize'), 100);
+            \PoP\Root\App::addAction('aws_init', $this->initialize(...), 100);
             define('AWSS3CFPOP_INITIALIZED', true);
         }
     }

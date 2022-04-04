@@ -7,7 +7,7 @@ class FunctionAPIHooks {
 	
 		\PoP\Root\App::addFilter(
 		    'CMSAPI:users:query',
-		    [$this, 'convertUsersQuery'],
+		    $this->convertUsersQuery(...),
 		    10,
 		    2
 		);

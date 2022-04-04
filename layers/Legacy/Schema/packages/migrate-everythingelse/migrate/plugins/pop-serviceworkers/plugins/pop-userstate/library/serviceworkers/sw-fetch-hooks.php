@@ -7,7 +7,7 @@ class PoP_ServiceWorkers_UserState_Job_Fetch_Hooks
         $resourceType = 'json';
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_Fetch:exclude-paramvalues:'.$resourceType,
-            array($this, 'getExcludedParamvalues')
+            $this->getExcludedParamvalues(...)
         );
     }
 

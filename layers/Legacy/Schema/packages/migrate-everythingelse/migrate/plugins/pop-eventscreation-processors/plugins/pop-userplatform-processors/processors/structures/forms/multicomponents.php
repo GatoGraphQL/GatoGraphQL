@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_EM_Custom_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE = 'multicomponent-form-event-rightside';
+    public final const MODULE_MULTICOMPONENT_FORM_EVENT_RIGHTSIDE = 'multicomponent-form-event-rightside';
 
     public function getModulesToProcess(): array
     {

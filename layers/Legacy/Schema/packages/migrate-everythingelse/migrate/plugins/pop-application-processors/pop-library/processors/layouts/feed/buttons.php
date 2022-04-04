@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 {
-    public const MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY = 'button-toggleuserpostactivity';
+    public final const MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY = 'button-toggleuserpostactivity';
 
     public function getModulesToProcess(): array
     {

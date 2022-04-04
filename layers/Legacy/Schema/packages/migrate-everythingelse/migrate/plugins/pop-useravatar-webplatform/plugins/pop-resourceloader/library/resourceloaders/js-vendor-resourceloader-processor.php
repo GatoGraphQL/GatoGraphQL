@@ -2,11 +2,11 @@
 
 class PoP_UserAvatarProcessors_VendorJSResourceLoaderProcessor extends PoP_VendorJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_IFRAMETRANSPORT = 'external-iframe-transport';
-    public const RESOURCE_EXTERNAL_FILEUPLOAD = 'external-fileupload';
-    public const RESOURCE_EXTERNAL_FILEUPLOADUI = 'external-fileupload-ui';
-    public const RESOURCE_EXTERNAL_FILEUPLOADPROCESS = 'external-fileupload-process';
-    public const RESOURCE_EXTERNAL_FILEUPLOADVALIDATE = 'external-fileupload-validate';
+    public final const RESOURCE_EXTERNAL_IFRAMETRANSPORT = 'external-iframe-transport';
+    public final const RESOURCE_EXTERNAL_FILEUPLOAD = 'external-fileupload';
+    public final const RESOURCE_EXTERNAL_FILEUPLOADUI = 'external-fileupload-ui';
+    public final const RESOURCE_EXTERNAL_FILEUPLOADPROCESS = 'external-fileupload-process';
+    public final const RESOURCE_EXTERNAL_FILEUPLOADVALIDATE = 'external-fileupload-validate';
 
     public function getResourcesToProcess()
     {

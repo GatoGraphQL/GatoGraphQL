@@ -2,7 +2,7 @@
 
 class PoP_ServiceWorkers_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_SWREGISTRAR = 'sw-registrar';
+    public final const RESOURCE_SWREGISTRAR = 'sw-registrar';
 
     public function getResourcesToProcess()
     {

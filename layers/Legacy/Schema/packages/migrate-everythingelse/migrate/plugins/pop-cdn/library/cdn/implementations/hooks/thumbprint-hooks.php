@@ -6,13 +6,13 @@ class PoP_CDN_ThumbprintUserHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:startsWith:partial',
-            array($this, 'getThumbprintPartialpaths'),
+            $this->getThumbprintPartialpaths(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_CDN_FileReproduction_ThumbprintsConfig:criteriaitems:thumbprint:isHome',
-            array($this, 'getThumbprintIshome'),
+            $this->getThumbprintIshome(...),
             10,
             2
         );

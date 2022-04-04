@@ -17,7 +17,7 @@ class TagPostFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloa
 {
     use QueriedDBObjectModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST = 'dataload-relationalfields-tagpostlist';
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;

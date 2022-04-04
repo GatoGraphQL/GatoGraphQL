@@ -2,10 +2,10 @@
 
 class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS = 'layout-referencedbyscroll-inner-details';
-    public const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW = 'layout-referencedbyscroll-inner-simpleview';
-    public const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW = 'layout-referencedbyscroll-inner-fullview';
-    public const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE = 'layout-referencedbyscroll-inner-appendable';
+    public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS = 'layout-referencedbyscroll-inner-details';
+    public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW = 'layout-referencedbyscroll-inner-simpleview';
+    public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW = 'layout-referencedbyscroll-inner-fullview';
+    public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE = 'layout-referencedbyscroll-inner-appendable';
 
     public function getModulesToProcess(): array
     {

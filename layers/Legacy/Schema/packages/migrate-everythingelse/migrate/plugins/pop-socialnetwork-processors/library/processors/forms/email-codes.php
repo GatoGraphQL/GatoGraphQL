@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public const MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL = 'code-emailnotifications-networklabel';
-    public const MODULE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL = 'code-emailnotifications-subscribedtopicslabel';
+    public final const MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL = 'code-emailnotifications-networklabel';
+    public final const MODULE_CODE_EMAILNOTIFICATIONS_SUBSCRIBEDTOPICSLABEL = 'code-emailnotifications-subscribedtopicslabel';
 
     public function getModulesToProcess(): array
     {

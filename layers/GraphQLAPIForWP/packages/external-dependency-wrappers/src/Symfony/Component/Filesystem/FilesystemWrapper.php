@@ -17,7 +17,7 @@ class FilesystemWrapper
 {
     use StandaloneServiceTrait;
 
-    private Filesystem $fileSystem;
+    private readonly Filesystem $fileSystem;
 
     public function __construct()
     {

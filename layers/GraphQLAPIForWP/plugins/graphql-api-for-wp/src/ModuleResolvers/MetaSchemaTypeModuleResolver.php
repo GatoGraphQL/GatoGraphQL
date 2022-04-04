@@ -24,10 +24,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         getPriority as getUpstreamPriority;
     }
 
-    public const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
-    public const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
-    public const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
-    public const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
+    public final const SCHEMA_CUSTOMPOST_META = Plugin::NAMESPACE . '\schema-custompost-meta';
+    public final const SCHEMA_USER_META = Plugin::NAMESPACE . '\schema-user-meta';
+    public final const SCHEMA_COMMENT_META = Plugin::NAMESPACE . '\schema-comment-meta';
+    public final const SCHEMA_TAXONOMY_META = Plugin::NAMESPACE . '\schema-taxonomy-meta';
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;

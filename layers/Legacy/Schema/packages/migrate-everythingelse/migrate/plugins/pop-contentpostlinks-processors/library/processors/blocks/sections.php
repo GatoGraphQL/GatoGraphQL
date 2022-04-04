@@ -2,23 +2,23 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_LINKS_SCROLL_NAVIGATOR = 'block-links-scroll-navigator';
-    public const MODULE_BLOCK_LINKS_SCROLL_ADDONS = 'block-links-scroll-addons';
-    public const MODULE_BLOCK_LINKS_SCROLL_DETAILS = 'block-links-scroll-details';
-    public const MODULE_BLOCK_AUTHORLINKS_SCROLL_DETAILS = 'block-authorlinks-scroll-details';
-    public const MODULE_BLOCK_TAGLINKS_SCROLL_DETAILS = 'block-taglinks-scroll-details';
-    public const MODULE_BLOCK_LINKS_SCROLL_SIMPLEVIEW = 'block-links-scroll-simpleview';
-    public const MODULE_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW = 'block-authorlinks-scroll-simpleview';
-    public const MODULE_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW = 'block-taglinks-scroll-simpleview';
-    public const MODULE_BLOCK_LINKS_SCROLL_FULLVIEW = 'block-links-scroll-fullview';
-    public const MODULE_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW = 'block-authorlinks-scroll-fullview';
-    public const MODULE_BLOCK_TAGLINKS_SCROLL_FULLVIEW = 'block-taglinks-scroll-fullview';
-    public const MODULE_BLOCK_LINKS_SCROLL_THUMBNAIL = 'block-links-scroll-thumbnail';
-    public const MODULE_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL = 'block-authorlinks-scroll-thumbnail';
-    public const MODULE_BLOCK_TAGLINKS_SCROLL_THUMBNAIL = 'block-taglinks-scroll-thumbnail';
-    public const MODULE_BLOCK_LINKS_SCROLL_LIST = 'block-links-scroll-list';
-    public const MODULE_BLOCK_AUTHORLINKS_SCROLL_LIST = 'block-authorlinks-scroll-list';
-    public const MODULE_BLOCK_TAGLINKS_SCROLL_LIST = 'block-taglinks-scroll-list';
+    public final const MODULE_BLOCK_LINKS_SCROLL_NAVIGATOR = 'block-links-scroll-navigator';
+    public final const MODULE_BLOCK_LINKS_SCROLL_ADDONS = 'block-links-scroll-addons';
+    public final const MODULE_BLOCK_LINKS_SCROLL_DETAILS = 'block-links-scroll-details';
+    public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_DETAILS = 'block-authorlinks-scroll-details';
+    public final const MODULE_BLOCK_TAGLINKS_SCROLL_DETAILS = 'block-taglinks-scroll-details';
+    public final const MODULE_BLOCK_LINKS_SCROLL_SIMPLEVIEW = 'block-links-scroll-simpleview';
+    public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_SIMPLEVIEW = 'block-authorlinks-scroll-simpleview';
+    public final const MODULE_BLOCK_TAGLINKS_SCROLL_SIMPLEVIEW = 'block-taglinks-scroll-simpleview';
+    public final const MODULE_BLOCK_LINKS_SCROLL_FULLVIEW = 'block-links-scroll-fullview';
+    public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_FULLVIEW = 'block-authorlinks-scroll-fullview';
+    public final const MODULE_BLOCK_TAGLINKS_SCROLL_FULLVIEW = 'block-taglinks-scroll-fullview';
+    public final const MODULE_BLOCK_LINKS_SCROLL_THUMBNAIL = 'block-links-scroll-thumbnail';
+    public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_THUMBNAIL = 'block-authorlinks-scroll-thumbnail';
+    public final const MODULE_BLOCK_TAGLINKS_SCROLL_THUMBNAIL = 'block-taglinks-scroll-thumbnail';
+    public final const MODULE_BLOCK_LINKS_SCROLL_LIST = 'block-links-scroll-list';
+    public final const MODULE_BLOCK_AUTHORLINKS_SCROLL_LIST = 'block-authorlinks-scroll-list';
+    public final const MODULE_BLOCK_TAGLINKS_SCROLL_LIST = 'block-taglinks-scroll-list';
 
     public function getModulesToProcess(): array
     {

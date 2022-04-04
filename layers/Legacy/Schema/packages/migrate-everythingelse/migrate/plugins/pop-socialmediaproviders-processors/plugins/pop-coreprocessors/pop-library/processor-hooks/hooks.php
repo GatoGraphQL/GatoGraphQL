@@ -6,19 +6,19 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonControls:modules:share',
-            array($this, 'getShareSubmodules'),
+            $this->getShareSubmodules(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            array($this, 'getDropdownSubmodules'),
+            $this->getDropdownSubmodules(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            array($this, 'getSocialmediaprovidersSubmodules'),
+            $this->getSocialmediaprovidersSubmodules(...),
             10,
             2
         );

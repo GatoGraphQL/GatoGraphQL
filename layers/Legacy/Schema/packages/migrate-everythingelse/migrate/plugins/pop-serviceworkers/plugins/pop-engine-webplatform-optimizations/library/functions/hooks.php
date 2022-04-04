@@ -5,7 +5,7 @@ class PoP_ServiceWorkers_WebPlatformEngine_Hooks
 {
     public function __construct()
     {
-        \PoP\Root\App::addFilter('extractResponseIntoJsfilesOnRuntime:skip', array($this, 'maybeSkipExtractResponseIntoJsfilesOnRuntime'));
+        \PoP\Root\App::addFilter('extractResponseIntoJsfilesOnRuntime:skip', $this->maybeSkipExtractResponseIntoJsfilesOnRuntime(...));
     }
 
     public function maybeSkipExtractResponseIntoJsfilesOnRuntime($skip)

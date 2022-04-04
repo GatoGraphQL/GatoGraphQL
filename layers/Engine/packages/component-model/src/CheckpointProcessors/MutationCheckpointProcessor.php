@@ -10,7 +10,7 @@ use PoP\Root\App;
 
 class MutationCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const ENABLED_MUTATIONS = 'enabled-mutations';
+    public final const ENABLED_MUTATIONS = 'enabled-mutations';
 
     private ?CheckpointErrorFeedbackItemProvider $checkpointErrorFeedbackItemProvider = null;
 

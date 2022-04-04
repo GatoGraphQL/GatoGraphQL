@@ -7,7 +7,7 @@ class PoP_ContentCreationWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
+            \PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...));
         }
 
         /**

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_PostTypeaheadComponentLayouts extends PoP_Module_Processor_PostTypeaheadComponentLayoutsBase
 {
-    public const MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT = 'layoutpost-typeahead-component';
+    public final const MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT = 'layoutpost-typeahead-component';
 
     public function getModulesToProcess(): array
     {

@@ -2,12 +2,12 @@
 
 class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySectionBlocksBase
 {
-    public const MODULE_BLOCK_MYEVENTS_TABLE_EDIT = 'block-myevents-table-edit';
-    public const MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT = 'block-mypastevents-table-edit';
-    public const MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-myevents-scroll-simpleviewpreview';
-    public const MODULE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-mypastevents-scroll-simpleviewpreview';
-    public const MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-myevents-scroll-fullviewpreview';
-    public const MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-mypastevents-scroll-fullviewpreview';
+    public final const MODULE_BLOCK_MYEVENTS_TABLE_EDIT = 'block-myevents-table-edit';
+    public final const MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT = 'block-mypastevents-table-edit';
+    public final const MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-myevents-scroll-simpleviewpreview';
+    public final const MODULE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-mypastevents-scroll-simpleviewpreview';
+    public final const MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-myevents-scroll-fullviewpreview';
+    public final const MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-mypastevents-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

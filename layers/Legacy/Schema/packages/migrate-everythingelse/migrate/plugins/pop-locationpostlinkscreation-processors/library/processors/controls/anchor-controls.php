@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_LocationPostLinksCreation_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK = 'custombuttoncontrol-addlocationpostlink';
+    public final const MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK = 'custombuttoncontrol-addlocationpostlink';
 
     public function getModulesToProcess(): array
     {

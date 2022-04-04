@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_EditorFormInputs extends PoP_Module_Processor_EditorFormInputsBase
 {
-    public const MODULE_FORMINPUT_EDITOR = 'forminputeditor';
+    public final const MODULE_FORMINPUT_EDITOR = 'forminputeditor';
     
     public function getModulesToProcess(): array
     {

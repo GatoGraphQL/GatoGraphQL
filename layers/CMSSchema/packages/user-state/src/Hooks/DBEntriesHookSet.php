@@ -25,7 +25,7 @@ class DBEntriesHookSet extends AbstractHookSet
     {
         App::addFilter(
             'PoP\ComponentModel\Engine:moveEntriesUnderDBName:dbName-dataFields',
-            array($this, 'moveEntriesUnderDBName'),
+            $this->moveEntriesUnderDBName(...),
             10,
             1
         );

@@ -2,9 +2,9 @@
 
 class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR = 'multiple-sectioninner-mymembers-sidebar';
-    public const MODULE_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR = 'multiple-sectioninner-communities-sidebar';
-    public const MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR = 'multiple-authorsectioninner-communitymembers-sidebar';
+    public final const MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR = 'multiple-sectioninner-mymembers-sidebar';
+    public final const MODULE_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR = 'multiple-sectioninner-communities-sidebar';
+    public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR = 'multiple-authorsectioninner-communitymembers-sidebar';
 
     public function getModulesToProcess(): array
     {

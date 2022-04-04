@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_FORMINPUT_CUP_SHORTDESCRIPTION = 'forminput-cup-shortdescription';
-    public const MODULE_FORMINPUT_CUP_FACEBOOK = 'forminput-cup-facebook';
-    public const MODULE_FORMINPUT_CUP_TWITTER = 'forminput-cup-twitter';
-    public const MODULE_FORMINPUT_CUP_LINKEDIN = 'forminput-cup-linkedin';
-    public const MODULE_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
-    public const MODULE_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
+    public final const MODULE_FORMINPUT_CUP_SHORTDESCRIPTION = 'forminput-cup-shortdescription';
+    public final const MODULE_FORMINPUT_CUP_FACEBOOK = 'forminput-cup-facebook';
+    public final const MODULE_FORMINPUT_CUP_TWITTER = 'forminput-cup-twitter';
+    public final const MODULE_FORMINPUT_CUP_LINKEDIN = 'forminput-cup-linkedin';
+    public final const MODULE_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
+    public final const MODULE_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
 
     public function getModulesToProcess(): array
     {

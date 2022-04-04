@@ -6,6 +6,6 @@ namespace PoP\ComponentModel\Resolvers;
 
 class ResolverTypes
 {
-    public const FIELD = 'field';
-    public const DIRECTIVE = 'directive';
+    public final const FIELD = 'field';
+    public final const DIRECTIVE = 'directive';
 }

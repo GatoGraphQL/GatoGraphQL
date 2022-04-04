@@ -4,8 +4,8 @@ use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 class GD_CommonPages_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public const MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ = 'custombuttoncontrol-addcontentfaq';
-    public const MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ = 'custombuttoncontrol-accountfaq';
+    public final const MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ = 'custombuttoncontrol-addcontentfaq';
+    public final const MODULE_CUSTOMANCHORCONTROL_ACCOUNTFAQ = 'custombuttoncontrol-accountfaq';
 
     public function getModulesToProcess(): array
     {

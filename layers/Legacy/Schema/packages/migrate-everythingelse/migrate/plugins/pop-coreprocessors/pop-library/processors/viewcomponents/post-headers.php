@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor_PostViewComponentHeadersBase
 {
-    public const MODULE_VIEWCOMPONENT_HEADER_POST = 'viewcomponent-header-post-';
-    public const MODULE_VIEWCOMPONENT_HEADER_POST_URL = 'viewcomponent-header-post-url';
+    public final const MODULE_VIEWCOMPONENT_HEADER_POST = 'viewcomponent-header-post-';
+    public final const MODULE_VIEWCOMPONENT_HEADER_POST_URL = 'viewcomponent-header-post-url';
 
     public function getModulesToProcess(): array
     {

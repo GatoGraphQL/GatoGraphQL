@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_AppendScriptsLayoutsBase
 {
-    public const MODULE_SCRIPT_SINGLECOMMENT = 'script-singlecomment';
-    public const MODULE_SCRIPT_COMMENTS = 'script-comments';
-    public const MODULE_SCRIPT_COMMENTSEMPTY = 'script-commentsempty';
-    public const MODULE_SCRIPT_REFERENCES = 'script-references';
-    public const MODULE_SCRIPT_REFERENCESEMPTY = 'script-referencesempty';
+    public final const MODULE_SCRIPT_SINGLECOMMENT = 'script-singlecomment';
+    public final const MODULE_SCRIPT_COMMENTS = 'script-comments';
+    public final const MODULE_SCRIPT_COMMENTSEMPTY = 'script-commentsempty';
+    public final const MODULE_SCRIPT_REFERENCES = 'script-references';
+    public final const MODULE_SCRIPT_REFERENCESEMPTY = 'script-referencesempty';
 
     public function getModulesToProcess(): array
     {

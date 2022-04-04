@@ -14,20 +14,20 @@ class PoP_ServiceWorkers_Hooks_TinyMCE
         // Execute last one
         \PoP\Root\App::addFilter(
             'teeny_mce_before_init',
-            array($this, 'storeTinymceResources'),
+            $this->storeTinymceResources(...),
             PHP_INT_MAX,
             1
         );
         \PoP\Root\App::addFilter(
             'tiny_mce_before_init',
-            array($this, 'storeTinymceResources'),
+            $this->storeTinymceResources(...),
             PHP_INT_MAX,
             1
         );
         
         \PoP\Root\App::addFilter(
             'PoP_ServiceWorkers_Job_CacheResources:precache',
-            array($this, 'getPrecacheList'),
+            $this->getPrecacheList(...),
             1000,
             2
         );

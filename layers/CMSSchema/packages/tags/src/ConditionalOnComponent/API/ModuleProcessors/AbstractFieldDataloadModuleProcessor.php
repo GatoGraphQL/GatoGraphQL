@@ -16,9 +16,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
 {
     use QueriedDBObjectModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
-    public const MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
+    public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT = 'dataload-relationalfields-tagcount';
 
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?ListQueryInputOutputHandler $listQueryInputOutputHandler = null;

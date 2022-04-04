@@ -3,16 +3,16 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_CUU_USERNAME = 'forminputgroup-cuu-username';
-    public const MODULE_FORMINPUTGROUP_CUU_EMAIL = 'forminputgroup-cuu-email';
-    public const MODULE_FORMINPUTGROUP_CUU_CURRENTPASSWORD = 'forminputgroup-cuu-currentpassword';
-    public const MODULE_FORMINPUTGROUP_CUU_PASSWORD = 'forminputgroup-cuu-password';
-    public const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORD = 'forminputgroup-cuu-newpassword';
-    public const MODULE_FORMINPUTGROUP_CUU_PASSWORDREPEAT = 'forminputgroup-cuu-passwordrepeat';
-    public const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORDREPEAT = 'forminputgroup-cuu-newpasswordrepeat';
-    public const MODULE_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstName';
-    public const MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
-    public const MODULE_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
+    public final const MODULE_FORMINPUTGROUP_CUU_USERNAME = 'forminputgroup-cuu-username';
+    public final const MODULE_FORMINPUTGROUP_CUU_EMAIL = 'forminputgroup-cuu-email';
+    public final const MODULE_FORMINPUTGROUP_CUU_CURRENTPASSWORD = 'forminputgroup-cuu-currentpassword';
+    public final const MODULE_FORMINPUTGROUP_CUU_PASSWORD = 'forminputgroup-cuu-password';
+    public final const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORD = 'forminputgroup-cuu-newpassword';
+    public final const MODULE_FORMINPUTGROUP_CUU_PASSWORDREPEAT = 'forminputgroup-cuu-passwordrepeat';
+    public final const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORDREPEAT = 'forminputgroup-cuu-newpasswordrepeat';
+    public final const MODULE_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstName';
+    public final const MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
+    public final const MODULE_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
 
     public function getModulesToProcess(): array
     {

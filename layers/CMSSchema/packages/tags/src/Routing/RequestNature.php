@@ -6,5 +6,5 @@ namespace PoPCMSSchema\Tags\Routing;
 
 class RequestNature
 {
-    public const TAG = 'tag';
+    public final const TAG = 'tag';
 }

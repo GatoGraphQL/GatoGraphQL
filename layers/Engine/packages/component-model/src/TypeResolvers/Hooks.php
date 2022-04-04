@@ -6,5 +6,5 @@ namespace PoP\ComponentModel\TypeResolvers;
 
 class Hooks
 {
-    public const EXCLUDE_FIELDNAMES = __CLASS__ . ':exclude-fieldnames';
+    public final const EXCLUDE_FIELDNAMES = __CLASS__ . ':exclude-fieldnames';
 }

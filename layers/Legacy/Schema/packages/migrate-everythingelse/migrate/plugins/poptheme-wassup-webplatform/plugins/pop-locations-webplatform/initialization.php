@@ -10,7 +10,7 @@ class PoPTheme_Wassup_EM_Initialization
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 50);
+            \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...), 50);
         }
     }
 

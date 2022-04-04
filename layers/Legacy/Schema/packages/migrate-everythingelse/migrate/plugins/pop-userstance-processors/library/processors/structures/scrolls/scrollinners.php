@@ -2,16 +2,16 @@
 
 class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public const MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW = 'scrollinner-mystance-fullviewpreview';
-    public const MODULE_SCROLLINNER_STANCES_NAVIGATOR = 'scrollinner-stances-navigator';
-    public const MODULE_SCROLLINNER_STANCES_ADDONS = 'scrollinner-stances-addons';
-    public const MODULE_SCROLLINNER_STANCES_FULLVIEW = 'scrollinner-stances-fullview';
-    public const MODULE_SCROLLINNER_STANCES_THUMBNAIL = 'scrollinner-stances-thumbnail';
-    public const MODULE_SCROLLINNER_STANCES_LIST = 'scrollinner-stances-list';
-    public const MODULE_SCROLLINNER_AUTHORSTANCES_FULLVIEW = 'scrollinner-authorstances-fullview';
-    public const MODULE_SCROLLINNER_AUTHORSTANCES_THUMBNAIL = 'scrollinner-authorstances-thumbnail';
-    public const MODULE_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
-    public const MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
+    public final const MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW = 'scrollinner-mystance-fullviewpreview';
+    public final const MODULE_SCROLLINNER_STANCES_NAVIGATOR = 'scrollinner-stances-navigator';
+    public final const MODULE_SCROLLINNER_STANCES_ADDONS = 'scrollinner-stances-addons';
+    public final const MODULE_SCROLLINNER_STANCES_FULLVIEW = 'scrollinner-stances-fullview';
+    public final const MODULE_SCROLLINNER_STANCES_THUMBNAIL = 'scrollinner-stances-thumbnail';
+    public final const MODULE_SCROLLINNER_STANCES_LIST = 'scrollinner-stances-list';
+    public final const MODULE_SCROLLINNER_AUTHORSTANCES_FULLVIEW = 'scrollinner-authorstances-fullview';
+    public final const MODULE_SCROLLINNER_AUTHORSTANCES_THUMBNAIL = 'scrollinner-authorstances-thumbnail';
+    public final const MODULE_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
+    public final const MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
 
     public function getModulesToProcess(): array
     {

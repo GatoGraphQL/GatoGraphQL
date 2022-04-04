@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLayoutsBase
 {
-    public const MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES = 'layout-followuser-show-styles';
-    public const MODULE_LAYOUT_FOLLOWUSER_HIDE_STYLES = 'layout-followuser-hide-styles';
-    public const MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES = 'layout-unfollowuser-show-styles';
-    public const MODULE_LAYOUT_UNFOLLOWUSER_HIDE_STYLES = 'layout-unfollowuser-hide-styles';
-    public const MODULE_LAYOUT_RECOMMENDPOST_SHOW_STYLES = 'layout-recommendposts-show-styles';
-    public const MODULE_LAYOUT_RECOMMENDPOST_HIDE_STYLES = 'layout-recommendposts-hide-styles';
-    public const MODULE_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES = 'layout-unrecommendposts-show-styles';
-    public const MODULE_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES = 'layout-unrecommendposts-hide-styles';
-    public const MODULE_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES = 'layout-subscribetotag-show-styles';
-    public const MODULE_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES = 'layout-subscribetotag-hide-styles';
-    public const MODULE_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES = 'layout-unsubscribefromtag-show-styles';
-    public const MODULE_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES = 'layout-unsubscribefromtag-hide-styles';
-    public const MODULE_LAYOUT_UPVOTEPOST_SHOW_STYLES = 'layout-upvoteposts-show-styles';
-    public const MODULE_LAYOUT_UPVOTEPOST_HIDE_STYLES = 'layout-upvoteposts-hide-styles';
-    public const MODULE_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES = 'layout-undoupvoteposts-show-styles';
-    public const MODULE_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES = 'layout-undoupvoteposts-hide-styles';
-    public const MODULE_LAYOUT_DOWNVOTEPOST_SHOW_STYLES = 'layout-downvoteposts-show-styles';
-    public const MODULE_LAYOUT_DOWNVOTEPOST_HIDE_STYLES = 'layout-downvoteposts-hide-styles';
-    public const MODULE_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
-    public const MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
+    public final const MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES = 'layout-followuser-show-styles';
+    public final const MODULE_LAYOUT_FOLLOWUSER_HIDE_STYLES = 'layout-followuser-hide-styles';
+    public final const MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES = 'layout-unfollowuser-show-styles';
+    public final const MODULE_LAYOUT_UNFOLLOWUSER_HIDE_STYLES = 'layout-unfollowuser-hide-styles';
+    public final const MODULE_LAYOUT_RECOMMENDPOST_SHOW_STYLES = 'layout-recommendposts-show-styles';
+    public final const MODULE_LAYOUT_RECOMMENDPOST_HIDE_STYLES = 'layout-recommendposts-hide-styles';
+    public final const MODULE_LAYOUT_UNRECOMMENDPOST_SHOW_STYLES = 'layout-unrecommendposts-show-styles';
+    public final const MODULE_LAYOUT_UNRECOMMENDPOST_HIDE_STYLES = 'layout-unrecommendposts-hide-styles';
+    public final const MODULE_LAYOUT_SUBSCRIBETOTAG_SHOW_STYLES = 'layout-subscribetotag-show-styles';
+    public final const MODULE_LAYOUT_SUBSCRIBETOTAG_HIDE_STYLES = 'layout-subscribetotag-hide-styles';
+    public final const MODULE_LAYOUT_UNSUBSCRIBEFROMTAG_SHOW_STYLES = 'layout-unsubscribefromtag-show-styles';
+    public final const MODULE_LAYOUT_UNSUBSCRIBEFROMTAG_HIDE_STYLES = 'layout-unsubscribefromtag-hide-styles';
+    public final const MODULE_LAYOUT_UPVOTEPOST_SHOW_STYLES = 'layout-upvoteposts-show-styles';
+    public final const MODULE_LAYOUT_UPVOTEPOST_HIDE_STYLES = 'layout-upvoteposts-hide-styles';
+    public final const MODULE_LAYOUT_UNDOUPVOTEPOST_SHOW_STYLES = 'layout-undoupvoteposts-show-styles';
+    public final const MODULE_LAYOUT_UNDOUPVOTEPOST_HIDE_STYLES = 'layout-undoupvoteposts-hide-styles';
+    public final const MODULE_LAYOUT_DOWNVOTEPOST_SHOW_STYLES = 'layout-downvoteposts-show-styles';
+    public final const MODULE_LAYOUT_DOWNVOTEPOST_HIDE_STYLES = 'layout-downvoteposts-hide-styles';
+    public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
+    public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
 
     public function getModulesToProcess(): array
     {

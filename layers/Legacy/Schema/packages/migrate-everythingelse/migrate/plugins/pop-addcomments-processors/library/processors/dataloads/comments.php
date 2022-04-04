@@ -9,8 +9,8 @@ use PoPSitesWassup\CommentMutations\MutationResolverBridges\AddCommentToCustomPo
 
 class PoP_Module_Processor_CommentsDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public const MODULE_DATALOAD_COMMENTS_SCROLL = 'dataload-comments-scroll';
-    public const MODULE_DATALOAD_ADDCOMMENT = 'dataload-addcomment';
+    public final const MODULE_DATALOAD_COMMENTS_SCROLL = 'dataload-comments-scroll';
+    public final const MODULE_DATALOAD_ADDCOMMENT = 'dataload-addcomment';
 
     public function getModulesToProcess(): array
     {

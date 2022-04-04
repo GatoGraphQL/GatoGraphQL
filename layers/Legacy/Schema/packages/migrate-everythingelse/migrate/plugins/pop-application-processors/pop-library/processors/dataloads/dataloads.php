@@ -4,7 +4,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public const MODULE_DATALOAD_INITIALIZEDOMAIN = 'dataload-initializedomain';
+    public final const MODULE_DATALOAD_INITIALIZEDOMAIN = 'dataload-initializedomain';
 
     public function getModulesToProcess(): array
     {

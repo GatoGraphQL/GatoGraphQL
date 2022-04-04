@@ -5,9 +5,9 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_MultiDomainSPAResourceLoader_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_MULTIDOMAIN_RESOURCELOADERCONFIG = 'multidomain-resourceloader-config';
-    public const RESOURCE_RESOURCELOADERCONFIG_EXTERNAL = 'resourceloader-config-external';
-    public const RESOURCE_RESOURCELOADERCONFIG_EXTERNALRESOURCES = 'resourceloader-config-externalresources';
+    public final const RESOURCE_MULTIDOMAIN_RESOURCELOADERCONFIG = 'multidomain-resourceloader-config';
+    public final const RESOURCE_RESOURCELOADERCONFIG_EXTERNAL = 'resourceloader-config-external';
+    public final const RESOURCE_RESOURCELOADERCONFIG_EXTERNALRESOURCES = 'resourceloader-config-externalresources';
 
     public function getResourcesToProcess()
     {

@@ -2,7 +2,7 @@
 
 class PoP_FrontEnd_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_EXTENSIONAPPENDABLECLASS = 'extensionappendableclass';
+    public final const RESOURCE_EXTENSIONAPPENDABLECLASS = 'extensionappendableclass';
 
     public function getResourcesToProcess()
     {

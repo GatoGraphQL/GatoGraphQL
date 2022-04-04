@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_CONTACTUS = 'form-contactus';
+    public final const MODULE_FORM_CONTACTUS = 'form-contactus';
 
     public function getModulesToProcess(): array
     {

@@ -12,10 +12,10 @@ abstract class AbstractPostFilterInputContainerModuleProcessor extends AbstractC
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
-    public const MODULE_FILTERINPUTCONTAINER_POSTCOUNT = 'filterinputcontainer-postcount';
-    public const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
-    public const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
+    public final const MODULE_FILTERINPUTCONTAINER_POSTS = 'filterinputcontainer-posts';
+    public final const MODULE_FILTERINPUTCONTAINER_POSTCOUNT = 'filterinputcontainer-postcount';
+    public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
+    public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
     public function getModulesToProcess(): array
     {

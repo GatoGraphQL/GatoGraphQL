@@ -22,10 +22,10 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends AbstractMu
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    public const HOOK_EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
-    public const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
-    public const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
-    public const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
+    public final const HOOK_EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
+    public final const HOOK_EXECUTE_CREATE = __CLASS__ . ':execute-create';
+    public final const HOOK_EXECUTE_UPDATE = __CLASS__ . ':execute-update';
+    public final const HOOK_VALIDATE_CONTENT = __CLASS__ . ':validate-content';
 
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?NameResolverInterface $nameResolver = null;

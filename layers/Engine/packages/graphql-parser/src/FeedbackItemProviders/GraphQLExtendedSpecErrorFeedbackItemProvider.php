@@ -9,11 +9,11 @@ use PoP\Root\Feedback\FeedbackCategories;
 
 class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = '1';
-    public const E2 = '2';
-    public const E3 = '3';
-    public const E4 = '4';
-    public const E_5_8_3 = '5.8.3';
+    public final const E1 = '1';
+    public final const E2 = '2';
+    public final const E3 = '3';
+    public final const E4 = '4';
+    public final const E_5_8_3 = '5.8.3';
 
     protected function getNamespace(): string
     {

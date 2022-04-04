@@ -20,7 +20,7 @@ class PoP_UserCommunitiesWebPlatform
     {
 
         // Priority: after PoP Social Network Web Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888570);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888570);
     }
     public function init()
     {

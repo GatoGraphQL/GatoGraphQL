@@ -25,7 +25,7 @@ class PoP_Mailer_AWS
         include_once dirname(__FILE__).'/wp-includes/load.php';
 
         // Priority: after PoP AWS
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888120);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888120);
     }
     public function init()
     {

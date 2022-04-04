@@ -19,7 +19,7 @@ class PoP_AddRelatedPostsProcessors
     {
 
         // Priority: after PoP Related Posts Processors and PoP Content Creation Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888860);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888860);
     }
     public function init()
     {

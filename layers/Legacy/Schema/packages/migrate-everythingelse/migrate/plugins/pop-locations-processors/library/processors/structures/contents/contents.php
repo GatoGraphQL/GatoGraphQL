@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_LocationContents extends PoP_Module_Processor_ContentsBase
 {
-    public const MODULE_TRIGGERTYPEAHEADSELECT_LOCATION = 'triggertypeaheadselect-location';
+    public final const MODULE_TRIGGERTYPEAHEADSELECT_LOCATION = 'triggertypeaheadselect-location';
 
     public function getModulesToProcess(): array
     {

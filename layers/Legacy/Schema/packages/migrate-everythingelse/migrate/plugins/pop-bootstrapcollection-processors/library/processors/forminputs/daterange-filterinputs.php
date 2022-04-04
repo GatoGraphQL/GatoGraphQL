@@ -11,7 +11,7 @@ class PoP_Module_Processor_DateRangeComponentFilterInputs extends PoP_Module_Pro
 {
     use DataloadQueryArgsSchemaFilterInputModuleProcessorTrait;
 
-    public const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
+    public final const MODULE_FILTERINPUT_CUSTOMPOSTDATES = 'filterinput-custompostdates';
 
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 

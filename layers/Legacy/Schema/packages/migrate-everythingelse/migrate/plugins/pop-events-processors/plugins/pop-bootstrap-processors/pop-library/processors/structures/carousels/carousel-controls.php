@@ -8,9 +8,9 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_EM_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public const MODULE_CAROUSELCONTROLS_EVENTS = 'carouselcontrols-events';
-    public const MODULE_CAROUSELCONTROLS_AUTHOREVENTS = 'carouselcontrols-authorevents';
-    public const MODULE_CAROUSELCONTROLS_TAGEVENTS = 'carouselcontrols-tagevents';
+    public final const MODULE_CAROUSELCONTROLS_EVENTS = 'carouselcontrols-events';
+    public final const MODULE_CAROUSELCONTROLS_AUTHOREVENTS = 'carouselcontrols-authorevents';
+    public final const MODULE_CAROUSELCONTROLS_TAGEVENTS = 'carouselcontrols-tagevents';
 
     public function getModulesToProcess(): array
     {

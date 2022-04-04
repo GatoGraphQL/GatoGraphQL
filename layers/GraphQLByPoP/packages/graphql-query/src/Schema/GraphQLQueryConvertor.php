@@ -290,14 +290,14 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              * When coming from the InputList, its `getValue` is an array of Variables
              */
             return array_map(
-                [$this, 'convertArgumentValue'],
+                $this->convertArgumentValue(...),
                 $value
             );
         }
 
         if ($value instanceof stdClass) {
             return (object) array_map(
-                [$this, 'convertArgumentValue'],
+                $this->convertArgumentValue(...),
                 (array) $value
             );
         }
@@ -312,7 +312,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             }
             return $array;
             // return array_map(
-            //     [$this, 'convertArgumentValue'],
+            //     $this->convertArgumentValue(...),
             //     $value->getValue()
             // );
         }
@@ -326,7 +326,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             return $object;
             // // Convert from array back to stdClass
             // return (object) array_map(
-            //     [$this, 'convertArgumentValue'],
+            //     $this->convertArgumentValue(...),
             //     // Convert from stdClass to array
             //     (array) $value->getValue()
             // );
@@ -375,7 +375,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         $directiveComposableDirectives = '';
         if ($directive instanceof MetaDirective) {
             $nestedDirectives = array_map(
-                [$this, 'convertDirective'],
+                $this->convertDirective(...),
                 $directive->getNestedDirectives()
             );
             $nestedDirectives = array_map(

@@ -14,7 +14,7 @@ use PoPCMSSchema\Media\FilterInputProcessors\FilterInputProcessor;
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
+    public final const MODULE_FILTERINPUT_MIME_TYPES = 'filterinput-mime-types';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

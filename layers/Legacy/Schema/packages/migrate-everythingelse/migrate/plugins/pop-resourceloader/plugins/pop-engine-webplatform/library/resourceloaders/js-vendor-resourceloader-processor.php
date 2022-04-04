@@ -2,7 +2,7 @@
 
 class PoP_FrontEnd_VendorJSResourceLoaderProcessor extends PoP_VendorJSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_HANDLEBARS = 'external-handlebars';
+    public final const RESOURCE_EXTERNAL_HANDLEBARS = 'external-handlebars';
 
     public function getResourcesToProcess()
     {

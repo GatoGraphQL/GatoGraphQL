@@ -8,11 +8,11 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
-    public const FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
-    public const FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
-    public const FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
-    public const FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
+    public final const FILTERINPUT_CUSTOMPOST_IDS = 'filterinput-custompost-ids';
+    public final const FILTERINPUT_CUSTOMPOST_ID = 'filterinput-custompost-id';
+    public final const FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS = 'filterinput-exclude-custompost-ids';
+    public final const FILTERINPUT_COMMENT_TYPES = 'filterinput-comment-types';
+    public final const FILTERINPUT_COMMENT_STATUS = 'filterinput-comment-status';
 
     public function getFilterInputsToProcess(): array
     {

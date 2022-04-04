@@ -18,10 +18,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     use ModuleResolverTrait;
     use EndpointFunctionalityModuleResolverTrait;
 
-    public const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
-    public const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
-    public const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
-    public const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
+    public final const SINGLE_ENDPOINT = Plugin::NAMESPACE . '\single-endpoint';
+    public final const PERSISTED_QUERIES = Plugin::NAMESPACE . '\persisted-queries';
+    public final const CUSTOM_ENDPOINTS = Plugin::NAMESPACE . '\custom-endpoints';
+    public final const API_HIERARCHY = Plugin::NAMESPACE . '\api-hierarchy';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 

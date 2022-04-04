@@ -2,7 +2,7 @@
 
 class UserStance_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_WIDGETCOMPACT_STANCEINFO = 'widgetcompact-stance-info';
+    public final const MODULE_WIDGETCOMPACT_STANCEINFO = 'widgetcompact-stance-info';
 
     public function getModulesToProcess(): array
     {

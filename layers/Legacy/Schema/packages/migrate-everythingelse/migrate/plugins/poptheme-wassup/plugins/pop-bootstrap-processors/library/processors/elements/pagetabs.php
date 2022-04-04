@@ -4,8 +4,8 @@ use PoP\SPA\Modules\PageInterface;
 
 class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSectionsBase implements PageInterface
 {
-    public const MODULE_PAGE_ADDONTABS = 'page-addontabs';
-    public const MODULE_PAGE_BODYTABS = 'page-bodytabs';
+    public final const MODULE_PAGE_ADDONTABS = 'page-addontabs';
+    public final const MODULE_PAGE_BODYTABS = 'page-bodytabs';
     public function getModulesToProcess(): array
     {
         return array(

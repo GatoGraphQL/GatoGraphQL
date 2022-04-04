@@ -3,14 +3,14 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInputs
 {
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT = 'forminput-emailnotifications-network-createdpost';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST = 'forminput-emailnotifications-network-recommendedpost';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER = 'forminput-emailnotifications-network-followeduser';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC = 'forminput-emailnotifications-network-subscribedtotopic';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT = 'forminput-emailnotifications-network-addedcomment';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST = 'forminput-emailnotifications-network-updownvotedpost';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminput-emailnotifications-subscribedtopic-createdcontent';
-    public const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminput-emailnotifications-subscribedtopic-addedcomment';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT = 'forminput-emailnotifications-network-createdpost';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST = 'forminput-emailnotifications-network-recommendedpost';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER = 'forminput-emailnotifications-network-followeduser';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC = 'forminput-emailnotifications-network-subscribedtotopic';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT = 'forminput-emailnotifications-network-addedcomment';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST = 'forminput-emailnotifications-network-updownvotedpost';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminput-emailnotifications-subscribedtopic-createdcontent';
+    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminput-emailnotifications-subscribedtopic-addedcomment';
 
     public function getModulesToProcess(): array
     {

@@ -7,7 +7,7 @@ use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {
-    public const MODULE_TYPEAHEAD_COMPONENT_USERS = 'forminput-typeaheadcomponent-users';
+    public final const MODULE_TYPEAHEAD_COMPONENT_USERS = 'forminput-typeaheadcomponent-users';
 
     public function getModulesToProcess(): array
     {

@@ -5,24 +5,24 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_LocationPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public const MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD = 'dataload-locationposts-typeahead';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR = 'dataload-locationposts-scroll-navigator';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS = 'dataload-locationposts-scroll-addons';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS = 'dataload-locationposts-scroll-details';
-    public const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS = 'dataload-authorlocationposts-scroll-details';
-    public const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS = 'dataload-taglocationposts-scroll-details';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-locationposts-scroll-simpleview';
-    public const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-authorlocationposts-scroll-simpleview';
-    public const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-taglocationposts-scroll-simpleview';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-locationposts-scroll-fullview';
-    public const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-authorlocationposts-scroll-fullview';
-    public const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-taglocationposts-scroll-fullview';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-locationposts-scroll-thumbnail';
-    public const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-authorlocationposts-scroll-thumbnail';
-    public const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-taglocationposts-scroll-thumbnail';
-    public const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_LIST = 'dataload-locationposts-scroll-list';
-    public const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'dataload-authorlocationposts-scroll-list';
-    public const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST = 'dataload-taglocationposts-scroll-list';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_TYPEAHEAD = 'dataload-locationposts-typeahead';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_NAVIGATOR = 'dataload-locationposts-scroll-navigator';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_ADDONS = 'dataload-locationposts-scroll-addons';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_DETAILS = 'dataload-locationposts-scroll-details';
+    public final const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS = 'dataload-authorlocationposts-scroll-details';
+    public final const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_DETAILS = 'dataload-taglocationposts-scroll-details';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-locationposts-scroll-simpleview';
+    public final const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-authorlocationposts-scroll-simpleview';
+    public final const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'dataload-taglocationposts-scroll-simpleview';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-locationposts-scroll-fullview';
+    public final const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-authorlocationposts-scroll-fullview';
+    public final const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_FULLVIEW = 'dataload-taglocationposts-scroll-fullview';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-locationposts-scroll-thumbnail';
+    public final const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-authorlocationposts-scroll-thumbnail';
+    public final const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL = 'dataload-taglocationposts-scroll-thumbnail';
+    public final const MODULE_DATALOAD_LOCATIONPOSTS_SCROLL_LIST = 'dataload-locationposts-scroll-list';
+    public final const MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'dataload-authorlocationposts-scroll-list';
+    public final const MODULE_DATALOAD_TAGLOCATIONPOSTS_SCROLL_LIST = 'dataload-taglocationposts-scroll-list';
 
     public function getModulesToProcess(): array
     {

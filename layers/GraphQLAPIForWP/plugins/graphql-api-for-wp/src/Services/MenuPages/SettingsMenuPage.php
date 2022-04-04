@@ -20,8 +20,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 {
     use UseTabpanelMenuPageTrait;
 
-    public const FORM_ORIGIN = 'form-origin';
-    public const SETTINGS_FIELD = 'graphql-api-settings';
+    public final const FORM_ORIGIN = 'form-origin';
+    public final const SETTINGS_FIELD = 'graphql-api-settings';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -65,7 +65,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $option = self::SETTINGS_FIELD;
         // \add_filter(
         //     "pre_update_option_{$option}",
-        //     [$this, 'normalizeSettings']
+        //     $this->normalizeSettings(...)
         // );
 
         /**
@@ -144,7 +144,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         'description' => \__('Settings for the GraphQL API', 'graphql-api'),
                         // This call is needed to cast the data
                         // before saving to the DB
-                        'sanitize_callback' => [$this, 'normalizeSettings'],
+                        'sanitize_callback' => $this->normalizeSettings(...),
                         'show_in_rest' => false,
                     ]
                 );

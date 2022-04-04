@@ -28,7 +28,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 {
     use ExcludeFieldNamesFromSchemaTypeResolverTrait;
 
-    public const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
+    public final const OPTION_VALIDATE_SCHEMA_ON_RESULT_ITEM = 'validateSchemaOnObject';
 
     /**
      * @var array<string,DirectiveResolverInterface[]>|null

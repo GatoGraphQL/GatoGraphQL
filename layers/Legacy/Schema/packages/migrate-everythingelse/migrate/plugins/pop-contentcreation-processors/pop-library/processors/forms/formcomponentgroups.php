@@ -2,7 +2,7 @@
 
 class GD_ContentCreation_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public const MODULE_FORMCOMPONENTGROUP_FEATUREDIMAGE = 'formcomponentgroup-featuredimage';
+    public final const MODULE_FORMCOMPONENTGROUP_FEATUREDIMAGE = 'formcomponentgroup-featuredimage';
 
     public function getModulesToProcess(): array
     {

@@ -6,20 +6,20 @@ namespace GraphQLAPI\GraphQLAPI\ModuleSettings;
 
 class Properties
 {
-    public const NAME = 'name';
-    public const INPUT = 'input';
-    public const TITLE = 'title';
-    public const DESCRIPTION = 'description';
-    public const POSSIBLE_VALUES = 'possibleValues';
-    public const CAN_BE_EMPTY = 'canBeEmpty';
+    public final const NAME = 'name';
+    public final const INPUT = 'input';
+    public final const TITLE = 'title';
+    public final const DESCRIPTION = 'description';
+    public final const POSSIBLE_VALUES = 'possibleValues';
+    public final const CAN_BE_EMPTY = 'canBeEmpty';
     // Used for Select inputs
-    public const IS_MULTIPLE = 'isMultiple';
+    public final const IS_MULTIPLE = 'isMultiple';
     // Used for Integers
-    public const MIN_NUMBER = 'minNumber';
-    public const TYPE = 'type';
-    public const TYPE_STRING = 'string';
-    public const TYPE_BOOL = 'bool';
-    public const TYPE_INT = 'int';
-    public const TYPE_ARRAY = 'array';
-    public const TYPE_NULL = 'null';
+    public final const MIN_NUMBER = 'minNumber';
+    public final const TYPE = 'type';
+    public final const TYPE_STRING = 'string';
+    public final const TYPE_BOOL = 'bool';
+    public final const TYPE_INT = 'int';
+    public final const TYPE_ARRAY = 'array';
+    public final const TYPE_NULL = 'null';
 }

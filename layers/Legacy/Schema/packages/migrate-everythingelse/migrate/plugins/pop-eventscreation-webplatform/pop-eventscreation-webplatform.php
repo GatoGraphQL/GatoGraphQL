@@ -20,7 +20,7 @@ class PoP_EventsCreationWebPlatform
     {
 
         // Priority: after PoP Events Web Platform
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888580);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888580);
     }
     public function init()
     {

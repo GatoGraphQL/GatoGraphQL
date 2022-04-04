@@ -2,9 +2,9 @@
 
 class PoP_Locations_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_CONTROLBUTTONGROUP_TOGGLEMAP = 'controlbuttongroup-togglemap';
-    public const MODULE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP = 'controlbuttongroup-toggleauthormap';
-    public const MODULE_CONTROLBUTTONGROUP_TOGGLETAGMAP = 'controlbuttongroup-toggletagmap';
+    public final const MODULE_CONTROLBUTTONGROUP_TOGGLEMAP = 'controlbuttongroup-togglemap';
+    public final const MODULE_CONTROLBUTTONGROUP_TOGGLEAUTHORMAP = 'controlbuttongroup-toggleauthormap';
+    public final const MODULE_CONTROLBUTTONGROUP_TOGGLETAGMAP = 'controlbuttongroup-toggletagmap';
 
     public function getModulesToProcess(): array
     {

@@ -83,7 +83,7 @@ class PoP_ServerSide_ResourceLoader
 
         // Map the resources to their tags. First set the domain so it can be accessed in that function
         $this->domain = $domain;
-        $tags = array_map(array($this, 'includeResource'), $resources);
+        $tags = array_map($this->includeResource(...), $resources);
 
         return implode('', $tags);
     }

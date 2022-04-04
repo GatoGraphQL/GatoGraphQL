@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 
 class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_PROFILEORGANIZATION_CREATE = 'block-profileorganization-create';
-    public const MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE = 'block-profileindividual-create';
+    public final const MODULE_BLOCK_PROFILEORGANIZATION_CREATE = 'block-profileorganization-create';
+    public final const MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE = 'block-profileindividual-create';
 
     public function getModulesToProcess(): array
     {

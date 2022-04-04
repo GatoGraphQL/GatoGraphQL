@@ -4,26 +4,26 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 = 'block-tabpanel-authorcategoryposts00';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01 = 'block-tabpanel-authorcategoryposts01';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02 = 'block-tabpanel-authorcategoryposts02';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS03 = 'block-tabpanel-authorcategoryposts03';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS04 = 'block-tabpanel-authorcategoryposts04';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS05 = 'block-tabpanel-authorcategoryposts05';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS06 = 'block-tabpanel-authorcategoryposts06';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS07 = 'block-tabpanel-authorcategoryposts07';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS08 = 'block-tabpanel-authorcategoryposts08';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS09 = 'block-tabpanel-authorcategoryposts09';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS10 = 'block-tabpanel-authorcategoryposts10';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS11 = 'block-tabpanel-authorcategoryposts11';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS12 = 'block-tabpanel-authorcategoryposts12';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS13 = 'block-tabpanel-authorcategoryposts13';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS14 = 'block-tabpanel-authorcategoryposts14';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS15 = 'block-tabpanel-authorcategoryposts15';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS16 = 'block-tabpanel-authorcategoryposts16';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS17 = 'block-tabpanel-authorcategoryposts17';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 = 'block-tabpanel-authorcategoryposts18';
-    public const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 = 'block-tabpanel-authorcategoryposts19';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 = 'block-tabpanel-authorcategoryposts00';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01 = 'block-tabpanel-authorcategoryposts01';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02 = 'block-tabpanel-authorcategoryposts02';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS03 = 'block-tabpanel-authorcategoryposts03';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS04 = 'block-tabpanel-authorcategoryposts04';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS05 = 'block-tabpanel-authorcategoryposts05';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS06 = 'block-tabpanel-authorcategoryposts06';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS07 = 'block-tabpanel-authorcategoryposts07';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS08 = 'block-tabpanel-authorcategoryposts08';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS09 = 'block-tabpanel-authorcategoryposts09';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS10 = 'block-tabpanel-authorcategoryposts10';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS11 = 'block-tabpanel-authorcategoryposts11';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS12 = 'block-tabpanel-authorcategoryposts12';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS13 = 'block-tabpanel-authorcategoryposts13';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS14 = 'block-tabpanel-authorcategoryposts14';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS15 = 'block-tabpanel-authorcategoryposts15';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS16 = 'block-tabpanel-authorcategoryposts16';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS17 = 'block-tabpanel-authorcategoryposts17';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 = 'block-tabpanel-authorcategoryposts18';
+    public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 = 'block-tabpanel-authorcategoryposts19';
 
     public function getModulesToProcess(): array
     {

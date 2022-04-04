@@ -20,7 +20,7 @@ function popGetRssPostlistCampaigns()
     );
 }
 
-\PoP\Root\App::addFilter('pre_get_posts', 'popthemeWassupRssFilter');
+\PoP\Root\App::addFilter('pre_get_posts', popthemeWassupRssFilter(...));
 function popthemeWassupRssFilter($query)
 {
     if ($query->is_feed) {
@@ -43,7 +43,7 @@ function popthemeWassupRssFilter($query)
 function gdRssAuthorAddlink()
 {
     if (is_feed()) {
-        \PoP\Root\App::addFilter('the_author', 'gdRssAuthor');
+        \PoP\Root\App::addFilter('the_author', gdRssAuthor(...));
     }
 }
 function gdRssAuthor($output)

@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_CustomFullUserLayoutsBase
 {
-    public const MODULE_LAYOUT_FULLUSER_ORGANIZATION = 'layout-fulluser-organization';
-    public const MODULE_LAYOUT_FULLUSER_INDIVIDUAL = 'layout-fulluser-individual';
+    public final const MODULE_LAYOUT_FULLUSER_ORGANIZATION = 'layout-fulluser-organization';
+    public final const MODULE_LAYOUT_FULLUSER_INDIVIDUAL = 'layout-fulluser-individual';
 
     public function getModulesToProcess(): array
     {

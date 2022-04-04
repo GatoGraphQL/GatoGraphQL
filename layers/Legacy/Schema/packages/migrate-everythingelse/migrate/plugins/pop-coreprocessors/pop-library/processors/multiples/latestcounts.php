@@ -2,7 +2,7 @@
 
 class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_MULTIPLE_LATESTCOUNTS = 'multiple-latestcounts';
+    public final const MODULE_MULTIPLE_LATESTCOUNTS = 'multiple-latestcounts';
 
     public function getModulesToProcess(): array
     {

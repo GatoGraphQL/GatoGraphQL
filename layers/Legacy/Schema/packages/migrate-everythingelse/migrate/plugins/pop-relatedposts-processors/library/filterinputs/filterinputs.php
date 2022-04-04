@@ -3,7 +3,7 @@ use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 
 class PoP_Module_Processor_ReferencesFilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
+    public final const FILTERCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'filtercomponent-selectabletypeahead-references';
 
     public function getFilterInputsToProcess(): array
     {

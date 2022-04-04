@@ -8,42 +8,42 @@ class PoP_SocialNetwork_Notifications_NotificationHooks
         // Hook into the API: Notification Actions
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityplusnetwork:actions',
-            array($this, 'getUseractivityplusnetworkActions')
+            $this->getUseractivityplusnetworkActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:posts:actions',
-            array($this, 'getMarkasreadPostActions')
+            $this->getMarkasreadPostActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:userplusnetwork-user:actions',
-            array($this, 'getUserplusnetworkUserActions')
+            $this->getUserplusnetworkUserActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:users:actions',
-            array($this, 'getMarkasreadUserActions')
+            $this->getMarkasreadUserActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:userplusnetwork-tag:actions',
-            array($this, 'getUserplusnetworkTagActions')
+            $this->getUserplusnetworkTagActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:additional_notifications:markasread:tags:actions',
-            array($this, 'getMarkasreadTagActions')
+            $this->getMarkasreadTagActions(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:usernetwork:metakeys',
-            array($this, 'getUsernetworkMetakeys')
+            $this->getUsernetworkMetakeys(...)
         );
 
         \PoP\Root\App::addFilter(
             'AAL_PoP_API:notifications:useractivityposts:post_id_unions',
-            array($this, 'getUseractivitypostsPostIdUnions'),
+            $this->getUseractivitypostsPostIdUnions(...),
             10,
             2
         );

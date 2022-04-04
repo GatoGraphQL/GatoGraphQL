@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_PublishedLayouts extends PoP_Module_Processor_PostStatusDateLayoutsBase
 {
-    public const MODULE_LAYOUT_PUBLISHED = 'layout-published';
-    public const MODULE_LAYOUT_WIDGETPUBLISHED = 'layout-widgetpublished';
+    public final const MODULE_LAYOUT_PUBLISHED = 'layout-published';
+    public final const MODULE_LAYOUT_WIDGETPUBLISHED = 'layout-widgetpublished';
 
     public function getModulesToProcess(): array
     {

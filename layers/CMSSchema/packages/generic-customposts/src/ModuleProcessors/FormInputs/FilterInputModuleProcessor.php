@@ -14,7 +14,7 @@ use PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType\GenericCustomPostEnum
 
 class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
 {
-    public const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
+    public final const MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES = 'filterinput-genericcustomposttypes';
 
     private ?GenericCustomPostEnumTypeResolver $genericCustomPostEnumTypeResolver = null;
 

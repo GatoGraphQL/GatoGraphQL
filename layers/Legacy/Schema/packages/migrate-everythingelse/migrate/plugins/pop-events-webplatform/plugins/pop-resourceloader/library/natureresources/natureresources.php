@@ -97,9 +97,9 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
             $merge = true;
 
             // Add the hook before the execution of the method, and remove it immediately afterwards
-            \PoP\Root\App::addFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::addFilter('em_get_event', $this->forceEventScope(...), PHP_INT_MAX, 2);
             PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
-            \PoP\Root\App::removeFilter('em_get_event', array($this, 'forceEventScope'), PHP_INT_MAX, 2);
+            \PoP\Root\App::removeFilter('em_get_event', $this->forceEventScope(...), PHP_INT_MAX, 2);
         }
     }
 

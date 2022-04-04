@@ -4,9 +4,9 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public const MODULE_DATALOAD_MYCONTENT_TABLE_EDIT = 'dataload-mycontent-table-edit';
-    public const MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mycontent-scroll-simpleviewpreview';
-    public const MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'dataload-mycontent-scroll-fullviewpreview';
+    public final const MODULE_DATALOAD_MYCONTENT_TABLE_EDIT = 'dataload-mycontent-table-edit';
+    public final const MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mycontent-scroll-simpleviewpreview';
+    public final const MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'dataload-mycontent-scroll-fullviewpreview';
 
     public function getModulesToProcess(): array
     {

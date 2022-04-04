@@ -2,9 +2,9 @@
 
 class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public const MODULE_TABPANEL_EVENTS = 'tabpanel-events';
-    public const MODULE_TABPANEL_PASTEVENTS = 'tabpanel-pastevents';
-    public const MODULE_TABPANEL_EVENTSCALENDAR = 'tabpanel-eventscalendar';
+    public final const MODULE_TABPANEL_EVENTS = 'tabpanel-events';
+    public final const MODULE_TABPANEL_PASTEVENTS = 'tabpanel-pastevents';
+    public final const MODULE_TABPANEL_EVENTSCALENDAR = 'tabpanel-eventscalendar';
 
     public function getModulesToProcess(): array
     {

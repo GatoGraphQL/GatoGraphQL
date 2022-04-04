@@ -7,37 +7,37 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_SocialNetwork_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS = 'dataload-authorfollowers-scroll-details';
-    public const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS = 'dataload-authorfollowingusers-scroll-details';
-    public const MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS = 'dataload-authorsubscribedtotags-scroll-details';
-    public const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS = 'dataload-authorrecommendedposts-scroll-details';
-    public const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS = 'dataload-tagsubscribers-scroll-details';
-    public const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS = 'dataload-singlerecommendedby-scroll-details';
-    public const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_DETAILS = 'dataload-singleupvotedby-scroll-details';
-    public const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_DETAILS = 'dataload-singledownvotedby-scroll-details';
-    public const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW = 'dataload-authorrecommendedposts-scroll-simpleview';
-    public const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW = 'dataload-authorfollowers-scroll-fullview';
-    public const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW = 'dataload-authorfollowingusers-scroll-fullview';
-    public const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW = 'dataload-authorrecommendedposts-scroll-fullview';
-    public const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW = 'dataload-tagsubscribers-scroll-fullview';
-    public const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW = 'dataload-singlerecommendedby-scroll-fullview';
-    public const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_FULLVIEW = 'dataload-singleupvotedby-scroll-fullview';
-    public const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW = 'dataload-singledownvotedby-scroll-fullview';
-    public const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_THUMBNAIL = 'dataload-authorfollowers-scroll-thumbnail';
-    public const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL = 'dataload-authorfollowingusers-scroll-thumbnail';
-    public const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL = 'dataload-authorrecommendedposts-scroll-thumbnail';
-    public const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL = 'dataload-tagsubscribers-scroll-thumbnail';
-    public const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL = 'dataload-singlerecommendedby-scroll-thumbnail';
-    public const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_THUMBNAIL = 'dataload-singleupvotedby-scroll-thumbnail';
-    public const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL = 'dataload-singledownvotedby-scroll-thumbnail';
-    public const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_LIST = 'dataload-authorfollowers-scroll-list';
-    public const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_LIST = 'dataload-authorfollowingusers-scroll-list';
-    public const MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST = 'dataload-authorsubscribedtotags-scroll-list';
-    public const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST = 'dataload-authorrecommendedposts-scroll-list';
-    public const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST = 'dataload-tagsubscribers-scroll-list';
-    public const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_LIST = 'dataload-singlerecommendedby-scroll-list';
-    public const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_LIST = 'dataload-singleupvotedby-scroll-list';
-    public const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'dataload-singledownvotedby-scroll-list';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_DETAILS = 'dataload-authorfollowers-scroll-details';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS = 'dataload-authorfollowingusers-scroll-details';
+    public final const MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS = 'dataload-authorsubscribedtotags-scroll-details';
+    public final const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS = 'dataload-authorrecommendedposts-scroll-details';
+    public final const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS = 'dataload-tagsubscribers-scroll-details';
+    public final const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_DETAILS = 'dataload-singlerecommendedby-scroll-details';
+    public final const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_DETAILS = 'dataload-singleupvotedby-scroll-details';
+    public final const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_DETAILS = 'dataload-singledownvotedby-scroll-details';
+    public final const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW = 'dataload-authorrecommendedposts-scroll-simpleview';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_FULLVIEW = 'dataload-authorfollowers-scroll-fullview';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW = 'dataload-authorfollowingusers-scroll-fullview';
+    public final const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW = 'dataload-authorrecommendedposts-scroll-fullview';
+    public final const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW = 'dataload-tagsubscribers-scroll-fullview';
+    public final const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW = 'dataload-singlerecommendedby-scroll-fullview';
+    public final const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_FULLVIEW = 'dataload-singleupvotedby-scroll-fullview';
+    public final const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW = 'dataload-singledownvotedby-scroll-fullview';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_THUMBNAIL = 'dataload-authorfollowers-scroll-thumbnail';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL = 'dataload-authorfollowingusers-scroll-thumbnail';
+    public final const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL = 'dataload-authorrecommendedposts-scroll-thumbnail';
+    public final const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL = 'dataload-tagsubscribers-scroll-thumbnail';
+    public final const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL = 'dataload-singlerecommendedby-scroll-thumbnail';
+    public final const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_THUMBNAIL = 'dataload-singleupvotedby-scroll-thumbnail';
+    public final const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL = 'dataload-singledownvotedby-scroll-thumbnail';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWERS_SCROLL_LIST = 'dataload-authorfollowers-scroll-list';
+    public final const MODULE_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLL_LIST = 'dataload-authorfollowingusers-scroll-list';
+    public final const MODULE_DATALOAD_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST = 'dataload-authorsubscribedtotags-scroll-list';
+    public final const MODULE_DATALOAD_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST = 'dataload-authorrecommendedposts-scroll-list';
+    public final const MODULE_DATALOAD_TAGSUBSCRIBERS_SCROLL_LIST = 'dataload-tagsubscribers-scroll-list';
+    public final const MODULE_DATALOAD_SINGLERECOMMENDEDBY_SCROLL_LIST = 'dataload-singlerecommendedby-scroll-list';
+    public final const MODULE_DATALOAD_SINGLEUPVOTEDBY_SCROLL_LIST = 'dataload-singleupvotedby-scroll-list';
+    public final const MODULE_DATALOAD_SINGLEDOWNVOTEDBY_SCROLL_LIST = 'dataload-singledownvotedby-scroll-list';
 
     public function getModulesToProcess(): array
     {

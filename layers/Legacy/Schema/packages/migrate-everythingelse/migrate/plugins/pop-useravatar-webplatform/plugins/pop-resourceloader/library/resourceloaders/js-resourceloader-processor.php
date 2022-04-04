@@ -2,9 +2,9 @@
 
 class PoP_UserAvatarWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_USERAVATARACCOUNT = 'user-avatar-account';
-    public const RESOURCE_FILEUPLOAD = 'fileupload';
-    public const RESOURCE_FILEUPLOADLOCALE = 'fileupload-locale';
+    public final const RESOURCE_USERAVATARACCOUNT = 'user-avatar-account';
+    public final const RESOURCE_FILEUPLOAD = 'fileupload';
+    public final const RESOURCE_FILEUPLOADLOCALE = 'fileupload-locale';
 
     public function getResourcesToProcess()
     {

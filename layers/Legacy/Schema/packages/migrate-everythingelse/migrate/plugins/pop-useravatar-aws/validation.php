@@ -14,8 +14,8 @@ class PoP_UserAvatar_AWS_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_USERAVATAR_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_USERAVATAR_AWS_POP_USERAVATAR_MIN_VERSION > POP_USERAVATAR_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));
@@ -27,8 +27,8 @@ class PoP_UserAvatar_AWS_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'install_warning_2'));
             $success = false;
         } elseif (!defined('POP_AVATAR_AWS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initialize_warning_2'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initialize_warning_2'));
+            \PoP\Root\App::addAction('admin_notices', $this->initialize_warning_2(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initialize_warning_2(...));
             $success = false;
         } elseif (POP_USERAVATAR_AWS_POP_AVATAR_AWS_MIN_VERSION > POP_AVATAR_AWS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'version_warning_2'));

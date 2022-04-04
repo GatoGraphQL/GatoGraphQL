@@ -2,15 +2,15 @@
 
 class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor_SidebarsBase
 {
-    public const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL = 'layout-postsidebar-vertical';
-    public const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_HIGHLIGHT = 'layout-postsidebar-vertical-highlight';
-    public const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_POST = 'layout-postsidebar-vertical-post';
-    public const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL = 'layout-postsidebar-horizontal';
-    public const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_HIGHLIGHT = 'layout-postsidebar-horizontal-highlight';
-    public const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST = 'layout-postsidebar-horizontal-post';
-    public const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL = 'layout-postsidebarcompact-horizontal';
-    public const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarcompact-horizontal-highlight';
-    public const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST = 'layout-postsidebarcompact-horizontal-post';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL = 'layout-postsidebar-vertical';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_HIGHLIGHT = 'layout-postsidebar-vertical-highlight';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_POST = 'layout-postsidebar-vertical-post';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL = 'layout-postsidebar-horizontal';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_HIGHLIGHT = 'layout-postsidebar-horizontal-highlight';
+    public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_POST = 'layout-postsidebar-horizontal-post';
+    public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL = 'layout-postsidebarcompact-horizontal';
+    public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarcompact-horizontal-highlight';
+    public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST = 'layout-postsidebarcompact-horizontal-post';
 
     public function getModulesToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class WSL_PoPWebPlatform_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_WSLFUNCTIONS = 'wsl-functions';
+    public final const RESOURCE_WSLFUNCTIONS = 'wsl-functions';
 
     public function getResourcesToProcess()
     {

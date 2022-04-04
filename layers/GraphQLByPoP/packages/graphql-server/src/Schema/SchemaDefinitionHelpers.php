@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\Field;
 
 class SchemaDefinitionHelpers
 {
-    public const PATH_SEPARATOR = '.';
+    public final const PATH_SEPARATOR = '.';
 
     public static function getSchemaDefinitionReferenceObjectID(array $schemaDefinitionPath): string
     {

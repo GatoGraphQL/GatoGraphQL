@@ -30,7 +30,7 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
     {
         App::addAction(
             'cortex.routes',
-            [$this, 'setupCortex'],
+            $this->setupCortex(...),
             1
         );
     }

@@ -21,7 +21,7 @@ class PoP_SSR
     {
 
         // Priority: after PoP Engine Web Platform, inner circle
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888402);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888402);
     }
     public function init()
     {

@@ -29,7 +29,7 @@ class PoPHTMLCSSPlatform
             },
             392
         );
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888396);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888396);
     }
     public function init()
     {

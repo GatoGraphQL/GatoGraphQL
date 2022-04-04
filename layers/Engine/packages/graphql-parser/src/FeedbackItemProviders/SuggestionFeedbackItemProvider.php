@@ -9,7 +9,7 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class SuggestionFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const S1 = 's1';
+    public final const S1 = 's1';
 
     /**
      * @return string[]

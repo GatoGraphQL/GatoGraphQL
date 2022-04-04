@@ -13,8 +13,8 @@ class PoP_BootstrapCollectionProcessors_Validation
             \PoP\Root\App::addAction('network_admin_notices', array($this,'installWarning'));
             $success = false;
         } elseif (!defined('POP_BOOTSTRAPPROCESSORS_INITIALIZED')) {
-            \PoP\Root\App::addAction('admin_notices', array($this, 'initializeWarning'));
-            \PoP\Root\App::addAction('network_admin_notices', array($this, 'initializeWarning'));
+            \PoP\Root\App::addAction('admin_notices', $this->initializeWarning(...));
+            \PoP\Root\App::addAction('network_admin_notices', $this->initializeWarning(...));
             $success = false;
         } elseif (POP_BOOTSTRAPCOLLECTIONPROCESSORS_POP_BOOTSTRAPPROCESSORS_MIN_VERSION > POP_BOOTSTRAPPROCESSORS_VERSION) {
             \PoP\Root\App::addAction('admin_notices', array($this,'versionWarning'));

@@ -16,7 +16,7 @@ class InputObject extends AbstractAst implements ArgumentValueAstInterface, With
     protected InputList|InputObject|Argument $parent;
 
     public function __construct(
-        protected stdClass $object,
+        protected readonly stdClass $object,
         Location $location,
     ) {
         parent::__construct($location);

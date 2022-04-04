@@ -6,11 +6,11 @@ class PoPTheme_Wassup_EventLinksCreation_WebPlatform_PreloadHooks
     {
         \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.\PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
-            array($this, 'maybeGetRoutesForMain')
+            $this->maybeGetRoutesForMain(...)
         );
         \PoP\Root\App::addFilter(
             'wassup:extra-routes:initialframes:'.POP_TARGET_ADDONS,
-            array($this, 'maybeGetRoutesForAddons')
+            $this->maybeGetRoutesForAddons(...)
         );
     }
 

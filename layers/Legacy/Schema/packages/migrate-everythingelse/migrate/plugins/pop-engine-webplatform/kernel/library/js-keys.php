@@ -15,7 +15,7 @@ define('GD_JS_SETTINGS', $compact ? 'st' : 'settings');
 define('GD_JS_TARGET', $compact ? 'tg' : 'target');
 define('GD_JS_SKIPSTATEUPDATE', $compact ? 'sk' : 'skipstateupdate');
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsJsparams');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsJsparams(...));
 function gdJqueryConstantsJsparams($jqueryConstants)
 {
 

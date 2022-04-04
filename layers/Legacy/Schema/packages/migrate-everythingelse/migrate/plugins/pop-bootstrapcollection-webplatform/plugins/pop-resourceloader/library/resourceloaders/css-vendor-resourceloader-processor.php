@@ -2,8 +2,8 @@
 
 class PoP_CoreProcessors_Bootstrap_VendorCSSResourceLoaderProcessor extends PoP_VendorCSSResourceLoaderProcessor
 {
-    public const RESOURCE_EXTERNAL_CSS_DATERANGEPICKER = 'css-external-daterangepicker';
-    public const RESOURCE_EXTERNAL_CSS_BOOTSTRAPMULTISELECT = 'css-external-bootstrapmultiselect';
+    public final const RESOURCE_EXTERNAL_CSS_DATERANGEPICKER = 'css-external-daterangepicker';
+    public final const RESOURCE_EXTERNAL_CSS_BOOTSTRAPMULTISELECT = 'css-external-bootstrapmultiselect';
 
     public function getResourcesToProcess()
     {

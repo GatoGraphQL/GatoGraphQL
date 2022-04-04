@@ -2,9 +2,9 @@
 
 class UserStance_Module_Processor_UserPostInteractionLayouts extends PoP_Module_Processor_UserPostInteractionLayoutsBase
 {
-    public const MODULE_LAYOUT_USERSTANCEPOSTINTERACTION = 'layout-userstancepostinteraction';
-    public const MODULE_USERSTANCE_LAYOUT_USERPOSTINTERACTION = 'userstance-layout-userpostinteraction';
-    public const MODULE_USERSTANCE_LAYOUT_USERFULLVIEWINTERACTION = 'userstance-layout-userfullviewinteraction';
+    public final const MODULE_LAYOUT_USERSTANCEPOSTINTERACTION = 'layout-userstancepostinteraction';
+    public final const MODULE_USERSTANCE_LAYOUT_USERPOSTINTERACTION = 'userstance-layout-userpostinteraction';
+    public final const MODULE_USERSTANCE_LAYOUT_USERFULLVIEWINTERACTION = 'userstance-layout-userfullviewinteraction';
     
     public function getModulesToProcess(): array
     {

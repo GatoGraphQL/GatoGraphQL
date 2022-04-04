@@ -2,14 +2,14 @@
 
 class PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_BLOCK = 'block';
-    public const RESOURCE_BASICBLOCK = 'basicblock';
-    public const RESOURCE_PAGESECTION_PLAIN = 'pagesection_plain';
-    public const RESOURCE_CONTENT = 'content';
-    public const RESOURCE_CONTENTMULTIPLE_INNER = 'contentmultiple_inner';
-    public const RESOURCE_CONTENTSINGLE_INNER = 'contentsingle_inner';
-    public const RESOURCE_NOCONTENT = 'nocontent';
-    public const RESOURCE_MULTIPLE = 'multiple';
+    public final const RESOURCE_BLOCK = 'block';
+    public final const RESOURCE_BASICBLOCK = 'basicblock';
+    public final const RESOURCE_PAGESECTION_PLAIN = 'pagesection_plain';
+    public final const RESOURCE_CONTENT = 'content';
+    public final const RESOURCE_CONTENTMULTIPLE_INNER = 'contentmultiple_inner';
+    public final const RESOURCE_CONTENTSINGLE_INNER = 'contentsingle_inner';
+    public final const RESOURCE_NOCONTENT = 'nocontent';
+    public final const RESOURCE_MULTIPLE = 'multiple';
 
     public function getResourcesToProcess()
     {

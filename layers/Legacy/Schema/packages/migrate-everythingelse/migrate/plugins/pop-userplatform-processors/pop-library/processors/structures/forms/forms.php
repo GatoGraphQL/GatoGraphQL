@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
 {
-    public const MODULE_FORM_INVITENEWUSERS = 'form-inviteusers';
-    public const MODULE_FORM_MYPREFERENCES = 'form-mypreferences';
+    public final const MODULE_FORM_INVITENEWUSERS = 'form-inviteusers';
+    public final const MODULE_FORM_MYPREFERENCES = 'form-mypreferences';
 
     public function getModulesToProcess(): array
     {

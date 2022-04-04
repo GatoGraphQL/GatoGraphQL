@@ -15,12 +15,12 @@ class CommonCustomPostFilterInputContainerModuleProcessor extends AbstractFilter
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE = 'filterinputcontainer-custompost-by-generictype';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-status-generictype';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE = 'filterinputcontainer-custompost-by-id-generictype';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-id-status-generictype';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-generictype';
-    public const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-status-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE = 'filterinputcontainer-custompost-by-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-status-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE = 'filterinputcontainer-custompost-by-id-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-id-status-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-generictype';
+    public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-status-generictype';
 
     public function getModulesToProcess(): array
     {

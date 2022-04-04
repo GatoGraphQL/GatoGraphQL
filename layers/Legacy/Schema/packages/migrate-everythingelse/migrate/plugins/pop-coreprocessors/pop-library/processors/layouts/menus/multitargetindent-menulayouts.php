@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_MultiTargetIndentMenuLayouts extends PoP_Module_Processor_MultiTargetIndentMenuLayoutsBase
 {
-    public const MODULE_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
+    public final const MODULE_LAYOUT_MENU_MULTITARGETINDENT = 'layout-menu-multitargetindent';
 
     public function getModulesToProcess(): array
     {

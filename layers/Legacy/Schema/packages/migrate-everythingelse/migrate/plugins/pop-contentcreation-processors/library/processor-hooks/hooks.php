@@ -6,13 +6,13 @@ class PoP_GenericFormsProcessors_Hooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            array($this, 'getDropdownSubmodules'),
+            $this->getDropdownSubmodules(...),
             10,
             2
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            array($this, 'getSocialmediaSubmodules'),
+            $this->getSocialmediaSubmodules(...),
             10,
             2
         );

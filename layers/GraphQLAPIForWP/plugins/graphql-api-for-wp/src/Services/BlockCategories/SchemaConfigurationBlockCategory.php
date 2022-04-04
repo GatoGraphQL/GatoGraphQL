@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLSchemaConfigurationCus
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
-    public const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
+    public final const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'graphql-api-schema-config';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 

@@ -2,14 +2,14 @@
 
 class PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPCOMPONENT_CAROUSEL = 'bootstrapcomponent_carousel';
-    public const RESOURCE_BOOTSTRAPCOMPONENT_COLLAPSEPANELGROUP = 'bootstrapcomponent_collapsepanelgroup';
-    public const RESOURCE_BOOTSTRAPCOMPONENT_MODAL = 'bootstrapcomponent_modal';
-    public const RESOURCE_BOOTSTRAPCOMPONENT_TABPANEL = 'bootstrapcomponent_tabpanel';
-    public const RESOURCE_BOOTSTRAPCOMPONENT_VIEWCOMPONENT = 'bootstrapcomponent_viewcomponent';
-    public const RESOURCE_PAGESECTION_MODAL = 'pagesection_modal';
-    public const RESOURCE_PAGESECTION_PAGETAB = 'pagesection_pagetab';
-    public const RESOURCE_PAGESECTION_TABPANE = 'pagesection_tabpane';
+    public final const RESOURCE_BOOTSTRAPCOMPONENT_CAROUSEL = 'bootstrapcomponent_carousel';
+    public final const RESOURCE_BOOTSTRAPCOMPONENT_COLLAPSEPANELGROUP = 'bootstrapcomponent_collapsepanelgroup';
+    public final const RESOURCE_BOOTSTRAPCOMPONENT_MODAL = 'bootstrapcomponent_modal';
+    public final const RESOURCE_BOOTSTRAPCOMPONENT_TABPANEL = 'bootstrapcomponent_tabpanel';
+    public final const RESOURCE_BOOTSTRAPCOMPONENT_VIEWCOMPONENT = 'bootstrapcomponent_viewcomponent';
+    public final const RESOURCE_PAGESECTION_MODAL = 'pagesection_modal';
+    public final const RESOURCE_PAGESECTION_PAGETAB = 'pagesection_pagetab';
+    public final const RESOURCE_PAGESECTION_TABPANE = 'pagesection_tabpane';
 
     public function getResourcesToProcess()
     {

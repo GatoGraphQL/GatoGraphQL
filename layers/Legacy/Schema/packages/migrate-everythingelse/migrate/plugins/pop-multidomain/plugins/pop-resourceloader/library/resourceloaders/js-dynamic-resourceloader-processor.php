@@ -2,7 +2,7 @@
 
 class PoP_MultiDomain_DynamicJSResourceLoaderProcessor extends PoP_DynamicJSResourceLoaderProcessor
 {
-    public const RESOURCE_MULTIDOMAIN_INITDOMAINSCRIPTS = 'multidomain-init-domain-scripts';
+    public final const RESOURCE_MULTIDOMAIN_INITDOMAINSCRIPTS = 'multidomain-init-domain-scripts';
 
     public function getResourcesToProcess()
     {

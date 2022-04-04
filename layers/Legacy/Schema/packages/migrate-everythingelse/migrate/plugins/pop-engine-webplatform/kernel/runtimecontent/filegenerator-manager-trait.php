@@ -11,8 +11,8 @@ trait FileGeneratorManagerTrait
         // When a plugin is activated/deactivated, ANY plugin, delete the corresponding cached files
         // This is particularly important for the MEMORY, since we can't set by constants to not use it
         // These are WP hooks, must migrate them to PoP hooks
-        App::addAction('activate_plugin', [$this, 'deleteFiles']);
-        App::addAction('deactivate_plugin', [$this, 'deleteFiles']);
+        App::addAction('activate_plugin', $this->deleteFiles(...));
+        App::addAction('deactivate_plugin', $this->deleteFiles(...));
     }
 
     public function deleteFiles()

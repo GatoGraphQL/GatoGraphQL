@@ -13,20 +13,20 @@ const POP_MODULEID_PAGESECTIONCONTAINERID_BODYTABS = 'ps-bodytabs';
 
 class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBase
 {
-    public const MODULE_PAGESECTION_QUICKVIEW = 'pagesection-quickview';
-    public const MODULE_PAGESECTION_QUICKVIEWSIDEINFO = 'pagesection-quickviewsideinfo';
-    public const MODULE_PAGESECTION_ADDONTABS = 'pagesection-addontabs';
-    public const MODULE_PAGESECTION_BACKGROUND = 'pagesection-background';
-    public const MODULE_PAGESECTION_FRAMECOMPONENTS = 'pagesection-framecomponents';
-    public const MODULE_PAGESECTION_HOLE = 'pagesection-hole';
-    public const MODULE_PAGESECTION_HOVER = 'pagesection-hover';
-    public const MODULE_PAGESECTION_NAVIGATOR = 'pagesection-navigator';
-    public const MODULE_PAGESECTION_SIDE = 'pagesection-side';
-    public const MODULE_PAGESECTION_TOP = 'pagesection-top';
-    public const MODULE_PAGESECTION_BODYSIDEINFO = 'pagesection-bodysideinfo';
-    public const MODULE_PAGESECTION_MODALS = 'pagesection-modals';
-    public const MODULE_PAGESECTION_BODYTABS = 'pagesection-bodytabs';
-    public const MODULE_PAGESECTION_BODY = 'pagesection-body';
+    public final const MODULE_PAGESECTION_QUICKVIEW = 'pagesection-quickview';
+    public final const MODULE_PAGESECTION_QUICKVIEWSIDEINFO = 'pagesection-quickviewsideinfo';
+    public final const MODULE_PAGESECTION_ADDONTABS = 'pagesection-addontabs';
+    public final const MODULE_PAGESECTION_BACKGROUND = 'pagesection-background';
+    public final const MODULE_PAGESECTION_FRAMECOMPONENTS = 'pagesection-framecomponents';
+    public final const MODULE_PAGESECTION_HOLE = 'pagesection-hole';
+    public final const MODULE_PAGESECTION_HOVER = 'pagesection-hover';
+    public final const MODULE_PAGESECTION_NAVIGATOR = 'pagesection-navigator';
+    public final const MODULE_PAGESECTION_SIDE = 'pagesection-side';
+    public final const MODULE_PAGESECTION_TOP = 'pagesection-top';
+    public final const MODULE_PAGESECTION_BODYSIDEINFO = 'pagesection-bodysideinfo';
+    public final const MODULE_PAGESECTION_MODALS = 'pagesection-modals';
+    public final const MODULE_PAGESECTION_BODYTABS = 'pagesection-bodytabs';
+    public final const MODULE_PAGESECTION_BODY = 'pagesection-body';
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 

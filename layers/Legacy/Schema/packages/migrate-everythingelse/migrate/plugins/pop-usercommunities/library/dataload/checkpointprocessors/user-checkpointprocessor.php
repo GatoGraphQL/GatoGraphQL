@@ -6,9 +6,9 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class PoP_UserCommunities_Dataload_UserCheckpointProcessor extends AbstractCheckpointProcessor
 {
-    public const CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY = 'checkpoint-loggedinuser-iscommunity';
-    public const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';
-    public const CHECKPOINT_EDITMEMBERSHIPNONCE = 'checkpoint-editmembershipnonce';
+    public final const CHECKPOINT_LOGGEDINUSER_ISCOMMUNITY = 'checkpoint-loggedinuser-iscommunity';
+    public final const CHECKPOINT_EDITINGCOMMUNITYMEMBER = 'checkpoint-editingcommunitymember';
+    public final const CHECKPOINT_EDITMEMBERSHIPNONCE = 'checkpoint-editmembershipnonce';
 
     public function getCheckpointsToProcess(): array
     {

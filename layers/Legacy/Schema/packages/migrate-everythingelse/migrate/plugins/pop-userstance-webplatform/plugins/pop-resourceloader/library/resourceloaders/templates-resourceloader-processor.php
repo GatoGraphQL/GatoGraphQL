@@ -2,7 +2,7 @@
 
 class PoP_Application_UserStance_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUTSTANCE = 'layoutstance';
+    public final const RESOURCE_LAYOUTSTANCE = 'layoutstance';
 
     public function getResourcesToProcess()
     {

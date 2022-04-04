@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts extends PoP_Module_Processor_CheckpointMessageLayoutsBase
 {
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN = 'layout-checkpointmessage-notloggedin';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN = 'layout-checkpointmessage-loggedin';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'layout-checkpointmessage-loggedincanedit';
-    public const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'layout-checkpointmessage-loggedinisadmin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_NOTLOGGEDIN = 'layout-checkpointmessage-notloggedin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN = 'layout-checkpointmessage-loggedin';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'layout-checkpointmessage-loggedincanedit';
+    public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'layout-checkpointmessage-loggedinisadmin';
 
     public function getModulesToProcess(): array
     {

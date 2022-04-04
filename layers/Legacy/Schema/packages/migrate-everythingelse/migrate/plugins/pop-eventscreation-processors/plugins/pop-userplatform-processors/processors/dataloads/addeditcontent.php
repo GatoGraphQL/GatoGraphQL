@@ -9,8 +9,8 @@ class GD_EM_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Proces
 {
     use ObjectIDFromURLParamModuleProcessorTrait;
 
-    public const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
-    public const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
+    public final const MODULE_DATALOAD_EVENT_UPDATE = 'dataload-event-update';
+    public final const MODULE_DATALOAD_EVENT_CREATE = 'dataload-event-create';
 
     public function getModulesToProcess(): array
     {

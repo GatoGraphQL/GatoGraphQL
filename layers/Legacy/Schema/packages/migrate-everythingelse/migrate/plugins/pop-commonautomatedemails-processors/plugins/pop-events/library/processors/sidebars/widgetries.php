@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 {
-    public const MODULE_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO = 'em-widgetcompact-automatedemails-eventinfo';
+    public final const MODULE_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO = 'em-widgetcompact-automatedemails-eventinfo';
 
     public function getModulesToProcess(): array
     {

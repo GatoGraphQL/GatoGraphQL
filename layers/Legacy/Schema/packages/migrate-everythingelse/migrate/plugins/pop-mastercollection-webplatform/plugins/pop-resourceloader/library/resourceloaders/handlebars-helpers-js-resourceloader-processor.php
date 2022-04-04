@@ -2,20 +2,20 @@
 
 class PoP_CoreProcessors_HandlebarsHelpersJSResourceLoaderProcessor extends PoP_HandlebarsHelpersJSResourceLoaderProcessor
 {
-    public const RESOURCE_HANDLEBARSHELPERS_ARRAYS = 'handlebars-helpers-arrays';
-    public const RESOURCE_HANDLEBARSHELPERS_COMPARE = 'handlebars-helpers-compare';
-    public const RESOURCE_HANDLEBARSHELPERS_DATE = 'handlebars-helpers-date';
-    public const RESOURCE_HANDLEBARSHELPERS_DBOBJECT = 'handlebars-helpers-dbobject';
-    public const RESOURCE_HANDLEBARSHELPERS_LABELS = 'handlebars-helpers-labels';
-    public const RESOURCE_HANDLEBARSHELPERS_MOD = 'handlebars-helpers-mod';
-    public const RESOURCE_HANDLEBARSHELPERS_MULTILAYOUT = 'handlebars-helpers-multilayout';
-    public const RESOURCE_HANDLEBARSHELPERS_OPERATORS = 'handlebars-helpers-operators';
-    public const RESOURCE_HANDLEBARSHELPERS_SHOWMORE = 'handlebars-helpers-showmore';
-    public const RESOURCE_HANDLEBARSHELPERS_STATUS = 'handlebars-helpers-status';
-    public const RESOURCE_HANDLEBARSHELPERS_REPLACE = 'handlebars-helpers-replace';
-    public const RESOURCE_HANDLEBARSHELPERS_URLPARAM = 'handlebars-helpers-urlparam';
-    public const RESOURCE_HANDLEBARSHELPERS_LATESTCOUNT = 'helpers-handlebars-latestcount';
-    public const RESOURCE_HANDLEBARSHELPERS_FEEDBACKMESSAGE = 'helpers-handlebars-feedbackmessage';
+    public final const RESOURCE_HANDLEBARSHELPERS_ARRAYS = 'handlebars-helpers-arrays';
+    public final const RESOURCE_HANDLEBARSHELPERS_COMPARE = 'handlebars-helpers-compare';
+    public final const RESOURCE_HANDLEBARSHELPERS_DATE = 'handlebars-helpers-date';
+    public final const RESOURCE_HANDLEBARSHELPERS_DBOBJECT = 'handlebars-helpers-dbobject';
+    public final const RESOURCE_HANDLEBARSHELPERS_LABELS = 'handlebars-helpers-labels';
+    public final const RESOURCE_HANDLEBARSHELPERS_MOD = 'handlebars-helpers-mod';
+    public final const RESOURCE_HANDLEBARSHELPERS_MULTILAYOUT = 'handlebars-helpers-multilayout';
+    public final const RESOURCE_HANDLEBARSHELPERS_OPERATORS = 'handlebars-helpers-operators';
+    public final const RESOURCE_HANDLEBARSHELPERS_SHOWMORE = 'handlebars-helpers-showmore';
+    public final const RESOURCE_HANDLEBARSHELPERS_STATUS = 'handlebars-helpers-status';
+    public final const RESOURCE_HANDLEBARSHELPERS_REPLACE = 'handlebars-helpers-replace';
+    public final const RESOURCE_HANDLEBARSHELPERS_URLPARAM = 'handlebars-helpers-urlparam';
+    public final const RESOURCE_HANDLEBARSHELPERS_LATESTCOUNT = 'helpers-handlebars-latestcount';
+    public final const RESOURCE_HANDLEBARSHELPERS_FEEDBACKMESSAGE = 'helpers-handlebars-feedbackmessage';
 
     public function getResourcesToProcess()
     {

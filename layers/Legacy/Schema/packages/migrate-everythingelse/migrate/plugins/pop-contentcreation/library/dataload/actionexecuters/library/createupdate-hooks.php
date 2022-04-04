@@ -7,7 +7,7 @@ class GD_CreateUpdate_Hooks
     {
         \PoP\Root\App::addFilter(
             'popcms:editPostLink',
-            array($this, 'editPostLink'),
+            $this->editPostLink(...),
             100,
             2
         );

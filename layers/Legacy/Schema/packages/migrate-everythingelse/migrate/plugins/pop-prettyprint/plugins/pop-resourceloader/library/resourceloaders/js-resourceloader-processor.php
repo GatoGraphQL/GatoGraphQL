@@ -2,7 +2,7 @@
 
 class PoP_PrettyPrint_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_PRETTYPRINT = 'prettyprint';
+    public final const RESOURCE_PRETTYPRINT = 'prettyprint';
 
     public function getResourcesToProcess()
     {

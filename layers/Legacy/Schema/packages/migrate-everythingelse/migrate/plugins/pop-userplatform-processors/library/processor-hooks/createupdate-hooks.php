@@ -6,11 +6,11 @@ class PoP_UserPlatform_CreateUpdateHooks
     {
         \PoP\Root\App::addFilter(
             'GD_CreateUpdate_Profile:form-inputs',
-            array($this, 'getProfileFormInputs')
+            $this->getProfileFormInputs(...)
         );
         \PoP\Root\App::addFilter(
             'GD_CreateUpdate_User:form-inputs',
-            array($this, 'getUserFormInputs')
+            $this->getUserFormInputs(...)
         );
     }
 

@@ -5,7 +5,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_CreateUpdatePostCheckboxFormInputs extends PoP_Module_Processor_BooleanCheckboxFormInputsBase
 {
-    public const MODULE_FORMINPUT_CUP_KEEPASDRAFT = 'forminput-keepasdraft';
+    public final const MODULE_FORMINPUT_CUP_KEEPASDRAFT = 'forminput-keepasdraft';
 
     public function getModulesToProcess(): array
     {

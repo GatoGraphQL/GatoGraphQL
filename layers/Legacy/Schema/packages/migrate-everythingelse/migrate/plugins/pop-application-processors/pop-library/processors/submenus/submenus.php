@@ -8,9 +8,9 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusBase
 {
-    public const MODULE_SUBMENU_AUTHOR = 'submenu-author';
-    public const MODULE_SUBMENU_TAG = 'submenu-tag';
-    public const MODULE_SUBMENU_SINGLE = 'submenu-single';
+    public final const MODULE_SUBMENU_AUTHOR = 'submenu-author';
+    public final const MODULE_SUBMENU_TAG = 'submenu-tag';
+    public final const MODULE_SUBMENU_SINGLE = 'submenu-single';
 
     public function getModulesToProcess(): array
     {

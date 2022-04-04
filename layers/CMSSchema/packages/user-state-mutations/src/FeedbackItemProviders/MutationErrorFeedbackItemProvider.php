@@ -9,10 +9,10 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
-    public const E1 = 'e1';
-    public const E2 = 'e2';
-    public const E3 = 'e3';
-    public const E4 = 'e4';
+    public final const E1 = 'e1';
+    public final const E2 = 'e2';
+    public final const E3 = 'e3';
+    public final const E4 = 'e4';
 
     /**
      * @return string[]

@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMeta;
 
 class Environment
 {
-    public const TAXONOMY_META_ENTRIES = 'TAXONOMY_META_ENTRIES';
-    public const TAXONOMY_META_BEHAVIOR = 'TAXONOMY_META_BEHAVIOR';
+    public final const TAXONOMY_META_ENTRIES = 'TAXONOMY_META_ENTRIES';
+    public final const TAXONOMY_META_BEHAVIOR = 'TAXONOMY_META_BEHAVIOR';
 }

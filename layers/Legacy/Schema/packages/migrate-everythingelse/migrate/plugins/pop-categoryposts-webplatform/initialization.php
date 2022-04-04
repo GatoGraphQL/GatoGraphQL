@@ -18,7 +18,7 @@ class PoP_CategoryPostsWebPlatform_Initialization
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
             // After PoPTheme MESYM
-            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 110);
+            \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...), 110);
         }
     }
 

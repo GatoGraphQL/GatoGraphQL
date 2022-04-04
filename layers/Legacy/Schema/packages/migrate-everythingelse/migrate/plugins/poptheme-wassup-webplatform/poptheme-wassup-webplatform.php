@@ -21,7 +21,7 @@ class PoP_ThemeWassupWebPlatform
     {
 
         // Priority: after everything
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888599);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888599);
     }
     public function init()
     {

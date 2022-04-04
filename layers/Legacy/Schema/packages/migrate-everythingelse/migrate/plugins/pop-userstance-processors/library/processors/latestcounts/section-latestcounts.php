@@ -2,22 +2,22 @@
 
 class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public const MODULE_LATESTCOUNT_STANCES = 'latestcount-stances';
-    public const MODULE_LATESTCOUNT_AUTHOR_STANCES = 'latestcount-author-stances';
-    public const MODULE_LATESTCOUNT_TAG_STANCES = 'latestcount-tag-stances';
-    public const MODULE_LATESTCOUNT_SINGLE_STANCES = 'latestcount-single-stances';
-    public const MODULE_LATESTCOUNT_STANCES_PRO = 'latestcount-stances-pro';
-    public const MODULE_LATESTCOUNT_AUTHOR_STANCES_PRO = 'latestcount-author-stances-pro';
-    public const MODULE_LATESTCOUNT_TAG_STANCES_PRO = 'latestcount-tag-stances-pro';
-    public const MODULE_LATESTCOUNT_SINGLE_STANCES_PRO = 'latestcount-single-stances-pro';
-    public const MODULE_LATESTCOUNT_STANCES_AGAINST = 'latestcount-stances-against';
-    public const MODULE_LATESTCOUNT_AUTHOR_STANCES_AGAINST = 'latestcount-author-stances-against';
-    public const MODULE_LATESTCOUNT_TAG_STANCES_AGAINST = 'latestcount-tag-stances-against';
-    public const MODULE_LATESTCOUNT_SINGLE_STANCES_AGAINST = 'latestcount-single-stances-against';
-    public const MODULE_LATESTCOUNT_STANCES_NEUTRAL = 'latestcount-stances-neutral';
-    public const MODULE_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL = 'latestcount-author-stances-neutral';
-    public const MODULE_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
-    public const MODULE_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
+    public final const MODULE_LATESTCOUNT_STANCES = 'latestcount-stances';
+    public final const MODULE_LATESTCOUNT_AUTHOR_STANCES = 'latestcount-author-stances';
+    public final const MODULE_LATESTCOUNT_TAG_STANCES = 'latestcount-tag-stances';
+    public final const MODULE_LATESTCOUNT_SINGLE_STANCES = 'latestcount-single-stances';
+    public final const MODULE_LATESTCOUNT_STANCES_PRO = 'latestcount-stances-pro';
+    public final const MODULE_LATESTCOUNT_AUTHOR_STANCES_PRO = 'latestcount-author-stances-pro';
+    public final const MODULE_LATESTCOUNT_TAG_STANCES_PRO = 'latestcount-tag-stances-pro';
+    public final const MODULE_LATESTCOUNT_SINGLE_STANCES_PRO = 'latestcount-single-stances-pro';
+    public final const MODULE_LATESTCOUNT_STANCES_AGAINST = 'latestcount-stances-against';
+    public final const MODULE_LATESTCOUNT_AUTHOR_STANCES_AGAINST = 'latestcount-author-stances-against';
+    public final const MODULE_LATESTCOUNT_TAG_STANCES_AGAINST = 'latestcount-tag-stances-against';
+    public final const MODULE_LATESTCOUNT_SINGLE_STANCES_AGAINST = 'latestcount-single-stances-against';
+    public final const MODULE_LATESTCOUNT_STANCES_NEUTRAL = 'latestcount-stances-neutral';
+    public final const MODULE_LATESTCOUNT_AUTHOR_STANCES_NEUTRAL = 'latestcount-author-stances-neutral';
+    public final const MODULE_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
+    public final const MODULE_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
 
     public function getModulesToProcess(): array
     {

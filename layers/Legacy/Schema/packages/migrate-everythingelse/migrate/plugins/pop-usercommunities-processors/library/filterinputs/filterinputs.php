@@ -6,12 +6,12 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputProcessor
 {
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
-    public const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filterinput-typeahead-communities-user';
-    public const URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
-    public const URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
-    public const URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filterinput-typeahead-communityplusmembers';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filterinput-typeahead-communities-post';
+    public final const URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filterinput-typeahead-communities-user';
+    public final const URE_FILTERINPUT_MEMBERPRIVILEGES = 'filterinput-memberprivileges';
+    public final const URE_FILTERINPUT_MEMBERTAGS = 'filterinput-membertags';
+    public final const URE_FILTERINPUT_MEMBERSTATUS = 'filterinput-memberstatus';
 
     public function getFilterInputsToProcess(): array
     {
@@ -75,7 +75,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
 
             case self::URE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_COMMUNITIES_USER:
                 // Add the 'contributecontent' status to the value for each selected community
-                $value = array_map('gdUreGetCommunityMetavalueContributecontent', $value);
+                $value = array_map(gdUreGetCommunityMetavalueContributecontent(...), $value);
                 $query['meta-query'][] = [
                     'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                     'value' => $value,
@@ -84,7 +84,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
                 break;
 
             case self::URE_FILTERINPUT_MEMBERPRIVILEGES:
-                $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
+                $value = array_map(gdUreGetCommunityMetavalueCurrentcommunity(...), $value);
                 $query['meta-query'][] = [
                     'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERPRIVILEGES),
                     'value' => $value,
@@ -93,7 +93,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
                 break;
 
             case self::URE_FILTERINPUT_MEMBERTAGS:
-                $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
+                $value = array_map(gdUreGetCommunityMetavalueCurrentcommunity(...), $value);
                 $query['meta-query'][] = [
                     'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERTAGS),
                     'value' => $value,
@@ -102,7 +102,7 @@ class GD_URE_Module_Processor_FilterInputProcessor extends AbstractFilterInputPr
                 break;
 
             case self::URE_FILTERINPUT_MEMBERSTATUS:
-                $value = array_map('gdUreGetCommunityMetavalueCurrentcommunity', $value);
+                $value = array_map(gdUreGetCommunityMetavalueCurrentcommunity(...), $value);
                 $query['meta-query'][] = [
                     'key' => \PoPCMSSchema\UserMeta\Utils::getMetaKey(GD_URE_METAKEY_PROFILE_COMMUNITIES_MEMBERSTATUS),
                     'value' => $value,

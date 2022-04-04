@@ -2,26 +2,26 @@
 
 class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public const MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW = 'scroll-categoryposts00-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW = 'scroll-categoryposts01-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW = 'scroll-categoryposts02-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW = 'scroll-categoryposts03-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW = 'scroll-categoryposts04-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW = 'scroll-categoryposts05-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW = 'scroll-categoryposts06-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW = 'scroll-categoryposts07-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW = 'scroll-categoryposts08-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW = 'scroll-categoryposts09-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW = 'scroll-categoryposts10-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW = 'scroll-categoryposts11-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW = 'scroll-categoryposts12-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW = 'scroll-categoryposts13-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW = 'scroll-categoryposts14-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW = 'scroll-categoryposts15-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW = 'scroll-categoryposts16-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW = 'scroll-categoryposts17-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW = 'scroll-categoryposts18-simpleview';
-    public const MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW = 'scroll-categoryposts19-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW = 'scroll-categoryposts00-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS01_SIMPLEVIEW = 'scroll-categoryposts01-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS02_SIMPLEVIEW = 'scroll-categoryposts02-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS03_SIMPLEVIEW = 'scroll-categoryposts03-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS04_SIMPLEVIEW = 'scroll-categoryposts04-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS05_SIMPLEVIEW = 'scroll-categoryposts05-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS06_SIMPLEVIEW = 'scroll-categoryposts06-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS07_SIMPLEVIEW = 'scroll-categoryposts07-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS08_SIMPLEVIEW = 'scroll-categoryposts08-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS09_SIMPLEVIEW = 'scroll-categoryposts09-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS10_SIMPLEVIEW = 'scroll-categoryposts10-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS11_SIMPLEVIEW = 'scroll-categoryposts11-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS12_SIMPLEVIEW = 'scroll-categoryposts12-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS13_SIMPLEVIEW = 'scroll-categoryposts13-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS14_SIMPLEVIEW = 'scroll-categoryposts14-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS15_SIMPLEVIEW = 'scroll-categoryposts15-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS16_SIMPLEVIEW = 'scroll-categoryposts16-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS17_SIMPLEVIEW = 'scroll-categoryposts17-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW = 'scroll-categoryposts18-simpleview';
+    public final const MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW = 'scroll-categoryposts19-simpleview';
 
     public function getModulesToProcess(): array
     {

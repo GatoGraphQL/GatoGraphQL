@@ -61,7 +61,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         if (!empty($new_community_privileges)) {
             $privileges = array_merge(
                 $privileges,
-                array_map('gdUreGetCommunityMetavalueCurrentcommunity', $new_community_privileges)
+                array_map(gdUreGetCommunityMetavalueCurrentcommunity(...), $new_community_privileges)
             );
         } else {
             $privileges[] = gdUreGetCommunityMetavalueCurrentcommunity(GD_METAVALUE_NONE);
@@ -69,7 +69,7 @@ class EditMembershipMutationResolver extends AbstractMutationResolver
         if (!empty($new_community_tags)) {
             $tags = array_merge(
                 $tags,
-                array_map('gdUreGetCommunityMetavalueCurrentcommunity', $new_community_tags)
+                array_map(gdUreGetCommunityMetavalueCurrentcommunity(...), $new_community_tags)
             );
         } else {
             $tags[] = gdUreGetCommunityMetavalueCurrentcommunity(GD_METAVALUE_NONE);

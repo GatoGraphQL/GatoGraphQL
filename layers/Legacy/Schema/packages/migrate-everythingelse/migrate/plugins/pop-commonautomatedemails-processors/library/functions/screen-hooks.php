@@ -6,7 +6,7 @@ class PoP_CommonAutomatedEmails_ScreenHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Application_Utils:defaultformat_by_screen',
-            array($this, 'getDefaultformatByScreen'),
+            $this->getDefaultformatByScreen(...),
             0,
             2
         );

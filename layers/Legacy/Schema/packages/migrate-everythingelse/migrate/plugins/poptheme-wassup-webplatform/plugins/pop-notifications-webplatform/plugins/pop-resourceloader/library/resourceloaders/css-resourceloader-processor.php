@@ -2,7 +2,7 @@
 
 class PopThemeWassup_AAL_CSSResourceLoaderProcessor extends PoP_CSSResourceLoaderProcessor
 {
-    public const RESOURCE_CSS_NOTIFICATIONLAYOUT = 'css-notification-layout';
+    public final const RESOURCE_CSS_NOTIFICATIONLAYOUT = 'css-notification-layout';
 
     public function getResourcesToProcess()
     {

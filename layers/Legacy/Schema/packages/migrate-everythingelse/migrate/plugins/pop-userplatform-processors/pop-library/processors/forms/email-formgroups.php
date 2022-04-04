@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelFormComponentGroupsBase
 {
-    public const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminputgroup-emailnotifications-general-newpost';
-    public const MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminputgroup-emaildigests-weeklylatestposts';
-    public const MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS = 'forminputgroup-emaildigests-specialposts';
+    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminputgroup-emailnotifications-general-newpost';
+    public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminputgroup-emaildigests-weeklylatestposts';
+    public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_SPECIALPOSTS = 'forminputgroup-emaildigests-specialposts';
 
     public function getModulesToProcess(): array
     {

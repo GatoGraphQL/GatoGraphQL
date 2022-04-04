@@ -2,7 +2,7 @@
 
 class PoP_SSR_JSResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_SSR = 'ssr';
+    public final const RESOURCE_SSR = 'ssr';
 
     public function getResourcesToProcess()
     {

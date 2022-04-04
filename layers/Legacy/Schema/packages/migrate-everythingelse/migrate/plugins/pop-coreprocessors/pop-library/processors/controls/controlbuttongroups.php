@@ -2,18 +2,18 @@
 
 class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public const MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS = 'controlbuttongroup-toggleoptionalfields';
-    public const MODULE_CONTROLBUTTONGROUP_FILTER = 'controlbuttongroup-filter';
-    public const MODULE_CONTROLBUTTONGROUP_CURRENTURL = 'controlbuttongroup-currenturl';
-    public const MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP = 'controlbuttongroup-reloadblockgroup';
-    public const MODULE_CONTROLBUTTONGROUP_RELOADBLOCK = 'controlbuttongroup-reloadblock';
-    public const MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK = 'controlbuttongroup-loadlatestblock';
-    public const MODULE_CONTROLBUTTONGROUP_SUBMENU_XS = 'controlbuttongroup-submenu-xs';
-    public const MODULE_CONTROLBUTTONGROUP_RESETEDITOR = 'controlbuttongroup-reseteditor';
-    public const MODULE_CONTROLBUTTONGROUP_SHARE = 'controlbuttongroup-share';
-    public const MODULE_CONTROLBUTTONGROUP_RESULTSSHARE = 'controlbuttongroup-resultsshare';
-    public const MODULE_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
-    public const MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
+    public final const MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS = 'controlbuttongroup-toggleoptionalfields';
+    public final const MODULE_CONTROLBUTTONGROUP_FILTER = 'controlbuttongroup-filter';
+    public final const MODULE_CONTROLBUTTONGROUP_CURRENTURL = 'controlbuttongroup-currenturl';
+    public final const MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP = 'controlbuttongroup-reloadblockgroup';
+    public final const MODULE_CONTROLBUTTONGROUP_RELOADBLOCK = 'controlbuttongroup-reloadblock';
+    public final const MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK = 'controlbuttongroup-loadlatestblock';
+    public final const MODULE_CONTROLBUTTONGROUP_SUBMENU_XS = 'controlbuttongroup-submenu-xs';
+    public final const MODULE_CONTROLBUTTONGROUP_RESETEDITOR = 'controlbuttongroup-reseteditor';
+    public final const MODULE_CONTROLBUTTONGROUP_SHARE = 'controlbuttongroup-share';
+    public final const MODULE_CONTROLBUTTONGROUP_RESULTSSHARE = 'controlbuttongroup-resultsshare';
+    public final const MODULE_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
+    public final const MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
     public function getModulesToProcess(): array
     {

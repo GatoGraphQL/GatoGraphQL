@@ -6,11 +6,11 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_AUTHOR_CONTENT = 'block-author-content';
-    public const MODULE_BLOCK_AUTHOR_SUMMARYCONTENT = 'block-author-summarycontent';
-    public const MODULE_BLOCK_TAG_CONTENT = 'block-tag-content';
-    public const MODULE_BLOCK_SINGLE_CONTENT = 'block-single-content';
-    public const MODULE_BLOCK_PAGE_CONTENT = 'block-pageabout-content';
+    public final const MODULE_BLOCK_AUTHOR_CONTENT = 'block-author-content';
+    public final const MODULE_BLOCK_AUTHOR_SUMMARYCONTENT = 'block-author-summarycontent';
+    public final const MODULE_BLOCK_TAG_CONTENT = 'block-tag-content';
+    public final const MODULE_BLOCK_SINGLE_CONTENT = 'block-single-content';
+    public final const MODULE_BLOCK_PAGE_CONTENT = 'block-pageabout-content';
 
     public function getModulesToProcess(): array
     {

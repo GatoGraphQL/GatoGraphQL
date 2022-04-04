@@ -3,14 +3,14 @@ use PoP\ModuleRouting\Facades\RouteModuleProcessorManagerFacade;
 
 class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 {
-    public const MODULE_OFFCANVAS_HOVER = 'offcanvas-hover';
-    public const MODULE_OFFCANVAS_NAVIGATOR = 'offcanvas-navigator';
-    public const MODULE_OFFCANVAS_SIDE = 'offcanvas-side';
-    public const MODULE_OFFCANVAS_TOP = 'offcanvas-top';
-    public const MODULE_OFFCANVAS_BODYSIDEINFO = 'offcanvas-bodysideinfo';
-    public const MODULE_OFFCANVAS_BACKGROUND = 'offcanvas-background';
-    public const MODULE_OFFCANVAS_BODYTABS = 'offcanvas-bodytabs';
-    public const MODULE_OFFCANVAS_BODY = 'offcanvas-body';
+    public final const MODULE_OFFCANVAS_HOVER = 'offcanvas-hover';
+    public final const MODULE_OFFCANVAS_NAVIGATOR = 'offcanvas-navigator';
+    public final const MODULE_OFFCANVAS_SIDE = 'offcanvas-side';
+    public final const MODULE_OFFCANVAS_TOP = 'offcanvas-top';
+    public final const MODULE_OFFCANVAS_BODYSIDEINFO = 'offcanvas-bodysideinfo';
+    public final const MODULE_OFFCANVAS_BACKGROUND = 'offcanvas-background';
+    public final const MODULE_OFFCANVAS_BODYTABS = 'offcanvas-bodytabs';
+    public final const MODULE_OFFCANVAS_BODY = 'offcanvas-body';
 
     use PoP_SPA_Module_Processor_PageSections_Trait;
 

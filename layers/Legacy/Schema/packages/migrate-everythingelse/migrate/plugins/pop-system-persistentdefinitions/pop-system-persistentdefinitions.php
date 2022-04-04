@@ -19,7 +19,7 @@ class PoP_PersistentDefinitionsSystem
     {
 
         // Priority: after PoP System
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888220);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888220);
     }
     public function init()
     {

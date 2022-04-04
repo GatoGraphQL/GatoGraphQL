@@ -9,6 +9,6 @@ namespace GraphQLAPI\GraphQLAPI\Constants;
  */
 class DocumentationConstants
 {
-    public const LOCALE_LANG = 'localeLang';
-    public const DEFAULT_LANG = 'defaultLang';
+    public final const LOCALE_LANG = 'localeLang';
+    public final const DEFAULT_LANG = 'defaultLang';
 }

@@ -16,7 +16,7 @@ class PoP_SocialLoginProcessors
     {
 
         // Priority: after PoP Notifications Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888850);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888850);
     }
 
     public function init()

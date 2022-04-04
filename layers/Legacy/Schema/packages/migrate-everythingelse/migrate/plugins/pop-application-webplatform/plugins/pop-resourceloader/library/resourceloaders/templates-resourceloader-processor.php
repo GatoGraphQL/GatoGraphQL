@@ -2,9 +2,9 @@
 
 class PoP_ApplicationProcessors_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_LAYOUT_LINK_ACCESS = 'layout_link_access';
-    public const RESOURCE_LAYOUT_VOLUNTEERTAG = 'layout_volunteertag';
-    public const RESOURCE_SPEECHBUBBLE = 'speechbubble';
+    public final const RESOURCE_LAYOUT_LINK_ACCESS = 'layout_link_access';
+    public final const RESOURCE_LAYOUT_VOLUNTEERTAG = 'layout_volunteertag';
+    public final const RESOURCE_SPEECHBUBBLE = 'speechbubble';
 
     public function getResourcesToProcess()
     {

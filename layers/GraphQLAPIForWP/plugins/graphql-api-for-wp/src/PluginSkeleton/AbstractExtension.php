@@ -127,19 +127,19 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
                  */
                 \add_action(
                     PluginLifecycleHooks::INITIALIZE_EXTENSION,
-                    [$this, 'initialize']
+                    $this->initialize(...)
                 );
                 \add_action(
                     PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS,
-                    [$this, 'configureComponents']
+                    $this->configureComponents(...)
                 );
                 \add_action(
                     PluginLifecycleHooks::CONFIGURE_EXTENSION,
-                    [$this, 'configure']
+                    $this->configure(...)
                 );
                 \add_action(
                     PluginLifecycleHooks::BOOT_EXTENSION,
-                    [$this, 'boot']
+                    $this->boot(...)
                 );
 
                 // Execute the plugin's custom setup, if any

@@ -5,8 +5,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public const MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS = 'block-notifications-scroll-details';
-    public const MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST = 'block-notifications-scroll-list';
+    public final const MODULE_BLOCK_NOTIFICATIONS_SCROLL_DETAILS = 'block-notifications-scroll-details';
+    public final const MODULE_BLOCK_NOTIFICATIONS_SCROLL_LIST = 'block-notifications-scroll-list';
 
     public function getModulesToProcess(): array
     {

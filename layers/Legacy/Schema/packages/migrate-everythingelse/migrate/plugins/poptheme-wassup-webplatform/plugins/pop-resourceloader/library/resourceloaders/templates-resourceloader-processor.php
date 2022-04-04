@@ -2,11 +2,11 @@
 
 class PoPTheme_Wassup_TemplateResourceLoaderProcessor extends PoP_TemplateResourceLoaderProcessor
 {
-    public const RESOURCE_FRAME_BACKGROUND = 'frame_background';
-    public const RESOURCE_FRAME_TOPSIMPLE = 'frame_topsimple';
-    public const RESOURCE_FRAME_SIDE = 'frame_side';
-    public const RESOURCE_FRAME_TOP = 'frame_top';
-    public const RESOURCE_EXTENSIONPAGESECTIONFRAMEOPTIONS = 'extensionpagesectionframeoptions';
+    public final const RESOURCE_FRAME_BACKGROUND = 'frame_background';
+    public final const RESOURCE_FRAME_TOPSIMPLE = 'frame_topsimple';
+    public final const RESOURCE_FRAME_SIDE = 'frame_side';
+    public final const RESOURCE_FRAME_TOP = 'frame_top';
+    public final const RESOURCE_EXTENSIONPAGESECTIONFRAMEOPTIONS = 'extensionpagesectionframeoptions';
 
     public function getResourcesToProcess()
     {

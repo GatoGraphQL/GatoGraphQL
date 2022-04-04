@@ -20,7 +20,7 @@ class PoP_FormsProcessors
     {
 
         // Priority: before PoP Application Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888790);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888790);
     }
     public function init()
     {

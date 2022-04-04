@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public const MODULE_BUTTON_STANCE_CREATE = 'postbutton-stance-create';
-    public const MODULE_BUTTON_STANCE_UPDATE = 'postbutton-stance-update';
-    public const MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE = 'lazypostbutton-stance-createorupdate';
+    public final const MODULE_BUTTON_STANCE_CREATE = 'postbutton-stance-create';
+    public final const MODULE_BUTTON_STANCE_UPDATE = 'postbutton-stance-update';
+    public final const MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE = 'lazypostbutton-stance-createorupdate';
 
     public function getModulesToProcess(): array
     {

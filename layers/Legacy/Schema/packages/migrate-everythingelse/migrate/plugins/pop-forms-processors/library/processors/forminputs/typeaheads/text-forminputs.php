@@ -4,10 +4,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public const MODULE_FORMINPUT_TEXT_TYPEAHEAD = 'forminput-text-typeahead';
-    public const MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH = 'forminput-text-typeaheadsearch';
-    public const MODULE_FORMINPUT_TEXT_TYPEAHEADPROFILES = 'forminput-text-typeaheadprofiles';
-    public const MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT = 'forminput-text-typeaheadrelatedcontent';
+    public final const MODULE_FORMINPUT_TEXT_TYPEAHEAD = 'forminput-text-typeahead';
+    public final const MODULE_FORMINPUT_TEXT_TYPEAHEADSEARCH = 'forminput-text-typeaheadsearch';
+    public final const MODULE_FORMINPUT_TEXT_TYPEAHEADPROFILES = 'forminput-text-typeaheadprofiles';
+    public final const MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT = 'forminput-text-typeaheadrelatedcontent';
 
     public function getModulesToProcess(): array
     {

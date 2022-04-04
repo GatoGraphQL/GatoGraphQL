@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsForminputInputImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsForminputInputImpl(...));
 function gdJqueryConstantsForminputInputImpl($jqueryConstants)
 {
     $jqueryConstants['FORM_INPUT'] = GD_FORM_INPUT;

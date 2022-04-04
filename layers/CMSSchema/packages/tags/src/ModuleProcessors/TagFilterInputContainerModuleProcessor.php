@@ -11,8 +11,8 @@ class TagFilterInputContainerModuleProcessor extends AbstractFilterInputContaine
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
-    public const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
-    public const MODULE_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
+    public final const MODULE_FILTERINPUTCONTAINER_TAGS = 'filterinputcontainer-tags';
+    public final const MODULE_FILTERINPUTCONTAINER_TAGCOUNT = 'filterinputcontainer-tagcount';
 
     public function getModulesToProcess(): array
     {

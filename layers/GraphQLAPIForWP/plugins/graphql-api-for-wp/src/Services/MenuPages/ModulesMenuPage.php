@@ -13,7 +13,7 @@ class ModulesMenuPage extends AbstractTableMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
 
-    public const SCREEN_OPTION_NAME = 'graphql_api_modules_per_page';
+    public final const SCREEN_OPTION_NAME = 'graphql_api_modules_per_page';
 
     public function getMenuPageSlug(): string
     {

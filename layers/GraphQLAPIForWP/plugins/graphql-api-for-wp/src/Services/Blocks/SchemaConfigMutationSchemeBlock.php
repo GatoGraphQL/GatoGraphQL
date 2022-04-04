@@ -15,7 +15,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
     use MainPluginBlockTrait;
     use OptionsBlockTrait;
 
-    public const ATTRIBUTE_NAME_MUTATION_SCHEME = 'mutationScheme';
+    public final const ATTRIBUTE_NAME_MUTATION_SCHEME = 'mutationScheme';
 
     protected function getBlockName(): string
     {

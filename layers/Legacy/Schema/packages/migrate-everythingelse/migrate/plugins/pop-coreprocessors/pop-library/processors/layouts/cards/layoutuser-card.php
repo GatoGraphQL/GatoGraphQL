@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_UserCardLayouts extends PoP_Module_Processor_UserCardLayoutsBase
 {
-    public const MODULE_LAYOUTUSER_CARD = 'layoutuser-card';
-    public const MODULE_LAYOUTUSER_FILTERCARD = 'layoutuser-filtercard';
+    public final const MODULE_LAYOUTUSER_CARD = 'layoutuser-card';
+    public final const MODULE_LAYOUTUSER_FILTERCARD = 'layoutuser-filtercard';
 
     public function getModulesToProcess(): array
     {

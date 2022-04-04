@@ -7,12 +7,12 @@ class PoP_UserStanceWP_Setup
     {
         register_activation_hook(
             POP_USERSTANCEWP_BASE,
-            array($this, 'rewriteFlush')
+            $this->rewriteFlush(...)
         );
     
         \PoP\Root\App::addAction(
             'init',
-            array($this, 'installPostType')
+            $this->installPostType(...)
         );
     }
 

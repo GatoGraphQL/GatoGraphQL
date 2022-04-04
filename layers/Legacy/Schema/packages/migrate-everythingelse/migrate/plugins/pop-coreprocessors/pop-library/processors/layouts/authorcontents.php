@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_AuthorContentLayoutsBase
 {
-    public const MODULE_LAYOUTAUTHOR_CONTENT = 'layoutauthor-content';
-    public const MODULE_LAYOUTAUTHOR_LIMITEDCONTENT = 'layoutauthor-limitedcontent';
+    public final const MODULE_LAYOUTAUTHOR_CONTENT = 'layoutauthor-content';
+    public final const MODULE_LAYOUTAUTHOR_LIMITEDCONTENT = 'layoutauthor-limitedcontent';
 
     public function getModulesToProcess(): array
     {

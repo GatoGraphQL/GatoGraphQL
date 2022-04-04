@@ -2,7 +2,7 @@
 
 class PoP_AddLocations_Bootstrap_ResourceLoaderProcessor extends PoP_JSResourceLoaderProcessor
 {
-    public const RESOURCE_BOOTSTRAPCREATELOCATION = 'em-bootstrap-create-location';
+    public final const RESOURCE_BOOTSTRAPCREATELOCATION = 'em-bootstrap-create-location';
 
     public function getResourcesToProcess()
     {

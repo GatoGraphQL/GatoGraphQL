@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CalendarControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public const MODULE_CALENDARCONTROLGROUP_CALENDAR = 'calendarcontrolgroup-calendar';
+    public final const MODULE_CALENDARCONTROLGROUP_CALENDAR = 'calendarcontrolgroup-calendar';
 
     public function getModulesToProcess(): array
     {

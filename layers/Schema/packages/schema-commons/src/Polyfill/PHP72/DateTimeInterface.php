@@ -9,5 +9,5 @@ interface DateTimeInterface
     /**
      * @see https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom
      */
-    public const ATOM = 'Y-m-d\TH:i:sP';
+    public final const ATOM = 'Y-m-d\TH:i:sP';
 }

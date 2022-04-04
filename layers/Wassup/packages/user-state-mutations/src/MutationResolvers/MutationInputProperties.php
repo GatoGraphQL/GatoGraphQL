@@ -8,7 +8,7 @@ use PoPCMSSchema\UserStateMutations\MutationResolvers\MutationInputProperties as
 
 class MutationInputProperties extends UpstreamMutationInputProperties
 {
-    public const USER_LOGIN = 'userLogin';
-    public const CODE = 'code';
-    public const REPEAT_PASSWORD = 'repeatPassword';
+    public final const USER_LOGIN = 'userLogin';
+    public final const CODE = 'code';
+    public final const REPEAT_PASSWORD = 'repeatPassword';
 }

@@ -7,7 +7,7 @@ use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
 use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
 
-\PoP\Root\App::addFilter('mce_external_plugins', 'gdMentionsExternalPlugins');
+\PoP\Root\App::addFilter('mce_external_plugins', gdMentionsExternalPlugins(...));
 function gdMentionsExternalPlugins($plugins)
 {
     if (is_admin()) {
@@ -27,8 +27,8 @@ function gdMentionsExternalPlugins($plugins)
 }
 
 
-\PoP\Root\App::addFilter('teeny_mce_before_init', 'gdMentionsBeforeInit');
-\PoP\Root\App::addFilter('tiny_mce_before_init', 'gdMentionsBeforeInit');
+\PoP\Root\App::addFilter('teeny_mce_before_init', gdMentionsBeforeInit(...));
+\PoP\Root\App::addFilter('tiny_mce_before_init', gdMentionsBeforeInit(...));
 function gdMentionsBeforeInit($mceInit)
 {
     if (is_admin() || PoP_WebPlatform_ServerUtils::disableJs()) {
@@ -56,7 +56,7 @@ function gdMentionsBeforeInit($mceInit)
     return $mceInit;
 }
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsMentionsManagerImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsMentionsManagerImpl(...));
 function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
 {
     $cmsService = CMSServiceFacade::getInstance();

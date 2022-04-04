@@ -3,14 +3,14 @@ use PoPCMSSchema\UserRoles\Facades\UserRoleTypeAPIFacade;
 
 define('GD_URE_ROLE_COMMUNITY', 'community');
 
-\PoP\Root\App::addFilter('gdRoles', 'gdUreAddCommunityRole');
+\PoP\Root\App::addFilter('gdRoles', gdUreAddCommunityRole(...));
 function gdUreAddCommunityRole($roles)
 {
     $roles[] = GD_URE_ROLE_COMMUNITY;
     return $roles;
 }
 
-\PoP\Root\App::addFilter('getUserRoleCombinations', 'getUserRoleCombinationsCommunityRole');
+\PoP\Root\App::addFilter('getUserRoleCombinations', getUserRoleCombinationsCommunityRole(...));
 function getUserRoleCombinationsCommunityRole($user_role_combinations)
 {
 
@@ -61,7 +61,7 @@ function gdUreGetuserroleHook($role, $user_id)
 }
 
 // Override the generic function with this one
-\PoP\Root\App::addFilter('getTheUserRole', 'gdUreGetTheUserRole', 10, 2);
+\PoP\Root\App::addFilter('getTheUserRole', gdUreGetTheUserRole(...), 10, 2);
 function gdUreGetTheUserRole($role, $user_id)
 {
     return gdUreGetuserrole($user_id);

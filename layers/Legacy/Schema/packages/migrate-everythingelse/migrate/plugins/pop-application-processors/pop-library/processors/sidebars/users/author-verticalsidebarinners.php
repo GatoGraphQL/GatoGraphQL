@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomVerticalAuthorSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public const MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC = 'vertical-sidebarinner-author-generic';
+    public final const MODULE_VERTICALSIDEBARINNER_AUTHOR_GENERIC = 'vertical-sidebarinner-author-generic';
 
     public function getModulesToProcess(): array
     {

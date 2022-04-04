@@ -2,13 +2,13 @@
 
 class PoP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public const MODULE_BLOCK_TABPANEL_SEARCHCONTENT = 'block-searchcontent-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_CONTENT = 'block-content-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_POSTS = 'block-posts-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_SEARCHUSERS = 'block-searchusers-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_USERS = 'block-users-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
-    public const MODULE_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_SEARCHCONTENT = 'block-searchcontent-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_CONTENT = 'block-content-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_POSTS = 'block-posts-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_SEARCHUSERS = 'block-searchusers-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_USERS = 'block-users-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_MYCONTENT = 'block-mycontent-tabpanel';
+    public final const MODULE_BLOCK_TABPANEL_MYPOSTS = 'block-myposts-tabpanel';
 
     public function getModulesToProcess(): array
     {

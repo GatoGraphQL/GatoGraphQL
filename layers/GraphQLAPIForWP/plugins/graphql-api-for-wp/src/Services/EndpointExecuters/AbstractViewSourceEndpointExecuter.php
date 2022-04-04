@@ -21,7 +21,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
         /** Add the excerpt, which is the description of the GraphQL query */
         \add_filter(
             'the_content',
-            [$this, 'maybeGetGraphQLQuerySourceContent']
+            $this->maybeGetGraphQLQuerySourceContent(...)
         );
     }
 

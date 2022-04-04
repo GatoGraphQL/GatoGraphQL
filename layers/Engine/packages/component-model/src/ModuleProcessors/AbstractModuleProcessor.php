@@ -33,9 +33,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     use ModulePathProcessorTrait;
     use BasicServiceTrait;
 
-    public const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
-    public const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
-    public const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
+    public final const HOOK_INIT_MODEL_PROPS = __CLASS__ . ':initModelProps';
+    public final const HOOK_INIT_REQUEST_PROPS = __CLASS__ . ':initRequestProps';
+    public final const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
 
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
     protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';
@@ -218,7 +218,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree([$this, 'initModelProps'], [$this, 'getModelPropsForDescendantModules'], [$this, 'getModelPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantModules(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getModelPropsForDescendantModules(array $module, array &$props): array
@@ -298,7 +298,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree([$this, 'initRequestProps'], [$this, 'getRequestPropsForDescendantModules'], [$this, 'getRequestPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantModules(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getRequestPropsForDescendantModules(array $module, array &$props): array

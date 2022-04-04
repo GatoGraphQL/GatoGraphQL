@@ -7,8 +7,8 @@ class PoP_BootstrapCollectionWebPlatform_Initialization
 
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         if (!$cmsapplicationapi->isAdminPanel()) {
-            \PoP\Root\App::addAction('popcms:enqueueScripts', array($this, 'registerScripts'));
-            \PoP\Root\App::addAction('popcms:printStyles', array($this, 'registerStyles'), 100);
+            \PoP\Root\App::addAction('popcms:enqueueScripts', $this->registerScripts(...));
+            \PoP\Root\App::addAction('popcms:printStyles', $this->registerStyles(...), 100);
         }
 
         /**

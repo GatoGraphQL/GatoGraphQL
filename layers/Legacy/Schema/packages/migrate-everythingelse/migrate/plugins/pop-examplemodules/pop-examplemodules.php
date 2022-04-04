@@ -20,7 +20,7 @@ class Plugin
     {
 
         // Priority: new section, after PoP Engine section
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888310);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888310);
     }
     public function init()
     {

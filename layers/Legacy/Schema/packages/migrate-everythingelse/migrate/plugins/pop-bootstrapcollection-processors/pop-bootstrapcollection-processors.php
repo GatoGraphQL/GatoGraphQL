@@ -19,9 +19,9 @@ class PoP_BootstrapCollectionProcessors
     {
 
         // // Priority: new section, after PoP Base Collection Processors section
-        // \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888700);
+        // \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888700);
         // Priority: after PoP Core Processors
-        \PoP\Root\App::addAction('plugins_loaded', array($this, 'init'), 888720);
+        \PoP\Root\App::addAction('plugins_loaded', $this->init(...), 888720);
     }
     public function init()
     {

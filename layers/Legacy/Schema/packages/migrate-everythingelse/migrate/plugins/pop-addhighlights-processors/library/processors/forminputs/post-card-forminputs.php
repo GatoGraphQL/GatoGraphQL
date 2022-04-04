@@ -2,7 +2,7 @@
 
 class PoP_AddHighlights_Module_Processor_PostTriggerLayoutFormComponentValues extends PoP_Module_Processor_PostTriggerLayoutFormComponentValuesBase
 {
-    public const MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST = 'card-highlightedpost';
+    public final const MODULE_FORMCOMPONENT_CARD_HIGHLIGHTEDPOST = 'card-highlightedpost';
 
     public function getModulesToProcess(): array
     {

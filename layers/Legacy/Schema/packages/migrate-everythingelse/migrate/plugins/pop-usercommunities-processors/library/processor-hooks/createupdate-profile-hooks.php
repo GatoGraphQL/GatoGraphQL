@@ -6,7 +6,7 @@ class GD_UserCommunitiesProcessors_CreateUpdate_ProfileHooks
     {
         \PoP\Root\App::addFilter(
             'GD_UserCommunities_MyCommunitiesUtils:form-inputs',
-            array($this, 'getFormInputs')
+            $this->getFormInputs(...)
         );
     }
 
