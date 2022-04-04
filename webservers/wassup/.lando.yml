@@ -2,7 +2,7 @@ name: wassup
 recipe: wordpress
 config:
   webroot: wordpress
-  php: '8.0'
+  php: '8.1'
   ssl: true
   database: mariadb
   xdebug: false
@@ -271,6 +271,7 @@ services:
         --admin_user=admin --admin_password=admin
         --admin_email=admin@example.com --path=wordpress
       - wp config set WP_DEBUG true --raw --path=wordpress
+      - wp config set WP_DEBUG_DISPLAY false --raw --path=wordpress
       - sed "s#require_once ABSPATH . 'wp-settings.php';#require_once(__DIR__ . '/../vendor/autoload.php'); require_once(__DIR__ . '/../code-src/initialize-pop-components.php'); require_once  ABSPATH  .  'wp-settings.php' ;#g" wordpress/wp-config.php > wp-config.php.tmp
       - mv wp-config.php.tmp wordpress/wp-config.php
       - wp plugin activate engine-wp-bootloader --path=wordpress

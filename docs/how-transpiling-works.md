@@ -1,8 +1,8 @@
 # How transpiling works
 
-Transpiling converts code from PHP 8.0 to 7.1. Then,
+Transpiling converts code from PHP 8.1 to 7.1. Then,
 
-- The project uses PHP 8.0 for development
+- The project uses PHP 8.1 for development
 - The code is converted to PHP 7.1 when generating the plugins for production
 
 For instance, PHP 8.0's union types, are converted [from this code](https://github.com/leoloso/PoP/blob/b9d379dc34195701e3afac2be4c132da6728ab75/layers/Schema/packages/custompost-mutations/src/TypeAPIs/CustomPostTypeAPIInterface.php#L18) in development:

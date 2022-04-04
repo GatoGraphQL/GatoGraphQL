@@ -3,7 +3,7 @@
 These are the instructions on how to set-up a local development environment.
 ## Requirements
 
-- PHP 8.0+
+- PHP 8.1+
 - Composer
 - Lando 3.0.26+
 

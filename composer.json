@@ -10,7 +10,7 @@
     "homepage": "https://github.com/leoloso/PoP",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-mbstring": "*",
         "boxuk/wp-muplugin-loader": "^1.6",
         "brain/cortex": "1.0.0-alpha.7",

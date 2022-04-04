@@ -162,7 +162,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "getpop/component-model": "^0.9",
         "getpop/definitions": "^0.9",
         "getpop/filestore": "^0.9"

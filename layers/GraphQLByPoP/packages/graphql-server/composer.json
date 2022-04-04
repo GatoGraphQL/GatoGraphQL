@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "graphql-by-pop/graphql-request": "^0.9"
     },
     "require-dev": {

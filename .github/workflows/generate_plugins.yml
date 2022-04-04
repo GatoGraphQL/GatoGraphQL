@@ -2,12 +2,12 @@
 # GitHub Action:
 # Whenever creating a new release of the source code,
 # also create a release of the installable plugin,
-# and downgrading it from PHP 8.0 to 7.1 to support more users.
+# and downgrading it from PHP 8.1 to 7.1 to support more users.
 ####################################################################################
 # Steps to execute:
 # - Checkout the source code
 # - Run "composer install" for development, to install dependencies for Rector
-# - Run Rector to downgrade code from PHP 8.0 to 7.1
+# - Run Rector to downgrade code from PHP 8.1 to 7.1
 # - Run "composer install" for production (required dependencies are already under vendor/)
 # - Create a .zip file, excluding:
 #   - All hidden files (.git, .gitignore, etc)
@@ -45,7 +45,7 @@ jobs:
 
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0
+                    php-version: 8.1
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -84,10 +84,10 @@ jobs:
                 uses: montudor/action-zip@v0.1.1
 
             # pcre.jit=0 => @see https://github.com/composer/composer/issues/9595
-            -   name: Use PHP 8.0
+            -   name: Use PHP 8.1
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0
+                    php-version: 8.1
                     coverage: none
                     ini-values: pcre.jit=0
                 env:
@@ -130,7 +130,7 @@ jobs:
 
             -   name: Replace PHP version in plugin main file
                 run: |
-                    sed -i 's/Requires PHP: 8.0/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.1/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Build project for production
