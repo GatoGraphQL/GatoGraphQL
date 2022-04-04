@@ -15,4 +15,4 @@
 // \PoP\Root\App::addFilter('gd_comments_content', do_shortcode(...), 11); // AFTER wpautop()
 
 // Add the autoembed too
-\PoP\Root\App::addFilter('comment_text', array($GLOBALS['wp_embed'], 'autoembed'), 8);
+\PoP\Root\App::addFilter('comment_text', $GLOBALS['wp_embed']->autoembed(...), 8);
