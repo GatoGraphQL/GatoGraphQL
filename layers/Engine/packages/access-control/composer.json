@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Access Control for fields and directives",
-    "keywords": ["PHP", "PoP", "AccessControl"],
+    "keywords": ["GraphQL", "PHP", "PoP", "AccessControl"],
     "homepage": "https://github.com/getpop/access-control",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/notifications",
     "type": "library",
     "description": "Adds support for notifications",
-    "keywords": ["PHP", "PoP", "notifications"],
+    "keywords": ["GraphQL", "PHP", "PoP", "notifications"],
     "homepage": "https://github.com/PoPSchema/notifications",
     "license": "GPL-2.0-or-later",
     "authors": [

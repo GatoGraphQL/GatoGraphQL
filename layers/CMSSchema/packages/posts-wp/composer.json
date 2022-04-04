@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Posts\"",
-    "keywords": ["PHP", "PoP", "posts-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "posts-wp"],
     "homepage": "https://github.com/PoPCMSSchema/posts-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

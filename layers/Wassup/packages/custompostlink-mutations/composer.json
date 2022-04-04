@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds support for custom post link mutations",
-    "keywords": ["PHP", "PoP", "custompostlink-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "custompostlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/custompostlink-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Convert Markdown to HTML",
-    "keywords": ["PHP", "PoP", "markdown-convertor"],
+    "keywords": ["GraphQL", "PHP", "PoP", "markdown-convertor"],
     "homepage": "https://github.com/GraphQLAPI/markdown-convertor",
     "license": "GPL-2.0-or-later",
     "authors": [

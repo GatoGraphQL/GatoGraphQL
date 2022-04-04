@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Categories\"",
-    "keywords": ["PHP", "PoP", "post-categories-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "post-categories-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-categories-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

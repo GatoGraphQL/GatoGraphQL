@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/usermeta",
     "type": "library",
     "description": "WordPress-specific User Meta data model",
-    "keywords": ["PHP", "PoP", "WP", "usermeta"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "usermeta"],
     "homepage": "https://github.com/PoPWPSchema/usermeta",
     "license": "GPL-2.0-or-later",
     "authors": [

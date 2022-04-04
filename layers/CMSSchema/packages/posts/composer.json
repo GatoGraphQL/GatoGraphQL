@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/posts",
     "type": "library",
     "description": "Adds support for posts",
-    "keywords": ["PHP", "PoP", "posts"],
+    "keywords": ["GraphQL", "PHP", "PoP", "posts"],
     "homepage": "https://github.com/PoPCMSSchema/posts",
     "license": "GPL-2.0-or-later",
     "authors": [

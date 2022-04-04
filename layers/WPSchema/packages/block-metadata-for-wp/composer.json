@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/block-metadata-for-wp",
     "type": "library",
     "description": "Integration with WordPress plugin \"Block Metadata\"",
-    "keywords": ["PHP", "block-metadata-for-wp"],
+    "keywords": ["GraphQL", "PHP", "block-metadata-for-wp"],
     "homepage": "https://github.com/PoPSchema/block-metadata-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

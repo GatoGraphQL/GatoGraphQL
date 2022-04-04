@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/users",
     "type": "library",
     "description": "Adds support for users",
-    "keywords": ["PHP", "PoP", "users"],
+    "keywords": ["GraphQL", "PHP", "PoP", "users"],
     "homepage": "https://github.com/PoPCMSSchema/users",
     "license": "GPL-2.0-or-later",
     "authors": [

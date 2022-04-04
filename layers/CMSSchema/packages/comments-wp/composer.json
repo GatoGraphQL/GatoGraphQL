@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comments\"",
-    "keywords": ["PHP", "PoP", "comments-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "comments-wp"],
     "homepage": "https://github.com/PoPCMSSchema/comments-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "graphql-by-pop/graphiql",
     "type": "graphiql-client",
     "description": "GraphiQL client for GraphQL by PoP",
-    "keywords": ["PHP", "PoP", "GraphQL", "API", "GraphiQL"],
+    "keywords": ["GraphQL", "PHP", "PoP", "GraphQL", "API", "GraphiQL"],
     "homepage": "https://github.com/GraphQLByPoP/GraphiQL",
     "license": "MIT",
     "authors": [

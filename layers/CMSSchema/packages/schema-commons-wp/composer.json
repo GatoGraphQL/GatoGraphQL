@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/schema-commons-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Schema Commons\"",
-    "keywords": ["PHP", "PoP", "schema-commons-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "schema-commons-wp"],
     "homepage": "https://github.com/PoPCMSSchema/schema-commons-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

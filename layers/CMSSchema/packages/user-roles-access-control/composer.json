@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-roles-access-control",
     "type": "library",
     "description": "Access Control based on the user having a given role/capability",
-    "keywords": ["PHP", "PoP", "UserRolesAccessControl"],
+    "keywords": ["GraphQL", "PHP", "PoP", "UserRolesAccessControl"],
     "homepage": "https://github.com/PoPCMSSchema/user-roles-access-control",
     "license": "GPL-2.0-or-later",
     "authors": [

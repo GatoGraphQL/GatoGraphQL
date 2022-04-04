@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/commentmeta",
     "type": "library",
     "description": "WordPress-specific Comment Meta data model",
-    "keywords": ["PHP", "PoP", "WP", "commentmeta"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "commentmeta"],
     "homepage": "https://github.com/PoPWPSchema/commentmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

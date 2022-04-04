@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Engine for PoP",
-    "keywords": ["PHP", "PoP", "engine"],
+    "keywords": ["GraphQL", "PHP", "PoP", "engine"],
     "homepage": "https://github.com/getpop/engine",
     "license": "GPL-2.0-or-later",
     "authors": [

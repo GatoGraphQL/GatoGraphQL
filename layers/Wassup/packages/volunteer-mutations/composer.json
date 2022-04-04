@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds mutations for volunteering functionality",
-    "keywords": ["PHP", "PoP", "volunteer-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "volunteer-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/volunteer-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

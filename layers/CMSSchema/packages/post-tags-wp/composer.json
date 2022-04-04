@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Tags\"",
-    "keywords": ["PHP", "PoP", "post-tags-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "post-tags-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Category Mutations\"",
-    "keywords": ["PHP", "PoP", "post-category-mutations-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "post-category-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-category-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

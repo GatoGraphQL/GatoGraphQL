@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Multisite",
-    "keywords": ["PHP", "PoP", "multisite"],
+    "keywords": ["GraphQL", "PHP", "PoP", "multisite"],
     "homepage": "https://github.com/getpop/multisite",
     "license": "GPL-2.0-or-later",
     "authors": [
