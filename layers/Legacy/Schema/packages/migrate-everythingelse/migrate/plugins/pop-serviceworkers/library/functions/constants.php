@@ -26,7 +26,7 @@ function popSwRemoveUrlparams($remove_params)
     return $remove_params;
 }
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'popSwJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', popSwJqueryConstants(...));
 function popSwJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['SW_URLPARAM_NETWORKFIRST'] = GD_URLPARAM_SWNETWORKFIRST;
@@ -40,7 +40,7 @@ function popSwJqueryConstants($jqueryConstants)
 
     \PoP\Root\App::removeFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
     $reloadurl_linkattrs = getReloadurlLinkattrs();
-    \PoP\Root\App::addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+    \PoP\Root\App::addFilter('getReloadurlLinkattrs', popSwReloadurlLinkattrs(...));
 
     // The message html to be appended to the pageSection
     $msg_placeholder = '<div class="pop-notificationmsg %s alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" aria-hidden="true" data-dismiss="alert">×</button>%s</div>';
@@ -73,7 +73,7 @@ function popSwJqueryConstants($jqueryConstants)
 }
 
 
-\PoP\Root\App::addFilter('getReloadurlLinkattrs', 'popSwReloadurlLinkattrs');
+\PoP\Root\App::addFilter('getReloadurlLinkattrs', popSwReloadurlLinkattrs(...));
 \PoP\Root\App::addFilter('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', 'popSwReloadurlLinkattrs');
 function popSwReloadurlLinkattrs($params)
 {

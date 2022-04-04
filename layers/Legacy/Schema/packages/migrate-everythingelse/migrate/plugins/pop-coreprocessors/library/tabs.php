@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 define('POP_IDS_TABS_REMEMBERCHECKBOX', 'tabs-remember');
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'popcoreTabsJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', popcoreTabsJqueryConstants(...));
 function popcoreTabsJqueryConstants($jqueryConstants)
 {
     $opentabs = \PoP\Root\App::applyFilters(

@@ -330,7 +330,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         $ret = \strip_shortcodes($customPost->post_content);
         $ret = App::applyFilters('the_content', $ret);
         App::addFilter('the_content', array( $wp_embed, 'autoembed' ), 8);
-        App::addFilter('the_content', 'wpautop');
+        App::addFilter('the_content', wpautop(...));
 
         return strip_tags($ret);
     }

@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-\PoP\Root\App::addFilter('icon_dirs', 'gdMediaIconDirs', 100);
+\PoP\Root\App::addFilter('icon_dirs', gdMediaIconDirs(...), 100);
 
 // Icons copied from EG-Attachment plugin
 function gdMediaIconDirs($args)
@@ -22,7 +22,7 @@ function gdMediaIconDirs($args)
  * Do not allow certain filetypes
  */
 
-\PoP\Root\App::addFilter('upload_mimes', 'gdUploadMimes');
+\PoP\Root\App::addFilter('upload_mimes', gdUploadMimes(...));
 function gdUploadMimes($mime)
 {
     $unset = array('exe', 'gz', 'gzip', 'rar', 'tar', 'zip');
@@ -39,7 +39,7 @@ function gdUploadMimes($mime)
  * Source: http://alxmedia.se/code/2013/10/make-wordpress-default-video-embeds-responsive/
  */
 
-\PoP\Root\App::addFilter('embed_defaults', 'gdEmbedDefaultsSize');
+\PoP\Root\App::addFilter('embed_defaults', gdEmbedDefaultsSize(...));
 function gdEmbedDefaultsSize()
 {
     // adjust these pixel values to your needs
@@ -63,7 +63,7 @@ function gdImageRel()
  *
  * @see wp-includes|media.php
  */
-\PoP\Root\App::addFilter('media_view_strings', 'corMediaViewStrings');
+\PoP\Root\App::addFilter('media_view_strings', corMediaViewStrings(...));
 function corMediaViewStrings($strings)
 {
     if (!is_admin()) {
@@ -102,7 +102,7 @@ function gdMediaRegisterScripts()
     wp_enqueue_script('thickbox');
 }
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdJqueryConstantsMediaManagerImpl');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsMediaManagerImpl(...));
 function gdJqueryConstantsMediaManagerImpl($jqueryConstants)
 {
 
@@ -163,5 +163,5 @@ function alxEmbedHtml($html, $src)
         $html
     );
 }
-\PoP\Root\App::addFilter('embed_oembed_html', 'alxEmbedHtml', 10, 2);
+\PoP\Root\App::addFilter('embed_oembed_html', alxEmbedHtml(...), 10, 2);
 // \PoP\Root\App::addFilter( 'video_embed_html', 'alxEmbedHtml' ); // Jetpack

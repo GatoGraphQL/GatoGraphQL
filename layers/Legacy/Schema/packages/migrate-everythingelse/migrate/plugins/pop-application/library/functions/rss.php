@@ -4,7 +4,7 @@
  * Standard
  */
 
-\PoP\Root\App::addFilter('pre_get_posts', 'gdRssFilter');
+\PoP\Root\App::addFilter('pre_get_posts', gdRssFilter(...));
 function gdRssFilter($query)
 {
 

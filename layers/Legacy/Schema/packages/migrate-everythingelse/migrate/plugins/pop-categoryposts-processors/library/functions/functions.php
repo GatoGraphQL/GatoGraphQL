@@ -3,7 +3,7 @@
 // use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
 // use PoPSchema\SchemaCommons\Constants\QueryOptions;
 
-// \PoP\Root\App::addFilter('gdPostParentpageid', 'categorypostsPostParentpageid', 10, 2);
+// \PoP\Root\App::addFilter('gdPostParentpageid', categorypostsPostParentpageid(...), 10, 2);
 // function categorypostsPostParentpageid($pageid, $post_id)
 // {
     // $postTypeAPI = PostTypeAPIFacade::getInstance();

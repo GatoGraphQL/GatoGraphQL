@@ -4,7 +4,7 @@ use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_3DAYS', 'events-3days');
 define('GD_URLPARAM_RSSCAMPAIGN_UPCOMINGEVENTS_4DAYS', 'events-4days');
 
-\PoP\Root\App::addFilter('popGetRssPostlistCampaigns', 'popEmGetRssPostlistCampaigns');
+\PoP\Root\App::addFilter('popGetRssPostlistCampaigns', popEmGetRssPostlistCampaigns(...));
 function popEmGetRssPostlistCampaigns($campaigns)
 {
     return array_merge(
@@ -19,7 +19,7 @@ function popEmGetRssPostlistCampaigns($campaigns)
 /**
  * Scope for getting events
  */
-\PoP\Root\App::addFilter('em_rss_template_args', 'popEmRssTemplateArgs');
+\PoP\Root\App::addFilter('em_rss_template_args', popEmRssTemplateArgs(...));
 function popEmRssTemplateArgs($args)
 {
     if (isset($_GET[GD_URLPARAM_RSSCAMPAIGN])) {

@@ -51,7 +51,7 @@ function gdAvatarExtractUrl($avatar)
  * Return the default avatar
  */
 // Hook is added through the Plug-in (interface) implementation
-// \PoP\Root\App::addFilter('gd_avatar_default', 'getDefaultAvatar', 1, 5);
+// \PoP\Root\App::addFilter('gd_avatar_default', getDefaultAvatar(...), 1, 5);
 function getDefaultAvatar($avatar, $id_or_email, $size, $default, $alt)
 {
 

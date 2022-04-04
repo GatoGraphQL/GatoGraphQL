@@ -13,13 +13,13 @@ function gdEditorInit()
         return;
     }
 
-    \PoP\Root\App::addFilter('the_editor_content', 'format_for_editor', 10, 2);
+    \PoP\Root\App::addFilter('the_editor_content', format_for_editor(...), 10, 2);
 }
 
 
 // Absolutely always state that the default editor is Visual. This way, function getValue('contentEditor') on typeResolver-posts.php
 // will process the right html output, and not the one the HTML tab (without <p> <br> etc tags)
-\PoP\Root\App::addFilter('wp_default_editor', 'gdWpDefaultEditor', 10000000, 1);
+\PoP\Root\App::addFilter('wp_default_editor', gdWpDefaultEditor(...), 10000000, 1);
 function gdWpDefaultEditor($default_editor)
 {
     if (is_admin()) {
@@ -32,8 +32,8 @@ function gdWpDefaultEditor($default_editor)
     return 'tinymce';
 }
 
-\PoP\Root\App::addFilter('teeny_mce_before_init', 'gdMceBeforeInit');
-\PoP\Root\App::addFilter('tiny_mce_before_init', 'gdMceBeforeInit');
+\PoP\Root\App::addFilter('teeny_mce_before_init', gdMceBeforeInit(...));
+\PoP\Root\App::addFilter('tiny_mce_before_init', gdMceBeforeInit(...));
 function gdMceBeforeInit($mceInit)
 {
     if (is_admin()) {
@@ -59,8 +59,8 @@ function gdMceBeforeInit($mceInit)
 // Solution: replace tinymce plugin wplink with link, and then implement solutions stated in these links:
 // - http://jsfiddle.net/e99xf/13/
 // - http://stackoverflow.com/questions/18111582/tinymce-4-links-plugin-modal-in-not-editable
-\PoP\Root\App::addFilter('teeny_mce_plugins', 'gdMcePluginsEdit');
-\PoP\Root\App::addFilter('tiny_mce_plugins', 'gdMcePluginsEdit');
+\PoP\Root\App::addFilter('teeny_mce_plugins', gdMcePluginsEdit(...));
+\PoP\Root\App::addFilter('tiny_mce_plugins', gdMcePluginsEdit(...));
 function gdMcePluginsEdit($plugins)
 {
     if (is_admin()) {
@@ -77,7 +77,7 @@ function gdMcePluginsEdit($plugins)
     return $plugins;
 }
 // Remove them also from the quicktags
-\PoP\Root\App::addFilter('quicktags_settings', 'gdQuicktagsSettings');
+\PoP\Root\App::addFilter('quicktags_settings', gdQuicktagsSettings(...));
 function gdQuicktagsSettings($qtInit)
 {
     if (is_admin()) {
@@ -88,7 +88,7 @@ function gdQuicktagsSettings($qtInit)
     $qtInit['buttons'] = str_replace(array(',link', ',fullscreen'), '', $qtInit['buttons']);
     return $qtInit;
 }
-\PoP\Root\App::addFilter('mce_buttons', 'gdMceButtonsEdit');
+\PoP\Root\App::addFilter('mce_buttons', gdMceButtonsEdit(...));
 function gdMceButtonsEdit($buttons)
 {
     if (is_admin()) {
@@ -112,7 +112,7 @@ function gdMceButtonsEdit($buttons)
     // array_splice($buttons, array_search('wp_adv', $buttons), 0, array('code'));
     return $buttons;
 }
-\PoP\Root\App::addFilter('mce_buttons_2', 'gdMceButtonsEdit2');
+\PoP\Root\App::addFilter('mce_buttons_2', gdMceButtonsEdit2(...));
 function gdMceButtonsEdit2($buttons)
 {
     if (is_admin()) {
@@ -134,7 +134,7 @@ function gdMceButtonsEdit2($buttons)
     array_splice($buttons, array_search('redo', $buttons)+1, 0, array('code'));
     return $buttons;
 }
-\PoP\Root\App::addFilter('mce_external_plugins', 'gdMceExternalPlugins');
+\PoP\Root\App::addFilter('mce_external_plugins', gdMceExternalPlugins(...));
 function gdMceExternalPlugins($plugins)
 {
     if (is_admin()) {
@@ -155,7 +155,7 @@ function gdMceExternalPlugins($plugins)
  * Add Media Hack
  * Always show the 'Add Media' button, even if the user is not logged in
  */
-\PoP\Root\App::addFilter('gdWpEditorSet', 'gdWpEditorSet');
+\PoP\Root\App::addFilter('gdWpEditorSet', gdWpEditorSet(...));
 function gdWpEditorSet($set)
 {
     $set['media_buttons'] = true;

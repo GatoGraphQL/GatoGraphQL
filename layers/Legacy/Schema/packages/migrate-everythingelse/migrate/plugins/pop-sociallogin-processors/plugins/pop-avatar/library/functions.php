@@ -6,7 +6,7 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 // Instead, check if PoP_UserAvatar is displaying the default avatar, only then use the WSL avatar
 // (TemplatManager user-set avatar has priority)
-\PoP\Root\App::addFilter('gd_avatar_default', 'gdWslAvatar', 100, 5);
+\PoP\Root\App::addFilter('gd_avatar_default', gdWslAvatar(...), 100, 5);
 function gdWslAvatar($html, $user, $size, $default, $alt)
 {
     $userTypeAPI = UserTypeAPIFacade::getInstance();

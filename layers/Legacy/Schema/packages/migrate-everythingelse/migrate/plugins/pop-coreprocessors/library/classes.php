@@ -16,7 +16,7 @@ define('GD_CLASS_UNDODOWNVOTEPOST', 'pop-undodownvotepost');
 
 define('GD_CLASS_TRIGGERLAYOUT', 'trigger-layout');
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'gdPopcoreClassesJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', gdPopcoreClassesJqueryConstants(...));
 function gdPopcoreClassesJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['CLASS_LAZYJS'] = GD_CLASS_LAZYJS;

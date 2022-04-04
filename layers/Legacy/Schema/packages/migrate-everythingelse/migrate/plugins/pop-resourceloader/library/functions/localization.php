@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'popResourceloaderJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', popResourceloaderJqueryConstants(...));
 function popResourceloaderJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['SEPARATOR_RESOURCELOADER'] = GD_SEPARATOR_RESOURCELOADER;

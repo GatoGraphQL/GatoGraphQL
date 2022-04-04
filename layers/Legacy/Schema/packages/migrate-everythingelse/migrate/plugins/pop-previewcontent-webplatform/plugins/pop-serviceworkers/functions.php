@@ -1,7 +1,7 @@
 <?php
 
 // Inject data-sw-networkfirst="true" to the preview link in the Add Post feedbackmessage
-\PoP\Root\App::addFilter('gd_ppp_previewurl_link_params', 'popSwReloadurlLinkattrs');
+\PoP\Root\App::addFilter('gd_ppp_previewurl_link_params', popSwReloadurlLinkattrs(...));
 
 // Inject data-sw-networkfirst="true" to the preview link in the My Posts table
 \PoP\Root\App::addFilter('GD_UserPlatform_Module_Processor_Buttons:postpreview:params', 'popPppSwPreviewbtnNetworkfirst');

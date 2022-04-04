@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Add the week scope
 // Taken from http://wp-events-plugin.com/tutorials/create-your-own-event-scope/
-\PoP\Root\App::addFilter('em_events_build_sql_conditions', 'popEmAeEventsBuildSqlConditions', 1, 2);
+\PoP\Root\App::addFilter('em_events_build_sql_conditions', popEmAeEventsBuildSqlConditions(...), 1, 2);
 function popEmAeEventsBuildSqlConditions($conditions, $args)
 {
 
@@ -17,7 +17,7 @@ function popEmAeEventsBuildSqlConditions($conditions, $args)
     }
     return $conditions;
 }
-\PoP\Root\App::addFilter('em_get_scopes', 'popEmAeScopes', 1, 1);
+\PoP\Root\App::addFilter('em_get_scopes', popEmAeScopes(...), 1, 1);
 function popEmAeScopes($scopes)
 {
     $scopes['week'] = TranslationAPIFacade::getInstance()->__('week', 'poptheme-wassup');

@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', 'gdUreAcfGetKeysStoreAsArrayCustomImpl');
+\PoP\Root\App::addFilter('gdAcfGetKeysStoreAsArray', gdUreAcfGetKeysStoreAsArrayCustomImpl(...));
 function gdUreAcfGetKeysStoreAsArrayCustomImpl($keys)
 {
     $keys[] = GD_URE_METAKEY_PROFILE_ORGANIZATIONCATEGORIES;

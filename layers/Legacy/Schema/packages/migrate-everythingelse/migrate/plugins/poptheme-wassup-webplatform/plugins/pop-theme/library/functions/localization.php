@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 
-\PoP\Root\App::addFilter('gd_jquery_constants', 'popthemeWassupJqueryConstants');
+\PoP\Root\App::addFilter('gd_jquery_constants', popthemeWassupJqueryConstants(...));
 function popthemeWassupJqueryConstants($jqueryConstants)
 {
     $jqueryConstants['URLPARAM_THEMEMODE'] = GD_URLPARAM_THEMEMODE;
