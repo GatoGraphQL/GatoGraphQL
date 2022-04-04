@@ -9,9 +9,9 @@ namespace GraphQLAPI\GraphQLAPI\AppObjects;
  */
 class ContainerCacheConfiguration
 {
-    private bool $cacheContainerConfiguration;
-    private ?string $containerConfigurationCacheNamespace;
-    private ?string $containerConfigurationCacheDirectory;
+    private readonly bool $cacheContainerConfiguration;
+    private readonly ?string $containerConfigurationCacheNamespace;
+    private readonly ?string $containerConfigurationCacheDirectory;
 
     public function __construct(
         bool $cacheContainerConfiguration,
