@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "getpop/engine-wp": "^0.9",
         "getpop/guzzle-helpers": "^0.9",
         "graphql-api/external-dependency-wrappers": "^0.9",

@@ -164,7 +164,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "composer/semver": "^3.2",
         "getpop/engine": "^0.9"
     },

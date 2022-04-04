@@ -521,7 +521,7 @@ The merging can be done in the server-side too: If there is no need to cache the
 
 Requirements:
 
-- PHP 8.0+ for development
+- PHP 8.1+ for development
 - PHP 7.1+ for production
 
 ### Supported PHP features

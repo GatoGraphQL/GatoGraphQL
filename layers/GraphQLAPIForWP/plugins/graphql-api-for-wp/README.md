@@ -26,7 +26,7 @@ Please read the author's [introduction to the GraphQL API for WordPress](https:/
 <!-- ## Requirements
 
 - WordPress 5.4 or above
-- PHP 8.0+ for development
+- PHP 8.1+ for development
 - PHP 7.1+ for production -->
 
 ## Installing the plugin (for production)
@@ -173,7 +173,7 @@ GraphQL API is extensible, and ships with the following modules (organized by ca
 
 ### PHP Architecture
 
-Articles explaining how the plugin is "downgraded", using PHP 8.0 for development but deployable to PHP 7.1 for production:
+Articles explaining how the plugin is "downgraded", using PHP 8.1 for development but deployable to PHP 7.1 for production:
 
 1. [Transpiling PHP code from 8.0 to 7.x via Rector](https://blog.logrocket.com/transpiling-php-code-from-8-0-to-7-x-via-rector/)
 2. [Coding in PHP 7.4 and deploying to 7.1 via Rector and GitHub Actions](https://blog.logrocket.com/coding-in-php-7-4-and-deploying-to-7-1-via-rector-and-github-actions/)

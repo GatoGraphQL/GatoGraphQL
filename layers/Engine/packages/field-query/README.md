@@ -1131,7 +1131,7 @@ Directives:
 
 Requirements:
 
-- PHP 8.0+ for development
+- PHP 8.1+ for development
 - PHP 7.1+ for production
 
 ### Supported PHP features
