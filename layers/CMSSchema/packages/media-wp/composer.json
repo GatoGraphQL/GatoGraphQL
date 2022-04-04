@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Media\"",
-    "keywords": ["PHP", "PoP", "media-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "media-wp"],
     "homepage": "https://github.com/PoPCMSSchema/media-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

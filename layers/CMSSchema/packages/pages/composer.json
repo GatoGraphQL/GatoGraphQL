@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/pages",
     "type": "library",
     "description": "Adds support for pages",
-    "keywords": ["PHP", "PoP", "pages"],
+    "keywords": ["GraphQL", "PHP", "PoP", "pages"],
     "homepage": "https://github.com/PoPCMSSchema/pages",
     "license": "GPL-2.0-or-later",
     "authors": [

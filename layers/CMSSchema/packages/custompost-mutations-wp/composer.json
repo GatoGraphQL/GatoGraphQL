@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Mutations\"",
-    "keywords": ["PHP", "PoP", "custompost-mutations-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "custompost-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

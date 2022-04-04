@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds support for stance mutations",
-    "keywords": ["PHP", "PoP", "stance-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "stance-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/stance-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

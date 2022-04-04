@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Queried Object\"",
-    "keywords": ["PHP", "PoP", "queriedobject-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "queriedobject-wp"],
     "homepage": "https://github.com/PoPCMSSchema/queriedobject-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

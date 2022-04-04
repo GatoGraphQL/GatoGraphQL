@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Utilities to transform the query from the GraphQL syntax to the Field query syntax",
-    "keywords": ["PHP", "PoP", "graphql-query"],
+    "keywords": ["GraphQL", "PHP", "PoP", "graphql-query"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-query",
     "license": "GPL-2.0-or-later",
     "authors": [

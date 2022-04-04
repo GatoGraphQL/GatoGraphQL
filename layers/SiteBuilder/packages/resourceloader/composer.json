@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Load resources for the website",
-    "keywords": ["PHP", "PoP", "resourceloader"],
+    "keywords": ["GraphQL", "PHP", "PoP", "resourceloader"],
     "homepage": "https://github.com/getpop/resourceloader",
     "license": "GPL-2.0-or-later",
     "authors": [

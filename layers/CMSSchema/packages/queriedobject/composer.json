@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support to query single objects (users, posts, etc) in the request",
-    "keywords": ["PHP", "PoP", "queriedobject"],
+    "keywords": ["GraphQL", "PHP", "PoP", "queriedobject"],
     "homepage": "https://github.com/PoPCMSSchema/queriedobject",
     "license": "GPL-2.0-or-later",
     "authors": [

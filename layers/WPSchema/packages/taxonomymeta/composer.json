@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/taxonomymeta",
     "type": "library",
     "description": "WordPress-specific Taxonomy Meta data model",
-    "keywords": ["PHP", "PoP", "WP", "taxonomymeta"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "taxonomymeta"],
     "homepage": "https://github.com/PoPWPSchema/taxonomymeta",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/post-categories",
     "type": "library",
     "description": "Adds support for post categories",
-    "keywords": ["PHP", "PoP", "post-categories"],
+    "keywords": ["GraphQL", "PHP", "PoP", "post-categories"],
     "homepage": "https://github.com/PoPCMSSchema/post-categories",
     "license": "GPL-2.0-or-later",
     "authors": [

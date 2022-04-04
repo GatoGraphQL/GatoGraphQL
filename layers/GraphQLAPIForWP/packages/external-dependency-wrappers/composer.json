@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Wrap classes from 3rd-party dependencies which must be accessed by GraphQL API, so they can be scoped (package `graphql-api/graphql-api-for-wp` is not scoped)",
-    "keywords": ["PHP", "PoP", "external-dependency-wrappers"],
+    "keywords": ["GraphQL", "PHP", "PoP", "external-dependency-wrappers"],
     "homepage": "https://github.com/GraphQLAPI/external-dependency-wrappers",
     "license": "GPL-2.0-or-later",
     "authors": [

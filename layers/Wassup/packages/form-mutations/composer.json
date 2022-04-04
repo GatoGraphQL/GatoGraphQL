@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds support for form mutations",
-    "keywords": ["PHP", "PoP", "form-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "form-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/form-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

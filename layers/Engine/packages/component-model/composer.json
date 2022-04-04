@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Component model for PoP, over which the component-based architecture is based",
-    "keywords": ["PHP", "PoP", "component-model"],
+    "keywords": ["GraphQL", "PHP", "PoP", "component-model"],
     "homepage": "https://github.com/getpop/component-model",
     "license": "GPL-2.0-or-later",
     "authors": [

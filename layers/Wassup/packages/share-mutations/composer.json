@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds mutations for sharing functionality",
-    "keywords": ["PHP", "PoP", "share-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "share-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/share-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Helper functions for Guzzle",
-    "keywords": ["PHP", "PoP", "guzzle-helpers"],
+    "keywords": ["GraphQL", "PHP", "PoP", "guzzle-helpers"],
     "homepage": "https://github.com/getpop/guzzle-helpers",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/menus",
     "type": "library",
     "description": "WordPress-specific Menu data model",
-    "keywords": ["PHP", "PoP", "WP", "menus"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "menus"],
     "homepage": "https://github.com/PoPWPSchema/menus",
     "license": "GPL-2.0-or-later",
     "authors": [

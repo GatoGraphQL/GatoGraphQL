@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds support for taxonomy (category and tag) meta",
-    "keywords": ["PHP", "PoP", "taxonomymeta"],
+    "keywords": ["GraphQL", "PHP", "PoP", "taxonomymeta"],
     "homepage": "https://github.com/PoPCMSSchema/taxonomymeta",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Utilities to parse the query",
-    "keywords": ["PHP", "PoP", "query-parsing"],
+    "keywords": ["GraphQL", "PHP", "PoP", "query-parsing"],
     "homepage": "https://github.com/getpop/query-parsing",
     "license": "GPL-2.0-or-later",
     "authors": [

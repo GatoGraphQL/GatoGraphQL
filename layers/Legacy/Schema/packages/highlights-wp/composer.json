@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/highlights-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Highlights\"",
-    "keywords": ["PHP", "PoP", "highlights-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "highlights-wp"],
     "homepage": "https://github.com/PoPSchema/highlights-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

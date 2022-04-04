@@ -151,7 +151,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comment Mutations\"",
-    "keywords": ["PHP", "PoP", "comment-mutations-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "comment-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/comment-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

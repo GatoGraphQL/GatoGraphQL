@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Component-based API",
-    "keywords": ["PHP", "PoP", "site-builder-api"],
+    "keywords": ["GraphQL", "PHP", "PoP", "site-builder-api"],
     "homepage": "https://github.com/getpop/site-builder-api",
     "license": "GPL-2.0-or-later",
     "authors": [

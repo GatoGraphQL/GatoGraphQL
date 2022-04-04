@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Enables to define a name for an element (such as modules, resources, etc) through different strategies",
-    "keywords": ["PHP", "PoP", "definitions"],
+    "keywords": ["GraphQL", "PHP", "PoP", "definitions"],
     "homepage": "https://github.com/getpop/definitions",
     "license": "GPL-2.0-or-later",
     "authors": [

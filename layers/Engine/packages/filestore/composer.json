@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Base classes to save files to disk, read them and reference them through an URL",
-    "keywords": ["PHP", "PoP", "file", "store"],
+    "keywords": ["GraphQL", "PHP", "PoP", "file", "store"],
     "homepage": "https://github.com/getpop/filestore",
     "license": "GPL-2.0-or-later",
     "authors": [

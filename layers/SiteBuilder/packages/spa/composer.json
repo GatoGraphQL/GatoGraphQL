@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Single-Page Application for PoP",
-    "keywords": ["PHP", "PoP", "single-page application", "spa"],
+    "keywords": ["GraphQL", "PHP", "PoP", "single-page application", "spa"],
     "homepage": "https://github.com/getpop/spa",
     "license": "GPL-2.0-or-later",
     "authors": [

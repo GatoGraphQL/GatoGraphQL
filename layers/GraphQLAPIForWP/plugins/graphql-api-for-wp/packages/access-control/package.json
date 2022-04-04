@@ -7,7 +7,8 @@
     "url": "https://github.com/GraphQLAPI/graphql-api.git",
     "directory": "packages/access-control"
   },
-  "keywords": ["PHP", 
+  "keywords": [
+    "PHP", 
     "GraphQL",
     "API",
     "WordPress",

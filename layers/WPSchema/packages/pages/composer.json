@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/pages",
     "type": "library",
     "description": "WordPress-specific Page data model",
-    "keywords": ["PHP", "PoP", "WP", "pages"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "pages"],
     "homepage": "https://github.com/PoPWPSchema/pages",
     "license": "GPL-2.0-or-later",
     "authors": [

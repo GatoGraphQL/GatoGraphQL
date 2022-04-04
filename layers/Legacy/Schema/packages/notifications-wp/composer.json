@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/notifications-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Notifications\"",
-    "keywords": ["PHP", "PoP", "notifications-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "notifications-wp"],
     "homepage": "https://github.com/PoPSchema/notifications-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

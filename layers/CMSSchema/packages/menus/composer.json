@@ -153,7 +153,7 @@
     },
     "type": "library",
     "description": "Adds support for menus",
-    "keywords": ["PHP", "PoP", "menus"],
+    "keywords": ["GraphQL", "PHP", "PoP", "menus"],
     "homepage": "https://github.com/PoPCMSSchema/menus",
     "license": "GPL-2.0-or-later",
     "authors": [

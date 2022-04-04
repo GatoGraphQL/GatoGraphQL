@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/everythingelse",
     "type": "library",
     "description": "All code from a PoP application that has been migrated but not to its rightful and final destination",
-    "keywords": ["PHP", "PoP", "everythingelse"],
+    "keywords": ["GraphQL", "PHP", "PoP", "everythingelse"],
     "homepage": "https://github.com/PoPSchema/everythingelse",
     "license": "GPL-2.0-or-later",
     "authors": [

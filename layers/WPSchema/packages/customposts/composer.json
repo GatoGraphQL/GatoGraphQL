@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/customposts",
     "type": "library",
     "description": "WordPress-specific Custom Post data model",
-    "keywords": ["PHP", "PoP", "WP", "customposts"],
+    "keywords": ["GraphQL", "PHP", "PoP", "WP", "customposts"],
     "homepage": "https://github.com/PoPWPSchema/customposts",
     "license": "GPL-2.0-or-later",
     "authors": [

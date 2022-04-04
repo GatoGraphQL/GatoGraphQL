@@ -152,7 +152,7 @@
     },
     "type": "library",
     "description": "Adds mutations for the \"contact user\" functionality",
-    "keywords": ["PHP", "PoP", "contactuser-mutations"],
+    "keywords": ["GraphQL", "PHP", "PoP", "contactuser-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/contactuser-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

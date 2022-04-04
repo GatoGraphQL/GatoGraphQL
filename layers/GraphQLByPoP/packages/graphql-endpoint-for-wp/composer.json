@@ -2,7 +2,7 @@
     "name": "graphql-by-pop/graphql-endpoint-for-wp",
     "type": "library",
     "description": "Add pretty permalinks for the single GraphQL endpoint, for WordPress",
-    "keywords": ["PHP", "PoP", "graphql-endpoint-for-wp"],
+    "keywords": ["GraphQL", "PHP", "PoP", "graphql-endpoint-for-wp"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-endpoint-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
