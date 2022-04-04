@@ -681,19 +681,19 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLEndpointForWP\Environment::DISABLE_GRAPHQL_API_ENDPOINT,
-                'callback' => [$this, 'opposite'],
+                'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT,
-                'callback' => [$this, 'opposite'],
+                'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
-                'callback' => [$this, 'opposite'],
+                'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,

@@ -43,13 +43,13 @@ abstract class AbstractDocAboutMenuPage extends AbstractDocsMenuPage
         // Enable "/" in the filename
         add_filter(
             'sanitize_file_name_chars',
-            [$this, 'enableSpecialCharsForSanitization']
+            $this->enableSpecialCharsForSanitization(...)
         );
         $filename = App::query(RequestParams::DOC, '');
         $doc = \sanitize_file_name($filename . '.md');
         remove_filter(
             'sanitize_file_name_chars',
-            [$this, 'enableSpecialCharsForSanitization']
+            $this->enableSpecialCharsForSanitization(...)
         );
         return $this->getMarkdownContent(
             $doc,

@@ -71,7 +71,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            add_action('pre_user_query', [$this, 'enableMultipleEmails']);
+            add_action('pre_user_query', $this->enableMultipleEmails(...));
         }
 
         // Execute the query. Original solution from:
@@ -84,7 +84,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', [$this, 'enableMultipleEmails']);
+            remove_action('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }
@@ -102,7 +102,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            add_action('pre_user_query', [$this, 'enableMultipleEmails']);
+            add_action('pre_user_query', $this->enableMultipleEmails(...));
         }
 
         // Execute the query
@@ -110,7 +110,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', [$this, 'enableMultipleEmails']);
+            remove_action('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }

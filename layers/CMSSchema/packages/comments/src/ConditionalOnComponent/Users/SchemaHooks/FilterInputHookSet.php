@@ -16,7 +16,7 @@ class FilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             CommentFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
-            [$this, 'getFilterInputModules']
+            $this->getFilterInputModules(...)
         );
     }
 

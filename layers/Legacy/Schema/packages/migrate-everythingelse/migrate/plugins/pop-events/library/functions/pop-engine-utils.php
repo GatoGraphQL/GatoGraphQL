@@ -8,7 +8,7 @@ class PoP_Events_Engine_Hooks
     {
         \PoP\Root\App::addAction(
             'augmentVarsProperties',
-            [$this, 'augmentVarsProperties'],
+            $this->augmentVarsProperties(...),
             10,
             1
         );

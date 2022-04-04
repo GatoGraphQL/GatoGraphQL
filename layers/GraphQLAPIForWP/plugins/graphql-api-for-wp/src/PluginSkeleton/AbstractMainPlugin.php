@@ -198,8 +198,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */
-        \add_action('activate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
-        \add_action('deactivate_plugin', [$this, 'handleAnyPluginActivatedOrDeactivated']);
+        \add_action('activate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
+        \add_action('deactivate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
@@ -213,7 +213,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        \register_activation_hook($this->getPluginFile(), [$this, 'activate']);
+        \register_activation_hook($this->getPluginFile(), $this->activate(...));
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();

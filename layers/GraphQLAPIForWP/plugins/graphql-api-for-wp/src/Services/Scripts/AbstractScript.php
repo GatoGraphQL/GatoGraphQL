@@ -46,7 +46,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
      */
     final public function initialize(): void
     {
-        \add_action('init', [$this, 'initScript']);
+        \add_action('init', $this->initScript(...));
     }
 
     public function getEnablingModule(): ?string

@@ -65,7 +65,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $option = self::SETTINGS_FIELD;
         // \add_filter(
         //     "pre_update_option_{$option}",
-        //     [$this, 'normalizeSettings']
+        //     $this->normalizeSettings(...)
         // );
 
         /**
@@ -144,7 +144,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         'description' => \__('Settings for the GraphQL API', 'graphql-api'),
                         // This call is needed to cast the data
                         // before saving to the DB
-                        'sanitize_callback' => [$this, 'normalizeSettings'],
+                        'sanitize_callback' => $this->normalizeSettings(...),
                         'show_in_rest' => false,
                     ]
                 );

@@ -526,7 +526,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return [];
         }
         return array_map(
-            [$this, 'listFieldDirective'],
+            $this->listFieldDirective(...),
             $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,

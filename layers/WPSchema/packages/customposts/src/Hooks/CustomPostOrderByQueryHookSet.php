@@ -15,7 +15,7 @@ class CustomPostOrderByQueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             AbstractCustomPostTypeAPI::HOOK_ORDERBY_QUERY_ARG_VALUE,
-            [$this, 'getOrderByQueryArgValue']
+            $this->getOrderByQueryArgValue(...)
         );
     }
 

@@ -32,7 +32,7 @@ class QueryHookSet extends AbstractHookSet
     {
         App::addFilter(
             CustomPostTypeAPI::HOOK_QUERY,
-            [$this, 'convertCustomPostsQuery'],
+            $this->convertCustomPostsQuery(...),
             10,
             2
         );

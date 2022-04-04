@@ -90,12 +90,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         // earlier or later
         \add_action(
             'init',
-            [$this, 'initCustomPostType'],
+            $this->initCustomPostType(...),
             $this->getMenuPosition()
         );
         \add_action(
             'init',
-            [$this, 'maybeLockGutenbergTemplate']
+            $this->maybeLockGutenbergTemplate(...)
         );
         /**
          * Starting from WP 5.8 the hook is a different one
@@ -105,14 +105,14 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         if (\is_wp_version_compatible('5.8')) {
             \add_filter(
                 'allowed_block_types_all',
-                [$this, 'allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext'],
+                $this->allowGutenbergBlocksForCustomPostTypeViaBlockEditorContext(...),
                 10,
                 2
             );
         } else {
             \add_filter(
                 'allowed_block_types',
-                [$this, 'allowGutenbergBlocksForCustomPostType'],
+                $this->allowGutenbergBlocksForCustomPostType(...),
                 10,
                 2
             );
@@ -122,7 +122,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \add_action(
             'admin_print_scripts',
-            [$this, 'printAdminGraphQLEndpointVariables']
+            $this->printAdminGraphQLEndpointVariables(...)
         );
 
         /**
@@ -133,17 +133,17 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             // Execute last as to always add the description at the top
             \add_filter(
                 'the_content',
-                [$this, 'maybeAddExcerptAsDescription'],
+                $this->maybeAddExcerptAsDescription(...),
                 PHP_INT_MAX
             );
             // Add the custom columns to the post type
             add_filter(
                 "manage_{$postType}_posts_columns",
-                [$this, 'setTableColumns']
+                $this->setTableColumns(...)
             );
             add_action(
                 "manage_{$postType}_posts_custom_column",
-                [$this, 'resolveCustomColumn'],
+                $this->resolveCustomColumn(...),
                 10,
                 2
             );
@@ -155,13 +155,13 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          */
         \add_filter(
             'post_row_actions',
-            [$this, 'maybeAddCustomPostTypeTableActions'],
+            $this->maybeAddCustomPostTypeTableActions(...),
             10,
             2
         );
         \add_filter(
             'page_row_actions',
-            [$this, 'maybeAddCustomPostTypeTableActions'],
+            $this->maybeAddCustomPostTypeTableActions(...),
             10,
             2
         );

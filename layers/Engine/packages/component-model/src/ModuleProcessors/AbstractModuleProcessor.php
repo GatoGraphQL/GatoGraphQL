@@ -213,7 +213,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function initModelPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree([$this, 'initModelProps'], [$this, 'getModelPropsForDescendantModules'], [$this, 'getModelPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantModules(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getModelPropsForDescendantModules(array $module, array &$props): array
@@ -290,7 +290,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
     public function initRequestPropsModuletree(array $module, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree([$this, 'initRequestProps'], [$this, 'getRequestPropsForDescendantModules'], [$this, 'getRequestPropsForDescendantDatasetmodules'], __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantModules(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $module, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
     public function getRequestPropsForDescendantModules(array $module, array &$props): array

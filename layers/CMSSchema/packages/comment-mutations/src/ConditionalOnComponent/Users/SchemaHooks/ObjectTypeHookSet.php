@@ -31,7 +31,7 @@ class ObjectTypeHookSet extends AbstractHookSet
     {
         App::addFilter(
             HookNames::OBJECT_TYPE_MUTATION_FIELD_ARGS,
-            [$this, 'getMutationFieldArgs'],
+            $this->getMutationFieldArgs(...),
             10,
             2
         );
