@@ -162,7 +162,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "pop-cms-schema/custompostmeta": "^0.9",
         "pop-cms-schema/customposts-wp": "^0.9",
         "pop-cms-schema/metaquery-wp": "^0.9"

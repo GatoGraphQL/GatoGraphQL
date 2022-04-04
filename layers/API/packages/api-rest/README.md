@@ -115,7 +115,7 @@ Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the R
 
 Requirements:
 
-- PHP 8.0+ for development
+- PHP 8.1+ for development
 - PHP 7.1+ for production
 
 ### Supported PHP features

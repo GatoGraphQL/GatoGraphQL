@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "php": "~8.0",
+        "php": "~8.1",
         "getpop/engine-wp-bootloader": "^0.9",
         "pop-sites-wassup/wassup": "^0.9",
         "oomphinc/composer-installers-extender": "^2.0",

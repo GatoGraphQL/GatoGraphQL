@@ -18,7 +18,7 @@ jobs:
 
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0
+                    php-version: 8.1
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,7 +56,7 @@ jobs:
             -   name: Set-up PHP
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.0
+                    php-version: 8.1
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -96,7 +96,7 @@ jobs:
                 run: composer create-project php-parallel-lint/php-parallel-lint php-parallel-lint --ansi --no-dev
 
             # Only PROD dependencies must be tested
-            # --ignore-platform-reqs to avoid Composer checking the PHP 8.0 requirement
+            # --ignore-platform-reqs to avoid Composer checking the PHP 8.1 requirement
             -   name: Keep dependencies for PROD only (for testing)
                 uses: "ramsey/composer-install@v1"
                 with:
@@ -132,7 +132,7 @@ jobs:
             # do not require downgrading
             # Use a PHP Linter. If PHP is not valid, it will throw an error
             # Exclude layers/Legacy/ which is not part of any project,
-            # and DOES contain PHP 8.0 (it's not being downgraded)
+            # and DOES contain PHP 8.1 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.1
                 run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude ${{ needs.provide_data.outputs.skip_downgrade_test_paths }} --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
 

@@ -159,7 +159,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "getpop/cache-control": "^0.9",
         "psr/cache": "^3.0"
     },

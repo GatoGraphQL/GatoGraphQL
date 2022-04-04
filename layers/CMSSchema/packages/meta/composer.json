@@ -163,7 +163,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "getpop/engine": "^0.9",
         "pop-cms-schema/schema-commons": "^0.9"
     },

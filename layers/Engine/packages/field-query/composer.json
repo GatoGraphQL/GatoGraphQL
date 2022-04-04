@@ -163,7 +163,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "getpop/query-parsing": "^0.9"
     },
     "require-dev": {
