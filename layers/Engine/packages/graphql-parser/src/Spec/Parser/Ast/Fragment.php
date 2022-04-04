@@ -68,18 +68,8 @@ class Fragment extends AbstractAst implements WithDirectivesInterface, WithField
         return $this->name;
     }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getModel(): string
     {
         return $this->model;
-    }
-
-    public function setModel(string $model): void
-    {
-        $this->model = $model;
     }
 }

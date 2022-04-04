@@ -50,18 +50,8 @@ class LeafField extends AbstractAst implements FieldInterface
         return $this->name;
     }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getAlias(): ?string
     {
         return $this->alias;
-    }
-
-    public function setAlias(?string $alias): void
-    {
-        $this->alias = $alias;
     }
 }

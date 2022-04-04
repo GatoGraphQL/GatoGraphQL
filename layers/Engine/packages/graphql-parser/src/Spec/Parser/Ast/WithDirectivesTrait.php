@@ -25,7 +25,7 @@ trait WithDirectivesTrait
     /**
      * @param Directive[] $directives
      */
-    public function setDirectives(array $directives): void
+    private function setDirectives(array $directives): void
     {
         $this->directives = $directives;
     }

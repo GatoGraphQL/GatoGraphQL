@@ -42,11 +42,6 @@ class Argument extends AbstractAst
         return $this->name;
     }
 
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getValue(): WithValueInterface
     {
         return $this->value;

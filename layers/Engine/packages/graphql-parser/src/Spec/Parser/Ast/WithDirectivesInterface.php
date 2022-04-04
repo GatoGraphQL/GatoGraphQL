@@ -7,11 +7,6 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 interface WithDirectivesInterface
 {
     /**
-     * @param Directive[] $directives
-     */
-    public function setDirectives(array $directives): void;
-
-    /**
      * @return Directive[]
      */
     public function getDirectives(): array;
