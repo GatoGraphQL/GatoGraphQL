@@ -31,9 +31,9 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      */
     public function fixtureGraphQLServerExecutionProvider(): array
     {
-        $directory = $this->getFixtureFolder();
+        $fixtureFolder = $this->getFixtureFolder();
         $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
-            $directory,
+            $fixtureFolder,
             ['*.gql', '*.graphql'],
             ['*.disabled.gql', '*.disabled.graphql']
         );
@@ -55,7 +55,13 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             // The operation name is provided by code, not by fixture
             $graphQLOperationName = $this->getGraphQLOperationName($fileName);
 
-            $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
+            /**
+             * If the test is organized under a subfolder (such as "Success" or "Error"),
+             * append it to the named dataset
+             */
+            $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
+            $namedDataset = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
+            $providerItems[$namedDataset] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
         }
         return $providerItems;
     }
