@@ -1,0 +1,15 @@
+{
+    "data": {
+        "self":  {
+            "first":  {
+                "id": "root"
+            },
+            "second":  {
+                "id": "root"
+            },
+            "third":  {
+                "id": "root"
+            }
+        }
+    }
+}
