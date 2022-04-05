@@ -79,10 +79,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     /**
      * Directory under the fixture files are placed
      */
-    protected function getFixtureFolder(): string
-    {
-        return __DIR__ . '/Fixture';
-    }
+    abstract protected function getFixtureFolder(): string;
 
     /**
      * The operation name is provided by code, not by fixture
