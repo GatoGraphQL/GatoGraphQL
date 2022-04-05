@@ -17,39 +17,36 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         $this->assertFixtureGraphQLQueryExecution($queryFile, $expectedResponseFile, $variablesFile, $operationName);
     }
 
+    /**
+     * Retrieve all files under the "/Fixture" folder (by default):
+     *
+     *   - GraphQL queries: all files ending in ".gql" or ".graphql"
+     *     (unless ending in ".disabled.gql" or ".disabled.graphql")
+     *
+     * Each of these files will need to have corresponding file(s)
+     * in the same folder, sharing the same file name:
+     *
+     *   - GraphQL response: "${fileName}.json"
+     *   - GraphQL variables: "${fileName}.var.json"
+     */
     public function fixtureGraphQLServerExecutionProvider(): array
     {
         $directory = $this->getFixtureFolder();
-
-        /**
-         * Retrieve all files:
-         *
-         * - GraphQL queries: ending in ".gql" or ".graphql"
-         *   (unless ending in ".disabled.gql" or ".disabled.graphql")
-         *
-         * Each of these files will need to have corresponding file(s)
-         * in the same folder, all of them sharing the same file name:
-         *
-         * - GraphQL response: ending in "${fileName}.json"
-         * - GraphQL variables: ending in "${fileName}.var.json"
-         */
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory($directory, ['*.gql', '*.graphql'], ['*.disabled.gql', '*.disabled.graphql']);
-        // $graphQLResponseFileNameFileInfos = $this->placeFileInfosUnderFileName(
-        //     $this->findFilesInDirectory($directory, ['*.json'], ['*.var.json'])
-        // );
-        // $graphQLVariableFileNameFileInfos = $this->placeFileInfosUnderFileName(
-        //     $this->findFilesInDirectory($directory, ['*.var.json'])
-        // );
-
-        /**
-         * Pair up these files among themselves. They must all share the
-         * same fileName
-         */
+        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
+            $directory,
+            ['*.gql', '*.graphql'],
+            ['*.disabled.gql', '*.disabled.graphql']
+        );
+        
         $providerItems = [];
         foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
+            $graphQLQueryFile = $graphQLQueryFileInfo->getRealPath();
+        
+            /**
+             * From the GraphQL query file name, generate the remaining file names
+             */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $graphQLQueryFile = $graphQLQueryFileInfo->getRealPath();
             $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
             $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
             if (!\file_exists($graphQLVariablesFile)) {
@@ -57,51 +54,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             }
             // The operation name is provided by code, not by fixture
             $graphQLOperationName = $this->getGraphQLOperationName($fileName);
+            
             $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
-            // /**
-            //  * The GraphQL response file is mandatory, but the variables one is optional
-            //  */
-            // $graphQLResponseFileInfo = $graphQLResponseFileNameFileInfos[$fileName] ?? null;
-            // if ($graphQLResponseFileInfo === null) {
-            //     // Stop here and mark this test as incomplete.
-            //     $this->markTestIncomplete(
-            //         sprintf(
-            //             'File "%s.json" (with the expected GraphQL response) is missing.',
-            //             $fileName
-            //         )
-            //     );
-            //     continue;
-            // }
-            // $graphQLVariableFileInfo = $graphQLVariableFileNameFileInfos[$fileName] ?? null;
-
-            // /**
-            //  * We have identified all the files. Extract their content, and pass it upwards
-            //  * via the provider.
-            //  */
-            // $graphQLQuery = file_get_contents($graphQLQueryFileInfo->getRealPath());
-            // $graphQLResponse = file_get_contents($graphQLResponseFileInfo->getRealPath());
-            // $graphQLVariables = $graphQLVariableFileInfo !== null ? file_get_contents($graphQLVariableFileInfo->getRealPath()) : [];
-            // $providerItems[] = [$graphQLQuery, $graphQLResponse, $graphQLVariables];
         }
         return $providerItems;
     }
-
-    // /**
-    //  * @return Iterator<array<int, SplFileInfo>>
-    //  */
-    // public function provideData(): Iterator
-    // {
-    //     return $this->yieldDirectory($this->getFixtureFolder());
-    // }
-
-    // /**
-    //  * @return Iterator<array<int, SplFileInfo>>
-    //  */
-    // protected function yieldDirectory(string $directory): Iterator
-    // {
-    //     $fileInfos = $this->findFilesInDirectory($directory);
-    //     return $this->yieldFileInfos($fileInfos);
-    // }
 
     /**
      * @return SplFileInfo[]
@@ -112,17 +69,6 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         $fileInfos = iterator_to_array($finder);
         return array_values($fileInfos);
     }
-
-    // /**
-    //  * @param SplFileInfo[] $fileInfos
-    //  * @return Iterator<array<int, SplFileInfo>>
-    //  */
-    // protected function yieldFileInfos(array $fileInfos): Iterator
-    // {
-    //     foreach ($fileInfos as $fileInfo) {
-    //         yield [$fileInfo];
-    //     }
-    // }
 
     /**
      * Directory under the fixture files are placed
@@ -139,18 +85,4 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     {
         return null;
     }
-
-    // /**
-    //  * @param SplFileInfo[] $fileInfos
-    //  * @return array<string,SplFileInfo>
-    //  */
-    // protected function placeFileInfosUnderFileName(array $fileInfos): array
-    // {
-    //     $fileNameFileInfos = [];
-    //     foreach ($fileInfos as $fileInfo) {
-    //         $fileNameWithExtension = $fileInfo->getRelativePathname();
-    //         $fileNameFileInfos[$fileNameWithExtension] = $fileInfo;
-    //     }
-    //     return $fileNameFileInfos;
-    // }
 }
