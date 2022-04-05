@@ -16,6 +16,12 @@ class FeedbackMessageStore implements FeedbackMessageStoreInterface
      */
     protected array $queryWarnings = [];
 
+    public function clearAll(): void
+    {
+        $this->queryErrors = [];
+        $this->queryWarnings = [];
+    }
+
     /**
      * $extensions is optional. It is used by GraphQL to pass the location with "line" and "column" (as a string)
      *
