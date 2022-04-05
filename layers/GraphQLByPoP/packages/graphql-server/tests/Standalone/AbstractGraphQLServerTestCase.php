@@ -80,7 +80,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                     )
                 );
             }
-            $graphQLVariables = json_decode($graphQLVariablesJSON);
+            $graphQLVariables = json_decode($graphQLVariablesJSON, true);
         }
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
         $this->assertJsonStringEqualsJsonFile(
