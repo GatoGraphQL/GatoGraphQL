@@ -6,5 +6,4 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 class FixtureQueryExecutionGraphQLServerTestCase extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
-    
 }

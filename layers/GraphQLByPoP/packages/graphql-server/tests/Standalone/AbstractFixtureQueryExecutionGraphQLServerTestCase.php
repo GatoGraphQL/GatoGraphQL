@@ -37,11 +37,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             ['*.gql', '*.graphql'],
             ['*.disabled.gql', '*.disabled.graphql']
         );
-        
+
         $providerItems = [];
         foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
             $graphQLQueryFile = $graphQLQueryFileInfo->getRealPath();
-        
+
             /**
              * From the GraphQL query file name, generate the remaining file names
              */
@@ -54,7 +54,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             }
             // The operation name is provided by code, not by fixture
             $graphQLOperationName = $this->getGraphQLOperationName($fileName);
-            
+
             $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
         }
         return $providerItems;
