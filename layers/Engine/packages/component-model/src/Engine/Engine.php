@@ -439,6 +439,11 @@ class Engine implements EngineInterface
 
         // Keep only the data that is needed to be sent, and encode it as JSON
         $this->calculateOutputData();
+
+        /**
+         * @todo Remove this temporary code to remove feedback state
+         */
+        $this->getFeedbackMessageStore()->clearAll();
     }
 
     protected function formatData(): void

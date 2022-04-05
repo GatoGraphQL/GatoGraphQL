@@ -1,0 +1,6 @@
+{
+    id
+    self @skip(if: false) {
+        id
+    }
+}

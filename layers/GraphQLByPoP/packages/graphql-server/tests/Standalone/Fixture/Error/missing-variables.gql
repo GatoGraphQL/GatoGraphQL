@@ -1,0 +1,6 @@
+query SomeQuery($include: Boolean!) {
+    id
+    self @include(if: $include) {
+        id
+    }
+}

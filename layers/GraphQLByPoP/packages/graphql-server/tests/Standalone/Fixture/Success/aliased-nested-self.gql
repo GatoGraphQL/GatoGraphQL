@@ -1,0 +1,13 @@
+query {
+    self {
+        first: self {
+            id
+        }
+        second: self {
+            id
+        }
+        third: self {
+            id
+        }
+    }
+}

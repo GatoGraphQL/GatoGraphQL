@@ -1,0 +1,18 @@
+{
+    self {
+        ...on QueryRoot {
+            id
+            ...on QueryRoot {
+                self {
+                    id
+                }
+                ...on QueryRoot {
+                    again: id
+                    ...on NonExistingType {
+                        noField
+                    }
+                }
+            }
+        }
+    }
+}
