@@ -9,9 +9,9 @@ abstract class AbstractQueryExecutionGraphQLServerTestCase extends AbstractGraph
     /**
      * @dataProvider graphQLServerExecutionProvider
      */
-    public function testGraphQLServerExecution(string $query, array $expectedResponse, array $variables = []): void
+    public function testGraphQLServerExecution(string $query, array $expectedResponse, array $variables = [], ?string $operationName = null): void
     {
-        $this->assertGraphQLQueryExecution($query, $expectedResponse, $variables);
+        $this->assertGraphQLQueryExecution($query, $expectedResponse, $variables, $operationName);
     }
 
     abstract public function graphQLServerExecutionProvider(): array;

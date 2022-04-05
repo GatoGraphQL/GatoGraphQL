@@ -97,7 +97,7 @@ class GraphQLServer implements GraphQLServerInterface
      *
      * @param array<string,mixed> $variables
      */
-    public function execute(string $query, array $variables = []): Response
+    public function execute(string $query, array $variables = [], ?string $operationName = null): Response
     {
         // Override the previous response, if any
         App::regenerateResponse();
@@ -106,6 +106,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager = App::getAppStateManager();
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
+        $appStateManager->override('graphql-operation-name', $operationName);
 
         // Convert the query to AST and set on the state
         [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
