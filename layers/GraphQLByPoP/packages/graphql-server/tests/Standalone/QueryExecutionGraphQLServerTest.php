@@ -11,18 +11,6 @@ class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServe
     public function graphQLServerExecutionProvider(): array
     {
         return [
-            'id' => [
-                '
-                query {
-                    id
-                }
-                ',
-                [
-                    'data' => [
-                        'id' => Root::ID,
-                    ]
-                ]
-            ],
             'self' => [
                 '
                 query {
