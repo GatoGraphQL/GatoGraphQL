@@ -122,6 +122,8 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('executable-query', $fieldQuerySet->getExecutableFieldQuery());
         if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
             $appStateManager->override('requested-query', $fieldQuerySet->getRequestedFieldQuery());
+        } else {
+            $appStateManager->override('requested-query', null);
         }
 
         // Generate the data, print the response to buffer, and send headers
