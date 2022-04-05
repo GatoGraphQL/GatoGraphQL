@@ -189,6 +189,10 @@ class QueryHelpers
          * @todo Convert expressions from "$__" to "$"
          */
         // return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
+        if (str_starts_with($expressionName, '_')) {
+            // Dynamic variables: keep them as they are already! Return `$_id` as `$_id`, not `$___id`
+            return '$' . $expressionName;
+        }
         return '$__' . $expressionName;
     }
 
