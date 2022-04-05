@@ -68,7 +68,6 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                     $queryFile
                 )
             );
-            return;
         }
         // $graphQLExpectedResponse = file_get_contents($expectedResponseFile);
         // if ($graphQLExpectedResponse === false) {
@@ -90,7 +89,6 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                         $variablesFile
                     )
                 );
-                return;
             }
             $graphQLVariables = json_decode($graphQLVariablesJSON);
         }
