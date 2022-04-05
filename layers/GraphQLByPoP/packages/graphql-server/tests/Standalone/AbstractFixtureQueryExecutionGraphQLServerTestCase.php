@@ -25,6 +25,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * Retrieve all files:
          *
          * - GraphQL queries: ending in ".gql" or ".graphql"
+         *   (unless ending in ".disabled.gql" or ".disabled.graphql")
          *
          * Each of these files will need to have corresponding file(s)
          * in the same folder, all of them sharing the same file name:
@@ -32,7 +33,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * - GraphQL response: ending in "${fileName}.json"
          * - GraphQL variables: ending in "${fileName}.var.json"
          */
-        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory($directory, ['*.gql', '*.graphql']);
+        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory($directory, ['*.gql', '*.graphql'], ['*.disabled.gql', '*.disabled.graphql']);
         // $graphQLResponseFileNameFileInfos = $this->placeFileInfosUnderFileName(
         //     $this->findFilesInDirectory($directory, ['*.json'], ['*.var.json'])
         // );
