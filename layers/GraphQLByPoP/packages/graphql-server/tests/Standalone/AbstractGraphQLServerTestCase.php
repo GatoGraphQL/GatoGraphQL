@@ -54,4 +54,54 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $response->getContent()
         );
     }
+
+    /**
+     * Test by passing "fixture" files, from which to extract the content.
+     */
+    protected function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, string $variablesFile = null, ?string $operationName = null): void
+    {
+        $graphQLQuery = file_get_contents($queryFile);
+        if ($graphQLQuery === false) {
+            $this->markTestIncomplete(
+                sprintf(
+                    'File "%s" (with the expected GraphQL query) does not exist.',
+                    $queryFile
+                )
+            );
+            return;
+        }
+        // $graphQLExpectedResponse = file_get_contents($expectedResponseFile);
+        // if ($graphQLExpectedResponse === false) {
+        //     $this->markTestIncomplete(
+        //         sprintf(
+        //             'File "%s" (with the expected GraphQL response) does not exist.',
+        //             $expectedResponseFile
+        //         )
+        //     );
+        //     return;
+        // }
+        $graphQLVariables = [];
+        if ($variablesFile !== null) {
+            $graphQLVariablesJSON = file_get_contents($variablesFile);
+            if ($graphQLVariablesJSON === false) {
+                $this->markTestIncomplete(
+                    sprintf(
+                        'File "%s" (with the optional GraphQL variables) does not exist.',
+                        $variablesFile
+                    )
+                );
+                return;
+            }
+            $graphQLVariables = json_decode($graphQLVariablesJSON);
+        }
+        $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
+        // $this->assertJsonStringEqualsJsonString(
+        //     json_encode($graphQLExpectedResponse),
+        //     $response->getContent()
+        // );
+        $this->assertJsonStringEqualsJsonFile(
+            $expectedResponseFile,
+            $response->getContent()
+        );
+    }
 }
