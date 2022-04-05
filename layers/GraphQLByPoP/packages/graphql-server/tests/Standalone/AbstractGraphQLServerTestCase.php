@@ -69,16 +69,6 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                 )
             );
         }
-        // $graphQLExpectedResponse = file_get_contents($expectedResponseFile);
-        // if ($graphQLExpectedResponse === false) {
-        //     $this->markTestIncomplete(
-        //         sprintf(
-        //             'File "%s" (with the expected GraphQL response) does not exist.',
-        //             $expectedResponseFile
-        //         )
-        //     );
-        //     return;
-        // }
         $graphQLVariables = [];
         if ($variablesFile !== null) {
             $graphQLVariablesJSON = file_get_contents($variablesFile);
@@ -93,10 +83,6 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $graphQLVariables = json_decode($graphQLVariablesJSON);
         }
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
-        // $this->assertJsonStringEqualsJsonString(
-        //     json_encode($graphQLExpectedResponse),
-        //     $response->getContent()
-        // );
         $this->assertJsonStringEqualsJsonFile(
             $expectedResponseFile,
             $response->getContent()
