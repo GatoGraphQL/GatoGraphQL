@@ -107,6 +107,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
         $appStateManager->override('graphql-operation-name', $operationName);
+        $appStateManager->override('does-api-query-have-errors', null);
 
         // Convert the query to AST and set on the state
         [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
