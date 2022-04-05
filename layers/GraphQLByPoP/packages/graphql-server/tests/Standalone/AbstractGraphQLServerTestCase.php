@@ -54,4 +54,38 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $response->getContent()
         );
     }
+
+    /**
+     * Test by passing "fixture" files, from which to extract the content.
+     */
+    protected function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
+    {
+        $graphQLQuery = file_get_contents($queryFile);
+        if ($graphQLQuery === false) {
+            $this->markTestIncomplete(
+                sprintf(
+                    'File "%s" (with the expected GraphQL query) does not exist.',
+                    $queryFile
+                )
+            );
+        }
+        $graphQLVariables = [];
+        if ($variablesFile !== null) {
+            $graphQLVariablesJSON = file_get_contents($variablesFile);
+            if ($graphQLVariablesJSON === false) {
+                $this->markTestIncomplete(
+                    sprintf(
+                        'File "%s" (with the optional GraphQL variables) does not exist.',
+                        $variablesFile
+                    )
+                );
+            }
+            $graphQLVariables = json_decode($graphQLVariablesJSON);
+        }
+        $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
+        $this->assertJsonStringEqualsJsonFile(
+            $expectedResponseFile,
+            $response->getContent()
+        );
+    }
 }
