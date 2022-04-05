@@ -6,6 +6,7 @@ namespace PoP\FieldQuery;
 
 interface FeedbackMessageStoreInterface
 {
+    public function clearAll(): void;
     /**
      * $extensions is optional. It is used by GraphQL to pass the location with "line" and "column" (as a string)
      *
