@@ -54,7 +54,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
-            $providerItems[] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile];
+            $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile];
             // /**
             //  * The GraphQL response file is mandatory, but the variables one is optional
             //  */
