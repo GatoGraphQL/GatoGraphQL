@@ -11,26 +11,6 @@ class QueryExecutionGraphQLServerTest extends AbstractQueryExecutionGraphQLServe
     public function graphQLServerExecutionProvider(): array
     {
         return [
-            'nested-self' => [
-                '
-                query {
-                    self {
-                        self {
-                            id
-                        }
-                    }
-                }
-                ',
-                [
-                    'data' => [
-                        'self' => [
-                            'self' => [
-                                'id' => Root::ID,
-                            ]
-                        ]
-                    ]
-                ]
-            ],
             'aliased-nested-self' => [
                 '
                 query {
