@@ -55,7 +55,9 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
-            $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile];
+            // The operation name is provided by code, not by fixture
+            $graphQLOperationName = $this->getGraphQLOperationName($fileName);
+            $providerItems[$fileName] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
             // /**
             //  * The GraphQL response file is mandatory, but the variables one is optional
             //  */
@@ -128,6 +130,14 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/Fixture';
+    }
+
+    /**
+     * The operation name is provided by code, not by fixture
+     */
+    protected function getGraphQLOperationName(string $fileName): ?string
+    {
+        return null;
     }
 
     // /**
