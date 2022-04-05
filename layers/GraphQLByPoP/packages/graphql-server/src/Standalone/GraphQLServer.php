@@ -119,6 +119,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appStateManager->override('query', $query);
         $appStateManager->override('variables', $variables);
         $appStateManager->override('graphql-operation-name', $operationName);
+        $appStateManager->override('does-api-query-have-errors', null);
 
         // @todo Fix: this code is duplicated! It's also in api/src/State/AppStateProvider.php, keep DRY!
         try {
