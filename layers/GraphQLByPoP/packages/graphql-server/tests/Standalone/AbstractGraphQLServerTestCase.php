@@ -58,7 +58,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
     /**
      * Test by passing "fixture" files, from which to extract the content.
      */
-    protected function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, string $variablesFile = null, ?string $operationName = null): void
+    protected function assertFixtureGraphQLQueryExecution(string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
     {
         $graphQLQuery = file_get_contents($queryFile);
         if ($graphQLQuery === false) {
