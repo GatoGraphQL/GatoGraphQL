@@ -1,0 +1,17 @@
+{
+    "errors": [
+        {
+            "message": "Value is not set for non-nullable variable 'include'",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 23
+                }
+            ],
+            "extensions": {
+                "code": "gql-5.8.5",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-All-Variable-Usages-are-Allowed"
+            }
+        }
+    ]
+}
