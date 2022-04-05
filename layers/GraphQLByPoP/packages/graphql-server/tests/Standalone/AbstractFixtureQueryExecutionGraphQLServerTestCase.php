@@ -20,9 +20,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * - GraphQL responses: ending in ".json", but not ".var.json"
          * - GraphQL variables: ending in ".var.json"
          */
-        $graphQLQueryFileNameFileInfos = $this->placeFileInfosUnderFileName(
-            $this->findFilesInDirectory($directory, ['*.gql', '*.graphql'])
-        );
+        $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory($directory, ['*.gql', '*.graphql']);
         $graphQLResponseFileNameFileInfos = $this->placeFileInfosUnderFileName(
             $this->findFilesInDirectory($directory, ['*.json'], ['*.var.json'])
         );
@@ -35,7 +33,8 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
          * same fileName
          */
         $providerItems = [];
-        foreach ($graphQLQueryFileNameFileInfos as $fileName => $graphQLQueryFileInfo) {
+        foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
+            $fileName = $graphQLQueryFileInfo->getRelativePathname();
             /**
              * The GraphQL response file is mandatory, but the variables one is optional
              */
@@ -51,7 +50,15 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 continue;
             }
             $graphQLVariableFileInfo = $graphQLVariableFileNameFileInfos[$fileName] ?? null;
-            $providerItems[] = [$graphQLQueryFileInfo, $graphQLResponseFileInfo, $graphQLVariableFileInfo];
+
+            /**
+             * We have identified all the files. Extract their content, and pass it upwards
+             * via the provider.
+             */
+            $graphQLQuery = file_get_contents($graphQLQueryFileInfo->getRealPath());
+            $graphQLResponse = file_get_contents($graphQLResponseFileInfo->getRealPath());
+            $graphQLVariables = $graphQLVariableFileInfo !== null ? file_get_contents($graphQLVariableFileInfo->getRealPath()) : [];
+            $providerItems[] = [$graphQLQuery, $graphQLResponse, $graphQLVariables];
         }
         return $providerItems;
     }
