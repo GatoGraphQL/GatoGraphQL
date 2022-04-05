@@ -112,6 +112,7 @@ class GraphQLServer implements GraphQLServerInterface
         [$operationType, $fieldQuery] = GraphQLQueryConvertorFacade::getInstance()->convertFromGraphQLToFieldQuery(
             $query,
             $variables,
+            $operationName,
         );
         $appStateManager->override('graphql-operation-type', $operationType);
         $appStateManager->override('are-mutations-enabled', $operationType === OperationTypes::MUTATION);
