@@ -2236,7 +2236,7 @@ class Engine implements EngineInterface
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
-            if ($subcomponentTypeResolver === null && $relationalTypeResolver != $targetObjectTypeResolver) {
+            if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
                 $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
             if ($subcomponentTypeResolver !== null) {
