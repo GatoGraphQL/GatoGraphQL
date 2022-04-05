@@ -47,11 +47,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
         $providerItems = [];
         foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
-            $filePath = $graphQLQueryFileInfo->getPathname();
+            $filePath = $graphQLQueryFileInfo->getPath();
             $graphQLQueryFile = $graphQLQueryFileInfo->getRealPath();
-            $graphQLResponseFile = $filePath . '/' . $fileName . '.json';
-            $graphQLVariablesFile = $filePath . '/' . $fileName . '.var.json';
-            if (\file_exists($graphQLVariablesFile)) {
+            $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
             $providerItems[] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile];
