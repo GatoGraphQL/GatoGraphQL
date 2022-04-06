@@ -18,10 +18,12 @@ class DataToAppendAndRemoveDataSource
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
                 /**
-                 * BrainFaker has no releases yet, so point to a specific commit
-                 * @see https://github.com/Brain-WP/BrainFaker
+                 * BrainFaker has no releases yet, so point to dev-master
+                 * (under "leoloso/BrainFaker" repository, so it's under control)
+                 *
+                 * @see https://github.com/leoloso/BrainFaker
                  */
-                'brain/faker' => 'dev-master#c657e49f75c058c3081f0bb90fb53e06973a35e9',
+                'brain/faker' => 'dev-master',
             ],
             'autoload' => [
                 'psr-4' => [
