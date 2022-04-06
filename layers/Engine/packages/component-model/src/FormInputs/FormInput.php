@@ -8,9 +8,9 @@ use PoP\Root\App;
 
 class FormInput
 {
-    public string $name;
-    public mixed $selected;
-    public array $params;
+    public readonly string $name;
+    public readonly mixed $selected;
+    public readonly array $params;
 
     public function __construct(string $name, mixed $selected = null, array $params = [])
     {

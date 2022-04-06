@@ -7,9 +7,9 @@ namespace PoPCMSSchema\UserAvatars\ObjectModels;
 class UserAvatar
 {
     public function __construct(
-        public string | int $id,
-        public string $src,
-        public int $size,
+        public readonly string | int $id,
+        public readonly string $src,
+        public readonly int $size,
     ) {
     }
 }
