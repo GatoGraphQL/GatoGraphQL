@@ -64,6 +64,18 @@ class Component extends AbstractPluginComponent
     }
 
     /**
+     * Classes from PoP components that must be initialized before this component
+     *
+     * @return string[]
+     */
+    public function getDevPHPUnitDependedComponentClasses(): array
+    {
+        return [
+            \GraphQLAPI\PHPUnitWPSchema\Component::class,
+        ];
+    }
+
+    /**
      * Compiler Passes for the System Container
      *
      * @return string[]

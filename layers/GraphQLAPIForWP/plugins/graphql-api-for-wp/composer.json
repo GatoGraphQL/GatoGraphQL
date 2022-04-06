@@ -53,6 +53,7 @@
         "pop-wp-schema/users": "^0.9"
     },
     "require-dev": {
+        "graphql-api/phpunit-wp-schema": "^0.9",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
