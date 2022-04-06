@@ -16,7 +16,7 @@ Satisfy the Type APIs for the WordPress schema when running PHPUnit tests.
 Via Composer
 
 ``` bash
-composer require graphql-api/phpunit-wpfaker-schema
+composer require graphql-api/wpfaker-schema
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/graphql-api/wpfaker-schema.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/graphql-api/phpunit-wpfaker-schema/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/graphql-api/wpfaker-schema/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/wpfaker-schema.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/wpfaker-schema.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/wpfaker-schema.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/graphql-api/phpunit-wpfaker-schema
-[link-travis]: https://travis-ci.org/graphql-api/phpunit-wpfaker-schema
-[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wpfaker-schema/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wpfaker-schema
-[link-downloads]: https://packagist.org/packages/graphql-api/phpunit-wpfaker-schema
+[link-packagist]: https://packagist.org/packages/graphql-api/wpfaker-schema
+[link-travis]: https://travis-ci.org/graphql-api/wpfaker-schema
+[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/wpfaker-schema/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/wpfaker-schema
+[link-downloads]: https://packagist.org/packages/graphql-api/wpfaker-schema
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

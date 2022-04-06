@@ -1,5 +1,5 @@
 {
-    "name": "graphql-api/phpunit-wpfaker-schema",
+    "name": "graphql-api/wpfaker-schema",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",

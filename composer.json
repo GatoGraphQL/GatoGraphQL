@@ -421,7 +421,7 @@
         "graphql-api/external-dependency-wrappers": "self.version",
         "graphql-api/graphql-api-for-wp": "self.version",
         "graphql-api/markdown-convertor": "self.version",
-        "graphql-api/phpunit-wp-schema": "self.version",
+        "graphql-api/wpfaker-schema": "self.version",
         "graphql-api/plugin-utils": "self.version",
         "graphql-by-pop/graphiql": "self.version",
         "graphql-by-pop/graphql-clients-for-wp": "self.version",
