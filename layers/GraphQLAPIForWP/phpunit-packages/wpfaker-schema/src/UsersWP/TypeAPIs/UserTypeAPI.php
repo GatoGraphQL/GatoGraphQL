@@ -15,7 +15,23 @@ class UserTypeAPI extends UpstreamUserTypeAPI
 {
     protected function getUsersByCMS(array $query): array
     {
-        $users = App::getWPFaker()->users(3);
+        /**
+         * If providing the IDs to retrieve, re-generate exactly those objects.
+         * Otherwise, get random ones.
+         */
+        $ids = explode(',', $query['include'] ?? []);
+        if ($ids !== []) {
+            $users = array_map(
+                fn (string|int $id) => App::getWPFaker()->user(['id' => (int) trim($id)]),
+                $ids
+            );
+        } else {
+            $users = App::getWPFaker()->users($query['number'] ?? 10);
+        }
+
+        /**
+         * Retrieve the IDs of the objects?
+         */
         if (($query['fields'] ?? null) === 'ID') {
             $users = array_map(
                 fn (WP_User $user) => $user->ID,
