@@ -2,7 +2,3 @@ parameters:
 	level: 8
 	paths:
 		- src
-	ignoreErrors:
-		-
-			message: '#^Function apply_filters invoked with 3 parameters, 2 required\.$#'
-			path: src/TypeAPIs/MenuTypeAPI.php
