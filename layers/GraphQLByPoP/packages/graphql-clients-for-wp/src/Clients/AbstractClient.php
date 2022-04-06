@@ -48,7 +48,7 @@ abstract class AbstractClient extends AbstractEndpointHandler
          *
          * @see https://github.com/leoloso/PoP/issues/710
          */
-        \add_action('init', function (): void {
+        App::addAction('init', function (): void {
             if (!$this->isClientDisabled()) {
                 parent::initialize();
             }
