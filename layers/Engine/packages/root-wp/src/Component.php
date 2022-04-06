@@ -6,6 +6,7 @@ namespace PoP\RootWP;
 
 use Brain\Cortex;
 use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Environment;
 
 /**
  * Initialize component
@@ -22,6 +23,16 @@ class Component extends AbstractComponent
         return [
             \PoP\Root\Component::class,
         ];
+    }
+
+    /**
+     * Do not enable when running PHPUnit tests
+     * (the needed methods, such as `__`, will be satisfied
+     * somewhere else)
+     */
+    protected function resolveEnabled(): bool
+    {
+        return !Environment::isApplicationEnvironmentDevPHPUnit();
     }
 
     /**
@@ -47,6 +58,6 @@ class Component extends AbstractComponent
 
     public function componentLoaded(): void
     {
-        Cortex::boot();
+       Cortex::boot();
     }
 }
