@@ -47,7 +47,7 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsTrait
         }
         $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         $interfaceTypeResolverClasses = array_map(
-            'get_class',
+            get_class(...),
             $interfaceTypeResolvers
         );
         $individualControlSchemaMode = $this->getSchemaMode();

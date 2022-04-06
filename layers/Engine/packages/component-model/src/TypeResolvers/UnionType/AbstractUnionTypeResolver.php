@@ -311,7 +311,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                             fn (ObjectTypeResolverInterface $objectTypeResolver) => !in_array(
                                 $interfaceTypeResolverClass,
                                 array_map(
-                                    'get_class',
+                                    get_class(...),
                                     $objectTypeResolver->getImplementedInterfaceTypeResolvers()
                                 )
                             )

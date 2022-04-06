@@ -168,7 +168,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
                     $classStack = array_values(array_unique(array_merge(
                         $classStack,
                         array_map(
-                            'get_class',
+                            get_class(...),
                             $interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers()
                         ),
                     )));
