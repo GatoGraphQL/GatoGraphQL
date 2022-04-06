@@ -12,6 +12,8 @@ use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;
 use WP_User_Query;
 
+use function get_user_by;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
