@@ -46,11 +46,11 @@ class MenuTypeAPI implements MenuTypeAPIInterface
                     $menuItem->ID,
                     $menuItem->object_id,
                     $menuItem->menu_item_parent === "0" ? null : $menuItem->menu_item_parent,
-                    \apply_filters('the_title', $menuItem->title, $menuItem->object_id),
+                    App::applyFilters('the_title', $menuItem->title, $menuItem->object_id),
                     $menuItem->attr_title,
                     $menuItem->url,
                     $menuItem->description,
-                    \apply_filters('menuitem:classes', array_filter($menuItem->classes), $menuItem),
+                    App::applyFilters('menuitem:classes', array_filter($menuItem->classes), $menuItem),
                     $menuItem->target,
                     $menuItem->xfn,
                 );
