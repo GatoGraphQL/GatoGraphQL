@@ -49,6 +49,9 @@ class ComponentManager implements ComponentManagerInterface
     public function configureComponents(): void
     {
         foreach ($this->components as $component) {
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->configure();
         }
     }
@@ -59,6 +62,9 @@ class ComponentManager implements ComponentManagerInterface
     public function bootSystem(): void
     {
         foreach ($this->components as $component) {
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->bootSystem();
         }
     }
@@ -69,6 +75,9 @@ class ComponentManager implements ComponentManagerInterface
     public function componentLoaded(): void
     {
         foreach ($this->components as $component) {
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->componentLoaded();
         }
     }
@@ -79,6 +88,9 @@ class ComponentManager implements ComponentManagerInterface
     public function boot(): void
     {
         foreach ($this->components as $component) {
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->boot();
         }
     }
@@ -89,6 +101,9 @@ class ComponentManager implements ComponentManagerInterface
     public function afterBoot(): void
     {
         foreach ($this->components as $component) {
+            if (!$component->isEnabled()) {
+                continue;
+            }
             $component->afterBoot();
         }
     }
