@@ -25,6 +25,7 @@ class FakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQu
             ...parent::getGraphQLServerComponentClasses(),
             ...[
                 \PoPWPSchema\Users\Component::class,
+                \GraphQLAPI\PHPUnitWPSchema\Component::class,
             ]
         ];
     }
