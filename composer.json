@@ -378,6 +378,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/dominiccarrington/BrainFaker.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/leoloso/monorepo-builder.git"
         }
     ],
