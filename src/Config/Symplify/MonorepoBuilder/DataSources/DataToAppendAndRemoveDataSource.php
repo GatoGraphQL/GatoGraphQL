@@ -32,7 +32,17 @@ class DataToAppendAndRemoveDataSource
                 [
                     'type' => 'vcs',
                     'url' => 'https://github.com/leoloso/monorepo-builder.git',
-                ]
+                ],
+                [
+                    'type' => 'vcs',
+                    /**
+                     * Override `Brain-WP/BrainFaker` to use dependency "fakerphp/faker",
+                     * which works with PHP 8.
+                     *
+                     * @see https://github.com/dominiccarrington/BrainFaker/commit/37cd7675a207912f9f72170bf3e35c375e09599d
+                     */
+                    'url' => 'https://github.com/dominiccarrington/BrainFaker.git',
+                ],
             ],
             // 'extra' => [
             //     'installer-paths' => [
