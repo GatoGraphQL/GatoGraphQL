@@ -73,6 +73,6 @@ class Component extends AbstractComponent
         if (Environment::isApplicationEnvironmentDevPHPUnit()) {
             return;
         };
-       Cortex::boot();
+        Cortex::boot();
     }
 }

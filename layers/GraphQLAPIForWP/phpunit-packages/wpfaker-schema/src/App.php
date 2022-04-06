@@ -19,7 +19,7 @@ use function Brain\faker;
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
-    protected static Generator $faker;    
+    protected static Generator $faker;
     protected static Providers $wpFaker;
 
     public static function initializeFaker(
