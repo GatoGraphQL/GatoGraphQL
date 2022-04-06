@@ -37,7 +37,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $user;
     }
 
-    public function getUserById(string | int $userID): ?object
+    public function getUserByID(string | int $userID): ?object
     {
         return $this->getUserBy('id', $userID);
     }
@@ -316,7 +316,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return $this->getUserProperty('description', $userObjectOrID);
     }
-    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string
+    public function getUserWebsiteURL(string | int | object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_url', $userObjectOrID);
     }
@@ -324,7 +324,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return $this->getUserProperty('user_nicename', $userObjectOrID);
     }
-    public function getUserId(object $user): string | int
+    public function getUserID(object $user): string | int
     {
         return $user->ID;
     }

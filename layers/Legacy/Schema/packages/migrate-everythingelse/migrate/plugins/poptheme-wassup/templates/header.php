@@ -60,7 +60,7 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
         $description = gdHeaderRouteDescription();
     } elseif (\PoP\Root\App::getState(['routing', 'is-user'])) {
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-        $curauth = $userTypeAPI->getUserById($author);
+        $curauth = $userTypeAPI->getUserByID($author);
         $description = sprintf(TranslationAPIFacade::getInstance()->__('View %1$s profile and get in touch through %2$s.', 'poptheme-wassup'), $curauth->display_name, $site_name);
     } elseif (\PoP\Root\App::getState(['routing', 'is-tag'])) {
         $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);

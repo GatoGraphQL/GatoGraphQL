@@ -146,7 +146,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         */
         // $site_name = wp_specialchars_decode($cmsapplicationapi->getSiteName(), ENT_QUOTES);
         // $title = sprintf($this->__('[%s] Password Reset'), $site_name);
-        $user_id = $this->getUserTypeAPI()->getUserId($user);
+        $user_id = $this->getUserTypeAPI()->getUserID($user);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
         $title = sprintf($this->__('[%s] Password Reset'), $cmsapplicationapi->getSiteName());
         $title = App::applyFilters('popcms:retrievePasswordTitle', $title, $user_login, $user);

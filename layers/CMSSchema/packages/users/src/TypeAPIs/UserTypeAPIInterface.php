@@ -14,7 +14,7 @@ interface UserTypeAPIInterface
      */
     public function isInstanceOfUserType(object $object): bool;
 
-    public function getUserById(string | int $userID): ?object;
+    public function getUserByID(string | int $userID): ?object;
     public function getUserByEmail(string $email): ?object;
     public function getUserByLogin(string $login): ?object;
     public function getUsers($query = array(), array $options = []): array;
@@ -27,7 +27,7 @@ interface UserTypeAPIInterface
     public function getUserDescription(string | int | object $userObjectOrID): ?string;
     public function getUserURL(string | int | object $userObjectOrID): ?string;
     public function getUserURLPath(string | int | object $userObjectOrID): ?string;
-    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string;
+    public function getUserWebsiteURL(string | int | object $userObjectOrID): ?string;
     public function getUserSlug(string | int | object $userObjectOrID): ?string;
-    public function getUserId(object $user): string | int;
+    public function getUserID(object $user): string | int;
 }

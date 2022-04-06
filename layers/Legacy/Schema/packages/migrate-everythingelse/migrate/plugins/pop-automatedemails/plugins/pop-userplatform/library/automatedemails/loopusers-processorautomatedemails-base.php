@@ -52,7 +52,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
-                $vars['current-user'] = $userTypeAPI->getUserById($user_id)/*new WP_User($user_id, '')*/;
+                $vars['current-user'] = $userTypeAPI->getUserByID($user_id)/*new WP_User($user_id, '')*/;
                 $vars['current-user-id'] = $user_id;
 
                 // Return the notifications from within the last 24 hs, or from the last time the user was last seen in the website, whatever is higher

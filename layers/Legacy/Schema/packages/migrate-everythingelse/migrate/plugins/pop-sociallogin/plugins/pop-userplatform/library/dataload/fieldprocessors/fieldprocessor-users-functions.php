@@ -73,7 +73,7 @@ class GD_WSL_ObjectTypeFieldResolver_Users extends AbstractObjectTypeFieldResolv
             case 'url':
                 // Return the user's website url from the connecting network (eg: facebook, twitter)
                 $userTypeAPI = UserTypeAPIFacade::getInstance();
-                return $userTypeAPI->getUserWebsiteUrl($user);
+                return $userTypeAPI->getUserWebsiteURL($user);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldName, $fieldArgs, $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);

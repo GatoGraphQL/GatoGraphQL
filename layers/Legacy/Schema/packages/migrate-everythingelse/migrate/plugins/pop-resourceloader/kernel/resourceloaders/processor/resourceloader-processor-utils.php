@@ -487,7 +487,7 @@ class PoP_ResourceLoaderProcessorUtils {
                 self::setExtraVarsProperties($vars, $extra_vars, $author);
 
                 $vars['routing'] = [];
-                $vars['routing']['queried-object'] = $userTypeAPI->getUserById($author);
+                $vars['routing']['queried-object'] = $userTypeAPI->getUserByID($author);
                 $vars['routing']['queried-object-id'] = $author;
                 ApplicationState::augmentVarsProperties();
 

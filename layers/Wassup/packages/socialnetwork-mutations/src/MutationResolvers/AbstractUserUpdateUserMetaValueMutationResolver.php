@@ -28,7 +28,7 @@ class AbstractUserUpdateUserMetaValueMutationResolver extends AbstractUpdateUser
             $target_id = $form_data['target_id'];
 
             // Make sure the user exists
-            $target = $this->getUserTypeAPI()->getUserById($target_id);
+            $target = $this->getUserTypeAPI()->getUserByID($target_id);
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(

@@ -44,7 +44,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver
     public function getID(object $object): string | int | null
     {
         $user = $object;
-        return $this->getUserTypeAPI()->getUserId($user);
+        return $this->getUserTypeAPI()->getUserID($user);
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
