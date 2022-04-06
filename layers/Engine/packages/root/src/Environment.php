@@ -26,6 +26,10 @@ class Environment
      * The app runs in DEV
      */
     public final const APPLICATION_ENVIRONMENT_DEV = 'development';
+    /**
+     * The app runs in DEV
+     */
+    public final const APPLICATION_ENVIRONMENT_DEV_PHPUNIT = 'development-phpunit';
 
     /**
      * Indicate if to cache the container configuration.
@@ -101,6 +105,7 @@ class Environment
         $environments = [
             self::APPLICATION_ENVIRONMENT_PROD,
             self::APPLICATION_ENVIRONMENT_DEV,
+            self::APPLICATION_ENVIRONMENT_DEV_PHPUNIT,
         ];
         return in_array($environment, $environments) ? $environment : $default;
     }
@@ -112,6 +117,12 @@ class Environment
 
     public static function isApplicationEnvironmentDev(): bool
     {
-        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_DEV;
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_DEV
+            || self::isApplicationEnvironmentDevPHPUnit();
+    }
+
+    public static function isApplicationEnvironmentDevPHPUnit(): bool
+    {
+        return self::getApplicationEnvironment() === self::APPLICATION_ENVIRONMENT_DEV_PHPUNIT;
     }
 }

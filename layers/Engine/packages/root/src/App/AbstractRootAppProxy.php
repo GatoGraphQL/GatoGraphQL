@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\App;
+namespace PoP\Root\App;
 
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
