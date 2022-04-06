@@ -1,4 +1,4 @@
-# WP Schema for PHPUnit
+# WP Faker Schema (for PHPUnit)
 
 <!--
 [![Build Status][ico-travis]][link-travis]
