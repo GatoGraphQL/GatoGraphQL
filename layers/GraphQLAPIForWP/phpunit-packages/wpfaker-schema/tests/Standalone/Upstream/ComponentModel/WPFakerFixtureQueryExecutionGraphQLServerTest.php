@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
 
-use GraphQLAPI\WPFakerSchema\Standalone\AbstractFakerFixtureQueryExecutionGraphQLServerTestCase;
+use GraphQLAPI\WPFakerSchema\Standalone\GraphQLServerTestCaseTrait;
+use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 
-class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQueryExecutionGraphQLServerTestCase
+class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
+    use GraphQLServerTestCaseTrait;
+    
     /**
      * Directory under the fixture files are placed
      */

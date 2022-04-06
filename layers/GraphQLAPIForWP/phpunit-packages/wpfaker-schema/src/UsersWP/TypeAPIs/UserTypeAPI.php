@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs;
 
+use GraphQLAPI\WPFakerSchema\App;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -33,10 +34,8 @@ class UserTypeAPI extends UpstreamUserTypeAPI
 
         // Execute the query
         // $ret = get_users($query);
-        $faker = \Brain\faker();
-        $wpFaker = $faker->wp();
         // $ret = get_users($query);
-        $ret = $wpFaker->users(3);
+        $ret = App::getWPFaker()->users(3);
 
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
             $ret = array_map(
