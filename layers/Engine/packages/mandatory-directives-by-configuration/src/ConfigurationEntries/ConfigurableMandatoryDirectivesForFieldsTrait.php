@@ -84,7 +84,7 @@ trait ConfigurableMandatoryDirectivesForFieldsTrait
     ): array {
         $objectTypeOrInterfaceTypeResolverClass = get_class($objectTypeOrInterfaceTypeResolver);
         $interfaceTypeResolverClasses = array_map(
-            'get_class',
+            get_class(...),
             $interfaceTypeResolvers
         );
         return array_values(array_filter(

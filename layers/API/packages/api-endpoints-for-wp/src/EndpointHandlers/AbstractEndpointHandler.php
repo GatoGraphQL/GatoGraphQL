@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
+use PoP\ComponentModel\App;
 use PoPAPI\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
 
 abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
@@ -22,24 +23,24 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
             /**
              * Register the endpoints
              */
-            \add_action(
+            App::addAction(
                 'init',
                 $this->addRewriteEndpoints(...)
             );
-            \add_filter(
+            App::addFilter(
                 'query_vars',
                 $this->addQueryVar(...),
                 10,
                 1
             );
-            \add_action(
+            App::addAction(
                 'parse_request',
                 $this->parseRequest(...)
             );
 
             // // If it is a partial endpoint, we must add all the combinations of routes to Cortex
             // if (!$this->doesEndpointMatchWholeURL()) {
-            //     \add_filter(
+            //     App::addFilter(
             //         'route-endpoints',
             //         $this->getRouteEndpoints(...),
             //         10,

@@ -110,7 +110,7 @@ class PoP_Mentions
                 $taggedusers_ids = array();
                 foreach ($user_nicenames as $user_nicename) {
                     if ($user = $cmsusersapi->getUserBySlug($user_nicename)) {
-                        $taggedusers_ids[] = $userTypeAPI->getUserId($user);
+                        $taggedusers_ids[] = $userTypeAPI->getUserID($user);
                     }
                 }
 
@@ -155,7 +155,7 @@ class PoP_Mentions
             $taggedusers_ids = array();
             foreach ($user_nicenames as $user_nicename) {
                 if ($user = $cmsusersapi->getUserBySlug($user_nicename)) {
-                    $taggedusers_ids[] = $userTypeAPI->getUserId($user);
+                    $taggedusers_ids[] = $userTypeAPI->getUserID($user);
                 }
             }
 
@@ -259,8 +259,8 @@ class PoP_Mentions
             $userObjectTypeResolver = $instanceManager->getInstance(UserObjectTypeResolver::class);
             $content = sprintf(
                 '<a class="pop-mentions-user" data-popover-target="%s" href="%s">%s</a>',
-                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userObjectTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserId($user),
-                $userTypeAPI->getUserURL($userTypeAPI->getUserId($user)),
+                '#popover-' . RequestUtils::getDomainId($cmsService->getSiteURL()) . '-' . $userObjectTypeResolver->getTypeName() . '-' . $userTypeAPI->getUserID($user),
+                $userTypeAPI->getUserURL($userTypeAPI->getUserID($user)),
                 $userTypeAPI->getUserDisplayName($user)
             );
         }

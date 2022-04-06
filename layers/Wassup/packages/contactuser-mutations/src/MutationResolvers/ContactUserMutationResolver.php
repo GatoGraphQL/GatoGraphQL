@@ -68,7 +68,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             // );
             $errors[] = $this->__('The requested user cannot be empty.', 'pop-genericforms');
         } else {
-            $target = $this->getUserTypeAPI()->getUserById($form_data['target-id']);
+            $target = $this->getUserTypeAPI()->getUserByID($form_data['target-id']);
             if (!$target) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(

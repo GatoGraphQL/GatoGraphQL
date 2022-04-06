@@ -141,7 +141,7 @@ return [
             // - etc
             $pattern = '#' . convertRelativeToFullPath('vendor/symfony/polyfill-[a-zA-Z0-9_-]*/bootstrap.*\.php') . '#';
             $symfonyPolyfillFilesWithGlobalClass = array_map(
-                'convertRelativeToFullPath',
+                convertRelativeToFullPath(...),
                 [
                     'vendor/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
                     'vendor/symfony/polyfill-php73/Resources/stubs/JsonException.php',

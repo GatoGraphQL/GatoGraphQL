@@ -40,9 +40,7 @@ class ModuleListTableAction extends AbstractListTableAction
      */
     public function initialize(): void
     {
-        \add_action('admin_notices', function (): void {
-            $this->maybeAddAdminNotice();
-        });
+        \add_action('admin_notices', $this->maybeAddAdminNotice(...));
     }
 
     /**

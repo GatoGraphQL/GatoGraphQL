@@ -37,7 +37,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $user;
     }
 
-    public function getUserById(string | int $userID): ?object
+    public function getUserByID(string | int $userID): ?object
     {
         return $this->getUserBy('id', $userID);
     }
@@ -71,7 +71,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            add_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::addAction('pre_user_query', $this->enableMultipleEmails(...));
         }
 
         // Execute the query. Original solution from:
@@ -84,7 +84,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }
@@ -102,7 +102,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            add_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::addAction('pre_user_query', $this->enableMultipleEmails(...));
         }
 
         // Execute the query
@@ -110,7 +110,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }
@@ -316,7 +316,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return $this->getUserProperty('description', $userObjectOrID);
     }
-    public function getUserWebsiteUrl(string | int | object $userObjectOrID): ?string
+    public function getUserWebsiteURL(string | int | object $userObjectOrID): ?string
     {
         return $this->getUserProperty('user_url', $userObjectOrID);
     }
@@ -324,7 +324,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return $this->getUserProperty('user_nicename', $userObjectOrID);
     }
-    public function getUserId(object $user): string | int
+    public function getUserID(object $user): string | int
     {
         return $user->ID;
     }

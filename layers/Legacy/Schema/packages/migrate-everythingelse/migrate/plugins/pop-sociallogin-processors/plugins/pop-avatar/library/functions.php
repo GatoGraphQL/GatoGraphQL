@@ -13,7 +13,7 @@ function gdWslAvatar($html, $user, $size, $default, $alt)
 
     // If passed an object, assume $user->ID
     if (is_object($user)) {
-        $user_id = $userTypeAPI->getUserId($user);
+        $user_id = $userTypeAPI->getUserID($user);
     }
 
     // If passed a number, assume it was a $user_id
@@ -23,7 +23,7 @@ function gdWslAvatar($html, $user, $size, $default, $alt)
 
     // If passed a string and that string returns a user, get the $id
     elseif (is_string($user) && ($user_by_email = $userTypeAPI->getUserByEmail($user))) {
-        $user_id = $userTypeAPI->getUserId($user_by_email);
+        $user_id = $userTypeAPI->getUserID($user_by_email);
     }
 
     // User found?

@@ -14,7 +14,7 @@ class CAP_PoP_AddCoauthors_API extends PoP_AddCoauthors_API_Base implements PoP_
 
         $coauthor_nicenames = array();
         foreach ($coauthors as $user_id) {
-            $user = $userTypeAPI->getUserById($user_id);
+            $user = $userTypeAPI->getUserByID($user_id);
             $coauthor_nicenames[] = $user->user_nicename;
         }
 

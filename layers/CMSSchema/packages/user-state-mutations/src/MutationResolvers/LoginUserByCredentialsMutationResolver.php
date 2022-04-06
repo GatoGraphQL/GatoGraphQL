@@ -105,7 +105,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         // Modify the routing-state with the newly logged in user info
         AppStateHelpers::resetCurrentUserInAppState();
 
-        $userID = $this->getUserTypeAPI()->getUserId($user);
+        $userID = $this->getUserTypeAPI()->getUserID($user);
         App::doAction('gd:user:loggedin', $userID);
         return $userID;
     }
