@@ -84,7 +84,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }
@@ -110,7 +110,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            remove_action('pre_user_query', $this->enableMultipleEmails(...));
+            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
     }
