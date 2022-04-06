@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\Standalone\Upstream\ComponentModel;
 
-use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
+use GraphQLAPI\GraphQLAPI\Standalone\AbstractFakerFixtureQueryExecutionGraphQLServerTestCase;
 
-class FixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
+class FakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
      * Directory under the fixture files are placed
