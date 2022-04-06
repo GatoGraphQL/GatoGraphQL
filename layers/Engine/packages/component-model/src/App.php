@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel;
 
-use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\Engine\EngineState;
 use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 use PoP\ComponentModel\Tracing\TracingStore;
+use PoP\Root\App\AbstractRootAppProxy;
 
 /**
  * Keep all state in the application stored and accessible

@@ -12,6 +12,8 @@ use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
 use WP_User;
 use WP_User_Query;
 
+use function get_user_by;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -106,7 +108,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
 
         // Execute the query
-        $ret = get_users($query);
+        $ret = $this->getUsersByCMS($query);
 
         // Remove the hook
         if ($filterByEmails) {
@@ -114,6 +116,18 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
         return $ret;
     }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function getUsersByCMS(array $query): array
+    {
+        return get_users($query);
+    }
+
     /**
      * Limit users which have an email appearing on the input
      * WordPress does not allow to search by many email addresses, only 1!

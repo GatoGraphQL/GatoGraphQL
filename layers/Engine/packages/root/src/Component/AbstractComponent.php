@@ -85,6 +85,16 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
+     * All DEV PHPUnit component classes that this component depends upon, to initialize them
+     *
+     * @return string[]
+     */
+    public function getDevPHPUnitDependedComponentClasses(): array
+    {
+        return [];
+    }
+
+    /**
      * All conditional component classes that this component depends upon, to initialize them
      *
      * @return string[]

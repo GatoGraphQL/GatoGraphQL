@@ -27,7 +27,7 @@ class DataToAppendAndRemoveDataSource
                 [
                     'type' => 'vcs',
                     'url' => 'https://github.com/leoloso/monorepo-builder.git',
-                ]
+                ],
             ],
             // 'extra' => [
             //     'installer-paths' => [

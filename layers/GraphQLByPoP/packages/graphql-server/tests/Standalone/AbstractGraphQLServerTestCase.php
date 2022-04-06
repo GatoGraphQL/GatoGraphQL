@@ -14,7 +14,12 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$graphQLServer = new GraphQLServer(
+        self::$graphQLServer = static::createGraphQLServer();
+    }
+
+    protected static function createGraphQLServer(): GraphQLServer
+    {
+        return new GraphQLServer(
             static::getGraphQLServerComponentClasses(),
             static::getGraphQLServerComponentClassConfiguration()
         );

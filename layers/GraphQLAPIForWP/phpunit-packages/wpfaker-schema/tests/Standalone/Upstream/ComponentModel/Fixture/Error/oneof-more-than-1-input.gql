@@ -1,0 +1,8 @@
+query {
+  user(by: {
+    id: 1,
+    username: "themedemos"
+  }) {
+    id
+  }
+}

@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs\UserTypeAPI
