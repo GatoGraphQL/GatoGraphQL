@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\PHPUnitWPSchema\UsersWP\TypeAPIs;
 
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use WP_User;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -34,6 +37,13 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         $wpFaker = $faker->wp();
         // $ret = get_users($query);
         $ret = $wpFaker->users(3);
+
+        if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
+            $ret = array_map(
+                fn (WP_User $user) => $user->ID,
+                $ret
+            );
+        }
 
         // // Remove the hook
         // if ($filterByEmails) {
