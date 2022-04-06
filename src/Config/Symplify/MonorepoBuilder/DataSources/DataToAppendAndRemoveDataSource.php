@@ -17,6 +17,11 @@ class DataToAppendAndRemoveDataSource
                 'symplify/monorepo-builder' => '^10.0',
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
+                /**
+                 * BrainFaker has no releases yet, so point to a specific commit
+                 * @see https://github.com/Brain-WP/BrainFaker
+                 */
+                'brain/faker' => 'dev-master#c657e49f75c058c3081f0bb90fb53e06973a35e9',
             ],
             'autoload' => [
                 'psr-4' => [
