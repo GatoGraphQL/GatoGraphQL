@@ -713,7 +713,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 get_class($this->getTypeResolverToCalculateSchema()),
             ],
             array_map(
-                'get_class',
+                get_class(...),
                 $this->getImplementedInterfaceTypeResolvers()
             )
         );
@@ -1058,7 +1058,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 get_class($this->getTypeResolverToCalculateSchema()),
             ],
             array_map(
-                'get_class',
+                get_class(...),
                 $this->getImplementedInterfaceTypeResolvers()
             )
         );
