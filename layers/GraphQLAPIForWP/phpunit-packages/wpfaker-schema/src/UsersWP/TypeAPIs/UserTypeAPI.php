@@ -19,8 +19,10 @@ class UserTypeAPI extends UpstreamUserTypeAPI
          * If providing the IDs to retrieve, re-generate exactly those objects.
          * Otherwise, get random ones.
          */
-        $ids = explode(',', $query['include'] ?? []);
-        if ($ids !== []) {
+        $ids = $query['include'] ?? null;
+        if (!empty($ids)) {
+            $ids = is_string($ids) ? explode(',', $ids) : $ids;
+            /** @var array $ids */
             $users = array_map(
                 fn (string|int $id) => App::getWPFaker()->user(['id' => (int) trim($id)]),
                 $ids

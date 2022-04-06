@@ -26,6 +26,7 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
         ?Generator $faker = null,
     ): void {
         self::$faker = $faker ?? static::createFaker();
+        // @phpstan-ignore-line
         self::$wpFaker = self::$faker->wp();
     }
 
