@@ -10,17 +10,17 @@ namespace PoPCMSSchema\Menus\ObjectModels;
 class MenuItem
 {
     public function __construct(
-        public string | int $id,
-        public string | int $objectID,
-        public string | int | null $parentID,
-        public string $label,
-        public string $title,
-        public string $url,
-        public string $description,
+        public readonly string | int $id,
+        public readonly string | int $objectID,
+        public readonly string | int | null $parentID,
+        public readonly string $label,
+        public readonly string $title,
+        public readonly string $url,
+        public readonly string $description,
         /** @var string[] */
-        public array $classes,
-        public string $target,
-        public string $linkRelationship,
+        public readonly array $classes,
+        public readonly string $target,
+        public readonly string $linkRelationship,
     ) {
     }
 }
