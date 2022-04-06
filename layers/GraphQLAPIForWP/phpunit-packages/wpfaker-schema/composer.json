@@ -163,11 +163,18 @@
             "homepage": "https://getpop.org"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/BrainFaker.git"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "getpop/engine": "^0.9"
     },
     "require-dev": {
+        "brain/faker": "dev-master",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.12",
