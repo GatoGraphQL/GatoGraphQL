@@ -60,7 +60,6 @@ class Component extends AbstractPluginComponent
             \PoPWPSchema\Posts\Component::class,
             \PoPWPSchema\TaxonomyMeta\Component::class,
             \PoPWPSchema\UserMeta\Component::class,
-            \PoPWPSchema\Users\Component::class,
         ];
     }
 
