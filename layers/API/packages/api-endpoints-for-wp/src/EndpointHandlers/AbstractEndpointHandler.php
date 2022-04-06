@@ -27,7 +27,7 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
                 'init',
                 $this->addRewriteEndpoints(...)
             );
-            \add_filter(
+            App::addFilter(
                 'query_vars',
                 $this->addQueryVar(...),
                 10,
@@ -40,7 +40,7 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
 
             // // If it is a partial endpoint, we must add all the combinations of routes to Cortex
             // if (!$this->doesEndpointMatchWholeURL()) {
-            //     \add_filter(
+            //     App::addFilter(
             //         'route-endpoints',
             //         $this->getRouteEndpoints(...),
             //         10,
