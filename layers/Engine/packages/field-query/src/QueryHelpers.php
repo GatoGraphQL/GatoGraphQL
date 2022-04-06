@@ -202,21 +202,28 @@ class QueryHelpers
     public static function splitFieldDirectives(string $fieldDirectives): array
     {
         $queryParser = QueryParserFacade::getInstance();
-        return $queryParser->splitElements(
-            $fieldDirectives,
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
-            [
-                QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                QuerySyntax::SYMBOL_BOOKMARK_OPENING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
-            ],
-            [
-                QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
-                QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ],
-            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Remove the extra " "
+         */
+        return array_map(
+            'trim',
+            $queryParser->splitElements(
+                $fieldDirectives,
+                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                [
+                    QuerySyntax::SYMBOL_FIELDARGS_OPENING,
+                    QuerySyntax::SYMBOL_BOOKMARK_OPENING,
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
+                ],
+                [
+                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
+                    QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
+                ],
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
+            )
         );
     }
 }
