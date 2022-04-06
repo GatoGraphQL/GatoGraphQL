@@ -167,7 +167,7 @@ class AppLoader implements AppLoaderInterface
             $this->addComponentsOrderedForInitialization(
                 array_filter(
                     $component->getDependedConditionalComponentClasses(),
-                    'class_exists'
+                    class_exists(...)
                 ),
                 $isDev
             );
