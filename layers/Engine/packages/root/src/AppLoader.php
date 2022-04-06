@@ -161,6 +161,12 @@ class AppLoader implements AppLoaderInterface
                     $component->getDevDependedComponentClasses(),
                     $isDev
                 );
+                if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+                    $this->addComponentsOrderedForInitialization(
+                        $component->getDevPHPUnitDependedComponentClasses(),
+                        $isDev
+                    );
+                }
             }
 
             // Initialize all depended-upon PoP conditional components, if they are installed
