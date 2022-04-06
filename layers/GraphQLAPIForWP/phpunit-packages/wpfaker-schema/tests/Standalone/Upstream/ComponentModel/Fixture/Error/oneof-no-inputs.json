@@ -11,7 +11,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "user(by:{})",
+          "user(by: {})",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e7"
