@@ -17,7 +17,7 @@ interface UserTypeAPIInterface
     public function getUserByID(string | int $userID): ?object;
     public function getUserByEmail(string $email): ?object;
     public function getUserByLogin(string $login): ?object;
-    public function getUsers($query = array(), array $options = []): array;
+    public function getUsers(array $query = [], array $options = []): array;
     public function getUserCount(array $query = [], array $options = []): int;
     public function getUserDisplayName(string | int | object $userObjectOrID): ?string;
     public function getUserEmail(string | int | object $userObjectOrID): ?string;

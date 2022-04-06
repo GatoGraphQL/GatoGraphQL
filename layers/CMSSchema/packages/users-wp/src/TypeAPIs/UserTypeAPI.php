@@ -90,7 +90,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
         return $ret;
     }
-    public function getUsers($query = array(), array $options = []): array
+    public function getUsers(array $query = [], array $options = []): array
     {
         // Convert the parameters
         $query = $this->convertUsersQuery($query, $options);
