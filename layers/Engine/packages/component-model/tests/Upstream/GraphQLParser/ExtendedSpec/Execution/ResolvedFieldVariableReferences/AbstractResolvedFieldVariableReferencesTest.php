@@ -44,7 +44,6 @@ abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestC
     protected static function getComponentClassConfiguration(): array
     {
         $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = true;
         $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = true;
         $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES] = static::enabled();
         return $componentClassConfiguration;
