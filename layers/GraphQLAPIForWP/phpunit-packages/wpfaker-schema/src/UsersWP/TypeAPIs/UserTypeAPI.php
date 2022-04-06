@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\PHPUnitWPSchema\UsersWP\TypeAPIs;
+namespace GraphQLAPI\PHPUnitWPFakerSchema\UsersWP\TypeAPIs;
 
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;

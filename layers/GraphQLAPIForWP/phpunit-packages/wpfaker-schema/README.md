@@ -16,12 +16,12 @@ Satisfy the Type APIs for the WordPress schema when running PHPUnit tests.
 Via Composer
 
 ``` bash
-composer require graphql-api/phpunit-wp-schema
+composer require graphql-api/phpunit-wpfaker-schema
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/phpunit-packages/wp-schema`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/phpunit-packages/wp-schema).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/phpunit-packages/wpfaker-schema`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/phpunit-packages/wpfaker-schema).
 
 ## Usage
 
@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \GraphQLAPI\PHPUnitWPSchema\Component::class,
+    \GraphQLAPI\PHPUnitWPFakerSchema\Component::class,
 ]);
 ```
 
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/graphql-api/phpunit-wp-schema.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/graphql-api/phpunit-wp-schema/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/phpunit-wp-schema.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/phpunit-wp-schema.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/phpunit-wp-schema.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/graphql-api/phpunit-wpfaker-schema/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/graphql-api/phpunit-wpfaker-schema.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/graphql-api/phpunit-wp-schema
-[link-travis]: https://travis-ci.org/graphql-api/phpunit-wp-schema
-[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wp-schema/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wp-schema
-[link-downloads]: https://packagist.org/packages/graphql-api/phpunit-wp-schema
+[link-packagist]: https://packagist.org/packages/graphql-api/phpunit-wpfaker-schema
+[link-travis]: https://travis-ci.org/graphql-api/phpunit-wpfaker-schema
+[link-scrutinizer]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wpfaker-schema/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/graphql-api/phpunit-wpfaker-schema
+[link-downloads]: https://packagist.org/packages/graphql-api/phpunit-wpfaker-schema
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

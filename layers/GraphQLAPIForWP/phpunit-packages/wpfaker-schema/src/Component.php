@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\PHPUnitWPSchema;
+namespace GraphQLAPI\PHPUnitWPFakerSchema;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Environment;

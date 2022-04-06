@@ -1,5 +1,5 @@
 {
-    "name": "graphql-api/phpunit-wp-schema",
+    "name": "graphql-api/phpunit-wpfaker-schema",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\PHPUnitWPSchema\\": "src"
+            "GraphQLAPI\\PHPUnitWPFakerSchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\PHPUnitWPSchema\\": "tests"
+            "GraphQLAPI\\PHPUnitWPFakerSchema\\": "tests"
         }
     },
     "scripts": {
