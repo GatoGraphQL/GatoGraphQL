@@ -175,12 +175,12 @@
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\PHPUnitWPFakerSchema\\": "src"
+            "GraphQLAPI\\WPFakerSchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\PHPUnitWPFakerSchema\\": "tests"
+            "GraphQLAPI\\WPFakerSchema\\": "tests"
         }
     },
     "scripts": {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\PHPUnitWPFakerSchema\Standalone\Upstream\ComponentModel;
+namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
 
-use GraphQLAPI\PHPUnitWPFakerSchema\Standalone\AbstractFakerFixtureQueryExecutionGraphQLServerTestCase;
+use GraphQLAPI\WPFakerSchema\Standalone\AbstractFakerFixtureQueryExecutionGraphQLServerTestCase;
 
 class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQueryExecutionGraphQLServerTestCase
 {
@@ -25,7 +25,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixture
             ...parent::getGraphQLServerComponentClasses(),
             ...[
                 \PoPWPSchema\Users\Component::class,
-                \GraphQLAPI\PHPUnitWPFakerSchema\Component::class,
+                \GraphQLAPI\WPFakerSchema\Component::class,
             ]
         ];
     }
