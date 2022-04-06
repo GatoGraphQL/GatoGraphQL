@@ -6,7 +6,7 @@ namespace GraphQLAPI\WPFakerSchema;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
-use GraphQLAPI\GraphQLAPI\App\AbstractComponentModelAppProxy;
+use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
 
 use function Brain\faker;
 

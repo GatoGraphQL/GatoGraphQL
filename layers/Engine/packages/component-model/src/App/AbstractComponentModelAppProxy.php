@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\GraphQLAPI\App;
+namespace PoP\ComponentModel\App;
 
 use PoP\ComponentModel\App as ComponentModelApp;
-use PoP\ComponentModel\App\AbstractRootAppProxy;
 use PoP\ComponentModel\AppInterface as ComponentModelAppInterface;
 use PoP\ComponentModel\Engine\EngineState;
 use PoP\ComponentModel\Feedback\FeedbackStore;
 use PoP\ComponentModel\Stores\MutationResolutionStoreInterface;
 use PoP\ComponentModel\Tracing\TracingStore;
+use PoP\Root\App\AbstractRootAppProxy;
 
 /**
  * Using proxy instead of inheritance, so that the upstream App
