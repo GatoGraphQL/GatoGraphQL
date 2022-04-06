@@ -26,16 +26,6 @@ class Component extends AbstractComponent
     }
 
     /**
-     * Do not enable when running PHPUnit tests
-     * (the needed methods, such as `__`, will be satisfied
-     * somewhere else)
-     */
-    protected function resolveEnabled(): bool
-    {
-        return !Environment::isApplicationEnvironmentDevPHPUnit();
-    }
-
-    /**
      * Initialize services
      *
      * @param string[] $skipSchemaComponentClasses
@@ -44,6 +34,15 @@ class Component extends AbstractComponent
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
+        /**
+         * Do not enable services when running PHPUnit tests
+         * (the needed methods, such as `__`, will be satisfied
+         * somewhere else)
+         */
+        if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+            return;
+        };
+
         $this->initServices(dirname(__DIR__), '', 'hybrid-services.yaml');
         $this->initServices(dirname(__DIR__));
     }
@@ -53,11 +52,27 @@ class Component extends AbstractComponent
      */
     protected function initializeSystemContainerServices(): void
     {
+        /**
+         * Do not enable services when running PHPUnit tests
+         * (the needed methods, such as `__`, will be satisfied
+         * somewhere else)
+         */
+        if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+            return;
+        };
         $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 
     public function componentLoaded(): void
     {
+        /**
+         * Do not enable services when running PHPUnit tests
+         * (the needed methods, such as `__`, will be satisfied
+         * somewhere else)
+         */
+        if (Environment::isApplicationEnvironmentDevPHPUnit()) {
+            return;
+        };
        Cortex::boot();
     }
 }
