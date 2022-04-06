@@ -10,11 +10,13 @@
   <coverage processUncoveredFiles="true">
     <include>
       <directory suffix=".php">layers/**/packages/*/src</directory>
+      <directory suffix=".php">layers/**/phpunit-packages/*/src</directory>
       <directory suffix=".php">layers/**/plugins/*/src</directory>
     </include>
   </coverage>
   <testsuite name="all">
     <directory>layers/**/packages/**/tests</directory>
+    <directory>layers/**/phpunit-packages/**/tests</directory>
     <directory>layers/**/plugins/**/tests</directory>
   </testsuite>
   <php>
