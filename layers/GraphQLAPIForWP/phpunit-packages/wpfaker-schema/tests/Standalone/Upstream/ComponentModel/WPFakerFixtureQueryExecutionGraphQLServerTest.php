@@ -6,7 +6,7 @@ namespace GraphQLAPI\PHPUnitWPFakerSchema\Standalone\Upstream\ComponentModel;
 
 use GraphQLAPI\PHPUnitWPFakerSchema\Standalone\AbstractFakerFixtureQueryExecutionGraphQLServerTestCase;
 
-class FakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQueryExecutionGraphQLServerTestCase
+class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFakerFixtureQueryExecutionGraphQLServerTestCase
 {
     /**
      * Directory under the fixture files are placed
