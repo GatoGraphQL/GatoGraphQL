@@ -18,6 +18,6 @@
     <directory>layers/**/plugins/**/tests</directory>
   </testsuite>
   <php>
-    <env name="APPLICATION_ENVIRONMENT" value="development"/>
+    <env name="APPLICATION_ENVIRONMENT" value="development-phpunit"/>
   </php>
 </phpunit>
