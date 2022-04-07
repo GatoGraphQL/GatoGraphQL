@@ -39,5 +39,6 @@ class Component extends AbstractComponent
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
+        $this->initServices(dirname(__DIR__), '/Overrides');
     }
 }
