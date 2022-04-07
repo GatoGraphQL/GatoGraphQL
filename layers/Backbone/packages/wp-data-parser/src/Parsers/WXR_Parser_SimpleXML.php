@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace PoPBackbone\WPDataParser\Parsers;
 
 use DOMDocument;
+use LibXMLError;
 use PoPBackbone\WPDataParser\Exception\ParserException;
 use SimpleXMLElement;
 
@@ -43,7 +44,10 @@ class WXR_Parser_SimpleXML
 		if ( ! $success || isset( $dom->doctype ) ) {
 			throw new ParserException(sprintf(
 				'There was an error when reading this WXR file: %s',
-				implode(', ', libxml_get_errors())
+				implode(', ', array_map(
+					$this->display_xml_error(...),
+					libxml_get_errors()
+				))
 			));
 		}
 
@@ -54,7 +58,10 @@ class WXR_Parser_SimpleXML
 		if ( ! $xml ) {
 			throw new ParserException(sprintf(
 				'There was an error when reading this WXR file: %s',
-				implode(', ', libxml_get_errors())
+				implode(', ', array_map(
+					$this->display_xml_error(...),
+					libxml_get_errors()
+				))
 			));
 		}
 
@@ -259,5 +266,31 @@ class WXR_Parser_SimpleXML
 			'base_blog_url' => $base_blog_url,
 			'version' => $wxr_version
 		);
+	}
+
+	/**
+	 * @see https://www.php.net/manual/en/function.libxml-get-errors.php
+	 */
+	private function display_xml_error(LibXMLError $error): string
+	{
+		$return = '';
+		switch ($error->level) {
+			case LIBXML_ERR_WARNING:
+				$return .= "Warning $error->code: ";
+				break;
+			case LIBXML_ERR_ERROR:
+				$return .= "Error $error->code: ";
+				break;
+			case LIBXML_ERR_FATAL:
+				$return .= "Fatal Error $error->code: ";
+				break;
+		}
+
+		$return .= trim($error->message) . " (Line: $error->line,  Column: $error->column)";
+
+		if ($error->file) {
+			$return .= " [File: $error->file]";
+		}
+		return $return;
 	}
 }
