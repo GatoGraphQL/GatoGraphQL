@@ -89,8 +89,8 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     {
         return match ($inputFieldName) {
             'id' => [SchemaCommonsFilterInputProcessor::class, SchemaCommonsFilterInputProcessor::FILTERINPUT_INCLUDE],
-            'username' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USERNAME_OR_USERNAMES],
-            'email' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL_OR_EMAILS],
+            'username' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_USERNAME],
+            'email' => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_EMAIL],
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

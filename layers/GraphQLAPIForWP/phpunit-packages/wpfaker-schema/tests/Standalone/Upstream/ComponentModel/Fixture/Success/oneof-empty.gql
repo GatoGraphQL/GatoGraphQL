@@ -1,0 +1,6 @@
+query {
+  user(by: {username: "non_existing_username"}) {
+    id
+    name
+  }
+}
