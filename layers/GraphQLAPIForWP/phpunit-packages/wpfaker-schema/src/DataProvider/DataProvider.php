@@ -25,7 +25,7 @@ class DataProvider implements DataProviderInterface
      */
     public function getFixedDataset(): array
     {
-        if ($this->initialized) {
+        if (!$this->initialized) {
             $this->initializeFixedDataset();
         }
         return $this->data;
