@@ -22,6 +22,20 @@ class DataProvider implements DataProviderInterface
     /**
      * The parsed WordPress data from one or more pre-defined export files.
      *
+     * Data is provided under the following entries:
+     *
+     * - "authors"
+     * - "posts"
+     * - "categories"
+     * - "tags"
+     * - "terms"
+     *
+     * Meta-data is provided under the following entries:
+     *
+     * - "base_url"
+     * - "base_blog_url"
+     * - "version"
+     *
      * @return array<string,mixed>
      * @throws DatasetFileException If the fixed dataset file does not end with ".xml" or ".php"
      */
