@@ -136,8 +136,16 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     {
         return array_values(array_map(
             fn (array $wpAuthor) => (int) $wpAuthor['author_id'],
-            $this->getDataProvider()->getFixedDataset()['authors']
+            $this->getUserFixedDataset()
         ));
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getUserFixedDataset(): array
+    {
+        return $this->getDataProvider()->getFixedDataset()['authors'] ?? [];
     }
 
     /**
@@ -146,7 +154,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
      */
     protected function getFakeUserDataEntries(array $userIDs = []): array
     {
-        $wpAuthors = $this->getDataProvider()->getFixedDataset()['authors'];
+        $wpAuthors = $this->getUserFixedDataset();
         if ($userIDs !== []) {
             array_filter(
                 $wpAuthors,
