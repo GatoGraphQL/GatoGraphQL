@@ -33,12 +33,23 @@ class WXR_Parser_SimpleXML
 
 		$dom = new DOMDocument;
 		$old_value = null;
-		if ( function_exists( 'libxml_disable_entity_loader' ) ) {
-			$old_value = libxml_disable_entity_loader( true );
+
+		/**
+		 * @todo Migrate `libxml_disable_entity_loader`, deprecated in PHP 8.0. Temporarily running code only in lower PHP versions.
+		 */
+		if (PHP_VERSION_ID < 80000) {
+			if ( function_exists( 'libxml_disable_entity_loader' ) ) {
+				$old_value = libxml_disable_entity_loader( true );
+			}
 		}
 		$success = $dom->loadXML( file_get_contents( $file ) );
 		if ( ! is_null( $old_value ) ) {
-			libxml_disable_entity_loader( $old_value );
+			/**
+			 * @todo Migrate `libxml_disable_entity_loader`, deprecated in PHP 8.0. Temporarily running code only in lower PHP versions.
+			 */
+			if (PHP_VERSION_ID < 80000) {
+				libxml_disable_entity_loader( $old_value );
+			}
 		}
 
 		if ( ! $success || isset( $dom->doctype ) ) {
