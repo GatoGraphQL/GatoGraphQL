@@ -34,7 +34,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function getUserBy(string $property, string | int $propertyValue): ?object
     {
-        $user = $this->getUserByByCMS($property, $propertyValue);
+        $user = $this->resolveGetUserBy($property, $propertyValue);
         if ($user === false) {
             return null;
         }
@@ -47,7 +47,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      *
      * Overridable by Faker tests.
      */
-    protected function getUserByByCMS(string $property, string | int $propertyValue): WP_User|false
+    protected function resolveGetUserBy(string $property, string | int $propertyValue): WP_User|false
     {
         return get_user_by($property, $propertyValue);
     }
@@ -121,7 +121,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
 
         // Execute the query
-        $ret = $this->getUsersByCMS($query);
+        $ret = $this->resolveGetUsers($query);
 
         // Remove the hook
         if ($filterByEmails) {
@@ -136,7 +136,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      *
      * Overridable by Faker tests.
      */
-    protected function getUsersByCMS(array $query): array
+    protected function resolveGetUsers(array $query): array
     {
         return get_users($query);
     }
@@ -208,11 +208,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            $query['order'] = $this->escSQLByCMS($query['order']);
+            $query['order'] = $this->resolveEscSQL($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->escSQLByCMS($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
@@ -274,7 +274,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
      *
      * Overridable by Faker tests.
      */
-    protected function escSQLByCMS(string $string): string
+    protected function resolveEscSQL(string $string): string
     {
         return esc_sql($string);
     }

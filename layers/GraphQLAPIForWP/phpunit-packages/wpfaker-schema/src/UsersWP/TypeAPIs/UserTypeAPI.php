@@ -27,7 +27,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         return $this->dataProvider ??= $this->instanceManager->getInstance(DataProviderInterface::class);
     }
 
-    protected function getUsersByCMS(array $query): array
+    protected function resolveGetUsers(array $query): array
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -163,7 +163,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         );
     }
 
-    protected function getUserByByCMS(string $property, string | int $propertyValue): WP_User|false
+    protected function resolveGetUserBy(string $property, string | int $propertyValue): WP_User|false
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -203,7 +203,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         )));
     }
 
-    protected function escSQLByCMS(string $string): string
+    protected function resolveEscSQL(string $string): string
     {
         return $string;
     }
