@@ -8,14 +8,16 @@ use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 use PoPCMSSchema\Menus\TypeAPIs\MenuTypeAPIInterface;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
+use PoPCMSSchema\UsersWP\TypeAPIs\TypeAPITrait;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
     use BasicServiceTrait;
+    use TypeAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
 
@@ -145,12 +147,12 @@ class MenuTypeAPI implements MenuTypeAPIInterface
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            $query['order'] = \esc_sql($query['order']);
+            $query['order'] = $this->resolveEscSQL($query['order']);
         }
         if (isset($query['orderby'])) {
             // This param can either be a string or an array. Eg:
             // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
-            $query['orderby'] = \esc_sql($query['orderby']);
+            $query['orderby'] = $this->resolveEscSQL($query['orderby']);
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
