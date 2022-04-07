@@ -77,12 +77,22 @@ class DataProvider implements DataProviderInterface
                     )
                 );
             }
-            /**
-             * Merge the datasets together
-             */
-            $this->data = array_merge_recursive(
-                $this->data,
-                $fileData
+            $this->mergeDataset($fileData);
+        }
+    }
+
+    protected function mergeDataset(array $data): void
+    {
+        /**
+         * Merge the datasets together.
+         *
+         * Use `array_merge` as to have downstream datasets
+         * be able to override entries.
+         */
+        foreach (array_keys($data) as $entityType) {
+            $this->data[$entityType] = array_merge(
+                $this->data[$entityType] ?? [],
+                $data[$entityType]
             );
         }
     }
