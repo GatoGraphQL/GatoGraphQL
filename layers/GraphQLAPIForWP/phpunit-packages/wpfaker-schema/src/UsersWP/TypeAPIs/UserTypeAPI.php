@@ -8,6 +8,7 @@ use GraphQLAPI\WPFakerSchema\App;
 use GraphQLAPI\WPFakerSchema\Component;
 use GraphQLAPI\WPFakerSchema\ComponentConfiguration;
 use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
+use GraphQLAPI\WPFakerSchema\TypeAPIs\TypeAPITrait;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;
 use WP_User;
 
@@ -16,6 +17,8 @@ use WP_User;
  */
 class UserTypeAPI extends UpstreamUserTypeAPI
 {
+    use TypeAPITrait;
+    
     private ?DataProviderInterface $dataProvider = null;
 
     final public function setDataProvider(DataProviderInterface $dataProvider): void
@@ -201,10 +204,5 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             fn (array $fakeUserDataEntry): ?array => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry : null,
             $userDataEntries,
         )));
-    }
-
-    protected function resolveEscSQL(string $string): string
-    {
-        return $string;
     }
 }
