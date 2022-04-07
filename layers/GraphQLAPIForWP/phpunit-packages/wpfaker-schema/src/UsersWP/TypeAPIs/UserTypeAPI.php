@@ -73,10 +73,22 @@ class UserTypeAPI extends UpstreamUserTypeAPI
          * Get users from the fixed dataset?
          */
         if ($useFixedDataset) {
-            $userIDs = array_slice(
-                $this->getFakeUserIDs(),
+            $userDataEntries = $this->getFakeUserDataEntries();
+            if (isset($query['login'])) {
+                $userDataEntries = $this->filterUserDataEntriesByProperty(
+                    $userDataEntries,
+                    'login',
+                    $query['login']
+                );
+            }
+            $userDataEntries = array_slice(
+                $userDataEntries,
                 $query['offset'] ?? 0,
                 $query['number'] ?? 10
+            );
+            $userIDs = array_map(
+                fn (array $userDataEntry) : int => $userDataEntry['id'],
+                $userDataEntries,
             );
             if ($retrieveUserIDs) {
                 return $userIDs;
@@ -159,15 +171,20 @@ class UserTypeAPI extends UpstreamUserTypeAPI
 
         if ($useFixedDataset) {
             /**
-             * Get the ID of all users matching the passed property
+             * Get the data of all users matching the passed property
              */
-            $userIDs = array_values(array_filter(array_map(
-                fn (array $fakeUserDataEntry) : ?int => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry['id'] : null,
+            $userDataEntries = $this->filterUserDataEntriesByProperty(
                 $this->getFakeUserDataEntries(),
-            )));
-            if ($userIDs === []) {
+                $property,
+                $propertyValue
+            );
+            if ($userDataEntries === []) {
                 return false;
             }
+            $userIDs = array_map(
+                fn (array $userDataEntry) : int => $userDataEntry['id'],
+                $userDataEntries,
+            );
             $users = $this->getFakeUsers($userIDs);
             return $users[0];
         }
@@ -176,5 +193,13 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             // Whatever data was provided, mirror it back in a random new user
             $property => $propertyValue
         ]);
+    }
+
+    protected function filterUserDataEntriesByProperty(array $userDataEntries, string $property, string | int $propertyValue): array
+    {
+        return array_values(array_filter(array_map(
+            fn (array $fakeUserDataEntry) : ?array => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry : null,
+            $userDataEntries,
+        )));
     }
 }
