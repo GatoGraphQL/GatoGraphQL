@@ -61,8 +61,10 @@ class WXR_Parser_SimpleXML
 		if ( ! $wxr_version ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
 		}
+		/** @var array $wxr_version */
 
 		$wxr_version = (string) trim( $wxr_version[0] );
+		/** @var string $wxr_version */
 		// confirm that we are dealing with the correct file format
 		if ( ! preg_match( '/^\d+\.\d+$/', $wxr_version ) ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
@@ -74,6 +76,7 @@ class WXR_Parser_SimpleXML
 
 		$base_blog_url = $xml->xpath('/rss/channel/wp:base_blog_url');
 		if ( $base_blog_url ) {
+			/** @var array $base_blog_url */
 			$base_blog_url = (string) trim( $base_blog_url[0] );
 		} else {
 			$base_blog_url = $base_url;

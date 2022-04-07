@@ -74,7 +74,7 @@ class WXR_Parser_XML
 		}
 		xml_parser_free( $xml );
 
-		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
+		if ( $this->wxr_version === false || ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
 		}
 
