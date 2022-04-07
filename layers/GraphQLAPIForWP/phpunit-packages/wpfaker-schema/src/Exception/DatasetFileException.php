@@ -6,6 +6,6 @@ namespace GraphQLAPI\WPFakerSchema\Exception;
 
 use Exception;
 
-final class DatasetFileExtensionException extends Exception
+final class DatasetFileException extends Exception
 {
 }
