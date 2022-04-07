@@ -17,11 +17,13 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
 /**
  * WXR Parser that makes use of the SimpleXML PHP extension.
  */
-class WXR_Parser_SimpleXML {
+class WXR_Parser_SimpleXML
+{
 	/**
 	 * @throws ParserException
 	 */
-	function parse( $file ) {
+	function parse( $file )
+	{
 		$authors = $posts = $categories = $tags = $terms = array();
 
 		$internal_errors = libxml_use_internal_errors(true);
@@ -47,20 +49,23 @@ class WXR_Parser_SimpleXML {
 		unset( $dom );
 
 		// halt if loading produces an error
-		if ( ! $xml )
+		if ( ! $xml ) {
 			throw new ParserException(sprintf(
 				'There was an error when reading this WXR file: %s',
 				implode(', ', libxml_get_errors())
 			));
+		}
 
 		$wxr_version = $xml->xpath('/rss/channel/wp:wxr_version');
-		if ( ! $wxr_version )
+		if ( ! $wxr_version ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
+		}
 
 		$wxr_version = (string) trim( $wxr_version[0] );
 		// confirm that we are dealing with the correct file format
-		if ( ! preg_match( '/^\d+\.\d+$/', $wxr_version ) )
+		if ( ! preg_match( '/^\d+\.\d+$/', $wxr_version ) ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
+		}
 
 		$base_url = $xml->xpath('/rss/channel/wp:base_site_url');
 		$base_url = (string) trim( isset( $base_url[0] ) ? $base_url[0] : '' );
@@ -74,10 +79,12 @@ class WXR_Parser_SimpleXML {
 		}
 
 		$namespaces = $xml->getDocNamespaces();
-		if ( ! isset( $namespaces['wp'] ) )
+		if ( ! isset( $namespaces['wp'] ) ) {
 			$namespaces['wp'] = 'http://wordpress.org/export/1.1/';
-		if ( ! isset( $namespaces['excerpt'] ) )
+		}
+		if ( ! isset( $namespaces['excerpt'] ) ) {
 			$namespaces['excerpt'] = 'http://wordpress.org/export/1.1/excerpt/';
+		}
 
 		// grab authors
 		foreach ( $xml->xpath('/rss/channel/wp:author') as $author_arr ) {
@@ -183,17 +190,19 @@ class WXR_Parser_SimpleXML {
 			$post['post_password'] = (string) $wp->post_password;
 			$post['is_sticky'] = (int) $wp->is_sticky;
 
-			if ( isset($wp->attachment_url) )
+			if ( isset($wp->attachment_url) ) {
 				$post['attachment_url'] = (string) $wp->attachment_url;
+			}
 
 			foreach ( $item->category as $c ) {
 				$att = $c->attributes();
-				if ( isset( $att['nicename'] ) )
+				if ( isset( $att['nicename'] ) ) {
 					$post['terms'][] = array(
 						'name' => (string) $c,
 						'slug' => (string) $att['nicename'],
 						'domain' => (string) $att['domain']
 					);
+				}
 			}
 
 			foreach ( $wp->postmeta as $meta ) {

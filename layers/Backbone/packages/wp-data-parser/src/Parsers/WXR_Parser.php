@@ -16,17 +16,19 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
 /**
  * WordPress Importer class for managing parsing of WXR files.
  */
-class WXR_Parser {
+class WXR_Parser
+{
 	/**
 	 * @throws ParserException
 	 */
-	function parse( $file ) {
+	function parse( $file )
+	{
 		// Attempt to use proper XML parsers first
 		if ( extension_loaded( 'simplexml' ) ) {
 			$parser = new WXR_Parser_SimpleXML;
 			return $parser->parse( $file );
 		}
-		
+
 		if ( extension_loaded( 'xml' ) ) {
 			$parser = new WXR_Parser_XML;
 			return $parser->parse( $file );

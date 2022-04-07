@@ -16,7 +16,8 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
 /**
  * WXR Parser that makes use of the XML Parser PHP extension.
  */
-class WXR_Parser_XML {
+class WXR_Parser_XML
+{
 	var $wp_tags = array(
 		'wp:post_id', 'wp:post_date', 'wp:post_date_gmt', 'wp:comment_status', 'wp:ping_status', 'wp:attachment_url',
 		'wp:status', 'wp:post_name', 'wp:post_parent', 'wp:menu_order', 'wp:post_type', 'wp:post_password',
@@ -34,7 +35,8 @@ class WXR_Parser_XML {
 	/**
 	 * @throws ParserException
 	 */
-	function parse( $file ) {
+	function parse( $file )
+	{
 		$this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
 		$this->authors = $this->posts = $this->term = $this->category = $this->tag = array();
 
@@ -57,8 +59,9 @@ class WXR_Parser_XML {
 		}
 		xml_parser_free( $xml );
 
-		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) )
+		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
+		}
 
 		return array(
 			'authors' => $this->authors,
@@ -72,7 +75,8 @@ class WXR_Parser_XML {
 		);
 	}
 
-	function tag_open( $parse, $tag, $attr ) {
+	function tag_open( $parse, $tag, $attr )
+	{
 		if ( in_array( $tag, $this->wp_tags ) ) {
 			$this->in_tag = substr( $tag, 3 );
 			return;
@@ -90,22 +94,43 @@ class WXR_Parser_XML {
 					$this->sub_data['slug'] = $attr['nicename'];
 				}
 				break;
-			case 'item': $this->in_post = true;
-			case 'title': if ( $this->in_post ) $this->in_tag = 'post_title'; break;
-			case 'guid': $this->in_tag = 'guid'; break;
-			case 'dc:creator': $this->in_tag = 'post_author'; break;
-			case 'content:encoded': $this->in_tag = 'post_content'; break;
-			case 'excerpt:encoded': $this->in_tag = 'post_excerpt'; break;
+			case 'item':
+				$this->in_post = true;
+			case 'title':
+				if ( $this->in_post ) {
+					$this->in_tag = 'post_title';
+				}
+				break;
+			case 'guid':
+				$this->in_tag = 'guid';
+				break;
+			case 'dc:creator':
+				$this->in_tag = 'post_author';
+				break;
+			case 'content:encoded':
+				$this->in_tag = 'post_content';
+				break;
+			case 'excerpt:encoded':
+				$this->in_tag = 'post_excerpt';
+				break;
 
-			case 'wp:term_slug': $this->in_tag = 'slug'; break;
-			case 'wp:meta_key': $this->in_sub_tag = 'key'; break;
-			case 'wp:meta_value': $this->in_sub_tag = 'value'; break;
+			case 'wp:term_slug':
+				$this->in_tag = 'slug';
+				break;
+			case 'wp:meta_key':
+				$this->in_sub_tag = 'key';
+				break;
+			case 'wp:meta_value':
+				$this->in_sub_tag = 'value';
+				break;
 		}
 	}
 
-	function cdata( $parser, $cdata ) {
-		if ( ! trim( $cdata ) )
+	function cdata( $parser, $cdata )
+	{
+		if ( ! trim( $cdata ) ) {
 			return;
+		}
 
 		if ( false !== $this->in_tag || false !== $this->in_sub_tag ) {
 			$this->cdata .= $cdata;
@@ -114,12 +139,14 @@ class WXR_Parser_XML {
 		}
 	}
 
-	function tag_close( $parser, $tag ) {
+	function tag_close( $parser, $tag )
+	{
 		switch ( $tag ) {
 			case 'wp:comment':
 				unset( $this->sub_data['key'], $this->sub_data['value'] ); // remove meta sub_data
-				if ( ! empty( $this->sub_data ) )
+				if ( ! empty( $this->sub_data ) ) {
 					$this->data['comments'][] = $this->sub_data;
+				}
 				$this->sub_data = false;
 				break;
 			case 'wp:commentmeta':
@@ -136,8 +163,9 @@ class WXR_Parser_XML {
 				$this->sub_data = false;
 				break;
 			case 'wp:postmeta':
-				if ( ! empty( $this->sub_data ) )
+				if ( ! empty( $this->sub_data ) ) {
 					$this->data['postmeta'][] = $this->sub_data;
+				}
 				$this->sub_data = false;
 				break;
 			case 'item':
@@ -158,8 +186,9 @@ class WXR_Parser_XML {
 				$this->sub_data = false;
 				break;
 			case 'wp:author':
-				if ( ! empty($this->data['author_login']) )
+				if ( ! empty($this->data['author_login']) ) {
 					$this->authors[$this->data['author_login']] = $this->data;
+				}
 				$this->data = false;
 				break;
 			case 'wp:base_site_url':
