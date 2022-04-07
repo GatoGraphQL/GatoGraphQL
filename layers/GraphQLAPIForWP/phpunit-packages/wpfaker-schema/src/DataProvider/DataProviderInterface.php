@@ -29,7 +29,7 @@ interface DataProviderInterface
      * @throws DatasetFileException If the fixed dataset file does not end with ".xml" or ".php"
      */
     public function getFixedDataset(): array;
-    
+
     /**
      * The file providing the fixed dataset. It can be either:
      *
