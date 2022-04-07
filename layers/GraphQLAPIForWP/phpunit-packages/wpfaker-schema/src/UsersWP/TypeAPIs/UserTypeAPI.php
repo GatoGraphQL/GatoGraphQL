@@ -41,7 +41,10 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         $ids = $query['include'] ?? null;
         if (!empty($ids)) {
             /** @var int[] */
-            $userIDs = is_string($ids) ? array_map(trim(...), explode(',', $ids)) : $ids;
+            $userIDs = is_string($ids) ? array_map(
+                fn (string $id) => (int) trim($id),
+                explode(',', $ids)
+            ) : $ids;
             if ($retrieveUserIDs) {
                 return $userIDs;
             }
