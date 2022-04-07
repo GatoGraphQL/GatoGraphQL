@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\WPFakerSchema\DataProvider;
 
-use GraphQLAPI\WPFakerSchema\Exception\DatasetFileExtensionException;
+use GraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
 
 interface DataProviderInterface
 {
     /**
-     * The parsed WordPress data from a pre-defined export file.
+     * The parsed WordPress data from one or more pre-defined export files.
      *
      * @return array<string,mixed>
-     * @throws DatasetFileExtensionException If the fixed dataset file does not end with ".xml" or ".php"
+     * @throws DatasetFileException If the fixed dataset file does not end with ".xml" or ".php"
      */
     public function getFixedDataset(): array;
     /**
@@ -23,6 +23,8 @@ interface DataProviderInterface
      *
      * In the 1st case, the data is retrieved directly from the PHP file.
      * In the 2nd case, the file is parsed via `WPDataParser`.
+     *
+     * @return string[]
      */
-    public function getFixedDatasetFile(): string;
+    public function getFixedDatasetFiles(): array;
 }
