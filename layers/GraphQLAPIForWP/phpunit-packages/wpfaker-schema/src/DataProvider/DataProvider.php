@@ -6,6 +6,8 @@ namespace GraphQLAPI\WPFakerSchema\DataProvider;
 
 use GraphQLAPI\WPFakerSchema\Exception\DatasetFileExtensionException;
 use PoP\Root\Services\BasicServiceTrait;
+use PoPBackbone\WPDataParser\Exception\ParserException;
+use PoPBackbone\WPDataParser\WPDataParser;
 
 class DataProvider implements DataProviderInterface
 {
@@ -31,15 +33,19 @@ class DataProvider implements DataProviderInterface
 
     /**
      * @throws DatasetFileExtensionException If the fixed dataset file does not end with ".xml" or ".php"
+     * @throws ParserException If the fixed dataset file is invalid
      */
     protected function initializeFixedDataset(): void
     {
+        $this->initialized = true;
         $file = $this->getFixedDatasetFile();
 
         /**
-         * Validate the file is right
+         * Validate the file is either XML or PHP,
+         * or throw an Exception otherwise
          */
-        if (!(str_ends_with($file, '.xml') || str_ends_with($file, '.php'))) {
+        $isXML = str_ends_with($file, '.xml');
+        if (!($isXML || str_ends_with($file, '.php'))) {
             throw new DatasetFileExtensionException(
                 sprintf(
                     $this->__(
@@ -54,15 +60,16 @@ class DataProvider implements DataProviderInterface
         /**
          * WordPress data export XML file
          */
-        if (str_ends_with($file, '.xml')) {
-
+        if ($isXML) {
+            $wpDataParser = new WPDataParser();
+            $this->data = $wpDataParser->parse($file);
+            return;
         }
 
         /**
          * WordPress data as PHP file
          */
-        
-         $this->data = require 'includeme.php'; 
+        $this->data = require $file; 
     }
 
     /**
