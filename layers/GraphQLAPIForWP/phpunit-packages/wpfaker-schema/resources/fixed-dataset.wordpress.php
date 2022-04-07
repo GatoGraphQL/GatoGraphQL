@@ -5,13 +5,13 @@ declare(strict_types=1);
 /**
  * This file was automatically generated.
  *
- * Source: `sample-data.wordpress.xml`
+ * Source: `fixed-dataset.wordpress.xml`
  * Process: run this PHP code, and copy/paste the result from `var_export`:
  *
  * ```php
  * use PoPBackbone\WPDataParser;
  * 
- * $wpDataXMLExportFile = __DIR__ . '/sample-data.wordpress.xml';
+ * $wpDataXMLExportFile = __DIR__ . '/fixed-dataset.wordpress.xml';
  * $wpDataParser = new WPDataParser();
  * $parsedData = $wpDataParser->parse($wpDataXMLExportFile);
  * var_export($parsedData);
