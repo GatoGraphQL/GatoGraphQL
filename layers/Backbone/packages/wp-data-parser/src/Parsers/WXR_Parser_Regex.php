@@ -146,7 +146,7 @@ class WXR_Parser_Regex
 	}
 
 	/**
-	 * @return array<string,array<array<string,string>>>
+	 * @return array<string, array<array<string, string>>|string>
 	 */
 	private function process_category(string $c): array
 	{
@@ -167,7 +167,7 @@ class WXR_Parser_Regex
 	}
 
 	/**
-	 * @return array<string,array<array<string,string>>>
+	 * @return array<string,array<array<string,string>>|string>
 	 */
 	private function process_tag(string $t): array
 	{
@@ -187,7 +187,7 @@ class WXR_Parser_Regex
 	}
 
 	/**
-	 * @return array<string,array<array<string,string>>>
+	 * @return array<string,array<array<string,string>>|string>
 	 */
 	private function process_term(string $t): array
 	{
@@ -340,7 +340,10 @@ class WXR_Parser_Regex
 		return '<' . strtolower( $matches[1] );
 	}
 
-	private function fopen(string $filename, string $mode = 'r'): resource|false
+	/**
+	 * @return resource|false
+	 */
+	private function fopen(string $filename, string $mode = 'r')
 	{
 		if ( $this->has_gzip ) {
 			return gzopen( $filename, $mode );
@@ -348,7 +351,10 @@ class WXR_Parser_Regex
 		return fopen( $filename, $mode );
 	}
 
-	private function feof(resource $fp ): bool
+	/**
+	 * @param resource $fp
+	 */
+	private function feof( $fp ): bool
 	{
 		if ( $this->has_gzip ) {
 			return gzeof( $fp );
@@ -356,7 +362,10 @@ class WXR_Parser_Regex
 		return feof( $fp );
 	}
 
-	private function fgets(resource $fp, int $len = 8192 ): string|false
+	/**
+	 * @param resource $fp
+	 */
+	private function fgets( $fp, int $len = 8192 ): string|false
 	{
 		if ( $this->has_gzip ) {
 			return gzgets( $fp, $len );
@@ -364,7 +373,10 @@ class WXR_Parser_Regex
 		return fgets( $fp, $len );
 	}
 
-	private function fclose(resource $fp ): bool
+	/**
+	 * @param resource $fp
+	 */
+	private function fclose( $fp ): bool
 	{
 		if ( $this->has_gzip ) {
 			return gzclose( $fp );

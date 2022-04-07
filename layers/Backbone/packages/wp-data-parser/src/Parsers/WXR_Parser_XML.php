@@ -33,18 +33,21 @@ class WXR_Parser_XML
 	);
 
 	private bool|string $wxr_version;
-	private bool $in_post;
-	private bool $cdata;
-	private bool $data;
-	private bool $sub_data;
-	private bool $in_tag;
-	private bool $in_sub_tag;
+	private bool|string $in_post;
+	private bool|string $cdata;
+	private bool|string $data;
+	private bool|string|array $sub_data;
+	private bool|string $in_tag;
+	private bool|string $in_sub_tag;
 
 	private array $authors;
 	private array $posts;
 	private array $term;
 	private array $category;
 	private array $tag;
+
+	private bool|string $base_url;
+	private bool|string $base_blog_url;
 
 	/**
 	 * @return array<string,mixed>
@@ -59,8 +62,8 @@ class WXR_Parser_XML
 		xml_parser_set_option( $xml, XML_OPTION_SKIP_WHITE, 1 );
 		xml_parser_set_option( $xml, XML_OPTION_CASE_FOLDING, 0 );
 		xml_set_object( $xml, $this );
-		xml_set_character_data_handler( $xml, 'cdata' );
-		xml_set_element_handler( $xml, 'tag_open', 'tag_close' );
+		xml_set_character_data_handler( $xml, $this->cdata(...) );
+		xml_set_element_handler( $xml, $this->tag_open(...), $this->tag_close(...) );
 
 		if ( ! xml_parse( $xml, file_get_contents( $file ), true ) ) {
 			$current_line = xml_get_current_line_number( $xml );
@@ -68,16 +71,20 @@ class WXR_Parser_XML
 			$error_code = xml_get_error_code( $xml );
 			$error_string = xml_error_string( $error_code );
 			throw new ParserException(sprintf(
-				'There was an error when reading this WXR file: %s',
-				array( $current_line, $current_column, $error_string )
+				'There was an error when reading this WXR file (line: %s, column: %s): %s',
+				$current_line,
+				$current_column,
+				$error_string
 			));
 		}
 		xml_parser_free( $xml );
 
-		if ( $this->wxr_version === false || ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
+		// if (! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
+		if ( $this->wxr_version === false ) {
 			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
 		}
 
+		/** @phpstan-ignore-next-line */
 		return array(
 			'authors' => $this->authors,
 			'posts' => $this->posts,
@@ -93,7 +100,7 @@ class WXR_Parser_XML
 	/**
 	 * @param array<string,string> $attr
 	 */
-	private function tag_open(string $parse, string $tag, array $attr ): void
+	protected function tag_open(string $parse, string $tag, array $attr ): void
 	{
 		if ( in_array( $tag, $this->wp_tags ) ) {
 			$this->in_tag = substr( $tag, 3 );
@@ -144,7 +151,7 @@ class WXR_Parser_XML
 		}
 	}
 
-	private function cdata(string $parser, string $cdata): void
+	protected function cdata(string $parser, string $cdata): void
 	{
 		if ( ! trim( $cdata ) ) {
 			return;
@@ -157,7 +164,7 @@ class WXR_Parser_XML
 		}
 	}
 
-	private function tag_close(string $parser, string $tag): void
+	protected function tag_close(string $parser, string $tag): void
 	{
 		switch ( $tag ) {
 			case 'wp:comment':
