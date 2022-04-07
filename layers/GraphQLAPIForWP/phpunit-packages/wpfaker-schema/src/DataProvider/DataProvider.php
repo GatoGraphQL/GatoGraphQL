@@ -50,7 +50,7 @@ class DataProvider implements DataProviderInterface
             /**
              * Validate all files are either XML or PHP,
              * or throw an Exception otherwise
-             */            
+             */
             if (!($isXML || str_ends_with($file, '.php'))) {
                 throw new DatasetFileException(
                     sprintf(
