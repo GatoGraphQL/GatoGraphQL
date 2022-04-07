@@ -985,6 +985,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                         [
                                             $this->directive,
                                             $e->getMessage(),
+                                            $e->getTraceAsString(),
                                         ]
                                     ),
                                     LocationHelper::getNonSpecificLocation(),
@@ -1004,6 +1005,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         [
                             $this->directive,
                             $e->getMessage(),
+                            $e->getTraceAsString(),
                         ]
                     )
                     : new FeedbackItemResolution(
