@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
 use function get_post_status;
+
 use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\Component;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration;
@@ -13,7 +14,6 @@ use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
-
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 

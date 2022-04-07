@@ -18,7 +18,7 @@ use WP_User;
 class UserTypeAPI extends UpstreamUserTypeAPI
 {
     use TypeAPITrait;
-    
+
     private ?DataProviderInterface $dataProvider = null;
 
     final public function setDataProvider(DataProviderInterface $dataProvider): void

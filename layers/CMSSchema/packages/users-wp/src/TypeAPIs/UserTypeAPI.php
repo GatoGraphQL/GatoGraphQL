@@ -22,7 +22,7 @@ use function get_users;
 class UserTypeAPI extends AbstractUserTypeAPI
 {
     use TypeAPITrait;
-    
+
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
