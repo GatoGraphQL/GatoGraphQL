@@ -1277,7 +1277,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                                 ErrorFeedbackItemProvider::E6,
                                 [
                                     $fieldName,
-                                    $e->getMessage()
+                                    $e->getMessage(),
+                                    $e->getTraceAsString(),
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
@@ -1293,7 +1294,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         ErrorFeedbackItemProvider::E6,
                         [
                             $fieldName,
-                            $e->getMessage()
+                            $e->getMessage(),
+                            $e->getTraceAsString(),
                         ]
                     )
                     : new FeedbackItemResolution(
