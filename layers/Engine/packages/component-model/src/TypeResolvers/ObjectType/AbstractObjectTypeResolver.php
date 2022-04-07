@@ -491,6 +491,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                                 [
                                     $fieldName,
                                     $e->getMessage(),
+                                    $e->getTraceAsString()
                                 ]
                             ),
                             LocationHelper::getNonSpecificLocation(),
@@ -507,6 +508,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         [
                             $fieldName,
                             $e->getMessage(),
+                            $e->getTraceAsString()
                         ]
                     )
                     : new FeedbackItemResolution(
