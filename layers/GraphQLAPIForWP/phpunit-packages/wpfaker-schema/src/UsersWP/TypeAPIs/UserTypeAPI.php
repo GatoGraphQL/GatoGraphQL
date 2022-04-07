@@ -51,7 +51,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             $userIDs = array_map(
                 fn (array $wpAuthor) => $wpAuthor['author_id'],
                 array_slice(
-                    $this->getDataProvider()['authors'],
+                    $this->getDataProvider()->getFixedDataset()['authors'],
                     $query['offset'] ?? 0,
                     $query['number'] ?? 10
                 )
@@ -103,7 +103,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     protected function getFakeDataForUsers(array $userIDs): array
     {
         $wpAuthors = array_filter(
-            $this->getDataProvider()['authors'],
+            $this->getDataProvider()->getFixedDataset()['authors'],
             fn (array $wpAuthor) => in_array($wpAuthor['author_id'], $userIDs)
         );
         return array_map(
