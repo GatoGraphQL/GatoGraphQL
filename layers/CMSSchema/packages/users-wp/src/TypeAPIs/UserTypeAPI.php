@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UsersWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Constants\UserOrderBy;
 use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
+use PoPCMSSchema\UsersWP\TypeAPIs\TypeAPITrait;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;
 use WP_User_Query;
 
 use function get_user_by;
 use function get_users;
-use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class UserTypeAPI extends AbstractUserTypeAPI
 {
+    use TypeAPITrait;
+    
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -266,17 +268,6 @@ class UserTypeAPI extends AbstractUserTypeAPI
                 $query->query_where = str_replace($replace, $replacement, $query->query_where);
             }
         }
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveEscSQL(string $string): string
-    {
-        return esc_sql($string);
     }
 
     /**
