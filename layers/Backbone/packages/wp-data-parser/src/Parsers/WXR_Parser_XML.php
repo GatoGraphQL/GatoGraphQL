@@ -32,6 +32,20 @@ class WXR_Parser_XML
 		'wp:comment_approved', 'wp:comment_type', 'wp:comment_parent', 'wp:comment_user_id',
 	);
 
+	private bool|string $wxr_version;
+	private bool $in_post;
+	private bool $cdata;
+	private bool $data;
+	private bool $sub_data;
+	private bool $in_tag;
+	private bool $in_sub_tag;
+
+	private array $authors;
+	private array $posts;
+	private array $term;
+	private array $category;
+	private array $tag;
+
 	/**
 	 * @return array<string,mixed>
 	 * @throws ParserException
