@@ -24,4 +24,19 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
             ]
         ];
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getGraphQLServerComponentClassConfiguration(): array
+    {
+        return [
+            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...[
+                \GraphQLAPI\WPFakerSchema\Component::class => [
+                    \GraphQLAPI\WPFakerSchema\Environment::USE_FIXED_DATASET => true,
+                ],
+            ]
+        ];
+    }
 }
