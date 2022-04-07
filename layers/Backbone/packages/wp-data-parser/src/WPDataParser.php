@@ -22,6 +22,12 @@ class WPDataParser
 	 */
 	public function parse(string $wpDataXMLExportFile): array
     {
+        if (!file_exists($wpDataXMLExportFile)) {
+            throw new ParserException(sprintf(
+                'WordPress expord data file "%s" does not exist',
+                $wpDataXMLExportFile
+            ));
+        }
         $parser = new WXR_Parser();
 		return $parser->parse($wpDataXMLExportFile);
     }
