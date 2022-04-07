@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface:
-        class: \GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs\UserTypeAPI
+    GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface:
+        class: \GraphQLAPI\WPFakerSchema\DataProvider\DataProvider
