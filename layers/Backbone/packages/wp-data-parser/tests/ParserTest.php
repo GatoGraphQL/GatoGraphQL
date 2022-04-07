@@ -11,7 +11,7 @@ class ParserTest extends TestCase
 {
     public function testParser(): void
     {
-        $wpDataXMLExportFile = __DIR__ . '/sample-data.wordpress.xml';
+        $wpDataXMLExportFile = __DIR__ . '/Resources/sample-data.wordpress.xml';
         $wpDataParser = new WPDataParser();
         $parsedData = $wpDataParser->parse($wpDataXMLExportFile);
         $this->assertEquals(
@@ -26,6 +26,14 @@ class ParserTest extends TestCase
     {
         $this->expectException(ParserException::class);
         $wpDataXMLExportFile = __DIR__ . '/Resources/invalid.wordpress.xml';
+        $wpDataParser = new WPDataParser();
+        $parsedData = $wpDataParser->parse($wpDataXMLExportFile);
+    }
+
+    public function testNonExistingFile(): void
+    {
+        $this->expectException(ParserException::class);
+        $wpDataXMLExportFile = __DIR__ . '/Resources/non-existing.wordpress.xml';
         $wpDataParser = new WPDataParser();
         $parsedData = $wpDataParser->parse($wpDataXMLExportFile);
     }
