@@ -17,6 +17,11 @@
             "PoPBackbone\\WPDataParser\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPBackbone\\WPDataParser\\": "tests"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "0.9-dev"
