@@ -13,6 +13,8 @@ namespace PoPBackbone\WPDataParser\Parsers;
 
 use PoPBackbone\WPDataParser\Exception\ParserException;
 
+use function extension_loaded;
+
 /**
  * WordPress Importer class for managing parsing of WXR files.
  */

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPBackbone\WPDataParser;
 
 use PoPBackbone\WPDataParser\Exception\ParserException;
+use PoPBackbone\WPDataParser\Parsers\WXR_Parser;
 
 /**
  * This is a fork of the WordPress Importer plugin, adapted for PoP
@@ -21,6 +22,7 @@ class WPDataParser
 	 */
 	public function parse(string $wpDataXMLExportFile): array
     {
-        return [];
+        $parser = new WXR_Parser();
+		return $parser->parse($wpDataXMLExportFile);
     }
 }
