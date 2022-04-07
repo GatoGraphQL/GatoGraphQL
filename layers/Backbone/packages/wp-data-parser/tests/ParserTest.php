@@ -25,9 +25,18 @@ class ParserTest extends TestCase
         return array(
             'authors' =>
             array(
+                'admin' =>
+                array(
+                    'author_id' => 1,
+                    'author_login' => 'admin',
+                    'author_email' => 'admin@gmail.com',
+                    'author_display_name' => 'Leo',
+                    'author_first_name' => '',
+                    'author_last_name' => '',
+                ),
                 'themedemos' =>
                 array(
-                    'author_id' => 0,
+                    'author_id' => 2,
                     'author_login' => 'themedemos',
                     'author_email' => 'themeshaperwp+demos@gmail.com',
                     'author_display_name' => 'Theme Buster',
@@ -36,7 +45,7 @@ class ParserTest extends TestCase
                 ),
                 'themereviewteam' =>
                 array(
-                    'author_id' => 0,
+                    'author_id' => 3,
                     'author_login' => 'themereviewteam',
                     'author_email' => 'themereviewteam@gmail.com',
                     'author_display_name' => 'Theme Reviewer',

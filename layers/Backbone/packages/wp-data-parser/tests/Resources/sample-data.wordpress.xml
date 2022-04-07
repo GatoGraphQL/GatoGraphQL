@@ -29,6 +29,15 @@
 <wp:base_site_url>https://wordpress.com/</wp:base_site_url>
 <wp:base_blog_url>https://wpthemetestdata.wordpress.com</wp:base_blog_url>
 <wp:author>
+  <wp:author_id>1</wp:author_id>
+  <wp:author_login>admin</wp:author_login>
+  <wp:author_email>admin@gmail.com</wp:author_email>
+  <wp:author_display_name><![CDATA[Leo]]></wp:author_display_name>
+  <wp:author_first_name><![CDATA[]]></wp:author_first_name>
+  <wp:author_last_name><![CDATA[]]></wp:author_last_name>
+</wp:author>
+<wp:author>
+  <wp:author_id>2</wp:author_id>
   <wp:author_login>themedemos</wp:author_login>
   <wp:author_email>themeshaperwp+demos@gmail.com</wp:author_email>
   <wp:author_display_name><![CDATA[Theme Buster]]></wp:author_display_name>
@@ -36,6 +45,7 @@
   <wp:author_last_name><![CDATA[]]></wp:author_last_name>
 </wp:author>
 <wp:author>
+  <wp:author_id>3</wp:author_id>
   <wp:author_login><![CDATA[themereviewteam]]></wp:author_login>
   <wp:author_email><![CDATA[themereviewteam@gmail.com]]></wp:author_email>
   <wp:author_display_name><![CDATA[Theme Reviewer]]></wp:author_display_name>
