@@ -40,7 +40,15 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         if (!empty($ids)) {
             /** @var int[] */
             $userIDs = is_string($ids) ? explode(',', $ids) : $ids;
-            $users = $this->getFakeUsers($userIDs);
+            $users = $useFixedDataset
+                ? $this->getFakeUsers($userIDs)
+                : array_map(
+                    fn (string|int $id) => App::getWPFaker()->user([
+                        // Other than the ID, the rest is random data
+                        'id' => (int) trim($id)
+                    ]),
+                    $userIDs
+                );
             return $this->maybeRetrieveUserIDs($users, $query);
         }
         
