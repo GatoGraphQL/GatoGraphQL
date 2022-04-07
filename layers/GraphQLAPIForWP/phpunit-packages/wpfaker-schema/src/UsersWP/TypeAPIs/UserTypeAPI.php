@@ -38,12 +38,9 @@ class UserTypeAPI extends UpstreamUserTypeAPI
          */
         $ids = $query['include'] ?? null;
         if (!empty($ids)) {
-            $ids = is_string($ids) ? explode(',', $ids) : $ids;
-            /** @var array $ids */
-            $users = array_map(
-                fn (string|int $id) => App::getWPFaker()->user(['id' => (int) trim($id)]),
-                $ids
-            );
+            /** @var int[] */
+            $userIDs = is_string($ids) ? explode(',', $ids) : $ids;
+            $users = $this->getFakeUsers($userIDs);
             return $this->maybeRetrieveUserIDs($users, $query);
         }
         
@@ -51,22 +48,15 @@ class UserTypeAPI extends UpstreamUserTypeAPI
          * Get users from the fixed dataset?
          */
         if ($useFixedDataset) {
-            $wpAuthors = array_slice(
-                $this->getDataProvider()['authors'],
-                0,
-                $query['number'] ?? 10
+            $userIDs = array_map(
+                fn (array $wpAuthor) => $wpAuthor['author_id'],
+                array_slice(
+                    $this->getDataProvider()['authors'],
+                    $query['offset'] ?? 0,
+                    $query['number'] ?? 10
+                )
             );
-            $users = array_map(
-                fn (array $wpAuthor) => App::getWPFaker()->user([
-                    'id' => $wpAuthor['author_id'],
-                    'login' => $wpAuthor['author_login'],
-                    'email' => $wpAuthor['author_email'],
-                    'display_name' => $wpAuthor['author_display_name'],
-                    'first_name' => $wpAuthor['author_first_name'],
-                    'last_name' => $wpAuthor['author_last_name'],
-                ]),
-                $wpAuthors
-            );
+            $users = $this->getFakeUsers($userIDs);
             return $this->maybeRetrieveUserIDs($users, $query);
         }
         
@@ -92,5 +82,40 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             );
         }
         return $users;
+    }
+
+    /**
+     * @param int[] $userIDs
+     * @return WP_User[]
+     */
+    protected function getFakeUsers(array $userIDs): array
+    {
+        return array_map(
+            fn (array $fakeUserData) => App::getWPFaker()->user($fakeUserData),
+            $this->getFakeDataForUsers($userIDs)
+        );
+    }
+
+    /**
+     * @param int[] $userIDs
+     * @return array<string,mixed>
+     */
+    protected function getFakeDataForUsers(array $userIDs): array
+    {
+        $wpAuthors = array_filter(
+            $this->getDataProvider()['authors'],
+            fn (array $wpAuthor) => in_array($wpAuthor['author_id'], $userIDs)
+        );
+        return array_map(
+            fn (array $wpAuthor) => [
+                'id' => $wpAuthor['author_id'],
+                'login' => $wpAuthor['author_login'],
+                'email' => $wpAuthor['author_email'],
+                'display_name' => $wpAuthor['author_display_name'],
+                'first_name' => $wpAuthor['author_first_name'],
+                'last_name' => $wpAuthor['author_last_name'],
+            ],
+            $wpAuthors
+        );
     }
 }
