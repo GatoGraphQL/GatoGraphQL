@@ -109,8 +109,8 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     protected function getFakeUsers(array $userIDs): array
     {
         return array_map(
-            fn (array $fakeUserData) => App::getWPFaker()->user($fakeUserData),
-            $this->getFakeDataForUsers($userIDs)
+            fn (array $fakeUserDataEntry) => App::getWPFaker()->user($fakeUserDataEntry),
+            $this->getFakeUserDataEntries($userIDs)
         );
     }
 
@@ -119,22 +119,25 @@ class UserTypeAPI extends UpstreamUserTypeAPI
      */
     protected function getFakeUserIDs(): array
     {
-        return array_map(
+        return array_values(array_map(
             fn (array $wpAuthor) => (int) $wpAuthor['author_id'],
             $this->getDataProvider()->getFixedDataset()['authors']
-        );
+        ));
     }
 
     /**
      * @param int[] $userIDs
      * @return array<string,mixed>
      */
-    protected function getFakeDataForUsers(array $userIDs): array
+    protected function getFakeUserDataEntries(array $userIDs = []): array
     {
-        $wpAuthors = array_filter(
-            $this->getDataProvider()->getFixedDataset()['authors'],
-            fn (array $wpAuthor) => in_array($wpAuthor['author_id'], $userIDs)
-        );
+        $wpAuthors = $this->getDataProvider()->getFixedDataset()['authors'];
+        if ($userIDs !== []) {
+            array_filter(
+                $wpAuthors,
+                fn (array $wpAuthor) => in_array($wpAuthor['author_id'], $userIDs)
+            );
+        }
         return array_map(
             fn (array $wpAuthor) => [
                 'id' => $wpAuthor['author_id'],
@@ -146,5 +149,32 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             ],
             $wpAuthors
         );
+    }
+
+    protected function getUserByByCMS(string $property, string | int $propertyValue): WP_User|false
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $useFixedDataset = $componentConfiguration->useFixedDataset();
+
+        if ($useFixedDataset) {
+            /**
+             * Get the ID of all users matching the passed property
+             */
+            $userIDs = array_values(array_filter(array_map(
+                fn (array $fakeUserDataEntry) : ?int => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry['id'] : null,
+                $this->getFakeUserDataEntries(),
+            )));
+            if ($userIDs === []) {
+                return false;
+            }
+            $users = $this->getFakeUsers($userIDs);
+            return $users[0];
+        }
+
+        return App::getWPFaker()->user([
+            // Whatever data was provided, mirror it back in a random new user
+            $property => $propertyValue
+        ]);
     }
 }
