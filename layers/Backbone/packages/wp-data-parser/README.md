@@ -38,7 +38,22 @@ This forked package does not require WordPress to be installed. It re-uses the s
 ## Use
 
 ```php
+use PoPBackbone\WPDataParser\Exception\ParserException;
+
 $wpDataXMLExportFile = __DIR__ . '/sample-data.wordpress.xml';
 $wpDataParser = new WPDataParser();
-$parsedData = $wpDataParser->parse($wpDataXMLExportFile);
+try {
+     $parsedData = $wpDataParser->parse($wpDataXMLExportFile);
+     // Parsed data:
+     $authors = $parsedData['authors'];
+     $posts = $parsedData['posts'];
+     $categories = $parsedData['categories'];
+     $tags = $parsedData['tags'];
+     $terms = $parsedData['terms'];
+     $base_url = $parsedData['base_url'];
+     $base_blog_url = $parsedData['base_blog_url'];
+     $version = $parsedData['version'];
+} catch (ParserException $e) {
+     // ...
+}
 ```
