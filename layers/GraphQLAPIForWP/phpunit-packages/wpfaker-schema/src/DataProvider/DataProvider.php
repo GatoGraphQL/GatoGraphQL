@@ -81,6 +81,9 @@ class DataProvider implements DataProviderInterface
         }
     }
 
+    /**
+     * @param array<string,mixed> $data
+     */
     protected function mergeDataset(array $data): void
     {
         /**
@@ -90,15 +93,15 @@ class DataProvider implements DataProviderInterface
          * as to have downstream datasets add more data, not
          * replace the one from upstream sources.
          */
-        foreach (array_keys($data) as $entityType) {
+        foreach ($data as $entityType => $entityData) {
             /**
              * Merge properties "authors", "posts", "categories",
              * "tags" and "terms"
              */
-            if (is_array($entityType)) {
+            if (is_array($entityData)) {
                 $this->data[$entityType] = array_merge(
                     $this->data[$entityType] ?? [],
-                    $data[$entityType]
+                    $entityData
                 );
                 continue;
             }
@@ -109,7 +112,7 @@ class DataProvider implements DataProviderInterface
             if (isset($this->data[$entityType])) {
                 continue;
             }
-            $this->data[$entityType] = $data[$entityType];
+            $this->data[$entityType] = $entityData;
         }
     }
 
