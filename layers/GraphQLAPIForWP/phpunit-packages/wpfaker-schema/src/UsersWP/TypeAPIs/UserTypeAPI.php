@@ -87,7 +87,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                 $query['number'] ?? 10
             );
             $userIDs = array_map(
-                fn (array $userDataEntry) : int => $userDataEntry['id'],
+                fn (array $userDataEntry): int => $userDataEntry['id'],
                 $userDataEntries,
             );
             if ($retrieveUserIDs) {
@@ -182,7 +182,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                 return false;
             }
             $userIDs = array_map(
-                fn (array $userDataEntry) : int => $userDataEntry['id'],
+                fn (array $userDataEntry): int => $userDataEntry['id'],
                 $userDataEntries,
             );
             $users = $this->getFakeUsers($userIDs);
@@ -198,7 +198,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     protected function filterUserDataEntriesByProperty(array $userDataEntries, string $property, string | int $propertyValue): array
     {
         return array_values(array_filter(array_map(
-            fn (array $fakeUserDataEntry) : ?array => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry : null,
+            fn (array $fakeUserDataEntry): ?array => $fakeUserDataEntry[$property] === $propertyValue ? $fakeUserDataEntry : null,
             $userDataEntries,
         )));
     }
