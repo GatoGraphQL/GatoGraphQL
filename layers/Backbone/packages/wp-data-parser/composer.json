@@ -1,0 +1,34 @@
+{
+    "name": "pop-backbone/wp-data-parser",
+    "description": "Fork of the WordPress Importer plugin, to enable providing WordPress data to seed PHPUnit tests",
+    "keywords": ["GraphQL", "PHP", "WordPress", "data", "PHPUnit"],
+    "homepage": "https://github.com/PoPBackbone/wp-data-parser",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PoPBackbone\\WPDataParser\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPBackbone\\WPDataParser\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.9-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {}
+    }
+}
