@@ -44,14 +44,13 @@ class DataProvider implements DataProviderInterface
         $this->initialized = true;
         $this->data = [];
         $files = $this->getFixedDatasetFiles();
-        $hasXML = false;
 
-        /**
-         * Validate all files are either XML or PHP,
-         * or throw an Exception otherwise
-         */
         foreach ($files as $file) {
             $isXML = str_ends_with($file, '.xml');
+            /**
+             * Validate all files are either XML or PHP,
+             * or throw an Exception otherwise
+             */            
             if (!($isXML || str_ends_with($file, '.php'))) {
                 throw new DatasetFileException(
                     sprintf(
@@ -63,17 +62,10 @@ class DataProvider implements DataProviderInterface
                     )
                 );
             }
-            $hasXML = $hasXML || $isXML;
-        }
-        
-        $wpDataParser = null;
-        if ($hasXML) {
-            $wpDataParser = new WPDataParser();
-        }
-        foreach ($files as $file) {
-            // WordPress data via export XML file or already-rendered PHP file
-            $isXML = str_ends_with($file, '.xml');
-            $fileData = $isXML ? $wpDataParser->parse($file) : require $file;
+            /**
+             * Retrieve the WordPress data from the source file
+             */
+            $fileData = $isXML ? (new WPDataParser())->parse($file) : require $file;
             if (!is_array($fileData)) {
                 throw new DatasetFileException(
                     sprintf(
@@ -85,6 +77,9 @@ class DataProvider implements DataProviderInterface
                     )
                 );
             }
+            /**
+             * Merge the datasets together
+             */
             $this->data = array_merge_recursive(
                 $this->data,
                 $fileData
