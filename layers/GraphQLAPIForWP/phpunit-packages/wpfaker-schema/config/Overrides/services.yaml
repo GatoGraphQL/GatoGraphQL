@@ -5,4 +5,4 @@ services:
         autoconfigure: true
 
     PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface:
-        class: \GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs\UserTypeAPI
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\UserTypeAPI
