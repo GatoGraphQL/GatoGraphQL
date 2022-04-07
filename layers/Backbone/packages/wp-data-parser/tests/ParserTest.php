@@ -7,7 +7,7 @@ namespace PoPBackbone\WPDataParser;
 use PHPUnit\Framework\TestCase;
 use PoPBackbone\WPDataParser\Exception\ParserException;
 
-class Parser extends TestCase
+class ParserTest extends TestCase
 {
     public function testParser(): void
     {
