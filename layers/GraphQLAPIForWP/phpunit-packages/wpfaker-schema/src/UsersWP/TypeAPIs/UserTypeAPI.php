@@ -45,6 +45,16 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                 fn (string $id) => (int) trim($id),
                 explode(',', $ids)
             ) : $ids;
+            /**
+             * If using a fixed dataset, make sure the ID exists.
+             * If it does not, return `null` instead
+             */
+            if ($useFixedDataset) {
+                $userIDs = array_values(array_intersect(
+                    $userIDs,
+                    $this->getFakeUserIDs()
+                ));
+            }
             if ($retrieveUserIDs) {
                 return $userIDs;
             }
@@ -63,13 +73,10 @@ class UserTypeAPI extends UpstreamUserTypeAPI
          * Get users from the fixed dataset?
          */
         if ($useFixedDataset) {
-            $userIDs = array_map(
-                fn (array $wpAuthor) => $wpAuthor['author_id'],
-                array_slice(
-                    $this->getDataProvider()->getFixedDataset()['authors'],
-                    $query['offset'] ?? 0,
-                    $query['number'] ?? 10
-                )
+            $userIDs = array_slice(
+                $this->getFakeUserIDs(),
+                $query['offset'] ?? 0,
+                $query['number'] ?? 10
             );
             if ($retrieveUserIDs) {
                 return $userIDs;
@@ -104,6 +111,17 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         return array_map(
             fn (array $fakeUserData) => App::getWPFaker()->user($fakeUserData),
             $this->getFakeDataForUsers($userIDs)
+        );
+    }
+
+    /**
+     * @return int[] $userIDs
+     */
+    protected function getFakeUserIDs(): array
+    {
+        return array_map(
+            fn (array $wpAuthor) => (int) $wpAuthor['author_id'],
+            $this->getDataProvider()->getFixedDataset()['authors']
         );
     }
 
