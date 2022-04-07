@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs;
 
 use GraphQLAPI\WPFakerSchema\App;
+use GraphQLAPI\WPFakerSchema\Component;
+use GraphQLAPI\WPFakerSchema\ComponentConfiguration;
+use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;
 use WP_User;
 
@@ -13,11 +16,25 @@ use WP_User;
  */
 class UserTypeAPI extends UpstreamUserTypeAPI
 {
+    private ?DataProviderInterface $dataProvider = null;
+
+    final public function setDataProvider(DataProviderInterface $dataProvider): void
+    {
+        $this->dataProvider = $dataProvider;
+    }
+    final protected function getDataProvider(): DataProviderInterface
+    {
+        return $this->dataProvider ??= $this->instanceManager->getInstance(DataProviderInterface::class);
+    }
+
     protected function getUsersByCMS(array $query): array
     {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $useFixedDataset = $componentConfiguration->useFixedDataset();
+
         /**
          * If providing the IDs to retrieve, re-generate exactly those objects.
-         * Otherwise, get random ones.
          */
         $ids = $query['include'] ?? null;
         if (!empty($ids)) {
@@ -27,15 +44,49 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                 fn (string|int $id) => App::getWPFaker()->user(['id' => (int) trim($id)]),
                 $ids
             );
-        } else {
-            $users = App::getWPFaker()->users($query['number'] ?? 10);
+            return $this->maybeRetrieveUserIDs($users, $query);
         }
-
+        
         /**
-         * Retrieve the IDs of the objects?
+         * Get users from the fixed dataset?
          */
-        if (($query['fields'] ?? null) === 'ID') {
+        if ($useFixedDataset) {
+            $wpAuthors = array_slice(
+                $this->getDataProvider()['authors'],
+                0,
+                $query['number'] ?? 10
+            );
             $users = array_map(
+                fn (array $wpAuthor) => App::getWPFaker()->user([
+                    'id' => $wpAuthor['author_id'],
+                    'login' => $wpAuthor['author_login'],
+                    'email' => $wpAuthor['author_email'],
+                    'display_name' => $wpAuthor['author_display_name'],
+                    'first_name' => $wpAuthor['author_first_name'],
+                    'last_name' => $wpAuthor['author_last_name'],
+                ]),
+                $wpAuthors
+            );
+            return $this->maybeRetrieveUserIDs($users, $query);
+        }
+        
+        /**
+         * Otherwise, let BrainFaker produce random entries
+         */
+        $users = App::getWPFaker()->users($query['number'] ?? 10);
+        return $this->maybeRetrieveUserIDs($users, $query);
+    }
+
+    /**
+     * Retrieve the IDs of the objects?
+     *
+     * @param WP_User[] $users
+     * @return WP_User[]|int[]
+     */
+    protected function maybeRetrieveUserIDs(array $users, array $query): array
+    {
+        if (($query['fields'] ?? null) === 'ID') {
+            return array_map(
                 fn (WP_User $user) => $user->ID,
                 $users
             );
