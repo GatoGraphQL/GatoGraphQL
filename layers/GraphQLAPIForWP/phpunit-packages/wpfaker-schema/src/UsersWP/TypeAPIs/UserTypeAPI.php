@@ -33,23 +33,27 @@ class UserTypeAPI extends UpstreamUserTypeAPI
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $useFixedDataset = $componentConfiguration->useFixedDataset();
 
+        $retrieveUserIDs = $this->retrieveUserIDs($query);
+
         /**
          * If providing the IDs to retrieve, re-generate exactly those objects.
          */
         $ids = $query['include'] ?? null;
         if (!empty($ids)) {
             /** @var int[] */
-            $userIDs = is_string($ids) ? explode(',', $ids) : $ids;
-            $users = $useFixedDataset
+            $userIDs = is_string($ids) ? array_map(trim(...), explode(',', $ids)) : $ids;
+            if ($retrieveUserIDs) {
+                return $userIDs;
+            }
+            return $useFixedDataset
                 ? $this->getFakeUsers($userIDs)
                 : array_map(
                     fn (string|int $id) => App::getWPFaker()->user([
                         // Other than the ID, the rest is random data
-                        'id' => (int) trim($id)
+                        'id' => $id
                     ]),
                     $userIDs
                 );
-            return $this->maybeRetrieveUserIDs($users, $query);
         }
         
         /**
@@ -64,32 +68,28 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                     $query['number'] ?? 10
                 )
             );
-            $users = $this->getFakeUsers($userIDs);
-            return $this->maybeRetrieveUserIDs($users, $query);
+            if ($retrieveUserIDs) {
+                return $userIDs;
+            }
+            return $this->getFakeUsers($userIDs);
         }
         
         /**
          * Otherwise, let BrainFaker produce random entries
          */
         $users = App::getWPFaker()->users($query['number'] ?? 10);
-        return $this->maybeRetrieveUserIDs($users, $query);
-    }
-
-    /**
-     * Retrieve the IDs of the objects?
-     *
-     * @param WP_User[] $users
-     * @return WP_User[]|int[]
-     */
-    protected function maybeRetrieveUserIDs(array $users, array $query): array
-    {
-        if (($query['fields'] ?? null) === 'ID') {
+        if ($retrieveUserIDs) {
             return array_map(
                 fn (WP_User $user) => $user->ID,
                 $users
             );
         }
         return $users;
+    }
+
+    protected function retrieveUserIDs(array $query): bool
+    {
+        return ($query['fields'] ?? null) === 'ID';
     }
 
     /**
