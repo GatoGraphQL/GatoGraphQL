@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UsersWP\TypeAPIs;
+namespace PoPCMSSchema\SchemaCommonsWP\TypeAPIs;
 
 use function esc_sql;
 

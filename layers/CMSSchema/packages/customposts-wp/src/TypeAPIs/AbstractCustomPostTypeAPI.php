@@ -12,7 +12,7 @@ use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\UsersWP\TypeAPIs\TypeAPITrait;
+use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;

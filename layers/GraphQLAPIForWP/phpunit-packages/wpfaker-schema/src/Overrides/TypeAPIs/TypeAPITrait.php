@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema\TypeAPIs;
+namespace GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs;
 
 trait TypeAPITrait
 {

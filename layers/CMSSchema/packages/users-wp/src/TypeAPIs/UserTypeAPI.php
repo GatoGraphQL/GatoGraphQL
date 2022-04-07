@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Constants\UserOrderBy;
 use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
-use PoPCMSSchema\UsersWP\TypeAPIs\TypeAPITrait;
+use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;
 use WP_User_Query;

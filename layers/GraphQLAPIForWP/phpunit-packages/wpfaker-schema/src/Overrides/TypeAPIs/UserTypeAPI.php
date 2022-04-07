@@ -8,7 +8,7 @@ use GraphQLAPI\WPFakerSchema\App;
 use GraphQLAPI\WPFakerSchema\Component;
 use GraphQLAPI\WPFakerSchema\ComponentConfiguration;
 use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
-use GraphQLAPI\WPFakerSchema\TypeAPIs\TypeAPITrait;
+use GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\TypeAPITrait;
 use PoPCMSSchema\UsersWP\TypeAPIs\UserTypeAPI as UpstreamUserTypeAPI;
 use WP_User;
 
