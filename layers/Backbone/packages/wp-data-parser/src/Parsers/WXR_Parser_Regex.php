@@ -18,23 +18,25 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
  */
 class WXR_Parser_Regex
 {
-	var $authors = array();
-	var $posts = array();
-	var $categories = array();
-	var $tags = array();
-	var $terms = array();
-	var $base_url = '';
-	var $base_blog_url = '';
+	private array $authors = array();
+	private array $posts = array();
+	private array $categories = array();
+	private array $tags = array();
+	private array $terms = array();
+	private string $base_url = '';
+	private string $base_blog_url = '';
+	private bool $has_gzip;
 
 	public function __construct()
 	{
-		$this->has_gzip = is_callable( 'gzopen' );
+		$this->has_gzip = \is_callable('gzopen');
 	}
 
 	/**
+	 * @return array<string,mixed>
 	 * @throws ParserException
 	 */
-	function parse( $file )
+	public function parse(string $file): array
 	{
 		$wxr_version = $in_multiline = false;
 
@@ -121,7 +123,7 @@ class WXR_Parser_Regex
 		);
 	}
 
-	function get_tag( $string, $tag )
+	private function get_tag(string $string, string $tag): string
 	{
 		preg_match( "|<$tag.*?>(.*?)</$tag>|is", $string, $return );
 		if ( isset( $return[1] ) ) {
@@ -143,7 +145,10 @@ class WXR_Parser_Regex
 		return $return;
 	}
 
-	function process_category( $c )
+	/**
+	 * @return array<string,array<array<string,string>>>
+	 */
+	private function process_category(string $c): array
 	{
 		$term = array(
 			'term_id' => $this->get_tag( $c, 'wp:term_id' ),
@@ -161,7 +166,10 @@ class WXR_Parser_Regex
 		return $term;
 	}
 
-	function process_tag( $t )
+	/**
+	 * @return array<string,array<array<string,string>>>
+	 */
+	private function process_tag(string $t): array
 	{
 		$term = array(
 			'term_id' => $this->get_tag( $t, 'wp:term_id' ),
@@ -178,7 +186,10 @@ class WXR_Parser_Regex
 		return $term;
 	}
 
-	function process_term( $t )
+	/**
+	 * @return array<string,array<array<string,string>>>
+	 */
+	private function process_term(string $t): array
 	{
 		$term = array(
 			'term_id' => $this->get_tag( $t, 'wp:term_id' ),
@@ -197,7 +208,10 @@ class WXR_Parser_Regex
 		return $term;
 	}
 
-	function process_meta( $string, $tag )
+	/**
+	 * @return array<array<string,string>>
+	 */
+	private function process_meta(string $string, string $tag): array
 	{
 		$parsed_meta = array();
 
@@ -217,7 +231,10 @@ class WXR_Parser_Regex
 		return $parsed_meta;
 	}
 
-	function process_author( $a )
+	/**
+	 * @return array<string,string>
+	 */
+	private function process_author(string $a): array
 	{
 		return array(
 			'author_id' => $this->get_tag( $a, 'wp:author_id' ),
@@ -229,7 +246,10 @@ class WXR_Parser_Regex
 		);
 	}
 
-	function process_post( $post )
+	/**
+	 * @return array<string,mixed>
+	 */
+	private function process_post(string $post): array
 	{
 		$post_id        = $this->get_tag( $post, 'wp:post_id' );
 		$post_title     = $this->get_tag( $post, 'title' );
@@ -312,12 +332,15 @@ class WXR_Parser_Regex
 		return $postdata;
 	}
 
-	function _normalize_tag( $matches )
+	/**
+	 * @param array<mixed> $matches
+	 */
+	private function _normalize_tag(array $matches): string
 	{
 		return '<' . strtolower( $matches[1] );
 	}
 
-	function fopen( $filename, $mode = 'r' )
+	private function fopen(string $filename, string $mode = 'r'): resource|false
 	{
 		if ( $this->has_gzip ) {
 			return gzopen( $filename, $mode );
@@ -325,7 +348,7 @@ class WXR_Parser_Regex
 		return fopen( $filename, $mode );
 	}
 
-	function feof( $fp )
+	private function feof(resource $fp ): bool
 	{
 		if ( $this->has_gzip ) {
 			return gzeof( $fp );
@@ -333,7 +356,7 @@ class WXR_Parser_Regex
 		return feof( $fp );
 	}
 
-	function fgets( $fp, $len = 8192 )
+	private function fgets(resource $fp, int $len = 8192 ): string|false
 	{
 		if ( $this->has_gzip ) {
 			return gzgets( $fp, $len );
@@ -341,7 +364,7 @@ class WXR_Parser_Regex
 		return fgets( $fp, $len );
 	}
 
-	function fclose( $fp )
+	private function fclose(resource $fp ): bool
 	{
 		if ( $this->has_gzip ) {
 			return gzclose( $fp );

@@ -20,9 +20,10 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
 class WXR_Parser_SimpleXML
 {
 	/**
+	 * @return array<string,mixed>
 	 * @throws ParserException
 	 */
-	function parse( $file )
+	public function parse(string $file): array
 	{
 		$authors = $posts = $categories = $tags = $terms = array();
 

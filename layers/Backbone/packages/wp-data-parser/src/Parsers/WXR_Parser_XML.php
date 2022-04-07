@@ -18,7 +18,7 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
  */
 class WXR_Parser_XML
 {
-	var $wp_tags = array(
+	private array $wp_tags = array(
 		'wp:post_id', 'wp:post_date', 'wp:post_date_gmt', 'wp:comment_status', 'wp:ping_status', 'wp:attachment_url',
 		'wp:status', 'wp:post_name', 'wp:post_parent', 'wp:menu_order', 'wp:post_type', 'wp:post_password',
 		'wp:is_sticky', 'wp:term_id', 'wp:category_nicename', 'wp:category_parent', 'wp:cat_name', 'wp:category_description',
@@ -26,16 +26,17 @@ class WXR_Parser_XML
 		'wp:term_name', 'wp:term_description', 'wp:author_id', 'wp:author_login', 'wp:author_email', 'wp:author_display_name',
 		'wp:author_first_name', 'wp:author_last_name',
 	);
-	var $wp_sub_tags = array(
+	private array $wp_sub_tags = array(
 		'wp:comment_id', 'wp:comment_author', 'wp:comment_author_email', 'wp:comment_author_url',
 		'wp:comment_author_IP',	'wp:comment_date', 'wp:comment_date_gmt', 'wp:comment_content',
 		'wp:comment_approved', 'wp:comment_type', 'wp:comment_parent', 'wp:comment_user_id',
 	);
 
 	/**
+	 * @return array<string,mixed>
 	 * @throws ParserException
 	 */
-	function parse( $file )
+	public function parse(string $file): array
 	{
 		$this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
 		$this->authors = $this->posts = $this->term = $this->category = $this->tag = array();
@@ -75,7 +76,10 @@ class WXR_Parser_XML
 		);
 	}
 
-	function tag_open( $parse, $tag, $attr )
+	/**
+	 * @param array<string,string> $attr
+	 */
+	private function tag_open(string $parse, string $tag, array $attr ): void
 	{
 		if ( in_array( $tag, $this->wp_tags ) ) {
 			$this->in_tag = substr( $tag, 3 );
@@ -126,7 +130,7 @@ class WXR_Parser_XML
 		}
 	}
 
-	function cdata( $parser, $cdata )
+	private function cdata(string $parser, string $cdata): void
 	{
 		if ( ! trim( $cdata ) ) {
 			return;
@@ -139,7 +143,7 @@ class WXR_Parser_XML
 		}
 	}
 
-	function tag_close( $parser, $tag )
+	private function tag_close(string $parser, string $tag): void
 	{
 		switch ( $tag ) {
 			case 'wp:comment':

@@ -19,9 +19,10 @@ use PoPBackbone\WPDataParser\Exception\ParserException;
 class WXR_Parser
 {
 	/**
+	 * @return array<string,mixed>
 	 * @throws ParserException
 	 */
-	function parse( $file )
+	public function parse(string $file): array
 	{
 		// Attempt to use proper XML parsers first
 		if ( extension_loaded( 'simplexml' ) ) {
