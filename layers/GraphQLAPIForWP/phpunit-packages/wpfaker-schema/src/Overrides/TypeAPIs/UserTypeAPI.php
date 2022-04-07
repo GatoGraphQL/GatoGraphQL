@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema\UsersWP\TypeAPIs;
+namespace GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs;
 
 use GraphQLAPI\WPFakerSchema\App;
 use GraphQLAPI\WPFakerSchema\Component;
