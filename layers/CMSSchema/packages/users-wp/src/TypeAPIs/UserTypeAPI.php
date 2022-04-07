@@ -13,6 +13,7 @@ use WP_User;
 use WP_User_Query;
 
 use function get_user_by;
+use function get_users;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -30,13 +31,24 @@ class UserTypeAPI extends AbstractUserTypeAPI
         return $object instanceof WP_User;
     }
 
-    protected function getUserBy(string $property, string | int $userID): ?object
+    protected function getUserBy(string $property, string | int $propertyValue): ?object
     {
-        $user = get_user_by($property, $userID);
+        $user = $this->getUserByByCMS($property, $propertyValue);
         if ($user === false) {
             return null;
         }
         return $user;
+    }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function getUserByByCMS(string $property, string | int $propertyValue): WP_User|false
+    {
+        return get_user_by($property, $propertyValue);
     }
 
     public function getUserByID(string | int $userID): ?object
