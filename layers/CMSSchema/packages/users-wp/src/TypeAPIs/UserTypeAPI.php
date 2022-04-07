@@ -14,6 +14,7 @@ use WP_User_Query;
 
 use function get_user_by;
 use function get_users;
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -207,11 +208,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            $query['order'] = \esc_sql($query['order']);
+            $query['order'] = $this->escSQLByCMS($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = \esc_sql($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = $this->escSQLByCMS($this->getOrderByQueryArgValue($query['orderby']));
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing
@@ -265,6 +266,17 @@ class UserTypeAPI extends AbstractUserTypeAPI
                 $query->query_where = str_replace($replace, $replacement, $query->query_where);
             }
         }
+    }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function escSQLByCMS(string $string): string
+    {
+        return esc_sql($string);
     }
 
     /**

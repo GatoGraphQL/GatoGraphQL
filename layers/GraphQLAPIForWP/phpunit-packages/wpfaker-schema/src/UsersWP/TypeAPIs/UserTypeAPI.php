@@ -202,4 +202,9 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             $userDataEntries,
         )));
     }
+
+    protected function escSQLByCMS(string $string): string
+    {
+        return $string;
+    }
 }
