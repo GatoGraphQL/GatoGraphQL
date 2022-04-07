@@ -58,7 +58,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                     $userIDs
                 );
         }
-        
+
         /**
          * Get users from the fixed dataset?
          */
@@ -76,7 +76,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             }
             return $this->getFakeUsers($userIDs);
         }
-        
+
         /**
          * Otherwise, let BrainFaker produce random entries
          */

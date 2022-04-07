@@ -56,7 +56,7 @@ class DataProvider implements DataProviderInterface
                 )
             );
         }
-        
+
         /**
          * WordPress data export XML file
          */
@@ -69,7 +69,7 @@ class DataProvider implements DataProviderInterface
         /**
          * WordPress data as PHP file
          */
-        $this->data = require $file; 
+        $this->data = require $file;
     }
 
     /**
