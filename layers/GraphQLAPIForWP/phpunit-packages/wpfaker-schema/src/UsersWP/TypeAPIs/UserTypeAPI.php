@@ -49,7 +49,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
                 ? $this->getFakeUsers($userIDs)
                 : array_map(
                     fn (string|int $id) => App::getWPFaker()->user([
-                        // Other than the ID, the rest is random data
+                        // The ID is provided, the rest is random data
                         'id' => $id
                     ]),
                     $userIDs
