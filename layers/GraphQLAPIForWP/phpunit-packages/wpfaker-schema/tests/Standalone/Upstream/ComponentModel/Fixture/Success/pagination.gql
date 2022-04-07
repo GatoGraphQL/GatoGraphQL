@@ -1,0 +1,22 @@
+query {
+  users1: users(pagination: {limit: 1}) {
+    id
+    name
+  }
+  users2: users(pagination: {limit: 2}) {
+    id
+    name
+  }
+  users3: users(pagination: {limit: 2, offset: 1}) {
+    id
+    name
+  }
+  users4: users(pagination: {limit: 2, offset: 2}) {
+    id
+    name
+  }
+  users5: users(pagination: {limit: 2, offset: 3}) {
+    id
+    name
+  }
+}
