@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\WPDataParser\Parsers;
 
+use PoPBackbone\WPDataParser\Exception\ParserException;
+
 /**
  * WXR Parser that uses regular expressions. Fallback for installs without an XML parser.
  */
@@ -27,6 +29,9 @@ class WXR_Parser_Regex {
 		$this->has_gzip = is_callable( 'gzopen' );
 	}
 
+	/**
+	 * @throws ParserException
+	 */
 	function parse( $file ) {
 		$wxr_version = $in_multiline = false;
 
@@ -98,7 +103,7 @@ class WXR_Parser_Regex {
 		}
 
 		if ( ! $wxr_version )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
+			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
 
 		return array(
 			'authors' => $this->authors,

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace PoPBackbone\WPDataParser\Parsers;
 
+use PoPBackbone\WPDataParser\Exception\ParserException;
+
 /**
  * WXR Parser that makes use of the XML Parser PHP extension.
  */
@@ -29,6 +31,9 @@ class WXR_Parser_XML {
 		'wp:comment_approved', 'wp:comment_type', 'wp:comment_parent', 'wp:comment_user_id',
 	);
 
+	/**
+	 * @throws ParserException
+	 */
 	function parse( $file ) {
 		$this->wxr_version = $this->in_post = $this->cdata = $this->data = $this->sub_data = $this->in_tag = $this->in_sub_tag = false;
 		$this->authors = $this->posts = $this->term = $this->category = $this->tag = array();
@@ -45,12 +50,15 @@ class WXR_Parser_XML {
 			$current_column = xml_get_current_column_number( $xml );
 			$error_code = xml_get_error_code( $xml );
 			$error_string = xml_error_string( $error_code );
-			return new WP_Error( 'XML_parse_error', 'There was an error when reading this WXR file', array( $current_line, $current_column, $error_string ) );
+			throw new ParserException(sprintf(
+				'There was an error when reading this WXR file: %s',
+				array( $current_line, $current_column, $error_string )
+			));
 		}
 		xml_parser_free( $xml );
 
 		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) )
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'wordpress-importer' ) );
+			throw new ParserException('This does not appear to be a WXR file, missing/invalid WXR version number');
 
 		return array(
 			'authors' => $this->authors,
