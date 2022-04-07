@@ -86,14 +86,30 @@ class DataProvider implements DataProviderInterface
         /**
          * Merge the datasets together.
          *
-         * Use `array_merge` as to have downstream datasets
-         * be able to override entries.
+         * Use `array_merge` instead of `array_merge_recursive`
+         * as to have downstream datasets add more data, not
+         * replace the one from upstream sources.
          */
         foreach (array_keys($data) as $entityType) {
-            $this->data[$entityType] = array_merge(
-                $this->data[$entityType] ?? [],
-                $data[$entityType]
-            );
+            /**
+             * Merge properties "authors", "posts", "categories",
+             * "tags" and "terms"
+             */
+            if (is_array($entityType)) {
+                $this->data[$entityType] = array_merge(
+                    $this->data[$entityType] ?? [],
+                    $data[$entityType]
+                );
+                continue;
+            }
+            /**
+             * Properties "base_url", "base_blog_url" and "version"
+             * need not be overriden.
+             */
+            if (isset($this->data[$entityType])) {
+                continue;
+            }
+            $this->data[$entityType] = $data[$entityType];
         }
     }
 
