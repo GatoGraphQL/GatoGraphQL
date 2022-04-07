@@ -18,9 +18,9 @@ class WPDataParser
      * Parse the WordPress export file and return the data
      *
      * @return array<string,mixed>
-	 * @throws ParserException
-	 */
-	public function parse(string $wpDataXMLExportFile): array
+     * @throws ParserException
+     */
+    public function parse(string $wpDataXMLExportFile): array
     {
         if (!file_exists($wpDataXMLExportFile)) {
             throw new ParserException(sprintf(
@@ -29,6 +29,6 @@ class WPDataParser
             ));
         }
         $parser = new WXR_Parser();
-		return $parser->parse($wpDataXMLExportFile);
+        return $parser->parse($wpDataXMLExportFile);
     }
 }
