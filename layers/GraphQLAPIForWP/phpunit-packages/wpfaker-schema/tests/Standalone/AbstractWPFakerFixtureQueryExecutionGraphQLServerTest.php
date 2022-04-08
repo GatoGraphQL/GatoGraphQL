@@ -21,6 +21,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
             ...[
                 \PoPWPSchema\Users\Component::class,
                 \PoPWPSchema\Posts\Component::class,
+                \PoPWPSchema\Comments\Component::class,
                 \GraphQLAPI\WPFakerSchema\Component::class,
             ]
         ];

@@ -48,6 +48,9 @@ class WPDataParser
      * This fixes the issue of querying ```{ posts { author { id }}}```
      * which fails since post_author expects the ID in the resolver.
      *
+     * Do the same for comments, but if the author does not exist,
+     * it's not an error, since comments can be added by non-users too.
+     *
      * @param array<string,mixed> $data
      * @return array<string,mixed>
      * @throws ParserException If the author ID has not been added to the dataset file
@@ -58,8 +61,8 @@ class WPDataParser
     ): array {
         $authorDataEntries = $data['authors'] ?? [];
         $postDataEntries = $data['posts'] ?? [];
-        foreach ($postDataEntries as $key => &$postDataEntry) {
-            // Find the author with the given nicename
+        foreach ($postDataEntries as $key => $postDataEntry) {
+            // Find the post author with the given nicename
             $authorDataEntry = $authorDataEntries[$postDataEntry['post_author']] ?? null;
             if ($authorDataEntry === null) {
                 throw new ParserException(sprintf(
@@ -71,6 +74,18 @@ class WPDataParser
             // Replace the nicename with the ID
             $data['posts'][$key]['post_author_login'] = $data['posts'][$key]['post_author'];
             $data['posts'][$key]['post_author'] = $authorDataEntry['author_id'];
+
+            // Convert comments
+            $postCommentDataEntries = $postDataEntry['comments'] ?? [];
+            foreach ($postCommentDataEntries as $commentKey => $postCommentDataEntry) {
+                // Find the comment author with the given nicename
+                $authorDataEntry = $authorDataEntries[$postCommentDataEntry['comment_author']] ?? null;
+                if ($authorDataEntry === null) {
+                    continue;
+                }
+                // Replace current value `0` with the user ID
+                $data['posts'][$key]['comments'][$commentKey]['comment_user_id'] = $authorDataEntry['author_id'];
+            }
         }
         return $data;
     }

@@ -150,13 +150,16 @@ class UserTypeAPI extends UpstreamUserTypeAPI
 
     /**
      * @param int[] $userIDs
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
-    protected function getFakeUserDataEntries(array $userIDs = []): array
+    protected function getFakeUserDataEntries(?array $userIDs = null): array
     {
+        if ($userIDs === []) {
+            return [];
+        }
         $userDataEntries = $this->getAllFakeUserDataEntries();
-        if ($userIDs !== []) {
-            array_filter(
+        if ($userIDs !== null) {
+            $userDataEntries = array_filter(
                 $userDataEntries,
                 fn (array $userDataEntry) => in_array($userDataEntry['author_id'], $userIDs)
             );
@@ -192,11 +195,8 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             if ($userDataEntries === []) {
                 return false;
             }
-            $userIDs = array_map(
-                fn (array $userDataEntry): int => $userDataEntry['id'],
-                $userDataEntries,
-            );
-            $users = $this->getFakeUsers($userIDs);
+            $userID = $userDataEntries[0]['id'];
+            $users = $this->getFakeUsers([$userID]);
             return $users[0];
         }
 

@@ -134,7 +134,7 @@ class PostTypeAPI extends UpstreamPostTypeAPI
             $this->getFakePostDataEntries($postIDs)
         );
     }
-    
+
     /**
      * @return int[] $postIDs
      */
@@ -156,13 +156,16 @@ class PostTypeAPI extends UpstreamPostTypeAPI
 
     /**
      * @param int[] $postIDs
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
-    protected function getFakePostDataEntries(array $postIDs = []): array
+    protected function getFakePostDataEntries(?array $postIDs = null): array
     {
+        if ($postIDs === []) {
+            return [];
+        }
         $postDataEntries = $this->getAllFakePostDataEntries();
-        if ($postIDs !== []) {
-            array_filter(
+        if ($postIDs !== null) {
+            $postDataEntries = array_filter(
                 $postDataEntries,
                 fn (array $postDataEntry) => in_array($postDataEntry['post_id'], $postIDs)
             );
@@ -214,11 +217,8 @@ class PostTypeAPI extends UpstreamPostTypeAPI
             if ($postDataEntries === []) {
                 return null;
             }
-            $postIDs = array_map(
-                fn (array $postDataEntry): int => $postDataEntry['id'],
-                $postDataEntries,
-            );
-            $posts = $this->getFakePosts($postIDs);
+            $postID = $postDataEntries[0]['id'];
+            $posts = $this->getFakePosts([$postID]);
             return $posts[0];
         }
 

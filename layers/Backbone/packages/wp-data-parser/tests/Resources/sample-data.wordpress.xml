@@ -1098,6 +1098,49 @@
 	 <wp:post_password><![CDATA[]]></wp:post_password>
   <category domain="post_tag" nicename="codex"><![CDATA[Codex]]></category>
 	 <wp:is_sticky>0</wp:is_sticky>
+
+  <wp:comment>
+    <wp:comment_id>167</wp:comment_id>
+    <wp:comment_author><![CDATA[Anon]]></wp:comment_author>
+    <wp:comment_author_email>anon@example.com</wp:comment_author_email>
+    <wp:comment_author_url/>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2007-09-04 10:49:28</wp:comment_date>
+    <wp:comment_date_gmt>2007-09-04 00:49:28</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Anonymous comment.]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>168</wp:comment_id>
+    <wp:comment_author><![CDATA[tellyworthtest2]]></wp:comment_author>
+    <wp:comment_author_email>tellyworth+test2@example.com</wp:comment_author_email>
+    <wp:comment_author_url/>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2007-09-04 10:49:03</wp:comment_date>
+    <wp:comment_date_gmt>2007-09-04 00:49:03</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Contributor comment.]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>169</wp:comment_id>
+    <wp:comment_author><![CDATA[themedemos]]></wp:comment_author>
+    <wp:comment_author_email>themeshaperwp+demos@gmail.com</wp:comment_author_email>
+    <wp:comment_author_url>https://wpthemetestdata.wordpress.com/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2007-09-04 10:48:51</wp:comment_date>
+    <wp:comment_date_gmt>2007-09-04 17:48:51</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Author comment.]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+   </wp:comment>
 	</item>
 	<item>
   <title>About The Tests</title>

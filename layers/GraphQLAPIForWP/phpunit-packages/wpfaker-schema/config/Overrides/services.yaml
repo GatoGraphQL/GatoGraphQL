@@ -9,3 +9,6 @@ services:
 
     PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface:
         class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\PostTypeAPI
+
+    PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\CommentTypeAPI

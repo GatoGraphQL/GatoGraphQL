@@ -4,82 +4,81 @@
       {
         "id": 1724,
         "title": "Keyboard navigation",
+        "commentCount": 4,
         "author": {
           "id": 3,
           "name": "Theme Reviewer"
-        }
+        },
+        "comments": [
+          {
+            "id": 1901,
+            "date": "2013-03-14T07:53:26+00:00",
+            "content": "These tests are amazing!",
+            "responseCount": 0,
+            "responses": []
+          },
+          {
+            "id": 1903,
+            "date": "2013-03-14T07:56:46+00:00",
+            "content": "Author Comment.",
+            "responseCount": 0,
+            "responses": []
+          },
+          {
+            "id": 1904,
+            "date": "2013-03-14T07:57:01+00:00",
+            "content": "Comment Depth 01",
+            "responseCount": 1,
+            "responses": [
+              {
+                "id": 1905,
+                "date": "2013-03-14T08:01:21+00:00",
+                "content": "Comment Depth 02",
+                "responseCount": 1
+              }
+            ]
+          }
+        ]
       },
       {
         "id": 358,
         "title": "Post Format: Standard",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
+        },
+        "comments": []
       },
       {
         "id": 555,
         "title": "Post Format: Gallery",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
+        },
+        "comments": []
       },
       {
         "id": 559,
         "title": "Post Format: Aside",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
+        },
+        "comments": []
       },
       {
         "id": 562,
         "title": "Post Format: Chat",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 565,
-        "title": "Post Format: Link",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 568,
-        "title": "Post Format: Image (Linked)",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 575,
-        "title": "Post Format: Quote",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 579,
-        "title": "Post Format: Status",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 582,
-        "title": "Post Format: Video (WordPress.tv)",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
+        },
+        "comments": []
       }
     ]
   }

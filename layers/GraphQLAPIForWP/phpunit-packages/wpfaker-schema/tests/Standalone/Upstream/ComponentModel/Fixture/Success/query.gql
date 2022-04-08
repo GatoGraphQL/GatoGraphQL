@@ -1,10 +1,33 @@
 {
-  posts {
+  posts(
+    pagination: {
+      limit: 5
+    }
+  ) {
     id
     title
     author {
       id
       name
     }
+    commentCount
+    comments(
+      pagination: {
+        offset: 1
+        limit: 3
+      }
+    ) {
+      ...CommentData
+      responses {
+        ...CommentData
+      }
+    }
   }
+}
+
+fragment CommentData on Comment {
+  id
+  date
+  content
+  responseCount
 }

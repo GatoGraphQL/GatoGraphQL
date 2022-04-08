@@ -15,6 +15,11 @@ use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
+use function get_comments;
+use function get_comment;
+use function get_comments_number;
+use function comments_open;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -37,8 +42,22 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
-        return (array) \get_comments($query);
+        return (array) $this->resolveGetComments($query);
     }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     *
+     * @return int|array List of comments or number of found comments if $count argument is true.
+     */
+    protected function resolveGetComments(array $query): int|array
+    {
+        return get_comments($query);
+    }
+
     protected function convertCommentsQuery(array $query, array $options): array
     {
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
@@ -138,6 +157,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         );
         return $query;
     }
+
     public function getCommentCount(array $query, array $options = []): int
     {
         $query = $this->convertCommentsQuery($query, $options);
@@ -145,20 +165,53 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         unset($query['offset']);
         $query['count'] = true;
         /** @var int */
-        $count = \get_comments($query);
+        $count = $this->resolveGetComments($query);
         return $count;
     }
+
     public function getComment(string | int $comment_id): ?object
     {
-        return \get_comment($comment_id);
+        return $this->resolveGetComment($comment_id);
     }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetComment(string | int $comment_id): ?WP_Comment
+    {
+        return get_comment($comment_id);
+    }
+
     public function getCommentNumber(string | int $post_id): int
     {
-        return (int) \get_comments_number($post_id);
+        return (int) $this->resolveGetCommentsNumber((int) $post_id);
     }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetCommentsNumber(int $post_id): string|int
+    {
+        return get_comments_number($post_id);
+    }
+
     public function areCommentsOpen(string | int $post_id): bool
     {
-        return \comments_open($post_id);
+        return $this->resolveCommentsOpen((int)$post_id);
+    }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveCommentsOpen(int $post_id): bool
+    {
+        return comments_open($post_id);
     }
 
     protected function getOrderByQueryArgValue(string $orderBy): string
