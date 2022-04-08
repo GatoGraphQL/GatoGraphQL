@@ -29,6 +29,48 @@ class WPDataParser
             ));
         }
         $parser = new WXR_Parser();
-        return $parser->parse($wpDataXMLExportFile);
+        return $this->customDataTransformations(
+            $parser->parse($wpDataXMLExportFile),
+            $wpDataXMLExportFile
+        );
+    }
+
+    /**
+     * Modifications applied on the parsed data.
+     *
+     * Because the WordPress export file does not assign IDs to
+     * the authors, posts have a relationship to the author
+     * via the nicename, not the ID.
+     *
+     * However, in this upgraded version we do already have
+     * the author ID, then replace it.
+     *
+     * This fixes the issue of querying ```{ posts { author { id }}}```
+     * which fails since post_author expects the ID in the resolver.
+     *
+     * @param array<string,mixed> $data
+     * @return array<string,mixed>
+     * @throws ParserException If the author ID has not been added to the dataset file
+     */
+    protected function customDataTransformations(
+        array $data,
+        string $wpDataXMLExportFile,
+    ): array {
+        $authorDataEntries = $data['authors'] ?? [];
+        $postDataEntries = $data['posts'] ?? [];
+        foreach ($postDataEntries as $key => &$postDataEntry) {
+            // Find the author with the given nicename
+            $authorDataEntry = $authorDataEntries[$postDataEntry['post_author']] ?? null;
+            if ($authorDataEntry === null) {
+                throw new ParserException(sprintf(
+                    'The ID for author "%s" has not beed added to dataset file "%s"',
+                    $postDataEntry['post_author'],
+                    $wpDataXMLExportFile
+                ));
+            }
+            // Replace the nicename with the ID
+            $data['posts'][$key]['post_author'] = $authorDataEntry['author_id'];
+        }
+        return $data;
     }
 }
