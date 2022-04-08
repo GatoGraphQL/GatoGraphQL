@@ -65,7 +65,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     public function getPost(int | string $id): ?object
     {
         $post = $this->resolveGetPost($id);
-        if (!$post || $post->post_type !== 'post') {
+        if ($post === null || $post->post_type !== 'post') {
             return null;
         }
         return $post;
