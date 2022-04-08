@@ -47,6 +47,6 @@ class StanceTypeAPI implements StanceTypeAPIInterface
      */
     public function stanceExists(int | string $id): bool
     {
-        return $this->getStance($id) != null;
+        return $this->getStance($id) !== null;
     }
 }

@@ -76,7 +76,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function postExists(int | string $id): bool
     {
-        return $this->getPost($id) != null;
+        return $this->getPost($id) !== null;
     }
 
     /**

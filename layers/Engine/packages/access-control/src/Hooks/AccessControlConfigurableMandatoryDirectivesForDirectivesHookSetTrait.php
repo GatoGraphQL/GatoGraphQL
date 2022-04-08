@@ -33,7 +33,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
         do {
             $ancestorDirectiveResolverClasses[] = $directiveResolverClass;
             $directiveResolverClass = get_parent_class($directiveResolverClass);
-        } while ($directiveResolverClass != null);
+        } while ($directiveResolverClass !== null);
         $entries = $this->getEntries();
         foreach ($entries as $entry) {
             /**

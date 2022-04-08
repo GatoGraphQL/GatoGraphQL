@@ -47,6 +47,6 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
      */
     public function highlightExists(int | string $id): bool
     {
-        return $this->getHighlight($id) != null;
+        return $this->getHighlight($id) !== null;
     }
 }

@@ -130,7 +130,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     public function pageExists(int | string $id): bool
     {
-        return $this->getPage($id) != null;
+        return $this->getPage($id) !== null;
     }
 
     /**
