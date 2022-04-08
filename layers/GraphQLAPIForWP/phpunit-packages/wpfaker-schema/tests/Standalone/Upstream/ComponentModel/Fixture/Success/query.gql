@@ -1,7 +1,7 @@
 {
   posts(
     pagination: {
-      limit: 3
+      limit: 5
     }
   ) {
     id
@@ -17,6 +17,7 @@
     ) {
       id
       date
+      content
     }
   }
 }
