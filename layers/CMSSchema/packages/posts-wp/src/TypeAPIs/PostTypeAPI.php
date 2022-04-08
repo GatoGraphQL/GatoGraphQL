@@ -64,11 +64,22 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function getPost(int | string $id): ?object
     {
-        $post = get_post($id);
-        if (!$post || $post->post_type !== 'post') {
+        $post = $this->resolveGetPost($id);
+        if ($post === null || $post->post_type !== 'post') {
             return null;
         }
         return $post;
+    }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetPost(int | string $id): ?WP_Post
+    {
+        return get_post($id);
     }
 
     /**

@@ -56,7 +56,7 @@ return array(
         array(
             'post_title' => 'Keyboard navigation',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1724',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>There are many different ways to use the web besides a mouse and a pair of eyes.  Users navigate for example with a keyboard only or with their voice. </p>
   <!-- /wp:paragraph -->
@@ -106,12 +106,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         1 =>
         array(
             'post_title' => 'About The Tests',
             'guid' => 'https://wpthemetestdata.wordpress.com/about/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This site is using the standard WordPress Theme Unit Test Data for content. The Theme Unit Test is a series of posts and pages that match up with a checklist on the WordPress codex. You can use the data and checklist together to test your theme. It is recommended that you test your theme with the Theme Unit Test before submitting your theme to the WordPress.org theme directory.
   
   <h2>WordPress Theme Development Resources</h2>
@@ -135,12 +136,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         2 =>
         array(
             'post_title' => 'Lorem Ipsum',
             'guid' => 'https://wpthemetestdata.wordpress.com/lorem-ipsum/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec mollis. Quisque convallis libero in sapien pharetra tincidunt. Aliquam elit ante, malesuada id, tempor eu, gravida id, odio. Maecenas suscipit, risus et eleifend imperdiet, nisi orci ullamcorper massa, et adipiscing orci velit quis magna. Praesent sit amet ligula id orci venenatis auctor. Phasellus porttitor, metus non tincidunt dapibus, orci pede pretium neque, sit amet adipiscing ipsum lectus et libero. Aenean bibendum. Curabitur mattis quam id urna. Vivamus dui. Donec nonummy lacinia lorem. Cras risus arcu, sodales ac, ultrices ac, mollis quis, justo. Sed a libero. Quisque risus erat, posuere at, tristique non, lacinia quis, eros.
   
   Cras volutpat, lacus quis semper pharetra, nisi enim dignissim est, et sollicitudin quam ipsum vel mi. Sed commodo urna ac urna. Nullam eu tortor. Curabitur sodales scelerisque magna. Donec ultricies tristique pede. Nullam libero. Nam sollicitudin felis vel metus. Nullam posuere molestie metus. Nullam molestie, nunc id suscipit rhoncus, felis mi vulputate lacus, a ultrices tortor dolor eget augue. Aenean ultricies felis ut turpis. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse placerat tellus ac nulla. Proin adipiscing sem ac risus. Maecenas nisi. Cras semper.
@@ -191,12 +193,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         3 =>
         array(
             'post_title' => 'Page with comments',
             'guid' => 'https://wpthemetestdata.wordpress.com/page-with-comments/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Repository-hosted Themes are required to support display of comments on static Pages as well as on single blog Posts.  This static Page has comments, and these comments should be displayed.
   If the Theme includes a custom option to prevent static Pages from displaying comments, such option must be disabled (i.e. so that static Pages display comments) by default.
   Also, verify that this Page does not display taxonomy information (e.g. categories or tags) or time-stamp information (Page publish date/time).',
@@ -284,12 +287,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         4 =>
         array(
             'post_title' => 'Page with comments disabled',
             'guid' => 'https://wpthemetestdata.wordpress.com/page-with-comments-disabled/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This static Page is set not to allow comments. Verify that the Page does not display a comment list, comment reply links, or comment reply form.
   Also, verify that the Page does not display a "comments are closed" type message. Such messages are not suitable for static Pages, and should only be used on blog Posts.',
             'post_excerpt' => '',
@@ -305,12 +309,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         5 =>
         array(
             'post_title' => 'Level 3',
             'guid' => 'https://wpthemetestdata.wordpress.com/level-3/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Level 3 of the reverse hierarchy test.',
             'post_excerpt' => '',
             'post_id' => 172,
@@ -325,12 +330,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         6 =>
         array(
             'post_title' => 'Level 2',
             'guid' => 'https://wpthemetestdata.wordpress.com/level-2/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Level 2 of the reverse hierarchy test.',
             'post_excerpt' => '',
             'post_id' => 173,
@@ -345,12 +351,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         7 =>
         array(
             'post_title' => 'Level 1',
             'guid' => 'https://wpthemetestdata.wordpress.com/level-1/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Level 1 of the reverse hierarchy test.  This is to make sure the importer correctly assigns parents and children even when the children come first in the export file.',
             'post_excerpt' => '',
             'post_id' => 174,
@@ -365,12 +372,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         8 =>
         array(
             'post_title' => 'Clearing Floats',
             'guid' => 'https://wpthemetestdata.wordpress.com/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'The last item in this page\'s content is a thumbnail floated left. There should be page links following it. Make sure any elements after the content are clearing properly.
   
     The float is cleared when it does not stick out the bottom of the parent container, and when other elements that follow it do not wrap around the floated element.
@@ -389,12 +397,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         9 =>
         array(
             'post_title' => 'canola2',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/canola2.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec mollis. Quisque convallis libero in sapien pharetra tincidunt. Aliquam elit ante, malesuada id, tempor eu, gravida id, odio. Maecenas suscipit, risus et eleifend imperdiet, nisi orci ullamcorper massa, et adipiscing orci velit quis magna.',
             'post_id' => 611,
@@ -423,12 +432,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         10 =>
         array(
             'post_title' => 'dsc20050727_091048_222',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc20050727_091048_222.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 616,
@@ -457,12 +467,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         11 =>
         array(
             'post_title' => 'dsc20050813_115856_52',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc20050813_115856_52.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 617,
@@ -491,12 +502,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         12 =>
         array(
             'post_title' => 'Front Page',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=701',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Use this static Page to test the Theme\'s handling of the Front Page template file.
   
   This is the Front Page content. Use this static Page to test the Front Page output of the Theme. The Theme should properly handle both Blog Posts Index as Front Page and static Page as Front Page.
@@ -515,12 +527,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         13 =>
         array(
             'post_title' => 'a Blog page',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=703',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Use this static Page to test the Theme\'s handling of the Blog Posts Index page. If the site is set to display a static Page on the Front Page, and this Page is set to display the Blog Posts Index, then this text should not appear. The title might, so make sure the theme is not supplying a hard-coded title for the Blog Post Index.',
             'post_excerpt' => '',
             'post_id' => 703,
@@ -555,12 +568,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         14 =>
         array(
             'post_title' => 'Bell on Wharf',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/100_5478.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/100_5478.JPG.html',
             'post_excerpt' => 'Bell on wharf in San Francisco',
             'post_id' => 754,
@@ -589,12 +603,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         15 =>
         array(
             'post_title' => 'Golden Gate Bridge',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/100_5540.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/100_5540.JPG.html',
             'post_excerpt' => 'Golden Gate Bridge',
             'post_id' => 755,
@@ -623,12 +638,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         16 =>
         array(
             'post_title' => 'Sunburst Over River',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/cep00032.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/CEP00032.jpg.html',
             'post_excerpt' => 'Sunburst over the Clinch River, Southwest Virginia.',
             'post_id' => 756,
@@ -657,12 +673,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         17 =>
         array(
             'post_title' => 'Boardwalk',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dcp_2082.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/DCP_2082.jpg.html',
             'post_excerpt' => 'Boardwalk at Westport, WA',
             'post_id' => 757,
@@ -691,12 +708,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         18 =>
         array(
             'post_title' => 'Yachtsody in Blue',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc03149.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/dsc03149.jpg.html',
             'post_excerpt' => 'Boats and reflections, Royal Perth Yacht Club',
             'post_id' => 758,
@@ -725,12 +743,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         19 =>
         array(
             'post_title' => 'Rain Ripples',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc04563.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/dsc04563.jpg.html',
             'post_excerpt' => 'Raindrop ripples on a pond',
             'post_id' => 759,
@@ -759,12 +778,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         20 =>
         array(
             'post_title' => 'Sydney Harbor Bridge',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc09114.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/dsc09114.jpg.html',
             'post_excerpt' => 'Sydney Harbor Bridge',
             'post_id' => 760,
@@ -793,12 +813,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         21 =>
         array(
             'post_title' => 'Wind Farm',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc20050102_192118_51.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/dsc20050102_192118_51.jpg.html',
             'post_excerpt' => 'Albany wind-farm against the sunset, Western Australia',
             'post_id' => 761,
@@ -827,12 +848,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         22 =>
         array(
             'post_title' => 'Antique Farm Machinery',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc20051220_160808_102.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/dsc20051220_160808_102.jpg.html',
             'post_excerpt' => 'Antique farm machinery, Mount Barker Museum, Western Australia',
             'post_id' => 762,
@@ -861,12 +883,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         23 =>
         array(
             'post_title' => 'Orange Iris',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc02085.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/main.php?g2_view=dynamicalbum.UpdatesAlbum&amp;g2_itemId=25895',
             'post_excerpt' => 'Orange Iris',
             'post_id' => 763,
@@ -895,12 +918,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         24 =>
         array(
             'post_title' => 'Rusty Rail',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dsc20051220_173257_119.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/dsc20051220_173257_119.jpg.html',
             'post_excerpt' => 'Rusty rails with fishplate, Kojonup',
             'post_id' => 764,
@@ -929,12 +953,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         25 =>
         array(
             'post_title' => 'Sea and Rocks',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/dscn3316.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/dscn3316.jpg.html',
             'post_excerpt' => 'Sea and rocks, Plimmerton, New Zealand',
             'post_id' => 765,
@@ -963,12 +988,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         26 =>
         array(
             'post_title' => 'Big Sur',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/michelle_049.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/michelle_049.jpg.html',
             'post_excerpt' => 'Beach at Big Sur, CA',
             'post_id' => 766,
@@ -997,12 +1023,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         27 =>
         array(
             'post_title' => 'Windmill',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/windmill.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Objects/Windmill.jpg.html',
             'post_excerpt' => 'Windmill shrouded in fog at a farm outside of Walker, Iowa',
             'post_id' => 767,
@@ -1031,12 +1058,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         28 =>
         array(
             'post_title' => 'Huatulco Coastline',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/img_0513-1.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/IMG_0513-1.JPG.html',
             'post_excerpt' => 'Sunrise over the coast in Huatulco, Oaxaca, Mexico',
             'post_id' => 768,
@@ -1065,12 +1093,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         29 =>
         array(
             'post_title' => 'Brazil Beach',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/img_0747.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/main.php?g2_view=dynamicalbum.UpdatesAlbum&amp;g2_itemId=25770',
             'post_excerpt' => 'Jericoacoara Ceara Brasil',
             'post_id' => 769,
@@ -1099,12 +1128,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         30 =>
         array(
             'post_title' => 'Huatulco Coastline',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/img_0767.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/v/Landscapes/ocean/IMG_0767.JPG.html',
             'post_excerpt' => 'Coastline in Huatulco, Oaxaca, Mexico',
             'post_id' => 770,
@@ -1133,12 +1163,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         31 =>
         array(
             'post_title' => 'Boat Barco Texture',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/img_8399.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Public domain via https://www.burningwell.org/gallery2/main.php?g2_view=dynamicalbum.UpdatesAlbum&amp;g2_itemId=25774',
             'post_excerpt' => 'Boat BW PB Barco Texture Beautiful Fishing',
             'post_id' => 771,
@@ -1167,12 +1198,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         32 =>
         array(
             'post_title' => 'Resinous',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2012/06/dsc20040724_152504_532.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => 'log',
             'post_id' => 807,
@@ -1196,12 +1228,13 @@ return array(
                     'value' => '555',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         33 =>
         array(
             'post_title' => 'St. Louis Blues',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2008/06/originaldixielandjazzbandwithalbernard-stlouisblues.mp3',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'St. Louis Blues, by Original Dixieland Jazz Band with Al Bernard (public domain)',
             'post_excerpt' => 'St. Louis Blues, by Original Dixieland Jazz Band with Al Bernard (public domain)',
             'post_id' => 821,
@@ -1217,12 +1250,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2008/06/originaldixielandjazzbandwithalbernard-stlouisblues.mp3',
+            'post_author_login' => 'themedemos',
         ),
         34 =>
         array(
             'post_title' => 'OLYMPUS DIGITAL CAMERA',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2010/08/manhattansummer.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 827,
@@ -1238,12 +1272,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2010/08/manhattansummer.jpg',
+            'post_author_login' => 'themedemos',
         ),
         35 =>
         array(
             'post_title' => 'Image Alignment 580x300',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/image-alignment-580x300.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 967,
@@ -1272,12 +1307,13 @@ return array(
                     'value' => '903',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         36 =>
         array(
             'post_title' => 'Image Alignment 150x150',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/image-alignment-150x150.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 968,
@@ -1306,12 +1342,13 @@ return array(
                     'value' => '903',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         37 =>
         array(
             'post_title' => 'Horizontal Featured Image',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/featured-image-horizontal.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1022,
@@ -1340,12 +1377,13 @@ return array(
                     'value' => '1011',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         38 =>
         array(
             'post_title' => 'I Am Worth Loving Wallpaper',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/soworthloving-wallpaper.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1023,
@@ -1369,12 +1407,13 @@ return array(
                     'value' => 'I Am Worth Loving Wallpaper',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         39 =>
         array(
             'post_title' => 'Image Alignment 300x200',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/image-alignment-300x200.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1025,
@@ -1403,12 +1442,13 @@ return array(
                     'value' => '903',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         40 =>
         array(
             'post_title' => 'Vertical Featured Image',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/featured-image-vertical.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1027,
@@ -1437,12 +1477,13 @@ return array(
                     'value' => '1016',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         41 =>
         array(
             'post_title' => 'Image Alignment 1200x4002',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/03/image-alignment-1200x4002.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1029,
@@ -1471,12 +1512,13 @@ return array(
                     'value' => '903',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         42 =>
         array(
             'post_title' => 'Unicorn Wallpaper',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2012/12/unicorn-wallpaper.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1045,
@@ -1505,12 +1547,13 @@ return array(
                     'value' => '568',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         43 =>
         array(
             'post_title' => 'Pages',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/pages',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1100,
@@ -1577,12 +1620,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         44 =>
         array(
             'post_title' => 'Categories',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/categories',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1101,
@@ -1649,12 +1693,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         45 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/1112',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Posts in this category test markup tags and styles.',
             'post_excerpt' => '',
             'post_id' => 1112,
@@ -1721,12 +1766,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         46 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/1115',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Posts in this category test post formats.',
             'post_excerpt' => '',
             'post_id' => 1115,
@@ -1793,12 +1839,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         47 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/1118',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Posts in this category test unpublished posts.',
             'post_excerpt' => '',
             'post_id' => 1118,
@@ -1865,12 +1912,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         48 =>
         array(
             'post_title' => 'Depth',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/depth',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1119,
@@ -1942,12 +1990,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         49 =>
         array(
             'post_title' => 'Level 01',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-01',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1120,
@@ -2019,12 +2068,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         50 =>
         array(
             'post_title' => 'Level 02',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-02',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1121,
@@ -2096,12 +2146,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         51 =>
         array(
             'post_title' => 'Level 03',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-03',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1122,
@@ -2173,12 +2224,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         52 =>
         array(
             'post_title' => 'Level 04',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-04',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1123,
@@ -2250,12 +2302,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         53 =>
         array(
             'post_title' => 'Level 05',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-05',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1124,
@@ -2327,12 +2380,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         54 =>
         array(
             'post_title' => 'Level 06',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-06',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1125,
@@ -2404,12 +2458,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         55 =>
         array(
             'post_title' => 'Level 07',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-07',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1126,
@@ -2481,12 +2536,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         56 =>
         array(
             'post_title' => 'Level 08',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-08',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1127,
@@ -2558,12 +2614,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         57 =>
         array(
             'post_title' => 'Level 09',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-09',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1128,
@@ -2635,12 +2692,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         58 =>
         array(
             'post_title' => 'Level 10',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/level-10',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1129,
@@ -2712,12 +2770,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         59 =>
         array(
             'post_title' => 'Advanced',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/advanced',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1130,
@@ -2789,12 +2848,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         60 =>
         array(
             'post_title' => 'Menu Description',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/menu-description',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Custom Menu Description',
             'post_excerpt' => '',
             'post_id' => 1142,
@@ -2866,12 +2926,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         61 =>
         array(
             'post_title' => 'Menu Title Attribute',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/menu-title-attribute',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => 'Custom Title Attribute',
             'post_id' => 1143,
@@ -2943,12 +3004,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         62 =>
         array(
             'post_title' => 'Menu CSS Class',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/menu-css-class',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1144,
@@ -3020,12 +3082,13 @@ return array(
                     'value' => '#',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         63 =>
         array(
             'post_title' => 'New Window / Tab',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/new-window-tab',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1145,
@@ -3097,12 +3160,13 @@ return array(
                     'value' => 'https://wordpressfoundation.org/',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         64 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/1263',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1263,
@@ -3174,12 +3238,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         65 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2013/04/09/1264',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1264,
@@ -3251,12 +3316,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         66 =>
         array(
             'post_title' => 'twitter.com',
             'guid' => 'https://wpthemetestdata.wordpress.com/2018/10/20/twitter-com/',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1719,
@@ -3323,12 +3389,13 @@ return array(
                     'value' => 'https://twitter.com/wordpress',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         67 =>
         array(
             'post_title' => 'facebook.com',
             'guid' => 'https://wpthemetestdata.wordpress.com/2018/10/20/facebook-com/',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1720,
@@ -3395,12 +3462,13 @@ return array(
                     'value' => 'https://www.facebook.com/WordPress/',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         68 =>
         array(
             'post_title' => 'github.com',
             'guid' => 'https://wpthemetestdata.wordpress.com/2018/10/20/github-com',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1721,
@@ -3467,12 +3535,13 @@ return array(
                     'value' => 'https://github.com/WordPress/',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         69 =>
         array(
             'post_title' => 'instagram.com',
             'guid' => 'https://wpthemetestdata.wordpress.com/2018/10/20/instagram-com',
-            'post_author' => 'themereviewteam>',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1723,
@@ -3539,12 +3608,13 @@ return array(
                     'value' => 'https://www.instagram.com/photomatt/',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         70 =>
         array(
             'post_title' => 'linkedin.com',
             'guid' => 'https://wpthemetestdata.wordpress.com/2018/10/20/linkedin-com/',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1722,
@@ -3611,12 +3681,13 @@ return array(
                     'value' => 'https://www.linkedin.com/company/wordpress/',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         71 =>
         array(
             'post_title' => 'triforce-wallpaper',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2010/08/triforce-wallpaper.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => 'It’s dangerous to go alone! Take this.',
             'post_id' => 1628,
@@ -3632,12 +3703,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2010/08/triforce-wallpaper.jpg',
+            'post_author_login' => 'themedemos',
         ),
         72 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1636',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1636,
@@ -3709,12 +3781,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         73 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1637',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1637,
@@ -3786,12 +3859,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         74 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1638',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1638,
@@ -3863,12 +3937,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         75 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1639',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1639,
@@ -3940,12 +4015,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         76 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1640',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1640,
@@ -4017,12 +4093,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         77 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1641',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1641,
@@ -4094,12 +4171,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         78 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1643',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1643,
@@ -4171,12 +4249,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         79 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1644',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1644,
@@ -4248,12 +4327,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         80 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1645',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1645,
@@ -4325,12 +4405,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         81 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1646',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1646,
@@ -4402,12 +4483,13 @@ return array(
                     'value' => '0',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         82 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1647',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1647,
@@ -4479,12 +4561,13 @@ return array(
                     'value' => '1134',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         83 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1648',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1648,
@@ -4556,12 +4639,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         84 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1649',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1649,
@@ -4633,12 +4717,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         85 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1650',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1650,
@@ -4710,12 +4795,13 @@ return array(
                     'value' => 'a:1:{i:0;s:0:"";}',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         86 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1651',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1651,
@@ -4787,12 +4873,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         87 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1652',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1652,
@@ -4864,12 +4951,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         88 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1653',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1653,
@@ -4941,12 +5029,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         89 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1654',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1654,
@@ -5018,12 +5107,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         90 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1655',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1655,
@@ -5095,12 +5185,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         91 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1656',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1656,
@@ -5172,12 +5263,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         92 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1657',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1657,
@@ -5249,12 +5341,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         93 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1658',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1658,
@@ -5326,12 +5419,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         94 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1659',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1659,
@@ -5403,12 +5497,13 @@ return array(
                     'value' => '1',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         95 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1660',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1660,
@@ -5480,12 +5575,13 @@ return array(
                     'value' => 'page',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         96 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1643',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1643,
@@ -5557,12 +5653,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         97 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1644',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1644,
@@ -5634,12 +5731,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         98 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1645',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1645,
@@ -5711,12 +5809,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         99 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1646',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1646,
@@ -5788,12 +5887,13 @@ return array(
                     'value' => '1645',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         100 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1647',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1647,
@@ -5865,12 +5965,13 @@ return array(
                     'value' => '1134',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         101 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1648',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1648,
@@ -5942,12 +6043,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         102 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1649',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1649,
@@ -6019,12 +6121,13 @@ return array(
                     'value' => '',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         103 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1650',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1650,
@@ -6096,12 +6199,13 @@ return array(
                     'value' => 'a:1:{i:0;s:0:"";}',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         104 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1651',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1651,
@@ -6173,12 +6277,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         105 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1652',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1652,
@@ -6250,12 +6355,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         106 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1653',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1653,
@@ -6327,12 +6433,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         107 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1654',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1654,
@@ -6404,12 +6511,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         108 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1655',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1655,
@@ -6481,12 +6589,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         109 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1656',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1656,
@@ -6558,12 +6667,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         110 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1657',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1657,
@@ -6635,12 +6745,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         111 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1658',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1658,
@@ -6712,12 +6823,13 @@ return array(
                     'value' => 'post_type',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         112 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1659',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1659,
@@ -6789,12 +6901,13 @@ return array(
                     'value' => '1',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         113 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1660',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => ' ',
             'post_excerpt' => '',
             'post_id' => 1660,
@@ -6866,12 +6979,13 @@ return array(
                     'value' => 'page',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         114 =>
         array(
             'post_title' => 'dsc20040724_152504_532',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/09/dsc20040724_152504_532.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1686,
@@ -6887,12 +7001,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2013/09/dsc20040724_152504_532.jpg',
+            'post_author_login' => 'themedemos',
         ),
         115 =>
         array(
             'post_title' => 'dsc20050604_133440_34211',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/09/dsc20050604_133440_34211.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1687,
@@ -6908,12 +7023,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2013/09/dsc20050604_133440_34211.jpg',
+            'post_author_login' => 'themedemos',
         ),
         116 =>
         array(
             'post_title' => '2014-slider-mobile-behavior',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2013/12/2014-slider-mobile-behavior.mov',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1690,
@@ -6929,12 +7045,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2013/12/2014-slider-mobile-behavior.mov',
+            'post_author_login' => 'themedemos',
         ),
         117 =>
         array(
             'post_title' => 'dsc20050315_145007_132',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2014/01/dsc20050315_145007_132.jpg',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1691,
@@ -6950,12 +7067,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2014/01/dsc20050315_145007_132.jpg',
+            'post_author_login' => 'themedemos',
         ),
         118 =>
         array(
             'post_title' => 'spectacles',
             'guid' => 'https://wpthemetestdata.files.wordpress.com/2014/01/spectacles.gif',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1692,
@@ -6971,12 +7089,13 @@ return array(
             'post_password' => '',
             'is_sticky' => 0,
             'attachment_url' => 'https://wpthemetestdata.files.wordpress.com/2014/01/spectacles.gif',
+            'post_author_login' => 'themedemos',
         ),
         119 =>
         array(
             'post_title' => 'Post Format: Standard',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=358',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'All children, except one, grow up. They soon know that they will grow up, and the way Wendy knew was this. One day when she was two years old she was playing in a garden, and she plucked another flower and ran with it to her mother. I suppose she must have looked rather delightful, for Mrs. Darling put her hand to her heart and cried, "Oh, why can\'t you remain like this for ever!" This was all that passed between them on the subject, but henceforth Wendy knew that she must grow up. You always know after you are two. Two is the beginning of the end.
   
   <!--more-->
@@ -7038,12 +7157,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         120 =>
         array(
             'post_title' => 'Post Format: Gallery',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=555',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '[gallery]
   
   <!--nextpage-->
@@ -7119,12 +7239,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         121 =>
         array(
             'post_title' => 'Post Format: Aside',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=559',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '“I never tried to prove nothing, just wanted to give a good show. My life has always been my music, it\'s always come first, but the music ain\'t worth nothing if you can\'t lay it on the public. The main thing is to live for that audience, \'cause what you\'re there for is to please the people.”',
             'post_excerpt' => '',
             'post_id' => 559,
@@ -7172,12 +7293,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         122 =>
         array(
             'post_title' => 'Post Format: Chat',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=562',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Abbott: Strange as it may seem, they give ball players nowadays very peculiar names.
   
   Costello: Funny names?
@@ -7349,12 +7471,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         123 =>
         array(
             'post_title' => 'Post Format: Link',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=565',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<a href="https://make.wordpress.org/themes" title="The WordPress Theme Review Team Website">The WordPress Theme Review Team Website</a>',
             'post_excerpt' => '',
             'post_id' => 565,
@@ -7402,12 +7525,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         124 =>
         array(
             'post_title' => 'Post Format: Image (Linked)',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=568',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '[caption id="attachment_612" align="aligncenter" width="640" caption="Chunk of resinous blackboy husk, Clarkson, Western Australia. This burns like a spinifex log."]<a href="https://wpthemetestdata.files.wordpress.com/2013/09/dsc20040724_152504_532.jpg"><img src="https://wpthemetestdata.files.wordpress.com/2013/09/dsc20040724_152504_532.jpg" alt="chunk of resinous blackboy husk" title="dsc20040724_152504_532" width="640" height="480" class="size-full wp-image-612" /></a>[/caption]
   ',
             'post_excerpt' => '',
@@ -7456,12 +7580,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         125 =>
         array(
             'post_title' => 'Post Format: Quote',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=575',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<blockquote>Only one thing is impossible for God: To find any sense in any copyright law on the planet.
   <cite><a href="http://www.brainyquote.com/quotes/quotes/m/marktwain163473.html">Mark Twain</a></cite></blockquote>',
             'post_excerpt' => '',
@@ -7510,12 +7635,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         126 =>
         array(
             'post_title' => 'Post Format: Status',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=579',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'WordPress, how do I love thee? Let me count the ways (in 140 characters or less).',
             'post_excerpt' => '',
             'post_id' => 579,
@@ -7563,12 +7689,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         127 =>
         array(
             'post_title' => 'Post Format: Video (WordPress.tv)',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=582',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'https://wordpress.tv/2009/03/16/anatomy-of-a-wordpress-theme-exploring-the-files-behind-your-theme/
   
   Posted as per the <a href="https://codex.wordpress.org/Embeds" target="_blank">instructions in the Codex</a>.',
@@ -7658,12 +7785,13 @@ return array(
                     'value' => '<div class="embed-"><embed src="http://v.wordpress.com/hrPKeL5t" type="application/x-shockwave-flash" width="599" height="336" allowscriptaccess="always" allowfullscreen="true" wmode="transparent"></embed></div>',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         128 =>
         array(
             'post_title' => 'Post Format: Audio',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=587',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Link:
   
   <a href="https://wpthemetestdata.files.wordpress.com/2008/06/originaldixielandjazzbandwithalbernard-stlouisblues.mp3">St. Louis Blues</a>
@@ -7734,12 +7862,13 @@ return array(
   ',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         129 =>
         array(
             'post_title' => 'Page A',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=733',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
             'post_excerpt' => '',
             'post_id' => 733,
@@ -7754,12 +7883,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         130 =>
         array(
             'post_title' => 'Page B',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=735',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '(lorem ipsum)',
             'post_excerpt' => '',
             'post_id' => 735,
@@ -7774,12 +7904,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         131 =>
         array(
             'post_title' => 'Level 2a',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=742',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '(lorem ipsum)',
             'post_excerpt' => '',
             'post_id' => 742,
@@ -7794,12 +7925,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         132 =>
         array(
             'post_title' => 'Level 2b',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=744',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '(lorem ipsum)',
             'post_excerpt' => '',
             'post_id' => 744,
@@ -7814,12 +7946,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         133 =>
         array(
             'post_title' => 'Level 3a',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=746',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '(lorem ipsum)',
             'post_excerpt' => '',
             'post_id' => 746,
@@ -7834,12 +7967,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         134 =>
         array(
             'post_title' => 'Level 3b',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=748',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '(lorem ipsum)',
             'post_excerpt' => '',
             'post_id' => 748,
@@ -7854,12 +7988,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         135 =>
         array(
             'post_title' => 'Template: Excerpt (Defined)',
             'guid' => 'http://wptest.io/demo/?p=993',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This is the post content. It <strong>should</strong> be displayed in place of the user-defined excerpt in single-page views.',
             'post_excerpt' => 'This is a user-defined post excerpt. It <em>should</em> be displayed in place of the post content in archive-index pages. It can be longer than the automatically generated excerpts, and can have <strong>HTML</strong> tags.',
             'post_id' => 993,
@@ -7913,12 +8048,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         136 =>
         array(
             'post_title' => 'Template: More Tag',
             'guid' => 'http://wptest.io/demo/?p=996',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This content is before the <a title="The More Tag" href="https://en.support.wordpress.com/splitting-content/more-tag/" target="_blank">more tag</a>.
   
   Right after this sentence should be a "continue reading" button of some sort on list pages of themes that show full content. It won\'t show on single pages or on themes showing excerpts.
@@ -7978,12 +8114,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         137 =>
         array(
             'post_title' => 'Edge Case: Nested And Mixed Lists',
             'guid' => 'http://wptest.io/demo/?p=1000',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Nested and mixed lists are an interesting beast. It\'s a corner case to make sure that
   <ul>
       <li>Lists within lists do not break the ordered list numbering order</li>
@@ -8115,12 +8252,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         138 =>
         array(
             'post_title' => 'Template: Featured Image (Horizontal)',
             'guid' => 'http://wptest.io/demo/?p=1011',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post should display a <a title="Featured Images" href="https://en.support.wordpress.com/featured-images/#setting-a-featured-image" target="_blank">featured image</a>, if the theme <a title="Post Thumbnails" href="https://codex.wordpress.org/Post_Thumbnails" target="_blank">supports it</a>.
   
   Non-square images can provide some unique styling issues.
@@ -8198,12 +8336,13 @@ return array(
                     'value' => '1022',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         139 =>
         array(
             'post_title' => 'Template: Featured Image (Vertical)',
             'guid' => 'http://wptest.io/demo/?p=1016',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post should display a <a title="Featured Images" href="https://en.support.wordpress.com/featured-images/#setting-a-featured-image" target="_blank">featured image</a>, if the theme <a title="Post Thumbnails" href="https://codex.wordpress.org/Post_Thumbnails" target="_blank">supports it</a>.
   
   Non-square images can provide some unique styling issues.
@@ -8281,12 +8420,13 @@ return array(
                     'value' => '1027',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         140 =>
         array(
             'post_title' => 'Post Format: Gallery (Tiled)',
             'guid' => 'http://wptest.io/demo/?p=1031',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This is a test for Jetpack\'s Tiled Gallery.
   
   Install <a title="Jetpack for WordPress" href="https://wordpress.org/plugins/jetpack/" target="_blank">Jetpack</a> to test.
@@ -8358,12 +8498,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         141 =>
         array(
             'post_title' => 'Page Image Alignment',
             'guid' => 'http://wptest.io/demo/?page_id=1080',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Welcome to image alignment! The best way to demonstrate the ebb and flow of the various image positioning options is to nestle them snuggly among an ocean of words. Grab a paddle and let\'s get started.
   
   On the topic of alignment, it should be noted that users can choose from the options of <em>None</em>, <em>Left</em>, <em>Right, </em>and <em>Center</em>. In addition, they also get the options of <em>Thumbnail</em>, <em>Medium</em>, <em>Large</em> &amp; <em>Fullsize</em>. Be sure to try this page in RTL mode and it should look the same as LTR. 
@@ -8431,12 +8572,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         142 =>
         array(
             'post_title' => 'Page Markup And Formatting',
             'guid' => 'http://wptest.io/demo/?page_id=1083',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<strong>Headings</strong>
   <h1>Header one</h1>
   <h2>Header two</h2>
@@ -8668,12 +8810,13 @@ return array(
             'post_type' => 'page',
             'post_password' => '',
             'is_sticky' => 0,
+            'post_author_login' => 'themedemos',
         ),
         143 =>
         array(
             'post_title' => 'Template: Comments',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/comment-test/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post tests comments in the following ways.
   <ul>
       <li>Threaded comments up to 10 levels deep</li>
@@ -9281,12 +9424,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         144 =>
         array(
             'post_title' => 'Template: Pingbacks And Trackbacks',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/many-trackbacks/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post has many pingpacks and trackbacks.
   
   There are a few ways to list them.
@@ -9441,12 +9585,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         145 =>
         array(
             'post_title' => 'Template: Comments Disabled',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/no-comments/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post has its comments, pingbacks, and trackbacks disabled.
   
   There should be no comment reply form, but <em>should</em> display pingbacks and trackbacks.',
@@ -9496,12 +9641,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         146 =>
         array(
             'post_title' => 'Edge Case: Many Tags',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/11/24/many-tags/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post has many tags.',
             'post_excerpt' => '',
             'post_id' => 1151,
@@ -9801,12 +9947,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         147 =>
         array(
             'post_title' => 'Edge Case: Many Categories',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/11/24/many-categories/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post has many categories.',
             'post_excerpt' => '',
             'post_id' => 1152,
@@ -10214,12 +10361,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         148 =>
         array(
             'post_title' => 'Scheduled',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=418',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post is scheduled to be published in the future.
   
   It should not be displayed by the theme.',
@@ -10257,12 +10405,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         149 =>
         array(
             'post_title' => 'Post Format: Image',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=568',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<dl id="attachment_612" class="wp-caption aligncenter" style="width:650px;"><dt class="wp-caption-dt"></dt></dl>&nbsp;
   
   <a href="https://wpthemetestdata.files.wordpress.com/2008/06/100_5540.jpg"><img class="alignnone wp-image-755 size-large" src="https://wpthemetestdata.files.wordpress.com/2008/06/100_5540.jpg?w=604" alt="" width="604" height="453" /></a>',
@@ -10312,12 +10461,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         150 =>
         array(
             'post_title' => 'Post Format: Video (YouTube)',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=582',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'https://www.youtube.com/watch?v=SQEQr7c0-dw
   
   Learn more about <a title="WordPress Embeds" href="https://codex.wordpress.org/Embeds" target="_blank">WordPress Embeds</a>.',
@@ -10361,12 +10511,13 @@ return array(
                     'domain' => 'post_format',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         151 =>
         array(
             'post_title' => 'Post Format: Image (Caption)',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=674',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '[caption id="attachment_754" align="alignnone" width="604"]<a href="https://wpthemetestdata.files.wordpress.com/2008/06/100_5478.jpg"><img class="wp-image-754 size-large" src="https://wpthemetestdata.files.wordpress.com/2008/06/100_5478.jpg?w=604" alt="Bell on Wharf" width="604" height="453" /></a> Bell on wharf in San Francisco[/caption]',
             'post_excerpt' => '',
             'post_id' => 1163,
@@ -10428,12 +10579,13 @@ return array(
                     'value' => '1628',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         152 =>
         array(
             'post_title' => 'Draft',
             'guid' => 'http://wptest.io/demo/?p=922',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post is drafted and not published yet.
   
   It should not be displayed by the theme.',
@@ -10471,12 +10623,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         153 =>
         array(
             'post_title' => 'Template: Password Protected (the password is "enter")',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/test-with-secret-password/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This content, comments, pingbacks, and trackbacks should not be visible until the password is entered.',
             'post_excerpt' => '',
             'post_id' => 1168,
@@ -10544,12 +10697,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         154 =>
         array(
             'post_title' => '',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/14/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This post has no title, but it still must link to the single post view somehow.
   
   This is typically done by placing the permalink on the post date.',
@@ -10599,12 +10753,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         155 =>
         array(
             'post_title' => 'Edge Case: No Content',
             'guid' => 'https://wpthemetestdata.wordpress.com/2007/09/04/this-post-has-no-body/',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1170,
@@ -10672,12 +10827,13 @@ return array(
                     array(),
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         156 =>
         array(
             'post_title' => 'Template: Paginated',
             'guid' => 'https://noeltest.wordpress.com/?p=188',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Post Page 1
   
   <!--nextpage-->
@@ -10739,12 +10895,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         157 =>
         array(
             'post_title' => 'Markup: Title <em>With</em> <b>Mark<sup>up</sup></b>',
             'guid' => 'http://wptest.io/demo/?p=861',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Verify that:
   <ul>
       <li>The post title renders the word "with" in <em>italics</em> and the word "markup" in <strong>bold</strong> (and "up" is <sup>super</sup>script).</li>
@@ -10796,12 +10953,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         158 =>
         array(
             'post_title' => 'Markup: Title With Special Characters ~`!@#$%^&*()-_=+{}[]/\\;:\'"?,.>',
             'guid' => 'http://wptest.io/demo/?p=867',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Putting special characters in the title should have no adverse effect on the layout or functionality.
   
   Special characters in the post title have been known to cause issues with JavaScript when it is minified, especially in the admin when editing the post itself (ie. issues with metaboxes, media upload, etc.).
@@ -10983,12 +11141,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         159 =>
         array(
             'post_title' => 'Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu',
             'guid' => 'http://wptest.io/demo/?p=877',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<h2>Title should not overflow the content area</h2>
   
   A few things to check for:
@@ -11067,12 +11226,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         160 =>
         array(
             'post_title' => 'Markup: Text Alignment',
             'guid' => 'http://wptest.io/demo/?p=895',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<h3>Default</h3>
   This is a paragraph. It should not have any alignment of any kind. It should just flow like you would normally expect. Nothing fancy. Just straight up text, free flowing, with love. Completely neutral and not picking a side or sitting on the fence. It just is. It just freaking is. It likes where it is. It does not feel compelled to pick a side. Leave him be. It will just be better that way. Trust me.
   <h3>Left Align</h3>
@@ -11138,12 +11298,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         161 =>
         array(
             'post_title' => 'Markup: Image Alignment',
             'guid' => 'http://wptest.io/demo/?p=903',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'Welcome to image alignment! The best way to demonstrate the ebb and flow of the various image positioning options is to nestle them snuggly among an ocean of words. Grab a paddle and let\'s get started.
   
   On the topic of alignment, it should be noted that users can choose from the options of <em>None</em>, <em>Left</em>, <em>Right, </em>and <em>Center</em>. In addition, they also get the options of <em>Thumbnail</em>, <em>Medium</em>, <em>Large</em> &amp; <em>Fullsize</em>. Be sure to try this page in RTL mode and it should look the same as LTR. 
@@ -11272,12 +11433,13 @@ return array(
                     'value' => '1023',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         162 =>
         array(
             'post_title' => 'Markup: HTML Tags and Formatting',
             'guid' => 'http://wptest.io/demo/?p=919',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => '<strong>Headings</strong>
   <h1>Header one</h1>
   <h2>Header two</h2>
@@ -11556,12 +11718,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         163 =>
         array(
             'post_title' => 'Media: Twitter Embeds',
             'guid' => 'http://wptest.io/demo/?p=1027',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'https://twitter.com/nacin/status/319508408669708289
   
   This post tests WordPress\' <a title="Twitter Embeds" href="https://en.support.wordpress.com/twitter/twitter-embeds/" target="_blank">Twitter Embeds</a> feature.',
@@ -11640,12 +11803,13 @@ return array(
                     'value' => '<div class="embed-twitter"><blockquote class="twitter-tweet" width="550"><p>Really cool to read through and find so much awesomeness added to WordPress 3.6 while I was gone. I should take three weeks off more often.</p>&mdash; Andrew Nacin (@nacin) <a href="https://twitter.com/nacin/status/319508408669708289">April 3, 2013</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></div>',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         164 =>
         array(
             'post_title' => 'Template: Sticky',
             'guid' => 'http://wptest.io/demo/?p=1241',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This is a sticky post.
   
   There are a few things to verify:
@@ -11695,12 +11859,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         165 =>
         array(
             'post_title' => 'Template: Excerpt (Generated)',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1446',
-            'post_author' => 'themedemos',
+            'post_author' => 2,
             'post_content' => 'This is the post content. It should be displayed in place of the auto-generated excerpt in single-page views. Archive-index pages should display an auto-generated excerpt of this content. Depending on Theme-defined filters, the length of the auto-generated excerpt will vary from Theme-to-Theme. The default length for auto-generated excerpts is 55 words, so to test the excerpt auto-generation, this post must have more than 55 words.
   
   Be sure to test the formatting of the auto-generated excerpt, to ensure that it doesn\'t create any layout problems. Also, ensure that any filters applied to the excerpt, such as <code>excerpt_length</code> and <code>excerpt_more</code>, display properly.',
@@ -11756,12 +11921,13 @@ return array(
                     'domain' => 'category',
                 ),
             ),
+            'post_author_login' => 'themedemos',
         ),
         166 =>
         array(
             'post_title' => 'Block category: Common',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1730',
-            'post_author' => '>themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>The Common category includes the following blocks:<em> Paragraph, image, headings, list, gallery, quote, audio, cover, video.</em></p>
   <!-- /wp:paragraph -->
@@ -11967,12 +12133,13 @@ return array(
   ',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         167 =>
         array(
             'post_title' => 'Block category: Formatting',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1732',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>The formatting category includes the following blocks:</p>
   <!-- /wp:paragraph -->
@@ -12045,12 +12212,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         168 =>
         array(
             'post_title' => 'Block category: Layout Elements',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1734',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:group {"customBackgroundColor":"#d8f6ec"} -->
   <div class="wp-block-group has-background" style="background-color:#d8f6ec"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
   <p>The Layout Elements category includes the following blocks: <em>Group, Button, Columns, Media &amp; Text, separator, spacer, read more, and page break.</em></p>
@@ -12194,12 +12362,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         169 =>
         array(
             'post_title' => 'Block category: Embeds',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1738',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '
       <!-- wp:paragraph -->
   <p>This post tests various embed blocks:</p>
@@ -12391,12 +12560,13 @@ return array(
                     'value' => '1541092486',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         170 =>
         array(
             'post_title' => 'Block category: Widgets',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1736',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '
       <!-- wp:paragraph -->
   <p>The shortcode widget:</p>
@@ -12502,12 +12672,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         171 =>
         array(
             'post_title' => 'Block: Columns',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1743',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:columns -->
   <div class="wp-block-columns"><!-- wp:column -->
   <div class="wp-block-column"><!-- wp:paragraph -->
@@ -12767,12 +12938,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         172 =>
         array(
             'post_title' => 'Block: Cover',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1745',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '
       <!-- wp:cover {"url":"https://wpthemetestdata.files.wordpress.com/2008/06/dsc20050102_192118_51.jpg","align":"left","id":761} -->
   <div class="wp-block-cover has-background-dim alignleft" style="background-image:url(https://wpthemetestdata.files.wordpress.com/2008/06/dsc20050102_192118_51.jpg)"><p class="wp-block-cover-text">This is a left aligned cover block with a background image.</p></div>
@@ -12857,12 +13029,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         173 =>
         array(
             'post_title' => 'Block: Button',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1747',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>Button blocks are not semantically <em>buttons</em>, but links inside a styled div.&nbsp;</p>
   <!-- /wp:paragraph -->
@@ -12958,12 +13131,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         174 =>
         array(
             'post_title' => 'Block: Quote',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1749',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>The quote block has two styles,&nbsp;regular:</p>
   <!-- /wp:paragraph -->
@@ -13035,12 +13209,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         175 =>
         array(
             'post_title' => 'Block: Gallery',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1752',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>Gallery blocks have two settings: the number of columns, and whether or not images should be cropped. The default number of columns is three, and the maximum number of columns is eight.</p>
   <!-- /wp:paragraph -->
@@ -13185,12 +13360,13 @@ return array(
                     'value' => '771',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         176 =>
         array(
             'post_title' => 'Block: Image',
             'guid' => 'https://wpthemetestdata.wordpress.com/?p=1755',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '<!-- wp:paragraph -->
   <p>Welcome to image alignment! If you recognize this post, it is because these are blocks that have been converted from the classic <em>Markup: Image Alignment</em> post. The best way to demonstrate the ebb and flow of the various image positioning options is to nestle them snuggly among an ocean of words. Grab a paddle and let\'s get started. Be sure to try it in RTL mode. Left should stay left and right should stay right for both reading directions.</p>
   <!-- /wp:paragraph -->
@@ -13352,12 +13528,13 @@ return array(
                     'domain' => 'post_tag',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         177 =>
         array(
             'post_title' => 'Ελληνικά-Greek',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=1809',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => 'Typography tests for Greek Ελληνική σελίδα 1ου επιπέδου και δείγμα τυπογραφίας.
   
   <strong>Headings Επικεφαλίδες</strong>
@@ -13589,12 +13766,13 @@ return array(
                     'value' => 'default',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         178 =>
         array(
             'post_title' => 'Επίπεδο 2 -Second Greek level',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=1811',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => 'Σελίδα 2ου επιπέδου - Second level page
   ',
             'post_excerpt' => '',
@@ -13623,12 +13801,13 @@ return array(
                     'value' => 'default',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
         179 =>
         array(
             'post_title' => 'Επίπεδο 3',
             'guid' => 'https://wpthemetestdata.wordpress.com/?page_id=1813',
-            'post_author' => 'themereviewteam',
+            'post_author' => 3,
             'post_content' => '',
             'post_excerpt' => '',
             'post_id' => 1813,
@@ -13656,6 +13835,7 @@ return array(
                     'value' => 'default',
                 ),
             ),
+            'post_author_login' => 'themereviewteam',
         ),
     ),
     'categories' =>

@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface:
         class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\UserTypeAPI
+
+    PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\PostTypeAPI
