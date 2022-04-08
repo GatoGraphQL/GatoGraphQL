@@ -12,3 +12,12 @@ services:
 
     PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
         class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\CommentTypeAPI
+
+    PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\TaxonomyTypeAPI
+
+    PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\PostCategoryTypeAPI
+
+    PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface:
+        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\PostTagTypeAPI
