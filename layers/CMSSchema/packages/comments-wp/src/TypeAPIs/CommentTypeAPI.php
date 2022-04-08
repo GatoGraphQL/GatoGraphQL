@@ -16,6 +16,9 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
 use function get_comments;
+use function get_comment;
+use function get_comments_number;
+use function comments_open;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -154,6 +157,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         );
         return $query;
     }
+
     public function getCommentCount(array $query, array $options = []): int
     {
         $query = $this->convertCommentsQuery($query, $options);
@@ -164,17 +168,28 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         $count = $this->resolveGetComments($query);
         return $count;
     }
+
     public function getComment(string | int $comment_id): ?object
     {
-        return \get_comment($comment_id);
+        return $this->resolveGetComment($comment_id);
+    }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetComment(string | int $comment_id): ?WP_Comment
+    {
+        return get_comment($comment_id);
     }
     public function getCommentNumber(string | int $post_id): int
     {
-        return (int) \get_comments_number($post_id);
+        return (int) get_comments_number($post_id);
     }
     public function areCommentsOpen(string | int $post_id): bool
     {
-        return \comments_open($post_id);
+        return comments_open($post_id);
     }
 
     protected function getOrderByQueryArgValue(string $orderBy): string
