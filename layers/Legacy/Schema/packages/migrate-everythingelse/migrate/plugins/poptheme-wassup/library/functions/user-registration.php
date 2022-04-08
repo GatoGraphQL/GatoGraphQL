@@ -34,7 +34,7 @@ function setNickname(&$errors, $update, &$user)
 function printUserPreferencesField($user_id, $input)
 {
     global $user_preferences;
-    if ($user_preferences == null) {
+    if ($user_preferences === null) {
         $user_preferences = \PoPCMSSchema\UserMeta\Utils::getUserMeta($user_id, GD_METAKEY_PROFILE_USERPREFERENCES);
     }
 

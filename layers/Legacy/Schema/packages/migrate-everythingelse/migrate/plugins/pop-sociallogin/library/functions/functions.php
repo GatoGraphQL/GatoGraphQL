@@ -14,7 +14,7 @@ function getSocialloginProvider($user_id = null)
 function isSocialloginUser($user_id = null)
 {
     $provider = getSocialloginProvider($user_id);
-    return $provider != null;
+    return $provider !== null;
 }
 
 function getSocialloginNetworklinks()

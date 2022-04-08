@@ -43,7 +43,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
     protected function isUpdate(): bool
     {
         // If param "?pid" is provided then it's update, otherwise it's create
-        return $this->getUpdateCustomPostID() != null;
+        return $this->getUpdateCustomPostID() !== null;
     }
 
     protected function getEditorInput()
