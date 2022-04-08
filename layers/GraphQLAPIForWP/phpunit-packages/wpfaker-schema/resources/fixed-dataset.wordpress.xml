@@ -3,6 +3,7 @@
   Slightly modified version of file themeunittestdata.wordpress.xml, with the following changes:
   - Added author "admin"
   - Added author_id property to all 3 authors
+  - Fixed bug: creator "themereviewteam>" fixed as "themereviewteam"
   @see https://raw.githubusercontent.com/WPTT/theme-unit-test/master/themeunittestdata.wordpress.xml
   @see https://codex.wordpress.org/Theme_Unit_Test
 -->
