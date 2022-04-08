@@ -73,9 +73,8 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
          * Get comments from the fixed dataset?
          */
         if ($useFixedDataset) {
-            $commentDataEntries = $this->getFakeCommentDataEntries();
+            $commentDataEntries = $this->getFakeCommentDataEntries($query['post_id'] ?? null);
             $filterableProperties = [
-                'comment_post_id',
                 'comment_type',
                 'parent' => 'comment_parent',
             ];
@@ -142,28 +141,38 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
     {
         return array_map(
             fn (array $fakeCommentDataEntry) => App::getWPFaker()->comment($fakeCommentDataEntry),
-            $this->getFakeCommentDataEntries($commentIDs)
+            $this->getFakeCommentDataEntries(null, $commentIDs)
         );
     }
     
     /**
      * @return int[] $commentIDs
      */
-    protected function getFakeCommentIDs(): array
+    protected function getFakeCommentIDs(?int $postID = null): array
     {
         return array_values(array_map(
             fn (array $commentDataEntry) => (int) $commentDataEntry['comment_id'],
-            $this->getAllFakeCommentDataEntries()
+            $this->getAllFakeCommentDataEntries($postID)
         ));
     }
 
     /**
      * @return array<array<string,mixed>>
      */
-    protected function getAllFakeCommentDataEntries(): array
+    protected function getAllFakeCommentDataEntries(?int $postID = null): array
     {
         $comments = [];
-        foreach ($this->getDataProvider()->getFixedDataset()['posts'] ?? [] as $postDataEntry) {
+        $postDataEntries = $this->getDataProvider()->getFixedDataset()['posts'] ?? [];
+        if ($postID !== null) {
+            foreach ($postDataEntries as $postDataEntry) {
+                if ($postDataEntry['post_id'] !== $postID) {
+                    continue;
+                }
+                return $postDataEntry['comments'] ?? [];
+            }
+            return [];
+        }
+        foreach ($postDataEntries as $postDataEntry) {
             $postComments = $postDataEntry['comments'] ?? [];
             $comments = [
                 ...$comments,
@@ -177,9 +186,9 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
      * @param int[] $commentIDs
      * @return array<string,mixed>
      */
-    protected function getFakeCommentDataEntries(array $commentIDs = []): array
+    protected function getFakeCommentDataEntries(?int $postID = null, array $commentIDs = []): array
     {
-        $commentDataEntries = $this->getAllFakeCommentDataEntries();
+        $commentDataEntries = $this->getAllFakeCommentDataEntries($postID);
         if ($commentIDs !== []) {
             array_filter(
                 $commentDataEntries,
