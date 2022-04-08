@@ -28,6 +28,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      *
      *   - GraphQL response: "${fileName}.json"
      *   - GraphQL variables: "${fileName}.var.json"
+     *
+     * In addition, multiple operationNames can be executed by
+     * providing different responses, with file name:
+     *
+     *   - GraphQL response for operationName: "${fileName}.${operationName}.json"
      */
     public function fixtureGraphQLServerExecutionProvider(): array
     {
