@@ -11,6 +11,10 @@ use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use WP_Error;
+use WP_Term;
+
+use function get_term;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -30,13 +34,29 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             $termObjectID = $termObject->ID;
         } else {
             $termObjectID = $termObjectOrID;
-            $termObject = \get_term($termObjectID);
+            $termObject = $this->resolveGetTerm($termObjectID);
         }
         return [
             $termObject,
             $termObjectID,
         ];
     }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetTerm(string | int $termObjectID): ?WP_Term
+    {
+        $term = get_term($termObjectID);
+        if ($term instanceof WP_Error) {
+            return null;
+        }
+        return $term;
+    }
+    
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
