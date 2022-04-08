@@ -56,7 +56,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function isInstanceOfPostType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == 'post';
+        return ($object instanceof WP_Post) && $object->post_type === 'post';
     }
 
     /**
@@ -65,7 +65,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     public function getPost(int | string $id): ?object
     {
         $post = get_post($id);
-        if (!$post || $post->post_type != 'post') {
+        if (!$post || $post->post_type !== 'post') {
             return null;
         }
         return $post;
