@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
-use function get_post_status;
-
 use PoP\Root\App;
 use PoPCMSSchema\CustomPosts\Component;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration;
@@ -16,6 +14,8 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
+
+use function get_post_status;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -36,6 +36,21 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     }
 
     public function getStatus(string | int | object $customPostObjectOrID): ?string
+    {
+        $status = $this->resolveGetPostStatus($customPostObjectOrID);
+        if ($status === false) {
+            return null;
+        }
+        return $status;
+    }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetPostStatus(string | int | object $customPostObjectOrID): string|false
     {
         return get_post_status($customPostObjectOrID);
     }
