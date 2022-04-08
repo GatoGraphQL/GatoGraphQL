@@ -152,10 +152,13 @@ class UserTypeAPI extends UpstreamUserTypeAPI
      * @param int[] $userIDs
      * @return array<string,mixed>
      */
-    protected function getFakeUserDataEntries(array $userIDs = []): array
+    protected function getFakeUserDataEntries(?array $userIDs = null): array
     {
+        if ($userIDs === []) {
+            return [];
+        }
         $userDataEntries = $this->getAllFakeUserDataEntries();
-        if ($userIDs !== []) {
+        if ($userIDs !== null) {
             $userDataEntries = array_filter(
                 $userDataEntries,
                 fn (array $userDataEntry) => in_array($userDataEntry['author_id'], $userIDs)

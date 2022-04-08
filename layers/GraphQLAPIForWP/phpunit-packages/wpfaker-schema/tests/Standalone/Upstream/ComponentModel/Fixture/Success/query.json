@@ -4,6 +4,7 @@
       {
         "id": 1724,
         "title": "Keyboard navigation",
+        "commentCount": 4,
         "author": {
           "id": 3,
           "name": "Theme Reviewer"
@@ -38,6 +39,7 @@
       {
         "id": 358,
         "title": "Post Format: Standard",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
@@ -47,6 +49,7 @@
       {
         "id": 555,
         "title": "Post Format: Gallery",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
@@ -56,6 +59,7 @@
       {
         "id": 559,
         "title": "Post Format: Aside",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
@@ -65,6 +69,7 @@
       {
         "id": 562,
         "title": "Post Format: Chat",
+        "commentCount": 0,
         "author": {
           "id": 2,
           "name": "Theme Buster"
