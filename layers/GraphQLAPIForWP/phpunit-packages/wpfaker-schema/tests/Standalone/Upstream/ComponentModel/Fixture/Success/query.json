@@ -7,7 +7,21 @@
         "author": {
           "id": 3,
           "name": "Theme Reviewer"
-        }
+        },
+        "comments": [
+          {
+            "id": 167,
+            "date": "2007-09-04T10:49:28+00:00"
+          },
+          {
+            "id": 168,
+            "date": "2007-09-04T10:49:03+00:00"
+          },
+          {
+            "id": 169,
+            "date": "2007-09-04T10:48:51+00:00"
+          }
+        ]
       },
       {
         "id": 358,
@@ -15,7 +29,21 @@
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
+        },
+        "comments": [
+          {
+            "id": 167,
+            "date": "2007-09-04T10:49:28+00:00"
+          },
+          {
+            "id": 168,
+            "date": "2007-09-04T10:49:03+00:00"
+          },
+          {
+            "id": 169,
+            "date": "2007-09-04T10:48:51+00:00"
+          }
+        ]
       },
       {
         "id": 555,
@@ -23,63 +51,21 @@
         "author": {
           "id": 2,
           "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 559,
-        "title": "Post Format: Aside",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 562,
-        "title": "Post Format: Chat",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 565,
-        "title": "Post Format: Link",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 568,
-        "title": "Post Format: Image (Linked)",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 575,
-        "title": "Post Format: Quote",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 579,
-        "title": "Post Format: Status",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
-      },
-      {
-        "id": 582,
-        "title": "Post Format: Video (WordPress.tv)",
-        "author": {
-          "id": 2,
-          "name": "Theme Buster"
-        }
+        },
+        "comments": [
+          {
+            "id": 167,
+            "date": "2007-09-04T10:49:28+00:00"
+          },
+          {
+            "id": 168,
+            "date": "2007-09-04T10:49:03+00:00"
+          },
+          {
+            "id": 169,
+            "date": "2007-09-04T10:48:51+00:00"
+          }
+        ]
       }
     ]
   }

@@ -1,10 +1,22 @@
 {
-  posts {
+  posts(
+    pagination: {
+      limit: 3
+    }
+  ) {
     id
     title
     author {
       id
       name
+    }
+    comments(
+      pagination: {
+        limit: 3
+      }
+    ) {
+      id
+      date
     }
   }
 }
