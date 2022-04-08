@@ -1176,6 +1176,62 @@
     <wp:comment_parent>0</wp:comment_parent>
     <wp:comment_user_id>24783058</wp:comment_user_id>
   </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1904</wp:comment_id>
+    <wp:comment_author><![CDATA[John Κώστας Doe Τάδε]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 07:57:01</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 14:57:01</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 01]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1905</wp:comment_id>
+    <wp:comment_author><![CDATA[Jane Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:01:21</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:01:21</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 02]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1904</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1906</wp:comment_id>
+    <wp:comment_author><![CDATA[Fred Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:02:06</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:02:06</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 03]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1905</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1907</wp:comment_id>
+    <wp:comment_author><![CDATA[Fred Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:03:22</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:03:22</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 04]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1906</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
 	</item>
 	<item>
   <title>About The Tests</title>
