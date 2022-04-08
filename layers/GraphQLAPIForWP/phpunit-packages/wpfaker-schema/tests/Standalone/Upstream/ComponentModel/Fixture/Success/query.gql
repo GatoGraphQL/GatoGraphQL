@@ -2,5 +2,9 @@
   posts {
     id
     title
+    author {
+      id
+      name
+    }
   }
 }
