@@ -10,6 +10,7 @@ use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI as UpstreamTaxonomyTypeAP
 class TaxonomyTypeAPI extends UpstreamTaxonomyTypeAPI
 {
     use TypeAPITrait;
+    use TaxonomyTypeAPITrait;
 
     private ?DataProviderInterface $dataProvider = null;
 

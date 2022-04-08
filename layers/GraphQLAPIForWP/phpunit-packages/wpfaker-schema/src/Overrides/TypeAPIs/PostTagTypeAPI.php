@@ -11,6 +11,7 @@ use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
 class PostTagTypeAPI extends UpstreamPostTagTypeAPI
 {
     use TypeAPITrait;
+    use TaxonomyTypeAPITrait;
 
     private ?DataProviderInterface $dataProvider = null;
 

@@ -10,6 +10,7 @@ use PoPCMSSchema\PostCategoriesWP\TypeAPIs\PostCategoryTypeAPI as UpstreamPostCa
 class PostCategoryTypeAPI extends UpstreamPostCategoryTypeAPI
 {
     use TypeAPITrait;
+    use TaxonomyTypeAPITrait;
 
     private ?DataProviderInterface $dataProvider = null;
 
