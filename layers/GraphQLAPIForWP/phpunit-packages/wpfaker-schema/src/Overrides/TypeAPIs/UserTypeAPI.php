@@ -210,7 +210,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     {
         $propertyValues = is_array($propertyValueOrValues) ? $propertyValueOrValues : [$propertyValueOrValues];
         return array_values(array_filter(array_map(
-            fn (array $fakeUserDataEntry): ?array => in_array($fakeUserDataEntry[$property], $propertyValues) ? $fakeUserDataEntry : null,
+            fn (array $fakeUserDataEntry): ?array => isset($fakeUserDataEntry[$property]) && in_array($fakeUserDataEntry[$property], $propertyValues) ? $fakeUserDataEntry : null,
             $userDataEntries,
         )));
     }
