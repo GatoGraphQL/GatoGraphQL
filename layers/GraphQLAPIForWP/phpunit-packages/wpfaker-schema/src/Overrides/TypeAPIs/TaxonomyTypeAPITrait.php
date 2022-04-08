@@ -65,7 +65,7 @@ trait TaxonomyTypeAPITrait
         );
     }
 
-    protected function resolveGetTerm(int | string $id): ?WP_Term
+    protected function resolveGetTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
@@ -83,7 +83,7 @@ trait TaxonomyTypeAPITrait
 
         return App::getWPFaker()->term([
             // Create a random new term with the requested ID
-            'id' => $id
+            'id' => $termObjectID
         ]);
     }
 }

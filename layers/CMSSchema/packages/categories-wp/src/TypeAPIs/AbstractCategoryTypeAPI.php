@@ -217,8 +217,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (is_object($catObjectOrID)) {
             return $catObjectOrID;
         }
-        $catObject = \get_term($catObjectOrID, $this->getCategoryTaxonomyName());
-        if ($catObject === null || $catObject instanceof WP_Error) {
+        $catObject = $this->resolveGetTerm($catObjectOrID, $this->getCategoryTaxonomyName());
+        if ($catObject === null) {
             return null;
         }
         return $catObject;

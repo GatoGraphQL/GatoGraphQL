@@ -45,7 +45,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     {
         return is_object($tagObjectOrID) ?
             $tagObjectOrID
-            : \get_term($tagObjectOrID, $this->getTagTaxonomyName());
+            : $this->resolveGetTerm($tagObjectOrID, $this->getTagTaxonomyName());
     }
     public function getTagName(string | int | object $tagObjectOrID): string
     {
