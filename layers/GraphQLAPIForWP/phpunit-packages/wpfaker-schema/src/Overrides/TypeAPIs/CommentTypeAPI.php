@@ -195,7 +195,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
 
     /**
      * @param int[] $commentIDs
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
     protected function getFakeCommentDataEntries(?int $postID = null, ?array $commentIDs = null): array
     {

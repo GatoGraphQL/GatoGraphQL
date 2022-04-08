@@ -156,7 +156,7 @@ class PostTypeAPI extends UpstreamPostTypeAPI
 
     /**
      * @param int[] $postIDs
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
     protected function getFakePostDataEntries(?array $postIDs = null): array
     {

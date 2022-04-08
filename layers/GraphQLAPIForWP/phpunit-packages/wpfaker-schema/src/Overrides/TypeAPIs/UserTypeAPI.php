@@ -150,7 +150,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
 
     /**
      * @param int[] $userIDs
-     * @return array<string,mixed>
+     * @return array<array<string,mixed>>
      */
     protected function getFakeUserDataEntries(?array $userIDs = null): array
     {
