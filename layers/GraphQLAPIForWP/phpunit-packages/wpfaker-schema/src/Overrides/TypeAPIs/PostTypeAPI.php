@@ -169,16 +169,19 @@ class PostTypeAPI extends UpstreamPostTypeAPI
             $postDataEntries = $this->getFakePostDataEntries();
             $filterableProperties = [
                 'post_type',
-                'post_status',
+                'post_status' => 'status',
             ];
-            foreach ($filterableProperties as $property) {
-                if (!isset($query[$property])) {
+            foreach ($filterableProperties as $queryProperty => $dataProperty) {
+                if (is_numeric($queryProperty)) {
+                    $queryProperty = $dataProperty;
+                }
+                if (!isset($query[$queryProperty])) {
                     continue;
                 }
                 $postDataEntries = $this->filterPostDataEntriesByProperty(
                     $postDataEntries,
-                    $property,
-                    $query[$property]
+                    $dataProperty,
+                    $query[$queryProperty]
                 );
             }
             $postDataEntries = array_slice(
