@@ -232,7 +232,7 @@ class PostTypeAPI extends UpstreamPostTypeAPI
     {
         $propertyValues = is_array($propertyValueOrValues) ? $propertyValueOrValues : [$propertyValueOrValues];
         return array_values(array_filter(array_map(
-            fn (array $fakePostDataEntry): ?array => isset($fakePostDataEntry[$property]) && in_array($fakePostDataEntry[$property], $propertyValues) ? $fakePostDataEntry : null,
+            fn (array $fakePostDataEntry): ?array => in_array($fakePostDataEntry[$property] ?? null, $propertyValues) ? $fakePostDataEntry : null,
             $postDataEntries,
         )));
     }
