@@ -86,7 +86,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     public function isInstanceOfPageType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == 'page';
+        return ($object instanceof WP_Post) && $object->post_type === 'page';
     }
 
     /**
@@ -95,7 +95,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     public function getPage(int | string $id): ?object
     {
         $page = get_post($id);
-        if (!$page || $page->post_type != 'page') {
+        if (!$page || $page->post_type !== 'page') {
             return null;
         }
         return $page;
@@ -130,7 +130,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     public function pageExists(int | string $id): bool
     {
-        return $this->getPage($id) != null;
+        return $this->getPage($id) !== null;
     }
 
     /**

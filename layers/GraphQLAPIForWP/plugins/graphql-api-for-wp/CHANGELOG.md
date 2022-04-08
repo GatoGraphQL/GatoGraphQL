@@ -186,6 +186,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/leoloso/PoP/pull/972))
 
+### Improvements in Development and Testing
+
+- Completed hundreds of new PHPUnit tests
+- Bumped the min PHP version to 8.1 for development
+
 ### Breaking changes
 
 - Replaced argument `id` with `by` in fields fetching a single entity

@@ -314,7 +314,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function maybeAddCustomPostTypeTableActions(array $actions, $post): array
     {
-        if ($post->post_type == $this->getCustomPostType()) {
+        if ($post->post_type === $this->getCustomPostType()) {
             $actions = \array_merge(
                 $actions,
                 $this->getCustomPostTypeTableActions($post)
@@ -637,7 +637,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         /**
          * Check if it is this CPT
          */
-        if ($post->post_type == $this->getCustomPostType()) {
+        if ($post->post_type === $this->getCustomPostType()) {
             if ($blocks = $this->getGutenbergBlocksForCustomPostType()) {
                 return $blocks;
             }
@@ -670,7 +670,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     //         /**
     //          * Check if it is this CPT
     //          */
-    //         if ($post->post_type == $this->getCustomPostType()) {
+    //         if ($post->post_type === $this->getCustomPostType()) {
     //             return $blocks;
     //         } elseif ($this->removeGutenbergBlocksForOtherPostTypes($post)) {
     //             // Remove this CPT's blocks from other post types.

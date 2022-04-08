@@ -28,6 +28,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      *
      *   - GraphQL response: "${fileName}.json"
      *   - GraphQL variables: "${fileName}.var.json"
+     *
+     * The operation to execute can by defined via additional responses,
+     * with the "operationName" as part of the file name:
+     *
+     *   - GraphQL response for operationName: "${fileName}:${operationName}.json"
      */
     public function fixtureGraphQLServerExecutionProvider(): array
     {
@@ -52,8 +57,6 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
-            // The operation name is provided by code, not by fixture
-            $graphQLOperationName = $this->getGraphQLOperationName($fileName);
 
             /**
              * If the test is organized under a subfolder (such as "Success" or "Error"),
@@ -61,7 +64,31 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              */
             $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
             $namedDataset = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
-            $providerItems[$namedDataset] = [$graphQLQueryFile, $graphQLResponseFile, $graphQLVariablesFile, $graphQLOperationName];
+            $providerItems[$namedDataset] = [
+                $graphQLQueryFile,
+                $graphQLResponseFile,
+                $graphQLVariablesFile,
+                null,
+            ];
+
+            /**
+             * Retrieve additional GraphQL responses to execute some "operationName"
+             */
+            $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
+                $fixtureFolder,
+                [$fileName . ':*.json'],
+            );
+            foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
+                $graphQLResponseForOperationFile = $graphQLResponseForOperationFileInfo->getRealPath();
+                $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
+                $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
+                $providerItems["${namedDataset}:${operationName}"] = [
+                    $graphQLQueryFile,
+                    $graphQLResponseForOperationFile,
+                    $graphQLVariablesFile,
+                    $operationName,
+                ];
+            }
         }
         return $providerItems;
     }
@@ -80,12 +107,4 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
      * Directory under the fixture files are placed
      */
     abstract protected function getFixtureFolder(): string;
-
-    /**
-     * The operation name is provided by code, not by fixture
-     */
-    protected function getGraphQLOperationName(string $fileName): ?string
-    {
-        return null;
-    }
 }

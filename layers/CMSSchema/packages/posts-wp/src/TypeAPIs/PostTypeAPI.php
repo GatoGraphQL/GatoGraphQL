@@ -56,7 +56,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function isInstanceOfPostType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == 'post';
+        return ($object instanceof WP_Post) && $object->post_type === 'post';
     }
 
     /**
@@ -64,11 +64,22 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function getPost(int | string $id): ?object
     {
-        $post = get_post($id);
-        if (!$post || $post->post_type != 'post') {
+        $post = $this->resolveGetPost($id);
+        if ($post === null || $post->post_type !== 'post') {
             return null;
         }
         return $post;
+    }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveGetPost(int | string $id): ?WP_Post
+    {
+        return get_post($id);
     }
 
     /**
@@ -76,7 +87,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
      */
     public function postExists(int | string $id): bool
     {
-        return $this->getPost($id) != null;
+        return $this->getPost($id) !== null;
     }
 
     /**

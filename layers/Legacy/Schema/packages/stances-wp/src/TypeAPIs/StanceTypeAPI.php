@@ -27,7 +27,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
      */
     public function isInstanceOfStanceType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == \POP_USERSTANCE_POSTTYPE_USERSTANCE;
+        return ($object instanceof WP_Post) && $object->post_type === \POP_USERSTANCE_POSTTYPE_USERSTANCE;
     }
 
     /**
@@ -36,7 +36,7 @@ class StanceTypeAPI implements StanceTypeAPIInterface
     public function getStance(int | string $id): ?object
     {
         $post = get_post($id);
-        if (!$post || $post->post_type != \POP_USERSTANCE_POSTTYPE_USERSTANCE) {
+        if (!$post || $post->post_type !== \POP_USERSTANCE_POSTTYPE_USERSTANCE) {
             return null;
         }
         return $post;
@@ -47,6 +47,6 @@ class StanceTypeAPI implements StanceTypeAPIInterface
      */
     public function stanceExists(int | string $id): bool
     {
-        return $this->getStance($id) != null;
+        return $this->getStance($id) !== null;
     }
 }

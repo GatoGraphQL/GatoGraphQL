@@ -3,6 +3,9 @@
   Slightly modified version of file themeunittestdata.wordpress.xml, with the following changes:
   - Added author "admin"
   - Added author_id property to all 3 authors
+  - Fixed bug: creator "themereviewteam>" fixed as "themereviewteam"
+  - Fixed bug: creator ">themereviewteam" fixed as "themereviewteam"
+  - Added comments to 1st post
   @see https://raw.githubusercontent.com/WPTT/theme-unit-test/master/themeunittestdata.wordpress.xml
   @see https://codex.wordpress.org/Theme_Unit_Test
 -->
@@ -1131,6 +1134,104 @@
 	 <wp:post_password><![CDATA[]]></wp:post_password>
   <category domain="post_tag" nicename="codex"><![CDATA[Codex]]></category>
 	 <wp:is_sticky>0</wp:is_sticky>
+  <wp:comment>
+    <wp:comment_id>1900</wp:comment_id>
+    <wp:comment_author><![CDATA[Jane Doe]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-12 13:17:35</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-12 20:17:35</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comments? I love comments!]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1901</wp:comment_id>
+    <wp:comment_author><![CDATA[John Γιανης Doe Κάποιος]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 07:53:26</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 14:53:26</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[These tests are amazing!]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1903</wp:comment_id>
+    <wp:comment_author><![CDATA[themedemos]]></wp:comment_author>
+    <wp:comment_author_email>themeshaperwp+demos@gmail.com</wp:comment_author_email>
+    <wp:comment_author_url>https://wpthemetestdata.wordpress.com/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 07:56:46</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 14:56:46</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Author Comment.]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>24783058</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1904</wp:comment_id>
+    <wp:comment_author><![CDATA[John Κώστας Doe Τάδε]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 07:57:01</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 14:57:01</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 01]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>0</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1905</wp:comment_id>
+    <wp:comment_author><![CDATA[Jane Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:01:21</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:01:21</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 02]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1904</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1906</wp:comment_id>
+    <wp:comment_author><![CDATA[Fred Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:02:06</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:02:06</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 03]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1905</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
+  <wp:comment>
+    <wp:comment_id>1907</wp:comment_id>
+    <wp:comment_author><![CDATA[Fred Bloggs]]></wp:comment_author>
+    <wp:comment_author_email>example@example.org</wp:comment_author_email>
+    <wp:comment_author_url>http://example.org/</wp:comment_author_url>
+    <wp:comment_author_IP></wp:comment_author_IP>
+    <wp:comment_date>2013-03-14 08:03:22</wp:comment_date>
+    <wp:comment_date_gmt>2013-03-14 15:03:22</wp:comment_date_gmt>
+    <wp:comment_content><![CDATA[Comment Depth 04]]></wp:comment_content>
+    <wp:comment_approved>1</wp:comment_approved>
+    <wp:comment_type/>
+    <wp:comment_parent>1906</wp:comment_parent>
+    <wp:comment_user_id>0</wp:comment_user_id>
+  </wp:comment>
 	</item>
 	<item>
   <title>About The Tests</title>
@@ -3952,7 +4053,7 @@ If the site is set to display the Blog Posts Index as the Front Page, then this 
 		<title>instagram.com</title>
 		<link>https://wpthemetestdata.wordpress.com/2018/10/20/instagram-com</link>
 		<pubDate>Sun, 21 Oct 2018 02:57:41 +000</pubDate>
-		<dc:creator>themereviewteam></dc:creator>
+		<dc:creator>themereviewteam</dc:creator>
 		<guid isPermaLink="false">https://wpthemetestdata.wordpress.com/2018/10/20/instagram-com</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
@@ -9695,7 +9796,7 @@ Be sure to test the formatting of the auto-generated excerpt, to ensure that it 
 		<title>Block category: Common</title>
 		<link>https://wpthemetestdata.wordpress.com/2018/11/02/block-category-common/</link>
 		<pubDate>Fri, 02 Nov 2018 16:20:28 +0000</pubDate>
-		<dc:creator>>themereviewteam</dc:creator>
+		<dc:creator>themereviewteam</dc:creator>
 		<guid isPermaLink="false">https://wpthemetestdata.wordpress.com/?p=1730</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
