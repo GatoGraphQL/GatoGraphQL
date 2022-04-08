@@ -27,13 +27,14 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
         return $this->dataProvider ??= $this->instanceManager->getInstance(DataProviderInterface::class);
     }
 
-    protected function resolveGetComments(array $query): array
+    protected function resolveGetComments(array $query): int|array
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         $useFixedDataset = $componentConfiguration->useFixedDataset();
 
         $retrieveCommentIDs = $this->retrieveCommentIDs($query);
+        $isCount = $query['count'] ?? null;
 
         /**
          * If providing the IDs to retrieve, re-generate exactly those objects.
@@ -56,9 +57,9 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
                 ));
             }
             if ($retrieveCommentIDs) {
-                return $commentIDs;
+                return $isCount ? count($commentIDs) : $commentIDs;
             }
-            return $useFixedDataset
+            $comments = $useFixedDataset
                 ? $this->getFakeComments($commentIDs)
                 : array_map(
                     fn (string|int $id) => App::getWPFaker()->comment([
@@ -67,6 +68,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
                     ]),
                     $commentIDs
                 );
+            return $isCount ? count($comments) : $comments;
         }
 
         /**
@@ -110,9 +112,10 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
                 $commentDataEntries,
             );
             if ($retrieveCommentIDs) {
-                return $commentIDs;
+                return $isCount ? count($commentIDs) : $commentIDs;
             }
-            return $this->getFakeComments($commentIDs);
+            $comments = $this->getFakeComments($commentIDs);
+            return $isCount ? count($comments) : $comments;
         }
 
         /**
@@ -121,7 +124,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
         $comments = App::getWPFaker()->comments($query['number'] ?? 10);
         if ($retrieveCommentIDs) {
             return array_map(
-                fn (WP_Comment $comment) => $comment->ID,
+                fn (WP_Comment $comment) => $comment->comment_ID,
                 $comments
             );
         }
@@ -162,7 +165,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
     protected function getAllFakeCommentDataEntries(?int $postID = null): array
     {
         $comments = [];
-        $postDataEntries = $this->getDataProvider()->getFixedDataset()['posts'] ?? [];
+        $postDataEntries = $this->getAllFakePostDataEntries();
         if ($postID !== null) {
             foreach ($postDataEntries as $postDataEntry) {
                 if ($postDataEntry['post_id'] !== $postID) {
@@ -180,6 +183,14 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             ];
         }
         return $comments;
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getAllFakePostDataEntries(): array
+    {
+        return $this->getDataProvider()->getFixedDataset()['posts'] ?? [];
     }
 
     /**

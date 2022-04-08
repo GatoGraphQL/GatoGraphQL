@@ -10,6 +10,7 @@
       id
       name
     }
+    commentCount
     comments(
       pagination: {
         offset: 1
