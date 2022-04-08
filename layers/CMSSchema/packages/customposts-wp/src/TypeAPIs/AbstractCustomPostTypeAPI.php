@@ -16,6 +16,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_post_status;
+use function get_posts;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -87,8 +88,23 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPosts(array $query, array $options = []): array
     {
         $query = $this->convertCustomPostsQuery($query, $options);
-        return (array) \get_posts($query);
+        return $this->resolveGetPosts($query);
     }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     *
+     * @param array<string,mixed> $query
+     * @return WP_Post[]|int[]
+     */
+    protected function resolveGetPosts(array $query): array
+    {
+        return get_posts($query);
+    }
+
     public function getCustomPostCount(array $query = [], array $options = []): int
     {
         // Convert parameters
@@ -100,7 +116,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         unset($query['offset']);
 
         // Execute query and count results
-        $posts = \get_posts($query);
+        $posts = $this->resolveGetPosts($query);
         return count($posts);
     }
     /**
