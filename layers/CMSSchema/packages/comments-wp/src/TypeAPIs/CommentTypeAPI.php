@@ -183,10 +183,16 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     {
         return get_comment($comment_id);
     }
+
     public function getCommentNumber(string | int $post_id): int
     {
-        return (int) get_comments_number($post_id);
+        return (int) $this->resolveGetCommentNumber((int) $post_id);
     }
+    protected function resolveGetCommentNumber(int $post_id): string|int
+    {
+        return get_comments_number($post_id);
+    }
+
     public function areCommentsOpen(string | int $post_id): bool
     {
         return comments_open($post_id);
