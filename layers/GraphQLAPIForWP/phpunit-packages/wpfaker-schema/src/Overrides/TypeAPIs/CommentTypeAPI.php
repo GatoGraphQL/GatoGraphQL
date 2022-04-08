@@ -276,4 +276,37 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             $commentDataEntries,
         )));
     }
+    
+    protected function resolveGetCommentsNumber(int $postID): string|int
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $useFixedDataset = $componentConfiguration->useFixedDataset();
+
+        if ($useFixedDataset) {
+            return count($this->getAllFakeCommentDataEntries($postID));
+        }
+
+        return rand(0, 10);
+    }
+    
+    protected function resolveCommentsOpen(int $postID): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $useFixedDataset = $componentConfiguration->useFixedDataset();
+
+        if ($useFixedDataset) {
+            $postDataEntries = $this->getAllFakePostDataEntries();
+            foreach ($postDataEntries as $postDataEntry) {
+                if ($postDataEntry['post_id'] !== $postID) {
+                    continue;
+                }
+                return $postDataEntry['comment_status'] === 'open';
+            }
+            return false;
+        }
+        
+        return (bool) rand(0, 1);
+    }
 }
