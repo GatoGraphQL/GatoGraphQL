@@ -4,6 +4,7 @@
   - Added author "admin"
   - Added author_id property to all 3 authors
   - Fixed bug: creator "themereviewteam>" fixed as "themereviewteam"
+  - Fixed bug: creator ">themereviewteam" fixed as "themereviewteam"
   @see https://raw.githubusercontent.com/WPTT/theme-unit-test/master/themeunittestdata.wordpress.xml
   @see https://codex.wordpress.org/Theme_Unit_Test
 -->
@@ -9696,7 +9697,7 @@ Be sure to test the formatting of the auto-generated excerpt, to ensure that it 
 		<title>Block category: Common</title>
 		<link>https://wpthemetestdata.wordpress.com/2018/11/02/block-category-common/</link>
 		<pubDate>Fri, 02 Nov 2018 16:20:28 +0000</pubDate>
-		<dc:creator>>themereviewteam</dc:creator>
+		<dc:creator>themereviewteam</dc:creator>
 		<guid isPermaLink="false">https://wpthemetestdata.wordpress.com/?p=1730</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
