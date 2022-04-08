@@ -57,11 +57,11 @@ class PostTypeAPI extends UpstreamPostTypeAPI
      */
     protected function getFakePostDataEntries(array $postIDs = []): array
     {
-        $wpPosts = $this->getPostFixedDataset();
+        $postDataEntries = $this->getAllFakePostDataEntries();
         if ($postIDs !== []) {
             array_filter(
-                $wpPosts,
-                fn (array $wpPost) => in_array($wpPost['post_id'], $postIDs)
+                $postDataEntries,
+                fn (array $postDataEntry) => in_array($postDataEntry['post_id'], $postIDs)
             );
         }
 
@@ -90,20 +90,20 @@ class PostTypeAPI extends UpstreamPostTypeAPI
          * Convert "post_id" to "id", keep all other properties the same
          */
         return array_map(
-            fn (array $wpPost) => [
-                ...$wpPost,
+            fn (array $postDataEntry) => [
+                ...$postDataEntry,
                 ...[
-                    'id' => $wpPost['post_id'],
+                    'id' => $postDataEntry['post_id'],
                 ]
             ],
-            $wpPosts
+            $postDataEntries
         );
     }
 
     /**
      * @return array<array<string,mixed>>
      */
-    protected function getPostFixedDataset(): array
+    protected function getAllFakePostDataEntries(): array
     {
         return $this->getDataProvider()->getFixedDataset()['posts'] ?? [];
     }
@@ -223,8 +223,8 @@ class PostTypeAPI extends UpstreamPostTypeAPI
     protected function getFakePostIDs(): array
     {
         return array_values(array_map(
-            fn (array $wpPost) => (int) $wpPost['post_id'],
-            $this->getPostFixedDataset()
+            fn (array $postDataEntry) => (int) $postDataEntry['post_id'],
+            $this->getAllFakePostDataEntries()
         ));
     }
 

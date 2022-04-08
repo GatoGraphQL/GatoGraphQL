@@ -135,15 +135,15 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     protected function getFakeUserIDs(): array
     {
         return array_values(array_map(
-            fn (array $wpAuthor) => (int) $wpAuthor['author_id'],
-            $this->getUserFixedDataset()
+            fn (array $userDataEntry) => (int) $userDataEntry['author_id'],
+            $this->getAllFakeUserDataEntries()
         ));
     }
 
     /**
      * @return array<array<string,mixed>>
      */
-    protected function getUserFixedDataset(): array
+    protected function getAllFakeUserDataEntries(): array
     {
         return $this->getDataProvider()->getFixedDataset()['authors'] ?? [];
     }
@@ -154,23 +154,23 @@ class UserTypeAPI extends UpstreamUserTypeAPI
      */
     protected function getFakeUserDataEntries(array $userIDs = []): array
     {
-        $wpAuthors = $this->getUserFixedDataset();
+        $userDataEntries = $this->getAllFakeUserDataEntries();
         if ($userIDs !== []) {
             array_filter(
-                $wpAuthors,
-                fn (array $wpAuthor) => in_array($wpAuthor['author_id'], $userIDs)
+                $userDataEntries,
+                fn (array $userDataEntry) => in_array($userDataEntry['author_id'], $userIDs)
             );
         }
         return array_map(
-            fn (array $wpAuthor) => [
-                'id' => $wpAuthor['author_id'],
-                'login' => $wpAuthor['author_login'],
-                'email' => $wpAuthor['author_email'],
-                'display_name' => $wpAuthor['author_display_name'],
-                'first_name' => $wpAuthor['author_first_name'],
-                'last_name' => $wpAuthor['author_last_name'],
+            fn (array $userDataEntry) => [
+                'id' => $userDataEntry['author_id'],
+                'login' => $userDataEntry['author_login'],
+                'email' => $userDataEntry['author_email'],
+                'display_name' => $userDataEntry['author_display_name'],
+                'first_name' => $userDataEntry['author_first_name'],
+                'last_name' => $userDataEntry['author_last_name'],
             ],
-            $wpAuthors
+            $userDataEntries
         );
     }
 
