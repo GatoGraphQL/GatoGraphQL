@@ -97,57 +97,6 @@ return array(
             'post_type' => 'post',
             'post_password' => '',
             'is_sticky' => 0,
-            0 =>
-            array(
-                'comment_id' => 1900,
-                'comment_author' => 'Jane Doe',
-                'comment_author_email' => 'example@example.org',
-                'comment_author_IP' => '',
-                'comment_author_url' => 'http://example.org/',
-                'comment_date' => '2013-03-12 13:17:35',
-                'comment_date_gmt' => '2013-03-12 20:17:35',
-                'comment_content' => 'Comments? I love comments!',
-                'comment_approved' => '1',
-                'comment_type' => '',
-                'comment_parent' => '0',
-                'comment_user_id' => 0,
-                'commentmeta' =>
-                array(),
-            ),
-            1 =>
-            array(
-                'comment_id' => 1901,
-                'comment_author' => 'John Γιανης Doe Κάποιος',
-                'comment_author_email' => 'example@example.org',
-                'comment_author_IP' => '',
-                'comment_author_url' => 'http://example.org',
-                'comment_date' => '2013-03-14 07:53:26',
-                'comment_date_gmt' => '2013-03-14 14:53:26',
-                'comment_content' => 'These tests are amazing!',
-                'comment_approved' => '1',
-                'comment_type' => '',
-                'comment_parent' => '0',
-                'comment_user_id' => 0,
-                'commentmeta' =>
-                array(),
-            ),
-            2 =>
-            array(
-                'comment_id' => 1903,
-                'comment_author' => 'themedemos',
-                'comment_author_email' => 'themeshaperwp+demos@gmail.com',
-                'comment_author_IP' => '',
-                'comment_author_url' => 'https://wpthemetestdata.wordpress.com/',
-                'comment_date' => '2013-03-14 07:56:46',
-                'comment_date_gmt' => '2013-03-14 14:56:46',
-                'comment_content' => 'Author Comment.',
-                'comment_approved' => '1',
-                'comment_type' => '',
-                'comment_parent' => '0',
-                'comment_user_id' => 24783058,
-                'commentmeta' =>
-                array(),
-            ),
             'terms' =>
             array(
                 0 =>
@@ -155,6 +104,60 @@ return array(
                     'name' => 'Codex',
                     'slug' => 'codex',
                     'domain' => 'post_tag',
+                ),
+            ),
+            'comments' =>
+            array(
+                0 =>
+                array(
+                    'comment_id' => 1900,
+                    'comment_author' => 'Jane Doe',
+                    'comment_author_email' => 'example@example.org',
+                    'comment_author_IP' => '',
+                    'comment_author_url' => 'http://example.org/',
+                    'comment_date' => '2013-03-12 13:17:35',
+                    'comment_date_gmt' => '2013-03-12 20:17:35',
+                    'comment_content' => 'Comments? I love comments!',
+                    'comment_approved' => '1',
+                    'comment_type' => '',
+                    'comment_parent' => '0',
+                    'comment_user_id' => 0,
+                    'commentmeta' =>
+                    array(),
+                ),
+                1 =>
+                array(
+                    'comment_id' => 1901,
+                    'comment_author' => 'John Γιανης Doe Κάποιος',
+                    'comment_author_email' => 'example@example.org',
+                    'comment_author_IP' => '',
+                    'comment_author_url' => 'http://example.org',
+                    'comment_date' => '2013-03-14 07:53:26',
+                    'comment_date_gmt' => '2013-03-14 14:53:26',
+                    'comment_content' => 'These tests are amazing!',
+                    'comment_approved' => '1',
+                    'comment_type' => '',
+                    'comment_parent' => '0',
+                    'comment_user_id' => 0,
+                    'commentmeta' =>
+                    array(),
+                ),
+                2 =>
+                array(
+                    'comment_id' => 1903,
+                    'comment_author' => 'themedemos',
+                    'comment_author_email' => 'themeshaperwp+demos@gmail.com',
+                    'comment_author_IP' => '',
+                    'comment_author_url' => 'https://wpthemetestdata.wordpress.com/',
+                    'comment_date' => '2013-03-14 07:56:46',
+                    'comment_date_gmt' => '2013-03-14 14:56:46',
+                    'comment_content' => 'Author Comment.',
+                    'comment_approved' => '1',
+                    'comment_type' => '',
+                    'comment_parent' => '0',
+                    'comment_user_id' => 2,
+                    'commentmeta' =>
+                    array(),
                 ),
             ),
             'post_author_login' => 'themereviewteam',
@@ -316,7 +319,7 @@ return array(
                     'comment_approved' => '1',
                     'comment_type' => '',
                     'comment_parent' => '0',
-                    'comment_user_id' => 0,
+                    'comment_user_id' => 2,
                     'commentmeta' =>
                     array(),
                 ),
@@ -333,7 +336,7 @@ return array(
                     'comment_approved' => '0',
                     'comment_type' => '',
                     'comment_parent' => '168',
-                    'comment_user_id' => 0,
+                    'comment_user_id' => 3,
                     'commentmeta' =>
                     array(),
                 ),
@@ -9206,7 +9209,7 @@ return array(
                     'comment_approved' => '1',
                     'comment_type' => '',
                     'comment_parent' => '0',
-                    'comment_user_id' => 24783058,
+                    'comment_user_id' => 2,
                     'commentmeta' =>
                     array(),
                 ),
@@ -9293,7 +9296,7 @@ return array(
                     'comment_approved' => '1',
                     'comment_type' => '',
                     'comment_parent' => '907',
-                    'comment_user_id' => 24783058,
+                    'comment_user_id' => 2,
                     'commentmeta' =>
                     array(),
                 ),
@@ -9380,7 +9383,7 @@ return array(
                     'comment_approved' => '1',
                     'comment_type' => '',
                     'comment_parent' => '914',
-                    'comment_user_id' => 24783058,
+                    'comment_user_id' => 2,
                     'commentmeta' =>
                     array(),
                 ),
