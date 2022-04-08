@@ -92,11 +92,20 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
                     $query[$queryProperty]
                 );
             }
-            $commentDataEntries = array_slice(
-                $commentDataEntries,
-                $query['offset'] ?? 0,
-                $query['number'] ?? 10
-            );
+            $number = (int) ($query['number'] ?? 10);
+            $offset = (int) ($query['offset'] ?? 0);
+            if ($number !== 0) {
+                $commentDataEntries = array_slice(
+                    $commentDataEntries,
+                    $offset,
+                    $number,
+                );
+            } elseif ($offset !== 0) {
+                $commentDataEntries = array_slice(
+                    $commentDataEntries,
+                    $offset,
+                );
+            }
             $commentIDs = array_map(
                 fn (array $commentDataEntry): int => $commentDataEntry['id'],
                 $commentDataEntries,
