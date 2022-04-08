@@ -1,8 +1,14 @@
 {
   "data": {
-    "user": {
-      "id": 1,
-      "name": "Leo"
-    }
+    "posts": [
+      {
+        "id": 1,
+        "title": "Songa",
+        "author": {
+          "id": 1,
+          "name": "Leo"
+        }
+      }
+    ]
   }
 }
