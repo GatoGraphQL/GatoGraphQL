@@ -15,6 +15,8 @@ use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
+use function get_comments;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -37,8 +39,22 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
-        return (array) \get_comments($query);
+        return (array) $this->resolveGetComments($query);
     }
+
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     *
+     * @return int|array List of comments or number of found comments if $count argument is true.
+     */
+    protected function resolveGetComments(array $query): int|array
+    {
+        return get_comments($query);
+    }
+
     protected function convertCommentsQuery(array $query, array $options): array
     {
         if (($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS) {
@@ -145,7 +161,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         unset($query['offset']);
         $query['count'] = true;
         /** @var int */
-        $count = \get_comments($query);
+        $count = $this->resolveGetComments($query);
         return $count;
     }
     public function getComment(string | int $comment_id): ?object
