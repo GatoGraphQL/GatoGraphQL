@@ -41,7 +41,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
-    protected function getTagFromObjectOrID(string | int | object $tagObjectOrID): object
+    protected function getTagFromObjectOrID(string | int | object $tagObjectOrID): ?object
     {
         return is_object($tagObjectOrID) ?
             $tagObjectOrID
@@ -50,6 +50,9 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagName(string | int | object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
+        if ($tag === null) {
+            return '';
+        }
         return $tag->name;
     }
     public function getTag(string | int $tagID): object
@@ -138,16 +141,25 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getTagSlug(string | int | object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
+        if ($tag === null) {
+            return '';
+        }
         return $tag->slug;
     }
     public function getTagDescription(string | int | object $tagObjectOrID): string
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
+        if ($tag === null) {
+            return '';
+        }
         return $tag->description;
     }
     public function getTagItemCount(string | int | object $tagObjectOrID): int
     {
         $tag = $this->getTagFromObjectOrID($tagObjectOrID);
+        if ($tag === null) {
+            return 0;
+        }
         return $tag->count;
     }
     public function getTagID(object $tag): string | int
