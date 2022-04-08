@@ -152,7 +152,15 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
      */
     protected function getAllFakeCommentDataEntries(): array
     {
-        return $this->getDataProvider()->getFixedDataset()['comments'] ?? [];
+        $comments = [];
+        foreach ($this->getDataProvider()->getFixedDataset()['posts'] ?? [] as $postDataEntry) {
+            $postComments = $postDataEntry['comments'] ?? [];
+            $comments = [
+                ...$comments,
+                ...$postComments
+            ];
+        }
+        return $comments;
     }
 
     /**
