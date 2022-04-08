@@ -27,7 +27,7 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
      */
     public function isInstanceOfHighlightType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
+        return ($object instanceof WP_Post) && $object->post_type === \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT;
     }
 
     /**
@@ -36,7 +36,7 @@ class HighlightTypeAPI implements HighlightTypeAPIInterface
     public function getHighlight(int | string $id): ?object
     {
         $post = get_post($id);
-        if (!$post || $post->post_type != \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
+        if (!$post || $post->post_type !== \POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
             return null;
         }
         return $post;

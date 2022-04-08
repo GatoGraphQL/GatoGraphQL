@@ -25,7 +25,7 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
      */
     public function isInstanceOfMediaType(object $object): bool
     {
-        return ($object instanceof WP_Post) && $object->post_type == 'attachment';
+        return ($object instanceof WP_Post) && $object->post_type === 'attachment';
     }
 
     public function getMediaItemSrc(string | int $media_id): ?string
