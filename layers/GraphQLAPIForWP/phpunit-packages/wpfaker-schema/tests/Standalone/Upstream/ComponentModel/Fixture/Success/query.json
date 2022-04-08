@@ -2,12 +2,44 @@
   "data": {
     "posts": [
       {
-        "id": 1,
-        "title": "Songa",
-        "author": {
-          "id": 1,
-          "name": "Leo"
-        }
+        "id": 1724,
+        "title": "Keyboard navigation"
+      },
+      {
+        "id": 358,
+        "title": "Post Format: Standard"
+      },
+      {
+        "id": 555,
+        "title": "Post Format: Gallery"
+      },
+      {
+        "id": 559,
+        "title": "Post Format: Aside"
+      },
+      {
+        "id": 562,
+        "title": "Post Format: Chat"
+      },
+      {
+        "id": 565,
+        "title": "Post Format: Link"
+      },
+      {
+        "id": 568,
+        "title": "Post Format: Image (Linked)"
+      },
+      {
+        "id": 575,
+        "title": "Post Format: Quote"
+      },
+      {
+        "id": 579,
+        "title": "Post Format: Status"
+      },
+      {
+        "id": 582,
+        "title": "Post Format: Video (WordPress.tv)"
       }
     ]
   }
