@@ -191,13 +191,14 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
         // ];
 
         /**
-         * Convert "comment_id" to "id", keep all other properties the same
+         * Convert some properties, keep all others the same
          */
         return array_map(
             fn (array $commentDataEntry) => [
                 ...$commentDataEntry,
                 ...[
                     'id' => $commentDataEntry['comment_id'],
+                    'user_id' => $commentDataEntry['comment_user_id'],
                 ]
             ],
             $commentDataEntries
