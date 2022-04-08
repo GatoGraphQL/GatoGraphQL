@@ -3,43 +3,83 @@
     "posts": [
       {
         "id": 1724,
-        "title": "Keyboard navigation"
+        "title": "Keyboard navigation",
+        "author": {
+          "id": 3,
+          "name": "Theme Reviewer"
+        }
       },
       {
         "id": 358,
-        "title": "Post Format: Standard"
+        "title": "Post Format: Standard",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 555,
-        "title": "Post Format: Gallery"
+        "title": "Post Format: Gallery",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 559,
-        "title": "Post Format: Aside"
+        "title": "Post Format: Aside",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 562,
-        "title": "Post Format: Chat"
+        "title": "Post Format: Chat",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 565,
-        "title": "Post Format: Link"
+        "title": "Post Format: Link",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 568,
-        "title": "Post Format: Image (Linked)"
+        "title": "Post Format: Image (Linked)",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 575,
-        "title": "Post Format: Quote"
+        "title": "Post Format: Quote",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 579,
-        "title": "Post Format: Status"
+        "title": "Post Format: Status",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       },
       {
         "id": 582,
-        "title": "Post Format: Video (WordPress.tv)"
+        "title": "Post Format: Video (WordPress.tv)",
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        }
       }
     ]
   }
