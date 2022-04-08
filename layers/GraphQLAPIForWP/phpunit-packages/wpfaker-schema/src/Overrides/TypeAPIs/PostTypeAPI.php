@@ -225,10 +225,11 @@ class PostTypeAPI extends UpstreamPostTypeAPI
         ));
     }
 
-    protected function filterPostDataEntriesByProperty(array $postDataEntries, string $property, string | int $propertyValue): array
+    protected function filterPostDataEntriesByProperty(array $postDataEntries, string $property, string|int|array $propertyValueOrValues): array
     {
+        $propertyValues = is_array($propertyValueOrValues) ? $propertyValueOrValues : [$propertyValueOrValues];
         return array_values(array_filter(array_map(
-            fn (array $fakePostDataEntry): ?array => $fakePostDataEntry[$property] === $propertyValue ? $fakePostDataEntry : null,
+            fn (array $fakePostDataEntry): ?array => in_array($fakePostDataEntry[$property], $propertyValues) ? $fakePostDataEntry : null,
             $postDataEntries,
         )));
     }
