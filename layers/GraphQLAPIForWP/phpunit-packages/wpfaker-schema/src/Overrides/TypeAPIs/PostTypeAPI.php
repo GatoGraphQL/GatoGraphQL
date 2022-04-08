@@ -134,7 +134,7 @@ class PostTypeAPI extends UpstreamPostTypeAPI
             $this->getFakePostDataEntries($postIDs)
         );
     }
-    
+
     /**
      * @return int[] $postIDs
      */

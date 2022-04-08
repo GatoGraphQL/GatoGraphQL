@@ -9,7 +9,6 @@ use GraphQLAPI\WPFakerSchema\Component;
 use GraphQLAPI\WPFakerSchema\ComponentConfiguration;
 use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
 use PoPCMSSchema\CommentsWP\TypeAPIs\CommentTypeAPI as UpstreamCommentTypeAPI;
-
 use WP_Comment;
 
 class CommentTypeAPI extends UpstreamCommentTypeAPI
@@ -147,7 +146,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             $this->getFakeCommentDataEntries(null, $commentIDs)
         );
     }
-    
+
     /**
      * @return int[] $commentIDs
      */
@@ -276,7 +275,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             $commentDataEntries,
         )));
     }
-    
+
     protected function resolveGetCommentsNumber(int $postID): string|int
     {
         /** @var ComponentConfiguration */
@@ -289,7 +288,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
 
         return rand(0, 10);
     }
-    
+
     protected function resolveCommentsOpen(int $postID): bool
     {
         /** @var ComponentConfiguration */
@@ -306,7 +305,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             }
             return false;
         }
-        
+
         return (bool) rand(0, 1);
     }
 }
