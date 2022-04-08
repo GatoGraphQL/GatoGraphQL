@@ -49,8 +49,6 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $termObject->taxonomy;
     }
 
-
-
     public function convertTaxonomiesQuery(array $query, array $options = []): array
     {
         if ($return_type = $options[QueryOptions::RETURN_TYPE] ?? null) {
