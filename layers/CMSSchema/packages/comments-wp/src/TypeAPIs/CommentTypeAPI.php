@@ -186,7 +186,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
 
     public function getCommentNumber(string | int $post_id): int
     {
-        return (int) $this->resolveGetCommentNumber((int) $post_id);
+        return (int) $this->resolveGetCommentsNumber((int) $post_id);
     }
     /**
      * Only keep the single call to the CMS function and
@@ -194,7 +194,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
      *
      * Overridable by Faker tests.
      */
-    protected function resolveGetCommentNumber(int $post_id): string|int
+    protected function resolveGetCommentsNumber(int $post_id): string|int
     {
         return get_comments_number($post_id);
     }
