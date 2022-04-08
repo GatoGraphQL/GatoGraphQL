@@ -12,12 +12,20 @@
     }
     comments(
       pagination: {
+        offset: 1
         limit: 3
       }
     ) {
-      id
-      date
-      content
+      ...CommentData
+      responses {
+        ...CommentData
+      }
     }
   }
+}
+
+fragment CommentData on Comment {
+  id
+  date
+  content
 }
