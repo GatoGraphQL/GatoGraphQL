@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs;
 
 use GraphQLAPI\WPFakerSchema\App;
+use GraphQLAPI\WPFakerSchema\Component;
+use GraphQLAPI\WPFakerSchema\ComponentConfiguration;
 use GraphQLAPI\WPFakerSchema\DataProvider\DataProviderInterface;
 use PoPCMSSchema\PostsWP\TypeAPIs\PostTypeAPI as UpstreamPostTypeAPI;
 use WP_Post;
