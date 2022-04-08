@@ -201,7 +201,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
     {
         $commentDataEntries = $this->getAllFakeCommentDataEntries($postID);
         if ($commentIDs !== []) {
-            array_filter(
+            $commentDataEntries = array_filter(
                 $commentDataEntries,
                 fn (array $commentDataEntry) => in_array($commentDataEntry['comment_id'], $commentIDs)
             );

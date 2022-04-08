@@ -156,7 +156,7 @@ class UserTypeAPI extends UpstreamUserTypeAPI
     {
         $userDataEntries = $this->getAllFakeUserDataEntries();
         if ($userIDs !== []) {
-            array_filter(
+            $userDataEntries = array_filter(
                 $userDataEntries,
                 fn (array $userDataEntry) => in_array($userDataEntry['author_id'], $userIDs)
             );
