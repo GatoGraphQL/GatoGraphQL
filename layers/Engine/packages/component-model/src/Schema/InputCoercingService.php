@@ -6,19 +6,32 @@ namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
+use stdClass;
 
 class InputCoercingService implements InputCoercingServiceInterface
 {
     use BasicServiceTrait;
+
+    private ?OutputServiceInterface $outputService = null;
+
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
 
     /**
      * Support passing a single value where a list is expected:
@@ -90,6 +103,9 @@ class InputCoercingService implements InputCoercingServiceInterface
             $inputIsArrayType
             && !is_array($inputValue)
         ) {
+            $inputValueAsString = $inputValue instanceof stdClass
+                ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue)
+                : $inputValue;
             $schemaInputValidationFeedbackStore->addError(
                 new SchemaInputValidationFeedback(
                     new FeedbackItemResolution(
@@ -97,7 +113,7 @@ class InputCoercingService implements InputCoercingServiceInterface
                         InputValueCoercionErrorFeedbackItemProvider::E9,
                         [
                             $inputName,
-                            $inputValue,
+                            $inputValueAsString,
                         ]
                     ),
                     LocationHelper::getNonSpecificLocation(),
