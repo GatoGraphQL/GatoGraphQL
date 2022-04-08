@@ -38,7 +38,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
      */
     public function isInstanceOfTagType(object $object): bool
     {
-        return ($object instanceof WP_Taxonomy) && $object->hierarchical == false;
+        return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
     protected function getTagFromObjectOrID(string | int | object $tagObjectOrID): object

@@ -17,7 +17,7 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
      */
     public function isInstanceOfPostCategoryType(object $object): bool
     {
-        return $this->isInstanceOfPostCategoryType($object) && $object->name = $this->getPostCategoryTaxonomyName();
+        return $this->isInstanceOfCategoryType($object) && $object->name === $this->getPostCategoryTaxonomyName();
     }
 
     /**
