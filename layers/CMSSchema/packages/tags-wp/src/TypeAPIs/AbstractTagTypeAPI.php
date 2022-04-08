@@ -12,6 +12,12 @@ use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\TaxonomyTypeAPI;
 use WP_Taxonomy;
 
+use function get_tag;
+use function get_term_by;
+use function wp_get_post_terms;
+use function get_tags;
+use function get_term_link;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -66,8 +72,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
     public function getCustomPostTags(string | int $customPostID, array $query = [], array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
-
-        return \wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
+        return wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
     }
     public function getCustomPostTagCount(string | int $customPostID, array $query = [], array $options = []): int
     {
@@ -83,7 +88,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
         unset($query['offset']);
 
         // Resolve and count
-        $tags = \wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
+        $tags = wp_get_post_terms($customPostID, $this->getTagTaxonomyName(), $query);
         return count($tags);
     }
     public function getTagCount(array $query = [], array $options = []): int
@@ -100,7 +105,7 @@ abstract class AbstractTagTypeAPI extends TaxonomyTypeAPI implements TagTypeAPII
 
         // Execute query and return count
         /** @var int[] */
-        $count = \get_tags($query);
+        $count = get_tags($query);
         // For some reason, the count is returned as an array of 1 element!
         if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
             return (int) $count[0];
