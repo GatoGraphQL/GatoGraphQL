@@ -29,4 +29,5 @@ fragment CommentData on Comment {
   id
   date
   content
+  responseCount
 }
