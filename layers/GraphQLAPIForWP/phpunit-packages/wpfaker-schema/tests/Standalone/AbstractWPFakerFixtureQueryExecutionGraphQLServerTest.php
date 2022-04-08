@@ -34,6 +34,9 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
+                \PoP\ComponentModel\Component::class => [
+                    \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
+                ],
                 \GraphQLAPI\WPFakerSchema\Component::class => [
                     \GraphQLAPI\WPFakerSchema\Environment::USE_FIXED_DATASET => true,
                 ],
