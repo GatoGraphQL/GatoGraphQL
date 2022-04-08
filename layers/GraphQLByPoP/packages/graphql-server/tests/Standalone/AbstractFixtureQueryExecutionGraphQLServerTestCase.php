@@ -81,9 +81,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $graphQLResponseForOperationFile = $graphQLResponseForOperationFileInfo->getRealPath();
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
-                $matches = [];
-                preg_match("/${fileName}:(*).json", $operationFileName, $matches);
-                $operationName = $matches[1];
+                $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
                 $providerItems["${namedDataset}:${operationName}"] = [
                     $graphQLQueryFile,
                     $graphQLResponseForOperationFile,
