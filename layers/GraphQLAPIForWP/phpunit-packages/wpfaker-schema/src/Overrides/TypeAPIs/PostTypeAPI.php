@@ -217,11 +217,8 @@ class PostTypeAPI extends UpstreamPostTypeAPI
             if ($postDataEntries === []) {
                 return null;
             }
-            $postIDs = array_map(
-                fn (array $postDataEntry): int => $postDataEntry['id'],
-                $postDataEntries,
-            );
-            $posts = $this->getFakePosts($postIDs);
+            $postID = $postDataEntries[0]['id'];
+            $posts = $this->getFakePosts([$postID]);
             return $posts[0];
         }
 

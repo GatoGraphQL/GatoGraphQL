@@ -195,11 +195,8 @@ class UserTypeAPI extends UpstreamUserTypeAPI
             if ($userDataEntries === []) {
                 return false;
             }
-            $userIDs = array_map(
-                fn (array $userDataEntry): int => $userDataEntry['id'],
-                $userDataEntries,
-            );
-            $users = $this->getFakeUsers($userIDs);
+            $userID = $userDataEntries[0]['id'];
+            $users = $this->getFakeUsers([$userID]);
             return $users[0];
         }
 

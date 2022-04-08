@@ -257,11 +257,8 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             if ($commentDataEntries === []) {
                 return null;
             }
-            $commentIDs = array_map(
-                fn (array $commentDataEntry): int => $commentDataEntry['id'],
-                $commentDataEntries,
-            );
-            $comments = $this->getFakeComments($commentIDs);
+            $commentID = $commentDataEntries[0]['id'];
+            $comments = $this->getFakeComments([$commentID]);
             return $comments[0];
         }
 
