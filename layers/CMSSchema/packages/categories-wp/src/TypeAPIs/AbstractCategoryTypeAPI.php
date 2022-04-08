@@ -161,11 +161,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         return $this->getCMSService()->getOption($this->getCategoryBaseOption());
     }
 
-    public function setPostCategories($post_id, array $categories, bool $append = false)
-    {
-        return wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
-    }
-
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
     // {
     //     $return_type = $options[QueryOptions::RETURN_TYPE] ?? null;
