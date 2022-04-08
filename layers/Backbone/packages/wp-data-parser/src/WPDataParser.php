@@ -77,14 +77,14 @@ class WPDataParser
 
             // Convert comments
             $postCommentDataEntries = $postDataEntry['comments'] ?? [];
-            foreach ($postCommentDataEntries as $key => $postCommentDataEntry) {
+            foreach ($postCommentDataEntries as $commentKey => $postCommentDataEntry) {
                 // Find the comment author with the given nicename
                 $authorDataEntry = $authorDataEntries[$postCommentDataEntry['comment_author']] ?? null;
                 if ($authorDataEntry === null) {
                     continue;
                 }
                 // Replace current value `0` with the user ID
-                $data['posts'][$key]['comments'][$key]['comment_user_id'] = $authorDataEntry['author_id'];
+                $data['posts'][$key]['comments'][$commentKey]['comment_user_id'] = $authorDataEntry['author_id'];
             }
         }
         return $data;
