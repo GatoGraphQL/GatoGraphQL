@@ -188,12 +188,28 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     {
         return (int) $this->resolveGetCommentNumber((int) $post_id);
     }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
     protected function resolveGetCommentNumber(int $post_id): string|int
     {
         return get_comments_number($post_id);
     }
 
     public function areCommentsOpen(string | int $post_id): bool
+    {
+        return $this->resolveCommentsOpen((int)$post_id);
+    }
+    /**
+     * Only keep the single call to the CMS function and
+     * no extra logic whatsoever.
+     *
+     * Overridable by Faker tests.
+     */
+    protected function resolveCommentsOpen(int $post_id): bool
     {
         return comments_open($post_id);
     }
