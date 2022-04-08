@@ -17,7 +17,7 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
      */
     public function isInstanceOfPostTagType(object $object): bool
     {
-        return $this->isInstanceOfPostTagType($object) && $object->name = $this->getPostTagTaxonomyName();
+        return $this->isInstanceOfTagType($object) && $object->name === $this->getPostTagTaxonomyName();
     }
 
     /**

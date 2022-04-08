@@ -47,7 +47,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
      */
     public function isInstanceOfCategoryType(object $object): bool
     {
-        return ($object instanceof WP_Taxonomy) && $object->hierarchical == true;
+        return ($object instanceof WP_Taxonomy) && $object->hierarchical;
     }
 
     public function getCategoryID(object $cat): string | int
