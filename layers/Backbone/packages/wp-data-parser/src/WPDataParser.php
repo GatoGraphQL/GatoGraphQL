@@ -69,6 +69,7 @@ class WPDataParser
                 ));
             }
             // Replace the nicename with the ID
+            $data['posts'][$key]['post_author_login'] = $data['posts'][$key]['post_author'];
             $data['posts'][$key]['post_author'] = $authorDataEntry['author_id'];
         }
         return $data;
