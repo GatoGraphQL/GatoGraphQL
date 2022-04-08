@@ -77,6 +77,7 @@ class CommentTypeAPI extends UpstreamCommentTypeAPI
             $filterableProperties = [
                 'comment_post_id',
                 'comment_type',
+                'parent' => 'comment_parent',
             ];
             foreach ($filterableProperties as $queryProperty => $dataProperty) {
                 if (is_numeric($queryProperty)) {
