@@ -141,8 +141,9 @@ class MockDataStore
             array_splice($postDataEntries, 0, $limitPosts);
         }
         foreach ($postDataEntries as $postDataEntry) {
+            $postID = $postDataEntry['post_id'];
             $this->wpFaker->post([
-                'id' => $postDataEntry['post_id'],
+                'id' => $postID,
                 ...$postDataEntry
             ]);
             foreach (($postDataEntry['comments'] ?? []) as $postCommentDataEntry) {
@@ -150,6 +151,7 @@ class MockDataStore
                     ...$postCommentDataEntry,
                     ...[
                         'id' => $postCommentDataEntry['comment_id'],
+                        'comment_post_ID' => $postID,
                         'user_id' => $postCommentDataEntry['comment_user_id'],
                     ]
                 ]);
