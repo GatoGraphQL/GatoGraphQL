@@ -12,6 +12,6 @@ class GraphQLServer extends UpstreamGraphQLServer
     protected function initializeApp(): void
     {
         parent::initializeApp();
-        App::initializeFaker();
+        App::initializeMockDataStore();
     }
 }

@@ -11,7 +11,6 @@ use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
@@ -19,6 +18,7 @@ use function get_comments;
 use function get_comment;
 use function get_comments_number;
 use function comments_open;
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -26,7 +26,6 @@ use function comments_open;
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
     use BasicServiceTrait;
-    use TypeAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
@@ -42,20 +41,7 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
-        return (array) $this->resolveGetComments($query);
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     *
-     * @return int|array List of comments or number of found comments if $count argument is true.
-     */
-    protected function resolveGetComments(array $query): int|array
-    {
-        return get_comments($query);
+        return (array) get_comments($query);
     }
 
     protected function convertCommentsQuery(array $query, array $options): array
@@ -118,11 +104,11 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
 
         if (isset($query['order'])) {
-            $query['order'] = $this->resolveEscSQL($query['order']);
+            $query['order'] = esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
@@ -165,53 +151,23 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         unset($query['offset']);
         $query['count'] = true;
         /** @var int */
-        $count = $this->resolveGetComments($query);
+        $count = get_comments($query);
         return $count;
     }
 
     public function getComment(string | int $comment_id): ?object
-    {
-        return $this->resolveGetComment($comment_id);
-    }
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetComment(string | int $comment_id): ?WP_Comment
     {
         return get_comment($comment_id);
     }
 
     public function getCommentNumber(string | int $post_id): int
     {
-        return (int) $this->resolveGetCommentsNumber((int) $post_id);
-    }
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetCommentsNumber(int $post_id): string|int
-    {
-        return get_comments_number($post_id);
+        return (int) get_comments_number((int) $post_id);
     }
 
     public function areCommentsOpen(string | int $post_id): bool
     {
-        return $this->resolveCommentsOpen((int)$post_id);
-    }
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveCommentsOpen(int $post_id): bool
-    {
-        return comments_open($post_id);
+        return comments_open((int)$post_id);
     }
 
     protected function getOrderByQueryArgValue(string $orderBy): string

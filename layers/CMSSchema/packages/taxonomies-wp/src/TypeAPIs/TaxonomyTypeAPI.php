@@ -9,12 +9,13 @@ use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Error;
 use WP_Term;
 
 use function get_term;
+
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -22,7 +23,6 @@ use function get_term;
 class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
 {
     use BasicServiceTrait;
-    use TypeAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
@@ -97,12 +97,12 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            $query['order'] = $this->resolveEscSQL($query['order']);
+            $query['order'] = esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // This param can either be a string or an array. Eg:
             // $query['orderby'] => array('date' => 'DESC', 'title' => 'ASC');
-            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

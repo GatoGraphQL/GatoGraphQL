@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\WPFakerSchema;
 
-use Brain\Faker\Providers;
-use Faker\Generator;
+use GraphQLAPI\WPFakerSchema\State\MockDataStore;
 use PoP\ComponentModel\AppInterface as UpstreamAppInterface;
 
 interface AppInterface extends UpstreamAppInterface
 {
-    public static function initializeFaker(
-        ?Generator $faker = null,
+    public static function initializeMockDataStore(
+        ?MockDataStore $mockDataStore = null,
     ): void;
-
-    public static function getWPFaker(): Providers;
 }
