@@ -28,16 +28,4 @@ class Component extends AbstractComponent
     {
         return Environment::isApplicationEnvironmentDevPHPUnit();
     }
-
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaComponentClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-    }
 }
