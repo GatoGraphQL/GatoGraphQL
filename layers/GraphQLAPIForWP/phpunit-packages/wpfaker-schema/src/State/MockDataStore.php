@@ -121,17 +121,30 @@ class MockDataStore
      */
     protected function seedFakeData(array $options): void
     {
+        $userDataEntries = ($this->data['authors'] ?? []);
+        if ($limitUsers = $options['limit-users'] ?? 0) {
+            array_splice($userDataEntries, 0, $limitUsers);
+        }
+        foreach ($userDataEntries as $userDataEntry) {
+            $this->wpFaker->user([
+                'id' => $userDataEntry['author_id'],
+                'login' => $userDataEntry['author_login'],
+                'email' => $userDataEntry['author_email'],
+                'display_name' => $userDataEntry['author_display_name'],
+                'first_name' => $userDataEntry['author_first_name'],
+                'last_name' => $userDataEntry['author_last_name'],
+            ]);
+        }
+
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
             array_splice($postDataEntries, 0, $limitPosts);
         }
         foreach ($postDataEntries as $postDataEntry) {
-            $this->wpFaker->post(
-                [
-                    'id' => $postDataEntry['post_id'],
-                    ...$postDataEntry
-                ]
-            );
+            $this->wpFaker->post([
+                'id' => $postDataEntry['post_id'],
+                ...$postDataEntry
+            ]);
         }
     }
 }
