@@ -21,15 +21,18 @@ class MockDataStore
     /**
      * @param string[] $files
      */
-    function __construct(array $files) {
+    function __construct(
+        array $files,
+        array $options = []
+    ) {
         $this->faker = faker();
         // @phpstan-ignore-next-line
         $this->wpFaker = $this->faker->wp();
         $this->initializeFakePostDataEntries($files);
-        $this->seedFakeData();
+        $this->seedFakeData($options);
     }
 
-    protected function seedFakeData(): void
+    protected function seedFakeData(array $options): void
     {
         foreach (($this->data['posts'] ?? []) as $fakePostDataEntry) {
             $this->wpFaker->post(['id' => $fakePostDataEntry['post_id'], ...$fakePostDataEntry]);
