@@ -145,6 +145,15 @@ class MockDataStore
                 'id' => $postDataEntry['post_id'],
                 ...$postDataEntry
             ]);
+            foreach (($postDataEntry['comments'] ?? []) as $postCommentDataEntry) {
+                $this->wpFaker->comment([
+                    ...$postCommentDataEntry,
+                    ...[
+                        'id' => $postCommentDataEntry['comment_id'],
+                        'user_id' => $postCommentDataEntry['comment_user_id'],
+                    ]
+                ]);
+            }
         }
     }
 }
