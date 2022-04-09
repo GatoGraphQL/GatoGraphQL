@@ -14,7 +14,6 @@ use WP_Error;
 use WP_Term;
 
 use function get_term;
-
 use function esc_sql;
 
 /**
