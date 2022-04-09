@@ -34,7 +34,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             $termObjectID = $termObject->ID;
         } else {
             $termObjectID = $termObjectOrID;
-            $termObject = $this->resolveGetTerm($termObjectID);
+            $termObject = $this->getTerm($termObjectID);
         }
         return [
             $termObject,
@@ -48,7 +48,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
      *
      * Overridable by Faker tests.
      */
-    protected function resolveGetTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
+    protected function getTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         $term = get_term($termObjectID, $taxonomy);
         if ($term instanceof WP_Error) {

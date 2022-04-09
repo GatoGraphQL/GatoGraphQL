@@ -219,7 +219,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (is_object($catObjectOrID)) {
             return $catObjectOrID;
         }
-        $catObject = $this->resolveGetTerm($catObjectOrID, $this->getCategoryTaxonomyName());
+        $catObject = $this->getTerm($catObjectOrID, $this->getCategoryTaxonomyName());
         if ($catObject === null) {
             return null;
         }

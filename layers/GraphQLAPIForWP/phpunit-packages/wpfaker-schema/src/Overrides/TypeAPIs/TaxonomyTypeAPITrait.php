@@ -65,7 +65,7 @@ trait TaxonomyTypeAPITrait
         );
     }
 
-    protected function resolveGetTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
+    protected function getTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
