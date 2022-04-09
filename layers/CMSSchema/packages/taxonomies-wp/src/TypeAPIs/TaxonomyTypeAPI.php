@@ -42,12 +42,6 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         ];
     }
 
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
     protected function getTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
     {
         $term = get_term($termObjectID, $taxonomy);
