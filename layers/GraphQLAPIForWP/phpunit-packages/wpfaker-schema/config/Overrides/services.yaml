@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface:
-        class: \GraphQLAPI\WPFakerSchema\Overrides\TypeAPIs\CommentTypeAPI
