@@ -40,7 +40,7 @@ class MockDataStore
      * The file can be either:
      *
      * - a PHP file with the array containing the data
-     * - an XML WordPress data export file     
+     * - an XML WordPress data export file
      */
     protected function mergeDataFromFile(string $file): void
     {
@@ -53,7 +53,7 @@ class MockDataStore
             throw new DatasetFileException(
                 sprintf(
                     // $this->__(
-                        'The fixed dataset must be either a PHP or XML file, but file "%s" was provided',
+                    'The fixed dataset must be either a PHP or XML file, but file "%s" was provided',
                     //     'wpfaker-schema'
                     // ),
                     $file
@@ -68,7 +68,7 @@ class MockDataStore
             throw new DatasetFileException(
                 sprintf(
                     // $this->__(
-                        'File "%s" does not contain a valid dataset',
+                    'File "%s" does not contain a valid dataset',
                     //     'wpfaker-schema'
                     // ),
                     $file

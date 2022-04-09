@@ -17,7 +17,7 @@ use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
     protected static MockDataStore $mockDataStore;
-    
+
     public static function initializeMockDataStore(
         ?MockDataStore $mockDataStore = null,
     ): void {
