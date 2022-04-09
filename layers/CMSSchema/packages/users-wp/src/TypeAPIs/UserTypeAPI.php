@@ -36,22 +36,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function getUserBy(string $property, string | int $propertyValue): ?object
     {
-        $user = $this->resolveGetUserBy($property, $propertyValue);
+        $user = get_user_by($property, $propertyValue);
         if ($user === false) {
             return null;
         }
         return $user;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetUserBy(string $property, string | int $propertyValue): WP_User|false
-    {
-        return get_user_by($property, $propertyValue);
     }
 
     public function getUserByID(string | int $userID): ?object
@@ -123,24 +112,13 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
 
         // Execute the query
-        $ret = $this->resolveGetUsers($query);
+        $ret = get_users($query);
 
         // Remove the hook
         if ($filterByEmails) {
             App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetUsers(array $query): array
-    {
-        return get_users($query);
     }
 
     /**
