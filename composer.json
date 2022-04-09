@@ -36,7 +36,7 @@
         "symfony/yaml": "^6.0"
     },
     "require-dev": {
-        "brain/faker": "dev-master",
+        "leoloso/faker": "dev-master",
         "friendsofphp/php-cs-fixer": "^3.5",
         "johnpbloch/wordpress": ">=5.5",
         "phpstan/phpstan": "^1.4",
@@ -375,10 +375,6 @@
         {
             "type": "composer",
             "url": "https://wpackagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/BrainFaker.git"
         },
         {
             "type": "vcs",
