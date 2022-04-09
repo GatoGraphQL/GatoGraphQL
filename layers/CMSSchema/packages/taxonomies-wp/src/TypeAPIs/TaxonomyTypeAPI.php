@@ -49,7 +49,7 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         }
         return $term;
     }
-    
+
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
