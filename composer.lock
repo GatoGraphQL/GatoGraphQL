@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ef38dd9a76c33565527defdd2f55e60",
+    "content-hash": "18b0954d963ae545e5c6437862c8309a",
     "packages": [
         {
             "name": "boxuk/wp-muplugin-loader",
@@ -3233,12 +3233,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "7747c4d684c44e94d94ea951372c2b62b7a7755d"
+                "reference": "948227b57f5ee34e2751528e747d10e34537b392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/7747c4d684c44e94d94ea951372c2b62b7a7755d",
-                "reference": "7747c4d684c44e94d94ea951372c2b62b7a7755d",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/948227b57f5ee34e2751528e747d10e34537b392",
+                "reference": "948227b57f5ee34e2751528e747d10e34537b392",
                 "shasum": ""
             },
             "require": {
@@ -3313,7 +3313,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2022-04-06T09:01:27+00:00"
+            "time": "2022-04-09T10:44:49+00:00"
         },
         {
             "name": "brain/monkey",
