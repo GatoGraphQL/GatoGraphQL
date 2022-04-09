@@ -11,7 +11,6 @@ use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Comment;
 
@@ -19,6 +18,7 @@ use function get_comments;
 use function get_comment;
 use function get_comments_number;
 use function comments_open;
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -26,7 +26,6 @@ use function comments_open;
 class CommentTypeAPI implements CommentTypeAPIInterface
 {
     use BasicServiceTrait;
-    use TypeAPITrait;
 
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
@@ -118,11 +117,11 @@ class CommentTypeAPI implements CommentTypeAPIInterface
         }
 
         if (isset($query['order'])) {
-            $query['order'] = $this->resolveEscSQL($query['order']);
+            $query['order'] = esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         // For the comments, if there's no limit then it brings all results
         if (isset($query['limit'])) {
