@@ -38,22 +38,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getStatus(string | int | object $customPostObjectOrID): ?string
     {
-        $status = $this->resolveGetPostStatus($customPostObjectOrID);
+        $status = get_post_status($customPostObjectOrID);
         if ($status === false) {
             return null;
         }
         return $status;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetPostStatus(string | int | object $customPostObjectOrID): string|false
-    {
-        return get_post_status($customPostObjectOrID);
     }
 
     /**
@@ -88,20 +77,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPosts(array $query, array $options = []): array
     {
         $query = $this->convertCustomPostsQuery($query, $options);
-        return $this->resolveGetPosts($query);
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     *
-     * @param array<string,mixed> $query
-     * @return WP_Post[]|int[]
-     */
-    protected function resolveGetPosts(array $query): array
-    {
         return get_posts($query);
     }
 
@@ -116,7 +91,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         unset($query['offset']);
 
         // Execute query and count results
-        $posts = $this->resolveGetPosts($query);
+        $posts = get_posts($query);
         return count($posts);
     }
     /**
