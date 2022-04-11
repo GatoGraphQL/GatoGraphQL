@@ -1,0 +1,17 @@
+{
+  "data": {
+    "customPosts": [
+      {
+        "__typename": "Post",
+        "id": 1724,
+        "title": "Keyboard navigation"
+      },
+      {
+        "__typename": "Page"
+      },
+      {
+        "__typename": "Page"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...PostData
+  }
+}
+
+fragment PostData on Post {
+  id
+  title
+}
