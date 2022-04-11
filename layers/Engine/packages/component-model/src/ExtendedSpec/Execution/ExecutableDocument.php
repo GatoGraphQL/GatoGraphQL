@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ExtendedSpec\Execution;
 
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -24,9 +27,13 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 class ExecutableDocument extends UpstreamExecutableDocument
 {
     /**
-     * @var array<ObjectTypeResolverInterface|InterfaceTypeResolverInterface>
+     * @var array<ObjectTypeResolverInterface|UnionTypeResolverInterface|InterfaceTypeResolverInterface>
      */
-    protected array $typeResolvers;
+    protected array $compositeUnionTypeResolvers;
+    /**
+     * @var array<EnumTypeResolverInterface|ScalarTypeResolverInterface>
+     */
+    protected array $nonCompositeUnionTypeResolvers;
 
     private ?TypeRegistryInterface $typeRegistry = null;
 
@@ -43,9 +50,14 @@ class ExecutableDocument extends UpstreamExecutableDocument
             $document,
             $context
         );
-        $this->typeResolvers = [
-            ...$this->getTypeRegistry()->getRelationalTypeResolvers(),
-            ...$this->getTypeRegistry()->getInterfaceTypeResolvers()
+        $this->compositeUnionTypeResolvers = [
+            ...$this->getTypeRegistry()->getObjectTypeResolvers(),
+            ...$this->getTypeRegistry()->getUnionTypeResolvers(),
+            ...$this->getTypeRegistry()->getInterfaceTypeResolvers(),
+        ];
+        $this->nonCompositeUnionTypeResolvers = [
+            ...$this->getTypeRegistry()->getEnumTypeResolvers(),
+            ...$this->getTypeRegistry()->getScalarTypeResolvers(),
         ];
     }
 
@@ -79,12 +91,35 @@ class ExecutableDocument extends UpstreamExecutableDocument
      */
     protected function assertFragmentSpreadTypeExistsInSchema(string $fragmentSpreadType): void
     {
-        foreach ($this->typeResolvers as $typeResolver) {
-            if (
-                $typeResolver->getTypeName() === $fragmentSpreadType
-                || $typeResolver->getNamespacedTypeName() === $fragmentSpreadType
-            ) {
+        foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
+            if ($this->isTypeResolverForFragmentSpreadType(
+                $fragmentSpreadType,
+                $typeResolver
+            )) {
                 return;
+            }
+        }
+
+        /**
+         * The type is neither Union, Object or Interface.
+         * Check if it is Enum/Scalar as to determine which validation
+         * from the GraphQL spec it belongs to.
+         */
+        foreach ($this->nonCompositeUnionTypeResolvers as $typeResolver) {
+            if ($this->isTypeResolverForFragmentSpreadType(
+                $fragmentSpreadType,
+                $typeResolver
+            )) {
+                throw new InvalidRequestException(
+                    new FeedbackItemResolution(
+                        GraphQLSpecErrorFeedbackItemProvider::class,
+                        GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_3,
+                        [
+                            $fragmentSpreadType,
+                        ]
+                    ),
+                    LocationHelper::getNonSpecificLocation()
+                );
             }
         }
         throw new InvalidRequestException(
@@ -97,6 +132,18 @@ class ExecutableDocument extends UpstreamExecutableDocument
             ),
             LocationHelper::getNonSpecificLocation()
         );
+    }
+
+    /**
+     * @throws InvalidRequestException
+     * @see https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence
+     */
+    protected function isTypeResolverForFragmentSpreadType(
+        string $fragmentSpreadType,
+        TypeResolverInterface $typeResolver
+    ): bool {
+        return $typeResolver->getTypeName() === $fragmentSpreadType
+            || $typeResolver->getNamespacedTypeName() === $fragmentSpreadType;
     }
 
     /**
