@@ -175,6 +175,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - No cyclical fragment references
   - No duplicate fragment names
   - Fragment spread type existence
+  - Support fragment spread on unions
 - Query `extensions` in the schema introspection
   - Implemented extension `isAdminElement`
 - Performance improvement: Avoid regenerating the container when the schema is modified
