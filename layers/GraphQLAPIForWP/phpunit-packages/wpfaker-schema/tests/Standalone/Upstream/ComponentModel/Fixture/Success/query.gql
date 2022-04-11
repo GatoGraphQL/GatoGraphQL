@@ -24,13 +24,21 @@
     }
   }
 
-  postCategories {
+  postCategories(
+    pagination: {
+      limit: 5
+    }
+  ) {
     id
     name
     count
   }
 
-  postTags {
+  postTags(
+    pagination: {
+      limit: 5
+    }
+  ) {
     id
     name
     count
