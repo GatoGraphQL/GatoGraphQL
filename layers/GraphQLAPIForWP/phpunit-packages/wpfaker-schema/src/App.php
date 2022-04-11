@@ -55,10 +55,6 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
      */
     protected static function getDefaultMockDataOptions(): array
     {
-        return [
-            'limit-posts' => 10,
-            'limit-categories' => 10,
-            'limit-tags' => 10,
-        ];
+        return [];
     }
 }
