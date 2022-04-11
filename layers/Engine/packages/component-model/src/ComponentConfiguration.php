@@ -282,6 +282,19 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
+    public function logExceptionErrorMessagesAndTraces(): bool
+    {
+        $envVariable = Environment::LOG_EXCEPTION_ERROR_MESSAGES_AND_TRACES;
+        $defaultValue = false;
+        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function sendExceptionErrorMessages(): bool
     {
         $envVariable = Environment::SEND_EXCEPTION_ERROR_MESSAGES;
@@ -295,10 +308,14 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function logExceptionErrorMessages(): bool
+    public function sendExceptionTraces(): bool
     {
-        $envVariable = Environment::LOG_EXCEPTION_ERROR_MESSAGES;
-        $defaultValue = false;
+        if (!$this->sendExceptionErrorMessages()) {
+            return false;
+        }
+
+        $envVariable = Environment::SEND_EXCEPTION_TRACES;
+        $defaultValue = RootEnvironment::isApplicationEnvironmentDev();
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         return $this->retrieveConfigurationValueOrUseDefault(
