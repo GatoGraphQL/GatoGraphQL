@@ -136,12 +136,50 @@ class MockDataStore
             ]);
         }
 
+        // $termSlugIDs = [];
+        $categoryDataEntries = ($this->data['categories'] ?? []);
+        if ($limitCategories = $options['limit-categories'] ?? 0) {
+            array_splice($categoryDataEntries, 0, $limitCategories);
+        }
+        foreach ($categoryDataEntries as $categoryDataEntry) {
+            $this->wpFaker->term([
+                'id' => $categoryDataEntry['term_id'],
+                'taxonomy' => 'category',
+                'term_id' => $categoryDataEntry['term_id'],
+                'name' => $categoryDataEntry['cat_name'],
+                'slug' => $categoryDataEntry['category_nicename'],
+                'parent' => $categoryDataEntry['category_parent'],
+                'description' => $categoryDataEntry['category_description'],
+            ]);
+            // $termSlugIDs['category'][$categoryDataEntry['category_nicename']] = $categoryDataEntry['term_id'];
+        }
+
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
             array_splice($postDataEntries, 0, $limitPosts);
         }
         foreach ($postDataEntries as $postDataEntry) {
             $postID = $postDataEntry['post_id'];
+            /**
+             * @todo Map relationships between posts and tags/categories
+             * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
+             */
+            // $postCategoryIDs = [];
+            // foreach (($postDataEntry['categories'] ?? []) as $postCategoryDataEntry) {
+            //     $postCategoryID = $termSlugIDs[$postCategoryDataEntry['domain']][$postCategoryDataEntry['slug']] ?? null;
+            //     if ($postCategoryID === null) {
+            //         throw new DatasetFileException(
+            //             sprintf(
+            //                 // $this->__(
+            //                 'There is no category with slug %s',
+            //                 //     'wpfaker-schema'
+            //                 // ),
+            //                 $postCategoryDataEntry['slug']
+            //             )
+            //         );
+            //     }
+            //     $postCategoryIDs[] = $postCategoryID;
+            // }
             $this->wpFaker->post([
                 'id' => $postID,
                 ...$postDataEntry
@@ -149,11 +187,9 @@ class MockDataStore
             foreach (($postDataEntry['comments'] ?? []) as $postCommentDataEntry) {
                 $this->wpFaker->comment([
                     ...$postCommentDataEntry,
-                    ...[
-                        'id' => $postCommentDataEntry['comment_id'],
-                        'comment_post_ID' => $postID,
-                        'user_id' => $postCommentDataEntry['comment_user_id'],
-                    ]
+                    'id' => $postCommentDataEntry['comment_id'],
+                    'comment_post_ID' => $postID,
+                    'user_id' => $postCommentDataEntry['comment_user_id'],
                 ]);
             }
         }
