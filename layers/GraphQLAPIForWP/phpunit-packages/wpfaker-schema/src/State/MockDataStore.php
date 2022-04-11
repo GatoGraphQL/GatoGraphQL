@@ -170,9 +170,9 @@ class MockDataStore
              * @todo Map relationships between posts and tags/categories
              * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
              */
-            // ...    
+            // ...
         }
-        
+
         $categoryDataEntries = ($this->data['categories'] ?? []);
         if ($limitCategories = $options['limit-categories'] ?? 0) {
             $categoryDataEntries = array_slice($categoryDataEntries, 0, $limitCategories, true);
@@ -189,7 +189,7 @@ class MockDataStore
                 'count' => $termSlugCounter['category'][$categoryDataEntry['category_nicename']] ?? 0,
             ]);
         }
-        
+
         $tagDataEntries = ($this->data['tags'] ?? []);
         if ($limitTags = $options['limit-tags'] ?? 0) {
             $tagDataEntries = array_slice($tagDataEntries, 0, $limitTags, true);
