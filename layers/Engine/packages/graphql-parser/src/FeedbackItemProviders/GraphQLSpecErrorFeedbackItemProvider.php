@@ -118,7 +118,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_4_2_1 => 'TODO: satisfy',
             self::E_5_5_1_1 => $this->__('Fragment name \'%s\' is duplicated', 'graphql-server'),
             self::E_5_5_1_2 => $this->__('Fragment spread type \'%s\' is not defined in the schema', 'graphql-server'),
-            self::E_5_5_1_3 => 'TODO: satisfy',
+            self::E_5_5_1_3 => $this->__('The target type of fragment\'%s\' must have kind UNION, INTERFACE, or OBJECT.', 'graphql-server'),
             self::E_5_5_1_4 => $this->__('Fragment \'%s\' is not used', 'graphql-server'),
             self::E_5_5_2_1 => $this->__('Fragment \'%s\' is not defined in document', 'graphql-server'),
             self::E_5_5_2_2 => $this->__('Fragment \'%s\' is cyclical', 'graphql-server'),
