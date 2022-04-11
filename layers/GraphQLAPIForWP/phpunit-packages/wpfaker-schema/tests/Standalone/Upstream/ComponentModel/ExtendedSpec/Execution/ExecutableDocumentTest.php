@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ExtendedSpec\Execution;
+namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel\ExtendedSpec\Execution;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ExecutableDocumentTest as UpstreamExecutableDocumentTest;
@@ -15,6 +15,19 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
 {
+    /**
+     * @return string[]
+     */
+    protected static function getComponentClassesToInitialize(): array
+    {
+        return [
+            ...parent::getComponentClassesToInitialize(),
+            ...[
+                \PoPWPSchema\Posts\Component::class,
+            ]
+        ];
+    }
+
     protected function createExecutableDocument(
       Document $document,
       Context $context,
