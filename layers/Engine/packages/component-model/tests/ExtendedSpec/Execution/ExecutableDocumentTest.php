@@ -73,7 +73,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     public function testNonExistingTypeOrInterfaceFragmentSpread()
     {
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2))->getMessage(['ThisTypeDoesNotExist']));
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2, ['ThisTypeDoesNotExist']))->getMessage());
         $parser = $this->getParser();
         $document = $parser->parse(
             <<<GRAPHQL
