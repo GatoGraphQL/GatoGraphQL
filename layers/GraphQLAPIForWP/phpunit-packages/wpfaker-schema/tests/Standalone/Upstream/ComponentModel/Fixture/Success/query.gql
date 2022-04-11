@@ -23,6 +23,17 @@
       }
     }
   }
+
+  postCategories {
+    id
+    name
+  }
+
+  postTags {
+    id
+    name
+    count
+  }
 }
 
 fragment CommentData on Comment {
