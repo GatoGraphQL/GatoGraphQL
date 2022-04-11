@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\Services\StandaloneServiceTrait;
 
-class ExecutableDocument implements ExecutableDocumentInterface
+abstract class AbstractExecutableDocument implements ExecutableDocumentInterface
 {
     use StandaloneServiceTrait;
 
@@ -44,6 +44,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
 
         $this->document->validate();
         $this->assertAllMandatoryVariablesHaveValue();
+        $this->assertFragmentSpreadTypesExistInSchema();
 
         // Obtain the operations that must be executed
         $this->requestedOperations = $this->assertAndGetRequestedOperations();
@@ -151,6 +152,14 @@ class ExecutableDocument implements ExecutableDocumentInterface
             }
         }
     }
+
+    /**
+     * Function to be satisfied at the ComponentModel level,
+     * where we access to the schema.
+     *
+     * @throws InvalidRequestException
+     */
+    abstract protected function assertFragmentSpreadTypesExistInSchema(): void;
 
     protected function propagateContext(OperationInterface $operation, ?Context $context): void
     {

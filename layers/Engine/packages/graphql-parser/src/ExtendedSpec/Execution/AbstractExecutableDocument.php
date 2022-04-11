@@ -9,11 +9,11 @@ use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Spec\Execution\Context;
-use PoP\GraphQLParser\Spec\Execution\ExecutableDocument as UpstreamExecutableDocument;
+use PoP\GraphQLParser\Spec\Execution\AbstractExecutableDocument as UpstreamAbstractExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\Root\App;
 
-class ExecutableDocument extends UpstreamExecutableDocument
+abstract class AbstractExecutableDocument extends UpstreamAbstractExecutableDocument
 {
     /**
      * Override to support the "multiple query execution" feature:
