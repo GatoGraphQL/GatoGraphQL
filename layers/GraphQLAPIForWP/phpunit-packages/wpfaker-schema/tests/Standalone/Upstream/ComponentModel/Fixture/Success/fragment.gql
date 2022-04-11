@@ -5,19 +5,19 @@
     }
   ) {
     __typename
-    ...PostData
     ...CustomPostData
     ...UserData
   }
 }
 
+fragment CustomPostData on IsCustomPost {
+  date
+  ...PostData
+}
+
 fragment PostData on Post {
   id
   title
-}
-
-fragment CustomPostData on IsCustomPost {
-  date
 }
 
 fragment UserData on User {
