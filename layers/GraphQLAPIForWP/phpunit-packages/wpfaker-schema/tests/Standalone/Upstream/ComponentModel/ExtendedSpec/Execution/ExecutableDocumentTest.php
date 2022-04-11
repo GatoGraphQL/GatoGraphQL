@@ -35,76 +35,86 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         return new ExecutableDocument($document, $context);
     }
 
-    public function testExistingTypeFragmentSpread()
+    /**
+     * @dataProvider getExistingTypeOrInterfaceQueries
+     */
+    public function testExistingTypeFragmentSpread(string $query)
     {
-        $parser = $this->getParser();
-        $document = $parser->parse(
-            <<<GRAPHQL
-            {
-                customPosts {
-                    __typename
-                    ...PostData
-                }
-            }
-            
-            fragment PostData on Post {
-                id
-                title
-            }
-            GRAPHQL
-        );
+        $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
 
-    public function testExistingInterfaceFragmentSpread()
+    public function getExistingTypeOrInterfaceQueries(): array
     {
-        $parser = $this->getParser();
-        $document = $parser->parse(
-            <<<GRAPHQL
-            {
-                customPosts {
-                    __typename
-                    ...PostData
+        return [
+            'existing-object-type-in-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...PostData
+                    }
                 }
-            }
-            
-            fragment PostData on IsCustomPost {
-                id
-                title
-            }
-            GRAPHQL
-        );
-        $context = new Context();
-        $executableDocument = $this->createExecutableDocument($document, $context);
-        $executableDocument->validateAndInitialize();
-        $this->assertTrue(true);
+                
+                fragment PostData on Post {
+                    id
+                    title
+                }
+                GRAPHQL,
+            ],
+            'existing-interface-type-in-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...PostData
+                    }
+                }
+                
+                fragment PostData on IsCustomPost {
+                    id
+                    title
+                }
+                GRAPHQL,
+            ],
+        ];
     }
 
-    public function testNonExistingTypeOrInterfaceFragmentSpread()
+    /**
+     * @dataProvider getNonExistingTypeOrInterfaceQueries
+     */
+    public function testNonExistingTypeFragmentSpread(string $query)
     {
         $this->expectException(InvalidRequestException::class);
         $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2, ['ThisTypeDoesNotExist']))->getMessage());
-        $parser = $this->getParser();
-        $document = $parser->parse(
-            <<<GRAPHQL
-            {
-                customPosts {
-                    __typename
-                    ...PostData
-                }
-            }
-            
-            fragment PostData on ThisTypeDoesNotExist {
-                id
-                title
-            }
-            GRAPHQL
-        );
+        $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
+    }
+
+    public function getNonExistingTypeOrInterfaceQueries(): array
+    {
+        return [
+            'non-existing-object-type-or-interface-in-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...PostData
+                    }
+                }
+                
+                fragment PostData on ThisTypeDoesNotExist {
+                    id
+                    title
+                }
+                GRAPHQL,
+            ]
+        ];
     }
 }
