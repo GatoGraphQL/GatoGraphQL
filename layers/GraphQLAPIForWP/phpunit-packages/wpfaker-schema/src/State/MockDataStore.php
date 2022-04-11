@@ -137,6 +137,7 @@ class MockDataStore
         }
 
         // $termSlugIDs = [];
+        $taxonomies = ['post_tag', 'category'];
         $termSlugCounter = [];
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
@@ -177,12 +178,14 @@ class MockDataStore
                 ]);
             }
             // Count tags/categories
-            $postCategoryDataEntries = array_filter(
-                $postDataEntry['terms'] ?? [],
-                fn (array $postTermDataEntry) => $postTermDataEntry['domain'] === 'category'
-            );
-            foreach ($postCategoryDataEntries as $postCategoryDataEntry) {
-                $termSlugCounter['category'][$postCategoryDataEntry['slug']] = ($termSlugCounter['category'][$postCategoryDataEntry['slug']] ?? 0) + 1;
+            foreach ($taxonomies as $taxonomy) {
+                $postTaxonomyTermDataEntries = array_filter(
+                    $postDataEntry['terms'] ?? [],
+                    fn (array $postTermDataEntry) => $postTermDataEntry['domain'] === $taxonomy
+                );
+                foreach ($postTaxonomyTermDataEntries as $postCategoryDataEntry) {
+                    $termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] = ($termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] ?? 0) + 1;
+                }
             }
         }
         
