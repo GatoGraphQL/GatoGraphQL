@@ -80,6 +80,26 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 }
                 GRAPHQL,
             ],
+            'union-type-in-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...CustomPostData
+                    }
+                }
+                
+                fragment CustomPostData on CustomPostUnion {
+                    customPostType
+                    ...PostData
+                }
+                
+                fragment PostData on Post {
+                    id
+                    title
+                }
+                GRAPHQL,
+            ],
             'object-type-in-inline-fragment' => [
                 <<<GRAPHQL
                 {
@@ -101,6 +121,22 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                         ...on IsCustomPost {
                             id
                             title
+                        }
+                    }
+                }
+                GRAPHQL,
+            ],
+            'union-type-in-inline-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...on CustomPostUnion {
+                            customPostType
+                            ...on Post {
+                                id
+                                title
+                            }
                         }
                     }
                 }
