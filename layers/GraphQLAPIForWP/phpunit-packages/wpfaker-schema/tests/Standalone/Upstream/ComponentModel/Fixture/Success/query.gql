@@ -24,6 +24,31 @@
     }
   }
 
+  pages(
+    pagination: {
+      limit: 5
+    }
+  ) {
+    id
+    title
+    author {
+      id
+      name
+    }
+    commentCount
+    comments(
+      pagination: {
+        offset: 1
+        limit: 3
+      }
+    ) {
+      ...CommentData
+      responses {
+        ...CommentData
+      }
+    }
+  }
+
   postCategories(
     pagination: {
       limit: 5

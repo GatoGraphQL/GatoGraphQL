@@ -81,6 +81,80 @@
         "comments": []
       }
     ],
+    "pages": [
+      {
+        "id": 2,
+        "title": "About The Tests",
+        "commentCount": 0,
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        },
+        "comments": []
+      },
+      {
+        "id": 146,
+        "title": "Lorem Ipsum",
+        "commentCount": 0,
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        },
+        "comments": []
+      },
+      {
+        "id": 155,
+        "title": "Page with comments",
+        "commentCount": 3,
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        },
+        "comments": [
+          {
+            "id": 168,
+            "date": "2007-09-04T10:49:03+00:00",
+            "content": "Contributor comment.",
+            "responseCount": 1,
+            "responses": [
+              {
+                "id": 1017,
+                "date": "2014-12-10T01:56:24+00:00",
+                "content": "nothing useful to say",
+                "responseCount": 0
+              }
+            ]
+          },
+          {
+            "id": 169,
+            "date": "2007-09-04T10:48:51+00:00",
+            "content": "Author comment.",
+            "responseCount": 0,
+            "responses": []
+          }
+        ]
+      },
+      {
+        "id": 156,
+        "title": "Page with comments disabled",
+        "commentCount": 0,
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        },
+        "comments": []
+      },
+      {
+        "id": 172,
+        "title": "Level 3",
+        "commentCount": 0,
+        "author": {
+          "id": 2,
+          "name": "Theme Buster"
+        },
+        "comments": []
+      }
+    ],
     "postCategories": [
       {
         "id": 2835016,
