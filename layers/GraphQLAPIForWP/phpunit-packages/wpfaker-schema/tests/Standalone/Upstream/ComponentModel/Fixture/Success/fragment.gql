@@ -6,10 +6,20 @@
   ) {
     __typename
     ...PostData
+    ...CustomPostData
+    ...UserData
   }
 }
 
 fragment PostData on Post {
   id
   title
+}
+
+fragment CustomPostData on IsCustomPost {
+  date
+}
+
+fragment UserData on User {
+  name
 }

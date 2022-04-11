@@ -4,13 +4,16 @@
       {
         "__typename": "Post",
         "id": 1724,
-        "title": "Keyboard navigation"
+        "title": "Keyboard navigation",
+        "date": "2018-10-20T20:03:48+00:00"
       },
       {
-        "__typename": "Page"
+        "__typename": "Page",
+        "date": "2010-07-25T19:40:01+00:00"
       },
       {
-        "__typename": "Page"
+        "__typename": "Page",
+        "date": "2007-09-04T09:52:50+00:00"
       }
     ]
   }
