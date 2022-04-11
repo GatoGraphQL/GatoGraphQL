@@ -189,5 +189,21 @@ class MockDataStore
                 'count' => $termSlugCounter['category'][$categoryDataEntry['category_nicename']] ?? 0,
             ]);
         }
+        
+        $tagDataEntries = ($this->data['tags'] ?? []);
+        if ($limitTags = $options['limit-tags'] ?? 0) {
+            array_splice($tagDataEntries, 0, $limitTags);
+        }
+        foreach ($tagDataEntries as $tagDataEntry) {
+            $this->wpFaker->term([
+                'id' => $tagDataEntry['term_id'],
+                'taxonomy' => 'post_tag',
+                'term_id' => $tagDataEntry['term_id'],
+                'name' => $tagDataEntry['tag_name'],
+                'slug' => $tagDataEntry['tag_slug'],
+                'description' => $tagDataEntry['tag_description'],
+                'count' => $termSlugCounter['post_tag'][$tagDataEntry['tag_slug']] ?? 0,
+            ]);
+        }
     }
 }
