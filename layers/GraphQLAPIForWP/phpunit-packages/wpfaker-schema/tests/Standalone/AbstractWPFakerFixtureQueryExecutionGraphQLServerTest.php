@@ -44,6 +44,9 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
                 \GraphQLAPI\WPFakerSchema\Component::class => [
                     \GraphQLAPI\WPFakerSchema\Environment::USE_FIXED_DATASET => true,
                 ],
+                \PoPCMSSchema\Pages\Component::class => [
+                    \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
+                ],
             ]
         ];
     }
