@@ -29,8 +29,8 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     }
 
     protected function createExecutableDocument(
-      Document $document,
-      Context $context,
+        Document $document,
+        Context $context,
     ): ExecutableDocumentInterface {
         return new ExecutableDocument($document, $context);
     }

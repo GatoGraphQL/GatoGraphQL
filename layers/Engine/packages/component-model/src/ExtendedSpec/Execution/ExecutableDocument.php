@@ -46,7 +46,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
         $this->typeResolvers = [
             ...$this->getTypeRegistry()->getObjectTypeResolvers(),
             ...$this->getTypeRegistry()->getInterfaceTypeResolvers()
-        ];        
+        ];
     }
 
     /**
@@ -80,7 +80,8 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function assertFragmentSpreadTypeExistsInSchema(string $fragmentSpreadType): void
     {
         foreach ($this->typeResolvers as $typeResolver) {
-            if ($typeResolver->getTypeName() === $fragmentSpreadType
+            if (
+                $typeResolver->getTypeName() === $fragmentSpreadType
                 || $typeResolver->getNamespacedTypeName() === $fragmentSpreadType
             ) {
                 return;
