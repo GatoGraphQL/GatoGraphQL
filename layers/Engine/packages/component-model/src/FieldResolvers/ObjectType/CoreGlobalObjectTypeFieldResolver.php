@@ -258,7 +258,8 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                  */
                 $isNamespacedUnionTypeName = str_contains($unionTypeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
                 foreach ($unionTypeResolvers as $unionTypeResolver) {
-                    if ($unionTypeName === $unionTypeResolver->getTypeName()
+                    if (
+                        $unionTypeName === $unionTypeResolver->getTypeName()
                         || ($isNamespacedUnionTypeName && $unionTypeName === $unionTypeResolver->getNamespacedTypeName())
                     ) {
                         $foundUnionTypeResolver = $unionTypeResolver;
