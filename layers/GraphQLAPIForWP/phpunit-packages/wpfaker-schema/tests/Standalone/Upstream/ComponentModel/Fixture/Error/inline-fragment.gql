@@ -1,0 +1,12 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ... on NonExistingType {
+      id
+    }
+  }
+}
