@@ -23,6 +23,26 @@
       }
     }
   }
+
+  postCategories(
+    pagination: {
+      limit: 5
+    }
+  ) {
+    id
+    name
+    count
+  }
+
+  postTags(
+    pagination: {
+      limit: 5
+    }
+  ) {
+    id
+    name
+    count
+  }
 }
 
 fragment CommentData on Comment {

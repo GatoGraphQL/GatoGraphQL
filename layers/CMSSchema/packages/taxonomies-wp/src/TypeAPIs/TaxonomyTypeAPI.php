@@ -10,7 +10,10 @@ use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Taxonomies\Constants\TaxonomyOrderBy;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use WP_Error;
+use WP_Term;
 
+use function get_term;
 use function esc_sql;
 
 /**
@@ -30,13 +33,23 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             $termObjectID = $termObject->ID;
         } else {
             $termObjectID = $termObjectOrID;
-            $termObject = \get_term($termObjectID);
+            $termObject = $this->getTerm($termObjectID);
         }
         return [
             $termObject,
             $termObjectID,
         ];
     }
+
+    protected function getTerm(string | int $termObjectID, string $taxonomy = ''): ?WP_Term
+    {
+        $term = get_term($termObjectID, $taxonomy);
+        if ($term instanceof WP_Error) {
+            return null;
+        }
+        return $term;
+    }
+
     /**
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
@@ -48,8 +61,6 @@ class TaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         ) = $this->getTermObjectAndID($termObjectOrID);
         return $termObject->taxonomy;
     }
-
-
 
     public function convertTaxonomiesQuery(array $query, array $options = []): array
     {

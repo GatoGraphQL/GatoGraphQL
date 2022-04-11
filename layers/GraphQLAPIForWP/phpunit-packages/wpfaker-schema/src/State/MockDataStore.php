@@ -123,7 +123,7 @@ class MockDataStore
     {
         $userDataEntries = ($this->data['authors'] ?? []);
         if ($limitUsers = $options['limit-users'] ?? 0) {
-            array_splice($userDataEntries, 0, $limitUsers);
+            $userDataEntries = array_slice($userDataEntries, 0, $limitUsers, true);
         }
         foreach ($userDataEntries as $userDataEntry) {
             $this->wpFaker->user([
@@ -136,9 +136,11 @@ class MockDataStore
             ]);
         }
 
+        $taxonomies = ['post_tag', 'category'];
+        $termSlugCounter = [];
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
-            array_splice($postDataEntries, 0, $limitPosts);
+            $postDataEntries = array_slice($postDataEntries, 0, $limitPosts, true);
         }
         foreach ($postDataEntries as $postDataEntry) {
             $postID = $postDataEntry['post_id'];
@@ -149,13 +151,59 @@ class MockDataStore
             foreach (($postDataEntry['comments'] ?? []) as $postCommentDataEntry) {
                 $this->wpFaker->comment([
                     ...$postCommentDataEntry,
-                    ...[
-                        'id' => $postCommentDataEntry['comment_id'],
-                        'comment_post_ID' => $postID,
-                        'user_id' => $postCommentDataEntry['comment_user_id'],
-                    ]
+                    'id' => $postCommentDataEntry['comment_id'],
+                    'comment_post_ID' => $postID,
+                    'user_id' => $postCommentDataEntry['comment_user_id'],
                 ]);
             }
+            // Count tags/categories
+            foreach ($taxonomies as $taxonomy) {
+                $postTaxonomyTermDataEntries = array_filter(
+                    $postDataEntry['terms'] ?? [],
+                    fn (array $postTermDataEntry) => $postTermDataEntry['domain'] === $taxonomy
+                );
+                foreach ($postTaxonomyTermDataEntries as $postCategoryDataEntry) {
+                    $termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] = ($termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] ?? 0) + 1;
+                }
+            }
+            /**
+             * @todo Map relationships between posts and tags/categories
+             * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
+             */
+            // ...
+        }
+
+        $categoryDataEntries = ($this->data['categories'] ?? []);
+        if ($limitCategories = $options['limit-categories'] ?? 0) {
+            $categoryDataEntries = array_slice($categoryDataEntries, 0, $limitCategories, true);
+        }
+        foreach ($categoryDataEntries as $categoryDataEntry) {
+            $this->wpFaker->term([
+                'id' => $categoryDataEntry['term_id'],
+                'taxonomy' => 'category',
+                'term_id' => $categoryDataEntry['term_id'],
+                'name' => $categoryDataEntry['cat_name'],
+                'slug' => $categoryDataEntry['category_nicename'],
+                'parent' => $categoryDataEntry['category_parent'],
+                'description' => $categoryDataEntry['category_description'],
+                'count' => $termSlugCounter['category'][$categoryDataEntry['category_nicename']] ?? 0,
+            ]);
+        }
+
+        $tagDataEntries = ($this->data['tags'] ?? []);
+        if ($limitTags = $options['limit-tags'] ?? 0) {
+            $tagDataEntries = array_slice($tagDataEntries, 0, $limitTags, true);
+        }
+        foreach ($tagDataEntries as $tagDataEntry) {
+            $this->wpFaker->term([
+                'id' => $tagDataEntry['term_id'],
+                'taxonomy' => 'post_tag',
+                'term_id' => $tagDataEntry['term_id'],
+                'name' => $tagDataEntry['tag_name'],
+                'slug' => $tagDataEntry['tag_slug'],
+                'description' => $tagDataEntry['tag_description'],
+                'count' => $termSlugCounter['post_tag'][$tagDataEntry['tag_slug']] ?? 0,
+            ]);
         }
     }
 }

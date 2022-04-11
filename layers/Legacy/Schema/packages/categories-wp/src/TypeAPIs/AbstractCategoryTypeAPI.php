@@ -32,4 +32,9 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
         return substr($category_path, strlen($termlink));
     }
+
+    public function setPostCategories($post_id, array $categories, bool $append = false)
+    {
+        return wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
+    }
 }

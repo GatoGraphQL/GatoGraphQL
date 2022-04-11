@@ -15,6 +15,13 @@ use WP_Error;
 use WP_Taxonomy;
 use WP_Term;
 
+use function get_category;
+use function get_term_by;
+use function wp_get_post_terms;
+use function get_categories;
+use function get_term_link;
+use function get_term_children;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -71,7 +78,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     {
         $query = $this->convertCategoriesQuery($query, $options);
 
-        return \wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        return wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
     }
     public function getCustomPostCategoryCount(string | int $customPostID, array $query = [], array $options = []): int
     {
@@ -87,7 +94,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         unset($query['offset']);
 
         // Resolve and count
-        $categories = \wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
+        $categories = wp_get_post_terms($customPostID, $this->getCategoryTaxonomyName(), $query);
         return count($categories);
     }
     public function getCategoryCount(array $query = [], array $options = []): int
@@ -104,7 +111,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
         // Execute query and return count
         /** @var int[] */
-        $count = \get_categories($query);
+        $count = get_categories($query);
 
         // For some reason, the count is returned as an array of 1 element!
         if (is_array($count) && count($count) === 1 && is_numeric($count[0])) {
@@ -140,7 +147,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
 
     public function getCategoryURL(string | int | object $catObjectOrID): string
     {
-        return \get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
+        return get_term_link($catObjectOrID, $this->getCategoryTaxonomyName());
     }
 
     public function getCategoryURLPath(string | int | object $catObjectOrID): string
@@ -152,11 +159,6 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryBase()
     {
         return $this->getCMSService()->getOption($this->getCategoryBaseOption());
-    }
-
-    public function setPostCategories($post_id, array $categories, bool $append = false)
-    {
-        return wp_set_post_terms($post_id, $categories, $this->getCategoryTaxonomyName(), $append);
     }
 
     // protected function returnCategoryObjectsOrIDs($categories, $options = []): array
@@ -217,8 +219,8 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
         if (is_object($catObjectOrID)) {
             return $catObjectOrID;
         }
-        $catObject = \get_term($catObjectOrID, $this->getCategoryTaxonomyName());
-        if ($catObject === null || $catObject instanceof WP_Error) {
+        $catObject = $this->getTerm($catObjectOrID, $this->getCategoryTaxonomyName());
+        if ($catObject === null) {
             return null;
         }
         return $catObject;
@@ -252,7 +254,7 @@ abstract class AbstractCategoryTypeAPI extends TaxonomyTypeAPI implements Catego
     public function getCategoryChildIDs(string | int | object $catObjectOrID): ?array
     {
         $categoryID = is_object($catObjectOrID) ? $this->getCategoryID($catObjectOrID) : $catObjectOrID;
-        $childrenIDs = \get_term_children($categoryID, $this->getCategoryTaxonomyName());
+        $childrenIDs = get_term_children($categoryID, $this->getCategoryTaxonomyName());
         if ($childrenIDs instanceof WP_Error) {
             return null;
         }
