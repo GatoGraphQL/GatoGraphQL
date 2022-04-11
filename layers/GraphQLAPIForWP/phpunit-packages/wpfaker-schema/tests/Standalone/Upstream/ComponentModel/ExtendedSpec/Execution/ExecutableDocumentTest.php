@@ -226,4 +226,62 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
             ],
         ];
     }
+
+    /**
+     * @dataProvider getNonCompositeTypeQueries
+     */
+    public function testNonCompositeTypeFragmentSpread(string $query)
+    {
+        $types = [
+            'scalar' => 'String',
+            'enum' => 'CustomPostStatusEnum',
+        ];
+        $this->expectException(InvalidRequestException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_3, [$types[$this->dataName()]]))->getMessage());
+        $document = $this->getParser()->parse($query);
+        $context = new Context();
+        $executableDocument = $this->createExecutableDocument($document, $context);
+        $executableDocument->validateAndInitialize();
+        $this->assertTrue(true);
+    }
+
+    public function getNonCompositeTypeQueries(): array
+    {
+        return [
+            'scalar' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...StringData
+                    }
+                }
+                
+                fragment StringData on String {
+                    id
+                    title
+                }
+                GRAPHQL,
+            ],
+            'enum' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...SomePostData
+                    }
+                }
+                
+                fragment SomePostData on Post {
+                    id
+                    ...OtherEnumData
+                }
+                
+                fragment OtherEnumData on CustomPostStatusEnum {
+                    title
+                }
+                GRAPHQL,
+            ],
+        ];
+    }
 }
