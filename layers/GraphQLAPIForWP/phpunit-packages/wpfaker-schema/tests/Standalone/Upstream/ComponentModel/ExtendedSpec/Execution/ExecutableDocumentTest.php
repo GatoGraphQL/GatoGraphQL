@@ -50,7 +50,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     public function getExistingTypeOrInterfaceQueries(): array
     {
         return [
-            'existing-object-type-in-fragment' => [
+            'object-type-in-fragment' => [
                 <<<GRAPHQL
                 {
                     customPosts {
@@ -65,7 +65,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 }
                 GRAPHQL,
             ],
-            'existing-interface-type-in-fragment' => [
+            'interface-type-in-fragment' => [
                 <<<GRAPHQL
                 {
                     customPosts {
@@ -77,6 +77,32 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 fragment PostData on IsCustomPost {
                     id
                     title
+                }
+                GRAPHQL,
+            ],
+            'object-type-in-inline-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...on Post {
+                            id
+                            title
+                        }
+                    }
+                }
+                GRAPHQL,
+            ],
+            'interface-type-in-inline-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...on IsCustomPost {
+                            id
+                            title
+                        }
+                    }
                 }
                 GRAPHQL,
             ],
@@ -100,7 +126,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     public function getNonExistingTypeOrInterfaceQueries(): array
     {
         return [
-            'non-existing-object-type-or-interface-in-fragment' => [
+            'fragment' => [
                 <<<GRAPHQL
                 {
                     customPosts {
@@ -112,6 +138,19 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 fragment PostData on ThisTypeDoesNotExist {
                     id
                     title
+                }
+                GRAPHQL,
+            ],
+            'inline-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...on ThisTypeDoesNotExist {
+                            id
+                            title
+                        }
+                    }
                 }
                 GRAPHQL,
             ]
