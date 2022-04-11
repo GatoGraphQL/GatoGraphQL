@@ -44,7 +44,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
             $context
         );
         $this->typeResolvers = [
-            ...$this->getTypeRegistry()->getObjectTypeResolvers(),
+            ...$this->getTypeRegistry()->getRelationalTypeResolvers(),
             ...$this->getTypeRegistry()->getInterfaceTypeResolvers()
         ];
     }
