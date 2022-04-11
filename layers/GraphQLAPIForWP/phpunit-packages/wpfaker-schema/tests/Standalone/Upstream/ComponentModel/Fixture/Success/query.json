@@ -80,6 +80,60 @@
         },
         "comments": []
       }
+    ],
+    "postCategories": [
+      {
+        "id": 2835016,
+        "name": "aciform",
+        "count": 1
+      },
+      {
+        "id": 1020423,
+        "name": "antiquarianism",
+        "count": 1
+      },
+      {
+        "id": 33280,
+        "name": "arrangement",
+        "count": 1
+      },
+      {
+        "id": 2720660,
+        "name": "asmodeus",
+        "count": 1
+      },
+      {
+        "id": 193,
+        "name": "Block",
+        "count": 11
+      }
+    ],
+    "postTags": [
+      {
+        "id": 44090582,
+        "name": "Post Formats",
+        "count": 15
+      },
+      {
+        "id": 695220,
+        "name": "8BIT",
+        "count": 1
+      },
+      {
+        "id": 38590737,
+        "name": "alignment",
+        "count": 3
+      },
+      {
+        "id": 651,
+        "name": "Articles",
+        "count": 1
+      },
+      {
+        "id": 6935,
+        "name": "aside",
+        "count": 1
+      }
     ]
   }
 }
