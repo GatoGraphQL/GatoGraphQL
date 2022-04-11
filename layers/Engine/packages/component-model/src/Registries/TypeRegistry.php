@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class TypeRegistry implements TypeRegistryInterface
 {
@@ -35,6 +36,16 @@ class TypeRegistry implements TypeRegistryInterface
         return array_values(array_filter(
             $this->typeResolvers,
             fn ($typeResolver) => $typeResolver instanceof RelationalTypeResolverInterface
+        ));
+    }
+    /**
+     * @return UnionTypeResolverInterface[]
+     */
+    public function getUnionTypeResolvers(): array
+    {
+        return array_values(array_filter(
+            $this->typeResolvers,
+            fn ($typeResolver) => $typeResolver instanceof UnionTypeResolverInterface
         ));
     }
     /**

@@ -36,7 +36,7 @@ class PoP_EventsCreation_Multilayout_Processor extends PoP_Application_Multilayo
                         $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'isType',
+                            'isObjectType',
                             [
                                 'type' => $eventObjectTypeResolver->getTypeName(),
                             ]

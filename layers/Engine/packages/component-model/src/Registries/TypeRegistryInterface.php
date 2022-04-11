@@ -8,6 +8,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 interface TypeRegistryInterface
 {
@@ -20,6 +21,10 @@ interface TypeRegistryInterface
      * @return RelationalTypeResolverInterface[]
      */
     public function getRelationalTypeResolvers(): array;
+    /**
+     * @return UnionTypeResolverInterface[]
+     */
+    public function getUnionTypeResolvers(): array;
     /**
      * @return ObjectTypeResolverInterface[]
      */

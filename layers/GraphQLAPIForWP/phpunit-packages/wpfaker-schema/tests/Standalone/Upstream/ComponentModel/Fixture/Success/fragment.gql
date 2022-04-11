@@ -10,7 +10,12 @@
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPostUnion {
+  customPostType
+  ...CustomPostNodeData
+}
+
+fragment CustomPostNodeData on IsCustomPost {
   date
   ...PostData
 }

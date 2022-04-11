@@ -5,12 +5,14 @@
     }
   ) {
     __typename
-    ... on IsCustomPost {
-      date
+    ... on CustomPostUnion {
       customPostType
-      ... on Post {
-        id
-        title
+      ... on IsCustomPost {
+        date
+        ... on Post {
+          id
+          title
+        }
       }
     }
     ... on User {
