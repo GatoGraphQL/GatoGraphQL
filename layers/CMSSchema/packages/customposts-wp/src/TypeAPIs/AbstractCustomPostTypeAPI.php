@@ -233,7 +233,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPostID === null) {
             return null;
         }
-        if ($this->getStatus($customPostObjectOrID) == CustomPostStatus::PUBLISH) {
+        if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             return \get_permalink($customPostID);
         }
 
