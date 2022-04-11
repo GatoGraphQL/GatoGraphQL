@@ -125,6 +125,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
                 $this->assertFragmentSpreadTypeExistsInSchema($inlineFragment->getTypeName());
+                $this->assertInlineFragmentSpreadTypesInFieldsOrFragmentsExistInSchema($inlineFragment->getFieldsOrFragmentBonds());
                 continue;
             }
         }

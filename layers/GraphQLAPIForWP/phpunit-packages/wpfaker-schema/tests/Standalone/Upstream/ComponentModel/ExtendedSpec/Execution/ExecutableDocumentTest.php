@@ -141,6 +141,25 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                 }
                 GRAPHQL,
             ],
+            'nested-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...SomePostData
+                    }
+                }
+                
+                fragment SomePostData on Post {
+                    id
+                    ...OtherPostData
+                }
+                
+                fragment OtherPostData on ThisTypeDoesNotExist {
+                    title
+                }
+                GRAPHQL,
+            ],
             'inline-fragment' => [
                 <<<GRAPHQL
                 {
@@ -153,7 +172,22 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
                     }
                 }
                 GRAPHQL,
-            ]
+            ],
+            'nested-inline-fragment' => [
+                <<<GRAPHQL
+                {
+                    customPosts {
+                        __typename
+                        ...on Post {
+                            id
+                            ...on ThisTypeDoesNotExist {
+                                title
+                            }
+                        }
+                    }
+                }
+                GRAPHQL,
+            ],
         ];
     }
 }
