@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument as UpstreamExecutableDocument;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
@@ -92,10 +93,12 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function assertFragmentSpreadTypeExistsInSchema(string $fragmentSpreadType): void
     {
         foreach ($this->compositeUnionTypeResolvers as $typeResolver) {
-            if ($this->isTypeResolverForFragmentSpreadType(
-                $fragmentSpreadType,
-                $typeResolver
-            )) {
+            if (
+                $this->isTypeResolverForFragmentSpreadType(
+                    $fragmentSpreadType,
+                    $typeResolver
+                )
+            ) {
                 return;
             }
         }
@@ -106,10 +109,12 @@ class ExecutableDocument extends UpstreamExecutableDocument
          * from the GraphQL spec it belongs to.
          */
         foreach ($this->nonCompositeUnionTypeResolvers as $typeResolver) {
-            if ($this->isTypeResolverForFragmentSpreadType(
-                $fragmentSpreadType,
-                $typeResolver
-            )) {
+            if (
+                $this->isTypeResolverForFragmentSpreadType(
+                    $fragmentSpreadType,
+                    $typeResolver
+                )
+            ) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
                         GraphQLSpecErrorFeedbackItemProvider::class,
