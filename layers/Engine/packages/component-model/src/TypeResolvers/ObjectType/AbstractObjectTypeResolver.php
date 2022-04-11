@@ -487,7 +487,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E3,
+                                ErrorFeedbackItemProvider::E3a,
                                 [
                                     $fieldName,
                                     $e->getMessage(),
@@ -502,14 +502,24 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $sendExceptionErrorMessages = $e instanceof AbstractClientException
                     || $componentConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionErrorMessages
-                    ? new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E3,
-                        [
-                            $fieldName,
-                            $e->getMessage(),
-                            $e->getTraceAsString()
-                        ]
+                    ? ($componentConfiguration->sendExceptionTraces()
+                        ? new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E3a,
+                            [
+                                $fieldName,
+                                $e->getMessage(),
+                                $e->getTraceAsString(),
+                            ]
+                        )
+                        : new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E3,
+                            [
+                                $fieldName,
+                                $e->getMessage(),
+                            ]
+                        )
                     )
                     : new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,
