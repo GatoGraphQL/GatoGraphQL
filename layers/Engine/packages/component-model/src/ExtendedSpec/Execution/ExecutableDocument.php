@@ -32,23 +32,33 @@ class ExecutableDocument extends UpstreamExecutableDocument
 
     /**
      * @throws InvalidRequestException
+     * @see https://spec.graphql.org/draft/#sec-Fragment-Spread-Type-Existence
      */
     protected function assertFragmentSpreadTypesExistInSchema(): void
     {
+        $typeResolvers = [
+            ...$this->getTypeRegistry()->getObjectTypeResolvers(),
+            ...$this->getTypeRegistry()->getInterfaceTypeResolvers()
+        ];
         foreach ($this->document->getFragments() as $fragment) {
             $fragmentModel = $fragment->getModel();
-            if (false/*in_array($fragmentModel, $fragmentNames)*/) {
-                throw new InvalidRequestException(
-                    new FeedbackItemResolution(
-                        GraphQLSpecErrorFeedbackItemProvider::class,
-                        GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2,
-                        [
-                            $fragmentModel,
-                        ]
-                    ),
-                    LocationHelper::getNonSpecificLocation()
-                );
+            foreach ($typeResolvers as $typeResolver) {
+                if ($typeResolver->getTypeName() === $fragmentModel
+                    || $typeResolver->getNamespacedTypeName() === $fragmentModel
+                ) {
+                    continue(2);
+                }
             }
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_2,
+                    [
+                        $fragmentModel,
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation()
+            );
         }
     }
 }
