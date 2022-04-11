@@ -4,24 +4,32 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Spec\Execution;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\FeedbackItemProviders\FeedbackItemProvider;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Location;
 use PoP\GraphQLParser\Spec\Parser\ParserInterface;
 use PoP\Root\AbstractTestCase;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 class ExecutableDocumentTest extends AbstractTestCase
 {
     protected function getParser(): ParserInterface
     {
         return $this->getService(ParserInterface::class);
+    }
+
+    protected function createExecutableDocument(
+      Document $document,
+      Context $context,
+    ): ExecutableDocumentInterface {
+        return new ExecutableDocument($document, $context);
     }
 
     public function testGetVariableFromContext()
@@ -40,7 +48,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $context = new Context(null, [
             'includeUsers' => true,
         ]);
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -57,7 +65,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -74,7 +82,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context('SomeQuery');
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -98,7 +106,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context('SomeQuery');
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -124,7 +132,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -141,7 +149,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -160,7 +168,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
     }
 
@@ -176,7 +184,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertTrue(true);
     }
@@ -195,7 +203,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
     }
 
@@ -213,7 +221,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context('AnotherOp');
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
     }
 
@@ -224,7 +232,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $parser = $this->getParser();
         $document = $parser->parse('{ id }');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->getRequestedOperations();
     }
 
@@ -233,7 +241,7 @@ class ExecutableDocumentTest extends AbstractTestCase
         $parser = $this->getParser();
         $document = $parser->parse('{ film(id: 1 filmID: 2) { title } }');
         $context = new Context();
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             $executableDocument->getRequestedOperations(),
@@ -267,7 +275,7 @@ class ExecutableDocumentTest extends AbstractTestCase
             }
         ');
         $context = new Context('Two');
-        $executableDocument = new ExecutableDocument($document, $context);
+        $executableDocument = $this->createExecutableDocument($document, $context);
         $executableDocument->validateAndInitialize();
         $this->assertEquals(
             $executableDocument->getRequestedOperations(),
