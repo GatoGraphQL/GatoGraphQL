@@ -1,0 +1,20 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ... on IsCustomPost {
+      date
+      customPostType
+      ... on Post {
+        id
+        title
+      }
+    }
+    ... on User {
+      name
+    }
+  }
+}
