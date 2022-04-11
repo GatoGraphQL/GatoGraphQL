@@ -26,7 +26,10 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
 
     protected static function createMockDataStore(): MockDataStore
     {
-        return new MockDataStore(static::getDefaultMockDataFiles());
+        return new MockDataStore(
+            static::getDefaultMockDataFiles(),
+            static::getDefaultMockDataOptions(),
+        );
     }
 
     /**
@@ -44,6 +47,18 @@ class App extends AbstractComponentModelAppProxy implements AppInterface
     {
         return [
             dirname(__DIR__) . '/resources/fixed-dataset.wordpress.php',
+        ];
+    }
+
+    /**
+     * return array<string,mixed>
+     */
+    protected static function getDefaultMockDataOptions(): array
+    {
+        return [
+            'limit-posts' => 10,
+            'limit-categories' => 10,
+            'limit-tags' => 10,
         ];
     }
 }
