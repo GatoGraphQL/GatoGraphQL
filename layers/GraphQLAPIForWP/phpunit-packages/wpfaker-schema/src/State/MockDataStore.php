@@ -136,7 +136,6 @@ class MockDataStore
             ]);
         }
 
-        // $termSlugIDs = [];
         $taxonomies = ['post_tag', 'category'];
         $termSlugCounter = [];
         $postDataEntries = ($this->data['posts'] ?? []);
@@ -145,26 +144,6 @@ class MockDataStore
         }
         foreach ($postDataEntries as $postDataEntry) {
             $postID = $postDataEntry['post_id'];
-            /**
-             * @todo Map relationships between posts and tags/categories
-             * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
-             */
-            // $postCategoryIDs = [];
-            // foreach (($postDataEntry['categories'] ?? []) as $postCategoryDataEntry) {
-            //     $postCategoryID = $termSlugIDs[$postCategoryDataEntry['domain']][$postCategoryDataEntry['slug']] ?? null;
-            //     if ($postCategoryID === null) {
-            //         throw new DatasetFileException(
-            //             sprintf(
-            //                 // $this->__(
-            //                 'There is no category with slug %s',
-            //                 //     'wpfaker-schema'
-            //                 // ),
-            //                 $postCategoryDataEntry['slug']
-            //             )
-            //         );
-            //     }
-            //     $postCategoryIDs[] = $postCategoryID;
-            // }
             $this->wpFaker->post([
                 'id' => $postID,
                 ...$postDataEntry
@@ -187,6 +166,11 @@ class MockDataStore
                     $termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] = ($termSlugCounter[$taxonomy][$postCategoryDataEntry['slug']] ?? 0) + 1;
                 }
             }
+            /**
+             * @todo Map relationships between posts and tags/categories
+             * Currently not supported because BrainFaker is not mocking `wp_get_post_terms`
+             */
+            // ...    
         }
         
         $categoryDataEntries = ($this->data['categories'] ?? []);
@@ -204,7 +188,6 @@ class MockDataStore
                 'description' => $categoryDataEntry['category_description'],
                 'count' => $termSlugCounter['category'][$categoryDataEntry['category_nicename']] ?? 0,
             ]);
-            // $termSlugIDs['category'][$categoryDataEntry['category_nicename']] = $categoryDataEntry['term_id'];
         }
     }
 }
