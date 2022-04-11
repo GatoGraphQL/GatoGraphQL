@@ -108,7 +108,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
         } catch (Exception $e) {
             /** @var ComponentConfiguration */
             $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->logExceptionErrorMessages()) {
+            if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                 // @todo: Implement for Log
             }
             $errorMessage = $componentConfiguration->sendExceptionErrorMessages()

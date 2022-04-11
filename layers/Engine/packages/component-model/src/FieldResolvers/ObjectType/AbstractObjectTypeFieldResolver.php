@@ -1269,7 +1269,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessages()) {
+                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(

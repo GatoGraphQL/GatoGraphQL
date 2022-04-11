@@ -974,7 +974,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessages()) {
+                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
