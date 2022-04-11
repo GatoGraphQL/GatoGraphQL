@@ -123,7 +123,7 @@ class MockDataStore
     {
         $userDataEntries = ($this->data['authors'] ?? []);
         if ($limitUsers = $options['limit-users'] ?? 0) {
-            array_slice($userDataEntries, 0, $limitUsers, true);
+            $userDataEntries = array_slice($userDataEntries, 0, $limitUsers, true);
         }
         foreach ($userDataEntries as $userDataEntry) {
             $this->wpFaker->user([
@@ -140,7 +140,7 @@ class MockDataStore
         $termSlugCounter = [];
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
-            array_slice($postDataEntries, 0, $limitPosts, true);
+            $postDataEntries = array_slice($postDataEntries, 0, $limitPosts, true);
         }
         foreach ($postDataEntries as $postDataEntry) {
             $postID = $postDataEntry['post_id'];
@@ -175,7 +175,7 @@ class MockDataStore
         
         $categoryDataEntries = ($this->data['categories'] ?? []);
         if ($limitCategories = $options['limit-categories'] ?? 0) {
-            array_slice($categoryDataEntries, 0, $limitCategories, true);
+            $categoryDataEntries = array_slice($categoryDataEntries, 0, $limitCategories, true);
         }
         foreach ($categoryDataEntries as $categoryDataEntry) {
             $this->wpFaker->term([
@@ -192,7 +192,7 @@ class MockDataStore
         
         $tagDataEntries = ($this->data['tags'] ?? []);
         if ($limitTags = $options['limit-tags'] ?? 0) {
-            array_slice($tagDataEntries, 0, $limitTags, true);
+            $tagDataEntries = array_slice($tagDataEntries, 0, $limitTags, true);
         }
         foreach ($tagDataEntries as $tagDataEntry) {
             $this->wpFaker->term([
