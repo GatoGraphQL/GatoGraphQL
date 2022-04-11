@@ -12,6 +12,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E1 = 'e1';
     public final const E2 = 'e2';
     public final const E3 = 'e3';
+    public final const E3a = 'e3a';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
     public final const E6 = 'e6';
@@ -46,6 +47,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E1,
             self::E2,
             self::E3,
+            self::E3a,
             self::E4,
             self::E5,
             self::E6,
@@ -78,7 +80,8 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
         return match ($code) {
             self::E1 => $this->__('Field \'%s\' is not a connection', 'component-model'),
             self::E2 => $this->__('Field \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
-            self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
+            self::E3 => $this->__('Resolving field \'%s\' triggered exception: \'%s\'', 'component-model'),
+            self::E3a => $this->__('Resolving field \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E4 => $this->__('Resolving field \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E5 => $this->__('Directive \'%s\' could not be resolved due to its nested error(s)', 'component-model'),
             self::E6 => $this->__('Resolving mutation \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
