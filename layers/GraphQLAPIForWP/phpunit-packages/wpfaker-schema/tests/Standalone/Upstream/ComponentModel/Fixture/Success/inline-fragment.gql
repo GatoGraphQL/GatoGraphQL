@@ -4,11 +4,11 @@
       limit: 3
     }
   ) {
+    __typename
     ... on CustomPostUnion {
-      __typename
+      customPostType
       ... on IsCustomPost {
         date
-        customPostType
         ... on Post {
           id
           title
