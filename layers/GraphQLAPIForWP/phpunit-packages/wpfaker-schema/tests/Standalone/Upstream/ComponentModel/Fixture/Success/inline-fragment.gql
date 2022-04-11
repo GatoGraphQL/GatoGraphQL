@@ -4,13 +4,15 @@
       limit: 3
     }
   ) {
-    __typename
-    ... on IsCustomPost {
-      date
-      customPostType
-      ... on Post {
-        id
-        title
+    ... on CustomPostUnion {
+      __typename
+      ... on IsCustomPost {
+        date
+        customPostType
+        ... on Post {
+          id
+          title
+        }
       }
     }
     ... on User {

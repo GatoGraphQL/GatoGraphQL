@@ -4,13 +4,18 @@
       limit: 3
     }
   ) {
-    __typename
     ...CustomPostData
     ...UserData
   }
 }
 
-fragment CustomPostData on IsCustomPost {
+fragment CustomPostData on CustomPostUnion {
+  __typename
+  ...CustomPostNodeData
+}
+
+fragment CustomPostNodeData on IsCustomPost {
+  customPostType
   date
   ...PostData
 }
