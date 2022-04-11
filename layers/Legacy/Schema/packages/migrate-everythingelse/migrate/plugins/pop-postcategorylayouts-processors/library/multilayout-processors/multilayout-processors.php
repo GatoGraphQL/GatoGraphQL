@@ -22,7 +22,7 @@ class PoP_PostCategoryLayouts_Multilayout_Processor extends PoP_Application_Mult
                         $postObjectTypeResolver = $instanceManager->getInstance(PostObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'isType',
+                            'isObjectType',
                             [
                                 'type' => $postObjectTypeResolver->getTypeName(),
                             ]

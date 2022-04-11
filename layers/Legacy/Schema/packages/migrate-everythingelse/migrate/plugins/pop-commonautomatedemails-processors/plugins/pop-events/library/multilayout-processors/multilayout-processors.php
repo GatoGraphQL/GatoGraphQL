@@ -30,7 +30,7 @@ class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Applica
                         $eventObjectTypeResolver = $instanceManager->getInstance(EventObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'isType',
+                            'isObjectType',
                             [
                                 'type' => $eventObjectTypeResolver->getTypeName(),
                             ]

@@ -41,7 +41,7 @@ class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_P
                         $stanceTypeResolver = $instanceManager->getInstance(StanceObjectTypeResolver::class);
                         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                         $field = $fieldQueryInterpreter->getField(
-                            'isType',
+                            'isObjectType',
                             [
                                 'type' => $stanceTypeResolver->getTypeName(),
                             ]

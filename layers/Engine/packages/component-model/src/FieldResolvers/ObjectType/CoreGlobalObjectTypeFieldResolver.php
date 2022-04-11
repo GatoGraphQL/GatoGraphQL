@@ -41,7 +41,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'typeName',
             'namespace',
             'qualifiedTypeName',
-            'isType',
+            'isObjectType',
             'implements',
             'isTypeOrImplements',
             'isTypeOrImplementsAll',
@@ -54,7 +54,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'typeName' => $this->getStringScalarTypeResolver(),
             'namespace' => $this->getStringScalarTypeResolver(),
             'qualifiedTypeName' => $this->getStringScalarTypeResolver(),
-            'isType' => $this->getBooleanScalarTypeResolver(),
+            'isObjectType' => $this->getBooleanScalarTypeResolver(),
             'implements' => $this->getBooleanScalarTypeResolver(),
             'isTypeOrImplements' => $this->getBooleanScalarTypeResolver(),
             'isTypeOrImplementsAll' => $this->getBooleanScalarTypeResolver(),
@@ -68,7 +68,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'typeName',
             'namespace',
             'qualifiedTypeName',
-            'isType',
+            'isObjectType',
             'implements',
             'isTypeOrImplements',
             'isTypeOrImplementsAll'
@@ -84,7 +84,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             'typeName' => $this->__('The object\'s type', 'component-model'),
             'namespace' => $this->__('The object\'s namespace', 'component-model'),
             'qualifiedTypeName' => $this->__('The object\'s namespace + type', 'component-model'),
-            'isType' => $this->__('Indicate if the object is of a given type', 'component-model'),
+            'isObjectType' => $this->__('Indicate if the object is of a given type', 'component-model'),
             'implements' => $this->__('Indicate if the object implements a given interface', 'component-model'),
             'isTypeOrImplements' => $this->__('Indicate if the object is of a given type or implements a given interface', 'component-model'),
             'isTypeOrImplementsAll' => $this->__('Indicate if the object is all of the given types or interfaces', 'component-model'),
@@ -95,7 +95,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         return match ($fieldName) {
-            'isType' => [
+            'isObjectType' => [
                 'type' => $this->getStringScalarTypeResolver(),
             ],
             'implements' => [
@@ -114,7 +114,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
+            ['isObjectType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
             ['implements' => 'interface'] => $this->__('The interface name to compare against', 'component-model'),
             ['isTypeOrImplements' => 'typeOrInterface'] => $this->__('The type or interface name to compare against', 'component-model'),
             ['isTypeOrImplementsAll' => 'typeOrInterfaces'] => $this->__('The types and interface names to compare against', 'component-model'),
@@ -125,7 +125,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['isType' => 'type'],
+            ['isObjectType' => 'type'],
             ['implements' => 'interface'],
             ['isTypeOrImplements' => 'typeOrInterface']
                 => SchemaTypeModifiers::MANDATORY,
@@ -162,7 +162,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             case 'qualifiedTypeName':
                 return $objectTypeResolver->getNamespacedTypeName();
 
-            case 'isType':
+            case 'isObjectType':
                 $typeName = $fieldArgs['type'];
                 // If the provided typeName contains the namespace separator, then compare by qualifiedType
                 if (str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR)) {
@@ -232,7 +232,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                 $isType = $objectTypeResolver->resolveValue(
                     $object,
                     $this->getFieldQueryInterpreter()->getField(
-                        'isType',
+                        'isObjectType',
                         [
                             'type' => $fieldArgs['typeOrInterface'],
                         ]
