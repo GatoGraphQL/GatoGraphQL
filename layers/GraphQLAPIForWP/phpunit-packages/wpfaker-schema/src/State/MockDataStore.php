@@ -137,23 +137,7 @@ class MockDataStore
         }
 
         // $termSlugIDs = [];
-        $categoryDataEntries = ($this->data['categories'] ?? []);
-        if ($limitCategories = $options['limit-categories'] ?? 0) {
-            array_splice($categoryDataEntries, 0, $limitCategories);
-        }
-        foreach ($categoryDataEntries as $categoryDataEntry) {
-            $this->wpFaker->term([
-                'id' => $categoryDataEntry['term_id'],
-                'taxonomy' => 'category',
-                'term_id' => $categoryDataEntry['term_id'],
-                'name' => $categoryDataEntry['cat_name'],
-                'slug' => $categoryDataEntry['category_nicename'],
-                'parent' => $categoryDataEntry['category_parent'],
-                'description' => $categoryDataEntry['category_description'],
-            ]);
-            // $termSlugIDs['category'][$categoryDataEntry['category_nicename']] = $categoryDataEntry['term_id'];
-        }
-
+        $termSlugCounter = [];
         $postDataEntries = ($this->data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
             array_splice($postDataEntries, 0, $limitPosts);
@@ -192,6 +176,32 @@ class MockDataStore
                     'user_id' => $postCommentDataEntry['comment_user_id'],
                 ]);
             }
+            // Count tags/categories
+            $postCategoryDataEntries = array_filter(
+                $postDataEntry['terms'] ?? [],
+                fn (array $postTermDataEntry) => $postTermDataEntry['domain'] === 'category'
+            );
+            foreach ($postCategoryDataEntries as $postCategoryDataEntry) {
+                $termSlugCounter['category'][$postCategoryDataEntry['slug']] = ($termSlugCounter['category'][$postCategoryDataEntry['slug']] ?? 0) + 1;
+            }
+        }
+        
+        $categoryDataEntries = ($this->data['categories'] ?? []);
+        if ($limitCategories = $options['limit-categories'] ?? 0) {
+            array_splice($categoryDataEntries, 0, $limitCategories);
+        }
+        foreach ($categoryDataEntries as $categoryDataEntry) {
+            $this->wpFaker->term([
+                'id' => $categoryDataEntry['term_id'],
+                'taxonomy' => 'category',
+                'term_id' => $categoryDataEntry['term_id'],
+                'name' => $categoryDataEntry['cat_name'],
+                'slug' => $categoryDataEntry['category_nicename'],
+                'parent' => $categoryDataEntry['category_parent'],
+                'description' => $categoryDataEntry['category_description'],
+                'count' => $termSlugCounter['category'][$categoryDataEntry['category_nicename']] ?? 0,
+            ]);
+            // $termSlugIDs['category'][$categoryDataEntry['category_nicename']] = $categoryDataEntry['term_id'];
         }
     }
 }

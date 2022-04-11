@@ -27,6 +27,7 @@
   postCategories {
     id
     name
+    count
   }
 
   postTags {
