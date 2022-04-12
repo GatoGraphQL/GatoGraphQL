@@ -6,14 +6,14 @@ namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
 
 use GraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 
-class Set2WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+class WPFakerFixture2QueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
      * Directory under the fixture files are placed
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/FixtureSet2';
+        return __DIR__ . '/Fixture2';
     }
 
     /**
