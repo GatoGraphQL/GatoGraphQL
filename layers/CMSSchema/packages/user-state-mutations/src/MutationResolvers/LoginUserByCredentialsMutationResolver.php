@@ -101,7 +101,7 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
         );
         try {
             $user = $this->getUserStateTypeMutationAPI()->login($credentials);
-            
+
             // Modify the routing-state with the newly logged in user info
             AppStateHelpers::resetCurrentUserInAppState();
 
