@@ -603,11 +603,6 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
             /**
-             * Enable passing a single value where a list is expected:
-             * `{ posts(ids: 1) }` means `{ posts(ids: [1]) }`
-             */
-            ComponentModelEnvironment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
-            /**
              * Do not expose the `DangerouslyDynamic` scalar type
              */
             ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,

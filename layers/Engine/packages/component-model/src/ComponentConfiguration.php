@@ -187,7 +187,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function convertInputValueFromSingleToList(): bool
     {
         $envVariable = Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = [EnvironmentValueHelpers::class, 'toBool'];
 
         return $this->retrieveConfigurationValueOrUseDefault(

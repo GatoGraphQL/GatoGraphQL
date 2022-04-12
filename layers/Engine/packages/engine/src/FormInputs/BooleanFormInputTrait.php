@@ -36,6 +36,6 @@ trait BooleanFormInputTrait
         // For select, it could be true or false
         return ($value === FormInputConstants::BOOLSTRING_TRUE);
     }
-    
+
     abstract protected function getValueFromSourceOrRequest(string $name, ?array $source = null): mixed;
 }
