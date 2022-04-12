@@ -1,4 +1,4 @@
-# WP Faker Schema (for PHPUnit)
+# WPFaker PHPUnit tests for the GraphQL API for WordPress
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Utilities to execute PHPUnit for the GraphQL API for WordPress
+Mock the WordPress schema when running PHPUnit tests
 
 ## Install
 

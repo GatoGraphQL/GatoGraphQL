@@ -152,9 +152,9 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Utilities to execute PHPUnit for the GraphQL API for WordPress",
+    "description": "Mock the WordPress schema when running PHPUnit tests",
     "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/wpfaker-schema",
+    "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -165,9 +165,15 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9",
-        "leoloso/faker": "dev-master",
-        "pop-backbone/wp-data-parser": "^0.9"
+        "phpunit-for-graphql-api/wpfaker-schema": "^0.9",
+        "pop-wp-schema/users": "^0.9",
+        "pop-wp-schema/pages": "^0.9",
+        "pop-wp-schema/posts": "^0.9",
+        "pop-wp-schema/comments": "^0.9",
+        "pop-cms-schema/comment-mutations-wp": "^0.9",
+        "pop-cms-schema/post-categories-wp": "^0.9",
+        "pop-cms-schema/post-tags-wp": "^0.9",
+        "pop-cms-schema/user-state-mutations-wp": "^0.9"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.4",
@@ -177,12 +183,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "src"
+            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "tests"
+            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "tests"
         }
     },
     "scripts": {

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Standalone\Upstream\ComponentModel;
 
-use GraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
+use PHPUnitForGraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 
-class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
      * Directory under the fixture files are placed
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/FixtureMutation';
+        return __DIR__ . '/FixtureNestedMutation';
     }
 
     /**
@@ -26,7 +26,6 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
             ...[
                 \PoPWPSchema\Users\Component::class,
                 \PoPWPSchema\Posts\Component::class,
-                \PoPWPSchema\Pages\Component::class,
                 \PoPWPSchema\Comments\Component::class,
                 \PoPCMSSchema\CommentMutationsWP\Component::class,
             ]
@@ -41,11 +40,11 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoPCMSSchema\Pages\Component::class => [
-                    \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
-                ],
                 \PoPCMSSchema\CommentMutations\Component::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
+                ],
+                \GraphQLByPoP\GraphQLServer\Component::class => [
+                    \GraphQLByPoP\GraphQLServer\Environment::ENABLE_NESTED_MUTATIONS => true,
                 ],
             ]
         ];

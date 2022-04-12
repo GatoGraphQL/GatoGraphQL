@@ -21,7 +21,7 @@ class PackageOrganizationDataSource
             'layers/CMSSchema/packages' => 'PoPCMSSchema',
             'layers/Engine/packages' => 'getpop',
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
-            'layers/GraphQLAPIForWP/phpunit-packages' => 'GraphQLAPI',
+            'layers/GraphQLAPIForWP/phpunit-packages' => 'PHPUnitForGraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
             'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
