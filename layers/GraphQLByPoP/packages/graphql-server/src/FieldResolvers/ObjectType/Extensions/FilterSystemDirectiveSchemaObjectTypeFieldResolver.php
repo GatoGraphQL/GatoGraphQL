@@ -141,10 +141,10 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
                         },
                         $ofTypeDirectiveResolvers
                     );
-                    return array_intersect(
+                    return array_values(array_intersect(
                         $directiveIDs,
                         $ofTypeDirectiveIDs
-                    );
+                    ));
                 }
                 return $directiveIDs;
         }
