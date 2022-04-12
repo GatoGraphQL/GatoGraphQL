@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \GraphQLAPI\WPFakerSchema\Component::class,
+    \PHPUnitForGraphQLAPI\WPFakerSchema\Component::class,
 ]);
 ```
 

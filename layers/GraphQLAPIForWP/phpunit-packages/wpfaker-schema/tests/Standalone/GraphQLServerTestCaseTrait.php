@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone;
 
-use GraphQLAPI\WPFakerSchema\Standalone\GraphQLServer;
+use PHPUnitForGraphQLAPI\WPFakerSchema\Standalone\GraphQLServer;
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer as UpstreamGraphQLServer;
 
 trait GraphQLServerTestCaseTrait

@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema\State;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
-use GraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
+use PHPUnitForGraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
 use PoPBackbone\WPDataParser\WPDataParser;
 
 use function Brain\faker;

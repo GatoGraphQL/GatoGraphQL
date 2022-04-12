@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WPFakerSchema;
 
-use GraphQLAPI\WPFakerSchema\State\MockDataStore;
+use PHPUnitForGraphQLAPI\WPFakerSchema\State\MockDataStore;
 use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
 
 /**
