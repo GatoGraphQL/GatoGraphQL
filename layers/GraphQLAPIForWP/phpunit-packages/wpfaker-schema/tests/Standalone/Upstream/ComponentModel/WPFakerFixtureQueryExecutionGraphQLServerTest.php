@@ -15,4 +15,25 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
     {
         return __DIR__ . '/Fixture';
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getGraphQLServerComponentClassConfiguration(): array
+    {
+        return [
+            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...[
+                \PoP\ComponentModel\Component::class => [
+                    \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
+                ],
+                \PoPCMSSchema\Pages\Component::class => [
+                    \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
+                ],
+                \PoPCMSSchema\CommentMutations\Component::class => [
+                    \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
+                ],
+            ]
+        ];
+    }
 }
