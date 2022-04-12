@@ -1,0 +1,16 @@
+{
+  "data": {
+    "customPost": {
+      "addComment": {
+        "content": "Great insight!",
+        "authorName": "Leo",
+        "authorEmail": "leo@saronga.com",
+        "customPost": {
+          "__typename": "Post",
+          "id": 1724,
+          "title": "Keyboard navigation"
+        }
+      }
+    }
+  }
+}
