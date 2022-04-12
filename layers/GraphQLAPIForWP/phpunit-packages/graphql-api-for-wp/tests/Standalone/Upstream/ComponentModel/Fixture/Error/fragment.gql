@@ -1,0 +1,14 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...NonExistingTypeData
+  }
+}
+
+fragment NonExistingTypeData on NonExistingType {
+  id
+}

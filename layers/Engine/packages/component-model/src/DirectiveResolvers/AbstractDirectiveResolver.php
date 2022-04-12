@@ -974,14 +974,14 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
                 $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessages()) {
+                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
                                         ErrorFeedbackItemProvider::class,
-                                        ErrorFeedbackItemProvider::E11,
+                                        ErrorFeedbackItemProvider::E11a,
                                         [
                                             $this->directive,
                                             $e->getMessage(),
@@ -999,14 +999,24 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     }
                 }
                 $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
-                    ? new FeedbackItemResolution(
-                        ErrorFeedbackItemProvider::class,
-                        ErrorFeedbackItemProvider::E11,
-                        [
-                            $this->directive,
-                            $e->getMessage(),
-                            $e->getTraceAsString(),
-                        ]
+                    ? ($componentConfiguration->sendExceptionTraces()
+                        ? new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E11a,
+                            [
+                                $this->directive,
+                                $e->getMessage(),
+                                $e->getTraceAsString(),
+                            ]
+                        )
+                        : new FeedbackItemResolution(
+                            ErrorFeedbackItemProvider::class,
+                            ErrorFeedbackItemProvider::E11,
+                            [
+                                $this->directive,
+                                $e->getMessage(),
+                            ]
+                        )
                     )
                     : new FeedbackItemResolution(
                         ErrorFeedbackItemProvider::class,

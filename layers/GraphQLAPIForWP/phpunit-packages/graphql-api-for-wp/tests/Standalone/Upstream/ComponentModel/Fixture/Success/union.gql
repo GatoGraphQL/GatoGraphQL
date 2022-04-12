@@ -1,0 +1,27 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...PostData
+    ...PageData
+  }
+}
+
+fragment PostData on Post {
+  id
+  title
+  author {
+    id
+    name
+  }
+  commentCount
+}
+
+fragment PageData on Page {
+  id
+  title
+  date
+}

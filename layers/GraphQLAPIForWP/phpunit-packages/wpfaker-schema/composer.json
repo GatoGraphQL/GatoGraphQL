@@ -1,5 +1,5 @@
 {
-    "name": "graphql-api/wpfaker-schema",
+    "name": "phpunit-for-graphql-api/wpfaker-schema",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -152,9 +152,9 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Convert Markdown to HTML",
-    "keywords": ["GraphQL", "PHP", "PoP", "markdown-convertor"],
-    "homepage": "https://github.com/GraphQLAPI/markdown-convertor",
+    "description": "Utilities to execute PHPUnit for the GraphQL API for WordPress",
+    "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit"],
+    "homepage": "https://github.com/PHPUnitForGraphQLAPI/wpfaker-schema",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -163,32 +163,26 @@
             "homepage": "https://getpop.org"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/BrainFaker.git"
-        }
-    ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9"
+        "getpop/engine": "^0.9",
+        "leoloso/faker": "dev-master",
+        "pop-backbone/wp-data-parser": "^0.9"
     },
     "require-dev": {
-        "brain/faker": "dev-master",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "pop-backbone/wp-data-parser": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
-            "GraphQLAPI\\WPFakerSchema\\": "src"
+            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GraphQLAPI\\WPFakerSchema\\": "tests"
+            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "tests"
         }
     },
     "scripts": {

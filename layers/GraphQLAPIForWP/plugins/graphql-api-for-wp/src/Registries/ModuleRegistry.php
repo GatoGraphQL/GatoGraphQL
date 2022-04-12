@@ -91,7 +91,7 @@ class ModuleRegistry implements ModuleRegistryInterface
                 fn (string $module) => !$this->getModuleResolver($module)->isHidden($module)
             );
         }
-        return $modules;
+        return array_values($modules);
     }
     /**
      * @throws ModuleNotExistsException If module does not exist

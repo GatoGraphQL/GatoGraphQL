@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Registries;
 
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 interface TypeRegistryInterface
 {
@@ -21,6 +24,10 @@ interface TypeRegistryInterface
      */
     public function getRelationalTypeResolvers(): array;
     /**
+     * @return UnionTypeResolverInterface[]
+     */
+    public function getUnionTypeResolvers(): array;
+    /**
      * @return ObjectTypeResolverInterface[]
      */
     public function getObjectTypeResolvers(): array;
@@ -28,4 +35,12 @@ interface TypeRegistryInterface
      * @return InterfaceTypeResolverInterface[]
      */
     public function getInterfaceTypeResolvers(): array;
+    /**
+     * @return EnumTypeResolverInterface[]
+     */
+    public function getEnumTypeResolvers(): array;
+    /**
+     * @return ScalarTypeResolverInterface[]
+     */
+    public function getScalarTypeResolvers(): array;
 }

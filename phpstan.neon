@@ -125,3 +125,4 @@ includes:
     - layers/CMSSchema/packages/users-wp/phpstan.neon.dist
     - layers/Backbone/packages/wp-data-parser/phpstan.neon.dist
     - layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/phpstan.neon.dist

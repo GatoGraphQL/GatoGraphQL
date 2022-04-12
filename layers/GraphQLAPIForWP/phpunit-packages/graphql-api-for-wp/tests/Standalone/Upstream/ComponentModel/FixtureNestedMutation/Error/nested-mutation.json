@@ -1,0 +1,25 @@
+{
+  "errors": [
+    {
+      "message": "Mutations cannot be executed",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "id": 1724,
+        "fields": [
+          "addComment(input:{comment:\"Great insight!\",authorName:\"Leo\",authorEmail:\"leo@saronga.com\"})",
+          "resolveValueAndMerge"
+        ],
+        "code": "PoP\\ComponentModel\\1"
+      }
+    }
+  ],
+  "data": {
+    "customPost": null
+  }
+}

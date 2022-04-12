@@ -21,7 +21,7 @@ class PoP_AddHighlights_Multilayout_Processor extends PoP_Application_Multilayou
                     $highlightTypeResolver = $instanceManager->getInstance(HighlightObjectTypeResolver::class);
                     $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
                     $field = $fieldQueryInterpreter->getField(
-                        'isType',
+                        'isObjectType',
                         [
                             'type' => $highlightTypeResolver->getTypeName(),
                         ]

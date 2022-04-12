@@ -21,7 +21,7 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
         $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);
         $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();
         $field = $fieldQueryInterpreter->getField(
-            'isType',
+            'isObjectType',
             [
                 'type' => $locationPostTypeResolver->getTypeName(),
             ]

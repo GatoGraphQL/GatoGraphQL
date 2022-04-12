@@ -11,20 +11,18 @@ use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\AbstractCustomPostTypeAPI as UpstreamAbstractCustomPostTypeAPI;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Post;
 
 use function get_post_status;
 use function get_posts;
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeAPI
 {
-    use TypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -38,22 +36,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getStatus(string | int | object $customPostObjectOrID): ?string
     {
-        $status = $this->resolveGetPostStatus($customPostObjectOrID);
+        $status = get_post_status($customPostObjectOrID);
         if ($status === false) {
             return null;
         }
         return $status;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetPostStatus(string | int | object $customPostObjectOrID): string|false
-    {
-        return get_post_status($customPostObjectOrID);
     }
 
     /**
@@ -88,20 +75,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPosts(array $query, array $options = []): array
     {
         $query = $this->convertCustomPostsQuery($query, $options);
-        return $this->resolveGetPosts($query);
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     *
-     * @param array<string,mixed> $query
-     * @return WP_Post[]|int[]
-     */
-    protected function resolveGetPosts(array $query): array
-    {
         return get_posts($query);
     }
 
@@ -116,7 +89,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         unset($query['offset']);
 
         // Execute query and count results
-        $posts = $this->resolveGetPosts($query);
+        $posts = get_posts($query);
         return count($posts);
     }
     /**
@@ -185,11 +158,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             unset($query['limit']);
         }
         if (isset($query['order'])) {
-            $query['order'] = $this->resolveEscSQL($query['order']);
+            $query['order'] = esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         // Post slug
         if (isset($query['slug'])) {
@@ -260,7 +233,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         if ($customPostID === null) {
             return null;
         }
-        if ($this->getStatus($customPostObjectOrID) == CustomPostStatus::PUBLISH) {
+        if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
             return \get_permalink($customPostID);
         }
 

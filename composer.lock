@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ef38dd9a76c33565527defdd2f55e60",
+    "content-hash": "2874860c018150f94d76989d1a46f5f5",
     "packages": [
         {
             "name": "boxuk/wp-muplugin-loader",
@@ -3228,94 +3228,6 @@
             "time": "2022-02-07T07:28:34+00:00"
         },
         {
-            "name": "brain/faker",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "7747c4d684c44e94d94ea951372c2b62b7a7755d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/7747c4d684c44e94d94ea951372c2b62b7a7755d",
-                "reference": "7747c4d684c44e94d94ea951372c2b62b7a7755d",
-                "shasum": ""
-            },
-            "require": {
-                "brain/monkey": "^2.3.1",
-                "fakerphp/faker": "^1.16",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8",
-                "squizlabs/php_codesniffer": "^3"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "inc/functions.php"
-                ],
-                "psr-4": {
-                    "Brain\\Faker\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Brain\\Faker\\Tests\\": [
-                        "tests/src/",
-                        "tests/cases/unit"
-                    ]
-                }
-            },
-            "scripts": {
-                "tests": [
-                    "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
-                ],
-                "tests:coverage": [
-                    "@php ./vendor/phpunit/phpunit/phpunit --coverage-clover=coverage.xml"
-                ],
-                "phpcs": [
-                    "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs -p . --ignore=*/vendor/* --extensions=php --basepath=./ --runtime-set testVersion 7.2-",
-                    "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs -p . --standard=PHPCompatibility --ignore=*/vendor/* --extensions=php --basepath=./ --runtime-set testVersion 7.2-"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Giuseppe Mazzapica",
-                    "email": "giuseppe.mazzapica@gmail.com",
-                    "homepage": "https://gmazzap.me",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Faker (fzaninotto/faker) for WordPress via Brain Monkey",
-            "keywords": [
-                "fake data",
-                "faker",
-                "interception",
-                "mock",
-                "mock functions",
-                "mockery",
-                "monkey patching",
-                "patchwork",
-                "redefinition",
-                "runkit",
-                "test",
-                "test data",
-                "testing",
-                "unit tests data",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/Brain-WP/BrainFaker/issues",
-                "source": "https://github.com/Brain-WP/BrainFaker"
-            },
-            "time": "2022-04-06T09:01:27+00:00"
-        },
-        {
             "name": "brain/monkey",
             "version": "2.6.1",
             "source": {
@@ -4169,6 +4081,75 @@
                 "source": "https://github.com/johnpbloch/wordpress-core-installer/tree/master"
             },
             "time": "2020-04-16T21:44:57+00:00"
+        },
+        {
+            "name": "leoloso/faker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leoloso/BrainFaker.git",
+                "reference": "542188688bb586caea93bd5ae7f7028e3b08a08d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/542188688bb586caea93bd5ae7f7028e3b08a08d",
+                "reference": "542188688bb586caea93bd5ae7f7028e3b08a08d",
+                "shasum": ""
+            },
+            "require": {
+                "brain/monkey": "^2.3.1",
+                "fakerphp/faker": "^1.16",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8",
+                "squizlabs/php_codesniffer": "^3"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "inc/functions.php"
+                ],
+                "psr-4": {
+                    "Brain\\Faker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giuseppe Mazzapica",
+                    "email": "giuseppe.mazzapica@gmail.com",
+                    "homepage": "https://gmazzap.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Fork for PoP of: Faker (fzaninotto/faker) for WordPress via Brain Monkey",
+            "keywords": [
+                "Fake data",
+                "Monkey Patching",
+                "faker",
+                "interception",
+                "mock",
+                "mock functions",
+                "mockery",
+                "patchwork",
+                "redefinition",
+                "runkit",
+                "test",
+                "test data",
+                "testing",
+                "unit tests data",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/Brain-WP/BrainFaker/issues",
+                "source": "https://github.com/Brain-WP/BrainFaker"
+            },
+            "time": "2022-04-12T08:50:08+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8031,7 +8012,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "brain/faker": 20
+        "leoloso/faker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

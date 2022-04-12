@@ -8,21 +8,19 @@ use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Constants\UserOrderBy;
 use PoPCMSSchema\Users\TypeAPIs\AbstractUserTypeAPI;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeAPITrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;
 use WP_User_Query;
 
 use function get_user_by;
 use function get_users;
+use function esc_sql;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class UserTypeAPI extends AbstractUserTypeAPI
 {
-    use TypeAPITrait;
-
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -36,22 +34,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
     protected function getUserBy(string $property, string | int $propertyValue): ?object
     {
-        $user = $this->resolveGetUserBy($property, $propertyValue);
+        $user = get_user_by($property, $propertyValue);
         if ($user === false) {
             return null;
         }
         return $user;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetUserBy(string $property, string | int $propertyValue): WP_User|false
-    {
-        return get_user_by($property, $propertyValue);
     }
 
     public function getUserByID(string | int $userID): ?object
@@ -123,24 +110,13 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
 
         // Execute the query
-        $ret = $this->resolveGetUsers($query);
+        $ret = get_users($query);
 
         // Remove the hook
         if ($filterByEmails) {
             App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
         }
         return $ret;
-    }
-
-    /**
-     * Only keep the single call to the CMS function and
-     * no extra logic whatsoever.
-     *
-     * Overridable by Faker tests.
-     */
-    protected function resolveGetUsers(array $query): array
-    {
-        return get_users($query);
     }
 
     /**
@@ -210,11 +186,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
             unset($query['exclude-ids']);
         }
         if (isset($query['order'])) {
-            $query['order'] = $this->resolveEscSQL($query['order']);
+            $query['order'] = esc_sql($query['order']);
         }
         if (isset($query['orderby'])) {
             // Maybe replace the provided value
-            $query['orderby'] = $this->resolveEscSQL($this->getOrderByQueryArgValue($query['orderby']));
+            $query['orderby'] = esc_sql($this->getOrderByQueryArgValue($query['orderby']));
         }
         if (isset($query['offset'])) {
             // Same param name, so do nothing

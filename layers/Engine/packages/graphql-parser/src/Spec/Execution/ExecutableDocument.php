@@ -42,8 +42,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
     {
         $this->requestedOperations = null;
 
-        $this->document->validate();
-        $this->assertAllMandatoryVariablesHaveValue();
+        $this->validate();
 
         // Obtain the operations that must be executed
         $this->requestedOperations = $this->assertAndGetRequestedOperations();
@@ -54,6 +53,15 @@ class ExecutableDocument implements ExecutableDocumentInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
+    protected function validate(): void
+    {
+        $this->document->validate();
+        $this->assertAllMandatoryVariablesHaveValue();
     }
 
     /**

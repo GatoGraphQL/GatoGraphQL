@@ -1,0 +1,22 @@
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ... on CustomPostUnion {
+      customPostType
+      ... on IsCustomPost {
+        date
+        ... on Post {
+          id
+          title
+        }
+      }
+    }
+    ... on User {
+      name
+    }
+  }
+}

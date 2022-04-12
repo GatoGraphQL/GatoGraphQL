@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema;
+namespace PHPUnitForGraphQLAPI\WPFakerSchema;
 
-use Brain\Faker\Providers;
-use Faker\Generator;
+use PHPUnitForGraphQLAPI\WPFakerSchema\State\MockDataStore;
 use PoP\ComponentModel\App\AbstractComponentModelAppProxy;
-
-use function Brain\faker;
 
 /**
  * Keep all state in the application stored and accessible
@@ -19,24 +16,45 @@ use function Brain\faker;
  */
 class App extends AbstractComponentModelAppProxy implements AppInterface
 {
-    protected static Generator $faker;
-    protected static Providers $wpFaker;
+    protected static MockDataStore $mockDataStore;
 
-    public static function initializeFaker(
-        ?Generator $faker = null,
+    public static function initializeMockDataStore(
+        ?MockDataStore $mockDataStore = null,
     ): void {
-        self::$faker = $faker ?? static::createFaker();
-        // @phpstan-ignore-next-line
-        self::$wpFaker = self::$faker->wp();
+        self::$mockDataStore = $mockDataStore ?? static::createMockDataStore();
     }
 
-    protected static function createFaker(): Generator
+    protected static function createMockDataStore(): MockDataStore
     {
-        return faker();
+        return new MockDataStore(
+            static::getDefaultMockDataFiles(),
+            static::getDefaultMockDataOptions(),
+        );
     }
 
-    public static function getWPFaker(): Providers
+    /**
+     * The file providing the fixed dataset. It can be either:
+     *
+     * - a PHP file with the array containing the data
+     * - an XML WordPress data export file
+     *
+     * In the 1st case, the data is retrieved directly from the PHP file.
+     * In the 2nd case, the file is parsed via `WPDataParser`.
+     *
+     * @return string[]
+     */
+    protected static function getDefaultMockDataFiles(): array
     {
-        return self::$wpFaker;
+        return [
+            dirname(__DIR__) . '/resources/fixed-dataset.wordpress.php',
+        ];
+    }
+
+    /**
+     * return array<string,mixed>
+     */
+    protected static function getDefaultMockDataOptions(): array
+    {
+        return [];
     }
 }

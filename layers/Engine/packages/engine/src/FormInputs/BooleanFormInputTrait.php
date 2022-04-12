@@ -11,7 +11,7 @@ trait BooleanFormInputTrait
     protected function getValueFromSource(?array $source = null): mixed
     {
         // If it is not set, then return NULL, so that doing #formcomponentValue ignores value and proceeds to dbObject[dbObjectField]
-        $value = $this->getValueFromSourceOrRequest($source, $this->getName());
+        $value = $this->getValueFromSourceOrRequest($this->getName(), $source);
         if ($value === null) {
             return null;
         }
@@ -36,4 +36,6 @@ trait BooleanFormInputTrait
         // For select, it could be true or false
         return ($value === FormInputConstants::BOOLSTRING_TRUE);
     }
+
+    abstract protected function getValueFromSourceOrRequest(string $name, ?array $source = null): mixed;
 }

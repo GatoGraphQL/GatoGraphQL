@@ -36,9 +36,9 @@
         "symfony/yaml": "^6.0"
     },
     "require-dev": {
-        "brain/faker": "dev-master",
         "friendsofphp/php-cs-fixer": "^3.5",
         "johnpbloch/wordpress": ">=5.5",
+        "leoloso/faker": "dev-master",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.12",
@@ -55,12 +55,13 @@
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/src",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/src",
             "GraphQLAPI\\PluginUtils\\": "layers/GraphQLAPIForWP/packages/plugin-utils/src",
-            "GraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/src",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/src",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/src",
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/src",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/src",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/src",
+            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/src",
+            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/src",
             "PoPAPI\\APIClients\\": "layers/API/packages/api-clients/src",
             "PoPAPI\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/src",
             "PoPAPI\\APIEndpoints\\": "layers/API/packages/api-endpoints/src",
@@ -216,12 +217,13 @@
             "GraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/tests",
             "GraphQLAPI\\MarkdownConvertor\\": "layers/GraphQLAPIForWP/packages/markdown-convertor/tests",
             "GraphQLAPI\\PluginUtils\\": "layers/GraphQLAPIForWP/packages/plugin-utils/tests",
-            "GraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/tests",
             "GraphQLByPoP\\GraphQLClientsForWP\\": "layers/GraphQLByPoP/packages/graphql-clients-for-wp/tests",
             "GraphQLByPoP\\GraphQLEndpointForWP\\": "layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/tests",
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/tests",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/tests",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/tests",
+            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests",
+            "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/tests",
             "PoPAPI\\APIClients\\": "layers/API/packages/api-clients/tests",
             "PoPAPI\\APIEndpointsForWP\\": "layers/API/packages/api-endpoints-for-wp/tests",
             "PoPAPI\\APIEndpoints\\": "layers/API/packages/api-endpoints/tests",
@@ -378,10 +380,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/leoloso/BrainFaker.git"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/leoloso/monorepo-builder.git"
         }
     ],
@@ -422,7 +420,6 @@
         "graphql-api/graphql-api-for-wp": "self.version",
         "graphql-api/markdown-convertor": "self.version",
         "graphql-api/plugin-utils": "self.version",
-        "graphql-api/wpfaker-schema": "self.version",
         "graphql-by-pop/graphiql": "self.version",
         "graphql-by-pop/graphql-clients-for-wp": "self.version",
         "graphql-by-pop/graphql-endpoint-for-wp": "self.version",
@@ -430,6 +427,7 @@
         "graphql-by-pop/graphql-request": "self.version",
         "graphql-by-pop/graphql-server": "self.version",
         "graphql-by-pop/graphql-voyager": "self.version",
+        "phpunit-for-graphql-api/wpfaker-schema": "self.version",
         "pop-api/api": "self.version",
         "pop-api/api-clients": "self.version",
         "pop-api/api-endpoints": "self.version",

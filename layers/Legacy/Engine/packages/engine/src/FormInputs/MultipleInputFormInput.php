@@ -29,7 +29,7 @@ class MultipleInputFormInput extends MultipleSelectFormInput
         $value = array();
         foreach ($this->getSubnames() as $subname) {
             $fullSubname = $formInputHelperService->getMultipleInputName($name, $subname);
-            $subValue = $this->getValueFromSourceOrRequest($source, $fullSubname);
+            $subValue = $this->getValueFromSourceOrRequest($fullSubname, $source);
             if ($subValue !== null) {
                 $value[$subname] = $subValue;
             }

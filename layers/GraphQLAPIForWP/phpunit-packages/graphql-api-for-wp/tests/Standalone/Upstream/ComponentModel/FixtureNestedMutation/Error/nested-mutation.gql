@@ -1,0 +1,20 @@
+{
+  customPost(by: {id: 1724}) {
+    addComment(input: {
+      comment: "Great insight!",
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    }) {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on Post {
+          id
+          title
+        }
+      }
+    }
+  }
+}

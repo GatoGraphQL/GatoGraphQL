@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema;
+namespace PHPUnitForGraphQLAPI\WPFakerSchema;
 
 use PoP\Root\Component\AbstractComponent;
 use PoP\Root\Environment;
@@ -27,18 +27,5 @@ class Component extends AbstractComponent
     protected function resolveEnabled(): bool
     {
         return Environment::isApplicationEnvironmentDevPHPUnit();
-    }
-
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaComponentClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
-        $this->initServices(dirname(__DIR__), '/Overrides');
     }
 }

@@ -29,7 +29,7 @@ class FormInput
 
     protected function getValueFromSource(?array $source = null): mixed
     {
-        $value = $this->getValueFromSourceOrRequest($source, $this->getName());
+        $value = $this->getValueFromSourceOrRequest($this->getName(), $source);
 
         // If it is multiple and the URL contains an empty value (eg: &searchfor[]=&), it will interpret it as array(''),
         // but instead it must be an empty array
@@ -48,7 +48,7 @@ class FormInput
         return $value;
     }
 
-    protected function getValueFromSourceOrRequest(?array $source = null, string $name): mixed
+    protected function getValueFromSourceOrRequest(string $name, ?array $source = null): mixed
     {
         // If not set, it will be NULL
         $value = null;
