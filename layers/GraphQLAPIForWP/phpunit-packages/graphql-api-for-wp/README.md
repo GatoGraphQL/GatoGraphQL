@@ -21,7 +21,7 @@ composer require phpunit-for-graphql-api/graphql-api-for-wp
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPI/phpunit-packages/wpfaker-schema`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPI/phpunit-packages/wpfaker-schema).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp).
 
 ## Usage
 
