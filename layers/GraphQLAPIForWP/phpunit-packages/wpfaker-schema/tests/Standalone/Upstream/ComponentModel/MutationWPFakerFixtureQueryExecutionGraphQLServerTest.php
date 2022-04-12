@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
+namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
 
 use GraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 

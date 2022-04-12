@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLAPI\WPFakerSchema\Standalone;
+namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone;
 
 use GraphQLAPI\WPFakerSchema\Standalone\GraphQLServerTestCaseTrait;
 use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
