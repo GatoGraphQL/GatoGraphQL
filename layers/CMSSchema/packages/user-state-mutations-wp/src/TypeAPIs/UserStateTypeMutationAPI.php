@@ -53,8 +53,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
 
         $user = $result;
         wp_set_current_user($user->ID);
-
-        return $result;
+        return $user;
     }
 
     public function logout(): void
