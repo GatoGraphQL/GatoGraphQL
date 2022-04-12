@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations\MutationResolvers;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\Exception\UserLoginMutationException;
+use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\UserStateMutations\StaticHelpers\AppStateHelpers;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
@@ -98,15 +99,17 @@ class LoginUserByCredentialsMutationResolver extends AbstractMutationResolver
             'password' => $pwd,
             'remember' => true,
         );
-        $loginResult = $this->getUserStateTypeMutationAPI()->login($credentials);
+        try {
+            $user = $this->getUserStateTypeMutationAPI()->login($credentials);
+            
+            // Modify the routing-state with the newly logged in user info
+            AppStateHelpers::resetCurrentUserInAppState();
 
-        $user = $loginResult;
-
-        // Modify the routing-state with the newly logged in user info
-        AppStateHelpers::resetCurrentUserInAppState();
-
-        $userID = $this->getUserTypeAPI()->getUserID($user);
-        App::doAction('gd:user:loggedin', $userID);
-        return $userID;
+            $userID = $this->getUserTypeAPI()->getUserID($user);
+            App::doAction('gd:user:loggedin', $userID);
+            return $userID;
+        } catch (UserStateMutationException) {
+            return null;
+        }
     }
 }
