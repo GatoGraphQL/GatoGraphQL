@@ -165,13 +165,13 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^0.9"
+        "getpop/engine": "^0.9",
+        "leoloso/faker": "dev-master",
+        "pop-backbone/wp-data-parser": "^0.9"
     },
     "require-dev": {
-        "leoloso/faker": "dev-master",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "pop-backbone/wp-data-parser": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.6"
     },
