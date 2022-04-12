@@ -21,6 +21,6 @@ fragment QueryRoot3rdLevel on QueryRoot {
     ...NonExistingTypeData
 }
 
-fragment NonExistingTypeData on NonExistingType {
+fragment NonExistingTypeData on MutationRoot {
     noField
 }

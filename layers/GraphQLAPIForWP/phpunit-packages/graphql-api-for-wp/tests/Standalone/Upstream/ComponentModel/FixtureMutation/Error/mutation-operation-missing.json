@@ -11,7 +11,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "addCommentToCustomPost(input:{comment:\"Great insight!\",customPostID:1724,authorName:\"Leo\",authorEmail:\"leo@saronga.com\"})",
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"
