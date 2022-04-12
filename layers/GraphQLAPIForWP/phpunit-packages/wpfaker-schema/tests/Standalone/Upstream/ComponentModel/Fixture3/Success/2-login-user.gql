@@ -4,5 +4,8 @@ mutation {
       usernameOrEmail: "admin",
       password: "admin"
     }
-  })
+  }) {
+    id
+    username
+  }
 }
