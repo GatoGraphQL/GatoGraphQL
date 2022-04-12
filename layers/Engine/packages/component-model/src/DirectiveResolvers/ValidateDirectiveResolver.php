@@ -89,6 +89,10 @@ final class ValidateDirectiveResolver extends AbstractValidateDirectiveResolver 
         $objectTypeResolver = $relationalTypeResolver;
 
         $objectTypeResolver->collectFieldValidationErrors($field, $variables, $objectTypeFieldResolutionFeedbackStore);
+        // If there are errors, do not check warnings/deprecations for fear of producing some exception
+        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return;
+        }
         $objectTypeResolver->collectFieldValidationWarnings($field, $variables, $objectTypeFieldResolutionFeedbackStore);
         $objectTypeResolver->collectFieldDeprecations($field, $variables, $objectTypeFieldResolutionFeedbackStore);
     }
