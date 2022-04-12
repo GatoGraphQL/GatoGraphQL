@@ -9,6 +9,10 @@ use PoPCMSSchema\UserStateMutations\Exception\UserStateMutationException;
 use PoPCMSSchema\UserStateMutations\TypeAPIs\UserStateTypeMutationAPIInterface;
 use WP_Error;
 
+use function wp_signon;
+use function wp_set_current_user;
+use function wp_logout;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -33,7 +37,7 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         if (isset($credentials['remember'])) {
             // Same param name, so do nothing
         }
-        $result = \wp_signon($credentials);
+        $result = wp_signon($credentials);
 
         if ($result instanceof WP_Error) {
             $errorMessage = $result->get_error_code() === 'incorrect_password'
@@ -48,18 +52,18 @@ class UserStateTypeMutationAPI implements UserStateTypeMutationAPIInterface
         }
 
         $user = $result;
-        \wp_set_current_user($user->ID);
+        wp_set_current_user($user->ID);
 
         return $result;
     }
 
     public function logout(): void
     {
-        \wp_logout();
+        wp_logout();
 
         // Delete the current user, so that it already says "user not logged in" for the toplevel feedback
         global $current_user;
         $current_user = null;
-        \wp_set_current_user(0);
+        wp_set_current_user(0);
     }
 }
