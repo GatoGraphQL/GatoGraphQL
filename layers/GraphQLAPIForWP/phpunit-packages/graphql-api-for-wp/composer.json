@@ -152,7 +152,7 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "WPFaker PHPUnit tests for the GraphQL API for WordPress",
+    "description": "Mock the WordPress schema when running PHPUnit tests",
     "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit"],
     "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp",
     "license": "GPL-2.0-or-later",

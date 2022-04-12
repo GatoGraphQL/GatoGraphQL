@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Satisfy the Type APIs for the WordPress schema when running PHPUnit tests.
+Mock the WordPress schema when running PHPUnit tests
 
 ## Install
 
