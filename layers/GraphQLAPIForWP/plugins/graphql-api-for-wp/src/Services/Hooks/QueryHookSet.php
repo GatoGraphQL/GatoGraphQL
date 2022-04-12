@@ -60,13 +60,13 @@ class QueryHookSet extends AbstractHookSet
              * configuration purposes only, which is private data.
              */
             $customPostTypeServices = $this->getCustomPostTypeRegistry()->getCustomPostTypes();
-            $query['post_type'] = array_diff(
+            $query['post_type'] = array_values(array_diff(
                 is_array($query['post_type']) ? $query['post_type'] : [$query['post_type']],
                 array_map(
                     fn (CustomPostTypeInterface $customPostTypeService) => $customPostTypeService->getCustomPostType(),
                     $customPostTypeServices
                 )
-            );
+            ));
             // If there are no valid postTypes, then return no results
             // By not adding the post type, WordPress will fetch a "post"
             // Then, include a non-existing ID

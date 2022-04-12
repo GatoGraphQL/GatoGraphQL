@@ -26,10 +26,10 @@ class CustomPostUnionTypeHelpers
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         $unionTypeResolver ??= $instanceManager->getInstance(CustomPostUnionTypeResolver::class);
-        $customPostObjectTypeResolverPickers = array_filter(
+        $customPostObjectTypeResolverPickers = array_values(array_filter(
             $unionTypeResolver->getObjectTypeResolverPickers(),
             fn (ObjectTypeResolverPickerInterface $objectTypeResolverPicker) => $objectTypeResolverPicker instanceof CustomPostObjectTypeResolverPickerInterface
-        );
+        ));
         return array_map(
             fn (CustomPostObjectTypeResolverPickerInterface $customPostObjectTypeResolverPicker) => $customPostObjectTypeResolverPicker->getCustomPostType(),
             $customPostObjectTypeResolverPickers
