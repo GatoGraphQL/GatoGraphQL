@@ -25,7 +25,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
                 \PoPWPSchema\Users\Component::class,
                 \PoPWPSchema\Posts\Component::class,
                 \PoPWPSchema\Pages\Component::class,
-                \PoPWPSchema\Comments\Component::class,
+                \PoPCMSSchema\CommentMutationsWP\Component::class,
             ]
         ];
     }
@@ -43,6 +43,9 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
                 ],
                 \PoPCMSSchema\Pages\Component::class => [
                     \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
+                ],
+                \PoPCMSSchema\CommentMutations\Component::class => [
+                    \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
             ]
         ];
