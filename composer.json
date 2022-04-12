@@ -418,7 +418,7 @@
         "graphql-api/graphql-api-for-wp": "self.version",
         "graphql-api/markdown-convertor": "self.version",
         "graphql-api/plugin-utils": "self.version",
-        "graphql-api/wpfaker-schema": "self.version",
+        "phpunit-for-graphql-api/wpfaker-schema": "self.version",
         "graphql-by-pop/graphiql": "self.version",
         "graphql-by-pop/graphql-clients-for-wp": "self.version",
         "graphql-by-pop/graphql-endpoint-for-wp": "self.version",

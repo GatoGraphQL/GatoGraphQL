@@ -1,5 +1,5 @@
 {
-    "name": "graphql-api/wpfaker-schema",
+    "name": "phpunit-for-graphql-api/wpfaker-schema",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -152,7 +152,7 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Convert Markdown to HTML",
+    "description": "Utilities to execute PHPUnit for the GraphQL API for WordPress",
     "keywords": ["GraphQL", "PHP", "PoP", "markdown-convertor"],
     "homepage": "https://github.com/GraphQLAPI/markdown-convertor",
     "license": "GPL-2.0-or-later",
