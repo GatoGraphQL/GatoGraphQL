@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel\ExtendedSpec\Execution;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Standalone\Upstream\ComponentModel\ExtendedSpec\Execution;
 
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Upstream\GraphQLParser\ExtendedSpec\Execution\ExecutableDocumentTest as UpstreamExecutableDocumentTest;
