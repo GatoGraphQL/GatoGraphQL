@@ -6,14 +6,30 @@ namespace GraphQLAPI\WPFakerSchema\Standalone\Upstream\ComponentModel;
 
 use GraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 
-class WPFakerFixture2QueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
      * Directory under the fixture files are placed
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/Fixture2';
+        return __DIR__ . '/FixtureNestedMutation';
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getGraphQLServerComponentClasses(): array
+    {
+        return [
+            ...parent::getGraphQLServerComponentClasses(),
+            ...[
+                \PoPWPSchema\Users\Component::class,
+                \PoPWPSchema\Posts\Component::class,
+                \PoPWPSchema\Comments\Component::class,
+                \PoPCMSSchema\CommentMutationsWP\Component::class,
+            ]
+        ];
     }
 
     /**

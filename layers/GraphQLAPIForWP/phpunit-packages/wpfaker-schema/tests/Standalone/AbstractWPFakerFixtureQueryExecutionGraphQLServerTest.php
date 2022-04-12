@@ -20,13 +20,6 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
             ...parent::getGraphQLServerComponentClasses(),
             ...[
                 \GraphQLAPI\WPFakerSchema\Component::class,
-                \PoPCMSSchema\PostCategoriesWP\Component::class,
-                \PoPCMSSchema\PostTagsWP\Component::class,
-                \PoPWPSchema\Users\Component::class,
-                \PoPWPSchema\Posts\Component::class,
-                \PoPWPSchema\Pages\Component::class,
-                \PoPCMSSchema\CommentMutationsWP\Component::class,
-                \PoPCMSSchema\UserStateMutationsWP\Component::class,
             ]
         ];
     }
