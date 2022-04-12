@@ -24,9 +24,6 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
-                    \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
-                ],
                 \PoPCMSSchema\Pages\Component::class => [
                     \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
                 ],

@@ -24,9 +24,6 @@ class WPFakerFixture2QueryExecutionGraphQLServerTest extends AbstractWPFakerFixt
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
-                    \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => true,
-                ],
                 \PoPCMSSchema\CommentMutations\Component::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
