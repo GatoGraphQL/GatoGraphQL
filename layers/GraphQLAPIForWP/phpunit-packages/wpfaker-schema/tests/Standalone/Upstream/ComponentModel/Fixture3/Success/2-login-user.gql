@@ -1,0 +1,8 @@
+mutation {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: "admin",
+      password: "admin"
+    }
+  })
+}
