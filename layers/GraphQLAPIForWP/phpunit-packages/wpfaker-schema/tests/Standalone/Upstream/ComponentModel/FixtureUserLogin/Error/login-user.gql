@@ -1,0 +1,6 @@
+mutation {
+  loginUser {
+    id
+    username
+  }
+}
