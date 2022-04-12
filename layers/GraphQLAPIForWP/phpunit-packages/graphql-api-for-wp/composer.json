@@ -170,12 +170,14 @@
     "require-dev": {
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
-        "pop-backbone/wp-data-parser": "^0.9",
         "pop-wp-schema/users": "^0.9",
+        "pop-wp-schema/pages": "^0.9",
         "pop-wp-schema/posts": "^0.9",
         "pop-wp-schema/comments": "^0.9",
+        "pop-cms-schema/comment-mutations-wp": "^0.9",
         "pop-cms-schema/post-categories-wp": "^0.9",
         "pop-cms-schema/post-tags-wp": "^0.9",
+        "pop-cms-schema/user-state-mutations-wp": "^0.9",
         "rector/rector": "^0.12",
         "squizlabs/php_codesniffer": "^3.6"
     },
