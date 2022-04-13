@@ -24,8 +24,6 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     
     protected static Generator $faker;
     protected static Providers $wpFaker;
-    /** @var array<string,mixed> */
-    protected static array $data = [];
 
     public static function setUpBeforeClass(): void
     {
@@ -45,13 +43,13 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         // @phpstan-ignore-next-line
         self::$wpFaker = self::$faker->wp();
 
-        $files = static::getWordPressExportDataFiles();
-        foreach ($files as $file) {
-            static::mergeDataFromFile($file);
+        $data = [];
+        foreach (static::getWordPressExportDataFiles() as $file) {
+            $data = static::mergeDataFromFile($data, $file);
         }
         
-        $options = static::getDefaultMockDataOptions();
-        static::seedFakeData($options);
+        $options = static::getSeedDataOptions();
+        static::seedWordPressDataIntoFaker($data, $options);
         static::mockFunctions();
     }
 
@@ -82,7 +80,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     /**
      * return array<string,mixed>
      */
-    protected static function getDefaultMockDataOptions(): array
+    protected static function getSeedDataOptions(): array
     {
         return [];
     }
@@ -94,8 +92,11 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
      *
      * - a PHP file with the array containing the data
      * - an XML WordPress data export file
+     *
+     * @param array<string,mixed> $data
+     * @return array<string,mixed>
      */
-    protected static function mergeDataFromFile(string $file): void
+    protected static function mergeDataFromFile(array $data, string $file): array
     {
         $isXML = str_ends_with($file, '.xml');
         /**
@@ -128,29 +129,31 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
                 )
             );
         }
-        self::mergeData($fileData);
+        return self::mergeData($data, $fileData);
     }
 
     /**
      * Merge the datasets from different files.
      *
      * @param array<string,mixed> $data
+     * @param array<string,mixed> $fileData
+     * @return array<string,mixed>
      */
-    private static function mergeData(array $data): void
+    private static function mergeData(array $data, array $fileData): array
     {
         /**
          * Use `array_merge` instead of `array_merge_recursive`
          * as to have downstream datasets add more data, not
          * replace the one from upstream sources.
          */
-        foreach ($data as $entityType => $entityData) {
+        foreach ($fileData as $entityType => $entityData) {
             /**
              * Merge properties "authors", "posts", "categories",
              * "tags" and "terms"
              */
             if (is_array($entityData)) {
-                self::$data[$entityType] = array_merge(
-                    self::$data[$entityType] ?? [],
+                $data[$entityType] = array_merge(
+                    $data[$entityType] ?? [],
                     $entityData
                 );
                 continue;
@@ -159,23 +162,25 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
              * Properties "base_url", "base_blog_url" and "version"
              * need not be overriden.
              */
-            if (isset(self::$data[$entityType])) {
+            if (isset($data[$entityType])) {
                 continue;
             }
-            self::$data[$entityType] = $entityData;
+            $data[$entityType] = $entityData;
         }
+        return $data;
     }
 
     /**
      * Inject the dataset into BrainFaker
      *
+     * @param array<string,mixed> $data
      * @param array<string,mixed> $options
      * @see https://github.com/Brain-WP/BrainFaker#what-is-mocked
      */
-    protected static function seedFakeData(array $options): void
+    protected static function seedWordPressDataIntoFaker(array $data, array $options): void
     {
         // Seed the entities retrieved from the export file
-        $userDataEntries = (self::$data['authors'] ?? []);
+        $userDataEntries = ($data['authors'] ?? []);
         if ($limitUsers = $options['limit-users'] ?? 0) {
             $userDataEntries = array_slice($userDataEntries, 0, $limitUsers, true);
         }
@@ -192,7 +197,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
 
         $taxonomies = ['post_tag', 'category'];
         $termSlugCounter = [];
-        $postDataEntries = (self::$data['posts'] ?? []);
+        $postDataEntries = ($data['posts'] ?? []);
         if ($limitPosts = $options['limit-posts'] ?? 0) {
             $postDataEntries = array_slice($postDataEntries, 0, $limitPosts, true);
         }
@@ -227,7 +232,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
             // ...
         }
 
-        $categoryDataEntries = (self::$data['categories'] ?? []);
+        $categoryDataEntries = ($data['categories'] ?? []);
         if ($limitCategories = $options['limit-categories'] ?? 0) {
             $categoryDataEntries = array_slice($categoryDataEntries, 0, $limitCategories, true);
         }
@@ -244,7 +249,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
             ]);
         }
 
-        $tagDataEntries = (self::$data['tags'] ?? []);
+        $tagDataEntries = ($data['tags'] ?? []);
         if ($limitTags = $options['limit-tags'] ?? 0) {
             $tagDataEntries = array_slice($tagDataEntries, 0, $limitTags, true);
         }
