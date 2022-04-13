@@ -799,12 +799,14 @@ class Engine implements EngineInterface
     }
 
     /**
+     * If any field must be retrieved always (eg: the object ID
+     * must always be displayed in the client) then add it here.
+     *
      * @return string[]
      */
     protected function getDBObjectMandatoryFields(): array
     {
-        // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
-        return ['id'];
+        return [];
     }
 
     private function doAddDatasetToDatabase(

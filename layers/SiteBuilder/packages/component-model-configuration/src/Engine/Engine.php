@@ -199,4 +199,16 @@ class Engine extends UpstreamEngine implements EngineInterface
             $meta
         );
     }
+
+    /**
+     * @return string[]
+     */
+    protected function getDBObjectMandatoryFields(): array
+    {
+        // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
+        return [
+            ...parent::getDBObjectMandatoryFields(),
+            'id',
+        ];
+    }
 }
