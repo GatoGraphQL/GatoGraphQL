@@ -4088,12 +4088,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "542188688bb586caea93bd5ae7f7028e3b08a08d"
+                "reference": "1957b81fe130f7fb4094afc25b152ec5f022516f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/542188688bb586caea93bd5ae7f7028e3b08a08d",
-                "reference": "542188688bb586caea93bd5ae7f7028e3b08a08d",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/1957b81fe130f7fb4094afc25b152ec5f022516f",
+                "reference": "1957b81fe130f7fb4094afc25b152ec5f022516f",
                 "shasum": ""
             },
             "require": {
@@ -4149,7 +4149,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2022-04-12T08:50:08+00:00"
+            "time": "2022-04-13T06:23:17+00:00"
         },
         {
             "name": "mockery/mockery",
