@@ -782,8 +782,7 @@ class Engine implements EngineInterface
             'idsDataFields' => [],
         ];
         foreach ($ids as $id) {
-            // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ??= ['id'];
+            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ??= $this->getDBObjectMandatoryFields();
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
                 $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'],
                 $data_fields
@@ -797,6 +796,15 @@ class Engine implements EngineInterface
                 );
             }
         }
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getDBObjectMandatoryFields(): array
+    {
+        // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
+        return ['id'];
     }
 
     private function doAddDatasetToDatabase(
