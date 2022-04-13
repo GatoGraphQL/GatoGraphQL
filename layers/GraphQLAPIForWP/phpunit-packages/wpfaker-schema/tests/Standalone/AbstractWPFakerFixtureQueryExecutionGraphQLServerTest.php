@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone;
 
 use Brain\Faker\Providers;
-use Brain\Monkey\Container;
 use Faker\Generator;
 use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
@@ -18,6 +17,8 @@ use function Brain\faker;
 use function Brain\fakerReset;
 use function Brain\Monkey\Functions\expect;
 use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\setUp;
+use function Brain\Monkey\tearDown;
 
 abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
@@ -40,6 +41,8 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
      */
     protected static function setUpFaker(): void
     {
+        setUp();
+
         self::$faker = faker();
         // @phpstan-ignore-next-line
         self::$wpFaker = self::$faker->wp();
@@ -74,8 +77,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     protected static function tearDownFaker(): void
     {
         fakerReset();
-        Container::instance()->reset();
-        Mockery::close();
+        tearDown();
     }
 
     /**
