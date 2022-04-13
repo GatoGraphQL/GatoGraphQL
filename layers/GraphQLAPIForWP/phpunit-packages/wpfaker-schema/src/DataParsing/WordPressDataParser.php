@@ -20,7 +20,7 @@ class WordPressDataParser
      * @param array<string,mixed> $data
      * @return array<string,mixed>
      */
-   public function mergeDataFromFile(array $data, string $file): array
+    public function mergeDataFromFile(array $data, string $file): array
     {
         $isXML = str_ends_with($file, '.xml');
         /**

@@ -48,7 +48,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         $wordPressDataParser = static::getWordPressDataParser();
         foreach (static::getWordPressExportDataFiles() as $file) {
             $data = $wordPressDataParser->mergeDataFromFile($data, $file);
-        }        
+        }
         static::getFakerWordPressDataSeeder()->seedWordPressDataIntoFaker(
             self::$wpFaker,
             $data,
