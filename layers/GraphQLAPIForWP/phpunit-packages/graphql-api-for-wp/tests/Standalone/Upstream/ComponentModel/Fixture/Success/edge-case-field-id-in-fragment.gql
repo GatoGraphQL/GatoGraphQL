@@ -1,0 +1,23 @@
+#######################################
+# Field "id" is mandatory and always fetched for all objects.
+# When not requested, it should not be printed.
+# The fragment represents an edge case to test.
+# In this test, type "Page" should not print the id.
+#######################################
+{
+  customPosts(
+    pagination: {
+      limit: 3
+    }
+  ) {
+    __typename
+    ...PostData
+    ... on Post {
+      again: id
+    }
+  }
+}
+
+fragment PostData on Post {
+  id
+}
