@@ -328,7 +328,10 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     ): array {
         $variablesHash = $this->getVariablesHash($variables);
         $relationalTypeResolverClass = get_class($relationalTypeResolver);
-        if (!isset($this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash])) {
+        /**
+         * @todo The cache was commented because it doesn't contain the Errors, and this method is called more than once, so the 2nd time fieldArgs will be `null` and produce exception
+         */
+        // if (!isset($this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash])) {
             $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash] = $this->doExtractDirectiveArguments(
                 $directiveResolver,
                 $relationalTypeResolver,
@@ -336,7 +339,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
                 $variables,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-        }
+        // }
         return $this->extractedDirectiveArgumentsCache[$relationalTypeResolverClass][$fieldDirective][$variablesHash];
     }
 
@@ -513,14 +516,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
     ): ?array {
         $variablesHash = $this->getVariablesHash($variables);
         $objectTypeResolverClass = get_class($objectTypeResolver);
-        if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field] ?? [])) {
+        /**
+         * @todo The cache was commented because it doesn't contain the Errors, and this method is called more than once, so the 2nd time fieldArgs will be `null` and produce exception
+         */
+        // if (!array_key_exists($variablesHash, $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field] ?? [])) {
             $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash] = $this->doExtractFieldArguments(
                 $objectTypeResolver,
                 $field,
                 $variables,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-        }
+        // }
         return $this->extractedFieldArgumentsCache[$objectTypeResolverClass][$field][$variablesHash];
     }
 
