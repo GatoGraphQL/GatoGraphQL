@@ -109,10 +109,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         if (!($isXML || str_ends_with($file, '.php'))) {
             throw new DatasetFileException(
                 sprintf(
-                    // $this->__(
                     'The fixed dataset must be either a PHP or XML file, but file "%s" was provided',
-                    //     'wpfaker-schema'
-                    // ),
                     $file
                 )
             );
@@ -124,10 +121,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         if (!is_array($fileData)) {
             throw new DatasetFileException(
                 sprintf(
-                    // $this->__(
                     'File "%s" does not contain a valid dataset',
-                    //     'wpfaker-schema'
-                    // ),
                     $file
                 )
             );
