@@ -8,7 +8,6 @@ use Brain\Faker\Providers;
 use Faker\Generator;
 use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
 use PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
 use PoPBackbone\WPDataParser\WPDataParser;
@@ -20,8 +19,6 @@ use function Brain\Monkey\Functions\stubEscapeFunctions;
 
 abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
-    use MockeryPHPUnitIntegration;
-    
     protected static Generator $faker;
     protected static Providers $wpFaker;
 
