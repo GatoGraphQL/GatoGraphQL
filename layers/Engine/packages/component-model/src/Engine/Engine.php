@@ -1562,7 +1562,7 @@ class Engine implements EngineInterface
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
-            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] = $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ?? [];
+            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
             foreach ($ids_data_fields as $id => $data_fields) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
