@@ -151,6 +151,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDataFields(array $module, array &$props): array
     {
+        if (App::getState('does-api-query-have-errors')) {
+            return [];
+        }
+
         $moduleAtts = $module[2] ?? null;
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
 
@@ -202,6 +206,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getDomainSwitchingSubmodules(array $module): array
     {
+        if (App::getState('does-api-query-have-errors')) {
+            return [];
+        }
+        
         $moduleAtts = $module[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
 
@@ -300,6 +308,10 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
+        if (App::getState('does-api-query-have-errors')) {
+            return [];
+        }
+        
         $moduleAtts = $module[2] ?? null;
         if (!$this->ignoreConditionalFields($moduleAtts)) {
             return [];
