@@ -782,9 +782,8 @@ class Engine implements EngineInterface
             'idsDataFields' => [],
         ];
         foreach ($ids as $id) {
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ??= $this->getDBObjectMandatoryFields();
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'],
+                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ?? $this->getDBObjectMandatoryFields(),
                 $data_fields
             )));
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
