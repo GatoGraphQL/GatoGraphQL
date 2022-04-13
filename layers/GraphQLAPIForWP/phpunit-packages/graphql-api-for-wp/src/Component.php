@@ -20,6 +20,14 @@ class Component extends AbstractComponent
     {
         return [
             \PHPUnitForGraphQLAPI\WPFakerSchema\Component::class,
+            \PoPCMSSchema\PostCategoriesWP\Component::class,
+            \PoPCMSSchema\PostTagsWP\Component::class,
+            \PoPWPSchema\Users\Component::class,
+            \PoPWPSchema\Posts\Component::class,
+            \PoPWPSchema\Pages\Component::class,
+            \PoPWPSchema\Comments\Component::class,
+            \PoPCMSSchema\CommentMutationsWP\Component::class,
+            \PoPCMSSchema\UserStateMutationsWP\Component::class,
         ];
     }
 }
