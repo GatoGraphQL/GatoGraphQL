@@ -782,10 +782,8 @@ class Engine implements EngineInterface
             'idsDataFields' => [],
         ];
         foreach ($ids as $id) {
-            // Make sure to always add the 'id' data-field, since that's the key for the dbobject in the client database
-            $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ??= ['id'];
             $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] = array_values(array_unique(array_merge(
-                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'],
+                $relationalTypeOutputDBKeyIDsDataFields[$relationalTypeOutputDBKey]['idsDataFields'][(string)$id]['direct'] ?? $this->getDBObjectMandatoryFields(),
                 $data_fields
             )));
             // The conditional data fields have the condition data fields, as key, and the list of conditional data fields to load if the condition one is successful, as value
@@ -797,6 +795,17 @@ class Engine implements EngineInterface
                 );
             }
         }
+    }
+
+    /**
+     * If any field must be retrieved always (eg: the object ID
+     * must always be displayed in the client) then add it here.
+     *
+     * @return string[]
+     */
+    protected function getDBObjectMandatoryFields(): array
+    {
+        return [];
     }
 
     private function doAddDatasetToDatabase(
