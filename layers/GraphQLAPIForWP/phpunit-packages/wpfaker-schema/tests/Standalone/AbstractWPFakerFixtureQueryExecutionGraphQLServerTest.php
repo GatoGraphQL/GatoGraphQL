@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone;
 
 use Brain\Faker\Providers;
+use Brain\Monkey\Container;
 use Faker\Generator;
 use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;
 use PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Seed\FakerWordPressDataSeeder;
@@ -19,6 +21,8 @@ use function Brain\Monkey\Functions\stubEscapeFunctions;
 
 abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
+    use MockeryPHPUnitIntegration;
+
     protected static Generator $faker;
     protected static Providers $wpFaker;
 
@@ -58,8 +62,20 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
 
     public static function tearDownAfterClass(): void
     {
-        fakerReset();
+        static::tearDownFaker();
         parent::tearDownAfterClass();
+    }
+
+    /**
+     * Extend "Brain Monkey setup for WordPress" with "Brain Faker" capabilities.
+     *
+     * @see https://github.com/leoloso/BrainFaker#tests-setup
+     */
+    protected static function tearDownFaker(): void
+    {
+        fakerReset();
+        Container::instance()->reset();
+        Mockery::close();
     }
 
     /**
