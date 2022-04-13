@@ -535,6 +535,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                 continue;
             }
             $objectIDItems[$objectID] = $object;
+            /**
+             * If no fields are queried, the entry will be null.
+             * Initialize it to [] to simplify typing/null-checking
+             */
+            $dbItems[$objectID] ??= [];
         }
         // Show an error for all objects that couldn't be processed
         $resolvedObjectIDs = $this->getIDsToQuery($objectIDItems);
