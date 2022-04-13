@@ -8,10 +8,9 @@ use Brain\Faker\Providers;
 use Faker\Generator;
 use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
-use PHPUnitForGraphQLAPI\WPFakerSchema\Exception\DatasetFileException;
+use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;
 use PHPUnitForGraphQLAPI\WPFakerSchema\MockFunctions\WordPressMockFunctionContainer;
 use PHPUnitForGraphQLAPI\WPFakerSchema\Seed\FakerWordPressDataSeeder;
-use PoPBackbone\WPDataParser\WPDataParser;
 
 use function Brain\faker;
 use function Brain\fakerReset;
@@ -46,8 +45,9 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
 
         // 2. Mock WordPress entity data
         $data = [];
+        $wordPressDataParser = static::getWordPressDataParser();
         foreach (static::getWordPressExportDataFiles() as $file) {
-            $data = static::mergeDataFromFile($data, $file);
+            $data = $wordPressDataParser->mergeDataFromFile($data, $file);
         }        
         static::getFakerWordPressDataSeeder()->seedWordPressDataIntoFaker(
             self::$wpFaker,
@@ -88,95 +88,14 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         return [];
     }
 
-    /**
-     * Read the file, and extract its data.
-     *
-     * The file can be either:
-     *
-     * - a PHP file with the array containing the data
-     * - an XML WordPress data export file
-     *
-     * @param array<string,mixed> $data
-     * @return array<string,mixed>
-     */
-    protected static function mergeDataFromFile(array $data, string $file): array
-    {
-        $isXML = str_ends_with($file, '.xml');
-        /**
-         * Validate all files are either XML or PHP,
-         * or throw an Exception otherwise
-         */
-        if (!($isXML || str_ends_with($file, '.php'))) {
-            throw new DatasetFileException(
-                sprintf(
-                    'The fixed dataset must be either a PHP or XML file, but file "%s" was provided',
-                    $file
-                )
-            );
-        }
-        /**
-         * Retrieve the WordPress data from the source file
-         */
-        $fileData = $isXML ? (new WPDataParser())->parse($file) : require $file;
-        if (!is_array($fileData)) {
-            throw new DatasetFileException(
-                sprintf(
-                    'File "%s" does not contain a valid dataset',
-                    $file
-                )
-            );
-        }
-        return self::mergeData($data, $fileData);
-    }
-
-    /**
-     * Merge the datasets from different files.
-     *
-     * @param array<string,mixed> $data
-     * @param array<string,mixed> $fileData
-     * @return array<string,mixed>
-     */
-    private static function mergeData(array $data, array $fileData): array
-    {
-        /**
-         * Use `array_merge` instead of `array_merge_recursive`
-         * as to have downstream datasets add more data, not
-         * replace the one from upstream sources.
-         */
-        foreach ($fileData as $entityType => $entityData) {
-            /**
-             * Merge properties "authors", "posts", "categories",
-             * "tags" and "terms"
-             */
-            if (is_array($entityData)) {
-                $data[$entityType] = array_merge(
-                    $data[$entityType] ?? [],
-                    $entityData
-                );
-                continue;
-            }
-            /**
-             * Properties "base_url", "base_blog_url" and "version"
-             * need not be overriden.
-             */
-            if (isset($data[$entityType])) {
-                continue;
-            }
-            $data[$entityType] = $entityData;
-        }
-        return $data;
-    }
-
-    /**
-     * Inject the dataset into BrainFaker
-     *
-     * @param array<string,mixed> $data
-     * @param array<string,mixed> $options
-     * @see https://github.com/Brain-WP/BrainFaker#what-is-mocked
-     */
     protected static function getFakerWordPressDataSeeder(): FakerWordPressDataSeeder
     {
         return new FakerWordPressDataSeeder();
+    }
+
+    protected static function getWordPressDataParser(): WordPressDataParser
+    {
+        return new WordPressDataParser();
     }
 
     /**
