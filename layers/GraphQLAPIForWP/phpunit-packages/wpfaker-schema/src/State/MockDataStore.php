@@ -6,6 +6,7 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema\State;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
+use Mockery;
 
 use function Brain\faker;
 use function Brain\Monkey\Functions\expect;
@@ -218,7 +219,7 @@ class MockDataStore
     protected function mockFunctions(): void
     {
         expect('get_option')
-            ->with('date_format', \Mockery::any())
+            ->with('date_format', Mockery::any())
             ->andReturn('Y-m-d');
 
         expect('esc_sql')
