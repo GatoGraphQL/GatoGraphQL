@@ -27,14 +27,9 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     /** @var array<string,mixed> */
     protected static array $data = [];
 
-    /**
-     * Extend "Brain Monkey setup for WordPress" with "Brain Faker" capabilities.
-     *
-     * @see https://github.com/leoloso/BrainFaker#tests-setup
-     */
     public static function setUpBeforeClass(): void
     {
-        // Executed in this order!
+        // Execute in this order!
         static::setUpFaker();
         parent::setUpBeforeClass();
     }
@@ -50,7 +45,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
         // @phpstan-ignore-next-line
         self::$wpFaker = self::$faker->wp();
 
-        $files = static::getDefaultMockDataFiles();
+        $files = static::getWordPressExportDataFiles();
         foreach ($files as $file) {
             static::mergeDataFromFile($file);
         }
@@ -77,7 +72,7 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
      *
      * @return string[]
      */
-    protected static function getDefaultMockDataFiles(): array
+    protected static function getWordPressExportDataFiles(): array
     {
         return [
             dirname(__DIR__, 2) . '/resources/fixed-dataset.wordpress.php',
