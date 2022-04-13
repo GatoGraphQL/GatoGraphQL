@@ -12,9 +12,6 @@
   ) {
     __typename
     ...PostData
-    ... on Post {
-      again: id
-    }
   }
 }
 
