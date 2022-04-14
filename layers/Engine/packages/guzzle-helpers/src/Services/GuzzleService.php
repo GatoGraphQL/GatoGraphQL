@@ -52,9 +52,9 @@ class GuzzleService implements GuzzleServiceInterface
     protected function getClient(): Client
     {
         if ($this->client === null) {
-            $client = $this->createClient();
+            $this->client = $this->createClient();
         }
-        return $client;
+        return $this->client;
     }
 
     protected function createClient(): Client
