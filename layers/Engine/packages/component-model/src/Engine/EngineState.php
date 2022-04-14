@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Engine;
 
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class EngineState
 {
@@ -79,37 +79,37 @@ class EngineState
          * @todo Check if caching by $objectID and $field is enough; $variables? $options? $feedbackStore?
          * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
          *
-         * @var array<string|id,array<string,mixed>> Multidimensional array of [$relationalTypeResolverNamespacedName][$objectID][$field] => $value
+         * @var array<string|id,array<string,mixed>> Multidimensional array of [$objectTypeResolverNamespacedName][$objectID][$field] => $value
          */
-        protected array $relationalTypeResolvedValuesCache = [],
+        protected array $objectTypeResolvedValuesCache = [],
     ) {
     }
 
-    public function hasRelationalTypeResolvedValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+    public function hasObjectTypeResolvedValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
     ): bool {
-        $objectID = $relationalTypeResolver->getID($object);
-        return array_key_exists($field, $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID] ?? []);
+        $objectID = $objectTypeResolver->getID($object);
+        return array_key_exists($field, $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$objectID] ?? []);
     }
 
-    public function getRelationalTypeResolvedValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+    public function getObjectTypeResolvedValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
     ): mixed {
-        $objectID = $relationalTypeResolver->getID($object);
-        return $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID][$field];
+        $objectID = $objectTypeResolver->getID($object);
+        return $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$objectID][$field];
     }
 
-    public function setRelationalTypeResolvedValue(
-        RelationalTypeResolverInterface $relationalTypeResolver,
+    public function setObjectTypeResolvedValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         string $field,
         mixed $value,
     ): void {
-        $objectID = $relationalTypeResolver->getID($object);
-        $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID][$field] = $value;
+        $objectID = $objectTypeResolver->getID($object);
+        $this->objectTypeResolvedValuesCache[$objectTypeResolver->getNamespacedTypeName()][$objectID][$field] = $value;
     }
 }

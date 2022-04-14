@@ -386,7 +386,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
          */
         $engineState = App::getEngineState();
-        if (!$engineState->hasRelationalTypeResolvedValue($this, $object, $field)) {
+        if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field)) {
             $value = $this->doResolveValue(
                 $object,
                 $field,
@@ -395,9 +395,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore,
                 $options,
             );
-            $engineState->setRelationalTypeResolvedValue($this, $object, $field, $value);
+            $engineState->setObjectTypeResolvedValue($this, $object, $field, $value);
         }        
-        return $engineState->getRelationalTypeResolvedValue($this, $object, $field);
+        return $engineState->getObjectTypeResolvedValue($this, $object, $field);
     }
 
     /**
