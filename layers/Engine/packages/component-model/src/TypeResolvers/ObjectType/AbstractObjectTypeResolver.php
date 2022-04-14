@@ -363,28 +363,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
-        /**
-         * If the same field has already been resolved for this object,
-         * retrieve it from the cache.
-         *
-         * This is mandatory due to the "Resolved Field Variable References",
-         * which re-create the same field in the AST.
-         *
-         * For instance, in this query, the `id` field is created twice in the AST:
-         *
-         * ```graphql
-         * {
-         *   id
-         *   echo(value: $_id)
-         * }
-         * ```
-         *
-         * But the 2nd AST must not be recalculated.
-         *
-         * @todo Incorporate with AST to compare against the Field->getLocation(), to make sure 2 fields are indeed the same
-         * @todo Check if caching by $objectID and $field is enough; $variables? $options? $feedbackStore?
-         * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
-         */
         $engineState = App::getEngineState();
         if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field, $variables, $expressions)) {
             $value = $this->doResolveValue(
