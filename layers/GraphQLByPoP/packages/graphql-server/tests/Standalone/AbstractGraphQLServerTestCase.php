@@ -87,10 +87,31 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             }
             $graphQLVariables = json_decode($graphQLVariablesJSON, true);
         }
+
+        /**
+         * Allow to inject extra functionality, such as
+         * setting Guzzle response mocks for the particular
+         * named dataset
+         */
+        $this->beforeFixtureGraphQLQueryExecution(
+            $this->dataName(),
+            $queryFile,
+            $expectedResponseFile,
+            $variablesFile,
+            $operationName,
+        );
+
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
         $this->assertJsonStringEqualsJsonFile(
             $expectedResponseFile,
             $response->getContent()
         );
+    }
+
+    /**
+     * Allow to inject extra functionality or override GraphQL variables.
+     */
+    protected function beforeFixtureGraphQLQueryExecution(string $dataName, string $queryFile, string $expectedResponseFile, ?string $variablesFile = null, ?string $operationName = null): void
+    {
     }
 }
