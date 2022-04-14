@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHelpers\Services;
 
+use GuzzleHttp\Client;
 use PoP\GuzzleHelpers\Exception\GuzzleInvalidResponseException;
 use PoP\GuzzleHelpers\Exception\GuzzleRequestException;
 
 interface GuzzleServiceInterface
 {
+    public function setClient(Client $client): void;
+
     /**
      * Execute a JSON request to the passed endpoint URL and form params
      *

@@ -17,6 +17,11 @@ class GuzzleService implements GuzzleServiceInterface
 {
     protected ?Client $client = null;
 
+    public function setClient(Client $client): void
+    {
+        $this->client = $client;
+    }
+
     /**
      * Execute a JSON request to the passed endpoint URL and form params
      *
