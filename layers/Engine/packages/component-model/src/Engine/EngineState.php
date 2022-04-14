@@ -141,6 +141,7 @@ class EngineState
 
     protected function getDataHash(array $data): string
     {
-        return (string)hash('crc32', json_encode($data));
+        return json_encode($data);
+        // return (string)hash('crc32', json_encode($data));
     }
 }
