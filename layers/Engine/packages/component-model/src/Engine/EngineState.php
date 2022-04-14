@@ -88,7 +88,7 @@ class EngineState
     public function hasRelationalTypeResolvedValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
-        string $field
+        string $field,
     ): bool {
         $objectID = $relationalTypeResolver->getID($object);
         return array_key_exists($field, $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID] ?? []);
@@ -97,9 +97,19 @@ class EngineState
     public function getRelationalTypeResolvedValue(
         RelationalTypeResolverInterface $relationalTypeResolver,
         object $object,
-        string $field
+        string $field,
     ): mixed {
         $objectID = $relationalTypeResolver->getID($object);
         return $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID][$field];
+    }
+
+    public function setRelationalTypeResolvedValue(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        object $object,
+        string $field,
+        mixed $value,
+    ): void {
+        $objectID = $relationalTypeResolver->getID($object);
+        $this->relationalTypeResolvedValuesCache[$relationalTypeResolver->getNamespacedTypeName()][$objectID][$field] = $value;
     }
 }
