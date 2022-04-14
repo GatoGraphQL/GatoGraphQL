@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\GuzzleHelpers;
+namespace PoP\GuzzleHelpers\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -13,7 +13,7 @@ use PoP\GuzzleHelpers\Exception\GuzzleRequestException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Psr\Http\Message\ResponseInterface;
 
-class GuzzleHelpers
+class GuzzleService implements GuzzleServiceInterface
 {
     /**
      * Execute a JSON request to the passed endpoint URL and form params
@@ -24,7 +24,7 @@ class GuzzleHelpers
      * @throws GuzzleRequestException
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
+    public function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
     {
         $client = new Client();
         $options = [
@@ -46,7 +46,7 @@ class GuzzleHelpers
      * @return array<string,mixed>
      * @throws GuzzleInvalidResponseException
      */
-    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): array
+    protected function validateAndDecodeJSONResponse(ResponseInterface $response): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         if ($response->getStatusCode() !== 200) {
@@ -94,7 +94,7 @@ class GuzzleHelpers
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
+    public function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         $urls = [];
         for ($i = 0; $i < count($bodyJSONQueries); $i++) {
@@ -111,7 +111,7 @@ class GuzzleHelpers
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
+    public function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         if (!$urls) {
             return [];
