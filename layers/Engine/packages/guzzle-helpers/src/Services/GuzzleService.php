@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHelpers\Services;
 
+use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
 use PoP\GuzzleHelpers\Exception\GuzzleInvalidResponseException;
@@ -39,7 +39,7 @@ class GuzzleService implements GuzzleServiceInterface
         ];
         try {
             $response = $client->request($method, $url, $options);
-        } catch (RequestException $exception) {
+        } catch (Exception $exception) {
             throw new GuzzleRequestException(
                 $exception->getMessage(),
                 0,
@@ -156,7 +156,7 @@ class GuzzleService implements GuzzleServiceInterface
 
             // Wait for the requests to complete, even if some of them fail
             $results = Utils::settle($promises)->wait();
-        } catch (RequestException $exception) {
+        } catch (Exception $exception) {
             throw new GuzzleRequestException(
                 $exception->getMessage(),
                 0,
