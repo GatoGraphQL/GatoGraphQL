@@ -67,13 +67,6 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var InterfaceTypeFieldResolverInterface[]|null
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
-    /**
-     * After executing `resolveValue`, store the results
-     * to re-use for subsequent calls for same object/field.
-     *
-     * @var array<string|id,array<string,mixed>> Multidimensional array of [$objectID][$field] => $value
-     */
-    protected array $resolvedValuesCache = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
@@ -392,9 +385,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * @todo Check if caching by $objectID and $field is enough; $variables? $options? $feedbackStore?
          * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
          */
-        $objectID = $this->getID($object);
-        if (!array_key_exists($field, $this->resolvedValuesCache[$objectID] ?? [])) {
-            $this->resolvedValuesCache[$objectID][$field] = $this->doResolveValue(
+        $engineState = App::getEngineState();
+        if (!$engineState->hasRelationalTypeResolvedValue($this, $object, $field)) {
+            $value = $this->doResolveValue(
                 $object,
                 $field,
                 $variables,
@@ -402,8 +395,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $objectTypeFieldResolutionFeedbackStore,
                 $options,
             );
+            $engineState->setRelationalTypeResolvedValue($this, $object, $field, $value);
         }        
-        return $this->resolvedValuesCache[$objectID][$field];
+        return $engineState->getRelationalTypeResolvedValue($this, $object, $field);
     }
 
     /**
