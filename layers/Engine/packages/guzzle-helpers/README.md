@@ -36,7 +36,7 @@ Initialize the component:
 Use it:
 
 ```php
-$response = \PoP\GuzzleHelpers\GuzzleHelpers::requestJSON($url, $bodyJSONQuery);
+$response = InstanceManagerFacade::getInstance()->getInstance(GuzzleServiceInterface::class)->requestJSON($url, $bodyJSONQuery);
 ```
 
 ## PHP versions
