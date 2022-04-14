@@ -76,7 +76,6 @@ class EngineState
          * But the 2nd AST must not be recalculated.
          *
          * @todo Incorporate with AST to compare against the Field->getLocation(), to make sure 2 fields are indeed the same
-         * @todo Check if can avoid caching by $variables and $expressions
          * @todo Check if caching by $feedbackStore is also needed
          * @todo Check if caching by $options is also needed
          * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
