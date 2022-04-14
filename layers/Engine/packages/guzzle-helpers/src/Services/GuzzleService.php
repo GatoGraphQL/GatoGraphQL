@@ -15,6 +15,8 @@ use Psr\Http\Message\ResponseInterface;
 
 class GuzzleService implements GuzzleServiceInterface
 {
+    protected ?Client $client = null;
+
     /**
      * Execute a JSON request to the passed endpoint URL and form params
      *
@@ -26,7 +28,7 @@ class GuzzleService implements GuzzleServiceInterface
      */
     public function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
     {
-        $client = new Client();
+        $client = $this->getClient();
         $options = [
             RequestOptions::JSON => $bodyJSONQuery,
         ];
@@ -40,6 +42,14 @@ class GuzzleService implements GuzzleServiceInterface
             );
         }
         return self::validateAndDecodeJSONResponse($response);
+    }
+
+    protected function getClient(): Client
+    {
+        if ($this->client === null) {
+            $client = new Client();
+        }
+        return $client;
     }
 
     /**
@@ -117,7 +127,7 @@ class GuzzleService implements GuzzleServiceInterface
             return [];
         }
 
-        $client = new Client();
+        $client = $this->getClient();
         try {
             // Build the list of promises from the URLs and the body JSON queries
             $promises = [];
