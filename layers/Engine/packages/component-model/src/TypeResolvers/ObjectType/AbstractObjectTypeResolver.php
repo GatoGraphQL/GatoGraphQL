@@ -67,6 +67,13 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @var InterfaceTypeFieldResolverInterface[]|null
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
+    /**
+     * After executing `resolveValue`, store the results
+     * to re-use for subsequent calls for same object/field.
+     *
+     * @var array<string|id,array<string,mixed>> Multidimensional array of [$objectID][$field] => $value
+     */
+    protected array $resolvedValuesCache = [];
 
     private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
@@ -356,6 +363,55 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * @param array<string, mixed> $options
      */
     final public function resolveValue(
+        object $object,
+        string $field,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $options = []
+    ): mixed {
+        /**
+         * If the same field has already been resolved for this object,
+         * retrieve it from the cache.
+         *
+         * This is mandatory due to the "Resolved Field Variable References",
+         * which re-create the same field in the AST.
+         *
+         * For instance, in this query, the `id` field is created twice in the AST:
+         *
+         * ```graphql
+         * {
+         *   id
+         *   echo(value: $_id)
+         * }
+         * ```
+         *
+         * But the 2nd AST must not be recalculated.
+         *
+         * @todo Incorporate with AST to compare against the Field->getLocation(), to make sure 2 fields are indeed the same
+         * @todo Check if caching by $objectID and $field is enough; $variables? $options? $feedbackStore?
+         * @todo Check how this plays out for mutations; should they be executed more than once? If so, when/how?
+         */
+        $objectID = $this->getID($object);
+        if (!array_key_exists($field, $this->resolvedValuesCache[$objectID] ?? [])) {
+            $this->resolvedValuesCache[$objectID][$field] = $this->doResolveValue(
+                $object,
+                $field,
+                $variables,
+                $expressions,
+                $objectTypeFieldResolutionFeedbackStore,
+                $options,
+            );
+        }        
+        return $this->resolvedValuesCache[$objectID][$field];
+    }
+
+    /**
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
+     * @param array<string, mixed> $options
+     */
+    final public function doResolveValue(
         object $object,
         string $field,
         array $variables,
