@@ -6,8 +6,9 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use function getenv;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ClientException;
 
+use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -150,19 +151,46 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     //     parent::tearDown();
     // }
 
+    // /**
+    //  * Execute a request against the webserver.
+    //  * If not successful (eg: because the server is not running)
+    //  * then skip all tests.
+    //  *
+    //  * @return ResponseInterface|string The response if successful, or the error message otherwise
+    //  */
+    // protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface|string
+    // {
+    //     $client = static::getClient();
+    //     $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+    //     try {
+    //         return $client->request(
+    //             $method ?? $this->getMethod(),
+    //             $endpointURL,
+    //             [
+    //                 'query' => $params,
+    //                 'body' => $body,
+    //             ]
+    //         );
+    //     } catch (GuzzleException | RuntimeException $e) {
+    //         return $e->getMessage();
+    //     }
+    // }
+
     /**
-     * Execute a request against the webserver.
-     * If not successful (eg: because the server is not running)
-     * then skip all tests.
-     *
-     * @return ResponseInterface|string The response if successful, or the error message otherwise
+     * @dataProvider provideEndpoints
      */
-    protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface|string
-    {
+    public function testEndpoints(
+        string $endpoint,
+        string $expectedResponseBody,
+        array $params = [],
+        string $body = '',
+        string $expectedContentType = 'application/json',
+        ?string $method = null,
+    ): void {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         try {
-            return $client->request(
+            $response = $client->request(
                 $method ?? $this->getMethod(),
                 $endpointURL,
                 [
@@ -170,13 +198,26 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
                     'body' => $body,
                 ]
             );
-        } catch (GuzzleException | RuntimeException $e) {
-            return $e->getMessage();
+        } catch (ClientException $e) {
+            /**
+             * A 404 is a Client Exception.
+             * It's a failure, not an error.
+             */
+            $this->fail($e->getMessage());
         }
+        
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
+        $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
     }
+
+    /**
+     * @return array<string,array<mixed>>
+     */
+    abstract protected function provideEndpoints(string $endpoint): array;
 
     protected function getMethod(): string
     {
-        return 'GET';
+        return 'POST';
     }
 }
