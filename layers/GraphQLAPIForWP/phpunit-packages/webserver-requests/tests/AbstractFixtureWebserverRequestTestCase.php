@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GraphQLByPoP\GraphQLServer\Standalone\FixtureTestCaseTrait;
+use RuntimeException;
 
 abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
@@ -22,7 +23,7 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      * Additional properties (such as the params)
      * must be provided via code.
      */
-    protected function provideEndpointEntries(): array
+    final protected function provideEndpointEntries(): array
     {
         $fixtureFolder = $this->getFixtureFolder();
         $bodyResponseFileNameFileInfos = $this->findFilesInDirectory(
@@ -59,9 +60,17 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
         return $this->getMethod();
     }
 
+    /**
+     * @throws RuntimeException If the endpoint is not defined
+     */
     protected function getEndpoint(string $dataName): string
     {
-        return '';
+        throw new RuntimeException(
+            sprintf(
+                'The endpoint for dataName "%s" has not been defined',
+                $dataName
+            )
+        );
     }
 
     /**
