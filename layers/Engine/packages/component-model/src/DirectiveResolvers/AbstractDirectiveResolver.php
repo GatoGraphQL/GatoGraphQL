@@ -981,7 +981,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                                 new ObjectFeedback(
                                     new FeedbackItemResolution(
                                         ErrorFeedbackItemProvider::class,
-                                        ErrorFeedbackItemProvider::E11a,
+                                        ErrorFeedbackItemProvider::E11A,
                                         [
                                             $this->directive,
                                             $e->getMessage(),
@@ -1002,7 +1002,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     ? ($componentConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E11a,
+                            ErrorFeedbackItemProvider::E11A,
                             [
                                 $this->directive,
                                 $e->getMessage(),

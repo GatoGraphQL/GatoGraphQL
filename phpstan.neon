@@ -48,6 +48,7 @@ includes:
     - layers/Engine/packages/field-query/phpstan.neon.dist
     - layers/Engine/packages/filestore/phpstan.neon.dist
     - layers/CMSSchema/packages/generic-customposts/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
@@ -123,6 +124,6 @@ includes:
     - layers/CMSSchema/packages/users/phpstan.neon.dist
     - layers/WPSchema/packages/users/phpstan.neon.dist
     - layers/CMSSchema/packages/users-wp/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/phpstan.neon.dist
     - layers/Backbone/packages/wp-data-parser/phpstan.neon.dist
     - layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/phpstan.neon.dist
-    - layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/phpstan.neon.dist

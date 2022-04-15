@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-/**
- * WordPress eXtended RSS file parser implementations
- *
- * @package WordPress
- * @subpackage Importer
- */
-
 namespace PoPBackbone\WPDataParser\Parsers;
 
 use PoPBackbone\WPDataParser\Exception\ParserException;
 
 /**
  * WXR Parser that makes use of the XML Parser PHP extension.
+ *
+ * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
  */
 class WXR_Parser_XML
 {
@@ -99,6 +94,7 @@ class WXR_Parser_XML
 
     /**
      * @param array<string,string> $attr
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function tag_open(string $parse, string $tag, array $attr): void
     {
@@ -119,6 +115,7 @@ class WXR_Parser_XML
                     $this->sub_data['slug'] = $attr['nicename'];
                 }
                 break;
+            // phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
             case 'item':
                 $this->in_post = true;
             case 'title':
@@ -164,6 +161,9 @@ class WXR_Parser_XML
         }
     }
 
+    /**
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
     protected function tag_close(string $parser, string $tag): void
     {
         switch ($tag) {

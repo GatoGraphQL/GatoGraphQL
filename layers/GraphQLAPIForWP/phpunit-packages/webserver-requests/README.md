@@ -1,4 +1,4 @@
-# GuzzleHelpers
+# Webserver Requests (for PHPUnit)
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,19 +9,19 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Helper functions for Guzzle
+Test the response from requests against a webserver using PHPUnit and Guzzle
 
 ## Install
 
 Via Composer
 
 ``` bash
-composer require getpop/guzzle-helpers
+composer require phpunit-for-graphql-api/webserver-requests
 ```
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/guzzle-helpers`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/guzzle-helpers).
+The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLAPIForWP/phpunit-packages/webserver-requests`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLAPIForWP/phpunit-packages/webserver-requests).
 
 ## Usage
 
@@ -29,14 +29,8 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\GuzzleHelpers\Component::class,
+    \PHPUnitForGraphQLAPI\WebserverRequests\Component::class,
 ]);
-```
-
-Use it:
-
-```php
-$response = InstanceManagerFacade::getInstance()->getInstance(GuzzleServiceInterface::class)->requestJSON($url, $bodyJSONQuery);
 ```
 
 ## PHP versions
@@ -117,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/getpop/guzzle-helpers.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-graphql-api/webserver-requests.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/getpop/guzzle-helpers/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/getpop/guzzle-helpers.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/getpop/guzzle-helpers.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/getpop/guzzle-helpers.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-graphql-api/webserver-requests/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-graphql-api/webserver-requests.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-graphql-api/webserver-requests.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-graphql-api/webserver-requests.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/getpop/guzzle-helpers
-[link-travis]: https://travis-ci.org/getpop/guzzle-helpers
-[link-scrutinizer]: https://scrutinizer-ci.com/g/getpop/guzzle-helpers/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/getpop/guzzle-helpers
-[link-downloads]: https://packagist.org/packages/getpop/guzzle-helpers
+[link-packagist]: https://packagist.org/packages/phpunit-for-graphql-api/webserver-requests
+[link-travis]: https://travis-ci.org/phpunit-for-graphql-api/webserver-requests
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/webserver-requests/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-graphql-api/webserver-requests
+[link-downloads]: https://packagist.org/packages/phpunit-for-graphql-api/webserver-requests
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

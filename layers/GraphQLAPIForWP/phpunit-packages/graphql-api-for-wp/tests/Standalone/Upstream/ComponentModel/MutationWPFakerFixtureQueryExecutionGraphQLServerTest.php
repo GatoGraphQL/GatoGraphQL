@@ -13,7 +13,7 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/FixtureMutation';
+        return __DIR__ . '/fixture-mutation';
     }
 
     /**

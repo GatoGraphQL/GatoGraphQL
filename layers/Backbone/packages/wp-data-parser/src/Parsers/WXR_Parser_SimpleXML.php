@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * WordPress eXtended RSS file parser implementations
- *
- * @package WordPress
- * @subpackage Importer
- */
-
 namespace PoPBackbone\WPDataParser\Parsers;
 
 use DOMDocument;
@@ -18,6 +11,8 @@ use SimpleXMLElement;
 
 /**
  * WXR Parser that makes use of the SimpleXML PHP extension.
+ *
+ * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
  */
 class WXR_Parser_SimpleXML
 {
@@ -281,6 +276,7 @@ class WXR_Parser_SimpleXML
 
     /**
      * @see https://www.php.net/manual/en/function.libxml-get-errors.php
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function display_xml_error(LibXMLError $error): string
     {

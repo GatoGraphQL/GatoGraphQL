@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\GuzzleHelpers;
+namespace PoP\GuzzleHelpers\Services;
 
+use Exception;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\RequestOptions;
 use PoP\GuzzleHelpers\Exception\GuzzleInvalidResponseException;
@@ -13,8 +13,15 @@ use PoP\GuzzleHelpers\Exception\GuzzleRequestException;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use Psr\Http\Message\ResponseInterface;
 
-class GuzzleHelpers
+class GuzzleService implements GuzzleServiceInterface
 {
+    protected ?Client $client = null;
+
+    public function setClient(Client $client): void
+    {
+        $this->client = $client;
+    }
+
     /**
      * Execute a JSON request to the passed endpoint URL and form params
      *
@@ -24,15 +31,15 @@ class GuzzleHelpers
      * @throws GuzzleRequestException
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
+    public function requestJSON(string $url, array $bodyJSONQuery = [], string $method = 'POST'): array
     {
-        $client = new Client();
+        $client = $this->getClient();
         $options = [
             RequestOptions::JSON => $bodyJSONQuery,
         ];
         try {
             $response = $client->request($method, $url, $options);
-        } catch (RequestException $exception) {
+        } catch (Exception $exception) {
             throw new GuzzleRequestException(
                 $exception->getMessage(),
                 0,
@@ -42,11 +49,24 @@ class GuzzleHelpers
         return self::validateAndDecodeJSONResponse($response);
     }
 
+    protected function getClient(): Client
+    {
+        if ($this->client === null) {
+            $this->client = $this->createClient();
+        }
+        return $this->client;
+    }
+
+    protected function createClient(): Client
+    {
+        return new Client();
+    }
+
     /**
      * @return array<string,mixed>
      * @throws GuzzleInvalidResponseException
      */
-    protected static function validateAndDecodeJSONResponse(ResponseInterface $response): array
+    protected function validateAndDecodeJSONResponse(ResponseInterface $response): array
     {
         $translationAPI = TranslationAPIFacade::getInstance();
         if ($response->getStatusCode() !== 200) {
@@ -94,7 +114,7 @@ class GuzzleHelpers
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
+    public function requestSingleURLMultipleQueriesAsyncJSON(string $url, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         $urls = [];
         for ($i = 0; $i < count($bodyJSONQueries); $i++) {
@@ -111,13 +131,13 @@ class GuzzleHelpers
      * @return array<string,mixed> The payload if successful
      * @throws GuzzleInvalidResponseException
      */
-    public static function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
+    public function requestAsyncJSON(array $urls, array $bodyJSONQueries = [], string $method = 'POST'): array
     {
         if (!$urls) {
             return [];
         }
 
-        $client = new Client();
+        $client = $this->getClient();
         try {
             // Build the list of promises from the URLs and the body JSON queries
             $promises = [];
@@ -136,7 +156,7 @@ class GuzzleHelpers
 
             // Wait for the requests to complete, even if some of them fail
             $results = Utils::settle($promises)->wait();
-        } catch (RequestException $exception) {
+        } catch (Exception $exception) {
             throw new GuzzleRequestException(
                 $exception->getMessage(),
                 0,

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\GuzzleHelpers;
+namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Environment;
 
 /**
  * Initialize component
@@ -19,19 +20,12 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\ComponentModel\Component::class,
+            \GraphQLByPoP\GraphQLServer\Component::class,
         ];
     }
 
-    /**
-     * Initialize services
-     *
-     * @param string[] $skipSchemaComponentClasses
-     */
-    protected function initializeContainerServices(
-        bool $skipSchema,
-        array $skipSchemaComponentClasses,
-    ): void {
-        $this->initServices(dirname(__DIR__));
+    protected function resolveEnabled(): bool
+    {
+        return Environment::isApplicationEnvironmentDevPHPUnit();
     }
 }

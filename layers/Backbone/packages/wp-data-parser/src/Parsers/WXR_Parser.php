@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * WordPress eXtended RSS file parser implementations
- *
- * @package WordPress
- * @subpackage Importer
- */
-
 namespace PoPBackbone\WPDataParser\Parsers;
 
 use PoPBackbone\WPDataParser\Exception\ParserException;
@@ -17,6 +10,8 @@ use function extension_loaded;
 
 /**
  * WordPress Importer class for managing parsing of WXR files.
+ *
+ * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
  */
 class WXR_Parser
 {

@@ -363,6 +363,34 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
         array $options = []
     ): mixed {
+        $engineState = App::getEngineState();
+        if (!$engineState->hasObjectTypeResolvedValue($this, $object, $field, $variables, $expressions)) {
+            $value = $this->doResolveValue(
+                $object,
+                $field,
+                $variables,
+                $expressions,
+                $objectTypeFieldResolutionFeedbackStore,
+                $options,
+            );
+            $engineState->setObjectTypeResolvedValue($this, $object, $field, $variables, $expressions, $value);
+        }
+        return $engineState->getObjectTypeResolvedValue($this, $object, $field, $variables, $expressions);
+    }
+
+    /**
+     * @param array<string, mixed> $variables
+     * @param array<string, mixed> $expressions
+     * @param array<string, mixed> $options
+     */
+    final public function doResolveValue(
+        object $object,
+        string $field,
+        array $variables,
+        array $expressions,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $options = []
+    ): mixed {
         $objectTypeFieldResolvers = $this->getObjectTypeFieldResolversForField($field);
         if ($objectTypeFieldResolvers === []) {
             /**
@@ -487,7 +515,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E3a,
+                                ErrorFeedbackItemProvider::E3A,
                                 [
                                     $fieldName,
                                     $e->getMessage(),
@@ -505,7 +533,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     ? ($componentConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E3a,
+                            ErrorFeedbackItemProvider::E3A,
                             [
                                 $fieldName,
                                 $e->getMessage(),
