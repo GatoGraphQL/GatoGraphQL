@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,7 @@ use function getenv;
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
+    protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
     protected static string $skipTestsReason = '';
 
@@ -38,11 +40,16 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
 
         $client = static::getClient();
+        $options = static::getWebserverPingOptions();
+        if (static::shareCookies()) {
+            self::$cookieJar = static::createCookieJar();
+            $options['cookies'] = self::$cookieJar;
+        }        
         try {
             $response = $client->request(
                 'GET',
                 static::getWebserverPingURL(),
-                static::getWebserverPingOptions()
+                $options
             );
             // The webserver is working
             self::$enableTests = true;
@@ -125,6 +132,24 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         );
     }
 
+    protected static function createCookieJar(): CookieJar
+    {
+        return CookieJar::fromArray(
+            static::getCookies(),
+            static::getWebserverDomain()
+        );
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected static function getCookies(): array
+    {
+        return [
+            'wordpress_test_cookie' => 'WP%20Cookie%20check'
+        ];
+    }
+
     /**
      * Indicate if to share cookies across requests (Cookie Jar)
      *
@@ -158,14 +183,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     ): void {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+        $options = [
+            'query' => $params,
+            'body' => $body,
+        ];
+        if (static::shareCookies()) {
+            $options['cookies'] = self::$cookieJar;
+        }        
         try {
             $response = $client->request(
                 $method ?? $this->getMethod(),
                 $endpointURL,
-                [
-                    'query' => $params,
-                    'body' => $body,
-                ]
+                $options
             );
         } catch (ClientException $e) {
             /**

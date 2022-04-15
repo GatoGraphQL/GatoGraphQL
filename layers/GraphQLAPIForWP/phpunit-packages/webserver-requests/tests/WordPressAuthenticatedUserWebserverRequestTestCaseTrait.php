@@ -34,6 +34,16 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     }
 
     /**
+     * @return array<string,string>
+     */
+    protected static function getCookies(): array
+    {
+        return [
+            'wordpress_test_cookie' => 'WP%20Cookie%20check'
+        ];
+    }
+
+    /**
      * Must re-use the cookies received when logging in
      *
      * @see https://docs.guzzlephp.org/en/stable/quickstart.html#cookies
