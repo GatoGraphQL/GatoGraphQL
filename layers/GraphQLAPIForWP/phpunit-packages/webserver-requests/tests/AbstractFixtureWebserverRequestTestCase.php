@@ -54,7 +54,7 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      * Directory under the fixture files are placed
      */
     abstract protected function getFixtureFolder(): string;
-    
+
     protected function getEntryMethod(string $dataName): string
     {
         return $this->getMethod();

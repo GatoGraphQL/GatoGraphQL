@@ -91,7 +91,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    abstract protected static function getWebserverDomain(): string;    
+    abstract protected static function getWebserverDomain(): string;
 
     protected static function getClient(): Client
     {
@@ -174,7 +174,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
              */
             $this->fail($e->getMessage());
         }
-        
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
         $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
