@@ -22,7 +22,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E9 = 'e9';
     public final const E10 = 'e10';
     public final const E11 = 'e11';
-    public final const E11a = 'e11a';
+    public final const E11A = 'e11a';
     public final const E12 = 'e12';
     public final const E13 = 'e13';
     public final const E14 = 'e14';
@@ -59,7 +59,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E9,
             self::E10,
             self::E11,
-            self::E11a,
+            self::E11A,
             self::E12,
             self::E13,
             self::E14,
@@ -95,7 +95,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E9 => $this->__('The DataLoader can\'t load data for object of type \'%s\' with ID \'%s\'', 'component-model'),
             self::E10 => $this->__('Either the DataLoader can\'t load data, or no TypeResolver resolves, object with ID \'%s\'', 'component-model'),
             self::E11 => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'', 'component-model'),
-            self::E11a => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
+            self::E11A => $this->__('Resolving directive \'%s\' triggered exception: \'%s\'. Trace: %s', 'component-model'),
             self::E12 => $this->__('Resolving directive \'%s\' triggered an exception, please contact the admin', 'component-model'),
             self::E13 => $this->__('Corrupted data: Object with ID \'%s\' doesn\'t exist', 'component-model'),
             self::E14 => $this->__('Expression \'%s\' is undefined', 'component-model'),
