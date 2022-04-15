@@ -16,6 +16,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
     protected static bool $enableTests = false;
+    protected static string $skipTestsReason = '';
 
     public static function setUpBeforeClass(): void
     {
@@ -32,6 +33,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
+            self::$skipTestsReason = sprintf(
+                'Test skipped for Continuous Integration',
+                static::getWebserverDomain()
+            );
             return;
         }
 
@@ -41,13 +46,17 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
                 'GET',
                 static::getWebserverPingURL()
             );
-            // if ($response->getStatusCode() === 200) {
             // The webserver is working
             self::$enableTests = true;
-            // }
+            return;
         } catch (GuzzleException | RuntimeException) {
             // The webserver is down
         }
+
+        self::$skipTestsReason = sprintf(
+            'Webserver under "%s" is not running',
+            static::getWebserverDomain()
+        );
     }
 
     /**
@@ -136,12 +145,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
         // Skip the tests if the webserver is down
         if (!static::$enableTests) {
-            $this->markTestSkipped(
-                sprintf(
-                    'Webserver under "%s" is not running',
-                    static::getWebserverDomain()
-                )
-            );
+            $this->markTestSkipped(self::$skipTestsReason);
         }
     }
 
