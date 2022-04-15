@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
@@ -19,8 +20,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static ?Client $client = null;
     protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
-    protected static ?string $skipTestsReason = null;
-    protected static ?string $failTestsReason = null;
+    protected static string $skipTestsReason = '';
 
     public static function setUpBeforeClass(): void
     {
@@ -57,8 +57,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // If the user validation does not succeed, treat it as a failure
             $maybeErrorMessage = static::validateWebserverPingResponse($response, $options);
             if ($maybeErrorMessage !== null) {
-                self::$failTestsReason = $maybeErrorMessage;
-                return;
+                throw new UnauthenticatedUserException($maybeErrorMessage);
             }
 
             // The webserver is working
@@ -189,15 +188,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
         /**
          * Skip the tests if the webserver is down.
-         * Fail the tests if the user could not be authenticated.
          */
         if (!static::$enableTests) {
-            if (self::$failTestsReason !== null) {
-                $this->fail(self::$failTestsReason);
-                return;
-            }
-            
-            /** @var string self::$skipTestsReason */
             $this->markTestSkipped(self::$skipTestsReason);
         }
     }
