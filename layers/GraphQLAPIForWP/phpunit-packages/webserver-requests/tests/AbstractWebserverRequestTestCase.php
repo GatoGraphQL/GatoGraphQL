@@ -105,7 +105,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         parent::setUp();
 
         // Skip the tests if the webserver is down
-        if (static::$enableTests) {
+        if (!static::$enableTests) {
             $this->markTestSkipped(
                 sprintf(
                     'Webserver under "%s" is not running',
