@@ -151,20 +151,21 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     public function testEndpoints(
         string $expectedResponseBody,
         ?string $endpoint = null,
-        array $params = [],
-        string $body = '',
-        string $expectedContentType = 'application/json',
+        ?array $params = null,
+        ?string $body = null,
+        ?string $expectedContentType = null,
         ?string $method = null,
     ): void {
         $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/' . ($endpoint ?? $this->getEndpoint($this->dataName()));
+        $dataName = $this->dataName();
+        $endpointURL = static::getWebserverHomeURL() . '/' . ($endpoint ?? $this->getEndpoint($dataName));
         try {
             $response = $client->request(
-                $method ?? $this->getMethod(),
+                $method ?? $this->getMethod($dataName),
                 $endpointURL,
                 [
-                    'query' => $params,
-                    'body' => $body,
+                    'query' => $params ?? $this->getParams($dataName),
+                    'body' => $body ?? $this->getBody($dataName),
                 ]
             );
         } catch (ClientException $e) {
@@ -176,7 +177,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
         
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
+        $this->assertEquals(
+            $expectedContentType ?? $this->getExpectedContentType($dataName),
+            $response->getHeaderLine('content-type')
+        );
         $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
     }
 
@@ -185,7 +189,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     abstract protected function provideEndpoints(string $endpoint): array;
 
-    protected function getMethod(): string
+    protected function getMethod(string $dataName): string
     {
         return 'POST';
     }
@@ -193,5 +197,23 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected function getEndpoint(string $dataName): string
     {
         return '';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getParams(string $dataName): array
+    {
+        return [];
+    }
+
+    protected function getBody(string $dataName): string
+    {
+        return '';
+    }
+
+    protected function getExpectedContentType(string $dataName): string
+    {
+        return 'application/json';
     }
 }
