@@ -1274,7 +1274,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 ErrorFeedbackItemProvider::class,
-                                ErrorFeedbackItemProvider::E6a,
+                                ErrorFeedbackItemProvider::E6A,
                                 [
                                     $fieldName,
                                     $e->getMessage(),
@@ -1292,7 +1292,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     ? ($componentConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
-                            ErrorFeedbackItemProvider::E6a,
+                            ErrorFeedbackItemProvider::E6A,
                             [
                                 $fieldName,
                                 $e->getMessage(),
