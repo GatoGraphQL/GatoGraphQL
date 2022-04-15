@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client;
+    protected static bool $skipTests = false;
 
     public static function setUpBeforeClass(): void
     {
@@ -34,6 +35,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             return;
         }
         // The webserver is down. Mark all tests to be skipped
+        self::$skipTests = true;
     }
 
     protected static function getMethod(): string
@@ -96,4 +98,24 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function tearDownWebserverRequestTests(): void
     {
     }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        
+        // Skip the tests if the webserver is down
+        if (static::$skipTests) {
+            $this->markTestSkipped(
+                sprintf(
+                    'Webserver under "%s" is not running',
+                    static::getWebserverDomain()
+                )
+            );
+        }
+    }
+
+    // protected function tearDown(): void
+    // {
+    //     parent::tearDown();
+    // }
 }
