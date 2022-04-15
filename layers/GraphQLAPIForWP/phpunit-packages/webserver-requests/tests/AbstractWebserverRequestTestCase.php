@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
-    protected static ?Client $client;
+    protected static ?Client $client = null;
     protected static bool $skipTests = false;
 
     public static function setUpBeforeClass(): void
