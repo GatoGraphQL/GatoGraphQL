@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use function getenv;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
+
+use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -180,15 +179,15 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * @dataProvider provideEndpoints
      */
     public function testEndpoints(
-        string $endpoint,
         string $expectedResponseBody,
+        ?string $endpoint = null,
         array $params = [],
         string $body = '',
         string $expectedContentType = 'application/json',
         ?string $method = null,
     ): void {
         $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+        $endpointURL = static::getWebserverHomeURL() . '/' . ($endpoint ?? $this->getEndpoint($this->dataName()));
         try {
             $response = $client->request(
                 $method ?? $this->getMethod(),
@@ -219,5 +218,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected function getMethod(): string
     {
         return 'POST';
+    }
+
+    protected function getEndpoint(string $dataName): string
+    {
+        return '';
     }
 }
