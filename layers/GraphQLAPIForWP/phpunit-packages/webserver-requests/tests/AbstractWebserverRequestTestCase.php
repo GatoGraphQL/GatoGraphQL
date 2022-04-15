@@ -154,8 +154,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * Execute a request against the webserver.
      * If not successful (eg: because the server is not running)
      * then skip all tests.
+     *
+     * @return ResponseInterface|string The response if successful, or the error message otherwise
      */
-    protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ?ResponseInterface
+    protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface|string
     {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
@@ -168,8 +170,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
                     'body' => $body,
                 ]
             );
-        } catch (GuzzleException | RuntimeException) {
-            return null;
+        } catch (GuzzleException | RuntimeException $e) {
+            return $e->getMessage();
         }
     }
 

@@ -10,6 +10,9 @@ class LocalhostWebserverRequestTest extends AbstractLocalhostWebserverRequestTes
     {
         $endpoint = 'graphql-query/latest-posts-for-mobile-app-2/';
         $response = $this->request($endpoint, ['limit' => 3], '', 'GET');
+        if (is_string($response)) {
+            $this->fail($response);
+        }
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('application/json', $response->getHeaderLine('content-type'));
         $expectedResponseBody = <<<JSON
