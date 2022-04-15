@@ -17,6 +17,6 @@ trait LocalhostWordPressAuthenticatedUserWebserverRequestTestCaseTrait
 
     protected static function getLoginPassword(): string
     {
-        return 'admins';
+        return 'admin';
     }
 }
