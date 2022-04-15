@@ -41,7 +41,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         try {
             $response = $client->request(
                 'GET',
-                static::getWebserverPingURL()
+                static::getWebserverPingURL(),
+                static::getWebserverPingOptions()
             );
             // The webserver is working
             self::$enableTests = true;
@@ -85,6 +86,14 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function getWebserverPingURL(): string
     {
         return static::getWebserverHomeURL();
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getWebserverPingOptions(): array
+    {
+        return [];
     }
 
     protected static function getWebserverHomeURL(): string
