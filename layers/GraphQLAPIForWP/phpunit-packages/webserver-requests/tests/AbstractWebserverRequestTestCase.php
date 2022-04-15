@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use PHPUnit\Framework\TestCase;
 
-use function getenv;
+use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -36,7 +37,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         $client = static::getClient();
         try {
             $response = $client->request(
-                static::getMethod(),
+                'GET',
                 static::getWebserverPingURL()
             );
             // if ($response->getStatusCode() === 200) {
@@ -72,11 +73,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function skipTestsInContinuousIntegration(): bool
     {
         return true;
-    }
-
-    protected static function getMethod(): string
-    {
-        return 'GET';
     }
 
     protected static function getWebserverPingURL(): string
@@ -152,4 +148,24 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     // {
     //     parent::tearDown();
     // }
+
+    /**
+     * Execute a request against the webserver.
+     * If not successful (eg: because the server is not running)
+     * then skip all tests.
+     */
+    protected function request(string $endpoint): ResponseInterface
+    {
+        $client = static::getClient();
+        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+        return $client->request(
+            $this->getMethod(),
+            $endpointURL
+        );
+    }
+
+    protected function getMethod(): string
+    {
+        return 'GET';
+    }
 }
