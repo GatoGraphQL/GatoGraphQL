@@ -18,7 +18,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     }
 
     /**
-     * Retrieve all files under the "/Fixture" folder (by default):
+     * Retrieve all files under the "/fixture" folder (by default):
      *
      *   - GraphQL queries: all files ending in ".gql" or ".graphql"
      *     (unless ending in ".disabled.gql" or ".disabled.graphql")

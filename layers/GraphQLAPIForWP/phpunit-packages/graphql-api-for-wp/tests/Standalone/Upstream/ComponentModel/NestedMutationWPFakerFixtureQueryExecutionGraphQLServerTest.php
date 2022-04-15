@@ -13,7 +13,7 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/FixtureNestedMutation';
+        return __DIR__ . '/fixture-nested-mutation';
     }
 
     /**
