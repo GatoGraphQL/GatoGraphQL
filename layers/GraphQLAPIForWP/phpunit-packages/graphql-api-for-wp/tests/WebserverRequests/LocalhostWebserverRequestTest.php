@@ -9,7 +9,7 @@ class LocalhostWebserverRequestTest extends AbstractLocalhostWebserverRequestTes
     public function testPersistedQuery(): void
     {
         $endpoint = 'graphql-query/latest-posts-for-mobile-app-2/';
-        $response = $this->request($endpoint, ['limit' => 3], 'GET');
+        $response = $this->request($endpoint, ['limit' => 3], '', 'GET');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('application/json', $response->getHeaderLine('content-type'));
         $expectedResponseBody = <<<JSON
