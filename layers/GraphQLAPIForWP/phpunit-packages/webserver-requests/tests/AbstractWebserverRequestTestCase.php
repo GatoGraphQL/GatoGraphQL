@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use function getenv;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
-
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -46,14 +46,14 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if (static::shareCookies()) {
             self::$cookieJar = static::createCookieJar();
             $options['cookies'] = self::$cookieJar;
-        }        
+        }
         try {
             $response = $client->request(
                 static::getWebserverPingMethod(),
                 static::getWebserverPingURL(),
                 $options
             );
-            
+
             // If the user validation does not succeed, treat it as a failure
             $maybeErrorMessage = static::validateWebserverPingResponse($response, $options);
             if ($maybeErrorMessage !== null) {
@@ -229,7 +229,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
         if (static::shareCookies()) {
             $options['cookies'] = self::$cookieJar;
-        }        
+        }
         try {
             $response = $client->request(
                 $method ?? $this->getMethod(),

@@ -9,7 +9,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 trait LocalhostWordPressAuthenticatedUserWebserverRequestTestCaseTrait
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-    
+
     protected static function getLoginUsername(): string
     {
         return 'admin';

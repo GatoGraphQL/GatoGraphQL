@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
 {
     abstract protected static function getWebserverHomeURL(): string;
-    
+
     /**
      * To login a user in WordPress, request the following URL by post:
      *
@@ -44,7 +44,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
 
     /**
      * Make sure the user was successfully logged-in
-     * 
+     *
      * @param array<string,mixed> $options
      */
     protected static function validateWebserverPingResponse(
@@ -70,7 +70,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     {
         return true;
     }
-    
+
     protected function getMethod(): string
     {
         return 'POST';
