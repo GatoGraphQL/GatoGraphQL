@@ -19,7 +19,7 @@ class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverReque
     {
         return match ($dataName) {
             'persisted-query',
-            'persisted-query-by-get',
+            'persisted-query-by-post',
             'persisted-query-passing-params'
                 => 'graphql-query/latest-posts-for-mobile-app-2',
             default => parent::getEndpoint($dataName),
@@ -29,7 +29,7 @@ class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverReque
     protected function getEntryMethod(string $dataName): string
     {
         return match ($dataName) {
-            'persisted-query-by-get' => 'GET',
+            'persisted-query-by-post' => 'POST',
             default => parent::getEntryMethod($dataName),
         };
     }
@@ -45,5 +45,10 @@ class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverReque
             ],
             default => parent::getParams($dataName),
         };
+    }
+
+    protected function getMethod(): string
+    {
+        return 'GET';
     }
 }
