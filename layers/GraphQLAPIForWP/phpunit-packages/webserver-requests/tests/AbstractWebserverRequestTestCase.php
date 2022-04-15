@@ -19,7 +19,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static ?Client $client = null;
     protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
-    protected static string $skipTestsReason = '';
+    protected static ?string $skipTestsReason = null;
+    protected static ?string $failTestsReason = null;
 
     public static function setUpBeforeClass(): void
     {
@@ -52,9 +53,11 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
                 static::getWebserverPingURL(),
                 $options
             );
+            
+            // If the user validation does not succeed, treat it as a failure
             $maybeErrorMessage = static::validateWebserverPingResponse($response, $options);
             if ($maybeErrorMessage !== null) {
-                self::$skipTestsReason = $maybeErrorMessage;
+                self::$failTestsReason = $maybeErrorMessage;
                 return;
             }
 
@@ -184,8 +187,17 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     {
         parent::setUp();
 
-        // Skip the tests if the webserver is down
+        /**
+         * Skip the tests if the webserver is down.
+         * Fail the tests if the user could not be authenticated.
+         */
         if (!static::$enableTests) {
+            if (self::$failTestsReason !== null) {
+                $this->fail(self::$failTestsReason);
+                return;
+            }
+            
+            /** @var string self::$skipTestsReason */
             $this->markTestSkipped(self::$skipTestsReason);
         }
     }
