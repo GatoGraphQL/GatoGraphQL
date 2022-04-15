@@ -30,8 +30,6 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
             'form_params' => [
                 'log' => 'admin',
                 'pwd' => 'admin',
-                'rememberme' => 'forever',
-                'wp-submit' => 'Log+In',
             ],
         ];
     }
