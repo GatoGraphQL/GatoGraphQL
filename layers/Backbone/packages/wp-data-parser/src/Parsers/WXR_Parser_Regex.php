@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-/**
- * WordPress eXtended RSS file parser implementations
- *
- * @package WordPress
- * @subpackage Importer
- */
-
 namespace PoPBackbone\WPDataParser\Parsers;
 
 use PoPBackbone\WPDataParser\Exception\ParserException;
 
 /**
  * WXR Parser that uses regular expressions. Fallback for installs without an XML parser.
+ *
+ * phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
  */
 class WXR_Parser_Regex
 {
@@ -122,6 +117,9 @@ class WXR_Parser_Regex
         );
     }
 
+    /**
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
     private function get_tag(string $string, string $tag): string
     {
         preg_match("|<$tag.*?>(.*?)</$tag>|is", $string, $return);
@@ -147,6 +145,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<string, array<array<string, string>>|string>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_category(string $c): array
     {
@@ -168,6 +167,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<string,array<array<string,string>>|string>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_tag(string $t): array
     {
@@ -188,6 +188,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<string,array<array<string,string>>|string>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_term(string $t): array
     {
@@ -210,6 +211,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<array<string,string>>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_meta(string $string, string $tag): array
     {
@@ -233,6 +235,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<string,string>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_author(string $a): array
     {
@@ -248,6 +251,7 @@ class WXR_Parser_Regex
 
     /**
      * @return array<string,mixed>
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     private function process_post(string $post): array
     {
@@ -304,6 +308,7 @@ class WXR_Parser_Regex
 
         preg_match_all('|<category domain="([^"]+?)" nicename="([^"]+?)">(.+?)</category>|is', $post, $terms, PREG_SET_ORDER);
         foreach ($terms as $t) {
+            // phpcs:disable SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation.ImplicitArrayCreationUsed
             $post_terms[] = array(
                 'slug' => $t[2],
                 'domain' => $t[1],
@@ -318,6 +323,7 @@ class WXR_Parser_Regex
         $comments = $comments[1];
         if ($comments) {
             foreach ($comments as $comment) {
+                // phpcs:disable SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation.ImplicitArrayCreationUsed
                 $post_comments[] = array(
                     'comment_id' => $this->get_tag($comment, 'wp:comment_id'),
                     'comment_author' => $this->get_tag($comment, 'wp:comment_author'),
@@ -349,6 +355,8 @@ class WXR_Parser_Regex
 
     /**
      * @param array<mixed> $matches
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     * phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
      */
     private function _normalize_tag(array $matches): string
     {
