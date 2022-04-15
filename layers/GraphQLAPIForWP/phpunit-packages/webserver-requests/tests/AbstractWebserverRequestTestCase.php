@@ -154,13 +154,16 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * If not successful (eg: because the server is not running)
      * then skip all tests.
      */
-    protected function request(string $endpoint, ?string $method = null): ResponseInterface
+    protected function request(string $endpoint, array $params = [], ?string $method = null): ResponseInterface
     {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         return $client->request(
             $method ?? $this->getMethod(),
-            $endpointURL
+            $endpointURL,
+            [
+                'query' => $params,
+            ]
         );
     }
 
