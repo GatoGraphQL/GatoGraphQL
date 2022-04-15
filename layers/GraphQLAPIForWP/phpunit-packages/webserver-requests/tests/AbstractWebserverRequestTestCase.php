@@ -10,6 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -44,7 +45,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             // The webserver is working
             self::$enableTests = true;
             // }
-        } catch (GuzzleException) {
+        } catch (GuzzleException | RuntimeException) {
             // The webserver is down
         }
     }
@@ -154,18 +155,22 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * If not successful (eg: because the server is not running)
      * then skip all tests.
      */
-    protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface
+    protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ?ResponseInterface
     {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        return $client->request(
-            $method ?? $this->getMethod(),
-            $endpointURL,
-            [
-                'query' => $params,
-                'body' => $body,
-            ]
-        );
+        try {
+            return $client->request(
+                $method ?? $this->getMethod(),
+                $endpointURL,
+                [
+                    'query' => $params,
+                    'body' => $body,
+                ]
+            );
+        } catch (GuzzleException | RuntimeException) {
+            return null;
+        }
     }
 
     protected function getMethod(): string
