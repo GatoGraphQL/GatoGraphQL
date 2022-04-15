@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GraphQLByPoP\GraphQLServer\Standalone\FixtureTestCaseTrait;
+
 abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
+    use FixtureTestCaseTrait;
+
     /**
      * Retrieve all files under the "/fixture" folder
      * to retrieve the expected response bodies.
@@ -20,21 +24,29 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      */
     protected function provideEndpointEntries(): array
     {
-        $entries = [];
-        foreach ($this->getFixtureEndpointEntries() as $fixtureEntry) {
-            $dataName = '{fileName}';
-            $expectedResponseBody = '';
-            $expectedContentType = true ? 'application/json' : 'text/html';
-            $entries[] = [
-                $expectedResponseBody,
-                $endpoint = null,
+        $fixtureFolder = $this->getFixtureFolder();
+        $bodyResponseFileNameFileInfos = $this->findFilesInDirectory(
+            $fixtureFolder,
+            ['*.json'],
+            ['*.disabled.json']
+        );
+
+        $providerItems = [];
+        foreach ($bodyResponseFileNameFileInfos as $bodyResponseFileInfo) {
+            /** @var string */
+            $bodyResponseFile = $bodyResponseFileInfo->getRealPath();
+            $fileName = $bodyResponseFileInfo->getFilenameWithoutExtension();
+            $dataName = $fileName;
+            $providerItems[$dataName] = [
+                $bodyResponseFileInfo->getContents(),
+                $this->getEndpoint($dataName),
                 $this->getParams($dataName),
                 $this->getBody($dataName),
-                $expectedContentType,
+                str_ends_with($bodyResponseFile, '.html') ? 'text/html' : 'application/json',
                 $this->getEntryMethod($dataName),
             ];
         }
-        return $entries;
+        return $providerItems;
     }
 
     /**
@@ -42,8 +54,6 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      */
     abstract protected function getFixtureFolder(): string;
     
-    abstract protected function getFixtureEndpointEntries(): array;
-
     protected function getEntryMethod(string $dataName): string
     {
         return $this->getMethod();
