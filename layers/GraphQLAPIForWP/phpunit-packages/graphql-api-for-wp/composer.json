@@ -166,6 +166,7 @@
     "require": {
         "php": "^8.1",
         "phpunit-for-graphql-api/wpfaker-schema": "^0.9",
+        "phpunit-for-graphql-api/webserver-requests": "^0.9",
         "pop-wp-schema/users": "^0.9",
         "pop-wp-schema/pages": "^0.9",
         "pop-wp-schema/posts": "^0.9",

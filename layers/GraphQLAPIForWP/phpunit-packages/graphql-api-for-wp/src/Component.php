@@ -20,6 +20,7 @@ class Component extends AbstractComponent
     {
         return [
             \PHPUnitForGraphQLAPI\WPFakerSchema\Component::class,
+            \PHPUnitForGraphQLAPI\WebserverRequests\Component::class,
         ];
     }
 }
