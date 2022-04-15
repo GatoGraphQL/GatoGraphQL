@@ -85,9 +85,4 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
     {
         return '';
     }
-
-    // protected function getExpectedContentType(string $dataName): string
-    // {
-    //     return 'application/json';
-    // }
 }
