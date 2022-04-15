@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Engine\Component::class,
+            \GraphQLByPoP\GraphQLServer\Component::class,
         ];
     }
 
