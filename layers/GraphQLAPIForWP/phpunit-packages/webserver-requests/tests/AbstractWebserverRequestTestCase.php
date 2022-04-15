@@ -186,10 +186,13 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     ): void {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = [
-            'query' => $params,
-            'body' => $body,
-        ];
+        $options = [];
+        if ($params !== []) {
+            $options['query'] = $params;
+        }
+        if ($body !== '') {
+            $options['body'] = $body;
+        }
         if (static::shareCookies()) {
             $options['cookies'] = self::$cookieJar;
         }        
