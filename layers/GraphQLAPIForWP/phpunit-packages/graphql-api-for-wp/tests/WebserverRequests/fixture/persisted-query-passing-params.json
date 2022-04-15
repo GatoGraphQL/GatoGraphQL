@@ -1,0 +1,37 @@
+{
+    "data": {
+        "posts": [
+            {
+                "date": "2021-08-07T02:20:44+00:00",
+                "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "title": "Hello world!",
+                "tags": [],
+                "author": {
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/",
+                    "id": 1
+                }
+            },
+            {
+                "date": "2020-12-12T04:06:52+00:00",
+                "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
+                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "title": "Public or Private API mode, for extra security",
+                "tags": [
+                    {
+                        "name": "security"
+                    },
+                    {
+                        "name": "features"
+                    }
+                ],
+                "author": {
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/",
+                    "id": 1
+                }
+            }
+        ]
+    }
+}
