@@ -18,9 +18,23 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      * Additional properties (such as the params)
      * must be provided via code.
      */
-    protected function provideEndpoints(string $endpoint): array
+    protected function provideEndpointEntries(): array
     {
-
+        $entries = [];
+        foreach ($this->getFixtureEndpointEntries() as $fixtureEntry) {
+            $dataName = '{fileName}';
+            $expectedResponseBody = '';
+            $expectedContentType = true ? 'application/json' : 'text/html';
+            $entries[] = [
+                $expectedResponseBody,
+                $endpoint = null,
+                $this->getParams($dataName),
+                $this->getBody($dataName),
+                $expectedContentType,
+                $this->getEntryMethod($dataName),
+            ];
+        }
+        return $entries;
     }
 
     /**
@@ -28,5 +42,33 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
      */
     abstract protected function getFixtureFolder(): string;
     
-    abstract protected function provideFixtureEndpoints(string $endpoint): array;
+    abstract protected function getFixtureEndpointEntries(): array;
+
+    protected function getEntryMethod(string $dataName): string
+    {
+        return $this->getMethod();
+    }
+
+    protected function getEndpoint(string $dataName): string
+    {
+        return '';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getParams(string $dataName): array
+    {
+        return [];
+    }
+
+    protected function getBody(string $dataName): string
+    {
+        return '';
+    }
+
+    // protected function getExpectedContentType(string $dataName): string
+    // {
+    //     return 'application/json';
+    // }
 }
