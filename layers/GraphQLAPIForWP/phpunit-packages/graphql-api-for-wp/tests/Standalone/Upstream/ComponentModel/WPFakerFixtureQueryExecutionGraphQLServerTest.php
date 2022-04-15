@@ -13,7 +13,7 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/Fixture';
+        return __DIR__ . '/fixture';
     }
 
     /**

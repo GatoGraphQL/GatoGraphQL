@@ -13,7 +13,7 @@ class UserLoginWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPF
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/FixtureUserLogin';
+        return __DIR__ . '/fixture-user-login';
     }
 
     /**
