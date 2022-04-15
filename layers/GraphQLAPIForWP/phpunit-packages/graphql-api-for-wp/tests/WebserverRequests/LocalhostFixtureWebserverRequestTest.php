@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\WebserverRequests;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractFixtureWebserverRequestTestCase;
 
-class LocalhostWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
+class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
 {
     use LocalhostWebserverRequestTestTrait;
 
