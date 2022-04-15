@@ -126,16 +126,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    public static function tearDownAfterClass(): void
-    {
-        static::tearDownWebserverRequestTests();
-        parent::tearDownAfterClass();
-    }
-
-    protected static function tearDownWebserverRequestTests(): void
-    {
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
