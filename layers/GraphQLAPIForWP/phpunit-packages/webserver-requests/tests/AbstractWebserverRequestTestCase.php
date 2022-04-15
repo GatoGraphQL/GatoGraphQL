@@ -145,27 +145,56 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
     }
 
+    // protected function tearDown(): void
+    // {
+    //     parent::tearDown();
+    // }
+
+    // /**
+    //  * Execute a request against the webserver.
+    //  * If not successful (eg: because the server is not running)
+    //  * then skip all tests.
+    //  *
+    //  * @return ResponseInterface|string The response if successful, or the error message otherwise
+    //  */
+    // protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface|string
+    // {
+    //     $client = static::getClient();
+    //     $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+    //     try {
+    //         return $client->request(
+    //             $method ?? $this->getMethod(),
+    //             $endpointURL,
+    //             [
+    //                 'query' => $params,
+    //                 'body' => $body,
+    //             ]
+    //         );
+    //     } catch (GuzzleException | RuntimeException $e) {
+    //         return $e->getMessage();
+    //     }
+    // }
+
     /**
-     * @dataProvider provideEndpoints
+     * @dataProvider provideEndpointEntries
      */
     public function testEndpoints(
         string $expectedResponseBody,
-        ?string $endpoint = null,
-        ?array $params = null,
-        ?string $body = null,
-        ?string $expectedContentType = null,
+        string $endpoint,
+        array $params = [],
+        string $body = '',
+        string $expectedContentType = 'application/json',
         ?string $method = null,
     ): void {
         $client = static::getClient();
-        $dataName = $this->dataName();
-        $endpointURL = static::getWebserverHomeURL() . '/' . ($endpoint ?? $this->getEndpoint($dataName));
+        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         try {
             $response = $client->request(
-                $method ?? $this->getMethod($dataName),
+                $method ?? $this->getMethod(),
                 $endpointURL,
                 [
-                    'query' => $params ?? $this->getParams($dataName),
-                    'body' => $body ?? $this->getBody($dataName),
+                    'query' => $params,
+                    'body' => $body,
                 ]
             );
         } catch (ClientException $e) {
@@ -177,43 +206,17 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
         
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(
-            $expectedContentType ?? $this->getExpectedContentType($dataName),
-            $response->getHeaderLine('content-type')
-        );
+        $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
         $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
     }
 
     /**
      * @return array<string,array<mixed>>
      */
-    abstract protected function provideEndpoints(string $endpoint): array;
+    abstract protected function provideEndpointEntries(): array;
 
-    protected function getMethod(string $dataName): string
+    protected function getMethod(): string
     {
         return 'POST';
-    }
-
-    protected function getEndpoint(string $dataName): string
-    {
-        return '';
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getParams(string $dataName): array
-    {
-        return [];
-    }
-
-    protected function getBody(string $dataName): string
-    {
-        return '';
-    }
-
-    protected function getExpectedContentType(string $dataName): string
-    {
-        return 'application/json';
     }
 }
