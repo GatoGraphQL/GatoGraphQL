@@ -28,11 +28,14 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     {
         return [
             'form_params' => [
-                'log' => 'admin',
-                'pwd' => 'admin',
+                'log' => static::getLoginUsername(),
+                'pwd' => static::getLoginPassword(),
             ],
         ];
     }
+
+    abstract protected static function getLoginUsername(): string;
+    abstract protected static function getLoginPassword(): string;
 
     protected static function getWebserverPingMethod(): string
     {
@@ -55,7 +58,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
                 return null;
             }
         }
-        return sprintf('The user "%s" was not logged in', 'admin');
+        return sprintf('The user "%s" was not logged in', static::getLoginUsername());
     }
 
     /**
