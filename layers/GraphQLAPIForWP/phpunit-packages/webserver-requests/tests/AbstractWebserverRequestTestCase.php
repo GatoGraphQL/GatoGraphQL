@@ -8,6 +8,8 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
+use function getenv;
+
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
@@ -26,6 +28,11 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        // Skip running tests in Continuous Integration?
+        if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
+            return;
+        }
+
         $client = static::getClient();
         try {
             $response = $client->request(
@@ -39,6 +46,32 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         } catch (GuzzleException) {
             // The webserver is down
         }
+    }
+
+    /**
+     * Check if running the test on Continuous Integration.
+     *
+     * Currently supported:
+     *
+     * - GitHub Actions
+     *
+     * @see https://docs.github.com/en/enterprise-cloud@latest/actions/learn-github-actions/environment-variables
+     */
+    protected static function isContinuousIntegration(): bool
+    {
+        // GitHub Actions
+        if (getenv('GITHUB_ACTION') !== false) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Indicate to not run tests on CI (eg: GitHub)
+     */
+    protected static function skipTestsInContinuousIntegration(): bool
+    {
+        return true;
     }
 
     protected static function getMethod(): string
