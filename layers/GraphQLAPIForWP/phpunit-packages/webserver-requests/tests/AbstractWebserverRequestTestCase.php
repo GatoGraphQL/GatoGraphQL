@@ -145,36 +145,6 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
     }
 
-    // protected function tearDown(): void
-    // {
-    //     parent::tearDown();
-    // }
-
-    // /**
-    //  * Execute a request against the webserver.
-    //  * If not successful (eg: because the server is not running)
-    //  * then skip all tests.
-    //  *
-    //  * @return ResponseInterface|string The response if successful, or the error message otherwise
-    //  */
-    // protected function request(string $endpoint, array $params = [], string $body = '', ?string $method = null): ResponseInterface|string
-    // {
-    //     $client = static::getClient();
-    //     $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-    //     try {
-    //         return $client->request(
-    //             $method ?? $this->getMethod(),
-    //             $endpointURL,
-    //             [
-    //                 'query' => $params,
-    //                 'body' => $body,
-    //             ]
-    //         );
-    //     } catch (GuzzleException | RuntimeException $e) {
-    //         return $e->getMessage();
-    //     }
-    // }
-
     /**
      * @dataProvider provideEndpoints
      */
