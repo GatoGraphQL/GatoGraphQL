@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
-
 abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends AbstractGraphQLServerTestCase
 {
+    use FixtureTestCaseTrait;
+
     /**
      * @dataProvider fixtureGraphQLServerExecutionProvider
      */
@@ -18,7 +17,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
     }
 
     /**
-     * Retrieve all files under the "/fixture" folder (by default):
+     * Retrieve all files under the "/fixture" folder:
      *
      *   - GraphQL queries: all files ending in ".gql" or ".graphql"
      *     (unless ending in ".disabled.gql" or ".disabled.graphql")
@@ -91,18 +90,6 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             }
         }
         return $providerItems;
-    }
-
-    /**
-     * @return SplFileInfo[]
-     */
-    protected function findFilesInDirectory(string $directory, array $fileNames, array $notFileNames = []): array
-    {
-        $finder = Finder::create()->in($directory)->files()->name($fileNames)->notName($notFileNames);
-        // Allow fixtures to be named with cardinal numbers, to execute the tests in a desired order
-        $finder->sortByName(true);
-        $fileInfos = iterator_to_array($finder);
-        return array_values($fileInfos);
     }
 
     /**

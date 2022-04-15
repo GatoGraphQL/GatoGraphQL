@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-graphql-api/graphql-api-for-wp",
+    "name": "phpunit-for-graphql-api/webserver-requests",
     "conflict": {
         "getpop/modulerouting": "<0.8.9",
         "getpop/loosecontracts": "<0.8.9",
@@ -152,9 +152,9 @@
         "pop-wp-schema/schema-commons": "<0.8.9"
     },
     "type": "library",
-    "description": "Mock the WordPress schema when running PHPUnit tests",
-    "keywords": ["GraphQL", "PHP", "PoP", "wpfaker", "phpunit", "API"],
-    "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp",
+    "description": "Test the response from requests against a webserver using PHPUnit and Guzzle",
+    "keywords": ["GraphQL", "PHP", "PoP", "guzzle", "phpunit"],
+    "homepage": "https://github.com/PHPUnitForGraphQLAPI/webserver-requests",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -165,18 +165,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "phpunit-for-graphql-api/wpfaker-schema": "^0.9",
-        "phpunit-for-graphql-api/webserver-requests": "^0.9",
-        "pop-wp-schema/users": "^0.9",
-        "pop-wp-schema/pages": "^0.9",
-        "pop-wp-schema/posts": "^0.9",
-        "pop-wp-schema/comments": "^0.9",
-        "pop-cms-schema/comment-mutations-wp": "^0.9",
-        "pop-cms-schema/post-categories-wp": "^0.9",
-        "pop-cms-schema/post-tags-wp": "^0.9",
-        "pop-cms-schema/user-state-mutations-wp": "^0.9"
+        "graphql-by-pop/graphql-server": "^0.9"
     },
     "require-dev": {
+        "guzzlehttp/guzzle": "^7.4",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.12",
@@ -184,12 +176,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "src"
+            "PHPUnitForGraphQLAPI\\WebserverRequests\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "tests"
+            "PHPUnitForGraphQLAPI\\WebserverRequests\\": "tests"
         }
     },
     "scripts": {
