@@ -47,7 +47,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }        
         try {
             $response = $client->request(
-                'GET',
+                static::getWebserverPingMethod(),
                 static::getWebserverPingURL(),
                 $options
             );
@@ -93,6 +93,11 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function getWebserverPingURL(): string
     {
         return static::getWebserverHomeURL();
+    }
+
+    protected static function getWebserverPingMethod(): string
+    {
+        return 'GET';
     }
 
     /**
@@ -145,9 +150,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function getCookies(): array
     {
-        return [
-            'wordpress_test_cookie' => 'WP%20Cookie%20check'
-        ];
+        return [];
     }
 
     /**

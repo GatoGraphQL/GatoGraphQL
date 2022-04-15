@@ -33,6 +33,11 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         ];
     }
 
+    protected static function getWebserverPingMethod(): string
+    {
+        return 'POST';
+    }
+
     /**
      * @return array<string,string>
      */
