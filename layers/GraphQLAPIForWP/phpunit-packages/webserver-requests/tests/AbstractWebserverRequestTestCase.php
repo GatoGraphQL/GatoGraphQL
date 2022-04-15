@@ -197,7 +197,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         string $expectedResponseBody,
         string $endpoint,
         array $params = [],
-        string $body = '',
+        string $query = '',
+        array $variables = [],
         string $expectedContentType = 'application/json',
         ?string $method = null,
     ): void {
@@ -206,6 +207,13 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         $options = [];
         if ($params !== []) {
             $options['query'] = $params;
+        }
+        $body = '';
+        if ($query !== '' || $variables !== []) {
+            $body = json_encode([
+                'query' => $query,
+                'variables' => $variables,
+            ]);
         }
         if ($body !== '') {
             $options['body'] = $body;
