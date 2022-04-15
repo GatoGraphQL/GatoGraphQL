@@ -24,7 +24,39 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        $client = static::getClient();
+        $response = $client->request(
+            static::getMethod(),
+            static::getWebserverPingURL()
+        );
+        if ($response->getStatusCode() === 200) {
+            // The webserver is working
+            return;
+        }
+        // The webserver is down. Mark all tests to be skipped
     }
+
+    protected static function getMethod(): string
+    {
+        return 'GET';
+    }
+
+    protected static function getWebserverPingURL(): string
+    {
+        return static::getWebserverHomeURL();
+    }
+
+    protected static function getWebserverHomeURL(): string
+    {
+        return (static::useSSL() ? 'https' : 'http') . '://' . static::getWebserverDomain();
+    }
+
+    protected static function useSSL(): bool
+    {
+        return false;
+    }
+
+    abstract protected static function getWebserverDomain();
 
     
 
