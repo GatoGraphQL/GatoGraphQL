@@ -27,6 +27,7 @@ class LocalhostWordPressAuthenticatedUserWebserverRequestTest extends AbstractWe
                 }
                 JSON,
                 'wp-admin/edit.php?page=graphql_api&action=execute_query',
+                [],
                 <<<GRAPHQL
                 {
                     id
