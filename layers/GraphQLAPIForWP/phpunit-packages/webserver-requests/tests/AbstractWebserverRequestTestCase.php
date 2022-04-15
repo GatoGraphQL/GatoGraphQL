@@ -58,9 +58,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    abstract protected static function getWebserverDomain();
-
-    
+    abstract protected static function getWebserverDomain(): string;    
 
     protected static function getClient(): Client
     {
@@ -102,7 +100,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Skip the tests if the webserver is down
         if (static::$skipTests) {
             $this->markTestSkipped(
