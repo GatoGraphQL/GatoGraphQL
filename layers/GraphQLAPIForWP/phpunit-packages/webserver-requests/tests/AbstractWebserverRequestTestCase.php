@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
-    protected static bool $skipTests = false;
+    protected static bool $enableTests = false;
 
     public static function setUpBeforeClass(): void
     {
@@ -26,16 +27,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function setUpWebserverRequestTests(): void
     {
         $client = static::getClient();
-        $response = $client->request(
-            static::getMethod(),
-            static::getWebserverPingURL()
-        );
-        if ($response->getStatusCode() === 200) {
+        try {
+            $response = $client->request(
+                static::getMethod(),
+                static::getWebserverPingURL()
+            );
+            // if ($response->getStatusCode() === 200) {
             // The webserver is working
-            return;
+            self::$enableTests = true;
+            // }
+        } catch (GuzzleException) {
+            // The webserver is down
         }
-        // The webserver is down. Mark all tests to be skipped
-        self::$skipTests = true;
     }
 
     protected static function getMethod(): string
@@ -102,7 +105,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         parent::setUp();
 
         // Skip the tests if the webserver is down
-        if (static::$skipTests) {
+        if (static::$enableTests) {
             $this->markTestSkipped(
                 sprintf(
                     'Webserver under "%s" is not running',
