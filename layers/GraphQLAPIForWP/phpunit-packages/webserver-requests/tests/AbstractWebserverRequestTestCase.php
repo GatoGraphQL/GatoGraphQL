@@ -204,7 +204,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     ): void {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = [];
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+        ];
         if ($params !== []) {
             $options['query'] = $params;
         }
