@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
-use function getenv;
+use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -51,6 +52,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
                 static::getWebserverPingURL(),
                 $options
             );
+            $maybeErrorMessage = static::validateWebserverPingResponse($response, $options);
+            if ($maybeErrorMessage !== null) {
+                self::$skipTestsReason = $maybeErrorMessage;
+                return;
+            }
+
             // The webserver is working
             self::$enableTests = true;
             return;
@@ -98,6 +105,16 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     protected static function getWebserverPingMethod(): string
     {
         return 'GET';
+    }
+
+    /**
+     * @param array<string,mixed> $options
+     */
+    protected static function validateWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): ?string {
+        return null;
     }
 
     /**
