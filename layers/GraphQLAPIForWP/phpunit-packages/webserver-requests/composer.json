@@ -164,12 +164,10 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "getpop/engine": "^0.9",
-        "leoloso/faker": "dev-master",
-        "pop-backbone/wp-data-parser": "^0.9"
+        "php": "^8.1"
     },
     "require-dev": {
+        "guzzlehttp/guzzle": "^7.4",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.12",
