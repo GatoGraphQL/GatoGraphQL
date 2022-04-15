@@ -42,7 +42,8 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
                 $bodyResponseFileInfo->getContents(),
                 $this->getEndpoint($dataName),
                 $this->getParams($dataName),
-                $this->getBody($dataName),
+                $this->getQuery($dataName),
+                $this->getVariables($dataName),
                 str_ends_with($bodyResponseFile, '.html') ? 'text/html' : 'application/json',
                 $this->getEntryMethod($dataName),
             ];
@@ -81,8 +82,16 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
         return [];
     }
 
-    protected function getBody(string $dataName): string
+    protected function getQuery(string $dataName): string
     {
         return '';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getVariables(string $dataName): array
+    {
+        return [];
     }
 }

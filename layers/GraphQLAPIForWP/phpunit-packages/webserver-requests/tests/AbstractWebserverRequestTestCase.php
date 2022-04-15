@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
+
 use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
+use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
-
-use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
     protected static ?Client $client = null;
+    protected static ?CookieJar $cookieJar = null;
     protected static bool $enableTests = false;
     protected static string $skipTestsReason = '';
 
@@ -38,11 +42,24 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         }
 
         $client = static::getClient();
+        $options = static::getWebserverPingOptions();
+        if (static::shareCookies()) {
+            self::$cookieJar = static::createCookieJar();
+            $options['cookies'] = self::$cookieJar;
+        }
         try {
             $response = $client->request(
-                'GET',
-                static::getWebserverPingURL()
+                static::getWebserverPingMethod(),
+                static::getWebserverPingURL(),
+                $options
             );
+
+            // If the user validation does not succeed, treat it as a failure
+            $maybeErrorMessage = static::validateWebserverPingResponse($response, $options);
+            if ($maybeErrorMessage !== null) {
+                throw new UnauthenticatedUserException($maybeErrorMessage);
+            }
+
             // The webserver is working
             self::$enableTests = true;
             return;
@@ -87,6 +104,29 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return static::getWebserverHomeURL();
     }
 
+    protected static function getWebserverPingMethod(): string
+    {
+        return 'GET';
+    }
+
+    /**
+     * @param array<string,mixed> $options
+     */
+    protected static function validateWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): ?string {
+        return null;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getWebserverPingOptions(): array
+    {
+        return [];
+    }
+
     protected static function getWebserverHomeURL(): string
     {
         return (static::useSSL() ? 'https' : 'http') . '://' . static::getWebserverDomain();
@@ -116,6 +156,22 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         );
     }
 
+    protected static function createCookieJar(): CookieJar
+    {
+        return CookieJar::fromArray(
+            static::getCookies(),
+            static::getWebserverDomain()
+        );
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    protected static function getCookies(): array
+    {
+        return [];
+    }
+
     /**
      * Indicate if to share cookies across requests (Cookie Jar)
      *
@@ -126,21 +182,13 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    public static function tearDownAfterClass(): void
-    {
-        static::tearDownWebserverRequestTests();
-        parent::tearDownAfterClass();
-    }
-
-    protected static function tearDownWebserverRequestTests(): void
-    {
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        // Skip the tests if the webserver is down
+        /**
+         * Skip the tests if the webserver is down.
+         */
         if (!static::$enableTests) {
             $this->markTestSkipped(self::$skipTestsReason);
         }
@@ -153,20 +201,40 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         string $expectedResponseBody,
         string $endpoint,
         array $params = [],
-        string $body = '',
+        string $query = '',
+        array $variables = [],
         string $expectedContentType = 'application/json',
         ?string $method = null,
     ): void {
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
+            ],
+        ];
+        if ($params !== []) {
+            $options['query'] = $params;
+        }
+        $body = '';
+        if ($query !== '' || $variables !== []) {
+            $body = json_encode([
+                'query' => $query,
+                'variables' => $variables,
+            ]);
+        }
+        if ($body !== '') {
+            $options['body'] = $body;
+        }
+        if (static::shareCookies()) {
+            $options['cookies'] = self::$cookieJar;
+        }
         try {
             $response = $client->request(
                 $method ?? $this->getMethod(),
                 $endpointURL,
-                [
-                    'query' => $params,
-                    'body' => $body,
-                ]
+                $options
             );
         } catch (ClientException $e) {
             /**
