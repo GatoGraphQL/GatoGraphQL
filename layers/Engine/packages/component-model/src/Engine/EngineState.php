@@ -56,7 +56,6 @@ class EngineState
          * @var array<string,array<string,mixed>>
          */
         public array $relationalTypeOutputDBKeyIDsDataFields = [],
-
         /**
          * After executing `resolveValue` on the Object/UnionTypeResolver,
          * store the results to re-use for subsequent calls for same object/field.

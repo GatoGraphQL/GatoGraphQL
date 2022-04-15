@@ -374,7 +374,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $options,
             );
             $engineState->setObjectTypeResolvedValue($this, $object, $field, $variables, $expressions, $value);
-        }        
+        }
         return $engineState->getObjectTypeResolvedValue($this, $object, $field, $variables, $expressions);
     }
 
