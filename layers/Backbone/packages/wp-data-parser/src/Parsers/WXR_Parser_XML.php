@@ -115,9 +115,9 @@ class WXR_Parser_XML
                     $this->sub_data['slug'] = $attr['nicename'];
                 }
                 break;
-            case 'item': {
+            // phpcs:disable PSR2.ControlStructures.SwitchDeclaration.TerminatingComment
+            case 'item':
                 $this->in_post = true;
-            }
             case 'title':
                 if ($this->in_post) {
                     $this->in_tag = 'post_title';
