@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GuzzleHttp\Cookie\CookieJar;
+use Psr\Http\Message\ResponseInterface;
+
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
 {
     abstract protected static function getWebserverHomeURL(): string;
@@ -36,6 +39,25 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     protected static function getWebserverPingMethod(): string
     {
         return 'POST';
+    }
+
+    /**
+     * Make sure the user was successfully logged-in
+     * 
+     * @param array<string,mixed> $options
+     */
+    protected static function validateWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): ?string {
+        /** @var CookieJar */
+        $cookieJar = $options['cookies'];
+        foreach ($cookieJar->getIterator() as $cookie) {
+            if (str_starts_with($cookie->getName(), 'wordpress_logged_in_')) {
+                return null;
+            }
+        }
+        return sprintf('The user "%s" was not logged in', 'admin');
     }
 
     /**
