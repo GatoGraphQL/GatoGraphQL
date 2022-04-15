@@ -29,8 +29,11 @@ class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverReque
     protected function getEntryMethod(string $dataName): string
     {
         return match ($dataName) {
-            'persisted-query-by-post' => 'POST',
-            default => parent::getEntryMethod($dataName),
+            'persisted-query',
+            'persisted-query-passing-params'
+                => 'GET',
+            default
+                => parent::getEntryMethod($dataName),
         };
     }
 
@@ -45,10 +48,5 @@ class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverReque
             ],
             default => parent::getParams($dataName),
         };
-    }
-
-    protected function getMethod(): string
-    {
-        return 'GET';
     }
 }
