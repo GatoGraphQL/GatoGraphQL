@@ -38,6 +38,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        // Skip running tests if the domain has not been configured
+        if (static::getWebserverDomain() === '') {
+            self::$skipTestsReason = 'Webserver domain not configured';
+            return;
+        }
+
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
