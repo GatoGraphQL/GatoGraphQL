@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::DEFAULT_CACHE_CONTROL_MAX_AGE;
         $defaultValue = 3600; // 1 hour
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

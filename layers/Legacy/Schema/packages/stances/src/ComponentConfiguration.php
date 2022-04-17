@@ -18,7 +18,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $envVariable = Environment::STANCE_LIST_DEFAULT_LIMIT;
         $selfProperty = &self::$getStanceListDefaultLimit;
         $defaultValue = 10;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         // Initialize property from the environment/hook
         $this->maybeInitializeConfigurationValue(
@@ -36,7 +36,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         $envVariable = Environment::STANCE_LIST_MAX_LIMIT;
         $selfProperty = &self::$getStanceListMaxLimit;
         $defaultValue = -1; // Unlimited
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         // Initialize property from the environment/hook
         self::maybeInitializeConfigurationValue(

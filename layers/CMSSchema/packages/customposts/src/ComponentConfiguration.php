@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::CUSTOMPOST_LIST_DEFAULT_LIMIT;
         $defaultValue = 10;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -26,7 +26,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::CUSTOMPOST_LIST_MAX_LIMIT;
         $defaultValue = -1; // Unlimited
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -39,7 +39,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -52,7 +52,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA;
         $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
