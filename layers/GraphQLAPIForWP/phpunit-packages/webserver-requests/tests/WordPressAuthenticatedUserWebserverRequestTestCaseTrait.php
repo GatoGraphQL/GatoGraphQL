@@ -39,7 +39,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     {
         return Environment::getIntegrationTestsAuthenticatedUserUsername();
     }
-    
+
     protected static function getLoginPassword(): string
     {
         return Environment::getIntegrationTestsAuthenticatedUserPassword();
