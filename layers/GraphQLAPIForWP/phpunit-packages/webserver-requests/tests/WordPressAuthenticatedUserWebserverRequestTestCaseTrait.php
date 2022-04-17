@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
+use PHPUnitForGraphQLAPI\GraphQLAPI\Component;
+use PHPUnitForGraphQLAPI\WebserverRequests\ComponentConfiguration;
+use PoP\ComponentModel\App;
 use Psr\Http\Message\ResponseInterface;
 
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
@@ -34,8 +37,19 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         ];
     }
 
-    abstract protected static function getLoginUsername(): string;
-    abstract protected static function getLoginPassword(): string;
+    protected static function getLoginUsername(): string
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Cphomponent::class)->getConfiguration();
+        return $componentConfiguration->getIntegrationTestsAuthenticatedUserUsername();
+    }
+    
+    protected static function getLoginPassword(): string
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getIntegrationTestsAuthenticatedUserPassword();
+    }
 
     protected static function getWebserverPingMethod(): string
     {
