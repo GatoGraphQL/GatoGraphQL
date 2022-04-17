@@ -41,7 +41,8 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api",
             "@update-deps",
             "@start-server",
-            "@install-site"
+            "@install-site",
+            "@import data"
         ],
         "init-server": "@start-server",
         "start-server": [
@@ -50,6 +51,8 @@
         ],
         "install-site": "lando composer install-site-within-container",
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
+        "import-data": "lando composer import-data-within-container",
+        "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
         "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
             "@symlink-vendor-for-graphql-api-extension-demo"
