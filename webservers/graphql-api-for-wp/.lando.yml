@@ -14,7 +14,7 @@ services:
   appserver:
     overrides:
       environment:
-        XDEBUG_MODE:
+        XDEBUG_MODE: ""
       volumes:
         - >-
           ../../layers/GraphQLAPIForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
@@ -251,7 +251,9 @@ services:
         - >-
           ../../layers/WPSchema/packages/users:/app/wordpress/wp-content/plugins/graphql-api/vendor/pop-wp-schema/users
     run:
-      - SITE_NAME=graphql-api SITE_TITLE="GraphQL API" /bin/sh /app/setup/setup.sh        
+      - >-
+        SITE_NAME=graphql-api SITE_TITLE="GraphQL API" /bin/sh
+        /app/setup/setup.sh
 env_file:
   - defaults.env
   - defaults.local.env
