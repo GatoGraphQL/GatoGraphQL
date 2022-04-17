@@ -66,7 +66,11 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
                 return null;
             }
         }
-        return sprintf('The user "%s" was not logged in', static::getLoginUsername());
+        $username = static::getLoginUsername();
+        if ($username === '' || static::getLoginPassword() === '') {
+            return 'The credentials to authenticate the user are incomplete or missing';
+        }
+        return sprintf('Authentication of user "%s" did not succeed', $username);
     }
 
     /**
