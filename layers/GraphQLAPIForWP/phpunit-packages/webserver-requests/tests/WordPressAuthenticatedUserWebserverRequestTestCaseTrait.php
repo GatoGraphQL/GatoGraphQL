@@ -40,7 +40,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     protected static function getLoginUsername(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Cphomponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         return $componentConfiguration->getIntegrationTestsAuthenticatedUserUsername();
     }
     
