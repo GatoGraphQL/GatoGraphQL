@@ -9,7 +9,10 @@ use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
+use PHPUnitForGraphQLAPI\GraphQLAPI\Component;
+use PHPUnitForGraphQLAPI\WebserverRequests\ComponentConfiguration;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
+use PoP\ComponentModel\App;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
@@ -137,7 +140,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    abstract protected static function getWebserverDomain(): string;
+    protected static function getWebserverDomain(): string
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->getIntegrationTestsWebserverDomain();
+    }
 
     protected static function getClient(): Client
     {
