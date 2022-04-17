@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\WebserverRequests;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
-class LocalhostWordPressAuthenticatedUserWebserverRequestTest extends AbstractWebserverRequestTestCase
+class IntegrationTestsWordPressAuthenticatedUserWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
-    use LocalhostWebserverRequestTestTrait;
-    use LocalhostWordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
     /**
      * @return array<string,array<mixed>>

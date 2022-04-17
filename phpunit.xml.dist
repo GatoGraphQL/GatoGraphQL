@@ -21,5 +21,8 @@
   </testsuite>
   <php>
     <env name="APPLICATION_ENVIRONMENT" value="development-phpunit"/>
+    <env name="INTEGRATION_TESTS_WEBSERVER_DOMAIN" value="graphql-api.lndo.site"/>
+    <env name="INTEGRATION_TESTS_AUTHENTICATED_USER_USERNAME" value="admin"/>
+    <env name="INTEGRATION_TESTS_AUTHENTICATED_USER_PASSWORD" value="admin"/>
   </php>
 </phpunit>

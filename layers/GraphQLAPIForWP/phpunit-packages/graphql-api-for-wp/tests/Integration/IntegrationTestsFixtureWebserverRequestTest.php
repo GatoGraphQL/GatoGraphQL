@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\WebserverRequests;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractFixtureWebserverRequestTestCase;
 
-class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
+class IntegrationTestsFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
 {
-    use LocalhostWebserverRequestTestTrait;
-
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture';

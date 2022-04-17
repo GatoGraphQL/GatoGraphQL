@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use function getenv;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
+
+use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -35,6 +36,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        // Skip running tests if the domain has not been configured
+        if (static::getWebserverDomain() === '') {
+            self::$skipTestsReason = 'Webserver domain not configured';
+            return;
+        }
+
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
@@ -137,7 +144,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    abstract protected static function getWebserverDomain(): string;
+    protected static function getWebserverDomain(): string
+    {
+        return Environment::getIntegrationTestsWebserverDomain();
+    }
 
     protected static function getClient(): Client
     {
