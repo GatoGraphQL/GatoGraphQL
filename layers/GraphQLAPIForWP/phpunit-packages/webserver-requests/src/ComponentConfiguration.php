@@ -19,7 +19,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function getIntegrationTestsWebserverAuthenticatedUserUsername(): array
+    public function getIntegrationTestsAuthenticatedUserUsername(): array
     {
         $envVariable = Environment::INTEGRATION_TESTS_AUTHENTICATED_USER_USERNAME;
         $defaultValue = null;
@@ -30,7 +30,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
         );
     }
 
-    public function getIntegrationTestsWebserverAuthenticatedUserPassword(): array
+    public function getIntegrationTestsAuthenticatedUserPassword(): array
     {
         $envVariable = Environment::INTEGRATION_TESTS_AUTHENTICATED_USER_PASSWORD;
         $defaultValue = null;
