@@ -9,7 +9,6 @@ use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRe
 
 class LocalhostWordPressAuthenticatedUserWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
-    use LocalhostWebserverRequestTestTrait;
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
     /**

@@ -8,8 +8,6 @@ use PHPUnitForGraphQLAPI\WebserverRequests\AbstractFixtureWebserverRequestTestCa
 
 class LocalhostFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
 {
-    use LocalhostWebserverRequestTestTrait;
-
     protected function getFixtureFolder(): string
     {
         return __DIR__ . '/fixture';
