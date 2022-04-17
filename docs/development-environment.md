@@ -34,6 +34,13 @@ Build the Lando webserver:
 composer build-server
 ```
 
+If the process throws an error before installing the WordPress site (it may happen due to [unidentified reasons](https://github.com/lando/lando/issues/2210#issuecomment-777964375)), then run:
+
+```bash
+$ composer install-site
+$ composer import-data
+```
+
 ## Site URL
 
 The site will be available under `http://graphql-api.lndo.site`.
