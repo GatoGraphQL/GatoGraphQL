@@ -15,6 +15,11 @@ use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
  */
 class Component extends AbstractComponent
 {
+    protected function requiresSatisfyingComponent(): bool
+    {
+        return true;
+    }
+    
     /**
      * Classes from PoP components that must be initialized before this component
      *
