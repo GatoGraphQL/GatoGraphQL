@@ -176,16 +176,23 @@ abstract class AbstractComponent implements ComponentInterface
     {
         if ($this->enabled === null) {
             // If any dependency is disabled, then disable this component too
-            foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
-                $dependedComponent = App::getComponent($dependedComponentClass);
-                if (!$dependedComponent->isEnabled()) {
-                    $this->enabled = false;
-                    return $this->enabled;
+            if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
+                foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+                    $dependedComponent = App::getComponent($dependedComponentClass);
+                    if (!$dependedComponent->isEnabled()) {
+                        $this->enabled = false;
+                        return $this->enabled;
+                    }
                 }
             }
             $this->enabled = $this->resolveEnabled();
         }
         return $this->enabled;
+    }
+
+    public function onlyEnableIfAllDependenciesAreEnabled(): bool
+    {
+        return true;
     }
 
     protected function resolveEnabled(): bool
