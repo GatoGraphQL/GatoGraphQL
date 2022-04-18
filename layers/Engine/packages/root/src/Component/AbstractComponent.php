@@ -11,6 +11,15 @@ abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
 
+    /**
+     * Indicate if there is some other component that satisfies
+     * the contracts by this component.
+     *
+     * For instance, the packages under CMSSchema have generic contracts
+     * for any CMS, that require to be satisfied for some specific CMS
+     * (such as WordPress).
+     */
+    private bool $hasSatisfyingComponent = false;
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
@@ -68,7 +77,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Indicate if this components requires some other component
+     * Indicate if this component requires some other component
      * to satisfy its contracts.
      *
      * For instance, the packages under CMSSchema have generic contracts
