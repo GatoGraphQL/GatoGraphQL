@@ -1,2 +1,2 @@
 #!/bin/sh
-wp import /app/assets/graphql-api-sample-data.xml --authors=create --path=/app/wordpress
+wp import /app/assets/graphql-api-data.xml --authors=create --path=/app/wordpress
