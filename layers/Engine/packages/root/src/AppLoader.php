@@ -158,7 +158,7 @@ class AppLoader implements AppLoaderInterface
              */
             foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
                 $satisfiedComponent = App::getComponent($satisfiedComponentClass);
-                $satisfiedComponent->setHasSatisfyingComponent();
+                $satisfiedComponent->setSatisfyingComponent($component);
             }
 
             // Initialize all depended-upon PoP components

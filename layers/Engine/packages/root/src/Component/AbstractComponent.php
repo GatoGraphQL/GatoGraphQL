@@ -12,14 +12,14 @@ abstract class AbstractComponent implements ComponentInterface
     use InitializeContainerServicesInComponentTrait;
 
     /**
-     * Indicate if there is some other component that satisfies
-     * the contracts by this component.
+     * Indicate what other component satisfies the contracts
+     * by this component.
      *
      * For instance, the packages under CMSSchema have generic contracts
      * for any CMS, that require to be satisfied for some specific CMS
      * (such as WordPress).
      */
-    private bool $hasSatisfyingComponent = false;
+    private ?ComponentInterface $satisfyingComponent = null;
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
@@ -90,12 +90,11 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Indicate that there is some other component that satisfies
-     * the contracts by this component.
+     * Indicate what other component satisfies the contracts by this component.
      */
-    public function setHasSatisfyingComponent(): void
+    public function setSatisfyingComponent(ComponentInterface $component): void
     {
-        $this->hasSatisfyingComponent = true;
+        $this->satisfyingComponent = $component;
     }
     
     /**
@@ -227,7 +226,7 @@ abstract class AbstractComponent implements ComponentInterface
          * Check that there is some other component that satisfies
          * the contracts of this component (if required).
          */
-        if ($this->requiresSatisfyingComponent() && !$this->hasSatisfyingComponent) {
+        if ($this->requiresSatisfyingComponent() && $this->satisfyingComponent === null) {
             return false;
         }
 

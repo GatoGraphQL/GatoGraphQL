@@ -23,10 +23,9 @@ interface ComponentInterface
     ): void;
 
     /**
-     * Indicate that there is some other component that satisfies
-     * the contracts by this component.
+     * Indicate what other component satisfies the contracts by this component.
      */
-    public function setHasSatisfyingComponent(): void;
+    public function setSatisfyingComponent(ComponentInterface $component): void;
     
     /**
      * All component classes that this component satisfies
