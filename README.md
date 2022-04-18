@@ -76,15 +76,16 @@ $ composer install
 ## Table of Contents
 
 1. [Setting-up the development environment](docs/development-environment.md)
-2. [Repo visualization](docs/repo-visualization.md)
-3. [Layer dependency graph](docs/layer-dependency-graph.md)
-4. [Supported PHP features](docs/supported-php-features.md)
-5. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
-6. [Why are there so many packages in the repo](docs/splitting-packages.md)
-7. [Why a monorepo](docs/why-monorepo.md)
-8. [How transpiling works](docs/how-transpiling-works.md)
-9. [How scoping works](docs/how-scoping-works.md)
-10. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
+2. [Running tests](docs/running-tests.md)
+3. [Repo visualization](docs/repo-visualization.md)
+4. [Layer dependency graph](docs/layer-dependency-graph.md)
+5. [Supported PHP features](docs/supported-php-features.md)
+6. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
+7. [Why are there so many packages in the repo](docs/splitting-packages.md)
+8. [Why a monorepo](docs/why-monorepo.md)
+9. [How transpiling works](docs/how-transpiling-works.md)
+10. [How scoping works](docs/how-scoping-works.md)
+11. [Installing the GraphQL API for WordPress plugin](docs/installing-graphql-api-for-wordpress.md)
 
 <!-- ## Resources
 
