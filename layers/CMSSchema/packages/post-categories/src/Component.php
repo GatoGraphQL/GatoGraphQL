@@ -18,7 +18,7 @@ class Component extends AbstractComponent
     {
         return true;
     }
-    
+
     /**
      * Classes from PoP components that must be initialized before this component
      *

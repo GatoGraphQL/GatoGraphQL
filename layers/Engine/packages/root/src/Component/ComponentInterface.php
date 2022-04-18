@@ -33,7 +33,7 @@ interface ComponentInterface
      * Indicate what other component satisfies the contracts by this component.
      */
     public function setSatisfyingComponent(ComponentInterface $component): void;
-    
+
     /**
      * All component classes that this component satisfies
      *

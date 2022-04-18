@@ -96,7 +96,7 @@ abstract class AbstractComponent implements ComponentInterface
     {
         $this->satisfyingComponent = $component;
     }
-    
+
     /**
      * All component classes that this component satisfies
      *
