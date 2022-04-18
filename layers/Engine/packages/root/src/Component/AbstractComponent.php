@@ -88,6 +88,15 @@ abstract class AbstractComponent implements ComponentInterface
     {
         return false;
     }
+
+    /**
+     * Indicate that there is some other component that satisfies
+     * the contracts by this component.
+     */
+    protected function setHasSatisfyingComponent(): void
+    {
+        $this->hasSatisfyingComponent = true;
+    }
     
     /**
      * All component classes that this component depends upon, to initialize them
@@ -204,6 +213,15 @@ abstract class AbstractComponent implements ComponentInterface
 
     private function setEnabled(): void
     {
+        /**
+         * Check that there is some other component that satisfies
+         * the contracts of this component (if required).
+         */
+        if ($this->requiresSatisfyingComponent() && !$this->hasSatisfyingComponent) {
+            $this->enabled = false;
+            return;
+        }
+
         // If any dependency is disabled, then disable this component too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
             foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
@@ -214,6 +232,7 @@ abstract class AbstractComponent implements ComponentInterface
                 }
             }
         }
+
         $this->enabled = $this->resolveEnabled();
     }
 
