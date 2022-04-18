@@ -151,16 +151,6 @@ class AppLoader implements AppLoaderInterface
             // Initialize and register the Component
             $component = $componentManager->register($componentClass);
 
-            /**
-             * If this compononent satisfies the contracts for other
-             * components, set them as "satisfied". Since they will also
-             * be dependencies, they must've been already registered.
-             */
-            foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
-                $satisfiedComponent = App::getComponent($satisfiedComponentClass);
-                $satisfiedComponent->setSatisfyingComponent($component);
-            }
-
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
                 $component->getDependedComponentClasses(),
@@ -191,6 +181,15 @@ class AppLoader implements AppLoaderInterface
 
             // We reached the bottom of the rung, add the component to the list
             $this->orderedComponentClasses[] = $componentClass;
+
+            /**
+             * If this compononent satisfies the contracts for other
+             * components, set them as "satisfied".
+             */
+            foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
+                $satisfiedComponent = App::getComponent($satisfiedComponentClass);
+                $satisfiedComponent->setSatisfyingComponent($component);
+            }
         }
     }
 
