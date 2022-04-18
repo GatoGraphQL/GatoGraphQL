@@ -33,7 +33,7 @@ class Component extends AbstractComponent
         return [
             \PoPCMSSchema\CommentMutations\Component::class,
             \PoPCMSSchema\CommentsWP\Component::class,
-            \PoPCMSSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateMutationsWP\Component::class,
         ];
     }
 

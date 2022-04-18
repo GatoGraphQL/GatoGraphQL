@@ -34,7 +34,7 @@ class Component extends AbstractComponent
             \PoPCMSSchema\CustomPostMediaMutations\Component::class,
             \PoPCMSSchema\CustomPostMutationsWP\Component::class,
             \PoPCMSSchema\MediaWP\Component::class,
-            \PoPCMSSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateMutationsWP\Component::class,
         ];
     }
 

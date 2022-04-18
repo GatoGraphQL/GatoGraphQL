@@ -34,7 +34,7 @@ class Component extends AbstractComponent
             \PoPCMSSchema\PostTagMutations\Component::class,
             \PoPCMSSchema\CustomPostMutationsWP\Component::class,
             \PoPCMSSchema\PostTagsWP\Component::class,
-            \PoPCMSSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateMutationsWP\Component::class,
         ];
     }
 
