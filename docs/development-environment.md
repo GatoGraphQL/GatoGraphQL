@@ -1,6 +1,7 @@
 # Setting-up the development environment
 
 These are the instructions on how to set-up a local development environment.
+
 ## Requirements
 
 - PHP 8.1+
