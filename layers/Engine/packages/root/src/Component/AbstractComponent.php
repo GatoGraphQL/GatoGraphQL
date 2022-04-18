@@ -215,24 +215,43 @@ abstract class AbstractComponent implements ComponentInterface
     public function isEnabled(): bool
     {
         if ($this->enabled === null) {
-            $this->enabled = $this->calculateIsEnabled();
+            $this->enabled = $this->calculateIsEnabled(false);
         }
         return $this->enabled;
     }
 
-    private function calculateIsEnabled(): bool
+    /**
+     * Calculate if the component must be enabled or not.
+     *
+     * @param boolean $ignoreDependencyOnSatisfiedComponents Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
+     */
+    public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedComponents): bool
     {
         /**
          * Check that there is some other component that satisfies
-         * the contracts of this component (if required).
+         * the contracts of this component (if required), and
+         * that this components is itself enabled.
+         *
+         * The satisfying component depends on the satisfied component,
+         * and the other way around too. To avoid circular recursions
+         * there is param $ignoreDependencyOnSatisfiedComponents.
          */
-        if ($this->requiresSatisfyingComponent() && $this->satisfyingComponent === null) {
-            return false;
+        if ($this->requiresSatisfyingComponent()) {
+            if ($this->satisfyingComponent === null) {
+                return false;
+            }
+            if (!$this->satisfyingComponent->calculateIsEnabled(true)) {
+                return false;
+            }
         }
 
         // If any dependency is disabled, then disable this component too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
+            $satisfiedComponentClasses = $this->getSatisfiedComponentClasses();
             foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+                if ($ignoreDependencyOnSatisfiedComponents && in_array($dependedComponentClass, $satisfiedComponentClasses)) {
+                    continue;
+                }
                 $dependedComponent = App::getComponent($dependedComponentClass);
                 if (!$dependedComponent->isEnabled()) {
                     return false;
