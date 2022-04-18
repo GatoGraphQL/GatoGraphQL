@@ -144,11 +144,22 @@ class AppLoader implements AppLoaderInterface
             $componentClasses,
             $this->initializedComponentClasses
         ));
+        $componentManager = App::getComponentManager();
         foreach ($componentClasses as $componentClass) {
             $this->initializedComponentClasses[] = $componentClass;
 
             // Initialize and register the Component
-            $component = App::getComponentManager()->register($componentClass);
+            $component = $componentManager->register($componentClass);
+
+            /**
+             * If this compononent satisfies the contracts for other
+             * components, set them as "satisfied". Since they will also
+             * be dependencies, they must've been already registered.
+             */
+            foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
+                $satisfiedComponent = App::getComponent($satisfiedComponentClass);
+                $satisfiedComponent->setHasSatisfyingComponent();
+            }
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
@@ -380,8 +391,9 @@ class AppLoader implements AppLoaderInterface
     public function bootApplicationComponents(): void
     {
         App::getAppStateManager()->initializeAppState($this->initialAppState);
-        App::getComponentManager()->boot();
-        App::getComponentManager()->afterBoot();
+        $componentManager = App::getComponentManager();
+        $componentManager->boot();
+        $componentManager->afterBoot();
 
         // Allow to inject functionality
         App::doAction(HookNames::AFTER_BOOT_APPLICATION);

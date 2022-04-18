@@ -93,7 +93,7 @@ abstract class AbstractComponent implements ComponentInterface
      * Indicate that there is some other component that satisfies
      * the contracts by this component.
      */
-    protected function setHasSatisfyingComponent(): void
+    public function setHasSatisfyingComponent(): void
     {
         $this->hasSatisfyingComponent = true;
     }

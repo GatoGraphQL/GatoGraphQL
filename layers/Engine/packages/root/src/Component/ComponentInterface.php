@@ -23,12 +23,20 @@ interface ComponentInterface
     ): void;
 
     /**
-     * All component classes that this component depends upon, to initialize them
+     * Indicate that there is some other component that satisfies
+     * the contracts by this component.
+     */
+    public function setHasSatisfyingComponent(): void;
+    
+    /**
+     * All component classes that this component satisfies
      *
      * @return string[]
      */
+    public function getSatisfiedComponentClasses(): array;
+
     /**
-     * Classes from PoP components that must be initialized before this component
+     * All component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
