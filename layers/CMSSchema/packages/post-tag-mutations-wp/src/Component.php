@@ -12,6 +12,18 @@ use PoP\Root\Component\AbstractComponent;
 class Component extends AbstractComponent
 {
     /**
+     * All component classes that this component satisfies
+     *
+     * @return string[]
+     */
+    public function getSatisfiedComponentClasses(): array
+    {
+        return [
+            \PoPCMSSchema\PostTagMutations\Component::class,
+        ];
+    }
+
+    /**
      * Classes from PoP components that must be initialized before this component
      *
      * @return string[]
@@ -22,7 +34,7 @@ class Component extends AbstractComponent
             \PoPCMSSchema\PostTagMutations\Component::class,
             \PoPCMSSchema\CustomPostMutationsWP\Component::class,
             \PoPCMSSchema\PostTagsWP\Component::class,
-            \PoPCMSSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateMutationsWP\Component::class,
         ];
     }
 

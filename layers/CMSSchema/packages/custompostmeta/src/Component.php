@@ -11,6 +11,11 @@ use PoP\Root\Component\AbstractComponent;
  */
 class Component extends AbstractComponent
 {
+    protected function requiresSatisfyingComponent(): bool
+    {
+        return true;
+    }
+
     /**
      * Classes from PoP components that must be initialized before this component
      *
