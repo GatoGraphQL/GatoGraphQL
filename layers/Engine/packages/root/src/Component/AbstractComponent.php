@@ -99,6 +99,16 @@ abstract class AbstractComponent implements ComponentInterface
     }
     
     /**
+     * All component classes that this component satisfies
+     *
+     * @return string[]
+     */
+    public function getSatisfiedComponentClasses(): array
+    {
+        return [];
+    }
+
+    /**
      * All component classes that this component depends upon, to initialize them
      *
      * @return string[]
