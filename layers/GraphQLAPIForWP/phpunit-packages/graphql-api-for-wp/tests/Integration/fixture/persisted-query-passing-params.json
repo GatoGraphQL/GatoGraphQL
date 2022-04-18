@@ -2,10 +2,22 @@
     "data": {
         "posts": [
             {
-                "date": "2021-08-07T02:20:44+00:00",
+                "date": "2022-04-17T13:06:58+00:00",
                 "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
                 "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
                 "title": "Hello world!",
+                "tags": [],
+                "author": {
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/",
+                    "id": 1
+                }
+            },
+            {
+                "date": "2020-12-12T04:08:47+00:00",
+                "excerpt": "Categories Block Latest Posts Block",
+                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "title": "HTTP caching improves performance",
                 "tags": [],
                 "author": {
                     "displayName": "admin",

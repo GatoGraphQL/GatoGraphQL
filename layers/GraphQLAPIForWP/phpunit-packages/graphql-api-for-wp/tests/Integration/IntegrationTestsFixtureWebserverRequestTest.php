@@ -19,7 +19,7 @@ class IntegrationTestsFixtureWebserverRequestTest extends AbstractFixtureWebserv
             'persisted-query',
             'persisted-query-by-post',
             'persisted-query-passing-params'
-                => 'graphql-query/latest-posts-for-mobile-app-2',
+                => 'graphql-query/latest-posts-for-mobile-app',
             default => parent::getEndpoint($dataName),
         };
     }
@@ -42,7 +42,7 @@ class IntegrationTestsFixtureWebserverRequestTest extends AbstractFixtureWebserv
     {
         return match ($dataName) {
             'persisted-query-passing-params' => [
-                'limit' => 2,
+                'limit' => 3,
             ],
             default => parent::getParams($dataName),
         };
