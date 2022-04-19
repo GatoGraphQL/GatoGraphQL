@@ -17,9 +17,9 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
 
     /**
      * Retrieve all files under the "/fixture" folder
-     * to retrieve the GraphQL queries, and their 
+     * to retrieve the GraphQL queries, and their
      * expected responses:
-     * 
+     *
      * - ${fileName}-access-granted.json: when access to the "unrestricted" field is granted
      * - ${fileName}-access-forbidden.json: when access to the "unrestricted" field is forbidden
      */

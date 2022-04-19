@@ -32,7 +32,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                 [],
                 $query,
             ];
-            $entries[$dataName.'-with-params'] = [
+            $entries[$dataName . '-with-params'] = [
                 'application/json',
                 $expectedResponseBodyWithLimit,
                 $endpoint,
@@ -42,7 +42,7 @@ class RequestEndpointWebserverRequestTest extends AbstractEndpointWebserverReque
                     'limit' => 2,
                 ],
             ];
-            $entries[$dataName.'-empty-query'] = [
+            $entries[$dataName . '-empty-query'] = [
                 'application/json',
                 $expectedResponseBodyEmptyQuery,
                 $endpoint,
