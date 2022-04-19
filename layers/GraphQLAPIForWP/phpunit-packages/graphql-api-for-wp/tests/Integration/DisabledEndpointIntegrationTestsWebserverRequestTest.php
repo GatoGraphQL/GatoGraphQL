@@ -29,6 +29,13 @@ class DisabledEndpointIntegrationTestsWebserverRequestTest extends AbstractWebse
                 [],
                 $query,
             ],
+            'custom-endpoint' => [
+                'text/html; charset=UTF-8',
+                null,
+                'graphql/customers/',
+                [],
+                $query,
+            ],
         ];
     }
 }
