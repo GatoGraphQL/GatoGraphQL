@@ -17,7 +17,9 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
         $query = $this->getGraphQLQuery();
         $expectedResponseBody = $this->getGraphQLExpectedResponse();
         $endpoints = [
+            'single-endpoint' => 'graphql/',
             'custom-endpoint' => 'graphql/mobile-app/',
+            'custom-endpoint-with-hierarchy' => 'graphql/customers/penguin-books/',
         ];
         $entries = [];
         foreach ($endpoints as $dataName => $endpoint) {
