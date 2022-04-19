@@ -209,7 +209,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     public function testEndpoints(
         string $expectedContentType,
-        string $expectedResponseBody,
+        ?string $expectedResponseBody,
         string $endpoint,
         array $params = [],
         string $query = '',
@@ -256,7 +256,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
-        $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
+        if ($expectedResponseBody !== null) {
+            $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
+        }
     }
 
     /**
