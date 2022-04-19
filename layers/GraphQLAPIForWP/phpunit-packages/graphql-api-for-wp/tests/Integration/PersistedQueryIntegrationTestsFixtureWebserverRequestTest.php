@@ -24,6 +24,8 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
                 => 'graphql-query/website/home-posts-widget/',
             'do-not-override-params-none-set'
                 => 'graphql-query/website/home-post-widget/',
+            'do-not-override-params-some-set'
+                => 'graphql-query/website/home-user-widget/',
             default => parent::getEndpoint($dataName),
         };
     }
@@ -43,7 +45,8 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     {
         return match ($dataName) {
             'params',
-            'do-not-override-params-none-set'
+            'do-not-override-params-none-set',
+            'do-not-override-params-some-set'
                 => [
                     'limit' => 3,
                 ],
