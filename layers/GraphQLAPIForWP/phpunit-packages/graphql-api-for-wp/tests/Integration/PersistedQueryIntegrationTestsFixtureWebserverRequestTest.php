@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractFixtureWebserverRequestTestCase;
 
-class IntegrationTestsFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
+class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends AbstractFixtureWebserverRequestTestCase
 {
     protected function getFixtureFolder(): string
     {
