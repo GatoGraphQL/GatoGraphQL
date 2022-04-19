@@ -56,9 +56,9 @@ registerBlockType( 'graphql-api/endpoint-graphiql', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointGraphiQLBlock::ATTRIBUTE_NAME_IS_GRAPHIQL_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Constants::ATTRIBUTE_NAME_ENABLED
 		 */
-		isGraphiQLEnabled: {
+		isEnabled: {
 			type: 'boolean',
 			default: true,
 		},

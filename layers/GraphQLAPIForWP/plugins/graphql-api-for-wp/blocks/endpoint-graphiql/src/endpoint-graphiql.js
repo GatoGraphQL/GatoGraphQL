@@ -21,7 +21,7 @@ const EndpointGraphiQL = ( props ) => {
 		setAttributes,
 		attributes:
 		{
-			isGraphiQLEnabled,
+			isEnabled,
 		}
 	} = props;
 	return (
@@ -34,16 +34,16 @@ const EndpointGraphiQL = ( props ) => {
 			{ !isSelected && (
 				<>
 					<br />
-					{ isGraphiQLEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isGraphiQLEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
-					checked={ isGraphiQLEnabled }
+					label={ isEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
+					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
-						isGraphiQLEnabled: newValue,
+						isEnabled: newValue,
 					} ) }
 				/>
 			}
