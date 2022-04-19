@@ -134,6 +134,10 @@ class AppStateManager implements AppStateManagerInterface
     {
         $state = &$this->state;
         foreach ($path as $pathItem) {
+            if ($state === null) {
+                // Iterating to a subentry that is not defined?
+                return false;
+            }
             if (!array_key_exists($pathItem, $state)) {
                 return false;
             }
