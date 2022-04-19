@@ -21,8 +21,8 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
      * to retrieve the GraphQL queries, and their 
      * expected responses:
      * 
-     * - ${fileName}-valid.json: when access to the "unrestricted" field is granted
-     * - ${fileName}-invalid.json: when access to the "unrestricted" field is forbidden
+     * - ${fileName}-access-granted.json: when access to the "unrestricted" field is granted
+     * - ${fileName}-access-forbidden.json: when access to the "unrestricted" field is forbidden
      */
     final protected function provideEndpointEntries(): array
     {
@@ -45,26 +45,26 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $validGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-valid.json';
-            if (!\file_exists($validGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($validGraphQLResponseFile);
+            $grantedAccessGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-access-granted.json';
+            if (!\file_exists($grantedAccessGraphQLResponseFile)) {
+                $this->throwFileNotExistsException($grantedAccessGraphQLResponseFile);
             }
-            $invalidGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-invalid.json';
-            if (!\file_exists($invalidGraphQLResponseFile)) {
-                $this->throwFileNotExistsException($invalidGraphQLResponseFile);
+            $forbiddenAccessGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '-access-forbidden.json';
+            if (!\file_exists($forbiddenAccessGraphQLResponseFile)) {
+                $this->throwFileNotExistsException($forbiddenAccessGraphQLResponseFile);
             }
 
             $dataName = $fileName;
-            $providerItems[$dataName . '-valid'] = [
+            $providerItems[$dataName . '-access-granted'] = [
                 'application/json',
-                file_get_contents($validGraphQLResponseFile),
+                file_get_contents($grantedAccessGraphQLResponseFile),
                 $accessGrantedEndpoint,
                 [],
                 $query,
             ];
-            $providerItems[$dataName . '-invalid'] = [
+            $providerItems[$dataName . '-access-forbidden'] = [
                 'application/json',
-                file_get_contents($invalidGraphQLResponseFile),
+                file_get_contents($forbiddenAccessGraphQLResponseFile),
                 $accessForbiddenEndpoint,
                 [],
                 $query,
