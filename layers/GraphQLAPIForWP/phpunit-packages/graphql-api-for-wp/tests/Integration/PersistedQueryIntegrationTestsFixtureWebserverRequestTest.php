@@ -22,7 +22,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
                 => 'graphql-query/latest-posts-for-mobile-app/',
             'api-hierarchy'
                 => 'graphql-query/website/home-posts-widget/',
-            'do-not-override-params'
+            'do-not-override-params-none-set'
                 => 'graphql-query/website/home-post-widget/',
             default => parent::getEndpoint($dataName),
         };
@@ -43,7 +43,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     {
         return match ($dataName) {
             'params',
-            'do-not-override-params'
+            'do-not-override-params-none-set'
                 => [
                     'limit' => 3,
                 ],
