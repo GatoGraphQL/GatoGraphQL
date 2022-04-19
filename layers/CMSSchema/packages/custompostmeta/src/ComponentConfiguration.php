@@ -17,7 +17,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::CUSTOMPOST_META_ENTRIES;
         $defaultValue = [];
-        $callback = [EnvironmentValueHelpers::class, 'commaSeparatedStringToArray'];
+        $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

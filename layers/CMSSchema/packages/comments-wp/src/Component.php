@@ -13,6 +13,18 @@ use PoPCMSSchema\Users\Component as UsersComponent;
 class Component extends AbstractComponent
 {
     /**
+     * All component classes that this component satisfies
+     *
+     * @return string[]
+     */
+    public function getSatisfiedComponentClasses(): array
+    {
+        return [
+            \PoPCMSSchema\Comments\Component::class,
+        ];
+    }
+
+    /**
      * Classes from PoP components that must be initialized before this component
      *
      * @return string[]

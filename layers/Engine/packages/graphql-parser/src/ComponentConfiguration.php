@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::ENABLE_MULTIPLE_QUERY_EXECUTION;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -26,7 +26,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::ENABLE_COMPOSABLE_DIRECTIVES;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -39,7 +39,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::ENABLE_DYNAMIC_VARIABLES;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -56,7 +56,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
 
         $envVariable = Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

@@ -1,6 +1,7 @@
 # Setting-up the development environment
 
 These are the instructions on how to set-up a local development environment.
+
 ## Requirements
 
 - PHP 8.1+
@@ -32,6 +33,13 @@ Build the Lando webserver:
 
 ```bash
 composer build-server
+```
+
+If the process throws an error before installing the WordPress site (it may happen due to [unidentified reasons](https://github.com/lando/lando/issues/2210#issuecomment-777964375)), then run:
+
+```bash
+$ composer install-site
+$ composer import-data
 ```
 
 ## Site URL

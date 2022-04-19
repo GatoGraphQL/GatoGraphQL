@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::USER_AVATAR_DEFAULT_SIZE;
         $defaultValue = 96;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

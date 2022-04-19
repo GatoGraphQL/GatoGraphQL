@@ -32,7 +32,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::GROUP_FIELDS_UNDER_TYPE_FOR_PRINT;
         $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

@@ -8,8 +8,10 @@ use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLCustomEndpointCustomPo
 use GraphQLAPI\GraphQLAPI\Services\CustomPostTypes\GraphQLEndpointCustomPostTypeInterface;
 use GraphQLAPI\GraphQLAPI\Services\EndpointAnnotators\ClientEndpointAnnotatorInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Clients\AbstractClient;
+use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
+use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecuter implements EndpointExecuterServiceTagInterface
 {
@@ -43,6 +45,11 @@ abstract class AbstractClientEndpointExecuter extends AbstractCPTEndpointExecute
         $response = App::getResponse();
         $response->setContent($this->getClient()->getClientHTML());
         $response->headers->set('content-type', 'text/html');
+
+        // Add a Custom Header to test that enabling/disabling clients works
+        if (RootEnvironment::isApplicationEnvironmentDev()) {
+            $response->headers->set(CustomHeaders::CLIENT_ENDPOINT, $this->getClient()->getEndpoint());
+        }
 
         // Add a hook to send the Response to the client.
         $this->getTemplateHelpers()->sendResponseToClient();

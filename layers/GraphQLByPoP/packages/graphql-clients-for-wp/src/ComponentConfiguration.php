@@ -32,7 +32,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -48,7 +48,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::USE_GRAPHIQL_EXPLORER;
         $defaultValue = true;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -80,7 +80,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT;
         $defaultValue = false;
-        $callback = [EnvironmentValueHelpers::class, 'toBool'];
+        $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

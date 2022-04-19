@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
+use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use Psr\Http\Message\ResponseInterface;
 
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
@@ -34,8 +35,15 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         ];
     }
 
-    abstract protected static function getLoginUsername(): string;
-    abstract protected static function getLoginPassword(): string;
+    protected static function getLoginUsername(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedUserUsername();
+    }
+
+    protected static function getLoginPassword(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedUserPassword();
+    }
 
     protected static function getWebserverPingMethod(): string
     {
@@ -58,7 +66,11 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
                 return null;
             }
         }
-        return sprintf('The user "%s" was not logged in', static::getLoginUsername());
+        $username = static::getLoginUsername();
+        if ($username === '' || static::getLoginPassword() === '') {
+            return 'The credentials to authenticate the user are incomplete or missing';
+        }
+        return sprintf('Authentication of user "%s" did not succeed', $username);
     }
 
     /**

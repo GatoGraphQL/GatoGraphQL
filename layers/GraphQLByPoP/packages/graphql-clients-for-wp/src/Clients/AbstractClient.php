@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
+use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 use PoP\EngineWP\HelperServices\TemplateHelpersInterface;
 use PoP\Root\App;
+use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\APIClients\ClientTrait;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
@@ -72,6 +74,11 @@ abstract class AbstractClient extends AbstractEndpointHandler
         $response = App::getResponse();
         $response->setContent($this->getClientHTML());
         $response->headers->set('content-type', 'text/html');
+
+        // Add a Custom Header to test that enabling/disabling clients works
+        if (RootEnvironment::isApplicationEnvironmentDev()) {
+            $response->headers->set(CustomHeaders::CLIENT_ENDPOINT, $this->getEndpoint());
+        }
 
         // Add a hook to send the Response to the client.
         $this->getTemplateHelpers()->sendResponseToClient();

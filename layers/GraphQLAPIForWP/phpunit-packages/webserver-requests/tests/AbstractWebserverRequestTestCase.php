@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use function getenv;
-
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use PHPUnitForGraphQLAPI\WebserverRequests\Exception\UnauthenticatedUserException;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
+
+use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
 {
@@ -35,6 +35,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        // Skip running tests if the domain has not been configured
+        if (static::getWebserverDomain() === '') {
+            self::$skipTestsReason = 'Webserver domain not configured';
+            return;
+        }
+
         // Skip running tests in Continuous Integration?
         if (static::isContinuousIntegration() && static::skipTestsInContinuousIntegration()) {
             self::$skipTestsReason = 'Test skipped for Continuous Integration';
@@ -137,7 +143,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return false;
     }
 
-    abstract protected static function getWebserverDomain(): string;
+    protected static function getWebserverDomain(): string
+    {
+        return Environment::getIntegrationTestsWebserverDomain();
+    }
 
     protected static function getClient(): Client
     {
@@ -192,70 +201,5 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         if (!static::$enableTests) {
             $this->markTestSkipped(self::$skipTestsReason);
         }
-    }
-
-    /**
-     * @dataProvider provideEndpointEntries
-     */
-    public function testEndpoints(
-        string $expectedResponseBody,
-        string $endpoint,
-        array $params = [],
-        string $query = '',
-        array $variables = [],
-        string $expectedContentType = 'application/json',
-        ?string $method = null,
-    ): void {
-        $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
-        ];
-        if ($params !== []) {
-            $options['query'] = $params;
-        }
-        $body = '';
-        if ($query !== '' || $variables !== []) {
-            $body = json_encode([
-                'query' => $query,
-                'variables' => $variables,
-            ]);
-        }
-        if ($body !== '') {
-            $options['body'] = $body;
-        }
-        if (static::shareCookies()) {
-            $options['cookies'] = self::$cookieJar;
-        }
-        try {
-            $response = $client->request(
-                $method ?? $this->getMethod(),
-                $endpointURL,
-                $options
-            );
-        } catch (ClientException $e) {
-            /**
-             * A 404 is a Client Exception.
-             * It's a failure, not an error.
-             */
-            $this->fail($e->getMessage());
-        }
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
-        $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
-    }
-
-    /**
-     * @return array<string,array<mixed>>
-     */
-    abstract protected function provideEndpointEntries(): array;
-
-    protected function getMethod(): string
-    {
-        return 'POST';
     }
 }

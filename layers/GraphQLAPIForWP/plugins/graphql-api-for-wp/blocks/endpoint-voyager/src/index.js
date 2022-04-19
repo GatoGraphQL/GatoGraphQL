@@ -56,9 +56,9 @@ registerBlockType( 'graphql-api/endpoint-voyager', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GraphQLAPI\GraphQLAPI\Services\Blocks\EndpointVoyagerBlock::ATTRIBUTE_NAME_IS_VOYAGER_ENABLED
+		 * GraphQLAPI\GraphQLAPI\Constants::ATTRIBUTE_NAME_ENABLED
 		 */
-		isVoyagerEnabled: {
+		isEnabled: {
 			type: 'boolean',
 			default: true,
 		},

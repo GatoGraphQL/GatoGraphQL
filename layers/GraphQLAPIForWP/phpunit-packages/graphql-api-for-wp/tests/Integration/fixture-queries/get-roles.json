@@ -1,0 +1,21 @@
+{
+  "data": {
+    "roles": [
+      {
+        "name": "administrator"
+      },
+      {
+        "name": "editor"
+      },
+      {
+        "name": "author"
+      },
+      {
+        "name": "contributor"
+      },
+      {
+        "name": "subscriber"
+      }
+    ]
+  }
+}

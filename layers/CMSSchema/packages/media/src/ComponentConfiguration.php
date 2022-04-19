@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::MEDIA_LIST_DEFAULT_LIMIT;
         $defaultValue = 10;
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -26,7 +26,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     {
         $envVariable = Environment::MEDIA_LIST_MAX_LIMIT;
         $defaultValue = -1; // Unlimited
-        $callback = [EnvironmentValueHelpers::class, 'toInt'];
+        $callback = EnvironmentValueHelpers::toInt(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

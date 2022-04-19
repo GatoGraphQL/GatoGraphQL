@@ -11,6 +11,15 @@ abstract class AbstractComponent implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
 
+    /**
+     * Indicate what other component satisfies the contracts
+     * by this component.
+     *
+     * For instance, the packages under CMSSchema have generic contracts
+     * for any CMS, that require to be satisfied for some specific CMS
+     * (such as WordPress).
+     */
+    private ?ComponentInterface $satisfyingComponent = null;
     private ?bool $enabled = null;
     protected ?ComponentConfigurationInterface $componentConfiguration = null;
     protected ?ComponentInfoInterface $componentInfo = null;
@@ -65,6 +74,37 @@ abstract class AbstractComponent implements ComponentInterface
     protected function initializeSystemContainerServices(): void
     {
         // Override
+    }
+
+    /**
+     * Indicate if this component requires some other component
+     * to satisfy its contracts.
+     *
+     * For instance, the packages under CMSSchema have generic contracts
+     * for any CMS, that require to be satisfied for some specific CMS
+     * (such as WordPress).
+     */
+    protected function requiresSatisfyingComponent(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Indicate what other component satisfies the contracts by this component.
+     */
+    public function setSatisfyingComponent(ComponentInterface $component): void
+    {
+        $this->satisfyingComponent = $component;
+    }
+
+    /**
+     * All component classes that this component satisfies
+     *
+     * @return string[]
+     */
+    public function getSatisfiedComponentClasses(): array
+    {
+        return [];
     }
 
     /**
@@ -175,17 +215,56 @@ abstract class AbstractComponent implements ComponentInterface
     public function isEnabled(): bool
     {
         if ($this->enabled === null) {
-            // If any dependency is disabled, then disable this component too
-            foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
-                $dependedComponent = App::getComponent($dependedComponentClass);
-                if (!$dependedComponent->isEnabled()) {
-                    $this->enabled = false;
-                    return $this->enabled;
-                }
-            }
-            $this->enabled = $this->resolveEnabled();
+            $this->enabled = $this->calculateIsEnabled(false);
         }
         return $this->enabled;
+    }
+
+    /**
+     * Calculate if the component must be enabled or not.
+     *
+     * @param boolean $ignoreDependencyOnSatisfiedComponents Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
+     */
+    public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedComponents): bool
+    {
+        /**
+         * Check that there is some other component that satisfies
+         * the contracts of this component (if required), and
+         * that this components is itself enabled.
+         *
+         * The satisfying component depends on the satisfied component,
+         * and the other way around too. To avoid circular recursions
+         * there is param $ignoreDependencyOnSatisfiedComponents.
+         */
+        if ($this->requiresSatisfyingComponent()) {
+            if ($this->satisfyingComponent === null) {
+                return false;
+            }
+            if (!$this->satisfyingComponent->calculateIsEnabled(true)) {
+                return false;
+            }
+        }
+
+        // If any dependency is disabled, then disable this component too
+        if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
+            $satisfiedComponentClasses = $this->getSatisfiedComponentClasses();
+            foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+                if ($ignoreDependencyOnSatisfiedComponents && in_array($dependedComponentClass, $satisfiedComponentClasses)) {
+                    continue;
+                }
+                $dependedComponent = App::getComponent($dependedComponentClass);
+                if (!$dependedComponent->isEnabled()) {
+                    return false;
+                }
+            }
+        }
+
+        return $this->resolveEnabled();
+    }
+
+    public function onlyEnableIfAllDependenciesAreEnabled(): bool
+    {
+        return true;
     }
 
     protected function resolveEnabled(): bool

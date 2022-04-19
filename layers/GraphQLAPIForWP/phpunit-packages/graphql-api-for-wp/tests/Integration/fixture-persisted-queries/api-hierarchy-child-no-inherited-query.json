@@ -1,0 +1,36 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": 1,
+                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "title": "Hello world!",
+                "author": {
+                    "id": 1,
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
+                }
+            },
+            {
+                "id": 28,
+                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "title": "HTTP caching improves performance",
+                "author": {
+                    "id": 1,
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
+                }
+            },
+            {
+                "id": 25,
+                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "title": "Public or Private API mode, for extra security",
+                "author": {
+                    "id": 1,
+                    "displayName": "admin",
+                    "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
+                }
+            }
+        ]
+    }
+}

@@ -13,7 +13,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     // Define properties
     //     $envVariable = Environment::POSTCATEGORY_LIST_DEFAULT_LIMIT;
     //     $defaultValue = 10;
-    //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
+    //     $callback = EnvironmentValueHelpers::toInt(...);
 
     //     // Initialize property from the environment/hook
     //     $this->retrieveConfigurationValueOrUseDefault(
@@ -29,7 +29,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     //     // Define properties
     //     $envVariable = Environment::POSTCATEGORY_LIST_MAX_LIMIT;
     //     $defaultValue = -1; // Unlimited
-    //     $callback = [EnvironmentValueHelpers::class, 'toInt'];
+    //     $callback = EnvironmentValueHelpers::toInt(...);
 
     //     // Initialize property from the environment/hook
     //     $this->retrieveConfigurationValueOrUseDefault(
