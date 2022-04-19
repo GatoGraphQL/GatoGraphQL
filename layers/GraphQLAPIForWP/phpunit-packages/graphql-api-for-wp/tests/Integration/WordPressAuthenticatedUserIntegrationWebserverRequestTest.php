@@ -20,7 +20,8 @@ class WordPressAuthenticatedUserIntegrationWebserverRequestTest extends Abstract
         $expectedResponseBody = $this->getGraphQLExpectedResponse();
         $endpoints = [
             'admin-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query',
-            'admin-client-unrestricted' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted',
+            'admin-unrestricted-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&behavior=unrestricted',
+            'editing-persisted-query-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query&persisted_query_id=65',
         ];
         $entries = [];
         foreach ($endpoints as $dataName => $endpoint) {
