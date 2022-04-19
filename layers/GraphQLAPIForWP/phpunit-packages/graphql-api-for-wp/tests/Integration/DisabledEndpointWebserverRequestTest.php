@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
 
-class DisabledEndpointIntegrationTestsWebserverRequestTest extends AbstractWebserverRequestTestCase
+class DisabledEndpointWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
     /**
      * Assert that the endpoints are disabled,

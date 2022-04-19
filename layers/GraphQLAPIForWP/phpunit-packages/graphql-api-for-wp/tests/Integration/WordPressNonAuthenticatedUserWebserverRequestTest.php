@@ -5,27 +5,24 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
-use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
 /**
- * Test that the authenticated user can access the GraphQL endpoints.
+ * Test that, if the user is not authenticated, the GraphQL endpoints
+ * cannot be accessed.
  */
-class WordPressAuthenticatedUserIntegrationWebserverRequestTest extends AbstractWebserverRequestTestCase
+class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
-    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
     /**
      * @return array<string,array<mixed>>
      */
     protected function provideEndpointEntries(): array
     {
         $query = $this->getGraphQLQuery();
-        $expectedResponseBody = $this->getGraphQLExpectedResponse();
         $entries = [];
         foreach (WordPressAuthenticatedUserEndpoints::ENDPOINTS as $dataName => $endpoint) {
             $entries[$dataName] = [
-                'application/json',
-                $expectedResponseBody,
+                'text/html; charset=UTF-8',
+                null,
                 $endpoint,
                 [],
                 $query,
@@ -41,16 +38,5 @@ class WordPressAuthenticatedUserIntegrationWebserverRequestTest extends Abstract
                 id
             }       
         GRAPHQL;
-    }
-
-    protected function getGraphQLExpectedResponse(): string
-    {
-        return <<<JSON
-            {
-                "data": {
-                    "id": "root"
-                }
-            }
-        JSON;
     }
 }

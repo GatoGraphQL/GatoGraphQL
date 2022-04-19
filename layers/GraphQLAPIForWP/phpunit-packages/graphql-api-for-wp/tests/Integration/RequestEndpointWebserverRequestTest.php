@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
 
-class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebserverRequestTestCase
+class RequestEndpointWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
     /**
      * Execute a GraphQL query against each of the endpoints
