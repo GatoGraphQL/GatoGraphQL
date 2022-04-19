@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 
 /**
  * Test that, if the user is not authenticated, the GraphQL endpoints
  * cannot be accessed.
  */
-class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractWebserverRequestTestCase
+class WordPressNonAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
     /**
      * @return array<string,array<mixed>>
