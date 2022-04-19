@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
+
 /**
  * Test that enabling/disabling clients (GraphiQL/Voyager)
  * in Custom Endpoints works well
@@ -22,7 +24,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
             $clientEndpointURL,
         );
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertTrue($response->hasHeader('X-Client-Endpoint'));
+        $this->assertTrue($response->hasHeader(CustomHeaders::CLIENT_ENDPOINT));
     }
 
     /**
