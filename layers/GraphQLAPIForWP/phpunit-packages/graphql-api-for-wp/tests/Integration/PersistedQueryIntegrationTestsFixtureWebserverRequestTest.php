@@ -20,9 +20,9 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
             'by-post',
             'passing-params'
                 => 'graphql-query/latest-posts-for-mobile-app/',
-            'with-api-hierarchy'
+            'api-hierarchy'
                 => 'graphql-query/website/home-posts-widget/',
-            'with-disabled-params'
+            'do-not-override-params'
                 => 'graphql-query/website/home-post-widget/',
             default => parent::getEndpoint($dataName),
         };
@@ -43,7 +43,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     {
         return match ($dataName) {
             'passing-params',
-            'with-disabled-params'
+            'do-not-override-params'
                 => [
                     'limit' => 3,
                 ],
