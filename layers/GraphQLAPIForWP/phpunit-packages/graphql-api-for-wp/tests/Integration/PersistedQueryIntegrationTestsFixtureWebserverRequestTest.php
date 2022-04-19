@@ -18,7 +18,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
         return match ($dataName) {
             'basic',
             'by-post',
-            'passing-params'
+            'params'
                 => 'graphql-query/latest-posts-for-mobile-app/',
             'api-hierarchy'
                 => 'graphql-query/website/home-posts-widget/',
@@ -42,7 +42,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     protected function getParams(string $dataName): array
     {
         return match ($dataName) {
-            'passing-params',
+            'params',
             'do-not-override-params'
                 => [
                     'limit' => 3,
