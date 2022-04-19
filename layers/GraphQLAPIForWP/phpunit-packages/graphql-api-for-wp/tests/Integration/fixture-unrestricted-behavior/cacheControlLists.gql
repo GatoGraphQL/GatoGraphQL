@@ -1,0 +1,7 @@
+query GetCacheControlLists {
+  cacheControlLists {
+    id
+    title
+    excerpt
+  }
+}
