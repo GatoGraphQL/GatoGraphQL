@@ -22,6 +22,8 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
                 => 'graphql-query/latest-posts-for-mobile-app/',
             'persisted-query-with-api-hierarchy'
                 => 'graphql-query/website/home-posts-widget/',
+            'persisted-query-with-disabled-params'
+                => 'graphql-query/website/home-post-widget/',
             default => parent::getEndpoint($dataName),
         };
     }
@@ -40,10 +42,13 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     protected function getParams(string $dataName): array
     {
         return match ($dataName) {
-            'persisted-query-passing-params' => [
-                'limit' => 3,
-            ],
-            default => parent::getParams($dataName),
+            'persisted-query-passing-params',
+            'persisted-query-with-disabled-params'
+                => [
+                    'limit' => 3,
+                ],
+            default
+                => parent::getParams($dataName),
         };
     }
 }
