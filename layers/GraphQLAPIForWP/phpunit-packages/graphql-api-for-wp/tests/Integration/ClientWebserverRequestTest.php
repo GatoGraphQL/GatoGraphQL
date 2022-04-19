@@ -18,10 +18,16 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
     protected function provideEnabledClientEntries(): array
     {
         return [
-            'graphiql' => [
+            'single-endpoint-graphiql' => [
+                'graphiql/',
+            ],
+            'single-endpoint-voyager' => [
+                'schema/',
+            ],
+            'custom-endpoint-graphiql' => [
                 'graphql/mobile-app/?view=graphiql',
             ],
-            'voyager' => [
+            'custom-endpoint-voyager' => [
                 'graphql/mobile-app/?view=schema',
             ],
         ];
@@ -33,10 +39,10 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
     protected function provideDisabledClientEntries(): array
     {
         return [
-            'graphiql' => [
+            'custom-endpoint-graphiql' => [
                 'graphql/customers/penguin-books/?view=graphiql',
             ],
-            'voyager' => [
+            'custom-endpoint-voyager' => [
                 'graphql/customers/penguin-books/?view=schema',
             ],
         ];
