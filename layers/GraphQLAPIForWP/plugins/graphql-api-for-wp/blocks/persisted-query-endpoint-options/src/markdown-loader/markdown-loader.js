@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
-__webpack_public_path__ = window.graphqlApiPersistedQueryOptions?.publicPath;
+__webpack_public_path__ = window.graphqlApiPersistedQueryEndpointOptions?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
@@ -30,8 +30,8 @@ const getMarkdownContent = ( fileName, lang ) => {
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
-	lang = lang || window.graphqlApiPersistedQueryOptions?.localeLang
-	defaultLang = defaultLang || window.graphqlApiPersistedQueryOptions?.defaultLang
+	lang = lang || window.graphqlApiPersistedQueryEndpointOptions?.localeLang
+	defaultLang = defaultLang || window.graphqlApiPersistedQueryEndpointOptions?.defaultLang
 	return getMarkdownContent( fileName, lang )
 		.catch(err => getMarkdownContent( fileName, defaultLang ) )
 }
