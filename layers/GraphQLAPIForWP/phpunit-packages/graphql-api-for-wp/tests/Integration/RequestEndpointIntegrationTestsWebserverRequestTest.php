@@ -17,6 +17,7 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
         $query = $this->getGraphQLQuery();
         $expectedResponseBodyWithoutLimit = $this->getGraphQLExpectedResponseWithoutLimit();
         $expectedResponseBodyWithLimit = $this->getGraphQLExpectedResponseWithLimit();
+        $expectedResponseBodyEmptyQuery = $this->getGraphQLExpectedResponseEmptyQuery();
         $endpoints = [
             'single-endpoint' => 'graphql/',
             'custom-endpoint' => 'graphql/mobile-app/',
@@ -40,6 +41,13 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
                 [
                     'limit' => 2,
                 ],
+            ];
+            $entries[$dataName.'-empty-query'] = [
+                'application/json',
+                $expectedResponseBodyEmptyQuery,
+                $endpoint,
+                [],
+                '',
             ];
         }
         return $entries;
@@ -156,6 +164,29 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
                         }
                     ]
                 }
+            }
+        JSON;
+    }
+
+    protected function getGraphQLExpectedResponseEmptyQuery(): string
+    {
+        return <<<JSON
+            {
+                "errors": [
+                    {
+                        "message": "The query has not been provided",
+                        "locations": [
+                            {
+                                "line": 1,
+                                "column": 1
+                            }
+                        ],
+                        "extensions": {
+                            "code": "gql-6.1.c",
+                            "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Executing-Requests"
+                        }
+                    }
+                ]
             }
         JSON;
     }
