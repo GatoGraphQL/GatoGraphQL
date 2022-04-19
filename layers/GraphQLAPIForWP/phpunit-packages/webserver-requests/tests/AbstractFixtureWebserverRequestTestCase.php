@@ -39,12 +39,12 @@ abstract class AbstractFixtureWebserverRequestTestCase extends AbstractWebserver
             $fileName = $bodyResponseFileInfo->getFilenameWithoutExtension();
             $dataName = $fileName;
             $providerItems[$dataName] = [
+                str_ends_with($bodyResponseFile, '.html') ? 'text/html' : 'application/json',
                 $bodyResponseFileInfo->getContents(),
                 $this->getEndpoint($dataName),
                 $this->getParams($dataName),
                 $this->getQuery($dataName),
                 $this->getVariables($dataName),
-                str_ends_with($bodyResponseFile, '.html') ? 'text/html' : 'application/json',
                 $this->getEntryMethod($dataName),
             ];
         }

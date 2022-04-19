@@ -208,12 +208,12 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      * @dataProvider provideEndpointEntries
      */
     public function testEndpoints(
+        string $expectedContentType,
         string $expectedResponseBody,
         string $endpoint,
         array $params = [],
         string $query = '',
         array $variables = [],
-        string $expectedContentType = 'application/json',
         ?string $method = null,
     ): void {
         $client = static::getClient();

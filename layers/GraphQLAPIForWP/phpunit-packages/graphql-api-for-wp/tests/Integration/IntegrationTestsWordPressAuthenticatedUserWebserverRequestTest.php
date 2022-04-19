@@ -17,6 +17,7 @@ class IntegrationTestsWordPressAuthenticatedUserWebserverRequestTest extends Abs
     protected function provideEndpointEntries(): array
     {
         return [
+            'application/json',
             'admin-client' => [
                 <<<JSON
                 {
