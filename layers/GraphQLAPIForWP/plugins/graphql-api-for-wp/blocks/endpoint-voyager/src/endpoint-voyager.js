@@ -21,7 +21,7 @@ const EndpointVoyager = ( props ) => {
 		setAttributes,
 		attributes:
 		{
-			isVoyagerEnabled,
+			isEnabled,
 		}
 	} = props;
 	return (
@@ -34,16 +34,16 @@ const EndpointVoyager = ( props ) => {
 			{ !isSelected && (
 				<>
 					<br />
-					{ isVoyagerEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'graphql-api') }` : `❌ ${ __('No', 'graphql-api') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isVoyagerEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
-					checked={ isVoyagerEnabled }
+					label={ isEnabled ? __('Yes', 'graphql-api') : __('No', 'graphql-api') }
+					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
-						isVoyagerEnabled: newValue,
+						isEnabled: newValue,
 					} ) }
 				/>
 			}
