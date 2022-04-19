@@ -26,6 +26,10 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
                 => 'graphql-query/website/home-post-widget/',
             'do-not-override-params-some-set'
                 => 'graphql-query/website/home-user-widget/',
+            'api-hierarchy-parent-inherited-query'
+                => 'graphql-query/user-account/',
+            'api-hierarchy-child-inheriting-query'
+                => 'graphql-query/user-account/full-data/',
             default => parent::getEndpoint($dataName),
         };
     }
