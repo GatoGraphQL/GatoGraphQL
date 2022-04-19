@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use function file_get_contents;
 use GraphQLByPoP\GraphQLServer\Standalone\FixtureTestCaseTrait;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractWebserverRequestTestCase;
-
 use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-use RuntimeException;
+
+use function file_get_contents;
 
 abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
@@ -71,19 +70,6 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
             ];
         }
         return $providerItems;
-    }
-
-    /**
-     * @throws RuntimeException
-     */
-    protected function throwFileNotExistsException(string $file): never
-    {
-        throw new RuntimeException(
-            sprintf(
-                'File "%s" does not exist',
-                $file
-            )
-        );
     }
 
     /**
