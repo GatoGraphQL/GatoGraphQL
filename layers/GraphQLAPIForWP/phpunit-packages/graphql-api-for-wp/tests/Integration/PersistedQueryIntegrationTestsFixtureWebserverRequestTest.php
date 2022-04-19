@@ -10,19 +10,19 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture';
+        return __DIR__ . '/fixture-persisted-queries';
     }
 
     protected function getEndpoint(string $dataName): string
     {
         return match ($dataName) {
-            'persisted-query',
-            'persisted-query-by-post',
-            'persisted-query-passing-params'
+            'basic',
+            'by-post',
+            'passing-params'
                 => 'graphql-query/latest-posts-for-mobile-app/',
-            'persisted-query-with-api-hierarchy'
+            'with-api-hierarchy'
                 => 'graphql-query/website/home-posts-widget/',
-            'persisted-query-with-disabled-params'
+            'with-disabled-params'
                 => 'graphql-query/website/home-post-widget/',
             default => parent::getEndpoint($dataName),
         };
@@ -31,7 +31,7 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     protected function getEntryMethod(string $dataName): string
     {
         return match ($dataName) {
-            'persisted-query-by-post' => 'POST',
+            'by-post' => 'POST',
             default => 'GET',
         };
     }
@@ -42,8 +42,8 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     protected function getParams(string $dataName): array
     {
         return match ($dataName) {
-            'persisted-query-passing-params',
-            'persisted-query-with-disabled-params'
+            'passing-params',
+            'with-disabled-params'
                 => [
                     'limit' => 3,
                 ],
