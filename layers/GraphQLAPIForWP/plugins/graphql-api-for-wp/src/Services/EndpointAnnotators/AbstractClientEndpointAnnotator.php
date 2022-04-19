@@ -39,7 +39,7 @@ abstract class AbstractClientEndpointAnnotator extends AbstractEndpointAnnotator
     }
 
     /**
-     * Read the options block and check the value of attribute "isGraphiQLEnabled"
+     * Read the options block and check the value of attribute "isEnabled"
      */
     public function isClientEnabled(WP_Post|int $postOrID): bool
     {
