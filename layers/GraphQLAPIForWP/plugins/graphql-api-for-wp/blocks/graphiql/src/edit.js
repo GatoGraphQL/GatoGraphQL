@@ -47,6 +47,7 @@ const EditBlock = ( props ) => {
 				onEditQuery={ onEditQuery }
 				onEditVariables={ onEditVariables }
 				docExplorerOpen={ false }
+				headerEditorEnabled={ false }
 			/>
 		</div>
 	);

@@ -210,6 +210,7 @@ class GraphiQLWithExplorer extends Component {
 						onEditQuery={ this._handleEditQuery }
 						onEditVariables={ this._handleEditVariables }
 						docExplorerOpen={ false }
+						headerEditorEnabled={ false }
 					>
 						<GraphiQL.Toolbar>
 							<GraphiQL.Button
