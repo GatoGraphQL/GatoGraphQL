@@ -15,7 +15,8 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
     protected function provideEndpointEntries(): array
     {
         $query = $this->getGraphQLQuery();
-        $expectedResponseBody = $this->getGraphQLExpectedResponse();
+        $expectedResponseBodyWithoutLimit = $this->getGraphQLExpectedResponseWithoutLimit();
+        $expectedResponseBodyWithLimit = $this->getGraphQLExpectedResponseWithLimit();
         $endpoints = [
             'single-endpoint' => 'graphql/',
             'custom-endpoint' => 'graphql/mobile-app/',
@@ -25,10 +26,20 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
         foreach ($endpoints as $dataName => $endpoint) {
             $entries[$dataName] = [
                 'application/json',
-                $expectedResponseBody,
+                $expectedResponseBodyWithoutLimit,
                 $endpoint,
                 [],
                 $query,
+            ];
+            $entries[$dataName] = [
+                'application/json',
+                $expectedResponseBodyWithLimit,
+                $endpoint,
+                [],
+                $query,
+                [
+                    'limit' => 2,
+                ],
             ];
         }
         return $entries;
@@ -58,7 +69,7 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
         GRAPHQL;
     }
 
-    protected function getGraphQLExpectedResponse(): string
+    protected function getGraphQLExpectedResponseWithoutLimit(): string
     {
         return <<<JSON
             {
@@ -101,6 +112,42 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
                                     "name": "features"
                                 }
                             ],
+                            "author": {
+                                "displayName": "admin",
+                                "url": "http://graphql-api.lndo.site/author/admin/",
+                                "id": 1
+                            }
+                        }
+                    ]
+                }
+            }
+        JSON;
+    }
+
+    protected function getGraphQLExpectedResponseWithLimit(): string
+    {
+        return <<<JSON
+            {
+                "data": {
+                    "posts": [
+                        {
+                            "date": "2022-04-17T13:06:58+00:00",
+                            "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+                            "url": "http://graphql-api.lndo.site/hello-world/",
+                            "title": "Hello world!",
+                            "tags": [],
+                            "author": {
+                                "displayName": "admin",
+                                "url": "http://graphql-api.lndo.site/author/admin/",
+                                "id": 1
+                            }
+                        },
+                        {
+                            "date": "2020-12-12T04:08:47+00:00",
+                            "excerpt": "Categories Block Latest Posts Block",
+                            "url": "http://graphql-api.lndo.site/http-caching-improves-performance/",
+                            "title": "HTTP caching improves performance",
+                            "tags": [],
                             "author": {
                                 "displayName": "admin",
                                 "url": "http://graphql-api.lndo.site/author/admin/",
