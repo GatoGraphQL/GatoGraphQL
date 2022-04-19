@@ -20,9 +20,9 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
             'by-post',
             'params'
                 => 'graphql-query/latest-posts-for-mobile-app/',
-            'do-not-override-params-none-set'
+            'do-not-override-params-with-none-set'
                 => 'graphql-query/website/home-post-widget/',
-            'do-not-override-params-some-set'
+            'do-not-override-params-with-some-set'
                 => 'graphql-query/website/home-user-widget/',
             'api-hierarchy-child-no-inherited-query'
                 => 'graphql-query/website/home-posts-widget/',
@@ -49,8 +49,8 @@ class PersistedQueryIntegrationTestsFixtureWebserverRequestTest extends Abstract
     {
         return match ($dataName) {
             'params',
-            'do-not-override-params-none-set',
-            'do-not-override-params-some-set'
+            'do-not-override-params-with-none-set',
+            'do-not-override-params-with-some-set'
                 => [
                     'limit' => 3,
                 ],
