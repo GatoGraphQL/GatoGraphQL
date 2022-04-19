@@ -13,12 +13,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 
     /**
      * Retrieve all files under the "/fixture" folder
-     * to retrieve the expected response bodies.
-     *
-     * Depending on the file extension, we expect:
-     *
-     * - .json => application/json
-     * - .html => text/html
+     * to retrieve the expected response bodies, as JSON.
      *
      * Additional properties (such as the params)
      * must be provided via code.
@@ -34,12 +29,10 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
 
         $providerItems = [];
         foreach ($bodyResponseFileNameFileInfos as $bodyResponseFileInfo) {
-            /** @var string */
-            $bodyResponseFile = $bodyResponseFileInfo->getRealPath();
             $fileName = $bodyResponseFileInfo->getFilenameWithoutExtension();
             $dataName = $fileName;
             $providerItems[$dataName] = [
-                str_ends_with($bodyResponseFile, '.html') ? 'text/html' : 'application/json',
+                'application/json',
                 $bodyResponseFileInfo->getContents(),
                 $this->getEndpoint($dataName),
                 $this->getParams($dataName),
