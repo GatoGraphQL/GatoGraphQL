@@ -1,0 +1,16 @@
+{
+  "data": {
+    "cacheControlLists": [
+      {
+        "id": 181,
+        "title": "CCL for website",
+        "excerpt": ""
+      },
+      {
+        "id": 179,
+        "title": "CCL for mobile app",
+        "excerpt": ""
+      }
+    ]
+  }
+}

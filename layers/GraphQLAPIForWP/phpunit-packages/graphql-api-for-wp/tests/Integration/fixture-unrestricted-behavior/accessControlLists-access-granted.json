@@ -1,0 +1,21 @@
+{
+  "data": {
+    "accessControlLists": [
+      {
+        "id": 188,
+        "title": "Visitors",
+        "excerpt": ""
+      },
+      {
+        "id": 186,
+        "title": "Clients",
+        "excerpt": ""
+      },
+      {
+        "id": 184,
+        "title": "PRO users",
+        "excerpt": ""
+      }
+    ]
+  }
+}

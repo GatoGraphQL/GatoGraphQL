@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Standalone;
 
+use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -19,5 +20,18 @@ trait FixtureTestCaseTrait
         $finder->sortByName(true);
         $fileInfos = iterator_to_array($finder);
         return array_values($fileInfos);
+    }
+
+    /**
+     * @throws RuntimeException
+     */
+    protected function throwFileNotExistsException(string $file): never
+    {
+        throw new RuntimeException(
+            sprintf(
+                'File "%s" does not exist',
+                $file
+            )
+        );
     }
 }

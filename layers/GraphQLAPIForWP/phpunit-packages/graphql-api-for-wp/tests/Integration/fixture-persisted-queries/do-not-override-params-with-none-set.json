@@ -1,0 +1,21 @@
+{
+    "data": {
+        "postTags": [
+            {
+                "id": 9,
+                "url": "http:\/\/graphql-api.lndo.site\/tag\/wordpress\/",
+                "name": "wordpress"
+            },
+            {
+                "id": 8,
+                "url": "http:\/\/graphql-api.lndo.site\/tag\/security\/",
+                "name": "security"
+            },
+            {
+                "id": 7,
+                "url": "http:\/\/graphql-api.lndo.site\/tag\/release\/",
+                "name": "release"
+            }
+        ]
+    }
+}

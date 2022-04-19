@@ -1,0 +1,17 @@
+{
+    "data": {
+        "user": {
+            "name": "admin",
+            "posts": [
+                {
+                    "id": 1,
+                    "title": "Hello world!"
+                },
+                {
+                    "id": 28,
+                    "title": "HTTP caching improves performance"
+                }
+            ]
+        }
+    }
+}
