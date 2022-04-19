@@ -31,7 +31,7 @@ class RequestEndpointIntegrationTestsWebserverRequestTest extends AbstractWebser
                 [],
                 $query,
             ];
-            $entries[$dataName] = [
+            $entries[$dataName.'-with-params'] = [
                 'application/json',
                 $expectedResponseBodyWithLimit,
                 $endpoint,
