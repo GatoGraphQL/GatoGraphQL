@@ -16,24 +16,41 @@ class WordPressAuthenticatedUserIntegrationWebserverRequestTest extends Abstract
      */
     protected function provideEndpointEntries(): array
     {
-        return [
-            'admin-client' => [
-                'application/json',
-                <<<JSON
-                {
-                    "data": {
-                        "id": "root"
-                    }
-                }
-                JSON,
-                'wp-admin/edit.php?page=graphql_api&action=execute_query',
-                [],
-                <<<GRAPHQL
-                {
-                    id
-                }
-                GRAPHQL,
-            ],
+        $query = $this->getGraphQLQuery();
+        $expectedResponseBody = $this->getGraphQLExpectedResponse();
+        $endpoints = [
+            'admin-client' => 'wp-admin/edit.php?page=graphql_api&action=execute_query',
         ];
+        $entries = [];
+        foreach ($endpoints as $dataName => $endpoint) {
+            $entries[$dataName] = [
+                'application/json',
+                $expectedResponseBody,
+                $endpoint,
+                [],
+                $query,
+            ];
+        }
+        return $entries;
+    }
+
+    protected function getGraphQLQuery(): string
+    {
+        return <<<GRAPHQL
+            {
+                id
+            }       
+        GRAPHQL;
+    }
+
+    protected function getGraphQLExpectedResponse(): string
+    {
+        return <<<JSON
+            {
+                "data": {
+                    "id": "root"
+                }
+            }
+        JSON;
     }
 }
