@@ -60,6 +60,7 @@
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/src",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/src",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/src",
+            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/src",
             "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/src",
             "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/src",
             "PHPUnitForGraphQLAPI\\WebserverRequests\\": "layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/src",
