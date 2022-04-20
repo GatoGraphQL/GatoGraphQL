@@ -180,8 +180,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              */
             $errorMessage = RootEnvironment::isApplicationEnvironmentDev() ?
                 sprintf(
-                    $this->__('[Exception (Visible on DEV only)] %s', 'graphql-parser'),
-                    $e->getMessage()
+                    $this->__('[Exception (Visible on DEV only)] %s. Trace: %s', 'graphql-parser'),
+                    $e->getMessage(),
+                    $e->getTraceAsString()
                 ) : $this->__('There was an unexpected error', 'graphql-query');
 
             $this->getFeedbackMessageStore()->addQueryError($errorMessage);
