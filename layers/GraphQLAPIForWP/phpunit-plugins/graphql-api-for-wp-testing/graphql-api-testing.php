@@ -13,6 +13,8 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
+
 /**
  * Send the WP REST nonce as a header, to make it easier
  * to execute REST endpoints for integration tests.
@@ -24,6 +26,10 @@ function addRESTNonceAsHeader(): void
     if (!\is_user_logged_in()) {
         return;
     }
-    header('X-WP-REST-NONCE: ' . wp_create_nonce('wp_rest'));
+    header(sprintf(
+        '%s: %s',
+        CustomHeaders::WP_REST_NONCE,
+        wp_create_nonce('wp_rest')
+    ));
 }
 add_filter('init', 'addRESTNonceAsHeader');

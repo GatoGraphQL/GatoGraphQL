@@ -22,6 +22,11 @@
         "squizlabs/php_codesniffer": "^3.6",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
+    "autoload": {
+        "psr-4": {
+            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "src"
+        }
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {}

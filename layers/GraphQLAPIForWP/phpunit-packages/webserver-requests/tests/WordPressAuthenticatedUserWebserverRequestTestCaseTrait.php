@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use Psr\Http\Message\ResponseInterface;
 
@@ -84,7 +85,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
         ResponseInterface $response,
         array $options
     ): void {
-        static::$wpRESTNonce = $response->getHeaderLine('X-WP-REST-NONCE');
+        static::$wpRESTNonce = $response->getHeaderLine(CustomHeaders::WP_REST_NONCE);
     }
 
     /**
