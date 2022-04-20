@@ -53,6 +53,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             self::$cookieJar = static::createCookieJar();
             $options['cookies'] = self::$cookieJar;
         }
+        if (static::useSSL()) {
+            $options['verify'] = false;
+        }
         try {
             $response = $client->request(
                 static::getWebserverPingMethod(),

@@ -83,6 +83,9 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if (static::shareCookies()) {
             $options['cookies'] = self::$cookieJar;
         }
+        if (static::useSSL()) {
+            $options['verify'] = false;
+        }
         return $options;
     }
 
