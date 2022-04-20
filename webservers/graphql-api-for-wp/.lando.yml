@@ -17,6 +17,8 @@ services:
         XDEBUG_MODE: ''
       volumes:
         - >-
+          ../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing:/app/wordpress/wp-content/plugins/graphql-api-testing
+        - >-
           ../../layers/GraphQLAPIForWP/plugins/extension-demo:/app/wordpress/wp-content/plugins/graphql-api-extension-demo
         - >-
           ../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp:/app/wordpress/wp-content/plugins/graphql-api
