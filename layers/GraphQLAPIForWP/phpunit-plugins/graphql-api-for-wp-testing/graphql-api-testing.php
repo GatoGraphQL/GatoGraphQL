@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Testing - GraphQL API for WordPress
+Plugin Name: GraphQL API for WordPress - PHPUnit & Testing Utilities
 Description: Utilities for testing the GraphQL API for WordPress
 Version: 0.9.0
 Requires at least: 5.4

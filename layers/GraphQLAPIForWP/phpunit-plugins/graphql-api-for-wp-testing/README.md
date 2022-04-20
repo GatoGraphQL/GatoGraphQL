@@ -1,4 +1,4 @@
-# Testing - GraphQL API for WordPress
+# GraphQL API for WordPress - PHPUnit & Testing Utilities
 
 <!--
 [![Build Status][ico-travis]][link-travis]
