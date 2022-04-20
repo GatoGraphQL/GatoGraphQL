@@ -47,7 +47,7 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             }
 
             // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
-            $pluginVendor = substr($filePath, strlen($fixtureFolder));
+            $pluginVendor = substr($filePath, strlen($fixtureFolder . '/'));
             $pluginName = $pluginVendor . '/' . $fileName;
             $pluginEntries[$pluginName] = [
                 'query' => $query,
