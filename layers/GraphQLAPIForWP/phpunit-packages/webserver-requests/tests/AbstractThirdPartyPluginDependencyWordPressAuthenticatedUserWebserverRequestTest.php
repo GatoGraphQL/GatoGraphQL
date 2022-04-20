@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use PoP\Root\Exception\ShouldNotHappenException;
+
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
  *
@@ -46,7 +48,29 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      * @return string[]
      */
     abstract protected function getPluginNames(): array;
-    abstract protected function getPluginGraphQLQuery(string $pluginName): string;
-    abstract protected function getPluginEnabledExpectedGraphQLResponse(string $pluginName): string;
-    abstract protected function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string;
+
+    protected function getPluginGraphQLQuery(string $pluginName): string
+    {
+        $this->throwUnsupportedPluginName($pluginName);
+    }
+
+    protected function getPluginEnabledExpectedGraphQLResponse(string $pluginName): string
+    {
+        $this->throwUnsupportedPluginName($pluginName);
+    }
+
+    protected function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string
+    {
+        $this->throwUnsupportedPluginName($pluginName);
+    }    
+
+    protected function throwUnsupportedPluginName(string $pluginName): never
+    {
+        throw new ShouldNotHappenException(
+            sprintf(
+                'Configuration for plugin "%s" is not complete',
+                $pluginName
+            )
+        );
+    }
 }
