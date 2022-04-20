@@ -38,6 +38,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
                 $this->getParams($dataName),
                 $this->getQuery($dataName),
                 $this->getVariables($dataName),
+                $this->getOperationName($dataName),
                 $this->getEntryMethod($dataName),
             ];
         }
@@ -86,5 +87,10 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
     protected function getVariables(string $dataName): array
     {
         return [];
+    }
+
+    protected function getOperationName(string $dataName): string
+    {
+        return '';
     }
 }

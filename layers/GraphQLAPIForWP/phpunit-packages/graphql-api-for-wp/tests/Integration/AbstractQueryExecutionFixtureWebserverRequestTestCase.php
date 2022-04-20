@@ -9,6 +9,8 @@ use PHPUnitForGraphQLAPI\WebserverRequests\AbstractEndpointWebserverRequestTestC
 use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
 use function file_get_contents;
+use function file_exists;
+use function json_decode;
 
 abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
@@ -40,8 +42,17 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
             $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
-            if (!\file_exists($graphQLResponseFile)) {
+            if (!file_exists($graphQLResponseFile)) {
                 $this->throwFileNotExistsException($graphQLResponseFile);
+            }
+
+            $variables = [];
+            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            if (file_exists($graphQLVariablesFile)) {
+                $variables = json_decode(
+                    file_get_contents($graphQLVariablesFile),
+                    true
+                );
             }
 
             $dataName = $fileName;
@@ -51,7 +62,29 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
                 $endpoint,
                 [],
                 $query,
+                $variables,
             ];
+
+            /**
+             * Retrieve additional GraphQL responses to execute some "operationName"
+             */
+            $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
+                $fixtureFolder,
+                [$fileName . ':*.json'],
+            );
+            foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
+                $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
+                $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
+                $providerItems["${dataName}:${operationName}"] = [
+                    'application/json',
+                    file_get_contents($graphQLResponseFile),
+                    $endpoint,
+                    [],
+                    $query,
+                    $variables,
+                    $operationName,
+                ];
+            }
         }
         return $providerItems;
     }

@@ -18,6 +18,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         array $params = [],
         string $query = '',
         array $variables = [],
+        string $operationName = '',
         ?string $method = null,
     ): void {
         /**
@@ -33,10 +34,11 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options['query'] = $params;
         }
         $body = '';
-        if ($query !== '' || $variables !== []) {
+        if ($query !== '' || $variables !== [] || $operationName !== '') {
             $body = json_encode([
                 'query' => $query,
                 'variables' => $variables,
+                'operationName' => $operationName,
             ]);
         }
         if ($body !== '') {
