@@ -26,14 +26,14 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $entries = [];
         foreach ($this->getPluginNames() as $pluginName) {
             $query = $this->getPluginGraphQLQuery($pluginName);
-            $entries[$pluginName . '-enabled'] = [
+            $entries[$pluginName . ':enabled'] = [
                 'application/json',
                 $this->getPluginEnabledExpectedGraphQLResponse($pluginName),
                 $endpoint,
                 [],
                 $query,
             ];
-            $entries[$pluginName . '-disabled'] = [
+            $entries[$pluginName . ':disabled'] = [
                 'application/json',
                 $this->getPluginDisabledExpectedGraphQLResponse($pluginName),
                 $endpoint,
