@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GraphQLByPoP\GraphQLServer\Standalone\FixtureTestCaseTrait;
+use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 
 use function file_get_contents;
 

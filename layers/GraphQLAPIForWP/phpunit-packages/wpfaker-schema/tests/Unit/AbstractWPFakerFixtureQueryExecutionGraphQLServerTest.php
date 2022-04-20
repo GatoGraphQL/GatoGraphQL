@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
-use GraphQLByPoP\GraphQLServer\Standalone\AbstractFixtureQueryExecutionGraphQLServerTestCase;
+use GraphQLByPoP\GraphQLServer\Unit\AbstractFixtureQueryExecutionGraphQLServerTestCase;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnitForGraphQLAPI\WPFakerSchema\DataParsing\WordPressDataParser;

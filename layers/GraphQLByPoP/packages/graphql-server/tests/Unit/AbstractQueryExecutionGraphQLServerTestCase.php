@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Standalone;
+namespace GraphQLByPoP\GraphQLServer\Unit;
 
 abstract class AbstractQueryExecutionGraphQLServerTestCase extends AbstractGraphQLServerTestCase
 {

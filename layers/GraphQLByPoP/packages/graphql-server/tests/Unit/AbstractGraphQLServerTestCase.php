@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\Standalone;
+namespace GraphQLByPoP\GraphQLServer\Unit;
 
 use GraphQLByPoP\GraphQLServer\Standalone\GraphQLServer;
 use PHPUnit\Framework\TestCase;
