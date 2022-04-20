@@ -15,6 +15,14 @@ Domain Path: /languages
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Load Composer’s autoloader
+require_once(__DIR__ . '/vendor/autoload.php');
+
 /**
  * Send the WP REST nonce as a header, to make it easier
  * to execute REST endpoints for integration tests.
