@@ -34,12 +34,17 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
 
         $providerItems = [];
         foreach ($graphQLQueryFileNameFileInfos as $graphQLQueryFileInfo) {
+            // Allow to temporarily disable tests via code
+            $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
+            if ($this->isGraphQLQueryProviderTestDisabled($fileName)) {
+                continue;
+            }
+            
             $query = $graphQLQueryFileInfo->getContents();
 
             /**
              * From the GraphQL query file name, generate the remaining file names
              */
-            $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
             $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
             if (!file_exists($graphQLResponseFile)) {
@@ -94,6 +99,11 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
     {
         // Admin client endpoint
         return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+    }
+
+    protected function isGraphQLQueryProviderTestDisabled(string $fileName): bool
+    {
+        return false;
     }
 
     /**
