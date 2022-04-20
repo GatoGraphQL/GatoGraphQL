@@ -53,6 +53,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             self::$cookieJar = static::createCookieJar();
             $options['cookies'] = self::$cookieJar;
         }
+        if (static::useSSL()) {
+            $options['verify'] = false;
+        }
         try {
             $response = $client->request(
                 static::getWebserverPingMethod(),
@@ -68,6 +71,9 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
 
             // The webserver is working
             self::$enableTests = true;
+
+            // Allow to retrieve/store data from the response, eg: during authentication
+            static::postWebserverPingResponse($response, $options);
             return;
         } catch (GuzzleException | RuntimeException) {
             // The webserver is down
@@ -123,6 +129,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         array $options
     ): ?string {
         return null;
+    }
+
+    /**
+     * Allow to retrieve/store data from the response, eg: during authentication.
+     *
+     * @param array<string,mixed> $options
+     */
+    protected static function postWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): void {
+        // Override if needed
     }
 
     /**

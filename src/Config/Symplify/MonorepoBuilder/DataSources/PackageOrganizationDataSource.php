@@ -22,6 +22,7 @@ class PackageOrganizationDataSource
             'layers/Engine/packages' => 'getpop',
             'layers/GraphQLAPIForWP/packages' => 'GraphQLAPI',
             'layers/GraphQLAPIForWP/phpunit-packages' => 'PHPUnitForGraphQLAPI',
+            'layers/GraphQLAPIForWP/phpunit-plugins' => 'PHPUnitForGraphQLAPI',
             'layers/GraphQLAPIForWP/plugins' => 'GraphQLAPI',
             'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
