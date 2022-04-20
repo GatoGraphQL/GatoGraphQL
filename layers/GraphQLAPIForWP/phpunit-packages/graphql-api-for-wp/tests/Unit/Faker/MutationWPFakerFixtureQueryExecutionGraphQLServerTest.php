@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit\Faker;
 
 use PHPUnitForGraphQLAPI\WPFakerSchema\Unit\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 
