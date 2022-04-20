@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPI\Standalone\Upstream\ComponentModel;
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Unit;
 
 use PHPUnitForGraphQLAPI\WPFakerSchema\Standalone\AbstractWPFakerFixtureQueryExecutionGraphQLServerTest;
 
-class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
+class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtureQueryExecutionGraphQLServerTest
 {
     /**
      * Directory under the fixture files are placed
      */
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-mutation';
+        return __DIR__ . '/fixture';
     }
 
     /**
@@ -24,11 +24,12 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
         return [
             ...parent::getGraphQLServerComponentClasses(),
             ...[
+                \PoPCMSSchema\PostCategoriesWP\Component::class,
+                \PoPCMSSchema\PostTagsWP\Component::class,
                 \PoPWPSchema\Users\Component::class,
                 \PoPWPSchema\Posts\Component::class,
                 \PoPWPSchema\Pages\Component::class,
                 \PoPWPSchema\Comments\Component::class,
-                \PoPCMSSchema\CommentMutationsWP\Component::class,
             ]
         ];
     }
