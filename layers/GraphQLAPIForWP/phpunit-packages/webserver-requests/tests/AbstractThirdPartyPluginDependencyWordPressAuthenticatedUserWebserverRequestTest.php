@@ -14,7 +14,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-    
+
     protected static function useSSL(): bool
     {
         return true;

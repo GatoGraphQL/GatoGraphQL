@@ -45,7 +45,7 @@ abstract class AbstractCodeThirdPartyPluginDependencyWordPressAuthenticatedUserW
     protected function getPluginDisabledExpectedGraphQLResponse(string $pluginName): string
     {
         $this->throwUnsupportedPluginName($pluginName);
-    }    
+    }
 
     protected function throwUnsupportedPluginName(string $pluginName): never
     {
