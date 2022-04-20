@@ -39,7 +39,7 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
             if ($this->isGraphQLQueryProviderTestDisabled($fileName)) {
                 continue;
             }
-            
+
             $query = $graphQLQueryFileInfo->getContents();
 
             /**
