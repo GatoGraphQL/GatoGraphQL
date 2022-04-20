@@ -71,6 +71,7 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
                 $fixtureFolder,
                 [$fileName . ':*.json'],
+                ['*.disabled.json'],
             );
             foreach ($graphQLResponseForOperationFileNameFileInfos as $graphQLResponseForOperationFileInfo) {
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
