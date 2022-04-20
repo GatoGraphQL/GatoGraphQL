@@ -23,25 +23,40 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     protected function provideEndpointEntries(): array
     {
         $endpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query';
-        $entries = [];
-        foreach ($this->getPluginNames() as $pluginName) {
-            $query = $this->getPluginGraphQLQuery($pluginName);
-            $entries[$pluginName . ':enabled'] = [
+        $providerEntries = [];
+        foreach ($this->getPluginNameEntries() as $pluginName => $pluginEntry) {
+            $providerEntries[$pluginName . ':enabled'] = [
                 'application/json',
-                $this->getPluginEnabledExpectedGraphQLResponse($pluginName),
+                $pluginEntry['response-enabled'],
                 $endpoint,
                 [],
-                $query,
+                $pluginEntry['query'],
             ];
-            $entries[$pluginName . ':disabled'] = [
+            $providerEntries[$pluginName . ':disabled'] = [
                 'application/json',
-                $this->getPluginDisabledExpectedGraphQLResponse($pluginName),
+                $pluginEntry['response-disabled'],
                 $endpoint,
                 [],
-                $query,
+                $pluginEntry['query'],
             ];
         }
-        return $entries;
+        return $providerEntries;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getPluginNameEntries(): array
+    {
+        $pluginEntries = [];
+        foreach ($this->getPluginNames() as $pluginName) {
+            $pluginEntries[$pluginName] = [
+                'query' => $this->getPluginGraphQLQuery($pluginName),
+                'response-enabled' => $this->getPluginEnabledExpectedGraphQLResponse($pluginName),
+                'response-disabled' => $this->getPluginDisabledExpectedGraphQLResponse($pluginName),
+            ];
+        }
+        return $pluginEntries;
     }
 
     /**
