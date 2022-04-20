@@ -51,18 +51,27 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
-            $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
-            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
-            if (!\file_exists($graphQLVariablesFile)) {
-                $graphQLVariablesFile = null;
-            }
-
+            
             /**
              * If the test is organized under a subfolder (such as "Success" or "Error"),
              * append it to the named dataset
              */
             $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
             $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
+
+            /**
+             * Make sure the test is not temporarily disabled
+             */
+            if ($this->isProviderTestDisabled($dataName)) {
+                continue;
+            }
+            
+            $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            if (!\file_exists($graphQLVariablesFile)) {
+                $graphQLVariablesFile = null;
+            }
+
             $providerItems[$dataName] = [
                 $graphQLQueryFile,
                 $graphQLResponseFile,
@@ -91,6 +100,11 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             }
         }
         return $providerItems;
+    }
+
+    protected function isProviderTestDisabled(string $dataName): bool
+    {
+        return false;
     }
 
     /**
