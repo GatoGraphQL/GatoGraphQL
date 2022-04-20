@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\WPFakerSchema\Standalone;
+namespace PHPUnitForGraphQLAPI\WPFakerSchema\Unit;
 
 use Brain\Faker\Providers;
 use Faker\Generator;
