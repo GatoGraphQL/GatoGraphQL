@@ -62,8 +62,8 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
              * append it to the named dataset
              */
             $graphQLFilesSubfolder = substr($filePath, strlen($fixtureFolder) + 1);
-            $namedDataset = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
-            $providerItems[$namedDataset] = [
+            $dataName = ($graphQLFilesSubfolder !== '' ? $graphQLFilesSubfolder . \DIRECTORY_SEPARATOR : '') . $fileName;
+            $providerItems[$dataName] = [
                 $graphQLQueryFile,
                 $graphQLResponseFile,
                 $graphQLVariablesFile,
@@ -82,7 +82,7 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 $graphQLResponseForOperationFile = $graphQLResponseForOperationFileInfo->getRealPath();
                 $operationFileName = $graphQLResponseForOperationFileInfo->getFilenameWithoutExtension();
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
-                $providerItems["${namedDataset}:${operationName}"] = [
+                $providerItems["${dataName}:${operationName}"] = [
                     $graphQLQueryFile,
                     $graphQLResponseForOperationFile,
                     $graphQLVariablesFile,
