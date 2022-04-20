@@ -69,7 +69,7 @@
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp"
         ],
         "symlink-vendor-for-graphql-api-for-wp-testing-plugin": [
-            "php -r \"copy('../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.local.json');\"",
+            "php -r \"copy('../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.json', '../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing"
         ],
