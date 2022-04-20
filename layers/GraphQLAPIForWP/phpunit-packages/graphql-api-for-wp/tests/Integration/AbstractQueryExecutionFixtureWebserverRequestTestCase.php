@@ -23,7 +23,7 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
      */
     final protected function provideEndpointEntries(): array
     {
-        $endpoint = 'wp-admin/edit.php?page=graphql_api&action=execute_query';
+        $endpoint = $this->getEndpoint();
 
         $fixtureFolder = $this->getFixtureFolder();
         $graphQLQueryFileNameFileInfos = $this->findFilesInDirectory(
@@ -87,6 +87,12 @@ abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends Abs
             }
         }
         return $providerItems;
+    }
+
+    protected function getEndpoint(): string
+    {
+        // Admin client endpoint
+        return 'wp-admin/edit.php?page=graphql_api&action=execute_query';
     }
 
     /**
