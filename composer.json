@@ -430,6 +430,7 @@
         "graphql-by-pop/graphql-server": "self.version",
         "graphql-by-pop/graphql-voyager": "self.version",
         "phpunit-for-graphql-api/graphql-api-for-wp": "self.version",
+        "phpunit-for-graphql-api/graphql-api-for-wp-testing": "self.version",
         "phpunit-for-graphql-api/webserver-requests": "self.version",
         "phpunit-for-graphql-api/wpfaker-schema": "self.version",
         "pop-api/api": "self.version",
