@@ -45,4 +45,43 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      * @return array<string,array<string>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
     abstract protected function getPluginNameEntries(): array;
+
+    /**
+     * Disable the plugin before executing the ":disabled" test
+     */
+    protected function beforeRunningTest(string $dataName): void
+    {
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+        }
+        parent::beforeRunningTest($dataName);
+    }
+
+    protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
+    {
+        $client = static::getClient();
+        $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
+        $endpointURLPlaceholder = static::getWebserverHomeURL() .'/' . $restEndpointPlaceholder;
+        $options = static::getRequestBasicOptions();
+        $pluginName = substr($dataName, -1 * strlen(':disabled'));
+        $client->post(
+            sprintf(
+                $endpointURLPlaceholder,
+                $pluginName,
+                $status
+            ),
+            $options
+        );
+    }
+
+    /**
+     * Re-enable the plugin after executing the ":disabled" test
+     */
+    protected function afterRunningTest(string $dataName): void
+    {
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+        }
+        parent::afterRunningTest($dataName);
+    }
 }
