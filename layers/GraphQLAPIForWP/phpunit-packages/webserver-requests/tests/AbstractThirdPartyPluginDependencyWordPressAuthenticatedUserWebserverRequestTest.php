@@ -14,6 +14,11 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+    
+    protected static function useSSL(): bool
+    {
+        return true;
+    }
 
     /**
      * @return array<string,array<mixed>>
@@ -63,7 +68,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() .'/' . $restEndpointPlaceholder;
         $options = static::getRequestBasicOptions();
-        $pluginName = substr($dataName, -1 * strlen(':disabled'));
+        $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':disabled'));
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
