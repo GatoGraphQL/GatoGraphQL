@@ -1,4 +1,244 @@
 {
+    "errors": [
+        {
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Post",
+                "fields": [
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "disableAccess"
+                ],
+                "code": "PoP\\AccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Post'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Post",
+                "fields": [
+                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "validateIsUserNotLoggedInForDirectives"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+            }
+        },
+        {
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "CustomPostUnion",
+                "fields": [
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "disableAccess"
+                ],
+                "code": "PoP\\AccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'CustomPostUnion'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "CustomPostUnion",
+                "fields": [
+                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "validateIsUserNotLoggedInForDirectives"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+            }
+        },
+        {
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Page",
+                "fields": [
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "disableAccess"
+                ],
+                "code": "PoP\\AccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Page'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Page",
+                "fields": [
+                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "validateIsUserNotLoggedInForDirectives"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+            }
+        },
+        {
+            "message": "There is no field 'avatar' on type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "avatar",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "There is no field 'description' on type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "description",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "There is no field 'hasAnyRole' on type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "hasAnyRole(roles:[0:\"editor\"])",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "There is no field 'websiteURL' on type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "websiteURL",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "There is no field 'self' on type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "self",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "Access to field(s) 'lastName', 'name' has been disabled",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "lastName",
+                    "disableAccess"
+                ],
+                "code": "PoP\\AccessControl\\e2"
+            }
+        },
+        {
+            "message": "Access to field(s) 'lastName', 'name' has been disabled",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "name",
+                    "disableAccess"
+                ],
+                "code": "PoP\\AccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must not be logged in to access directives in field(s) 'nicename<skip(if:)>' for type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "nicename<skip(if:)>",
+                    "validateIsUserNotLoggedInForDirectives"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+            }
+        }
+    ],
     "data": {
         "commentCount": 11,
         "imageSizeNames": [
@@ -15,46 +255,27 @@
                 "title": "Hello world!",
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 1,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "comments": null
             },
             {
                 "id": 28,
                 "title": "HTTP caching improves performance",
                 "date": "2020-12-12T04:08:47+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 11,
-                        "content": "<p>Wow, this sounds awesome!<\/p>\n"
-                    }
-                ]
+                "comments": null
             },
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
                 "date": "2020-12-12T04:06:52+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 10,
-                        "content": "<p>Absolutely! And directives too!<\/p>\n"
-                    },
-                    {
-                        "id": 9,
-                        "content": "<p>Can I hide any field?<\/p>\n"
-                    }
-                ]
+                "comments": null
             }
         ],
         "comments": [
@@ -78,14 +299,9 @@
                 "title": "Hello world!",
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 1,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "comments": null
             },
             {
                 "__typename": "Post",
@@ -93,14 +309,9 @@
                 "title": "HTTP caching improves performance",
                 "date": "2020-12-12T04:08:47+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 11,
-                        "content": "<p>Wow, this sounds awesome!<\/p>\n"
-                    }
-                ]
+                "comments": null
             },
             {
                 "__typename": "Post",
@@ -108,18 +319,9 @@
                 "title": "Public or Private API mode, for extra security",
                 "date": "2020-12-12T04:06:52+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
-                "customPostType": "post",
+                "customPostType": null,
                 "hasComments": true,
-                "comments": [
-                    {
-                        "id": 10,
-                        "content": "<p>Absolutely! And directives too!<\/p>\n"
-                    },
-                    {
-                        "id": 9,
-                        "content": "<p>Can I hide any field?<\/p>\n"
-                    }
-                ]
+                "comments": null
             }
         ],
         "pages": [
@@ -128,66 +330,60 @@
                 "title": "Sample Page",
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/sample-page\/",
-                "customPostType": "page",
+                "customPostType": null,
                 "hasComments": false,
-                "comments": []
+                "comments": null
             },
             {
                 "id": 9,
                 "title": "Sample Page",
                 "date": "2020-07-27T11:28:57+00:00",
                 "url": "http:\/\/graphql-api.lndo.site\/sample-page-2\/",
-                "customPostType": "page",
+                "customPostType": null,
                 "hasComments": false,
-                "comments": []
+                "comments": null
             }
         ],
         "mediaItems": [],
         "users": [
             {
-                "avatar": "87753e8cc3d5a0485286226f9113ae58",
-                "description": "",
+                "avatar": null,
+                "description": null,
                 "firstName": "Editor",
                 "displayName": "Editor Smith",
                 "hasAnyCapability": false,
-                "hasAnyRole": true,
-                "lastName": "Smith",
-                "name": "Editor Smith",
-                "websiteURL": "",
-                "nicename": "editor",
-                "self": {
-                    "id": 5
-                }
+                "hasAnyRole": null,
+                "lastName": null,
+                "name": null,
+                "websiteURL": null,
+                "nicename": null,
+                "self": null
             },
             {
-                "avatar": "aee3afdd695c9f3d0532c1867eeadad9",
-                "description": "",
+                "avatar": null,
+                "description": null,
                 "firstName": "Author",
                 "displayName": "Author Marquez",
                 "hasAnyCapability": false,
-                "hasAnyRole": false,
-                "lastName": "Marquez",
-                "name": "Author Marquez",
-                "websiteURL": "",
-                "nicename": "author",
-                "self": {
-                    "id": 4
-                }
+                "hasAnyRole": null,
+                "lastName": null,
+                "name": null,
+                "websiteURL": null,
+                "nicename": null,
+                "self": null
             },
             {
-                "avatar": "fe8a37fbeab12a26305726599ec33f40",
-                "description": "",
+                "avatar": null,
+                "description": null,
                 "firstName": "Contributor",
                 "displayName": "Contributor Johnson",
                 "hasAnyCapability": false,
-                "hasAnyRole": false,
-                "lastName": "Johnson",
-                "name": "Contributor Johnson",
-                "websiteURL": "",
-                "nicename": "contributor",
-                "self": {
-                    "id": 3
-                }
+                "hasAnyRole": null,
+                "lastName": null,
+                "name": null,
+                "websiteURL": null,
+                "nicename": null,
+                "self": null
             }
         ]
     }
