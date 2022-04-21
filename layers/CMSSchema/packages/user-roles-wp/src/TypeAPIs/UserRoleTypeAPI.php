@@ -7,6 +7,11 @@ namespace PoPCMSSchema\UserRolesWP\TypeAPIs;
 use PoPCMSSchema\UserRoles\TypeAPIs\AbstractUserRoleTypeAPI;
 use WP_User;
 
+use function get_user_by;
+use function wp_roles;
+use function get_role;
+use function user_can;
+
 class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
 {
     public function getAdminRoleName(): string
@@ -19,7 +24,7 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
      */
     public function getRoleNames(): array
     {
-        $userRoles = \wp_roles();
+        $userRoles = wp_roles();
         return array_keys($userRoles->roles);
     }
 
@@ -34,7 +39,7 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
          * Merge all capabilities from all roles
          */
         $capabilities = [];
-        $roles = \wp_roles();
+        $roles = wp_roles();
         foreach ($roles->roles as $role) {
             $capabilities = array_merge(
                 $capabilities,
@@ -52,7 +57,7 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
         if (is_object($userObjectOrID)) {
             $user = $userObjectOrID;
         } else {
-            $user = \get_user_by('id', $userObjectOrID);
+            $user = get_user_by('id', $userObjectOrID);
             if ($user === false) {
                 return [];
             }
@@ -69,7 +74,7 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
         $roles = $this->getUserRoles($userObjectOrID);
         $capabilities = [];
         foreach ($roles as $roleName) {
-            $role = \get_role($roleName);
+            $role = get_role($roleName);
             $capabilities = array_merge(
                 $capabilities,
                 array_keys($role->capabilities ?? [])
@@ -89,6 +94,6 @@ class UserRoleTypeAPI extends AbstractUserRoleTypeAPI
 
     public function userCan(string | int | object $userObjectOrID, string $capability): bool
     {
-        return \user_can($userObjectOrID, $capability);
+        return user_can($userObjectOrID, $capability);
     }
 }
