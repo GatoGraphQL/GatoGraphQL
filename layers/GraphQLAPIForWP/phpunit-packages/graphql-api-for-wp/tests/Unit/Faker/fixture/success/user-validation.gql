@@ -1,0 +1,84 @@
+{  
+  # Default / logged-in users
+  posts(pagination: { limit: 3 }) {
+    ...IsCustomPostData
+  }
+  # Default / "administrator" or "editor" roles
+  comments(pagination: { limit: 3 }) {
+    id
+    date
+  }
+  # Default / "author" role
+  customPosts(pagination: { limit: 3 }) {
+    __typename
+    ...IsCustomPostData
+  }
+  # Private / Non-logged-in users
+  pages(pagination: { limit: 3 }) {
+    ...IsCustomPostData
+  }
+
+  # Public / "administrator" role
+  commentCount
+  # Public / logged-in user
+  imageSizeNames
+  # Public / "subscriber" role
+  mediaItems(pagination: { limit: 3 }) {
+    id
+    url
+  }
+
+  users(pagination: { limit: 3 }) {
+    # Private / "administrator", "author" or "subscriber" roles
+    avatar
+    # Private / logged-in user
+    description
+    # Private / "subscriber" role
+    firstName
+
+    # Default / "switch_themes" capability
+    displayName
+    # Public / "edit_plugins" capability
+    hasAnyCapability(capabilities: ["switch_themes"])
+    # Private / "read_private_posts" capability
+    hasAnyRole(roles: ["editor"])
+
+    # Default / Disabled
+    lastName
+    # Public / Disabled
+    name
+    # Private / Disabled
+    websiteURL
+
+    nicename
+      # Default / Non-logged-in users
+      @skip(if: false)
+
+    # Private / 2 states: "editor" or "contributor" roles, or non-logged-in user
+    self {
+      id
+    }
+  }
+}
+
+fragment IsCustomPostData on IsCustomPost {
+  id
+  # Private / Non-logged-in users
+  title
+  # Default / "administrator" role
+  date
+  # Public / Logged-in users
+  url
+  # Default / Disabled
+  customPostType
+  # Public / "edit_users" or "edit_files" capabilities
+  hasComments
+  comments
+      # Default / Non-logged-in users
+      @skip(if: false)
+    {
+      id
+      # No access control defined!
+      content
+    }
+}
