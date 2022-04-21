@@ -17,6 +17,12 @@ use WP_Post;
 use function get_post_status;
 use function get_posts;
 use function esc_sql;
+use function get_the_excerpt;
+use function get_post_types;
+use function get_permalink;
+use function get_sample_permalink;
+use function strip_shortcodes;
+use function get_post;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -224,7 +230,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['publicly_queryable'] = $query['publicly-queryable'];
             unset($query['publicly-queryable']);
         }
-        return \get_post_types($query);
+        return get_post_types($query);
     }
 
     public function getPermalink(string | int | object $customPostObjectOrID): ?string
@@ -234,13 +240,13 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         if ($this->getStatus($customPostObjectOrID) === CustomPostStatus::PUBLISH) {
-            return \get_permalink($customPostID);
+            return get_permalink($customPostID);
         }
 
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
         include_once ABSPATH . 'wp-admin/includes/post.php';
-        list($permalink, $post_name) = \get_sample_permalink($customPostID, null, null);
+        list($permalink, $post_name) = get_sample_permalink($customPostID, null, null);
         return str_replace(['%pagename%', '%postname%'], $post_name, $permalink);
     }
 
@@ -262,13 +268,13 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
         include_once ABSPATH . 'wp-admin/includes/post.php';
-        list($permalink, $post_name) = \get_sample_permalink($customPostID, null, null);
+        list($permalink, $post_name) = get_sample_permalink($customPostID, null, null);
         return $post_name;
     }
 
     public function getExcerpt(string | int | object $customPostObjectOrID): ?string
     {
-        return \get_the_excerpt($customPostObjectOrID);
+        return get_the_excerpt($customPostObjectOrID);
     }
     /**
      * @return mixed[]
@@ -334,7 +340,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         App::removeFilter('the_content', wpautop(...));
 
         // Do not allow HTML tags or shortcodes
-        $ret = \strip_shortcodes($customPost->post_content);
+        $ret = strip_shortcodes($customPost->post_content);
         $ret = App::applyFilters('the_content', $ret);
         App::addFilter('the_content', $wp_embed->autoembed(...), 8);
         App::addFilter('the_content', wpautop(...));
@@ -370,6 +376,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
      */
     public function getCustomPost(int | string $id): ?object
     {
-        return \get_post($id);
+        return get_post($id);
     }
 }
