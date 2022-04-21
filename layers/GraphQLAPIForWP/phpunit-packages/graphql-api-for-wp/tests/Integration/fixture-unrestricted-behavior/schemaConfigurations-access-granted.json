@@ -2,6 +2,10 @@
   "data": {
     "schemaConfigurations": [
       {
+        "id": 261,
+        "title": "Power users"
+      },
+      {
         "id": 193,
         "title": "Mobile app"
       },
