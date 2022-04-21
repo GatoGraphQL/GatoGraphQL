@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
+
+use PHPUnitForGraphQLAPI\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+
+abstract class AbstractAuthenticatedUserValidationQueryExecutionFixtureWebserverRequestTestCase extends AbstractUserValidationQueryExecutionFixtureWebserverRequestTestCase
+{
+    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+}
