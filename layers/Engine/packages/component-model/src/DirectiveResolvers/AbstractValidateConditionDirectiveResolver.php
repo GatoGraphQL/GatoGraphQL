@@ -43,23 +43,24 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedDataFields,
     ): void {
-        if (!$this->isValidationSuccessful($relationalTypeResolver)) {
-            // All fields failed
-            $failedDataFields = array_merge(
-                $failedDataFields,
-                $dataFields
+        if ($this->isValidationSuccessful($relationalTypeResolver)) {
+            return;
+        }
+        // All fields failed
+        $failedDataFields = array_merge(
+            $failedDataFields,
+            $dataFields
+        );
+        foreach ($dataFields as $field) {
+            $engineIterationFeedbackStore->schemaFeedbackStore->addError(
+                new SchemaFeedback(
+                    $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $dataFields),
+                    LocationHelper::getNonSpecificLocation(),
+                    $relationalTypeResolver,
+                    $field,
+                    $this->directive,
+                )
             );
-            foreach ($dataFields as $field) {
-                $engineIterationFeedbackStore->schemaFeedbackStore->addError(
-                    new SchemaFeedback(
-                        $this->getValidationFailedFeedbackItemResolution($relationalTypeResolver, $dataFields),
-                        LocationHelper::getNonSpecificLocation(),
-                        $relationalTypeResolver,
-                        $field,
-                        $this->directive,
-                    )
-                );
-            }
         }
     }
 
