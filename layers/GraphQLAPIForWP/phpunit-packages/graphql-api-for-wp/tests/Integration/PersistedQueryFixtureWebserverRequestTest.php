@@ -21,7 +21,7 @@ class PersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFi
             'passing-params'
                 => 'graphql-query/latest-posts-for-mobile-app/',
             'do-not-override-params-with-none-set'
-                => 'graphql-query/website/home-post-widget/',
+                => 'graphql-query/website/home-tag-widget/',
             'do-not-override-params-with-some-set'
                 => 'graphql-query/website/home-user-widget/',
             'api-hierarchy-child-no-inherited-query'
