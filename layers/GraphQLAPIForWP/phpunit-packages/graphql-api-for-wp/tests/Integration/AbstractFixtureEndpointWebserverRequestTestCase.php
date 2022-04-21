@@ -14,7 +14,7 @@ use function json_decode;
 abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
-    
+
     /**
      * Retrieve all GraphQL query files and their expected
      * responses from under the "/fixture" folder
