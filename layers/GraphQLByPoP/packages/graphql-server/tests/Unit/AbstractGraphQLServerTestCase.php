@@ -93,8 +93,9 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
          * setting Guzzle response mocks for the particular
          * named dataset
          */
+        $dataName = $this->dataName();
         $this->beforeFixtureGraphQLQueryExecution(
-            $this->dataName(),
+            $dataName,
             $queryFile,
             $expectedResponseFile,
             $variablesFile,
@@ -112,7 +113,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
          * that there are no mock Responses left in the queue.
          */
         $this->afterFixtureGraphQLQueryExecution(
-            $this->dataName(),
+            $dataName,
         );
     }
 
