@@ -43,7 +43,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
         array &$failedDataFields,
     ): void {
-        if (!$this->isSuccessfulValidation($relationalTypeResolver)) {
+        if (!$this->isValidationSuccessful($relationalTypeResolver)) {
             // All fields failed
             $failedDataFields = array_merge(
                 $failedDataFields,
@@ -66,7 +66,7 @@ abstract class AbstractValidateConditionDirectiveResolver extends AbstractValida
     /**
      * Condition to validate. Return `true` for success, `false` for failure
      */
-    abstract protected function isSuccessfulValidation(RelationalTypeResolverInterface $relationalTypeResolver): bool;
+    abstract protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool;
 
     /**
      * Show a different error message depending on if we are validating the whole field, or a directive
