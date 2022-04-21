@@ -12,7 +12,7 @@ use function file_get_contents;
 use function file_exists;
 use function json_decode;
 
-abstract class AbstractQueryExecutionFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractAdminClientQueryExecutionFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
