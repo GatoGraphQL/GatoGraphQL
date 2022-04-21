@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.9.3" created="2022-04-21 06:27" -->
+	<!-- generator="WordPress/5.9.3" created="2022-04-21 07:54" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>GraphQL API</title>
 	<link>http://graphql-api.lndo.site</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Thu, 21 Apr 2022 06:27:17 +0000</pubDate>
+	<pubDate>Thu, 21 Apr 2022 07:54:34 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://graphql-api.lndo.site</wp:base_site_url>
@@ -627,7 +627,7 @@
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">http://graphql-api.lndo.site/?post_type=graphql-query&#038;p=237</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 1,\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:graphql-api/graphiql {"query":"query GetUserAccountData(\n  $limit: Int\n) {\n  me {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
 <!-- wp:graphql-api/schema-configuration /-->
 
@@ -638,8 +638,8 @@
 		<wp:post_id>237</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 07:29:37]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-19 07:29:37]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-04-19 07:29:37]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-04-19 07:29:37]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-04-21 07:53:14]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-04-21 07:53:14]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[user-account]]></wp:post_name>
@@ -778,8 +778,8 @@
 		<wp:post_id>256</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 05:53:14]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-21 05:53:14]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-04-21 06:02:15]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-04-21 06:02:15]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-04-21 07:00:41]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-04-21 07:00:41]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[power-users]]></wp:post_name>
