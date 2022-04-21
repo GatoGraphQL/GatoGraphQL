@@ -86,6 +86,25 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
     }
 
     /**
+     * @return array<string,mixed>
+     */
+    protected static function getRequestBasicOptions(): array
+    {
+        $options = [
+            'headers' => [
+                'Accept' => 'application/json',
+            ],
+        ];
+        if (static::shareCookies()) {
+            $options['cookies'] = self::$cookieJar;
+        }
+        if (static::useSSL()) {
+            $options['verify'] = false;
+        }
+        return $options;
+    }
+
+    /**
      * Check if running the test on Continuous Integration.
      *
      * Currently supported:
