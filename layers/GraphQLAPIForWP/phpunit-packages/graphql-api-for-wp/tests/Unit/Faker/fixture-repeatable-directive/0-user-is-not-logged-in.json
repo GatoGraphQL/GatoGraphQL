@@ -1,0 +1,41 @@
+{
+  "errors": [
+    {
+      "message": "You must be logged in to access field(s) 'echo(value:\"Hi there\")@hi<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"author\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])>', 'self<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"])>' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "echo(value:\"Hi there\")@hi<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"author\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])>",
+          "validateIsUserLoggedIn"
+        ],
+        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+      }
+    },
+    {
+      "message": "You must be logged in to access field(s) 'echo(value:\"Hi there\")@hi<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"author\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])>', 'self<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"])>' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "self<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"])>",
+          "validateIsUserLoggedIn"
+        ],
+        "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+      }
+    }
+  ],
+  "data": {
+    "id": "root"
+  }
+}

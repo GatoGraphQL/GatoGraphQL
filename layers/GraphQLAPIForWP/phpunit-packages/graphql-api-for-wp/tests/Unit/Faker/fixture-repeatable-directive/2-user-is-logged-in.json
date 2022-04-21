@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": "root",
+    "hi": "Hi there",
+    "self": {
+      "id": "root",
+      "cool": "Cool!"
+    }
+  }
+}

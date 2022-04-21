@@ -1,0 +1,8 @@
+{
+  id
+  self @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) {
+    id
+    cool: echo(value: "Cool!") @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["author", "administrator"])
+  }
+  hi: echo(value: "Hi there") @validateDoesLoggedInUserHaveAnyRole(roles: ["editor", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["author", "administrator"]) @validateDoesLoggedInUserHaveAnyRole(roles: ["subscriber"])
+}
