@@ -7,7 +7,7 @@
                 "title": "Hello world!",
                 "author": {
                     "id": 1,
-                    "displayName": "admin",
+                    "username": "admin",
                     "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
                 }
             },
@@ -17,7 +17,7 @@
                 "title": "HTTP caching improves performance",
                 "author": {
                     "id": 1,
-                    "displayName": "admin",
+                    "username": "admin",
                     "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
                 }
             },
@@ -27,7 +27,7 @@
                 "title": "Public or Private API mode, for extra security",
                 "author": {
                     "id": 1,
-                    "displayName": "admin",
+                    "username": "admin",
                     "url": "http:\/\/graphql-api.lndo.site\/author\/admin\/"
                 }
             }
