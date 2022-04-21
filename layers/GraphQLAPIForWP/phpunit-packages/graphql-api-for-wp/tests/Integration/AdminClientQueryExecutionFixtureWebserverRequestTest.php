@@ -8,6 +8,6 @@ class AdminClientQueryExecutionFixtureWebserverRequestTest extends AbstractAdmin
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-admin-client-queries';
+        return __DIR__ . '/fixture-admin-client';
     }
 }
