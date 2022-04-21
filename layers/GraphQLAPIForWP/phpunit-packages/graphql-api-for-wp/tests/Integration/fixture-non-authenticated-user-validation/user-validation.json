@@ -1,6 +1,57 @@
 {
     "errors": [
         {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Post",
+                "fields": [
+                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Post",
+                "fields": [
+                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Post",
+                "fields": [
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
             "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
             "locations": [
                 {
@@ -18,7 +69,7 @@
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Post'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
             "locations": [
                 {
                     "line": 1,
@@ -26,12 +77,46 @@
                 }
             ],
             "extensions": {
-                "type": "Post",
+                "type": "CustomPostUnion",
                 "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
-                    "validateIsUserNotLoggedInForDirectives"
+                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "CustomPostUnion",
+                "fields": [
+                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "CustomPostUnion",
+                "fields": [
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
@@ -52,7 +137,7 @@
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'CustomPostUnion'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -60,12 +145,46 @@
                 }
             ],
             "extensions": {
-                "type": "CustomPostUnion",
+                "type": "Page",
                 "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
-                    "validateIsUserNotLoggedInForDirectives"
+                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
                 ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Page",
+                "fields": [
+                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "Page",
+                "fields": [
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
@@ -83,23 +202,6 @@
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
-            }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Page'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "Page",
-                "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
-                    "validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
             }
         },
         {
@@ -188,6 +290,57 @@
             }
         },
         {
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "firstName",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "displayName",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "hasAnyCapability(capabilities:[0:\"switch_themes\"])",
+                    "validateIsUserLoggedIn"
+                ],
+                "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
+            }
+        },
+        {
             "message": "Access to field(s) 'lastName', 'name' has been disabled",
             "locations": [
                 {
@@ -220,23 +373,6 @@
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
-        },
-        {
-            "message": "You must not be logged in to access directives in field(s) 'nicename<skip(if:)>' for type 'User'",
-            "locations": [
-                {
-                    "line": 1,
-                    "column": 1
-                }
-            ],
-            "extensions": {
-                "type": "User",
-                "fields": [
-                    "nicename<skip(if:)>",
-                    "validateIsUserNotLoggedInForDirectives"
-                ],
-                "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
-            }
         }
     ],
     "data": {
@@ -253,29 +389,48 @@
             {
                 "id": 1,
                 "title": "Hello world!",
-                "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 1,
+                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
+                    }
+                ]
             },
             {
                 "id": 28,
                 "title": "HTTP caching improves performance",
-                "date": "2020-12-12T04:08:47+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 11,
+                        "content": "<p>Wow, this sounds awesome!<\/p>\n"
+                    }
+                ]
             },
             {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
-                "date": "2020-12-12T04:06:52+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 10,
+                        "content": "<p>Absolutely! And directives too!<\/p>\n"
+                    },
+                    {
+                        "id": 9,
+                        "content": "<p>Can I hide any field?<\/p>\n"
+                    }
+                ]
             }
         ],
         "comments": [
@@ -297,51 +452,70 @@
                 "__typename": "Post",
                 "id": 1,
                 "title": "Hello world!",
-                "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/hello-world\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 1,
+                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
+                    }
+                ]
             },
             {
                 "__typename": "Post",
                 "id": 28,
                 "title": "HTTP caching improves performance",
-                "date": "2020-12-12T04:08:47+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/http-caching-improves-performance\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 11,
+                        "content": "<p>Wow, this sounds awesome!<\/p>\n"
+                    }
+                ]
             },
             {
                 "__typename": "Post",
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
-                "date": "2020-12-12T04:06:52+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/public-or-private-api-mode-for-extra-security\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": true,
-                "comments": null
+                "hasComments": null,
+                "comments": [
+                    {
+                        "id": 10,
+                        "content": "<p>Absolutely! And directives too!<\/p>\n"
+                    },
+                    {
+                        "id": 9,
+                        "content": "<p>Can I hide any field?<\/p>\n"
+                    }
+                ]
             }
         ],
         "pages": [
             {
                 "id": 2,
                 "title": "Sample Page",
-                "date": "2022-04-17T13:06:58+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/sample-page\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": false,
-                "comments": null
+                "hasComments": null,
+                "comments": []
             },
             {
                 "id": 9,
                 "title": "Sample Page",
-                "date": "2020-07-27T11:28:57+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/sample-page-2\/",
+                "date": null,
+                "url": null,
                 "customPostType": null,
-                "hasComments": false,
-                "comments": null
+                "hasComments": null,
+                "comments": []
             }
         ],
         "mediaItems": [],
@@ -349,40 +523,40 @@
             {
                 "avatar": null,
                 "description": null,
-                "firstName": "Editor",
-                "displayName": "Editor Smith",
-                "hasAnyCapability": false,
+                "firstName": null,
+                "displayName": null,
+                "hasAnyCapability": null,
                 "hasAnyRole": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,
-                "nicename": null,
+                "nicename": "editor",
                 "self": null
             },
             {
                 "avatar": null,
                 "description": null,
-                "firstName": "Author",
-                "displayName": "Author Marquez",
-                "hasAnyCapability": false,
+                "firstName": null,
+                "displayName": null,
+                "hasAnyCapability": null,
                 "hasAnyRole": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,
-                "nicename": null,
+                "nicename": "author",
                 "self": null
             },
             {
                 "avatar": null,
                 "description": null,
-                "firstName": "Contributor",
-                "displayName": "Contributor Johnson",
-                "hasAnyCapability": false,
+                "firstName": null,
+                "displayName": null,
+                "hasAnyCapability": null,
                 "hasAnyRole": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,
-                "nicename": null,
+                "nicename": "contributor",
                 "self": null
             }
         ]
