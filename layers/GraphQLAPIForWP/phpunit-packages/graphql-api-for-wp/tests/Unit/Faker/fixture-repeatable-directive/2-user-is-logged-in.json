@@ -20,6 +20,7 @@
     "self": {
       "id": "root",
       "cool": "Cool!"
-    }
+    },
+    "hi": null
   }
 }

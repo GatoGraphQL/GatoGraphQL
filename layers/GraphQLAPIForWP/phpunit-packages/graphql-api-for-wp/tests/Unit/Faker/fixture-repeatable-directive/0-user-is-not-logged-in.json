@@ -36,6 +36,8 @@
     }
   ],
   "data": {
-    "id": "root"
+    "id": "root",
+    "self": null,
+    "hi": null
   }
 }
