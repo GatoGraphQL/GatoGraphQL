@@ -1,7 +1,22 @@
 {
+  "errors": [
+    {
+      "message": "You must have role 'subscriber' to access field(s) 'echo(value:\"Hi there\")@hi<validateDoesLoggedInUserHaveAnyRole(roles:[0:\"editor\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"author\",1:\"administrator\"]),validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])>' for type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "directive": "validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])",
+        "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
+      }
+    }
+  ],
   "data": {
     "id": "root",
-    "hi": "Hi there",
     "self": {
       "id": "root",
       "cool": "Cool!"
