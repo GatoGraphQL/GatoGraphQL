@@ -33,7 +33,7 @@
     avatar
     # Private / logged-in user
     description
-    # Private / "subscriber" role
+    # Default / "subscriber" role
     firstName
 
     # Default / "switch_themes" capability
