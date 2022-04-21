@@ -59,6 +59,14 @@
       id
     }
   }
+
+  # There's no need to set ACL for these fields
+  myPosts(pagination: { limit: 3 }) {
+    id
+  }
+  me {
+    id
+  }
 }
 
 fragment IsCustomPostData on IsCustomPost {

@@ -439,6 +439,20 @@
                 "nicename": null,
                 "self": null
             }
-        ]
+        ],
+        "myPosts": [
+            {
+                "id": 1
+            },
+            {
+                "id": 28
+            },
+            {
+                "id": 25
+            }
+        ],
+        "me": {
+            "id": 1
+        }
     }
 }
