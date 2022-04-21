@@ -17,6 +17,8 @@
   ],
   "data": {
     "id": "root",
-    "self": null
+    "self": {
+      "id": "root"
+    }
   }
 }
