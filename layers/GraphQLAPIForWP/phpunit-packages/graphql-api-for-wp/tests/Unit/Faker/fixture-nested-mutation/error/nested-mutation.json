@@ -20,6 +20,8 @@
     }
   ],
   "data": {
-    "customPost": null
+    "customPost": {
+      "addComment": null
+    }
   }
 }

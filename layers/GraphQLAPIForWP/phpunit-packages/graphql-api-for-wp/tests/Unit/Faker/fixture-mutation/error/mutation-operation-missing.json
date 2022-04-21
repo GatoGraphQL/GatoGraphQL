@@ -17,5 +17,8 @@
         "code": "PoP\\ComponentModel\\e16"
       }
     }
-  ]
+  ],
+  "data": {
+    "addCommentToCustomPost": null
+  }
 }

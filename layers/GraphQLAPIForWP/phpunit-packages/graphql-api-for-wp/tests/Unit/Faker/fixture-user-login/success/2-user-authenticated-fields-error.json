@@ -36,5 +36,9 @@
                 "code": "PoPCMSSchema\\UserState\\1"
             }
         }
-    ]
+    ],
+    "data": {
+        "myPosts": null,
+        "me": null
+    }
 }

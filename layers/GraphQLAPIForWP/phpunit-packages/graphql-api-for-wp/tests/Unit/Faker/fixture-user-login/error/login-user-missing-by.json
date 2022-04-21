@@ -17,5 +17,8 @@
         "code": "PoP\\ComponentModel\\e24"
       }
     }
-  ]
+  ],
+  "data": {
+    "loginUser": null
+  }
 }
