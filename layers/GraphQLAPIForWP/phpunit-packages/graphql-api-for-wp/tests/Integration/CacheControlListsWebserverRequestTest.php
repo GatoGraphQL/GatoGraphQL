@@ -31,7 +31,7 @@ class CacheControlListsWebserverRequestTest extends AbstractCacheControlWebserve
                 'max-age=12000',
             ],
             'user-must-be-logged-in' => [
-                'graphql-query/user-account/',
+                'graphql-query/logged-in-user-account/',
                 'no-store',
             ],
         ];
