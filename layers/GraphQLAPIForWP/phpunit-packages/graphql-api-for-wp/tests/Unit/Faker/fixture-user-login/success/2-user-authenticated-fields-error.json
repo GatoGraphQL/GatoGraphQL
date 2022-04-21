@@ -12,7 +12,7 @@
                 "type": "QueryRoot",
                 "id": "root",
                 "fields": [
-                    "myPosts(pagination:{limit:3})",
+                    "myPosts(pagination: {limit: 3})",
                     "resolveValueAndMerge"
                 ],
                 "code": "PoPCMSSchema\\UserState\\1"
