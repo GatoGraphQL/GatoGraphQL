@@ -40,7 +40,7 @@ class ValidateDoesLoggedInUserHaveAnyRoleDirectiveResolver extends AbstractValid
         return 'validateDoesLoggedInUserHaveAnyRole';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    protected function isSuccessfulValidation(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         // If the user is not logged-in, then do nothing: directive `@validateIsUserLoggedIn` will already fail
         if (!App::getState('is-user-logged-in')) {
