@@ -76,18 +76,8 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      */
     protected static function getRequestBasicOptions(): array
     {
-        $options = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
-        ];
-        if (static::shareCookies()) {
-            $options['cookies'] = self::$cookieJar;
-        }
-        if (static::useSSL()) {
-            $options['verify'] = false;
-        }
+        $options = parent::getRequestBasicOptions();
+        $options['headers']['Content-Type'] = 'application/json';
         return $options;
     }
 
