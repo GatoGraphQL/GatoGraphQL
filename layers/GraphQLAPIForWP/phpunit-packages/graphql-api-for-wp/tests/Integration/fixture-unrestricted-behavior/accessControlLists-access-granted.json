@@ -2,6 +2,11 @@
   "data": {
     "accessControlLists": [
       {
+        "id": 256,
+        "title": "Power users",
+        "excerpt": "This ACL has a varied arrange of configuration, to execute integration tests."
+      },
+      {
         "id": 188,
         "title": "Visitors",
         "excerpt": ""
