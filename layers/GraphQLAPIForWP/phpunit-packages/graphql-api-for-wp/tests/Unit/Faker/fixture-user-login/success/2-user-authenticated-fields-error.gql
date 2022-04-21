@@ -1,0 +1,10 @@
+{ 
+  myPosts(pagination: { limit: 3 }) {
+    id
+    title
+  }
+  me {
+    id
+    name
+  }
+}
