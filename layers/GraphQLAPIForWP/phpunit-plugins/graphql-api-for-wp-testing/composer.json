@@ -1,0 +1,36 @@
+{
+    "name": "phpunit-for-graphql-api/graphql-api-for-wp-testing",
+    "type": "wordpress-plugin",
+    "description": "Utilities for testing the GraphQL API for WordPress",
+    "keywords": ["GraphQL", "PHP", "PoP", "WordPress", "GraphQL", "API"],
+    "homepage": "https://github.com/PHPUnitForGraphQLAPI/graphql-api-for-wp-testing",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://getpop.org"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "rector/rector": "^0.12",
+        "squizlabs/php_codesniffer": "^3.6",
+        "szepeviktor/phpstan-wordpress": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {}
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

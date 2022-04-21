@@ -16,7 +16,7 @@ class DisableAccessDirectiveResolver extends AbstractValidateConditionDirectiveR
         return 'disableAccess';
     }
 
-    protected function validateCondition(RelationalTypeResolverInterface $relationalTypeResolver): bool
+    protected function isValidationSuccessful(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         return false;
     }

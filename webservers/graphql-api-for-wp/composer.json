@@ -55,6 +55,7 @@
         "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
         "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
+            "@symlink-vendor-for-graphql-api-for-wp-testing-plugin",
             "@symlink-vendor-for-graphql-api-extension-demo"
         ],
         "rebuild-server": [
@@ -66,6 +67,11 @@
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.json', '../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/plugins/graphql-api-for-wp"
+        ],
+        "symlink-vendor-for-graphql-api-for-wp-testing-plugin": [
+            "php -r \"copy('../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.json', '../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.local.json');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/composer.local.json",
+            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing"
         ],
         "symlink-vendor-for-graphql-api-extension-demo": [
             "php -r \"copy('../../layers/GraphQLAPIForWP/plugins/extension-demo/composer.json', '../../layers/GraphQLAPIForWP/plugins/extension-demo/composer.local.json');\"",

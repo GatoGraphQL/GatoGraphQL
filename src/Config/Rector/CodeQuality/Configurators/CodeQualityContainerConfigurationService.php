@@ -22,6 +22,8 @@ class CodeQualityContainerConfigurationService extends AbstractCodeQualityContai
             $this->rootDirectory . '/layers/GraphQLAPIForWP/packages/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*/src/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*/tests/*',
+            $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-plugins/*/src/*',
+            $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-plugins/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/src/*',
             $this->rootDirectory . '/layers/GraphQLAPIForWP/plugins/*/tests/*',
             $this->rootDirectory . '/layers/GraphQLByPoP/packages/*/src/*',

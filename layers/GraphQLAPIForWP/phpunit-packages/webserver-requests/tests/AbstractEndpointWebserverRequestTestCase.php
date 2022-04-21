@@ -18,31 +18,31 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         array $params = [],
         string $query = '',
         array $variables = [],
+        string $operationName = '',
         ?string $method = null,
     ): void {
+        /**
+         * Allow to execute a REST endpoint against the webserver
+         * before running the test
+         */
+        $this->beforeRunningTest($this->dataName());
+
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
-        ];
+        $options = static::getRequestBasicOptions();
         if ($params !== []) {
             $options['query'] = $params;
         }
         $body = '';
-        if ($query !== '' || $variables !== []) {
+        if ($query !== '' || $variables !== [] || $operationName !== '') {
             $body = json_encode([
                 'query' => $query,
                 'variables' => $variables,
+                'operationName' => $operationName,
             ]);
         }
         if ($body !== '') {
             $options['body'] = $body;
-        }
-        if (static::shareCookies()) {
-            $options['cookies'] = self::$cookieJar;
         }
         try {
             $response = $client->request(
@@ -63,6 +63,22 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
         }
+
+        /**
+         * Allow to execute a REST endpoint against the webserver
+         * after running the test
+         */
+        $this->afterRunningTest($this->dataName());
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getRequestBasicOptions(): array
+    {
+        $options = parent::getRequestBasicOptions();
+        $options['headers']['Content-Type'] = 'application/json';
+        return $options;
     }
 
     /**
@@ -73,5 +89,23 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     protected function getMethod(): string
     {
         return 'POST';
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * before running the test
+     */
+    protected function beforeRunningTest(string $dataName): void
+    {
+        // Override if needed
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * after running the test
+     */
+    protected function afterRunningTest(string $dataName): void
+    {
+        // Override if needed
     }
 }

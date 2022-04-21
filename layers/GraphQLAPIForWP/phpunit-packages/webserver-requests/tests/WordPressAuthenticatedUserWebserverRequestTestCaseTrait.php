@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use GuzzleHttp\Cookie\CookieJar;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 use PHPUnitForGraphQLAPI\WebserverRequests\Environment;
 use Psr\Http\Message\ResponseInterface;
 
 trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
 {
+    protected static string $wpRESTNonce = '';
+
     abstract protected static function getWebserverHomeURL(): string;
 
     /**
@@ -71,6 +74,18 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
             return 'The credentials to authenticate the user are incomplete or missing';
         }
         return sprintf('Authentication of user "%s" did not succeed', $username);
+    }
+
+    /**
+     * Store the REST Nonce
+     *
+     * @param array<string,mixed> $options
+     */
+    protected static function postWebserverPingResponse(
+        ResponseInterface $response,
+        array $options
+    ): void {
+        static::$wpRESTNonce = $response->getHeaderLine(CustomHeaders::WP_REST_NONCE);
     }
 
     /**

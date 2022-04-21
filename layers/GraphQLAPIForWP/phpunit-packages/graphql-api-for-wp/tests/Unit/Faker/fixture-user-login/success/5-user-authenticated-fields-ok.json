@@ -1,0 +1,22 @@
+{
+    "data": {
+        "myPosts": [
+            {
+                "id": 1724,
+                "title": "Keyboard navigation"
+            },
+            {
+                "id": 358,
+                "title": "Post Format: Standard"
+            },
+            {
+                "id": 555,
+                "title": "Post Format: Gallery"
+            }
+        ],
+        "me": {
+            "id": 1,
+            "name": "Leo"
+        }
+    }
+}

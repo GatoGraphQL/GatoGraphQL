@@ -1,0 +1,30 @@
+query {
+  posts(pagination: { limit: 10 }) {
+    excerpt
+    title
+    author {
+      name
+      posts(pagination: { limit: 10 }) {
+        title
+        comments(pagination: { limit: 10 }) {
+          content
+          date
+          author {
+            name
+            posts(pagination: { limit: 10 }) {
+              title
+              comments(pagination: { limit: 10 }) {
+                content
+                date
+                author {
+                  name
+                  username
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+    "errors": [
+        {
+            "message": "The user is not logged-in",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "id": "root",
+                "fields": [
+                    "myPosts(pagination:{limit:3})",
+                    "resolveValueAndMerge"
+                ],
+                "code": "PoPCMSSchema\\UserState\\1"
+            }
+        },
+        {
+            "message": "The user is not logged-in",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "id": "root",
+                "fields": [
+                    "me",
+                    "resolveValueAndMerge"
+                ],
+                "code": "PoPCMSSchema\\UserState\\1"
+            }
+        }
+    ],
+    "data": {
+        "myPosts": null,
+        "me": null
+    }
+}

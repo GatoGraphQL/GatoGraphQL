@@ -33,6 +33,8 @@ class FakerWordPressDataSeeder
                 'display_name' => $userDataEntry['author_display_name'],
                 'first_name' => $userDataEntry['author_first_name'],
                 'last_name' => $userDataEntry['author_last_name'],
+                // Treat the admin user as "administrator", everyone else as "subscriber"
+                'role' => $userDataEntry['author_login'] === 'admin' ? 'administrator' : 'subscriber',
             ]);
         }
 

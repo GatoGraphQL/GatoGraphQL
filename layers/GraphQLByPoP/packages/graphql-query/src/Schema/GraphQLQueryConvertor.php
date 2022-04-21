@@ -183,8 +183,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
              */
             $errorMessage = RootEnvironment::isApplicationEnvironmentDev() ?
                 sprintf(
-                    $this->__('[Exception (Visible on DEV only)] %s', 'graphql-parser'),
-                    $e->getMessage()
+                    $this->__('[Exception (Visible on DEV only)] %s. Trace: %s', 'graphql-parser'),
+                    $e->getMessage(),
+                    $e->getTraceAsString()
                 ) : $this->__('There was an unexpected error', 'graphql-query');
 
             $this->getFeedbackMessageStore()->addQueryError($errorMessage);
@@ -225,34 +226,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
          */
         if ($value instanceof ResolvedFieldVariableReference) {
-            $field = $value->getField();
-            $fieldQuery = $field->getName();
-            if ($field->getArguments() !== []) {
-                $fieldQueryArguments = [];
-                foreach ($field->getArguments() as $argument) {
-                    $argumentValue = $this->convertArgumentValue($argument->getValue());
-                    if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
-                        $argumentValue = substr($argumentValue, 2, -2);
-                    } elseif (is_array($argumentValue)) {
-                        $argumentValueItems = [];
-                        foreach ($argumentValue as $argumentValueKey => $argumentValueValue) {
-                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
-                        }
-                        $argumentValue = '[' . implode(',', $argumentValueItems) . ']';
-                    } elseif ($argumentValue instanceof stdClass) {
-                        $argumentValueItems = [];
-                        foreach ((array) $argumentValue as $argumentValueKey => $argumentValueValue) {
-                            $argumentValueItems[] = $argumentValueKey . ':' . $argumentValueValue;
-                        }
-                        $argumentValue = '{' . implode(',', $argumentValueItems) . '}';
-                    }
-                    $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
-                }
-                $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
-            }
-            return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
-                . $fieldQuery
-                . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
+            return $this->convertArgumentValueForResolvedFieldVariableReference($value);
         }
 
         if (
@@ -338,6 +312,50 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         }
 
         return $value;
+    }
+
+    /**
+     * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+     */
+    protected function convertArgumentValueForResolvedFieldVariableReference(ResolvedFieldVariableReference $value): string
+    {
+        $field = $value->getField();
+        $fieldQuery = $field->getName();
+        if ($field->getArguments() !== []) {
+            $fieldQueryArguments = [];
+            foreach ($field->getArguments() as $argument) {
+                $argumentValue = $this->convertArgumentValue($argument->getValue());
+                $argumentValue = $this->maybeConvertArgumentValueForResolvedFieldVariableReference($argumentValue);
+                $fieldQueryArguments[] = $argument->getName() . ':' . $argumentValue;
+            }
+            $fieldQuery .= '(' . implode(',', $fieldQueryArguments) . ')';
+        }
+        return APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_PREFIX
+            . $fieldQuery
+            . APIQuerySyntax::SYMBOL_EMBEDDABLE_FIELD_SUFFIX;
+    }
+
+    /**
+     * @todo Remove this code! It is temporary and a hack to convert to PQL, which is being migrated away!
+     */
+    protected function maybeConvertArgumentValueForResolvedFieldVariableReference(mixed $argumentValue): mixed
+    {
+        if (is_string($argumentValue) && str_starts_with($argumentValue, '{{')) {
+            $argumentValue = substr($argumentValue, 2, -2);
+        } elseif (is_array($argumentValue)) {
+            $argumentValueItems = [];
+            foreach ($argumentValue as $argumentValueKey => $argumentValueValue) {
+                $argumentValueItems[] = $argumentValueKey . ':' . $this->maybeConvertArgumentValueForResolvedFieldVariableReference($argumentValueValue);
+            }
+            $argumentValue = '[' . implode(',', $argumentValueItems) . ']';
+        } elseif ($argumentValue instanceof stdClass) {
+            $argumentValueItems = [];
+            foreach ((array) $argumentValue as $argumentValueKey => $argumentValueValue) {
+                $argumentValueItems[] = $argumentValueKey . ':' . $this->maybeConvertArgumentValueForResolvedFieldVariableReference($argumentValueValue);
+            }
+            $argumentValue = '{' . implode(',', $argumentValueItems) . '}';
+        }
+        return $argumentValue;
     }
 
     /**

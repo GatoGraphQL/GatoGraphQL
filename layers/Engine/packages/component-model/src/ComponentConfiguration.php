@@ -152,7 +152,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     public function setFailingFieldResponseAsNull(): bool
     {
         $envVariable = Environment::SET_FAILING_FIELD_RESPONSE_AS_NULL;
-        $defaultValue = false;
+        $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(

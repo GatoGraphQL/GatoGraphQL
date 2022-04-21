@@ -84,7 +84,7 @@ return array(
   <!-- wp:list -->
   <ul><li><a href="https://make.wordpress.org/accessibility/handbook/">The Make WordPress Accessibility Handbook </a><ul><li><a href="https://make.wordpress.org/accessibility/handbook/test-for-web-accessibility/">Test for web accessibility</a></li></ul></li><li><a href="https://webaim.org/techniques/keyboard/">Keyboard Accessibility</a> by WebAIM</li><li><a href="http://rianrietveld.com/2016/05/10/keyboard/">Workshop keyboard accessibility</a></li><li><a href="https://make.wordpress.org/themes/handbook/review/accessibility/required/">Theme review accessibility-ready requirements: Keyboard Navigation</a></li></ul>
   <!-- /wp:list -->',
-            'post_excerpt' => '',
+            'post_excerpt' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec mollis. Quisque convallis libero in sapien pharetra tincidunt. Aliquam elit ante, malesuada id, tempor eu, gravida id, odio. Maecenas suscipit, risus et eleifend imperdiet, nisi orci ullamcorper massa, et adipiscing orci velit quis magna.',
             'post_id' => 1724,
             'post_date' => '2018-10-20 20:03:48',
             'post_date_gmt' => '2018-10-21 03:03:48',
