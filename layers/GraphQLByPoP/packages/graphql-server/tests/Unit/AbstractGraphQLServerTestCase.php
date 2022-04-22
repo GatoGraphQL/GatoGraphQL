@@ -89,7 +89,7 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
         }
 
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
-        
+
         $this->assertJsonStringEqualsJsonFile(
             $expectedResponseFile,
             $response->getContent()

@@ -28,7 +28,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
 
-	final protected function getSettingsNormalizer(): SettingsNormalizerInterface
+    final protected function getSettingsNormalizer(): SettingsNormalizerInterface
     {
         return $this->settingsNormalizer ??= InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
     }

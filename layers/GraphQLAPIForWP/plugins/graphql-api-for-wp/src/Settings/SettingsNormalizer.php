@@ -11,7 +11,7 @@ use PoP\Root\Services\BasicServiceTrait;
 class SettingsNormalizer implements SettingsNormalizerInterface
 {
     use BasicServiceTrait;
-    
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -112,5 +112,5 @@ class SettingsNormalizer implements SettingsNormalizerInterface
             ];
         }
         return $items;
-    }    
+    }
 }
