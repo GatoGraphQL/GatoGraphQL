@@ -7,6 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 use Exception;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
@@ -89,8 +90,14 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 		$moduleRegistry = ModuleRegistryFacade::getInstance();
 		$moduleResolver = $moduleRegistry->getModuleResolver($module);
 		$moduleSettings = $moduleResolver->getSettings($module);
-		$moduleSettingsOption = $moduleSettings[$option] ?? null;
-        if ($moduleSettingsOption === null) {
+		$found = false;
+		foreach ($moduleSettings as $moduleSetting) {
+			if ($moduleSetting[Properties::INPUT] === $option) {
+				$found = true;
+				break;
+			}
+		}
+		if (!$found) {
             return new WP_Error(
                 '1',
                 sprintf(
