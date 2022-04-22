@@ -11,10 +11,6 @@ use function add_action;
 
 abstract class AbstractRESTAPIEndpointManager
 {
-	public string $version = 'v1';
-
-	public string $endpoint = '';
-
 	/**
 	 * @var WC_REST_Controller[]|string[]
 	 */
