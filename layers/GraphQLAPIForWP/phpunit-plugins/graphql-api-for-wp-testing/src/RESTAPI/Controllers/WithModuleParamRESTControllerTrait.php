@@ -17,7 +17,7 @@ trait WithModuleParamRESTControllerTrait
         $module = $this->getModuleByID($moduleID);
         if ($module === null) {
             return new WP_Error(
-                '2',
+                '1',
                 sprintf(
                     __('There is no module with ID \'%s\'', 'graphql-api'),
                     $moduleID
