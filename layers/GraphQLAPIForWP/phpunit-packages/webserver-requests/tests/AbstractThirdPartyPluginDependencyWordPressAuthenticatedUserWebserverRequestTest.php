@@ -15,6 +15,32 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /**
+         * Disable the plugin before executing the ":disabled" test
+         */
+        $dataName = $this->dataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        /**
+         * Re-enable the plugin after executing the ":disabled" test
+         */
+        $dataName = $this->dataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+        }
+
+        parent::tearDown();
+    }
+
     /**
      * @return array<string,array<mixed>>
      */
@@ -47,17 +73,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     abstract protected function getPluginNameEntries(): array;
 
     /**
-     * Disable the plugin before executing the ":disabled" test
-     */
-    protected function beforeFixtureClientRequest(string $dataName): void
-    {
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
-        }
-        parent::beforeFixtureClientRequest($dataName);
-    }
-
-    /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
     protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
@@ -74,16 +89,5 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             ),
             static::getRESTEndpointRequestOptions()
         );
-    }
-
-    /**
-     * Re-enable the plugin after executing the ":disabled" test
-     */
-    protected function afterFixtureClientRequest(string $dataName): void
-    {
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
-        }
-        parent::afterFixtureClientRequest($dataName);
     }
 }
