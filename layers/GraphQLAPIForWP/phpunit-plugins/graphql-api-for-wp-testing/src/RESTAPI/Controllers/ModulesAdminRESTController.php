@@ -51,19 +51,19 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
 	protected function validateCallback(string $value): ?WP_Error
 	{
-		if (in_array($value, self::MODULE_STATES)) {
-			return null;
+		if (!in_array($value, self::MODULE_STATES)) {			
+			return new WP_Error(
+				'1',
+				sprintf(
+					__('Parameter \'state\' can only have one of these values: \'%s\'', 'graphql-api'),
+					implode(__('\', \'', 'graphql-api'), self::MODULE_STATES)
+				),
+				[
+					self::PARAM_STATE => $value,
+				]
+			);
 		}
-		return new WP_Error(
-			'1',
-			sprintf(
-				__('Parameter \'state\' can only have one of these values: \'%s\'', 'graphql-api'),
-				implode(__('\', \'', 'graphql-api'), self::MODULE_STATES)
-			),
-			[
-				self::PARAM_STATE => $value,
-			]
-		);
+		return null;
 	}
 
 	public function enableOrDisableModule(WP_REST_Request $request): WP_REST_Response|WP_Error
