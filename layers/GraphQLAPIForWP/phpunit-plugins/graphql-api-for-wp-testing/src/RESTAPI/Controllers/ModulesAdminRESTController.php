@@ -95,7 +95,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 					$value
 				),
 				[
-					self::PARAM_STATE => $value,
+					'moduleID' => $value,
 				]
 			);
 		}
