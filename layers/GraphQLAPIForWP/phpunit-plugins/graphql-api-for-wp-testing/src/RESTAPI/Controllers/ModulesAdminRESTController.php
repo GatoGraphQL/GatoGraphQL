@@ -21,7 +21,7 @@ use function rest_ensure_response;
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
 	use WithModuleParamRESTControllerTrait;
-	
+
     final public const MODULE_STATES = [
         ParamValues::ENABLED,
         ParamValues::DISABLED,
@@ -124,7 +124,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             $moduleIDValues = [
                 $moduleID => $moduleState === ParamValues::ENABLED,
             ];
-            UserSettingsManagerFacade::getInstance()->setModulesEnabled($moduleIDValues);
+			$userSettingsManager = UserSettingsManagerFacade::getInstance();
+            $userSettingsManager->setModulesEnabled($moduleIDValues);
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
