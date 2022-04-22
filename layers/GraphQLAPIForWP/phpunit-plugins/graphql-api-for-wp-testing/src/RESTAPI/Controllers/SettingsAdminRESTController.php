@@ -5,18 +5,20 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
+use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
+use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
+
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
-
-use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
@@ -142,7 +144,20 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $value = $params[Params::VALUE];
 
 			$module = $this->getModuleByID($moduleID);
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+			$moduleRegistry = ModuleRegistryFacade::getInstance();
+			$moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+			// Normalize the value
+			/** @var SettingsMenuPage */
+            $settingsMenuPage = InstanceManagerFacade::getInstance()->getInstance(SettingsMenuPage::class);
+			$settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $normalizedValues = $settingsMenuPage->normalizeSettings([
+				$settingsOptionName => $value,
+			]);
+			$value = $normalizedValues[$settingsOptionName];
+
+            // Store in the DB
+			$userSettingsManager = UserSettingsManagerFacade::getInstance();
 			$userSettingsManager->setSetting($module, $option, $value);
 
             // Success!
