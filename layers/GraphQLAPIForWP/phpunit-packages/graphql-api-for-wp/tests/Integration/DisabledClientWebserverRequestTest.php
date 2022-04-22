@@ -19,7 +19,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         /**
          * To test their disabled state works well, first execute
          * a REST API call to disable the client, and then re-enable
@@ -41,7 +41,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         if (str_starts_with($dataName, 'single-endpoint-')) {
             $this->executeRESTEndpointToEnableOrDisableClient($dataName, true);
         }
-        
+
         parent::tearDown();
     }
 
