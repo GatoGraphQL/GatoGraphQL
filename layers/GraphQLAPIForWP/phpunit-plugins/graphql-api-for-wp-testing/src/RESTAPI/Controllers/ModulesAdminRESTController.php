@@ -5,28 +5,26 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
-use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
-
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
+use function rest_ensure_response;
+
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
-	final public const MODULE_STATE_ENABLED = 'enabled';
-	final public const MODULE_STATE_DISABLED = 'disabled';
 	final public const MODULE_STATES = [
-		self::MODULE_STATE_ENABLED,
-		self::MODULE_STATE_DISABLED,
+		ParamValues::ENABLED,
+		ParamValues::DISABLED,
 	];
 	
-	final public const PARAM_STATE = 'state';
-
 	protected string $restBase = 'modules';
 
 	/**
@@ -51,7 +49,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 					'callback' => $this->enableOrDisableModule(...),
 					'permission_callback' => $this->checkAdminPermission(...),
 					'args' => [
-						self::PARAM_STATE => [
+						Params::STATE => [
 							'required' => true,
 							'validate_callback' => $this->validateState(...),
 						],
@@ -77,7 +75,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 					implode(__('\', \'', 'graphql-api'), self::MODULE_STATES)
 				),
 				[
-					self::PARAM_STATE => $value,
+					Params::STATE => $value,
 				]
 			);
 		}
@@ -154,10 +152,10 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 			$module = $this->getModuleByID($moduleID);
 
 			$params = $request->get_params();
-			$moduleState = $params[self::PARAM_STATE];
+			$moduleState = $params[Params::STATE];
 
 			$moduleIDValues = [
-				$moduleID => $moduleState === self::MODULE_STATE_ENABLED,
+				$moduleID => $moduleState === ParamValues::ENABLED,
 			];
 			UserSettingsManagerFacade::getInstance()->setModulesEnabled($moduleIDValues);
 
