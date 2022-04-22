@@ -11,7 +11,6 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -22,6 +21,7 @@ use function rest_ensure_response;
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
+    use WithFlushRewriteRulesRESTControllerTrait;
 
     final public const MODULE_STATES = [
         ParamValues::ENABLED,
@@ -126,16 +126,11 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             $userSettingsManager->setModulesEnabled($moduleIDValues);
 
             /**
-             * Must flush the rewrite rules, so that the disabled client
-             * shows a 404.
-             *
-             * But calling `flush_rewrite_rules` directly
-             * here doesn't work!
-             *
-             * So instead, save a flag in the options, and check if
-             * to do the flush at the beginning of the next request.
+             * Flush rewrite rules in the next request.
+             * Eg: after disabling "GraphiQL in single endpoint",
+             * accessing this client must produce a 404
              */
-            update_option(Options::FLUSH_REWRITE_RULES, true);
+            $this->enqueueFlushRewriteRules();
 
             $module = $this->getModuleByID($moduleID);
 

@@ -23,6 +23,7 @@ use function rest_ensure_response;
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
+    use WithFlushRewriteRulesRESTControllerTrait;
 
     protected string $restBase = 'settings';
 
@@ -161,6 +162,14 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
             $userSettingsManager->setSetting($module, $option, $value);
+
+            /**
+             * Flush rewrite rules in the next request.
+             * Eg: after changing the path of the GraphiQL
+             * client for the single endpoint,
+             * accessing the previous path must produce a 404
+             */
+            $this->enqueueFlushRewriteRules();
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
