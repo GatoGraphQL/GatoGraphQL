@@ -9,7 +9,7 @@ use stdClass;
 
 class RESTResponse
 {
-	public string $status = ResponseStatus::ERROR;
+	public string $status = '';
 	public string $message = '';
 	/**
 	 * Extra data

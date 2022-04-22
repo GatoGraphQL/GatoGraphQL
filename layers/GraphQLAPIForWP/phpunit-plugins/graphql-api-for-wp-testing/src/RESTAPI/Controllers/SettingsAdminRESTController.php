@@ -47,8 +47,10 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 			// @todo Remove this temporary code
 			$response->data->settingsName = $settingsName;
 
+			// Success!
 			$response->status = ResponseStatus::SUCCESS;
 		} catch ( Exception $e ) {
+			$response->status = ResponseStatus::ERROR;
 			$response->message = $e->getMessage();
 		}
 
