@@ -12,7 +12,6 @@ use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
-use function esc_html__;
 use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
@@ -27,6 +26,15 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 				'methods' => WP_REST_Server::CREATABLE,
 				'callback' => $this->updateSettings(...),
 				'permission_callback' => $this->checkAdminPermission(...),
+				'args' => [
+					'name' => [
+						'required' => true
+					],
+					'value' => [
+						'required' => true,
+						'sanitize_callback' => fn (string $value) => (bool) $value
+					],
+				],
 			],
 		];
 	}
@@ -37,18 +45,8 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 
 		try {
 			$params = $request->get_params();
-			$settingsName = $params['name'] ?? null;
-			if ($settingsName === null) {
-				throw new Exception(
-					__('The settings name has not been provided', 'graphql-api')
-				);
-			}
-			if (!array_key_exists('value', $params)) {
-				throw new Exception(
-					__('The value has not been provided', 'graphql-api')
-				);
-			}
-			$settingsValue = (bool) $params['value'];
+			$settingsName = $params['name'];
+			$settingsValue = $params['value'];
 
 			// @todo Remove this temporary code
 			$response->data->settingsName = $settingsName;
