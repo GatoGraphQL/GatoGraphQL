@@ -16,6 +16,7 @@ Domain Path: /languages
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
 use GraphQLAPI\GraphQLAPI\Plugin;
+use PoP\Root\Environment as RootEnvironment;
 
 use function add_action;
 
@@ -29,6 +30,11 @@ add_action(
     function(): void {
         // Validate the GraphQL API plugin is installed, or exit
         if (!class_exists(Plugin::class)) {
+            return;
+        }
+
+        // Validate we are in the DEV environment
+        if (!RootEnvironment::isApplicationEnvironmentDev()) {
             return;
         }
         
