@@ -121,6 +121,16 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $moduleResolver->getSettingsDefaultValue($module, $option);
     }
 
+    public function setSetting(string $module, string $option, mixed $value): void
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        $item = $moduleResolver->getSettingOptionName($module, $option);
+
+        $this->setOptionItem(Options::SETTINGS, $item, $value);
+    }
+
     public function hasSetModuleEnabled(string $moduleID): bool
     {
         return $this->hasItem(Options::MODULES, $moduleID);
@@ -133,7 +143,12 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void
     {
-        $this->storeItem(Options::MODULES, $moduleID, $isEnabled);
+        $this->setOptionItem(Options::MODULES, $moduleID, $isEnabled);
+    }
+
+    public function setOptionItem(string $optionName, string $item, mixed $value): void
+    {
+        $this->storeItem($optionName, $item, $value);
 
         // Update the timestamp
         $this->storeContainerTimestamp();
