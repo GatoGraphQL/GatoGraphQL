@@ -39,7 +39,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 					'permission_callback' => $this->checkAdminPermission(...),
 				],
 			],
-			$this->restBase . '/(?P<module>[a-zA-Z_-]+)' => [
+			$this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
 				[
 					'methods' => [
 						WP_REST_Server::READABLE,
