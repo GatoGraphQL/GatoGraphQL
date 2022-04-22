@@ -117,6 +117,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $items[] = [
                 'module' => $module,
+                'id' => $moduleResolver->getID($module),
                 'settings' => $moduleResolver->getSettings($module),
             ];
         }
