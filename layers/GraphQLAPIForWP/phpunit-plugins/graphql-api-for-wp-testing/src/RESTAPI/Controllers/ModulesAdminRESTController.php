@@ -20,6 +20,8 @@ use function rest_ensure_response;
 
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
+	use WithModuleParamRESTControllerTrait;
+	
     final public const MODULE_STATES = [
         ParamValues::ENABLED,
         ParamValues::DISABLED,
@@ -79,40 +81,6 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             );
         }
         return true;
-    }
-
-    /**
-     * Validate there is a module with this ID
-     */
-    protected function validateModule(string $value): bool|WP_Error
-    {
-        $module = $this->getModuleByID($value);
-        if ($module === null) {
-            return new WP_Error(
-                '2',
-                sprintf(
-                    __('There is no module with ID \'%s\'', 'graphql-api'),
-                    $value
-                ),
-                [
-                    'moduleID' => $value,
-                ]
-            );
-        }
-        return true;
-    }
-
-    public function getModuleByID(string $moduleID): ?string
-    {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $modules = $moduleRegistry->getAllModules();
-        foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            if ($moduleID === $moduleResolver->getID($module)) {
-                return $module;
-            }
-        }
-        return null;
     }
 
     public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
