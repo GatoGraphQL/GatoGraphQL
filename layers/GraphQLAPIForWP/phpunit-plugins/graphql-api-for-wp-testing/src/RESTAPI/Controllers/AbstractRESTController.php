@@ -26,11 +26,18 @@ abstract class AbstractRESTController extends WP_REST_Controller
 
 		foreach ($routeNameOptions as $name => $options) {
 			$namespace = sprintf(
-				'%s/%s/%s',
+				'%s/%s',
 				$this->getPluginNamespace(),
 				$this->getVersion(),
-				$this->getControllerNamespace()
 			);
+			$controllerNamespace = $this->getControllerNamespace();
+			if ($controllerNamespace !== '') {
+				$namespace = sprintf(
+					'%s/%s',
+					$namespace,
+					$controllerNamespace
+				);
+			}
 			$restBase = sprintf(
 				'/%s/%s',
 				$this->getRESTBase(),
@@ -59,7 +66,10 @@ abstract class AbstractRESTController extends WP_REST_Controller
 		return 'v1';
 	}
 
-	abstract protected function getControllerNamespace(): string;
+	protected function getControllerNamespace(): string
+	{
+		return '';
+	}
 
 	abstract protected function getRESTBase(): string;
 
