@@ -99,7 +99,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        if ($module == self::GENERAL) {
+        if ($module === self::GENERAL) {
             $option = self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

@@ -106,7 +106,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::CACHE_CONTROL) {
+        if ($module === self::CACHE_CONTROL) {
             $option = self::OPTION_MAX_AGE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

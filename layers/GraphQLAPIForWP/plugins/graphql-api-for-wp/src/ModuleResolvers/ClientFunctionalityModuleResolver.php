@@ -168,7 +168,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     {
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
+        if ($module === self::GRAPHIQL_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -180,7 +180,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::DESCRIPTION => \__('URL path to access the public GraphiQL client', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module == self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
+        } elseif ($module === self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -192,7 +192,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                 Properties::DESCRIPTION => \__('URL path to access the public Interactive Schema client', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module == self::GRAPHIQL_EXPLORER) {
+        } elseif ($module === self::GRAPHIQL_EXPLORER) {
             $option = self::OPTION_USE_IN_ADMIN_CLIENT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

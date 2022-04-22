@@ -558,7 +558,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         $privateDataTitlePlaceholder = \__('Treat %s as private data', 'graphql-api');
         $privateDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema (whether as an object field for querying, or as an input field for filtering) only if the Schema Configuration has property <code>Schema Expose Admin Data</code> enabled (i.e. the data is for private use only); otherwise, the data is always exposed in the schema (i.e. it is public)', 'graphql-api');
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SCHEMA_EXPOSE_ADMIN_DATA) {
+        if ($module === self::SCHEMA_EXPOSE_ADMIN_DATA) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -654,7 +654,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
-            if ($module == self::SCHEMA_CUSTOMPOSTS) {
+            if ($module === self::SCHEMA_CUSTOMPOSTS) {
                 $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -737,7 +737,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::DESCRIPTION => $moduleDescriptions[$module],
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
-            } elseif ($module == self::SCHEMA_USERS) {
+            } elseif ($module === self::SCHEMA_USERS) {
                 $option = self::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -831,7 +831,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif ($module == self::SCHEMA_GENERIC_CUSTOMPOSTS) {
+        } elseif ($module === self::SCHEMA_GENERIC_CUSTOMPOSTS) {
             // Get the list of custom post types from the system
             $genericCustomPostTypes = \get_post_types();
             /**
@@ -950,7 +950,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Behaviors::DENYLIST => \__('Deny access', 'graphql-api'),
                 ],
             ];
-        } elseif ($module == self::SCHEMA_USER_AVATARS) {
+        } elseif ($module === self::SCHEMA_USER_AVATARS) {
             $option = self::OPTION_DEFAULT_AVATAR_SIZE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -966,7 +966,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,
             ];
-        } elseif ($module == self::SCHEMA_USER_ROLES) {
+        } elseif ($module === self::SCHEMA_USER_ROLES) {
             $option = self::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
