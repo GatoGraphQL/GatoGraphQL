@@ -35,7 +35,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
          * Allow to execute a REST endpoint against the webserver
          * before running the test
          */
-        $this->beforeRunningTest($dataName, $clientEndpoint, $enabled);
+        $this->beforeFixtureClientRequest($dataName, $clientEndpoint, $enabled);
 
         $client = static::getClient();
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
@@ -48,7 +48,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
          * Allow to execute a REST endpoint against the webserver
          * after running the test
          */
-        $this->afterRunningTest($dataName, $clientEndpoint, $enabled);
+        $this->afterFixtureClientRequest($dataName, $clientEndpoint, $enabled);
 
         $this->assertEquals(200, $response->getStatusCode());
         $hasCustomHeader = $response->hasHeader(CustomHeaders::CLIENT_ENDPOINT);
@@ -59,7 +59,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
      * Allow to execute a REST endpoint against the webserver
      * before running the test
      */
-    protected function beforeRunningTest(
+    protected function beforeFixtureClientRequest(
         string $dataName,
         string $clientEndpoint,
         bool $enabled,
@@ -71,7 +71,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
      * Allow to execute a REST endpoint against the webserver
      * after running the test
      */
-    protected function afterRunningTest(
+    protected function afterFixtureClientRequest(
         string $dataName,
         string $clientEndpoint,
         bool $enabled,

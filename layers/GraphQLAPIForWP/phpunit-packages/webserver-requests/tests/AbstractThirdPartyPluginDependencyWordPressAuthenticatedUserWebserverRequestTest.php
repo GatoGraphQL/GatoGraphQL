@@ -49,12 +49,12 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * Disable the plugin before executing the ":disabled" test
      */
-    protected function beforeRunningTest(string $dataName): void
+    protected function beforeFixtureClientRequest(string $dataName): void
     {
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         }
-        parent::beforeRunningTest($dataName);
+        parent::beforeFixtureClientRequest($dataName);
     }
 
     /**
@@ -79,11 +79,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * Re-enable the plugin after executing the ":disabled" test
      */
-    protected function afterRunningTest(string $dataName): void
+    protected function afterFixtureClientRequest(string $dataName): void
     {
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         }
-        parent::afterRunningTest($dataName);
+        parent::afterFixtureClientRequest($dataName);
     }
 }

@@ -61,7 +61,7 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
      * Disable the clients for the single endpoint
      * before the "disabled" test
      */
-    protected function beforeRunningTest(
+    protected function beforeFixtureClientRequest(
         string $dataName,
         string $clientEndpoint,
         bool $enabled,
@@ -69,7 +69,7 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         if (!$enabled && str_starts_with($dataName, 'single-endpoint-')) {
             $this->executeRESTEndpointToEnableOrDisableClient($dataName, $clientEndpoint, false);
         }
-        parent::beforeRunningTest(
+        parent::beforeFixtureClientRequest(
             $dataName,
             $clientEndpoint,
             $enabled,
@@ -103,7 +103,7 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
      * Re-enable the clients for the single endpoint
      * after the "disabled" test
      */
-    protected function afterRunningTest(
+    protected function afterFixtureClientRequest(
         string $dataName,
         string $clientEndpoint,
         bool $enabled,
@@ -111,7 +111,7 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         if (!$enabled && str_starts_with($dataName, 'single-endpoint-')) {
             $this->executeRESTEndpointToEnableOrDisableClient($dataName, $clientEndpoint, true);
         }
-        parent::afterRunningTest(
+        parent::afterFixtureClientRequest(
             $dataName,
             $clientEndpoint,
             $enabled,

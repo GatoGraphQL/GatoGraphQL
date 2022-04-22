@@ -26,7 +26,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
          * Allow to execute a REST endpoint against the webserver
          * before running the test
          */
-        $this->beforeRunningTest($dataName);
+        $this->beforeFixtureClientRequest($dataName);
 
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
@@ -63,7 +63,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
          * Allow to execute a REST endpoint against the webserver
          * after running the test
          */
-        $this->afterRunningTest($dataName);
+        $this->afterFixtureClientRequest($dataName);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
@@ -96,7 +96,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * Allow to execute a REST endpoint against the webserver
      * before running the test
      */
-    protected function beforeRunningTest(string $dataName): void
+    protected function beforeFixtureClientRequest(string $dataName): void
     {
         // Override if needed
     }
@@ -105,7 +105,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
      * Allow to execute a REST endpoint against the webserver
      * after running the test
      */
-    protected function afterRunningTest(string $dataName): void
+    protected function afterFixtureClientRequest(string $dataName): void
     {
         // Override if needed
     }
