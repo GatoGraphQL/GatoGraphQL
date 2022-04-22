@@ -46,7 +46,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
     }
 
     /**
-     * @return array<string,string[]>
+     * @return array<string,mixed[]>
      */
     protected function provideDisabledClientEntries(): array
     {
