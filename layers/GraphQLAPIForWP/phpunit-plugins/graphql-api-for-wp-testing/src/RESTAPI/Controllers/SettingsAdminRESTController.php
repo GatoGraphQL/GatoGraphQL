@@ -18,7 +18,7 @@ use function rest_ensure_response;
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
 	/**
-	 * @return array<string,array<array<string,mixed>>> Array of [$route => $options]
+	 * @return array<string,array<string,mixed>> Array of [$route => $options]
 	 */
 	protected function getRouteOptions(): array
 	{
