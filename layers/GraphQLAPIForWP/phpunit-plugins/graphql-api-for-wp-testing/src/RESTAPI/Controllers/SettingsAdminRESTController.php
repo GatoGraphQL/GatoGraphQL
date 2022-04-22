@@ -55,7 +55,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                             'validate_callback' => $this->validateModule(...),
                         ],
                         Params::OPTION => [
-                            'description' => __('Option', 'graphql-api'),
+                            'description' => __('Option (also called \'input\' in the settings)', 'graphql-api'),
                             'type' => 'string',
                             'required' => true,
                             'validate_callback' => $this->validateOption(...),
