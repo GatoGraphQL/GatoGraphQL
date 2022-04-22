@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
+use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Settings\Options;
 use WP_Error;
 use WP_REST_Request;
+
 use WP_REST_Response;
 use WP_REST_Server;
-
-use function rest_ensure_response;
 
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
@@ -123,6 +124,18 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             ];
 			$userSettingsManager = UserSettingsManagerFacade::getInstance();
             $userSettingsManager->setModulesEnabled($moduleIDValues);
+
+			/**
+			 * Must flush the rewrite rules, so that the disabled client
+			 * shows a 404.
+			 *
+			 * But calling `flush_rewrite_rules` directly
+			 * here doesn't work!
+			 *
+			 * So instead, save a flag in the options, and check if
+			 * to do the flush at the beginning of the next request.
+			 */
+			update_option(Options::FLUSH_REWRITE_RULES, true);
 			
 			$module = $this->getModuleByID($moduleID);
 
