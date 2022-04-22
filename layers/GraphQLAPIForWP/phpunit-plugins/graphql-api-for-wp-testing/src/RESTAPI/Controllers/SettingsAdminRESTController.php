@@ -44,7 +44,9 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 				);
 			}
 
-			$response->data->songa = 'Danga';
+			// @todo Remove this temporary code
+			$response->data->settingsName = $settingsName;
+
 			$response->status = ResponseStatus::SUCCESS;
 		} catch ( Exception $e ) {
 			$response->message = $e->getMessage();
