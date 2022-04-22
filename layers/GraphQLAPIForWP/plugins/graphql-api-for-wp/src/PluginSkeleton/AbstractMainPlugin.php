@@ -555,33 +555,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function handleInitializationException(): void
     {
-        if ($this->inititalizationException !== null) {
-            if (RootEnvironment::isApplicationEnvironmentDev()) {
-                throw $this->inititalizationException;
-            } else {
-                add_action(
-                    'admin_notices',
-                    function (): void {
-                        // Avoid PHPStan error
-                        /** @var Exception */
-                        $inititalizationException = $this->inititalizationException;
-                        $errorMessage = sprintf(
-                            '%s%s',
-                            __('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api'),
-                            sprintf(
-                                __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
-                                $this->pluginName,
-                                $inititalizationException->getMessage(),
-                                $inititalizationException->getTraceAsString()
-                            )
-                        );
-                        _e(sprintf(
-                            '<div class="notice notice-error">%s</div>',
-                            $errorMessage
-                        ));
-                    }
-                );
-            }
+        if ($this->inititalizationException === null) {
+            return;
         }
+        if (RootEnvironment::isApplicationEnvironmentDev()) {
+            throw $this->inititalizationException;
+        }
+        add_action(
+            'admin_notices',
+            function (): void {
+                // Avoid PHPStan error
+                /** @var Exception */
+                $inititalizationException = $this->inititalizationException;
+                $errorMessage = sprintf(
+                    '%s%s',
+                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api'),
+                    sprintf(
+                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+                        $this->pluginName,
+                        $inititalizationException->getMessage(),
+                        $inititalizationException->getTraceAsString()
+                    )
+                );
+                _e(sprintf(
+                    '<div class="notice notice-error">%s</div>',
+                    $errorMessage
+                ));
+            }
+        );
     }
 }
