@@ -7,20 +7,22 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 use Exception;
 use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
-use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
-use WP_Error;
 
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
+	final public const MODULE_STATE_ENABLED = 'enabled';
+	final public const MODULE_STATE_DISABLED = 'disabled';
 	final public const MODULE_STATES = [
-		'enabled',
-		'disabled',
+		self::MODULE_STATE_ENABLED,
+		self::MODULE_STATE_DISABLED,
 	];
 	final public const PARAM_STATE = 'state';
 
@@ -153,8 +155,10 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 			$params = $request->get_params();
 			$moduleState = $params[self::PARAM_STATE];
 
-			// @todo Remove this temporary code
-			$response->data->moduleState = $moduleState;
+			$moduleIDValues = [
+				$moduleID => $moduleState === self::MODULE_STATE_ENABLED,
+			];
+			UserSettingsManagerFacade::getInstance()->setModulesEnabled($moduleIDValues);
 
 			// Success!
 			$response->status = ResponseStatus::SUCCESS;
