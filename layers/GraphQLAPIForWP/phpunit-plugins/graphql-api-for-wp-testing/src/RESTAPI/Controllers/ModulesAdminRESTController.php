@@ -54,7 +54,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                             'required' => true,
                             'validate_callback' => $this->validateState(...),
                         ],
-                        'moduleID' => [
+                        Params::MODULE_ID => [
                             'description' => __('Module ID', 'graphql-api'),
                             'type' => 'string',
                             'required' => true,
@@ -115,7 +115,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
         try {
             $params = $request->get_params();
-            $moduleID = $params['moduleID'];
+            $moduleID = $params[Params::MODULE_ID];
             $moduleState = $params[Params::STATE];
 
             $moduleIDValues = [
@@ -125,7 +125,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             $userSettingsManager->setModulesEnabled($moduleIDValues);
 			
 			$module = $this->getModuleByID($moduleID);
-			
+
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
