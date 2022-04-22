@@ -22,10 +22,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 	];
 	final public const PARAM_STATE = 'state';
 
-	protected function getRouteBase(): string
-	{
-		return 'modules';
-	}
+	protected string $restBase = 'modules';
 
 	/**
 	 * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
@@ -33,7 +30,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 	protected function getRouteOptions(): array
 	{
 		return [
-			'(?P<module>[a-zA-Z_-]+)' => [
+			$this->restBase . '/(?P<module>[a-zA-Z_-]+)' => [
 				[
 					'methods' => [
 						WP_REST_Server::READABLE,
@@ -80,7 +77,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
 		try {
 			$namespacedRoute = $request->get_route();
-			$module = $this->getRouteFromNamespacedRoute($namespacedRoute);
+			$module = substr($this->getRouteFromNamespacedRoute($namespacedRoute), strlen($this->restBase . '/'));
 
 			$params = $request->get_params();
 			$moduleState = $params[self::PARAM_STATE];
