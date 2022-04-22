@@ -5,37 +5,44 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
-use PHPUnitForGraphQLAPI\WebserverRequests\AbstractClientWebserverRequestTestCase;
+use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 use PoP\Root\Exception\ShouldNotHappenException;
 
 /**
- * Test that enabling/disabling clients (GraphiQL/Voyager)
- * in Custom Endpoints works well
+ * Test that disabling clients (GraphiQL/Voyager) works well
  */
-class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
+class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
-    /**
-     * @return array<string,string[]>
-     */
-    protected function provideEnabledClientEntries(): array
+    protected function setUp(): void
     {
-        return [
-            'single-endpoint-graphiql' => [
-                'graphiql/',
-            ],
-            'single-endpoint-voyager' => [
-                'schema/',
-            ],
-            'custom-endpoint-graphiql' => [
-                'graphql/mobile-app/?view=graphiql',
-            ],
-            'custom-endpoint-voyager' => [
-                'graphql/mobile-app/?view=schema',
-            ],
-        ];
+        parent::setUp();
+        
+        /**
+         * To test their disabled state works well, first execute
+         * a REST API call to disable the client, and then re-enable
+         * it afterwards.
+         */
+        $dataName = $this->dataName();
+        if (str_starts_with($dataName, 'single-endpoint-')) {
+            $this->executeRESTEndpointToEnableOrDisableClient($dataName, false);
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        /**
+         * Re-enable the clients for the single endpoint
+         * after the "disabled" test
+         */
+        $dataName = $this->dataName();
+        if (str_starts_with($dataName, 'single-endpoint-')) {
+            $this->executeRESTEndpointToEnableOrDisableClient($dataName, true);
+        }
+        
+        parent::tearDown();
     }
 
     /**
@@ -63,32 +70,8 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         ];
     }
 
-    /**
-     * The single endpoint clients (GraphiQL and Voyager)
-     * are by default enabled.
-     *
-     * To test their disabled state works well, first execute
-     * a REST API call to disable the client, and then re-enable
-     * it afterwards.
-     */
-    protected function beforeFixtureClientRequest(
-        string $dataName,
-        string $clientEndpoint,
-        bool $enabled,
-    ): void {
-        if (!$enabled && str_starts_with($dataName, 'single-endpoint-')) {
-            $this->executeRESTEndpointToEnableOrDisableClient($dataName, $clientEndpoint, false);
-        }
-        parent::beforeFixtureClientRequest(
-            $dataName,
-            $clientEndpoint,
-            $enabled,
-        );
-    }
-
     protected function executeRESTEndpointToEnableOrDisableClient(
         string $dataName,
-        string $clientEndpoint,
         bool $clientEnabled
     ): void {
         $client = static::getClient();
@@ -122,24 +105,5 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
                 )
             )
         };
-    }
-
-    /**
-     * Re-enable the clients for the single endpoint
-     * after the "disabled" test
-     */
-    protected function afterFixtureClientRequest(
-        string $dataName,
-        string $clientEndpoint,
-        bool $enabled,
-    ): void {
-        if (!$enabled && str_starts_with($dataName, 'single-endpoint-')) {
-            $this->executeRESTEndpointToEnableOrDisableClient($dataName, $clientEndpoint, true);
-        }
-        parent::afterFixtureClientRequest(
-            $dataName,
-            $clientEndpoint,
-            $enabled,
-        );
     }
 }
