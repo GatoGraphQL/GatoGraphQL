@@ -35,13 +35,21 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		return [
 			'(?P<module>[a-zA-Z_-]+)' => [
 				[
-					'methods' => WP_REST_Server::CREATABLE,
+					'methods' => [
+						WP_REST_Server::READABLE,
+						WP_REST_Server::CREATABLE,
+					],
 					'callback' => $this->enableOrDisableModule(...),
 					'permission_callback' => $this->checkAdminPermission(...),
 					'args' => [
 						self::PARAM_STATE => [
 							'required' => true,
-							'validate_callback' => $this->validateCallback(...)
+							'validate_callback' => $this->validateCallback(...),
+						],
+						'module' => [
+							'description' => __('Module name', 'graphql-api'),
+							'type' => 'string',
+							'required' => true,
 						],
 					],
 				],

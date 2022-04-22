@@ -24,7 +24,10 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 		return [
 			'settings' => [
 				[
-					'methods' => WP_REST_Server::CREATABLE,
+					'methods' => [
+						WP_REST_Server::READABLE,
+						WP_REST_Server::CREATABLE,
+					],
 					'callback' => $this->updateSettings(...),
 					'permission_callback' => $this->checkAdminPermission(...),
 					'args' => [
