@@ -25,14 +25,20 @@ abstract class AbstractRESTController extends WP_REST_Controller
 		}
 
 		foreach ($routeNameOptions as $name => $options) {
+			$namespace = sprintf(
+				'%s/%s/%s',
+				$this->getPluginNamespace(),
+				$this->getVersion(),
+				$this->getControllerNamespace()
+			);
 			$restBase = sprintf(
-				'%s/%s',
+				'/%s/%s',
 				$this->getRESTBase(),
 				$name
 			);
 			register_rest_route(
-				$this->getNamespace() . '/' . $this->getVersion(),
-				'/' . $restBase,
+				$namespace,
+				$restBase,
 				$options
 			);
 		}
@@ -43,7 +49,7 @@ abstract class AbstractRESTController extends WP_REST_Controller
 	 */
 	abstract protected function getRouteNameOptions(): array;
 
-	final protected function getNamespace(): string
+	final protected function getPluginNamespace(): string
 	{
 		return 'graphql-api';
 	}
@@ -52,6 +58,8 @@ abstract class AbstractRESTController extends WP_REST_Controller
 	{
 		return 'v1';
 	}
+
+	abstract protected function getControllerNamespace(): string;
 
 	abstract protected function getRESTBase(): string;
 

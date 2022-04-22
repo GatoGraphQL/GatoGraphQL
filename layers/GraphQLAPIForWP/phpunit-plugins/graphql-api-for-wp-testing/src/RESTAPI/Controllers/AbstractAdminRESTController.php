@@ -10,9 +10,9 @@ use function current_user_can;
 
 abstract class AbstractAdminRESTController extends AbstractRESTController
 {
-	protected function getNamespace(): string
+	protected function getControllerNamespace(): string
 	{
-		return parent::getNamespace() . '/admin';
+		return 'admin';
 	}
 
 	/**
