@@ -30,12 +30,53 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
         string $clientEndpoint,
         bool $enabled
     ): void {
+        $dataName = $this->dataName();
+        /**
+         * Allow to execute a REST endpoint against the webserver
+         * before running the test
+         */
+        $this->beforeRunningTest($dataName, $clientEndpoint, $enabled);
+
         $client = static::getClient();
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
-        $response = $client->get($clientEndpointURL);
+        $options = [
+            'verify' => false,
+        ];
+        $response = $client->get($clientEndpointURL, $options);
+
+        /**
+         * Allow to execute a REST endpoint against the webserver
+         * after running the test
+         */
+        $this->afterRunningTest($dataName, $clientEndpoint, $enabled);
+
         $this->assertEquals(200, $response->getStatusCode());
         $hasCustomHeader = $response->hasHeader(CustomHeaders::CLIENT_ENDPOINT);
         $this->assertTrue($enabled ? $hasCustomHeader : !$hasCustomHeader);
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * before running the test
+     */
+    protected function beforeRunningTest(
+        string $dataName,
+        string $clientEndpoint,
+        bool $enabled,
+    ): void {
+        // Override if needed
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * after running the test
+     */
+    protected function afterRunningTest(
+        string $dataName,
+        string $clientEndpoint,
+        bool $enabled,
+    ): void {
+        // Override if needed
     }
 
     /**
