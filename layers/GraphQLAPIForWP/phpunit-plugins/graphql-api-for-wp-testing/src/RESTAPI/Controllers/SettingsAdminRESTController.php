@@ -40,7 +40,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 			$settingsName = $params['settingsName'] ?? null;
 			if ($settingsName === null) {
 				throw new Exception(
-					esc_html__('The settings name must be provided via param "settingsName"', 'graphql-api')
+					esc_html__('The settings name has not been provided', 'graphql-api')
 				);
 			}
 
