@@ -40,7 +40,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 			$settingsName = $params['settingsName'] ?? null;
 			if ($settingsName === null) {
 				throw new Exception(
-					esc_html__('The settings name has not been provided', 'graphql-api')
+					__('The settings name has not been provided', 'graphql-api')
 				);
 			}
 
@@ -49,6 +49,10 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 
 			// Success!
 			$response->status = ResponseStatus::SUCCESS;
+			$response->message = sprintf(
+				__('The settings for \'%s\' have been updated successfully', 'graphql-api'),
+				$settingsName
+			);
 		} catch ( Exception $e ) {
 			$response->status = ResponseStatus::ERROR;
 			$response->message = $e->getMessage();
