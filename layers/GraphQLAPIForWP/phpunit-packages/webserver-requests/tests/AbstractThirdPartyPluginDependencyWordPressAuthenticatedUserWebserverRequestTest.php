@@ -13,12 +13,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
  */
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
-    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
-    protected static function useSSL(): bool
-    {
-        return true;
-    }
+    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
     /**
      * @return array<string,array<mixed>>
@@ -70,7 +65,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $options = static::getRESTEndpointRequestOptions();
         $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':disabled'));
         $client->post(
             sprintf(
@@ -78,20 +72,8 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
-            $options
+            static::getRESTEndpointRequestOptions()
         );
-    }
-
-    /**
-     * Must add the X-WP-Nonce header for the authenticated user.
-     *
-     * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
-     */
-    protected function getRESTEndpointRequestOptions(): array
-    {
-        $options = static::getRequestBasicOptions();
-        $options['headers']['X-WP-Nonce'] = static::$wpRESTNonce;
-        return $options;
     }
 
     /**
