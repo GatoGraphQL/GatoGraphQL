@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GuzzleHttp\Exception\ClientException;
+use Exception;
+// use GuzzleHttp\Exception\ClientException;
 
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
@@ -21,13 +22,6 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         string $operationName = '',
         ?string $method = null,
     ): void {
-        $dataName = $this->dataName();
-        /**
-         * Allow to execute a REST endpoint against the webserver
-         * before running the test
-         */
-        $this->beforeFixtureClientRequest($dataName);
-
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
@@ -45,25 +39,30 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($body !== '') {
             $options['body'] = $body;
         }
+
+        $dataName = $this->dataName();
+        // Set-up: Allow to execute a REST endpoint against the webserver
+        $this->beforeFixtureClientRequest($dataName);
+        $exception = null;
         try {
             $response = $client->request(
                 $method ?? $this->getMethod(),
                 $endpointURL,
                 $options
             );
-        } catch (ClientException $e) {
-            /**
-             * A 404 is a Client Exception.
-             * It's a failure, not an error.
-             */
-            $this->fail($e->getMessage());
+        } catch (Exception $e) {
+            // // A 404 is a Client Exception. It's a failure, not an error.
+            // if ($e instanceof ClientException) {
+            //     $this->fail($e->getMessage());
+            // }
+            $exception = $e;
+        } finally {
+            // Clean-up: Allow to execute a REST endpoint against the webserver
+            $this->afterFixtureClientRequest($dataName);
         }
-
-        /**
-         * Allow to execute a REST endpoint against the webserver
-         * after running the test
-         */
-        $this->afterFixtureClientRequest($dataName);
+        if ($exception !== null) {
+            throw $exception;
+        }        
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
