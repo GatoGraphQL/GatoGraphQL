@@ -38,7 +38,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     // 'permission_callback' => $this->checkAdminPermission(...),
                 ],
             ],
-            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
+            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<input>[a-zA-Z_-]+)' => [
                 [
                     'methods' => [
                         WP_REST_Server::READABLE,
@@ -54,7 +54,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                             'required' => true,
                             'validate_callback' => $this->validateModule(...),
                         ],
-                        Params::OPTION => [
+                        Params::INPUT => [
                             'description' => __('Option', 'graphql-api'),
                             'type' => 'string',
                             'required' => true,
@@ -71,10 +71,10 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     }
 
 	/**
-     * Validate the module has the given option
+     * Validate the module has the given input
      */
     protected function validateOption(
-		string $option,
+		string $input,
 		WP_REST_Request $request,
 	): bool|WP_Error {
 		$moduleID = $request->get_param(Params::MODULE_ID);
@@ -92,7 +92,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 		$moduleSettings = $moduleResolver->getSettings($module);
 		$found = false;
 		foreach ($moduleSettings as $moduleSetting) {
-			if ($moduleSetting[Properties::INPUT] === $option) {
+			if ($moduleSetting[Properties::INPUT] === $input) {
 				$found = true;
 				break;
 			}
@@ -101,14 +101,14 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api'),
-                    $option,
+                    __('There is no input \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api'),
+                    $input,
 					$module,
 					$moduleID
                 ),
                 [
                     Params::MODULE_ID => $moduleID,
-                    Params::OPTION => $option,
+                    Params::INPUT => $input,
                 ]
             );
         }
@@ -138,18 +138,18 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $moduleID = $params[Params::MODULE_ID];
-            $option = $params[Params::OPTION];
+            $input = $params[Params::INPUT];
             $value = $params[Params::VALUE];
 
 			$module = $this->getModuleByID($moduleID);
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
-			$userSettingsManager->setSetting($module, $option, $value);
+			$userSettingsManager->setSetting($module, $input, $value);
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api'),
-                $option,
+                __('Input option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api'),
+                $input,
 				$module,
 				$moduleID
             );
