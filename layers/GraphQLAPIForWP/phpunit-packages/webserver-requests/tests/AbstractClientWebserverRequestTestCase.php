@@ -35,6 +35,8 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
         $options = [
             'verify' => false,
+            // Don't throw exception with 404
+            'http_errors' => false,
         ];
 
         $dataName = $this->dataName();
@@ -49,11 +51,16 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
             // Clean-up: Allow to execute a REST endpoint against the webserver
             $this->afterFixtureClientRequest($dataName, $clientEndpoint, $enabled);
         }
+
         if ($exception !== null) {
             throw $exception;
         }
 
-        $this->assertEquals(200, $response->getStatusCode());
+        // Disabled clients: assert it produced a 404
+        $expectedStatusCode = $enabled ? 200 : 404;
+        $this->assertEquals($expectedStatusCode, $response->getStatusCode());
+
+        // Enable clients: must return a custom header, check it is there
         $hasCustomHeader = $response->hasHeader(CustomHeaders::CLIENT_ENDPOINT);
         $this->assertTrue($enabled ? $hasCustomHeader : !$hasCustomHeader);
     }
