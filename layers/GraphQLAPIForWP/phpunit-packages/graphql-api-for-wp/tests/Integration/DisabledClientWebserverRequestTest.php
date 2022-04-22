@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
+use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
@@ -75,8 +76,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         bool $clientEnabled
     ): void {
         $client = static::getClient();
-        $restEndpointPlaceholder = 'wp-json/graphql-api/v1/admin/modules/%s/?state=%s';
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
+        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::ENABLE_DISABLE_MODULE;
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
             $this->getModuleID($dataName),
