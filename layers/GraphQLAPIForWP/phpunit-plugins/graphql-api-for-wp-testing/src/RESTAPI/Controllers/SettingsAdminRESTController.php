@@ -8,7 +8,7 @@ use Exception;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
-use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
+use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
@@ -25,6 +25,13 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     use WithModuleParamRESTControllerTrait;
 
     protected string $restBase = 'settings';
+
+    private ?SettingsNormalizerInterface $settingsNormalizer = null;
+
+    final protected function getSettingsNormalizer(): SettingsNormalizerInterface
+    {
+        return $this->settingsNormalizer ??= InstanceManagerFacade::getInstance()->getInstance(SettingsNormalizerInterface::class);
+    }
 
     /**
      * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
@@ -145,10 +152,8 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
 
             // Normalize the value
-            /** @var SettingsMenuPage */
-            $settingsMenuPage = InstanceManagerFacade::getInstance()->getInstance(SettingsMenuPage::class);
             $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
-            $normalizedValues = $settingsMenuPage->normalizeSettings([
+            $normalizedValues = $this->getSettingsNormalizer()->normalizeSettings([
                 $settingsOptionName => $value,
             ]);
             $value = $normalizedValues[$settingsOptionName];

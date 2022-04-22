@@ -40,6 +40,9 @@ services:
     GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
         class: \GraphQLAPI\GraphQLAPI\Registries\PersistedQueryEndpointAnnotatorRegistry
 
+    GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface:
+        class: \GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizer
+
     GraphQLAPI\GraphQLAPI\Services\:
         resource: ../src/Services/*
 
