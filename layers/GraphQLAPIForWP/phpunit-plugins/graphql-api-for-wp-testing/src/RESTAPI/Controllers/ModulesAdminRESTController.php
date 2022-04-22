@@ -30,6 +30,16 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 	protected function getRouteOptions(): array
 	{
 		return [
+			$this->restBase => [
+				[
+					'methods' => [
+						WP_REST_Server::READABLE,
+						WP_REST_Server::CREATABLE,
+					],
+					'callback' => $this->retrieveAllItems(...),
+					'permission_callback' => $this->checkAdminPermission(...),
+				],
+			],
 			$this->restBase . '/(?P<module>[a-zA-Z_-]+)' => [
 				[
 					'methods' => [
@@ -71,6 +81,12 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		return true;
 	}
 
+	public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
+	{
+		$modules = ['a', 'zzzzonga'];
+		return rest_ensure_response($modules);
+	}
+
 	public function enableOrDisableModule(WP_REST_Request $request): WP_REST_Response|WP_Error
 	{
 		$response = new RESTResponse();
@@ -98,5 +114,5 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		}
 
 		return rest_ensure_response($response);
-	}	
+	}
 }
