@@ -21,11 +21,12 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         string $operationName = '',
         ?string $method = null,
     ): void {
+        $dataName = $this->dataName();
         /**
          * Allow to execute a REST endpoint against the webserver
          * before running the test
          */
-        $this->beforeRunningTest($this->dataName());
+        $this->beforeRunningTest($dataName);
 
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
@@ -58,17 +59,17 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $this->fail($e->getMessage());
         }
 
+        /**
+         * Allow to execute a REST endpoint against the webserver
+         * after running the test
+         */
+        $this->afterRunningTest($dataName);
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
         }
-
-        /**
-         * Allow to execute a REST endpoint against the webserver
-         * after running the test
-         */
-        $this->afterRunningTest($this->dataName());
     }
 
     /**
