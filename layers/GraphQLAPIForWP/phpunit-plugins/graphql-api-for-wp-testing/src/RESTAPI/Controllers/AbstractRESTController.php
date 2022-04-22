@@ -88,9 +88,4 @@ abstract class AbstractRESTController extends WP_REST_Controller
         echo wp_json_encode($result->get_data());
         die;
     }
-
-    protected function getRouteFromNamespacedRoute(string $namespacedRoute): string
-    {
-        return substr($namespacedRoute, strlen('/' . $this->getNamespace() . '/'));
-    }
 }

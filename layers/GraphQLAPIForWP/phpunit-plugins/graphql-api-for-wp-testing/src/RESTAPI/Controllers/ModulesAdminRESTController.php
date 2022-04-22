@@ -114,19 +114,18 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $response = new RESTResponse();
 
         try {
-            $namespacedRoute = $request->get_route();
-            $moduleID = substr($this->getRouteFromNamespacedRoute($namespacedRoute), strlen($this->restBase . '/'));
-            $module = $this->getModuleByID($moduleID);
-
             $params = $request->get_params();
+            $moduleID = $params['moduleID'];
             $moduleState = $params[Params::STATE];
 
             $moduleIDValues = [
-                $moduleID => $moduleState === ParamValues::ENABLED,
+				$moduleID => $moduleState === ParamValues::ENABLED,
             ];
 			$userSettingsManager = UserSettingsManagerFacade::getInstance();
             $userSettingsManager->setModulesEnabled($moduleIDValues);
-
+			
+			$module = $this->getModuleByID($moduleID);
+			
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
