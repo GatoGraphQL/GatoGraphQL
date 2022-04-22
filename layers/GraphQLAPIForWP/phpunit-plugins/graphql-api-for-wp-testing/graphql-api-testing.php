@@ -13,7 +13,7 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\AdminRESTAPIEndpointManager;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
 
 // Exit if accessed directly

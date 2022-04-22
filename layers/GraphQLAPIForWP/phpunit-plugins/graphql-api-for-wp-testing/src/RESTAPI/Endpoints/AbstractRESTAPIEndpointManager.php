@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI;
-
-use function add_action;
+namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\AbstractRESTController;
 use WC_REST_Controller;
+
+use function add_action;
 
 abstract class AbstractRESTAPIEndpointManager
 {

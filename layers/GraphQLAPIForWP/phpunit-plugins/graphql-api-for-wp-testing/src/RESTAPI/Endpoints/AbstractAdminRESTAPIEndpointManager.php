@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI;
+namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints;
 
 use function current_user_can;
 
