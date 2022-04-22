@@ -24,6 +24,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		self::MODULE_STATE_ENABLED,
 		self::MODULE_STATE_DISABLED,
 	];
+	
 	final public const PARAM_STATE = 'state';
 
 	protected string $restBase = 'modules';
