@@ -50,12 +50,13 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 					'args' => [
 						self::PARAM_STATE => [
 							'required' => true,
-							'validate_callback' => $this->validateCallback(...),
+							'validate_callback' => $this->validateState(...),
 						],
-						'module' => [
-							'description' => __('Module name', 'graphql-api'),
+						'moduleID' => [
+							'description' => __('Module ID', 'graphql-api'),
 							'type' => 'string',
 							'required' => true,
+							'validate_callback' => $this->validateModule(...),
 						],
 					],
 				],
@@ -63,7 +64,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		];
 	}
 
-	protected function validateCallback(string $value): bool|WP_Error
+	protected function validateState(string $value): bool|WP_Error
 	{
 		if (!in_array($value, self::MODULE_STATES)) {			
 			return new WP_Error(
@@ -80,6 +81,40 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		return true;
 	}
 
+	/**
+	 * Validate there is a module with this ID
+	 */
+	protected function validateModule(string $value): bool|WP_Error
+	{
+		$module = $this->getModuleByID($value);
+		if ($module === null) {			
+			return new WP_Error(
+				'2',
+				sprintf(
+					__('There is no module with ID \'%s\'', 'graphql-api'),
+					$value
+				),
+				[
+					self::PARAM_STATE => $value,
+				]
+			);
+		}
+		return true;
+	}
+
+	public function getModuleByID(string $moduleID): ?string
+	{
+		$moduleRegistry = ModuleRegistryFacade::getInstance();
+        $modules = $moduleRegistry->getAllModules();
+        foreach ($modules as $module) {
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            if ($moduleID === $moduleResolver->getID($module)) {
+				return $module;
+			}
+        }
+        return null;
+	}
+
 	public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
 	{
 		$items = [];
@@ -88,7 +123,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             $isEnabled = $moduleRegistry->isModuleEnabled($module);
-			$items[$module] = [
+			$items[] = [
 				'module' => $module,
 				'id' => $moduleResolver->getID($module),
 				'isEnabled' => $isEnabled,
@@ -112,7 +147,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
 		try {
 			$namespacedRoute = $request->get_route();
-			$module = substr($this->getRouteFromNamespacedRoute($namespacedRoute), strlen($this->restBase . '/'));
+			$moduleID = substr($this->getRouteFromNamespacedRoute($namespacedRoute), strlen($this->restBase . '/'));
+			$module = $this->getModuleByID($moduleID);
 
 			$params = $request->get_params();
 			$moduleState = $params[self::PARAM_STATE];
