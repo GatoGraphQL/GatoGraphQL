@@ -49,10 +49,10 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		];
 	}
 
-	protected function validateCallback(string $value): bool|WP_Error
+	protected function validateCallback(string $value): ?WP_Error
 	{
 		if (in_array($value, self::MODULE_STATES)) {
-			return true;
+			return null;
 		}
 		return new WP_Error(
 			'1',
