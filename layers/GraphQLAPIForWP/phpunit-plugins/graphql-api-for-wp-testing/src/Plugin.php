@@ -11,6 +11,7 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
 use function add_action;
 use function delete_option;
 use function get_option;
+use function flush_rewrite_rules;
 
 class Plugin
 {
@@ -33,7 +34,7 @@ class Plugin
          */
         if (get_option(Options::FLUSH_REWRITE_RULES)) {
             delete_option(Options::FLUSH_REWRITE_RULES);
-            add_action('init', \flush_rewrite_rules(...), PHP_INT_MAX);
+            add_action('init', flush_rewrite_rules(...), PHP_INT_MAX);
         }
     }
 }
