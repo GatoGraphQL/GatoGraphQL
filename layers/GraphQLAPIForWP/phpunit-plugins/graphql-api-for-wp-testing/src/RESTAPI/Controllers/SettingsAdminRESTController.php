@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
-use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
@@ -15,10 +14,11 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
-
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
+
+use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
@@ -42,10 +42,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
                 [
-                    'methods' => [
-                        WP_REST_Server::READABLE,
-                        WP_REST_Server::CREATABLE,
-                    ],
+                    'methods' => WP_REST_Server::CREATABLE,
                     'callback' => $this->updateSettings(...),
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
