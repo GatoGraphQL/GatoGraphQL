@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
-use function esc_html__;
-use function rest_ensure_response;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use WP_Error;
-
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
+
+use function esc_html__;
+use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
@@ -43,7 +43,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 	public function updateSettings(WP_REST_Request $request): WP_REST_Response|WP_Error
 	{
 		$response = new RESTResponse();
-		
+
 		try {
 			$params = $request->get_params();
 			$settingsName = $params['settingsName'] ?? null;

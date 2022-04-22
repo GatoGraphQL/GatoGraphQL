@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\AbstractRESTController;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\SettingsAdminRESTController;
 
 class AdminRESTAPIEndpointManager extends AbstractAdminRESTAPIEndpointManager
 {
@@ -13,6 +14,8 @@ class AdminRESTAPIEndpointManager extends AbstractAdminRESTAPIEndpointManager
 	 */
 	protected function getControllers(): array
 	{
-		return [];
+		return [
+			new SettingsAdminRESTController(),
+		];
 	}
 }
