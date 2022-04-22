@@ -13,9 +13,8 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
-use GraphQLAPI\GraphQLAPI\Plugin;
+use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
 use PoP\Root\Environment as RootEnvironment;
 
 use function add_action;
@@ -29,7 +28,7 @@ add_action(
     'plugins_loaded',
     function(): void {
         // Validate the GraphQL API plugin is installed, or exit
-        if (!class_exists(Plugin::class)) {
+        if (!class_exists(GraphQLAPIMainPlugin::class)) {
             return;
         }
 
@@ -40,15 +39,8 @@ add_action(
         
         // Load Composer’s autoloader
         require_once(__DIR__ . '/vendor/autoload.php');
-        
-        /**
-         * Send custom headers needed for development
-         */
-        new CustomHeaderAppender();
-        
-        /**
-         * Initialize REST endpoints
-         */
-        new AdminRESTAPIEndpointManager();
+
+        // Initialize the plugin
+        (new Plugin())->initialize();
     }
 );
