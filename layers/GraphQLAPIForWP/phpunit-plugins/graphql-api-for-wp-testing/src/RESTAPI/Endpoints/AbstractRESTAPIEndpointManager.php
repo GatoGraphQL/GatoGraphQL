@@ -5,17 +5,11 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints;
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\AbstractRESTController;
-use WC_REST_Controller;
 
 use function add_action;
 
 abstract class AbstractRESTAPIEndpointManager
 {
-	/**
-	 * @var WC_REST_Controller[]|string[]
-	 */
-	public array $controllers = [];
-
 	public function __construct()
 	{
 		$this->initialize();
@@ -33,7 +27,6 @@ abstract class AbstractRESTAPIEndpointManager
 	public function registerRoutes(): void
 	{
 		foreach ($this->getControllers() as $controller) {
-			$this->controllers[get_class($controller)] = $controller;
 			$controller->register_routes();
 		}
 	}
