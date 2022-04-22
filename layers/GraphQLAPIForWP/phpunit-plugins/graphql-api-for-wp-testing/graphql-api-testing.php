@@ -15,21 +15,34 @@ Domain Path: /languages
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
+use GraphQLAPI\GraphQLAPI\Plugin;
+
+use function add_action;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// Load Composer’s autoloader
-require_once(__DIR__ . '/vendor/autoload.php');
-
-/**
- * Send custom headers needed for development
- */
-new CustomHeaderAppender();
-
-/**
- * Initialize REST endpoints
- */
-new AdminRESTAPIEndpointManager();
+add_action(
+    'plugins_loaded',
+    function(): void {
+        // Validate the GraphQL API plugin is installed, or exit
+        if (!class_exists(Plugin::class)) {
+            return;
+        }
+        
+        // Load Composer’s autoloader
+        require_once(__DIR__ . '/vendor/autoload.php');
+        
+        /**
+         * Send custom headers needed for development
+         */
+        new CustomHeaderAppender();
+        
+        /**
+         * Initialize REST endpoints
+         */
+        new AdminRESTAPIEndpointManager();
+    }
+);
