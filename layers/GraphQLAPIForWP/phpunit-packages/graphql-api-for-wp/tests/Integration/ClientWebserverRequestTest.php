@@ -58,8 +58,12 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
     }
 
     /**
-     * Disable the clients for the single endpoint
-     * before the "disabled" test
+     * The single endpoint clients (GraphiQL and Voyager)
+     * are by default enabled.
+     *
+     * To test their disabled state works well, first execute
+     * a REST API call to disable the client, and then re-enable
+     * it afterwards.
      */
     protected function beforeFixtureClientRequest(
         string $dataName,
