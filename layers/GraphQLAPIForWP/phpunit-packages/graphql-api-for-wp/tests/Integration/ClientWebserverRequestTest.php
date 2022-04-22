@@ -46,15 +46,19 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         return [
             'single-endpoint-graphiql' => [
                 'graphiql/',
+                404,
             ],
             'single-endpoint-voyager' => [
                 'schema/',
+                404,
             ],
             'custom-endpoint-graphiql' => [
                 'graphql/customers/penguin-books/?view=graphiql',
+                200,
             ],
             'custom-endpoint-voyager' => [
                 'graphql/customers/penguin-books/?view=schema',
+                200,
             ],
         ];
     }

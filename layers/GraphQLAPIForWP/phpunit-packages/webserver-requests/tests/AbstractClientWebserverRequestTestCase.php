@@ -19,7 +19,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
     public function testEnabledClients(
         string $clientEndpoint,
     ): void {
-        $this->testEnabledOrDisabledClients($clientEndpoint, true);
+        $this->testEnabledOrDisabledClients($clientEndpoint, 200, true);
     }
 
     /**
@@ -29,6 +29,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
 
     protected function testEnabledOrDisabledClients(
         string $clientEndpoint,
+        int $expectedStatusCode,
         bool $enabled
     ): void {
         $client = static::getClient();
@@ -56,8 +57,7 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
             throw $exception;
         }
 
-        // Disabled clients: assert it produced a 404
-        $expectedStatusCode = $enabled ? 200 : 404;
+        // Disabled clients: they may assert it produced a 404
         $this->assertEquals($expectedStatusCode, $response->getStatusCode());
 
         // Enable clients: must return a custom header, check it is there
@@ -94,12 +94,13 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
      */
     public function testDisabledClients(
         string $clientEndpoint,
+        int $expectedStatusCode,
     ): void {
-        $this->testEnabledOrDisabledClients($clientEndpoint, false);
+        $this->testEnabledOrDisabledClients($clientEndpoint, $expectedStatusCode, false);
     }
 
     /**
-     * @return array<string,string[]>
+     * @return array<string,mixed[]>
      */
     abstract protected function provideDisabledClientEntries(): array;
 }
