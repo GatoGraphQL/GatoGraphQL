@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\ModulesAdminRESTController;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
@@ -96,7 +96,7 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
             $moduleIDs[$dataName],
-            $clientEnabled ? ModulesAdminRESTController::MODULE_STATE_ENABLED : ModulesAdminRESTController::MODULE_STATE_DISABLED
+            $clientEnabled ? ParamValues::ENABLED : ParamValues::DISABLED
         );
         $response = $client->post(
             $endpointURL,
