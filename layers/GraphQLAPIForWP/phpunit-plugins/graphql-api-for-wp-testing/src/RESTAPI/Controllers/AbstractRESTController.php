@@ -31,7 +31,7 @@ abstract class AbstractRESTController extends WP_REST_Controller
 				$name
 			);
 			register_rest_route(
-				$this->getNamespace(),
+				$this->getNamespace() . '/' . $this->getVersion(),
 				'/' . $restBase,
 				$options
 			);
@@ -43,9 +43,14 @@ abstract class AbstractRESTController extends WP_REST_Controller
 	 */
 	abstract protected function getRouteNameOptions(): array;
 
-	protected function getNamespace(): string
+	final protected function getNamespace(): string
 	{
-		return 'graphql-api/v1';
+		return 'graphql-api';
+	}
+
+	protected function getVersion(): string
+	{
+		return 'v1';
 	}
 
 	abstract protected function getRESTBase(): string;
