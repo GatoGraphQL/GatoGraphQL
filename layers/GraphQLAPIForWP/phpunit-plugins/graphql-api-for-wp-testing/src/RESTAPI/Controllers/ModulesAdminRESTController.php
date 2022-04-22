@@ -32,10 +32,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 	 */
 	protected function getRouteOptions(): array
 	{
-		$routeOptions = [];
-		$modules = ['a', 'b', 'c'];
-		foreach ($modules as $module) {
-			$routeOptions[$module] = [
+		return [
+			'(?P<module>[a-zA-Z_-]+)' => [
 				'methods' => WP_REST_Server::CREATABLE,
 				'callback' => $this->enableOrDisableModule(...),
 				'permission_callback' => $this->checkAdminPermission(...),
@@ -44,10 +42,9 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 						'required' => true,
 						'validate_callback' => $this->validateCallback(...)
 					],
-				],
-			];
-		}
-		return $routeOptions;
+				]
+			],
+		];
 	}
 
 	/**
