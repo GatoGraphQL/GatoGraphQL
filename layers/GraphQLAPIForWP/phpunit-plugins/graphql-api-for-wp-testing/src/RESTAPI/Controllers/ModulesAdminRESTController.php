@@ -49,7 +49,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		];
 	}
 
-	protected function validateCallback(string $value): ?WP_Error
+	protected function validateCallback(string $value): bool|WP_Error
 	{
 		if (!in_array($value, self::MODULE_STATES)) {			
 			return new WP_Error(
@@ -63,7 +63,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 				]
 			);
 		}
-		return null;
+		return true;
 	}
 
 	public function enableOrDisableModule(WP_REST_Request $request): WP_REST_Response|WP_Error
