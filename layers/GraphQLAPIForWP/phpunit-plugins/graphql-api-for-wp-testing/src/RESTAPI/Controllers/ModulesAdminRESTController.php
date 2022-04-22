@@ -28,28 +28,27 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 	}
 
 	/**
-	 * @return array<string,array<string,mixed>> Array of [$route => $options]
+	 * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
 	 */
 	protected function getRouteOptions(): array
 	{
 		return [
 			'(?P<module>[a-zA-Z_-]+)' => [
-				'methods' => WP_REST_Server::CREATABLE,
-				'callback' => $this->enableOrDisableModule(...),
-				'permission_callback' => $this->checkAdminPermission(...),
-				'args' => [
-					self::PARAM_STATE => [
-						'required' => true,
-						'validate_callback' => $this->validateCallback(...)
+				[
+					'methods' => WP_REST_Server::CREATABLE,
+					'callback' => $this->enableOrDisableModule(...),
+					'permission_callback' => $this->checkAdminPermission(...),
+					'args' => [
+						self::PARAM_STATE => [
+							'required' => true,
+							'validate_callback' => $this->validateCallback(...)
+						],
 					],
-				]
+				],
 			],
 		];
 	}
 
-	/**
-	 * @return array<string,array<string,mixed>> Array of [$route => $options]
-	 */
 	protected function validateCallback(string $value): bool|WP_Error
 	{
 		if (in_array($value, self::MODULE_STATES)) {

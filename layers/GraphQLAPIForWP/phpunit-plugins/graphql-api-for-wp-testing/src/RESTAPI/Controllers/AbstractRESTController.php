@@ -66,7 +66,7 @@ abstract class AbstractRESTController extends WP_REST_Controller
 	}
 
 	/**
-	 * @return array<string,array<string,mixed>> Array of [$route => $options]
+	 * @return array<string,array<array<string,mixed>>> Array of [$route => [$options]]
 	 */
 	abstract protected function getRouteOptions(): array;
 
