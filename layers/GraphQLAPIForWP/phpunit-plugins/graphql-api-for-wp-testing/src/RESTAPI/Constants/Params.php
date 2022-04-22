@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants;
 
-class ResponseStatus
+class Params
 {
-    public const SUCCESS = 'success';
-    public const ERROR = 'error';
+    final public const STATE = 'state';
 }

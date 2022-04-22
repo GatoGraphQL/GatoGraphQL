@@ -6,5 +6,5 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants;
 
 class Roles
 {
-	public const ADMINISTRATOR = 'administrator';	
+    public const ADMINISTRATOR = 'administrator';
 }

@@ -101,19 +101,18 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
             $variablesFile,
             $operationName,
         );
-
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
-        $this->assertJsonStringEqualsJsonFile(
-            $expectedResponseFile,
-            $response->getContent()
-        );
-
         /**
          * Perform additional assertions, such as macking sure
          * that there are no mock Responses left in the queue.
          */
         $this->afterFixtureGraphQLQueryExecution(
             $dataName,
+        );
+
+        $this->assertJsonStringEqualsJsonFile(
+            $expectedResponseFile,
+            $response->getContent()
         );
     }
 

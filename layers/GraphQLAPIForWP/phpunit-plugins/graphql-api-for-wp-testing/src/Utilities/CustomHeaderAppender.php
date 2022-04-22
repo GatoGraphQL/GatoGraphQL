@@ -31,7 +31,7 @@ class CustomHeaderAppender
         if (!is_user_logged_in()) {
             return;
         }
-        
+
         header(sprintf(
             '%s: %s',
             CustomHeaders::WP_REST_NONCE,

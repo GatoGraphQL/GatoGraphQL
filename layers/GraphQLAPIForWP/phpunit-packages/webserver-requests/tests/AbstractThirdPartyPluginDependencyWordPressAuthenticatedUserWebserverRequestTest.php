@@ -13,12 +13,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
  */
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
-    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
-
-    protected static function useSSL(): bool
-    {
-        return true;
-    }
+    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
     /**
      * @return array<string,array<mixed>>
@@ -54,12 +49,12 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * Disable the plugin before executing the ":disabled" test
      */
-    protected function beforeRunningTest(string $dataName): void
+    protected function beforeFixtureClientRequest(string $dataName): void
     {
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
         }
-        parent::beforeRunningTest($dataName);
+        parent::beforeFixtureClientRequest($dataName);
     }
 
     /**
@@ -70,7 +65,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $options = static::getRESTEndpointRequestOptions();
         $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':disabled'));
         $client->post(
             sprintf(
@@ -78,30 +72,18 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
-            $options
+            static::getRESTEndpointRequestOptions()
         );
-    }
-
-    /**
-     * Must add the X-WP-Nonce header for the authenticated user.
-     *
-     * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
-     */
-    protected function getRESTEndpointRequestOptions(): array
-    {
-        $options = static::getRequestBasicOptions();
-        $options['headers']['X-WP-Nonce'] = static::$wpRESTNonce;
-        return $options;
     }
 
     /**
      * Re-enable the plugin after executing the ":disabled" test
      */
-    protected function afterRunningTest(string $dataName): void
+    protected function afterFixtureClientRequest(string $dataName): void
     {
         if (str_ends_with($dataName, ':disabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
         }
-        parent::afterRunningTest($dataName);
+        parent::afterFixtureClientRequest($dataName);
     }
 }

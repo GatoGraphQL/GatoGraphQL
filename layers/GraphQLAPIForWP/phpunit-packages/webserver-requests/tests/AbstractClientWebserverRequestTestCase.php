@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use Exception;
 use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
 
 /**
@@ -32,10 +33,53 @@ abstract class AbstractClientWebserverRequestTestCase extends AbstractWebserverR
     ): void {
         $client = static::getClient();
         $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
-        $response = $client->get($clientEndpointURL);
+        $options = [
+            'verify' => false,
+        ];
+
+        $dataName = $this->dataName();
+        // Set-up: Allow to execute a REST endpoint against the webserver
+        $this->beforeFixtureClientRequest($dataName, $clientEndpoint, $enabled);
+        $exception = null;
+        try {
+            $response = $client->get($clientEndpointURL, $options);
+        } catch (Exception $e) {
+            $exception = $e;
+        } finally {
+            // Clean-up: Allow to execute a REST endpoint against the webserver
+            $this->afterFixtureClientRequest($dataName, $clientEndpoint, $enabled);
+        }
+        if ($exception !== null) {
+            throw $exception;
+        }
+
         $this->assertEquals(200, $response->getStatusCode());
         $hasCustomHeader = $response->hasHeader(CustomHeaders::CLIENT_ENDPOINT);
         $this->assertTrue($enabled ? $hasCustomHeader : !$hasCustomHeader);
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * before running the test
+     */
+    protected function beforeFixtureClientRequest(
+        string $dataName,
+        string $clientEndpoint,
+        bool $enabled,
+    ): void {
+        // Override if needed
+    }
+
+    /**
+     * Allow to execute a REST endpoint against the webserver
+     * after running the test
+     */
+    protected function afterFixtureClientRequest(
+        string $dataName,
+        string $clientEndpoint,
+        bool $enabled,
+    ): void {
+        // Override if needed
     }
 
     /**
