@@ -224,6 +224,7 @@
             "GraphQLByPoP\\GraphQLQuery\\": "layers/GraphQLByPoP/packages/graphql-query/tests",
             "GraphQLByPoP\\GraphQLRequest\\": "layers/GraphQLByPoP/packages/graphql-request/tests",
             "GraphQLByPoP\\GraphQLServer\\": "layers/GraphQLByPoP/packages/graphql-server/tests",
+            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/tests",
             "PHPUnitForGraphQLAPI\\GraphQLAPI\\": "layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/tests",
             "PHPUnitForGraphQLAPI\\WPFakerSchema\\": "layers/GraphQLAPIForWP/phpunit-packages/wpfaker-schema/tests",
             "PHPUnitForGraphQLAPI\\WebserverRequests\\": "layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests",
