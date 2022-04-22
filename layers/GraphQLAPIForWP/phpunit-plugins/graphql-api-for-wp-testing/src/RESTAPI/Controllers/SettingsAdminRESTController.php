@@ -37,22 +37,22 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 
 		try {
 			$params = $request->get_params();
-			$settingsName = $params['settingsName'] ?? null;
+			$settingsName = $params['name'] ?? null;
 			if ($settingsName === null) {
 				throw new Exception(
 					__('The settings name has not been provided', 'graphql-api')
 				);
 			}
-			if (array_key_exists('value', $params)) {
+			if (!array_key_exists('value', $params)) {
 				throw new Exception(
 					__('The value has not been provided', 'graphql-api')
 				);
 			}
-			$value = $params['value'];
+			$settingsValue = $params['value'];
 
 			// @todo Remove this temporary code
 			$response->data->settingsName = $settingsName;
-			$response->data->value = $value;
+			$response->data->settingsValue = $settingsValue;
 
 			// Success!
 			$response->status = ResponseStatus::SUCCESS;
