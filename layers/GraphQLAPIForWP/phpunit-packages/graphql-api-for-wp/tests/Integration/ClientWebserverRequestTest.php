@@ -7,6 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+use PoP\Root\Exception\ShouldNotHappenException;
 
 /**
  * Test that enabling/disabling clients (GraphiQL/Voyager)
@@ -89,19 +90,34 @@ class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/graphql-api/v1/admin/modules/%s/?state=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $moduleIDs = [
-            'single-endpoint-graphiql' => 'graphqlapi_graphqlapi_graphiql-for-single-endpoint',
-            'single-endpoint-voyager' => 'graphqlapi_graphqlapi_interactive-schema-for-single-endpoint',
-        ];
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
-            $moduleIDs[$dataName],
+            $this->getModuleID($dataName),
             $clientEnabled ? ParamValues::ENABLED : ParamValues::DISABLED
         );
         $response = $client->post(
             $endpointURL,
             static::getRESTEndpointRequestOptions()
         );
+    }
+
+    /**
+     * To visualize the list of all the modules, and find the "moduleID":
+     *
+     * @see http://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
+     */
+    protected function getModuleID(string $dataName): string
+    {
+        return match ($dataName) {
+            'single-endpoint-graphiql' => 'graphqlapi_graphqlapi_graphiql-for-single-endpoint',
+            'single-endpoint-voyager' => 'graphqlapi_graphqlapi_interactive-schema-for-single-endpoint',
+            default => throw new ShouldNotHappenException(
+                sprintf(
+                    'There is no moduleID configured for $dataName \'%s\'',
+                    $dataName
+                )
+            )
+        };
     }
 
     /**
