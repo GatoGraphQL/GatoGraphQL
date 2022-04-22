@@ -17,25 +17,16 @@ use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
-	protected function getRESTBase(): string
-	{
-		return 'settings';
-	}
-
 	/**
-	 * Register rest routes.
-	 *
-	 * @return array<string,array<array<string,mixed>>>
+	 * @return array<string,array<array<string,mixed>>> Array of [$route => $options]
 	 */
-	protected function getRouteNameOptions(): array
+	protected function getRouteOptions(): array
 	{
 		return [
-			'update' => [
-				[
-					'methods' => WP_REST_Server::CREATABLE,
-					'callback' => $this->updateSettings(...),
-					'permission_callback' => $this->checkAdminPermission(...),
-				],
+			'settings' => [
+				'methods' => WP_REST_Server::CREATABLE,
+				'callback' => $this->updateSettings(...),
+				'permission_callback' => $this->checkAdminPermission(...),
 			],
 		];
 	}

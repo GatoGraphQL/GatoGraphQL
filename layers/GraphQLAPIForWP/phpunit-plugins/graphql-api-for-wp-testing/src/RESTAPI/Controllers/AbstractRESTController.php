@@ -19,12 +19,12 @@ abstract class AbstractRESTController extends WP_REST_Controller
 	 */
 	public function register_routes(): void
 	{
-		$routeNameOptions = $this->getRouteNameOptions();
-		if ($routeNameOptions === []) {
+		$routeOptions = $this->getRouteOptions();
+		if ($routeOptions === []) {
 			return;
 		}
 
-		foreach ($routeNameOptions as $name => $options) {
+		foreach ($routeOptions as $route => $routeOptions) {
 			$namespace = sprintf(
 				'%s/%s',
 				$this->getPluginNamespace(),
@@ -38,23 +38,26 @@ abstract class AbstractRESTController extends WP_REST_Controller
 					$controllerNamespace
 				);
 			}
-			$restBase = sprintf(
-				'/%s/%s',
-				$this->getRESTBase(),
-				$name
-			);
+			$routeBase = $this->getRouteBase();
+			if ($routeBase !== '') {
+				$route = sprintf(
+					'%s/%s',
+					$routeBase,
+					$route
+				);
+			}
 			register_rest_route(
 				$namespace,
-				$restBase,
-				$options
+				$route,
+				$routeOptions
 			);
 		}
 	}
 
 	/**
-	 * @return array<string,array<array<string,mixed>>>
+	 * @return array<string,array<array<string,mixed>>> Array of [$route => $options]
 	 */
-	abstract protected function getRouteNameOptions(): array;
+	abstract protected function getRouteOptions(): array;
 
 	final protected function getPluginNamespace(): string
 	{
@@ -71,7 +74,10 @@ abstract class AbstractRESTController extends WP_REST_Controller
 		return '';
 	}
 
-	abstract protected function getRESTBase(): string;
+	protected function getRouteBase(): string
+	{
+		return '';
+	}
 
 	public function ensureResponse(array $data): WP_REST_Response|WP_Error
 	{
