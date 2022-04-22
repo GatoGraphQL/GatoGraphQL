@@ -48,7 +48,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 					__('The value has not been provided', 'graphql-api')
 				);
 			}
-			$settingsValue = $params['value'];
+			$settingsValue = (bool) $params['value'];
 
 			// @todo Remove this temporary code
 			$response->data->settingsName = $settingsName;
