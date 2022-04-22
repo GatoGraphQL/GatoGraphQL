@@ -22,7 +22,7 @@ use function rest_ensure_response;
 
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
-	use WithModuleParamRESTControllerTrait;
+    use WithModuleParamRESTControllerTrait;
 
     protected string $restBase = 'settings';
 
@@ -69,41 +69,41 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         ];
     }
 
-	/**
+    /**
      * Validate the module has the given option
      */
     protected function validateOption(
-		string $option,
-		WP_REST_Request $request,
-	): bool|WP_Error {
-		$moduleID = $request->get_param(Params::MODULE_ID);
-		if ($moduleID === null) {
-			return false;
-		}
+        string $option,
+        WP_REST_Request $request,
+    ): bool|WP_Error {
+        $moduleID = $request->get_param(Params::MODULE_ID);
+        if ($moduleID === null) {
+            return false;
+        }
 
         $module = $this->getModuleByID($moduleID);
-		if ($module === null) {
-			return false;
-		}
+        if ($module === null) {
+            return false;
+        }
 
-		$moduleRegistry = ModuleRegistryFacade::getInstance();
-		$moduleResolver = $moduleRegistry->getModuleResolver($module);
-		$moduleSettings = $moduleResolver->getSettings($module);
-		$found = false;
-		foreach ($moduleSettings as $moduleSetting) {
-			if ($moduleSetting[Properties::INPUT] === $option) {
-				$found = true;
-				break;
-			}
-		}
-		if (!$found) {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $moduleSettings = $moduleResolver->getSettings($module);
+        $found = false;
+        foreach ($moduleSettings as $moduleSetting) {
+            if ($moduleSetting[Properties::INPUT] === $option) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
             return new WP_Error(
                 '1',
                 sprintf(
                     __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api'),
                     $option,
-					$module,
-					$moduleID
+                    $module,
+                    $moduleID
                 ),
                 [
                     Params::MODULE_ID => $moduleID,
@@ -140,30 +140,30 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $option = $params[Params::OPTION];
             $value = $params[Params::VALUE];
 
-			$module = $this->getModuleByID($moduleID);
-			$moduleRegistry = ModuleRegistryFacade::getInstance();
-			$moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $module = $this->getModuleByID($moduleID);
+            $moduleRegistry = ModuleRegistryFacade::getInstance();
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
 
-			// Normalize the value
-			/** @var SettingsMenuPage */
+            // Normalize the value
+            /** @var SettingsMenuPage */
             $settingsMenuPage = InstanceManagerFacade::getInstance()->getInstance(SettingsMenuPage::class);
-			$settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
             $normalizedValues = $settingsMenuPage->normalizeSettings([
-				$settingsOptionName => $value,
-			]);
-			$value = $normalizedValues[$settingsOptionName];
+                $settingsOptionName => $value,
+            ]);
+            $value = $normalizedValues[$settingsOptionName];
 
             // Store in the DB
-			$userSettingsManager = UserSettingsManagerFacade::getInstance();
-			$userSettingsManager->setSetting($module, $option, $value);
+            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+            $userSettingsManager->setSetting($module, $option, $value);
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
                 __('Option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api'),
                 $option,
-				$module,
-				$moduleID
+                $module,
+                $moduleID
             );
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
