@@ -13,8 +13,8 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\AdminRESTAPIEndpointManager;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Utilities\CustomHeaderAppender;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -25,23 +25,9 @@ if (!defined('ABSPATH')) {
 require_once(__DIR__ . '/vendor/autoload.php');
 
 /**
- * Send the WP REST nonce as a header, to make it easier
- * to execute REST endpoints for integration tests.
- *
- * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest.php
+ * Send custom headers needed for development
  */
-function addRESTNonceAsHeader(): void
-{
-    if (!\is_user_logged_in()) {
-        return;
-    }
-    header(sprintf(
-        '%s: %s',
-        CustomHeaders::WP_REST_NONCE,
-        wp_create_nonce('wp_rest')
-    ));
-}
-add_filter('init', 'addRESTNonceAsHeader');
+new CustomHeaderAppender();
 
 /**
  * Initialize REST endpoints
