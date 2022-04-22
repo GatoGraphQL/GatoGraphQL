@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
+use function rest_ensure_response;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
+use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleTypeRegistryFacade;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use WP_Error;
+
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
-
-use function rest_ensure_response;
 
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
@@ -32,10 +34,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 		return [
 			$this->restBase => [
 				[
-					'methods' => [
-						WP_REST_Server::READABLE,
-						WP_REST_Server::CREATABLE,
-					],
+					'methods' => WP_REST_Server::READABLE,
 					'callback' => $this->retrieveAllItems(...),
 					'permission_callback' => $this->checkAdminPermission(...),
 				],
@@ -83,8 +82,28 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
 	public function retrieveAllItems(WP_REST_Request $request): WP_REST_Response|WP_Error
 	{
-		$modules = ['a', 'zzzzonga'];
-		return rest_ensure_response($modules);
+		$items = [];
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $modules = $moduleRegistry->getAllModules();
+        foreach ($modules as $module) {
+            $moduleResolver = $moduleRegistry->getModuleResolver($module);
+            $isEnabled = $moduleRegistry->isModuleEnabled($module);
+			$items[$module] = [
+				'module' => $module,
+				'id' => $moduleResolver->getID($module),
+				'isEnabled' => $isEnabled,
+				'canBeDisabled' => $moduleResolver->canBeDisabled($module),
+				'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
+				'hasSettings' => $moduleResolver->hasSettings($module),
+				'name' => $moduleResolver->getName($module),
+				'description' => $moduleResolver->getDescription($module),
+				'dependsOn' => $moduleResolver->getDependedModuleLists($module),
+				// 'url' => $moduleResolver->getURL($module),
+				'slug' => $moduleResolver->getSlug($module),
+				'hasDocs' => $moduleResolver->hasDocumentation($module),
+			];
+        }
+        return rest_ensure_response($items);
 	}
 
 	public function enableOrDisableModule(WP_REST_Request $request): WP_REST_Response|WP_Error
