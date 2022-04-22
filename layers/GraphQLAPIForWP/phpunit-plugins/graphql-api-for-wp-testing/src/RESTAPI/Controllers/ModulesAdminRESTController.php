@@ -37,16 +37,15 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 				[
 					'methods' => WP_REST_Server::READABLE,
 					'callback' => $this->retrieveAllItems(...),
-					'permission_callback' => $this->checkAdminPermission(...),
+					// Allow anyone to read the modules
+					// 'permission_callback' => $this->checkAdminPermission(...),
 				],
 			],
 			$this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
 				[
-					'methods' => [
-						WP_REST_Server::READABLE,
-						WP_REST_Server::CREATABLE,
-					],
+					'methods' => WP_REST_Server::CREATABLE,
 					'callback' => $this->enableOrDisableModule(...),
+					// only the Admin can execute the modification
 					'permission_callback' => $this->checkAdminPermission(...),
 					'args' => [
 						Params::STATE => [
