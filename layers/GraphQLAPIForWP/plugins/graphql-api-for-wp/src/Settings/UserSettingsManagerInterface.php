@@ -36,6 +36,7 @@ interface UserSettingsManagerInterface
     public function removeTimestamps(): void;
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
+    public function setSetting(string $module, string $option, mixed $value): void;
     public function hasSetModuleEnabled(string $moduleID): bool;
     public function isModuleEnabled(string $moduleID): bool;
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void;
