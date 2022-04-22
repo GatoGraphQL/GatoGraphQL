@@ -15,7 +15,7 @@ class Plugin
          * Send custom headers needed for development
          */
         new CustomHeaderAppender();
-        
+
         /**
          * Initialize REST endpoints
          */

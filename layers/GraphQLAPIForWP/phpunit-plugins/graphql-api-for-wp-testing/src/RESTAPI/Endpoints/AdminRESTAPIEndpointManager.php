@@ -10,14 +10,14 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers\SettingsAdminREST
 
 class AdminRESTAPIEndpointManager extends AbstractRESTAPIEndpointManager
 {
-	/**
-	 * @return AbstractRESTController[]
-	 */
-	protected function getControllers(): array
-	{
-		return [
-			new SettingsAdminRESTController(),
-			new ModulesAdminRESTController(),
-		];
-	}
+    /**
+     * @return AbstractRESTController[]
+     */
+    protected function getControllers(): array
+    {
+        return [
+            new SettingsAdminRESTController(),
+            new ModulesAdminRESTController(),
+        ];
+    }
 }

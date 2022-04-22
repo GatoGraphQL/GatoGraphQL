@@ -6,6 +6,6 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants;
 
 class ParamValues
 {
-	final public const ENABLED = 'enabled';
-	final public const DISABLED = 'disabled';
+    final public const ENABLED = 'enabled';
+    final public const DISABLED = 'disabled';
 }

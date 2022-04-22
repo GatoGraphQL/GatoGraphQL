@@ -10,29 +10,29 @@ use function add_action;
 
 abstract class AbstractRESTAPIEndpointManager
 {
-	public function __construct()
-	{
-		$this->initialize();
-	}
+    public function __construct()
+    {
+        $this->initialize();
+    }
 
-	public function initialize()
-	{
-		if (!class_exists('WP_REST_Server')) {
-			return;
-		}
+    public function initialize()
+    {
+        if (!class_exists('WP_REST_Server')) {
+            return;
+        }
 
-		add_action('rest_api_init', $this->registerRoutes(...));
-	}
+        add_action('rest_api_init', $this->registerRoutes(...));
+    }
 
-	public function registerRoutes(): void
-	{
-		foreach ($this->getControllers() as $controller) {
-			$controller->register_routes();
-		}
-	}
+    public function registerRoutes(): void
+    {
+        foreach ($this->getControllers() as $controller) {
+            $controller->register_routes();
+        }
+    }
 
-	/**
-	 * @return AbstractRESTController[]
-	 */
-	abstract protected function getControllers(): array;
+    /**
+     * @return AbstractRESTController[]
+     */
+    abstract protected function getControllers(): array;
 }

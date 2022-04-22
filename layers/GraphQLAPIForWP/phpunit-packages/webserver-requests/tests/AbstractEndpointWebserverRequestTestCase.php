@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use Exception;
+
 // use GuzzleHttp\Exception\ClientException;
 
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
@@ -62,7 +63,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         }
         if ($exception !== null) {
             throw $exception;
-        }        
+        }
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));

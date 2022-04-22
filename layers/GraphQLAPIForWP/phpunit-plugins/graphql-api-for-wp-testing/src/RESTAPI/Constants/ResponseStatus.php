@@ -6,6 +6,6 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants;
 
 class ResponseStatus
 {
-	public const SUCCESS = 'success';	
-	public const ERROR = 'error';	
+    public const SUCCESS = 'success';
+    public const ERROR = 'error';
 }

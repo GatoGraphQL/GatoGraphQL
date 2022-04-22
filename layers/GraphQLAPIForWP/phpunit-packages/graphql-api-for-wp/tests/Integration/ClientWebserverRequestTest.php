@@ -16,7 +16,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 class ClientWebserverRequestTest extends AbstractClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
-    
+
     /**
      * @return array<string,string[]>
      */
