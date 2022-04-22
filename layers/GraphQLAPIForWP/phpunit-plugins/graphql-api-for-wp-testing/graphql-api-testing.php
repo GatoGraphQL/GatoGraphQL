@@ -14,6 +14,7 @@ Domain Path: /languages
 */
 
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\AdminRESTAPIEndpointManager;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -41,3 +42,8 @@ function addRESTNonceAsHeader(): void
     ));
 }
 add_filter('init', 'addRESTNonceAsHeader');
+
+/**
+ * Initialize REST endpoints
+ */
+new AdminRESTAPIEndpointManager();
