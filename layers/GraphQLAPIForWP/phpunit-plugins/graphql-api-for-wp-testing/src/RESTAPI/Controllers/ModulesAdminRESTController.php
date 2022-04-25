@@ -46,6 +46,17 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
                 [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveModule(...),
+                    // Allow anyone to read the modules
+                    // 'permission_callback' => $this->checkAdminPermission(...),
+                    'args' => [
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                    ],
+                ],
+            ],
+            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
+                [
                     'methods' => WP_REST_Server::CREATABLE,
                     'callback' => $this->updateModule(...),
                     // only the Admin can execute the modification
@@ -55,15 +66,23 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                             'required' => true,
                             'validate_callback' => $this->validateState(...),
                         ],
-                        Params::MODULE_ID => [
-                            'description' => __('Module ID', 'graphql-api-testing'),
-                            'type' => 'string',
-                            'required' => true,
-                            'validate_callback' => $this->validateModule(...),
-                        ],
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
                     ],
                 ],
             ],
+        ];
+    }
+    
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getModuleIDParamArgs(): array
+    {
+        return [
+            'description' => __('Module ID', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
+            'validate_callback' => $this->validateModule(...),
         ];
     }
 
