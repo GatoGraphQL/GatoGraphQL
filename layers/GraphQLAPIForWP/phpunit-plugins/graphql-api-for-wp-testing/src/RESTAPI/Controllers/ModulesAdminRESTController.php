@@ -154,17 +154,17 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         return $this->prepareItemForResponse($module);
     }
 
-	/**
-	 * @return array<string,mixed>
-	 */
-	protected function prepareLinks(string $module): array
+    /**
+     * @return array<string,mixed>
+     */
+    protected function prepareLinks(string $module): array
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $moduleID = $moduleResolver->getID($module);
-		return [
-			'self' => [
-				'href' => rest_url(
+        return [
+            'self' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s/%s',
                         $this->getNamespace(),
@@ -173,8 +173,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
-			'collection' => [
-				'href' => rest_url(
+            'collection' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s',
                         $this->getNamespace(),
@@ -182,8 +182,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
-			'settings' => [
-				'href' => rest_url(
+            'settings' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s/%s',
                         $this->getNamespace(),
@@ -193,7 +193,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                 ),
             ],
         ];
-	}
+    }
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
@@ -229,7 +229,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     $module
                 );
             }
-            
+
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = $successMessage;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 use function getenv;
+
 use PoP\ComponentModel\Constants\FrameworkParams;
 
 /**

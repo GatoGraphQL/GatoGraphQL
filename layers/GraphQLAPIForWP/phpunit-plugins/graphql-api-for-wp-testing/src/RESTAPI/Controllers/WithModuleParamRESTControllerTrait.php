@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use WP_Error;
 
 trait WithModuleParamRESTControllerTrait
-{    
+{
     /**
      * @return array<string,mixed>
      */

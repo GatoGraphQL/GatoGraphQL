@@ -86,7 +86,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                             //         'required' => true,
                             //     ],
                             //     'value' => [
-                            //         'required' => true,     
+                            //         'required' => true,
                             //     ],
                             // ],
                             'required' => true,
@@ -204,17 +204,17 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         return rest_ensure_response($item);
     }
 
-	/**
-	 * @return array<string,mixed>
-	 */
-	protected function prepareLinks(string $module): array
+    /**
+     * @return array<string,mixed>
+     */
+    protected function prepareLinks(string $module): array
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $moduleID = $moduleResolver->getID($module);
-		return [
-			'self' => [
-				'href' => rest_url(
+        return [
+            'self' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s/%s',
                         $this->getNamespace(),
@@ -223,8 +223,8 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
-			'collection' => [
-				'href' => rest_url(
+            'collection' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s',
                         $this->getNamespace(),
@@ -232,8 +232,8 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     )
                 ),
             ],
-			'module' => [
-				'href' => rest_url(
+            'module' => [
+                'href' => rest_url(
                     sprintf(
                         '%s/%s/%s',
                         $this->getNamespace(),
@@ -243,7 +243,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                 ),
             ],
         ];
-	}
+    }
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
@@ -257,7 +257,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 
             // Normalize the values
             $optionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, (array)$optionValues);
-            
+
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
             $userSettingsManager->setSettings($module, $optionValues);
