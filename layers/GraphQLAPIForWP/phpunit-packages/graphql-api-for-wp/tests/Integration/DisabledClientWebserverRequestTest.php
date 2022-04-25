@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 use PoP\Root\Exception\ShouldNotHappenException;
@@ -18,6 +17,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+    use ExecuteRESTWebserverRequestTestCaseTrait;
 
     protected function setUp(): void
     {
@@ -89,10 +89,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
             static::getRESTEndpointRequestOptions()
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertStringStartsWith('application/json', $response->getHeaderLine('content-type'));
-        $restResponse = RESTResponse::fromClientResponse($response);
-        $this->assertEquals(ResponseStatus::SUCCESS, $restResponse->status);
+        $this->assertRESTCallIsSuccessful($response);
     }
 
     /**
