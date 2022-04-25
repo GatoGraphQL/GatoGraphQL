@@ -51,16 +51,11 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => $this->updateSettings(...),
+                    'callback' => $this->updateItem(...),
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
-                        Params::MODULE_ID => [
-                            'description' => __('Module ID', 'graphql-api-testing'),
-                            'type' => 'string',
-                            'required' => true,
-                            'validate_callback' => $this->validateModule(...),
-                        ],
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
                         Params::OPTION => [
                             'description' => __('Option (also called \'input\' in the settings)', 'graphql-api-testing'),
                             'type' => 'string',
@@ -138,7 +133,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         return rest_ensure_response($items);
     }
 
-    public function updateSettings(WP_REST_Request $request): WP_REST_Response|WP_Error
+    public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $response = new RESTResponse();
 

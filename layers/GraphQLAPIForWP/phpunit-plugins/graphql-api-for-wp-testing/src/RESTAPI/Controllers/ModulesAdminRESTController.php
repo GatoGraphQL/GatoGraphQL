@@ -69,19 +69,6 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             ],
         ];
     }
-    
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getModuleIDParamArgs(): array
-    {
-        return [
-            'description' => __('Module ID', 'graphql-api-testing'),
-            'type' => 'string',
-            'required' => true,
-            'validate_callback' => $this->validateModule(...),
-        ];
-    }
 
     protected function validateState(string $value): bool|WP_Error
     {
