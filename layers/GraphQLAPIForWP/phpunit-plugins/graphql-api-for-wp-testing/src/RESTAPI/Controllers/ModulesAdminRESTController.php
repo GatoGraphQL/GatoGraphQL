@@ -18,6 +18,18 @@ use WP_REST_Server;
 
 use function rest_ensure_response;
 
+/**
+ * Example to enable/disable a module
+ *
+ * ```bash
+ * curl -i --insecure \
+ *   --user "admin:{applicationPassword}" \
+ *   -X POST \
+ *   -H "Content-Type: application/json" \
+ *   -d '{"state": "enabled"}' \
+ *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ * ```
+ */
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;

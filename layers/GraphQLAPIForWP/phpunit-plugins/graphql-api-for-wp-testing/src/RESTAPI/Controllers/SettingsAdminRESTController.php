@@ -13,7 +13,6 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use stdClass;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -21,6 +20,18 @@ use WP_REST_Server;
 
 use function rest_ensure_response;
 
+/**
+ * Example to execute a Settings update:
+ *
+ * ```bash
+ * curl -i --insecure \
+ *   --user "admin:{applicationPassword}" \
+ *   -X POST \
+ *   -H "Content-Type: application/json" \
+ *   -d '{"optionValues": {"path": "/anotherGraphiQL/"}}' \
+ *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/module-settings/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ * ```
+ */
 class SettingsAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
