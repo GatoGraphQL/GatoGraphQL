@@ -88,7 +88,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
             $endpointURL,
             static::getRESTEndpointRequestOptions()
         );
-        // Assert the response is successful, or already fail the test
+        // Assert the REST API call is successful, or already fail the test
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertStringStartsWith('application/json', $response->getHeaderLine('content-type'));
         $restResponse = RESTResponse::fromClientResponse($response);
