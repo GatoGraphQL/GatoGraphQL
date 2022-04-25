@@ -49,7 +49,8 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractWe
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
-        $this->executeRESTEndpointToUpdateClientPath($dataName, $data[0]);
+        $newClientPath = $data[0];
+        $this->executeRESTEndpointToUpdateClientPath($dataName, $newClientPath);
     }
 
     protected function tearDown(): void
@@ -59,7 +60,8 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractWe
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
-        $this->executeRESTEndpointToUpdateClientPath($dataName, $data[1]);
+        $previousClientPath = $data[1];
+        $this->executeRESTEndpointToUpdateClientPath($dataName, $previousClientPath);
 
         parent::tearDown();
     }
