@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
@@ -16,6 +17,7 @@ use PoP\Root\Exception\ShouldNotHappenException;
 class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+    use ExecuteRESTWebserverRequestTestCaseTrait;
 
     protected function setUp(): void
     {
@@ -86,6 +88,8 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
             $endpointURL,
             static::getRESTEndpointRequestOptions()
         );
+        // Assert the REST API call is successful, or already fail the test
+        $this->assertRESTCallIsSuccessful($response);
     }
 
     /**
