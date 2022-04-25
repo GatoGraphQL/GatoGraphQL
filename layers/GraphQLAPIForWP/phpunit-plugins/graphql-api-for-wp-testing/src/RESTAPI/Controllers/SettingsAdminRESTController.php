@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
+use function rest_ensure_response;
+use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
@@ -15,10 +17,9 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
 use WP_REST_Request;
+
 use WP_REST_Response;
 use WP_REST_Server;
-
-use function rest_ensure_response;
 
 /**
  * Example to execute a Settings update:
@@ -256,19 +257,23 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             $module = $this->getModuleByID($moduleID);
 
             // Normalize the values
-            $optionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, (array)$optionValues);
+            $normalizedOptionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, $optionValues);
 
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $userSettingsManager->setSettings($module, $optionValues);
+            $userSettingsManager->setSettings($module, $normalizedOptionValues);
 
             /**
              * Flush rewrite rules in the next request.
              * Eg: after changing the path of the GraphiQL
              * client for the single endpoint,
-             * accessing the previous path must produce a 404
+             * accessing the previous path must produce a 404.
+             *
+             * Not all settings need flushing, so check first.
              */
-            $this->enqueueFlushRewriteRules();
+            if ($this->shouldFlushRewriteRules($optionValues)) {
+                $this->enqueueFlushRewriteRules();
+            }
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
@@ -283,5 +288,23 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         }
 
         return rest_ensure_response($response);
+    }
+
+    /**
+     * Some options need be flushed, others not.
+     * To find out, check the settings inputs.
+     *
+     * Inputs that need flushing (implemented so far):
+     *
+     * - Path (eg: GraphiQL/Voyager clients)
+     *
+     * @param array<string,mixed> $optionValues
+     */
+    protected function shouldFlushRewriteRules(array $optionValues): bool
+    {
+        return array_key_exists(
+            ModuleSettingOptions::PATH,
+            $optionValues
+        );
     }
 }
