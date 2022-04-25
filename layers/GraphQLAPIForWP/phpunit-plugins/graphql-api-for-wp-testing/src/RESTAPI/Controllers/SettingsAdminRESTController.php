@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Controllers;
 
 use Exception;
-use function rest_ensure_response;
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\Facades\Registries\ModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
@@ -17,9 +16,11 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
 use WP_REST_Request;
-
 use WP_REST_Response;
 use WP_REST_Server;
+
+use function rest_ensure_response;
+use function rest_url;
 
 /**
  * Example to execute a Settings update:
