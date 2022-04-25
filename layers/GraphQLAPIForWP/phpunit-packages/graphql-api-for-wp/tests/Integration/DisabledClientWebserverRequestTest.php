@@ -79,7 +79,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         bool $clientEnabled
     ): void {
         $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::ENABLE_DISABLE_MODULE;
+        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE;
         $endpointURL = sprintf(
             $endpointURLPlaceholder,
             $this->getModuleID($dataName),
