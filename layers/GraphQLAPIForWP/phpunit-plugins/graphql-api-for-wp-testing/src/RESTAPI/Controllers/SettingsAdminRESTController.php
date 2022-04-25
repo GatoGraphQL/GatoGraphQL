@@ -48,6 +48,17 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => '__return_true',
                 ],
             ],
+            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
+                [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveItem(...),
+                    // Allow anyone to read the modules
+                    'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                    ],
+                ],
+            ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::CREATABLE,
@@ -123,14 +134,32 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $items[] = [
-                'module' => $module,
-                'id' => $moduleResolver->getID($module),
-                'settings' => $moduleResolver->getSettings($module),
-            ];
+            $items[] = $this->getSettingsData($module);
         }
         return rest_ensure_response($items);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getSettingsData(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        return [
+            'module' => $module,
+            'id' => $moduleResolver->getID($module),
+            'settings' => $moduleResolver->getSettings($module),
+        ];
+    }
+
+    public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $params = $request->get_params();
+        $moduleID = $params[Params::MODULE_ID];
+        $module = $this->getModuleByID($moduleID);
+        $item = $this->getSettingsData($module);
+        return rest_ensure_response($item);
     }
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
