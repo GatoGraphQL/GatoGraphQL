@@ -45,7 +45,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveAllItems(...),
                     // Allow anyone to read the modules
-                    // 'permission_callback' => $this->checkAdminPermission(...),
+                    'permission_callback' => '__return_true',
                 ],
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
