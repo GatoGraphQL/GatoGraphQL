@@ -41,19 +41,19 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveAllItems(...),
                     // Allow anyone to read the modules
-                    // 'permission_callback' => $this->checkAdminPermission(...),
+                    'permission_callback' => '__return_true',
                 ],
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
-                [
-                    'methods' => WP_REST_Server::READABLE,
-                    'callback' => $this->retrieveModule(...),
-                    // Allow anyone to read the modules
-                    // 'permission_callback' => $this->checkAdminPermission(...),
-                    'args' => [
-                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
-                    ],
-                ],
+                // [
+                //     'methods' => WP_REST_Server::READABLE,
+                //     'callback' => $this->retrieveModule(...),
+                //     // Allow anyone to read the modules
+                //     // 'permission_callback' => $this->checkAdminPermission(...),
+                //     'args' => [
+                //         Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                //     ],
+                // ],
                 [
                     'methods' => WP_REST_Server::CREATABLE,
                     'callback' => $this->updateModule(...),
@@ -61,7 +61,6 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::STATE => [
-                            'required' => true,
                             'validate_callback' => $this->validateState(...),
                         ],
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
@@ -134,29 +133,37 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $moduleID = $params[Params::MODULE_ID];
-            $moduleState = $params[Params::STATE];
-
-            $moduleIDValues = [
-                $moduleID => $moduleState === ParamValues::ENABLED,
-            ];
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $userSettingsManager->setModulesEnabled($moduleIDValues);
-
-            /**
-             * Flush rewrite rules in the next request.
-             * Eg: after disabling "GraphiQL in single endpoint",
-             * accessing this client must produce a 404
-             */
-            $this->enqueueFlushRewriteRules();
-
+            $moduleState = $params[Params::STATE] ?? null;
             $module = $this->getModuleByID($moduleID);
 
+            if ($moduleState !== null) {
+                $moduleIDValues = [
+                    $moduleID => $moduleState === ParamValues::ENABLED,
+                ];
+                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                $userSettingsManager->setModulesEnabled($moduleIDValues);
+
+                /**
+                 * Flush rewrite rules in the next request.
+                 * Eg: after disabling "GraphiQL in single endpoint",
+                 * accessing this client must produce a 404
+                 */
+                $this->enqueueFlushRewriteRules();
+
+                $successMessage = sprintf(
+                    __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
+                    $module
+                );
+            } else {
+                $successMessage = sprintf(
+                    __('No updates were performed for module \'%s\'', 'graphql-api-testing'),
+                    $module
+                );
+            }
+            
             // Success!
             $response->status = ResponseStatus::SUCCESS;
-            $response->message = sprintf(
-                __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
-                $module
-            );
+            $response->message = $successMessage;
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
             $response->message = $e->getMessage();
