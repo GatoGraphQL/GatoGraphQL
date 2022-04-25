@@ -25,7 +25,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     use WithModuleParamRESTControllerTrait;
     use WithFlushRewriteRulesRESTControllerTrait;
 
-    protected string $restBase = 'settings';
+    protected string $restBase = 'module-settings';
 
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
 
