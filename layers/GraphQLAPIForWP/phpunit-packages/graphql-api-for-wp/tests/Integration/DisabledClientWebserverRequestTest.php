@@ -6,6 +6,8 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 use PoP\Root\Exception\ShouldNotHappenException;
@@ -86,6 +88,11 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
             $endpointURL,
             static::getRESTEndpointRequestOptions()
         );
+        // Assert the response is successful, or already fail the test
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('application/json', $response->getHeaderLine('content-type'));
+        $restResponse = RESTResponse::fromClientResponse($response);
+        $this->assertEquals(ResponseStatus::SUCCESS, $restResponse->status);
     }
 
     /**
