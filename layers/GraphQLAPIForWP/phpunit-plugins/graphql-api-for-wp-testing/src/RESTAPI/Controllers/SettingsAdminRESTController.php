@@ -13,6 +13,7 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use stdClass;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -58,8 +59,6 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
                     ],
                 ],
-            ],
-            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)/(?P<option>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::CREATABLE,
                     'callback' => $this->updateItem(...),
@@ -67,15 +66,20 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
-                        Params::OPTION => [
-                            'description' => __('Option (also called \'input\' in the settings)', 'graphql-api-testing'),
-                            'type' => 'string',
+                        Params::OPTION_VALUES => [
+                            'description' => __('Array of [\'option\' (also called \'input\' in the settings) => \'value\']. Different modules can receive different options', 'graphql-api-testing'),
+                            'type' => 'object',
+                            // 'properties' => [
+                            //     'option'  => [
+                            //         'type' => 'string',
+                            //         'required' => true,
+                            //     ],
+                            //     'value' => [
+                            //         'required' => true,     
+                            //     ],
+                            // ],
                             'required' => true,
-                            'validate_callback' => $this->validateOption(...),
-                        ],
-                        Params::VALUE => [
-                            'description' => __('Value', 'graphql-api-testing'),
-                            'required' => true,
+                            'validate_callback' => $this->validateOptions(...),
                         ],
                     ],
                 ],
@@ -86,44 +90,46 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     /**
      * Validate the module has the given option
      */
-    protected function validateOption(
-        string $option,
+    protected function validateOptions(
+        array $optionValues,
         WP_REST_Request $request,
     ): bool|WP_Error {
         $moduleID = $request->get_param(Params::MODULE_ID);
-        if ($moduleID === null) {
-            return false;
-        }
-
         $module = $this->getModuleByID($moduleID);
         if ($module === null) {
+            /**
+             * No need to provide an error message, since it's already done
+             * when validating the moduleID
+             */
             return false;
         }
 
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $moduleSettings = $moduleResolver->getSettings($module);
-        $found = false;
-        foreach ($moduleSettings as $moduleSetting) {
-            if ($moduleSetting[Properties::INPUT] === $option) {
-                $found = true;
-                break;
+        foreach ((array) $optionValues as $option => $value) {
+            $found = false;
+            foreach ($moduleSettings as $moduleSetting) {
+                if ($moduleSetting[Properties::INPUT] === $option) {
+                    $found = true;
+                    break;
+                }
             }
-        }
-        if (!$found) {
-            return new WP_Error(
-                '1',
-                sprintf(
-                    __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
-                    $option,
-                    $module,
-                    $moduleID
-                ),
-                [
-                    Params::MODULE_ID => $moduleID,
-                    Params::OPTION => $option,
-                ]
-            );
+            if (!$found) {
+                return new WP_Error(
+                    '1',
+                    sprintf(
+                        __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
+                        $option,
+                        $module,
+                        $moduleID
+                    ),
+                    [
+                        Params::MODULE_ID => $moduleID,
+                        Params::OPTION_VALUES => [$option => $value],
+                    ]
+                );
+            }
         }
         return true;
     }
@@ -146,10 +152,20 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        /**
+         * Append the settings value, store in the DB, to the description
+         * of the settings, which is defined by code.
+         */
+        $settings = $moduleResolver->getSettings($module);
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        foreach ($settings as &$setting) {
+            $setting['value'] = $userSettingsManager->getSetting($module, $setting['input']);
+        }
         return [
             'module' => $module,
             'id' => $moduleResolver->getID($module),
-            'settings' => $moduleResolver->getSettings($module),
+            'settings' => $settings,
         ];
     }
 
@@ -169,23 +185,15 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         try {
             $params = $request->get_params();
             $moduleID = $params[Params::MODULE_ID];
-            $option = $params[Params::OPTION];
-            $value = $params[Params::VALUE];
-
+            $optionValues = $params[Params::OPTION_VALUES];
             $module = $this->getModuleByID($moduleID);
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
 
-            // Normalize the value
-            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
-            $normalizedValues = $this->getSettingsNormalizer()->normalizeSettings([
-                $settingsOptionName => $value,
-            ]);
-            $value = $normalizedValues[$settingsOptionName];
-
+            // Normalize the values
+            $optionValues = $this->getSettingsNormalizer()->normalizeModuleSettings($module, (array)$optionValues);
+            
             // Store in the DB
             $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $userSettingsManager->setSetting($module, $option, $value);
+            $userSettingsManager->setSettings($module, $optionValues);
 
             /**
              * Flush rewrite rules in the next request.
@@ -198,8 +206,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api-testing'),
-                $option,
+                __('Settings for module \'%s\' (with ID \'%s\') have been updated successfully', 'graphql-api-testing'),
                 $module,
                 $moduleID
             );
