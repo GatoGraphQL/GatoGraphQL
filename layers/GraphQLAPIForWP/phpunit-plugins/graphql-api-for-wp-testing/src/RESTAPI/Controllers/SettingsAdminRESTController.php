@@ -160,7 +160,12 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         $settings = $moduleResolver->getSettings($module);
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
         foreach ($settings as &$setting) {
-            $setting['value'] = $userSettingsManager->getSetting($module, $setting['input']);
+            // There are non-editable inputs, to show information. Skip those
+            $input = $setting['input'] ?? null;
+            if ($input === null) {
+                continue;
+            }
+            $setting['value'] = $userSettingsManager->getSetting($module, $input);
         }
         return [
             'module' => $module,
