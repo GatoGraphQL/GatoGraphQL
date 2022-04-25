@@ -137,9 +137,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Module \'%s\' has been updated successfully %s', 'graphql-api'),
-                $module,
-                $moduleState
+                __('Module \'%s\' has been updated successfully', 'graphql-api'),
+                $module
             );
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
