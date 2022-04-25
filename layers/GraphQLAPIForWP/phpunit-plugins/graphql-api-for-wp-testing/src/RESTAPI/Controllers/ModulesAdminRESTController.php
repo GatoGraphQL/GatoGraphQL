@@ -54,8 +54,6 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                         Params::MODULE_ID => $this->getModuleIDParamArgs(),
                     ],
                 ],
-            ],
-            $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::CREATABLE,
                     'callback' => $this->updateModule(...),
