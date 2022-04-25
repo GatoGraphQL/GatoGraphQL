@@ -10,7 +10,6 @@ use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractDisabledClientWebserverRequestTestCase;
 use PHPUnitForGraphQLAPI\WebserverRequests\RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
-use PoP\Root\Exception\ShouldNotHappenException;
 
 /**
  * Test that disabling clients (GraphiQL/Voyager) works well
@@ -19,6 +18,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use ExecuteRESTWebserverRequestTestCaseTrait;
+    use SingleEndpointClientWebserverRequestTestCaseTrait;
 
     protected function setUp(): void
     {
@@ -94,22 +94,8 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         $this->assertRESTCallIsSuccessful($response);
     }
 
-    /**
-     * To visualize the list of all the modules, and find the "moduleID":
-     *
-     * @see http://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules
-     */
     protected function getModuleID(string $dataName): string
     {
-        return match ($dataName) {
-            'single-endpoint-graphiql' => 'graphqlapi_graphqlapi_graphiql-for-single-endpoint',
-            'single-endpoint-voyager' => 'graphqlapi_graphqlapi_interactive-schema-for-single-endpoint',
-            default => throw new ShouldNotHappenException(
-                sprintf(
-                    'There is no moduleID configured for $dataName \'%s\'',
-                    $dataName
-                )
-            )
-        };
+        return $this->getSingleEndpointClientModuleID($dataName);
     }
 }
