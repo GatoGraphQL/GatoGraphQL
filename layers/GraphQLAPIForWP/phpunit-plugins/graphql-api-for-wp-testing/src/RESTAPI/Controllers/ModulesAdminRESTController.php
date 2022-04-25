@@ -56,7 +56,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                             'validate_callback' => $this->validateState(...),
                         ],
                         Params::MODULE_ID => [
-                            'description' => __('Module ID', 'graphql-api'),
+                            'description' => __('Module ID', 'graphql-api-testing'),
                             'type' => 'string',
                             'required' => true,
                             'validate_callback' => $this->validateModule(...),
@@ -73,8 +73,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('Parameter \'state\' can only have one of these values: \'%s\'', 'graphql-api'),
-                    implode(__('\', \'', 'graphql-api'), self::MODULE_STATES)
+                    __('Parameter \'state\' can only have one of these values: \'%s\'', 'graphql-api-testing'),
+                    implode(__('\', \'', 'graphql-api-testing'), self::MODULE_STATES)
                 ),
                 [
                     Params::STATE => $value,
@@ -137,7 +137,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Module \'%s\' has been updated successfully', 'graphql-api'),
+                __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
                 $module
             );
         } catch (Exception $e) {

@@ -19,7 +19,7 @@ trait WithModuleParamRESTControllerTrait
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no module with ID \'%s\'', 'graphql-api'),
+                    __('There is no module with ID \'%s\'', 'graphql-api-testing'),
                     $moduleID
                 ),
                 [

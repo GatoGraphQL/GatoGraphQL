@@ -56,19 +56,19 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::MODULE_ID => [
-                            'description' => __('Module ID', 'graphql-api'),
+                            'description' => __('Module ID', 'graphql-api-testing'),
                             'type' => 'string',
                             'required' => true,
                             'validate_callback' => $this->validateModule(...),
                         ],
                         Params::OPTION => [
-                            'description' => __('Option (also called \'input\' in the settings)', 'graphql-api'),
+                            'description' => __('Option (also called \'input\' in the settings)', 'graphql-api-testing'),
                             'type' => 'string',
                             'required' => true,
                             'validate_callback' => $this->validateOption(...),
                         ],
                         Params::VALUE => [
-                            'description' => __('Value', 'graphql-api'),
+                            'description' => __('Value', 'graphql-api-testing'),
                             'required' => true,
                         ],
                     ],
@@ -108,7 +108,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api'),
+                    __('There is no option \'%s\' for module \'%s\' (with ID \'%s\')', 'graphql-api-testing'),
                     $option,
                     $module,
                     $moduleID
@@ -174,7 +174,7 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             // Success!
             $response->status = ResponseStatus::SUCCESS;
             $response->message = sprintf(
-                __('Option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api'),
+                __('Option \'%s\' for module \'%s\' (with ID \'%s\') has been updated successfully', 'graphql-api-testing'),
                 $option,
                 $module,
                 $moduleID
