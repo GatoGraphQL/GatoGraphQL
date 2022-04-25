@@ -90,7 +90,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
         );
         // Assert the response is successful, or already fail the test
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals('application/json', $response->getHeaderLine('content-type'));
+        $this->assertStringStartsWith('application/json', $response->getHeaderLine('content-type'));
         $restResponse = RESTResponse::fromClientResponse($response);
         $this->assertEquals(ResponseStatus::SUCCESS, $restResponse->status);
     }
