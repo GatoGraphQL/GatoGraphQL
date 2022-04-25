@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use function getenv;
+use PoP\ComponentModel\Constants\FrameworkParams;
+
 /**
  * Tests that require to call the REST API to perform some action
  * before/after running the test.
@@ -23,7 +26,10 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
     abstract protected static function getRequestBasicOptions(): array;
 
     /**
-     * Must add the X-WP-Nonce header for the authenticated user.
+     * Basic options for the Request:
+     *
+     * - Must add the X-WP-Nonce header for the authenticated user.
+     * - Add support for XDebug to the REST API call
      *
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
@@ -31,6 +37,10 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
     {
         $options = static::getRequestBasicOptions();
         $options['headers']['X-WP-Nonce'] = static::$wpRESTNonce;
+        $xdebugTrigger = getenv(FrameworkParams::XDEBUG_TRIGGER);
+        if ($xdebugTrigger !== false) {
+            $options['query'][FrameworkParams::XDEBUG_TRIGGER] = $xdebugTrigger;
+        }
         return $options;
     }
 }
