@@ -17,7 +17,20 @@ use WP_REST_Response;
 use WP_REST_Server;
 
 use function rest_ensure_response;
+use function rest_url;
 
+/**
+ * Example to enable/disable a module
+ *
+ * ```bash
+ * curl -i --insecure \
+ *   --user "admin:{applicationPassword}" \
+ *   -X POST \
+ *   -H "Content-Type: application/json" \
+ *   -d '{"state": "enabled"}' \
+ *   https://graphql-api.lndo.site/wp-json/graphql-api/v1/admin/modules/graphqlapi_graphqlapi_graphiql-for-single-endpoint/
+ * ```
+ */
 class ModulesAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
@@ -41,26 +54,29 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                     'methods' => WP_REST_Server::READABLE,
                     'callback' => $this->retrieveAllItems(...),
                     // Allow anyone to read the modules
-                    // 'permission_callback' => $this->checkAdminPermission(...),
+                    'permission_callback' => '__return_true',
                 ],
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
                 [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveItem(...),
+                    // Allow anyone to read the modules
+                    'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                    ],
+                ],
+                [
                     'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => $this->updateModule(...),
+                    'callback' => $this->updateItem(...),
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
                         Params::STATE => [
-                            'required' => true,
                             'validate_callback' => $this->validateState(...),
                         ],
-                        Params::MODULE_ID => [
-                            'description' => __('Module ID', 'graphql-api-testing'),
-                            'type' => 'string',
-                            'required' => true,
-                            'validate_callback' => $this->validateModule(...),
-                        ],
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
                     ],
                 ],
             ],
@@ -90,56 +106,133 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $isEnabled = $moduleRegistry->isModuleEnabled($module);
-            $items[] = [
-                'module' => $module,
-                'id' => $moduleResolver->getID($module),
-                'isEnabled' => $isEnabled,
-                'canBeDisabled' => $moduleResolver->canBeDisabled($module),
-                'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
-                'hasSettings' => $moduleResolver->hasSettings($module),
-                'name' => $moduleResolver->getName($module),
-                'description' => $moduleResolver->getDescription($module),
-                'dependsOn' => $moduleResolver->getDependedModuleLists($module),
-                // 'url' => $moduleResolver->getURL($module),
-                'slug' => $moduleResolver->getSlug($module),
-                'hasDocs' => $moduleResolver->hasDocumentation($module),
-            ];
+            $items[] = $this->prepare_response_for_collection(
+                $this->prepareItemForResponse($module)
+            );
         }
         return rest_ensure_response($items);
     }
 
-    public function updateModule(WP_REST_Request $request): WP_REST_Response|WP_Error
+    protected function prepareItemForResponse(string $module): WP_REST_Response
+    {
+        $item = $this->prepareItem($module);
+        $response = rest_ensure_response($item);
+        $response->add_links($this->prepareLinks($module));
+        return $response;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function prepareItem(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $isEnabled = $moduleRegistry->isModuleEnabled($module);
+        $moduleID = $moduleResolver->getID($module);
+        return [
+            'module' => $module,
+            'id' => $moduleID,
+            'isEnabled' => $isEnabled,
+            'canBeDisabled' => $moduleResolver->canBeDisabled($module),
+            'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
+            'hasSettings' => $moduleResolver->hasSettings($module),
+            'name' => $moduleResolver->getName($module),
+            'description' => $moduleResolver->getDescription($module),
+            'dependsOn' => $moduleResolver->getDependedModuleLists($module),
+            // 'url' => $moduleResolver->getURL($module),
+            'slug' => $moduleResolver->getSlug($module),
+            'hasDocs' => $moduleResolver->hasDocumentation($module),
+        ];
+    }
+
+    public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $params = $request->get_params();
+        $moduleID = $params[Params::MODULE_ID];
+        $module = $this->getModuleByID($moduleID);
+        return $this->prepareItemForResponse($module);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function prepareLinks(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $moduleID = $moduleResolver->getID($module);
+        return [
+            'self' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $moduleID
+                    )
+                ),
+            ],
+            'collection' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                    )
+                ),
+            ],
+            'settings' => [
+                'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        'module-settings',
+                        $moduleID
+                    )
+                ),
+            ],
+        ];
+    }
+
+    public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $response = new RESTResponse();
 
         try {
             $params = $request->get_params();
             $moduleID = $params[Params::MODULE_ID];
-            $moduleState = $params[Params::STATE];
-
-            $moduleIDValues = [
-                $moduleID => $moduleState === ParamValues::ENABLED,
-            ];
-            $userSettingsManager = UserSettingsManagerFacade::getInstance();
-            $userSettingsManager->setModulesEnabled($moduleIDValues);
-
-            /**
-             * Flush rewrite rules in the next request.
-             * Eg: after disabling "GraphiQL in single endpoint",
-             * accessing this client must produce a 404
-             */
-            $this->enqueueFlushRewriteRules();
-
+            $moduleState = $params[Params::STATE] ?? null;
             $module = $this->getModuleByID($moduleID);
+
+            if ($moduleState !== null) {
+                $moduleIDValues = [
+                    $moduleID => $moduleState === ParamValues::ENABLED,
+                ];
+                $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                $userSettingsManager->setModulesEnabled($moduleIDValues);
+
+                /**
+                 * Flush rewrite rules in the next request.
+                 * Eg: after disabling "GraphiQL in single endpoint",
+                 * accessing this client must produce a 404
+                 */
+                $this->enqueueFlushRewriteRules();
+
+                $successMessage = sprintf(
+                    __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
+                    $module
+                );
+            } else {
+                $successMessage = sprintf(
+                    __('No updates were performed for module \'%s\'', 'graphql-api-testing'),
+                    $module
+                );
+            }
 
             // Success!
             $response->status = ResponseStatus::SUCCESS;
-            $response->message = sprintf(
-                __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
-                $module
-            );
+            $response->message = $successMessage;
         } catch (Exception $e) {
             $response->status = ResponseStatus::ERROR;
             $response->message = $e->getMessage();

@@ -29,10 +29,10 @@ class SettingsNormalizer implements SettingsNormalizerInterface
      * - If the input is empty, replace with the default
      * - Convert from string to int/bool
      *
-     * @param array<string, string> $value All values submitted, each under its optionName as key
+     * @param array<string, string> $values All values submitted, each under its optionName as key
      * @return array<string, mixed> Normalized values
      */
-    public function normalizeSettings(array $value): array
+    public function normalizeSettings(array $values): array
     {
         $items = $this->getAllSettingsItems();
         foreach ($items as $item) {
@@ -59,38 +59,69 @@ class SettingsNormalizer implements SettingsNormalizerInterface
                  * For int, "0" is valid, it must not be considered empty
                  */
                 if (
-                    (!$canBeEmpty && empty($value[$name]))
+                    (!$canBeEmpty && empty($values[$name]))
                     && $type != Properties::TYPE_BOOL
-                    && !($type == Properties::TYPE_INT && $value[$name] == '0')
+                    && !($type == Properties::TYPE_INT && $values[$name] == '0')
                 ) {
-                    $value[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                    $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 } elseif ($type == Properties::TYPE_BOOL) {
-                    $value[$name] = !empty($value[$name]);
+                    $values[$name] = !empty($values[$name]);
                 } elseif ($type == Properties::TYPE_INT) {
-                    $value[$name] = (int) $value[$name];
+                    $values[$name] = (int) $values[$name];
                     // If the value is below its minimum, reset to the default one
                     $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
-                    if (!is_null($minNumber) && $value[$name] < $minNumber) {
-                        $value[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                    if (!is_null($minNumber) && $values[$name] < $minNumber) {
+                        $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
                 } elseif (
                     $type == Properties::TYPE_ARRAY
-                    && is_string($value[$name])
+                    && is_string($values[$name])
                 ) {
                     // Check if the type is array, but it's delivered as a string via a textarea
                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                     if (empty($possibleValues)) {
-                        $value[$name] = explode("\n", $value[$name]);
+                        $values[$name] = explode("\n", $values[$name]);
                     }
                 }
 
                 // Validate it is a valid value, or reset
-                if (!$moduleResolver->isValidValue($module, $option, $value[$name])) {
-                    $value[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
+                if (!$moduleResolver->isValidValue($module, $option, $values[$name])) {
+                    $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 }
             }
         }
-        return $value;
+        return $values;
+    }
+
+    /**
+     * Normalize the form values:
+     *
+     * - If the input is empty, replace with the default
+     * - Convert from string to int/bool
+     *
+     * @param array<string, string> $values All values submitted, each under its optionName as key
+     * @return array<string, mixed> Normalized values
+     */
+    public function normalizeModuleSettings(string $module, array $values): array
+    {
+        $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+
+        // Obtain the settingsOptionName for each option
+        $normalizedOptionValues = [];
+        foreach ($values as $option => $value) {
+            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $normalizedOptionValues[$settingsOptionName] = $value;
+        }
+        // Normalize it
+        $normalizedOptionValues = $this->normalizeSettings($normalizedOptionValues);
+
+        // Transform back
+        foreach ($values as $option => $value) {
+            $settingsOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $values[$option] = $normalizedOptionValues[$settingsOptionName];
+        }
+
+        return $values;
     }
 
     /**

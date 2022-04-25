@@ -10,6 +10,19 @@ use WP_Error;
 trait WithModuleParamRESTControllerTrait
 {
     /**
+     * @return array<string,mixed>
+     */
+    protected function getModuleIDParamArgs(): array
+    {
+        return [
+            'description' => __('Module ID', 'graphql-api-testing'),
+            'type' => 'string',
+            'required' => true,
+            'validate_callback' => $this->validateModule(...),
+        ];
+    }
+
+    /**
      * Validate there is a module with this ID
      */
     protected function validateModule(string $moduleID): bool|WP_Error
@@ -19,7 +32,7 @@ trait WithModuleParamRESTControllerTrait
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no module with ID \'%s\'', 'graphql-api-testing'),
+                    __('There is no module with ID \'%s\'', 'graphql-api'),
                     $moduleID
                 ),
                 [

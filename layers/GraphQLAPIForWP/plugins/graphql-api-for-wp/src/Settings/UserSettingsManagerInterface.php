@@ -37,6 +37,10 @@ interface UserSettingsManagerInterface
     public function hasSetting(string $module, string $option): bool;
     public function getSetting(string $module, string $option): mixed;
     public function setSetting(string $module, string $option, mixed $value): void;
+    /**
+     * @param array<string,mixed> $optionValues
+     */
+    public function setSettings(string $module, array $optionValues): void;
     public function hasSetModuleEnabled(string $moduleID): bool;
     public function isModuleEnabled(string $moduleID): bool;
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void;
