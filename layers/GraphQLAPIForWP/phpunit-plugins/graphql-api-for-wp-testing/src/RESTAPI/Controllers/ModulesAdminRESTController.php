@@ -45,18 +45,18 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                 ],
             ],
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
-                // [
-                //     'methods' => WP_REST_Server::READABLE,
-                //     'callback' => $this->retrieveModule(...),
-                //     // Allow anyone to read the modules
-                //     // 'permission_callback' => $this->checkAdminPermission(...),
-                //     'args' => [
-                //         Params::MODULE_ID => $this->getModuleIDParamArgs(),
-                //     ],
-                // ],
+                [
+                    'methods' => WP_REST_Server::READABLE,
+                    'callback' => $this->retrieveItem(...),
+                    // Allow anyone to read the modules
+                    'permission_callback' => '__return_true',
+                    'args' => [
+                        Params::MODULE_ID => $this->getModuleIDParamArgs(),
+                    ],
+                ],
                 [
                     'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => $this->updateModule(...),
+                    'callback' => $this->updateItem(...),
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
@@ -106,27 +106,45 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $moduleResolver = $moduleRegistry->getModuleResolver($module);
-            $isEnabled = $moduleRegistry->isModuleEnabled($module);
-            $items[] = [
-                'module' => $module,
-                'id' => $moduleResolver->getID($module),
-                'isEnabled' => $isEnabled,
-                'canBeDisabled' => $moduleResolver->canBeDisabled($module),
-                'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
-                'hasSettings' => $moduleResolver->hasSettings($module),
-                'name' => $moduleResolver->getName($module),
-                'description' => $moduleResolver->getDescription($module),
-                'dependsOn' => $moduleResolver->getDependedModuleLists($module),
-                // 'url' => $moduleResolver->getURL($module),
-                'slug' => $moduleResolver->getSlug($module),
-                'hasDocs' => $moduleResolver->hasDocumentation($module),
-            ];
+            $items[] = $this->getModuleData($module);
         }
         return rest_ensure_response($items);
     }
 
-    public function updateModule(WP_REST_Request $request): WP_REST_Response|WP_Error
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getModuleData(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $isEnabled = $moduleRegistry->isModuleEnabled($module);
+        return [
+            'module' => $module,
+            'id' => $moduleResolver->getID($module),
+            'isEnabled' => $isEnabled,
+            'canBeDisabled' => $moduleResolver->canBeDisabled($module),
+            'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
+            'hasSettings' => $moduleResolver->hasSettings($module),
+            'name' => $moduleResolver->getName($module),
+            'description' => $moduleResolver->getDescription($module),
+            'dependsOn' => $moduleResolver->getDependedModuleLists($module),
+            // 'url' => $moduleResolver->getURL($module),
+            'slug' => $moduleResolver->getSlug($module),
+            'hasDocs' => $moduleResolver->hasDocumentation($module),
+        ];
+    }
+
+    public function retrieveItem(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $params = $request->get_params();
+        $moduleID = $params[Params::MODULE_ID];
+        $module = $this->getModuleByID($moduleID);
+        $item = $this->getModuleData($module);
+        return rest_ensure_response($item);
+    }
+
+    public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $response = new RESTResponse();
 
