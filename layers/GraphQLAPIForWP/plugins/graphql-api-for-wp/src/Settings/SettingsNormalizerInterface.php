@@ -12,10 +12,17 @@ interface SettingsNormalizerInterface
      * - If the input is empty, replace with the default
      * - Convert from string to int/bool
      *
-     * @param array<string, string> $value All values submitted, each under its optionName as key
+     * @param array<string, string> $values All values submitted, each under its optionName as key
      * @return array<string, mixed> Normalized values
      */
-    public function normalizeSettings(array $value): array;
+    public function normalizeSettings(array $values): array;
+    /**
+     * Normalize the form values for a specific module
+     *
+     * @param array<string, string> $values All values submitted, each under its optionName as key
+     * @return array<string, mixed> Normalized values
+     */
+    public function normalizeModuleSettings(string $module, array $values): array;
     /**
      * Return all the modules with settings
      *
