@@ -151,15 +151,25 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $items[] = $this->getSettingsData($module);
+            $items[] = $this->prepare_response_for_collection(
+                $this->prepareItemForResponse($module)
+            );
         }
         return rest_ensure_response($items);
+    }
+
+    protected function prepareItemForResponse(string $module): WP_REST_Response
+    {
+        $item = $this->prepareItem($module);
+        $response = rest_ensure_response($item);
+        $response->add_links($this->prepareLinks($module));
+        return $response;
     }
 
     /**
      * @return array<string,mixed>
      */
-    protected function getSettingsData(string $module): array
+    protected function prepareItem(string $module): array
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
@@ -190,9 +200,41 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         $params = $request->get_params();
         $moduleID = $params[Params::MODULE_ID];
         $module = $this->getModuleByID($moduleID);
-        $item = $this->getSettingsData($module);
+        $item = $this->prepareItemForResponse($module);
         return rest_ensure_response($item);
     }
+
+	/**
+	 * @return array<string,mixed>
+	 */
+	protected function prepareLinks(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $moduleID = $moduleResolver->getID($module);
+		return [
+			'self' => [
+				'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $moduleID
+                    )
+                ),
+            ],
+			'module' => [
+				'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        'modules',
+                        $moduleID
+                    )
+                ),
+            ],
+        ];
+	}
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {

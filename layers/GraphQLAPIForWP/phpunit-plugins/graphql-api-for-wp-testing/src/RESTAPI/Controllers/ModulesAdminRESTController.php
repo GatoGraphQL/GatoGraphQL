@@ -17,6 +17,7 @@ use WP_REST_Response;
 use WP_REST_Server;
 
 use function rest_ensure_response;
+use function rest_url;
 
 /**
  * Example to enable/disable a module
@@ -105,22 +106,33 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules();
         foreach ($modules as $module) {
-            $items[] = $this->getModuleData($module);
+            $items[] = $this->prepare_response_for_collection(
+                $this->prepareItemForResponse($module)
+            );
         }
         return rest_ensure_response($items);
+    }
+
+    protected function prepareItemForResponse(string $module): WP_REST_Response
+    {
+        $item = $this->prepareItem($module);
+        $response = rest_ensure_response($item);
+        $response->add_links($this->prepareLinks($module));
+        return $response;
     }
 
     /**
      * @return array<string,mixed>
      */
-    protected function getModuleData(string $module): array
+    protected function prepareItem(string $module): array
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $moduleResolver = $moduleRegistry->getModuleResolver($module);
         $isEnabled = $moduleRegistry->isModuleEnabled($module);
+        $moduleID = $moduleResolver->getID($module);
         return [
             'module' => $module,
-            'id' => $moduleResolver->getID($module),
+            'id' => $moduleID,
             'isEnabled' => $isEnabled,
             'canBeDisabled' => $moduleResolver->canBeDisabled($module),
             'canBeEnabled' => !$isEnabled && $moduleRegistry->canModuleBeEnabled($module),
@@ -139,9 +151,40 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         $params = $request->get_params();
         $moduleID = $params[Params::MODULE_ID];
         $module = $this->getModuleByID($moduleID);
-        $item = $this->getModuleData($module);
-        return rest_ensure_response($item);
+        return $this->prepareItemForResponse($module);
     }
+
+	/**
+	 * @return array<string,mixed>
+	 */
+	protected function prepareLinks(string $module): array
+    {
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+        $moduleID = $moduleResolver->getID($module);
+		return [
+			'self' => [
+				'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        $this->restBase,
+                        $moduleID
+                    )
+                ),
+            ],
+			'settings' => [
+				'href' => rest_url(
+                    sprintf(
+                        '%s/%s/%s',
+                        $this->getNamespace(),
+                        'module-settings',
+                        $moduleID
+                    )
+                ),
+            ],
+        ];
+	}
 
     public function updateItem(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
