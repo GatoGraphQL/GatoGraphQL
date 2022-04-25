@@ -47,7 +47,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             $this->restBase . '/(?P<moduleID>[a-zA-Z_-]+)' => [
                 [
                     'methods' => WP_REST_Server::CREATABLE,
-                    'callback' => $this->enableOrDisableModule(...),
+                    'callback' => $this->updateModule(...),
                     // only the Admin can execute the modification
                     'permission_callback' => $this->checkAdminPermission(...),
                     'args' => [
@@ -110,7 +110,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
         return rest_ensure_response($items);
     }
 
-    public function enableOrDisableModule(WP_REST_Request $request): WP_REST_Response|WP_Error
+    public function updateModule(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $response = new RESTResponse();
 
