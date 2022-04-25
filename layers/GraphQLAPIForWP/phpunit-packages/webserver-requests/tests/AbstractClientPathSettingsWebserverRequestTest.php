@@ -20,6 +20,11 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractWe
     use ClientWebserverRequestTestCaseTrait;
 
     /**
+     * Test that:
+     *
+     * 1. The client under the new path returns a 200
+     * 2. The client under the old path returns a 404
+     *
      * @dataProvider provideClientPathEntries
      */
     public function testClientPathsUpdated(
@@ -40,9 +45,7 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractWe
         parent::setUp();
 
         /**
-         * To test their disabled state works well, first execute
-         * a REST API call to disable the client, and then re-enable
-         * it afterwards.
+         * Execute a REST API to update the client path before the test
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
@@ -52,8 +55,7 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractWe
     protected function tearDown(): void
     {
         /**
-         * Re-enable the clients for the single endpoint
-         * after the "disabled" test
+         * Execute a REST API to restore the client path after the test
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
