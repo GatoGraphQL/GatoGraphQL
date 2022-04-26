@@ -151,7 +151,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     {
         $moduleSettings = parent::getSettings($module);
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SINGLE_ENDPOINT) {
+        if ($module === self::SINGLE_ENDPOINT) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -163,7 +163,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module == self::CUSTOM_ENDPOINTS) {
+        } elseif ($module === self::CUSTOM_ENDPOINTS) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -175,7 +175,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 Properties::DESCRIPTION => \__('URL base path to expose the Custom Endpoint', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
-        } elseif ($module == self::PERSISTED_QUERIES) {
+        } elseif ($module === self::PERSISTED_QUERIES) {
             $option = ModuleSettingOptions::PATH;
             $moduleSettings[] = [
                 Properties::INPUT => $option,

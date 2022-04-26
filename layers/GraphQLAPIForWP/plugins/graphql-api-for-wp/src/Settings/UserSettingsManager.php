@@ -121,6 +121,33 @@ class UserSettingsManager implements UserSettingsManagerInterface
         return $moduleResolver->getSettingsDefaultValue($module, $option);
     }
 
+    public function setSetting(string $module, string $option, mixed $value): void
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        $item = $moduleResolver->getSettingOptionName($module, $option);
+
+        $this->setOptionItem(Options::SETTINGS, $item, $value);
+    }
+
+    /**
+     * @param array<string,mixed> $optionValues
+     */
+    public function setSettings(string $module, array $optionValues): void
+    {
+        $moduleRegistry = SystemModuleRegistryFacade::getInstance();
+        $moduleResolver = $moduleRegistry->getModuleResolver($module);
+
+        $itemValues = [];
+        foreach ($optionValues as $option => $value) {
+            $item = $moduleResolver->getSettingOptionName($module, $option);
+            $itemValues[$item] = $value;
+        }
+
+        $this->setOptionItems(Options::SETTINGS, $itemValues);
+    }
+
     public function hasSetModuleEnabled(string $moduleID): bool
     {
         return $this->hasItem(Options::MODULES, $moduleID);
@@ -133,7 +160,23 @@ class UserSettingsManager implements UserSettingsManagerInterface
 
     public function setModuleEnabled(string $moduleID, bool $isEnabled): void
     {
-        $this->storeItem(Options::MODULES, $moduleID, $isEnabled);
+        $this->setOptionItem(Options::MODULES, $moduleID, $isEnabled);
+    }
+
+    protected function setOptionItem(string $optionName, string $item, mixed $value): void
+    {
+        $this->storeItem($optionName, $item, $value);
+
+        // Update the timestamp
+        $this->storeContainerTimestamp();
+    }
+
+    /**
+     * @param array<string,mixed> $itemValues
+     */
+    protected function setOptionItems(string $optionName, array $itemValues): void
+    {
+        $this->storeItems($optionName, $itemValues);
 
         // Update the timestamp
         $this->storeContainerTimestamp();

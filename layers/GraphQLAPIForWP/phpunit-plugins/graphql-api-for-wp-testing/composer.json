@@ -27,6 +27,11 @@
             "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PHPUnitForGraphQLAPI\\GraphQLAPITesting\\": "tests"
+        }
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {}

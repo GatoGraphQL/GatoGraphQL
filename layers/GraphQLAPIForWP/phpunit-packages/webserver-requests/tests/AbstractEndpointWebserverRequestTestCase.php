@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GuzzleHttp\Exception\ClientException;
-
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
 {
     /**
@@ -21,12 +19,6 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         string $operationName = '',
         ?string $method = null,
     ): void {
-        /**
-         * Allow to execute a REST endpoint against the webserver
-         * before running the test
-         */
-        $this->beforeRunningTest($this->dataName());
-
         $client = static::getClient();
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
@@ -44,31 +36,18 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($body !== '') {
             $options['body'] = $body;
         }
-        try {
-            $response = $client->request(
-                $method ?? $this->getMethod(),
-                $endpointURL,
-                $options
-            );
-        } catch (ClientException $e) {
-            /**
-             * A 404 is a Client Exception.
-             * It's a failure, not an error.
-             */
-            $this->fail($e->getMessage());
-        }
+
+        $response = $client->request(
+            $method ?? $this->getMethod(),
+            $endpointURL,
+            $options
+        );
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
         }
-
-        /**
-         * Allow to execute a REST endpoint against the webserver
-         * after running the test
-         */
-        $this->afterRunningTest($this->dataName());
     }
 
     /**
@@ -89,23 +68,5 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     protected function getMethod(): string
     {
         return 'POST';
-    }
-
-    /**
-     * Allow to execute a REST endpoint against the webserver
-     * before running the test
-     */
-    protected function beforeRunningTest(string $dataName): void
-    {
-        // Override if needed
-    }
-
-    /**
-     * Allow to execute a REST endpoint against the webserver
-     * after running the test
-     */
-    protected function afterRunningTest(string $dataName): void
-    {
-        // Override if needed
     }
 }

@@ -158,7 +158,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $adminClientsDesc = $this->getAdminClientDescription();
         $adminClientAndConfigDesc = $this->getAdminClientAndConfigurationDescription();
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
-        if ($module == self::SCHEMA_CONFIGURATION) {
+        if ($module === self::SCHEMA_CONFIGURATION) {
             $whereModules = [];
             $maybeWhereModules = [
                 EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
@@ -222,7 +222,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     Properties::POSSIBLE_VALUES => $possibleValues,
                 ];
             }
-        } elseif ($module == self::SCHEMA_NAMESPACING) {
+        } elseif ($module === self::SCHEMA_NAMESPACING) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -254,7 +254,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif ($module == self::PUBLIC_PRIVATE_SCHEMA) {
+        } elseif ($module === self::PUBLIC_PRIVATE_SCHEMA) {
             $whereModules = [
                 SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION,
                 AccessControlFunctionalityModuleResolver::ACCESS_CONTROL,
@@ -296,7 +296,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::DESCRIPTION => \__('Enable to select the visibility for a set of fields/directives when editing the Access Control List', 'graphql-api'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif ($module == self::NESTED_MUTATIONS) {
+        } elseif ($module === self::NESTED_MUTATIONS) {
             $possibleValues = [
                 MutationSchemes::STANDARD => \__('Do not enable nested mutations', 'graphql-api'),
                 MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS => \__('Enable nested mutations, keeping all mutation fields in the root', 'graphql-api'),

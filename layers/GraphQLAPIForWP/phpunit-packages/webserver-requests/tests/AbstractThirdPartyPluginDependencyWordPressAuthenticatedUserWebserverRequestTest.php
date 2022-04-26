@@ -13,11 +13,32 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
  */
 abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
-    use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
+    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
 
-    protected static function useSSL(): bool
+    protected function setUp(): void
     {
-        return true;
+        parent::setUp();
+
+        /**
+         * Disable the plugin before executing the ":disabled" test
+         */
+        $dataName = $this->dataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        /**
+         * Re-enable the plugin after executing the ":disabled" test
+         */
+        $dataName = $this->dataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+        }
+
+        parent::tearDown();
     }
 
     /**
@@ -52,17 +73,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     abstract protected function getPluginNameEntries(): array;
 
     /**
-     * Disable the plugin before executing the ":disabled" test
-     */
-    protected function beforeRunningTest(string $dataName): void
-    {
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
-        }
-        parent::beforeRunningTest($dataName);
-    }
-
-    /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
     protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
@@ -70,7 +80,6 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $options = static::getRESTEndpointRequestOptions();
         $pluginName = substr($dataName, 0, strlen($dataName) - strlen(':disabled'));
         $client->post(
             sprintf(
@@ -78,30 +87,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
-            $options
+            static::getRESTEndpointRequestOptions()
         );
-    }
-
-    /**
-     * Must add the X-WP-Nonce header for the authenticated user.
-     *
-     * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
-     */
-    protected function getRESTEndpointRequestOptions(): array
-    {
-        $options = static::getRequestBasicOptions();
-        $options['headers']['X-WP-Nonce'] = static::$wpRESTNonce;
-        return $options;
-    }
-
-    /**
-     * Re-enable the plugin after executing the ":disabled" test
-     */
-    protected function afterRunningTest(string $dataName): void
-    {
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
-        }
-        parent::afterRunningTest($dataName);
     }
 }

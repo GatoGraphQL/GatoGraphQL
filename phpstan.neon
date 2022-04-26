@@ -50,6 +50,7 @@ includes:
     - layers/CMSSchema/packages/generic-customposts/phpstan.neon.dist
     - layers/GraphQLAPIForWP/phpunit-packages/graphql-api-for-wp/phpstan.neon.dist
     - layers/GraphQLAPIForWP/plugins/graphql-api-for-wp/phpstan.neon.dist
+    - layers/GraphQLAPIForWP/phpunit-plugins/graphql-api-for-wp-testing/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-clients-for-wp/phpstan.neon.dist
     - layers/GraphQLByPoP/packages/graphql-endpoint-for-wp/phpstan.neon.dist
     - layers/Engine/packages/graphql-parser/phpstan.neon.dist

@@ -13,31 +13,34 @@ Text Domain: graphql-api-testing
 Domain Path: /languages
 */
 
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\Constants\CustomHeaders;
+use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
+use PoP\Root\Environment as RootEnvironment;
+
+use function add_action;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// Load Composer’s autoloader
-require_once(__DIR__ . '/vendor/autoload.php');
+add_action(
+    'plugins_loaded',
+    function(): void {
+        // Validate the GraphQL API plugin is installed, or exit
+        if (!class_exists(GraphQLAPIMainPlugin::class)) {
+            return;
+        }
 
-/**
- * Send the WP REST nonce as a header, to make it easier
- * to execute REST endpoints for integration tests.
- *
- * @see layers/GraphQLAPIForWP/phpunit-packages/webserver-requests/tests/AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTest.php
- */
-function addRESTNonceAsHeader(): void
-{
-    if (!\is_user_logged_in()) {
-        return;
+        // Validate we are in the DEV environment
+        if (!RootEnvironment::isApplicationEnvironmentDev()) {
+            return;
+        }
+        
+        // Load Composer’s autoloader
+        require_once(__DIR__ . '/vendor/autoload.php');
+
+        // Initialize the plugin
+        (new Plugin())->initialize();
     }
-    header(sprintf(
-        '%s: %s',
-        CustomHeaders::WP_REST_NONCE,
-        wp_create_nonce('wp_rest')
-    ));
-}
-add_filter('init', 'addRESTNonceAsHeader');
+);

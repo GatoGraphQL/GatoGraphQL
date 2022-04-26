@@ -15,6 +15,15 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\RootWP\AppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 
+use function add_action;
+use function is_admin;
+use function get_called_class;
+use function get_option;
+use function update_option;
+use function register_activation_hook;
+use function do_action;
+use function __;
+
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
     /**
@@ -50,7 +59,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function getPluginInitializationConfigurationClass(): string
     {
-        $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
+        $classNamespace = ClassHelpers::getClassPSR4Namespace(get_called_class());
         return $classNamespace . '\\PluginInitializationConfiguration';
     }
 
@@ -131,9 +140,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeStoreEmptySettings(): void
     {
-        $settings = \get_option(Options::SETTINGS);
+        $settings = get_option(Options::SETTINGS);
         if ($settings === false) {
-            \update_option(Options::SETTINGS, []);
+            update_option(Options::SETTINGS, []);
         }
     }
 
@@ -198,8 +207,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * This way, extensions depending on 3rd-party plugins
          * can have their functionality automatically enabled/disabled.
          */
-        \add_action('activate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
-        \add_action('deactivate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
+        add_action('activate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
+        add_action('deactivate_plugin', $this->handleAnyPluginActivatedOrDeactivated(...));
 
         /**
          * PoP depends on hook "init" to set-up the endpoint rewrite,
@@ -213,7 +222,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          *
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
-        \register_activation_hook($this->getPluginFile(), $this->activate(...));
+        register_activation_hook($this->getPluginFile(), $this->activate(...));
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
@@ -237,13 +246,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Logic to check if the main plugin or any extension has just been activated or updated.
          */
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
-                if (!\is_admin() || $this->inititalizationException !== null) {
+                if (!is_admin() || $this->inititalizationException !== null) {
                     return;
                 }
-                $storedPluginVersions = \get_option(PluginOptions::PLUGIN_VERSIONS, []);
+                $storedPluginVersions = get_option(PluginOptions::PLUGIN_VERSIONS, []);
                 $registeredExtensionBaseNameInstances = App::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
@@ -289,7 +298,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 foreach ($justDeactivatedExtensionBaseNames as $extensionBaseName) {
                     unset($storedPluginVersions[$extensionBaseName]);
                 }
-                \update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+                update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
 
                 // Regenerate the timestamp, to generate the service container
                 $this->purgeContainer();
@@ -299,7 +308,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  * Watch out! Execute at the very end, just in case they need to access the service container,
                  * which is not initialized yet (eg: for calling `$userSettingsManager->getSetting`)
                  */
-                \add_action(
+                add_action(
                     'plugins_loaded',
                     function () use (
                         $isMainPluginJustActivated,
@@ -324,11 +333,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 );
 
                 /**
-                 * Execute at the end of hook "init", because `AbstractCustomPostType` initializes
-                 * the custom post types on this hook, and the CPT also adds rewrites
-                 * that must be flushed
+                 * Execute at the end of hook "init", because
+                 * `AbstractCustomPostType` initializes the
+                 * custom post types on this hook, and the CPT
+                 * also adds rewrites that must be flushed.
+                 *
+                 * Watch out! Can't do `flush_rewrite_rules(...)`,
+                 * because then Rector throws Exception:
+                 *
+                 *   Call to undefined method PhpParser\PrettyPrinter\Standard::pPHPStan_Node_FunctionCallableNode()". On line: 499
                  */
-                \add_action('init', 'flush_rewrite_rules', PHP_INT_MAX);
+                add_action('init', 'flush_rewrite_rules', PHP_INT_MAX);
             },
             PluginLifecyclePriorities::HANDLE_NEW_ACTIVATIONS
         );
@@ -354,17 +369,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * - ModuleListTableAction requires `wp_verify_nonce`, loaded in pluggable.php
          * - Allow other plugins to inject their own functionality
          */
-        \add_action(
+        add_action(
             'plugins_loaded',
-            function (): void {
-                App::initialize(
-                    new AppLoader(),
-                    new HookManager()
-                );
-            },
+            fn () => App::initialize(
+                new AppLoader(),
+                new HookManager()
+            ),
             PluginLifecyclePriorities::INITIALIZE_APP
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -374,17 +387,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::INITIALIZE_PLUGIN
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                \do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
+                do_action(PluginLifecycleHooks::INITIALIZE_EXTENSION);
             },
             PluginLifecyclePriorities::INITIALIZE_EXTENSIONS
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -394,7 +407,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::CONFIGURE_COMPONENTS
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -404,7 +417,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::BOOT_SYSTEM
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -414,17 +427,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::CONFIGURE_PLUGIN
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
+                do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION);
             },
             PluginLifecyclePriorities::CONFIGURE_EXTENSIONS
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -434,7 +447,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::BOOT_APPLICATION
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
@@ -444,21 +457,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PluginLifecyclePriorities::BOOT_PLUGIN
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
             function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                \do_action(PluginLifecycleHooks::BOOT_EXTENSION);
+                do_action(PluginLifecycleHooks::BOOT_EXTENSION);
             },
             PluginLifecyclePriorities::BOOT_EXTENSIONS
         );
-        \add_action(
+        add_action(
             'plugins_loaded',
-            function (): void {
-                $this->handleInitializationException();
-            },
+            $this->handleInitializationException(...),
             PHP_INT_MAX
         );
     }
@@ -475,7 +486,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * allow the components to inject their own configuration
          */
         $this->configureComponents();
-        \do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS);
+        do_action(PluginLifecycleHooks::CONFIGURE_EXTENSION_COMPONENTS);
     }
 
     /**
@@ -544,27 +555,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function handleInitializationException(): void
     {
-        if ($this->inititalizationException !== null) {
-            if (RootEnvironment::isApplicationEnvironmentDev()) {
-                throw $this->inititalizationException;
-            } else {
-                \add_action('admin_notices', function (): void {
-                    // Avoid PHPStan error
-                    /** @var Exception */
-                    $inititalizationException = $this->inititalizationException;
-                    $errorMessage = \__('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api')
-                    . sprintf(
-                        \__('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
+        if ($this->inititalizationException === null) {
+            return;
+        }
+        if (RootEnvironment::isApplicationEnvironmentDev()) {
+            throw $this->inititalizationException;
+        }
+        add_action(
+            'admin_notices',
+            function (): void {
+                // Avoid PHPStan error
+                /** @var Exception */
+                $inititalizationException = $this->inititalizationException;
+                $errorMessage = sprintf(
+                    '%s%s',
+                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'graphql-api'),
+                    sprintf(
+                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'graphql-api'),
                         $this->pluginName,
                         $inititalizationException->getMessage(),
                         $inititalizationException->getTraceAsString()
-                    );
-                    _e(sprintf(
-                        '<div class="notice notice-error">%s</div>',
-                        $errorMessage
-                    ));
-                });
+                    )
+                );
+                _e(sprintf(
+                    '<div class="notice notice-error">%s</div>',
+                    $errorMessage
+                ));
             }
-        }
+        );
     }
 }
