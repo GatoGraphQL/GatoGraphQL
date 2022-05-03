@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use function getenv;
-
 use PoP\ComponentModel\Constants\FrameworkParams;
+
+use function getenv;
 
 /**
  * Tests that require to call the REST API to perform some action
