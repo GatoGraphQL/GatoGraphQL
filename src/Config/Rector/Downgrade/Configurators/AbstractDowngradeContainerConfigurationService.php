@@ -66,8 +66,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
              *
              * Instead use temporary custom stubs file, which has the required stubs only
              */
-            // $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-            $this->rootDirectory . '/stubs/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            // $this->rootDirectory . '/stubs/php-stubs/wordpress-stubs/wordpress-stubs.php',
         ];
     }
 
