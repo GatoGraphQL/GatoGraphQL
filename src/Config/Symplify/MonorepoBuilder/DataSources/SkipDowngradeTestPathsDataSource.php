@@ -28,6 +28,7 @@ class SkipDowngradeTestPathsDataSource
     {
         return [
             'layers/Legacy/',
+            'layers/GraphQLAPIForWP/phpunit-packages/',
         ];
     }
 
@@ -37,6 +38,8 @@ class SkipDowngradeTestPathsDataSource
     protected function getSkipDowngradeTestVendorPaths(): array
     {
         return [
+            // This library is used for testing the source; it is added under "require" so it must be excluded
+            'vendor/fakerphp/faker/',
             'vendor/michelf/php-markdown/test/',
             'vendor/nikic/fast-route/test/',
             'vendor/psr/log/Psr/Log/Test/',

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-class MonorepoContainerConfigurationService extends AbstractDowngradeContainerConfigurationService
+class MonorepoDowngradeContainerConfigurationService extends AbstractDowngradeContainerConfigurationService
 {
     /**
      * @return string[]
@@ -16,6 +16,12 @@ class MonorepoContainerConfigurationService extends AbstractDowngradeContainerCo
             [
                 // Ignore downgrading the monorepo source
                 $this->rootDirectory . '/src/*',
+
+                // Ignore downgrading the testing packages
+                $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*',
+
+                // This library is used for testing the source; it is added under "require" so it must be excluded
+                $this->rootDirectory . '/vendor/fakerphp/faker/*',
 
                 // Even when downgrading all packages, skip Symfony's polyfills
                 $this->rootDirectory . '/vendor/symfony/polyfill-*',
