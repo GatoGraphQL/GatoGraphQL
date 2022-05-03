@@ -20,19 +20,15 @@ abstract class AbstractChainedRuleContainerConfigurationService extends Abstract
 {
     public function configureContainer(): void
     {
-        // get parameters
-        $parameters = $this->rectorConfig->parameters();
-
-        $services = $this->rectorConfig->services();
         foreach ($this->getRectorRuleClasses() as $rectorRuleClass) {
-            $services->set($rectorRuleClass);
+            $this->rectorConfig->rule($rectorRuleClass);
         }
 
-        $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
-        $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-        $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
+        // $parameters->set(Option::AUTO_IMPORT_NAMES, false);
+        // $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
-        $parameters->set(Option::PATHS, $this->getPaths());
+        $this->rectorConfig->paths($this->getPaths());
     }
 
     /**

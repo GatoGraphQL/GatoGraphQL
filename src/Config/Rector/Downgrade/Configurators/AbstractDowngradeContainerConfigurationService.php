@@ -17,7 +17,9 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
 {
     public function configureContainer(): void
     {
-        $this->rectorConfig->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
+        $this->rectorConfig->sets([
+            DowngradeLevelSetList::DOWN_TO_PHP_71,
+        ]);
 
         /**
          * @todo Uncomment this code
@@ -30,23 +32,21 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         // $services->set(RenameClassConstFetchRector::class)
         //     ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
-        $parameters = $this->rectorConfig->parameters();
-
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
 
-        // Do not change the code, other than the required rules
-        $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-        $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+        // // Do not change the code, other than the required rules
+        // $parameters->set(Option::AUTO_IMPORT_NAMES, false);
+        // $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
-            $parameters->set(Option::BOOTSTRAP_FILES, $bootstrapFiles);
+            $this->rectorConfig->bootstrapFiles($bootstrapFiles);
         }
 
         // files to skip downgrading
         if ($skip = $this->getSkip()) {
-            $parameters->set(Option::SKIP, $skip);
+            $this->rectorConfig->skip($skip);
         }
     }
 
