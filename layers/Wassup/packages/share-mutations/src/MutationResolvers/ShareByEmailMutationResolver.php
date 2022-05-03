@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ShareMutations\MutationResolvers;
 
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -94,7 +95,7 @@ class ShareByEmailMutationResolver extends AbstractMutationResolver
             $form_data['message']
         ) : '');
 
-        return \PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($form_data['email'], $subject, $msg);
     }
 
     /**

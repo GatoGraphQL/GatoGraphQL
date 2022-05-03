@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP_Application_Utils;
+use PoP_Forms_ConfigurationUtils;
 use PoP\Root\Exception\GenericSystemException;
 use PoP\Root\App;
 use Exception;
@@ -40,7 +42,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             return sprintf(
                 $this->getTranslationAPI()->__('View your <a href="%s" target="%s" %s>updated profile</a>.', 'pop-application'),
                 getAuthorProfileUrl(App::getState('current-user-id')),
-                \PoP_Application_Utils::getPreviewTarget(),
+                PoP_Application_Utils::getPreviewTarget(),
                 App::applyFilters('GD_DataLoad_ActionExecuter_CreateUpdate_UserBase:success_msg:linkattrs', '')
             );
         }
@@ -63,7 +65,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             'user_url' => trim($this->getModuleProcessorManager()->getProcessor($inputs['user_url'])->getValue($inputs['user_url'])),
         );
 
-        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_data['captcha'] = $this->getModuleProcessorManager()->getProcessor($inputs['captcha'])->getValue($inputs['captcha']);
         }
 
@@ -107,7 +109,7 @@ class CreateUpdateUserMutationResolverBridge extends AbstractComponentMutationRe
             'user_url' => null,
         );
 
-        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $form_inputs['captcha'] = null;
         }
 

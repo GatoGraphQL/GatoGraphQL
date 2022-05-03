@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\CustomPostMutations\MutationResolvers;
 
+use PoP_ApplicationProcessors_Utils;
+use GD_CreateUpdate_Utils;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\MutationInputProperties as CustomPostMediaMutationInputProperties;
@@ -194,7 +196,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         parent::additionals($customPostID, $form_data);
 
         // Topics
-        if (\PoP_ApplicationProcessors_Utils::addCategories()) {
+        if (PoP_ApplicationProcessors_Utils::addCategories()) {
             Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_CATEGORIES, $form_data[MutationInputProperties::TOPICS]);
         }
 
@@ -208,7 +210,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
             }
         }
 
-        if (\PoP_ApplicationProcessors_Utils::addAppliesto()) {
+        if (PoP_ApplicationProcessors_Utils::addAppliesto()) {
             Utils::updateCustomPostMeta($customPostID, GD_METAKEY_POST_APPLIESTO, $form_data[MutationInputProperties::APPLIESTO]);
         }
     }
@@ -250,7 +252,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
         // Status: If provided, Validate the value is permitted, or get the default value otherwise
         if ($status = $post_data['status']) {
-            $post_data['status'] = \GD_CreateUpdate_Utils::getUpdatepostStatus($status, $this->moderate());
+            $post_data['status'] = GD_CreateUpdate_Utils::getUpdatepostStatus($status, $this->moderate());
         }
 
         return $post_data;
@@ -258,7 +260,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
 
     protected function moderate()
     {
-        return \GD_CreateUpdate_Utils::moderate();
+        return GD_CreateUpdate_Utils::moderate();
     }
 
     protected function getCreateCustomPostData(array $form_data): array
@@ -266,7 +268,7 @@ abstract class AbstractCreateUpdateCustomPostMutationResolver extends UpstreamAb
         $post_data = parent::getCreateCustomPostData($form_data);
 
         // Status: Validate the value is permitted, or get the default value otherwise
-        $post_data['status'] = \GD_CreateUpdate_Utils::getCreatepostStatus($post_data['status'], $this->moderate());
+        $post_data['status'] = GD_CreateUpdate_Utils::getCreatepostStatus($post_data['status'], $this->moderate());
 
         return $post_data;
     }

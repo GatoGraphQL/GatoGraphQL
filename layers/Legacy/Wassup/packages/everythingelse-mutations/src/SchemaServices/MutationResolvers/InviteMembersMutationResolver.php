@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP_EmailTemplatesFactory;
 use PoP\Application\HelperAPIFactory;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Engine\Route\RouteUtils;
@@ -31,8 +32,8 @@ class InviteMembersMutationResolver extends AbstractEmailInviteMutationResolver
         $author_url = $this->getUserTypeAPI()->getUserURL($user_id);
         $author_name = $this->getUserTypeAPI()->getUserDisplayName($user_id);
 
-        $user_html = \PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
-        $website_html = \PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
+        $user_html = PoP_EmailTemplatesFactory::getInstance()->getUserhtml($user_id);//PoP_EmailUtils::get_user_html($user_id);
+        $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
 
         $content = sprintf(
             $this->getTranslationAPI()->__('<p><a href="%s">%s</a> is inviting you to <a href="%s">become their member</a>:</p>', 'ure-pop'),

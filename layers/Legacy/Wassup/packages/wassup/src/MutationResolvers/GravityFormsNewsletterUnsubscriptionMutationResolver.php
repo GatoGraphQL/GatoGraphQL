@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup\MutationResolvers;
 
+use GFAPI;
+use PoP_Newsletter_GFHelpers;
 use PoPSitesWassup\NewsletterMutations\MutationResolvers\NewsletterUnsubscriptionMutationResolver;
 
 class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUnsubscriptionMutationResolver
@@ -31,7 +33,7 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
                 ),
             ),
         );
-        $entries = \GFAPI::get_entries(\PoP_Newsletter_GFHelpers::getNewsletterFormId(), $search_criteria);
+        $entries = GFAPI::get_entries(PoP_Newsletter_GFHelpers::getNewsletterFormId(), $search_criteria);
         if (!$entries) {
             return array();
         }
@@ -42,6 +44,6 @@ class GravityFormsNewsletterUnsubscriptionMutationResolver extends NewsletterUns
 
     protected function doExecute(array $newsletter_data)
     {
-        return \GFAPI::delete_entry($newsletter_data['entry-id']);
+        return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 }

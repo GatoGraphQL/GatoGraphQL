@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\FormMutations\MutationResolverBridges;
 
+use PoP_Forms_ConfigurationUtils;
+use PoP_Module_Processor_CaptchaFormInputs;
+use GD_Captcha;
 use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\QueryInputOutputHandlers\ResponseConstants;
@@ -22,7 +25,7 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         }
 
         // Before submitting the form, validate the captcha (otherwise, the form is submitted independently of the result of this validation)
-        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             try {
                 $this->validateCaptcha($data_properties);
             } catch (GenericClientException $e) {
@@ -44,9 +47,9 @@ abstract class AbstractFormComponentMutationResolverBridge extends AbstractCompo
         // Check if Captcha validation is needed
         if ($data_properties[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA]) {
             /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $processor = $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
-            $captcha = $processor->getValue([\PoP_Module_Processor_CaptchaFormInputs::class, \PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
-            \GD_Captcha::assertIsValid($captcha);
+            $processor = $this->getModuleProcessorManager()->getProcessor([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            $captcha = $processor->getValue([PoP_Module_Processor_CaptchaFormInputs::class, PoP_Module_Processor_CaptchaFormInputs::MODULE_FORMINPUT_CAPTCHA]);
+            GD_Captcha::assertIsValid($captcha);
         }
     }
 }

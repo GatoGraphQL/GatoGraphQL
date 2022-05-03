@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUsMutations\MutationResolvers;
 
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -59,7 +60,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
     protected function doExecute($form_data)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
+        $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             $this->__('[%s]: %s', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName(),
@@ -90,7 +91,7 @@ class ContactUsMutationResolver extends AbstractMutationResolver
             $form_data['message']
         );
 
-        return \PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
     }
 
     /**

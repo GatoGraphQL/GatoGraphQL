@@ -13,6 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\UserRoles\Component;
 use PoPCMSSchema\UserRoles\ComponentConfiguration;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
+use WP_Role;
 
 class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTypeFieldResolver
 {
@@ -36,7 +37,7 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
 
     protected function getTypeClass(): string
     {
-        return \WP_Role::class;
+        return WP_Role::class;
     }
 
     public function getAdminFieldNames(): array
