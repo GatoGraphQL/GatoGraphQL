@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 
 require_once __DIR__ . '/rector-test-scoping-shared.php';
 
@@ -13,15 +13,15 @@ require_once __DIR__ . '/rector-test-scoping-shared.php';
  * Rule `AndAssignsToSeparateLinesRector` is not needed, but we need
  * to run at least 1 rule.
  */
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (RectorConfig $rectorConfig): void {
     // Shared configuration
-    doCommonContainerConfiguration($containerConfigurator);
+    doCommonContainerConfiguration($rectorConfig);
 
     $monorepoDir = dirname(__DIR__, 2);
     $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
 
     // get parameters
-    $parameters = $containerConfigurator->parameters();
+    $parameters = $rectorConfig->parameters();
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $parameters->set(Option::BOOTSTRAP_FILES, [
