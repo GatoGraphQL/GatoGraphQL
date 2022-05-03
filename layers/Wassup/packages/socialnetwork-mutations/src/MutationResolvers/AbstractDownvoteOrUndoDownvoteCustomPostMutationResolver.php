@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\SocialNetworkMutations\MutationResolvers;
 
+use PoP_SocialNetwork_Utils;
 use PoP\Root\App;
 
 abstract class AbstractDownvoteOrUndoDownvoteCustomPostMutationResolver extends AbstractCustomPostUpdateUserMetaValueMutationResolver
 {
     protected function eligible($post)
     {
-        $eligible = in_array($this->getCustomPostTypeAPI()->getCustomPostType($post), \PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
+        $eligible = in_array($this->getCustomPostTypeAPI()->getCustomPostType($post), PoP_SocialNetwork_Utils::getUpdownvotePostTypes());
         return App::applyFilters('GD_UpdownvoteUndoUpdownvotePost:eligible', $eligible, $post);
     }
 

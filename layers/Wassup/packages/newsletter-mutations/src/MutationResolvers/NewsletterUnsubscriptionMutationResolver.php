@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\NewsletterMutations\MutationResolvers;
 
+use PoP_GenericForms_NewsletterUtils;
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -50,7 +52,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
         }
 
         // Verify that the verification code corresponds to the email
-        $verificationcode = \PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($form_data['email']);
+        $verificationcode = PoP_GenericForms_NewsletterUtils::getEmailVerificationcode($form_data['email']);
         if ($verificationcode != $form_data['verificationcode']) {
             // @todo Migrate from string to FeedbackItemProvider
             // $errors[] = new FeedbackItemResolution(
@@ -97,7 +99,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
     protected function doExecute(array $newsletter_data)
     {
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
-        $to = \PoP_EmailSender_Utils::getAdminNotificationsEmail();
+        $to = PoP_EmailSender_Utils::getAdminNotificationsEmail();
         $subject = sprintf(
             $this->__('[%s]: Newsletter unsubscription', 'pop-genericforms'),
             $cmsapplicationapi->getSiteName()
@@ -112,7 +114,7 @@ class NewsletterUnsubscriptionMutationResolver extends AbstractMutationResolver
             $newsletter_data['email']
         );
 
-        return \PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
+        return PoP_EmailSender_Utils::sendEmail($to, $subject, $msg);
         // return GFAPI::delete_entry($newsletter_data['entry-id']);
     }
 

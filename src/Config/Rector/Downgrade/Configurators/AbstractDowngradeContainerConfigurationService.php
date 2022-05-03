@@ -9,7 +9,6 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 // use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 // use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 
@@ -17,7 +16,9 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
 {
     public function configureContainer(): void
     {
-        $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
+        $this->rectorConfig->sets([
+            DowngradeLevelSetList::DOWN_TO_PHP_71,
+        ]);
 
         /**
          * @todo Uncomment this code
@@ -26,27 +27,23 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          * Solution: Create a similar rule
          */
         // // Must also replace DateTimeInterface::ATOM for PHP 7.1
-        // $services = $this->containerConfigurator->services();
-        // $services->set(RenameClassConstFetchRector::class)
-        //     ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
-
-        $parameters = $this->containerConfigurator->parameters();
+        // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
 
         // Do not change the code, other than the required rules
-        $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-        $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+        $this->rectorConfig->disableImportNames();
+        $this->rectorConfig->disableImportShortClasses();
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
-            $parameters->set(Option::BOOTSTRAP_FILES, $bootstrapFiles);
+            $this->rectorConfig->bootstrapFiles($bootstrapFiles);
         }
 
         // files to skip downgrading
         if ($skip = $this->getSkip()) {
-            $parameters->set(Option::SKIP, $skip);
+            $this->rectorConfig->skip($skip);
         }
     }
 
@@ -56,18 +53,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     protected function getBootstrapFiles(): array
     {
         return [
-            /**
-             * This file has been commented since it doesn't work with Rector v0.12,
-             * due to having this code:
-             *
-             *   function readonly($readonly, $current = \true, $echo = \true)
-             *   {
-             *   }
-             *
-             * Instead use temporary custom stubs file, which has the required stubs only
-             */
-            // $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-            $this->rootDirectory . '/stubs/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         ];
     }
 

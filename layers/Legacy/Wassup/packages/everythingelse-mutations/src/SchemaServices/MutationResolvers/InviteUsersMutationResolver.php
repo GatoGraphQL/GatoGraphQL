@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP_EmailTemplatesFactory;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
 use PoP\Application\HelperAPIFactory;
@@ -14,7 +15,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 {
     protected function getEmailContent($form_data)
     {
-        $website_html = \PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
+        $website_html = PoP_EmailTemplatesFactory::getInstance()->getWebsitehtml();//PoP_EmailUtils::get_website_html();
         $cmsapplicationhelpers = HelperAPIFactory::getInstance();
 
         // Maybe the user is logged in, maybe not
@@ -67,7 +68,7 @@ class InviteUsersMutationResolver extends AbstractEmailInviteMutationResolver
 
         $cmsService = CMSServiceFacade::getInstance();
         $btn_title = $this->getTranslationAPI()->__('Check it out here', 'pop-coreprocessors');
-        $content .= \PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsService->getSiteURL());
+        $content .= PoP_EmailTemplatesFactory::getInstance()->getButtonhtml($btn_title, $cmsService->getSiteURL());
 
         return $content;
     }

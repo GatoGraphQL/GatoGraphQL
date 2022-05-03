@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use UserStance_Module_Processor_CustomSectionBlocksUtils;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -131,7 +132,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     'orderby' => $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));
+                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));
 
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -149,7 +150,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 );
 
                 $query = array();
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));
+                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($customPost));
 
                 // Override the category
                 $query['tax-query'][] = [

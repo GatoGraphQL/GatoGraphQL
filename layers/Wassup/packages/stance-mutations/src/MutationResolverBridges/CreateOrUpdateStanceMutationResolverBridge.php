@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolverBridges;
 
+use PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues;
+use PoP_Module_Processor_TextareaFormInputs;
+use UserStance_Module_Processor_ButtonGroupFormInputs;
+use PoP_UserStance_PostNameUtils;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoPSitesWassup\StanceMutations\MutationResolvers\CreateOrUpdateStanceMutationResolver;
 
@@ -34,7 +38,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
     {
         $form_data = parent::getFormData();
 
-        $target = $this->getModuleProcessorManager()->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getValue([\PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, \PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
+        $target = $this->getModuleProcessorManager()->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getValue([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
         $form_data['stancetarget'] = $target;
 
         return $form_data;
@@ -48,13 +52,13 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
 
     protected function getEditorInput()
     {
-        return [\PoP_Module_Processor_TextareaFormInputs::class, \PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
+        return [PoP_Module_Processor_TextareaFormInputs::class, PoP_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_TEXTAREAEDITOR];
     }
 
     protected function getCategoriesModule()
     {
         if ($this->showCategories()) {
-            return [\UserStance_Module_Processor_ButtonGroupFormInputs::class, \UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
+            return [UserStance_Module_Processor_ButtonGroupFormInputs::class, UserStance_Module_Processor_ButtonGroupFormInputs::MODULE_FORMINPUT_BUTTONGROUP_STANCE];
         }
 
         return parent::getCategoriesModule();
@@ -77,7 +81,7 @@ class CreateOrUpdateStanceMutationResolverBridge extends AbstractCreateUpdateSta
      */
     protected function getSuccessTitle($referenced = null)
     {
-        $feedback_title = \PoP_UserStance_PostNameUtils::getNameUc();
+        $feedback_title = PoP_UserStance_PostNameUtils::getNameUc();
         if ($referenced) {
             return sprintf(
                 $this->__('%1$s after reading “%2$s”', 'pop-userstance'),

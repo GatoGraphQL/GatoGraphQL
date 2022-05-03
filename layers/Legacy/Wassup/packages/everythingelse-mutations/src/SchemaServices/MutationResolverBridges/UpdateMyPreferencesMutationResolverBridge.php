@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges;
 
+use PoP_Module_Processor_UserProfileCheckboxFormInputs;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolverBridges\AbstractComponentMutationResolverBridge;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -33,7 +34,7 @@ class UpdateMyPreferencesMutationResolverBridge extends AbstractComponentMutatio
         $form_data = array(
             'user_id' => $user_id,
             // We can just get the value for any one forminput from the My Preferences form, since they all have the same name (and even if the forminput was actually removed from the form!)
-            'userPreferences' => $this->getModuleProcessorManager()->getProcessor([\PoP_Module_Processor_UserProfileCheckboxFormInputs::class, \PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST])->getValue([\PoP_Module_Processor_UserProfileCheckboxFormInputs::class, \PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST]),
+            'userPreferences' => $this->getModuleProcessorManager()->getProcessor([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST])->getValue([PoP_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST]),
         );
 
         return $form_data;

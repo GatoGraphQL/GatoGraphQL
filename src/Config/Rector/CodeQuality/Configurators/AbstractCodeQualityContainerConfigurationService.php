@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\CodeQuality\Configurators;
 
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\Configuration\Option;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 
@@ -13,27 +12,25 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
 {
     public function configureContainer(): void
     {
-        $services = $this->containerConfigurator->services();
-        $services->set(RemoveUselessParamTagRector::class);
-        $services->set(RemoveUselessReturnTagRector::class);
+        $this->rectorConfig->rule(RemoveUselessParamTagRector::class);
+        $this->rectorConfig->rule(RemoveUselessReturnTagRector::class);
 
-        $parameters = $this->containerConfigurator->parameters();
-        $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-        $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+        $this->rectorConfig->importNames();
+        $this->rectorConfig->importShortClasses();
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
-            $parameters->set(Option::BOOTSTRAP_FILES, $bootstrapFiles);
+            $this->rectorConfig->bootstrapFiles($bootstrapFiles);
         }
 
         // files to process
         if ($paths = $this->getPaths()) {
-            $parameters->set(Option::PATHS, $paths);
+            $this->rectorConfig->paths($paths);
         }
 
         // files to skip
         if ($skip = $this->getSkip()) {
-            $parameters->set(Option::SKIP, $skip);
+            $this->rectorConfig->skip($skip);
         }
     }
 
@@ -43,18 +40,7 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
     protected function getBootstrapFiles(): array
     {
         return [
-            /**
-             * This file has been commented since it doesn't work with Rector v0.12,
-             * due to having this code:
-             *
-             *   function readonly($readonly, $current = \true, $echo = \true)
-             *   {
-             *   }
-             *
-             * Instead use temporary custom stubs file, which has the required stubs only
-             */
-            // $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
-            $this->rootDirectory . '/stubs/php-stubs/wordpress-stubs/wordpress-stubs.php',
+            $this->rootDirectory . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
         ];
     }
 

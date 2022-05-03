@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Helpers;
 
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
+use WP_Post;
 
 class BlockHelpers
 {
@@ -21,7 +22,7 @@ class BlockHelpers
      * @return array<string, mixed> The block stores its data as property => value
      */
     public function getBlocksFromCustomPost(
-        \WP_Post|int $configurationPostOrID
+        WP_Post|int $configurationPostOrID
     ): array {
         if (\is_object($configurationPostOrID)) {
             $configurationPost = $configurationPostOrID;
@@ -56,7 +57,7 @@ class BlockHelpers
      * @return array<array> A list of block data, each as an array
      */
     public function getBlocksOfTypeFromCustomPost(
-        \WP_Post|int $configurationPostOrID,
+        WP_Post|int $configurationPostOrID,
         BlockInterface $block
     ): array {
         $blocks = $this->getBlocksFromCustomPost($configurationPostOrID);
@@ -76,7 +77,7 @@ class BlockHelpers
      * @return array<string, mixed>|null Data inside the block is saved as key (string) => value
      */
     public function getSingleBlockOfTypeFromCustomPost(
-        \WP_Post|int $configurationPostOrID,
+        WP_Post|int $configurationPostOrID,
         BlockInterface $block
     ): ?array {
         $blocks = $this->getBlocksOfTypeFromCustomPost($configurationPostOrID, $block);

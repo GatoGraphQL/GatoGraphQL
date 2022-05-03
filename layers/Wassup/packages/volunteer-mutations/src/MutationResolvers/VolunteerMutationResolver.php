@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\VolunteerMutations\MutationResolvers;
 
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -132,7 +133,7 @@ class VolunteerMutationResolver extends AbstractMutationResolver
             $form_data['whyvolunteer']
         );
 
-        return \PoP_EmailSender_Utils::sendemailToUsersFromPost(array($form_data['target-id']), $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUsersFromPost(array($form_data['target-id']), $subject, $msg);
     }
 
     /**

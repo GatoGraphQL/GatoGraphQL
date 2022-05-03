@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\StanceMutations\MutationResolvers;
 
+use UserStance_Module_Processor_CustomSectionBlocksUtils;
+use PoP_UserStance_PostNameUtils;
 use PoP\Root\App;
 use PoP\EditPosts\FunctionAPIFactory;
 use PoPCMSSchema\CustomPostMeta\Utils;
@@ -78,9 +80,9 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             'authors' => [App::getState('current-user-id')],
         );
         if ($referenced_id) {
-            \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $referenced_id);
+            UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $referenced_id);
         } else {
-            \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
+            UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
         }
 
         // Stances are unique, just 1 per person/article.
@@ -89,7 +91,7 @@ abstract class AbstractCreateUpdateStanceMutationResolver extends AbstractCreate
             $stance_id = $stances[0];
             $error = sprintf(
                 $this->__('You have already added your %s', 'pop-userstance'),
-                \PoP_UserStance_PostNameUtils::getNameLc()
+                PoP_UserStance_PostNameUtils::getNameLc()
             );
             if ($referenced_id) {
                 $error = sprintf(

@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 
 require_once __DIR__ . '/rector-test-scoping-shared.php';
 
@@ -13,30 +12,27 @@ require_once __DIR__ . '/rector-test-scoping-shared.php';
  * Rule `AndAssignsToSeparateLinesRector` is not needed, but we need
  * to run at least 1 rule.
  */
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (RectorConfig $rectorConfig): void {
     // Shared configuration
-    doCommonContainerConfiguration($containerConfigurator);
+    doCommonContainerConfiguration($rectorConfig);
 
     $monorepoDir = dirname(__DIR__, 2);
     $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
 
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::BOOTSTRAP_FILES, [
+    $rectorConfig->bootstrapFiles([
         $pluginDir . '/vendor/scoper-autoload.php',
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
 
     // files to rector
-    $parameters->set(Option::PATHS, [
+    $rectorConfig->paths([
         $pluginDir . '/vendor',
     ]);
 
     // files to skip
-    $parameters->set(Option::SKIP, [
+    $rectorConfig->skip([
         '*/tests/*',
 
         // The GraphQL API plugin does not require the REST package
@@ -45,6 +41,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         //   "vendor/pop-schema/pages/src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
         //   "Analyze error: "Class PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
         '*/ConditionalOnComponent/RESTAPI/*',
+
+        // This library is used for testing the source; it is added under "require" so it must be excluded
+        $pluginDir . '/vendor/fakerphp/faker/*',
 
         // // Exclude migrate libraries
         // $pluginDir . '/vendor/getpop/migrate-*',

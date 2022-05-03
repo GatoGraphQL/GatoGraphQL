@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\UserStateMutations\MutationResolvers;
 
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -154,6 +155,6 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $message = App::applyFilters('popcms:retrievePasswordMessage', $message, $key, $user_login, $user);
 
         $user_email = $this->getUserTypeAPI()->getUserEmail($user);
-        return \PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
+        return PoP_EmailSender_Utils::sendEmail($user_email, htmlspecialchars_decode($title)/*wp_specialchars_decode($title)*/, $message);
     }
 }

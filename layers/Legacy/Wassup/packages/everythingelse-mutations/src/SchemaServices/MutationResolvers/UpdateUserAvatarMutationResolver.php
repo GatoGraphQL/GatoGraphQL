@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use GD_FileUpload_UserPhotoFactory;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -13,7 +14,7 @@ class UpdateUserAvatarMutationResolver extends AbstractMutationResolver
     public function savePicture($user_id, $delete_source = false): void
     {
         // Avatar
-        $gd_fileupload_userphoto = \GD_FileUpload_UserPhotoFactory::getInstance();
+        $gd_fileupload_userphoto = GD_FileUpload_UserPhotoFactory::getInstance();
         $gd_fileupload_userphoto->savePicture($user_id, $delete_source);
     }
 

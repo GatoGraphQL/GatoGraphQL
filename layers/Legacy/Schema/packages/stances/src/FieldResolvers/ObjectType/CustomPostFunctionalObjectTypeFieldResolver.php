@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances\FieldResolvers\ObjectType;
 
+use UserStance_Module_Processor_CustomSectionBlocksUtils;
+use GD_FormInput_Stance;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -186,7 +188,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 $query = array(
                     'authors' => [App::getState('current-user-id')],
                 );
-                \UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($post));
+                UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsStancesaboutpost($query, $objectTypeResolver->getID($post));
 
                 return $customPostTypeAPI->getCustomPosts($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
 
@@ -221,7 +223,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
             case 'stanceName':
             case 'catName':
                 $selected = $objectTypeResolver->resolveValue($object, 'stance', $variables, $expressions, $objectTypeFieldResolutionFeedbackStore, $options);
-                $stance = new \GD_FormInput_Stance('', $selected);
+                $stance = new GD_FormInput_Stance('', $selected);
                 return $stance->getSelectedValue();
         }
 

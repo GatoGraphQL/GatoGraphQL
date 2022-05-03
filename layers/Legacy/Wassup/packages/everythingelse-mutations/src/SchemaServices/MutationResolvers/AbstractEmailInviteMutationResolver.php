@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP_EmailSender_Utils;
+use PoP_FormUtils;
+use GD_Captcha;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
@@ -24,7 +27,7 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
         if (!empty($emails)) {
             $subject = $this->getEmailSubject($form_data);
             $content = $this->getEmailContent($form_data);
-            \PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
+            PoP_EmailSender_Utils::sendemailToUsers($emails, array(), $subject, $content, true);
             return true;
         }
         return false;
@@ -33,10 +36,10 @@ abstract class AbstractEmailInviteMutationResolver extends AbstractMutationResol
     protected function validateCaptcha(&$errors, &$form_data): void
     {
         // Validate the captcha
-        if (!\PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
+        if (!PoP_FormUtils::useLoggedinuserData() || !App::getState('is-user-logged-in')) {
             $captcha = $form_data['captcha'];
             try {
-                \GD_Captcha::assertIsValid($captcha);
+                GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
                 $errors[] = $e->getMessage();
             }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\ContactUserMutations\MutationResolvers;
 
+use PoP_EmailSender_Utils;
 use PoP\Root\Exception\AbstractException;
 use PoP\Root\App;
 use PoP\Application\FunctionAPIFactory;
@@ -129,7 +130,7 @@ class ContactUserMutationResolver extends AbstractMutationResolver
             $form_data['message']
         );
 
-        return \PoP_EmailSender_Utils::sendemailToUser($form_data['target-id'], $subject, $msg);
+        return PoP_EmailSender_Utils::sendemailToUser($form_data['target-id'], $subject, $msg);
     }
 
     /**

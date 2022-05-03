@@ -23,6 +23,9 @@ class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngrad
                 //   "Analyze error: "Class PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
                 '*/ConditionalOnComponent/RESTAPI/*',
 
+                // This library is used for testing the source; it is added under "require" so it must be excluded
+                $this->pluginDir . '/vendor/fakerphp/faker/*',
+
                 // Even when downgrading all packages, skip Symfony's polyfills
                 $this->pluginDir . '/vendor/symfony/polyfill-*',
 

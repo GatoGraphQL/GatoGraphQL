@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\PostLinkMutations\MutationResolvers;
 
+use PoP_ApplicationProcessors_Utils;
 use PoPCMSSchema\CustomPostMeta\Utils;
 use PoPSitesWassup\CustomPostLinkMutations\MutationResolvers\MutationResolverUtils;
 use PoPSitesWassup\PostMutations\MutationResolvers\AbstractCreateUpdatePostMutationResolver;
@@ -27,7 +28,7 @@ abstract class AbstractCreateUpdatePostLinkMutationResolver extends AbstractCrea
     {
         parent::additionals($post_id, $form_data);
 
-        if (\PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
+        if (PoP_ApplicationProcessors_Utils::addLinkAccesstype()) {
             Utils::updateCustomPostMeta($post_id, GD_METAKEY_POST_LINKACCESS, $form_data['linkaccess'], true);
         }
     }

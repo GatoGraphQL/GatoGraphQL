@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 
 abstract class AbstractPluginDowngradeContainerConfigurationService extends AbstractDowngradeContainerConfigurationService
 {
     protected string $pluginDir;
 
     public function __construct(
-        ContainerConfigurator $containerConfigurator,
+        RectorConfig $rectorConfig,
         string $rootDirectory,
     ) {
-        parent::__construct($containerConfigurator, $rootDirectory);
+        parent::__construct($rectorConfig, $rootDirectory);
 
         $this->pluginDir = $this->rootDirectory . '/' . $this->getPluginRelativePath();
     }

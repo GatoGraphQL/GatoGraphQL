@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
+use PoP_Forms_ConfigurationUtils;
+use GD_Captcha;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\EditUsers\FunctionAPIFactory;
@@ -136,10 +138,10 @@ class CreateUpdateUserMutationResolver extends AbstractMutationResolver
         }
 
         // Validate the captcha
-        if (\PoP_Forms_ConfigurationUtils::captchaEnabled()) {
+        if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
             $captcha = $form_data['captcha'];
             try {
-                \GD_Captcha::assertIsValid($captcha);
+                GD_Captcha::assertIsValid($captcha);
             } catch (GenericClientException $e) {
                 // @todo Migrate from string to FeedbackItemProvider
                 // $errors[] = new FeedbackItemResolution(

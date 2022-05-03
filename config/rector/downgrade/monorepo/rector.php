@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\MonorepoContainerConfigurationService;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\MonorepoDowngradeContainerConfigurationService;
+use Rector\Config\RectorConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurationService = new MonorepoContainerConfigurationService(
-        $containerConfigurator,
+return static function (RectorConfig $rectorConfig): void {
+    $containerConfigurationService = new MonorepoDowngradeContainerConfigurationService(
+        $rectorConfig,
         dirname(__DIR__, 4)
     );
     $containerConfigurationService->configureContainer();
