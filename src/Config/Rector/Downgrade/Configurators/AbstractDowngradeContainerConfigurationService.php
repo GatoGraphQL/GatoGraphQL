@@ -35,9 +35,9 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         // is your PHP version different from the one your refactor to? [default: your PHP version]
         $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
 
-        // // Do not change the code, other than the required rules
-        // $parameters->set(Option::AUTO_IMPORT_NAMES, false);
-        // $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+        // Do not change the code, other than the required rules
+        $this->rectorConfig->disableImportNames();
+        $this->rectorConfig->disableImportShortClasses();
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
         if ($bootstrapFiles = $this->getBootstrapFiles()) {
