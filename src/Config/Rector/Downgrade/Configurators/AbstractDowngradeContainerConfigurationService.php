@@ -17,7 +17,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
 {
     public function configureContainer(): void
     {
-        $this->containerConfigurator->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
+        $this->rectorConfig->import(DowngradeLevelSetList::DOWN_TO_PHP_71);
 
         /**
          * @todo Uncomment this code
@@ -26,11 +26,11 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          * Solution: Create a similar rule
          */
         // // Must also replace DateTimeInterface::ATOM for PHP 7.1
-        // $services = $this->containerConfigurator->services();
+        // $services = $this->rectorConfig->services();
         // $services->set(RenameClassConstFetchRector::class)
         //     ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
-        $parameters = $this->containerConfigurator->parameters();
+        $parameters = $this->rectorConfig->parameters();
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
         $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_71);

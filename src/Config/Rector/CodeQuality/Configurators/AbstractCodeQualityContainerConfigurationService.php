@@ -13,11 +13,11 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
 {
     public function configureContainer(): void
     {
-        $services = $this->containerConfigurator->services();
+        $services = $this->rectorConfig->services();
         $services->set(RemoveUselessParamTagRector::class);
         $services->set(RemoveUselessReturnTagRector::class);
 
-        $parameters = $this->containerConfigurator->parameters();
+        $parameters = $this->rectorConfig->parameters();
         $parameters->set(Option::AUTO_IMPORT_NAMES, true);
         $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
 

@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use PoP\PoP\Config\Rector\CodeQuality\Configurators\CodeQualityContainerConfigurationService;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (RectorConfig $rectorConfig): void {
     $containerConfigurationService = new CodeQualityContainerConfigurationService(
-        $containerConfigurator,
+        $rectorConfig,
         dirname(__DIR__, 3)
     );
     $containerConfigurationService->configureContainer();

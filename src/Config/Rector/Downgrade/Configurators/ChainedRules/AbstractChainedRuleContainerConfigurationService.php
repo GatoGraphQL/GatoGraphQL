@@ -21,9 +21,9 @@ abstract class AbstractChainedRuleContainerConfigurationService extends Abstract
     public function configureContainer(): void
     {
         // get parameters
-        $parameters = $this->containerConfigurator->parameters();
+        $parameters = $this->rectorConfig->parameters();
 
-        $services = $this->containerConfigurator->services();
+        $services = $this->rectorConfig->services();
         foreach ($this->getRectorRuleClasses() as $rectorRuleClass) {
             $services->set($rectorRuleClass);
         }

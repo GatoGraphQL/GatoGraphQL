@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Configurators;
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Rector\Config\RectorConfig;
 
 abstract class AbstractContainerConfigurationService
 {
     public function __construct(
-        protected ContainerConfigurator $containerConfigurator,
+        protected RectorConfig $rectorConfig,
         protected string $rootDirectory,
     ) {
     }
