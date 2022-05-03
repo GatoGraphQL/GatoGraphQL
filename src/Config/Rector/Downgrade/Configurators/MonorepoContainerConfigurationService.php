@@ -17,6 +17,9 @@ class MonorepoContainerConfigurationService extends AbstractDowngradeContainerCo
                 // Ignore downgrading the monorepo source
                 $this->rootDirectory . '/src/*',
 
+                // Ignore downgrading the testing packages
+                $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*',
+
                 // Even when downgrading all packages, skip Symfony's polyfills
                 $this->rootDirectory . '/vendor/symfony/polyfill-*',
 
