@@ -20,6 +20,9 @@ class MonorepoDowngradeContainerConfigurationService extends AbstractDowngradeCo
                 // Ignore downgrading the testing packages
                 $this->rootDirectory . '/layers/GraphQLAPIForWP/phpunit-packages/*',
 
+                // This library is used for testing the source; it is added under "require" so it must be excluded
+                $this->rootDirectory . '/vendor/fakerphp/faker/*',
+
                 // Even when downgrading all packages, skip Symfony's polyfills
                 $this->rootDirectory . '/vendor/symfony/polyfill-*',
 
