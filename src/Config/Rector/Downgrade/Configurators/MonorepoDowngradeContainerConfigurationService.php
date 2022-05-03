@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 
-class MonorepoContainerConfigurationService extends AbstractDowngradeContainerConfigurationService
+class MonorepoDowngradeContainerConfigurationService extends AbstractDowngradeContainerConfigurationService
 {
     /**
      * @return string[]
