@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\CodeQuality\Configurators;
 
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\Configuration\Option;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 

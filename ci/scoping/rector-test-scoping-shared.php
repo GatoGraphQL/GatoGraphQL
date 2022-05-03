@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\LogicalAnd\AndAssignsToSeparateLinesRector;
-use Rector\Core\Configuration\Option;
 use Rector\Config\RectorConfig;
 
 /**
@@ -14,10 +13,8 @@ use Rector\Config\RectorConfig;
  */
 function doCommonContainerConfiguration(RectorConfig $rectorConfig): void
 {
-    $services = $rectorConfig->services();
-    $services->set(AndAssignsToSeparateLinesRector::class);
+    $rectorConfig->rule(AndAssignsToSeparateLinesRector::class);
     
-    $parameters = $rectorConfig->parameters();
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::IMPORT_SHORT_CLASSES, false);
+    $rectorConfig->importNames();
+    $rectorConfig->disableImportShortClasses();
 };
