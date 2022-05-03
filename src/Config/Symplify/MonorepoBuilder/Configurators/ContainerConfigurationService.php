@@ -13,7 +13,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
-use Rector\Config\RectorConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Neon\NeonPrinter;
@@ -21,14 +21,14 @@ use Symplify\PackageBuilder\Neon\NeonPrinter;
 class ContainerConfigurationService
 {
     public function __construct(
-        protected RectorConfig $rectorConfig,
+        protected ContainerConfigurator $containerConfigurator,
         protected string $rootDirectory,
     ) {
     }
 
     public function configureContainer(): void
     {
-        $parameters = $this->rectorConfig->parameters();
+        $parameters = $this->containerConfigurator->parameters();
 
         /**
          * Packages handled by the monorepo
@@ -125,7 +125,7 @@ class ContainerConfigurationService
         /**
          * Configure services
          */
-        $services = $this->rectorConfig->services();
+        $services = $this->containerConfigurator->services();
         $services->defaults()
             ->autowire()
             ->autoconfigure();
