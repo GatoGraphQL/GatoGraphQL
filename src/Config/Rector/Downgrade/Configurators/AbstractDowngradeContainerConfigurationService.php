@@ -9,7 +9,6 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 // use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 // use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 
@@ -28,9 +27,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          * Solution: Create a similar rule
          */
         // // Must also replace DateTimeInterface::ATOM for PHP 7.1
-        // $services = $this->rectorConfig->services();
-        // $services->set(RenameClassConstFetchRector::class)
-        //     ->configure([new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
+        // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
         $this->rectorConfig->phpVersion(PhpVersion::PHP_71);

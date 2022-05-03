@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
-use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 
 /**

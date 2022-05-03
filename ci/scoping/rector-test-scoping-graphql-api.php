@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
 use Rector\Config\RectorConfig;
 
 require_once __DIR__ . '/rector-test-scoping-shared.php';
@@ -20,23 +19,20 @@ return static function (RectorConfig $rectorConfig): void {
     $monorepoDir = dirname(__DIR__, 2);
     $pluginDir = $monorepoDir . '/layers/GraphQLAPIForWP/plugins/graphql-api-for-wp';
 
-    // get parameters
-    $parameters = $rectorConfig->parameters();
-
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
-    $parameters->set(Option::BOOTSTRAP_FILES, [
+    $rectorConfig->bootstrapFiles([
         $pluginDir . '/vendor/scoper-autoload.php',
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
 
     // files to rector
-    $parameters->set(Option::PATHS, [
+    $rectorConfig->paths([
         $pluginDir . '/vendor',
     ]);
 
     // files to skip
-    $parameters->set(Option::SKIP, [
+    $rectorConfig->skip([
         '*/tests/*',
 
         // The GraphQL API plugin does not require the REST package
