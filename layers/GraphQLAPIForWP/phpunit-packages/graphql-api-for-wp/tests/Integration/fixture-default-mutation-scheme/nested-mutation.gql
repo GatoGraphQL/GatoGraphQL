@@ -1,5 +1,5 @@
 mutation {
-  post(by: {id: 1}) {
+  post(by: { id: 13 }) {
     addComment(input: {
       comment: "Great insight!",
       authorName: "Leo"
