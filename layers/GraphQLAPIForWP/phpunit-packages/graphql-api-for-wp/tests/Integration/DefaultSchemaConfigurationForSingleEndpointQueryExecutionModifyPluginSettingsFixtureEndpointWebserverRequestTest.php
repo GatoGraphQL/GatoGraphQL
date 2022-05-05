@@ -48,10 +48,4 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
         // New value: Schema Config "Power Users"
         return self::SCHEMA_CONFIGURATION_POWERUSERS_ID;
     }
-    
-    protected function getPluginSettingsOriginalValue(): mixed
-    {
-        // Current value: no Schema Config selected
-        return ModuleSettingOptionValues::NO_VALUE_ID;
-    }
 }
