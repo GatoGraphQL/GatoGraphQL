@@ -16,6 +16,8 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 
     protected mixed $previousValue;
 
+    abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
+
     /**
      * Execute a REST API to update the client path before the test
      */
@@ -28,6 +30,18 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          */
         $this->previousValue = $this->getPluginSettingsOriginalValue();
         $newValue = $this->getPluginSettingsNewValue();
+
+        // Make sure the 2 values are indeed different
+        $this->assertNotEquals(
+            $newValue,
+            $this->previousValue,
+            sprintf(
+                'The new value to execute the REST API call to modify the plugin settings is \'%s\', which is the same as current value, and it must be different',
+                $newValue
+            )
+        );
+
+        // Update the settings
         $this->executeRESTEndpointToUpdatePluginSettings(
             $this->dataName(),
             $newValue,
