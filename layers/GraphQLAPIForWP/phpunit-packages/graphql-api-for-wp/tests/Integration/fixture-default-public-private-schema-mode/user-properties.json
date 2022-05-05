@@ -1,0 +1,27 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'lastName' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "lastName",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    }
+  ],
+  "data": {
+    "user": {
+      "id": 1,
+      "lastName": null
+    }
+  }
+}
