@@ -1,10 +1,14 @@
 {
   "data": {
     "post": {
-      "addComment": {
-        "content": "<p>Great insight!</p>\n",
-        "authorName": "Leo",
-        "authorEmail": "leo@saronga.com"
+      "id": 13,
+      "update": {
+        "title": "New title",
+        "newTitle": "New title",
+        "update": {
+          "title": "Released v0.6, check it out",
+          "originalTitle": "Released v0.6, check it out"
+        }
       }
     }
   }
