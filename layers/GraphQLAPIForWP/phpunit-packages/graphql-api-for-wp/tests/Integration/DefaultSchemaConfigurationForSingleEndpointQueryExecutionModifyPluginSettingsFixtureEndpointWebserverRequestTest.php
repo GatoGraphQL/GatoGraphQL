@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptionValues;
 
 class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
@@ -32,26 +31,11 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
     protected function getModuleID(string $dataName): string
     {
         return 'graphqlapi_graphqlapi_schema-configuration';
-        // return match ($dataName) {
-        //     'default-schema-configuration-for-single-endpoint' => 'graphqlapi_graphqlapi_schema-configuration',
-        //     default => throw new ShouldNotHappenException(
-        //         sprintf(
-        //             'There is no moduleID configured for $dataName \'%s\'',
-        //             $dataName
-        //         )
-        //     )
-        // };
     }
 
     protected function getPluginSettingsNewValue(): mixed
     {
         // New value: Schema Config "Power Users"
         return self::SCHEMA_CONFIGURATION_POWERUSERS_ID;
-    }
-    
-    protected function getPluginSettingsOriginalValue(): mixed
-    {
-        // Current value: no Schema Config selected
-        return ModuleSettingOptionValues::NO_VALUE_ID;
     }
 }

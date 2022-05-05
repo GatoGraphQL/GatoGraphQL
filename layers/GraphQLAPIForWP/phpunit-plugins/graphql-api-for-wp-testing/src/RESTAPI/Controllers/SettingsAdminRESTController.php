@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
@@ -182,18 +183,20 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
          */
         $settings = $moduleResolver->getSettings($module);
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        foreach ($settings as &$setting) {
+        $editableSettings = [];
+        foreach ($settings as $setting) {
             // There are non-editable inputs, to show information. Skip those
             $input = $setting['input'] ?? null;
             if ($input === null) {
                 continue;
             }
-            $setting['value'] = $userSettingsManager->getSetting($module, $input);
+            $setting[ResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
+            $editableSettings[$input] = $setting;
         }
         return [
-            'module' => $module,
-            'id' => $moduleResolver->getID($module),
-            'settings' => $settings,
+            ResponseKeys::MODULE => $module,
+            ResponseKeys::ID => $moduleResolver->getID($module),
+            ResponseKeys::SETTINGS => $editableSettings,
         ];
     }
 

@@ -91,7 +91,7 @@ class DisabledClientWebserverRequestTest extends AbstractDisabledClientWebserver
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTCallIsSuccessful($response);
+        $this->assertRESTPostCallIsSuccessful($response);
     }
 
     protected function getModuleID(string $dataName): string
