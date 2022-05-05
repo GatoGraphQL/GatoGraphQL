@@ -8,7 +8,7 @@ use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 
-trait ModifyPluginSettingsWebserverRequestTestTrait
+trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use ExecuteRESTWebserverRequestTestCaseTrait;

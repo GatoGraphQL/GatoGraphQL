@@ -6,7 +6,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
 abstract class AbstractModifyPluginSettingsWebserverRequestTest extends AbstractWebserverRequestTestCase
 {
-    use ModifyPluginSettingsWebserverRequestTestTrait;
+    use ModifyPluginSettingsWebserverRequestTestCaseTrait;
 
     protected function setUp(): void
     {
