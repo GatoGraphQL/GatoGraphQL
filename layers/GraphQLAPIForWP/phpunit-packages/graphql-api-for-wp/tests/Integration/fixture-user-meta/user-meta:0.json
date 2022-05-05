@@ -1,0 +1,10 @@
+{
+  "data": {
+    "user": {
+      "id": 2,
+      "nickname": "subscriber",
+      "firstname": "Subscriber",
+      "lastname": "Bennett"
+    }
+  }
+}
