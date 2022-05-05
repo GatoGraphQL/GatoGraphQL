@@ -90,6 +90,10 @@
             "@delete-settings"
         ],
         "disable-unsafe-defaults": [
+            "lando wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS false --raw --path=wordpress",
+            "@delete-settings"
+        ],
+        "use-default-unsafe-defaults": [
             "lando wp config delete GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS --path=wordpress",
             "@delete-settings"
         ],
