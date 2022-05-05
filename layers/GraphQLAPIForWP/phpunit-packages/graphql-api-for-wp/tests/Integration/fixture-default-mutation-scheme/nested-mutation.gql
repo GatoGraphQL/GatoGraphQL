@@ -1,0 +1,13 @@
+mutation {
+  post(by: {id: 1}) {
+    addComment(input: {
+      comment: "Great insight!",
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    }) {
+      content
+      authorName
+      authorEmail
+    }
+  }
+}
