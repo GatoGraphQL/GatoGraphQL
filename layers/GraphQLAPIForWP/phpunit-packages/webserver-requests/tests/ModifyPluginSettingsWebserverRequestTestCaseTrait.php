@@ -20,12 +20,20 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     abstract public static function assertEquals($expected, $actual, string $message = ''): void;
     abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
 
+    protected function executePluginSettingsSetUpTearDown(string $dataName): bool
+    {
+        return true;
+    }
+
     /**
      * Execute a REST API to update the client path before the test
      */
     protected function modifyPluginSettingsSetUp(): void
     {
         $dataName = $this->dataName();
+        if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
+            return;
+        }
 
         /**
          * First obtain and cache the previous value,
@@ -60,7 +68,10 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     protected function modifyPluginSettingsTearDown(): void
     {
         $dataName = $this->dataName();
-        
+        if (!$this->executePluginSettingsSetUpTearDown($dataName)) {
+            return;
+        }
+
         $this->executeRESTEndpointToUpdatePluginSettings(
             $dataName,
             $this->previousValue,
