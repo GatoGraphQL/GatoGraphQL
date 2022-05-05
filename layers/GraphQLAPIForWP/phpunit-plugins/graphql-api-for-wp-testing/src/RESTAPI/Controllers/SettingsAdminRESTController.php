@@ -39,6 +39,11 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
     use WithModuleParamRESTControllerTrait;
     use WithFlushRewriteRulesRESTControllerTrait;
 
+    public const RESPONSE_KEY_MODULE = 'module';
+    public const RESPONSE_KEY_ID = 'id';
+    public const RESPONSE_KEY_SETTINGS = 'settings';
+    public const RESPONSE_KEY_VALUE = 'value';
+
     protected string $restBase = 'module-settings';
 
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
@@ -182,18 +187,20 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
          */
         $settings = $moduleResolver->getSettings($module);
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        foreach ($settings as &$setting) {
+        $editableSettings = [];
+        foreach ($settings as $setting) {
             // There are non-editable inputs, to show information. Skip those
             $input = $setting['input'] ?? null;
             if ($input === null) {
                 continue;
             }
-            $setting['value'] = $userSettingsManager->getSetting($module, $input);
+            $setting[self::RESPONSE_KEY_VALUE] = $userSettingsManager->getSetting($module, $input);
+            $editableSettings[$input] = $setting;
         }
         return [
-            'module' => $module,
-            'id' => $moduleResolver->getID($module),
-            'settings' => $settings,
+            self::RESPONSE_KEY_MODULE => $module,
+            self::RESPONSE_KEY_ID => $moduleResolver->getID($module),
+            self::RESPONSE_KEY_SETTINGS => $editableSettings,
         ];
     }
 
