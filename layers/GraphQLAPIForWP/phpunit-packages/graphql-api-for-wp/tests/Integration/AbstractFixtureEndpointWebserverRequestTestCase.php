@@ -81,7 +81,7 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
                 $providerItems["${dataName}:${operationName}"] = [
                     'application/json',
-                    file_get_contents($graphQLResponseFile),
+                    $graphQLResponseForOperationFileInfo->getContents(),
                     $endpoint,
                     [],
                     $query,
