@@ -186,12 +186,12 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
         $editableSettings = [];
         foreach ($settings as $setting) {
             // There are non-editable inputs, to show information. Skip those
-            $input = $setting['input'] ?? null;
+            $input = $setting[Properties::INPUT] ?? null;
             if ($input === null) {
                 continue;
             }
             $setting[ResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
-            $editableSettings[$input] = $setting;
+            $editableSettings[] = $setting;
         }
         return [
             ResponseKeys::MODULE => $module,
