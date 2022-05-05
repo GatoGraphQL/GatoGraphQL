@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\SettingsResponseKeys;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
 
 trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 {
@@ -56,7 +56,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         $pluginSettings = $this->executeRESTEndpointToGetPluginSettings(
             $this->dataName(),
         );
-        return $pluginSettings[$this->getSettingsKey()][SettingsResponseKeys::VALUE];
+        return $pluginSettings[$this->getSettingsKey()][ResponseKeys::VALUE];
     }
 
     protected function executeRESTEndpointToGetPluginSettings(
@@ -76,7 +76,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         // Assert the REST API call is successful, or already fail the test
         $this->assertRESTGetCallIsSuccessful($response);
         $endpointResponse = json_decode($response->getBody()->__toString(), true);
-        return $endpointResponse[SettingsResponseKeys::SETTINGS];
+        return $endpointResponse[ResponseKeys::SETTINGS];
     }
 
     protected function executeRESTEndpointToUpdatePluginSettings(

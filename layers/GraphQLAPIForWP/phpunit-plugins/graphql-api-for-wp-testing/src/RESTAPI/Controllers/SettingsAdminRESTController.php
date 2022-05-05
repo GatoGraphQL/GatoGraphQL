@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
-use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\SettingsResponseKeys;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\ResponseKeys;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
@@ -190,13 +190,13 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             if ($input === null) {
                 continue;
             }
-            $setting[SettingsResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
+            $setting[ResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
             $editableSettings[$input] = $setting;
         }
         return [
-            SettingsResponseKeys::MODULE => $module,
-            SettingsResponseKeys::ID => $moduleResolver->getID($module),
-            SettingsResponseKeys::SETTINGS => $editableSettings,
+            ResponseKeys::MODULE => $module,
+            ResponseKeys::ID => $moduleResolver->getID($module),
+            ResponseKeys::SETTINGS => $editableSettings,
         ];
     }
 

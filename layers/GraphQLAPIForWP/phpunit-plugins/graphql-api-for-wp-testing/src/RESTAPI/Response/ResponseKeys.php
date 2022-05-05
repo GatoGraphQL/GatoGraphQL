@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response;
 
-class SettingsResponseKeys
+class ResponseKeys
 {
     public const MODULE = 'module';
     public const ID = 'id';
