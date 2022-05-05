@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Access to field(s) 'name' has been disabled",
+      "message": "There is no field 'lastName' on type 'User'",
       "locations": [
         {
           "line": 1,
@@ -11,17 +11,17 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "name",
-          "disableAccess"
+          "lastName",
+          "validate"
         ],
-        "code": "PoP\\AccessControl\\e2"
+        "code": "PoP\\ComponentModel\\e16"
       }
     }
   ],
   "data": {
     "user": {
       "id": 1,
-      "name": null
+      "lastName": null
     }
   }
 }
