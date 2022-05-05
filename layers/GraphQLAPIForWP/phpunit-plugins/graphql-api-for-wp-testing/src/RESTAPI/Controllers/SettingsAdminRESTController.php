@@ -12,6 +12,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Settings\SettingsNormalizerInterface;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\SettingsResponseKeys;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\RESTResponse;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_Error;
@@ -38,11 +39,6 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
 {
     use WithModuleParamRESTControllerTrait;
     use WithFlushRewriteRulesRESTControllerTrait;
-
-    public const RESPONSE_KEY_MODULE = 'module';
-    public const RESPONSE_KEY_ID = 'id';
-    public const RESPONSE_KEY_SETTINGS = 'settings';
-    public const RESPONSE_KEY_VALUE = 'value';
 
     protected string $restBase = 'module-settings';
 
@@ -194,13 +190,13 @@ class SettingsAdminRESTController extends AbstractAdminRESTController
             if ($input === null) {
                 continue;
             }
-            $setting[self::RESPONSE_KEY_VALUE] = $userSettingsManager->getSetting($module, $input);
+            $setting[SettingsResponseKeys::VALUE] = $userSettingsManager->getSetting($module, $input);
             $editableSettings[$input] = $setting;
         }
         return [
-            self::RESPONSE_KEY_MODULE => $module,
-            self::RESPONSE_KEY_ID => $moduleResolver->getID($module),
-            self::RESPONSE_KEY_SETTINGS => $editableSettings,
+            SettingsResponseKeys::MODULE => $module,
+            SettingsResponseKeys::ID => $moduleResolver->getID($module),
+            SettingsResponseKeys::SETTINGS => $editableSettings,
         ];
     }
 
