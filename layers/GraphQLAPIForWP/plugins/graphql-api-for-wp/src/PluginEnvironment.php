@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI;
 
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
+use PoP\Root\Environment as RootEnvironment;
 
 class PluginEnvironment
 {
@@ -62,6 +63,6 @@ class PluginEnvironment
             return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
-        return false;
+        return RootEnvironment::isApplicationEnvironmentDev();
     }
 }
