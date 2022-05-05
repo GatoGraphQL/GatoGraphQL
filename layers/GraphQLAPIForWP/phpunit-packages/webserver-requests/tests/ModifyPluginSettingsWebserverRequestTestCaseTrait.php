@@ -129,7 +129,16 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         );
         $options = $this->getRESTEndpointRequestOptions();
         $options['query'][Params::OPTION_VALUES] = [
-            $this->getSettingsKey() => $value,
+            /**
+             * For some reason, passing an empty array doesn't work,
+             * it doesn't append it to the "query". Eg:
+             *
+             *   ["entries" => []] (for User Meta entries)
+             *
+             * In that case, pass an empty string instead of an empty array,
+             * then it works!
+             */
+            $this->getSettingsKey() => $value === [] ? '' : $value,
         ];
         $response = $client->post(
             $endpointURL,

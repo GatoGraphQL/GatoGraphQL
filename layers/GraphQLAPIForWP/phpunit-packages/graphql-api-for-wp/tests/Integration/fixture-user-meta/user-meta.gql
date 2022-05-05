@@ -1,0 +1,8 @@
+{
+  user(by: {id: 2}) {
+    id
+    nickname: metaValue(key: "nickname")
+    firstname: metaValue(key: "first_name")
+    lastname: metaValue(key: "last_name")
+  }
+}
