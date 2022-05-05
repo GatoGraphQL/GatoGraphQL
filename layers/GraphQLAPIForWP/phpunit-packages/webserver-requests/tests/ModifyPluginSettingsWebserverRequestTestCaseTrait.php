@@ -49,7 +49,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
             $this->previousValue,
             sprintf(
                 'The new value to execute the REST API call to modify the plugin settings is \'%s\', but this is the same as the current value, and these must be different.',
-                $newValue
+                is_array($newValue) ? json_encode($newValue) : $newValue
             )
         );
 
