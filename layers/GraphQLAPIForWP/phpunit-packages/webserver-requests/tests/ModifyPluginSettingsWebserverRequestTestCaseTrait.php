@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
+use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
@@ -16,6 +17,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 
     protected mixed $previousValue;
 
+    abstract public static function assertEquals($expected, $actual, string $message = ''): void;
     abstract public static function assertNotEquals($expected, $actual, string $message = ''): void;
 
     /**
@@ -70,7 +72,14 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         $pluginSettings = $this->executeRESTEndpointToGetPluginSettings(
             $this->dataName(),
         );
-        return $pluginSettings[$this->getSettingsKey()][ResponseKeys::VALUE];
+        $input = $this->getSettingsKey();
+        $pluginInputSettings = array_values(array_filter(
+            $pluginSettings,
+            fn (array $pluginSetting) => $pluginSetting[Properties::INPUT] === $input,
+        ));
+        $this->assertEquals(count($pluginInputSettings), 1);
+        $pluginInputSetting = $pluginInputSettings[0];
+        return $pluginInputSetting[ResponseKeys::VALUE];
     }
 
     protected function executeRESTEndpointToGetPluginSettings(
