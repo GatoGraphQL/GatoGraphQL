@@ -33,7 +33,7 @@ class UserMetaModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
         $dataName = $this->dataName();
         if (str_ends_with($dataName, ':1')) {
             return [
-                '\/.*name\/',
+                '/.*name/',
             ];
         }
         return [
