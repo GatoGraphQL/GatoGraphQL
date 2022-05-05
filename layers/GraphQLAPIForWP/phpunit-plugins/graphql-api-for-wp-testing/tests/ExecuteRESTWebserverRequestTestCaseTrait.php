@@ -10,6 +10,9 @@ use Psr\Http\Message\ResponseInterface;
 
 trait ExecuteRESTWebserverRequestTestCaseTrait
 {
+    abstract public static function assertEquals($expected, $actual, string $message = ''): void;
+    abstract public static function assertStringStartsWith(string $prefix, string $string, string $message = ''): void;
+
     /**
      * Assert the REST API call is successful, or already fail the test
      */
