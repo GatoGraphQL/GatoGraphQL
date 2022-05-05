@@ -25,6 +25,8 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsSetUp(): void
     {
+        $dataName = $this->dataName();
+
         /**
          * First obtain and cache the previous value,
          * so it can be retrieved via REST
@@ -45,7 +47,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 
         // Update the settings
         $this->executeRESTEndpointToUpdatePluginSettings(
-            $this->dataName(),
+            $dataName,
             $newValue,
         );
     }
@@ -57,8 +59,10 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
      */
     protected function modifyPluginSettingsTearDown(): void
     {
+        $dataName = $this->dataName();
+        
         $this->executeRESTEndpointToUpdatePluginSettings(
-            $this->dataName(),
+            $dataName,
             $this->previousValue,
         );
     }
