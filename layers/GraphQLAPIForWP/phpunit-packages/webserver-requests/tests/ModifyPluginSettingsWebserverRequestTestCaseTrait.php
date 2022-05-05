@@ -7,6 +7,7 @@ namespace PHPUnitForGraphQLAPI\WebserverRequests;
 use PHPUnitForGraphQLAPI\GraphQLAPI\Constants\RESTAPIEndpoints;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Constants\Params;
+use PHPUnitForGraphQLAPI\GraphQLAPITesting\RESTAPI\Response\SettingsResponseKeys;
 
 trait ModifyPluginSettingsWebserverRequestTestCaseTrait
 {
@@ -26,9 +27,10 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          * (before the modifications is carried out)
          */
         $this->previousValue = $this->getPluginSettingsOriginalValue();
+        $newValue = $this->getPluginSettingsNewValue();
         $this->executeRESTEndpointToUpdatePluginSettings(
             $this->dataName(),
-            $this->getPluginSettingsNewValue(),
+            $newValue,
         );
     }
 
@@ -45,11 +47,41 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
         );
     }
 
-    abstract protected function getPluginSettingsOriginalValue(): mixed;
+    /**
+     * By default, execute a REST call to obtain the current
+     * value from the server
+     */
+    protected function getPluginSettingsOriginalValue(): mixed
+    {
+        $pluginSettings = $this->executeRESTEndpointToGetPluginSettings(
+            $this->dataName(),
+        );
+        return $pluginSettings[$this->getSettingsKey()][SettingsResponseKeys::VALUE];
+    }
+
+    protected function executeRESTEndpointToGetPluginSettings(
+        string $dataName,
+    ): array {
+        $client = static::getClient();
+        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;
+        $endpointURL = sprintf(
+            $endpointURLPlaceholder,
+            $this->getModuleID($dataName),
+        );
+        $options = $this->getRESTEndpointRequestOptions();
+        $response = $client->get(
+            $endpointURL,
+            $options,
+        );
+        // Assert the REST API call is successful, or already fail the test
+        $this->assertRESTGetCallIsSuccessful($response);
+        $endpointResponse = json_decode($response->getBody()->__toString(), true);
+        return $endpointResponse[SettingsResponseKeys::SETTINGS];
+    }
 
     protected function executeRESTEndpointToUpdatePluginSettings(
         string $dataName,
-        mixed $value
+        mixed $value,
     ): void {
         $client = static::getClient();
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;
@@ -66,7 +98,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTCallIsSuccessful($response);
+        $this->assertRESTPostCallIsSuccessful($response);
     }
 
     abstract protected function getSettingsKey(): string;
