@@ -43,12 +43,13 @@ class DefaultSchemaConfigurationForSingleEndpointQueryExecutionModifyPluginSetti
         // };
     }
 
-    protected function getPluginSettingsNewValue(array $data): mixed
+    protected function getPluginSettingsNewValue(): mixed
     {
         // New value: Schema Config "Power Users"
         return self::SCHEMA_CONFIGURATION_POWERUSERS_ID;
     }
-    protected function getPluginSettingsOriginalValue(array $data): mixed
+    
+    protected function getPluginSettingsOriginalValue(): mixed
     {
         // Current value: no Schema Config selected
         return ModuleSettingOptionValues::NO_VALUE_ID;

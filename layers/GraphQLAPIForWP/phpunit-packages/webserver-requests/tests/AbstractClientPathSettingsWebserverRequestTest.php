@@ -40,13 +40,15 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractMo
      */
     abstract protected function provideClientPathEntries(): array;
 
-    protected function getPluginSettingsNewValue(array $data): mixed
+    protected function getPluginSettingsNewValue(): mixed
     {
+        $data = $this->getProvidedData();
         return $data[0];
     }
 
-    protected function getPluginSettingsOriginalValue(array $data): mixed
+    protected function getPluginSettingsOriginalValue(): mixed
     {
+        $data = $this->getProvidedData();
         return $data[1];
     }
 }

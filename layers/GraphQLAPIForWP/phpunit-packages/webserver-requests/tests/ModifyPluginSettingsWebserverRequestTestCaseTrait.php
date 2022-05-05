@@ -19,12 +19,11 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          * Execute a REST API to update the client path before the test
          */
         $dataName = $this->dataName();
-        $data = $this->getProvidedData();
-        $newValue = $this->getPluginSettingsNewValue($data);
+        $newValue = $this->getPluginSettingsNewValue();
         $this->executeRESTEndpointToUpdatePluginSettings($dataName, $newValue);
     }
 
-    abstract protected function getPluginSettingsNewValue(array $data): mixed;
+    abstract protected function getPluginSettingsNewValue(): mixed;
 
     protected function modifyPluginSettingsTearDown(): void
     {
@@ -32,12 +31,11 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          * Execute a REST API to restore the client path after the test
          */
         $dataName = $this->dataName();
-        $data = $this->getProvidedData();
-        $previousValue = $this->getPluginSettingsOriginalValue($data);
+        $previousValue = $this->getPluginSettingsOriginalValue();
         $this->executeRESTEndpointToUpdatePluginSettings($dataName, $previousValue);
     }
 
-    abstract protected function getPluginSettingsOriginalValue(array $data): mixed;
+    abstract protected function getPluginSettingsOriginalValue(): mixed;
 
     protected function executeRESTEndpointToUpdatePluginSettings(
         string $dataName,
