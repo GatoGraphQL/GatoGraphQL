@@ -29,14 +29,13 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractMo
      */
     public function testClientPathsUpdated(
         string $newClientPath,
-        string $previousClientPath,
     ): void {
         $this->testEnabledOrDisabledClients($newClientPath, 200, true);
-        $this->testEnabledOrDisabledClients($previousClientPath, 404, false);
+        $this->testEnabledOrDisabledClients($this->previousValue, 404, false);
     }
 
     /**
-     * @return array<string,string[]> Array of 2 elements: [ ${newClientPath}, ${previousClientPath} ]
+     * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
      */
     abstract protected function provideClientPathEntries(): array;
 
@@ -44,11 +43,5 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractMo
     {
         $data = $this->getProvidedData();
         return $data[0];
-    }
-
-    protected function getPluginSettingsOriginalValue(): mixed
-    {
-        $data = $this->getProvidedData();
-        return $data[1];
     }
 }

@@ -14,18 +14,16 @@ class ClientPathSettingsWebserverRequestTest extends AbstractClientPathSettingsW
     use SingleEndpointClientWebserverRequestTestCaseTrait;
 
     /**
-     * @return array<string,string[]> Array of 2 elements: [ ${newClientPath}, ${previousClientPath} ]
+     * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
      */
     protected function provideClientPathEntries(): array
     {
         return [
             'single-endpoint-graphiql' => [
                 '/new-graphiql/',
-                '/graphiql/',
             ],
             'single-endpoint-voyager' => [
                 '/new-schema/',
-                '/schema/',
             ],
         ];
     }
