@@ -56,7 +56,9 @@ class PluginEnvironment
     {
         if (getenv(self::ENABLE_UNSAFE_DEFAULTS) !== false) {
             return (bool)getenv(self::ENABLE_UNSAFE_DEFAULTS);
-        } elseif (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
+        }
+
+        if (PluginEnvironmentHelpers::isWPConfigConstantDefined(self::ENABLE_UNSAFE_DEFAULTS)) {
             return (bool)PluginEnvironmentHelpers::getWPConfigConstantValue(self::ENABLE_UNSAFE_DEFAULTS);
         }
 
