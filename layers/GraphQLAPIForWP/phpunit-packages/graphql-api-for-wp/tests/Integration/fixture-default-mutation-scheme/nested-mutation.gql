@@ -1,13 +1,17 @@
 mutation {
   post(by: { id: 13 }) {
-    addComment(input: {
-      comment: "Great insight!",
-      authorName: "Leo"
-      authorEmail: "leo@saronga.com",
+    id
+    update(input: {
+      title: "New title"
     }) {
-      content
-      authorName
-      authorEmail
+      title
+      newTitle: title
+      update(input: {
+        title: "Released v0.6, check it out"
+      }) {
+        title
+        originalTitle: title
+      }
     }
   }
 }

@@ -12,7 +12,7 @@ class DefaultMutationSchemeModifyPluginSettingsFixtureEndpointWebserverRequestTe
     protected function getEndpoint(): string
     {
         // This endpoint has "Support nested mutations?" as "Default"
-        return 'graphql/power-users/';
+        return 'graphql/website/';
     }
 
     protected function getFixtureFolder(): string
