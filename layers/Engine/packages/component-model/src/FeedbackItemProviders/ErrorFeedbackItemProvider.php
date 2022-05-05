@@ -38,7 +38,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E24 = 'e24';
     public final const E25 = 'e25';
     public final const E26 = 'e26';
-    public final const E27 = 'e27';
 
     /**
      * @return string[]
@@ -75,7 +74,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E24,
             self::E25,
             self::E26,
-            self::E27,
         ];
     }
 
@@ -111,7 +109,6 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E24 => $this->__('Argument \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
             self::E25 => $this->__('Arguments \'%1$s\' in %2$s \'%3$s\' cannot be empty', 'component-model'),
             self::E26 => $this->__('There is no field \'%s\' on type \'%s\' satisfying version constraint \'%s\'', 'component-model'),
-            self::E27 => $this->__('There is no field \'%s\' on type \'%s\'', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

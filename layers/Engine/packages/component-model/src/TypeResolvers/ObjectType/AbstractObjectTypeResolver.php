@@ -187,7 +187,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 )
                 : new FeedbackItemResolution(
                     ErrorFeedbackItemProvider::class,
-                    ErrorFeedbackItemProvider::E27,
+                    ErrorFeedbackItemProvider::E16,
                     [
                         $fieldName,
                         $this->getMaybeNamespacedTypeName(),
