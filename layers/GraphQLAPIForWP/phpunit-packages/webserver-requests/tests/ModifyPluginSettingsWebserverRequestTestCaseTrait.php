@@ -20,9 +20,11 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
-        $newValue = $data[0];
+        $newValue = $this->getPluginSettingsNewValue($data);
         $this->executeRESTEndpointToUpdatePluginSettings($dataName, $newValue);
     }
+
+    abstract protected function getPluginSettingsNewValue(array $data): mixed;
 
     protected function modifyPluginSettingsTearDown(): void
     {
@@ -31,13 +33,15 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
          */
         $dataName = $this->dataName();
         $data = $this->getProvidedData();
-        $previousValue = $data[1];
+        $previousValue = $this->getPluginSettingsOriginalValue($data);
         $this->executeRESTEndpointToUpdatePluginSettings($dataName, $previousValue);
     }
 
+    abstract protected function getPluginSettingsOriginalValue(array $data): mixed;
+
     protected function executeRESTEndpointToUpdatePluginSettings(
         string $dataName,
-        string $value
+        mixed $value
     ): void {
         $client = static::getClient();
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE_SETTINGS;

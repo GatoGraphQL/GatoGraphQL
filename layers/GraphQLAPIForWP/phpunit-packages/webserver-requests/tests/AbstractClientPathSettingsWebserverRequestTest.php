@@ -39,4 +39,14 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractMo
      * @return array<string,string[]> Array of 2 elements: [ ${newClientPath}, ${previousClientPath} ]
      */
     abstract protected function provideClientPathEntries(): array;
+
+    protected function getPluginSettingsNewValue(array $data): mixed
+    {
+        return $data[0];
+    }
+
+    protected function getPluginSettingsOriginalValue(array $data): mixed
+    {
+        return $data[1];
+    }
 }
