@@ -12,6 +12,6 @@ class CustomEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpoi
 {
     protected function getEndpoint(): string
     {
-        return 'graphql/power-users/';
+        return 'graphql/website/';
     }
 }
