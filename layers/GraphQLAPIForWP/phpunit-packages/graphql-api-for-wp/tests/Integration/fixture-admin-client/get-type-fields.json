@@ -1947,7 +1947,7 @@
         },
         {
           "name": "RootMyCustomPostsFilterInput",
-          "namespacedName": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
+          "namespacedName": "RootMyCustomPostsFilterInput",
           "kind": "INPUT_OBJECT",
           "description": "Input to filter the logged-in user's custom posts",
           "fields": null
@@ -2038,14 +2038,14 @@
         },
         {
           "name": "TaxonomySortInput",
-          "namespacedName": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+          "namespacedName": "TaxonomySortInput",
           "kind": "INPUT_OBJECT",
           "description": "Input to sort custom posts",
           "fields": null
         },
         {
           "name": "TaxonomyTaxonomiesFilterInput",
-          "namespacedName": "PoPCMSSchema_Taxonomies_TaxonomyTaxonomiesFilterInput",
+          "namespacedName": "TaxonomyTaxonomiesFilterInput",
           "kind": "INPUT_OBJECT",
           "description": "Input to filter child taxonomies",
           "fields": null
@@ -2220,7 +2220,7 @@
         },
         {
           "name": "OrderEnum",
-          "namespacedName": "PoPCMSSchema_SchemaCommons_OrderEnum",
+          "namespacedName": "OrderEnum",
           "kind": "ENUM",
           "description": null,
           "fields": null
@@ -2234,7 +2234,7 @@
         },
         {
           "name": "TaxonomyOrderByEnum",
-          "namespacedName": "PoPCMSSchema_Taxonomies_TaxonomyOrderByEnum",
+          "namespacedName": "TaxonomyOrderByEnum",
           "kind": "ENUM",
           "description": null,
           "fields": null
