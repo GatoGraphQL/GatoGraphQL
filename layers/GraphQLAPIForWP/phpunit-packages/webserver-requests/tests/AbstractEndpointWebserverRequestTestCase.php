@@ -44,7 +44,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         );
 
         $this->assertEquals($this->getExpectedResponseStatusCode(), $response->getStatusCode());
-        $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
+        $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
         }
