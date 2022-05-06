@@ -14,12 +14,12 @@ trait ClientWebserverRequestTestCaseTrait
 {
     use RequestURLWebserverRequestTestCaseTrait;
 
-    protected function testEnabledOrDisabledClients(
+    protected function doTestEnabledOrDisabledClients(
         string $clientEndpoint,
         int $expectedStatusCode,
         bool $enabled,
     ): void {
-        $this->testEnabledOrDisabledPath(
+        $this->doTestEnabledOrDisabledPath(
             $clientEndpoint,
             $expectedStatusCode,
             null,

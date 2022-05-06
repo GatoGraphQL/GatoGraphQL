@@ -43,23 +43,16 @@ class PersistedQueryBasePathSettingsWebserverRequestTest extends AbstractRequest
         return $basePath . '/latest-posts-for-mobile-app/';
     }
 
-    /**
-     * For some reason, WordPress does not produce a 404 when accessing
-     * the previous CPT URL, so test on the content-type then:
-     *
-     * - JSON: Endpoint is accessible
-     * - HTML: Some WordPress page
-     */
     protected function doTestPathsUpdated(
         string $newPath,
         string $previousPath,
     ): void {
-        $this->testEnabledOrDisabledPath($newPath, 200, 'application/json', true);
+        $this->doTestEnabledOrDisabledPath($newPath, 200, 'application/json', true);
 
         /**
          * Disabled because WordPress still loads the previous URL,
          * doing a redirect to the new URL
          */
-        // $this->testEnabledOrDisabledPath($previousPath, 200, 'text/html', false);
+        // $this->doTestEnabledOrDisabledPath($previousPath, 200, 'text/html', false);
     }
 }

@@ -54,7 +54,7 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
         string $newPath,
         string $previousPath,
     ): void {
-        $this->testEnabledOrDisabledPath($newPath, 200, 'application/json', true);
-        $this->testEnabledOrDisabledPath($previousPath, 200, 'text/html', false);
+        $this->doTestEnabledOrDisabledPath($newPath, 200, 'application/json', true);
+        $this->doTestEnabledOrDisabledPath($previousPath, 200, 'text/html', false);
     }
 }

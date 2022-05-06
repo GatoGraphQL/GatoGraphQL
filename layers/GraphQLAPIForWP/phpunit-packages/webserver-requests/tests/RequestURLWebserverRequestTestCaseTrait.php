@@ -14,7 +14,7 @@ trait RequestURLWebserverRequestTestCaseTrait
      */
     abstract public function dataName();
 
-    protected function testEnabledOrDisabledPath(
+    protected function doTestEnabledOrDisabledPath(
         string $clientEndpoint,
         int $expectedStatusCode,
         ?string $expectedContentType,
