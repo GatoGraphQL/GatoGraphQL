@@ -53,6 +53,8 @@
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
         "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
+        "create-users": "lando composer create-users-within-container",
+        "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
         "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
             "@symlink-vendor-for-graphql-api-for-wp-testing-plugin",
