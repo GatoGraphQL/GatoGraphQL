@@ -4,44 +4,32 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\WebserverRequests;
 
-use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
-
 /**
  * Test that enabling/disabling clients (GraphiQL/Voyager)
  * in Custom Endpoints works well
  */
-abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractModifyPluginSettingsWebserverRequestTest
+abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
 {
     use ClientWebserverRequestTestCaseTrait;
 
-    protected function getSettingsKey(): string
-    {
-        return ModuleSettingOptions::PATH;
+    protected function doTestPathsUpdated(
+        string $newPath,
+        string $previousPath,
+    ): void {
+        $this->testEnabledOrDisabledPath($newPath, 200, 'text/html', true);
+        $this->testEnabledOrDisabledPath($previousPath, 404, null, false);
     }
 
     /**
-     * Test that:
-     *
-     * 1. The client under the new path returns a 200
-     * 2. The client under the old path returns a 404
-     *
-     * @dataProvider provideClientPathEntries
+     * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
-    public function testClientPathsUpdated(
-        string $newClientPath,
-    ): void {
-        $this->testEnabledOrDisabledClients($newClientPath, 200, true);
-        $this->testEnabledOrDisabledClients($this->previousValue, 404, false);
+    protected function providePathEntries(): array
+    {
+        return $this->provideClientPathEntries();
     }
 
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
      */
     abstract protected function provideClientPathEntries(): array;
-
-    protected function getPluginSettingsNewValue(): mixed
-    {
-        $data = $this->getProvidedData();
-        return $data[0];
-    }
 }
