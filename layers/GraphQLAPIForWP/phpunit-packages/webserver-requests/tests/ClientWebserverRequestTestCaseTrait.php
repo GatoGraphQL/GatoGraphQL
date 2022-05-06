@@ -12,30 +12,10 @@ use GraphQLByPoP\GraphQLClientsForWP\Constants\CustomHeaders;
  */
 trait ClientWebserverRequestTestCaseTrait
 {
-    /**
-     * @return int|string
-     */
-    abstract public function dataName();
+    use RequestURLWebserverRequestTestCaseTrait;
 
-    protected function testEnabledOrDisabledClients(
-        string $clientEndpoint,
-        int $expectedStatusCode,
-        bool $enabled
-    ): void {
-        $client = static::getClient();
-        $clientEndpointURL = static::getWebserverHomeURL() . '/' . $clientEndpoint;
-        $options = [
-            'verify' => false,
-            // Don't throw exception with 404
-            'http_errors' => false,
-        ];
-        $response = $client->get($clientEndpointURL, $options);
-
-        // Disabled clients: they may assert it produced a 404
-        $this->assertEquals($expectedStatusCode, $response->getStatusCode());
-
-        // Enable clients: must return a custom header, check it is there
-        $hasCustomHeader = $response->hasHeader(CustomHeaders::CLIENT_ENDPOINT);
-        $this->assertTrue($enabled ? $hasCustomHeader : !$hasCustomHeader);
+    protected function getCustomHeader(): ?string
+    {
+        return CustomHeaders::CLIENT_ENDPOINT;
     }
 }
