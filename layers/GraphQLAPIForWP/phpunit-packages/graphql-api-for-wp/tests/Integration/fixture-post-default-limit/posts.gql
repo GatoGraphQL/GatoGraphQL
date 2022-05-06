@@ -1,0 +1,6 @@
+{
+  posts {
+    id
+    title
+  }
+}
