@@ -43,7 +43,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
             $options
         );
 
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($this->getExpectedResponseStatusCode(), $response->getStatusCode());
         $this->assertEquals($expectedContentType, $response->getHeaderLine('content-type'));
         if ($expectedResponseBody !== null) {
             $this->assertJsonStringEqualsJsonString($expectedResponseBody, $response->getBody()->__toString());
@@ -58,6 +58,11 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $options = parent::getRequestBasicOptions();
         $options['headers']['Content-Type'] = 'application/json';
         return $options;
+    }
+
+    protected function getExpectedResponseStatusCode(): int
+    {
+        return 200;
     }
 
     /**
