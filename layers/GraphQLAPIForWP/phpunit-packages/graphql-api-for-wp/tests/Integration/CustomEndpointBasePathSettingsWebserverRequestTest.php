@@ -7,7 +7,7 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestURLPathSettingsWebserverRequestTest;
 
 /**
- * Test that updating the path for a client (GraphiQL/Voyager) works well
+ * Test that updating the base path for the custom endpoint works well
  */
 class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
 {
