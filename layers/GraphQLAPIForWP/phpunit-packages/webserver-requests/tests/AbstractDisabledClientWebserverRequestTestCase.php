@@ -18,7 +18,7 @@ abstract class AbstractDisabledClientWebserverRequestTestCase extends AbstractWe
         string $clientEndpoint,
         int $expectedStatusCode,
     ): void {
-        $this->testEnabledOrDisabledClients($clientEndpoint, $expectedStatusCode, false);
+        $this->doTestEnabledOrDisabledClients($clientEndpoint, $expectedStatusCode, false);
     }
 
     /**
