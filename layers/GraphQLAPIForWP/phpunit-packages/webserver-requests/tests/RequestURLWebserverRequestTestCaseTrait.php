@@ -29,7 +29,17 @@ trait RequestURLWebserverRequestTestCaseTrait
         $response = $client->get($clientEndpointURL, $options);
 
         // Disabled clients: they may assert it produced a 404
-        $this->assertEquals($expectedStatusCode, $response->getStatusCode());
+        $actualStatusCode = $response->getStatusCode();
+        $this->assertEquals(
+            $expectedStatusCode,
+            $actualStatusCode,
+            sprintf(
+                'Failed asserting that expected status code \'%s\' matches actual status code \'%s\' when requesting URL \'%s\'',
+                $expectedStatusCode,
+                $actualStatusCode,
+                $clientEndpointURL
+            )
+        );
 
         // Enable clients: must return a custom header, check it is there
         $customHeader = $this->getCustomHeader();
