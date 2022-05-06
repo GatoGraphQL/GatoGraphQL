@@ -19,7 +19,7 @@ class SingleEndpointTreatUserEmailAsPrivateDataModifyPluginSettingsFixtureEndpoi
     /**
      * "Private fields" must be accessible whether the "treat user email
      * as private" is true or false.
-     * 
+     *
      * Then, override the content of "user-email:0.json", which denies
      * access to the field, with the content from "user-email.json",
      * which allows it.
