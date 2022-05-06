@@ -50,7 +50,7 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         $client = static::getClient();
         $options = static::getWebserverPingOptions();
         if (static::shareCookies()) {
-            self::$cookieJar = static::createCookieJar();
+            static::regenerateCookieJar();
             $options['cookies'] = self::$cookieJar;
         }
         if (static::useSSL()) {
@@ -83,6 +83,16 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             'Webserver under "%s" is not running',
             static::getWebserverDomain()
         );
+    }
+
+    /**
+     * Execute a request against the webserver.
+     * If not successful (eg: because the server is not running)
+     * then skip all tests.
+     */
+    protected static function regenerateCookieJar(): void
+    {
+        self::$cookieJar = static::createCookieJar();
     }
 
     /**
