@@ -8,7 +8,7 @@ class ManageOptionsUserAuthorizationScheme extends AbstractUserAuthorizationSche
 {
     public function getSchemaEditorAccessCapability(): string
     {
-        return 'manage_options';
+        return UserAuthorizationSchemes::ADMIN_ONLY;
     }
 
     public function getDescription(): string
