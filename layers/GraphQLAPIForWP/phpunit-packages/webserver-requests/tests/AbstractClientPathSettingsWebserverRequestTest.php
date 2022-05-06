@@ -12,6 +12,14 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractRe
 {
     use ClientWebserverRequestTestCaseTrait;
 
+    protected function doTestPathsUpdated(
+        string $newPath,
+        string $previousPath,
+    ): void {
+        $this->testURLRequestProducesExpectedStatusCode($newPath, 200, 'text/html', true);
+        $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, null, false);
+    }
+
     /**
      * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */

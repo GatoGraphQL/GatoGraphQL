@@ -17,6 +17,7 @@ trait RequestURLWebserverRequestTestCaseTrait
     protected function testURLRequestProducesExpectedStatusCode(
         string $clientEndpoint,
         int $expectedStatusCode,
+        ?string $expectedContentType,
         bool $enabled,
     ): void {
         $client = static::getClient();
@@ -40,6 +41,13 @@ trait RequestURLWebserverRequestTestCaseTrait
                 $clientEndpointURL
             )
         );
+
+        if ($expectedContentType !== null) {
+            $this->assertStringStartsWith(
+                $expectedContentType,
+                $response->getHeaderLine('content-type')
+            );
+        }
 
         // Enable clients: must return a custom header, check it is there
         $customHeader = $this->getCustomHeader();
