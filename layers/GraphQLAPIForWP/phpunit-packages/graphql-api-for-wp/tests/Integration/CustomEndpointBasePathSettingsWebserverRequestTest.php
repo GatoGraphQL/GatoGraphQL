@@ -20,9 +20,6 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
             'custom-endpoint-base-path' => [
                 'graaaaaaaphql',
             ],
-            'slashed-custom-endpoint-base-path' => [
-                '/graaaaaaappppppphql/',
-            ],
         ];
     }
 
