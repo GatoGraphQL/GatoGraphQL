@@ -93,6 +93,15 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 ];
             }
         }
+        return $this->customizeProviderEndpointEntries($providerItems);
+    }
+
+    /**
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function customizeProviderEndpointEntries(array $providerItems): array
+    {
         return $providerItems;
     }
 
