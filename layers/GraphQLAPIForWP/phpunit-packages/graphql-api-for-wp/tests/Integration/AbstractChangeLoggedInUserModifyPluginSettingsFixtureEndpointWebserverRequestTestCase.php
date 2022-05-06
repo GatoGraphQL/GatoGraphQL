@@ -12,6 +12,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
     protected static ?string $differentUsername = null;
     protected static ?string $differentPassword = null;
     protected static array $differentWebserverPingOptions = [];
+    protected static array $differentRequestBasicOptions = [];
 
     /**
      * After the initial set-up, log the "admin" out,
@@ -25,6 +26,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         static::$differentUsername = $this->getDifferentLoginUsername();
         static::$differentPassword = $this->getDifferentLoginPassword();
         static::$differentWebserverPingOptions = $this->getDifferentWebserverPingOptions();
+        static::$differentRequestBasicOptions = $this->getDifferentRequestBasicOptions();
         static::setUpWebserverRequestTests();
     }
 
@@ -49,19 +51,39 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
      */
     protected static function getWebserverPingOptions(): array
     {
-        $webserverPingOptions = parent::getWebserverPingOptions();
+        $options = parent::getWebserverPingOptions();
         foreach (static::$differentWebserverPingOptions as $key => $value) {
             // Merge arrays, or assign other values directly
             if (is_array($value)) {
-                $webserverPingOptions[$key] = array_merge(
-                    $webserverPingOptions[$key] ?? [],
+                $options[$key] = array_merge(
+                    $options[$key] ?? [],
                     $value
                 );
                 continue;
             }
-            $webserverPingOptions[$key] = $value;
+            $options[$key] = $value;
         }
-        return $webserverPingOptions;
+        return $options;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getRequestBasicOptions(): array
+    {
+        $options = parent::getRequestBasicOptions();
+        foreach (static::$differentRequestBasicOptions as $key => $value) {
+            // Merge arrays, or assign other values directly
+            if (is_array($value)) {
+                $options[$key] = array_merge(
+                    $options[$key] ?? [],
+                    $value
+                );
+                continue;
+            }
+            $options[$key] = $value;
+        }
+        return $options;
     }
 
     abstract protected function getDifferentLoginUsername(): string;
@@ -73,15 +95,22 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         return [];
     }
 
+    protected function getDifferentRequestBasicOptions(): array
+    {
+        return [];
+    }
+
     /**
      * Log the different user out, and again the "admin" in,
      * and then continue the original set-up
      */
     protected function tearDown(): void
     {
-        // Login the "admin" user
+        // Login the "admin" user again
         static::$differentUsername = null;
         static::$differentPassword = null;
+        static::$differentWebserverPingOptions = [];
+        static::$differentRequestBasicOptions = [];
         static::setUpWebserverRequestTests();
 
         parent::tearDown();
