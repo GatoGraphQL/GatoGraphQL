@@ -39,8 +39,8 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends Abstra
         string $newPath,
         string $previousPath,
     ): void {
-        $this->testURLRequestProducesExpectedStatusCode($newPath, 200, 'application/json', true);
-        $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, null, false);
+        $this->testEnabledOrDisabledPath($newPath, 200, 'application/json', true);
+        $this->testEnabledOrDisabledPath($previousPath, 404, null, false);
     }
 
     protected function getNewPath(string $dataItem): string

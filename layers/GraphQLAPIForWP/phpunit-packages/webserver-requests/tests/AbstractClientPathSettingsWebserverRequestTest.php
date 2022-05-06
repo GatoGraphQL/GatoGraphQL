@@ -16,8 +16,8 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractRe
         string $newPath,
         string $previousPath,
     ): void {
-        $this->testURLRequestProducesExpectedStatusCode($newPath, 200, 'text/html', true);
-        $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, null, false);
+        $this->testEnabledOrDisabledPath($newPath, 200, 'text/html', true);
+        $this->testEnabledOrDisabledPath($previousPath, 404, null, false);
     }
 
     /**
