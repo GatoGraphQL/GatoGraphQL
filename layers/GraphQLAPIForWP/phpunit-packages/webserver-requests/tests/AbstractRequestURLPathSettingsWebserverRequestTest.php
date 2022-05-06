@@ -29,8 +29,16 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends Abstra
     public function testPathsUpdated(
         string $dataItem,
     ): void {
-        $newPath = $this->getNewPath($dataItem);
-        $previousPath = $this->getPreviousPath($this->previousValue);
+        $this->doTestPathsUpdated(
+            $this->getNewPath($dataItem),
+            $this->getPreviousPath($this->previousValue)
+        );
+    }
+
+    protected function doTestPathsUpdated(
+        string $newPath,
+        string $previousPath,
+    ): void {
         $this->testURLRequestProducesExpectedStatusCode($newPath, 200, true);
         $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, false);
     }
