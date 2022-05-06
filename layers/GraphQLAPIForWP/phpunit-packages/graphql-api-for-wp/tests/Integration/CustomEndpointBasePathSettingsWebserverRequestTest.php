@@ -42,4 +42,19 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
     {
         return $basePath . '/power-users/';
     }
+
+    /**
+     * For some reason, WordPress does not produce a 404 when accessing
+     * the previous CPT URL, so test on the content-type then:
+     *
+     * - JSON: Endpoint is accessible
+     * - HTML: Some WordPress page
+     */
+    protected function doTestPathsUpdated(
+        string $newPath,
+        string $previousPath,
+    ): void {
+        $this->testURLRequestProducesExpectedStatusCode($newPath, 200, 'application/json', true);
+        $this->testURLRequestProducesExpectedStatusCode($previousPath, 200, 'text/html', false);
+    }
 }
