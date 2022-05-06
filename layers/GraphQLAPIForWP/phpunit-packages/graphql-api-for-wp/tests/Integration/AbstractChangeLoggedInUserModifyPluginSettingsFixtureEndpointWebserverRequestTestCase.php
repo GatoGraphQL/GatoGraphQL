@@ -13,6 +13,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
     protected static ?string $differentPassword = null;
     protected static array $differentWebserverPingOptions = [];
     protected static array $differentRequestBasicOptions = [];
+    protected ?int $differentExpectedResponseStatusCode = null;
 
     /**
      * After the initial set-up, log the "admin" out,
@@ -27,6 +28,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         static::$differentPassword = $this->getDifferentLoginPassword();
         static::$differentWebserverPingOptions = $this->getDifferentWebserverPingOptions();
         static::$differentRequestBasicOptions = $this->getDifferentRequestBasicOptions();
+        $this->differentExpectedResponseStatusCode = $this->getDifferentExpectedResponseStatusCode();
         static::setUpWebserverRequestTests();
     }
 
@@ -86,6 +88,14 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         return $options;
     }
 
+    protected function getExpectedResponseStatusCode(): int
+    {
+        if ($this->differentExpectedResponseStatusCode !== null) {
+            return $this->differentExpectedResponseStatusCode;
+        }
+        return parent::getExpectedResponseStatusCode();
+    }
+
     abstract protected function getDifferentLoginUsername(): string;
 
     abstract protected function getDifferentLoginPassword(): string;
@@ -100,6 +110,11 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         return [];
     }
 
+    protected function getDifferentExpectedResponseStatusCode(): ?int
+    {
+        return null;
+    }
+
     /**
      * Log the different user out, and again the "admin" in,
      * and then continue the original set-up
@@ -111,6 +126,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         static::$differentPassword = null;
         static::$differentWebserverPingOptions = [];
         static::$differentRequestBasicOptions = [];
+        $this->differentExpectedResponseStatusCode = null;
         static::setUpWebserverRequestTests();
 
         parent::tearDown();
