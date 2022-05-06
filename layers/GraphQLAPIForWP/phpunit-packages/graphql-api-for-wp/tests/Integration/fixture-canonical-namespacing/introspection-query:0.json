@@ -2740,7 +2740,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -2822,7 +2822,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -3375,7 +3375,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -3430,7 +3430,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -3556,7 +3556,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomyTaxonomiesFilterInput",
+                    "name": "TaxonomyTaxonomiesFilterInput",
                     "ofType": null
                   }
                 }
@@ -3583,7 +3583,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomyTaxonomiesFilterInput",
+                    "name": "TaxonomyTaxonomiesFilterInput",
                     "ofType": null
                   }
                 },
@@ -3603,7 +3603,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -3638,7 +3638,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomyTaxonomiesFilterInput",
+                    "name": "TaxonomyTaxonomiesFilterInput",
                     "ofType": null
                   }
                 },
@@ -3658,7 +3658,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -5112,7 +5112,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
+                    "name": "RootMyCustomPostsFilterInput",
                     "ofType": null
                   }
                 }
@@ -5139,7 +5139,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
+                    "name": "RootMyCustomPostsFilterInput",
                     "ofType": null
                   }
                 },
@@ -5556,7 +5556,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -5661,7 +5661,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -5793,7 +5793,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -5848,7 +5848,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -7074,7 +7074,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
+                    "name": "RootMyCustomPostsFilterInput",
                     "ofType": null
                   }
                 }
@@ -7101,7 +7101,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
+                    "name": "RootMyCustomPostsFilterInput",
                     "ofType": null
                   }
                 },
@@ -7518,7 +7518,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -7623,7 +7623,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -7755,7 +7755,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -7810,7 +7810,7 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
+                    "name": "TaxonomySortInput",
                     "ofType": null
                   }
                 }
@@ -11631,7 +11631,7 @@
               "defaultValue": "\"DESC\"",
               "type": {
                 "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+                "name": "OrderEnum",
                 "ofType": null
               }
             }
@@ -12084,7 +12084,7 @@
               "defaultValue": "\"DESC\"",
               "type": {
                 "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+                "name": "OrderEnum",
                 "ofType": null
               }
             }
@@ -12463,7 +12463,7 @@
               "defaultValue": "\"DESC\"",
               "type": {
                 "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+                "name": "OrderEnum",
                 "ofType": null
               }
             }
@@ -12535,7 +12535,7 @@
               "defaultValue": "\"DESC\"",
               "type": {
                 "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+                "name": "OrderEnum",
                 "ofType": null
               }
             }
@@ -12939,279 +12939,6 @@
                 "kind": "SCALAR",
                 "name": "Int",
                 "ofType": null
-              }
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "PoPCMSSchema_CustomPostMutations_RootMyCustomPostsFilterInput",
-          "description": "Input to filter the logged-in user's custom posts",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "customPostTypes",
-              "description": "Filter custom posts of given types",
-              "defaultValue": "[\"post\"]",
-              "type": {
-                "kind": "LIST",
-                "name": "[CustomPostEnum!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "CustomPostEnum!",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "CustomPostEnum",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "dateQuery",
-              "description": "Filter custom posts based on date",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[DateQueryInput!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "DateQueryInput!",
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "excludeIDs",
-              "description": "Exclude elements with the given IDs",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
-              "defaultValue": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            {
-              "name": "ids",
-              "description": "Limit results to elements with the given IDs",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "metaQuery",
-              "description": "Filter elements by meta key and value",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[CustomPostMetaQueryInput!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "CustomPostMetaQueryInput!",
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "CustomPostMetaQueryInput",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "password",
-              "description": "Include custom posts protected by a specific password",
-              "defaultValue": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "name": "search",
-              "description": "Search for custom posts containing the given string",
-              "defaultValue": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "name": "status",
-              "description": "Custom post status",
-              "defaultValue": "[\"publish\"]",
-              "type": {
-                "kind": "LIST",
-                "name": "[FilterCustomPostStatusEnum!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "FilterCustomPostStatusEnum!",
-                  "ofType": {
-                    "kind": "ENUM",
-                    "name": "FilterCustomPostStatusEnum",
-                    "ofType": null
-                  }
-                }
-              }
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "PoPCMSSchema_Taxonomies_TaxonomySortInput",
-          "description": "Input to sort custom posts",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "by",
-              "description": "Property to order by",
-              "defaultValue": "\"NAME\"",
-              "type": {
-                "kind": "ENUM",
-                "name": "PoPCMSSchema_Taxonomies_TaxonomyOrderByEnum",
-                "ofType": null
-              }
-            },
-            {
-              "name": "order",
-              "description": "Sorting direction",
-              "defaultValue": "\"DESC\"",
-              "type": {
-                "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
-                "ofType": null
-              }
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "PoPCMSSchema_Taxonomies_TaxonomyTaxonomiesFilterInput",
-          "description": "Input to filter child taxonomies",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "excludeIDs",
-              "description": "Exclude elements with the given IDs",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "ids",
-              "description": "Limit results to elements with the given IDs",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "metaQuery",
-              "description": "Filter elements by meta key and value",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[TaxonomyMetaQueryInput!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "TaxonomyMetaQueryInput!",
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "TaxonomyMetaQueryInput",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            {
-              "name": "search",
-              "description": "Search for taxonomies containing the given string",
-              "defaultValue": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "name": "slugs",
-              "description": "Search for taxonomies with the given slugs",
-              "defaultValue": null,
-              "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
               }
             }
           ],
@@ -14871,6 +14598,155 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootMyCustomPostsFilterInput",
+          "description": "Input to filter the logged-in user's custom posts",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "customPostTypes",
+              "description": "Filter custom posts of given types",
+              "defaultValue": "[\"post\"]",
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostEnum!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostEnum!",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "CustomPostEnum",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "dateQuery",
+              "description": "Filter custom posts based on date",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[DateQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "DateQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DateQueryInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "hasPassword",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "metaQuery",
+              "description": "Filter elements by meta key and value",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostMetaQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostMetaQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CustomPostMetaQueryInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "password",
+              "description": "Include custom posts protected by a specific password",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "search",
+              "description": "Search for custom posts containing the given string",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "status",
+              "description": "Custom post status",
+              "defaultValue": "[\"publish\"]",
+              "type": {
+                "kind": "LIST",
+                "name": "[FilterCustomPostStatusEnum!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "FilterCustomPostStatusEnum!",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "FilterCustomPostStatusEnum",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootMyPostsFilterInput",
           "description": "Input to filter the logged-in user's posts",
           "fields": null,
@@ -15993,6 +15869,130 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "TaxonomySortInput",
+          "description": "Input to sort custom posts",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "by",
+              "description": "Property to order by",
+              "defaultValue": "\"NAME\"",
+              "type": {
+                "kind": "ENUM",
+                "name": "TaxonomyOrderByEnum",
+                "ofType": null
+              }
+            },
+            {
+              "name": "order",
+              "description": "Sorting direction",
+              "defaultValue": "\"DESC\"",
+              "type": {
+                "kind": "ENUM",
+                "name": "OrderEnum",
+                "ofType": null
+              }
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TaxonomyTaxonomiesFilterInput",
+          "description": "Input to filter child taxonomies",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "metaQuery",
+              "description": "Filter elements by meta key and value",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[TaxonomyMetaQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "TaxonomyMetaQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomyMetaQueryInput",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "name": "search",
+              "description": "Search for taxonomies containing the given string",
+              "defaultValue": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "name": "slugs",
+              "description": "Search for taxonomies with the given slugs",
+              "defaultValue": null,
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "UserByInput",
           "description": "Oneof input to specify the property and data to fetch a user",
           "fields": null,
@@ -16324,7 +16324,7 @@
               "defaultValue": "\"DESC\"",
               "type": {
                 "kind": "ENUM",
-                "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+                "name": "OrderEnum",
                 "ofType": null
               }
             }
@@ -17281,7 +17281,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "PoPCMSSchema_SchemaCommons_OrderEnum",
+          "name": "OrderEnum",
           "description": null,
           "fields": null,
           "inputFields": null,
@@ -17304,7 +17304,30 @@
         },
         {
           "kind": "ENUM",
-          "name": "PoPCMSSchema_Taxonomies_TaxonomyOrderByEnum",
+          "name": "RelationEnum",
+          "description": "The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "AND",
+              "description": "`AND` relation",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OR",
+              "description": "`OR` relation",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "TaxonomyOrderByEnum",
           "description": null,
           "fields": null,
           "inputFields": null,
@@ -17367,29 +17390,6 @@
             {
               "name": "SLUG__IN",
               "description": "Match the 'order' of the $slug param",
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "possibleTypes": null
-        },
-        {
-          "kind": "ENUM",
-          "name": "RelationEnum",
-          "description": "The logical relationship between array values in query args (for meta query, date parameters, and others) when there is more than one",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": [
-            {
-              "name": "AND",
-              "description": "`AND` relation",
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "OR",
-              "description": "`OR` relation",
               "isDeprecated": false,
               "deprecationReason": null
             }
