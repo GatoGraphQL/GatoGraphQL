@@ -13,7 +13,7 @@ abstract class AbstractClientPathSettingsWebserverRequestTest extends AbstractRe
     use ClientWebserverRequestTestCaseTrait;
 
     /**
-     * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
+     * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
     protected function providePathEntries(): array
     {

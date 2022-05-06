@@ -29,24 +29,24 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends Abstra
     public function testPathsUpdated(
         string $dataItem,
     ): void {
-        $newClientPath = $this->getNewClientPath($dataItem);
-        $previousClientPath = $this->getPreviousClientPath($dataItem);
-        $this->testURLRequestProducesExpectedStatusCode($newClientPath, 200, true);
-        $this->testURLRequestProducesExpectedStatusCode($previousClientPath, 404, false);
+        $newPath = $this->getNewPath($dataItem);
+        $previousPath = $this->getPreviousPath($dataItem);
+        $this->testURLRequestProducesExpectedStatusCode($newPath, 200, true);
+        $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, false);
     }
 
-    protected function getNewClientPath(string $dataItem): string
+    protected function getNewPath(string $dataItem): string
     {
         return $dataItem;
     }
 
-    protected function getPreviousClientPath(string $previousValue): string
+    protected function getPreviousPath(string $previousValue): string
     {
         return $previousValue;
     }
 
     /**
-     * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
+     * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
     abstract protected function providePathEntries(): array;
 

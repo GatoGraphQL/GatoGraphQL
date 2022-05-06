@@ -12,7 +12,7 @@ use PHPUnitForGraphQLAPI\WebserverRequests\AbstractRequestURLPathSettingsWebserv
 class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequestURLPathSettingsWebserverRequestTest
 {
     /**
-     * @return array<string,string[]> Array of 1 element: [ ${newClientPath} ]
+     * @return array<string,string[]> Array of 1 element: [ ${newPath} ]
      */
     protected function providePathEntries(): array
     {
@@ -31,12 +31,12 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
         return 'graphqlapi_graphqlapi_custom-endpoints';
     }
 
-    protected function getNewClientPath(string $dataItem): string
+    protected function getNewPath(string $dataItem): string
     {
         return $this->getCustomEndpointURL($dataItem);
     }
 
-    protected function getPreviousClientPath(string $previousPath): string
+    protected function getPreviousPath(string $previousPath): string
     {
         return $this->getCustomEndpointURL($previousPath);
     }
