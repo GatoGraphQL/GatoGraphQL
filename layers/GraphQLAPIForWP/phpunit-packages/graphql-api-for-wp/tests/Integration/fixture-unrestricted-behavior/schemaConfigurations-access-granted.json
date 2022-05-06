@@ -2,6 +2,10 @@
   "data": {
     "schemaConfigurations": [
       {
+        "id": 304,
+        "title": "Unrestricted schema"
+      },
+      {
         "id": 261,
         "title": "Power users"
       },
