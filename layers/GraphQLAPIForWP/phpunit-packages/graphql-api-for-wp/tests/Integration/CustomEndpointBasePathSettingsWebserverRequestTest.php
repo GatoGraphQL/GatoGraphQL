@@ -33,6 +33,16 @@ class CustomEndpointBasePathSettingsWebserverRequestTest extends AbstractRequest
 
     protected function getNewClientPath(string $dataItem): string
     {
-        return $dataItem . '/power-users/';
+        return $this->getCustomEndpointURL($dataItem);
+    }
+
+    protected function getPreviousClientPath(string $previousPath): string
+    {
+        return $this->getCustomEndpointURL($previousPath);
+    }
+
+    protected function getCustomEndpointURL(string $basePath): string
+    {
+        return $basePath . '/power-users/';
     }
 }

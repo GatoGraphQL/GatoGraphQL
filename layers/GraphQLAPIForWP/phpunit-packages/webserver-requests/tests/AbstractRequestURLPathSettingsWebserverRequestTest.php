@@ -30,13 +30,19 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends Abstra
         string $dataItem,
     ): void {
         $newClientPath = $this->getNewClientPath($dataItem);
+        $previousClientPath = $this->getPreviousClientPath($dataItem);
         $this->testURLRequestProducesExpectedStatusCode($newClientPath, 200, true);
-        $this->testURLRequestProducesExpectedStatusCode($this->previousValue, 404, false);
+        $this->testURLRequestProducesExpectedStatusCode($previousClientPath, 404, false);
     }
 
     protected function getNewClientPath(string $dataItem): string
     {
         return $dataItem;
+    }
+
+    protected function getPreviousClientPath(string $previousValue): string
+    {
+        return $previousValue;
     }
 
     /**
