@@ -40,12 +40,12 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
 
     protected static function getLoginUsername(): string
     {
-        return Environment::getIntegrationTestsAuthenticatedUserUsername();
+        return Environment::getIntegrationTestsAuthenticatedAdminUserUsername();
     }
 
     protected static function getLoginPassword(): string
     {
-        return Environment::getIntegrationTestsAuthenticatedUserPassword();
+        return Environment::getIntegrationTestsAuthenticatedAdminUserPassword();
     }
 
     protected static function getWebserverPingMethod(): string

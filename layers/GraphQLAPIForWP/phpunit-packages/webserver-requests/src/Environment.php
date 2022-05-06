@@ -9,8 +9,8 @@ use function getenv;
 class Environment
 {
     public final const INTEGRATION_TESTS_WEBSERVER_DOMAIN = 'INTEGRATION_TESTS_WEBSERVER_DOMAIN';
-    public final const INTEGRATION_TESTS_AUTHENTICATED_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_USER_USERNAME';
-    public final const INTEGRATION_TESTS_AUTHENTICATED_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_USER_PASSWORD';
+    public final const INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME';
+    public final const INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD';
 
     public static function getIntegrationTestsWebserverDomain(): string
     {
@@ -22,9 +22,9 @@ class Environment
         return $envVarValue;
     }
 
-    public static function getIntegrationTestsAuthenticatedUserUsername(): string
+    public static function getIntegrationTestsAuthenticatedAdminUserUsername(): string
     {
-        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_USER_USERNAME;
+        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME;
         $envVarValue = getenv($envVar);
         if ($envVarValue === false) {
             return '';
@@ -32,9 +32,9 @@ class Environment
         return $envVarValue;
     }
 
-    public static function getIntegrationTestsAuthenticatedUserPassword(): string
+    public static function getIntegrationTestsAuthenticatedAdminUserPassword(): string
     {
-        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_USER_PASSWORD;
+        $envVar = self::INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD;
         $envVarValue = getenv($envVar);
         if ($envVarValue === false) {
             return '';
