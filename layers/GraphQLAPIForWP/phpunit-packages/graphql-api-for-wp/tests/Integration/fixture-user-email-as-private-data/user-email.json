@@ -2,7 +2,7 @@
   "data": {
     "user": {
       "name": "admin",
-      "email": null
+      "email": "admin@example.com"
     }
   }
 }
