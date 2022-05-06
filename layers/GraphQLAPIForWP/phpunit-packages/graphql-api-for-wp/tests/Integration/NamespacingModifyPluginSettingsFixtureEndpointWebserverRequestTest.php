@@ -6,6 +6,12 @@ namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
 use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 
+/**
+ * This test is actually validating that all types/interfaces in the plugin
+ * are the canonical, and so they have no namespacing. Then, both
+ * "introspection-query.json" (namespaced schema) and
+ * "introspection-query:0.json" (non-namespaced schema) are the same.
+ */
 class NamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     /**
