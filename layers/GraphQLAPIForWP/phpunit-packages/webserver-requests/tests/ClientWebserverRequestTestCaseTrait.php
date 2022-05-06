@@ -14,6 +14,19 @@ trait ClientWebserverRequestTestCaseTrait
 {
     use RequestURLWebserverRequestTestCaseTrait;
 
+    protected function testEnabledOrDisabledClients(
+        string $clientEndpoint,
+        int $expectedStatusCode,
+        bool $enabled,
+    ): void {
+        $this->testEnabledOrDisabledPath(
+            $clientEndpoint,
+            $expectedStatusCode,
+            null,
+            $enabled,
+        );
+    }
+
     protected function getCustomHeader(): ?string
     {
         return CustomHeaders::CLIENT_ENDPOINT;
