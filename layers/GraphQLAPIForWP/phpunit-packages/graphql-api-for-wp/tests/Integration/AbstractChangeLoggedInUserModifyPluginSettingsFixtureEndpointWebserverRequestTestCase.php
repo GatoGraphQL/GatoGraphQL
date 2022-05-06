@@ -11,6 +11,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
 {
     protected static ?string $differentUsername = null;
     protected static ?string $differentPassword = null;
+    protected static array $differentWebserverPingOptions = [];
 
     /**
      * After the initial set-up, log the "admin" out,
@@ -23,6 +24,7 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         // Login a different user
         static::$differentUsername = $this->getDifferentLoginUsername();
         static::$differentPassword = $this->getDifferentLoginPassword();
+        static::$differentWebserverPingOptions = $this->getDifferentWebserverPingOptions();
         static::setUpWebserverRequestTests();
     }
 
@@ -42,9 +44,34 @@ abstract class AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebs
         return parent::getLoginPassword();
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    protected static function getWebserverPingOptions(): array
+    {
+        $webserverPingOptions = parent::getWebserverPingOptions();
+        foreach (static::$differentWebserverPingOptions as $key => $value) {
+            // Merge arrays, or assign other values directly
+            if (is_array($value)) {
+                $webserverPingOptions[$key] = array_merge(
+                    $webserverPingOptions[$key] ?? [],
+                    $value
+                );
+                continue;
+            }
+            $webserverPingOptions[$key] = $value;
+        }
+        return $webserverPingOptions;
+    }
+
     abstract protected function getDifferentLoginUsername(): string;
 
     abstract protected function getDifferentLoginPassword(): string;
+
+    protected function getDifferentWebserverPingOptions(): array
+    {
+        return [];
+    }
 
     /**
      * Log the different user out, and again the "admin" in,
