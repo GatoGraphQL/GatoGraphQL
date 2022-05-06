@@ -12,7 +12,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
  * "introspection-query.json" (namespaced schema) and
  * "introspection-query:0.json" (non-namespaced schema) are the same.
  */
-class NamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class CanonicalNamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     /**
      * Custom endpoint "unrestricted-schema" has no ACLs (so we get all the
@@ -25,7 +25,7 @@ class NamespacingModifyPluginSettingsFixtureEndpointWebserverRequestTest extends
 
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-namespacing';
+        return __DIR__ . '/fixture-canonical-namespacing';
     }
 
     protected function getSettingsKey(): string
