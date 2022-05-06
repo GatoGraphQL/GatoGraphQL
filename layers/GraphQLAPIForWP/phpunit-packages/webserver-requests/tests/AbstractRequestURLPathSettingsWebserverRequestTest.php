@@ -30,7 +30,7 @@ abstract class AbstractRequestURLPathSettingsWebserverRequestTest extends Abstra
         string $dataItem,
     ): void {
         $newPath = $this->getNewPath($dataItem);
-        $previousPath = $this->getPreviousPath($dataItem);
+        $previousPath = $this->getPreviousPath($this->previousPath);
         $this->testURLRequestProducesExpectedStatusCode($newPath, 200, true);
         $this->testURLRequestProducesExpectedStatusCode($previousPath, 404, false);
     }
