@@ -6,5 +6,5 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 class DisabledExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTest extends AbstractExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTest
 {
-    use DisabledFixtureQueryExecutionGraphQLServerTestTrait;
+    use DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 }

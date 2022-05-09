@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-trait DisabledFixtureQueryExecutionGraphQLServerTestTrait
+trait DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait
 {
     protected static function isEnabled(): bool
     {

@@ -6,5 +6,5 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 class DisabledSkipDangerouslyDynamicScalarTypeFixtureQueryExecutionGraphQLServerTest extends AbstractSkipDangerouslyDynamicScalarTypeFixtureQueryExecutionGraphQLServerTest
 {
-    use DisabledFixtureQueryExecutionGraphQLServerTestTrait;
+    use DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
 }
