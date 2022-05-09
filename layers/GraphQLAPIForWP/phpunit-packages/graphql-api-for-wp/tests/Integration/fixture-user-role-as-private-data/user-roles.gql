@@ -1,0 +1,15 @@
+{
+  roles {
+    name
+  }
+  capabilities
+  roleNames
+  user(by: {id: 1}) {
+    name
+    roles {
+      name
+    }
+    capabilities
+    roleNames
+  }
+}
