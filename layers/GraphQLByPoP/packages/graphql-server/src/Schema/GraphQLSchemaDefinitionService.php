@@ -83,7 +83,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     ): UpstreamRootObjectTypeSchemaDefinitionProvider {
         return new RootObjectTypeSchemaDefinitionProvider($rootObjectTypeResolver);
     }
-    
+
     /**
      * Global fields are only added if enabled
      */

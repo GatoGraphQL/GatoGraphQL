@@ -28,7 +28,7 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         if ($this->skipExposingGlobalFieldsInSchema()) {
             return $schemaDefinition;
         }
-        
+
         $this->addFieldSchemaDefinitions($globalSchemaDefinition, true);
         return array_merge(
             $schemaDefinition,
