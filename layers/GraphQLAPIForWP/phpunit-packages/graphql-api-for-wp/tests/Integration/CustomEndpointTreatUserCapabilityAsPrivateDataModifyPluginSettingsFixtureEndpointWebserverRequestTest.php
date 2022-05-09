@@ -15,6 +15,6 @@ class CustomEndpointTreatUserCapabilityAsPrivateDataModifyPluginSettingsFixtureE
 {
     protected function getEndpoint(): string
     {
-        return 'graphql/website/';
+        return 'graphql/power-users/';
     }
 }
