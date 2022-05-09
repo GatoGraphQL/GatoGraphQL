@@ -39,7 +39,7 @@
     # Default / "switch_themes" capability
     displayName
     # Public / "edit_plugins" capability
-    registeredDateStr(format: "DD/MM/YYYY")
+    registeredDateStr(format: "Y-m-d")
     # Private / "read_private_posts" capability
     registeredDate
 

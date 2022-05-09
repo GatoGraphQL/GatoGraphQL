@@ -149,14 +149,14 @@
                 "description": "",
                 "firstName": "Editor",
                 "displayName": "Editor Smith",
-                "hasAnyCapability": false,
-                "hasAnyRole": true,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:26+00:00",
                 "lastName": "Smith",
                 "name": "Editor Smith",
                 "websiteURL": "",
                 "nicename": "editor",
                 "self": {
-                    "id": 5
+                    "id": 9
                 }
             },
             {
@@ -164,14 +164,14 @@
                 "description": "",
                 "firstName": "Author",
                 "displayName": "Author Marquez",
-                "hasAnyCapability": false,
-                "hasAnyRole": false,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:25+00:00",
                 "lastName": "Marquez",
                 "name": "Author Marquez",
                 "websiteURL": "",
                 "nicename": "author",
                 "self": {
-                    "id": 4
+                    "id": 8
                 }
             },
             {
@@ -179,14 +179,14 @@
                 "description": "",
                 "firstName": "Contributor",
                 "displayName": "Contributor Johnson",
-                "hasAnyCapability": false,
-                "hasAnyRole": false,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:24+00:00",
                 "lastName": "Johnson",
                 "name": "Contributor Johnson",
                 "websiteURL": "",
                 "nicename": "contributor",
                 "self": {
-                    "id": 3
+                    "id": 7
                 }
             }
         ],
