@@ -12,7 +12,7 @@ use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResol
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 use PoPAPI\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider as UpstreamRootObjectTypeSchemaDefinitionProvider;
 use PoPAPI\API\Schema\SchemaDefinitionService;
@@ -79,9 +79,9 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     }
 
     protected function createRootObjectTypeSchemaDefinitionProvider(
-        TypeResolverInterface $typeResolver,
+        RootObjectTypeResolver $rootObjectTypeResolver,
     ): UpstreamRootObjectTypeSchemaDefinitionProvider {
-        return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+        return new RootObjectTypeSchemaDefinitionProvider($rootObjectTypeResolver);
     }
     
     /**
