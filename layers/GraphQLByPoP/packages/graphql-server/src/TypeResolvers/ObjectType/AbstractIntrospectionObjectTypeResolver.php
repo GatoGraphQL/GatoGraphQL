@@ -10,12 +10,4 @@ use PoP\ComponentModel\TypeResolvers\ReservedNameTypeResolverTrait;
 abstract class AbstractIntrospectionObjectTypeResolver extends AbstractObjectTypeResolver
 {
     use ReservedNameTypeResolverTrait;
-
-    /**
-     * Introspection types must not be namespaced
-     */
-    public function getNamespace(): string
-    {
-        return '';
-    }
 }
