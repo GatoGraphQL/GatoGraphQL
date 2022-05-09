@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ReservedNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 abstract class AbstractIntrospectionObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    use ReservedNameTypeResolverTrait;
+    use CanonicalTypeNameTypeResolverTrait;
 }

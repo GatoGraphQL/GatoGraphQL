@@ -9,11 +9,11 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\ReservedNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {
-    use ReservedNameTypeResolverTrait;
+    use CanonicalTypeNameTypeResolverTrait;
 
     public final const HOOK_DESCRIPTION = __CLASS__ . ':description';
 
