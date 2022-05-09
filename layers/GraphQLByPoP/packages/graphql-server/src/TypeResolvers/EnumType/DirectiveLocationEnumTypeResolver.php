@@ -12,7 +12,7 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
     {
         return 'DirectiveLocation';
     }
-    
+
     /**
      * @return string[]
      */
