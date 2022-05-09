@@ -1392,16 +1392,6 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "PoP_ComponentModel_DangerouslyDynamic",
-                    "description": "Special scalar type which is not coerced or validated. In particular, it does not need to validate if it is an array or not, as GraphQL requires based on the applied WrappingType (such as `[String]`).",
-                    "fields": null,
-                    "inputFields": null,
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "SCALAR",
                     "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
                     "fields": null,
