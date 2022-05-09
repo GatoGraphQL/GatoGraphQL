@@ -20,6 +20,6 @@
     roles: ["administrator"]
     excludeRoles: ["subscriber"]
   }) {
-    id
+    name
   }
 }
