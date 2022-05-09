@@ -1,6 +1,6 @@
 {
     "data": {
-        "commentCount": 11,
+        "commentCount": 10,
         "imageSizeNames": [
             "thumbnail",
             "medium",
@@ -16,13 +16,8 @@
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 13,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\" rel=\"nofollow ugc\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "hasComments": false,
+                "comments": []
             },
             {
                 "id": 28,
@@ -33,7 +28,7 @@
                 "hasComments": true,
                 "comments": [
                     {
-                        "id": 23,
+                        "id": 11,
                         "content": "<p>Wow, this sounds awesome!<\/p>\n"
                     }
                 ]
@@ -47,11 +42,11 @@
                 "hasComments": true,
                 "comments": [
                     {
-                        "id": 22,
+                        "id": 10,
                         "content": "<p>Absolutely! And directives too!<\/p>\n"
                     },
                     {
-                        "id": 21,
+                        "id": 9,
                         "content": "<p>Can I hide any field?<\/p>\n"
                     }
                 ]
@@ -59,16 +54,16 @@
         ],
         "comments": [
             {
-                "id": 13,
-                "date": "2022-04-17T13:06:58+00:00"
-            },
-            {
-                "id": 23,
+                "id": 11,
                 "date": "2020-12-12T04:09:36+00:00"
             },
             {
-                "id": 22,
+                "id": 10,
                 "date": "2020-12-12T04:07:26+00:00"
+            },
+            {
+                "id": 9,
+                "date": "2020-12-12T04:07:13+00:00"
             }
         ],
         "customPosts": [
@@ -79,13 +74,8 @@
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 13,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\" rel=\"nofollow ugc\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "hasComments": false,
+                "comments": []
             },
             {
                 "__typename": "Post",
@@ -97,7 +87,7 @@
                 "hasComments": true,
                 "comments": [
                     {
-                        "id": 23,
+                        "id": 11,
                         "content": "<p>Wow, this sounds awesome!<\/p>\n"
                     }
                 ]
@@ -112,11 +102,11 @@
                 "hasComments": true,
                 "comments": [
                     {
-                        "id": 22,
+                        "id": 10,
                         "content": "<p>Absolutely! And directives too!<\/p>\n"
                     },
                     {
-                        "id": 21,
+                        "id": 9,
                         "content": "<p>Can I hide any field?<\/p>\n"
                     }
                 ]
