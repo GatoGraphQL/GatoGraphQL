@@ -50,7 +50,12 @@ abstract class AbstractTypeResolver implements TypeResolverInterface
 
     public function getNamespace(): string
     {
-        return $this->getSchemaNamespacingService()->getSchemaNamespace(get_called_class());
+        return $this->getSchemaNamespacingService()->getSchemaNamespace($this->getClassToNamespace());
+    }
+
+    protected function getClassToNamespace(): string
+    {
+        return get_called_class();
     }
 
     final public function getNamespacedTypeName(): string
