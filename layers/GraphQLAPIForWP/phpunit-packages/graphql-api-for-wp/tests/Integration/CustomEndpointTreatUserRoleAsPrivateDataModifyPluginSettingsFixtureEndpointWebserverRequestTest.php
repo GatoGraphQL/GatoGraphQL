@@ -15,6 +15,6 @@ class CustomEndpointTreatUserRoleAsPrivateDataModifyPluginSettingsFixtureEndpoin
 {
     protected function getEndpoint(): string
     {
-        return 'graphql/unrestricted-schema/';
+        return 'graphql/website/';
     }
 }
