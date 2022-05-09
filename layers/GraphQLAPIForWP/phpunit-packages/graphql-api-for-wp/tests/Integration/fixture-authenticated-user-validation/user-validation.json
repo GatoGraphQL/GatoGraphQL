@@ -387,15 +387,6 @@
                 "customPostType": null,
                 "hasComments": false,
                 "comments": null
-            },
-            {
-                "id": 9,
-                "title": null,
-                "date": "2020-07-27T11:28:57+00:00",
-                "url": "http:\/\/graphql-api.lndo.site\/sample-page-2\/",
-                "customPostType": null,
-                "hasComments": false,
-                "comments": null
             }
         ],
         "mediaItems": [],

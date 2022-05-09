@@ -334,15 +334,15 @@
         ],
         "comments": [
             {
-                "id": 1,
+                "id": 13,
                 "date": "2022-04-17T13:06:58+00:00"
             },
             {
-                "id": 11,
+                "id": 23,
                 "date": "2020-12-12T04:09:36+00:00"
             },
             {
-                "id": 10,
+                "id": 22,
                 "date": "2020-12-12T04:07:26+00:00"
             }
         ],
@@ -384,15 +384,6 @@
                 "title": null,
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "https:\/\/graphql-api.lndo.site\/sample-page\/",
-                "customPostType": null,
-                "hasComments": false,
-                "comments": null
-            },
-            {
-                "id": 9,
-                "title": null,
-                "date": "2020-07-27T11:28:57+00:00",
-                "url": "https:\/\/graphql-api.lndo.site\/sample-page-2\/",
                 "customPostType": null,
                 "hasComments": false,
                 "comments": null
