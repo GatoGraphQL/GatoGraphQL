@@ -9,7 +9,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterfa
 use PoP\ComponentModel\TypeResolvers\ObjectType\AbstractObjectTypeResolver;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\RelationalTypeDataLoaders\ObjectType\RootTypeDataLoader;
-use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\ReservedNameTypeResolverTrait;
 
 class RootObjectTypeResolver extends AbstractObjectTypeResolver
 {

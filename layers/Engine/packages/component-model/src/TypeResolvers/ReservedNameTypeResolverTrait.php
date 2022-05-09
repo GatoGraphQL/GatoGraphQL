@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\TypeResolvers;
+namespace PoP\ComponentModel\TypeResolvers;
 
 trait ReservedNameTypeResolverTrait
 {
