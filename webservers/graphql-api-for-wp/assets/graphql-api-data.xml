@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.9.3" created="2022-05-06 10:23" -->
+	<!-- generator="WordPress/5.9.3" created="2022-05-09 10:19" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>GraphQL API</title>
 	<link>https://graphql-api.lndo.site</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Fri, 06 May 2022 10:23:08 +0000</pubDate>
+	<pubDate>Mon, 09 May 2022 10:19:24 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://graphql-api.lndo.site</wp:base_site_url>
@@ -693,11 +693,11 @@
 <!-- wp:graphql-api/access-control-user-capabilities {"accessControlGroup":"capabilities","value":["switch_themes"]} /-->
 <!-- /wp:graphql-api/access-control -->
 
-<!-- wp:graphql-api/access-control {"schemaMode":"public","typeFields":["User.hasAnyCapability"]} -->
+<!-- wp:graphql-api/access-control {"schemaMode":"public","typeFields":["User.registeredDateStr"]} -->
 <!-- wp:graphql-api/access-control-user-capabilities {"accessControlGroup":"capabilities","value":["edit_plugins"]} /-->
 <!-- /wp:graphql-api/access-control -->
 
-<!-- wp:graphql-api/access-control {"schemaMode":"private","typeFields":["User.hasAnyRole"]} -->
+<!-- wp:graphql-api/access-control {"schemaMode":"private","typeFields":["User.registeredDate"]} -->
 <!-- wp:graphql-api/access-control-user-capabilities {"accessControlGroup":"capabilities","value":["read_private_posts"]} /-->
 <!-- /wp:graphql-api/access-control -->
 
@@ -748,8 +748,8 @@
 		<wp:post_id>256</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 05:53:14]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-04-21 05:53:14]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-04-21 07:00:41]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-04-21 07:00:41]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-09 10:19:15]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-09 10:19:15]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[power-users]]></wp:post_name>
@@ -1098,8 +1098,8 @@ Commenter avatars come from <a href="https://gravatar.com">Gravatar</a>.]]></wp:
 		<wp:post_id>13</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 03:56:13]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-05-06 10:04:20]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-05-06 10:04:20]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-05-09 09:45:54]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-05-09 09:45:54]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[open]]></wp:comment_status>
 		<wp:ping_status><![CDATA[open]]></wp:ping_status>
 		<wp:post_name><![CDATA[released-v0-6-check-it-out]]></wp:post_name>
