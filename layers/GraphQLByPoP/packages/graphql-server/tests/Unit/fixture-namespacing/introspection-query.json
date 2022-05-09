@@ -555,16 +555,16 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "[GraphQLByPoP_GraphQLServer_DirectiveLocation!]!",
+                                "name": "[DirectiveLocation!]!",
                                 "ofType": {
                                     "kind": "LIST",
-                                    "name": "[GraphQLByPoP_GraphQLServer_DirectiveLocation!]",
+                                    "name": "[DirectiveLocation!]",
                                     "ofType": {
                                         "kind": "NON_NULL",
-                                        "name": "GraphQLByPoP_GraphQLServer_DirectiveLocation!",
+                                        "name": "DirectiveLocation!",
                                         "ofType": {
                                             "kind": "ENUM",
-                                            "name": "GraphQLByPoP_GraphQLServer_DirectiveLocation",
+                                            "name": "DirectiveLocation",
                                             "ofType": null
                                         }
                                     }
@@ -971,10 +971,10 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "LIST",
-                                        "name": "[GraphQLByPoP_GraphQLServer_DirectiveKindEnum]",
+                                        "name": "[DirectiveKindEnum]",
                                         "ofType": {
                                             "kind": "ENUM",
-                                            "name": "GraphQLByPoP_GraphQLServer_DirectiveKindEnum",
+                                            "name": "DirectiveKindEnum",
                                             "ofType": null
                                         }
                                     }
@@ -1284,10 +1284,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "GraphQLByPoP_GraphQLServer_TypeKind!",
+                                "name": "TypeKind!",
                                 "ofType": {
                                     "kind": "ENUM",
-                                    "name": "GraphQLByPoP_GraphQLServer_TypeKind",
+                                    "name": "TypeKind",
                                     "ofType": null
                                 }
                             }
@@ -1515,7 +1515,7 @@
                 },
                 {
                     "kind": "ENUM",
-                    "name": "GraphQLByPoP_GraphQLServer_DirectiveKindEnum",
+                    "name": "DirectiveKindEnum",
                     "description": null,
                     "fields": null,
                     "inputFields": null,
@@ -1538,7 +1538,7 @@
                 },
                 {
                     "kind": "ENUM",
-                    "name": "GraphQLByPoP_GraphQLServer_DirectiveLocation",
+                    "name": "DirectiveLocation",
                     "description": null,
                     "fields": null,
                     "inputFields": null,
@@ -1657,7 +1657,7 @@
                 },
                 {
                     "kind": "ENUM",
-                    "name": "GraphQLByPoP_GraphQLServer_TypeKind",
+                    "name": "TypeKind",
                     "description": null,
                     "fields": null,
                     "inputFields": null,
