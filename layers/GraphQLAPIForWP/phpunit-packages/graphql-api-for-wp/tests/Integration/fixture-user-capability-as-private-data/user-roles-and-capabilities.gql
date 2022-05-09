@@ -12,7 +12,9 @@
     capabilities
     roleNames
   }
+  hasRole(role: "administrator")
   hasAnyRole(role: ["administrator"])
+  hasCapability(capability: "manage_options")
   hasAnyCapability(capability: ["manage_options"])
   users(filter: {
     roles: ["administrator"]
