@@ -1,0 +1,45 @@
+{
+  "data": {
+    "roleNames": [
+      "administrator",
+      "editor",
+      "author",
+      "contributor",
+      "subscriber"
+    ],
+    "roles": [
+      {
+        "name": "administrator"
+      },
+      {
+        "name": "editor"
+      },
+      {
+        "name": "author"
+      },
+      {
+        "name": "contributor"
+      },
+      {
+        "name": "subscriber"
+      }
+    ],
+    "user": {
+      "roleNames": [
+        "administrator"
+      ],
+      "hasRole": true,
+      "hasAnyRole": true,
+      "roles": [
+        {
+          "name": "administrator"
+        }
+      ]
+    },
+    "users": [
+      {
+        "id": 1
+      }
+    ]
+  }
+}

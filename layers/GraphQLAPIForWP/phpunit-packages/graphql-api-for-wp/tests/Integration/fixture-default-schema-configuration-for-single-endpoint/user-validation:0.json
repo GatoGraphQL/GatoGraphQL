@@ -1,6 +1,6 @@
 {
     "data": {
-        "commentCount": 11,
+        "commentCount": 10,
         "imageSizeNames": [
             "thumbnail",
             "medium",
@@ -16,13 +16,8 @@
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 1,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "hasComments": false,
+                "comments": []
             },
             {
                 "id": 28,
@@ -59,16 +54,16 @@
         ],
         "comments": [
             {
-                "id": 1,
-                "date": "2022-04-17T13:06:58+00:00"
-            },
-            {
                 "id": 11,
                 "date": "2020-12-12T04:09:36+00:00"
             },
             {
                 "id": 10,
                 "date": "2020-12-12T04:07:26+00:00"
+            },
+            {
+                "id": 9,
+                "date": "2020-12-12T04:07:13+00:00"
             }
         ],
         "customPosts": [
@@ -79,13 +74,8 @@
                 "date": "2022-04-17T13:06:58+00:00",
                 "url": "https:\/\/graphql-api.lndo.site\/hello-world\/",
                 "customPostType": "post",
-                "hasComments": true,
-                "comments": [
-                    {
-                        "id": 1,
-                        "content": "<p>Hi, this is a comment.<br \/>\nTo get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br \/>\nCommenter avatars come from <a href=\"https:\/\/gravatar.com\">Gravatar<\/a>.<\/p>\n"
-                    }
-                ]
+                "hasComments": false,
+                "comments": []
             },
             {
                 "__typename": "Post",
@@ -131,15 +121,6 @@
                 "customPostType": "page",
                 "hasComments": false,
                 "comments": []
-            },
-            {
-                "id": 9,
-                "title": "Sample Page",
-                "date": "2020-07-27T11:28:57+00:00",
-                "url": "https:\/\/graphql-api.lndo.site\/sample-page-2\/",
-                "customPostType": "page",
-                "hasComments": false,
-                "comments": []
             }
         ],
         "mediaItems": [],
@@ -149,8 +130,8 @@
                 "description": "",
                 "firstName": "Editor",
                 "displayName": "Editor Smith",
-                "hasAnyCapability": false,
-                "hasAnyRole": true,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:26+00:00",
                 "lastName": "Smith",
                 "name": "Editor Smith",
                 "websiteURL": "",
@@ -164,8 +145,8 @@
                 "description": "",
                 "firstName": "Author",
                 "displayName": "Author Marquez",
-                "hasAnyCapability": false,
-                "hasAnyRole": false,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:25+00:00",
                 "lastName": "Marquez",
                 "name": "Author Marquez",
                 "websiteURL": "",
@@ -179,8 +160,8 @@
                 "description": "",
                 "firstName": "Contributor",
                 "displayName": "Contributor Johnson",
-                "hasAnyCapability": false,
-                "hasAnyRole": false,
+                "registeredDateStr": "1982-06-29",
+                "registeredDate": "1982-06-29T17:48:24+00:00",
                 "lastName": "Johnson",
                 "name": "Contributor Johnson",
                 "websiteURL": "",

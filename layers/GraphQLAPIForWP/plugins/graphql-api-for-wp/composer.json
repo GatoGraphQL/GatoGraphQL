@@ -204,6 +204,7 @@
             "composer install",
             "lando start"
         ],
+        "destroy-server": "lando destroy -y",
         "rebuild-server": "lando rebuild -y",
         "test": "phpunit",
         "check-style": "phpcs src tests",

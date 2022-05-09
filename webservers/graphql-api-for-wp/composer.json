@@ -41,14 +41,14 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api",
             "@update-deps",
             "@start-server",
-            "@install-site",
-            "@import data"
+            "@install-site"
         ],
         "init-server": "@start-server",
         "start-server": [
             "@purge-cache",
             "lando start"
         ],
+        "destroy-server": "lando destroy -y",
         "install-site": "lando composer install-site-within-container",
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
