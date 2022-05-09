@@ -11,7 +11,7 @@ class DefaultExposeAdminDataForSchemaConfigurationModifyPluginSettingsFixtureEnd
     protected function getEndpoint(): string
     {
         // This endpoint has "Expose admin elements in the schema?" as "Default"
-        return 'graphql/power-users/';
+        return 'graphql/mobile-app/';
     }
 
     protected function getFixtureFolder(): string
