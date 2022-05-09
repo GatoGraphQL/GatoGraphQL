@@ -41,8 +41,7 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api",
             "@update-deps",
             "@start-server",
-            "@install-site",
-            "@import data"
+            "@install-site"
         ],
         "init-server": "@start-server",
         "start-server": [
