@@ -6,18 +6,18 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 abstract class AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase extends AbstractFixtureQueryExecutionGraphQLServerTestCase
 {
-    abstract protected function isEnabled(): bool;
+    abstract protected static function isEnabled(): bool;
 
     protected function getGraphQLResponseFile(string $filePath, string $fileName): string
     {
         $state = $this->getFileState();
-        return $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $state . '.json';
+        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.json';
     }
 
     protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
     {
         $state = $this->getFileState();
-        return $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $state . '.var.json';
+        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '@' . $state . '.var.json';
     }
 
     protected function getFileState(): string
