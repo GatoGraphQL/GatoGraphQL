@@ -6,13 +6,11 @@ namespace PoPCMSSchema\CustomPostsWP\Overrides\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver as UpstreamCustomPostUnionTypeResolver;
+use PoPCMSSchema\SchemaCommonsWP\Overrides\TypeResolvers\OverridingTypeResolverTrait;
 
 class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
 {
-    protected function getClassToNamespace(): string
-    {
-        return get_parent_class();
-    }
+    use OverridingTypeResolverTrait;
 
     /**
      * Overriding function to provide optimization:
