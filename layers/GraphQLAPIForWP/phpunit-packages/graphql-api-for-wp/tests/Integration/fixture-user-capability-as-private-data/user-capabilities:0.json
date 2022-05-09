@@ -18,40 +18,6 @@
       }
     },
     {
-      "message": "There is no field 'hasCapability' on type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 1,
-          "column": 1
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "fields": [
-          "hasCapability(capability:\"manage_options\")",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e16"
-      }
-    },
-    {
-      "message": "There is no field 'hasAnyCapability' on type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 1,
-          "column": 1
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "fields": [
-          "hasAnyCapability(capability:[0:\"manage_options\"])",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e16"
-      }
-    },
-    {
       "message": "There is no field 'capabilities' on type 'User'",
       "locations": [
         {
@@ -67,14 +33,48 @@
         ],
         "code": "PoP\\ComponentModel\\e16"
       }
+    },
+    {
+      "message": "There is no field 'hasCapability' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "hasCapability(capability:\"manage_options\")",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'hasAnyCapability' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "hasAnyCapability(capabilities:[0:\"manage_options\"])",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
     }
   ],
   "data": {
     "capabilities": null,
-    "hasCapability": null,
-    "hasAnyCapability": null,
     "user": {
-      "capabilities": null
+      "capabilities": null,
+      "hasCapability": null,
+      "hasAnyCapability": null
     }
   }
 }

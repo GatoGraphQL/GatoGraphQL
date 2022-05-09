@@ -1,40 +1,4 @@
 {
-  "errors": [
-    {
-      "message": "There is no field 'hasCapability' on type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 1,
-          "column": 1
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "fields": [
-          "hasCapability(capability:\"manage_options\")",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e16"
-      }
-    },
-    {
-      "message": "There is no field 'hasAnyCapability' on type 'QueryRoot'",
-      "locations": [
-        {
-          "line": 1,
-          "column": 1
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "fields": [
-          "hasAnyCapability(capability:[0:\"manage_options\"])",
-          "validate"
-        ],
-        "code": "PoP\\ComponentModel\\e16"
-      }
-    }
-  ],
   "data": {
     "capabilities": [
       "switch_themes",
@@ -99,8 +63,6 @@
       "delete_themes",
       "export"
     ],
-    "hasCapability": null,
-    "hasAnyCapability": null,
     "user": {
       "capabilities": [
         "switch_themes",
@@ -164,7 +126,9 @@
         "edit_theme_options",
         "delete_themes",
         "export"
-      ]
+      ],
+      "hasCapability": true,
+      "hasAnyCapability": true
     }
   }
 }
