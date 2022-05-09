@@ -1,0 +1,62 @@
+{
+  "data": {
+    "customPosts": [
+      {
+        "__typename": "PoPCMSSchema_Posts_Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true
+      },
+      {
+        "__typename": "PoPCMSSchema_Posts_Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true
+      },
+      {
+        "__typename": "PoPCMSSchema_Posts_Post",
+        "isObjectTypeWithNamespacing": true,
+        "isObjectTypeWithoutNamespacing": true,
+        "implementsWithNamespacing": true,
+        "implementsWithoutNamespacing": true,
+        "isInUnionTypeWithNamespacing": true,
+        "isInUnionTypeWithoutNamespacing": true
+      }
+    ],
+    "users": [
+      {
+        "__typename": "PoPCMSSchema_Users_User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false
+      },
+      {
+        "__typename": "PoPCMSSchema_Users_User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false
+      },
+      {
+        "__typename": "PoPCMSSchema_Users_User",
+        "isObjectTypeWithNamespacing": false,
+        "isObjectTypeWithoutNamespacing": false,
+        "implementsWithNamespacing": false,
+        "implementsWithoutNamespacing": false,
+        "isInUnionTypeWithNamespacing": false,
+        "isInUnionTypeWithoutNamespacing": false
+      }
+    ]
+  }
+}
