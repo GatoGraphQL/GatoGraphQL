@@ -49,6 +49,7 @@
             "@purge-cache",
             "lando start"
         ],
+        "destroy-server": "lando destroy -y",
         "install-site": "lando composer install-site-within-container",
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
