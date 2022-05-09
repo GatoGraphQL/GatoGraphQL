@@ -4,8 +4,21 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\Schema;
 
-use PoP\Root\Exception\ImpossibleToHappenException;
+use PoP\ComponentModel\Cache\PersistentCacheInterface;
+use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\Engine\Cache\CacheUtils;
+use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
+use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
+use PoP\Root\Exception\ImpossibleToHappenException;
 use PoPAPI\API\Cache\CacheTypes;
 use PoPAPI\API\Component;
 use PoPAPI\API\ComponentConfiguration;
@@ -20,18 +33,6 @@ use PoPAPI\API\ObjectModels\SchemaDefinition\TypeSchemaDefinitionProviderInterfa
 use PoPAPI\API\ObjectModels\SchemaDefinition\UnionTypeSchemaDefinitionProvider;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
-use PoP\ComponentModel\Cache\PersistentCacheInterface;
-use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
-use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoP\Engine\Cache\CacheUtils;
-use PoP\Engine\Schema\SchemaDefinitionService as UpstreamSchemaDefinitionService;
 
 class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements SchemaDefinitionServiceInterface
 {
@@ -302,13 +303,21 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
+        if ($this->skipExposingGlobalFieldsInSchema()) {
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
+    }
+
+    /**
+     * Global fields are only added if enabled
+     */
+    protected function skipExposingGlobalFieldsInSchema(): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
     private function addDirectiveSchemaDefinition(
@@ -341,7 +350,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * global fields, connections and directives
              */
             if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
-                return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+                return $this->createRootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
         }
@@ -364,5 +373,11 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));
+    }
+
+    protected function createRootObjectTypeSchemaDefinitionProvider(
+        RootObjectTypeResolver $rootObjectTypeResolver,
+    ): RootObjectTypeSchemaDefinitionProvider {
+        return new RootObjectTypeSchemaDefinitionProvider($rootObjectTypeResolver);
     }
 }
