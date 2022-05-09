@@ -9,6 +9,11 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver
 
 class CustomPostUnionTypeResolver extends UpstreamCustomPostUnionTypeResolver
 {
+    protected function getClassToNamespace(): string
+    {
+        return get_parent_class();
+    }
+
     /**
      * Overriding function to provide optimization:
      * instead of calling ->isIDOfType on each object (as in parent function),
