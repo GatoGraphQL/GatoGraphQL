@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use PoP\Root\App;
+use GraphQLByPoP\GraphQLServer\Component;
+use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Component as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\Root\App;
+use PoPAPI\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider as UpstreamRootObjectTypeSchemaDefinitionProvider;
 use PoPAPI\API\Schema\SchemaDefinitionService;
 
 class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements GraphQLSchemaDefinitionServiceInterface
@@ -71,5 +76,21 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getSchemaSubscriptionRootTypeResolver(): ?ObjectTypeResolverInterface
     {
         return null;
+    }
+
+    protected function createRootObjectTypeSchemaDefinitionProvider(
+        TypeResolverInterface $typeResolver,
+    ): UpstreamRootObjectTypeSchemaDefinitionProvider {
+        return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+    }
+    
+    /**
+     * Global fields are only added if enabled
+     */
+    protected function skipExposingGlobalFieldsInSchema(): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return !$componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }

@@ -302,13 +302,21 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     private function maybeMoveGlobalTypeSchemaDefinition(array &$schemaDefinition, array &$rootTypeSchemaDefinition): void
     {
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES]);
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
+        if ($this->skipExposingGlobalFieldsInSchema()) {
             return;
         }
         $schemaDefinition[SchemaDefinition::GLOBAL_FIELDS] = $rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS];
         unset($rootTypeSchemaDefinition[SchemaDefinition::GLOBAL_FIELDS]);
+    }
+
+    /**
+     * Global fields are only added if enabled
+     */
+    protected function skipExposingGlobalFieldsInSchema(): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
     private function addDirectiveSchemaDefinition(
@@ -341,7 +349,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
              * global fields, connections and directives
              */
             if ($typeResolver === $this->getSchemaRootObjectTypeResolver()) {
-                return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
+                return $this->createRootObjectTypeSchemaDefinitionProvider($typeResolver);
             }
             return new ObjectTypeSchemaDefinitionProvider($typeResolver);
         }
@@ -364,5 +372,11 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $this->__('No type identified for TypeResolver with class \'%s\'', 'api'),
             get_class($typeResolver)
         ));
+    }
+
+    protected function createRootObjectTypeSchemaDefinitionProvider(
+        TypeResolverInterface $typeResolver,
+    ): RootObjectTypeSchemaDefinitionProvider {
+        return new RootObjectTypeSchemaDefinitionProvider($typeResolver);
     }
 }
