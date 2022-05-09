@@ -6,8 +6,5 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 
 class EnabledExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTest extends AbstractExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGraphQLServerTest
 {
-    protected static function isEnabled(): bool
-    {
-        return true;
-    }
+    use EnabledFixtureQueryExecutionGraphQLServerTestTrait;
 }
