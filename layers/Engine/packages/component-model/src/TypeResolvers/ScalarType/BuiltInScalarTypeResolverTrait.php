@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 
+use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
+
+/**
+ * Built-in scalars must not be namespaced
+ */
 trait BuiltInScalarTypeResolverTrait
 {
-    /**
-     * Built-in scalars must not be namespaced
-     */
-    public function getNamespace(): string
-    {
-        return '';
-    }
+    use CanonicalTypeNameTypeResolverTrait;
 }
