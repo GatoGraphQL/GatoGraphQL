@@ -22,10 +22,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -55,10 +55,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -88,10 +88,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -145,10 +145,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -161,10 +161,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -194,10 +194,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -210,10 +210,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -243,10 +243,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -259,10 +259,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -275,10 +275,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -308,10 +308,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -324,10 +324,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -357,10 +357,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -373,10 +373,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -389,10 +389,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -422,10 +422,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -438,10 +438,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -495,7 +495,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -523,10 +523,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -539,10 +539,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -579,10 +579,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -612,7 +612,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -624,7 +624,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -652,10 +652,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -668,10 +668,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -684,10 +684,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -741,7 +741,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -753,7 +753,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -781,10 +781,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -797,10 +797,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_Boolean!",
+                                "name": "Boolean!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_Boolean",
+                                    "name": "Boolean",
                                     "ofType": null
                                 }
                             }
@@ -813,10 +813,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -862,7 +862,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -874,7 +874,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -902,10 +902,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -918,10 +918,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_String!",
+                                "name": "String!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_String",
+                                    "name": "String",
                                     "ofType": null
                                 }
                             }
@@ -1022,10 +1022,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -1082,7 +1082,7 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "SCALAR",
-                                        "name": "PoP_ComponentModel_String",
+                                        "name": "String",
                                         "ofType": null
                                     }
                                 }
@@ -1142,7 +1142,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -1158,7 +1158,7 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "SCALAR",
-                                        "name": "PoP_ComponentModel_Boolean",
+                                        "name": "Boolean",
                                         "ofType": null
                                     }
                                 }
@@ -1201,7 +1201,7 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "SCALAR",
-                                        "name": "PoP_ComponentModel_Boolean",
+                                        "name": "Boolean",
                                         "ofType": null
                                     }
                                 }
@@ -1228,10 +1228,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -1300,7 +1300,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         },
@@ -1344,7 +1344,7 @@
                             "args": [],
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_String",
+                                "name": "String",
                                 "ofType": null
                             }
                         }
@@ -1362,8 +1362,28 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "PoP_ComponentModel_Boolean",
+                    "name": "Boolean",
                     "description": "The Boolean scalar type represents `true` or `false`.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "description": "The ID scalar type represents a unique identifier.",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "description": "The Int scalar type represents non-fractional signed whole numeric values.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -1382,27 +1402,7 @@
                 },
                 {
                     "kind": "SCALAR",
-                    "name": "PoP_ComponentModel_ID",
-                    "description": "The ID scalar type represents a unique identifier.",
-                    "fields": null,
-                    "inputFields": null,
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "PoP_ComponentModel_Int",
-                    "description": "The Int scalar type represents non-fractional signed whole numeric values.",
-                    "fields": null,
-                    "inputFields": null,
-                    "interfaces": null,
-                    "enumValues": null,
-                    "possibleTypes": null
-                },
-                {
-                    "kind": "SCALAR",
-                    "name": "PoP_ComponentModel_String",
+                    "name": "String",
                     "description": "The String scalar type represents textual data, represented as UTF-8 character sequences.",
                     "fields": null,
                     "inputFields": null,
@@ -1423,10 +1423,10 @@
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
-                                "name": "PoP_ComponentModel_ID!",
+                                "name": "ID!",
                                 "ofType": {
                                     "kind": "SCALAR",
-                                    "name": "PoP_ComponentModel_ID",
+                                    "name": "ID",
                                     "ofType": null
                                 }
                             }
@@ -1729,7 +1729,7 @@
                             "defaultValue": null,
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_Int",
+                                "name": "Int",
                                 "ofType": null
                             }
                         }
@@ -1766,7 +1766,7 @@
                             "defaultValue": null,
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_Boolean",
+                                "name": "Boolean",
                                 "ofType": null
                             }
                         }
@@ -1787,7 +1787,7 @@
                             "defaultValue": null,
                             "type": {
                                 "kind": "SCALAR",
-                                "name": "PoP_ComponentModel_Boolean",
+                                "name": "Boolean",
                                 "ofType": null
                             }
                         }
