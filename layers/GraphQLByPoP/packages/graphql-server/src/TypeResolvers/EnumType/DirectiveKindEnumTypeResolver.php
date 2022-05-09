@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 
+use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
-use PoP\Root\App;
 use PoP\GraphQLParser\Component;
 use PoP\GraphQLParser\ComponentConfiguration;
-use PoP\ComponentModel\Directives\DirectiveKinds;
-use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
+use PoP\Root\App;
 use stdClass;
 
-class DirectiveKindEnumTypeResolver extends AbstractEnumTypeResolver
+class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolver
 {
     public function getTypeName(): string
     {

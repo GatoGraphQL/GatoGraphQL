@@ -8,11 +8,11 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\QueryRootTypeDataLoader;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 class QueryRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
-    use ReservedNameTypeResolverTrait;
+    use CanonicalTypeNameTypeResolverTrait;
 
     private ?QueryRootTypeDataLoader $queryRootTypeDataLoader = null;
 
