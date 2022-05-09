@@ -4,18 +4,17 @@
   }
   roleNames
   user(by: {id: 1}) {
-    name
     roles {
       name
     }
     roleNames
+    hasRole(role: "administrator")
+    hasAnyRole(roles: ["administrator"])
   }
-  hasRole(role: "administrator")
-  hasAnyRole(role: ["administrator"])
   users(filter: {
     roles: ["administrator"]
     excludeRoles: ["subscriber"]
   }) {
-    name
+    id
   }
 }
