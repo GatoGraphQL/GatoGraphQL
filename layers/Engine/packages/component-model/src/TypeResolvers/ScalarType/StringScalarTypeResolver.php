@@ -14,6 +14,8 @@ use stdClass;
  */
 class StringScalarTypeResolver extends AbstractScalarTypeResolver
 {
+    use BuiltInScalarTypeResolverTrait;
+    
     public function getTypeName(): string
     {
         return 'String';

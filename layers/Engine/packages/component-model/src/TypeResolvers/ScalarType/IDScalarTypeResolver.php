@@ -18,6 +18,8 @@ use stdClass;
  */
 class IDScalarTypeResolver extends AbstractScalarTypeResolver
 {
+    use BuiltInScalarTypeResolverTrait;
+    
     public function getTypeName(): string
     {
         return 'ID';

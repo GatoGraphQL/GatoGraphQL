@@ -15,6 +15,8 @@ use stdClass;
  */
 class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
 {
+    use BuiltInScalarTypeResolverTrait;
+    
     public function getTypeName(): string
     {
         return 'Boolean';
