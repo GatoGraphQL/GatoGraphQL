@@ -239,7 +239,7 @@
             }
         },
         {
-            "message": "There is no field 'hasAnyRole' on type 'User'",
+            "message": "There is no field 'registeredDate' on type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -249,7 +249,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "hasAnyRole(roles:[0:\"editor\"])",
+                    "registeredDate",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
@@ -290,7 +290,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -307,7 +307,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -324,7 +324,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'hasAnyCapability(capabilities:[0:\"switch_themes\"])' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -334,7 +334,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "hasAnyCapability(capabilities:[0:\"switch_themes\"])",
+                    "registeredDateStr(format:\"Y-m-d\")",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
@@ -561,8 +561,8 @@
                 "description": null,
                 "firstName": null,
                 "displayName": null,
-                "hasAnyCapability": null,
-                "hasAnyRole": null,
+                "registeredDateStr": null,
+                "registeredDate": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,
@@ -574,8 +574,8 @@
                 "description": null,
                 "firstName": null,
                 "displayName": null,
-                "hasAnyCapability": null,
-                "hasAnyRole": null,
+                "registeredDateStr": null,
+                "registeredDate": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,
@@ -587,8 +587,8 @@
                 "description": null,
                 "firstName": null,
                 "displayName": null,
-                "hasAnyCapability": null,
-                "hasAnyRole": null,
+                "registeredDateStr": null,
+                "registeredDate": null,
                 "lastName": null,
                 "name": null,
                 "websiteURL": null,

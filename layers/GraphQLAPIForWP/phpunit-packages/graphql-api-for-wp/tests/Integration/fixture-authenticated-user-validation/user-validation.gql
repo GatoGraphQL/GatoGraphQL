@@ -39,9 +39,9 @@
     # Default / "switch_themes" capability
     displayName
     # Public / "edit_plugins" capability
-    hasAnyCapability(capabilities: ["switch_themes"])
+    registeredDateStr(format: "Y-m-d")
     # Private / "read_private_posts" capability
-    hasAnyRole(roles: ["editor"])
+    registeredDate
 
     # Default / Disabled
     lastName
