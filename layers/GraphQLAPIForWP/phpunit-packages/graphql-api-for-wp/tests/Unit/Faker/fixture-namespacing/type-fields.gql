@@ -7,10 +7,13 @@
     __typename
     isObjectTypeWithNamespacing: isObjectType(type: "PoPCMSSchema_Posts_Post")
     isObjectTypeWithoutNamespacing: isObjectType(type: "Post")
+    isObjectTypeWithWrongNamespacing: isObjectType(type: "NonExisting_PoPCMSSchema_Posts_Post")
     implementsWithNamespacing: implements(interface: "PoPCMSSchema_CustomPosts_IsCustomPost")
     implementsWithoutNamespacing: implements(interface: "IsCustomPost")
+    implementsWithWrongNamespacing: implements(interface: "NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost")
     isInUnionTypeWithNamespacing: isInUnionType(type: "PoPCMSSchema_CustomPosts_CustomPostUnion")
     isInUnionTypeWithoutNamespacing: isInUnionType(type: "CustomPostUnion")
+    isInUnionTypeWithWrongNamespacing: isInUnionType(type: "NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion")
   }
 
   users(
@@ -21,9 +24,12 @@
     __typename
     isObjectTypeWithNamespacing: isObjectType(type: "PoPCMSSchema_Posts_Post")
     isObjectTypeWithoutNamespacing: isObjectType(type: "Post")
+    isObjectTypeWithWrongNamespacing: isObjectType(type: "NonExisting_PoPCMSSchema_Posts_Post")
     implementsWithNamespacing: implements(interface: "PoPCMSSchema_CustomPosts_IsCustomPost")
     implementsWithoutNamespacing: implements(interface: "IsCustomPost")
+    implementsWithWrongNamespacing: implements(interface: "NonExisting_PoPCMSSchema_CustomPosts_IsCustomPost")
     isInUnionTypeWithNamespacing: isInUnionType(type: "PoPCMSSchema_CustomPosts_CustomPostUnion")
     isInUnionTypeWithoutNamespacing: isInUnionType(type: "CustomPostUnion")
+    isInUnionTypeWithWrongNamespacing: isInUnionType(type: "NonExisting_PoPCMSSchema_CustomPosts_CustomPostUnion")
   }
 }

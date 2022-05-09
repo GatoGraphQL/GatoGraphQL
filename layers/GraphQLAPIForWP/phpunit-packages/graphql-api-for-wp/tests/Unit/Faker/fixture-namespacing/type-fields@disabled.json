@@ -5,28 +5,37 @@
         "__typename": "PoPCMSSchema_Posts_Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": true,
         "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": true,
-        "isInUnionTypeWithoutNamespacing": true
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
       },
       {
         "__typename": "PoPCMSSchema_Posts_Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": true,
         "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": true,
-        "isInUnionTypeWithoutNamespacing": true
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
       },
       {
         "__typename": "PoPCMSSchema_Posts_Post",
         "isObjectTypeWithNamespacing": true,
         "isObjectTypeWithoutNamespacing": true,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": true,
         "implementsWithoutNamespacing": true,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": true,
-        "isInUnionTypeWithoutNamespacing": true
+        "isInUnionTypeWithoutNamespacing": true,
+        "isInUnionTypeWithWrongNamespacing": false
       }
     ],
     "users": [
@@ -34,28 +43,37 @@
         "__typename": "PoPCMSSchema_Users_User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": false,
         "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": false,
-        "isInUnionTypeWithoutNamespacing": false
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
       },
       {
         "__typename": "PoPCMSSchema_Users_User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": false,
         "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": false,
-        "isInUnionTypeWithoutNamespacing": false
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
       },
       {
         "__typename": "PoPCMSSchema_Users_User",
         "isObjectTypeWithNamespacing": false,
         "isObjectTypeWithoutNamespacing": false,
+        "isObjectTypeWithWrongNamespacing": false,
         "implementsWithNamespacing": false,
         "implementsWithoutNamespacing": false,
+        "implementsWithWrongNamespacing": false,
         "isInUnionTypeWithNamespacing": false,
-        "isInUnionTypeWithoutNamespacing": false
+        "isInUnionTypeWithoutNamespacing": false,
+        "isInUnionTypeWithWrongNamespacing": false
       }
     ]
   }
