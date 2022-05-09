@@ -1,0 +1,23 @@
+{
+  roles {
+    name
+  }
+  capabilities
+  roleNames
+  user(by: {id: 1}) {
+    name
+    roles {
+      name
+    }
+    capabilities
+    roleNames
+  }
+  hasAnyRole(role: ["administrator"])
+  hasAnyCapability(capability: ["manage_options"])
+  users(filter: {
+    roles: ["administrator"]
+    excludeRoles: ["subscriber"]
+  }) {
+    id
+  }
+}
