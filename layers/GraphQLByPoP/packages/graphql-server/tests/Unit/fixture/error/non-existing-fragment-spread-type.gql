@@ -18,4 +18,9 @@ fragment QueryRoot2ndLevel on QueryRoot {
 
 fragment QueryRoot3rdLevel on QueryRoot {
     again: id
+    ...NonExistingTypeData
+}
+
+fragment NonExistingTypeData on NonExistingType {
+    anyField
 }

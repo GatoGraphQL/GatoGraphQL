@@ -1,0 +1,10 @@
+{
+    posts(pagination: {limit: 3, offset: 6}) {
+        guid: self {
+            rendered: url
+        }
+        content: self {
+            rendered: content
+        }
+    }
+}

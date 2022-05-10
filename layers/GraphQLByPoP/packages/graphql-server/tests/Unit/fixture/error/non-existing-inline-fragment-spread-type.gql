@@ -8,6 +8,9 @@
                 }
                 ...on QueryRoot {
                     again: id
+                    ...on NonExistingType {
+                        anyField
+                    }
                 }
             }
         }
