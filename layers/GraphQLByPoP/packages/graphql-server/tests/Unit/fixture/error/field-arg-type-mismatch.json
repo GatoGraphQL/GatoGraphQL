@@ -1,6 +1,23 @@
 {
     "errors": [
         {
+            "message": "Argument 'ofKinds' cannot receive an array containing arrays as elements",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Schema",
+                "fields": [
+                    "directives(ofKinds:[0:[0:\"query\"]])",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e11"
+            }
+        },
+        {
             "message": "Cannot cast value '1.2' for type 'Boolean'",
             "locations": [
                 {
@@ -193,7 +210,8 @@
                     "passingArray": null,
                     "passingInputObject": null
                 }
-            ]
+            ],
+            "directives": null
         }
     }
 }
