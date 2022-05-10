@@ -10,7 +10,7 @@ class ErrorFixtureEndpointWebserverRequestTest extends AbstractFixtureEndpointWe
     {
         return __DIR__ . '/fixture-errors';
     }
-    
+
     /**
      * Single endpoint
      */
