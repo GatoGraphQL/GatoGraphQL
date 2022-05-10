@@ -1,0 +1,3 @@
+query UpperCaseText($text: String!) {
+    echo(value: [[$text]])
+}
