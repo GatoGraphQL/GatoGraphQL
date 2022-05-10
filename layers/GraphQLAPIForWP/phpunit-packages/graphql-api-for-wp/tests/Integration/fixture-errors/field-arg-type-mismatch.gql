@@ -1,0 +1,14 @@
+query {
+  user(by: {id: 1}) {
+    # The input expects an Int, but passing a String/Float
+    passingString: avatar(size: "Sixty") {
+      id
+    }
+    passingFloat: avatar(size: 24.5) {
+      id
+    }
+    passingBool: avatar(size: false) {
+      id
+    }
+  }
+}
