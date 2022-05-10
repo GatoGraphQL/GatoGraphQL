@@ -44,6 +44,10 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
+        // Validate type first
+        if (!is_string($inputValue)) {
+            return parent::coerceValue($inputValue, $schemaInputValidationFeedbackStore);
+        }
         return parent::coerceValue(strtolower($inputValue), $schemaInputValidationFeedbackStore);
     }
 

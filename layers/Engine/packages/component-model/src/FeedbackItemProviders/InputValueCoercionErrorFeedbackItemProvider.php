@@ -26,6 +26,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public final const E15 = 'e15';
     public final const E16 = 'e16';
     public final const E17 = 'e17';
+    public final const E18 = 'e18';
 
     /**
      * @return string[]
@@ -50,6 +51,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E15,
             self::E16,
             self::E17,
+            self::E18,
         ];
     }
 
@@ -73,6 +75,7 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
             self::E15 => $this->__('Input object of type \'%s\' cannot be casted from input value \'%s\'', 'component-model'),
             self::E16 => $this->__('Cannot cast value \'%s\' for type \'%s\'', 'component-model'),
             self::E17 => $this->__('Only strings or integers are allowed for type \'%s\'', 'component-model'),
+            self::E18 => $this->__('Enum values can only be strings, value \'%s\' for type \'%s\' is not allowed', 'component-model'),
             default => parent::getMessagePlaceholder($code),
         };
     }

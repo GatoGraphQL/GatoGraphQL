@@ -6,14 +6,15 @@ namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Component;
 use PoP\ComponentModel\ComponentConfiguration;
-use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
+use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
+use PoP\Root\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
@@ -32,6 +33,17 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     protected ?array $schemaDefinitionForEnumCache = null;
     /** @var array<string, array<string,mixed>> */
     protected array $schemaDefinitionForEnumValueCache = [];
+
+    private ?OutputServiceInterface $outputService = null;
+
+    final public function setOutputService(OutputServiceInterface $outputService): void
+    {
+        $this->outputService = $outputService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        return $this->outputService ??= $this->instanceManager->getInstance(OutputServiceInterface::class);
+    }
 
     /**
      * The "admin" values in the enum
@@ -69,6 +81,13 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         string|int|float|bool|stdClass $inputValue,
         SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
     ): string|int|float|bool|object|null {
+        $separateSchemaInputValidationFeedbackStore = new SchemaInputValidationFeedbackStore();
+        $this->validateIsString($inputValue, $separateSchemaInputValidationFeedbackStore);
+        $schemaInputValidationFeedbackStore->incorporate($separateSchemaInputValidationFeedbackStore);
+        if ($separateSchemaInputValidationFeedbackStore->getErrors() !== []) {
+            return null;
+        }
+
         $enumValues = $this->getConsolidatedEnumValues();
         if (!in_array($inputValue, $enumValues)) {
             $nonDeprecatedEnumValues = array_filter(
@@ -93,6 +112,32 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             return null;
         }
         return $inputValue;
+    }
+
+    final protected function validateIsString(
+        string|int|float|bool|stdClass $inputValue,
+        SchemaInputValidationFeedbackStore $schemaInputValidationFeedbackStore,
+    ): void {
+        if (is_string($inputValue)) {
+            return;
+        }
+        $inputValueAsString = $inputValue instanceof stdClass
+            ? $this->getOutputService()->jsonEncodeArrayOrStdClassValue($inputValue)
+            : (string) $inputValue;
+        $schemaInputValidationFeedbackStore->addError(
+            new SchemaInputValidationFeedback(
+                new FeedbackItemResolution(
+                    InputValueCoercionErrorFeedbackItemProvider::class,
+                    InputValueCoercionErrorFeedbackItemProvider::E18,
+                    [
+                        $inputValueAsString,
+                        $this->getMaybeNamespacedTypeName(),
+                    ]
+                ),
+                LocationHelper::getNonSpecificLocation(),
+                $this
+            ),
+        );
     }
 
     /**
