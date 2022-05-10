@@ -8,7 +8,11 @@ query {
       passingInputObject: name(namespaced: {namespaced: true})
     }
     # The input expects an Array, passing Array<Array>
-    directives(ofKinds: [["query"]]) {
+    passingArrayOfArrays: directives(ofKinds: [["query"]]) {
+      name
+    }
+    # The input expects an Array<String>, passing Array<InputObject>
+    passingArrayOfInputObject: directives(ofKinds: [{ofKinds: "query"}]) {
       name
     }
   }
