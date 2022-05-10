@@ -1,0 +1,7 @@
+query {
+  # The input expects a Boolean, but passing a String/Int gets coerced successfully
+  withTrueBoolean: id @skip(if: "true")
+  withTrueInt: id @skip(if: 1)
+  withFalseBoolean: id @skip(if: "false")
+  withFalseInt: id @skip(if: 0)
+}
