@@ -1,0 +1,99 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'interface' in field 'implements' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "fields": [
+          "implements",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    },
+    {
+      "message": "Argument 'type' in field 'isObjectType' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "id": 1724,
+        "fields": [
+          "isObjectType",
+          "resolveValueAndMerge"
+        ],
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    },
+    {
+      "message": "Argument 'type' in field 'isObjectType' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Page",
+        "id": 2,
+        "fields": [
+          "isObjectType",
+          "resolveValueAndMerge"
+        ],
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    },
+    {
+      "message": "Argument 'type' in field 'isObjectType' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Page",
+        "id": 146,
+        "fields": [
+          "isObjectType",
+          "resolveValueAndMerge"
+        ],
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    }
+  ],
+  "data": {
+    "posts": [
+      {
+        "implements": null
+      },
+      {
+        "implements": null
+      },
+      {
+        "implements": null
+      }
+    ],
+    "customPosts": [
+      {
+        "isObjectType": null
+      },
+      {
+        "isObjectType": null
+      },
+      {
+        "isObjectType": null
+      }
+    ]
+  }
+}

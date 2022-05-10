@@ -1,0 +1,8 @@
+query {
+  posts(pagination: { limit: 3 }) {
+    id @skip(if: false, unless: true)
+  }
+  customPosts(pagination: { limit: 3 }) {
+    id @include(if: true, unless: true)
+  }
+}

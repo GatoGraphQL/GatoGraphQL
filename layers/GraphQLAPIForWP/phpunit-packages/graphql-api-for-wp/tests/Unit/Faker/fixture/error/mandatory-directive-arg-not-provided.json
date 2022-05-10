@@ -1,0 +1,56 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'if' in directive 'skip' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "field": "id<skip>",
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    },
+    {
+      "message": "Argument 'if' in directive 'include' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "CustomPostUnion",
+        "field": "id<include>",
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    }
+  ],
+  "data": {
+    "posts": [
+      {
+        "id": null
+      },
+      {
+        "id": null
+      },
+      {
+        "id": null
+      }
+    ],
+    "customPosts": [
+      {
+        "id": null
+      },
+      {
+        "id": null
+      },
+      {
+        "id": null
+      }
+    ]
+  }
+}
