@@ -22,5 +22,5 @@ fragment QueryRoot3rdLevel on QueryRoot {
 }
 
 fragment NonExistingTypeData on NonExistingType {
-    noField
+    anyField
 }

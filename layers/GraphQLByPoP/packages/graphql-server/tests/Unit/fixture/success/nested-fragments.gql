@@ -1,0 +1,21 @@
+query {
+    self {
+        ...QueryRoot1stLevel
+    }
+}
+
+fragment QueryRoot1stLevel on QueryRoot {
+    id
+    ...QueryRoot2ndLevel
+}
+
+fragment QueryRoot2ndLevel on QueryRoot {
+    self {
+        id
+    }
+    ...QueryRoot3rdLevel
+}
+
+fragment QueryRoot3rdLevel on QueryRoot {
+    again: id
+}
