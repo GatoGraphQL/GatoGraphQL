@@ -1,0 +1,30 @@
+{
+    "data": {
+        "posts": [
+            {
+                "guid": {
+                    "rendered": "https:\/\/www.mysite.com\/post-format-image-linked"
+                },
+                "content": {
+                    "rendered": "[caption id=\"attachment_612\" align=\"aligncenter\" width=\"640\" caption=\"Chunk of resinous blackboy husk, Clarkson, Western Australia. This burns like a spinifex log.\"]<a href=\"https:\/\/wpthemetestdata.files.wordpress.com\/2013\/09\/dsc20040724_152504_532.jpg\"><img src=\"https:\/\/wpthemetestdata.files.wordpress.com\/2013\/09\/dsc20040724_152504_532.jpg\" alt=\"chunk of resinous blackboy husk\" title=\"dsc20040724_152504_532\" width=\"640\" height=\"480\" class=\"size-full wp-image-612\" \/><\/a>[\/caption]\n  "
+                }
+            },
+            {
+                "guid": {
+                    "rendered": "https:\/\/www.mysite.com\/post-format-quote"
+                },
+                "content": {
+                    "rendered": "<blockquote>Only one thing is impossible for God: To find any sense in any copyright law on the planet.\n  <cite><a href=\"http:\/\/www.brainyquote.com\/quotes\/quotes\/m\/marktwain163473.html\">Mark Twain<\/a><\/cite><\/blockquote>"
+                }
+            },
+            {
+                "guid": {
+                    "rendered": "https:\/\/www.mysite.com\/post-format-status"
+                },
+                "content": {
+                    "rendered": "WordPress, how do I love thee? Let me count the ways (in 140 characters or less)."
+                }
+            }
+        ]
+    }
+}
