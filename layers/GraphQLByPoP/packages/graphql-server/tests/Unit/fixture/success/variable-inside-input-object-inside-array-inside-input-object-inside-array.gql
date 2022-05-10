@@ -1,0 +1,12 @@
+query UpperCaseText($text: String!) {
+    echo(value: {
+        x: "Zero",
+        z: [
+            "One",
+            {
+                a: "Two",
+                b: [$text, "Four"]
+            }
+        ]
+    })
+}

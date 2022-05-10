@@ -1,0 +1,14 @@
+{
+    "data": {
+        "echo": {
+            "x": "Zero",
+            "z": [
+                "One",
+                {
+                    "a": "Two",
+                    "b": ["Three", "Four"]
+                }
+            ]
+        }
+    }
+}
