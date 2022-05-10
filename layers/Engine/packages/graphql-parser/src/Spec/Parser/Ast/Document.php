@@ -506,47 +506,52 @@ class Document implements DocumentInterface
     }
 
     /**
+     * @param WithValueInterface|array<WithValueInterface|array> $argumentValue
      * @return VariableReference[]
      */
-    protected function getVariableReferencesInArgumentValue(WithValueInterface $argumentValue): array
+    protected function getVariableReferencesInArgumentValue(WithValueInterface|array $argumentValue): array
     {
         if ($argumentValue instanceof VariableReference) {
             return [$argumentValue];
         }
-        if (!($argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
+        if (!(is_array($argumentValue) || $argumentValue instanceof InputObject || $argumentValue instanceof InputList)) {
             return [];
         }
         // Get references within InputObjects and Lists
         $variableReferences = [];
+        /**
+         * Handle array of arrays. Eg:
+         *
+         * ```
+         * query UpperCaseText($text: String!) {
+         *   echo(value: [[$text]])
+         * }
+         * ```
+         */
+        if (is_array($argumentValue)) {
+            foreach ($argumentValue as $listValue) {
+                if (!(is_array($listValue) || $listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
+                    continue;
+                }
+                /** @var WithValueInterface|array $listValue */
+                $variableReferences = array_merge(
+                    $variableReferences,
+                    $this->getVariableReferencesInArgumentValue($listValue)
+                );
+            }
+            return $variableReferences;
+        }
+        /** @var WithAstValueInterface $argumentValue */
         $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
-            /**
-             * Handle array of arrays. Eg:
-             *
-             * ```
-             * query UpperCaseText($text: String!) {
-             *   echo(value: [[$text]])
-             * }
-             * ```
-             */
-            if (is_array($listValue)) {
-                foreach ($listValue as $listValueElem) {
-                    /** @var WithValueInterface $listValueElem */
-                    $variableReferences = array_merge(
-                        $variableReferences,
-                        $this->getVariableReferencesInArgumentValue($listValueElem)
-                    );
-                }
-                continue;
-            }
-            if (!($listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
+            if (!(is_array($listValue) || $listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
                 continue;
             }
             if ($listValue instanceof VariableReference) {
                 $variableReferences[] = $listValue;
                 continue;
             }
-            /** @var WithValueInterface $listValue */
+            /** @var WithValueInterface|array $listValue */
             $variableReferences = array_merge(
                 $variableReferences,
                 $this->getVariableReferencesInArgumentValue($listValue)
