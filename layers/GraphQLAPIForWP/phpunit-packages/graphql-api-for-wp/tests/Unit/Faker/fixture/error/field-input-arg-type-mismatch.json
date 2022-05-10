@@ -1,0 +1,42 @@
+{
+    "errors": [
+        {
+            "message": "Argument 'slug' does not expect an array, but array '[\"block-category-common\"]' was provided",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "fields": [
+                    "post(by:{slug:[0:\"block-category-common\"]})@passingArray",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e8"
+            }
+        },
+        {
+            "message": "An object cannot be casted to type 'String'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "fields": [
+                    "post(by:{slug:{slug:\"block-category-common\"}})@passingInputObject",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        }
+    ],
+    "data": {
+        "passingArray": null,
+        "passingInputObject": null
+    }
+}
