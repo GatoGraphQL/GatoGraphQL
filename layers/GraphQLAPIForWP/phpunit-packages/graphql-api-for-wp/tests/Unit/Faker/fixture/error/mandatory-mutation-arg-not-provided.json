@@ -1,0 +1,24 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'input' in field 'addCommentToCustomPost' cannot be empty",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "MutationRoot",
+        "fields": [
+          "addCommentToCustomPost",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e24"
+      }
+    }
+  ],
+  "data": {
+    "addCommentToCustomPost": null
+  }
+}
