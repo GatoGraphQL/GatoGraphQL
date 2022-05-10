@@ -24,6 +24,5 @@ composer import-data
 To import all the data again into the DB, you can first drop all tables from the WordPress DB (or destroy the database service in Lando), and then re-install the site and import all data:
 
 ```bash
-$ composer install-site
-$ composer import-data
+composer install-site
 ```

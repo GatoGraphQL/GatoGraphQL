@@ -1,0 +1,26 @@
+{
+  "errors": [
+    {
+      "message": "Value 'non_existing' for enum type 'DirectiveKindEnum' is not valid (the only valid values are: 'query', 'schema')",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "__Schema",
+        "fields": [
+          "directives(ofKinds:[0:\"NON_EXISTING\"])",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e14"
+      }
+    }
+  ],
+  "data": {
+    "__schema": {
+      "directives": null
+    }
+  }
+}

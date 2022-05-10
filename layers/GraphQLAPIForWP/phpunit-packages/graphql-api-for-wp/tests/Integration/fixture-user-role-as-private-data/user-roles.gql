@@ -1,0 +1,20 @@
+{
+  roles {
+    name
+  }
+  roleNames
+  user(by: {id: 1}) {
+    roles {
+      name
+    }
+    roleNames
+    hasRole(role: "administrator")
+    hasAnyRole(roles: ["administrator"])
+  }
+  users(filter: {
+    roles: ["administrator"]
+    excludeRoles: ["subscriber"]
+  }) {
+    id
+  }
+}

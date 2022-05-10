@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\ModuleResolvers;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsDefaultValues;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
@@ -91,7 +92,7 @@ class PerformanceFunctionalityModuleResolver extends AbstractFunctionalityModule
     {
         $defaultValues = [
             self::CACHE_CONTROL => [
-                self::OPTION_MAX_AGE => 86400, // 1 day
+                self::OPTION_MAX_AGE => SettingsDefaultValues::CACHE_CONTROL_MAX_AGE,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;

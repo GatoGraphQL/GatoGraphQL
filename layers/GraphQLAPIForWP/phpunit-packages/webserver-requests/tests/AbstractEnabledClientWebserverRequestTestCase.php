@@ -18,7 +18,7 @@ abstract class AbstractEnabledClientWebserverRequestTestCase extends AbstractWeb
     public function testEnabledClients(
         string $clientEndpoint,
     ): void {
-        $this->testEnabledOrDisabledClients($clientEndpoint, 200, true);
+        $this->doTestEnabledOrDisabledClients($clientEndpoint, 200, true);
     }
 
     /**

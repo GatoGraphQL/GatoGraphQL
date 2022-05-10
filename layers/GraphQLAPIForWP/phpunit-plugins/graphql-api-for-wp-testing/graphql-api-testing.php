@@ -17,8 +17,6 @@ use GraphQLAPI\GraphQLAPI\Plugin as GraphQLAPIMainPlugin;
 use PHPUnitForGraphQLAPI\GraphQLAPITesting\Plugin;
 use PoP\Root\Environment as RootEnvironment;
 
-use function add_action;
-
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;

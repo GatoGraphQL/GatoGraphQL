@@ -15,6 +15,8 @@ use stdClass;
  */
 class FloatScalarTypeResolver extends AbstractScalarTypeResolver
 {
+    use BuiltInScalarTypeResolverTrait;
+
     public function getTypeName(): string
     {
         return 'Float';

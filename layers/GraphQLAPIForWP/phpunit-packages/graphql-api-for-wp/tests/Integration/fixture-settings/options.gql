@@ -1,0 +1,3 @@
+{
+  adminEmail: optionValue(name: "admin_email")
+}

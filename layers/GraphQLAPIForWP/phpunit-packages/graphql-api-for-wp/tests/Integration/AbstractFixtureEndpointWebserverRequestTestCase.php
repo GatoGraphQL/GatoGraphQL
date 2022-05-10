@@ -69,7 +69,10 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
             ];
 
             /**
-             * Retrieve additional GraphQL responses to execute some "operationName"
+             * Retrieve additional GraphQL responses to execute some "operationName".
+             * If it is numeric (eg: "user-properties:2.json") then it's not an
+             * operation name, but simply the re-execution of the same query, that will
+             * produce a different response (eg: by not executing `setUp` and `tearDown`)
              */
             $graphQLResponseForOperationFileNameFileInfos = $this->findFilesInDirectory(
                 $fixtureFolder,
@@ -81,15 +84,24 @@ abstract class AbstractFixtureEndpointWebserverRequestTestCase extends AbstractE
                 $operationName = substr($operationFileName, strpos($operationFileName, ':') + 1);
                 $providerItems["${dataName}:${operationName}"] = [
                     'application/json',
-                    file_get_contents($graphQLResponseFile),
+                    $graphQLResponseForOperationFileInfo->getContents(),
                     $endpoint,
                     [],
                     $query,
                     $variables,
-                    $operationName,
+                    is_numeric($operationName) ? '' : $operationName,
                 ];
             }
         }
+        return $this->customizeProviderEndpointEntries($providerItems);
+    }
+
+    /**
+     * @param array<string,mixed> $providerItems
+     * @return array<string,mixed>
+     */
+    protected function customizeProviderEndpointEntries(array $providerItems): array
+    {
         return $providerItems;
     }
 

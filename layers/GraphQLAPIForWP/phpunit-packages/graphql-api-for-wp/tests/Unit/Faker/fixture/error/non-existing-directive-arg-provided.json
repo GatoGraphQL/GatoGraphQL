@@ -1,0 +1,56 @@
+{
+  "errors": [
+    {
+      "message": "On directive 'skip', there is no argument with name 'unless'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "Post",
+        "field": "id<skip(if:,unless:1)>",
+        "code": "PoP\\Root\\e1"
+      }
+    },
+    {
+      "message": "On directive 'include', there is no argument with name 'unless'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "CustomPostUnion",
+        "field": "id<include(if:1,unless:1)>",
+        "code": "PoP\\Root\\e1"
+      }
+    }
+  ],
+  "data": {
+    "posts": [
+      {
+        "id": null
+      },
+      {
+        "id": null
+      },
+      {
+        "id": null
+      }
+    ],
+    "customPosts": [
+      {
+        "id": null
+      },
+      {
+        "id": null
+      },
+      {
+        "id": null
+      }
+    ]
+  }
+}

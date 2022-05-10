@@ -25,11 +25,10 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
         $schemaDefinition[SchemaDefinition::GLOBAL_DIRECTIVES] = $globalSchemaDefinition[SchemaDefinition::DIRECTIVES];
 
         // Global fields are only added if enabled
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingGlobalFieldsInFullSchema()) {
+        if ($this->skipExposingGlobalFieldsInSchema()) {
             return $schemaDefinition;
         }
+
         $this->addFieldSchemaDefinitions($globalSchemaDefinition, true);
         return array_merge(
             $schemaDefinition,
@@ -37,5 +36,15 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
                 SchemaDefinition::GLOBAL_FIELDS => $globalSchemaDefinition[SchemaDefinition::FIELDS],
             ]
         );
+    }
+
+    /**
+     * Global fields are only added if enabled
+     */
+    protected function skipExposingGlobalFieldsInSchema(): bool
+    {
+        /** @var ComponentConfiguration */
+        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 }

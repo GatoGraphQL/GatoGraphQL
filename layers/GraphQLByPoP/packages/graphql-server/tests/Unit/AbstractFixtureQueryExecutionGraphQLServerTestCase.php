@@ -66,8 +66,8 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
                 continue;
             }
 
-            $graphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
-            $graphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            $graphQLResponseFile = $this->getGraphQLResponseFile($filePath, $fileName);
+            $graphQLVariablesFile = $this->getGraphQLVariablesFile($filePath, $fileName);
             if (!\file_exists($graphQLVariablesFile)) {
                 $graphQLVariablesFile = null;
             }
@@ -100,6 +100,16 @@ abstract class AbstractFixtureQueryExecutionGraphQLServerTestCase extends Abstra
             }
         }
         return $providerItems;
+    }
+
+    protected function getGraphQLResponseFile(string $filePath, string $fileName): string
+    {
+        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '.json';
+    }
+
+    protected function getGraphQLVariablesFile(string $filePath, string $fileName): string
+    {
+        return $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
     }
 
     protected function isProviderTestDisabled(string $dataName): bool

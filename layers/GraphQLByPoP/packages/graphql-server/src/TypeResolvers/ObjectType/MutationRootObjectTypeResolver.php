@@ -9,11 +9,11 @@ use GraphQLByPoP\GraphQLServer\ObjectModels\MutationRoot;
 use GraphQLByPoP\GraphQLServer\RelationalTypeDataLoaders\ObjectType\MutationRootTypeDataLoader;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
-use PoP\Engine\TypeResolvers\ReservedNameTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\CanonicalTypeNameTypeResolverTrait;
 
 class MutationRootObjectTypeResolver extends AbstractUseRootAsSourceForSchemaObjectTypeResolver
 {
-    use ReservedNameTypeResolverTrait;
+    use CanonicalTypeNameTypeResolverTrait;
 
     private ?TypeResolverHelperInterface $typeResolverHelper = null;
     private ?MutationRootTypeDataLoader $mutationRootTypeDataLoader = null;

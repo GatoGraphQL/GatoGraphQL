@@ -11,6 +11,8 @@ use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function current_user_can;
+
 /**
  * UserAuthorization
  */
@@ -57,6 +59,6 @@ class UserAuthorization implements UserAuthorizationInterface
 
     public function canAccessSchemaEditor(): bool
     {
-        return \current_user_can($this->getSchemaEditorAccessCapability());
+        return current_user_can($this->getSchemaEditorAccessCapability());
     }
 }

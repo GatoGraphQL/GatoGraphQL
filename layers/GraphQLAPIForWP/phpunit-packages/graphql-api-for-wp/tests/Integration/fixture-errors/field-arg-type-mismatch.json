@@ -1,0 +1,62 @@
+{
+    "errors": [
+        {
+            "message": "Cannot cast value 'Sixty' for type 'Int'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "avatar(size:\"Sixty\")@passingString",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "Cannot cast value '24.5' for type 'Int'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "avatar(size:24.5)@passingFloat",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "Cannot cast value '' for type 'Int'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "User",
+                "fields": [
+                    "avatar(size:)@passingBool",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        }
+    ],
+    "data": {
+        "user": {
+            "passingString": null,
+            "passingFloat": null,
+            "passingBool": null
+        }
+    }
+}

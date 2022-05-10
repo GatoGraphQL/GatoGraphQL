@@ -1,0 +1,14 @@
+{
+    "data": {
+        "__schema": {
+            "directives": [
+                {
+                    "name": "include"
+                },
+                {
+                    "name": "skip"
+                }
+            ]
+        }
+    }
+}

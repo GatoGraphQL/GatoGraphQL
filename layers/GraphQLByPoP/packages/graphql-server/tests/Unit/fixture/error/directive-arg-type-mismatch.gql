@@ -1,0 +1,6 @@
+query {
+  # The input expects a Boolean, passing a Float/Array/InputObject
+  withFloat: id @skip(if: 1.1)
+  withArray: id @skip(if: [true])
+  withInputObject: id @skip(if: {condition: false})
+}

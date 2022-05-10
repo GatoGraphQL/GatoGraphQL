@@ -1,0 +1,22 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": 1745,
+                "title": "Block: Cover"
+            },
+            {
+                "id": 1747,
+                "title": "Block: Button"
+            },
+            {
+                "id": 1752,
+                "title": "Block: Gallery"
+            },
+            {
+                "id": 1755,
+                "title": "Block: Image"
+            }
+        ]
+    }
+}

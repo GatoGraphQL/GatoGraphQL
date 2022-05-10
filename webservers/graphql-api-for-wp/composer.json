@@ -41,18 +41,20 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name graphql-api",
             "@update-deps",
             "@start-server",
-            "@install-site",
-            "@import data"
+            "@install-site"
         ],
         "init-server": "@start-server",
         "start-server": [
             "@purge-cache",
             "lando start"
         ],
+        "destroy-server": "lando destroy -y",
         "install-site": "lando composer install-site-within-container",
         "install-site-within-container": "/bin/sh /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
         "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
+        "create-users": "lando composer create-users-within-container",
+        "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
         "update-deps": [
             "@symlink-vendor-for-graphql-api-for-wp-plugin",
             "@symlink-vendor-for-graphql-api-for-wp-testing-plugin",
@@ -90,6 +92,10 @@
             "@delete-settings"
         ],
         "disable-unsafe-defaults": [
+            "lando wp config set GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS false --raw --path=wordpress",
+            "@delete-settings"
+        ],
+        "use-default-unsafe-defaults": [
             "lando wp config delete GRAPHQL_API_ENABLE_UNSAFE_DEFAULTS --path=wordpress",
             "@delete-settings"
         ],

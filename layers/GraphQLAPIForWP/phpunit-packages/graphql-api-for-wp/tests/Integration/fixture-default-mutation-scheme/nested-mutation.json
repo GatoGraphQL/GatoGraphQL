@@ -1,0 +1,15 @@
+{
+  "data": {
+    "post": {
+      "id": 13,
+      "update": {
+        "title": "New title",
+        "newTitle": "New title",
+        "update": {
+          "title": "New title",
+          "originalTitle": "Released v0.6, check it out"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query GetPosts($date: Date!) {
+  posts(
+    filter: {
+      dateQuery: {
+        after: $date
+      }
+    }
+  ) {
+    id
+    title
+  }
+}

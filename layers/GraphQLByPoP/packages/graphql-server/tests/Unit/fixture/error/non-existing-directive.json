@@ -1,0 +1,21 @@
+{
+  "errors": [
+    {
+      "message": "There is no directive with name 'nonExisting'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "field": "id<nonExisting>",
+        "code": "PoP\\ComponentModel\\e20"
+      }
+    }
+  ],
+  "data": {
+    "id": "root"
+  }
+}

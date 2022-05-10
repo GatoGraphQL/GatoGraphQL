@@ -1,0 +1,10 @@
+query {
+  posts(
+    filter: {
+      ids: [1, 28]
+    }
+  ) {
+    id
+    title
+  }
+}

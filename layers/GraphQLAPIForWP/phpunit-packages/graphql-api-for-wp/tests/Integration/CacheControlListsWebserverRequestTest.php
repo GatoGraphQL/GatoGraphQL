@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGraphQLAPI\GraphQLAPI\Integration;
 
+use GraphQLAPI\GraphQLAPI\Constants\SettingsDefaultValues;
 use PHPUnitForGraphQLAPI\WebserverRequests\AbstractCacheControlWebserverRequestTestCase;
 
 class CacheControlListsWebserverRequestTest extends AbstractCacheControlWebserverRequestTestCase
@@ -20,7 +21,7 @@ class CacheControlListsWebserverRequestTest extends AbstractCacheControlWebserve
             ],
             'website-ccl-nofield' => [
                 'website/home-tag-widget/',
-                'max-age=86400',
+                sprintf('max-age=%s', SettingsDefaultValues::CACHE_CONTROL_MAX_AGE),
             ],
             'website-ccl-inherit-schemaconfig-from-parent-displayName-field' => [
                 'website/home-user-widget/',

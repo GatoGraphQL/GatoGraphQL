@@ -1,0 +1,151 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'roleNames' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "roleNames",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'roles' on type 'QueryRoot'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "roles",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no input field 'roles' in input object 'UsersFilterInput'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "users(filter:{roles:[0:\"administrator\"],excludeRoles:[0:\"subscriber\"]})",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e4"
+      }
+    },
+    {
+      "message": "There is no input field 'excludeRoles' in input object 'UsersFilterInput'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "QueryRoot",
+        "fields": [
+          "users(filter:{roles:[0:\"administrator\"],excludeRoles:[0:\"subscriber\"]})",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e4"
+      }
+    },
+    {
+      "message": "There is no field 'roleNames' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "roleNames",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'hasRole' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "hasRole(role:\"administrator\")",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'hasAnyRole' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "hasAnyRole(roles:[0:\"administrator\"])",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    },
+    {
+      "message": "There is no field 'roles' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "roles",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    }
+  ],
+  "data": {
+    "roleNames": null,
+    "roles": null,
+    "user": {
+      "roleNames": null,
+      "hasRole": null,
+      "hasAnyRole": null,
+      "roles": null
+    },
+    "users": null
+  }
+}

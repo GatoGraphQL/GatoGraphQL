@@ -1,0 +1,9 @@
+query {
+  # The input expects a Boolean, passing a String/Int/Float can be successfully coerced
+  withTrueBoolean: id @skip(if: "true")
+  withTrueInt: id @skip(if: 1)
+  withTrueFloat: id @skip(if: 1.0)
+  withFalseBoolean: id @skip(if: "false")
+  withFalseInt: id @skip(if: 0)
+  withFalseFloat: id @skip(if: 0.0)
+}

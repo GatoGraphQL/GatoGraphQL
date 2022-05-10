@@ -1,0 +1,10 @@
+query GetPosts($limit: Int) {
+  posts(
+    pagination: {
+      limit: $limit
+    }
+  ) {
+    id
+    title
+  }
+}

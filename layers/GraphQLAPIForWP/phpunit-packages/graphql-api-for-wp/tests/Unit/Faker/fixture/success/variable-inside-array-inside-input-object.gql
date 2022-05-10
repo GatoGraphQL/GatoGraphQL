@@ -1,0 +1,10 @@
+query GetPosts($postID: ID!) {
+  posts(
+    filter: {
+      ids: [$postID]
+    }
+  ) {
+    id
+    title
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "errors": [
+    {
+      "message": "There is no field 'email' on type 'User'",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "User",
+        "fields": [
+          "email",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e16"
+      }
+    }
+  ],
+  "data": {
+    "user": {
+      "name": "admin",
+      "email": null
+    }
+  }
+}

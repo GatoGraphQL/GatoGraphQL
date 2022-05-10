@@ -60,9 +60,8 @@
             "@start-server"
         ],
         "init-server": "@start-server",
-        "start-server": [
-            "lando start"
-        ],
+        "start-server": "lando start",
+        "destroy-server": "lando destroy -y",
         "rebuild-server": [
             "@symlink-vendor",
             "lando rebuild appserver -y"
