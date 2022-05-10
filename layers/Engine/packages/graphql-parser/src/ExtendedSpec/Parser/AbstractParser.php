@@ -220,7 +220,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         [
                             $argument->getName(),
                             $directive->getName(),
-                            $argumentValueItem,
+                            $argumentValueItem === null ? 'null' : $argumentValueItem,
                         ]
                     ),
                     $argument->getLocation()
