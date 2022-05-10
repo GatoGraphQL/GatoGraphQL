@@ -1,0 +1,11 @@
+query {
+  __schema {
+    types {
+      name
+      # The input expects a Boolean, passing a Float/Array/InputObject
+      passingFloat: name(namespaced: 1.2)
+      passingArray: name(namespaced: [false])
+      passingInputObject: name(namespaced: {namespaced: true})
+    }
+  }
+}
