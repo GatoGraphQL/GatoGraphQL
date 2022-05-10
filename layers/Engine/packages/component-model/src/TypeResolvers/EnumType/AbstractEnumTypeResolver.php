@@ -79,7 +79,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                 new SchemaInputValidationFeedback(
                     new FeedbackItemResolution(
                         InputValueCoercionErrorFeedbackItemProvider::class,
-                        InputValueCoercionErrorFeedbackItemProvider::E1,
+                        InputValueCoercionErrorFeedbackItemProvider::E14,
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
