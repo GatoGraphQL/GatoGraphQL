@@ -520,6 +520,25 @@ class Document implements DocumentInterface
         $variableReferences = [];
         $listValues = (array)$argumentValue->getAstValue();
         foreach ($listValues as $listValue) {
+            /**
+             * Handle array of arrays. Eg:
+             *
+             * ```
+             * query UpperCaseText($text: String!) {
+             *   echo(value: [[$text]])
+             * }
+             * ```
+             */
+            if (is_array($listValue)) {
+                foreach ($listValue as $listValueElem) {
+                    /** @var WithValueInterface $listValueElem */
+                    $variableReferences = array_merge(
+                        $variableReferences,
+                        $this->getVariableReferencesInArgumentValue($listValueElem)
+                    );
+                }
+                continue;
+            }
             if (!($listValue instanceof VariableReference || $listValue instanceof WithValueInterface)) {
                 continue;
             }
