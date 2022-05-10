@@ -96,7 +96,7 @@ class FilterSystemDirectiveSchemaObjectTypeFieldResolver extends SchemaObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['directives' => 'ofKinds'] => SchemaTypeModifiers::IS_ARRAY,
+            ['directives' => 'ofKinds'] => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
