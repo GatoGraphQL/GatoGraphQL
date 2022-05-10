@@ -35,6 +35,23 @@
             }
         },
         {
+            "message": "Argument 'ofKinds' cannot receive an array with `null` values",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Schema",
+                "fields": [
+                    "directives(ofKinds:[0:\"query\",1:null])@passingArrayOfArrays",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e10"
+            }
+        },
+        {
             "message": "Cannot cast value '1.2' for type 'Boolean'",
             "locations": [
                 {
