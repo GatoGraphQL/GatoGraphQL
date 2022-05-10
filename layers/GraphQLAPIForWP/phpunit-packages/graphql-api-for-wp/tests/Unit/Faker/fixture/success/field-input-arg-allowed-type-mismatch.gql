@@ -1,0 +1,12 @@
+query {
+  # The input expects a String, but passing a Boolean/Int/Float gets coerced successfully
+  passingBoolean: post(by: { slug: false }) {
+    id
+  }
+  passingInt: post(by: { slug: 15 }) {
+    id
+  }
+  passingFloat: post(by: { slug: 15.5 }) {
+    id
+  }
+}

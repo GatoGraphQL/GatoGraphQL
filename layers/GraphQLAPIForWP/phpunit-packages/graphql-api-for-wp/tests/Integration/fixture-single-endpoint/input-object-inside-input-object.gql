@@ -1,0 +1,12 @@
+query {
+  posts(
+    filter: {
+      dateQuery: {
+        after: "2021-01-02"
+      }
+    }
+  ) {
+    id
+    title
+  }
+}

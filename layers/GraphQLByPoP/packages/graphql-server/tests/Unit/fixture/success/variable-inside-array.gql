@@ -1,0 +1,9 @@
+query GetDirectivesOfKind($kind: String!) {
+  __schema {
+    directives(
+      ofKinds: [$kind]
+    ) {
+      name
+    }
+  }
+}

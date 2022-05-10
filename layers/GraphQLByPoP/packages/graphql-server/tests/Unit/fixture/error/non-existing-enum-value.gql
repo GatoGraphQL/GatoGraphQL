@@ -1,6 +1,6 @@
 query GetDirectives {
   __schema {
-    directives(ofKinds: [QUERY]) {
+    directives(ofKinds: [NON_EXISTING]) {
       name
     }
   }

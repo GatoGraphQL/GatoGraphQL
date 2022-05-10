@@ -1,0 +1,23 @@
+query {
+  __schema {
+    types {
+      name
+      # The input expects a Boolean, passing a Float/Array/InputObject
+      passingFloat: name(namespaced: 1.2)
+      passingArray: name(namespaced: [false])
+      passingInputObject: name(namespaced: {namespaced: true})
+    }
+    # The input expects an Array, passing Array<Array>
+    passingArrayOfArrays: directives(ofKinds: [["query"]]) {
+      name
+    }
+    # The input expects an Array<String>, passing Array<InputObject>
+    passingArrayOfInputObject: directives(ofKinds: [{ofKinds: "query"}]) {
+      name
+    }
+    # The input does not accept NULL values
+    passingArrayOfArrays: directives(ofKinds: ["query", null]) {
+      name
+    }
+  }
+}

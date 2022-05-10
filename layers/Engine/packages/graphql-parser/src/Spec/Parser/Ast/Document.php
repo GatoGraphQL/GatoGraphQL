@@ -506,7 +506,7 @@ class Document implements DocumentInterface
     }
 
     /**
-     * @param WithValueInterface|array<WithValueInterface|array> $argumentValue
+     * @param WithValueInterface|array<WithValueInterface|array<mixed>> $argumentValue
      * @return VariableReference[]
      */
     protected function getVariableReferencesInArgumentValue(WithValueInterface|array $argumentValue): array

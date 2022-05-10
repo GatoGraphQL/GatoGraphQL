@@ -1,0 +1,51 @@
+{
+    "errors": [
+        {
+            "message": "Cannot cast value '1.1' for type 'Boolean'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "field": "id@withFloat<skip(if:1.1)>",
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "Argument 'if' does not expect an array, but array '[\"true\"]' was provided",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "field": "id@withFloat<skip(if:1.1)>",
+                "code": "PoP\\ComponentModel\\e8"
+            }
+        },
+        {
+            "message": "An object cannot be casted to type 'Boolean'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "QueryRoot",
+                "field": "id@withFloat<skip(if:1.1)>",
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        }
+    ],
+    "data": {
+        "withFloat": null,
+        "withArray": null,
+        "withInputObject": null
+    }
+}

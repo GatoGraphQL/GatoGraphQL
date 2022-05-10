@@ -3,3 +3,9 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+		# Some bug in PHPStan:
+		- 
+			message: '#Result of \|\| is always true\.#'
+			path: src/Spec/Parser/Ast/Document.php
+			

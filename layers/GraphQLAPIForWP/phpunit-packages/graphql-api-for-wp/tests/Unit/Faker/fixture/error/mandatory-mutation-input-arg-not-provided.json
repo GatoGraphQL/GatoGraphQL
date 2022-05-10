@@ -1,0 +1,41 @@
+{
+  "errors": [
+    {
+      "message": "Mandatory input field 'comment' in input object 'RootAddCommentToCustomPostFilterInput' has not been provided",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "MutationRoot",
+        "fields": [
+          "addCommentToCustomPost(input:{})",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e5"
+      }
+    },
+    {
+      "message": "Mandatory input field 'customPostID' in input object 'RootAddCommentToCustomPostFilterInput' has not been provided",
+      "locations": [
+        {
+          "line": 1,
+          "column": 1
+        }
+      ],
+      "extensions": {
+        "type": "MutationRoot",
+        "fields": [
+          "addCommentToCustomPost(input:{})",
+          "validate"
+        ],
+        "code": "PoP\\ComponentModel\\e5"
+      }
+    }
+  ],
+  "data": {
+    "addCommentToCustomPost": null
+  }
+}

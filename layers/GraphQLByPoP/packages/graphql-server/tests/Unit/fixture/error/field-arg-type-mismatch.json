@@ -1,0 +1,252 @@
+{
+    "errors": [
+        {
+            "message": "Argument 'ofKinds' cannot receive an array containing arrays as elements",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Schema",
+                "fields": [
+                    "directives(ofKinds:[0:[0:\"query\"]])@passingArrayOfArrays",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e11"
+            }
+        },
+        {
+            "message": "Enum values can only be strings, value '{\"ofKinds\":\"query\"}' for type 'DirectiveKindEnum' is not allowed",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Schema",
+                "fields": [
+                    "directives(ofKinds:[0:{ofKinds:\"query\"}])@passingArrayOfInputObject",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e18"
+            }
+        },
+        {
+            "message": "Argument 'ofKinds' cannot receive an array with `null` values",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Schema",
+                "fields": [
+                    "directives(ofKinds:[0:\"query\",1:null])@passingArrayOfArrays",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e10"
+            }
+        },
+        {
+            "message": "Cannot cast value '1.2' for type 'Boolean'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Type",
+                "fields": [
+                    "name(namespaced:1.2)@passingFloat",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e16"
+            }
+        },
+        {
+            "message": "Argument 'namespaced' does not expect an array, but array '[\"false\"]' was provided",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Type",
+                "fields": [
+                    "name(namespaced:[0:false])@passingArray",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e8"
+            }
+        },
+        {
+            "message": "An object cannot be casted to type 'Boolean'",
+            "locations": [
+                {
+                    "line": 1,
+                    "column": 1
+                }
+            ],
+            "extensions": {
+                "type": "__Type",
+                "fields": [
+                    "name(namespaced:{namespaced:true})@passingInputObject",
+                    "validate"
+                ],
+                "code": "PoP\\ComponentModel\\e1"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "types": [
+                {
+                    "name": "MutationRoot",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "QueryRoot",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "Root",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_DirectiveExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_EnumValueExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_FieldExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_InputValueExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_NamedTypeExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "_SchemaExtensions",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__Directive",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__EnumValue",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__Field",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__InputValue",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__Schema",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "__Type",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "Boolean",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "ID",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "Int",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "String",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "Node",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "DirectiveKindEnum",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "DirectiveLocation",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                },
+                {
+                    "name": "TypeKind",
+                    "passingFloat": null,
+                    "passingArray": null,
+                    "passingInputObject": null
+                }
+            ],
+            "passingArrayOfArrays": null,
+            "passingArrayOfInputObject": null
+        }
+    }
+}

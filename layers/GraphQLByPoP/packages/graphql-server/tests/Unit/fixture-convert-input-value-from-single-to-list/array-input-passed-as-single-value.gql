@@ -1,0 +1,7 @@
+query {
+  __schema {
+    directives(ofKinds: "query") {
+      name
+    }
+  }
+}
