@@ -1,6 +1,7 @@
 {
     "data": {
         "withFalseBoolean": "root",
-        "withFalseInt": "root"
+        "withFalseInt": "root",
+        "withFalseFloat": "root"
     }
 }
