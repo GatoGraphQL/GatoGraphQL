@@ -10,7 +10,7 @@
       ],
       "extensions": {
         "type": "Post",
-        "field": "id<skip(if:,unless:1)>",
+        "field": "id<skip(if: false, unless: true)>",
         "code": "PoP\\Root\\e1"
       }
     },
