@@ -11,7 +11,7 @@
             "extensions": {
                 "type": "QueryRoot",
                 "fields": [
-                    "passingArray: post(by: {slug: [\"block-category-common\"]} )",
+                    "passingArray: post(by: {slug: [\"block-category-common\"]})",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e8"
@@ -28,7 +28,7 @@
             "extensions": {
                 "type": "QueryRoot",
                 "fields": [
-                    "passingInputObject: post(by: {slug: {slug: \"block-category-common\" } })",
+                    "passingInputObject: post(by: {slug: {slug: \"block-category-common\"}})",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e1"
