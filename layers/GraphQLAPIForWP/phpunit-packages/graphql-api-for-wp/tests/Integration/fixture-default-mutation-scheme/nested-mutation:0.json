@@ -11,7 +11,7 @@
       "extensions": {
         "type": "MutationRoot",
         "fields": [
-          "post(by: { id: 13 } )",
+          "post(by: {id: 13})",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"
