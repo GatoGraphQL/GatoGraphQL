@@ -15,19 +15,19 @@ use stdClass;
  * This is to enable it to have an array as value, which is not
  * allowed by GraphQL unless the array is explicitly defined.
  *
- * For instance, type `DangerouslyDynamic` could have values
+ * For instance, type `DangerouslyNonSpecificScalar` could have values
  * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
  * these values by types `String` and `[String]`.
  */
-class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
+class DangerouslyNonSpecificScalarTypeScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'DangerouslyDynamic';
+        return 'DangerouslyNonSpecificScalar';
     }
 
     /**
-     * This method will never be called for DangerouslyDynamicScalar
+     * This method will never be called for DangerouslyNonSpecificScalar
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,

@@ -603,9 +603,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::REMOVE_FIELD_IF_DIRECTIVE_FAILED => true,
             /**
-             * Do not expose the `DangerouslyDynamic` scalar type
+             * Do not expose the `DangerouslyNonSpecificScalar` scalar type
              */
-            ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA => true,
+            ComponentModelEnvironment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => true,
             /**
              * Enable Mutations?
              */

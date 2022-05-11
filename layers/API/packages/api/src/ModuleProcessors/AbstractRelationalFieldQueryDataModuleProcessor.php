@@ -209,7 +209,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
-        
+
         $moduleAtts = $module[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
 
@@ -311,7 +311,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
-        
+
         $moduleAtts = $module[2] ?? null;
         if (!$this->ignoreConditionalFields($moduleAtts)) {
             return [];

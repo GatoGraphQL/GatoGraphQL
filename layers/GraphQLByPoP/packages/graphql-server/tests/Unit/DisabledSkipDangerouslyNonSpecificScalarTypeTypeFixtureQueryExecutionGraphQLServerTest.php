@@ -1,0 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GraphQLByPoP\GraphQLServer\Unit;
+
+class DisabledSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecutionGraphQLServerTest extends AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecutionGraphQLServerTest
+{
+    use DisabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+}

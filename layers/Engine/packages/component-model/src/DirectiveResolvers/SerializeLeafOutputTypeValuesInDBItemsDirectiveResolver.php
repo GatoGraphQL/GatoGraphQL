@@ -141,14 +141,14 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
         bool $fieldLeafOutputTypeIsArray,
     ): string|int|float|bool|array {
         /**
-         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
          */
-        if ($fieldLeafOutputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+        if ($fieldLeafOutputTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
             /**
              * Array is not supported by `serialize`, but can still be handled
-             * by DangerouslyDynamic. So convert it into stdClass
+             * by DangerouslyNonSpecificScalar. So convert it into stdClass
              */
             if (is_array($value)) {
                 $value = (object) $value;

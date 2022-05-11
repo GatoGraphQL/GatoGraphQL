@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use stdClass;
@@ -41,16 +41,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /** @var string[]|null */
     private ?array $consolidatedAdminInputFieldNames = null;
 
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 
-    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
-    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {
@@ -276,18 +276,18 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
             }
 
             /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
              * In particular, it does not need to validate if it is an array or not,
              * as according to the applied WrappingType.
              *
              * This is to enable it to have an array as value, which is not
              * allowed by GraphQL unless the array is explicitly defined.
              *
-             * For instance, type `DangerouslyDynamic` could have values
+             * For instance, type `DangerouslyNonSpecificScalar` could have values
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($inputFieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
                 $coercedInputValue->$inputFieldName = $inputFieldValue;
                 continue;
             }
@@ -475,15 +475,15 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
-             * If `DangerouslyDynamic` is disabled, do not expose the input field if:
+             * If `DangerouslyNonSpecificScalar` is disabled, do not expose the input field if:
              *
-             *   - its type is `DangerouslyDynamic`
+             *   - its type is `DangerouslyNonSpecificScalar`
              */
             $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
-            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($inputFieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
                 return true;
             }
         }
