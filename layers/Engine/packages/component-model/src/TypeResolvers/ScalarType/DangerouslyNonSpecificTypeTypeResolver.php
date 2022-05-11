@@ -27,7 +27,7 @@ class DangerouslyNonSpecificTypeTypeResolver extends AbstractScalarTypeResolver
     }
 
     /**
-     * This method will never be called for DangerouslyNonSpecificType
+     * This method will never be called for DangerouslyNonSpecificScalar
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
