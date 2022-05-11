@@ -57,11 +57,11 @@ trait CheckDangerouslyNonSpecificScalarTypeFieldOrDirectiveResolverTrait
         array $consolidatedFieldOrDirectiveArgNameTypeResolvers,
         array $consolidatedFieldOrDirectiveArgsTypeModifiers,
     ): bool {
-        $dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers = array_filter(
+        $dangerouslyNonSpecificScalarTypeFieldOrDirectiveArgNameTypeResolvers = array_filter(
             $consolidatedFieldOrDirectiveArgNameTypeResolvers,
             fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()
         );
-        foreach (array_keys($dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
+        foreach (array_keys($dangerouslyNonSpecificScalarTypeFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
             $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];
             if ($consolidatedFieldOrDirectiveArgTypeModifiers & SchemaTypeModifiers::MANDATORY) {
                 return true;
