@@ -971,11 +971,15 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "LIST",
-                                        "name": "[DirectiveKindEnum]",
+                                        "name": "[DirectiveKindEnum!]",
                                         "ofType": {
-                                            "kind": "ENUM",
-                                            "name": "DirectiveKindEnum",
-                                            "ofType": null
+                                            "kind": "NON_NULL",
+                                            "name": "DirectiveKindEnum!",
+                                            "ofType": {
+                                                "kind": "ENUM",
+                                                "name": "DirectiveKindEnum",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
