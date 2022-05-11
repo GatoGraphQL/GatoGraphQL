@@ -875,10 +875,10 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             /**
-             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *
-             *   1. its type is `DangerouslyDynamic`
-             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             *   1. its type is `DangerouslyNonSpecificScalar`
+             *   2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
              */
             $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($objectTypeResolver, $fieldName));
             $consolidatedFieldArgsTypeModifiers = [];

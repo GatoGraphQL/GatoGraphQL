@@ -571,7 +571,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
              * If disabled, then do not expose the directive args of this type
              */
             if (
@@ -640,10 +640,10 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             /**
-             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *
-             *   1. its type is `DangerouslyDynamic`
-             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             *   1. its type is `DangerouslyNonSpecificScalar`
+             *   2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
              */
             $consolidatedFieldArgNames = array_keys($this->getConsolidatedFieldArgNameTypeResolvers($fieldName));
             $consolidatedFieldArgsTypeModifiers = [];

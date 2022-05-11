@@ -217,13 +217,13 @@ class ComponentConfiguration extends AbstractComponentConfiguration
     }
 
     /**
-     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
      * In particular, it does not need to validate if it is an array or not,
      * as according to the applied WrappingType.
      *
      * This behavior is not compatible with the GraphQL spec!
      *
-     * For instance, type `DangerouslyDynamic` could have values
+     * For instance, type `DangerouslyNonSpecificScalar` could have values
      * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
      * these values by types `String` and `[String]`.
      *

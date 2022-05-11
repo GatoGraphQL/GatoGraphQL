@@ -1197,21 +1197,21 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     public function skipExposingDirectiveInSchema(RelationalTypeResolverInterface $relationalTypeResolver): bool
     {
         /**
-         * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+         * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
          *
          * If disabled, then do not expose the directive if it
-         * has any mandatory argument of type `DangerouslyDynamic`
+         * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             /**
-             * If `DangerouslyDynamic` is disabled, do not expose the field if either:
+             * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *
-             *   1. its type is `DangerouslyDynamic`
-             *   2. it has any mandatory argument of type `DangerouslyDynamic`
+             *   1. its type is `DangerouslyNonSpecificScalar`
+             *   2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
              */
             $consolidatedDirectiveArgNameTypeResolvers = $this->getConsolidatedDirectiveArgNameTypeResolvers($relationalTypeResolver);
             $consolidatedDirectiveArgsTypeModifiers = [];

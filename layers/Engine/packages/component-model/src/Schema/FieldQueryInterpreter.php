@@ -956,14 +956,14 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
             $fieldOrDirectiveArgTypeResolver = $fieldOrDirectiveArgSchemaDefinition[$argName][SchemaDefinition::TYPE_RESOLVER];
 
             /**
-             * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+             * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
              * In particular, it does not need to validate if it is an array or not,
              * as according to the applied WrappingType.
              *
              * This is to enable it to have an array as value, which is not
              * allowed by GraphQL unless the array is explicitly defined.
              *
-             * For instance, type `DangerouslyDynamic` could have values
+             * For instance, type `DangerouslyNonSpecificScalar` could have values
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */

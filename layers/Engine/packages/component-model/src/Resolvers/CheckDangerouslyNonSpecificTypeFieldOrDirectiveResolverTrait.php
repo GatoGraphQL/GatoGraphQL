@@ -14,14 +14,14 @@ trait CheckDangerouslyNonSpecificTypeFieldOrDirectiveResolverTrait
     abstract protected function getDangerouslyNonSpecificTypeTypeResolver(): DangerouslyNonSpecificTypeTypeResolver;
 
     /**
-     * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
+     * `DangerouslyNonSpecificScalar` is a special scalar type which is not coerced or validated.
      * In particular, it does not need to validate if it is an array or not,
      * as according to the applied WrappingType.
      *
      * If disabled, then do not expose the field if either:
      *
-     * 1. its type is `DangerouslyDynamic`
-     * 2. it has any mandatory argument of type `DangerouslyDynamic`
+     * 1. its type is `DangerouslyNonSpecificScalar`
+     * 2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
      *
      * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
      * @param array<string, int> $consolidatedFieldArgsTypeModifiers
@@ -31,12 +31,12 @@ trait CheckDangerouslyNonSpecificTypeFieldOrDirectiveResolverTrait
         array $consolidatedFieldArgNameTypeResolvers,
         array $consolidatedFieldArgsTypeModifiers,
     ): bool {
-        // 1. its type is `DangerouslyDynamic`
+        // 1. its type is `DangerouslyNonSpecificScalar`
         if ($fieldTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
             return true;
         }
 
-        // 2. it has any mandatory argument of type `DangerouslyDynamic`
+        // 2. it has any mandatory argument of type `DangerouslyNonSpecificScalar`
         if (
             $this->hasMandatoryDangerouslyNonSpecificTypeInputType(
                 $consolidatedFieldArgNameTypeResolvers,
