@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Unit;
 
-abstract class AbstractSkipDangerouslyNonSpecificTypeTypeFixtureQueryExecutionGraphQLServerTest extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase
+abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecutionGraphQLServerTest extends AbstractEnabledDisabledFixtureQueryExecutionGraphQLServerTestCase
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-skip-dangerously-non-specific-type-scalar-type';
+        return __DIR__ . '/fixture-skip-dangerously-non-specific-scalar-type-scalar-type';
     }
 
     /**

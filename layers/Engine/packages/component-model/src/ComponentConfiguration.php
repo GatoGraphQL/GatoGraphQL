@@ -231,7 +231,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      * field arguments and directive arguments which use this type will
      * automatically not be added to the schema.
      */
-    public function skipExposingDangerouslyNonSpecificTypeTypeInSchema(): bool
+    public function skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema(): bool
     {
         $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
         $defaultValue = false;

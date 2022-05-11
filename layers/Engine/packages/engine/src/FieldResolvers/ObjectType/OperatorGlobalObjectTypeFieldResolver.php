@@ -80,16 +80,16 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'if' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+            'if' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             'not' => $this->getBooleanScalarTypeResolver(),
             'and' => $this->getBooleanScalarTypeResolver(),
             'or' => $this->getBooleanScalarTypeResolver(),
             'equals' => $this->getBooleanScalarTypeResolver(),
             'empty' => $this->getBooleanScalarTypeResolver(),
             'isNull' => $this->getBooleanScalarTypeResolver(),
-            'extract' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+            'extract' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             'time' => $this->getIntScalarTypeResolver(),
-            'echo' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+            'echo' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             'sprintf' => $this->getStringScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -135,8 +135,8 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
         return match ($fieldName) {
             'if' => [
                 'condition' => $this->getBooleanScalarTypeResolver(),
-                'then' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
-                'else' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'then' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
+                'else' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             ],
             'not' => [
                 'value' => $this->getBooleanScalarTypeResolver(),
@@ -146,21 +146,21 @@ class OperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFiel
                 'values' => $this->getBooleanScalarTypeResolver(),
             ],
             'equals' => [
-                'value1' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
-                'value2' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'value1' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
+                'value2' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             ],
             'empty' => [
-                'value' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'value' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             ],
             'isNull' => [
-                'value' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'value' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             ],
             'extract' => [
-                'object' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'object' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
                 'path' => $this->getStringScalarTypeResolver(),
             ],
             'echo' => [
-                'value' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
+                'value' => $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver(),
             ],
             'sprintf' => [
                 'string' => $this->getStringScalarTypeResolver(),

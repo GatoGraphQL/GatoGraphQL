@@ -145,7 +145,7 @@ final class SerializeLeafOutputTypeValuesInDBItemsDirectiveResolver extends Abst
          * In particular, it does not need to validate if it is an array or not,
          * as according to the applied WrappingType.
          */
-        if ($fieldLeafOutputTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
+        if ($fieldLeafOutputTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
             /**
              * Array is not supported by `serialize`, but can still be handled
              * by DangerouslyNonSpecificScalar. So convert it into stdClass

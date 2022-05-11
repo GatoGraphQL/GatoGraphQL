@@ -13,7 +13,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificScalarTypeScalarTypeResolver;
 
 class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
 {
@@ -76,10 +76,10 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
         $dangerouslyDynamicScalarTypeResolver = null;
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($skipExposingDangerouslyNonSpecificTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
+        if ($skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var DangerouslyNonSpecificTypeTypeResolver */
-            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificTypeTypeResolver::class);
+            /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
+            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
         }
 
         // Add the fields (non-global)
@@ -106,7 +106,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
                  * If the field arg must not be exposed, then remove it from the schema
                  */
                 $skipExposingDangerousDynamicType =
-                    $skipExposingDangerouslyNonSpecificTypeTypeInSchema
+                    $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema
                     && $fieldArgTypeResolver === $dangerouslyDynamicScalarTypeResolver;
                 if ($skipExposingDangerousDynamicType || $objectTypeFieldResolver->skipExposingFieldArgInSchema($this->objectTypeResolver, $fieldName, $fieldArgName)) {
                     unset($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);

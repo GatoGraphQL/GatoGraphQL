@@ -19,7 +19,7 @@ use stdClass;
  * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
  * these values by types `String` and `[String]`.
  */
-class DangerouslyNonSpecificTypeTypeResolver extends AbstractScalarTypeResolver
+class DangerouslyNonSpecificScalarTypeScalarTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
