@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Post'",
             "locations": [
                 {
                     "line": 1,
@@ -11,14 +11,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Post'",
             "locations": [
                 {
                     "line": 1,
@@ -28,14 +28,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Post'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Post'",
             "locations": [
                 {
                     "line": 1,
@@ -45,14 +45,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -62,14 +62,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'CustomPostUnion'",
             "locations": [
                 {
                     "line": 1,
@@ -79,14 +79,14 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'CustomPostUnion'",
             "locations": [
                 {
                     "line": 1,
@@ -96,14 +96,14 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'CustomPostUnion'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'CustomPostUnion'",
             "locations": [
                 {
                     "line": 1,
@@ -113,14 +113,14 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -130,14 +130,14 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -147,14 +147,14 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -164,14 +164,14 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' for type 'Page'",
+            "message": "You must be logged in to access field(s) 'date<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'url<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>', 'hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -181,14 +181,14 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "hasComments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "hasComments<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -198,7 +198,7 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType<include(if:isTypeOrImplements(typeOrInterface: \"IsCustomPost\"))>",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
@@ -290,7 +290,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format: \"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -307,7 +307,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format: \"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -324,7 +324,7 @@
             }
         },
         {
-            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format:\"Y-m-d\")' for type 'User'",
+            "message": "You must be logged in to access field(s) 'firstName', 'displayName', 'registeredDateStr(format: \"Y-m-d\")' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -334,7 +334,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "registeredDateStr(format:\"Y-m-d\")",
+                    "registeredDateStr(format: \"Y-m-d\")",
                     "validateIsUserLoggedIn"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e2"
@@ -386,7 +386,7 @@
                 "type": "QueryRoot",
                 "id": "root",
                 "fields": [
-                    "myPosts(pagination:{limit:3})",
+                    "myPosts(pagination: { limit: 3 })",
                     "resolveValueAndMerge"
                 ],
                 "code": "PoPCMSSchema\\UserState\\1"

@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\Root\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
+use PoP\Root\Feedback\FeedbackItemResolution;
 
 interface ModuleProcessorInterface
 {
@@ -41,9 +45,21 @@ interface ModuleProcessorInterface
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface;
     public function getComponentMutationResolverBridge(array $module): ?ComponentMutationResolverBridgeInterface;
     public function prepareDataPropertiesAfterMutationExecution(array $module, array &$props, array &$data_properties): void;
+    /**
+     * @return LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array;
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array;
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array;
+    /**
+     * @return ConditionalRelationalModuleField[]
+     */
     public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array;
     public function getImmutableDataPropertiesDatasetmoduletree(array $module, array &$props): array;
     public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $module, array &$props): array;

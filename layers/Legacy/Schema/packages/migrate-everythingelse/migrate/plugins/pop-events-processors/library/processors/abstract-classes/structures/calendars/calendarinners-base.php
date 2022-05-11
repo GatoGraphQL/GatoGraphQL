@@ -7,6 +7,11 @@ abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Proces
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_CALENDAR_INNER];
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);

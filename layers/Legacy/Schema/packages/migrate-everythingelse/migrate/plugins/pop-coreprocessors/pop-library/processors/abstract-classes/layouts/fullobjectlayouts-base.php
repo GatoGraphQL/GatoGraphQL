@@ -13,6 +13,11 @@ abstract class PoP_Module_Processor_FullObjectLayoutsBase extends PoPEngine_Quer
         return null;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array_merge(

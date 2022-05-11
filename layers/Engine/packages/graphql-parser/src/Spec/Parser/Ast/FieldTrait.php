@@ -21,6 +21,16 @@ trait FieldTrait
             );
         }
 
+        return sprintf(
+            '%s%s%s',
+            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
+            $this->getName(),
+            $strFieldArguments,
+        );
+    }
+
+    public function asQueryString(): string
+    {
         // Generate the string for directives
         $strFieldDirectives = '';
         if ($this->getDirectives() !== []) {
@@ -33,11 +43,10 @@ trait FieldTrait
                 implode(' ', $strDirectives)
             );
         }
+
         return sprintf(
-            '%s%s%s%s',
-            $this->getAlias() !== null ? sprintf('%s: ', $this->getAlias()) : '',
-            $this->getName(),
-            $strFieldArguments,
+            '%s%s',
+            $this->asFieldOutputQueryString(),
             $strFieldDirectives,
         );
     }

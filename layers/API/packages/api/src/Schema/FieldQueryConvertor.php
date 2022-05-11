@@ -103,11 +103,13 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
             // Replace all fragment placeholders with the actual fragments
             $replacedDotNotation = [];
             foreach ($this->getQueryParser()->splitElements($dotNotation, FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING) as $commafields) {
+                $commafields = trim($commafields);
                 if ($replacedCommaFields = $this->replaceFragments($commafields, $fragments)) {
                     $replacedDotNotation[] = $replacedCommaFields;
                 }
             }
             if ($dotNotation = implode(FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, $replacedDotNotation)) {
+                $dotNotation = trim($dotNotation);
                 // After replacing the fragments, expand relational properties once again, since any such string could have been provided through a fragment
                 // Eg: a fragment can contain strings such as "id|author.id"
                 $dotNotation = $this->expandRelationalProperties($dotNotation);
@@ -120,6 +122,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 // Split the ElemCount by ",". Use `splitElements` instead of `explode` so that the "," can also be inside the fieldArgs
                 $commafieldSet = $this->getQueryParser()->splitElements($dotNotation, FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
                 foreach ($commafieldSet as $commafields) {
+                    $commafields = trim($commafields);
+
                     // Initialize the pointer
                     $requestedPointer = &$requestedFields;
                     $executablePointer = &$executableFields;
@@ -595,6 +599,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // Strategy: continuously search for "." appearing after "|", recreate their full path, and add them as new query sections (separated by ",")
         $expandedDotNotations = [];
         foreach ($this->getQueryParser()->splitElements($dotNotation, FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING) as $commafields) {
+            $commafields = trim($commafields);
             $dotPos = QueryUtils::findFirstSymbolPosition(
                 $commafields,
                 FieldQueryQuerySyntax::SYMBOL_RELATIONALFIELDS_NEXTLEVEL,
@@ -690,7 +695,11 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         }
 
         // Recombine all the elements
-        return implode(FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR, $expandedDotNotations);
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Added an extra " "
+         */
+        return implode(FieldQueryQuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR . ' ', $expandedDotNotations);
     }
 
     protected function getFragment($fragmentName, array $fragments): ?string
@@ -752,11 +761,12 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                 $pos = $fieldDirectivesOpeningSymbolPos;
             }
             // Extract the alias, without the "@" symbol
-            if ($pos !== false) {
-                $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX), $pos - strlen($fragmentName));
-            } else {
-                $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
-            }
+            // if ($pos !== false) {
+            //     $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX), $pos - strlen($fragmentName));
+            // } else {
+            //     $alias = substr($fragmentName, $aliasSymbolPos + strlen(FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+            // }
+            $alias = substr($fragmentName, 0, $aliasSymbolPos);
         }
         // If it has the "skip output if null" symbol, transfer it to the resolved fragments
         $skipOutputIfNull = false;
@@ -780,7 +790,8 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         }
         // Extract the fragment name
         if ($aliasSymbolPos !== false) {
-            $fragmentName = substr($fragmentName, 0, $aliasSymbolPos);
+            // $fragmentName = substr($fragmentName, 0, $aliasSymbolPos);
+            $fragmentName = substr($fragmentName, $aliasSymbolPos + 1);
         } elseif ($skipOutputIfNullSymbolPos !== false) {
             $fragmentName = substr($fragmentName, 0, $skipOutputIfNullSymbolPos);
         } elseif ($fieldDirectivesOpeningSymbolPos !== false) {
@@ -807,7 +818,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
                     $fragmentAliasSymbolPos = QueryHelpers::findFieldAliasSymbolPosition($fragmentField);
                     $addAliasToFragmentField = $fragmentAliasSymbolPos === false;
                     if ($addAliasToFragmentField) {
-                        $fragmentFieldAliasWithSymbol = FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $alias . array_search($fragmentField, $fragmentPipeFields);
+                        $fragmentFieldAliasWithSymbol = $alias . FieldQueryQuerySyntax::SYMBOL_FIELDALIAS_PREFIX . array_search($fragmentField, $fragmentPipeFields);
                     }
                 }
                 // Calculate if to add "?"

@@ -8,6 +8,11 @@ abstract class PoP_Module_Processor_UserQuickLinkLayoutsBase extends PoPEngine_Q
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_QUICKLINKS];
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('contactSmall');

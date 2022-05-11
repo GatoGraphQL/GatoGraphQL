@@ -1,6 +1,7 @@
 <?php
 namespace PoP\ExampleModules;
 
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
@@ -110,6 +111,9 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
@@ -119,11 +123,17 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
-                $ret['author'] = array(
-                    [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES],
+                $ret[] = new RelationalModuleField(
+                    'author',
+                    [
+                        [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES],
+                    ]
                 );
-                $ret['comments'] = array(
-                    [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
+                $ret[] = new RelationalModuleField(
+                    'comments',
+                    [
+                        [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
+                    ]
                 );
                 break;
         }
@@ -131,6 +141,11 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $data_fields = array(

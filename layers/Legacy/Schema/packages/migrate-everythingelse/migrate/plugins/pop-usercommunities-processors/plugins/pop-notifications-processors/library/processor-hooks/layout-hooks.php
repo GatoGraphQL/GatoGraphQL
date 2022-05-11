@@ -1,14 +1,14 @@
 <?php
 
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+
 class GD_URE_AAL_CustomMultipleLayoutHooks
 {
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalOnDataFieldSubmodules',
-            $this->getConditionalOnDataFieldSubmodules(...),
-            10,
-            2
+            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
+            $this->getConditionalBottomSubmodules(...)
         );
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_MultipleComponentLayouts:modules',
@@ -16,22 +16,36 @@ class GD_URE_AAL_CustomMultipleLayoutHooks
         );
     }
 
-    public function getConditionalOnDataFieldSubmodules($submodules, $module)
+    /**
+     * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
+     * @return ConditionalLeafModuleField[]
+     */
+    public function getConditionalBottomSubmodules(array $conditionalLeafModuleFields): array
     {
         // Add layout for action "updated_user_membership"
-        $submodules['isUserNotification'] = [
-            [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
-        ];
-        return $submodules;
+        $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+            'isUserNotification',
+            [
+                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP],
+            ]
+        );
+        return $conditionalLeafModuleFields;
     }
 
-    public function getQuicklinkgroupBottomSubmodule($submodules)
+    /**
+     * @param ConditionalLeafModuleField[] $conditionalLeafModuleFields
+     * @return ConditionalLeafModuleField[]
+     */
+    public function getQuicklinkgroupBottomSubmodule(array $conditionalLeafModuleFields): array
     {
         // Add layout for action "joined_community"
-        $submodules['isUserNotification'] = [
-            [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
-        ];
-        return $submodules;
+        $conditionalLeafModuleFields[] = new ConditionalLeafModuleField(
+            'isUserNotification',
+            [
+                [Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::class, Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers::MODULE_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY]
+            ]
+        );
+        return $conditionalLeafModuleFields;
     }
 }
 

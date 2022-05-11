@@ -11,7 +11,7 @@
             "extensions": {
                 "type": "__Schema",
                 "fields": [
-                    "directives(ofKinds:\"query\")",
+                    "directives(ofKinds: \"query\")",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e9"

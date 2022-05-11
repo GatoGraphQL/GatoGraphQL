@@ -32,6 +32,11 @@ abstract class PoP_Module_Processor_SocialMediaItemsBase extends PoPEngine_Query
         return null;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = array(

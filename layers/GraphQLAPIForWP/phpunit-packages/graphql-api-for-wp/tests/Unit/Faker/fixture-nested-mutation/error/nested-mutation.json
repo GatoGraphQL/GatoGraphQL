@@ -12,7 +12,7 @@
         "type": "Post",
         "id": 1724,
         "fields": [
-          "addComment(input:{comment:\"Great insight!\",authorName:\"Leo\",authorEmail:\"leo@saronga.com\"})",
+          "addComment(input: {comment: \"Great insight!\", authorName: \"Leo\", authorEmail: \"leo@saronga.com\"})",
           "resolveValueAndMerge"
         ],
         "code": "PoP\\ComponentModel\\1"

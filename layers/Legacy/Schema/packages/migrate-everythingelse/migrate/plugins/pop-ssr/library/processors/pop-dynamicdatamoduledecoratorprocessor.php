@@ -170,12 +170,14 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $processor = $this->getDecoratedmoduleProcessor($module);
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
-        foreach ($processor->getDomainSwitchingSubmodules($module) as $subcomponent_data_field => $subcomponent_modules) {
+        foreach ($processor->getDomainSwitchingSubmodules($module) as $relationalModuleField) {
+            // @todo Pass the ModuleField directly, do not convert to string first
+            $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
             $subcomponent_modules_data_properties = array(
                 'data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($subcomponent_modules as $subcomponent_module) {
+            foreach ($relationalModuleField->getNestedModules() as $subcomponent_module) {
                 if ($subcomponent_module_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($subcomponent_module))->$propagate_fn($subcomponent_module, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                     $subcomponent_modules_data_properties = array_merge_recursive(
                         $subcomponent_modules_data_properties,

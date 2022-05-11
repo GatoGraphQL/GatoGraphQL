@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -24,13 +25,19 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataMo
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        return array(
-            'locations' => array(
-                [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS],
-            )
-        );
+        return [
+            new RelationalModuleField(
+                'locations',
+                [
+                    [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS],
+                ]
+            ),
+        ];
     }
 
     public function getImmutableConfiguration(array $module, array &$props): array

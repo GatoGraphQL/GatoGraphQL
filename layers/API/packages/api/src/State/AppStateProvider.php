@@ -11,6 +11,11 @@ use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
+use PoP\GraphQLParser\Exception\Parser\SyntaxErrorException;
+use PoP\GraphQLParser\ExtendedSpec\Parser\ParserInterface;
+use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Configuration\EngineRequest;
 use PoPAPI\API\Constants\Actions;
@@ -20,8 +25,20 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 
 class AppStateProvider extends AbstractAppStateProvider
 {
+    private ?ParserInterface $parser = null;
+
+    final public function setParser(ParserInterface $parser): void
+    {
+        $this->parser = $parser;
+    }
+    final protected function getParser(): ParserInterface
+    {
+        return $this->parser ??= $this->instanceManager->getInstance(ParserInterface::class);
+    }
+
     public function initialize(array &$state): void
     {
+        $state['executable-document-ast'] = null;
         $state['executable-query'] = null;
         $state['requested-query'] = null;
         $state['does-api-query-have-errors'] = null;
@@ -92,15 +109,54 @@ class AppStateProvider extends AbstractAppStateProvider
             return;
         }
 
+        $variableValues = $state['variables'];
+        $operationName = $state['graphql-operation-name'];
+
+        try {
+            $executableDocument = $this->parseGraphQLQuery(
+                $query,
+                $variableValues,
+                $operationName
+            );
+            $state['executable-document-ast'] = $executableDocument;
+        } catch (SyntaxErrorException | InvalidRequestException $e) {
+            // @todo Show GraphQL error in client
+            // ...
+            $state['does-api-query-have-errors'] = true;
+        }
+
+        // @todo Remove all code below!!!
+
         // If the query starts with "!", then it is the query name to a persisted query
-        $query = PersistedQueryUtils::maybeGetPersistedQuery($query);
+        $fieldQuery = $state['field-query'];
+        $fieldQuery = PersistedQueryUtils::maybeGetPersistedQuery($fieldQuery);
 
         // Parse the query from string into the format needed to work with it
         $fieldQueryConvertor = FieldQueryConvertorFacade::getInstance();
-        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($query);
+        $fieldQuerySet = $fieldQueryConvertor->convertAPIQuery($fieldQuery);
         $state['executable-query'] = $fieldQuerySet->getExecutableFieldQuery();
         if ($fieldQuerySet->areRequestedAndExecutableFieldQueriesDifferent()) {
             $state['requested-query'] = $fieldQuerySet->getRequestedFieldQuery();
         }
+    }
+
+    /**
+     * @throws SyntaxErrorException
+     * @throws InvalidRequestException
+     */
+    protected function parseGraphQLQuery(
+        string $query,
+        array $variableValues,
+        ?string $operationName,
+    ): ExecutableDocument {
+        $document = $this->getParser()->parse($query)->setAncestorsInAST();
+        /** @var ExecutableDocument */
+        $executableDocument = (
+            new ExecutableDocument(
+                $document,
+                new Context($operationName, $variableValues)
+            )
+        )->validateAndInitialize();
+        return $executableDocument;
     }
 }

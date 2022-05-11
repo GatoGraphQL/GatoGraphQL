@@ -11,7 +11,7 @@
             "extensions": {
                 "type": "__Schema",
                 "fields": [
-                    "directives(ofKinds:[0:[0:\"query\"]])@passingArrayOfArrays",
+                    "passingArrayOfArrays: directives(ofKinds: [[\"query\"]])",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e11"
@@ -28,7 +28,7 @@
             "extensions": {
                 "type": "__Schema",
                 "fields": [
-                    "directives(ofKinds:[0:{ofKinds:\"query\"}])@passingArrayOfInputObject",
+                    "passingArrayOfInputObject: directives(ofKinds: [{ofKinds: \"query\"}])",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e18"
@@ -45,7 +45,7 @@
             "extensions": {
                 "type": "__Schema",
                 "fields": [
-                    "directives(ofKinds:[0:\"query\",1:null])@passingArrayOfArrays",
+                    "passingArrayOfArrays: directives(ofKinds: [\"query\", null])",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e10"
@@ -62,7 +62,7 @@
             "extensions": {
                 "type": "__Type",
                 "fields": [
-                    "name(namespaced:1.2)@passingFloat",
+                    "passingFloat: name(namespaced: 1.2)",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
@@ -79,7 +79,7 @@
             "extensions": {
                 "type": "__Type",
                 "fields": [
-                    "name(namespaced:[0:false])@passingArray",
+                    "passingArray: name(namespaced: [false])",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e8"
@@ -96,7 +96,7 @@
             "extensions": {
                 "type": "__Type",
                 "fields": [
-                    "name(namespaced:{namespaced:true})@passingInputObject",
+                    "passingInputObject: name(namespaced: {namespaced: true})",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e1"

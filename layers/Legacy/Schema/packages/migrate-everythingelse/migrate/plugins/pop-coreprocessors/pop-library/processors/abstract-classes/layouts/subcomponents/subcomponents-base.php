@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -18,11 +19,17 @@ abstract class PoP_Module_Processor_SubcomponentLayoutsBase extends PoPEngine_Qu
         return array();
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
-        return array(
-            $this->getSubcomponentField($module) => $this->getLayoutSubmodules($module),
-        );
+        return [
+            new RelationalModuleField(
+                $this->getSubcomponentField($module),
+                $this->getLayoutSubmodules($module)
+            ),
+        ];
     }
 
     public function isIndividual(array $module, array &$props)

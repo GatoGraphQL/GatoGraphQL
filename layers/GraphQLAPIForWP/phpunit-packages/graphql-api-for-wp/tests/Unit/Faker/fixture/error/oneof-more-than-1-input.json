@@ -11,7 +11,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "user(by:{id:1,username:\"themedemos\"})",
+          "user(by: {id: 1, username: \"themedemos\"})",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e6"

@@ -8,6 +8,11 @@ abstract class PoP_Module_Processor_UserMentionComponentLayoutsBase extends PoPE
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_MENTION_COMPONENT];
     }
     
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         // Can't use "user-nicename", because @Mentions plugin does not store the "-" in the html attribute, so it would

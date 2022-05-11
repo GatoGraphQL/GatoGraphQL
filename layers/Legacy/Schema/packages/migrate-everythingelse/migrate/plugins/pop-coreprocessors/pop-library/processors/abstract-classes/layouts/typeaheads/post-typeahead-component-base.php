@@ -13,6 +13,11 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
         return FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'thumb-xs'], 'thumb');
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $thumb = $this->getThumbField($module, $props);

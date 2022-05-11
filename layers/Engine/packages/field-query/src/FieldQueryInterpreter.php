@@ -93,12 +93,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected function doGetFieldName(string $field): string
     {
         // Successively search for the position of some edge symbol
+        // Everything before "@" (for the alias)
+        $pos = QueryHelpers::findFieldAliasSymbolPosition($field);
+        if ($pos !== false) {
+            $field = trim(substr($field, $pos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)));
+        }
+
         // Everything before "(" (for the fieldArgs)
         list($pos) = QueryHelpers::listFieldArgsSymbolPositions($field);
-        // Everything before "@" (for the alias)
-        if ($pos === false) {
-            $pos = QueryHelpers::findFieldAliasSymbolPosition($field);
-        }
         // Everything before "?" (for "skip output if null")
         if ($pos === false) {
             $pos = QueryHelpers::findSkipOutputIfNullSymbolPosition($field);
@@ -364,9 +366,14 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
 
             // Extract the alias, without the "@" symbol
             $aliasSymbolLength = $fieldAliasPositionSpan[self::ALIAS_LENGTH_KEY];
+            // return substr(
+            //     $field,
+            //     $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
+            //     $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
+            // );
             return substr(
                 $field,
-                $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX),
+                0,
                 $aliasSymbolLength - strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX)
             );
         }
@@ -401,7 +408,8 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
 
         // Extract the alias, without the "@" symbol
-        $alias = substr($field, $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+        // $alias = substr($field, $aliasSymbolPos + strlen(QuerySyntax::SYMBOL_FIELDALIAS_PREFIX));
+        $alias = substr($field, 0, $aliasSymbolPos);
 
         // If there is a "]", "?" or "<" after the alias, remove the string from then on
         // Everything before "]" (for if the alias is inside the bookmark)
@@ -526,7 +534,10 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             return [];
         }
         return array_map(
-            $this->listFieldDirective(...),
+            function ($fieldDirective) {
+                $fieldDirective = trim($fieldDirective);
+                return $this->listFieldDirective($fieldDirective);
+            },
             $this->getQueryParser()->splitElements(
                 $fieldDirectives,
                 QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
@@ -551,7 +562,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
      */
     public function composeFieldDirectives(array $fieldDirectives): string
     {
-        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR, $fieldDirectives);
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Added an extra " "
+         */
+        return implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', $fieldDirectives);
     }
 
     /**
@@ -658,7 +673,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     public function listField(string $field): array
     {
         if ($fieldAlias = $this->getFieldAlias($field)) {
-            $fieldAlias = QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldAlias;
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            $fieldAlias = $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
         }
         return [
             $this->getFieldName($field),
@@ -682,9 +701,9 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         bool $addFieldArgSymbolsIfEmpty = false
     ): string {
         return
+            $this->getFieldAliasAsString($fieldAlias) .
             $fieldName .
             $this->getFieldArgsAsString($fieldArgs, $addFieldArgSymbolsIfEmpty) .
-            $this->getFieldAliasAsString($fieldAlias) .
             $this->getFieldSkipOutputIfNullAsString($skipOutputIfNull) .
             $this->getFieldDirectivesAsString($fieldDirectives ?? []);
     }
@@ -696,7 +715,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         ?string $skipOutputIfNull = '',
         ?string $fieldDirectives = ''
     ): string {
-        return $fieldName . ($fieldArgs ?? '') . ($fieldAlias ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
+        return ($fieldAlias ?? '') . $fieldName . ($fieldArgs ?? '') . ($skipOutputIfNull ?? '') . ($fieldDirectives ?? '');
     }
 
     /**
@@ -758,6 +777,12 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             // If it is null, the unquoted `null` string will be represented as null
             if ($fieldArgValue === null) {
                 $fieldArgValue = 'null';
+            } elseif (is_bool($fieldArgValue)) {
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Before it printed "1" and "0" as true/false
+                 */
+                $fieldArgValue = $fieldArgValue ? 'true' : 'false';
             } elseif (is_array($fieldArgValue)) {
                 // Convert from array to its representation of array in a string
                 $fieldArgValue = $this->getArrayAsStringForQuery($fieldArgValue);
@@ -777,11 +802,19 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 // from string to array in `getField`)
                 $fieldArgValue = $this->maybeWrapStringInQuotes($fieldArgValue);
             }
-            $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . $fieldArgValue;
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            $elems[] = $fieldArgKey . QuerySyntax::SYMBOL_FIELDARGS_ARGKEYVALUESEPARATOR . ' ' . $fieldArgValue;
         }
         return
             QuerySyntax::SYMBOL_FIELDARGS_OPENING .
-            implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR, $elems) .
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            implode(QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR . ' ', $elems) .
             QuerySyntax::SYMBOL_FIELDARGS_CLOSING;
     }
 
@@ -844,13 +877,31 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
             // Add the keyValueDelimiter
             if (is_array($value)) {
                 $elems[] =
-                    $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Do not print the array index
+                     */
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
                     $this->getArrayAsStringForQuery($value);
             } elseif ($value instanceof stdClass) {
                 $elems[] =
-                    $key .
-                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Do not print the array index
+                     */
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
@@ -864,13 +915,30 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
                 }
-                $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER . $value;
+                $elems[] =
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Do not print the array index
+                     */
+                    // $key .
+                    // QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_KEYVALUEDELIMITER .
+                    // /**
+                    //  * @todo Temporary addition to match `asQueryString` in the AST
+                    //  * Added an extra " "
+                    //  */
+                    // ' ' .
+                    $value;
             }
         }
         return
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_OPENING .
             implode(
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_SEPARATOR,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_SEPARATOR
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                . ' ',
                 $elems
             ) .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEARRAY_CLOSING;
@@ -887,23 +955,33 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getArrayAsStringForQuery($value);
             } elseif ($value instanceof stdClass) {
                 $elems[] =
                     $key .
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
                     $this->getObjectAsStringForQuery($value);
             } else {
                 // If it is null, the unquoted `null` string will be represented as null
                 if ($value === null) {
                     $value = 'null';
+                } elseif (is_bool($value)) {
+                    $value = $value ? 'true' : 'false';
                 } elseif (is_string($value)) {
                     // If it doesn't have them yet, wrap the string between quotes for if there's a special symbol
                     // inside of it (eg: it if has a ",", it will split the element there when decoding again
                     // from string to array in `getField`)
                     $value = $this->maybeWrapStringInQuotes($value);
-                } elseif (is_bool($value)) {
-                    $value = $value ? 'true' : 'false';
                 } elseif (is_object($value)) {
                     /**
                      * This function accepts objects because it is called
@@ -912,13 +990,26 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
                      */
                     $value = $this->wrapStringInQuotes($this->serializeObject($value));
                 }
-                $elems[] = $key . QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER . $value;
+                $elems[] =
+                    $key .
+                    QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_KEYVALUEDELIMITER .
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    ' ' .
+                    $value;
             }
         }
         return
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_OPENING .
             implode(
-                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_SEPARATOR
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                . ' ',
                 $elems
             ) .
             QuerySyntax::SYMBOL_FIELDARGS_ARGVALUEOBJECT_CLOSING;
@@ -929,7 +1020,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         if (!$fieldAlias) {
             return '';
         }
-        return QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . $fieldAlias;
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Added an extra " "
+         */
+        return $fieldAlias . QuerySyntax::SYMBOL_FIELDALIAS_PREFIX . ' ';
     }
 
     protected function getFieldSkipOutputIfNullAsString(?bool $skipOutputIfNull = false): string
@@ -950,7 +1045,11 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
         }
         return
             QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING .
-            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR, array_map(
+            /**
+             * @todo Temporary addition to match `asQueryString` in the AST
+             * Added an extra " "
+             */
+            implode(QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ', array_map(
                 function ($fieldDirective) {
                     return $this->composeFieldDirective(
                         (string)$fieldDirective[0],

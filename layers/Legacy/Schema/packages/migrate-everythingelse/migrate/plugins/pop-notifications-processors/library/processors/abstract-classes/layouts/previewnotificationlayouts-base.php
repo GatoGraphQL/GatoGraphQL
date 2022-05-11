@@ -1,6 +1,8 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -53,6 +55,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
@@ -67,7 +72,10 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         }
 
         if ($modules) {
-            $ret['userID'] = $modules;
+            $ret[] = new RelationalModuleField(
+                'userID',
+                $modules
+            );
         }
 
         return $ret;
@@ -78,6 +86,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return false;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);
@@ -111,17 +124,23 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return null;
     }
 
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
     public function getConditionalOnDataFieldSubmodules(array $module): array
     {
         $ret = parent::getConditionalOnDataFieldSubmodules($module);
 
-        return array_merge_recursive(
+        return array_merge(
             $ret,
             $this->getConditionalBottomSubmodules($module)
         );
     }
 
-    public function getConditionalBottomSubmodules(array $module)
+    /**
+     * @return ConditionalLeafModuleField[]
+     */
+    public function getConditionalBottomSubmodules(array $module): array
     {
         $ret = [];
         // Only fetch data if doing loadingLatest and is a comment notification
@@ -136,12 +155,15 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
             ],
             'is-comment-notification-and-loading-latest'
         );
-        $ret[$field] = [
-            [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT],
-        ];
+        $ret[] = new ConditionalLeafModuleField(
+            $field,
+            [
+                [PoP_Module_Processor_NotificationSubcomponentLayouts::class, PoP_Module_Processor_NotificationSubcomponentLayouts::MODULE_SUBCOMPONENT_NOTIFICATIONCOMMENT],
+            ]
+        );
 
         return \PoP\Root\App::applyFilters(
-            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalOnDataFieldSubmodules',
+            'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
             $ret,
             $module
         );
@@ -196,12 +218,12 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $this->getBottomSubmodules($module)
             );
-            foreach ($this->getConditionalBottomSubmodules($module) as $conditionDataField => $conditionSubmodules) {
+            foreach ($this->getConditionalBottomSubmodules($module) as $conditionalLeafModuleField) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
                     array_map(
                         [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                        $conditionSubmodules
+                        $conditionalLeafModuleField->getConditionalNestedModules()
                     )
                 );
             }

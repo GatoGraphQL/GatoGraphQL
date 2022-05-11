@@ -366,7 +366,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -926,7 +926,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -1486,7 +1486,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -2070,7 +2070,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -2662,7 +2662,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -3254,7 +3254,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -3830,7 +3830,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -4406,7 +4406,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -4998,7 +4998,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -5626,7 +5626,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -6282,7 +6282,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -6938,7 +6938,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -7570,7 +7570,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -7853,11 +7853,15 @@
                                     "defaultValue": null,
                                     "type": {
                                         "kind": "LIST",
-                                        "name": "[DirectiveKindEnum]",
+                                        "name": "[DirectiveKindEnum!]",
                                         "ofType": {
-                                            "kind": "ENUM",
-                                            "name": "DirectiveKindEnum",
-                                            "ofType": null
+                                            "kind": "NON_NULL",
+                                            "name": "DirectiveKindEnum!",
+                                            "ofType": {
+                                                "kind": "ENUM",
+                                                "name": "DirectiveKindEnum",
+                                                "ofType": null
+                                            }
                                         }
                                     }
                                 }
@@ -8217,7 +8221,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -8990,7 +8994,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {
@@ -9672,7 +9676,7 @@
                             "deprecationReason": null,
                             "args": [
                                 {
-                                    "name": "typeOrInterfaces",
+                                    "name": "typesOrInterfaces",
                                     "description": "The types and interface names to compare against",
                                     "defaultValue": null,
                                     "type": {

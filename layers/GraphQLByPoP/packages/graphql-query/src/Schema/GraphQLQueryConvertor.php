@@ -29,7 +29,6 @@ use PoP\GraphQLParser\Spec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputObject;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
-use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -118,7 +117,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             }
             // Join all fields at the same level with ","
             $fieldQueries[] = implode(
-                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR,
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                QuerySyntax::SYMBOL_QUERYFIELDS_SEPARATOR . ' ',
                 $operationFieldQueries
             );
         }
@@ -245,9 +248,16 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
             return $value->getValue();
         }
 
-        if ($value instanceof VariableReference || $value instanceof Variable) {
-            return $this->convertArgumentValue($value->getValue());
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Print again the variable, don't resolve it yet, so the fieldName is found on $dbObject
+         */
+        if ($value instanceof VariableReference) {
+            return '$' . $value->getName();
         }
+        // if ($value instanceof VariableReference || $value instanceof Variable) {
+        //     return $this->convertArgumentValue($value->getValue());
+        // }
 
         if (is_array($value)) {
             /**
@@ -391,7 +401,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $nestedDirectives
             );
             $directiveComposableDirectives = QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING . implode(
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * Added an extra " "
+                 */
+                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
                 $nestedDirectives
             ) . QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING;
         }
@@ -449,7 +463,11 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                     // so if it evals to false the upcoming directives are not executed
                     $rootFieldDirectives =
                         $includeDirective .
-                        QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR .
+                        /**
+                         * @todo Temporary addition to match `asQueryString` in the AST
+                         * Added an extra " "
+                         */
+                        QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ' .
                         $rootFieldDirectives;
                     // Also remove the directive from the root field, since it will be added again below
                     list(
@@ -511,7 +529,13 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
                 $this->processAndAddFieldPaths($executableDocument, $fragmentConvertedFieldPaths, $fragmentFields);
 
                 // Restrain those fields to the indicated type
-                $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
+                /**
+                 * @todo Temporary addition to match `asQueryString` in the AST
+                 * @todo Watch out: Here directive <include(if:isTypeOrImplements(...))> was removed,
+                 * since it's already resolved via AST, and `->asFieldOutputQueryString` does not print
+                 * the directive in the fieldOutput
+                 */
+                // $fragmentConvertedFieldPaths = $this->restrainFieldsByTypeOrInterface($fragmentConvertedFieldPaths, $fragmentType);
 
                 // Add them to the list of fields in the query
                 foreach ($fragmentConvertedFieldPaths as $fragmentFieldPath) {
@@ -627,7 +651,12 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
          * Let it bubble up
          */
         $document = $this->getParser()->parse($payload);
-        $executableDocument = (new ExecutableDocument($document, new Context($operationName, $variableValues)))->validateAndInitialize();
+        $executableDocument = (
+            new ExecutableDocument(
+                $document,
+                new Context($operationName, $variableValues)
+            )
+        )->validateAndInitialize();
         return $executableDocument;
     }
 }

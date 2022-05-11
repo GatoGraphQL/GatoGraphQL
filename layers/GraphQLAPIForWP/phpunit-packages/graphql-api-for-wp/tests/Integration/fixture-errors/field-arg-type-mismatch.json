@@ -11,7 +11,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "avatar(size:\"Sixty\")@passingString",
+                    "passingString: avatar(size: \"Sixty\")",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
@@ -28,14 +28,14 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "avatar(size:24.5)@passingFloat",
+                    "passingFloat: avatar(size: 24.5)",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Cannot cast value '' for type 'Int'",
+            "message": "Cannot cast value 'false' for type 'Int'",
             "locations": [
                 {
                     "line": 1,
@@ -45,7 +45,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "avatar(size:)@passingBool",
+                    "passingBool: avatar(size: false)",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"

@@ -852,7 +852,11 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
                 // Convert from directive to fieldDirective
                 $fieldDirectives = implode(
-                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                    /**
+                     * @todo Temporary addition to match `asQueryString` in the AST
+                     * Added an extra " "
+                     */
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR . ' ',
                     array_map(
                         [$this->getFieldQueryInterpreter(), 'convertDirectiveToFieldDirective'],
                         $directives
@@ -880,6 +884,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
                 }
                 if ($conditionalFields = $data_fields['conditional'][$field] ?? null) {
+                    // Make sure there's always a 'direct' alongside a 'conditional'
+                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'] ??= [];
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
                         $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
                         $conditionalFields

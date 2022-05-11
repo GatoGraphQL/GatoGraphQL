@@ -11,7 +11,7 @@
       "extensions": {
         "type": "MutationRoot",
         "fields": [
-          "addCommentToCustomPost(input:{comment:\"Great insight!\",customPostID:1724,authorName:\"Leo\",authorEmail:\"leo@saronga.com\",nonExistingArg:\"Doesnt Matter\"})",
+          "addCommentToCustomPost(input: {comment: \"Great insight!\", customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\", nonExistingArg: \"Doesnt Matter\"})",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e4"

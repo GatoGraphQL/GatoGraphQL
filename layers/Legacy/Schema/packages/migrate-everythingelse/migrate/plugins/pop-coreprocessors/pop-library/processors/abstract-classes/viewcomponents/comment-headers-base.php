@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
 {
@@ -13,14 +14,20 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
         return null;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($header = $this->getHeaderSubmodule($module)) {
-            return array(
-                'customPost' => array(
-                    $header,
+            return [
+                new RelationalModuleField(
+                    'customPost',
+                    [
+                        $header,
+                    ]
                 ),
-            );
+            ];
         }
 
         return parent::getDomainSwitchingSubmodules($module);

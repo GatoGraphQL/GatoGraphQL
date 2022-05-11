@@ -1571,7 +1571,7 @@ class Engine implements EngineInterface
             }
 
             // Store the loaded IDs/fields in an object, to avoid fetching them again in later iterations on the same typeResolver
-            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] = $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ?? [];
+            $already_loaded_ids_data_fields[$relationalTypeOutputDBKey] ??= [];
             foreach ($ids_data_fields as $id => $data_fields) {
                 $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] = array_merge(
                     $already_loaded_ids_data_fields[$relationalTypeOutputDBKey][(string)$id] ?? [],
@@ -2245,126 +2245,127 @@ class Engine implements EngineInterface
             // However, for the targetObjectTypeResolver, "self" is processed by itself, not by a UnionTypeResolver, hence it would never add the type under entry "unionDBKeyIDs".
             // The UnionTypeResolver should only handle 2 connection fields: "id" and "self"
             $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field);
-            if ($subcomponentTypeResolver === null && $relationalTypeResolver != $targetObjectTypeResolver) {
+            if ($subcomponentTypeResolver === null && $relationalTypeResolver !== $targetObjectTypeResolver) {
                 $subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($targetObjectTypeResolver, $subcomponent_data_field);
             }
-            if ($subcomponentTypeResolver !== null) {
-                $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
-                // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
-                $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
-                $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
-                if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
-                    $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
+            if ($subcomponentTypeResolver === null) {
+                continue;
+            }
+            $subcomponentTypeOutputDBKey = $subcomponentTypeResolver->getTypeOutputDBKey();
+            // The array_merge_recursive when there are at least 2 levels will make the data_fields to be duplicated, so remove duplicates now
+            $subcomponent_data_fields = array_unique($subcomponent_data_properties['data-fields'] ?? []);
+            $subcomponent_conditional_data_fields = $subcomponent_data_properties['conditional-data-fields'] ?? [];
+            if ($subcomponent_data_fields || $subcomponent_conditional_data_fields) {
+                $subcomponentIsUnionTypeResolver = $subcomponentTypeResolver instanceof UnionTypeResolverInterface;
 
-                    $subcomponent_already_loaded_ids_data_fields = [];
-                    if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey] ?? null)) {
-                        $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
-                    }
-                    $subcomponentIDs = [];
-                    foreach ($typeResolver_ids as $id) {
-                        $object = $objectIDItems[$id];
-                        $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
-                        // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
-                        // Fetch the field_ids from all these DBs
-                        foreach ($databases as $dbname => $database) {
-                            if ($database_field_ids = $database[$database_key][(string)$id][$subcomponent_data_field_outputkey] ?? null) {
-                                $subcomponentIDs[$dbname][$database_key][(string)$id] = array_merge(
-                                    $subcomponentIDs[$dbname][$database_key][(string)$id] ?? [],
-                                    is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
-                                );
-                            }
+                $subcomponent_already_loaded_ids_data_fields = [];
+                if ($already_loaded_ids_data_fields && ($already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey] ?? null)) {
+                    $subcomponent_already_loaded_ids_data_fields = $already_loaded_ids_data_fields[$subcomponentTypeOutputDBKey];
+                }
+                $subcomponentIDs = [];
+                foreach ($typeResolver_ids as $id) {
+                    $object = $objectIDItems[$id];
+                    $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                    // $databases may contain more the 1 DB shipped by pop-engine/ ("primary"). Eg: PoP User Login adds db "userstate"
+                    // Fetch the field_ids from all these DBs
+                    foreach ($databases as $dbname => $database) {
+                        if ($database_field_ids = $database[$database_key][(string)$id][$subcomponent_data_field_outputkey] ?? null) {
+                            $subcomponentIDs[$dbname][$database_key][(string)$id] = array_merge(
+                                $subcomponentIDs[$dbname][$database_key][(string)$id] ?? [],
+                                is_array($database_field_ids) ? $database_field_ids : array($database_field_ids)
+                            );
                         }
                     }
-                    // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
-                    // So, instead, we store the dbKey/ID values in another object "$unionDBKeyIDs"
-                    // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
-                    $typedSubcomponentIDs = [];
-                    // if ($subcomponentIsUnionTypeResolver) {
-                        // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => dbkey => id => ...
-                        $allSubcomponentIDs = array_values(array_unique(
-                            GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
-                        ));
-                        $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
-                        // Create a map, from ID to TypedID
-                    for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
-                        $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
-                    }
-                    // }
+                }
+                // We don't want to store the dbKey/ID inside the relationalID, because that can lead to problems when dealing with the relations in the application (better keep it only to the ID)
+                // So, instead, we store the dbKey/ID values in another object "$unionDBKeyIDs"
+                // Then, whenever it's a union type data resolver, we obtain the values for the relationship under this other object
+                $typedSubcomponentIDs = [];
+                // if ($subcomponentIsUnionTypeResolver) {
+                    // Get the types for all of the IDs all at once. Flatten 3 levels: dbname => dbkey => id => ...
+                    $allSubcomponentIDs = array_values(array_unique(
+                        GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten(GeneralUtils::arrayFlatten($subcomponentIDs)))
+                    ));
+                    $qualifiedSubcomponentIDs = $subcomponentTypeResolver->getQualifiedDBObjectIDOrIDs($allSubcomponentIDs);
+                    // Create a map, from ID to TypedID
+                for ($i = 0; $i < count($allSubcomponentIDs); $i++) {
+                    $typedSubcomponentIDs[$allSubcomponentIDs[$i]] = $qualifiedSubcomponentIDs[$i];
+                }
+                // }
 
-                    $field_ids = [];
-                    foreach ($subcomponentIDs as $dbname => $dbkey_id_database_field_ids) {
-                        foreach ($dbkey_id_database_field_ids as $database_key => $id_database_field_ids) {
-                            foreach ($id_database_field_ids as $id => $database_field_ids) {
-                                // Transform the IDs, adding their type
-                                // Do it always, for UnionTypeResolvers and non-union ones.
-                                // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                                // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataModuleProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
-                                // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
-                                $typed_database_field_ids = array_map(
-                                    function ($field_id) use ($typedSubcomponentIDs) {
-                                        return $typedSubcomponentIDs[$field_id];
-                                    },
-                                    $database_field_ids
-                                );
-                                if ($subcomponentIsUnionTypeResolver) {
-                                    $database_field_ids = $typed_database_field_ids;
-                                }
-                                $object = $objectIDItems[$id];
-                                $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
-                                // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
-                                $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
-                                $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-                                $combinedUnionDBKeyIDs[$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
-
-                                // Merge, after adding their type!
-                                $field_ids = array_merge(
-                                    $field_ids,
-                                    $database_field_ids
-                                );
+                $field_ids = [];
+                foreach ($subcomponentIDs as $dbname => $dbkey_id_database_field_ids) {
+                    foreach ($dbkey_id_database_field_ids as $database_key => $id_database_field_ids) {
+                        foreach ($id_database_field_ids as $id => $database_field_ids) {
+                            // Transform the IDs, adding their type
+                            // Do it always, for UnionTypeResolvers and non-union ones.
+                            // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataModuleProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+                            // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
+                            $typed_database_field_ids = array_map(
+                                function ($field_id) use ($typedSubcomponentIDs) {
+                                    return $typedSubcomponentIDs[$field_id];
+                                },
+                                $database_field_ids
+                            );
+                            if ($subcomponentIsUnionTypeResolver) {
+                                $database_field_ids = $typed_database_field_ids;
                             }
+                            $object = $objectIDItems[$id];
+                            $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getUniqueFieldOutputKey($relationalTypeResolver, $subcomponent_data_field, $object);
+                            // Set on the `unionDBKeyIDs` output entry. This could be either an array or a single value. Check from the original entry which case it is
+                            $entryIsArray = $databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] && is_array($databases[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey]);
+                            $unionDBKeyIDs[$dbname][$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+                            $combinedUnionDBKeyIDs[$database_key][(string)$id][$subcomponent_data_field_outputkey] = $entryIsArray ? $typed_database_field_ids : $typed_database_field_ids[0];
+
+                            // Merge, after adding their type!
+                            $field_ids = array_merge(
+                                $field_ids,
+                                $database_field_ids
+                            );
                         }
                     }
-                    if ($field_ids) {
-                        foreach ($field_ids as $field_id) {
-                            // Do not add again the IDs/Fields already loaded
-                            if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
-                                $id_subcomponent_data_fields = array_values(
-                                    array_diff(
-                                        $subcomponent_data_fields,
-                                        $subcomponent_already_loaded_data_fields
-                                    )
+                }
+                if ($field_ids) {
+                    foreach ($field_ids as $field_id) {
+                        // Do not add again the IDs/Fields already loaded
+                        if ($subcomponent_already_loaded_data_fields = $subcomponent_already_loaded_ids_data_fields[$field_id] ?? null) {
+                            $id_subcomponent_data_fields = array_values(
+                                array_diff(
+                                    $subcomponent_data_fields,
+                                    $subcomponent_already_loaded_data_fields
+                                )
+                            );
+                            $id_subcomponent_conditional_data_fields = [];
+                            foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
+                                $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
+                                    $conditionalFields,
+                                    $subcomponent_already_loaded_data_fields
                                 );
-                                $id_subcomponent_conditional_data_fields = [];
-                                foreach ($subcomponent_conditional_data_fields as $conditionField => $conditionalFields) {
-                                    $id_subcomponent_conditional_data_fields[$conditionField] = Methods::arrayDiffRecursive(
-                                        $conditionalFields,
-                                        $subcomponent_already_loaded_data_fields
-                                    );
-                                }
-                            } else {
-                                $id_subcomponent_data_fields = $subcomponent_data_fields;
-                                $id_subcomponent_conditional_data_fields = $subcomponent_conditional_data_fields;
                             }
-                            // Important: do ALWAYS execute the lines below, even if $id_subcomponent_data_fields is empty
-                            // That is because we can load additional data for an object that was already loaded in a previous iteration
-                            // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
-                            // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
-                            // if ($id_subcomponent_data_fields) {
-                            $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
-                            // }
+                        } else {
+                            $id_subcomponent_data_fields = $subcomponent_data_fields;
+                            $id_subcomponent_conditional_data_fields = $subcomponent_conditional_data_fields;
                         }
-                        $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
-                            $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
-                            $field_ids
-                        );
-                        $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
+                        // Important: do ALWAYS execute the lines below, even if $id_subcomponent_data_fields is empty
+                        // That is because we can load additional data for an object that was already loaded in a previous iteration
+                        // Eg: /api/?query=posts(id:1).author.posts.comments.post.author.posts.title
+                        // In this case, property "title" at the end would not be fetched otherwise (that post was already loaded at the beginning)
+                        // if ($id_subcomponent_data_fields) {
+                        $this->combineIDsDatafields($engineState->relationalTypeOutputDBKeyIDsDataFields, $subcomponentTypeResolver, $subcomponentTypeOutputDBKey, array($field_id), $id_subcomponent_data_fields, $id_subcomponent_conditional_data_fields);
+                        // }
                     }
+                    $this->initializeTypeResolverEntry($engineState->dbdata, $subcomponentTypeOutputDBKey, $module_path_key);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_merge(
+                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] ?? [],
+                        $field_ids
+                    );
+                    $this->integrateSubcomponentDataProperties($engineState->dbdata, $subcomponent_data_properties, $subcomponentTypeOutputDBKey, $module_path_key);
+                }
 
-                    if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
-                        $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
-                    }
+                if ($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key] ?? null) {
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['ids']);
+                    $engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields'] = array_unique($engineState->dbdata[$subcomponentTypeOutputDBKey][$module_path_key]['data-fields']);
                 }
             }
         }

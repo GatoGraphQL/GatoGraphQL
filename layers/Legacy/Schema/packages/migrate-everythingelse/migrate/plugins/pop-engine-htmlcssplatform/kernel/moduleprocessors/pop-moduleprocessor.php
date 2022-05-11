@@ -69,6 +69,11 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
         return array();
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);

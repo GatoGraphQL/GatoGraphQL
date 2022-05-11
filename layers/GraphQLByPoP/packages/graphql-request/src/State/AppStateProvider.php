@@ -70,6 +70,9 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['standard-graphql'] = true;
 
+        // Do not include the fieldArgs and directives when outputting the field
+        $state['only-fieldname-as-outputkey'] = true;
+
         // @todo Remove this code, to temporarily convert back from GraphQL to PoP query
         // ---------------------------------------------
         list(
@@ -80,7 +83,7 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['variables'],
             $state['graphql-operation-name'],
         );
-        $state['query'] = $fieldQuery;
+        $state['field-query'] = $fieldQuery;
 
         // Set the operation type and, based on it, if mutations are supported
         $state['graphql-operation-type'] = $operationType;
@@ -91,9 +94,6 @@ class AppStateProvider extends AbstractAppStateProvider
         if ($operationType === null) {
             $state['does-api-query-have-errors'] = true;
         }
-
-        // Do not include the fieldArgs and directives when outputting the field
-        $state['only-fieldname-as-outputkey'] = true;
         // ---------------------------------------------
     }
 }

@@ -7,6 +7,11 @@ abstract class PoP_Module_Processor_PostAdditionalLayoutsBase extends PoPEngine_
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL];
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('multilayoutKeys');

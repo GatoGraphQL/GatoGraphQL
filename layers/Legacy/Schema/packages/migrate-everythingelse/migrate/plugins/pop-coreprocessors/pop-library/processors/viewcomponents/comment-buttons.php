@@ -1,5 +1,7 @@
 <?php
 
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
+
 class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Processor_CommentViewComponentButtonsBase
 {
     public final const MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY = 'viewcomponent-commentbutton-reply';
@@ -23,15 +25,21 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
         return parent::getTargetDynamicallyRenderedSubmodules($module);
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
-                return array(
-                    'customPost' => array(
-                        [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
-                    ),
-                );
+                return [
+                    new RelationalModuleField(
+                        'customPost',
+                        [
+                            [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_POST],
+                        ],
+                    )
+                ];
         }
 
         return parent::getTargetDynamicallyRenderedSubcomponentSubmodules($module);

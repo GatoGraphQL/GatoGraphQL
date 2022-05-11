@@ -32,6 +32,11 @@ abstract class PoP_Module_Processor_PostCardLayoutsBase extends PoPEngine_QueryD
         return 'thumb';
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $thumb = $this->getThumbField($module, $props);

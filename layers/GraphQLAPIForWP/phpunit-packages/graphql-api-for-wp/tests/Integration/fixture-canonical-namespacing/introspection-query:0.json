@@ -173,7 +173,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -629,7 +629,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -842,7 +842,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -1081,7 +1081,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -1208,7 +1208,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -1239,7 +1239,7 @@
             },
             {
               "name": "sizes",
-              "description": "Media element's ‘sizes’ attribute value for an image",
+              "description": "Media element's \u2018sizes\u2019 attribute value for an image",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [
@@ -2267,7 +2267,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -2496,7 +2496,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -2994,7 +2994,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -3223,7 +3223,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -8757,7 +8757,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -9429,7 +9429,7 @@
             },
             {
               "name": "extensions",
-              "description": "Extensions (custom metadata) added to the directive (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)",
+              "description": "Extensions (custom metadata) added to the directive (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9546,7 +9546,7 @@
             },
             {
               "name": "description",
-              "description": "Enum value's description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)",
+              "description": "Enum value's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9558,7 +9558,7 @@
             },
             {
               "name": "extensions",
-              "description": "Extensions (custom metadata) added to the enum value (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)",
+              "description": "Extensions (custom metadata) added to the enum value (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9606,7 +9606,7 @@
             },
             {
               "name": "name",
-              "description": "Enum value's name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)",
+              "description": "Enum value's name as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACvBBCyBH6rd)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9687,7 +9687,7 @@
             },
             {
               "name": "extensions",
-              "description": "Extensions (custom metadata) added to the field (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)",
+              "description": "Extensions (custom metadata) added to the field (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9808,7 +9808,7 @@
             },
             {
               "name": "extensions",
-              "description": "Extensions (custom metadata) added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)",
+              "description": "Extensions (custom metadata) added to the input (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -9899,11 +9899,15 @@
                   "defaultValue": null,
                   "type": {
                     "kind": "LIST",
-                    "name": "[DirectiveKindEnum]",
+                    "name": "[DirectiveKindEnum!]",
                     "ofType": {
-                      "kind": "ENUM",
-                      "name": "DirectiveKindEnum",
-                      "ofType": null
+                      "kind": "NON_NULL",
+                      "name": "DirectiveKindEnum!",
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "DirectiveKindEnum",
+                        "ofType": null
+                      }
                     }
                   }
                 }
@@ -10064,7 +10068,7 @@
           "fields": [
             {
               "name": "description",
-              "description": "Type's description as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACyBIC1BHnjL)",
+              "description": "Type's description as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACyBIC1BHnjL)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10076,7 +10080,7 @@
             },
             {
               "name": "enumValues",
-              "description": "Type's enum values (available for Enum type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC9CDD_CAA2lB)",
+              "description": "Type's enum values (available for Enum type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLAC9CDD_CAA2lB)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [
@@ -10107,7 +10111,7 @@
             },
             {
               "name": "extensions",
-              "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject) (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)",
+              "description": "Extensions (custom metadata) added to the GraphQL type (for all 'named' types: Object, Interface, Union, Scalar, Enum and InputObject) (see: https:\/\/github.com\/graphql\/graphql-spec\/issues\/300#issuecomment-504734306 and below comments, and https:\/\/github.com\/graphql\/graphql-js\/issues\/1527)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10119,7 +10123,7 @@
             },
             {
               "name": "fields",
-              "description": "Type's fields (available for Object and Interface types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLAC3BBCnCA8pY)",
+              "description": "Type's fields (available for Object and Interface types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLAC3BBCnCA8pY)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [
@@ -10166,7 +10170,7 @@
             },
             {
               "name": "inputFields",
-              "description": "Type's input Fields (available for InputObject type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLAuDABCBIu9N)",
+              "description": "Type's input Fields (available for InputObject type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-HAJbLAuDABCBIu9N)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10186,7 +10190,7 @@
             },
             {
               "name": "interfaces",
-              "description": "Type's interfaces (available for Object type only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACpCBCxCA7tB)",
+              "description": "Type's interfaces (available for Object type only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACpCBCxCA7tB)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10206,7 +10210,7 @@
             },
             {
               "name": "kind",
-              "description": "Type's kind as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACqBBCvBAtrC)",
+              "description": "Type's kind as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACqBBCvBAtrC)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10222,7 +10226,7 @@
             },
             {
               "name": "name",
-              "description": "Type's name as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACvBBCyBH6rd)",
+              "description": "Type's name as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACvBBCyBH6rd)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10234,7 +10238,7 @@
             },
             {
               "name": "ofType",
-              "description": "The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-HAJbLA4DABCBIu9N)",
+              "description": "The type of the nested type (available for NonNull and List types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-HAJbLA4DABCBIu9N)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10246,7 +10250,7 @@
             },
             {
               "name": "possibleTypes",
-              "description": "Type's possible types (available for Interface and Union types only) as defined by the GraphQL spec (https://graphql.github.io/graphql-spec/draft/#sel-FAJbLACzCBC7CA0vN)",
+              "description": "Type's possible types (available for Interface and Union types only) as defined by the GraphQL spec (https:\/\/graphql.github.io\/graphql-spec\/draft\/#sel-FAJbLACzCBC7CA0vN)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10266,7 +10270,7 @@
             },
             {
               "name": "specifiedByURL",
-              "description": "A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https://spec.graphql.org/draft/#sel-IAJXNFA0EABABL9N)",
+              "description": "A scalar specification URL (a String (in the form of a URL) for custom scalars, otherwise must be null) as defined by the GraphQL spec (https:\/\/spec.graphql.org\/draft\/#sel-IAJXNFA0EABABL9N)",
               "isDeprecated": false,
               "deprecationReason": null,
               "args": [],
@@ -10341,7 +10345,7 @@
         {
           "kind": "SCALAR",
           "name": "HTML",
-          "description": "HTML scalar, such as \"<p>Hello <strong>world</strong>!</p>\"",
+          "description": "HTML scalar, such as \"<p>Hello <strong>world<\/strong>!<\/p>\"",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -10411,7 +10415,7 @@
         {
           "kind": "SCALAR",
           "name": "URL",
-          "description": "URL scalar, such as https://mysite.com/my-fabulous-page",
+          "description": "URL scalar, such as https:\/\/mysite.com\/my-fabulous-page",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -10421,7 +10425,7 @@
         {
           "kind": "SCALAR",
           "name": "URLAbsolutePath",
-          "description": "URL Absolute Path scalar, such as \"/my-fabulous-page\" in URL \"https://mysite.com/my-fabulous-page\". The absolute path starts with \"/\", followed by the URL relative path",
+          "description": "URL Absolute Path scalar, such as \"\/my-fabulous-page\" in URL \"https:\/\/mysite.com\/my-fabulous-page\". The absolute path starts with \"\/\", followed by the URL relative path",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -10641,7 +10645,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -10744,7 +10748,7 @@
               "args": [
                 {
                   "name": "format",
-                  "description": "Date format, as defined in https://www.php.net/manual/en/function.date.php",
+                  "description": "Date format, as defined in https:\/\/www.php.net\/manual\/en\/function.date.php",
                   "defaultValue": "\"F j, Y\"",
                   "type": {
                     "kind": "SCALAR",
@@ -11401,7 +11405,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "CommentMetaQueryInput",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
           "inputFields": [
             {
@@ -11983,7 +11987,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "CustomPostMetaQueryInput",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
           "inputFields": [
             {
@@ -12214,7 +12218,7 @@
             },
             {
               "name": "column",
-              "description": "Posts column to query against. Default: ‘post_date’)",
+              "description": "Posts column to query against. Default: \u2018post_date\u2019)",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -12254,7 +12258,7 @@
             },
             {
               "name": "inclusive",
-              "description": "For after/before, whether exact value should be matched or not",
+              "description": "For after\/before, whether exact value should be matched or not",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -13781,7 +13785,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -13976,7 +13980,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -14658,7 +14662,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -14825,7 +14829,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -15259,7 +15263,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -15819,7 +15823,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "TaxonomyMetaQueryInput",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
           "inputFields": [
             {
@@ -16094,7 +16098,7 @@
             },
             {
               "name": "hasPassword",
-              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with/out password",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
               "defaultValue": null,
               "type": {
                 "kind": "SCALAR",
@@ -16184,7 +16188,7 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "UserMetaQueryInput",
-          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/",
+          "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
           "inputFields": [
             {
@@ -16508,7 +16512,7 @@
             },
             {
               "name": "META_VALUE",
-              "description": "Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters",
+              "description": "Order by meta value. See description for \u2018meta_value\u2018 in: https:\/\/developer.wordpress.org\/reference\/classes\/wp_query\/#order-orderby-parameters",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -16660,7 +16664,7 @@
             },
             {
               "name": "META_VALUE",
-              "description": "Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters",
+              "description": "Order by meta value. See description for \u2018meta_value\u2018 in: https:\/\/developer.wordpress.org\/reference\/classes\/wp_query\/#order-orderby-parameters",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -17359,7 +17363,7 @@
             },
             {
               "name": "META_VALUE",
-              "description": "Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters",
+              "description": "Order by meta value. See description for \u2018meta_value\u2018 in: https:\/\/developer.wordpress.org\/reference\/classes\/wp_query\/#order-orderby-parameters",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -17495,7 +17499,7 @@
             },
             {
               "name": "META_VALUE",
-              "description": "Order by meta value. See description for ‘meta_value‘ in: https://developer.wordpress.org/reference/classes/wp_query/#order-orderby-parameters",
+              "description": "Order by meta value. See description for \u2018meta_value\u2018 in: https:\/\/developer.wordpress.org\/reference\/classes\/wp_query\/#order-orderby-parameters",
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -17552,7 +17556,7 @@
       "directives": [
         {
           "name": "cacheControl",
-          "description": "HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding 'no-store' value is sent, indicating to not cache the response",
+          "description": "HTTP caching (https:\/\/tools.ietf.org\/html\/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding 'no-store' value is sent, indicating to not cache the response",
           "locations": [
             "FIELD_DEFINITION"
           ],

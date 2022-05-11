@@ -1,6 +1,7 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 
 abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_Module_Processor_MapScriptCustomizationsBase
 {
@@ -34,14 +35,20 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($authors_module = $this->getAuthorsModule($module)) {
-            return array(
-                'author' => array(
-                    $authors_module,
+            return [
+                new RelationalModuleField(
+                    'author',
+                    [
+                        $authors_module,
+                    ]
                 ),
-            );
+            ];
         }
 
         return parent::getDomainSwitchingSubmodules($module);
@@ -71,6 +78,11 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
         return 'thumb';
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $thumb = $this->getThumbField($module, $props);

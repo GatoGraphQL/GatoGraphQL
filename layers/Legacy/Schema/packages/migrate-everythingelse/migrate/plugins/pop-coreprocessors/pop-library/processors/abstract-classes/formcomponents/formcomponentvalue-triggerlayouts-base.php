@@ -1,5 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
@@ -120,6 +121,11 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);
@@ -143,14 +149,20 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         if ($field = $this->getDbobjectField($module)) {
-            return array(
-                $field => array(
-                    $this->getTriggerSubmodule($module),
+            return [
+                new RelationalModuleField(
+                    $field,
+                    [
+                        $this->getTriggerSubmodule($module),
+                    ]
                 ),
-            );
+            ];
         }
 
         return parent::getDomainSwitchingSubmodules($module);

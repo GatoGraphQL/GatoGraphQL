@@ -11,14 +11,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "title<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "title",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -28,14 +28,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Post'",
+            "message": "You must not be logged in to access directives in field(s) 'comments<skip(if: false)>' for type 'Post'",
             "locations": [
                 {
                     "line": 1,
@@ -45,14 +45,14 @@
             "extensions": {
                 "type": "Post",
                 "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "comments<skip(if: false)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -62,14 +62,14 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'CustomPostUnion'",
+            "message": "You must not be logged in to access directives in field(s) 'comments<skip(if: false)>' for type 'CustomPostUnion'",
             "locations": [
                 {
                     "line": 1,
@@ -79,7 +79,7 @@
             "extensions": {
                 "type": "CustomPostUnion",
                 "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "comments<skip(if: false)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
@@ -96,14 +96,14 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "title<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "title",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
         {
-            "message": "Access to field(s) 'customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>' has been disabled",
+            "message": "Access to field(s) 'customPostType' has been disabled",
             "locations": [
                 {
                     "line": 1,
@@ -113,14 +113,14 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "customPostType<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "customPostType",
                     "disableAccess"
                 ],
                 "code": "PoP\\AccessControl\\e2"
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>' for type 'Page'",
+            "message": "You must not be logged in to access directives in field(s) 'comments<skip(if: false)>' for type 'Page'",
             "locations": [
                 {
                     "line": 1,
@@ -130,7 +130,7 @@
             "extensions": {
                 "type": "Page",
                 "fields": [
-                    "comments<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\")),skip(if:)>",
+                    "comments<skip(if: false)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
@@ -182,7 +182,7 @@
                 "type": "User",
                 "fields": [
                     "firstName",
-                    "validateDoesLoggedInUserHaveAnyRole(roles:[0:\"subscriber\"])"
+                    "validateDoesLoggedInUserHaveAnyRole(roles: [\"subscriber\"])"
                 ],
                 "code": "PoPCMSSchema\\UserRolesAccessControl\\e6"
             }
@@ -222,7 +222,7 @@
             }
         },
         {
-            "message": "You must not be logged in to access directives in field(s) 'nicename<skip(if:)>' for type 'User'",
+            "message": "You must not be logged in to access directives in field(s) 'nicename<skip(if: false)>' for type 'User'",
             "locations": [
                 {
                     "line": 1,
@@ -232,7 +232,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "nicename<skip(if:)>",
+                    "nicename<skip(if: false)>",
                     "validateIsUserNotLoggedInForDirectives"
                 ],
                 "code": "PoPCMSSchema\\UserStateAccessControl\\e3"
@@ -250,7 +250,7 @@
                 "type": "Post",
                 "id": 1,
                 "fields": [
-                    "title<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "title",
                     "resolveValueAndMerge"
                 ],
                 "code": "PoP\\ComponentModel\\1"
@@ -268,7 +268,7 @@
                 "type": "Post",
                 "id": 28,
                 "fields": [
-                    "title<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "title",
                     "resolveValueAndMerge"
                 ],
                 "code": "PoP\\ComponentModel\\1"
@@ -286,7 +286,7 @@
                 "type": "Post",
                 "id": 25,
                 "fields": [
-                    "title<include(if:isTypeOrImplements(typeOrInterface:\"IsCustomPost\"))>",
+                    "title",
                     "resolveValueAndMerge"
                 ],
                 "code": "PoP\\ComponentModel\\1"

@@ -14,5 +14,9 @@ interface GraphQLServerInterface
      *
      * @param array<string,mixed> $variables
      */
-    public function execute(string $query, array $variables = [], ?string $operationName = null): Response;
+    public function execute(
+        string $query,
+        array $variables = [],
+        ?string $operationName = null
+    ): Response;
 }

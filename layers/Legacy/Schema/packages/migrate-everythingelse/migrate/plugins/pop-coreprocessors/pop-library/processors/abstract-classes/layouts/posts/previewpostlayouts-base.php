@@ -4,6 +4,7 @@ define('GD_CONSTANT_AUTHORPOSITION_ABOVETITLE', 'abovetitle');
 define('GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT', 'belowcontent');
 
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Processor_PreviewObjectLayoutsBase
@@ -69,11 +70,14 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         return $ret;
     }
 
+    /**
+     * @return RelationalModuleField[]
+     */
     public function getDomainSwitchingSubmodules(array $module): array
     {
         $ret = parent::getDomainSwitchingSubmodules($module);
 
-        $modules = array();
+        $modules = [];
 
         // Show author or not: if position defined
         if ($author_module = $this->getAuthorModule($module)) {
@@ -88,12 +92,20 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
         }
 
         if ($modules) {
-            $ret['authors'] = $modules;
+            $ret[] = new RelationalModuleField(
+                'authors',
+                $modules
+            );
         }
 
         return $ret;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $ret = parent::getDataFields($module, $props);

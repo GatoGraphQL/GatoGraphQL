@@ -151,7 +151,7 @@ class QueryHelpers
             // Use `strlen` to allow for "0" as value. Eg: <skip(0)> meaning false
             if (!empty($fieldArgsAsString) || strlen($fieldArgsAsString)) {
                 $queryParser = QueryParserFacade::getInstance();
-                return $queryParser->splitElements(
+                $fieldArgElements = $queryParser->splitElements(
                     $fieldArgsAsString,
                     QuerySyntax::SYMBOL_FIELDARGS_ARGSEPARATOR,
                     [
@@ -167,6 +167,11 @@ class QueryHelpers
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
                     QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
                 );
+                $fieldArgElements = array_map(
+                    'trim',
+                    $fieldArgElements
+                );
+                return $fieldArgElements;
             }
         }
         return [];
@@ -184,6 +189,10 @@ class QueryHelpers
          * @todo Convert expressions from "$__" to "$"
          */
         // return QuerySyntax::SYMBOL_EXPRESSION_OPENING . $expressionName . QuerySyntax::SYMBOL_EXPRESSION_CLOSING;
+        if (str_starts_with($expressionName, '_')) {
+            // Dynamic variables: keep them as they are already! Return `$_id` as `$_id`, not `$___id`
+            return '$' . $expressionName;
+        }
         return '$__' . $expressionName;
     }
 
@@ -193,21 +202,28 @@ class QueryHelpers
     public static function splitFieldDirectives(string $fieldDirectives): array
     {
         $queryParser = QueryParserFacade::getInstance();
-        return $queryParser->splitElements(
-            $fieldDirectives,
-            QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
-            [
-                QuerySyntax::SYMBOL_FIELDARGS_OPENING,
-                QuerySyntax::SYMBOL_BOOKMARK_OPENING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
-            ],
-            [
-                QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
-                QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
-                QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
-            ],
-            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
-            QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
+        /**
+         * @todo Temporary addition to match `asQueryString` in the AST
+         * Remove the extra " "
+         */
+        return array_map(
+            'trim',
+            $queryParser->splitElements(
+                $fieldDirectives,
+                QuerySyntax::SYMBOL_FIELDDIRECTIVE_SEPARATOR,
+                [
+                    QuerySyntax::SYMBOL_FIELDARGS_OPENING,
+                    QuerySyntax::SYMBOL_BOOKMARK_OPENING,
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING
+                ],
+                [
+                    QuerySyntax::SYMBOL_FIELDARGS_CLOSING,
+                    QuerySyntax::SYMBOL_BOOKMARK_CLOSING,
+                    QuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING
+                ],
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING,
+                QuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING
+            )
         );
     }
 }

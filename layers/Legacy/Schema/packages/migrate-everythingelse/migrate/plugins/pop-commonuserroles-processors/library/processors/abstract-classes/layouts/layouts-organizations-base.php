@@ -8,6 +8,11 @@ abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase ext
         return [PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor::class, PoPTheme_Wassup_URE_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PROFILEORGANIZATION_DETAILS];
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('organizationTypesByName', 'organizationCategoriesByName', 'contactPerson', 'contactNumber');

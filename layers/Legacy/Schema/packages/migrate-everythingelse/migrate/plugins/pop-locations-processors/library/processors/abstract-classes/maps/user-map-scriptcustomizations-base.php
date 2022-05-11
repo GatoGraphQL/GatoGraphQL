@@ -18,6 +18,11 @@ abstract class PoP_Module_Processor_UserMapScriptCustomizationsBase extends PoP_
         return GD_AVATAR_SIZE_64;
     }
 
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         $data_fields = array('id', 'displayName', 'url', 'shortDescriptionFormatted');

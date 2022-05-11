@@ -2,6 +2,11 @@
 
 abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
 {
+    /**
+     * @todo Migrate from string to LeafModuleField
+     *
+     * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
+     */
     public function getDataFields(array $module, array &$props): array
     {
         return array('id', 'itemDataEntries(flat:true)@itemDataEntries');

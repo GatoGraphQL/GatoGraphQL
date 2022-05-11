@@ -10,7 +10,7 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "id@withFloat<skip(if:1.1)>",
+                "field": "withFloat: id<skip(if: 1.1)>",
                 "code": "PoP\\ComponentModel\\e16"
             }
         },
@@ -24,7 +24,7 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "id@withFloat<skip(if:1.1)>",
+                "field": "withFloat: id<skip(if: 1.1)>",
                 "code": "PoP\\ComponentModel\\e8"
             }
         },
@@ -38,7 +38,7 @@
             ],
             "extensions": {
                 "type": "QueryRoot",
-                "field": "id@withFloat<skip(if:1.1)>",
+                "field": "withFloat: id<skip(if: 1.1)>",
                 "code": "PoP\\ComponentModel\\e1"
             }
         }
