@@ -13,7 +13,7 @@ use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 class ConditionalRelationalModuleField extends LeafField implements ModuleFieldInterface
 {
     use ModuleFieldTrait;
- 
+
     /**
      * The condition must be satisfied on the implicit field.
      * When the value of the field is `true`, load the conditional
