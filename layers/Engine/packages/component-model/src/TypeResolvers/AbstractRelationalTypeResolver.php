@@ -884,6 +884,8 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'][] = $field;
                 }
                 if ($conditionalFields = $data_fields['conditional'][$field] ?? null) {
+                    // Make sure there's always a 'direct' alongside a 'conditional'
+                    $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['direct'] ??= [];
                     $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] = array_merge_recursive(
                         $this->fieldDirectiveIDFields[$fieldDirective][(string)$id]['conditional'][$field] ?? [],
                         $conditionalFields
