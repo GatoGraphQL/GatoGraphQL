@@ -11,7 +11,7 @@
             "extensions": {
                 "type": "User",
                 "fields": [
-                    "avatar(size:\"Sixty\")@passingString",
+                    "passingString: avatar(size: \"Sixty\")",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"

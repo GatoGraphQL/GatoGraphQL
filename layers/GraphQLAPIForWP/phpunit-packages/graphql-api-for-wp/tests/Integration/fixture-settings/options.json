@@ -11,7 +11,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "optionValue(name:\"admin_email\")@adminEmail",
+          "adminEmail: optionValue(name: \"admin_email\")",
           "validate"
         ],
         "code": "PoPCMSSchema\\Settings\\e1"

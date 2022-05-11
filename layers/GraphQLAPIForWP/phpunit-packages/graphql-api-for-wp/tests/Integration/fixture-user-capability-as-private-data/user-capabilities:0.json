@@ -45,7 +45,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "hasCapability(capability:\"manage_options\")",
+          "hasCapability(capability: \"manage_options\")",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"
@@ -62,7 +62,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "hasAnyCapability(capabilities:[0:\"manage_options\"])",
+          "hasAnyCapability(capabilities: [\"manage_options\"])",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"

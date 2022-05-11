@@ -45,7 +45,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "users(filter:{roles:[0:\"administrator\"],excludeRoles:[0:\"subscriber\"]})",
+          "users(filter: { roles: [\"administrator\"], excludeRoles: [\"subscriber\"] } )",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e4"
@@ -62,7 +62,7 @@
       "extensions": {
         "type": "QueryRoot",
         "fields": [
-          "users(filter:{roles:[0:\"administrator\"],excludeRoles:[0:\"subscriber\"]})",
+          "users(filter: {roles: [\"administrator\"], excludeRoles: [\"subscriber\"]} )",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e4"
@@ -96,7 +96,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "hasRole(role:\"administrator\")",
+          "hasRole(role: \"administrator\")",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"
@@ -113,7 +113,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "hasAnyRole(roles:[0:\"administrator\"])",
+          "hasAnyRole(roles: [\"administrator\"])",
           "validate"
         ],
         "code": "PoP\\ComponentModel\\e16"

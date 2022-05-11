@@ -11,7 +11,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "metaValue(key:\"nickname\")@nickname",
+          "nickname: metaValue(key: \"nickname\")",
           "validate"
         ],
         "code": "PoPCMSSchema\\Meta\\e1"
@@ -28,7 +28,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "metaValue(key:\"first_name\")@firstname",
+          "firstname: metaValue(key: \"first_name\")",
           "validate"
         ],
         "code": "PoPCMSSchema\\Meta\\e1"
@@ -45,7 +45,7 @@
       "extensions": {
         "type": "User",
         "fields": [
-          "metaValue(key:\"last_name\")@lastname",
+          "lastname: metaValue(key: \"last_name\")",
           "validate"
         ],
         "code": "PoPCMSSchema\\Meta\\e1"
