@@ -233,7 +233,7 @@ class ComponentConfiguration extends AbstractComponentConfiguration
      */
     public function skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema(): bool
     {
-        $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_DYNAMIC_SCALAR_TYPE_IN_SCHEMA;
+        $envVariable = Environment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
