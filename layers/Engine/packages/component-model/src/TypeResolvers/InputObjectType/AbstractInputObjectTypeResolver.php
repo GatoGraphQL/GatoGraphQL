@@ -17,7 +17,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 use PoP\Root\App;
 use stdClass;
@@ -41,16 +41,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /** @var string[]|null */
     private ?array $consolidatedAdminInputFieldNames = null;
 
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 
-    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificTypeTypeResolver(DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
-    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    final protected function getDangerouslyNonSpecificTypeTypeResolver(): DangerouslyNonSpecificTypeTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificTypeTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {
@@ -287,7 +287,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($inputFieldTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
                 $coercedInputValue->$inputFieldName = $inputFieldValue;
                 continue;
             }
@@ -475,7 +475,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        if ($componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the input field if:
              *
@@ -483,7 +483,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
              */
             $inputFieldNameTypeResolvers = $this->getConsolidatedInputFieldNameTypeResolvers();
             $inputFieldTypeResolver = $inputFieldNameTypeResolvers[$inputFieldName];
-            if ($inputFieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($inputFieldTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
                 return true;
             }
         }

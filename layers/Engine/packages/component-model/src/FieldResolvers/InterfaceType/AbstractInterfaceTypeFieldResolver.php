@@ -11,7 +11,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Resolvers\CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
+use PoP\ComponentModel\Resolvers\CheckDangerouslyNonSpecificTypeFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Resolvers\FieldOrDirectiveSchemaDefinitionResolverTrait;
 use PoP\ComponentModel\Resolvers\WithVersionConstraintFieldOrDirectiveResolverTrait;
 use PoP\ComponentModel\Schema\SchemaDefinition;
@@ -21,7 +21,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
@@ -30,7 +30,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     use AttachableExtensionTrait;
     use WithVersionConstraintFieldOrDirectiveResolverTrait;
     use FieldOrDirectiveSchemaDefinitionResolverTrait;
-    use CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait;
+    use CheckDangerouslyNonSpecificTypeFieldOrDirectiveResolverTrait;
 
     /** @var array<string, array> */
     protected array $schemaDefinitionForFieldCache = [];
@@ -66,7 +66,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     private ?SchemaNamespacingServiceInterface $schemaNamespacingService = null;
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -101,13 +101,13 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
-    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificTypeTypeResolver(DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
-    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    final protected function getDangerouslyNonSpecificTypeTypeResolver(): DangerouslyNonSpecificTypeTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificTypeTypeResolver::class);
     }
     final public function setAttachableExtensionManager(AttachableExtensionManagerInterface $attachableExtensionManager): void
     {
@@ -567,7 +567,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         $schemaFieldArgs = [];
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema();
+        $skipExposingDangerouslyNonSpecificTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
@@ -575,8 +575,8 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
              * If disabled, then do not expose the directive args of this type
              */
             if (
-                $skipExposingDangerouslyDynamicScalarTypeInSchema
-                && $fieldArgInputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()
+                $skipExposingDangerouslyNonSpecificTypeTypeInSchema
+                && $fieldArgInputTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()
             ) {
                 continue;
             }
@@ -638,7 +638,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     {
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        if ($componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             /**
              * If `DangerouslyDynamic` is disabled, do not expose the field if either:
              *
@@ -651,7 +651,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
                 $consolidatedFieldArgsTypeModifiers[$fieldArgName] = $this->getConsolidatedFieldArgTypeModifiers($fieldName, $fieldArgName);
             }
             if (
-                $this->isDangerouslyDynamicScalarFieldType(
+                $this->isDangerouslyNonSpecificTypeFieldType(
                     $this->getFieldTypeResolver($fieldName),
                     $this->getConsolidatedFieldArgNameTypeResolvers($fieldName),
                     $consolidatedFieldArgsTypeModifiers

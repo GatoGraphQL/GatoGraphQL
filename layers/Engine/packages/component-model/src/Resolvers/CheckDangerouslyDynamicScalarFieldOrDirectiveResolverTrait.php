@@ -6,12 +6,12 @@ namespace PoP\ComponentModel\Resolvers;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-trait CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait
+trait CheckDangerouslyNonSpecificTypeFieldOrDirectiveResolverTrait
 {
-    abstract protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver;
+    abstract protected function getDangerouslyNonSpecificTypeTypeResolver(): DangerouslyNonSpecificTypeTypeResolver;
 
     /**
      * `DangerouslyDynamic` is a special scalar type which is not coerced or validated.
@@ -26,19 +26,19 @@ trait CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait
      * @param array<string, InputTypeResolverInterface> $consolidatedFieldArgNameTypeResolvers
      * @param array<string, int> $consolidatedFieldArgsTypeModifiers
      */
-    protected function isDangerouslyDynamicScalarFieldType(
+    protected function isDangerouslyNonSpecificTypeFieldType(
         TypeResolverInterface $fieldTypeResolver,
         array $consolidatedFieldArgNameTypeResolvers,
         array $consolidatedFieldArgsTypeModifiers,
     ): bool {
         // 1. its type is `DangerouslyDynamic`
-        if ($fieldTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+        if ($fieldTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
             return true;
         }
 
         // 2. it has any mandatory argument of type `DangerouslyDynamic`
         if (
-            $this->hasMandatoryDangerouslyDynamicScalarInputType(
+            $this->hasMandatoryDangerouslyNonSpecificTypeInputType(
                 $consolidatedFieldArgNameTypeResolvers,
                 $consolidatedFieldArgsTypeModifiers,
             )
@@ -53,13 +53,13 @@ trait CheckDangerouslyDynamicScalarFieldOrDirectiveResolverTrait
      * @param array<string, InputTypeResolverInterface> $consolidatedFieldOrDirectiveArgNameTypeResolvers
      * @param array<string, int> $consolidatedFieldOrDirectiveArgsTypeModifiers
      */
-    protected function hasMandatoryDangerouslyDynamicScalarInputType(
+    protected function hasMandatoryDangerouslyNonSpecificTypeInputType(
         array $consolidatedFieldOrDirectiveArgNameTypeResolvers,
         array $consolidatedFieldOrDirectiveArgsTypeModifiers,
     ): bool {
         $dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers = array_filter(
             $consolidatedFieldOrDirectiveArgNameTypeResolvers,
-            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()
+            fn (InputTypeResolverInterface $inputTypeResolver) => $inputTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()
         );
         foreach (array_keys($dangerouslyDynamicFieldOrDirectiveArgNameTypeResolvers) as $fieldOrDirectiveArgName) {
             $consolidatedFieldOrDirectiveArgTypeModifiers = $consolidatedFieldOrDirectiveArgsTypeModifiers[$fieldOrDirectiveArgName];

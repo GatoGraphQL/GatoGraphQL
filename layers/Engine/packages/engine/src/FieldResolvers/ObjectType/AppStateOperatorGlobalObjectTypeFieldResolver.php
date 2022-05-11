@@ -58,7 +58,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'var' => $this->getDangerouslyDynamicScalarTypeResolver(),
+            'var' => $this->getDangerouslyNonSpecificTypeTypeResolver(),
             'context' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };

@@ -12,7 +12,7 @@ use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
 
 class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider implements SchemaDefinitionProviderInterface
 {
@@ -29,10 +29,10 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
         $dangerouslyDynamicScalarTypeResolver = null;
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($skipExposingDangerouslyDynamicScalarTypeInSchema = $componentConfiguration->skipExposingDangerouslyDynamicScalarTypeInSchema()) {
+        if ($skipExposingDangerouslyNonSpecificTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
-            /** @var DangerouslyDynamicScalarTypeResolver */
-            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+            /** @var DangerouslyNonSpecificTypeTypeResolver */
+            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificTypeTypeResolver::class);
         }
 
         foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
@@ -42,7 +42,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
              * If the directive arg must not be exposed, then remove it from the schema
              */
             $skipExposingDangerousDynamicType =
-                $skipExposingDangerouslyDynamicScalarTypeInSchema
+                $skipExposingDangerouslyNonSpecificTypeTypeInSchema
                 && $directiveArgTypeResolver === $dangerouslyDynamicScalarTypeResolver;
             if ($skipExposingDangerousDynamicType || $this->directiveResolver->skipExposingDirectiveArgInSchema($this->relationalTypeResolver, $directiveArgName)) {
                 unset($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);

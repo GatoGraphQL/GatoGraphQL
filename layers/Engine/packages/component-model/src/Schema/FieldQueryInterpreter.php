@@ -22,7 +22,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyDynamicScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\DangerouslyNonSpecificTypeTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\FieldQuery\FieldQueryInterpreter as UpstreamFieldQueryInterpreter;
 use PoP\FieldQuery\QueryHelpers;
@@ -84,17 +84,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
 
-    private ?DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
-    final public function setDangerouslyDynamicScalarTypeResolver(DangerouslyDynamicScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificTypeTypeResolver(DangerouslyNonSpecificTypeTypeResolver $dangerouslyDynamicScalarTypeResolver): void
     {
         $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
     }
-    final protected function getDangerouslyDynamicScalarTypeResolver(): DangerouslyDynamicScalarTypeResolver
+    final protected function getDangerouslyNonSpecificTypeTypeResolver(): DangerouslyNonSpecificTypeTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyDynamicScalarTypeResolver::class);
+        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificTypeTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {
@@ -967,7 +967,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
              * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
              * these values by types `String` and `[String]`.
              */
-            if ($fieldOrDirectiveArgTypeResolver === $this->getDangerouslyDynamicScalarTypeResolver()) {
+            if ($fieldOrDirectiveArgTypeResolver === $this->getDangerouslyNonSpecificTypeTypeResolver()) {
                 $fieldOrDirectiveArgs[$argName] = $argValue;
                 continue;
             }

@@ -19,7 +19,7 @@ use stdClass;
  * `"hello"` and `["hello"]`, but in GraphQL we must differentiate
  * these values by types `String` and `[String]`.
  */
-class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
+class DangerouslyNonSpecificTypeTypeResolver extends AbstractScalarTypeResolver
 {
     public function getTypeName(): string
     {
@@ -27,7 +27,7 @@ class DangerouslyDynamicScalarTypeResolver extends AbstractScalarTypeResolver
     }
 
     /**
-     * This method will never be called for DangerouslyDynamicScalar
+     * This method will never be called for DangerouslyNonSpecificType
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
