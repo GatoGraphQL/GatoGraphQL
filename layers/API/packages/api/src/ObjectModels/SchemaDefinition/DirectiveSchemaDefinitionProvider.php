@@ -26,13 +26,13 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
     {
         $schemaDefinition = $this->directiveResolver->getDirectiveSchemaDefinition($this->relationalTypeResolver);
 
-        $dangerouslyDynamicScalarTypeResolver = null;
+        $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
-            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+            $dangerouslyNonSpecificScalarTypeScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
         }
 
         foreach (($schemaDefinition[SchemaDefinition::ARGS] ?? []) as $directiveArgName => &$directiveArgSchemaDefinition) {
@@ -43,7 +43,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
              */
             $skipExposingDangerousDynamicType =
                 $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema
-                && $directiveArgTypeResolver === $dangerouslyDynamicScalarTypeResolver;
+                && $directiveArgTypeResolver === $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
             if ($skipExposingDangerousDynamicType || $this->directiveResolver->skipExposingDirectiveArgInSchema($this->relationalTypeResolver, $directiveArgName)) {
                 unset($schemaDefinition[SchemaDefinition::ARGS][$directiveArgName]);
                 continue;

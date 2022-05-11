@@ -68,17 +68,17 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      */
     protected ?array $implementedInterfaceTypeFieldResolversCache = null;
 
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?OutputServiceInterface $outputService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setOutputService(OutputServiceInterface $outputService): void
     {

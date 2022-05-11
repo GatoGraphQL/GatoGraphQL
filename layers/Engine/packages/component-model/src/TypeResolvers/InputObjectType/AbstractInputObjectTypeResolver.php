@@ -41,16 +41,16 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     /** @var string[]|null */
     private ?array $consolidatedAdminInputFieldNames = null;
 
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
 
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {

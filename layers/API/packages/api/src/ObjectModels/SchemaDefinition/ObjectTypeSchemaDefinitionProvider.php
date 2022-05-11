@@ -73,13 +73,13 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
 
     final protected function addFieldSchemaDefinitions(array &$schemaDefinition, bool $useGlobal): void
     {
-        $dangerouslyDynamicScalarTypeResolver = null;
+        $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
         /** @var ComponentConfiguration */
         $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
         if ($skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */
-            $dangerouslyDynamicScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+            $dangerouslyNonSpecificScalarTypeScalarTypeResolver = $instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
         }
 
         // Add the fields (non-global)
@@ -107,7 +107,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
                  */
                 $skipExposingDangerousDynamicType =
                     $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema
-                    && $fieldArgTypeResolver === $dangerouslyDynamicScalarTypeResolver;
+                    && $fieldArgTypeResolver === $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
                 if ($skipExposingDangerousDynamicType || $objectTypeFieldResolver->skipExposingFieldArgInSchema($this->objectTypeResolver, $fieldName, $fieldArgName)) {
                     unset($fieldSchemaDefinition[SchemaDefinition::ARGS][$fieldArgName]);
                     continue;

@@ -84,17 +84,17 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
      */
     private array $fieldsByTypeAndFieldOutputKey = [];
 
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?InputCoercingServiceInterface $inputCoercingService = null;
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
 
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setInputCoercingService(InputCoercingServiceInterface $inputCoercingService): void
     {

@@ -67,7 +67,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?SemverHelperServiceInterface $semverHelperService = null;
     private ?AttachableExtensionManagerInterface $attachableExtensionManager = null;
-    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver = null;
+    private ?DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
     private ?VersioningServiceInterface $versioningService = null;
 
     /**
@@ -130,13 +130,13 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
     {
         return $this->attachableExtensionManager ??= $this->instanceManager->getInstance(AttachableExtensionManagerInterface::class);
     }
-    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyDynamicScalarTypeResolver): void
+    final public function setDangerouslyNonSpecificScalarTypeScalarTypeResolver(DangerouslyNonSpecificScalarTypeScalarTypeResolver $dangerouslyNonSpecificScalarTypeScalarTypeResolver): void
     {
-        $this->dangerouslyDynamicScalarTypeResolver = $dangerouslyDynamicScalarTypeResolver;
+        $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver = $dangerouslyNonSpecificScalarTypeScalarTypeResolver;
     }
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
-        return $this->dangerouslyDynamicScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
+        return $this->dangerouslyNonSpecificScalarTypeScalarTypeResolver ??= $this->instanceManager->getInstance(DangerouslyNonSpecificScalarTypeScalarTypeResolver::class);
     }
     final public function setVersioningService(VersioningServiceInterface $versioningService): void
     {
