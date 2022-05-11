@@ -18,7 +18,7 @@
             }
         },
         {
-            "message": "Enum values can only be strings, value '{\"ofKinds\": \"query\"}' for type 'DirectiveKindEnum' is not allowed",
+            "message": "Enum values can only be strings, value '{\"ofKinds\":\"query\"}' for type 'DirectiveKindEnum' is not allowed",
             "locations": [
                 {
                     "line": 1,
@@ -45,7 +45,7 @@
             "extensions": {
                 "type": "__Schema",
                 "fields": [
-                    "passingArrayOfArrays: directives(ofKinds: [\"query\",null])",
+                    "passingArrayOfArrays: directives(ofKinds: [\"query\", null])",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e10"
@@ -62,7 +62,7 @@
             "extensions": {
                 "type": "__Type",
                 "fields": [
-                    "name(namespaced:1.2)@passingFloat",
+                    "passingFloat: name(namespaced: 1.2)",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e16"
@@ -96,7 +96,7 @@
             "extensions": {
                 "type": "__Type",
                 "fields": [
-                    "passingInputObject: name(namespaced: { namespaced: true })",
+                    "passingInputObject: name(namespaced: {namespaced: true})",
                     "validate"
                 ],
                 "code": "PoP\\ComponentModel\\e1"
