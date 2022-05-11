@@ -8,7 +8,7 @@ abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecu
 {
     protected function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-skip-dangerously-non-specific-scalar-type-scalar-type';
+        return __DIR__ . '/fixture-skip-dangerously-non-specific-scalar-type';
     }
 
     /**
