@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;

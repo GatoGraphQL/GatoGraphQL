@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\Root\Routing\RequestNature;
-use PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
+use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
 {

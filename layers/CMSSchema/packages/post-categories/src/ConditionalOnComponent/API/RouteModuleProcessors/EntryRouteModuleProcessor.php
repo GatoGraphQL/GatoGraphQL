@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\API\RouteModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
@@ -11,8 +11,8 @@ use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Module;
 use PoPCMSSchema\PostCategories\ModuleConfiguration;
-use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;

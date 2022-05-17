@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\Comments\ConditionalOnComponent\Users\FieldResolvers\:
-        resource: '../../../src/ConditionalOnComponent/Users/FieldResolvers/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Users/FieldResolvers/*'
 
-    PoPCMSSchema\Comments\ConditionalOnComponent\Users\SchemaHooks\:
-        resource: '../../../src/ConditionalOnComponent/Users/SchemaHooks/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'

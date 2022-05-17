@@ -5,5 +5,5 @@ services:
         autoconfigure: true
 
     PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface:
-        class: \PoPSchema\EverythingElseWP\ConditionalOnComponent\CustomPosts\TypeAPIs\CustomPostTypeAPI
+        class: \PoPSchema\EverythingElseWP\ConditionalOnModule\CustomPosts\TypeAPIs\CustomPostTypeAPI
 

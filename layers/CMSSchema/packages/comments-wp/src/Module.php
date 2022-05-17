@@ -51,12 +51,12 @@ class Module extends AbstractModule
         if (class_exists(UsersModule::class)) {
             $this->initServices(
                 dirname(__DIR__),
-                '/ConditionalOnComponent/Users'
+                '/ConditionalOnModule/Users'
             );
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(UsersModule::class, $skipSchemaComponentClasses),
-                '/ConditionalOnComponent/Users'
+                '/ConditionalOnModule/Users'
             );
         }
     }

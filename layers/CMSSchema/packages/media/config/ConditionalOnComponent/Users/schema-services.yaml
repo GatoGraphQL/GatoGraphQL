@@ -3,8 +3,8 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\Media\ConditionalOnComponent\Users\FieldResolvers\:
-        resource: '../../../src/ConditionalOnComponent/Users/FieldResolvers/*'
+    PoPCMSSchema\Media\ConditionalOnModule\Users\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Users/FieldResolvers/*'
 
-    PoPCMSSchema\Media\ConditionalOnComponent\Users\SchemaHooks\:
-        resource: '../../../src/ConditionalOnComponent/Users/SchemaHooks/*'
+    PoPCMSSchema\Media\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\RouteModuleProcessors;
+namespace PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature;
 
 class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor

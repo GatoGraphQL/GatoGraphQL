@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\CustomPostMutations\ConditionalOnModule\Users\SchemaHooks;
 
 use PoPCMSSchema\CustomPostMutations\ModuleProcessors\CustomPostMutationFilterInputContainerModuleProcessor;
 

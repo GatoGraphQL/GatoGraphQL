@@ -7,7 +7,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Facades\Formatters\DateFormatterFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPCMSSchema\CustomPostMedia\Misc\MediaHelpers;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;

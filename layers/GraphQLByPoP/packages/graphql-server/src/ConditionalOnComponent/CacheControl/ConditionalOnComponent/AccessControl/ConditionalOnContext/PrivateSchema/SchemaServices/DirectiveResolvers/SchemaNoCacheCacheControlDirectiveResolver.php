@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\ConditionalOnComponent\CacheControl\ConditionalOnComponent\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\DirectiveResolvers;
+namespace GraphQLByPoP\GraphQLServer\ConditionalOnModule\CacheControl\ConditionalOnModule\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPCMSSchema\Posts\ConditionalOnComponent\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
 use PoPCMSSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
 use PoPCMSSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;

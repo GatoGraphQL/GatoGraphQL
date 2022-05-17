@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnComponent\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\Users\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
@@ -12,7 +12,7 @@ use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
-use PoPCMSSchema\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor

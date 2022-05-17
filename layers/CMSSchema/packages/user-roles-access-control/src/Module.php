@@ -51,7 +51,7 @@ class Module extends AbstractModule
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses),
-                '/ConditionalOnComponent/CacheControl'
+                '/ConditionalOnModule/CacheControl'
             );
         }
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\LooseContracts;
+namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractSet;
 

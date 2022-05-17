@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Constants\CommentOrderBy;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\Constants\CommentOrderBy;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentOrderByEnumTypeResolver;
 
 class EnumTypeHookSet extends AbstractHookSet

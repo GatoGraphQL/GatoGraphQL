@@ -58,7 +58,7 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         if (class_exists(CustomPostsModule::class)) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
         }
     }
 }

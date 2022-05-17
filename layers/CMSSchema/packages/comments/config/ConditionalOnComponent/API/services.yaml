@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Comments\ConditionalOnComponent\API\ModuleProcessors\:
-        resource: '../../../src/ConditionalOnComponent/API/ModuleProcessors/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\API\ModuleProcessors\:
+        resource: '../../../src/ConditionalOnModule/API/ModuleProcessors/*'

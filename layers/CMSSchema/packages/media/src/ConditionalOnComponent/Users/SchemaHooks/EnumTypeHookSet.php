@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\Media\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Media\ConditionalOnComponent\Users\Constants\MediaItemOrderBy;
+use PoPCMSSchema\Media\ConditionalOnModule\Users\Constants\MediaItemOrderBy;
 use PoPCMSSchema\Media\TypeResolvers\EnumType\MediaItemOrderByEnumTypeResolver;
 
 class EnumTypeHookSet extends AbstractHookSet

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ConditionalOnComponent\CacheControl\ConditionalOnComponent\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\DirectiveResolvers;
+namespace PoPAPI\API\ConditionalOnModule\CacheControl\ConditionalOnModule\AccessControl\ConditionalOnContext\PrivateSchema\SchemaServices\DirectiveResolvers;
 
 use PoP\CacheControl\DirectiveResolvers\AbstractCacheControlDirectiveResolver;
 

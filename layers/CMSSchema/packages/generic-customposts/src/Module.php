@@ -48,7 +48,7 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         if (class_exists(APIModule::class) && App::getComponent(APIModule::class)->isEnabled()) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/API');
         }
     }
 }

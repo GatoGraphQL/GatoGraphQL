@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UsersWP\ConditionalOnComponent\CustomPosts\LooseContracts;
+namespace PoPCMSSchema\UsersWP\ConditionalOnModule\CustomPosts\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
 

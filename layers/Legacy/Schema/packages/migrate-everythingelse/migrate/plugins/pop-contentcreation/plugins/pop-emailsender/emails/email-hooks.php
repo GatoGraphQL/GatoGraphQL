@@ -7,7 +7,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_ContentCreation_EmailSender_Hooks

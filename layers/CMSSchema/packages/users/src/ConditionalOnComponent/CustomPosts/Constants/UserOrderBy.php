@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Constants;
+namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Constants;
 
 class UserOrderBy
 {

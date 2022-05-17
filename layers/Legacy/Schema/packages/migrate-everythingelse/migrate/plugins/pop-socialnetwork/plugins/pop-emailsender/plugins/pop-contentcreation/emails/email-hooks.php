@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateUpdateCustomPostMutationResolver;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 use PoPCMSSchema\PostTags\Facades\PostTagTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');

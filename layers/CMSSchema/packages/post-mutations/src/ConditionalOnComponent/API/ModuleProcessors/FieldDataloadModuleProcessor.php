@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\ConditionalOnComponent\API\ModuleProcessors;
+namespace PoPCMSSchema\PostMutations\ConditionalOnModule\API\ModuleProcessors;
 
 use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;

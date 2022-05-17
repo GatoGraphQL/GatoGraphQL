@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\PostMutations\ConditionalOnModule\Users\SchemaHooks;
 
-use PoPCMSSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks\AbstractRemoveAuthorFilterInputHookSet;
+use PoPCMSSchema\CustomPostMutations\ConditionalOnModule\Users\SchemaHooks\AbstractRemoveAuthorFilterInputHookSet;
 use PoPCMSSchema\PostMutations\ModuleProcessors\PostMutationFilterInputContainerModuleProcessor;
 
 class RemoveAuthorFilterInputHookSet extends AbstractRemoveAuthorFilterInputHookSet

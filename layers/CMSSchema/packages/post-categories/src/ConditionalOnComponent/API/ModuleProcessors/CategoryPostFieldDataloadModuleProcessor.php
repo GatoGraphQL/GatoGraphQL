@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;

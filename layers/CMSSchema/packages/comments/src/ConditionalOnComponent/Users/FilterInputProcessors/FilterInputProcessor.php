@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Comments\ConditionalOnComponent\Users\FilterInputProcessors;
+namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\Comments\ConditionalOnComponent\RESTAPI\Hooks\:
-        resource: '../../../src/ConditionalOnComponent/RESTAPI/Hooks/*'
+    PoPCMSSchema\Comments\ConditionalOnModule\RESTAPI\Hooks\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/Hooks/*'

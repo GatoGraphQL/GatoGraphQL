@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UsersWP\ConditionalOnComponent\CustomPosts\Hooks;
+namespace PoPCMSSchema\UsersWP\ConditionalOnModule\CustomPosts\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\CustomPostTypeAPI;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Constants\CustomPostOrderBy;
 
 class CustomPostQueryHookSet extends AbstractHookSet
 {

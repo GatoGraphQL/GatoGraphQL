@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\Media\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\AbstractMediaItemsFilterInputObjectTypeResolver;

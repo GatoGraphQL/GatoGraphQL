@@ -100,7 +100,7 @@ class Module extends AbstractModule
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaComponentClasses),
-                '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
+                '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
             );
         }
     }

@@ -46,7 +46,7 @@ class Module extends AbstractModule
         array $skipSchemaComponentClasses,
     ): void {
         if (class_exists(CustomPostsModule::class)) {
-            $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
+            $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
         }
     }
 }

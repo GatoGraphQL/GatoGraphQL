@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks;
+namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\HookNames;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostOrderByEnumTypeResolver;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Constants\CustomPostOrderBy;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Constants\CustomPostOrderBy;
 
 class CustomPostEnumTypeHookSet extends AbstractHookSet
 {

@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\Hooks\:
-        resource: '../../../src/ConditionalOnComponent/RESTAPI/Hooks/*'
+    PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\Hooks\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/Hooks/*'
 
-    PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\:
-        resource: '../../../src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/*'
+    PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\RouteModuleProcessors\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/RouteModuleProcessors/*'

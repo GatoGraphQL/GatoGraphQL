@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\UserRolesAccessControl\ConditionalOnComponent\CacheControl\RelationalTypeResolverDecorators\:
-        resource: '../../../src/ConditionalOnComponent/CacheControl/RelationalTypeResolverDecorators/*'
+    PoPCMSSchema\UserRolesAccessControl\ConditionalOnModule\CacheControl\RelationalTypeResolverDecorators\:
+        resource: '../../../src/ConditionalOnModule/CacheControl/RelationalTypeResolverDecorators/*'

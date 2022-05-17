@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPSchema\EverythingElseWP\ConditionalOnComponent\CustomPosts\TypeAPIs;
+namespace PoPSchema\EverythingElseWP\ConditionalOnModule\CustomPosts\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;

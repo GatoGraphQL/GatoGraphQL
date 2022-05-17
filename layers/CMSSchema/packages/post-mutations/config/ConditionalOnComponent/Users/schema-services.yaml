@@ -3,5 +3,5 @@ services:
         public: true
         autowire: true
 
-    PoPCMSSchema\PostMutations\ConditionalOnComponent\Users\SchemaHooks\:
-        resource: '../../../src/ConditionalOnComponent/Users/SchemaHooks/*'
+    PoPCMSSchema\PostMutations\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'

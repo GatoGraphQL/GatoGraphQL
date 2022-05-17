@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMutations\ConditionalOnComponent\Users\SchemaHooks;
+namespace PoPCMSSchema\CustomPostMutations\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\SchemaHooks\FilterInputHookSet as UserCustomPostFilterInputHookSet;
 
 abstract class AbstractRemoveAuthorFilterInputHookSet extends AbstractHookSet
 {

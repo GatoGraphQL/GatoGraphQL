@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTags\ConditionalOnComponent\API\RouteModuleProcessors;
+namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
@@ -12,8 +12,8 @@ use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 use PoPCMSSchema\PostTags\Module;
 use PoPCMSSchema\PostTags\ModuleConfiguration;
-use PoPCMSSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 

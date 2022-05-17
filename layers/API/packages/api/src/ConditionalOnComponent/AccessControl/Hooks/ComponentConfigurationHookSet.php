@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ConditionalOnComponent\AccessControl\Hooks;
+namespace PoPAPI\API\ConditionalOnModule\AccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module as AccessControlModule;

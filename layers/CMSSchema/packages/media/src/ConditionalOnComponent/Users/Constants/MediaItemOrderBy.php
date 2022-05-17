@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Media\ConditionalOnComponent\Users\Constants;
+namespace PoPCMSSchema\Media\ConditionalOnModule\Users\Constants;
 
 class MediaItemOrderBy
 {

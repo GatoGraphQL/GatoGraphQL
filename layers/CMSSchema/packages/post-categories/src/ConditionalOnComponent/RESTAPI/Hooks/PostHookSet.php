@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ConditionalOnComponent\RESTAPI\Hooks;
+namespace PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\Hooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
-use PoPCMSSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\RouteModuleProcessors\EntryRouteModuleProcessor;
 
 class PostHookSet extends AbstractHookSet
 {

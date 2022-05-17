@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Pages\ConditionalOnComponent\API\RouteModuleProcessors;
+namespace PoPCMSSchema\Pages\ConditionalOnModule\API\RouteModuleProcessors;
 
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;

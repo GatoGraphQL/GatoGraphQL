@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors;
+namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\Tags\ConditionalOnComponent\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
+use PoPCMSSchema\Tags\ConditionalOnModule\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
 
 class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
 {
