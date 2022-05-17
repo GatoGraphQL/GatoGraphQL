@@ -13,22 +13,22 @@ class TemplateHelpers implements TemplateHelpersInterface
     public function getGenerateDataAndPrepareAndSendResponseTemplateFile(): string
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
     }
 
     public function getGenerateDataAndPrepareResponseTemplateFile(): string
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
     }
 
     public function getSendResponseTemplateFile(): string
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/SendResponse.php';
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/SendResponse.php';
     }
 
     /**

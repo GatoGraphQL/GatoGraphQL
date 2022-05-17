@@ -49,8 +49,8 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
             /** @var ComponentModelModuleInfo */
-            $componentInfo = App::getModule(ComponentModelModule::class)->getInfo();
-            $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
+            $moduleInfo = App::getModule(ComponentModelModule::class)->getInfo();
+            $ret[GD_URLPARAM_TIMESTAMP] = $moduleInfo->getTime();
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc

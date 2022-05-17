@@ -53,8 +53,8 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ModuleInfo */
-            $componentInfo = App::getModule(Module::class)->getInfo();
-            $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+            $moduleInfo = App::getModule(Module::class)->getInfo();
+            $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
         $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
@@ -124,8 +124,8 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ModuleInfo */
-            $componentInfo = App::getModule(Module::class)->getInfo();
-            $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+            $moduleInfo = App::getModule(Module::class)->getInfo();
+            $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
         $this->getModuleFilterManager()->restoreFromPropagation($module, $props);

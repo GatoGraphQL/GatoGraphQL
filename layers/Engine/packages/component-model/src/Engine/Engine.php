@@ -265,11 +265,11 @@ class Engine implements EngineInterface
          * So remove these to generate the hash.
          */
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         $differentiators = array(
-            $componentInfo->getUniqueID(),
-            $componentInfo->getRand(),
-            $componentInfo->getTime(),
+            $moduleInfo->getUniqueID(),
+            $moduleInfo->getRand(),
+            $moduleInfo->getTime(),
         );
         $commoncode = str_replace($differentiators, '', json_encode($engineState->data));
 
@@ -694,10 +694,10 @@ class Engine implements EngineInterface
     public function getRequestMeta(): array
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryComponent()[1],
-            Response::UNIQUE_ID => $componentInfo->getUniqueID(),
+            Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
 
@@ -999,8 +999,8 @@ class Engine implements EngineInterface
         mixed $value,
     ): void {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
             // Notice that when generating the array for the response, we don't use $module anymore, but $moduleOutputName
@@ -1119,8 +1119,8 @@ class Engine implements EngineInterface
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
-        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getModuleFilterManager()->neverExclude(true);
@@ -2458,8 +2458,8 @@ class Engine implements EngineInterface
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
-                $componentInfo = App::getModule(Module::class)->getInfo();
-                $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+                $moduleInfo = App::getModule(Module::class)->getInfo();
+                $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {

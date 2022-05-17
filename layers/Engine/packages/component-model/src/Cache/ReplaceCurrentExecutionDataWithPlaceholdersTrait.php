@@ -17,11 +17,11 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
     protected function getCacheReplacements(): array
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getModule(Module::class)->getInfo();
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         return [
-            $componentInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
-            $componentInfo->getRand() => CachePlaceholders::RAND,
-            $componentInfo->getTime() => CachePlaceholders::TIME,
+            $moduleInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
+            $moduleInfo->getRand() => CachePlaceholders::RAND,
+            $moduleInfo->getTime() => CachePlaceholders::TIME,
         ];
     }
 
