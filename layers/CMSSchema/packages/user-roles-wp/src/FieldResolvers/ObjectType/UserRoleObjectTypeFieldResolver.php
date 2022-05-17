@@ -10,8 +10,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\UserRoles\Component;
-use PoPCMSSchema\UserRoles\ComponentConfiguration;
+use PoPCMSSchema\UserRoles\Module;
+use PoPCMSSchema\UserRoles\ModuleConfiguration;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use WP_Role;
 
@@ -43,9 +43,9 @@ class UserRoleObjectTypeFieldResolver extends AbstractReflectionPropertyObjectTy
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserCapabilityAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
             $adminFieldNames[] = 'capabilities';
         }
         return $adminFieldNames;

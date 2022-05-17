@@ -2,9 +2,9 @@
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
@@ -140,11 +140,11 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_AUTHORCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
             self::MODULE_BLOCK_CONTENT_SCROLL_ADDONS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_CONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_CONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
@@ -152,13 +152,13 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_CONTENT_SCROLL_NAVIGATOR => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_CONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_CONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_POSTS_SCROLL_ADDONS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_ADDONS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_NAVIGATOR => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_POSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
             self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHCONTENT,
             self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
             self::MODULE_BLOCK_SEARCHCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHCONTENT,
@@ -173,21 +173,21 @@ class PoP_Blog_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor
             self::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_TAGCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => PostTagsComponentConfiguration::getPostTagsRoute() ,
-            self::MODULE_BLOCK_TAGS_SCROLL_LIST => PostTagsComponentConfiguration::getPostTagsRoute() ,
-            self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_TAGPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_TAGPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_TAGPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_TAGPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_BLOCK_TAGS_SCROLL_DETAILS => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::MODULE_BLOCK_TAGS_SCROLL_LIST => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::MODULE_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_ADDONS => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_DETAILS => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_FULLVIEW => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_LIST => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_BLOCK_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
             default => parent::getRelevantRoute($module, $props),
         };
     }

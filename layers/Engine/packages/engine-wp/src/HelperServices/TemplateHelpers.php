@@ -5,30 +5,30 @@ declare(strict_types=1);
 namespace PoP\EngineWP\HelperServices;
 
 use PoP\Root\App;
-use PoP\EngineWP\Component;
-use PoP\EngineWP\ComponentInfo;
+use PoP\EngineWP\Module;
+use PoP\EngineWP\ModuleInfo;
 
 class TemplateHelpers implements TemplateHelpersInterface
 {
     public function getGenerateDataAndPrepareAndSendResponseTemplateFile(): string
     {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/GenerateDataAndPrepareAndSendResponse.php';
     }
 
     public function getGenerateDataAndPrepareResponseTemplateFile(): string
     {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/GenerateDataAndPrepareResponse.php';
     }
 
     public function getSendResponseTemplateFile(): string
     {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
-        return $componentInfo->getTemplatesDir() . '/SendResponse.php';
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        return $moduleInfo->getTemplatesDir() . '/SendResponse.php';
     }
 
     /**

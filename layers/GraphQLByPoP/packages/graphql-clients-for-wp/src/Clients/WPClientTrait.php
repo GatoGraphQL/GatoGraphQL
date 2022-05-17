@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
-use GraphQLByPoP\GraphQLClientsForWP\Component;
-use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration;
-use GraphQLByPoP\GraphQLEndpointForWP\Component as GraphQLEndpointForWPComponent;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLClientsForWP\Module;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
 
 trait WPClientTrait
@@ -15,16 +15,16 @@ trait WPClientTrait
     /**
      * Base URL
      */
-    protected function getComponentBaseURL(): ?string
+    protected function getModuleBaseURL(): ?string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getGraphQLClientsComponentURL();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGraphQLClientsComponentURL();
     }
     /**
      * Base Dir
      */
-    protected function getComponentBaseDir(): string
+    protected function getModuleBaseDir(): string
     {
         return dirname(__FILE__, 3);
     }
@@ -34,8 +34,8 @@ trait WPClientTrait
      */
     protected function getEndpointURLOrURLPath(): string
     {
-        /** @var GraphQLEndpointForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
-        return $componentConfiguration->getGraphQLAPIEndpoint();
+        /** @var GraphQLEndpointForWPModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
+        return $moduleConfiguration->getGraphQLAPIEndpoint();
     }
 }

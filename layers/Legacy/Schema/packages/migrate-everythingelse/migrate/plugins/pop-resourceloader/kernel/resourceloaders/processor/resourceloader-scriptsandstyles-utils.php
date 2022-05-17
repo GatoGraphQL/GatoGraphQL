@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -18,7 +18,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // If so, just return it from there directly
         global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
         $cachemanager = null;
-        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
         }
 
@@ -574,7 +574,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                     if (is_null(self::$dynamic_module_resources)) {
 
                         $cachemanager = null;
-                        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+                        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
                             $cachemanager = PersistentCacheFacade::getInstance();
                         }
 
@@ -586,15 +586,15 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                             // If not, calculate the values now...
                             $engine = EngineFacade::getInstance();
-                            $entryModule = $engine->getEntryModule();
+                            $entryComponent = $engine->getEntryComponent();
 
-                            // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryModule, $props);
+                            // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryComponent, $props);
                             global $pop_resourcemoduledecoratorprocessor_manager;
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $processor = $moduleprocessor_manager->getProcessor($entryModule);
+                            $processor = $moduleprocessor_manager->getProcessor($entryComponent);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error
-                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, []/*$props*/);
+                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryComponent, []/*$props*/);
 
                             // And store them on the cache
                             if ($useCache) {

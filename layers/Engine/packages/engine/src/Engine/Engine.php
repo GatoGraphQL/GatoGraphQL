@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\CacheControl\Component as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 use PoP\Engine\Exception\ContractNotSatisfiedException;
@@ -56,7 +56,7 @@ class Engine extends UpstreamEngine
         $headers = parent::getHeaders();
 
         // If CacheControl is enabled, add it to the headers
-        if (App::getComponent(CacheControlComponent::class)->isEnabled()) {
+        if (App::getModule(CacheControlModule::class)->isEnabled()) {
             if ($cacheControlHeaders = $this->getCacheControlEngine()->getCacheControlHeaders()) {
                 $headers = array_merge(
                     $headers,

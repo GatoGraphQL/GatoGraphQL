@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Users/FieldResolvers/*'
+
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'

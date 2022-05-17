@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -13,8 +13,8 @@ use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManager;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManager;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
 
@@ -33,10 +33,10 @@ class App implements AppInterface
     protected static Response $response;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
-    protected static ComponentManagerInterface $componentManager;
+    protected static ModuleManagerInterface $moduleManager;
     protected static AppStateManagerInterface $appStateManager;
     /** @var string[] */
-    protected static array $componentClassesToInitialize = [];
+    protected static array $moduleClassesToInitialize = [];
     protected static bool $isHTTPRequest;
 
     /**
@@ -52,7 +52,7 @@ class App implements AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
@@ -60,14 +60,14 @@ class App implements AppInterface
         self::$request = $request ?? static::createRequest();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
-        self::$componentManager = $componentManager ?? static::createComponentManager();
+        self::$moduleManager = $moduleManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
 
         static::regenerateResponse();
 
         // Inject the Components slated for initialization
-        self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
-        self::$componentClassesToInitialize = [];
+        self::$appLoader->addModuleClassesToInitialize(self::$moduleClassesToInitialize);
+        self::$moduleClassesToInitialize = [];
 
         /**
          * Indicate if this App is invoked via an HTTP request.
@@ -110,9 +110,9 @@ class App implements AppInterface
         return new SystemContainerBuilderFactory();
     }
 
-    protected static function createComponentManager(): ComponentManagerInterface
+    protected static function createComponentManager(): ModuleManagerInterface
     {
-        return new ComponentManager();
+        return new ModuleManager();
     }
 
     protected static function createAppStateManager(): AppStateManagerInterface
@@ -155,9 +155,9 @@ class App implements AppInterface
         return self::$systemContainerBuilderFactory;
     }
 
-    public static function getComponentManager(): ComponentManagerInterface
+    public static function getModuleManager(): ModuleManagerInterface
     {
-        return self::$componentManager;
+        return self::$moduleManager;
     }
 
     public static function getAppStateManager(): AppStateManagerInterface
@@ -171,17 +171,17 @@ class App implements AppInterface
     }
 
     /**
-     * Store Component classes to be initialized, and
+     * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
-    public static function stockAndInitializeComponentClasses(
-        array $componentClasses
+    public static function stockAndInitializeModuleClasses(
+        array $moduleClasses
     ): void {
-        self::$componentClassesToInitialize = array_merge(
-            self::$componentClassesToInitialize,
-            $componentClasses
+        self::$moduleClassesToInitialize = array_merge(
+            self::$moduleClassesToInitialize,
+            $moduleClasses
         );
     }
 
@@ -206,9 +206,9 @@ class App implements AppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getComponent(string $componentClass): ComponentInterface
+    final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::getComponentManager()->getComponent($componentClass);
+        return self::getModuleManager()->getModule($moduleClass);
     }
 
     /**

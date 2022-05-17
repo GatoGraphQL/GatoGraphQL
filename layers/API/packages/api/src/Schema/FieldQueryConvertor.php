@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\Schema;
 
 use PoP\Root\App;
-use PoPAPI\API\Component;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\Module;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
 use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
@@ -87,9 +87,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // If it is a string, split the ElemCount with ',', the inner ElemCount with '.', and the inner fields with '|'
         $requestedFields = [];
         $executableFields = [];
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $executeQueryBatchInStrictOrder = $componentConfiguration->executeQueryBatchInStrictOrder();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $executeQueryBatchInStrictOrder = $moduleConfiguration->executeQueryBatchInStrictOrder();
         $operationMaxLevels = 0;
         $maxDepth = 0;
         $dotNotations = $this->getQueryParser()->splitElements($operationDotNotation, FieldQueryQuerySyntax::SYMBOL_OPERATIONS_SEPARATOR, [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_OPENING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_OPENING], [FieldQueryQuerySyntax::SYMBOL_FIELDARGS_CLOSING, FieldQueryQuerySyntax::SYMBOL_BOOKMARK_CLOSING, FieldQueryQuerySyntax::SYMBOL_FIELDDIRECTIVE_CLOSING], FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_OPENING, FieldQueryQuerySyntax::SYMBOL_FIELDARGS_ARGVALUESTRING_CLOSING);
@@ -311,9 +311,9 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      */
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableEmbeddableFields()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableEmbeddableFields()) {
             /**
              * Identify all the fieldArgValues from the string, because
              * embeddable fields can only appear in field/directive arguments

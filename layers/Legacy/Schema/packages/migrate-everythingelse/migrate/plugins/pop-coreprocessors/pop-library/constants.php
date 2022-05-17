@@ -39,7 +39,7 @@ function gdPopcoreJqueryConstantsModulemanagerImpl($jqueryConstants)
     // ------------------------------------------
     $jqueryConstants['ID_SEPARATOR'] = POP_CONSTANT_ID_SEPARATOR;
     // $jqueryConstants['ID_JSON'] = POP_ID_JSON;
-    $jqueryConstants['MODULESETTINGS_ENTRYMODULE'] = "must-remove-this-constant";//POP_MODULESETTINGS_ENTRYMODULE;
+    $jqueryConstants['MODULESETTINGS_ENTRYCOMPONENT'] = "must-remove-this-constant";//POP_MODULESETTINGS_ENTRYCOMPONENT;
     $jqueryConstants['JSMETHOD_GROUP_MAIN'] = GD_JSMETHOD_GROUP_MAIN;
     // ------------------------------------------
 

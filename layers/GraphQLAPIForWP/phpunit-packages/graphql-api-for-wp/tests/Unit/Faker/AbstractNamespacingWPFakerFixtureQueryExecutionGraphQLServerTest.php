@@ -22,13 +22,13 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PoPWPSchema\Users\Component::class,
-                \PoPWPSchema\Posts\Component::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPWPSchema\Posts\Module::class,
             ]
         ];
     }
@@ -36,12 +36,12 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
     /**
      * @return array<string,mixed>
      */
-    protected static function getGraphQLServerComponentClassConfiguration(): array
+    protected static function getGraphQLServerModuleClassConfiguration(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => static::isEnabled(),
                 ],
             ]

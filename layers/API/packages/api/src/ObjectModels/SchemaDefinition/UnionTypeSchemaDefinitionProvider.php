@@ -8,8 +8,8 @@ use PoP\Root\App;
 use PoPAPI\API\Schema\SchemaDefinition;
 use PoPAPI\API\Schema\SchemaDefinitionHelpers;
 use PoPAPI\API\Schema\TypeKinds;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitionProvider
@@ -54,9 +54,9 @@ class UnionTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefinitio
 
     final protected function addInterfaceSchemaDefinitions(array &$schemaDefinition): void
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableUnionTypeImplementingInterfaceType()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableUnionTypeImplementingInterfaceType()) {
             return;
         }
 

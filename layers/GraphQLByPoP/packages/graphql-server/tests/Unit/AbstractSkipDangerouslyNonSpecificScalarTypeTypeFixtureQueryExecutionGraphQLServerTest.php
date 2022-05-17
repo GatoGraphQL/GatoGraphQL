@@ -14,15 +14,15 @@ abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecu
     /**
      * @return array<string,mixed>
      */
-    protected static function getGraphQLServerComponentClassConfiguration(): array
+    protected static function getGraphQLServerModuleClassConfiguration(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => static::isEnabled(),
                 ],
-                \GraphQLByPoP\GraphQLServer\Component::class => [
+                \GraphQLByPoP\GraphQLServer\Module::class => [
                     \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
                 ],
             ]

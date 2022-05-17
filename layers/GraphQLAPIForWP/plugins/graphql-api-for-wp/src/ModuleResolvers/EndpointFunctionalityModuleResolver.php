@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
-use GraphQLByPoP\GraphQLEndpointForWP\Component as GraphQLEndpointForWPComponent;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 
@@ -87,13 +87,13 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
 
     public function getDescription(string $module): string
     {
-        /** @var GraphQLEndpointForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLEndpointForWPComponent::class)->getConfiguration();
+        /** @var GraphQLEndpointForWPModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
         switch ($module) {
             case self::SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Expose a single GraphQL endpoint under <code>%s</code>, with unrestricted access', 'graphql-api'),
-                    $componentConfiguration->getGraphQLAPIEndpoint()
+                    $moduleConfiguration->getGraphQLAPIEndpoint()
                 );
             case self::PERSISTED_QUERIES:
                 return \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'graphql-api');

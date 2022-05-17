@@ -17,58 +17,58 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
-use GraphQLByPoP\GraphQLEndpointForWP\Component as GraphQLEndpointForWPComponent;
+use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
-use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\CacheControl\Component as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Engine\Component as EngineComponent;
+use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoPCMSSchema\Categories\Component as CategoriesComponent;
+use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
-use PoPCMSSchema\CommentMeta\Component as CommentMetaComponent;
+use PoPCMSSchema\CommentMeta\Module as CommentMetaModule;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
-use PoPCMSSchema\Comments\Component as CommentsComponent;
+use PoPCMSSchema\Comments\Module as CommentsModule;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
-use PoPCMSSchema\CustomPostMeta\Component as CustomPostMetaComponent;
+use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
-use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
-use PoPCMSSchema\GenericCustomPosts\Component as GenericCustomPostsComponent;
+use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use PoPCMSSchema\Media\Component as MediaComponent;
+use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
-use PoPCMSSchema\Menus\Component as MenusComponent;
+use PoPCMSSchema\Menus\Module as MenusModule;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
-use PoPCMSSchema\Pages\Component as PagesComponent;
+use PoPCMSSchema\Pages\Module as PagesModule;
 use PoPCMSSchema\Pages\Environment as PagesEnvironment;
-use PoPCMSSchema\Posts\Component as PostsComponent;
+use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPCMSSchema\Settings\Component as SettingsComponent;
+use PoPCMSSchema\Settings\Module as SettingsModule;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
-use PoPCMSSchema\Tags\Component as TagsComponent;
+use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
-use PoPCMSSchema\TaxonomyMeta\Component as TaxonomyMetaComponent;
+use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPCMSSchema\UserRoles\Component as UserRolesComponent;
+use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
-use PoPCMSSchema\UserMeta\Component as UserMetaComponent;
-use PoPCMSSchema\UserAvatars\Component as UserAvatarsComponent;
+use PoPCMSSchema\UserMeta\Module as UserMetaModule;
+use PoPCMSSchema\UserAvatars\Module as UserAvatarsModule;
 use PoPCMSSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPCMSSchema\UserMeta\Environment as UserMetaEnvironment;
-use PoPCMSSchema\Users\Component as UsersComponent;
+use PoPCMSSchema\Users\Module as UsersModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 
 /**
@@ -99,7 +99,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return [
             // GraphQL single endpoint slug
             [
-                'class' => GraphQLEndpointForWPComponent::class,
+                'class' => GraphQLEndpointForWPModule::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -112,7 +112,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Custom Endpoint path
             [
-                'class' => Component::class,
+                'class' => Module::class,
                 'envVariable' => Environment::ENDPOINT_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 'option' => ModuleSettingOptions::PATH,
@@ -125,7 +125,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Persisted Query path
             [
-                'class' => Component::class,
+                'class' => Module::class,
                 'envVariable' => Environment::PERSISTED_QUERY_SLUG_BASE,
                 'module' => EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 'option' => ModuleSettingOptions::PATH,
@@ -138,7 +138,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // GraphiQL client slug
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -151,7 +151,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Voyager client slug
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -164,7 +164,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Use private schema mode?
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_MODE,
@@ -173,7 +173,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Enable individual access control for the schema mode?
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_ENABLE_GRANULAR,
@@ -184,7 +184,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Use namespacing?
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
@@ -192,7 +192,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
             [
-                'class' => GraphQLServerComponent::class,
+                'class' => GraphQLServerModule::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
@@ -200,7 +200,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Disable redundant mutation fields in the root type?
             [
-                'class' => EngineComponent::class,
+                'class' => EngineModule::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
@@ -208,120 +208,120 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Cache-Control default max-age
             [
-                'class' => CacheControlComponent::class,
+                'class' => CacheControlModule::class,
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
                 'module' => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
                 'option' => PerformanceFunctionalityModuleResolver::OPTION_MAX_AGE,
             ],
             // Custom Post default/max limits, Supported custom post types
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
             ],
             // Post default/max limits, add to CustomPostUnion
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::POST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::POST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
             ],
             // User default/max limits
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::USER_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
             ],
             // Comment default/max limits
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::ROOT_COMMENT_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::COMMENT_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
             ],
             // Media default/max limits
             [
-                'class' => MediaComponent::class,
+                'class' => MediaModule::class,
                 'envVariable' => MediaEnvironment::MEDIA_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => MediaComponent::class,
+                'class' => MediaModule::class,
                 'envVariable' => MediaEnvironment::MEDIA_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Menu default/max limits
             [
-                'class' => MenusComponent::class,
+                'class' => MenusModule::class,
                 'envVariable' => MenusEnvironment::MENU_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => MenusComponent::class,
+                'class' => MenusModule::class,
                 'envVariable' => MenusEnvironment::MENU_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
@@ -329,80 +329,80 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Tag default/max limits
             [
-                'class' => TagsComponent::class,
+                'class' => TagsModule::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => TagsComponent::class,
+                'class' => TagsModule::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Categories default/max limits
             [
-                'class' => CategoriesComponent::class,
+                'class' => CategoriesModule::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CategoriesComponent::class,
+                'class' => CategoriesModule::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             // Page default/max limits, add to CustomPostUnion
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
             ],
             // Custom post default/max limits
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,
             ],
             // White/Blacklisted entries to Root.option
             [
-                'class' => SettingsComponent::class,
+                'class' => SettingsModule::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -410,7 +410,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => SettingsComponent::class,
+                'class' => SettingsModule::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
@@ -418,14 +418,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
-                'class' => CustomPostMetaComponent::class,
+                'class' => CustomPostMetaModule::class,
                 'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -433,14 +433,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => CustomPostMetaComponent::class,
+                'class' => CustomPostMetaModule::class,
                 'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             // White/Blacklisted entries to User.meta
             [
-                'class' => UserMetaComponent::class,
+                'class' => UserMetaModule::class,
                 'envVariable' => UserMetaEnvironment::USER_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -448,14 +448,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => UserMetaComponent::class,
+                'class' => UserMetaModule::class,
                 'envVariable' => UserMetaEnvironment::USER_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             // White/Blacklisted entries to Comment.meta
             [
-                'class' => CommentMetaComponent::class,
+                'class' => CommentMetaModule::class,
                 'envVariable' => CommentMetaEnvironment::COMMENT_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -463,14 +463,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => CommentMetaComponent::class,
+                'class' => CommentMetaModule::class,
                 'envVariable' => CommentMetaEnvironment::COMMENT_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             // White/Blacklisted entries to PostTag.meta and PostCategory.meta
             [
-                'class' => TaxonomyMetaComponent::class,
+                'class' => TaxonomyMetaModule::class,
                 'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -478,25 +478,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => TaxonomyMetaComponent::class,
+                'class' => TaxonomyMetaModule::class,
                 'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             [
-                'class' => UserAvatarsComponent::class,
+                'class' => UserAvatarsModule::class,
                 'envVariable' => UserAvatarsEnvironment::USER_AVATAR_DEFAULT_SIZE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_AVATARS,
                 'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
             ],
             [
-                'class' => UserRolesComponent::class,
+                'class' => UserRolesModule::class,
                 'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
             ],
             [
-                'class' => UserRolesComponent::class,
+                'class' => UserRolesModule::class,
                 'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
@@ -511,12 +511,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     {
         return [
             [
-                'class' => \PoPCMSSchema\CommentMutations\Component::class,
+                'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT,
                 'callback' => fn () => \get_option('comment_registration') === '1',
             ],
             [
-                'class' => \PoPCMSSchema\CommentMutations\Component::class,
+                'class' => \PoPCMSSchema\CommentMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL,
                 'callback' => fn () => \get_option('require_name_email') === '1',
             ],
@@ -530,39 +530,39 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     {
         return [
             [
-                'class' => Component::class,
+                'class' => Module::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
             ],
             [
-                'class' => GraphQLEndpointForWPComponent::class,
+                'class' => GraphQLEndpointForWPModule::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
             ],
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
             ],
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
             ],
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
             ],
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
             ],
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
             ],
             [
-                'class' => CacheControlComponent::class,
+                'class' => CacheControlModule::class,
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
             ],
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
             ],
         ];
@@ -571,21 +571,21 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedComponentClassConfiguration(): array
+    protected function getPredefinedModuleClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $mainPluginURL = App::getMainPlugin()->getPluginURL();
 
-        $componentClassConfiguration = [];
-        $componentClassConfiguration[\PoP\Root\Component::class] = [
+        $moduleClassConfiguration = [];
+        $moduleClassConfiguration[\PoP\Root\Module::class] = [
             /**
              * Can pass state for "variables" and "actions"
              */
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
-        $componentClassConfiguration[\PoP\ComponentModel\Component::class] = [
+        $moduleClassConfiguration[\PoP\ComponentModel\Module::class] = [
             /**
              * Treat casting failures as errors, not warnings
              */
@@ -611,20 +611,20 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Component::class] = [
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Module::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
-        $componentClassConfiguration[\PoPAPI\APIEndpointsForWP\Component::class] = [
+        $moduleClassConfiguration[\PoPAPI\APIEndpointsForWP\Module::class] = [
             // Disable the Native endpoint
             \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class] = [
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
             // Do not send proactive deprecations
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
-        $componentClassConfiguration[\PoPAPI\API\Component::class] = [
+        $moduleClassConfiguration[\PoPAPI\API\Module::class] = [
             // Do not expose global fields
             \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
         ];
@@ -636,29 +636,29 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the "admin" fields
-            $componentClassConfiguration[\PoP\ComponentModel\Component::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable the "self" fields
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
             // Enable Nested mutations
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
-            $componentClassConfiguration[\PoP\Engine\Component::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
+            $moduleClassConfiguration[\PoP\Engine\Module::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
             // Allow disabling introspection via Access Control on field "__schema"
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Component::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
             // Allow access to all entries for Root.option
-            $componentClassConfiguration[\PoPCMSSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\Settings\Component::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
             // Allow access to all meta values
-            $componentClassConfiguration[\PoPCMSSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\CustomPostMeta\Component::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\UserMeta\Component::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\CommentMeta\Component::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Component::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
         }
-        return $componentClassConfiguration;
+        return $moduleClassConfiguration;
     }
 
     /**
@@ -669,30 +669,30 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return !$value;
     }
 
-    protected function getModuleToComponentClassConfigurationMapping(): array
+    protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [
             [
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                'class' => \GraphQLByPoP\GraphQLEndpointForWP\Component::class,
+                'class' => \GraphQLByPoP\GraphQLEndpointForWP\Module::class,
                 'envVariable' => \GraphQLByPoP\GraphQLEndpointForWP\Environment::DISABLE_GRAPHQL_API_ENDPOINT,
                 'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
+                'class' => \GraphQLByPoP\GraphQLClientsForWP\Module::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_GRAPHIQL_CLIENT_ENDPOINT,
                 'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
+                'class' => \GraphQLByPoP\GraphQLClientsForWP\Module::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::DISABLE_VOYAGER_CLIENT_ENDPOINT,
                 'callback' => $this->opposite(...),
             ],
             [
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_EXPLORER,
-                'class' => \GraphQLByPoP\GraphQLClientsForWP\Component::class,
+                'class' => \GraphQLByPoP\GraphQLClientsForWP\Module::class,
                 'envVariable' => \GraphQLByPoP\GraphQLClientsForWP\Environment::USE_GRAPHIQL_EXPLORER,
             ],
         ];
@@ -704,102 +704,102 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      *
      * @return array<string,string[]>
      */
-    protected function getModuleComponentClassesToSkipIfDisabled(): array
+    protected function getModuleClassesToSkipIfModuleDisabled(): array
     {
         return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
-                \PoPCMSSchema\CustomPosts\Component::class,
-                \PoPCMSSchema\CustomPostsWP\Component::class,
-                \PoPCMSSchema\CustomPostMedia\Component::class,
-                \PoPWPSchema\CustomPosts\Component::class,
+                \PoPCMSSchema\CustomPosts\Module::class,
+                \PoPCMSSchema\CustomPostsWP\Module::class,
+                \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPWPSchema\CustomPosts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS => [
-                \PoPCMSSchema\GenericCustomPosts\Component::class,
+                \PoPCMSSchema\GenericCustomPosts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POSTS => [
-                \PoPCMSSchema\Posts\Component::class,
-                \PoPWPSchema\Posts\Component::class,
+                \PoPCMSSchema\Posts\Module::class,
+                \PoPWPSchema\Posts\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_COMMENTS => [
-                \PoPCMSSchema\Comments\Component::class,
-                \PoPWPSchema\Comments\Component::class,
+                \PoPCMSSchema\Comments\Module::class,
+                \PoPWPSchema\Comments\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USERS => [
-                \PoPCMSSchema\Users\Component::class,
-                \PoPCMSSchema\UserState\Component::class,
-                \PoPWPSchema\Users\Component::class,
+                \PoPCMSSchema\Users\Module::class,
+                \PoPCMSSchema\UserState\Module::class,
+                \PoPWPSchema\Users\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_ROLES => [
-                \PoPCMSSchema\UserRoles\Component::class,
-                \PoPCMSSchema\UserRolesWP\Component::class,
+                \PoPCMSSchema\UserRoles\Module::class,
+                \PoPCMSSchema\UserRolesWP\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_USER_AVATARS => [
-                \PoPCMSSchema\UserAvatars\Component::class,
+                \PoPCMSSchema\UserAvatars\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_PAGES => [
-                \PoPCMSSchema\Pages\Component::class,
-                \PoPWPSchema\Pages\Component::class,
+                \PoPCMSSchema\Pages\Module::class,
+                \PoPWPSchema\Pages\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MEDIA => [
-                \PoPCMSSchema\CustomPostMedia\Component::class,
-                \PoPCMSSchema\Media\Component::class,
-                \PoPWPSchema\Media\Component::class,
+                \PoPCMSSchema\CustomPostMedia\Module::class,
+                \PoPCMSSchema\Media\Module::class,
+                \PoPWPSchema\Media\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_TAGS => [
-                \PoPCMSSchema\Tags\Component::class,
+                \PoPCMSSchema\Tags\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_TAGS => [
-                \PoPCMSSchema\PostTags\Component::class,
+                \PoPCMSSchema\PostTags\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_CATEGORIES => [
-                \PoPCMSSchema\Categories\Component::class,
+                \PoPCMSSchema\Categories\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_POST_CATEGORIES => [
-                \PoPCMSSchema\PostCategories\Component::class,
+                \PoPCMSSchema\PostCategories\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_MENUS => [
-                \PoPCMSSchema\Menus\Component::class,
-                \PoPWPSchema\Menus\Component::class,
+                \PoPCMSSchema\Menus\Module::class,
+                \PoPWPSchema\Menus\Module::class,
             ],
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
-                \PoPCMSSchema\Settings\Component::class,
+                \PoPCMSSchema\Settings\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
-                \PoPCMSSchema\UserStateMutations\Component::class,
+                \PoPCMSSchema\UserStateMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
-                \PoPCMSSchema\PostMutations\Component::class,
+                \PoPCMSSchema\PostMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
-                \PoPCMSSchema\CustomPostMediaMutations\Component::class,
+                \PoPCMSSchema\CustomPostMediaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
-                \PoPCMSSchema\PostMediaMutations\Component::class,
+                \PoPCMSSchema\PostMediaMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
-                \PoPCMSSchema\PostTagMutations\Component::class,
+                \PoPCMSSchema\PostTagMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
-                \PoPCMSSchema\PostCategoryMutations\Component::class,
+                \PoPCMSSchema\PostCategoryMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
-                \PoPCMSSchema\CommentMutations\Component::class,
+                \PoPCMSSchema\CommentMutations\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META => [
-                \PoPCMSSchema\CustomPostMeta\Component::class,
-                \PoPWPSchema\CustomPostMeta\Component::class,
+                \PoPCMSSchema\CustomPostMeta\Module::class,
+                \PoPWPSchema\CustomPostMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_USER_META => [
-                \PoPCMSSchema\UserMeta\Component::class,
-                \PoPWPSchema\UserMeta\Component::class,
+                \PoPCMSSchema\UserMeta\Module::class,
+                \PoPWPSchema\UserMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META => [
-                \PoPCMSSchema\CommentMeta\Component::class,
-                \PoPWPSchema\CommentMeta\Component::class,
+                \PoPCMSSchema\CommentMeta\Module::class,
+                \PoPWPSchema\CommentMeta\Module::class,
             ],
             MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META => [
-                \PoPCMSSchema\TaxonomyMeta\Component::class,
-                \PoPWPSchema\TaxonomyMeta\Component::class,
+                \PoPCMSSchema\TaxonomyMeta\Module::class,
+                \PoPWPSchema\TaxonomyMeta\Module::class,
             ],
         ];
     }

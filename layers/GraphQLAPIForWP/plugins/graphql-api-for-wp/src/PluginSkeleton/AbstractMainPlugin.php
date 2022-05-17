@@ -75,7 +75,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * Configure the plugin.
      * This defines hooks to set environment variables,
      * so must be executed before those hooks are triggered for first time
-     * (in ComponentConfiguration classes)
+     * (in ModuleConfiguration classes)
      */
     protected function callPluginInitializationConfiguration(): void
     {
@@ -83,23 +83,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
-        return $this->pluginInitializationConfiguration->getComponentClassConfiguration();
+        return $this->pluginInitializationConfiguration->getModuleClassConfiguration();
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaComponentClassesToSkip(): array
+    public function getSchemaModuleClassesToSkip(): array
     {
-        return $this->pluginInitializationConfiguration->getSchemaComponentClassesToSkip();
+        return $this->pluginInitializationConfiguration->getSchemaModuleClassesToSkip();
     }
 
     /**
@@ -403,7 +403,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->initializeComponents();
+                $this->initializeModules();
             },
             PluginLifecyclePriorities::CONFIGURE_COMPONENTS
         );
@@ -477,9 +477,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Initialize the components
      */
-    public function initializeComponents(): void
+    public function initializeModules(): void
     {
-        App::getAppLoader()->initializeComponents();
+        App::getAppLoader()->initializeModules();
 
         /**
          * After initialized, and before booting,
@@ -533,7 +533,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
-            $appLoader->bootApplicationComponents();
+            $appLoader->bootApplicationModules();
 
             // Custom logic
             $this->doBootApplication();

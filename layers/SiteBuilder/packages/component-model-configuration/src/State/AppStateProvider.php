@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\State;
 
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ConfigurationComponentModel\Configuration\EngineRequest;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\Root\App;
-use PoP\Root\Component as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Module as RootModule;
+use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -20,14 +20,14 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         // Override the settings from ComponentModel
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
 
-        /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
-        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+        /** @var RootModuleConfiguration */
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
+        if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             // If not target, or invalid, reset it to "main"
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided
             // (ie initial load) and when target is provided (ie loading pageSection)

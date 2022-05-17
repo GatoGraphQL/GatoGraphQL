@@ -16,7 +16,7 @@ abstract class AbstractClient extends AbstractEndpointHandler
 {
     use BasicServiceTrait;
     use ClientTrait, WPClientTrait {
-        WPClientTrait::getComponentBaseURL insteadof ClientTrait;
+        WPClientTrait::getModuleBaseURL insteadof ClientTrait;
     }
 
     private ?TemplateHelpersInterface $templateHelpers = null;

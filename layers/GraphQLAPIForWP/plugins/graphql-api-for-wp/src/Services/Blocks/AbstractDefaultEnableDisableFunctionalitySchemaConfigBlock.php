@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Component;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 
 abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extends AbstractSchemaConfigBlock
@@ -26,13 +26,13 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
 
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             $this->getBlockLabel(),
-            $enabledDisabledLabels[$attributes[BlockAttributeNames::ENABLED_CONST] ?? ''] ?? $componentConfiguration->getSettingsValueLabel()
+            $enabledDisabledLabels[$attributes[BlockAttributeNames::ENABLED_CONST] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT

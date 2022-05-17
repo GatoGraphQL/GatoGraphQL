@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Constants\Params;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class PoP_CDN_Blog_CDNHooks
 {
@@ -34,7 +34,7 @@ class PoP_CDN_Blog_CDNHooks
                     POP_BLOG_ROUTE_SEARCHCONTENT,
                     POP_BLOG_ROUTE_SEARCHUSERS,
                     POP_BLOG_ROUTE_CONTENT,
-                    UsersComponentConfiguration::getUsersRoute(),
+                    UsersModuleConfiguration::getUsersRoute(),
                     POP_BLOG_ROUTE_COMMENTS,
                 )
             );
@@ -54,7 +54,7 @@ class PoP_CDN_Blog_CDNHooks
         } elseif ($thumbprint == POP_CDN_THUMBPRINT_TAG) {
             $routes = array_filter(
                 array(
-                    PostTagsComponentConfiguration::getPostTagsRoute(),
+                    PostTagsModuleConfiguration::getPostTagsRoute(),
                 )
             );
         }

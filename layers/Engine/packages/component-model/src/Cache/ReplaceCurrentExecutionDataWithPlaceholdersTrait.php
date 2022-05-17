@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Cache;
 
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Constants\CachePlaceholders;
 use PoP\Root\App;
 
@@ -16,12 +16,12 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
      */
     protected function getCacheReplacements(): array
     {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         return [
-            $componentInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
-            $componentInfo->getRand() => CachePlaceholders::RAND,
-            $componentInfo->getTime() => CachePlaceholders::TIME,
+            $moduleInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
+            $moduleInfo->getRand() => CachePlaceholders::RAND,
+            $moduleInfo->getTime() => CachePlaceholders::TIME,
         ];
     }
 

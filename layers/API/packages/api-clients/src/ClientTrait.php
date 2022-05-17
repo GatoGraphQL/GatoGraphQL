@@ -35,11 +35,11 @@ trait ClientTrait
     /**
      * Base dir
      */
-    abstract protected function getComponentBaseDir(): string;
+    abstract protected function getModuleBaseDir(): string;
     /**
      * Base URL
      */
-    protected function getComponentBaseURL(): ?string
+    protected function getModuleBaseURL(): ?string
     {
         return null;
     }
@@ -58,7 +58,7 @@ trait ClientTrait
         }
         // Read from the static HTML files and replace their endpoints
         $assetRelativePath = $this->getClientRelativePath();
-        $file = $this->getComponentBaseDir() . $assetRelativePath . '/' . $this->getIndexFilename();
+        $file = $this->getModuleBaseDir() . $assetRelativePath . '/' . $this->getIndexFilename();
         $fileContents = \file_get_contents($file, true);
         $jsFileName = $this->getJSFilename();
         /**
@@ -66,14 +66,14 @@ trait ClientTrait
          * different than the URL under which the client is accessed.
          * Then add the URL to the plugin to all assets (they are all located under "assets/...")
          */
-        if ($componentBaseURL = $this->getComponentBaseURL()) {
+        if ($moduleBaseURL = $this->getModuleBaseURL()) {
             // The client could have several folders where to store the assets
             // GraphiQL Explorer loads under "/assets...", so the dirname starts with "/"
             // But otherwise it does not. So don't add "/" again if it already has
             $assetDirname = $this->getAssetDirname();
             $fileContents = \str_replace(
                 '"' . $assetDirname . '/',
-                '"' . \trim($componentBaseURL, '/') . $assetRelativePath . (\str_starts_with($assetDirname, '/') ? '' : '/') . $assetDirname . '/',
+                '"' . \trim($moduleBaseURL, '/') . $assetRelativePath . (\str_starts_with($assetDirname, '/') ? '' : '/') . $assetDirname . '/',
                 $fileContents
             );
         }
@@ -90,9 +90,9 @@ trait ClientTrait
          */
         $endpoint = preg_replace('#^https?:#', '', $endpoint);
         // // If namespaced, add /?use_namespace=1 to the endpoint
-        // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = \PoP\Root\App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        // if ($componentConfiguration->mustNamespaceTypes()) {
+        // /** @var ComponentModelModuleConfiguration */
+        // $moduleConfiguration = \PoP\Root\App::getModule(ComponentModelModule::class)->getConfiguration();
+        // if ($moduleConfiguration->mustNamespaceTypes()) {
         //     $endpoint = GeneralUtils::addQueryArgs(
         //         [
         //             APIParams::USE_NAMESPACE => true,

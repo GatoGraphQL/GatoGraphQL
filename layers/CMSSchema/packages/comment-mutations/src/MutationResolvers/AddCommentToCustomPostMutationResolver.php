@@ -8,8 +8,8 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CommentMutations\Component;
-use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\Module;
+use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
@@ -58,16 +58,16 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $errors = [];
 
         // Check that the user is logged-in
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
             $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
             if ($errorFeedbackItemResolution !== null) {
                 return [
                     $errorFeedbackItemResolution,
                 ];
             }
-        } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
+        } elseif ($moduleConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
                 $errors[] = new FeedbackItemResolution(
@@ -124,9 +124,9 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         /**
          * Override with the user's properties
          */
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = App::getState('current-user-id');
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);

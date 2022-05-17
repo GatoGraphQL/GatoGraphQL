@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Services;
 
-use PoP\Root\Component\ApplicationEvents;
+use PoP\Root\Module\ApplicationEvents;
 
 /**
  * A service which must always be instantiated,
@@ -22,6 +22,6 @@ trait AutomaticallyInstantiatedServiceTrait
 
     public function getInstantiationEvent(): string
     {
-        return ApplicationEvents::COMPONENT_LOADED;
+        return ApplicationEvents::MODULE_LOADED;
     }
 }

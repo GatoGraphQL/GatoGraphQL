@@ -81,7 +81,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      * Configure the plugin.
      * This defines hooks to set environment variables,
      * so must be executed before those hooks are triggered for first time
-     * (in ComponentConfiguration classes)
+     * (in ModuleConfiguration classes)
      */
     protected function callPluginInitializationConfiguration(): void
     {
@@ -89,23 +89,23 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
-        return $this->extensionInitializationConfiguration?->getComponentClassConfiguration() ?? parent::getComponentClassConfiguration();
+        return $this->extensionInitializationConfiguration?->getModuleClassConfiguration() ?? parent::getModuleClassConfiguration();
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaComponentClassesToSkip(): array
+    public function getSchemaModuleClassesToSkip(): array
     {
-        return $this->extensionInitializationConfiguration?->getSchemaComponentClassesToSkip() ?? [];
+        return $this->extensionInitializationConfiguration?->getSchemaModuleClassesToSkip() ?? [];
     }
 
     /**

@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/FieldResolvers/*'
+
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\TypeResolvers\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/TypeResolvers/*'
+
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/SchemaHooks/*'

@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Add the 3-days and 4-days scope
@@ -16,8 +16,8 @@ function popEmRssEventsBuildSqlConditions($conditions, $args)
             $days = $matches[1];
 
             // $end_date: if doing 2 days, then must produce +1 day, etc
-            $start_date = date('Y-m-d', ComponentModelComponentInfo::get('time'));
-            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), ComponentModelComponentInfo::get('time')));
+            $start_date = date('Y-m-d', ComponentModelModuleInfo::get('time'));
+            $end_date = date('Y-m-d', strtotime(sprintf("+%s day", $days-1), ComponentModelModuleInfo::get('time')));
             $conditions['scope'] = " ((event_start_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)) OR (event_end_date BETWEEN CAST('$start_date' AS DATE) AND CAST('$end_date' AS DATE)))";
         }
     }

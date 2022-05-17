@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {
@@ -20,7 +20,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
     {
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
-                return getRouteIcon(UsersComponentConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
+                return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
 
         return parent::getLabelText($module, $props);
@@ -64,7 +64,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
-                return RouteUtils::getRouteURL(UsersComponentConfiguration::getUsersRoute());
+                return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
         return parent::getTypeaheadDataloadSource($module, $props);

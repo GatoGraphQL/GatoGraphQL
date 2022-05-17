@@ -64,8 +64,8 @@ The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP),
 Initialize the component:
 
 ``` php
-\PoP\Root\App::stockAndInitializeComponentClasses([([
-    \GraphQLByPoP\GraphQLServer\Component::class,
+\PoP\Root\App::stockAndInitializeModuleClasses([([
+    \GraphQLByPoP\GraphQLServer\Module::class,
 ]);
 ```
 

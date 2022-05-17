@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
-use PoPAPI\APIEndpointsForWP\Component;
-use PoPAPI\APIEndpointsForWP\ComponentConfiguration;
+use PoPAPI\API\Module as APIModule;
+use PoPAPI\APIEndpointsForWP\Module;
+use PoPAPI\APIEndpointsForWP\ModuleConfiguration;
 
 class NativeAPIEndpointHandler extends AbstractEndpointHandler
 {
@@ -26,9 +26,9 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
      */
     public function getEndpoint(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getNativeAPIEndpoint();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getNativeAPIEndpoint();
     }
 
     /**
@@ -36,9 +36,9 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
      */
     protected function isNativeAPIEnabled(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return App::getComponent(APIComponent::class)->isEnabled()
-            && !$componentConfiguration->isNativeAPIEndpointDisabled();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return App::getModule(APIModule::class)->isEnabled()
+            && !$moduleConfiguration->isNativeAPIEndpointDisabled();
     }
 }

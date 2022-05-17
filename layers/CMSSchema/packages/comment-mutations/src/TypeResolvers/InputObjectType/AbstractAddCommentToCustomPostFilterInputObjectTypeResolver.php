@@ -9,8 +9,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CommentMutations\Component;
-use PoPCMSSchema\CommentMutations\ComponentConfiguration;
+use PoPCMSSchema\CommentMutations\Module;
+use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
@@ -57,8 +57,8 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
 
     public function getInputFieldNameTypeResolvers(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
                 MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),
@@ -69,7 +69,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
             $this->addParentCommentInputField() ? [
                 MutationInputProperties::PARENT_COMMENT_ID => $this->getIDScalarTypeResolver(),
             ] : [],
-            !$componentConfiguration->mustUserBeLoggedInToAddComment() ? [
+            !$moduleConfiguration->mustUserBeLoggedInToAddComment() ? [
                 MutationInputProperties::AUTHOR_NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_EMAIL => $this->getEmailScalarTypeResolver(),
                 MutationInputProperties::AUTHOR_URL => $this->getURLScalarTypeResolver(),

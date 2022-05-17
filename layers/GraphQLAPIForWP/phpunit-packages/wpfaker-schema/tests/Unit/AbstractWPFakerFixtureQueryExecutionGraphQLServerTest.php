@@ -137,12 +137,12 @@ abstract class AbstractWPFakerFixtureQueryExecutionGraphQLServerTest extends Abs
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PHPUnitForGraphQLAPI\WPFakerSchema\Component::class,
+                \PHPUnitForGraphQLAPI\WPFakerSchema\Module::class,
             ]
         ];
     }

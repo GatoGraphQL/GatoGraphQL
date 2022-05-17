@@ -24,7 +24,7 @@ class ServiceInstantiator implements ServiceInstantiatorInterface
     }
     /**
      * The SystemContainer requires no events => pass null
-     * The ApplicationContainer has 3 events (componentLoaded, boot, afterBoot)
+     * The ApplicationContainer has 3 events (moduleLoaded, boot, afterBoot)
      */
     public function initializeServices(?string $event = null): void
     {

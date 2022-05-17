@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use GraphQLByPoP\GraphQLServer\Component;
+use GraphQLByPoP\GraphQLServer\Module;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -22,32 +22,32 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer implements GraphQLServerInterface
 {
-    private readonly array $componentClasses;
+    private readonly array $moduleClasses;
 
     /**
-     * @param string[] $componentClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
-     * @param array<string,mixed> $componentClassConfiguration Predefined configuration for the components
+     * @param string[] $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
+     * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
      */
     public function __construct(
-        array $componentClasses,
-        private readonly array $componentClassConfiguration = [],
+        array $moduleClasses,
+        private readonly array $moduleClassConfiguration = [],
         private readonly ?bool $cacheContainerConfiguration = null,
         private readonly ?string $containerNamespace = null,
         private readonly ?string $containerDirectory = null,
     ) {
-        $this->componentClasses = array_merge(
-            $componentClasses,
+        $this->moduleClasses = array_merge(
+            $moduleClasses,
             [
-                // This is the one Component that is required to produce the GraphQL server.
+                // This is the one Module that is required to produce the GraphQL server.
                 // The other classes provide the schema and extra functionality.
-                Component::class,
+                Module::class,
             ]
         );
 
         $this->initializeApp();
         $appLoader = App::getAppLoader();
-        $appLoader->addComponentClassesToInitialize($this->componentClasses);
-        $appLoader->initializeComponents();
+        $appLoader->addModuleClassesToInitialize($this->moduleClasses);
+        $appLoader->initializeModules();
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,
             $this->containerNamespace,
@@ -56,7 +56,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
+        $appLoader->addModuleClassConfiguration($this->moduleClassConfiguration);
 
         // Boot the application
         $appLoader->bootApplication(
@@ -70,7 +70,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
 
         // Finally trigger booting the components
-        $appLoader->bootApplicationComponents();
+        $appLoader->bootApplicationModules();
     }
 
     protected function initializeApp(): void

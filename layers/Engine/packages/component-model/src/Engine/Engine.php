@@ -7,9 +7,9 @@ namespace PoP\ComponentModel\Engine;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
-use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
@@ -21,7 +21,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -75,7 +75,7 @@ class Engine implements EngineInterface
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
-    private ?EntryModuleManagerInterface $entryModuleManager = null;
+    private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
@@ -173,13 +173,13 @@ class Engine implements EngineInterface
     {
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
-    final public function setEntryModuleManager(EntryModuleManagerInterface $entryModuleManager): void
+    final public function setEntryComponentManager(EntryComponentManagerInterface $entryComponentManager): void
     {
-        $this->entryModuleManager = $entryModuleManager;
+        $this->entryComponentManager = $entryComponentManager;
     }
-    final protected function getEntryModuleManager(): EntryModuleManagerInterface
+    final protected function getEntryComponentManager(): EntryComponentManagerInterface
     {
-        return $this->entryModuleManager ??= $this->instanceManager->getInstance(EntryModuleManagerInterface::class);
+        return $this->entryComponentManager ??= $this->instanceManager->getInstance(EntryComponentManagerInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -218,24 +218,24 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls[$url] = $targets;
     }
 
-    public function getEntryModule(): array
+    public function getEntryComponent(): array
     {
         $engineState = App::getEngineState();
 
         // Use cached results
-        if ($engineState->entryModule !== null) {
-            return $engineState->entryModule;
+        if ($engineState->entryComponent !== null) {
+            return $engineState->entryComponent;
         }
 
         // Obtain, validate and cache
-        $engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
-        if ($engineState->entryModule === null) {
+        $engineState->entryComponent = $this->getEntryComponentManager()->getEntryComponent();
+        if ($engineState->entryComponent === null) {
             throw new ImpossibleToHappenException(
                 $this->__('No entry module for this request', 'component-model')
             );
         }
 
-        return $engineState->entryModule;
+        return $engineState->entryComponent;
     }
 
     /**
@@ -264,12 +264,12 @@ class Engine implements EngineInterface
          *
          * So remove these to generate the hash.
          */
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         $differentiators = array(
-            $componentInfo->getUniqueID(),
-            $componentInfo->getRand(),
-            $componentInfo->getTime(),
+            $moduleInfo->getUniqueID(),
+            $moduleInfo->getRand(),
+            $moduleInfo->getTime(),
         );
         $commoncode = str_replace($differentiators, '', json_encode($engineState->data));
 
@@ -471,9 +471,9 @@ class Engine implements EngineInterface
 
     public function getModelPropsModuletree(array $module): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
@@ -517,7 +517,7 @@ class Engine implements EngineInterface
         $datasourceselector = App::getState('datasourceselector');
 
         // Get the entry module based on the application configuration and the nature
-        $module = $this->getEntryModule();
+        $module = $this->getEntryComponent();
 
         $engineState = App::getEngineState();
 
@@ -647,9 +647,9 @@ class Engine implements EngineInterface
     public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
         $ret = [];
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         $engineState = App::getEngineState();
 
@@ -693,11 +693,11 @@ class Engine implements EngineInterface
 
     public function getRequestMeta(): array
     {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
         $meta = array(
-            Response::ENTRY_MODULE => $this->getEntryModule()[1],
-            Response::UNIQUE_ID => $componentInfo->getUniqueID(),
+            Response::ENTRY_MODULE => $this->getEntryComponent()[1],
+            Response::UNIQUE_ID => $moduleInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );
 
@@ -998,9 +998,9 @@ class Engine implements EngineInterface
         string $key,
         mixed $value,
     ): void {
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
-        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
             // Notice that when generating the array for the response, we don't use $module anymore, but $moduleOutputName
@@ -1041,9 +1041,9 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
         $engineState = App::getEngineState();
 
@@ -1118,9 +1118,9 @@ class Engine implements EngineInterface
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
-        /** @var ComponentInfo */
-        $componentInfo = App::getComponent(Component::class)->getInfo();
-        $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+        /** @var ModuleInfo */
+        $moduleInfo = App::getModule(Module::class)->getInfo();
+        $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
         $this->getModuleFilterManager()->neverExclude(true);
@@ -1750,9 +1750,9 @@ class Engine implements EngineInterface
         $ret[Response::OBJECT_FEEDBACK] = [];
         $ret[Response::SCHEMA_FEEDBACK] = [];
 
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $enabledFeedbackCategoryExtensions = $componentConfiguration->getEnabledFeedbackCategoryExtensions();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $enabledFeedbackCategoryExtensions = $moduleConfiguration->getEnabledFeedbackCategoryExtensions();
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);
@@ -2457,9 +2457,9 @@ class Engine implements EngineInterface
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
-                /** @var ComponentInfo */
-                $componentInfo = App::getComponent(Component::class)->getInfo();
-                $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
+                /** @var ModuleInfo */
+                $moduleInfo = App::getModule(Module::class)->getInfo();
+                $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {

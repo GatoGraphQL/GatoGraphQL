@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 
 class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Processor_TagTypeaheadComponentFormInputsBase
 {
@@ -18,7 +18,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
     {
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
-                return getRouteIcon(PostTagsComponentConfiguration::getPostTagsRoute(), true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
+                return getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), true).TranslationAPIFacade::getInstance()->__('Tags:', 'pop-coreprocessors');
         }
 
         return parent::getLabelText($module, $props);
@@ -29,7 +29,7 @@ class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Pr
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_TAGS:
-                return RouteUtils::getRouteURL(PostTagsComponentConfiguration::getPostTagsRoute());
+                return RouteUtils::getRouteURL(PostTagsModuleConfiguration::getPostTagsRoute());
         }
 
         return parent::getTypeaheadDataloadSource($module, $props);

@@ -1,7 +1,7 @@
 <?php
 namespace PoPCMSSchema\Posts;
 
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
 trait SettingsProcessor_Trait
 {
@@ -9,7 +9,7 @@ trait SettingsProcessor_Trait
     {
         return array_filter(
             array(
-                PostsComponentConfiguration::getPostsRoute(),
+                PostsModuleConfiguration::getPostsRoute(),
             )
         );
     }

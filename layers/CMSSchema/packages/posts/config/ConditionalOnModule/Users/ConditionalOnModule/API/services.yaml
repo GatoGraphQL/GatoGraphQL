@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\RouteModuleProcessors\:
+        resource: '../../../../../src/ConditionalOnModule/Users/ConditionalOnModule/API/RouteModuleProcessors/*'
+
+    PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ModuleProcessors\:
+        resource: '../../../../../src/ConditionalOnModule/Users/ConditionalOnModule/API/ModuleProcessors/*'

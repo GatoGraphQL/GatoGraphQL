@@ -16,15 +16,15 @@ class RepeatableDirectiveWPFakerFixtureQueryExecutionGraphQLServerTest extends A
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PoPWPSchema\Users\Component::class,
-                \PoPCMSSchema\UserStateMutationsWP\Component::class,
-                \PoPCMSSchema\UserRolesAccessControl\Component::class,
-                \PoPCMSSchema\UserRolesWP\Component::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
+                \PoPCMSSchema\UserRolesAccessControl\Module::class,
+                \PoPCMSSchema\UserRolesWP\Module::class,
             ]
         ];
     }

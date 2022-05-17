@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\TaxonomyMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\TaxonomyMeta\Component;
-use PoPCMSSchema\TaxonomyMeta\ComponentConfiguration;
+use PoPCMSSchema\TaxonomyMeta\Module;
+use PoPCMSSchema\TaxonomyMeta\ModuleConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
 class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectTypeResolver
@@ -21,14 +21,14 @@ class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObj
      */
     protected function getAllowOrDenyEntries(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getTaxonomyMetaEntries();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTaxonomyMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getTaxonomyMetaBehavior();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTaxonomyMetaBehavior();
     }
 }

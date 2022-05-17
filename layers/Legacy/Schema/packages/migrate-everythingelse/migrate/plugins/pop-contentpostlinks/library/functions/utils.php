@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\PostCategories\Facades\PostCategoryTypeAPIFacade;
@@ -47,7 +47,7 @@ class PoP_ContentPostLinks_Utils
             // If not $show, add a button to Load the frame (eg: feed). If not, show the frame directly (eg: single link)
             if (!$show) {
                 $post_id = $customPostTypeAPI->getID($post);
-                $collapse_id = $customPostTypeAPI->getCustomPostType($post_id) . $post_id . '-' . ComponentModelComponentInfo::get('time');
+                $collapse_id = $customPostTypeAPI->getCustomPostType($post_id) . $post_id . '-' . ComponentModelModuleInfo::get('time');
                 $messages[] = sprintf(
                     '<a href="%s" class="btn btn-primary" data-toggle="collapse"><i class="fa fa-fw fa-link"></i>%s</a>',
                     '#'.$collapse_id,

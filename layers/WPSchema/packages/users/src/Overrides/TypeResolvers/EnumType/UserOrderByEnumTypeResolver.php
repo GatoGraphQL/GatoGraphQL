@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPWPSchema\Users\Overrides\TypeResolvers\EnumType;
 
 use PoP\Root\App;
-use PoPCMSSchema\Users\Component;
-use PoPCMSSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\Module;
+use PoPCMSSchema\Users\ModuleConfiguration;
 use PoPCMSSchema\Users\TypeResolvers\EnumType\UserOrderByEnumTypeResolver as UpstreamUserOrderByEnumTypeResolver;
 use PoPWPSchema\Users\Constants\UserOrderBy;
 
@@ -23,9 +23,9 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
     public function getAdminEnumValues(): array
     {
         $adminEnumValues = parent::getAdminEnumValues();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserEmailAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
             $adminEnumValues[] = UserOrderBy::EMAIL;
         }
         return $adminEnumValues;

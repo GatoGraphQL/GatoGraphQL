@@ -1,8 +1,8 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
@@ -42,8 +42,8 @@ class PoP_SSR_EngineInitialization_Hooks
     public function getMainHtml($html)
     {
         $engine = EngineFacade::getInstance();
-        $entryModule = $engine->getEntryModule();
-        return PoP_ServerSideRendering_Utils::renderPagesection($entryModule);
+        $entryComponent = $engine->getEntryComponent();
+        return PoP_ServerSideRendering_Utils::renderPagesection($entryComponent);
     }
 
     public function initScripts($scripts)
@@ -132,13 +132,13 @@ class PoP_SSR_EngineInitialization_Hooks
         $dbobjectids = $data['datasetmoduledata']['combinedstate']['dbobjectids'];
 
         // Calculate the dynamic data settings
-        $entryModule = $engine->getEntryModule();
-        $entryModuleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($entryModule);
+        $entryComponent = $engine->getEntryComponent();
+        $entryComponentOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($entryComponent);
 
         // Get the static data properties
         // First check if there's a cache stored
         $cachemanager = null;
-        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
         }
         $dynamic_data_properties = null;
@@ -150,7 +150,7 @@ class PoP_SSR_EngineInitialization_Hooks
             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
             $engineState = App::getEngineState();
             $entry_model_props = $engineState->model_props;
-            $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($entryModule))->getDynamicDataFieldsDatasetmoduletree($entryModule, $entry_model_props);
+            $dynamic_data_properties = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($moduleprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetmoduletree($entryComponent, $entry_model_props);
 
             if ($useCache) {
                 $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES, $dynamic_data_properties);
@@ -160,11 +160,11 @@ class PoP_SSR_EngineInitialization_Hooks
         // By now, in object $dynamic_data_properties, we have the configuration of what data-fields are dynamic,
         // on a block by block basis, and also including the subcomponents.
         // Then, simply iterate this information, and build the dynamic database by copying the corresponding data from the database
-        foreach ($dynamic_data_properties[$entryModuleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] as $pagesection_settings_id => $pagesection_data_properties) {
-            foreach ($pagesection_data_properties[ComponentModelComponentInfo::get('response-prop-submodules')] as $block_settings_id => $block_settings_id_data_properties) {
+        foreach ($dynamic_data_properties[$entryComponentOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] as $pagesection_settings_id => $pagesection_data_properties) {
+            foreach ($pagesection_data_properties[ComponentModelModuleInfo::get('response-prop-submodules')] as $block_settings_id => $block_settings_id_data_properties) {
                 // If the block has no typeResolver, it will be empty
                 if ($block_typeResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
-                    $block_dataset = $dbobjectids[$entryModuleOutputName][$pagesection_settings_id][$block_settings_id];
+                    $block_dataset = $dbobjectids[$entryComponentOutputName][$pagesection_settings_id][$block_settings_id];
 
                     // The data_properties has a unique key as the typeResolver
                     reset($block_typeResolver_data_properties);

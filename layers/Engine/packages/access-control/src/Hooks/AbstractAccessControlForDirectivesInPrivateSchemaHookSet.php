@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace PoP\AccessControl\Hooks;
 
 use PoP\Root\App;
-use PoP\AccessControl\Component;
-use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\Module;
+use PoP\AccessControl\ModuleConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
 abstract class AbstractAccessControlForDirectivesInPrivateSchemaHookSet extends AbstractAccessControlForDirectivesHookSet
 {
     protected function enabled(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->canSchemaBePrivate();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string

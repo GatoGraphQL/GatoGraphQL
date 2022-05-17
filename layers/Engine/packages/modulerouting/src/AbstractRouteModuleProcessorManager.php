@@ -33,7 +33,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
 
     public function getDefaultGroup(): string
     {
-        return ModuleRoutingGroups::ENTRYMODULE;
+        return ModuleRoutingGroups::ENTRYCOMPONENT;
     }
 
     /**

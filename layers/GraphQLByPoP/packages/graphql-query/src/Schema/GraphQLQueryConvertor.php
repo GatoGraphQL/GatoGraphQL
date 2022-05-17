@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
-use GraphQLByPoP\GraphQLQuery\Component as GraphQLQueryComponent;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\Module as GraphQLQueryModule;
+use GraphQLByPoP\GraphQLQuery\ModuleConfiguration as GraphQLQueryModuleConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
@@ -15,8 +15,8 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Component as GraphQLParserComponent;
-use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
@@ -217,8 +217,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertArgumentValue($value)
     {
-        /** @var GraphQLQueryComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        /** @var GraphQLQueryModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLQueryModule::class)->getConfiguration();
         /**
          * Generate the field AST as composable field `{{ field }}`,
          * so its value can be computed on runtime.
@@ -231,7 +231,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         if (
             $value instanceof VariableReference &&
-            $componentConfiguration->enableVariablesAsExpressions() &&
+            $moduleConfiguration->enableVariablesAsExpressions() &&
             $this->treatVariableAsExpression($value->getName())
         ) {
             /**
@@ -580,9 +580,9 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // @todo Migrate this, currently this code is not working
         if ($operations === []) {
-            /** @var GraphQLParserComponentConfiguration */
-            $componentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
-            if ($componentConfiguration->enableMultipleQueryExecution()) {
+            /** @var GraphQLParserModuleConfiguration */
+            $moduleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
+            if ($moduleConfiguration->enableMultipleQueryExecution()) {
                 // Add a suggestion indicating to pass __ALL in the query
                 App::getFeedbackStore()->documentFeedbackStore->addSuggestion(
                     new DocumentFeedback(

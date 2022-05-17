@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\Root\Exception\GenericSystemException;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
@@ -245,7 +245,7 @@ class PoP_ServerSideRendering
         $renderModule = $pagesection_module;
         $render_context = $pagesection_configuration;
         if ($block) {
-            $render_context = $render_context[ComponentModelComponentInfo::get('response-prop-submodules')][$block];
+            $render_context = $render_context[ComponentModelModuleInfo::get('response-prop-submodules')][$block];
             $renderModule = $render_context[GD_JS_MODULE];
         }
 

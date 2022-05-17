@@ -24,14 +24,14 @@ class PoP_Notifications_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         return parent::getComponentSubmodule($module);
     }
 
-    public function useComponentConfiguration(array $module)
+    public function useModuleConfiguration(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS:
                 return false;
         }
 
-        return parent::useComponentConfiguration($module);
+        return parent::useModuleConfiguration($module);
     }
 }
 

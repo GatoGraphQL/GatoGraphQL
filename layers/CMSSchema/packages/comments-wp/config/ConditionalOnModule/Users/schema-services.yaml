@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Comments\ConditionalOnModule\Users\TypeAPIs\CommentTypeAPIInterface:
+        class: \PoPCMSSchema\CommentsWP\ConditionalOnModule\Users\TypeAPIs\CommentTypeAPI

@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 
 class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_WidgetsBase
 {
@@ -37,7 +37,7 @@ class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_Widgets
     public function getFontawesome(array $module, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsComponentConfiguration::getPostTagsRoute(), false),
+            self::MODULE_WIDGETCOMPACT_TAGINFO => getRouteIcon(PostTagsModuleConfiguration::getPostTagsRoute(), false),
         );
 
         return $fontawesomes[$module[1]] ?? null;

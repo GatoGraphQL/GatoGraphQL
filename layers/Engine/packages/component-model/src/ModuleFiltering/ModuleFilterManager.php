@@ -9,8 +9,8 @@ use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\Root\App;
-use PoP\Root\Component as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\Module as RootModule;
+use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
 class ModuleFilterManager implements ModuleFilterManagerInterface
@@ -94,9 +94,9 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         if ($this->selected_filter_name) {
             return $this->selected_filter_name;
         }
-        /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
-        if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
+        /** @var RootModuleConfiguration */
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
+        if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
             return null;
         }
 

@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 /**

@@ -9,7 +9,7 @@ use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
-use PoP\Root\Component\ApplicationEvents;
+use PoP\Root\Module\ApplicationEvents;
 
 class BootAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
 {

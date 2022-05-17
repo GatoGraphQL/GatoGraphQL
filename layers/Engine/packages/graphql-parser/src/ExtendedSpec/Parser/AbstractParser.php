@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
-use PoP\GraphQLParser\Component;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
@@ -50,9 +50,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableComposableDirectives()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableComposableDirectives()) {
             return $directives;
         }
 
@@ -286,9 +286,9 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $fragments,
         );
 
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableResolvedFieldVariableReferences()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableResolvedFieldVariableReferences()) {
             $this->replaceResolvedFieldVariableReferences($document);
         }
 

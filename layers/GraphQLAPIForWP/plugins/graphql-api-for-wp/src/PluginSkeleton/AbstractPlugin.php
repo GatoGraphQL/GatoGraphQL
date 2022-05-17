@@ -116,55 +116,55 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function initialize(): void
     {
-        $this->initializeComponentClasses();
+        $this->initializeModuleClasses();
     }
 
     /**
-     * Initialize Plugin's components
+     * Initialize Plugin's modules
      */
-    protected function initializeComponentClasses(): void
+    protected function initializeModuleClasses(): void
     {
         // Initialize the containers
-        $componentClasses = $this->getComponentClassesToInitialize();
-        App::getAppLoader()->addComponentClassesToInitialize($componentClasses);
+        $moduleClasses = $this->getModuleClassesToInitialize();
+        App::getAppLoader()->addModuleClassesToInitialize($moduleClasses);
     }
 
     /**
      * After initialized, and before booting,
-     * allow the components to inject their own configuration
+     * allow the modules to inject their own configuration
      */
     public function configureComponents(): void
     {
-        // Set the plugin folder on the plugin's Component
+        // Set the plugin folder on the plugin's Module
         $pluginFolder = dirname($this->pluginFile);
-        $this->getPluginComponent()->setPluginFolder($pluginFolder);
+        $this->getPluginModule()->setPluginFolder($pluginFolder);
     }
 
     /**
-     * Plugin's Component
+     * Plugin's Module
      */
-    protected function getPluginComponent(): PluginComponentInterface
+    protected function getPluginModule(): PluginModuleInterface
     {
-        /** @var PluginComponentInterface */
-        return App::getComponent($this->getComponentClass());
+        /** @var PluginModuleInterface */
+        return App::getModule($this->getModuleClass());
     }
 
     /**
-     * Package's Component class, of type PluginComponentInterface.
-     * By standard, it is "NamespaceOwner\Project\Component::class"
+     * Package's Module class, of type PluginModuleInterface.
+     * By standard, it is "NamespaceOwner\Project\Module::class"
      */
-    protected function getComponentClass(): string
+    protected function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        return $classNamespace . '\\Component';
+        return $classNamespace . '\\Module';
     }
 
     /**
-     * Add Component classes to be initialized
+     * Add Module classes to be initialized
      *
-     * @return string[] List of `Component` class to initialize
+     * @return string[] List of `Module` class to initialize
      */
-    public function getComponentClassesToInitialize(): array
+    public function getModuleClassesToInitialize(): array
     {
         return [];
     }
@@ -176,16 +176,16 @@ abstract class AbstractPlugin implements PluginInterface
     {
         // Configure the plugin. This defines hooks to set environment variables,
         // so must be executed before those hooks are triggered for first time
-        // (in ComponentConfiguration classes)
+        // (in ModuleConfiguration classes)
         $this->callPluginInitializationConfiguration();
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()->addComponentClassConfiguration(
-            $this->getComponentClassConfiguration()
+        App::getAppLoader()->addModuleClassConfiguration(
+            $this->getModuleClassConfiguration()
         );
-        App::getAppLoader()->addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
+        App::getAppLoader()->addSchemaModuleClassesToSkip(
+            $this->getSchemaModuleClassesToSkip()
         );
     }
 
@@ -203,21 +203,21 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
         return [];
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    abstract protected function getSchemaComponentClassesToSkip(): array;
+    abstract protected function getSchemaModuleClassesToSkip(): array;
 
     /**
      * Remove the CPTs from the DB

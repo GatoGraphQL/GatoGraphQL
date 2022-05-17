@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\Categories\Component;
-use PoPCMSSchema\Categories\ComponentConfiguration;
+use PoPCMSSchema\Categories\Module;
+use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class CategoryPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
@@ -23,15 +23,15 @@ class CategoryPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
 
     protected function getDefaultLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getCategoryListDefaultLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCategoryListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getCategoryListMaxLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCategoryListMaxLimit();
     }
 }

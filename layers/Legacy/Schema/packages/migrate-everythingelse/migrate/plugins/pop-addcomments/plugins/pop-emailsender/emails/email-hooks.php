@@ -2,7 +2,7 @@
 define('POP_EMAIL_ADDEDCOMMENT', 'added-comment');
 
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 

@@ -10,8 +10,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor as SchemaCommonsFilterInputProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
-use PoPCMSSchema\Users\Component;
-use PoPCMSSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\Module;
+use PoPCMSSchema\Users\ModuleConfiguration;
 use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
 class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
@@ -67,9 +67,9 @@ class UserByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTyp
     public function getAdminInputFieldNames(): array
     {
         $adminInputFieldNames = parent::getAdminInputFieldNames();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserEmailAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
             $adminInputFieldNames[] = 'email';
         }
         return $adminInputFieldNames;

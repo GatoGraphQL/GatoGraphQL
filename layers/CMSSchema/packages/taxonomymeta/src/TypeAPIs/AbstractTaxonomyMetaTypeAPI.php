@@ -7,8 +7,8 @@ namespace PoPCMSSchema\TaxonomyMeta\TypeAPIs;
 use PoP\Root\App;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
-use PoPCMSSchema\TaxonomyMeta\Component;
-use PoPCMSSchema\TaxonomyMeta\ComponentConfiguration;
+use PoPCMSSchema\TaxonomyMeta\Module;
+use PoPCMSSchema\TaxonomyMeta\ModuleConfiguration;
 
 abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implements TaxonomyMetaTypeAPIInterface
 {
@@ -34,15 +34,15 @@ abstract class AbstractTaxonomyMetaTypeAPI extends AbstractMetaTypeAPI implement
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getTaxonomyMetaEntries();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTaxonomyMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getTaxonomyMetaBehavior();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTaxonomyMetaBehavior();
     }
 
     /**

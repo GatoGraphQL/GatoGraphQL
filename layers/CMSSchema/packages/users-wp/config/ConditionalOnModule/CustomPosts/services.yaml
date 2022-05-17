@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\TypeAPIs\CustomPostUserTypeAPIInterface:
+        class: \PoPCMSSchema\UsersWP\ConditionalOnModule\CustomPosts\TypeAPIs\CustomPostUserTypeAPI
+
+    PoPCMSSchema\UsersWP\ConditionalOnModule\CustomPosts\LooseContracts\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/LooseContracts/*'
+
+    PoPCMSSchema\UsersWP\ConditionalOnModule\CustomPosts\Hooks\:
+        resource: '../../../src/ConditionalOnModule/CustomPosts/Hooks/*'

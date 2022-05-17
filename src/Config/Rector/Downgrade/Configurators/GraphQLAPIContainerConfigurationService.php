@@ -19,9 +19,9 @@ class GraphQLAPIContainerConfigurationService extends AbstractMainPluginDowngrad
                 // The GraphQL API plugin does not require the REST package
                 // So ignore all code depending on it, or it throws error:
                 //   "Could not process
-                //   "vendor/pop-schema/pages/src/ConditionalOnComponent/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
+                //   "vendor/pop-schema/pages/src/ConditionalOnModule/RESTAPI/RouteModuleProcessors/EntryRouteModuleProcessor.php" file, due to:
                 //   "Analyze error: "Class PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor not found."
-                '*/ConditionalOnComponent/RESTAPI/*',
+                '*/ConditionalOnModule/RESTAPI/*',
 
                 // This library is used for testing the source; it is added under "require" so it must be excluded
                 $this->pluginDir . '/vendor/fakerphp/faker/*',

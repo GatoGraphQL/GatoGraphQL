@@ -9,8 +9,8 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\HookNames;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPCMSSchema\SchemaCommons\Component;
-use PoPCMSSchema\SchemaCommons\ComponentConfiguration;
+use PoPCMSSchema\SchemaCommons\Module;
+use PoPCMSSchema\SchemaCommons\ModuleConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -50,9 +50,9 @@ class RoutingHookSet extends AbstractHookSet
      */
     public function maybeOverrideURIRoute(string $route): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->overrideRequestURI()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->overrideRequestURI()) {
             return $route;
         }
 

@@ -697,27 +697,27 @@ class PoP_ResourceLoaderProcessorUtils {
         $engine = EngineFacade::getInstance();
         $engineState = App::getEngineState();
         // After setting the new $vars properties, we can obtain the entry module
-        $entryModule = $engine->getEntryModule();
-        if ($options['use-engine-entrymodule-props'] ?? null) {
+        $entryComponent = $engine->getEntryComponent();
+        if ($options['use-engine-entrycomponent-props'] ?? null) {
             $entry_model_props = $engineState->model_props;
         } else {
             // To calculate all the resources below, we just need the static props.
             // Functions below should NOT rely on mutableonrequest props, or otherwise 2 posts may produce different resources,
             // and then visiting the 2nd post will not have its needed resource loaded
-            $entry_model_props = $engine->getModelPropsModuletree($entryModule);
+            $entry_model_props = $engine->getModelPropsModuletree($entryComponent);
         }
 
         // We are given a toplevel. Iterate through all the pageSections, and obtain their resources
         $methods = array();
-        $entry_processor = $moduleprocessor_manager->getProcessor($entryModule);
+        $entry_processor = $moduleprocessor_manager->getProcessor($entryComponent);
         $entry_processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($entry_processor);
 
         // Get the Handlebars list of resources needed for that pageSection
-        $templateResources = $entry_processor->getTemplateResourcesMergedmoduletree($entryModule, $entry_model_props);
+        $templateResources = $entry_processor->getTemplateResourcesMergedmoduletree($entryComponent, $entry_model_props);
 
         // We also need to get the dynamic-templates and save it on the vars cache.
         // It will be needed from there when doing `function isDefer(array $resource, $model_instance_id)`
-        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryModule, $entry_model_props)) {
+        if ($dynamic_template_resources = $entry_processorresourcedecorator->getDynamicTemplateResourcesMergedmoduletree($entryComponent, $entry_model_props)) {
             $memorymanager = TransientCacheManagerFacade::getInstance();
             $memorymanager->storeComponentModelCache($model_instance_id, POP_MEMORYTYPE_DYNAMICTEMPLATERESOURCES, $dynamic_template_resources);
         }
@@ -727,24 +727,24 @@ class PoP_ResourceLoaderProcessorUtils {
         // Comment Leo 21/11/2017: when switching from all methods to critical/noncritical ones, I dropped the array_values() out from $methods,
         // and added it when calculating $(non)critical_methods
         $loadingSite = self::isLoadingSite($modulefilter);
-        $methods = self::getJsmethodsFromModule($loadingSite, $entryModule, $entry_model_props);
+        $methods = self::getJsmethodsFromModule($loadingSite, $entryComponent, $entry_model_props);
         $critical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_CRITICAL]);
         $noncritical_methods = array_values($methods[POP_PROGRESSIVEBOOTING_NONCRITICAL]);
 
         // Get all the resources the module is dependent on. Eg: inline CSS styles
-        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($entry_processorresourcedecorator->getModulesResources($entryModule, $entry_model_props)))));
-        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedmoduletree($entryModule, $entry_model_props);
+        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($entry_processorresourcedecorator->getModulesResources($entryComponent, $entry_model_props)))));
+        $modules_resources = $entry_processorresourcedecorator->getResourcesMergedmoduletree($entryComponent, $entry_model_props);
 
         // Finally, merge all the template and JS resources together
         return self::calculateResources($modulefilter, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);
     }
 
-    public static function getJsmethodsFromModule($addInitial, $entryModule, $entry_model_props) {
+    public static function getJsmethodsFromModule($addInitial, $entryComponent, $entry_model_props) {
 
         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-        $processor = $moduleprocessor_manager->getProcessor($entryModule);
-        $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryModule, $entry_model_props);
-        $blockJSMethods = $processor->getJsmethodsModuletree($entryModule, $entry_model_props);
+        $processor = $moduleprocessor_manager->getProcessor($entryComponent);
+        $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
+        $blockJSMethods = $processor->getJsmethodsModuletree($entryComponent, $entry_model_props);
         return self::getJsmethods($pageSectionJSMethods, $blockJSMethods, $addInitial);
     }
 

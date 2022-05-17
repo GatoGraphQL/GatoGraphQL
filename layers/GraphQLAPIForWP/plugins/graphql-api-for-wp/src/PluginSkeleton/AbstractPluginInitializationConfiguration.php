@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\Root\Component\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -57,7 +57,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $class,
                 $envVariable
             );
@@ -112,7 +112,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $mapping['class'],
                 $envVariable
             );
@@ -154,7 +154,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $mapping['class'],
                 $envVariable
             );
@@ -177,22 +177,22 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
         return array_merge_recursive(
-            $this->getPredefinedComponentClassConfiguration(),
-            $this->getBasedOnModuleEnabledStateComponentClassConfiguration(),
+            $this->getPredefinedModuleClassConfiguration(),
+            $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
         );
     }
 
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedComponentClassConfiguration(): array
+    protected function getPredefinedModuleClassConfiguration(): array
     {
         return [];
     }
@@ -200,39 +200,39 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @return array<string, array> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
-    protected function getBasedOnModuleEnabledStateComponentClassConfiguration(): array
+    protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $componentClassConfiguration = [];
+        $moduleClassConfiguration = [];
 
-        $moduleToComponentClassConfigurationMappings = $this->getModuleToComponentClassConfigurationMapping();
-        foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
-            // Copy the state (enabled/disabled) to the component
+        $moduleToModuleClassConfigurationMappings = $this->getModuleToModuleClassConfigurationMapping();
+        foreach ($moduleToModuleClassConfigurationMappings as $mapping) {
+            // Copy the state (enabled/disabled) to the module configuration
             $value = $moduleRegistry->isModuleEnabled($mapping['module']);
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             $callback = $mapping['callback'] ?? null;
             if ($callback !== null) {
                 $value = $callback($value);
             }
-            $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
+            $moduleClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
         }
 
-        return $componentClassConfiguration;
+        return $moduleClassConfiguration;
     }
 
-    protected function getModuleToComponentClassConfigurationMapping(): array
+    protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [];
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaComponentClassesToSkip(): array
+    public function getSchemaModuleClassesToSkip(): array
     {
         // If doing ?behavior=unrestricted, always enable all schema-type modules
         $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
@@ -242,25 +242,25 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
-        // Component classes are skipped if the module is disabled
+        // Module classes are skipped if the module is disabled
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $skipSchemaModuleComponentClasses = array_filter(
-            $this->getModuleComponentClassesToSkipIfDisabled(),
+        $skipSchemaModuleClassesPerModule = array_filter(
+            $this->getModuleClassesToSkipIfModuleDisabled(),
             fn ($module) => !$moduleRegistry->isModuleEnabled($module),
             ARRAY_FILTER_USE_KEY
         );
         return GeneralUtils::arrayFlatten(array_values(
-            $skipSchemaModuleComponentClasses
+            $skipSchemaModuleClassesPerModule
         ));
     }
 
     /**
      * Provide the list of modules to check if they are enabled and,
-     * if they are not, what component classes must skip initialization
+     * if they are not, what module classes must skip initialization
      *
      * @return array<string,string[]>
      */
-    protected function getModuleComponentClassesToSkipIfDisabled(): array
+    protected function getModuleClassesToSkipIfModuleDisabled(): array
     {
         return [];
     }

@@ -39,14 +39,14 @@ use PoP\Root\AbstractTestCase;
 abstract class AbstractResolvedFieldVariableReferencesTest extends AbstractTestCase
 {
     /**
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
-        $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = true;
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES] = static::enabled();
-        return $componentClassConfiguration;
+        $moduleClassConfiguration = parent::getModuleClassConfiguration();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = true;
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_RESOLVED_FIELD_VARIABLE_REFERENCES] = static::enabled();
+        return $moduleClassConfiguration;
     }
 
     abstract protected static function enabled(): bool;

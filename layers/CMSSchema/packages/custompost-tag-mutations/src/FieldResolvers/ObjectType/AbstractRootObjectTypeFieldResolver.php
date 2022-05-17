@@ -10,8 +10,8 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\Engine\Component as EngineComponent;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\Module as EngineModule;
+use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
@@ -27,9 +27,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldNamesToResolve(): array
     {
-        /** @var EngineComponentConfiguration */
-        $componentConfiguration = App::getComponent(EngineComponent::class)->getConfiguration();
-        if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
+        /** @var EngineModuleConfiguration */
+        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
         return [

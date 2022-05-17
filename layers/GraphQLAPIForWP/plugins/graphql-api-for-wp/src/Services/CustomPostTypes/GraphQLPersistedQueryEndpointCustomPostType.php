@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\CustomPostTypes;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Component;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Registries\BlockRegistryInterface;
 use GraphQLAPI\GraphQLAPI\Registries\EndpointAnnotatorRegistryInterface;
@@ -83,9 +83,9 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
      */
     protected function getSlugBase(): ?string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getPersistedQuerySlugBase();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPersistedQuerySlugBase();
     }
 
     /**

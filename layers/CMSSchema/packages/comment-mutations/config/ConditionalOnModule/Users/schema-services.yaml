@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Users/FieldResolvers/*'
+
+    PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'
+

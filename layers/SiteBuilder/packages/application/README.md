@@ -28,8 +28,8 @@ The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP),
 Initialize the component:
 
 ``` php
-\PoP\Root\App::stockAndInitializeComponentClasses([([
-    \PoP\Application\Component::class,
+\PoP\Root\App::stockAndInitializeModuleClasses([([
+    \PoP\Application\Module::class,
 ]);
 ```
 

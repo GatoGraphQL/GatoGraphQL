@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
@@ -53,7 +53,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Get the entry module based on the application configuration and the nature
-        $module = $this->getEntryModule();
+        $module = $this->getEntryComponent();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = App::getState('dataoutputitems');
@@ -78,9 +78,9 @@ class Engine extends UpstreamEngine implements EngineInterface
         $ret = array();
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
-        /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both
         $datasourceselector = App::getState('datasourceselector');

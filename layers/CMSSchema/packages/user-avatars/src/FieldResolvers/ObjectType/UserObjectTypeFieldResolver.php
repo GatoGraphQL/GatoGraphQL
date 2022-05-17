@@ -10,8 +10,8 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPCMSSchema\UserAvatars\Component;
-use PoPCMSSchema\UserAvatars\ComponentConfiguration;
+use PoPCMSSchema\UserAvatars\Module;
+use PoPCMSSchema\UserAvatars\ModuleConfiguration;
 use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
@@ -100,10 +100,10 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
+            ['avatar' => 'size'] => $moduleConfiguration->getUserAvatarDefaultSize(),
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -125,12 +125,12 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $user = $object;
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $fieldArgs['size'] ?? $componentConfiguration->getUserAvatarDefaultSize();
+                $avatarSize = $fieldArgs['size'] ?? $moduleConfiguration->getUserAvatarDefaultSize();
                 $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;

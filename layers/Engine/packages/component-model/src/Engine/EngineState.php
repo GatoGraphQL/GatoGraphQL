@@ -50,7 +50,7 @@ class EngineState
          * @var array<string, mixed>
          */
         public array $outputData = [],
-        public ?array $entryModule = null,
+        public ?array $entryComponent = null,
         /**
          * `mixed` could be string[] for "direct", or array<string,string[]> for "conditional"
          * @var array<string,array<string,mixed>>

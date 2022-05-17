@@ -11,7 +11,7 @@ interface EngineInterface
 {
     public function getOutputData(): array;
     public function addBackgroundUrl(string $url, array $targets): void;
-    public function getEntryModule(): array;
+    public function getEntryComponent(): array;
     public function getExtraRoutes(): array;
     public function listExtraRouteVars(): array;
     public function generateDataAndPrepareResponse(): void;

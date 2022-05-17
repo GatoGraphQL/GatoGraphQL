@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 
 use PoP\Root\App;
-use PoPAPI\API\Component;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\Module;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\Schema\SchemaDefinition;
 
 /**
@@ -43,8 +43,8 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
      */
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 }

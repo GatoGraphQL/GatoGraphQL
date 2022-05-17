@@ -14,8 +14,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
-use PoPCMSSchema\Users\Component;
-use PoPCMSSchema\Users\ComponentConfiguration;
+use PoPCMSSchema\Users\Module;
+use PoPCMSSchema\Users\ModuleConfiguration;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
@@ -102,9 +102,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserEmailAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
             $adminFieldNames[] = 'email';
         }
         return $adminFieldNames;

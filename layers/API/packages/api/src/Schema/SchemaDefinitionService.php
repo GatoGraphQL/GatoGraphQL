@@ -20,8 +20,8 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoPAPI\API\Cache\CacheTypes;
-use PoPAPI\API\Component;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\Module;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoPAPI\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
 use PoPAPI\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
@@ -87,9 +87,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($useCache = $moduleConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -167,7 +167,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getSchemaExtensions();
 
             // Sort the elements in the schema alphabetically
-            if ($componentConfiguration->sortFullSchemaAlphabetically()) {
+            if ($moduleConfiguration->sortFullSchemaAlphabetically()) {
                 $this->sortFullSchemaAlphabetically($schemaDefinition);
             }
 
@@ -315,9 +315,9 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
     private function addDirectiveSchemaDefinition(

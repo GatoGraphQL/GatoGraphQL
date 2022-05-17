@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\Comments\Component;
-use PoPCMSSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\Module;
+use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class RootCommentPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
@@ -23,15 +23,15 @@ class RootCommentPaginationInputObjectTypeResolver extends PaginationInputObject
 
     protected function getDefaultLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getRootCommentListDefaultLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getRootCommentListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getCommentListMaxLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentListMaxLimit();
     }
 }

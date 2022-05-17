@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPAPI\API\State;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -44,9 +44,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
     }
 
@@ -74,7 +74,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
 
         // Do not print the entry module
-        $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
+        $state['actions'][] = Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT;
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;

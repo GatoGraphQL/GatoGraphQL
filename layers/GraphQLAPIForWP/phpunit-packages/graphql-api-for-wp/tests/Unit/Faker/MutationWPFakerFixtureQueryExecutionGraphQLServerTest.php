@@ -19,16 +19,16 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
-                \PoPWPSchema\Users\Component::class,
-                \PoPWPSchema\Posts\Component::class,
-                \PoPWPSchema\Pages\Component::class,
-                \PoPWPSchema\Comments\Component::class,
-                \PoPCMSSchema\CommentMutationsWP\Component::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPWPSchema\Posts\Module::class,
+                \PoPWPSchema\Pages\Module::class,
+                \PoPWPSchema\Comments\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
             ]
         ];
     }
@@ -36,15 +36,15 @@ class MutationWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFa
     /**
      * @return array<string,mixed>
      */
-    protected static function getGraphQLServerComponentClassConfiguration(): array
+    protected static function getGraphQLServerModuleClassConfiguration(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
-                \PoPCMSSchema\Pages\Component::class => [
+                \PoPCMSSchema\Pages\Module::class => [
                     \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
                 ],
-                \PoPCMSSchema\CommentMutations\Component::class => [
+                \PoPCMSSchema\CommentMutations\Module::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
             ]

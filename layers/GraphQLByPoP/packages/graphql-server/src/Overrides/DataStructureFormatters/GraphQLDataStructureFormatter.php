@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Overrides\DataStructureFormatters;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\Tokens;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter as UpstreamGraphQLDataStructureFormatter;
 
@@ -28,9 +28,9 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     protected function addTopLevelExtensionsEntryToResponse(): bool
     {
         if (App::getState('standard-graphql')) {
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            return $componentConfiguration->enableProactiveFeedback();
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            return $moduleConfiguration->enableProactiveFeedback();
         }
         return parent::addTopLevelExtensionsEntryToResponse();
     }

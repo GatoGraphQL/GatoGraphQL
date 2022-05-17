@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLEndpointForWP\Component;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\Module;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPAPI\GraphQLAPI\Component as GraphQLAPIComponent;
+use PoPAPI\GraphQLAPI\Module as GraphQLAPIModule;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
@@ -41,9 +41,9 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     public function getEndpoint(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getGraphQLAPIEndpoint();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGraphQLAPIEndpoint();
     }
 
     /**
@@ -51,11 +51,11 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function isGraphQLAPIEnabled(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return
-            class_exists(GraphQLAPIComponent::class)
-            && App::getComponent(GraphQLAPIComponent::class)->isEnabled()
-            && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
+            class_exists(GraphQLAPIModule::class)
+            && App::getModule(GraphQLAPIModule::class)->isEnabled()
+            && !$moduleConfiguration->isGraphQLAPIEndpointDisabled();
     }
 }

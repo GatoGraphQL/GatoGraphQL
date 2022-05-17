@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PagesWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Pages\Component;
-use PoPCMSSchema\Pages\ComponentConfiguration;
+use PoPCMSSchema\Pages\Module;
+use PoPCMSSchema\Pages\ModuleConfiguration;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -139,9 +139,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
      */
     protected function getCustomPostListMaxLimit(): int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getPageListMaxLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPageListMaxLimit();
     }
 
     public function getPages(array $query, array $options = []): array
@@ -152,9 +152,9 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         if ($paths = $query['paths'] ?? []) {
             $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
-            /** @var ComponentModelComponentConfiguration */
-            $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-            $enableAdminSchema = $componentConfiguration->enableAdminSchema();
+            /** @var ComponentModelModuleConfiguration */
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+            $enableAdminSchema = $moduleConfiguration->enableAdminSchema();
             foreach ($paths as $path) {
                 /** @var WP_Post|null */
                 $page = \get_page_by_path($path);

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 class PoP_ResourceLoader_ServerUtils
 {

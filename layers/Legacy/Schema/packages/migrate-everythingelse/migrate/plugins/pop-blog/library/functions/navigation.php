@@ -1,8 +1,8 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 /**
  * Implementation of the icons
@@ -20,7 +20,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-asterisk';
             break;
 
-        case UsersComponentConfiguration::getUsersRoute():
+        case UsersModuleConfiguration::getUsersRoute():
             $fontawesome = 'fa-users';
             break;
 
@@ -29,7 +29,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-comments';
             break;
 
-        case PostTagsComponentConfiguration::getPostTagsRoute():
+        case PostTagsModuleConfiguration::getPostTagsRoute():
             $fontawesome = 'fa-hashtag';
             break;
 
@@ -41,7 +41,7 @@ function popblogRouteIcon($icon, $route, $html = true)
             $fontawesome = 'fa-pencil-square';
             break;
 
-        case PostsComponentConfiguration::getPostsRoute():
+        case PostsModuleConfiguration::getPostsRoute():
             $fontawesome = 'fa-circle';
             break;
     }
@@ -56,13 +56,13 @@ function popblogNavigationRouteTitle($title, $route)
         POP_BLOG_ROUTE_SEARCHCONTENT => TranslationAPIFacade::getInstance()->__('Search content', 'pop-blog'),
         POP_BLOG_ROUTE_SEARCHUSERS => TranslationAPIFacade::getInstance()->__('Search users', 'pop-blog'),
         POP_BLOG_ROUTE_CONTENT => TranslationAPIFacade::getInstance()->__('Content', 'pop-blog'),
-        UsersComponentConfiguration::getUsersRoute() => TranslationAPIFacade::getInstance()->__('Users', 'pop-blog'),
+        UsersModuleConfiguration::getUsersRoute() => TranslationAPIFacade::getInstance()->__('Users', 'pop-blog'),
         POP_BLOG_ROUTE_COMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-blog'),
         POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => TranslationAPIFacade::getInstance()->__('Add Comment', 'pop-addcomments'),
-        PostTagsComponentConfiguration::getPostTagsRoute() => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),
+        PostTagsModuleConfiguration::getPostTagsRoute() => TranslationAPIFacade::getInstance()->__('Tags', 'pop-blog'),
         POP_USERPLATFORM_ROUTE_EDITPROFILE => TranslationAPIFacade::getInstance()->__('Edit Profile', 'pop-userplatform'),
         POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE => TranslationAPIFacade::getInstance()->__('Change Password', 'pop-userplatform'),
-        PostsComponentConfiguration::getPostsRoute() => TranslationAPIFacade::getInstance()->__('Posts', 'pop-application-processors'),
+        PostsModuleConfiguration::getPostsRoute() => TranslationAPIFacade::getInstance()->__('Posts', 'pop-application-processors'),
     ];
     return $titles[$route] ?? $title;
 }

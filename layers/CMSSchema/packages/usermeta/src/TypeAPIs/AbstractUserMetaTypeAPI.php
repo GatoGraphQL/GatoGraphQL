@@ -7,8 +7,8 @@ namespace PoPCMSSchema\UserMeta\TypeAPIs;
 use PoP\Root\App;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
-use PoPCMSSchema\UserMeta\Component;
-use PoPCMSSchema\UserMeta\ComponentConfiguration;
+use PoPCMSSchema\UserMeta\Module;
+use PoPCMSSchema\UserMeta\ModuleConfiguration;
 
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {
@@ -34,15 +34,15 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getUserMetaEntries();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getUserMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getUserMetaBehavior();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getUserMetaBehavior();
     }
 
     /**

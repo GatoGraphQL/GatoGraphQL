@@ -7,10 +7,10 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
-use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\Root\Component\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
@@ -50,8 +50,8 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
                 return;
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                AccessControlComponent::class,
+            $hookName = ModuleConfigurationHelpers::getHookName(
+                AccessControlModule::class,
                 AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE
             );
             \add_filter(

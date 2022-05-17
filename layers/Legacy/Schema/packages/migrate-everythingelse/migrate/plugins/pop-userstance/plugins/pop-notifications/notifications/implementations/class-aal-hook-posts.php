@@ -1,7 +1,7 @@
 <?php
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 
 if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly

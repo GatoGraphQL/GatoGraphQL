@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Component;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 
 /**
@@ -61,10 +61,10 @@ abstract class AbstractControlBlock extends AbstractBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
         $fieldTypeContent = $directiveContent = '';
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$this->disableFields()) {
-            $fieldTypeContent = $componentConfiguration->getEmptyLabel();
+            $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];
             if ($typeFields) {
                 $typeFieldsForPrint = $this->getTypeFieldsForPrint($typeFields);
@@ -72,7 +72,7 @@ abstract class AbstractControlBlock extends AbstractBlock
                  * If $groupFieldsUnderTypeForPrint is true, combine all types under their shared typeName
                  * If $groupFieldsUnderTypeForPrint is false, replace namespacedTypeName for typeName and "." for "/"
                  * */
-                $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
+                $groupFieldsUnderTypeForPrint = $moduleConfiguration->groupFieldsUnderTypeForPrint();
                 if ($groupFieldsUnderTypeForPrint) {
                     /**
                      * Cast object so PHPStan doesn't throw error
@@ -107,7 +107,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             }
         }
         if (!$this->disableDirectives()) {
-            $directiveContent = $componentConfiguration->getEmptyLabel();
+            $directiveContent = $moduleConfiguration->getEmptyLabel();
             $directives = $attributes[self::ATTRIBUTE_NAME_DIRECTIVES] ?? [];
             if ($directives) {
                 // // Notice we are adding the "@" symbol for GraphQL directives

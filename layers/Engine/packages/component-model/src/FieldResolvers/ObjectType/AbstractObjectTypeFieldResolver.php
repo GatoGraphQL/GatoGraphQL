@@ -8,8 +8,8 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -421,9 +421,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         }
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableAdminSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
@@ -783,9 +783,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldName,
         array $fieldArgs,
     ): bool {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->validateFieldTypeResponseWithSchemaDefinition();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->validateFieldTypeResponseWithSchemaDefinition();
     }
 
     /**
@@ -871,9 +871,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
      */
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *
@@ -1267,9 +1267,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
             try {
                 return $mutationResolver->executeMutation($mutationFieldArgs);
             } catch (Exception $e) {
-                /** @var ComponentConfiguration */
-                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                /** @var ModuleConfiguration */
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
@@ -1287,9 +1287,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     );
                 }
                 $sendExceptionToClient = $e instanceof AbstractClientException
-                    || $componentConfiguration->sendExceptionErrorMessages();
+                    || $moduleConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionToClient
-                    ? ($componentConfiguration->sendExceptionTraces()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,

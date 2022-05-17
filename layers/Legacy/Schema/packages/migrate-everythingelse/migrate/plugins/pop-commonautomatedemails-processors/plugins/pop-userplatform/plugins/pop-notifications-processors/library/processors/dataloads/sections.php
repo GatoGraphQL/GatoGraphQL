@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
@@ -97,7 +97,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads extends PoP_Commo
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Return the notifications from within the last 24 hs
-                $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
+                $yesterday = strtotime("-1 day", ComponentModelModuleInfo::get('time'));
                 $ret['hist_time'] = $yesterday;
                 break;
         }

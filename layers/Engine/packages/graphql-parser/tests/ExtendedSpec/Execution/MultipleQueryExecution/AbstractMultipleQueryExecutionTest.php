@@ -21,13 +21,13 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
 {
     /**
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
-        $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
-        return $componentClassConfiguration;
+        $moduleClassConfiguration = parent::getModuleClassConfiguration();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
+        return $moduleClassConfiguration;
     }
 
     abstract protected static function enabled(): bool;

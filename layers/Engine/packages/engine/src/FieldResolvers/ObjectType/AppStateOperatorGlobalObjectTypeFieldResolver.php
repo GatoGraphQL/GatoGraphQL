@@ -12,8 +12,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Engine\Component;
-use PoP\Engine\ComponentConfiguration;
+use PoP\Engine\Module;
+use PoP\Engine\ModuleConfiguration;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\Root\App;
@@ -50,9 +50,9 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     public function isServiceEnabled(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->enableQueryingAppStateFields();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->enableQueryingAppStateFields();
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

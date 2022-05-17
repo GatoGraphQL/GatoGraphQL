@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -48,9 +48,9 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
 
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
-            /** @var ComponentModelComponentInfo */
-            $componentInfo = App::getComponent(ComponentModelComponent::class)->getInfo();
-            $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
+            /** @var ComponentModelModuleInfo */
+            $moduleInfo = App::getModule(ComponentModelModule::class)->getInfo();
+            $ret[GD_URLPARAM_TIMESTAMP] = $moduleInfo->getTime();
         }
 
         // If it is lazy load, no need to calculate pagenumber / stop-fetching / etc

@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -508,9 +508,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $options
                 );
             } catch (Exception $e) {
-                /** @var ComponentConfiguration */
-                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                /** @var ModuleConfiguration */
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
@@ -528,9 +528,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     );
                 }
                 $sendExceptionErrorMessages = $e instanceof AbstractClientException
-                    || $componentConfiguration->sendExceptionErrorMessages();
+                    || $moduleConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionErrorMessages
-                    ? ($componentConfiguration->sendExceptionTraces()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E3A,

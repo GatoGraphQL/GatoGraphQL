@@ -7,7 +7,7 @@ namespace PoP\Root\App;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoaderInterface;
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -15,7 +15,7 @@ use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
@@ -37,7 +37,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         RootApp::initialize(
@@ -46,7 +46,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
             $request,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
-            $componentManager,
+            $moduleManager,
             $appStateManager,
         );
     }
@@ -86,9 +86,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         return RootApp::getSystemContainerBuilderFactory();
     }
 
-    public static function getComponentManager(): ComponentManagerInterface
+    public static function getModuleManager(): ModuleManagerInterface
     {
-        return RootApp::getComponentManager();
+        return RootApp::getModuleManager();
     }
 
     public static function getAppStateManager(): AppStateManagerInterface
@@ -102,15 +102,15 @@ abstract class AbstractRootAppProxy implements RootAppInterface
     }
 
     /**
-     * Store Component classes to be initialized, and
+     * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
-    public static function stockAndInitializeComponentClasses(
-        array $componentClasses
+    public static function stockAndInitializeModuleClasses(
+        array $moduleClasses
     ): void {
-        RootApp::stockAndInitializeComponentClasses($componentClasses);
+        RootApp::stockAndInitializeModuleClasses($moduleClasses);
     }
 
     /**
@@ -134,9 +134,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getComponent(string $componentClass): ComponentInterface
+    final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return RootApp::getComponent($componentClass);
+        return RootApp::getModule($moduleClass);
     }
 
     /**

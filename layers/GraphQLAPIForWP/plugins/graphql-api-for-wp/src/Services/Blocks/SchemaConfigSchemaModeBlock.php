@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Component;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\Module;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use PoP\AccessControl\Schema\SchemaModes;
 
@@ -46,12 +46,12 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
             SchemaModes::PUBLIC_SCHEMA_MODE => \__('Public', 'graphql-api'),
             SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
         ];
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Public/Private Schema Mode:', 'graphql-api'),
-            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $componentConfiguration->getSettingsValueLabel()
+            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT

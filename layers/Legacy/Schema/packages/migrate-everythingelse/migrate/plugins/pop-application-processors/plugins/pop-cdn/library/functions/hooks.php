@@ -1,5 +1,5 @@
 <?php
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
 
 class PoPThemeWassup_CDN_Hooks
@@ -21,7 +21,7 @@ class PoPThemeWassup_CDN_Hooks
             $routes = array_filter(
                 array(
                     POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
-                    PostsComponentConfiguration::getPostsRoute(),
+                    PostsModuleConfiguration::getPostsRoute(),
                 )
             );
         }

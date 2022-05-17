@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\FilterInputProcessors\FilterInputProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
 abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {

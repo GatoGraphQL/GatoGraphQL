@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeValues;
-use PoP\Root\Component\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 
 abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
@@ -15,7 +15,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
         return BlockAttributeNames::ENABLED_CONST;
     }
 
-    abstract public function getHookComponentClass(): string;
+    abstract public function getHookModuleClass(): string;
 
     abstract public function getHookEnvironmentClass(): string;
 
@@ -39,8 +39,8 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
                 return;
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
-            $hookName = ComponentConfigurationHelpers::getHookName(
-                $this->getHookComponentClass(),
+            $hookName = ModuleConfigurationHelpers::getHookName(
+                $this->getHookModuleClass(),
                 $this->getHookEnvironmentClass(),
             );
             \add_filter(

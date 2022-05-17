@@ -6,8 +6,8 @@ namespace PoPCMSSchema\MediaWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Media\Component;
-use PoPCMSSchema\Media\ComponentConfiguration;
+use PoPCMSSchema\Media\Module;
+use PoPCMSSchema\Media\ModuleConfiguration;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use WP_Post;
 
@@ -128,9 +128,9 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
      */
     protected function getCustomPostListMaxLimit(): int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getMediaListMaxLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getMediaListMaxLimit();
     }
 
     public function getMediaItems(array $query, array $options = []): array

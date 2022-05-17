@@ -1,19 +1,14 @@
 <?php
-$class = (new class() extends \PoP\Root\Component\AbstractComponent
+$class = (new class() extends \PoP\Root\Module\AbstractModule
 {
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [];
     }
 
-    /**
-     * Boot component
-     */
     public function beforeBoot(): void
     {
         parent::beforeBoot();
@@ -22,5 +17,5 @@ $class = (new class() extends \PoP\Root\Component\AbstractComponent
         require_once 'migrate/pop-engine-wp.php';
     }
 });
-\PoP\Root\StateManagers\ComponentManager::register(get_class($class));
+\PoP\Root\StateManagers\ModuleManager::register(get_class($class));
 $class::initialize();

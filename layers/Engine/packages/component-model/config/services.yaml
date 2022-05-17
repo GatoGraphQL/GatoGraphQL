@@ -23,8 +23,8 @@ services:
     PoP\ComponentModel\Engine\EngineInterface:
         class: \PoP\ComponentModel\Engine\Engine
 
-    PoP\ComponentModel\EntryModule\EntryModuleManagerInterface:
-        class: \PoP\ComponentModel\EntryModule\EntryModuleManager
+    PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface:
+        class: \PoP\ComponentModel\EntryComponent\EntryComponentManager
 
     PoP\ComponentModel\ObjectSerialization\ObjectSerializationManagerInterface:
         class: \PoP\ComponentModel\ObjectSerialization\ObjectSerializationManager

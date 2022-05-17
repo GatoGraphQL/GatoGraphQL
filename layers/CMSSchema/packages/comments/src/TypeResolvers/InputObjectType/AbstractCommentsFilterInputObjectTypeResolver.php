@@ -7,8 +7,8 @@ namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\Comments\Component;
-use PoPCMSSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\Module;
+use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\FilterInputProcessors\FilterInputProcessor;
@@ -80,9 +80,9 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
 
     protected function treatCommentStatusAsAdminData(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->treatCommentStatusAsAdminData();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->treatCommentStatusAsAdminData();
     }
 
     abstract protected function addParentInputFields(): bool;

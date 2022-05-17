@@ -6,7 +6,7 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Comments\ConditionalOnComponent\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\Facades\CommentTypeAPIFacade as UserCommentTypeAPIFacade;
 use PoPCMSSchema\Comments\Facades\CommentTypeAPIFacade;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
@@ -164,7 +164,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
-                        // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
+                        // TODO: Integrate with `CommentsModuleConfiguration::mustUserBeLoggedInToAddComment()`
                         $comment = $commentTypeAPI->getComment($notification->object_id);
                         $user_id = \PoP\Root\App::getState('current-user-id');
 

@@ -6,8 +6,8 @@ namespace PoP\ComponentModel\MutationResolverBridges;
 
 use Exception;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
@@ -106,12 +106,12 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $errorMessage = $e->getMessage();
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
-            /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-            if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                 // @todo: Implement for Log
             }
-            $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
+            $errorMessage = $moduleConfiguration->sendExceptionErrorMessages()
                 ? $e->getMessage()
                 : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;

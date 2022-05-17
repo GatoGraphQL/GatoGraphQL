@@ -24,14 +24,14 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
         return parent::getComponentSubmodule($module);
     }
 
-    public function useComponentConfiguration(array $module)
+    public function useModuleConfiguration(array $module)
     {
         switch ($module[1]) {
             case self::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 return false;
         }
 
-        return parent::useComponentConfiguration($module);
+        return parent::useModuleConfiguration($module);
     }
 }
 

@@ -12,8 +12,8 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\UserRoles\Component;
-use PoPCMSSchema\UserRoles\ComponentConfiguration;
+use PoPCMSSchema\UserRoles\Module;
+use PoPCMSSchema\UserRoles\ModuleConfiguration;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
@@ -70,14 +70,14 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserRoleAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roles';
             $adminFieldNames[] = 'hasRole';
             $adminFieldNames[] = 'hasAnyRole';
         }
-        if ($componentConfiguration->treatUserCapabilityAsAdminData()) {
+        if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
             $adminFieldNames[] = 'capabilities';
             $adminFieldNames[] = 'hasCapability';
             $adminFieldNames[] = 'hasAnyCapability';

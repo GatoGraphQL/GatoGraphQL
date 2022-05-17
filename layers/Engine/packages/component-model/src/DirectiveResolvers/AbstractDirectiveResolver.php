@@ -7,8 +7,8 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
@@ -972,9 +972,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     ]
                 );
             } catch (Exception $e) {
-                /** @var ComponentConfiguration */
-                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                /** @var ModuleConfiguration */
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
@@ -998,8 +998,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         }
                     }
                 }
-                $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
-                    ? ($componentConfiguration->sendExceptionTraces()
+                $feedbackItemResolution = $moduleConfiguration->sendExceptionErrorMessages()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11A,
@@ -1092,16 +1092,16 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $removeFieldIfDirectiveFailed = $moduleConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
         }
-        $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
+        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
@@ -1204,9 +1204,9 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *

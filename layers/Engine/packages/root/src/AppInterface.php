@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -12,7 +12,7 @@ use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
@@ -33,7 +33,7 @@ interface AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void;
 
@@ -51,20 +51,20 @@ interface AppInterface
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
-    public static function getComponentManager(): ComponentManagerInterface;
+    public static function getModuleManager(): ModuleManagerInterface;
 
     public static function getAppStateManager(): AppStateManagerInterface;
 
     public static function isHTTPRequest(): bool;
 
     /**
-     * Store Component classes to be initialized, and
+     * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
-    public static function stockAndInitializeComponentClasses(
-        array $componentClasses
+    public static function stockAndInitializeModuleClasses(
+        array $moduleClasses
     ): void;
 
     /**
@@ -82,7 +82,7 @@ interface AppInterface
      *
      * @throws ComponentNotExistsException
      */
-    public static function getComponent(string $componentClass): ComponentInterface;
+    public static function getModule(string $moduleClass): ModuleInterface;
 
     /**
      * Shortcut function.

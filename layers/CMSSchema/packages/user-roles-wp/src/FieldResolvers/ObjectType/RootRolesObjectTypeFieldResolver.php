@@ -12,8 +12,8 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\UserRoles\Component;
-use PoPCMSSchema\UserRoles\ComponentConfiguration;
+use PoPCMSSchema\UserRoles\Module;
+use PoPCMSSchema\UserRoles\ModuleConfiguration;
 use PoPCMSSchema\UserRoles\FieldResolvers\ObjectType\RolesObjectTypeFieldResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 
@@ -58,9 +58,9 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getAdminFieldNames(): array
     {
         $adminFieldNames = parent::getAdminFieldNames();
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->treatUserRoleAsAdminData()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roleNames';
         }
         return $adminFieldNames;

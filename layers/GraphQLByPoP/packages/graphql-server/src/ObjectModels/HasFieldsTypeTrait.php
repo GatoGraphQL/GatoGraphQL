@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
 use PoPAPI\API\Schema\SchemaDefinition;
 
@@ -31,9 +31,9 @@ trait HasFieldsTypeTrait
                 ]
             )
         );
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
             $this->getFieldsFromPath(
                 $fullSchemaDefinition,
@@ -44,7 +44,7 @@ trait HasFieldsTypeTrait
         }
 
         // Maybe sort fields and connections all together
-        if ($componentConfiguration->sortGraphQLSchemaAlphabetically()) {
+        if ($moduleConfiguration->sortGraphQLSchemaAlphabetically()) {
             uasort($this->fields, function (Field $a, Field $b): int {
                 return $a->getName() <=> $b->getName();
             });

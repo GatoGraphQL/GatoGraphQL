@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
@@ -37,7 +37,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
     {
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
-                return getRouteIcon(UsersComponentConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users', 'poptheme-wassup');
+                return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users', 'poptheme-wassup');
         }
 
         return parent::getTitle($module, $props);
@@ -47,7 +47,7 @@ class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_C
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         switch ($module[1]) {
             case self::MODULE_CAROUSELCONTROLS_USERS:
-                return RouteUtils::getRouteURL(UsersComponentConfiguration::getUsersRoute());
+                return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
         return parent::getTitleLink($module, $props);

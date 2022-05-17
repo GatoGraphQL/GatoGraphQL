@@ -29,14 +29,14 @@ abstract class AbstractTestCase extends TestCase
             static::getAppLoader(),
             static::getHookManager(),
         );
-        App::getAppLoader()->addComponentClassesToInitialize(static::getComponentClassesToInitialize());
-        App::getAppLoader()->initializeComponents($isDev);
+        App::getAppLoader()->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
+        App::getAppLoader()->initializeModules($isDev);
         App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()->addComponentClassConfiguration(
-            static::getComponentClassConfiguration()
+        App::getAppLoader()->addModuleClassConfiguration(
+            static::getModuleClassConfiguration()
         );
 
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
@@ -45,16 +45,16 @@ abstract class AbstractTestCase extends TestCase
         self::$container = App::getContainer();
 
         // Allow to modify the $_GET when testing
-        static::beforeBootApplicationComponents();
+        static::beforeBootApplicationModules();
 
         // Finish the initialization
-        App::getAppLoader()->bootApplicationComponents();
+        App::getAppLoader()->bootApplicationModules();
     }
 
     /**
      * Allow to modify the $_GET when testing.
      */
-    protected static function beforeBootApplicationComponents(): void
+    protected static function beforeBootApplicationModules(): void
     {
         // Do nothing
     }
@@ -72,31 +72,31 @@ abstract class AbstractTestCase extends TestCase
     /**
      * @return string[]
      */
-    protected static function getComponentClassesToInitialize(): array
+    protected static function getModuleClassesToInitialize(): array
     {
         return [
-            static::getComponentClass(),
+            static::getModuleClass(),
         ];
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
         return [];
     }
 
     /**
-     * Package's Component class, of type ComponentInterface.
-     * By standard, it is "NamespaceOwner\Project\Component::class"
+     * Package's Module class, of type ModuleInterface.
+     * By standard, it is "NamespaceOwner\Project\Module::class"
      */
-    protected static function getComponentClass(): string
+    protected static function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        return $classNamespace . '\\Component';
+        return $classNamespace . '\\Module';
     }
 
     public static function tearDownAfterClass(): void

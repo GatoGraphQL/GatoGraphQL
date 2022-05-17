@@ -2,7 +2,7 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;
-use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\Facades\CustomPostUserTypeAPIFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Notifications_Utils

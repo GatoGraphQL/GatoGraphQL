@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Schema;
 
-use GraphQLByPoP\GraphQLServer\Component;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
@@ -58,9 +58,9 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      */
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
-        /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
-        if (!$componentConfiguration->enableMutations()) {
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enableMutations()) {
             return null;
         }
         if (App::getState('nested-mutations-enabled')) {
@@ -89,8 +89,8 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
      */
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return !$componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return !$moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }

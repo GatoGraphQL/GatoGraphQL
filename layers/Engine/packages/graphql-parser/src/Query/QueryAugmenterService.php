@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
-use PoP\GraphQLParser\Component;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\Module;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
@@ -25,9 +25,9 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
      */
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableMultipleQueryExecution()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableMultipleQueryExecution()) {
             return null;
         }
 
@@ -50,9 +50,9 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
         string $name,
         ?Variable $variable,
     ): bool {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableDynamicVariables()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableDynamicVariables()) {
             return false;
         }
 

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLServer\Component;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\Module;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
-use PoP\ComponentModel\Component as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -56,18 +56,18 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
      */
     public function getFieldNamesToResolve(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (App::getState('nested-mutations-enabled') && !$componentConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (App::getState('nested-mutations-enabled') && !$moduleConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
             return [];
         }
-        /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        /** @var ComponentModelModuleConfiguration */
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         return array_merge(
             [
                 'queryRoot',
             ],
-            $componentConfiguration->enableMutations() ?
+            $moduleConfiguration->enableMutations() ?
             [
                 'mutationRoot',
             ] : []

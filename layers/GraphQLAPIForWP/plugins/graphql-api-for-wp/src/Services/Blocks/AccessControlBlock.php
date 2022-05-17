@@ -7,8 +7,8 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use PoP\AccessControl\Component;
-use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\Module;
+use PoP\AccessControl\ModuleConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
 /**
@@ -57,9 +57,9 @@ class AccessControlBlock extends AbstractControlBlock
     }
     protected function getBlockContentTitle(): string
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return \__('Access Control Rules:', 'graphql-api');
         }
         return \__('Who can access:', 'graphql-api');
@@ -72,12 +72,12 @@ class AccessControlBlock extends AbstractControlBlock
      */
     protected function getLocalizedData(): array
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isIndividualControlForSchemaModeEnabled' => $componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode(),
+                'isIndividualControlForSchemaModeEnabled' => $moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode(),
             ]
         );
     }
@@ -90,9 +90,9 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getBlockContent(array $attributes, string $content): string
     {
         $maybeSchemaModeContent = '';
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             $blockContentPlaceholder = <<<EOT
                 <p><strong>%s</strong> %s</p>
                 <h4 class="%s">%s</h4>

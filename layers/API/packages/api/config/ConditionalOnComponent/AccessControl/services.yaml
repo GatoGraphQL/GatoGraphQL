@@ -1,8 +1,0 @@
-services:
-    _defaults:
-        public: true
-        autowire: true
-        autoconfigure: true
-
-    PoPAPI\API\ConditionalOnComponent\AccessControl\Hooks\:
-        resource: '../../../src/ConditionalOnComponent/AccessControl/Hooks/*'

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\CustomPosts\Component;
-use PoPCMSSchema\CustomPosts\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\Module;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class CustomPostPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
@@ -23,15 +23,15 @@ class CustomPostPaginationInputObjectTypeResolver extends PaginationInputObjectT
 
     protected function getDefaultLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getCustomPostListDefaultLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCustomPostListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        return $componentConfiguration->getCustomPostListMaxLimit();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCustomPostListMaxLimit();
     }
 }

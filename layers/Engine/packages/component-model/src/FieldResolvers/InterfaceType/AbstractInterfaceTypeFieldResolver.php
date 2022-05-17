@@ -6,8 +6,8 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Component;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
@@ -325,9 +325,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         );
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if (!$componentConfiguration->enableAdminSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
@@ -565,9 +565,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
             return $this->schemaFieldArgsCache[$cacheKey];
         }
         $schemaFieldArgs = [];
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
             /**
@@ -636,9 +636,9 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
      */
     public function skipExposingFieldInSchema(string $fieldName): bool
     {
-        /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *

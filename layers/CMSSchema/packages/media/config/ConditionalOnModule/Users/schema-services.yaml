@@ -1,0 +1,10 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\Media\ConditionalOnModule\Users\FieldResolvers\:
+        resource: '../../../src/ConditionalOnModule/Users/FieldResolvers/*'
+
+    PoPCMSSchema\Media\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'

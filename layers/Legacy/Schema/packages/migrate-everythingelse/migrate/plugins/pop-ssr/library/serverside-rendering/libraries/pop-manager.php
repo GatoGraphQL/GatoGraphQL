@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
@@ -180,8 +180,8 @@ class PoP_ServerSideManager
         // in .tmpl files, so reconstruct the full name in the context duplicating these entries
         if ($context && \PoP\ComponentModel\Environment::compactResponseJsonKeys()) {
             // Hardcoding always 'modules' allows us to reference this key, with certainty of its name, in the .tmpl files
-            if ($context[ComponentModelComponentInfo::get('response-prop-submodules')] ?? null) {
-                $context['modules'] = $context[ComponentModelComponentInfo::get('response-prop-submodules')];
+            if ($context[ComponentModelModuleInfo::get('response-prop-submodules')] ?? null) {
+                $context['modules'] = $context[ComponentModelModuleInfo::get('response-prop-submodules')];
             }
             if ($context['bs']['dbkeys'] ?? null) {
                 $context['bs']['dbkeys'] = $context['bs']['dbkeys'];
@@ -365,16 +365,16 @@ class PoP_ServerSideManager
         $this->expandJSKeys($psConfiguration);
 
         // Fill each block configuration with its pssId/bsId/settings
-        if ($psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')]) {
-            foreach ($psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')] as $bsId => &$bConfiguration) {
+        if ($psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')]) {
+            foreach ($psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')] as $bsId => &$bConfiguration) {
                 $bId = $bConfiguration[GD_JS_FRONTENDID];
                 $bs = $this->getBlockSettings($domain, $domain, $pssId, $bsId, $psId, $bId);
-                $bConfiguration/*$psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')][$bsId]*/['tls'] = $tls;
-                $bConfiguration/*$psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')][$bsId]*/['pss'] = $pss;
-                $bConfiguration/*$psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')][$bsId]*/['bs'] = $bs;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['tls'] = $tls;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['pss'] = $pss;
+                $bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/['bs'] = $bs;
 
                 // Expand the JS Keys for the configuration
-                $this->expandJSKeys($bConfiguration/*$psConfiguration[ComponentModelComponentInfo::get('response-prop-submodules')][$bsId]*/);
+                $this->expandJSKeys($bConfiguration/*$psConfiguration[ComponentModelModuleInfo::get('response-prop-submodules')][$bsId]*/);
             }
         }
     }

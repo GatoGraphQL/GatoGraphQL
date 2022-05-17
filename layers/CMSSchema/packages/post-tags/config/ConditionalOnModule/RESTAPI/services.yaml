@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\Hooks\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/Hooks/*'
+
+    PoPCMSSchema\PostTags\ConditionalOnModule\RESTAPI\RouteModuleProcessors\:
+        resource: '../../../src/ConditionalOnModule/RESTAPI/RouteModuleProcessors/*'

@@ -9,8 +9,8 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
-use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
 
 /**
  * Modules exposing clients to interact with the API
@@ -114,20 +114,20 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
 
     public function getDescription(string $module): string
     {
-        /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        /** @var GraphQLClientsForWPModuleConfiguration */
+        $moduleConfiguration = App::getModule(GraphQLClientsForWPModule::class)->getConfiguration();
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
-                    $componentConfiguration->getGraphiQLClientEndpoint()
+                    $moduleConfiguration->getGraphiQLClientEndpoint()
                 );
             case self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS:
                 return \__('Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them', 'graphql-api');
             case self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
-                    $componentConfiguration->getVoyagerClientEndpoint()
+                    $moduleConfiguration->getVoyagerClientEndpoint()
                 );
             case self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS:
                 return \__('Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset', 'graphql-api');
