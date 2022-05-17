@@ -30,7 +30,7 @@ abstract class AbstractTestCase extends TestCase
             static::getHookManager(),
         );
         App::getAppLoader()->addModuleClassesToInitialize(static::getModuleClassesToInitialize());
-        App::getAppLoader()->initializeComponents($isDev);
+        App::getAppLoader()->initializeModules($isDev);
         App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
         // Only after initializing the System Container,

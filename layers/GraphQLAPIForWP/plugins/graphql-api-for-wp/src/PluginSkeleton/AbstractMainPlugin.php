@@ -403,7 +403,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->initializeComponents();
+                $this->initializeModules();
             },
             PluginLifecyclePriorities::CONFIGURE_COMPONENTS
         );
@@ -477,9 +477,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Initialize the components
      */
-    public function initializeComponents(): void
+    public function initializeModules(): void
     {
-        App::getAppLoader()->initializeComponents();
+        App::getAppLoader()->initializeModules();
 
         /**
          * After initialized, and before booting,

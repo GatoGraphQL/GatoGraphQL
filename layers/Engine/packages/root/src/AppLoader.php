@@ -200,7 +200,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
-    public function initializeComponents(
+    public function initializeModules(
         bool $isDev = false
     ): void {
         // Initialize Dotenv (before the ContainerBuilder, since this one uses environment constants)

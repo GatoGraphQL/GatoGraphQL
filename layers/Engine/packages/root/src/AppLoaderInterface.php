@@ -55,7 +55,7 @@ interface AppLoaderInterface
      *
      * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
      */
-    public function initializeComponents(
+    public function initializeModules(
         bool $isDev = false
     ): void;
 
