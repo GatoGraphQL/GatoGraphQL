@@ -35,7 +35,7 @@ trait ClientTrait
     /**
      * Base dir
      */
-    abstract protected function getComponentBaseDir(): string;
+    abstract protected function getModuleBaseDir(): string;
     /**
      * Base URL
      */
@@ -58,7 +58,7 @@ trait ClientTrait
         }
         // Read from the static HTML files and replace their endpoints
         $assetRelativePath = $this->getClientRelativePath();
-        $file = $this->getComponentBaseDir() . $assetRelativePath . '/' . $this->getIndexFilename();
+        $file = $this->getModuleBaseDir() . $assetRelativePath . '/' . $this->getIndexFilename();
         $fileContents = \file_get_contents($file, true);
         $jsFileName = $this->getJSFilename();
         /**

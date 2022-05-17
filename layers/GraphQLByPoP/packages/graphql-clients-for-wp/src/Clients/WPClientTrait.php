@@ -24,7 +24,7 @@ trait WPClientTrait
     /**
      * Base Dir
      */
-    protected function getComponentBaseDir(): string
+    protected function getModuleBaseDir(): string
     {
         return dirname(__FILE__, 3);
     }
