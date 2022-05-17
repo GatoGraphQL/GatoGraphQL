@@ -15,7 +15,7 @@ use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
 class AppLoader implements AppLoaderInterface
 {
     /**
-     * Has the component been initialized?
+     * Has the module been initialized?
      *
      * @var string[]
      */
@@ -51,7 +51,7 @@ class AppLoader implements AppLoaderInterface
      */
     protected array $skipSchemaModuleClasses = [];
     /**
-     * Cache if a component must skipSchema or not, stored under its class
+     * Cache if a module must skipSchema or not, stored under its class
      *
      * @var array<string,bool>
      */
@@ -127,7 +127,7 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Get the array of components ordered by how they must be initialized,
+     * Get the array of modules ordered by how they must be initialized,
      * following the Composer dependencies tree
      *
      * @param string[] $moduleClasses List of `Module` class to initialize
@@ -137,7 +137,7 @@ class AppLoader implements AppLoaderInterface
         bool $isDev
     ): void {
         /**
-         * If any component class has already been initialized,
+         * If any module class has already been initialized,
          * then do nothing
          */
         $moduleClasses = array_values(array_diff(
@@ -151,7 +151,7 @@ class AppLoader implements AppLoaderInterface
             // Initialize and register the Module
             $module = $moduleManager->register($moduleClass);
 
-            // Initialize all depended-upon PoP components
+            // Initialize all depended-upon PoP modules
             $this->addComponentsOrderedForInitialization(
                 $module->getDependedModuleClasses(),
                 $isDev
@@ -170,7 +170,7 @@ class AppLoader implements AppLoaderInterface
                 }
             }
 
-            // Initialize all depended-upon PoP conditional components, if they are installed
+            // Initialize all depended-upon PoP conditional modules, if they are installed
             $this->addComponentsOrderedForInitialization(
                 array_filter(
                     $module->getDependedConditionalModuleClasses(),
@@ -180,12 +180,12 @@ class AppLoader implements AppLoaderInterface
                 $isDev
             );
 
-            // We reached the bottom of the rung, add the component to the list
+            // We reached the bottom of the rung, add the module to the list
             $this->orderedComponentClasses[] = $moduleClass;
 
             /**
              * If this compononent satisfies the contracts for other
-             * components, set them as "satisfied".
+             * modules, set them as "satisfied".
              */
             foreach ($module->getSatisfiedModuleClasses() as $satisfiedComponentClass) {
                 $satisfiedComponent = App::getModule($satisfiedComponentClass);
@@ -195,10 +195,10 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Get the array of components ordered by how they must be initialized,
+     * Get the array of modules ordered by how they must be initialized,
      * following the Composer dependencies tree
      *
-     * @param boolean $isDev Indicate if testing with PHPUnit, as to load components only for DEV
+     * @param boolean $isDev Indicate if testing with PHPUnit, as to load modules only for DEV
      */
     public function initializeModules(
         bool $isDev = false
@@ -207,7 +207,7 @@ class AppLoader implements AppLoaderInterface
         DotenvBuilderFactory::init();
 
         /**
-         * Calculate the components in their initialization order
+         * Calculate the modules in their initialization order
          */
         $this->addComponentsOrderedForInitialization(
             $this->moduleClassesToInitialize,
@@ -216,7 +216,7 @@ class AppLoader implements AppLoaderInterface
 
         /**
          * After initialized, and before booting,
-         * allow the components to inject their own configuration
+         * allow the modules to inject their own configuration
          */
         $this->configureComponents();
     }
@@ -224,9 +224,9 @@ class AppLoader implements AppLoaderInterface
     /**
      * Boot the application. It does these steps:
      *
-     * 1. Initialize Symfony's Dotenv component (to get config from ENV)
+     * 1. Initialize Symfony's Dotenv module (to get config from ENV)
      * 2. Calculate in what order will the Components (including from main Plugin and Extensions) will be initialized (based on their Composer dependency order)
-     * 3. Allow Components to customize the component configuration for themselves, and the components they can see
+     * 3. Allow Components to customize the module configuration for themselves, and the modules they can see
      * 4. Register all Components with the ModuleManager
      * 5. Initialize the System Container, have all Components inject services, and compile it, making "system" services (eg: hooks, translation) available for initializing Application Container services
      *
@@ -268,12 +268,12 @@ class AppLoader implements AppLoaderInterface
         );
         App::getSystemContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
-        // Finally boot the components
+        // Finally boot the modules
         $this->bootSystemComponents();
     }
 
     /**
-     * Trigger after initializing all components,
+     * Trigger after initializing all modules,
      * and before booting the system
      */
     protected function configureComponents(): void
@@ -295,7 +295,7 @@ class AppLoader implements AppLoaderInterface
      */
     final protected function getSystemContainerCompilerPasses(): array
     {
-        // Collect the compiler pass classes from all components
+        // Collect the compiler pass classes from all modules
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $moduleClass) {
             $module = App::getModule($moduleClass);
@@ -326,8 +326,8 @@ class AppLoader implements AppLoaderInterface
         ?string $containerDirectory = null
     ): void {
         /**
-         * Allow each component to customize the configuration for itself,
-         * and for its depended-upon components.
+         * Allow each module to customize the configuration for itself,
+         * and for its depended-upon modules.
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse($this->orderedComponentClasses) as $moduleClass) {
@@ -351,7 +351,7 @@ class AppLoader implements AppLoaderInterface
          * Initialize the container services by the Components
          */
         foreach ($this->orderedComponentClasses as $moduleClass) {
-            // Initialize the component, passing its configuration, and checking if its schema must be skipped
+            // Initialize the module, passing its configuration, and checking if its schema must be skipped
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
                 continue;
@@ -371,7 +371,7 @@ class AppLoader implements AppLoaderInterface
         $systemCompilerPasses = $systemCompilerPassRegistry->getCompilerPasses();
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
-        // Initialize the components
+        // Initialize the modules
         App::getModuleManager()->moduleLoaded();
     }
 
