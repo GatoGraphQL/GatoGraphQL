@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CommentMutations;
 
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\Users\Module as UsersComponent;
+use PoPCMSSchema\Users\Module as UsersModule;
 
 /**
  * Initialize component
@@ -43,7 +43,7 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
         $this->initSchemaServices(
             dirname(__DIR__),
-            $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
+            $skipSchema || in_array(UsersModule::class, $skipSchemaComponentClasses),
             '/ConditionalOnComponent/Users'
         );
     }

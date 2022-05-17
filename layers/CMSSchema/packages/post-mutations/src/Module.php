@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostMutations;
 use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\Users\Module as UsersComponent;
+use PoPCMSSchema\Users\Module as UsersModule;
 
 /**
  * Initialize component
@@ -52,10 +52,10 @@ class Module extends AbstractModule
         if (class_exists(APIModule::class) && App::getComponent(APIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(UsersComponent::class)) {
+        if (class_exists(UsersModule::class)) {
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(UsersComponent::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(UsersModule::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/Users'
             );
         }

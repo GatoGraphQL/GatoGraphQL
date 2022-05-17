@@ -68,7 +68,7 @@ use PoPCMSSchema\UserMeta\Module as UserMetaComponent;
 use PoPCMSSchema\UserAvatars\Module as UserAvatarsComponent;
 use PoPCMSSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPCMSSchema\UserMeta\Environment as UserMetaEnvironment;
-use PoPCMSSchema\Users\Module as UsersComponent;
+use PoPCMSSchema\Users\Module as UsersModule;
 use PoPCMSSchema\Users\Environment as UsersEnvironment;
 
 /**
@@ -257,19 +257,19 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // User default/max limits
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::USER_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::USER_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => UsersComponent::class,
+                'class' => UsersModule::class,
                 'envVariable' => UsersEnvironment::TREAT_USER_EMAIL_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USERS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_EMAIL_AS_ADMIN_DATA,
