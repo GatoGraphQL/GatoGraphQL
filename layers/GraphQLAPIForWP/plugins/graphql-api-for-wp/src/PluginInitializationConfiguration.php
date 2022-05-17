@@ -573,7 +573,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      *
      * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    protected function getPredefinedComponentClassConfiguration(): array
+    protected function getPredefinedModuleClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $mainPluginURL = App::getMainPlugin()->getPluginURL();
