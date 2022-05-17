@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Pages;
 
 use PoP\Root\App;
-use PoPAPI\API\Module as APIComponent;
+use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIComponent;
 use PoP\Root\Module\AbstractModule;
 
@@ -58,7 +58,7 @@ class Module extends AbstractModule
         if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes');
         }
-        if (class_exists(APIComponent::class) && App::getComponent(APIComponent::class)->isEnabled()) {
+        if (class_exists(APIModule::class) && App::getComponent(APIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
         if (class_exists(RESTAPIComponent::class) && App::getComponent(RESTAPIComponent::class)->isEnabled()) {

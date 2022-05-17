@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
 use PoP\Root\App;
-use PoPAPI\API\Module as APIComponent;
+use PoPAPI\API\Module as APIModule;
 use PoPAPI\APIEndpointsForWP\Module;
 use PoPAPI\APIEndpointsForWP\ModuleConfiguration;
 
@@ -38,7 +38,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     {
         /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return App::getComponent(APIComponent::class)->isEnabled()
+        return App::getComponent(APIModule::class)->isEnabled()
             && !$componentConfiguration->isNativeAPIEndpointDisabled();
     }
 }

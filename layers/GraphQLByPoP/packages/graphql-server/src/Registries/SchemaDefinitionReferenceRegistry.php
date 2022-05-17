@@ -20,7 +20,7 @@ use PoP\GraphQLParser\Module as GraphQLParserComponent;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPAPI\API\Module as APIComponent;
+use PoPAPI\API\Module as APIModule;
 use PoPAPI\API\ModuleConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoPAPI\API\Schema\TypeKinds;
@@ -102,7 +102,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         // Attempt to retrieve from the cache, if enabled
         /** @var APIComponentConfiguration */
-        $componentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -286,7 +286,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Sort the elements in the schema alphabetically (if not already sorted!)
         /** @var APIComponentConfiguration */
-        $apiComponentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
+        $apiComponentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if (
             !$apiComponentConfiguration->sortFullSchemaAlphabetically()
             && $componentConfiguration->sortGraphQLSchemaAlphabetically()

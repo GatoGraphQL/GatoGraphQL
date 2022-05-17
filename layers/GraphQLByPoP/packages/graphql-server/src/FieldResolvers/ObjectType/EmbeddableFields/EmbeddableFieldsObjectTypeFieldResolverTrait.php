@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\Root\App;
-use PoPAPI\API\Module as APIComponent;
+use PoPAPI\API\Module as APIModule;
 use PoPAPI\API\ModuleConfiguration as APIComponentConfiguration;
 
 trait EmbeddableFieldsObjectTypeFieldResolverTrait
@@ -19,7 +19,7 @@ trait EmbeddableFieldsObjectTypeFieldResolverTrait
     public function isServiceEnabled(): bool
     {
         /** @var APIComponentConfiguration */
-        $componentConfiguration = App::getComponent(APIComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         return $componentConfiguration->enableEmbeddableFields();
     }
 }
