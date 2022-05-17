@@ -29,5 +29,5 @@ if (!class_exists(App::class)) {
     App::getAppLoader()->initializeModules();
     App::getAppLoader()->bootSystem();
     App::getAppLoader()->bootApplication();
-    App::getAppLoader()->bootApplicationComponents();
+    App::getAppLoader()->bootApplicationModules();
 });

@@ -48,7 +48,7 @@ abstract class AbstractTestCase extends TestCase
         static::beforeBootApplicationModules();
 
         // Finish the initialization
-        App::getAppLoader()->bootApplicationComponents();
+        App::getAppLoader()->bootApplicationModules();
     }
 
     /**

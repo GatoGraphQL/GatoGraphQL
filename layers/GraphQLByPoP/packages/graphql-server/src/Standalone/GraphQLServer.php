@@ -70,7 +70,7 @@ class GraphQLServer implements GraphQLServerInterface
         $appLoader->setInitialAppState($this->getGraphQLRequestAppState());
 
         // Finally trigger booting the components
-        $appLoader->bootApplicationComponents();
+        $appLoader->bootApplicationModules();
     }
 
     protected function initializeApp(): void

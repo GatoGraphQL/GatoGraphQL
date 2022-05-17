@@ -533,7 +533,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $containerCacheConfiguration->getContainerConfigurationCacheNamespace(),
                 $containerCacheConfiguration->getContainerConfigurationCacheDirectory(),
             );
-            $appLoader->bootApplicationComponents();
+            $appLoader->bootApplicationModules();
 
             // Custom logic
             $this->doBootApplication();

@@ -13,7 +13,7 @@ class AppLoader extends UpstreamAppLoader
      * Override to execute logic only after all the plugins (and all the logic)
      * has been loaded.
      */
-    public function bootApplicationComponents(): void
+    public function bootApplicationModules(): void
     {
         /**
          * Find the right action hook to initialize the application,
@@ -42,7 +42,7 @@ class AppLoader extends UpstreamAppLoader
         foreach ($actionHooks as $actionHook) {
             App::addAction(
                 $actionHook,
-                fn () => parent::bootApplicationComponents()
+                fn () => parent::bootApplicationModules()
             );
         }
     }
