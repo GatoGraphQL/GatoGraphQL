@@ -19,7 +19,7 @@ abstract class AbstractModule implements ModuleInterface
      * for any CMS, that require to be satisfied for some specific CMS
      * (such as WordPress).
      */
-    private ?ModuleInterface $satisfyingComponent = null;
+    private ?ModuleInterface $satisfyingModule = null;
     private ?bool $enabled = null;
     protected ?ModuleConfigurationInterface $moduleConfiguration = null;
     protected ?ModuleInfoInterface $componentInfo = null;
@@ -94,7 +94,7 @@ abstract class AbstractModule implements ModuleInterface
      */
     public function setSatisfyingComponent(ModuleInterface $module): void
     {
-        $this->satisfyingComponent = $module;
+        $this->satisfyingModule = $module;
     }
 
     /**
@@ -237,10 +237,10 @@ abstract class AbstractModule implements ModuleInterface
          * there is param $ignoreDependencyOnSatisfiedComponents.
          */
         if ($this->requiresSatisfyingComponent()) {
-            if ($this->satisfyingComponent === null) {
+            if ($this->satisfyingModule === null) {
                 return false;
             }
-            if (!$this->satisfyingComponent->calculateIsEnabled(true)) {
+            if (!$this->satisfyingModule->calculateIsEnabled(true)) {
                 return false;
             }
         }
