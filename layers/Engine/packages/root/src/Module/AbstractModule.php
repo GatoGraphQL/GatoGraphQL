@@ -252,8 +252,8 @@ abstract class AbstractModule implements ModuleInterface
                 if ($ignoreDependencyOnSatisfiedModules && in_array($dependedModuleClass, $satisfiedComponentClasses)) {
                     continue;
                 }
-                $dependedComponent = App::getModule($dependedModuleClass);
-                if (!$dependedComponent->isEnabled()) {
+                $dependedModule = App::getModule($dependedModuleClass);
+                if (!$dependedModule->isEnabled()) {
                     return false;
                 }
             }
