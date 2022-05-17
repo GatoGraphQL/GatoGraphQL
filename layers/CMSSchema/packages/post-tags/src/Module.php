@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostTags;
 
 use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
-use PoPAPI\RESTAPI\Module as RESTAPIComponent;
+use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoP\Root\Module\AbstractModule;
 
 /**
@@ -57,7 +57,7 @@ class Module extends AbstractModule
         if (class_exists(APIModule::class) && App::getComponent(APIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/API');
         }
-        if (class_exists(RESTAPIComponent::class) && App::getComponent(RESTAPIComponent::class)->isEnabled()) {
+        if (class_exists(RESTAPIModule::class) && App::getComponent(RESTAPIModule::class)->isEnabled()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
     }
