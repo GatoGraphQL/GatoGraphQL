@@ -31,7 +31,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @var string[]
      */
-    protected array $componentClassesToInitialize = [];
+    protected array $moduleClassesToInitialize = [];
     /**
      * [key]: Module class, [value]: Configuration
      *
@@ -65,8 +65,8 @@ class AppLoader implements AppLoaderInterface
     public function addComponentClassesToInitialize(
         array $componentClasses
     ): void {
-        $this->componentClassesToInitialize = array_merge(
-            $this->componentClassesToInitialize,
+        $this->moduleClassesToInitialize = array_merge(
+            $this->moduleClassesToInitialize,
             $componentClasses
         );
     }
@@ -210,7 +210,7 @@ class AppLoader implements AppLoaderInterface
          * Calculate the components in their initialization order
          */
         $this->addComponentsOrderedForInitialization(
-            $this->componentClassesToInitialize,
+            $this->moduleClassesToInitialize,
             $isDev
         );
 

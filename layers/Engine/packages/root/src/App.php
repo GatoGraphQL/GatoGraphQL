@@ -36,7 +36,7 @@ class App implements AppInterface
     protected static ComponentManagerInterface $componentManager;
     protected static AppStateManagerInterface $appStateManager;
     /** @var string[] */
-    protected static array $componentClassesToInitialize = [];
+    protected static array $moduleClassesToInitialize = [];
     protected static bool $isHTTPRequest;
 
     /**
@@ -66,8 +66,8 @@ class App implements AppInterface
         static::regenerateResponse();
 
         // Inject the Components slated for initialization
-        self::$appLoader->addComponentClassesToInitialize(self::$componentClassesToInitialize);
-        self::$componentClassesToInitialize = [];
+        self::$appLoader->addComponentClassesToInitialize(self::$moduleClassesToInitialize);
+        self::$moduleClassesToInitialize = [];
 
         /**
          * Indicate if this App is invoked via an HTTP request.
@@ -179,8 +179,8 @@ class App implements AppInterface
     public static function stockAndInitializeModuleClasses(
         array $componentClasses
     ): void {
-        self::$componentClassesToInitialize = array_merge(
-            self::$componentClassesToInitialize,
+        self::$moduleClassesToInitialize = array_merge(
+            self::$moduleClassesToInitialize,
             $componentClasses
         );
     }
