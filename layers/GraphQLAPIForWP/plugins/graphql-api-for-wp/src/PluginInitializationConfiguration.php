@@ -53,7 +53,7 @@ use PoPCMSSchema\Menus\Module as MenusComponent;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
 use PoPCMSSchema\Pages\Module as PagesModule;
 use PoPCMSSchema\Pages\Environment as PagesEnvironment;
-use PoPCMSSchema\Posts\Module as PostsComponent;
+use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPCMSSchema\Settings\Module as SettingsComponent;
@@ -236,21 +236,21 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Post default/max limits, add to CustomPostUnion
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::POST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::POST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => PostsComponent::class,
+                'class' => PostsModule::class,
                 'envVariable' => PostsEnvironment::ADD_POST_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_POSTS,
                 'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
