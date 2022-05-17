@@ -323,23 +323,23 @@ abstract class AbstractModule implements ModuleInterface
 
     protected function initializeInfo(): void
     {
-        $componentInfoClass = $this->getComponentInfoClass();
-        if ($componentInfoClass === null) {
+        $moduleInfoClass = $this->getModuleInfoClass();
+        if ($moduleInfoClass === null) {
             return;
         }
-        $this->componentInfo = new $componentInfoClass($this);
+        $this->componentInfo = new $moduleInfoClass($this);
     }
 
     /**
      * ModuleInfo class for the Module
      */
-    protected function getComponentInfoClass(): ?string
+    protected function getModuleInfoClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentInfoClass = $classNamespace . '\\ModuleInfo';
-        if (!class_exists($componentInfoClass)) {
+        $moduleInfoClass = $classNamespace . '\\ModuleInfo';
+        if (!class_exists($moduleInfoClass)) {
             return null;
         }
-        return $componentInfoClass;
+        return $moduleInfoClass;
     }
 }
