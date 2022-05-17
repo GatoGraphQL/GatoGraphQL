@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleConfiguration;
 
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\DataStructureFormatters\HTMLDataStructureFormatter;
 use PoP\ComponentModel\Engine\EngineInterface;
@@ -37,7 +37,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
                 RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
                 RootEnvironment::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST => true,
             ],
-            ComponentModelComponent::class => [
+            ComponentModelModule::class => [
                 ComponentModelEnvironment::ENABLE_MODIFYING_ENGINE_BEHAVIOR_VIA_REQUEST => static::enableModifyingEngineBehaviorViaRequest(),
             ],
         ];

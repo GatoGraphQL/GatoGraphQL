@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
@@ -49,7 +49,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
             /** @var ComponentModelComponentInfo */
-            $componentInfo = App::getComponent(ComponentModelComponent::class)->getInfo();
+            $componentInfo = App::getComponent(ComponentModelModule::class)->getInfo();
             $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
         }
 

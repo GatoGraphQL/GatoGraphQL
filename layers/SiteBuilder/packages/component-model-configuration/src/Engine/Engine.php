@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
@@ -79,7 +79,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both

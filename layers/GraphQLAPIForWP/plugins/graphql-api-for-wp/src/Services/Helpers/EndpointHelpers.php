@@ -115,7 +115,7 @@ class EndpointHelpers
 
         // If namespaced, add /?use_namespace=1 to the endpoint
         // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        // $componentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         // if ($componentConfiguration->mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);
         // }

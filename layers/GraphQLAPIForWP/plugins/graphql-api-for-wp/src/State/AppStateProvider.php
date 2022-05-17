@@ -11,7 +11,7 @@ use PoP\Root\Routing\RequestNature;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 
 /**
@@ -54,7 +54,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function isServiceEnabled(): bool
     {
         /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         return $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
     }
 

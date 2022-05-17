@@ -29,7 +29,7 @@ use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\CacheControl\Module as CacheControlComponent;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -184,7 +184,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Use namespacing?
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOrConfiguration ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
@@ -418,7 +418,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Enable the "admin" schema: if doing ?behavior=unrestricted, it will already
             // be set by configuration. Otherwise, it uses this mapping
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_EXPOSE_ADMIN_DATA,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
@@ -554,7 +554,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
             ],
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
             ],
             [
@@ -562,7 +562,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
             ],
             [
-                'class' => ComponentModelComponent::class,
+                'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA,
             ],
         ];

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ConfigurationComponentModel\State;
 
-use PoP\ComponentModel\Module as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\ConfigurationComponentModel\Configuration\EngineRequest;
 use PoP\ConfigurationComponentModel\Constants\Params;
@@ -21,7 +21,7 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         // Override the settings from ComponentModel
         /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();
+        $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
 
