@@ -11,9 +11,6 @@ use PoPAPI\API\Configuration\Request;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

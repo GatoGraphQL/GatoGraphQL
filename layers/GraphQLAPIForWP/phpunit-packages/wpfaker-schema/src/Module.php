@@ -7,9 +7,6 @@ namespace PHPUnitForGraphQLAPI\WPFakerSchema;
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Environment;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

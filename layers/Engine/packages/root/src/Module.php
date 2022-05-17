@@ -10,9 +10,6 @@ use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceComp
 use PoP\Root\Container\ServiceInstantiatorInterface;
 use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCompilerPass;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

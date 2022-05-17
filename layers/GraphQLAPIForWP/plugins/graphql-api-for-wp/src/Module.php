@@ -14,9 +14,6 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractPluginModule;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
-/**
- * Initialize component
- */
 class Module extends AbstractPluginModule
 {
     /**

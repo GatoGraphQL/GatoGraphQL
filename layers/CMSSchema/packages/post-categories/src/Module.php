@@ -9,9 +9,6 @@ use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     protected function requiresSatisfyingModule(): bool

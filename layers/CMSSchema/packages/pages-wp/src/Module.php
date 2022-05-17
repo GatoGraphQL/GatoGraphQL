@@ -9,9 +9,6 @@ use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Pages\ModuleConfiguration as PagesModuleConfiguration;
 use PoPCMSSchema\Pages\Module as PagesModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

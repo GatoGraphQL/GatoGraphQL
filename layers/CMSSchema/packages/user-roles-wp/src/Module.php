@@ -6,9 +6,6 @@ namespace PoPCMSSchema\UserRolesWP;
 
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

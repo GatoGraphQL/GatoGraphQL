@@ -8,9 +8,6 @@ use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade
 use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ApplicationEvents;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

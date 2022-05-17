@@ -7,9 +7,6 @@ namespace PoPSchema\StancesWP;
 use PoP\Root\Module\AbstractModule;
 use PoPSchema\Stances\Environment;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

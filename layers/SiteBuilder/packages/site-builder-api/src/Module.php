@@ -7,9 +7,6 @@ namespace PoP\SiteBuilderAPI;
 use PoPAPI\API\Environment;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

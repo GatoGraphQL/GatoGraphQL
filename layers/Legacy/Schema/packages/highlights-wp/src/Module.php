@@ -7,9 +7,6 @@ namespace PoPSchema\HighlightsWP;
 use PoP\Root\Module\AbstractModule;
 use PoPSchema\Highlights\Environment;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

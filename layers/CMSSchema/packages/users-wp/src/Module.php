@@ -7,9 +7,6 @@ namespace PoPCMSSchema\UsersWP;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

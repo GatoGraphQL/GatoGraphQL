@@ -10,9 +10,6 @@ use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     protected function requiresSatisfyingModule(): bool

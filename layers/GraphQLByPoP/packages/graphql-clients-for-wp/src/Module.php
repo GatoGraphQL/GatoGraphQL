@@ -6,9 +6,6 @@ namespace GraphQLByPoP\GraphQLClientsForWP;
 
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

@@ -8,9 +8,6 @@ use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     protected function requiresSatisfyingModule(): bool

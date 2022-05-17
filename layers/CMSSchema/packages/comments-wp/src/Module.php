@@ -7,9 +7,6 @@ namespace PoPCMSSchema\CommentsWP;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Users\Module as UsersModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

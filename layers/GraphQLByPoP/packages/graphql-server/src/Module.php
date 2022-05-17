@@ -14,9 +14,6 @@ use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

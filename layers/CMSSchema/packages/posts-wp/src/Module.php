@@ -9,9 +9,6 @@ use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

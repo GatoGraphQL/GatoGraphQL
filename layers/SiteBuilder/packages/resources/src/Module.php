@@ -6,9 +6,6 @@ namespace PoP\Resources;
 
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**

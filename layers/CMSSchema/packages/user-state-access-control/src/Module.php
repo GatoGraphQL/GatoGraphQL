@@ -7,9 +7,6 @@ namespace PoPCMSSchema\UserStateAccessControl;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\Module\AbstractModule;
 
-/**
- * Initialize component
- */
 class Module extends AbstractModule
 {
     /**
