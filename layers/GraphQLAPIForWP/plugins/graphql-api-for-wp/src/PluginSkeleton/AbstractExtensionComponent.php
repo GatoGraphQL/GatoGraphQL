@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-abstract class AbstractExtensionComponent extends AbstractPluginComponent
+abstract class AbstractExtensionComponent extends AbstractPluginModule
 {
     /**
      * Do not disable the plugin if one of its required

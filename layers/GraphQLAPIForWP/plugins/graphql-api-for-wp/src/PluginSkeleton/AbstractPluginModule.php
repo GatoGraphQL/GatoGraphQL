@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use PoP\Root\Module\AbstractModule;
 
-abstract class AbstractPluginComponent extends AbstractModule implements PluginComponentInterface
+abstract class AbstractPluginModule extends AbstractModule implements PluginComponentInterface
 {
     private ?string $pluginFolder = null;
 
