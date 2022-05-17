@@ -23,7 +23,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Root\Services\BasicServiceTrait;
@@ -959,7 +959,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Fetch params from request?
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
             $ignore_params_from_request = true;
         } else {

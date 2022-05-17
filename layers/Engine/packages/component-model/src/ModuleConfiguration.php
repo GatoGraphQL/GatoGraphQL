@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
@@ -250,7 +250,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function enableModifyingEngineBehaviorViaRequest(): bool
     {
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
             return false;
         }

@@ -9,7 +9,7 @@ use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -95,7 +95,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
             return $this->selected_filter_name;
         }
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
             return null;
         }

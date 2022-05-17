@@ -11,7 +11,7 @@ use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\Root\AbstractTestCase;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends AbstractTestCase
@@ -33,7 +33,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
     protected static function getComponentClassConfiguration(): array
     {
         return [
-            RootComponent::class => [
+            RootModule::class => [
                 RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
                 RootEnvironment::ENABLE_PASSING_ROUTING_STATE_VIA_REQUEST => true,
             ],

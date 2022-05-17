@@ -13,7 +13,7 @@ use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -52,7 +52,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
             $state['mangled'] = DefinitionsRequest::getMangledValue();
             $state['actionpath'] = Request::getActionPath();

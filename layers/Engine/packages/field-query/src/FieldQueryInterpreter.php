@@ -7,7 +7,7 @@ namespace PoP\FieldQuery;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\QueryParsing\QueryParserInterface;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use stdClass;
 
@@ -143,7 +143,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected function doGetVariablesFromRequest(): array
     {
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
             return [];
         }

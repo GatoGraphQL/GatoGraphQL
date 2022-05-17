@@ -8,7 +8,7 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -17,7 +17,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
             $state['settingsformat'] = App::request(Params::SETTINGSFORMAT) ?? App::query(Params::SETTINGSFORMAT, Values::DEFAULT);
         } else {

@@ -11,7 +11,7 @@ use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -26,7 +26,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
 
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
             // If not target, or invalid, reset it to "main"
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided

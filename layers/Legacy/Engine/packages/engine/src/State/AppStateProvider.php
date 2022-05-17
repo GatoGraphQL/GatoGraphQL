@@ -12,7 +12,7 @@ use PoP\Engine\ModuleFilters\HeadModule;
 use PoP\Engine\ModuleFilters\MainContentModule;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
@@ -81,7 +81,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         $enablePassingStateViaRequest = $rootComponentConfiguration->enablePassingStateViaRequest();
 
         if ($state['modulefilter'] === $this->headModule->getName()) {

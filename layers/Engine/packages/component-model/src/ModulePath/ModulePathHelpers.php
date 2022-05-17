@@ -9,7 +9,7 @@ use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\Root\App;
-use PoP\Root\Module as RootComponent;
+use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
@@ -72,7 +72,7 @@ class ModulePathHelpers implements ModulePathHelpersInterface
     public function getModulePaths(): array
     {
         /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootComponent::class)->getConfiguration();
+        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
         if (!$rootComponentConfiguration->enablePassingStateViaRequest()) {
             return [];
         }
