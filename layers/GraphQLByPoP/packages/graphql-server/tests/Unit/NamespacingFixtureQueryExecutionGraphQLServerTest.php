@@ -17,10 +17,10 @@ class NamespacingFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQ
     /**
      * @return array<string,mixed>
      */
-    protected static function getGraphQLServerComponentClassConfiguration(): array
+    protected static function getGraphQLServerModuleClassConfiguration(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
                 \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => true,

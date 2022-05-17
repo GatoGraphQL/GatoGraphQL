@@ -14,10 +14,10 @@ abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGra
     /**
      * @return array<string,mixed>
      */
-    protected static function getGraphQLServerComponentClassConfiguration(): array
+    protected static function getGraphQLServerModuleClassConfiguration(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClassConfiguration(),
+            ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
                 \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => static::isEnabled(),
