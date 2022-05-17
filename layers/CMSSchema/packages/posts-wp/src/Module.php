@@ -12,8 +12,6 @@ use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 class Module extends AbstractModule
 {
     /**
-     * All component classes that this component satisfies
-     *
      * @return string[]
      */
     public function getSatisfiedModuleClasses(): array

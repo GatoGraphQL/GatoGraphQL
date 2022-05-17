@@ -35,8 +35,6 @@ interface ModuleInterface
     public function setSatisfyingModule(ModuleInterface $component): void;
 
     /**
-     * All component classes that this component satisfies
-     *
      * @return string[]
      */
     public function getSatisfiedModuleClasses(): array;
