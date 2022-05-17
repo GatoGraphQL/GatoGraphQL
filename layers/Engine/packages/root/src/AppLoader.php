@@ -60,14 +60,14 @@ class AppLoader implements AppLoaderInterface
     /**
      * Add Module classes to be initialized
      *
-     * @param string[] $componentClasses List of `Module` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
     public function addComponentClassesToInitialize(
-        array $componentClasses
+        array $moduleClasses
     ): void {
         $this->moduleClassesToInitialize = array_merge(
             $this->moduleClassesToInitialize,
-            $componentClasses
+            $moduleClasses
         );
     }
 
@@ -130,22 +130,22 @@ class AppLoader implements AppLoaderInterface
      * Get the array of components ordered by how they must be initialized,
      * following the Composer dependencies tree
      *
-     * @param string[] $componentClasses List of `Module` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
     private function addComponentsOrderedForInitialization(
-        array $componentClasses,
+        array $moduleClasses,
         bool $isDev
     ): void {
         /**
          * If any component class has already been initialized,
          * then do nothing
          */
-        $componentClasses = array_values(array_diff(
-            $componentClasses,
+        $moduleClasses = array_values(array_diff(
+            $moduleClasses,
             $this->initializedComponentClasses
         ));
         $componentManager = App::getComponentManager();
-        foreach ($componentClasses as $moduleClass) {
+        foreach ($moduleClasses as $moduleClass) {
             $this->initializedComponentClasses[] = $moduleClass;
 
             // Initialize and register the Module

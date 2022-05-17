@@ -11,10 +11,10 @@ interface AppLoaderInterface
     /**
      * Add Module classes to be initialized
      *
-     * @param string[] $componentClasses List of `Module` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
     public function addComponentClassesToInitialize(
-        array $componentClasses
+        array $moduleClasses
     ): void;
 
     /**

@@ -61,10 +61,10 @@ interface AppInterface
      * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Module` class to initialize
+     * @param string[] $moduleClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeModuleClasses(
-        array $componentClasses
+        array $moduleClasses
     ): void;
 
     /**

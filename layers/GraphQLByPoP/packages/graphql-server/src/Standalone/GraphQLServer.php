@@ -22,21 +22,21 @@ use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLServer implements GraphQLServerInterface
 {
-    private readonly array $componentClasses;
+    private readonly array $moduleClasses;
 
     /**
-     * @param string[] $componentClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
+     * @param string[] $moduleClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
      * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
      */
     public function __construct(
-        array $componentClasses,
+        array $moduleClasses,
         private readonly array $moduleClassConfiguration = [],
         private readonly ?bool $cacheContainerConfiguration = null,
         private readonly ?string $containerNamespace = null,
         private readonly ?string $containerDirectory = null,
     ) {
-        $this->componentClasses = array_merge(
-            $componentClasses,
+        $this->moduleClasses = array_merge(
+            $moduleClasses,
             [
                 // This is the one Module that is required to produce the GraphQL server.
                 // The other classes provide the schema and extra functionality.
@@ -46,7 +46,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         $this->initializeApp();
         $appLoader = App::getAppLoader();
-        $appLoader->addComponentClassesToInitialize($this->componentClasses);
+        $appLoader->addComponentClassesToInitialize($this->moduleClasses);
         $appLoader->initializeComponents();
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,
