@@ -301,24 +301,24 @@ abstract class AbstractModule implements ModuleInterface
      */
     protected function initializeConfiguration(array $configuration): void
     {
-        $componentConfigurationClass = $this->getComponentConfigurationClass();
-        if ($componentConfigurationClass === null) {
+        $moduleConfigurationClass = $this->getModuleConfigurationClass();
+        if ($moduleConfigurationClass === null) {
             return;
         }
-        $this->moduleConfiguration = new $componentConfigurationClass($configuration);
+        $this->moduleConfiguration = new $moduleConfigurationClass($configuration);
     }
 
     /**
      * ModuleConfiguration class for the Module
      */
-    protected function getComponentConfigurationClass(): ?string
+    protected function getModuleConfigurationClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentConfigurationClass = $classNamespace . '\\ModuleConfiguration';
-        if (!class_exists($componentConfigurationClass)) {
+        $moduleConfigurationClass = $classNamespace . '\\ModuleConfiguration';
+        if (!class_exists($moduleConfigurationClass)) {
             return null;
         }
-        return $componentConfigurationClass;
+        return $moduleConfigurationClass;
     }
 
     protected function initializeInfo(): void
