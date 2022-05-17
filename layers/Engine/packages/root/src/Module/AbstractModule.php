@@ -22,7 +22,7 @@ abstract class AbstractModule implements ComponentInterface
     private ?ComponentInterface $satisfyingComponent = null;
     private ?bool $enabled = null;
     protected ?ModuleConfigurationInterface $componentConfiguration = null;
-    protected ?ComponentInfoInterface $componentInfo = null;
+    protected ?ModuleInfoInterface $componentInfo = null;
 
     /**
      * Enable each component to set default configuration for
@@ -291,7 +291,7 @@ abstract class AbstractModule implements ComponentInterface
     /**
      * ModuleInfo class for the Module
      */
-    public function getInfo(): ?ComponentInfoInterface
+    public function getInfo(): ?ModuleInfoInterface
     {
         return $this->componentInfo;
     }

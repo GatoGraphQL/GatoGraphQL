@@ -134,5 +134,5 @@ interface ComponentInterface
     /**
      * ModuleInfo for the Module
      */
-    public function getInfo(): ?ComponentInfoInterface;
+    public function getInfo(): ?ModuleInfoInterface;
 }

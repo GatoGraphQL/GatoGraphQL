@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Module;
 
-abstract class AbstractModuleInfo implements ComponentInfoInterface
+abstract class AbstractModuleInfo implements ModuleInfoInterface
 {
     protected array $values = [];
 
