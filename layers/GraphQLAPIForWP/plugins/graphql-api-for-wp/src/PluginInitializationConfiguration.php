@@ -39,7 +39,7 @@ use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
 use PoPCMSSchema\CommentMeta\Module as CommentMetaModule;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
-use PoPCMSSchema\Comments\Module as CommentsComponent;
+use PoPCMSSchema\Comments\Module as CommentsModule;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
 use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
@@ -276,25 +276,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Comment default/max limits
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::ROOT_COMMENT_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::COMMENT_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => CommentsComponent::class,
+                'class' => CommentsModule::class,
                 'envVariable' => CommentsEnvironment::TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_ADMIN_DATA,
