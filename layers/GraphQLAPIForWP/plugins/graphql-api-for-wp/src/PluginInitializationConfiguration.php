@@ -62,7 +62,7 @@ use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
 use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
-use PoPCMSSchema\UserRoles\Module as UserRolesComponent;
+use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserMeta\Module as UserMetaComponent;
 use PoPCMSSchema\UserAvatars\Module as UserAvatarsComponent;
@@ -490,13 +490,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
             ],
             [
-                'class' => UserRolesComponent::class,
+                'class' => UserRolesModule::class,
                 'envVariable' => UserRolesEnvironment::TREAT_USER_ROLE_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_ROLE_AS_ADMIN_DATA,
             ],
             [
-                'class' => UserRolesComponent::class,
+                'class' => UserRolesModule::class,
                 'envVariable' => UserRolesEnvironment::TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_ROLES,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_USER_CAPABILITY_AS_ADMIN_DATA,
