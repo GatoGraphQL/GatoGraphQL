@@ -9,9 +9,6 @@ $class = (new class() extends \PoP\Root\Module\AbstractModule
         return [];
     }
 
-    /**
-     * Boot component
-     */
     public function beforeBoot(): void
     {
         parent::beforeBoot();
