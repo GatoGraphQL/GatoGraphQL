@@ -17,7 +17,7 @@ use GraphQLAPI\GraphQLAPI\ModuleResolvers\UserInterfaceFunctionalityModuleResolv
 use GraphQLAPI\GraphQLAPI\PluginManagement\PluginOptionsFormHandler;
 use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPComponent;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPComponent;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
@@ -138,7 +138,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // GraphiQL client slug
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -151,7 +151,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Voyager client slug
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -538,11 +538,11 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
             ],
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
             ],
             [
-                'class' => GraphQLClientsForWPComponent::class,
+                'class' => GraphQLClientsForWPModule::class,
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
             ],
             [

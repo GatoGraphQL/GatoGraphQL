@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPComponent;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPComponentConfiguration;
 
 /**
@@ -115,7 +115,7 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getDescription(string $module): string
     {
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLClientsForWPComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLClientsForWPModule::class)->getConfiguration();
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
