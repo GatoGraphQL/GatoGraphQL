@@ -15,7 +15,7 @@ trait WPClientTrait
     /**
      * Base URL
      */
-    protected function getComponentBaseURL(): ?string
+    protected function getModuleBaseURL(): ?string
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

@@ -39,7 +39,7 @@ trait ClientTrait
     /**
      * Base URL
      */
-    protected function getComponentBaseURL(): ?string
+    protected function getModuleBaseURL(): ?string
     {
         return null;
     }
@@ -66,7 +66,7 @@ trait ClientTrait
          * different than the URL under which the client is accessed.
          * Then add the URL to the plugin to all assets (they are all located under "assets/...")
          */
-        if ($componentBaseURL = $this->getComponentBaseURL()) {
+        if ($componentBaseURL = $this->getModuleBaseURL()) {
             // The client could have several folders where to store the assets
             // GraphiQL Explorer loads under "/assets...", so the dirname starts with "/"
             // But otherwise it does not. So don't add "/" again if it already has
