@@ -183,7 +183,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     {
         return array_merge_recursive(
             $this->getPredefinedModuleClassConfiguration(),
-            $this->getBasedOnModuleEnabledStateComponentClassConfiguration(),
+            $this->getBasedOnModuleEnabledStateModuleClassConfiguration(),
         );
     }
 
@@ -202,14 +202,14 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<string, array> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
-    protected function getBasedOnModuleEnabledStateComponentClassConfiguration(): array
+    protected function getBasedOnModuleEnabledStateModuleClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleClassConfiguration = [];
 
-        $moduleToComponentClassConfigurationMappings = $this->getModuleToModuleClassConfigurationMapping();
-        foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
-            // Copy the state (enabled/disabled) to the component
+        $moduleToModuleClassConfigurationMappings = $this->getModuleToModuleClassConfigurationMapping();
+        foreach ($moduleToModuleClassConfigurationMappings as $mapping) {
+            // Copy the state (enabled/disabled) to the module configuration
             $value = $moduleRegistry->isModuleEnabled($mapping['module']);
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             $callback = $mapping['callback'] ?? null;
