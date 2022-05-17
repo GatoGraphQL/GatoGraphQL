@@ -24,7 +24,7 @@ use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnviron
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\AccessControl\Module as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\CacheControl\Module as CacheControlComponent;
@@ -164,7 +164,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Use private schema mode?
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_MODE,
@@ -173,7 +173,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Enable individual access control for the schema mode?
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::PUBLIC_PRIVATE_SCHEMA,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_ENABLE_GRANULAR,
@@ -546,11 +546,11 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
             ],
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE,
             ],
             [
-                'class' => AccessControlComponent::class,
+                'class' => AccessControlModule::class,
                 'envVariable' => AccessControlEnvironment::ENABLE_INDIVIDUAL_CONTROL_FOR_PUBLIC_PRIVATE_SCHEMA_MODE,
             ],
             [

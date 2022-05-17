@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigSchemaModeBlock;
-use PoP\AccessControl\Module as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
 use PoP\Root\Module\ModuleConfigurationHelpers;
@@ -51,7 +51,7 @@ class DefaultSchemaModeSchemaConfigurationExecuter extends AbstractSchemaConfigu
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
             $hookName = ModuleConfigurationHelpers::getHookName(
-                AccessControlComponent::class,
+                AccessControlModule::class,
                 AccessControlEnvironment::USE_PRIVATE_SCHEMA_MODE
             );
             \add_filter(

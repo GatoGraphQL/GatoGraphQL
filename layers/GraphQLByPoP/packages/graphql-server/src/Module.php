@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use PoP\AccessControl\Module as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoP\CacheControl\Module as CacheControlComponent;
 use PoP\Engine\Module as EngineComponent;
@@ -91,10 +91,10 @@ class Module extends AbstractModule
 
         // Boot conditionals
         /** @var AccessControlComponentConfiguration */
-        $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
         if (
             class_exists(CacheControlComponent::class)
-            && class_exists(AccessControlComponent::class)
+            && class_exists(AccessControlModule::class)
             && $componentConfiguration->canSchemaBePrivate()
         ) {
             $this->initSchemaServices(
