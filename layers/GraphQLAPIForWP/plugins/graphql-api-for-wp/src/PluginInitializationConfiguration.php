@@ -43,7 +43,7 @@ use PoPCMSSchema\Comments\Module as CommentsComponent;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
 use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsComponent;
 use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
@@ -376,26 +376,26 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Custom post default/max limits
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_ADMIN_DATA,
             ],
             // Custom post, if there is only one custom type, use it instead of the Union
             [
-                'class' => CustomPostsComponent::class,
+                'class' => CustomPostsModule::class,
                 'envVariable' => CustomPostsEnvironment::USE_SINGLE_TYPE_INSTEAD_OF_CUSTOMPOST_UNION_TYPE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE,

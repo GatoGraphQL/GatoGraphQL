@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPAPI\API\Module as APIModule;
 use PoPAPI\RESTAPI\Module as RESTAPIModule;
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 
 /**
  * Initialize component
@@ -63,7 +63,7 @@ class Module extends AbstractModule
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/RESTAPI');
         }
 
-        if (class_exists(CustomPostsComponent::class)) {
+        if (class_exists(CustomPostsModule::class)) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
             $this->initSchemaServices(
                 dirname(__DIR__),
