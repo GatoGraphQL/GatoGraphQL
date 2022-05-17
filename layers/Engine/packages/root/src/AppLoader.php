@@ -19,13 +19,13 @@ class AppLoader implements AppLoaderInterface
      *
      * @var string[]
      */
-    protected array $initializedComponentClasses = [];
+    protected array $initializedModuleClasses = [];
     /**
      * Module in their initialization order
      *
      * @var string[]
      */
-    protected array $orderedComponentClasses = [];
+    protected array $orderedModuleClasses = [];
     /**
      * Module classes to be initialized
      *
@@ -142,11 +142,11 @@ class AppLoader implements AppLoaderInterface
          */
         $moduleClasses = array_values(array_diff(
             $moduleClasses,
-            $this->initializedComponentClasses
+            $this->initializedModuleClasses
         ));
         $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
-            $this->initializedComponentClasses[] = $moduleClass;
+            $this->initializedModuleClasses[] = $moduleClass;
 
             // Initialize and register the Module
             $module = $moduleManager->register($moduleClass);
@@ -181,7 +181,7 @@ class AppLoader implements AppLoaderInterface
             );
 
             // We reached the bottom of the rung, add the module to the list
-            $this->orderedComponentClasses[] = $moduleClass;
+            $this->orderedModuleClasses[] = $moduleClass;
 
             /**
              * If this compononent satisfies the contracts for other
@@ -255,7 +255,7 @@ class AppLoader implements AppLoaderInterface
          * This way, these services become available for initializing
          * Application Container services.
          */
-        foreach ($this->orderedComponentClasses as $moduleClass) {
+        foreach ($this->orderedModuleClasses as $moduleClass) {
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
                 continue;
@@ -297,7 +297,7 @@ class AppLoader implements AppLoaderInterface
     {
         // Collect the compiler pass classes from all modules
         $compilerPassClasses = [];
-        foreach ($this->orderedComponentClasses as $moduleClass) {
+        foreach ($this->orderedModuleClasses as $moduleClass) {
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
                 continue;
@@ -330,7 +330,7 @@ class AppLoader implements AppLoaderInterface
          * and for its depended-upon modules.
          * Hence this is executed from bottom to top
          */
-        foreach (array_reverse($this->orderedComponentClasses) as $moduleClass) {
+        foreach (array_reverse($this->orderedModuleClasses) as $moduleClass) {
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
                 continue;
@@ -350,7 +350,7 @@ class AppLoader implements AppLoaderInterface
         /**
          * Initialize the container services by the Components
          */
-        foreach ($this->orderedComponentClasses as $moduleClass) {
+        foreach ($this->orderedModuleClasses as $moduleClass) {
             // Initialize the module, passing its configuration, and checking if its schema must be skipped
             $module = App::getModule($moduleClass);
             if (!$module->isEnabled()) {
