@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\AccessControl;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     public function usePrivateSchemaMode(): bool
     {

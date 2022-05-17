@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     // /**
     //  * URL base for the module, pointing to graphql-api.com

@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer;
 
 use PoP\Root\App;
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoPAPI\API\Module as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     public function exposeSelfFieldForRootTypeInGraphQLSchema(): bool
     {

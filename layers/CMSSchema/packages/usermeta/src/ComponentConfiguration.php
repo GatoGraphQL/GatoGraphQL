@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMeta;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     /**
      * @return string[]

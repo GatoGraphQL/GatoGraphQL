@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIEndpointsForWP;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     public function isNativeAPIEndpointDisabled(): bool
     {

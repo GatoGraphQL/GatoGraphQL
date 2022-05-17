@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     private ?int $getStanceListDefaultLimit = 10;
     private ?int $getStanceListMaxLimit = -1;

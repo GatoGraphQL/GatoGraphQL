@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories;
 
-use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractModuleConfiguration;
 
-class ComponentConfiguration extends AbstractComponentConfiguration
+class ComponentConfiguration extends AbstractModuleConfiguration
 {
     // public function getPostCategoryListDefaultLimit(): ?int
     // {
