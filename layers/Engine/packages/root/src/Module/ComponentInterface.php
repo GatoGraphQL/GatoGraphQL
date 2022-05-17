@@ -129,7 +129,7 @@ interface ComponentInterface
     /**
      * ModuleConfiguration for the Module
      */
-    public function getConfiguration(): ?ComponentConfigurationInterface;
+    public function getConfiguration(): ?ModuleConfigurationInterface;
 
     /**
      * ModuleInfo for the Module

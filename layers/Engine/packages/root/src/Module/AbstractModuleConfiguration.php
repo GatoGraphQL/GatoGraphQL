@@ -7,7 +7,7 @@ namespace PoP\Root\Module;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
-abstract class AbstractModuleConfiguration implements ComponentConfigurationInterface
+abstract class AbstractModuleConfiguration implements ModuleConfigurationInterface
 {
     final public function __construct(
         /** @var array<string,mixed> */
