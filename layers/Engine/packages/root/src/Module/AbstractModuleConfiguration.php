@@ -76,7 +76,7 @@ abstract class AbstractModuleConfiguration implements ModuleConfigurationInterfa
     }
 
     /**
-     * Package's Module class, of type ComponentInterface.
+     * Package's Module class, of type ModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
      */
     protected function getComponentClass(): string

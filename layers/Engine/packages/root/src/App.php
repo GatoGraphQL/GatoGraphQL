@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -206,7 +206,7 @@ class App implements AppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getComponent(string $componentClass): ComponentInterface
+    final public static function getComponent(string $componentClass): ModuleInterface
     {
         return self::getComponentManager()->getComponent($componentClass);
     }

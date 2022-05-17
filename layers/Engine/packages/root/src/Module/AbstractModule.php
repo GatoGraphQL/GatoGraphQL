@@ -7,7 +7,7 @@ namespace PoP\Root\Module;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
-abstract class AbstractModule implements ComponentInterface
+abstract class AbstractModule implements ModuleInterface
 {
     use InitializeContainerServicesInComponentTrait;
 
@@ -19,7 +19,7 @@ abstract class AbstractModule implements ComponentInterface
      * for any CMS, that require to be satisfied for some specific CMS
      * (such as WordPress).
      */
-    private ?ComponentInterface $satisfyingComponent = null;
+    private ?ModuleInterface $satisfyingComponent = null;
     private ?bool $enabled = null;
     protected ?ModuleConfigurationInterface $componentConfiguration = null;
     protected ?ModuleInfoInterface $componentInfo = null;
@@ -92,7 +92,7 @@ abstract class AbstractModule implements ComponentInterface
     /**
      * Indicate what other component satisfies the contracts by this component.
      */
-    public function setSatisfyingComponent(ComponentInterface $component): void
+    public function setSatisfyingComponent(ModuleInterface $component): void
     {
         $this->satisfyingComponent = $component;
     }

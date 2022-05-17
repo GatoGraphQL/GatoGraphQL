@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
@@ -375,7 +375,7 @@ class AppLoader implements AppLoaderInterface
         App::getComponentManager()->componentLoaded();
     }
 
-    public function skipSchemaForComponent(ComponentInterface $component): bool
+    public function skipSchemaForComponent(ModuleInterface $component): bool
     {
         $componentClass = \get_class($component);
         if (!isset($this->skipSchemaForComponentCache[$componentClass])) {

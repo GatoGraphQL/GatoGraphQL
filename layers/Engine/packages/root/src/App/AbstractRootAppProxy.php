@@ -7,7 +7,7 @@ namespace PoP\Root\App;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoaderInterface;
-use PoP\Root\Module\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -134,7 +134,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getComponent(string $componentClass): ComponentInterface
+    final public static function getComponent(string $componentClass): ModuleInterface
     {
         return RootApp::getComponent($componentClass);
     }

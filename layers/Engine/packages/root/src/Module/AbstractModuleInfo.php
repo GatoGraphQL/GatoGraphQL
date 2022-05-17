@@ -9,7 +9,7 @@ abstract class AbstractModuleInfo implements ModuleInfoInterface
     protected array $values = [];
 
     final public function __construct(
-        protected ComponentInterface $component
+        protected ModuleInterface $component
     ) {
         $this->initialize();
     }

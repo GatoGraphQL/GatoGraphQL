@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use PoP\Root\Module\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Exception\ComponentNotExistsException;
 
 /**
@@ -15,14 +15,14 @@ class ComponentManager implements ComponentManagerInterface
     /**
      * The initialized components, stored under their class
      *
-     * @var array<string,ComponentInterface>
+     * @var array<string,ModuleInterface>
      */
     protected array $components = [];
 
     /**
      * Register and initialize a component
      */
-    public function register(string $componentClass): ComponentInterface
+    public function register(string $componentClass): ModuleInterface
     {
         $component = new $componentClass();
         $this->components[$componentClass] = $component;
@@ -32,7 +32,7 @@ class ComponentManager implements ComponentManagerInterface
     /**
      * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
-    public function getComponent(string $componentClass): ComponentInterface
+    public function getComponent(string $componentClass): ModuleInterface
     {
         if (!isset($this->components[$componentClass])) {
             throw new ComponentNotExistsException(\sprintf(

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\ComponentInterface;
+use PoP\Root\Module\ModuleInterface;
 
 interface AppLoaderInterface
 {
@@ -100,5 +100,5 @@ interface AppLoaderInterface
      */
     public function bootApplicationComponents(): void;
 
-    public function skipSchemaForComponent(ComponentInterface $component): bool;
+    public function skipSchemaForComponent(ModuleInterface $component): bool;
 }
