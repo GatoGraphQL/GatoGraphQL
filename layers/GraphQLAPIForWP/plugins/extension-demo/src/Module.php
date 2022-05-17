@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\ExtensionDemo;
 
-use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionComponent;
+use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionModule;
 
 /**
  * Initialize component
  */
-class Module extends AbstractExtensionComponent
+class Module extends AbstractExtensionModule
 {
     public function getDependedModuleClasses(): array
     {
