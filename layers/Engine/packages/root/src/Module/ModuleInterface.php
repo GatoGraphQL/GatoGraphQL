@@ -60,14 +60,14 @@ interface ModuleInterface
      *
      * @return string[]
      */
-    public function getDevPHPUnitDependedComponentClasses(): array;
+    public function getDevPHPUnitDependedModuleClasses(): array;
 
     /**
      * All conditional component classes that this component depends upon, to initialize them
      *
      * @return string[]
      */
-    public function getDependedConditionalComponentClasses(): array;
+    public function getDependedConditionalModuleClasses(): array;
 
     /**
      * Function called by the Bootloader before booting the system

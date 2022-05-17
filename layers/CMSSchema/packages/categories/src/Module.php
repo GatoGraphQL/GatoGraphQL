@@ -31,7 +31,7 @@ class Module extends AbstractModule
     /**
      * All conditional component classes that this component depends upon, to initialize them
      */
-    public function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalModuleClasses(): array
     {
         return [
             \PoPAPI\API\Module::class,

@@ -164,7 +164,7 @@ class AppLoader implements AppLoaderInterface
                 );
                 if (Environment::isApplicationEnvironmentDevPHPUnit()) {
                     $this->addComponentsOrderedForInitialization(
-                        $module->getDevPHPUnitDependedComponentClasses(),
+                        $module->getDevPHPUnitDependedModuleClasses(),
                         $isDev
                     );
                 }
@@ -173,7 +173,7 @@ class AppLoader implements AppLoaderInterface
             // Initialize all depended-upon PoP conditional components, if they are installed
             $this->addComponentsOrderedForInitialization(
                 array_filter(
-                    $module->getDependedConditionalComponentClasses(),
+                    $module->getDependedConditionalModuleClasses(),
                     // Rector does not downgrade `class_exists(...)` properly, so keep as string
                     'class_exists'
                 ),

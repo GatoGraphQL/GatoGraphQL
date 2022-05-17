@@ -13,7 +13,7 @@ class ModuleTest extends AbstractTestCase
             App::getModule(Module::class)->getDependedModuleClasses()
         );
         $this->assertEmpty(
-            App::getModule(Module::class)->getDependedConditionalComponentClasses()
+            App::getModule(Module::class)->getDependedConditionalModuleClasses()
         );
     }
 }

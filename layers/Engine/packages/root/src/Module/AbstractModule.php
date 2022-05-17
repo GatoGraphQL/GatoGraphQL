@@ -129,7 +129,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @return string[]
      */
-    public function getDevPHPUnitDependedComponentClasses(): array
+    public function getDevPHPUnitDependedModuleClasses(): array
     {
         return [];
     }
@@ -139,7 +139,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @return string[]
      */
-    public function getDependedConditionalComponentClasses(): array
+    public function getDependedConditionalModuleClasses(): array
     {
         return [];
     }
