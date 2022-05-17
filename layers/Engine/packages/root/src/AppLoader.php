@@ -117,7 +117,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @param string[] $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
      */
-    public function addSchemaComponentClassesToSkip(
+    public function addSchemaModuleClassesToSkip(
         array $skipSchemaModuleClasses
     ): void {
         $this->skipSchemaModuleClasses = array_merge(

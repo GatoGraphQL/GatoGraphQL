@@ -184,7 +184,7 @@ abstract class AbstractPlugin implements PluginInterface
         App::getAppLoader()->addModuleClassConfiguration(
             $this->getModuleClassConfiguration()
         );
-        App::getAppLoader()->addSchemaComponentClassesToSkip(
+        App::getAppLoader()->addSchemaModuleClassesToSkip(
             $this->getSchemaModuleClassesToSkip()
         );
     }
