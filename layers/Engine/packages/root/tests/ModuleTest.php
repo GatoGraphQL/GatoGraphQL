@@ -5,7 +5,7 @@ namespace PoP\Root;
 class ModuleTest extends AbstractTestCase
 {
     /**
-     * The root component cannot have any dependency
+     * The root module cannot have any dependency
      */
     public function testHasNoDependencies(): void
     {

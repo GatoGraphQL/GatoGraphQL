@@ -20,7 +20,7 @@ class ModuleManager implements ModuleManagerInterface
     protected array $modules = [];
 
     /**
-     * Register and initialize a component
+     * Register and initialize a module
      */
     public function register(string $moduleClass): ModuleInterface
     {
@@ -30,7 +30,7 @@ class ModuleManager implements ModuleManagerInterface
     }
 
     /**
-     * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
+     * @throws ComponentNotExistsException If the class of the module does not exist or has not been initialized
      */
     public function getModule(string $moduleClass): ModuleInterface
     {

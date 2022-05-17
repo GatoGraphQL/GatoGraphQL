@@ -256,7 +256,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
 
     /**
      * Provide the list of modules to check if they are enabled and,
-     * if they are not, what component classes must skip initialization
+     * if they are not, what module classes must skip initialization
      *
      * @return array<string,string[]>
      */

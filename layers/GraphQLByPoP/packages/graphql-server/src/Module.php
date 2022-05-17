@@ -35,7 +35,7 @@ class Module extends AbstractModule
     }
 
     /**
-     * Set the default component configuration
+     * Set the default module configuration
      *
      * @param array<string, mixed> $moduleClassConfiguration
      */
