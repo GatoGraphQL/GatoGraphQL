@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
 use PoP\Root\Module\ModuleInterface;
 
-interface PluginComponentInterface extends ModuleInterface
+interface PluginModuleInterface extends ModuleInterface
 {
     public function setPluginFolder(string $pluginFolder): void;
     public function getPluginFolder(): ?string;

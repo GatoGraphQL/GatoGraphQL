@@ -137,20 +137,20 @@ abstract class AbstractPlugin implements PluginInterface
     {
         // Set the plugin folder on the plugin's Module
         $pluginFolder = dirname($this->pluginFile);
-        $this->getPluginComponent()->setPluginFolder($pluginFolder);
+        $this->getPluginModule()->setPluginFolder($pluginFolder);
     }
 
     /**
      * Plugin's Module
      */
-    protected function getPluginComponent(): PluginComponentInterface
+    protected function getPluginModule(): PluginModuleInterface
     {
-        /** @var PluginComponentInterface */
+        /** @var PluginModuleInterface */
         return App::getModule($this->getModuleClass());
     }
 
     /**
-     * Package's Module class, of type PluginComponentInterface.
+     * Package's Module class, of type PluginModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
      */
     protected function getModuleClass(): string
