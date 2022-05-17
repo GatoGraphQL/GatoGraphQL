@@ -37,7 +37,7 @@ use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
-use PoPCMSSchema\CommentMeta\Module as CommentMetaComponent;
+use PoPCMSSchema\CommentMeta\Module as CommentMetaModule;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
 use PoPCMSSchema\Comments\Module as CommentsComponent;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
@@ -455,7 +455,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // White/Blacklisted entries to Comment.meta
             [
-                'class' => CommentMetaComponent::class,
+                'class' => CommentMetaModule::class,
                 'envVariable' => CommentMetaEnvironment::COMMENT_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -463,7 +463,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => CommentMetaComponent::class,
+                'class' => CommentMetaModule::class,
                 'envVariable' => CommentMetaEnvironment::COMMENT_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_COMMENT_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
