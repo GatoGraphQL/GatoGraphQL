@@ -2,8 +2,8 @@
 
 namespace PoPAPI\APIMirrorQuery;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Root\AbstractModuleTest;
 
-class ComponentTest extends AbstractComponentTest
+class ComponentTest extends AbstractModuleTest
 {
 }

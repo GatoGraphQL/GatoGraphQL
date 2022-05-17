@@ -2,8 +2,8 @@
 
 namespace GraphQLAPI\PluginUtils;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Root\AbstractModuleTest;
 
-class ComponentTest extends AbstractComponentTest
+class ComponentTest extends AbstractModuleTest
 {
 }

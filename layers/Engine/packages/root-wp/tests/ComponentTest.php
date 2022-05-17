@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\RootWP;
 
-use PoP\Root\AbstractComponentTest;
+use PoP\Root\AbstractModuleTest;
 
 /**
  * Made abstract to disable the test
  */
-abstract class ComponentTest extends AbstractComponentTest
+abstract class ComponentTest extends AbstractModuleTest
 {
 }
