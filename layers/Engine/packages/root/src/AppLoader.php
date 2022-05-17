@@ -153,7 +153,7 @@ class AppLoader implements AppLoaderInterface
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
-                $module->getDependedComponentClasses(),
+                $module->getDependedModuleClasses(),
                 $isDev
             );
 

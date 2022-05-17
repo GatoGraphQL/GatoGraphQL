@@ -6,7 +6,7 @@ $class = (new class() extends \PoP\Root\Module\AbstractModule
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [];
     }

@@ -24,7 +24,7 @@ class Module extends AbstractPluginComponent
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [
             \GraphQLAPI\ExternalDependencyWrappers\Module::class,

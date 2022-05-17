@@ -46,7 +46,7 @@ interface ModuleInterface
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array;
+    public function getDependedModuleClasses(): array;
 
     /**
      * All DEV component classes that this component depends upon, to initialize them

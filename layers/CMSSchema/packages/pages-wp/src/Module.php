@@ -31,7 +31,7 @@ class Module extends AbstractModule
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [
             \PoPCMSSchema\Pages\Module::class,

@@ -16,7 +16,7 @@ class Module extends AbstractModule
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [
             \PoPCMSSchema\CustomPostMediaMutations\Module::class,

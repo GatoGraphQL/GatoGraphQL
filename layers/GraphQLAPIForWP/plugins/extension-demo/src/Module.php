@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionComponent;
  */
 class Module extends AbstractExtensionComponent
 {
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         return [
             \PoPSchema\SchemaCommons\Module::class,

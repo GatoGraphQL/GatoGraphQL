@@ -16,7 +16,7 @@ class Module extends AbstractModule
      *
      * @return string[]
      */
-    public function getDependedComponentClasses(): array
+    public function getDependedModuleClasses(): array
     {
         /**
          * Comment Leo 17/03/2021:

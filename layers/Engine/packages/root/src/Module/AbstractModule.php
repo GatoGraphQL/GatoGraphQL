@@ -112,7 +112,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @return string[]
      */
-    abstract public function getDependedComponentClasses(): array;
+    abstract public function getDependedModuleClasses(): array;
 
     /**
      * All DEV module classes that this module depends upon, to initialize them
@@ -248,7 +248,7 @@ abstract class AbstractModule implements ModuleInterface
         // If any dependency is disabled, then disable this module too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
             $satisfiedComponentClasses = $this->getSatisfiedModuleClasses();
-            foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
+            foreach ($this->getDependedModuleClasses() as $dependedComponentClass) {
                 if ($ignoreDependencyOnSatisfiedComponents && in_array($dependedComponentClass, $satisfiedComponentClasses)) {
                     continue;
                 }
