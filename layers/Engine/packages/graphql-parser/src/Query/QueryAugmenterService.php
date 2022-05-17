@@ -26,8 +26,8 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableMultipleQueryExecution()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableMultipleQueryExecution()) {
             return null;
         }
 
@@ -51,8 +51,8 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
         ?Variable $variable,
     ): bool {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableDynamicVariables()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableDynamicVariables()) {
             return false;
         }
 

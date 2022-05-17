@@ -59,15 +59,15 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
         // Check that the user is logged-in
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
             $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
             if ($errorFeedbackItemResolution !== null) {
                 return [
                     $errorFeedbackItemResolution,
                 ];
             }
-        } elseif ($componentConfiguration->requireCommenterNameAndEmail()) {
+        } elseif ($moduleConfiguration->requireCommenterNameAndEmail()) {
             // Validate if the commenter's name and email are mandatory
             if (!($form_data[MutationInputProperties::AUTHOR_NAME] ?? null)) {
                 $errors[] = new FeedbackItemResolution(
@@ -125,8 +125,8 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          * Override with the user's properties
          */
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = App::getState('current-user-id');
             $comment_data['userID'] = $userID;
             $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);

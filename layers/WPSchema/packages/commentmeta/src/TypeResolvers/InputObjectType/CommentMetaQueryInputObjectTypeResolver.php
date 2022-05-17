@@ -22,13 +22,13 @@ class CommentMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObje
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCommentMetaEntries();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCommentMetaBehavior();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentMetaBehavior();
     }
 }

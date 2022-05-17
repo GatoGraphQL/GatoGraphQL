@@ -88,8 +88,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($useCache = $moduleConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
             // Use different caches for the normal and namespaced schemas, or
             // it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -167,7 +167,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
             $schemaDefinition[SchemaDefinition::EXTENSIONS] = $this->getSchemaExtensions();
 
             // Sort the elements in the schema alphabetically
-            if ($componentConfiguration->sortFullSchemaAlphabetically()) {
+            if ($moduleConfiguration->sortFullSchemaAlphabetically()) {
                 $this->sortFullSchemaAlphabetically($schemaDefinition);
             }
 
@@ -316,8 +316,8 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 
     private function addDirectiveSchemaDefinition(

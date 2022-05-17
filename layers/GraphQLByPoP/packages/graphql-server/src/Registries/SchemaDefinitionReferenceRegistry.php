@@ -102,8 +102,8 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         // Attempt to retrieve from the cache, if enabled
         /** @var APIComponentConfiguration */
-        $componentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
-        if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
+        $moduleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
+        if ($useCache = $moduleConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
             $cacheType = CacheTypes::GRAPHQL_SCHEMA_DEFINITION;
@@ -143,14 +143,14 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
-        $exposeGlobalFieldsInGraphQLSchema = $componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $exposeSchemaIntrospectionFieldInSchema = $moduleConfiguration->exposeSchemaIntrospectionFieldInSchema();
+        $exposeGlobalFieldsInGraphQLSchema = $moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
 
         $rootObjectTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaRootObjectTypeResolver();
         $rootTypeName = $rootObjectTypeResolver->getMaybeNamespacedTypeName();
         $queryRootTypeName = null;
-        $addConnectionFromRootToQueryRootAndMutationRoot = $componentConfiguration->addConnectionFromRootToQueryRootAndMutationRoot();
+        $addConnectionFromRootToQueryRootAndMutationRoot = $moduleConfiguration->addConnectionFromRootToQueryRootAndMutationRoot();
         if (!$enableNestedMutations || $addConnectionFromRootToQueryRootAndMutationRoot) {
             $queryRootTypeResolver = $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             $queryRootTypeName = $queryRootTypeResolver->getMaybeNamespacedTypeName();
@@ -194,11 +194,11 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Remove unneeded data
-        if (!$componentConfiguration->exposeSelfFieldInGraphQLSchema()) {
+        if (!$moduleConfiguration->exposeSelfFieldInGraphQLSchema()) {
             /**
              * Check if to remove the "self" field everywhere, or if to keep it just for the Root type
              */
-            $keepSelfFieldForRootType = $componentConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
+            $keepSelfFieldForRootType = $moduleConfiguration->exposeSelfFieldForRootTypeInGraphQLSchema();
             foreach ($this->fullSchemaDefinitionForGraphQL[SchemaDefinition::TYPES] as $typeKind => $typeSchemaDefinitions) {
                 foreach (array_keys($typeSchemaDefinitions) as $typeName) {
                     if (!$keepSelfFieldForRootType || ($typeName !== $rootTypeName && ($enableNestedMutations || $typeName !== $queryRootTypeName))) {
@@ -209,7 +209,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Maybe append the field/directive's version to its description, since this field is missing in GraphQL
-        $addVersionToGraphQLSchemaFieldDescription = $componentConfiguration->addVersionToGraphQLSchemaFieldDescription();
+        $addVersionToGraphQLSchemaFieldDescription = $moduleConfiguration->addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         /** @var GraphQLParserComponentConfiguration */
@@ -289,7 +289,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $apiComponentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if (
             !$apiComponentConfiguration->sortFullSchemaAlphabetically()
-            && $componentConfiguration->sortGraphQLSchemaAlphabetically()
+            && $moduleConfiguration->sortGraphQLSchemaAlphabetically()
         ) {
             $this->getSchemaDefinitionService()->sortFullSchemaAlphabetically($this->fullSchemaDefinitionForGraphQL);
         }

@@ -509,8 +509,8 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
-                $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
@@ -528,9 +528,9 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     );
                 }
                 $sendExceptionErrorMessages = $e instanceof AbstractClientException
-                    || $componentConfiguration->sendExceptionErrorMessages();
+                    || $moduleConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionErrorMessages
-                    ? ($componentConfiguration->sendExceptionTraces()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E3A,

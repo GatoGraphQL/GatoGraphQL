@@ -21,7 +21,7 @@ abstract class AbstractModule implements ModuleInterface
      */
     private ?ModuleInterface $satisfyingComponent = null;
     private ?bool $enabled = null;
-    protected ?ModuleConfigurationInterface $componentConfiguration = null;
+    protected ?ModuleConfigurationInterface $moduleConfiguration = null;
     protected ?ModuleInfoInterface $componentInfo = null;
 
     /**
@@ -285,7 +285,7 @@ abstract class AbstractModule implements ModuleInterface
      */
     public function getConfiguration(): ?ModuleConfigurationInterface
     {
-        return $this->componentConfiguration;
+        return $this->moduleConfiguration;
     }
 
     /**
@@ -305,7 +305,7 @@ abstract class AbstractModule implements ModuleInterface
         if ($componentConfigurationClass === null) {
             return;
         }
-        $this->componentConfiguration = new $componentConfigurationClass($configuration);
+        $this->moduleConfiguration = new $componentConfigurationClass($configuration);
     }
 
     /**

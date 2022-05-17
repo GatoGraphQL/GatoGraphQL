@@ -24,14 +24,14 @@ class TagPaginationInputObjectTypeResolver extends PaginationInputObjectTypeReso
     protected function getDefaultLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getTagListDefaultLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTagListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getTagListMaxLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getTagListMaxLimit();
     }
 }

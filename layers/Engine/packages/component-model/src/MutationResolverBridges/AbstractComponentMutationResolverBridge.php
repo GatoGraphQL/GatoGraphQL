@@ -107,11 +107,11 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
-            $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-            if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                 // @todo: Implement for Log
             }
-            $errorMessage = $componentConfiguration->sendExceptionErrorMessages()
+            $errorMessage = $moduleConfiguration->sendExceptionErrorMessages()
                 ? $e->getMessage()
                 : $this->__('Resolving the mutation produced an exception, please contact the admin', 'component-model');
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;

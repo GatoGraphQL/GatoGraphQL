@@ -71,13 +71,13 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         $adminFieldNames = parent::getAdminFieldNames();
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->treatUserRoleAsAdminData()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserRoleAsAdminData()) {
             $adminFieldNames[] = 'roles';
             $adminFieldNames[] = 'hasRole';
             $adminFieldNames[] = 'hasAnyRole';
         }
-        if ($componentConfiguration->treatUserCapabilityAsAdminData()) {
+        if ($moduleConfiguration->treatUserCapabilityAsAdminData()) {
             $adminFieldNames[] = 'capabilities';
             $adminFieldNames[] = 'hasCapability';
             $adminFieldNames[] = 'hasAnyCapability';

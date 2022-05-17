@@ -24,14 +24,14 @@ class RootMenuPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
     protected function getDefaultLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getMenuListDefaultLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getMenuListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getMenuListMaxLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getMenuListMaxLimit();
     }
 }

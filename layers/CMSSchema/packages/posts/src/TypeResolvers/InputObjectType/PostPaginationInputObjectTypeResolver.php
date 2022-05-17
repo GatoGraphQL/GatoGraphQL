@@ -24,14 +24,14 @@ class PostPaginationInputObjectTypeResolver extends CustomPostPaginationInputObj
     protected function getDefaultLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getPostListDefaultLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPostListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getPostListMaxLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getPostListMaxLimit();
     }
 }

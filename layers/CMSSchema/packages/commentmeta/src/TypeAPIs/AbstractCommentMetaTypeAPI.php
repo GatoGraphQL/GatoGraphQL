@@ -35,14 +35,14 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCommentMetaEntries();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCommentMetaBehavior();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentMetaBehavior();
     }
 
     /**

@@ -21,7 +21,7 @@ class RootObjectTypeSchemaDefinitionProvider extends UpstreamRootObjectTypeSchem
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return !$componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return !$moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }

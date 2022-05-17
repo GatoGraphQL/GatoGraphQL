@@ -472,8 +472,8 @@ class Engine implements EngineInterface
     public function getModelPropsModuletree(array $module): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
@@ -648,8 +648,8 @@ class Engine implements EngineInterface
     {
         $ret = [];
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         $engineState = App::getEngineState();
 
@@ -1042,8 +1042,8 @@ class Engine implements EngineInterface
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
         $engineState = App::getEngineState();
 
@@ -1751,8 +1751,8 @@ class Engine implements EngineInterface
         $ret[Response::SCHEMA_FEEDBACK] = [];
 
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $enabledFeedbackCategoryExtensions = $componentConfiguration->getEnabledFeedbackCategoryExtensions();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $enabledFeedbackCategoryExtensions = $moduleConfiguration->getEnabledFeedbackCategoryExtensions();
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
         $sendFeedbackNotices = in_array(FeedbackCategories::NOTICE, $enabledFeedbackCategoryExtensions);

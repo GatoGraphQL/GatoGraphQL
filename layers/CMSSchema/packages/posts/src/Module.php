@@ -78,8 +78,8 @@ class Module extends AbstractModule
         }
 
         /** @var ModuleConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        if ($componentConfiguration->addPostTypeToCustomPostUnionTypes()) {
+        $moduleConfiguration = $this->getConfiguration();
+        if ($moduleConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');
         }
     }

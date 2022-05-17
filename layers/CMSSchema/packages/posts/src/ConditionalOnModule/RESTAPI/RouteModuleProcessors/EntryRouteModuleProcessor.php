@@ -49,11 +49,11 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     {
         $ret = array();
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         /** @var ComponentModelComponentConfiguration */
         $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         $routemodules = array(
-            $componentConfiguration->getPostsRoute() => [
+            $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 $componentModelComponentConfiguration->enableAdminSchema() ?
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST

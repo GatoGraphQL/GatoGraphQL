@@ -18,8 +18,8 @@ trait WPClientTrait
     protected function getComponentBaseURL(): ?string
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getGraphQLClientsComponentURL();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGraphQLClientsComponentURL();
     }
     /**
      * Base Dir
@@ -35,7 +35,7 @@ trait WPClientTrait
     protected function getEndpointURLOrURLPath(): string
     {
         /** @var GraphQLEndpointForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLEndpointForWPModule::class)->getConfiguration();
-        return $componentConfiguration->getGraphQLAPIEndpoint();
+        $moduleConfiguration = App::getComponent(GraphQLEndpointForWPModule::class)->getConfiguration();
+        return $moduleConfiguration->getGraphQLAPIEndpoint();
     }
 }

@@ -17,12 +17,12 @@ class ConfigureGraphQLPersistedQueryCompilerPass extends AbstractCompilerPass
     protected function enabled(): bool
     {
         // If any downstream Module is disabled, its ModuleConfiguration will be null
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration === null) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration === null) {
             return false;
         }
-        /** @var ModuleConfiguration $componentConfiguration */
-        return $componentConfiguration->addGraphQLIntrospectionPersistedQuery();
+        /** @var ModuleConfiguration $moduleConfiguration */
+        return $moduleConfiguration->addGraphQLIntrospectionPersistedQuery();
     }
 
     /**

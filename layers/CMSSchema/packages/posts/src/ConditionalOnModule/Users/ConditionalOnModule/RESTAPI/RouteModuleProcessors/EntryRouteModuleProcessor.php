@@ -38,9 +38,9 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
         $ret = array();
         // Author's posts
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
-            $componentConfiguration->getPostsRoute() => [
+            $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [

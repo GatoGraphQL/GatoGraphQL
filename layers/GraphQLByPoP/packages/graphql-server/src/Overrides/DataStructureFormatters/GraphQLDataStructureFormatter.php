@@ -29,8 +29,8 @@ class GraphQLDataStructureFormatter extends UpstreamGraphQLDataStructureFormatte
     {
         if (App::getState('standard-graphql')) {
             /** @var ModuleConfiguration */
-            $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-            return $componentConfiguration->enableProactiveFeedback();
+            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            return $moduleConfiguration->enableProactiveFeedback();
         }
         return parent::addTopLevelExtensionsEntryToResponse();
     }

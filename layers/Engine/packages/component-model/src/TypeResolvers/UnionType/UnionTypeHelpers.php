@@ -69,8 +69,8 @@ class UnionTypeHelpers
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
             /** @var ModuleConfiguration */
-            $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-            if ($componentConfiguration->useSingleTypeInsteadOfUnionType()) {
+            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            if ($moduleConfiguration->useSingleTypeInsteadOfUnionType()) {
                 return count($targetTypeResolvers) == 1 ?
                     $targetTypeResolvers[0] :
                     $unionTypeResolver;

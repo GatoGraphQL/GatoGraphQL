@@ -955,10 +955,10 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
             /** @var ModuleConfiguration */
-            $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
             if (
                 $separateEngineIterationFeedbackStore->hasErrors()
-                && $componentConfiguration->removeFieldIfDirectiveFailed()
+                && $moduleConfiguration->removeFieldIfDirectiveFailed()
             ) {
                 // Extract the failing fields from the errors
                 foreach ($separateEngineIterationFeedbackStore->objectFeedbackStore->getErrors() as $error) {

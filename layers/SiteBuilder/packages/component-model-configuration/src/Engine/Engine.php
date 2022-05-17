@@ -79,8 +79,8 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
-        $useCache = $componentConfiguration->useComponentModelCache();
+        $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $useCache = $moduleConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both
         $datasourceselector = App::getState('datasourceselector');

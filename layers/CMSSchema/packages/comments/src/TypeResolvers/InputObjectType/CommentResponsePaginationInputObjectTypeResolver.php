@@ -24,14 +24,14 @@ class CommentResponsePaginationInputObjectTypeResolver extends PaginationInputOb
     protected function getDefaultLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCustomPostCommentOrCommentResponseListDefaultLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCustomPostCommentOrCommentResponseListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCommentListMaxLimit();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCommentListMaxLimit();
     }
 }

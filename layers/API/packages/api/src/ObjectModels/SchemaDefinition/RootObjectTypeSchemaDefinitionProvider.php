@@ -44,7 +44,7 @@ class RootObjectTypeSchemaDefinitionProvider extends ObjectTypeSchemaDefinitionP
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->skipExposingGlobalFieldsInFullSchema();
     }
 }

@@ -58,8 +58,8 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getBlockContentTitle(): string
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return \__('Access Control Rules:', 'graphql-api');
         }
         return \__('Who can access:', 'graphql-api');
@@ -73,11 +73,11 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getLocalizedData(): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         return array_merge(
             parent::getLocalizedData(),
             [
-                'isIndividualControlForSchemaModeEnabled' => $componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode(),
+                'isIndividualControlForSchemaModeEnabled' => $moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode(),
             ]
         );
     }
@@ -91,8 +91,8 @@ class AccessControlBlock extends AbstractControlBlock
     {
         $maybeSchemaModeContent = '';
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             $blockContentPlaceholder = <<<EOT
                 <p><strong>%s</strong> %s</p>
                 <h4 class="%s">%s</h4>

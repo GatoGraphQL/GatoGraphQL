@@ -21,8 +21,8 @@ class Document extends UpstreamDocument
         VariableReference $variableReference,
     ): bool {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->enableDynamicVariables() && $variableReference instanceof DynamicVariableReferenceInterface) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableDynamicVariables() && $variableReference instanceof DynamicVariableReferenceInterface) {
             return true;
         }
         return parent::isVariableDefined($variableReference);

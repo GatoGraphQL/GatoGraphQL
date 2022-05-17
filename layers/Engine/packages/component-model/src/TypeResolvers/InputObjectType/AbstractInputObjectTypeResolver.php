@@ -96,8 +96,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
 
         // Exclude the admin input fields, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableAdminSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableAdminSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
             $consolidatedInputFieldNameTypeResolvers = array_filter(
                 $consolidatedInputFieldNameTypeResolvers,
@@ -474,8 +474,8 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the input field if:
              *

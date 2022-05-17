@@ -91,11 +91,11 @@ class Module extends AbstractModule
 
         // Boot conditionals
         /** @var AccessControlComponentConfiguration */
-        $componentConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
         if (
             class_exists(CacheControlModule::class)
             && class_exists(AccessControlModule::class)
-            && $componentConfiguration->canSchemaBePrivate()
+            && $moduleConfiguration->canSchemaBePrivate()
         ) {
             $this->initSchemaServices(
                 dirname(__DIR__),

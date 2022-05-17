@@ -48,11 +48,11 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
             MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('✳️ Nested mutations enabled, removing the redundant mutation fields from the root type', 'graphql-api'),
         ];
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Mutation Scheme', 'graphql-api'),
-            $mutationSchemeLabels[$attributes[self::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? ''] ?? $componentConfiguration->getSettingsValueLabel()
+            $mutationSchemeLabels[$attributes[self::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT

@@ -51,8 +51,8 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->enableQueryingAppStateFields();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->enableQueryingAppStateFields();
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

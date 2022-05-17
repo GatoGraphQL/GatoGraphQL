@@ -50,8 +50,8 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         /** @var PagesComponentConfiguration */
-        $componentConfiguration = App::getComponent(PagesModule::class)->getConfiguration();
-        if ($componentConfiguration->addPageTypeToCustomPostUnionTypes()) {
+        $moduleConfiguration = App::getComponent(PagesModule::class)->getConfiguration();
+        if ($moduleConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');
         }
     }

@@ -24,8 +24,8 @@ trait AccessControlConfigurableMandatoryDirectivesForFieldsHookSetTrait
          * If enabling individual control, then check if there is any entry for this field and schema mode
          */
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             /**
              * If there are no entries, then exit by returning the original hook value
              */

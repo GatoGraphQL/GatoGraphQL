@@ -84,8 +84,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->addFullSchemaFieldToSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->addFullSchemaFieldToSchema();
     }
 
     public function getFieldNamesToResolve(): array

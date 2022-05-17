@@ -42,9 +42,9 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
-        $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
+        $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
 
         $state['only-fieldname-as-outputkey'] = false;
 
@@ -69,7 +69,7 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['directive-version-constraints'] = null;
         }
 
-        $enableModifyingEngineBehaviorViaRequest = $componentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        $enableModifyingEngineBehaviorViaRequest = $moduleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['output'] = EngineRequest::getOutput($enableModifyingEngineBehaviorViaRequest);
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
         $state['datasourceselector'] = EngineRequest::getDataSourceSelector($enableModifyingEngineBehaviorViaRequest);

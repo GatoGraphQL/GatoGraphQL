@@ -24,8 +24,8 @@ class UserOrderByEnumTypeResolver extends UpstreamUserOrderByEnumTypeResolver
     {
         $adminEnumValues = parent::getAdminEnumValues();
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->treatUserEmailAsAdminData()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatUserEmailAsAdminData()) {
             $adminEnumValues[] = UserOrderBy::EMAIL;
         }
         return $adminEnumValues;

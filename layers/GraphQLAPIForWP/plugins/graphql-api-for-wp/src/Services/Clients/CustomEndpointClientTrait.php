@@ -38,8 +38,8 @@ trait CustomEndpointClientTrait
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
         // // Maybe add ?use_namespace=true
         // /** @var ComponentModelComponentConfiguration */
-        // $componentConfiguration = \PoP\Root\App::getComponent(ComponentModelModule::class)->getConfiguration();
-        // if ($componentConfiguration->mustNamespaceTypes()) {
+        // $moduleConfiguration = \PoP\Root\App::getComponent(ComponentModelModule::class)->getConfiguration();
+        // if ($moduleConfiguration->mustNamespaceTypes()) {
         //     $endpointURL = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpointURL);
         // }
         return $endpointURL;

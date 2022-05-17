@@ -35,8 +35,8 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     public function isServiceEnabled(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->enableComposableDirectives();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->enableComposableDirectives();
     }
 
     public function dissectAndValidateDirectiveForSchema(

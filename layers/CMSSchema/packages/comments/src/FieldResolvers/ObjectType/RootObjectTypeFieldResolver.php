@@ -194,10 +194,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'comment':
-                if ($componentConfiguration->treatCommentStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCommentStatusAsAdminData()) {
                     $commentStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputModuleProcessor::class,
                         FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS

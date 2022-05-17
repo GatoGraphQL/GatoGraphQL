@@ -17,8 +17,8 @@ abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends Abst
     protected function enabled(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->canSchemaBePrivate();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->canSchemaBePrivate();
     }
 
     protected function getSchemaMode(): string

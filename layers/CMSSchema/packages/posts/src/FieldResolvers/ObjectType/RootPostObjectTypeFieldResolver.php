@@ -86,10 +86,10 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'post':
-                if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {
+                if ($moduleConfiguration->treatCustomPostStatusAsAdminData()) {
                     $customPostStatusFilterInputName = FilterInputHelper::getFilterInputName([
                         FilterInputModuleProcessor::class,
                         FilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS

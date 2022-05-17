@@ -80,11 +80,11 @@ class AppLoader implements AppLoaderInterface
         array $componentClassConfiguration
     ): void {
         // Allow to override entries under each Module
-        foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
+        foreach ($componentClassConfiguration as $componentClass => $moduleConfiguration) {
             $this->componentClassConfiguration[$componentClass] ??= [];
             $this->componentClassConfiguration[$componentClass] = array_merge(
                 $this->componentClassConfiguration[$componentClass],
-                $componentConfiguration
+                $moduleConfiguration
             );
         }
     }
@@ -356,10 +356,10 @@ class AppLoader implements AppLoaderInterface
             if (!$component->isEnabled()) {
                 continue;
             }
-            $componentConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
+            $moduleConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
             $skipSchemaForComponent = $this->skipSchemaForComponent($component);
             $component->initialize(
-                $componentConfiguration,
+                $moduleConfiguration,
                 $skipSchemaForComponent,
                 $this->skipSchemaComponentClasses
             );

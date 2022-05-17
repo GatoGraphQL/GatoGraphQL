@@ -28,8 +28,8 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesTrait
          * schema mode is the same required one
          */
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return $this->getUpstreamMatchingEntries($entryList, $value);
         }
         /**

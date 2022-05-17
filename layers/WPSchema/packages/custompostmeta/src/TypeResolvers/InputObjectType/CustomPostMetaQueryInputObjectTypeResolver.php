@@ -22,13 +22,13 @@ class CustomPostMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputO
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCustomPostMetaEntries();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCustomPostMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->getCustomPostMetaBehavior();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->getCustomPostMetaBehavior();
     }
 }

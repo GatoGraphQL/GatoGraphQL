@@ -23,10 +23,10 @@ class RoutingHookSet extends AbstractHookSet
     public function registerRoutes(array $routes): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         return [
             ...$routes,
-            $componentConfiguration->getUsersRoute(),
+            $moduleConfiguration->getUsersRoute(),
         ];
     }
 }

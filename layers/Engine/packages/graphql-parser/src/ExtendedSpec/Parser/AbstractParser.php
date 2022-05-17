@@ -51,8 +51,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     {
         $directives = parent::parseDirectiveList();
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableComposableDirectives()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableComposableDirectives()) {
             return $directives;
         }
 
@@ -287,8 +287,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         );
 
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->enableResolvedFieldVariableReferences()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableResolvedFieldVariableReferences()) {
             $this->replaceResolvedFieldVariableReferences($document);
         }
 

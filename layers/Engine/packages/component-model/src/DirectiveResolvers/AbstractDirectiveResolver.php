@@ -973,8 +973,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 );
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
-                $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
                             $engineIterationFeedbackStore->objectFeedbackStore->addLog(
@@ -998,8 +998,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                         }
                     }
                 }
-                $feedbackItemResolution = $componentConfiguration->sendExceptionErrorMessages()
-                    ? ($componentConfiguration->sendExceptionTraces()
+                $feedbackItemResolution = $moduleConfiguration->sendExceptionErrorMessages()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E11A,
@@ -1093,15 +1093,15 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $removeFieldIfDirectiveFailed = $moduleConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
         }
-        $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
+        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
         if ($setFailingFieldResponseAsNull) {
             $this->setIDsDataFieldsAsNull(
                 $relationalTypeResolver,
@@ -1205,8 +1205,8 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *

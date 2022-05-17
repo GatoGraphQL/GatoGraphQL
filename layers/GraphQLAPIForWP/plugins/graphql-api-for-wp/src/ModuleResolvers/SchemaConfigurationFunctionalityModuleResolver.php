@@ -151,7 +151,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public function getSettings(string $module): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         $moduleSettings = parent::getSettings($module);
         $defaultValueLabel = $this->getDefaultValueLabel();
         $defaultValueDesc = $this->getDefaultValueDescription();
@@ -273,7 +273,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TITLE => \__('Default visibility', 'graphql-api'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Visibility to use for fields and directives in the schema when option <code>"%s"</code> is selected (in %s)', 'graphql-api'),
-                    $componentConfiguration->getSettingsValueLabel(),
+                    $moduleConfiguration->getSettingsValueLabel(),
                     implode(
                         \__(', ', 'graphql-api'),
                         $whereModuleNames

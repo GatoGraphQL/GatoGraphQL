@@ -24,8 +24,8 @@ class DisableUserStateFieldsIfUserIsNotLoggedInAccessControlForFieldsInPrivateSc
     {
         $isUserLoggedIn = App::getState('is-user-logged-in');
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->usePrivateSchemaMode() && !$isUserLoggedIn;
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->usePrivateSchemaMode() && !$isUserLoggedIn;
     }
 
     /**

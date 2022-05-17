@@ -115,19 +115,19 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     public function getDescription(string $module): string
     {
         /** @var GraphQLClientsForWPComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLClientsForWPModule::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(GraphQLClientsForWPModule::class)->getConfiguration();
         switch ($module) {
             case self::GRAPHIQL_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
-                    $componentConfiguration->getGraphiQLClientEndpoint()
+                    $moduleConfiguration->getGraphiQLClientEndpoint()
                 );
             case self::GRAPHIQL_FOR_CUSTOM_ENDPOINTS:
                 return \__('Enable custom endpoints to be attached their own GraphiQL client, to execute queries against them', 'graphql-api');
             case self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT:
                 return \sprintf(
                     \__('Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled', 'graphql-api'),
-                    $componentConfiguration->getVoyagerClientEndpoint()
+                    $moduleConfiguration->getVoyagerClientEndpoint()
                 );
             case self::INTERACTIVE_SCHEMA_FOR_CUSTOM_ENDPOINTS:
                 return \__('Enable custom endpoints to be attached their own Interactive schema client, to visualize the custom schema subset', 'graphql-api');

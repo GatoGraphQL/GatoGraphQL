@@ -24,8 +24,8 @@ trait WithTypeFieldControlBlockTrait
     public function getTypeFieldsForPrint(array $typeFields): array
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $groupFieldsUnderTypeForPrint = $moduleConfiguration->groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName
         $objectTypeResolvers = $this->getTypeRegistry()->getObjectTypeResolvers();
         $namespacedObjectTypeNameNames = [];

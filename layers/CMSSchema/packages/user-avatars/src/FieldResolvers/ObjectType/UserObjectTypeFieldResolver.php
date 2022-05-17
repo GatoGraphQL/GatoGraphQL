@@ -101,9 +101,9 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
-            ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
+            ['avatar' => 'size'] => $moduleConfiguration->getUserAvatarDefaultSize(),
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -126,11 +126,11 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $user = $object;
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry
-                $avatarSize = $fieldArgs['size'] ?? $componentConfiguration->getUserAvatarDefaultSize();
+                $avatarSize = $fieldArgs['size'] ?? $moduleConfiguration->getUserAvatarDefaultSize();
                 $avatarSrc = $this->getUserAvatarTypeAPI()->getUserAvatarSrc($user, $avatarSize);
                 if ($avatarSrc === null) {
                     return null;

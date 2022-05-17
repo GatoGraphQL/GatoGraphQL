@@ -35,8 +35,8 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         /** @var ModuleConfiguration */
-        $componentConfiguration = $this->getConfiguration();
-        if ($componentConfiguration->useGraphiQLExplorer()) {
+        $moduleConfiguration = $this->getConfiguration();
+        if ($moduleConfiguration->useGraphiQLExplorer()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');
         }
     }

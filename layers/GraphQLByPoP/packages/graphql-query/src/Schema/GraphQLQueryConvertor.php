@@ -218,7 +218,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function convertArgumentValue($value)
     {
         /** @var GraphQLQueryComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLQueryModule::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(GraphQLQueryModule::class)->getConfiguration();
         /**
          * Generate the field AST as composable field `{{ field }}`,
          * so its value can be computed on runtime.
@@ -231,7 +231,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         if (
             $value instanceof VariableReference &&
-            $componentConfiguration->enableVariablesAsExpressions() &&
+            $moduleConfiguration->enableVariablesAsExpressions() &&
             $this->treatVariableAsExpression($value->getName())
         ) {
             /**
@@ -581,8 +581,8 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // @todo Migrate this, currently this code is not working
         if ($operations === []) {
             /** @var GraphQLParserComponentConfiguration */
-            $componentConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
-            if ($componentConfiguration->enableMultipleQueryExecution()) {
+            $moduleConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
+            if ($moduleConfiguration->enableMultipleQueryExecution()) {
                 // Add a suggestion indicating to pass __ALL in the query
                 App::getFeedbackStore()->documentFeedbackStore->addSuggestion(
                     new DocumentFeedback(

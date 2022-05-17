@@ -47,11 +47,11 @@ class SchemaConfigSchemaModeBlock extends AbstractSchemaConfigBlock
             SchemaModes::PRIVATE_SCHEMA_MODE => \__('Private', 'graphql-api'),
         ];
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Public/Private Schema Mode:', 'graphql-api'),
-            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $componentConfiguration->getSettingsValueLabel()
+            $schemaModeLabels[$attributes[self::ATTRIBUTE_NAME_DEFAULT_SCHEMA_MODE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
         $blockContentPlaceholder = <<<EOT

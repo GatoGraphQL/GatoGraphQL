@@ -422,8 +422,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if (!$componentConfiguration->enableAdminSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
                 $consolidatedFieldArgNameTypeResolvers,
@@ -784,8 +784,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs,
     ): bool {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return $componentConfiguration->validateFieldTypeResponseWithSchemaDefinition();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return $moduleConfiguration->validateFieldTypeResponseWithSchemaDefinition();
     }
 
     /**
@@ -872,8 +872,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
              *
@@ -1268,8 +1268,8 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return $mutationResolver->executeMutation($mutationFieldArgs);
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
-                $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-                if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
+                $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+                if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
@@ -1287,9 +1287,9 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                     );
                 }
                 $sendExceptionToClient = $e instanceof AbstractClientException
-                    || $componentConfiguration->sendExceptionErrorMessages();
+                    || $moduleConfiguration->sendExceptionErrorMessages();
                 $feedbackItemResolution = $sendExceptionToClient
-                    ? ($componentConfiguration->sendExceptionTraces()
+                    ? ($moduleConfiguration->sendExceptionTraces()
                         ? new FeedbackItemResolution(
                             ErrorFeedbackItemProvider::class,
                             ErrorFeedbackItemProvider::E6A,

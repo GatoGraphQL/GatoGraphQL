@@ -39,8 +39,8 @@ class UserAuthorization implements UserAuthorizationInterface
     {
         $accessSchemeCapability = null;
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($accessScheme = $componentConfiguration->getEditingAccessScheme()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($accessScheme = $moduleConfiguration->getEditingAccessScheme()) {
             // If the capability does not exist, catch the exception
             try {
                 $accessSchemeCapability = $this->getUserAuthorizationSchemeRegistry()->getUserAuthorizationScheme($accessScheme)->getSchemaEditorAccessCapability();

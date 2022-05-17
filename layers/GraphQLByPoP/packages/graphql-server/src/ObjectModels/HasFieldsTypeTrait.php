@@ -32,8 +32,8 @@ trait HasFieldsTypeTrait
             )
         );
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        if ($componentConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        if ($moduleConfiguration->exposeGlobalFieldsInGraphQLSchema()) {
             // Global fields have already been initialized, simply get the reference to the existing objects from the registryMap
             $this->getFieldsFromPath(
                 $fullSchemaDefinition,
@@ -44,7 +44,7 @@ trait HasFieldsTypeTrait
         }
 
         // Maybe sort fields and connections all together
-        if ($componentConfiguration->sortGraphQLSchemaAlphabetically()) {
+        if ($moduleConfiguration->sortGraphQLSchemaAlphabetically()) {
             uasort($this->fields, function (Field $a, Field $b): int {
                 return $a->getName() <=> $b->getName();
             });

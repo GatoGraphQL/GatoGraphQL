@@ -28,8 +28,8 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
-        if ($componentConfiguration->disableRedundantRootTypeMutationFields()) {
+        $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
+        if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
         return [

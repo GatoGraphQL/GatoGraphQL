@@ -37,20 +37,20 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
 
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         // @todo Remove 'standard-graphql' and this temporary code!
         $standardGraphQL = true;//$state['standard-graphql'];
         /** @phpstan-ignore-next-line */
         $state['nested-mutations-enabled'] = $standardGraphQL ?
-            $componentConfiguration->enableNestedMutations()
+            $moduleConfiguration->enableNestedMutations()
             : true;
 
         // Check if the value has been defined by configuration. If so, use it.
         // Otherwise, use the defaults:
         // By default, Standard GraphQL has introspection enabled, and PQL is not
-        $enableGraphQLIntrospection = $componentConfiguration->enableGraphQLIntrospection();
+        $enableGraphQLIntrospection = $moduleConfiguration->enableGraphQLIntrospection();
         $state['graphql-introspection-enabled'] = $enableGraphQLIntrospection ?? $standardGraphQL;
     }
 }

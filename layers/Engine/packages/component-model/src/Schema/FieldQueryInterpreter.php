@@ -396,8 +396,8 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldOrDirectiveArgs = [];
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $setFailingFieldResponseAsNull = $moduleConfiguration->setFailingFieldResponseAsNull();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
             $fieldOrDirectiveArg = $fieldOrDirectiveArgElems[$i];
             // Either one of 2 formats are accepted:

@@ -15,7 +15,7 @@ class CacheUtils
     public static function getSchemaCacheKeyComponents(): array
     {
         /** @var EngineComponentConfiguration */
-        $componentConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
         return (array)App::applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [
@@ -23,7 +23,7 @@ class CacheUtils
                 'version-constraint' => App::getState('version-constraint'),
                 'field-version-constraints' => App::getState('field-version-constraints'),
                 'directive-version-constraints' => App::getState('directive-version-constraints'),
-                'redundant-root-fields-disabled' => $componentConfiguration->disableRedundantRootTypeMutationFields(),
+                'redundant-root-fields-disabled' => $moduleConfiguration->disableRedundantRootTypeMutationFields(),
             ]
         );
     }

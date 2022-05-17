@@ -46,7 +46,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         $directives = [];
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
         /**
          * There are 3 cases for adding the "Query" type locations:
          * 1. When the type is "Query"
@@ -56,7 +56,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
         if (
             $directiveKind === DirectiveKinds::QUERY
             || ($directiveKind === DirectiveKinds::SCHEMA && App::getState('edit-schema'))
-            || ($directiveKind === DirectiveKinds::INDEXING && $componentConfiguration->enableComposableDirectives())
+            || ($directiveKind === DirectiveKinds::INDEXING && $moduleConfiguration->enableComposableDirectives())
         ) {
             // Same DirectiveLocations as used by "@skip": https://graphql.github.io/graphql-spec/draft/#sec--skip
             $directives = array_merge(

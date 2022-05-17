@@ -59,8 +59,8 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
         /** @var ComponentModelComponentConfiguration */
-        $componentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
-        if (!$componentConfiguration->enableMutations()) {
+        $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        if (!$moduleConfiguration->enableMutations()) {
             return null;
         }
         if (App::getState('nested-mutations-enabled')) {
@@ -90,7 +90,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ModuleConfiguration */
-        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return !$componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
+        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        return !$moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }
