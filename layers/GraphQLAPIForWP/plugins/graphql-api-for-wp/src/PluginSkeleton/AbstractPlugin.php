@@ -185,7 +185,7 @@ abstract class AbstractPlugin implements PluginInterface
             $this->getModuleClassConfiguration()
         );
         App::getAppLoader()->addSchemaComponentClassesToSkip(
-            $this->getSchemaComponentClassesToSkip()
+            $this->getSchemaModuleClassesToSkip()
         );
     }
 
@@ -217,7 +217,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    abstract protected function getSchemaComponentClassesToSkip(): array;
+    abstract protected function getSchemaModuleClassesToSkip(): array;
 
     /**
      * Remove the CPTs from the DB

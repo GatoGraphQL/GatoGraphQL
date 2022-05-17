@@ -97,9 +97,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      *
      * @return string[] List of `Module` class which must not initialize their Schema services
      */
-    public function getSchemaComponentClassesToSkip(): array
+    public function getSchemaModuleClassesToSkip(): array
     {
-        return $this->pluginInitializationConfiguration->getSchemaComponentClassesToSkip();
+        return $this->pluginInitializationConfiguration->getSchemaModuleClassesToSkip();
     }
 
     /**
