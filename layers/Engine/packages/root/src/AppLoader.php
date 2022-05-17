@@ -189,7 +189,7 @@ class AppLoader implements AppLoaderInterface
              */
             foreach ($module->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
                 $satisfiedComponent = App::getModule($satisfiedComponentClass);
-                $satisfiedComponent->setSatisfyingComponent($module);
+                $satisfiedComponent->setSatisfyingModule($module);
             }
         }
     }

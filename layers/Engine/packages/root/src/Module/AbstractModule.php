@@ -92,7 +92,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Indicate what other module satisfies the contracts by this module.
      */
-    public function setSatisfyingComponent(ModuleInterface $module): void
+    public function setSatisfyingModule(ModuleInterface $module): void
     {
         $this->satisfyingModule = $module;
     }

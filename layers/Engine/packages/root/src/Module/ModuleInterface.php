@@ -32,7 +32,7 @@ interface ModuleInterface
     /**
      * Indicate what other component satisfies the contracts by this component.
      */
-    public function setSatisfyingComponent(ModuleInterface $component): void;
+    public function setSatisfyingModule(ModuleInterface $component): void;
 
     /**
      * All component classes that this component satisfies
