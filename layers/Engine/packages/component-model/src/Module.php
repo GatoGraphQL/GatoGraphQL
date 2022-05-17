@@ -56,7 +56,7 @@ class Module extends AbstractModule
         parent::componentLoaded();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
-        $attachExtensionService->attachExtensions(ApplicationEvents::COMPONENT_LOADED);
+        $attachExtensionService->attachExtensions(ApplicationEvents::MODULE_LOADED);
     }
 
     public function boot(): void

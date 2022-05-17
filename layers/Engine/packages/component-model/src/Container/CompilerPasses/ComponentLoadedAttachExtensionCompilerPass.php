@@ -10,7 +10,7 @@ class ComponentLoadedAttachExtensionCompilerPass extends AbstractAttachExtension
 {
     protected function getAttachExtensionEvent(): string
     {
-        return ApplicationEvents::COMPONENT_LOADED;
+        return ApplicationEvents::MODULE_LOADED;
     }
 
     /**

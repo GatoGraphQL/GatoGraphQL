@@ -84,7 +84,7 @@ class Module extends AbstractModule
          * @var ServiceInstantiatorInterface
          */
         $serviceInstantiator = App::getContainer()->get(ServiceInstantiatorInterface::class);
-        $serviceInstantiator->initializeServices(ApplicationEvents::COMPONENT_LOADED);
+        $serviceInstantiator->initializeServices(ApplicationEvents::MODULE_LOADED);
     }
 
     /**
