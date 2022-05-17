@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ApplicationEvents;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * Classes from PoP components that must be initialized before this component

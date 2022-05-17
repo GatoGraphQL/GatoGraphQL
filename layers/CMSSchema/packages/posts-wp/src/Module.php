@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostsWP;
 
 use PoP\Root\App;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Posts\Module as PostsComponent;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * All component classes that this component satisfies

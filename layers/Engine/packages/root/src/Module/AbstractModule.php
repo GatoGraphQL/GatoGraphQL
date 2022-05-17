@@ -7,7 +7,7 @@ namespace PoP\Root\Module;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 
-abstract class AbstractComponent implements ComponentInterface
+abstract class AbstractModule implements ComponentInterface
 {
     use InitializeContainerServicesInComponentTrait;
 

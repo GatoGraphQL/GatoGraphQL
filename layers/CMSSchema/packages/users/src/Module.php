@@ -7,13 +7,13 @@ namespace PoPCMSSchema\Users;
 use PoP\Root\App;
 use PoPAPI\API\Module as APIComponent;
 use PoPAPI\RESTAPI\Module as RESTAPIComponent;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     protected function requiresSatisfyingComponent(): bool
     {

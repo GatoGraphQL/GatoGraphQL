@@ -6,12 +6,12 @@ namespace PoPCMSSchema\CustomPosts;
 
 use PoP\Root\App;
 use PoPAPI\API\Module as APIComponent;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     protected function requiresSatisfyingComponent(): bool
     {

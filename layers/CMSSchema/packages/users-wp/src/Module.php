@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UsersWP;
 
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * All component classes that this component satisfies

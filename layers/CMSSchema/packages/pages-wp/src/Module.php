@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PagesWP;
 
 use PoP\Root\App;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Pages\ModuleConfiguration as PagesComponentConfiguration;
 use PoPCMSSchema\Pages\Module as PagesComponent;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * All component classes that this component satisfies

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser;
 
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * Classes from PoP components that must be initialized before this component

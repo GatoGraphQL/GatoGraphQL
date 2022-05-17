@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 
-abstract class AbstractPluginComponent extends AbstractComponent implements PluginComponentInterface
+abstract class AbstractPluginComponent extends AbstractModule implements PluginComponentInterface
 {
     private ?string $pluginFolder = null;
 

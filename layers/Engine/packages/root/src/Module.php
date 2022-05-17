@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Container\HybridCompilerPasses\AutomaticallyInstantiatedServiceCompilerPass;
 use PoP\Root\Container\ServiceInstantiatorInterface;
@@ -13,7 +13,7 @@ use PoP\Root\Container\SystemCompilerPasses\RegisterSystemCompilerPassServiceCom
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * Classes from PoP components that must be initialized before this component

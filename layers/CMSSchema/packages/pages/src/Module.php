@@ -7,12 +7,12 @@ namespace PoPCMSSchema\Pages;
 use PoP\Root\App;
 use PoPAPI\API\Module as APIComponent;
 use PoPAPI\RESTAPI\Module as RESTAPIComponent;
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     protected function requiresSatisfyingComponent(): bool
     {

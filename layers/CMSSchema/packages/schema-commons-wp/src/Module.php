@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\SchemaCommonsWP;
 
-use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\AbstractModule;
 
 /**
  * Initialize component
  */
-class Module extends AbstractComponent
+class Module extends AbstractModule
 {
     /**
      * All component classes that this component satisfies
