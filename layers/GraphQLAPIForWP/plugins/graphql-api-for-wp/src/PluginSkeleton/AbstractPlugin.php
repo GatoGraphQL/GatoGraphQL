@@ -116,13 +116,13 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function initialize(): void
     {
-        $this->initializeComponentClasses();
+        $this->initializeModuleClasses();
     }
 
     /**
-     * Initialize Plugin's components
+     * Initialize Plugin's modules
      */
-    protected function initializeComponentClasses(): void
+    protected function initializeModuleClasses(): void
     {
         // Initialize the containers
         $moduleClasses = $this->getModuleClassesToInitialize();
@@ -131,7 +131,7 @@ abstract class AbstractPlugin implements PluginInterface
 
     /**
      * After initialized, and before booting,
-     * allow the components to inject their own configuration
+     * allow the modules to inject their own configuration
      */
     public function configureComponents(): void
     {

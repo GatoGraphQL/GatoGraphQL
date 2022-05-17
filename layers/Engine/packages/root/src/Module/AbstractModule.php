@@ -247,9 +247,9 @@ abstract class AbstractModule implements ModuleInterface
 
         // If any dependency is disabled, then disable this module too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
-            $satisfiedComponentClasses = $this->getSatisfiedModuleClasses();
+            $satisfiedModuleClasses = $this->getSatisfiedModuleClasses();
             foreach ($this->getDependedModuleClasses() as $dependedModuleClass) {
-                if ($ignoreDependencyOnSatisfiedModules && in_array($dependedModuleClass, $satisfiedComponentClasses)) {
+                if ($ignoreDependencyOnSatisfiedModules && in_array($dependedModuleClass, $satisfiedModuleClasses)) {
                     continue;
                 }
                 $dependedModule = App::getModule($dependedModuleClass);
