@@ -110,10 +110,10 @@ interface ModuleInterface
      * Enable each component to set default configuration for
      * itself and its depended components
      *
-     * @param array<string, mixed> $componentClassConfiguration
+     * @param array<string, mixed> $moduleClassConfiguration
      */
     public function customizeComponentClassConfiguration(
-        array &$componentClassConfiguration
+        array &$moduleClassConfiguration
     ): void;
 
     /**

@@ -578,14 +578,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $mainPluginURL = App::getMainPlugin()->getPluginURL();
 
-        $componentClassConfiguration = [];
-        $componentClassConfiguration[\PoP\Root\Module::class] = [
+        $moduleClassConfiguration = [];
+        $moduleClassConfiguration[\PoP\Root\Module::class] = [
             /**
              * Can pass state for "variables" and "actions"
              */
             RootEnvironment::ENABLE_PASSING_STATE_VIA_REQUEST => true,
         ];
-        $componentClassConfiguration[\PoP\ComponentModel\Module::class] = [
+        $moduleClassConfiguration[\PoP\ComponentModel\Module::class] = [
             /**
              * Treat casting failures as errors, not warnings
              */
@@ -611,20 +611,20 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
              */
             ComponentModelEnvironment::ENABLE_MUTATIONS => $moduleRegistry->isModuleEnabled(MutationSchemaTypeModuleResolver::SCHEMA_MUTATIONS),
         ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Module::class] = [
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLClientsForWP\Module::class] = [
             \GraphQLByPoP\GraphQLClientsForWP\Environment::GRAPHQL_CLIENTS_COMPONENT_URL => $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp',
         ];
-        $componentClassConfiguration[\PoPAPI\APIEndpointsForWP\Module::class] = [
+        $moduleClassConfiguration[\PoPAPI\APIEndpointsForWP\Module::class] = [
             // Disable the Native endpoint
             \PoPAPI\APIEndpointsForWP\Environment::DISABLE_NATIVE_API_ENDPOINT => true,
         ];
-        $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
+        $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class] = [
             // Expose the "self" field when doing Low Level Query Editing
             GraphQLServerEnvironment::EXPOSE_SELF_FIELD_FOR_ROOT_TYPE_IN_GRAPHQL_SCHEMA => $moduleRegistry->isModuleEnabled(UserInterfaceFunctionalityModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING),
             // Do not send proactive deprecations
             GraphQLServerEnvironment::ENABLE_PROACTIVE_FEEDBACK_DEPRECATIONS => false,
         ];
-        $componentClassConfiguration[\PoPAPI\API\Module::class] = [
+        $moduleClassConfiguration[\PoPAPI\API\Module::class] = [
             // Do not expose global fields
             \PoPAPI\API\Environment::SKIP_EXPOSING_GLOBAL_FIELDS_IN_FULL_SCHEMA => true,
         ];
@@ -636,29 +636,29 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $endpointHelpers = $systemInstanceManager->getInstance(EndpointHelpers::class);
         if ($endpointHelpers->isRequestingAdminFixedSchemaGraphQLEndpoint()) {
             // Enable the "admin" fields
-            $componentClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][ComponentModelEnvironment::ENABLE_ADMIN_SCHEMA] = true;
             // Enable the "self" fields
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SELF_FIELD_IN_GRAPHQL_SCHEMA] = true;
             // Enable Nested mutations
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS] = true;
             // Do not disable redundant mutation fields in the root type
-            $componentClassConfiguration[\PoP\Engine\Module::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
+            $moduleClassConfiguration[\PoP\Engine\Module::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = false;
             // Allow disabling introspection via Access Control on field "__schema"
-            $componentClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
+            $moduleClassConfiguration[\GraphQLByPoP\GraphQLServer\Module::class][GraphQLServerEnvironment::EXPOSE_SCHEMA_INTROSPECTION_FIELD_IN_SCHEMA] = true;
             // Allow access to all entries for Root.option
-            $componentClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\Settings\Module::class][SettingsEnvironment::SETTINGS_BEHAVIOR] = Behaviors::DENYLIST;
             // Allow access to all meta values
-            $componentClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
-            $componentClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
-            $componentClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\CustomPostMeta\Module::class][CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\UserMeta\Module::class][UserMetaEnvironment::USER_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\CommentMeta\Module::class][CommentMetaEnvironment::COMMENT_META_BEHAVIOR] = Behaviors::DENYLIST;
+            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES] = [];
+            $moduleClassConfiguration[\PoPCMSSchema\TaxonomyMeta\Module::class][TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR] = Behaviors::DENYLIST;
         }
-        return $componentClassConfiguration;
+        return $moduleClassConfiguration;
     }
 
     /**

@@ -200,12 +200,12 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string, array> $componentClassConfiguration [key]: Module class, [value]: Configuration
+     * @return array<string, array> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateComponentClassConfiguration(): array
     {
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
-        $componentClassConfiguration = [];
+        $moduleClassConfiguration = [];
 
         $moduleToComponentClassConfigurationMappings = $this->getModuleToComponentClassConfigurationMapping();
         foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
@@ -216,10 +216,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if ($callback !== null) {
                 $value = $callback($value);
             }
-            $componentClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
+            $moduleClassConfiguration[$mapping['class']][$mapping['envVariable']] = $value;
         }
 
-        return $componentClassConfiguration;
+        return $moduleClassConfiguration;
     }
 
     protected function getModuleToComponentClassConfigurationMapping(): array

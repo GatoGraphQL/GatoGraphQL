@@ -20,10 +20,10 @@ interface AppLoaderInterface
     /**
      * Add configuration for the Module classes
      *
-     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
-        array $componentClassConfiguration
+        array $moduleClassConfiguration
     ): void;
 
     /**

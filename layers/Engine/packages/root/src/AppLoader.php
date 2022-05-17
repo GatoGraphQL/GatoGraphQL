@@ -37,7 +37,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @var array<string, array<string, mixed>>
      */
-    protected array $componentClassConfiguration = [];
+    protected array $moduleClassConfiguration = [];
     /**
      * [key]: State key, [value]: Value
      *
@@ -74,16 +74,16 @@ class AppLoader implements AppLoaderInterface
     /**
      * Add configuration for the Module classes
      *
-     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Module class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
-        array $componentClassConfiguration
+        array $moduleClassConfiguration
     ): void {
         // Allow to override entries under each Module
-        foreach ($componentClassConfiguration as $moduleClass => $moduleConfiguration) {
-            $this->componentClassConfiguration[$moduleClass] ??= [];
-            $this->componentClassConfiguration[$moduleClass] = array_merge(
-                $this->componentClassConfiguration[$moduleClass],
+        foreach ($moduleClassConfiguration as $moduleClass => $moduleConfiguration) {
+            $this->moduleClassConfiguration[$moduleClass] ??= [];
+            $this->moduleClassConfiguration[$moduleClass] = array_merge(
+                $this->moduleClassConfiguration[$moduleClass],
                 $moduleConfiguration
             );
         }
@@ -335,7 +335,7 @@ class AppLoader implements AppLoaderInterface
             if (!$component->isEnabled()) {
                 continue;
             }
-            $component->customizeComponentClassConfiguration($this->componentClassConfiguration);
+            $component->customizeComponentClassConfiguration($this->moduleClassConfiguration);
         }
 
         /**
@@ -356,7 +356,7 @@ class AppLoader implements AppLoaderInterface
             if (!$component->isEnabled()) {
                 continue;
             }
-            $moduleConfiguration = $this->componentClassConfiguration[$moduleClass] ?? [];
+            $moduleConfiguration = $this->moduleClassConfiguration[$moduleClass] ?? [];
             $skipSchemaForComponent = $this->skipSchemaForComponent($component);
             $component->initialize(
                 $moduleConfiguration,

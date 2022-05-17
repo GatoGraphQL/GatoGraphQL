@@ -27,9 +27,9 @@ abstract class AbstractDynamicVariablesTest extends AbstractTestCase
      */
     protected static function getComponentClassConfiguration(): array
     {
-        $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = static::enabled();
-        return $componentClassConfiguration;
+        $moduleClassConfiguration = parent::getComponentClassConfiguration();
+        $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = static::enabled();
+        return $moduleClassConfiguration;
     }
 
     abstract protected static function enabled(): bool;

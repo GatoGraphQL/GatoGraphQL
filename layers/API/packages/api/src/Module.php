@@ -47,15 +47,15 @@ class Module extends AbstractModule
     /**
      * Set the default component configuration
      *
-     * @param array<string, mixed> $componentClassConfiguration
+     * @param array<string, mixed> $moduleClassConfiguration
      */
     public function customizeComponentClassConfiguration(
-        array &$componentClassConfiguration
+        array &$moduleClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
         $useNamespacing = Request::mustNamespaceTypes();
         if ($useNamespacing !== null) {
-            $componentClassConfiguration[\PoP\ComponentModel\Module::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
+            $moduleClassConfiguration[\PoP\ComponentModel\Module::class][\PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES] = $useNamespacing;
         }
     }
 

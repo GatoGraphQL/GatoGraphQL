@@ -26,11 +26,11 @@ class GraphQLServer implements GraphQLServerInterface
 
     /**
      * @param string[] $componentClasses The component classes to initialize, including those dealing with the schema elements (posts, users, comments, etc)
-     * @param array<string,mixed> $componentClassConfiguration Predefined configuration for the components
+     * @param array<string,mixed> $moduleClassConfiguration Predefined configuration for the components
      */
     public function __construct(
         array $componentClasses,
-        private readonly array $componentClassConfiguration = [],
+        private readonly array $moduleClassConfiguration = [],
         private readonly ?bool $cacheContainerConfiguration = null,
         private readonly ?string $containerNamespace = null,
         private readonly ?string $containerDirectory = null,
@@ -56,7 +56,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $appLoader->addComponentClassConfiguration($this->componentClassConfiguration);
+        $appLoader->addComponentClassConfiguration($this->moduleClassConfiguration);
 
         // Boot the application
         $appLoader->bootApplication(
