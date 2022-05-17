@@ -58,7 +58,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLEndpoin
     }
 
     /**
-     * Module that enables this PostType
+     * Module22222 that enables this PostType
      */
     public function getEnablingModule(): ?string
     {

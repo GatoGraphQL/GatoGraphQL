@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\App;
 use WP_List_Table;
 
 /**
- * Module Table
+ * Module22222 Table
  */
 abstract class AbstractItemListTable extends WP_List_Table
 {

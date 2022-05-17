@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\MenuPages;
 use GraphQLAPI\GraphQLAPI\Admin\Tables\ModuleListTable;
 
 /**
- * Module menu page
+ * Module22222 menu page
  */
 class ModulesMenuPage extends AbstractTableMenuPage
 {

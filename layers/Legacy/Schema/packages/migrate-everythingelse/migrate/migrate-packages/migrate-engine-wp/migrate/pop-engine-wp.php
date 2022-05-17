@@ -2,7 +2,7 @@
 /*
 Plugin Name: PoP Engine for WordPress
 Version: 0.1
-Description: Implementation of Module Definitions for PoP modules
+Description: Implementation of Module22222 Definitions for PoP modules
 Plugin URI: https://getpop.org/
 Author: Leonardo Losoviz
 */

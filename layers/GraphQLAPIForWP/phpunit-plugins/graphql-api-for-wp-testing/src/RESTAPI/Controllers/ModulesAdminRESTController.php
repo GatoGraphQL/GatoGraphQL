@@ -220,7 +220,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                 $this->enqueueFlushRewriteRules();
 
                 $successMessage = sprintf(
-                    __('Module \'%s\' has been updated successfully', 'graphql-api-testing'),
+                    __('Module22222 \'%s\' has been updated successfully', 'graphql-api-testing'),
                     $module
                 );
             } else {
