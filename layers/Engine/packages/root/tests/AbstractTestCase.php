@@ -29,7 +29,7 @@ abstract class AbstractTestCase extends TestCase
             static::getAppLoader(),
             static::getHookManager(),
         );
-        App::getAppLoader()->addComponentClassesToInitialize(static::getComponentClassesToInitialize());
+        App::getAppLoader()->addComponentClassesToInitialize(static::getModuleClassesToInitialize());
         App::getAppLoader()->initializeComponents($isDev);
         App::getAppLoader()->bootSystem($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
 
@@ -72,7 +72,7 @@ abstract class AbstractTestCase extends TestCase
     /**
      * @return string[]
      */
-    protected static function getComponentClassesToInitialize(): array
+    protected static function getModuleClassesToInitialize(): array
     {
         return [
             static::getComponentClass(),

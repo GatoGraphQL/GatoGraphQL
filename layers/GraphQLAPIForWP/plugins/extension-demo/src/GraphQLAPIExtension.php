@@ -18,7 +18,7 @@ class GraphQLAPIExtension extends AbstractExtension
      *
      * @return string[] List of `Module` class to initialize
      */
-    public function getComponentClassesToInitialize(): array
+    public function getModuleClassesToInitialize(): array
     {
         return [
             Module::class,

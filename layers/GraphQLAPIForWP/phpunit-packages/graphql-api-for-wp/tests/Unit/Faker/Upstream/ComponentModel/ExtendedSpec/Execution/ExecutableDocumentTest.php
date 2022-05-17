@@ -18,10 +18,10 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     /**
      * @return string[]
      */
-    protected static function getComponentClassesToInitialize(): array
+    protected static function getModuleClassesToInitialize(): array
     {
         return [
-            ...parent::getComponentClassesToInitialize(),
+            ...parent::getModuleClassesToInitialize(),
             ...[
                 \PoPWPSchema\Posts\Module::class,
             ]
