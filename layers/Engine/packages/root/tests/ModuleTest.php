@@ -10,10 +10,10 @@ class ModuleTest extends AbstractTestCase
     public function testHasNoDependencies(): void
     {
         $this->assertEmpty(
-            App::getComponent(Module::class)->getDependedComponentClasses()
+            App::getModule(Module::class)->getDependedComponentClasses()
         );
         $this->assertEmpty(
-            App::getComponent(Module::class)->getDependedConditionalComponentClasses()
+            App::getModule(Module::class)->getDependedConditionalComponentClasses()
         );
     }
 }

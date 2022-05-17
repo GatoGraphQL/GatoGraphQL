@@ -17,7 +17,7 @@ class GenericCustomPostTypeDataLoader extends AbstractCustomPostTypeDataLoader
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             parent::getQueryToRetrieveObjectsForIDs($ids),
             [

@@ -58,7 +58,7 @@ class CustomPostUnionTypeHelpers
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
             /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->useSingleTypeInsteadOfCustomPostUnionType()) {
                 return count($targetTypeResolvers) === 1 ?
                     $targetTypeResolvers[0] :

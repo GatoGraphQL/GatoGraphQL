@@ -32,7 +32,7 @@ class ComponentManager implements ComponentManagerInterface
     /**
      * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
-    public function getComponent(string $componentClass): ModuleInterface
+    public function getModule(string $componentClass): ModuleInterface
     {
         if (!isset($this->components[$componentClass])) {
             throw new ComponentNotExistsException(\sprintf(

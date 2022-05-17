@@ -88,7 +88,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         $requestedFields = [];
         $executableFields = [];
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $executeQueryBatchInStrictOrder = $moduleConfiguration->executeQueryBatchInStrictOrder();
         $operationMaxLevels = 0;
         $maxDepth = 0;
@@ -312,7 +312,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->enableEmbeddableFields()) {
             /**
              * Identify all the fieldArgValues from the string, because

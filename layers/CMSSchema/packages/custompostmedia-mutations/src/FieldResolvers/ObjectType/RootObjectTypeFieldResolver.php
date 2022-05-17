@@ -78,7 +78,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }

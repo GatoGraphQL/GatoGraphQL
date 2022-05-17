@@ -134,9 +134,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getComponent(string $componentClass): ModuleInterface
+    final public static function getModule(string $componentClass): ModuleInterface
     {
-        return RootApp::getComponent($componentClass);
+        return RootApp::getModule($componentClass);
     }
 
     /**

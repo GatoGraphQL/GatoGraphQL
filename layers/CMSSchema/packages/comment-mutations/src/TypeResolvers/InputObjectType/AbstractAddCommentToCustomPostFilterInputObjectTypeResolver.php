@@ -58,7 +58,7 @@ abstract class AbstractAddCommentToCustomPostFilterInputObjectTypeResolver exten
     public function getInputFieldNameTypeResolvers(): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
                 MutationInputProperties::COMMENT => $this->getStringScalarTypeResolver(),

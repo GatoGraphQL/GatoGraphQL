@@ -17,7 +17,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $platformmanager = StratumManagerFactory::getInstance();
             $stratum = $platformmanager->getStratum();

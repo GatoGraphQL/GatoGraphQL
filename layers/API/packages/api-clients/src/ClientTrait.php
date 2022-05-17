@@ -91,7 +91,7 @@ trait ClientTrait
         $endpoint = preg_replace('#^https?:#', '', $endpoint);
         // // If namespaced, add /?use_namespace=1 to the endpoint
         // /** @var ComponentModelModuleConfiguration */
-        // $moduleConfiguration = \PoP\Root\App::getComponent(ComponentModelModule::class)->getConfiguration();
+        // $moduleConfiguration = \PoP\Root\App::getModule(ComponentModelModule::class)->getConfiguration();
         // if ($moduleConfiguration->mustNamespaceTypes()) {
         //     $endpoint = GeneralUtils::addQueryArgs(
         //         [

@@ -79,7 +79,7 @@ class Engine extends UpstreamEngine implements EngineInterface
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
 
         // From the state we know if to process static/staful content or both

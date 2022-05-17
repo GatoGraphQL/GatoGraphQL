@@ -50,7 +50,7 @@ class Module extends AbstractModule
     ): void {
         $this->initServices(dirname(__DIR__));
         /** @var PostsModuleConfiguration */
-        $moduleConfiguration = App::getComponent(PostsModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         if ($moduleConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes/Overrides');
         }

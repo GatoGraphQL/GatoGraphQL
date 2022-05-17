@@ -35,13 +35,13 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getUserMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getUserMetaBehavior();
     }
 

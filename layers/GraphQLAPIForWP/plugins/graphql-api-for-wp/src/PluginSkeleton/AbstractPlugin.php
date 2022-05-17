@@ -146,7 +146,7 @@ abstract class AbstractPlugin implements PluginInterface
     protected function getPluginComponent(): PluginComponentInterface
     {
         /** @var PluginComponentInterface */
-        return App::getComponent($this->getComponentClass());
+        return App::getModule($this->getComponentClass());
     }
 
     /**

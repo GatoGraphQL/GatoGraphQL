@@ -265,7 +265,7 @@ class Engine implements EngineInterface
          * So remove these to generate the hash.
          */
         /** @var ModuleInfo */
-        $componentInfo = App::getComponent(Module::class)->getInfo();
+        $componentInfo = App::getModule(Module::class)->getInfo();
         $differentiators = array(
             $componentInfo->getUniqueID(),
             $componentInfo->getRand(),
@@ -472,7 +472,7 @@ class Engine implements EngineInterface
     public function getModelPropsModuletree(array $module): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
 
@@ -648,7 +648,7 @@ class Engine implements EngineInterface
     {
         $ret = [];
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
         $engineState = App::getEngineState();
@@ -694,7 +694,7 @@ class Engine implements EngineInterface
     public function getRequestMeta(): array
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getComponent(Module::class)->getInfo();
+        $componentInfo = App::getModule(Module::class)->getInfo();
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
             Response::UNIQUE_ID => $componentInfo->getUniqueID(),
@@ -999,7 +999,7 @@ class Engine implements EngineInterface
         mixed $value,
     ): void {
         /** @var ModuleInfo */
-        $componentInfo = App::getComponent(Module::class)->getInfo();
+        $componentInfo = App::getModule(Module::class)->getInfo();
         $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
         foreach ($module_path as $submodule) {
@@ -1042,7 +1042,7 @@ class Engine implements EngineInterface
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
         $engineState = App::getEngineState();
@@ -1119,7 +1119,7 @@ class Engine implements EngineInterface
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
         /** @var ModuleInfo */
-        $componentInfo = App::getComponent(Module::class)->getInfo();
+        $componentInfo = App::getModule(Module::class)->getInfo();
         $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
@@ -1751,7 +1751,7 @@ class Engine implements EngineInterface
         $ret[Response::SCHEMA_FEEDBACK] = [];
 
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $enabledFeedbackCategoryExtensions = $moduleConfiguration->getEnabledFeedbackCategoryExtensions();
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);
         $sendFeedbackDeprecations = in_array(FeedbackCategories::DEPRECATION, $enabledFeedbackCategoryExtensions);
@@ -2458,7 +2458,7 @@ class Engine implements EngineInterface
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
-                $componentInfo = App::getComponent(Module::class)->getInfo();
+                $componentInfo = App::getModule(Module::class)->getInfo();
                 $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
 
                 // Advance the position of the array into the current module

@@ -143,7 +143,7 @@ class FieldQueryInterpreter implements FieldQueryInterpreterInterface
     protected function doGetVariablesFromRequest(): array
     {
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
             return [];
         }

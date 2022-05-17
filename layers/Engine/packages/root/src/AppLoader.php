@@ -188,7 +188,7 @@ class AppLoader implements AppLoaderInterface
              * components, set them as "satisfied".
              */
             foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
-                $satisfiedComponent = App::getComponent($satisfiedComponentClass);
+                $satisfiedComponent = App::getModule($satisfiedComponentClass);
                 $satisfiedComponent->setSatisfyingComponent($component);
             }
         }
@@ -256,7 +256,7 @@ class AppLoader implements AppLoaderInterface
          * Application Container services.
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getComponent($componentClass);
+            $component = App::getModule($componentClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -298,7 +298,7 @@ class AppLoader implements AppLoaderInterface
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getComponent($componentClass);
+            $component = App::getModule($componentClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -331,7 +331,7 @@ class AppLoader implements AppLoaderInterface
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
-            $component = App::getComponent($componentClass);
+            $component = App::getModule($componentClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -352,7 +352,7 @@ class AppLoader implements AppLoaderInterface
          */
         foreach ($this->orderedComponentClasses as $componentClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = App::getComponent($componentClass);
+            $component = App::getModule($componentClass);
             if (!$component->isEnabled()) {
                 continue;
             }

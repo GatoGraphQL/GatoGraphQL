@@ -53,7 +53,7 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ModuleInfo */
-            $componentInfo = App::getComponent(Module::class)->getInfo();
+            $componentInfo = App::getModule(Module::class)->getInfo();
             $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
@@ -124,7 +124,7 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ModuleInfo */
-            $componentInfo = App::getComponent(Module::class)->getInfo();
+            $componentInfo = App::getModule(Module::class)->getInfo();
             $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }

@@ -20,7 +20,7 @@ class ModuleConfigurationHookSet extends AbstractHookSet
          * Do not enable caching when doing a private schema mode
          */
         /** @var AccessControlModuleConfiguration */
-        $moduleConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
         if ($moduleConfiguration->canSchemaBePrivate()) {
             $hookName = ModuleConfigurationHelpers::getHookName(
                 Module::class,

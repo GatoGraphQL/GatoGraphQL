@@ -56,7 +56,7 @@ class Engine extends UpstreamEngine
         $headers = parent::getHeaders();
 
         // If CacheControl is enabled, add it to the headers
-        if (App::getComponent(CacheControlModule::class)->isEnabled()) {
+        if (App::getModule(CacheControlModule::class)->isEnabled()) {
             if ($cacheControlHeaders = $this->getCacheControlEngine()->getCacheControlHeaders()) {
                 $headers = array_merge(
                     $headers,

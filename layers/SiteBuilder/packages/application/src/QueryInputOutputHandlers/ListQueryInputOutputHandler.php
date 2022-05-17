@@ -49,7 +49,7 @@ class ListQueryInputOutputHandler extends UpstreamListQueryInputOutputHandler
         // Needed to loadLatest, to know from what time to get results
         if (isset($data_properties[DataloadingConstants::DATASOURCE]) && $data_properties[DataloadingConstants::DATASOURCE] == DataSources::MUTABLEONREQUEST) {
             /** @var ComponentModelComponentInfo */
-            $componentInfo = App::getComponent(ComponentModelModule::class)->getInfo();
+            $componentInfo = App::getModule(ComponentModelModule::class)->getInfo();
             $ret[GD_URLPARAM_TIMESTAMP] = $componentInfo->getTime();
         }
 

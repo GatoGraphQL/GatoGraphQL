@@ -27,7 +27,7 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     public function getEndpoint(): string
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getNativeAPIEndpoint();
     }
 
@@ -37,8 +37,8 @@ class NativeAPIEndpointHandler extends AbstractEndpointHandler
     protected function isNativeAPIEnabled(): bool
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
-        return App::getComponent(APIModule::class)->isEnabled()
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return App::getModule(APIModule::class)->isEnabled()
             && !$moduleConfiguration->isNativeAPIEndpointDisabled();
     }
 }

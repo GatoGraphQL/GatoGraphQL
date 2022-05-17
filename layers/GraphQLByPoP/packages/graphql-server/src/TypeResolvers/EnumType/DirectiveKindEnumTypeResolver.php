@@ -24,7 +24,7 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
     public function getEnumValues(): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return array_merge(
             [
                 DirectiveKinds::QUERY,

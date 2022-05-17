@@ -10,7 +10,7 @@ abstract class AbstractModuleTest extends AbstractTestCase
     public function testHasDependedComponentClasses(): void
     {
         $this->assertNotEmpty(
-            App::getComponent($this->getComponentClass())->getDependedComponentClasses()
+            App::getModule($this->getComponentClass())->getDependedComponentClasses()
         );
     }
 }

@@ -26,7 +26,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         if ($moduleConfiguration->enablePassingRoutingStateViaRequest()) {
             $state['nature'] = $this->getRoutingManager()->getCurrentRequestNature();

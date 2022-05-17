@@ -81,7 +81,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
     protected function treatCommentStatusAsAdminData(): bool
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->treatCommentStatusAsAdminData();
     }
 

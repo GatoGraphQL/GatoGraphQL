@@ -509,7 +509,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
-                $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(

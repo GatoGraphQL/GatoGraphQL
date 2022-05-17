@@ -140,7 +140,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getPageListMaxLimit();
     }
 
@@ -153,7 +153,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
             $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
             /** @var ComponentModelModuleConfiguration */
-            $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
             $enableAdminSchema = $moduleConfiguration->enableAdminSchema();
             foreach ($paths as $path) {
                 /** @var WP_Post|null */

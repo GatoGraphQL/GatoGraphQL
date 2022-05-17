@@ -51,7 +51,7 @@ class ObjectTypeHookSet extends AbstractHookSet
         }
 
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (
             !$moduleConfiguration->mustUserBeLoggedInToAddComment()
             && App::getState('is-user-logged-in')

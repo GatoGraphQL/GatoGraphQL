@@ -42,7 +42,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $moduleConfiguration->mustNamespaceTypes();
         $state['are-mutations-enabled'] = $moduleConfiguration->enableMutations();
 
@@ -52,7 +52,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['mangled'] = DefinitionsRequest::getMangledValue();
             $state['actionpath'] = Request::getActionPath();

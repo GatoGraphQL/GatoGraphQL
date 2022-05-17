@@ -220,7 +220,7 @@ final class ResolveValueAndMergeDirectiveResolver extends AbstractGlobalDirectiv
         if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             // For GraphQL, set the response for the failing field as null
             /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->setFailingFieldResponseAsNull()) {
                 $dbItems[(string)$id][$fieldOutputKey] = null;
             }

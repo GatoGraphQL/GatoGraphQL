@@ -54,7 +54,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function isServiceEnabled(): bool
     {
         /** @var ComponentModelModuleConfiguration */
-        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         return $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
     }
 

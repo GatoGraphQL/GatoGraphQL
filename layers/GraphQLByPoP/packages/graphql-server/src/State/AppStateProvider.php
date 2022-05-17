@@ -29,7 +29,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['edit-schema'] = Request::editSchema();
         } else {
@@ -37,7 +37,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
 
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server
         // @todo Remove 'standard-graphql' and this temporary code!

@@ -17,7 +17,7 @@ trait ReplaceCurrentExecutionDataWithPlaceholdersTrait
     protected function getCacheReplacements(): array
     {
         /** @var ModuleInfo */
-        $componentInfo = App::getComponent(Module::class)->getInfo();
+        $componentInfo = App::getModule(Module::class)->getInfo();
         return [
             $componentInfo->getUniqueID() => CachePlaceholders::UNIQUE_ID,
             $componentInfo->getRand() => CachePlaceholders::RAND,

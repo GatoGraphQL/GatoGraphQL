@@ -62,7 +62,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         $className = $this->getBlockClassName() . '-front';
         $fieldTypeContent = $directiveContent = '';
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$this->disableFields()) {
             $fieldTypeContent = $moduleConfiguration->getEmptyLabel();
             $typeFields = $attributes[self::ATTRIBUTE_NAME_TYPE_FIELDS] ?? [];

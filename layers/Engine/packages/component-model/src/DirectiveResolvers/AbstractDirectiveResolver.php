@@ -973,7 +973,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 );
             } catch (Exception $e) {
                 /** @var ModuleConfiguration */
-                $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+                $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
                 if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
@@ -1093,7 +1093,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $removeFieldIfDirectiveFailed = $moduleConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
@@ -1205,7 +1205,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:

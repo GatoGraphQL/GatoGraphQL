@@ -78,7 +78,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         return array_merge(
             [
                 'createPost',

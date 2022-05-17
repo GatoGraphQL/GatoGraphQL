@@ -91,7 +91,7 @@ class Module extends AbstractModule
 
         // Boot conditionals
         /** @var AccessControlModuleConfiguration */
-        $moduleConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(AccessControlModule::class)->getConfiguration();
         if (
             class_exists(CacheControlModule::class)
             && class_exists(AccessControlModule::class)

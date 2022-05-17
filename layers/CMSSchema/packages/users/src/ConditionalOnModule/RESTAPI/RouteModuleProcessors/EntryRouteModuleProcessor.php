@@ -53,9 +53,9 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     {
         $ret = array();
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** @var ComponentModelModuleConfiguration */
-        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $routemodules = array(
             $moduleConfiguration->getUsersRoute() => [
                 FieldDataloadModuleProcessor::class,

@@ -102,7 +102,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         // Attempt to retrieve from the cache, if enabled
         /** @var APIModuleConfiguration */
-        $moduleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(APIModule::class)->getConfiguration();
         if ($useCache = $moduleConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
             // or it throws exception if switching without deleting the cache (eg: when passing ?use_namespace=1)
@@ -143,7 +143,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $moduleConfiguration->exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = $moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
 
@@ -213,7 +213,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         /** @var GraphQLParserModuleConfiguration */
-        $graphQLParserModuleConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
+        $graphQLParserModuleConfiguration = App::getModule(GraphQLParserModule::class)->getConfiguration();
         $enableComposableDirectives = $graphQLParserModuleConfiguration->enableComposableDirectives();
 
         // Modify the schema definitions
@@ -286,7 +286,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
 
         // Sort the elements in the schema alphabetically (if not already sorted!)
         /** @var APIModuleConfiguration */
-        $apiModuleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
+        $apiModuleConfiguration = App::getModule(APIModule::class)->getConfiguration();
         if (
             !$apiModuleConfiguration->sortFullSchemaAlphabetically()
             && $moduleConfiguration->sortGraphQLSchemaAlphabetically()

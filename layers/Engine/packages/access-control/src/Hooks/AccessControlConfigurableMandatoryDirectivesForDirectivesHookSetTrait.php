@@ -18,7 +18,7 @@ trait AccessControlConfigurableMandatoryDirectivesForDirectivesHookSetTrait
          * If not enabling individual control, then the parent case already deals with the general case
          */
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return parent::maybeFilterDirectiveName($include, $relationalTypeResolver, $directiveResolver, $directiveName);
         }

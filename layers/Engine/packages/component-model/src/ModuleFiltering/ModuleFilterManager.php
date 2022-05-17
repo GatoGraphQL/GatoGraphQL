@@ -95,7 +95,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
             return $this->selected_filter_name;
         }
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
             return null;
         }

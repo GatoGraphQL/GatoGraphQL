@@ -26,7 +26,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     protected function assertAndGetRequestedOperations(): array
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableMultipleQueryExecution()) {
             return parent::assertAndGetRequestedOperations();
         }
@@ -49,7 +49,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
         parent::propagateContext($operation, $context);
 
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if (!$moduleConfiguration->enableDynamicVariables()) {
             return;
         }

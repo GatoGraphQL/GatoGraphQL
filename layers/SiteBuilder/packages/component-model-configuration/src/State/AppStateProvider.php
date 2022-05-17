@@ -21,12 +21,12 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         // Override the settings from ComponentModel
         /** @var ComponentModelModuleConfiguration */
-        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['dataoutputitems'] = EngineRequest::getDataOutputItems($enableModifyingEngineBehaviorViaRequest);
 
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             // If not target, or invalid, reset it to "main"
             // We allow an empty target if none provided, so that we can generate the settings cache when no target is provided

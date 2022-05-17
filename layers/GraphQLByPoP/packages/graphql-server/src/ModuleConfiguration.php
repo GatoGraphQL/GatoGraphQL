@@ -214,7 +214,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
         /** @var APIModuleConfiguration */
-        $moduleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(APIModule::class)->getConfiguration();
         if ($moduleConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;
         }

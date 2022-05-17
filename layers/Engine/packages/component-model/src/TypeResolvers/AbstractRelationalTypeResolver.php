@@ -955,7 +955,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
             // then skip processing that field altogether
             $schemaErrorFailingFields = [];
             /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if (
                 $separateEngineIterationFeedbackStore->hasErrors()
                 && $moduleConfiguration->removeFieldIfDirectiveFailed()

@@ -81,7 +81,7 @@ class AppStateProvider extends AbstractAppStateProvider
         }
 
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         $enablePassingStateViaRequest = $rootModuleConfiguration->enablePassingStateViaRequest();
 
         if ($state['modulefilter'] === $this->headModule->getName()) {

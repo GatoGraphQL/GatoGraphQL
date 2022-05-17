@@ -959,7 +959,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // Fetch params from request?
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
             $ignore_params_from_request = true;
         } else {

@@ -107,7 +107,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
             /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->logExceptionErrorMessagesAndTraces()) {
                 // @todo: Implement for Log
             }

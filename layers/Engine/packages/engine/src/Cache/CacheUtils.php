@@ -15,7 +15,7 @@ class CacheUtils
     public static function getSchemaCacheKeyComponents(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         return (array)App::applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,
             [

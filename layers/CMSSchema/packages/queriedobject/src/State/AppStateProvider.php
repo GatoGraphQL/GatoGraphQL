@@ -26,7 +26,7 @@ class AppStateProvider extends AbstractAppStateProvider
     public function initialize(array &$state): void
     {
         /** @var RootModuleConfiguration */
-        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['routing']['queried-object'] = $this->getCMSRoutingStateService()->getQueriedObject();
             $state['routing']['queried-object-id'] = $this->getCMSRoutingStateService()->getQueriedObjectId();

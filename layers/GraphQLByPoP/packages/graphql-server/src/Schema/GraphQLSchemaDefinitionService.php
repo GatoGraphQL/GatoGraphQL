@@ -59,7 +59,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     public function getSchemaMutationRootObjectTypeResolver(): ?ObjectTypeResolverInterface
     {
         /** @var ComponentModelModuleConfiguration */
-        $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         if (!$moduleConfiguration->enableMutations()) {
             return null;
         }
@@ -90,7 +90,7 @@ class GraphQLSchemaDefinitionService extends SchemaDefinitionService implements 
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return !$moduleConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }
