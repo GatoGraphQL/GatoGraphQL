@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Settings\UserSettingsManagerInterface;
 use PoP\Root\App;
 
 /**
- * Module22222 List Table Action
+ * Module List Table Action
  */
 class ModuleListTableAction extends AbstractListTableAction
 {
@@ -60,11 +60,11 @@ class ModuleListTableAction extends AbstractListTableAction
              */
             if (!empty($this->mutatedModuleIDs)) {
                 if (count($this->mutatedModuleIDs) == 1 && $this->mutatedEnabled) {
-                    $message = \__('Module22222 enabled successfully', 'graphql-api');
+                    $message = \__('Module enabled successfully', 'graphql-api');
                 } elseif (count($this->mutatedModuleIDs) > 1 && $this->mutatedEnabled) {
                     $message = \__('Modules enabled successfully', 'graphql-api');
                 } elseif (count($this->mutatedModuleIDs) == 1 && !$this->mutatedEnabled) {
-                    $message = \__('Module22222 disabled successfully', 'graphql-api');
+                    $message = \__('Module disabled successfully', 'graphql-api');
                 } elseif (count($this->mutatedModuleIDs) > 1 && !$this->mutatedEnabled) {
                     $message = \__('Modules disabled successfully', 'graphql-api');
                 }

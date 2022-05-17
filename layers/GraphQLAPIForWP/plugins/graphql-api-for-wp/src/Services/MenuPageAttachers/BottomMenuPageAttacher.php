@@ -180,7 +180,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     }
 
     /**
-     * Either the Modules menu page, or the Module22222 Documentation menu page,
+     * Either the Modules menu page, or the Module Documentation menu page,
      * based on parameter ?tab="docs" or not
      */
     protected function getModuleMenuPage(): MenuPageInterface

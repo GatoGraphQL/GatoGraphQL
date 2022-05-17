@@ -429,7 +429,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
     }
 
     /**
-     * Is the API Hierarchy Module22222 enabled?
+     * Is the API Hierarchy Module enabled?
      */
     protected function isAPIHierarchyModuleEnabled(): bool
     {

@@ -15,7 +15,7 @@ trait WithModuleParamRESTControllerTrait
     protected function getModuleIDParamArgs(): array
     {
         return [
-            'description' => __('Module22222 ID', 'graphql-api-testing'),
+            'description' => __('Module ID', 'graphql-api-testing'),
             'type' => 'string',
             'required' => true,
             'validate_callback' => $this->validateModule(...),

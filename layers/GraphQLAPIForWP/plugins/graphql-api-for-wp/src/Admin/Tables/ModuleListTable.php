@@ -15,7 +15,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
 /**
- * Module22222 Table
+ * Module Table
  */
 class ModuleListTable extends AbstractItemListTable
 {
@@ -26,7 +26,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function getItemSingularName(): string
     {
-        return \__('Module22222', 'graphql-api');
+        return \__('Module', 'graphql-api');
     }
 
     /**
@@ -96,7 +96,7 @@ class ModuleListTable extends AbstractItemListTable
         $views = [];
         $currentView = $this->getCurrentView();
 
-        // Module22222 page URL
+        // Module page URL
         $url = admin_url(sprintf(
             'admin.php?page=%s',
             esc_attr(\PoP\Root\App::request('page') ?? \PoP\Root\App::query('page', ''))
@@ -383,7 +383,7 @@ class ModuleListTable extends AbstractItemListTable
         return array_merge(
             [
                 'cb' => '<input type="checkbox" />',
-                'name' => \__('Module22222', 'graphql-api'),
+                'name' => \__('Module', 'graphql-api'),
             ],
             $this->usePluginTableStyle() ?
                 [] :

@@ -11,7 +11,7 @@ use GraphQLAPI\GraphQLAPI\Registries\ModuleRegistryInterface;
 use PoP\Root\App;
 
 /**
- * Module22222 Documentation menu page
+ * Module Documentation menu page
  */
 class ModuleDocumentationMenuPage extends AbstractDocsMenuPage
 {

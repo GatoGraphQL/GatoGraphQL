@@ -100,7 +100,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     {
         if (!isset($this->moduleResolversByModule[$module])) {
             throw new ModuleNotExistsException(sprintf(
-                \__('Module22222 \'%s\' does not exist', 'graphql-api'),
+                \__('Module \'%s\' does not exist', 'graphql-api'),
                 $module
             ));
         }

@@ -39,7 +39,7 @@ class GraphQLAccessControlListCustomPostType extends AbstractCustomPostType
     }
 
     /**
-     * Module22222 that enables this PostType
+     * Module that enables this PostType
      */
     public function getEnablingModule(): ?string
     {

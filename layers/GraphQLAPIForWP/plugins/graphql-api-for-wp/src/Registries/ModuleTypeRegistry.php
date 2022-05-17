@@ -28,7 +28,7 @@ class ModuleTypeRegistry implements ModuleTypeRegistryInterface
     {
         if (!isset($this->moduleTypeResolvers[$moduleType])) {
             throw new ModuleTypeNotExistsException(sprintf(
-                \__('Module22222 type \'%s\' does not exist', 'graphql-api'),
+                \__('Module type \'%s\' does not exist', 'graphql-api'),
                 $moduleType
             ));
         }
