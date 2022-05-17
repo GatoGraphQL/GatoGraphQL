@@ -47,7 +47,7 @@ use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
 use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
-use PoPCMSSchema\Media\Module as MediaComponent;
+use PoPCMSSchema\Media\Module as MediaModule;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
 use PoPCMSSchema\Menus\Module as MenusComponent;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
@@ -301,13 +301,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Media default/max limits
             [
-                'class' => MediaComponent::class,
+                'class' => MediaModule::class,
                 'envVariable' => MediaEnvironment::MEDIA_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => MediaComponent::class,
+                'class' => MediaModule::class,
                 'envVariable' => MediaEnvironment::MEDIA_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_MEDIA,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
