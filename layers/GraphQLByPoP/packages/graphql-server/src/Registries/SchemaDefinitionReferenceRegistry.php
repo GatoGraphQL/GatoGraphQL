@@ -16,7 +16,7 @@ use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
-use PoP\GraphQLParser\Module as GraphQLParserComponent;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
@@ -213,7 +213,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
         /** @var GraphQLParserComponentConfiguration */
-        $graphQLParserComponentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
+        $graphQLParserComponentConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
         $enableComposableDirectives = $graphQLParserComponentConfiguration->enableComposableDirectives();
 
         // Modify the schema definitions

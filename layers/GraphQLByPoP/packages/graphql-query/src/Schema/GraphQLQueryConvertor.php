@@ -15,7 +15,7 @@ use PoP\Engine\DirectiveResolvers\IncludeDirectiveResolver;
 use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
-use PoP\GraphQLParser\Module as GraphQLParserComponent;
+use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
@@ -581,7 +581,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
         // @todo Migrate this, currently this code is not working
         if ($operations === []) {
             /** @var GraphQLParserComponentConfiguration */
-            $componentConfiguration = App::getComponent(GraphQLParserComponent::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
             if ($componentConfiguration->enableMultipleQueryExecution()) {
                 // Add a suggestion indicating to pass __ALL in the query
                 App::getFeedbackStore()->documentFeedbackStore->addSuggestion(
