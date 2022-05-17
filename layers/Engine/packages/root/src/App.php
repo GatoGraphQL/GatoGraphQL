@@ -33,7 +33,7 @@ class App implements AppInterface
     protected static Response $response;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
-    protected static ModuleManagerInterface $componentManager;
+    protected static ModuleManagerInterface $moduleManager;
     protected static AppStateManagerInterface $appStateManager;
     /** @var string[] */
     protected static array $moduleClassesToInitialize = [];
@@ -52,7 +52,7 @@ class App implements AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ModuleManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
@@ -60,7 +60,7 @@ class App implements AppInterface
         self::$request = $request ?? static::createRequest();
         self::$containerBuilderFactory = $containerBuilderFactory ?? static::createContainerBuilderFactory();
         self::$systemContainerBuilderFactory = $systemContainerBuilderFactory ?? static::createSystemContainerBuilderFactory();
-        self::$componentManager = $componentManager ?? static::createComponentManager();
+        self::$moduleManager = $moduleManager ?? static::createComponentManager();
         self::$appStateManager = $appStateManager ?? static::createAppStateManager();
 
         static::regenerateResponse();
@@ -157,7 +157,7 @@ class App implements AppInterface
 
     public static function getModuleManager(): ModuleManagerInterface
     {
-        return self::$componentManager;
+        return self::$moduleManager;
     }
 
     public static function getAppStateManager(): AppStateManagerInterface

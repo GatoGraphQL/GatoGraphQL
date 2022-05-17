@@ -37,7 +37,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ModuleManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         RootApp::initialize(
@@ -46,7 +46,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
             $request,
             $containerBuilderFactory,
             $systemContainerBuilderFactory,
-            $componentManager,
+            $moduleManager,
             $appStateManager,
         );
     }

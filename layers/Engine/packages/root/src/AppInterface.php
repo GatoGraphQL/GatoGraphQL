@@ -33,7 +33,7 @@ interface AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ModuleManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $moduleManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void;
 

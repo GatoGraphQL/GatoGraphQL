@@ -144,12 +144,12 @@ class AppLoader implements AppLoaderInterface
             $moduleClasses,
             $this->initializedComponentClasses
         ));
-        $componentManager = App::getModuleManager();
+        $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
             $this->initializedComponentClasses[] = $moduleClass;
 
             // Initialize and register the Module
-            $component = $componentManager->register($moduleClass);
+            $component = $moduleManager->register($moduleClass);
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
@@ -391,9 +391,9 @@ class AppLoader implements AppLoaderInterface
     public function bootApplicationComponents(): void
     {
         App::getAppStateManager()->initializeAppState($this->initialAppState);
-        $componentManager = App::getModuleManager();
-        $componentManager->boot();
-        $componentManager->afterBoot();
+        $moduleManager = App::getModuleManager();
+        $moduleManager->boot();
+        $moduleManager->afterBoot();
 
         // Allow to inject functionality
         App::doAction(HookNames::AFTER_BOOT_APPLICATION);
