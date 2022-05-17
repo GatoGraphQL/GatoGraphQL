@@ -60,7 +60,7 @@ use PoPCMSSchema\Settings\Module as SettingsModule;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
 use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
-use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaComponent;
+use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesComponent;
 use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
@@ -470,7 +470,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // White/Blacklisted entries to PostTag.meta and PostCategory.meta
             [
-                'class' => TaxonomyMetaComponent::class,
+                'class' => TaxonomyMetaModule::class,
                 'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -478,7 +478,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => TaxonomyMetaComponent::class,
+                'class' => TaxonomyMetaModule::class,
                 'envVariable' => TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_TAXONOMY_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
