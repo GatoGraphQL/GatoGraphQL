@@ -669,7 +669,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return !$value;
     }
 
-    protected function getModuleToComponentClassConfigurationMapping(): array
+    protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [
             [

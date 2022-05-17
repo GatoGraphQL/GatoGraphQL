@@ -207,7 +207,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $moduleClassConfiguration = [];
 
-        $moduleToComponentClassConfigurationMappings = $this->getModuleToComponentClassConfigurationMapping();
+        $moduleToComponentClassConfigurationMappings = $this->getModuleToModuleClassConfigurationMapping();
         foreach ($moduleToComponentClassConfigurationMappings as $mapping) {
             // Copy the state (enabled/disabled) to the component
             $value = $moduleRegistry->isModuleEnabled($mapping['module']);
@@ -222,7 +222,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         return $moduleClassConfiguration;
     }
 
-    protected function getModuleToComponentClassConfigurationMapping(): array
+    protected function getModuleToModuleClassConfigurationMapping(): array
     {
         return [];
     }
