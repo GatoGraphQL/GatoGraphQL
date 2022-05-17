@@ -2,7 +2,7 @@
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
@@ -160,8 +160,8 @@ class PoP_SSR_EngineInitialization_Hooks
         // By now, in object $dynamic_data_properties, we have the configuration of what data-fields are dynamic,
         // on a block by block basis, and also including the subcomponents.
         // Then, simply iterate this information, and build the dynamic database by copying the corresponding data from the database
-        foreach ($dynamic_data_properties[$entryComponentOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] as $pagesection_settings_id => $pagesection_data_properties) {
-            foreach ($pagesection_data_properties[ComponentModelComponentInfo::get('response-prop-submodules')] as $block_settings_id => $block_settings_id_data_properties) {
+        foreach ($dynamic_data_properties[$entryComponentOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] as $pagesection_settings_id => $pagesection_data_properties) {
+            foreach ($pagesection_data_properties[ComponentModelModuleInfo::get('response-prop-submodules')] as $block_settings_id => $block_settings_id_data_properties) {
                 // If the block has no typeResolver, it will be empty
                 if ($block_typeResolver_data_properties = $block_settings_id_data_properties[POP_CONSTANT_DYNAMICDATAPROPERTIES]) {
                     $block_dataset = $dbobjectids[$entryComponentOutputName][$pagesection_settings_id][$block_settings_id];

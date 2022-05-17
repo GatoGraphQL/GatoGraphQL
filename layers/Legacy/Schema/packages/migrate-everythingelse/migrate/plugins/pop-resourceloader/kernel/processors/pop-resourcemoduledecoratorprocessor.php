@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
 use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
 
@@ -82,7 +82,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
 
-            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelComponentInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -115,7 +115,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
     //     foreach ($this->getDecoratedmoduleProcessor($module)->get_descendant_modules_to_propagate($module) as $submodule) {
 
-    //         if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelComponentInfo::get('response-prop-submodules')])) {
+    //         if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -158,7 +158,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
 
-            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelComponentInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(

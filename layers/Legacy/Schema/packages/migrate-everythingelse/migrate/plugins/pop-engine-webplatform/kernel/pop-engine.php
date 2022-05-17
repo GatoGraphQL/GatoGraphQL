@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -209,8 +209,8 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 // Advance the position of the array into the current module
                 foreach ($module_path as $submodule) {
                     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
-                    $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] = $modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')] ?? array();
-                    $modulejsdata = &$modulejsdata[$submoduleOutputName][ComponentModelComponentInfo::get('response-prop-submodules')];
+                    $modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] = $modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] ?? array();
+                    $modulejsdata = &$modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')];
                 }
                 // Merge the JS feedback in
                 $modulejsdata = array_merge_recursive(

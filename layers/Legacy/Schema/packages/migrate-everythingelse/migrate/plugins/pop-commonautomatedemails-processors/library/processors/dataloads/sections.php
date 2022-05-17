@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
@@ -108,7 +108,7 @@ class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAut
                 PoP_Application_SectionUtils::addDataloadqueryargsAllcontent($ret);
 
                 // Return the posts created after the given timestamp
-                $start_date = strtotime("-7 day", ComponentModelComponentInfo::get('time'));
+                $start_date = strtotime("-7 day", ComponentModelModuleInfo::get('time'));
                 // $ret['date-query'] = array(
                 //     array(
                 //         'after' => date('Y-m-d H:i:s', $start_date),

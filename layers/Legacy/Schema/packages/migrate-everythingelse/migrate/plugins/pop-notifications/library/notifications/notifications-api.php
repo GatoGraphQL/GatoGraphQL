@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
@@ -92,7 +92,7 @@ class PoP_Notifications_API
                 'array' => false,
                 'fields' => '*',
                 'user_id' => '',
-                'hist_time' => ComponentModelComponentInfo::get('time'),
+                'hist_time' => ComponentModelModuleInfo::get('time'),
                 'hist_time_compare' => '<',
                 'order' => 'ASC',
                 'orderby' => '',

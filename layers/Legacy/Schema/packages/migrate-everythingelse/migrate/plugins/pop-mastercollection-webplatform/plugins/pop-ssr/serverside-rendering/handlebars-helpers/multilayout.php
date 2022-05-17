@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 
 class PoP_ServerSide_MultiLayoutHelpers
 {
@@ -31,7 +31,7 @@ class PoP_ServerSide_MultiLayoutHelpers
         }
 
         // Render the content from this layout
-        $layoutContext = $context[ComponentModelComponentInfo::get('response-prop-submodules')][$layout];
+        $layoutContext = $context[ComponentModelModuleInfo::get('response-prop-submodules')][$layout];
 
         // Add dbKey and objectID back into the context
         $layoutContext = array_merge(

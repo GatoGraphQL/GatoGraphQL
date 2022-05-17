@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
@@ -49,7 +49,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             // Then, can start to modify the global state
             $vars['is-user-logged-in'] = true;
 
-            $yesterday = strtotime("-1 day", ComponentModelComponentInfo::get('time'));
+            $yesterday = strtotime("-1 day", ComponentModelModuleInfo::get('time'));
             foreach ($users as $user_id) {
                 // Set the recipient as the "current-user-id", pretending this user is logged in
                 $vars['current-user'] = $userTypeAPI->getUserByID($user_id)/*new WP_User($user_id, '')*/;

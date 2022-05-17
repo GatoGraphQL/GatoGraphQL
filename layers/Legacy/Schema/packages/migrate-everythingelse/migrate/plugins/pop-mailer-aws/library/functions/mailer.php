@@ -1,8 +1,8 @@
 <?php
 use Aws\Common\Aws;
 
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_Mailer_AWS_Engine
@@ -101,7 +101,7 @@ class PoP_Mailer_AWS_Engine
                         'emails' => $chunks[$chunk_count],
                     );
 
-                    $filename = ComponentModelComponentInfo::get('time') . '_' . ComponentModelComponentInfo::get('rand') . ($header_count ? '_h'.$header_count : '').($chunk_count ? '_c'.$chunk_count : '').'.json';
+                    $filename = ComponentModelModuleInfo::get('time') . '_' . ComponentModelModuleInfo::get('rand') . ($header_count ? '_h'.$header_count : '').($chunk_count ? '_c'.$chunk_count : '').'.json';
                     $result = $this->s3->putObject(
                         array(
                             'ACL'        => 'private',

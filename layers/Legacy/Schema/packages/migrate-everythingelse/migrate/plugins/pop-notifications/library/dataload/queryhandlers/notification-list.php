@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\QueryInputOutputHandlers\ListQueryInputOutputHandler;
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
@@ -20,7 +20,7 @@ class GD_DataLoad_QueryInputOutputHandler_NotificationList extends ListQueryInpu
         }
 
         // Baseline: return now
-        return ComponentModelComponentInfo::get('time');
+        return ComponentModelModuleInfo::get('time');
     }
 
     public function getHistTimeCompare(&$query_args)

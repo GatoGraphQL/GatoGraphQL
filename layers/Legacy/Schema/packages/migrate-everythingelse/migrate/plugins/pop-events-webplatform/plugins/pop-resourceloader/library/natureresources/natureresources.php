@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -109,14 +109,14 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         if (in_array($eventTypeAPI->getID($event), $this->future_events)) {
             // Modify start and end dates
-            $event->start = ComponentModelComponentInfo::get('time') + 1000;
-            $event->end = ComponentModelComponentInfo::get('time') + 2000;
+            $event->start = ComponentModelModuleInfo::get('time') + 1000;
+            $event->end = ComponentModelModuleInfo::get('time') + 2000;
         }
         // Force it to be past
         else {
             // Modify start and end dates
-            $event->start = ComponentModelComponentInfo::get('time') - 2000;
-            $event->end = ComponentModelComponentInfo::get('time') - 1000;
+            $event->start = ComponentModelModuleInfo::get('time') - 2000;
+            $event->end = ComponentModelModuleInfo::get('time') - 1000;
         }
 
         // Modify the categories, needed to get a different configuration for future/past events
