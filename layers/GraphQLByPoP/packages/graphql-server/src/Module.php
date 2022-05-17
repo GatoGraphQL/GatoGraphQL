@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
-use PoP\CacheControl\Module as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Module\AbstractModule;
@@ -93,7 +93,7 @@ class Module extends AbstractModule
         /** @var AccessControlComponentConfiguration */
         $componentConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
         if (
-            class_exists(CacheControlComponent::class)
+            class_exists(CacheControlModule::class)
             && class_exists(AccessControlModule::class)
             && $componentConfiguration->canSchemaBePrivate()
         ) {

@@ -27,7 +27,7 @@ use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\Environment as AccessControlEnvironment;
 use PoP\AccessControl\Schema\SchemaModes;
-use PoP\CacheControl\Module as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\CacheControl\Environment as CacheControlEnvironment;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
@@ -208,7 +208,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Cache-Control default max-age
             [
-                'class' => CacheControlComponent::class,
+                'class' => CacheControlModule::class,
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
                 'module' => PerformanceFunctionalityModuleResolver::CACHE_CONTROL,
                 'option' => PerformanceFunctionalityModuleResolver::OPTION_MAX_AGE,
@@ -558,7 +558,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
             ],
             [
-                'class' => CacheControlComponent::class,
+                'class' => CacheControlModule::class,
                 'envVariable' => CacheControlEnvironment::DEFAULT_CACHE_CONTROL_MAX_AGE,
             ],
             [

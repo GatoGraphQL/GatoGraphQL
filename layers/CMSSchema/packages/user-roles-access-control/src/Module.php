@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserRolesAccessControl;
 
-use PoP\CacheControl\Module as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\Module\AbstractModule;
 
 /**
@@ -47,7 +47,7 @@ class Module extends AbstractModule
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
-        if (class_exists(CacheControlComponent::class)) {
+        if (class_exists(CacheControlModule::class)) {
             $this->initSchemaServices(
                 dirname(__DIR__),
                 $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses),
