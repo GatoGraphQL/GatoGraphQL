@@ -32,7 +32,7 @@ interface ModuleManagerInterface
     /**
      * Boot all components
      */
-    public function componentLoaded(): void;
+    public function moduleLoaded(): void;
 
     /**
      * Boot all components

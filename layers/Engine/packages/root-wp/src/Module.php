@@ -63,7 +63,7 @@ class Module extends AbstractModule
         $this->initSystemServices(dirname(__DIR__), '', 'hybrid-services.yaml');
     }
 
-    public function componentLoaded(): void
+    public function moduleLoaded(): void
     {
         /**
          * Do not enable services when running PHPUnit tests

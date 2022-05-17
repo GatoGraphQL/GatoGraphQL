@@ -51,9 +51,9 @@ class Module extends AbstractModule
         $this->initSystemServices(dirname(__DIR__));
     }
 
-    public function componentLoaded(): void
+    public function moduleLoaded(): void
     {
-        parent::componentLoaded();
+        parent::moduleLoaded();
 
         $attachExtensionService = AttachExtensionServiceFacade::getInstance();
         $attachExtensionService->attachExtensions(ApplicationEvents::MODULE_LOADED);

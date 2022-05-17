@@ -282,7 +282,7 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components,
+     * Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic
      */
     protected function bootSystemComponents(): void
@@ -314,7 +314,7 @@ class AppLoader implements AppLoaderInterface
      * Boot the application. It does these steps:
      *
      * 1. Initialize the Application Container, have all Components inject services, and compile it
-     * 2. Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
+     * 2. Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components, for them to execute any custom extra logic
      *
      * @param boolean|null $cacheContainerConfiguration Indicate if to cache the container. If null, it gets the value from ENV
      * @param string|null $containerNamespace Provide the namespace, to regenerate the cache whenever the application is upgraded. If null, it gets the value from ENV
@@ -372,7 +372,7 @@ class AppLoader implements AppLoaderInterface
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Initialize the components
-        App::getModuleManager()->componentLoaded();
+        App::getModuleManager()->moduleLoaded();
     }
 
     public function skipSchemaForComponent(ModuleInterface $module): bool
@@ -385,7 +385,7 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Trigger "componentLoaded", "boot" and "afterBoot" events on all the Components,
+     * Trigger "moduleLoaded", "boot" and "afterBoot" events on all the Components,
      * for them to execute any custom extra logic.
      */
     public function bootApplicationComponents(): void

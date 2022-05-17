@@ -82,7 +82,7 @@ interface ModuleInterface
     /**
      * Function called by the Bootloader after all components have been loaded
      */
-    public function componentLoaded(): void;
+    public function moduleLoaded(): void;
 
     /**
      * Function called by the Bootloader when booting the system

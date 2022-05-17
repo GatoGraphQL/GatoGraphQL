@@ -72,13 +72,13 @@ class ModuleManager implements ModuleManagerInterface
     /**
      * Boot all modules
      */
-    public function componentLoaded(): void
+    public function moduleLoaded(): void
     {
         foreach ($this->modules as $module) {
             if (!$module->isEnabled()) {
                 continue;
             }
-            $module->componentLoaded();
+            $module->moduleLoaded();
         }
     }
 
