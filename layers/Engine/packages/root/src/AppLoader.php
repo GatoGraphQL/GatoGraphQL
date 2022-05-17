@@ -144,7 +144,7 @@ class AppLoader implements AppLoaderInterface
             $moduleClasses,
             $this->initializedComponentClasses
         ));
-        $componentManager = App::getComponentManager();
+        $componentManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
             $this->initializedComponentClasses[] = $moduleClass;
 
@@ -278,7 +278,7 @@ class AppLoader implements AppLoaderInterface
      */
     protected function configureComponents(): void
     {
-        App::getComponentManager()->configureComponents();
+        App::getModuleManager()->configureComponents();
     }
 
     /**
@@ -287,7 +287,7 @@ class AppLoader implements AppLoaderInterface
      */
     protected function bootSystemComponents(): void
     {
-        App::getComponentManager()->bootSystem();
+        App::getModuleManager()->bootSystem();
     }
 
     /**
@@ -372,7 +372,7 @@ class AppLoader implements AppLoaderInterface
         App::getContainerBuilderFactory()->maybeCompileAndCacheContainer($systemCompilerPasses);
 
         // Initialize the components
-        App::getComponentManager()->componentLoaded();
+        App::getModuleManager()->componentLoaded();
     }
 
     public function skipSchemaForComponent(ModuleInterface $component): bool
@@ -391,7 +391,7 @@ class AppLoader implements AppLoaderInterface
     public function bootApplicationComponents(): void
     {
         App::getAppStateManager()->initializeAppState($this->initialAppState);
-        $componentManager = App::getComponentManager();
+        $componentManager = App::getModuleManager();
         $componentManager->boot();
         $componentManager->afterBoot();
 

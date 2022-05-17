@@ -51,7 +51,7 @@ interface AppInterface
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
-    public static function getComponentManager(): ModuleManagerInterface;
+    public static function getModuleManager(): ModuleManagerInterface;
 
     public static function getAppStateManager(): AppStateManagerInterface;
 

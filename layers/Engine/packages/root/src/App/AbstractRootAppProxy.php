@@ -86,9 +86,9 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         return RootApp::getSystemContainerBuilderFactory();
     }
 
-    public static function getComponentManager(): ModuleManagerInterface
+    public static function getModuleManager(): ModuleManagerInterface
     {
-        return RootApp::getComponentManager();
+        return RootApp::getModuleManager();
     }
 
     public static function getAppStateManager(): AppStateManagerInterface

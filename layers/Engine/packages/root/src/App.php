@@ -155,7 +155,7 @@ class App implements AppInterface
         return self::$systemContainerBuilderFactory;
     }
 
-    public static function getComponentManager(): ModuleManagerInterface
+    public static function getModuleManager(): ModuleManagerInterface
     {
         return self::$componentManager;
     }
@@ -208,7 +208,7 @@ class App implements AppInterface
      */
     final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::getComponentManager()->getModule($moduleClass);
+        return self::getModuleManager()->getModule($moduleClass);
     }
 
     /**
