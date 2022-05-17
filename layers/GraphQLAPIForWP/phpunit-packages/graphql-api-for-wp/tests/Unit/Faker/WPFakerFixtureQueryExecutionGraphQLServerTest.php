@@ -19,10 +19,10 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
                 \PoPCMSSchema\PostCategoriesWP\Module::class,
                 \PoPCMSSchema\PostTagsWP\Module::class,

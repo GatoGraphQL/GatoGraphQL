@@ -19,10 +19,10 @@ class NestedMutationWPFakerFixtureQueryExecutionGraphQLServerTest extends Abstra
     /**
      * @return string[]
      */
-    protected static function getGraphQLServerComponentClasses(): array
+    protected static function getGraphQLServerModuleClasses(): array
     {
         return [
-            ...parent::getGraphQLServerComponentClasses(),
+            ...parent::getGraphQLServerModuleClasses(),
             ...[
                 \PoPWPSchema\Users\Module::class,
                 \PoPWPSchema\Posts\Module::class,
