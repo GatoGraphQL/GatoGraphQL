@@ -15,7 +15,7 @@ use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
  */
 class Module extends AbstractModule
 {
-    protected function requiresSatisfyingComponent(): bool
+    protected function requiresSatisfyingModule(): bool
     {
         return true;
     }

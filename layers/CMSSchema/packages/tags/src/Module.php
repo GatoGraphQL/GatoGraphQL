@@ -11,7 +11,7 @@ use PoP\Root\Module\AbstractModule;
  */
 class Module extends AbstractModule
 {
-    protected function requiresSatisfyingComponent(): bool
+    protected function requiresSatisfyingModule(): bool
     {
         return true;
     }

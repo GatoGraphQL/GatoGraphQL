@@ -15,7 +15,7 @@ use PoPCMSSchema\Users\Module as UsersModule;
  */
 class Module extends AbstractModule
 {
-    protected function requiresSatisfyingComponent(): bool
+    protected function requiresSatisfyingModule(): bool
     {
         return true;
     }

@@ -84,7 +84,7 @@ abstract class AbstractModule implements ModuleInterface
      * for any CMS, that require to be satisfied for some specific CMS
      * (such as WordPress).
      */
-    protected function requiresSatisfyingComponent(): bool
+    protected function requiresSatisfyingModule(): bool
     {
         return false;
     }
@@ -236,7 +236,7 @@ abstract class AbstractModule implements ModuleInterface
          * and the other way around too. To avoid circular recursions
          * there is param $ignoreDependencyOnSatisfiedComponents.
          */
-        if ($this->requiresSatisfyingComponent()) {
+        if ($this->requiresSatisfyingModule()) {
             if ($this->satisfyingModule === null) {
                 return false;
             }
