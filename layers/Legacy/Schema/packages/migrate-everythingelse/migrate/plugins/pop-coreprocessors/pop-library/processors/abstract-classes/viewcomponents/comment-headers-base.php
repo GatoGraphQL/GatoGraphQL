@@ -17,7 +17,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if ($header = $this->getHeaderSubmodule($module)) {
             return [
@@ -30,7 +30,7 @@ abstract class PoP_Module_Processor_CommentViewComponentHeadersBase extends PoPE
             ];
         }
 
-        return parent::getDomainSwitchingSubmodules($module);
+        return parent::getRelationalSubmodules($module);
     }
 
     public function headerShowUrl(array $module, array &$props)

@@ -204,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
@@ -290,7 +290,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
      * Watch out! This function loads both leaf fields (eg: "date") and
      * relational fields (eg: "author").
      *
-     * Using `getConditionalOnDataFieldDomainSwitchingSubmodules` to
+     * Using `getConditionalOnDataFieldRelationalSubmodules` to
      * load relational fields does not work, because the module to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
@@ -479,7 +479,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     // /**
     //  * @return ConditionalRelationalModuleField[]
     //  */
-    // public function getConditionalOnDataFieldDomainSwitchingSubmodules(array $module): array
+    // public function getConditionalOnDataFieldRelationalSubmodules(array $module): array
     // {
     //     $moduleAtts = $module[2] ?? null;
     //     if (!$this->ignoreConditionalFields($moduleAtts)) {

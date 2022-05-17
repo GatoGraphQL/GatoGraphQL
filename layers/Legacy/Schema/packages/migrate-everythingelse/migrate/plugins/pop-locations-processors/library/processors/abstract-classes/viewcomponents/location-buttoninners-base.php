@@ -42,7 +42,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if ($location_module = $this->getLocationModule($module)) {
             return [
@@ -54,6 +54,6 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
                 ),
             ];
         }
-        return parent::getDomainSwitchingSubmodules($module);
+        return parent::getRelationalSubmodules($module);
     }
 }

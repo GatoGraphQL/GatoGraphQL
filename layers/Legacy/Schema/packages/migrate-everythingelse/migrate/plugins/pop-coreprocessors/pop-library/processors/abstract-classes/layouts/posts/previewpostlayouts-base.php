@@ -73,9 +73,9 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
-        $ret = parent::getDomainSwitchingSubmodules($module);
+        $ret = parent::getRelationalSubmodules($module);
 
         $modules = [];
 
