@@ -47,7 +47,7 @@ class Module extends AbstractModule
      *
      * @param array<string, mixed> $moduleClassConfiguration
      */
-    public function customizeComponentClassConfiguration(
+    public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
     ): void {
         // The mutation scheme can be set by param ?mutation_scheme=..., with values:

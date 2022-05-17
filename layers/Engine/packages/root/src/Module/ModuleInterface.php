@@ -112,7 +112,7 @@ interface ModuleInterface
      *
      * @param array<string, mixed> $moduleClassConfiguration
      */
-    public function customizeComponentClassConfiguration(
+    public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
     ): void;
 

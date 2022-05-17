@@ -335,7 +335,7 @@ class AppLoader implements AppLoaderInterface
             if (!$module->isEnabled()) {
                 continue;
             }
-            $module->customizeComponentClassConfiguration($this->moduleClassConfiguration);
+            $module->customizeModuleClassConfiguration($this->moduleClassConfiguration);
         }
 
         /**

@@ -49,7 +49,7 @@ class Module extends AbstractModule
      *
      * @param array<string, mixed> $moduleClassConfiguration
      */
-    public function customizeComponentClassConfiguration(
+    public function customizeModuleClassConfiguration(
         array &$moduleClassConfiguration
     ): void {
         // If passing ?use_namespace=1, set it on the configuration
