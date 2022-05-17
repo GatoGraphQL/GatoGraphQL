@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP;
 
-use PoP\Root\Module\AbstractComponentInfo;
+use PoP\Root\Module\AbstractModuleInfo;
 
-class ComponentInfo extends AbstractComponentInfo
+class ComponentInfo extends AbstractModuleInfo
 {
     protected function initialize(): void
     {
