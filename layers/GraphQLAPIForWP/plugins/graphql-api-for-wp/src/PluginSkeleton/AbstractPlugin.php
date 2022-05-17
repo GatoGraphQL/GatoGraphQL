@@ -146,14 +146,14 @@ abstract class AbstractPlugin implements PluginInterface
     protected function getPluginComponent(): PluginComponentInterface
     {
         /** @var PluginComponentInterface */
-        return App::getModule($this->getComponentClass());
+        return App::getModule($this->getModuleClass());
     }
 
     /**
      * Package's Module class, of type PluginComponentInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
      */
-    protected function getComponentClass(): string
+    protected function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
         return $classNamespace . '\\Module';

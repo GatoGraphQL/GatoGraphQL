@@ -75,7 +75,7 @@ abstract class AbstractTestCase extends TestCase
     protected static function getModuleClassesToInitialize(): array
     {
         return [
-            static::getComponentClass(),
+            static::getModuleClass(),
         ];
     }
 
@@ -93,7 +93,7 @@ abstract class AbstractTestCase extends TestCase
      * Package's Module class, of type ModuleInterface.
      * By standard, it is "NamespaceOwner\Project\Module::class"
      */
-    protected static function getComponentClass(): string
+    protected static function getModuleClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
         return $classNamespace . '\\Module';
