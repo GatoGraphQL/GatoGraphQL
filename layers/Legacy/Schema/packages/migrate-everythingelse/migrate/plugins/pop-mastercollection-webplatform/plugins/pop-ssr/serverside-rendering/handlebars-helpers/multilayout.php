@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
 
 class PoP_ServerSide_MultiLayoutHelpers
 {

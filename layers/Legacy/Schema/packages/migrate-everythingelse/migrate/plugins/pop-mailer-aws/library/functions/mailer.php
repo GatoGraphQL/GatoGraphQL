@@ -1,8 +1,8 @@
 <?php
 use Aws\Common\Aws;
 
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
 class PoP_Mailer_AWS_Engine

@@ -50,7 +50,7 @@ abstract class AbstractModule implements ComponentInterface
         // Set the configuration on the corresponding ModuleConfiguration
         $this->initializeConfiguration($configuration);
 
-        // Have the Module set its own info on the corresponding ComponentInfo
+        // Have the Module set its own info on the corresponding ModuleInfo
         $this->initializeInfo();
 
         // Initialize the self component
@@ -289,7 +289,7 @@ abstract class AbstractModule implements ComponentInterface
     }
 
     /**
-     * ComponentInfo class for the Module
+     * ModuleInfo class for the Module
      */
     public function getInfo(): ?ComponentInfoInterface
     {
@@ -331,12 +331,12 @@ abstract class AbstractModule implements ComponentInterface
     }
 
     /**
-     * ComponentInfo class for the Module
+     * ModuleInfo class for the Module
      */
     protected function getComponentInfoClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentInfoClass = $classNamespace . '\\ComponentInfo';
+        $componentInfoClass = $classNamespace . '\\ModuleInfo';
         if (!class_exists($componentInfoClass)) {
             return null;
         }

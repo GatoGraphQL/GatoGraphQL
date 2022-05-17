@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
+use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 // Add the 3-days and 4-days scope

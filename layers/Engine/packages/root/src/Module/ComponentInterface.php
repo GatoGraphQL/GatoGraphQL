@@ -132,7 +132,7 @@ interface ComponentInterface
     public function getConfiguration(): ?ComponentConfigurationInterface;
 
     /**
-     * ComponentInfo for the Module
+     * ModuleInfo for the Module
      */
     public function getInfo(): ?ComponentInfoInterface;
 }

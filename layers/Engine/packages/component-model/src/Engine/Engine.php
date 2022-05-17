@@ -9,7 +9,7 @@ use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
-use PoP\ComponentModel\ComponentInfo;
+use PoP\ComponentModel\ModuleInfo;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataLoading;
@@ -264,7 +264,7 @@ class Engine implements EngineInterface
          *
          * So remove these to generate the hash.
          */
-        /** @var ComponentInfo */
+        /** @var ModuleInfo */
         $componentInfo = App::getComponent(Module::class)->getInfo();
         $differentiators = array(
             $componentInfo->getUniqueID(),
@@ -693,7 +693,7 @@ class Engine implements EngineInterface
 
     public function getRequestMeta(): array
     {
-        /** @var ComponentInfo */
+        /** @var ModuleInfo */
         $componentInfo = App::getComponent(Module::class)->getInfo();
         $meta = array(
             Response::ENTRY_MODULE => $this->getEntryModule()[1],
@@ -998,7 +998,7 @@ class Engine implements EngineInterface
         string $key,
         mixed $value,
     ): void {
-        /** @var ComponentInfo */
+        /** @var ModuleInfo */
         $componentInfo = App::getComponent(Module::class)->getInfo();
         $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
@@ -1118,7 +1118,7 @@ class Engine implements EngineInterface
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
         $module_fullpaths = $this->getDataloadingModuleFullpaths($root_module, $root_props);
 
-        /** @var ComponentInfo */
+        /** @var ModuleInfo */
         $componentInfo = App::getComponent(Module::class)->getInfo();
         $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
 
@@ -2457,7 +2457,7 @@ class Engine implements EngineInterface
 
             // Add the feedback into the object
             if ($feedback = $processor->getDataFeedbackDatasetmoduletree($module, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
-                /** @var ComponentInfo */
+                /** @var ModuleInfo */
                 $componentInfo = App::getComponent(Module::class)->getInfo();
                 $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
 
