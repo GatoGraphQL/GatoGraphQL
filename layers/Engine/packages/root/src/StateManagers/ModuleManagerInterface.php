@@ -7,7 +7,7 @@ namespace PoP\Root\StateManagers;
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Exception\ComponentNotExistsException;
 
-interface ComponentManagerInterface
+interface ModuleManagerInterface
 {
     /**
      * Register and initialize a component

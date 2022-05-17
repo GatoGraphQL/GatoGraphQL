@@ -13,8 +13,8 @@ use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManager;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManager;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManager;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManager;
 use PoP\Root\StateManagers\HookManagerInterface;
 
@@ -33,7 +33,7 @@ class App implements AppInterface
     protected static Response $response;
     protected static ContainerBuilderFactory $containerBuilderFactory;
     protected static SystemContainerBuilderFactory $systemContainerBuilderFactory;
-    protected static ComponentManagerInterface $componentManager;
+    protected static ModuleManagerInterface $componentManager;
     protected static AppStateManagerInterface $appStateManager;
     /** @var string[] */
     protected static array $moduleClassesToInitialize = [];
@@ -52,7 +52,7 @@ class App implements AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         self::$appLoader = $appLoader ?? static::createAppLoader();
@@ -110,9 +110,9 @@ class App implements AppInterface
         return new SystemContainerBuilderFactory();
     }
 
-    protected static function createComponentManager(): ComponentManagerInterface
+    protected static function createComponentManager(): ModuleManagerInterface
     {
-        return new ComponentManager();
+        return new ModuleManager();
     }
 
     protected static function createAppStateManager(): AppStateManagerInterface
@@ -155,7 +155,7 @@ class App implements AppInterface
         return self::$systemContainerBuilderFactory;
     }
 
-    public static function getComponentManager(): ComponentManagerInterface
+    public static function getComponentManager(): ModuleManagerInterface
     {
         return self::$componentManager;
     }

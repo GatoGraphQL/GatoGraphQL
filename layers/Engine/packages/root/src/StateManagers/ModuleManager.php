@@ -10,7 +10,7 @@ use PoP\Root\Exception\ComponentNotExistsException;
 /**
  * Keep a reference to all Components
  */
-class ComponentManager implements ComponentManagerInterface
+class ModuleManager implements ModuleManagerInterface
 {
     /**
      * The initialized components, stored under their class

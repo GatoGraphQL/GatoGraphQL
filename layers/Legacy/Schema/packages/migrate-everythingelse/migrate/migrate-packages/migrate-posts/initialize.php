@@ -22,5 +22,5 @@ $class = (new class() extends \PoP\Root\Module\AbstractModule
         require_once 'migrate/pop-posts.php';
     }
 });
-\PoP\Root\StateManagers\ComponentManager::register(get_class($class));
+\PoP\Root\StateManagers\ModuleManager::register(get_class($class));
 $class::initialize();

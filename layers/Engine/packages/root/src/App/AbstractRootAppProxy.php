@@ -15,7 +15,7 @@ use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
@@ -37,7 +37,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void {
         RootApp::initialize(
@@ -86,7 +86,7 @@ abstract class AbstractRootAppProxy implements RootAppInterface
         return RootApp::getSystemContainerBuilderFactory();
     }
 
-    public static function getComponentManager(): ComponentManagerInterface
+    public static function getComponentManager(): ModuleManagerInterface
     {
         return RootApp::getComponentManager();
     }

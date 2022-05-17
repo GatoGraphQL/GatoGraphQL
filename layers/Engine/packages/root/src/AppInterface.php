@@ -12,7 +12,7 @@ use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\StateManagers\AppStateManagerInterface;
-use PoP\Root\StateManagers\ComponentManagerInterface;
+use PoP\Root\StateManagers\ModuleManagerInterface;
 use PoP\Root\StateManagers\HookManagerInterface;
 
 /**
@@ -33,7 +33,7 @@ interface AppInterface
         ?Request $request = null,
         ?ContainerBuilderFactory $containerBuilderFactory = null,
         ?SystemContainerBuilderFactory $systemContainerBuilderFactory = null,
-        ?ComponentManagerInterface $componentManager = null,
+        ?ModuleManagerInterface $componentManager = null,
         ?AppStateManagerInterface $appStateManager = null,
     ): void;
 
@@ -51,7 +51,7 @@ interface AppInterface
 
     public static function getSystemContainerBuilderFactory(): SystemContainerBuilderFactory;
 
-    public static function getComponentManager(): ComponentManagerInterface;
+    public static function getComponentManager(): ModuleManagerInterface;
 
     public static function getAppStateManager(): AppStateManagerInterface;
 
