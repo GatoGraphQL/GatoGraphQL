@@ -58,7 +58,7 @@ use PoPCMSSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPCMSSchema\Settings\Module as SettingsComponent;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
-use PoPCMSSchema\Tags\Module as TagsComponent;
+use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
 use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaComponent;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
@@ -329,13 +329,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Tag default/max limits
             [
-                'class' => TagsComponent::class,
+                'class' => TagsModule::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => TagsComponent::class,
+                'class' => TagsModule::class,
                 'envVariable' => TagsEnvironment::TAG_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_TAGS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
