@@ -15,7 +15,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
         return BlockAttributeNames::ENABLED_CONST;
     }
 
-    abstract public function getHookComponentClass(): string;
+    abstract public function getHookModuleClass(): string;
 
     abstract public function getHookEnvironmentClass(): string;
 
@@ -40,7 +40,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigurationExecu
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
             $hookName = ModuleConfigurationHelpers::getHookName(
-                $this->getHookComponentClass(),
+                $this->getHookModuleClass(),
                 $this->getHookEnvironmentClass(),
             );
             \add_filter(

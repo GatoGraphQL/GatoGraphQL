@@ -33,7 +33,7 @@ class ExposeAdminDataSchemaConfigurationExecuter extends AbstractDefaultEnableDi
         return $this->getSchemaConfigExposeAdminDataBlock();
     }
 
-    public function getHookComponentClass(): string
+    public function getHookModuleClass(): string
     {
         return ComponentModelModule::class;
     }

@@ -33,7 +33,7 @@ class NamespacingSchemaConfigurationExecuter extends AbstractDefaultEnableDisabl
         return $this->getSchemaConfigNamespacingBlock();
     }
 
-    public function getHookComponentClass(): string
+    public function getHookModuleClass(): string
     {
         return ComponentModelModule::class;
     }
