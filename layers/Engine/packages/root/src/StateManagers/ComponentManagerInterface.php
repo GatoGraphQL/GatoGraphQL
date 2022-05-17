@@ -12,12 +12,12 @@ interface ComponentManagerInterface
     /**
      * Register and initialize a component
      */
-    public function register(string $componentClass): ModuleInterface;
+    public function register(string $moduleClass): ModuleInterface;
 
     /**
      * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
-    public function getModule(string $componentClass): ModuleInterface;
+    public function getModule(string $moduleClass): ModuleInterface;
 
     /**
      * Configure components

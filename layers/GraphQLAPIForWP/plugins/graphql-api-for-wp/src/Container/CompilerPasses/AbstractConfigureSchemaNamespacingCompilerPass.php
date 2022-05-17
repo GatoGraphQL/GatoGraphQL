@@ -14,8 +14,8 @@ abstract class AbstractConfigureSchemaNamespacingCompilerPass extends AbstractCo
     {
         $schemaNamespacingServiceDefinition = $containerBuilderWrapper->getDefinition(SchemaNamespacingServiceInterface::class);
         $schemaNamespace = $this->getSchemaNamespace();
-        foreach ($this->getComponentClasses() as $componentClass) {
-            $componentClassNamespace = substr($componentClass, 0, strrpos($componentClass, '\\'));
+        foreach ($this->getComponentClasses() as $moduleClass) {
+            $componentClassNamespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
             $schemaNamespacingServiceDefinition->addMethodCall(
                 'addSchemaNamespaceForClassOwnerAndProjectNamespace',
                 [

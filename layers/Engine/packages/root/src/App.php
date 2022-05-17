@@ -206,9 +206,9 @@ class App implements AppInterface
      *
      * @throws ComponentNotExistsException
      */
-    final public static function getModule(string $componentClass): ModuleInterface
+    final public static function getModule(string $moduleClass): ModuleInterface
     {
-        return self::getComponentManager()->getModule($componentClass);
+        return self::getComponentManager()->getModule($moduleClass);
     }
 
     /**

@@ -80,10 +80,10 @@ class AppLoader implements AppLoaderInterface
         array $componentClassConfiguration
     ): void {
         // Allow to override entries under each Module
-        foreach ($componentClassConfiguration as $componentClass => $moduleConfiguration) {
-            $this->componentClassConfiguration[$componentClass] ??= [];
-            $this->componentClassConfiguration[$componentClass] = array_merge(
-                $this->componentClassConfiguration[$componentClass],
+        foreach ($componentClassConfiguration as $moduleClass => $moduleConfiguration) {
+            $this->componentClassConfiguration[$moduleClass] ??= [];
+            $this->componentClassConfiguration[$moduleClass] = array_merge(
+                $this->componentClassConfiguration[$moduleClass],
                 $moduleConfiguration
             );
         }
@@ -145,11 +145,11 @@ class AppLoader implements AppLoaderInterface
             $this->initializedComponentClasses
         ));
         $componentManager = App::getComponentManager();
-        foreach ($componentClasses as $componentClass) {
-            $this->initializedComponentClasses[] = $componentClass;
+        foreach ($componentClasses as $moduleClass) {
+            $this->initializedComponentClasses[] = $moduleClass;
 
             // Initialize and register the Module
-            $component = $componentManager->register($componentClass);
+            $component = $componentManager->register($moduleClass);
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
@@ -181,7 +181,7 @@ class AppLoader implements AppLoaderInterface
             );
 
             // We reached the bottom of the rung, add the component to the list
-            $this->orderedComponentClasses[] = $componentClass;
+            $this->orderedComponentClasses[] = $moduleClass;
 
             /**
              * If this compononent satisfies the contracts for other
@@ -255,8 +255,8 @@ class AppLoader implements AppLoaderInterface
          * This way, these services become available for initializing
          * Application Container services.
          */
-        foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getModule($componentClass);
+        foreach ($this->orderedComponentClasses as $moduleClass) {
+            $component = App::getModule($moduleClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -297,8 +297,8 @@ class AppLoader implements AppLoaderInterface
     {
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
-        foreach ($this->orderedComponentClasses as $componentClass) {
-            $component = App::getModule($componentClass);
+        foreach ($this->orderedComponentClasses as $moduleClass) {
+            $component = App::getModule($moduleClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -330,8 +330,8 @@ class AppLoader implements AppLoaderInterface
          * and for its depended-upon components.
          * Hence this is executed from bottom to top
          */
-        foreach (array_reverse($this->orderedComponentClasses) as $componentClass) {
-            $component = App::getModule($componentClass);
+        foreach (array_reverse($this->orderedComponentClasses) as $moduleClass) {
+            $component = App::getModule($moduleClass);
             if (!$component->isEnabled()) {
                 continue;
             }
@@ -350,13 +350,13 @@ class AppLoader implements AppLoaderInterface
         /**
          * Initialize the container services by the Components
          */
-        foreach ($this->orderedComponentClasses as $componentClass) {
+        foreach ($this->orderedComponentClasses as $moduleClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = App::getModule($componentClass);
+            $component = App::getModule($moduleClass);
             if (!$component->isEnabled()) {
                 continue;
             }
-            $moduleConfiguration = $this->componentClassConfiguration[$componentClass] ?? [];
+            $moduleConfiguration = $this->componentClassConfiguration[$moduleClass] ?? [];
             $skipSchemaForComponent = $this->skipSchemaForComponent($component);
             $component->initialize(
                 $moduleConfiguration,
@@ -377,11 +377,11 @@ class AppLoader implements AppLoaderInterface
 
     public function skipSchemaForComponent(ModuleInterface $component): bool
     {
-        $componentClass = \get_class($component);
-        if (!isset($this->skipSchemaForComponentCache[$componentClass])) {
-            $this->skipSchemaForComponentCache[$componentClass] = in_array($componentClass, $this->skipSchemaComponentClasses) || $component->skipSchema();
+        $moduleClass = \get_class($component);
+        if (!isset($this->skipSchemaForComponentCache[$moduleClass])) {
+            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaComponentClasses) || $component->skipSchema();
         }
-        return $this->skipSchemaForComponentCache[$componentClass];
+        return $this->skipSchemaForComponentCache[$moduleClass];
     }
 
     /**

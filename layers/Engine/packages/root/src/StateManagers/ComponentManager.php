@@ -22,25 +22,25 @@ class ComponentManager implements ComponentManagerInterface
     /**
      * Register and initialize a component
      */
-    public function register(string $componentClass): ModuleInterface
+    public function register(string $moduleClass): ModuleInterface
     {
-        $component = new $componentClass();
-        $this->components[$componentClass] = $component;
+        $component = new $moduleClass();
+        $this->components[$moduleClass] = $component;
         return $component;
     }
 
     /**
      * @throws ComponentNotExistsException If the class of the component does not exist or has not been initialized
      */
-    public function getModule(string $componentClass): ModuleInterface
+    public function getModule(string $moduleClass): ModuleInterface
     {
-        if (!isset($this->components[$componentClass])) {
+        if (!isset($this->components[$moduleClass])) {
             throw new ComponentNotExistsException(\sprintf(
                 'Module of class \'%s\' does not exist, or it has not been added for initialization',
-                $componentClass
+                $moduleClass
             ));
         }
-        return $this->components[$componentClass];
+        return $this->components[$moduleClass];
     }
 
     /**

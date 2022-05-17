@@ -82,7 +82,7 @@ interface AppInterface
      *
      * @throws ComponentNotExistsException
      */
-    public static function getModule(string $componentClass): ModuleInterface;
+    public static function getModule(string $moduleClass): ModuleInterface;
 
     /**
      * Shortcut function.
