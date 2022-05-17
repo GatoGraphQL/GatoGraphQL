@@ -18,7 +18,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
     /**
      * @return string[]
      */
-    protected function getComponentClasses(): array
+    protected function getModuleClasses(): array
     {
         return [
             \GraphQLByPoP\GraphQLServer\Module::class,
