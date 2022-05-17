@@ -12,7 +12,7 @@ use PoPAPI\API\Environment;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
 
-class ComponentConfigurationHookSet extends AbstractHookSet
+class ModuleConfigurationHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
