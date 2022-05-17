@@ -51,7 +51,7 @@ use PoPCMSSchema\Media\Module as MediaComponent;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
 use PoPCMSSchema\Menus\Module as MenusComponent;
 use PoPCMSSchema\Menus\Environment as MenusEnvironment;
-use PoPCMSSchema\Pages\Module as PagesComponent;
+use PoPCMSSchema\Pages\Module as PagesModule;
 use PoPCMSSchema\Pages\Environment as PagesEnvironment;
 use PoPCMSSchema\Posts\Module as PostsComponent;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
@@ -355,21 +355,21 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Page default/max limits, add to CustomPostUnion
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::PAGE_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => PagesComponent::class,
+                'class' => PagesModule::class,
                 'envVariable' => PagesEnvironment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_PAGES,
                 'option' => ModuleSettingOptions::ADD_TYPE_TO_CUSTOMPOST_UNION_TYPE,
