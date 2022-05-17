@@ -55,7 +55,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @var array<string,bool>
      */
-    protected array $skipSchemaForComponentCache = [];
+    protected array $skipSchemaForModuleCache = [];
 
     /**
      * Add Module classes to be initialized
@@ -378,10 +378,10 @@ class AppLoader implements AppLoaderInterface
     public function skipSchemaForComponent(ModuleInterface $module): bool
     {
         $moduleClass = \get_class($module);
-        if (!isset($this->skipSchemaForComponentCache[$moduleClass])) {
-            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaModuleClasses) || $module->skipSchema();
+        if (!isset($this->skipSchemaForModuleCache[$moduleClass])) {
+            $this->skipSchemaForModuleCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaModuleClasses) || $module->skipSchema();
         }
-        return $this->skipSchemaForComponentCache[$moduleClass];
+        return $this->skipSchemaForModuleCache[$moduleClass];
     }
 
     /**
