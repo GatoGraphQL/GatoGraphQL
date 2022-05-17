@@ -176,7 +176,7 @@ class App implements AppInterface
      *
      * @param string[] $componentClasses List of `Module` class to initialize
      */
-    public static function stockAndInitializeComponentClasses(
+    public static function stockAndInitializeModuleClasses(
         array $componentClasses
     ): void {
         self::$componentClassesToInitialize = array_merge(

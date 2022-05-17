@@ -107,10 +107,10 @@ abstract class AbstractRootAppProxy implements RootAppInterface
      *
      * @param string[] $componentClasses List of `Module` class to initialize
      */
-    public static function stockAndInitializeComponentClasses(
+    public static function stockAndInitializeModuleClasses(
         array $componentClasses
     ): void {
-        RootApp::stockAndInitializeComponentClasses($componentClasses);
+        RootApp::stockAndInitializeModuleClasses($componentClasses);
     }
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use PoP\Root\App;
 
-App::stockAndInitializeComponentClasses([
+App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\PostsWP\Module::class,
     \PoPCMSSchema\PagesWP\Module::class,
     \PoPCMSSchema\CustomPostMediaWP\Module::class,
