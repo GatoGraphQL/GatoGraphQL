@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\UserState\Component::class,
+    \PoPCMSSchema\UserState\Module::class,
 ]);
 ```
 

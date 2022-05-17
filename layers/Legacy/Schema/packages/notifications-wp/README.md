@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addModuleClassesToInitialize([
-    \PoPSchema\NotificationsWP\Component::class,
+    \PoPSchema\NotificationsWP\Module::class,
 ]);
 ```
 

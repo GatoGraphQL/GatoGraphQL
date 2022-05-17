@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\CustomPostMedia\Component::class,
+    \PoPCMSSchema\CustomPostMedia\Module::class,
 ]);
 ```
 

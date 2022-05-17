@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\CustomPostMetaWP\Component::class,
+    \PoPCMSSchema\CustomPostMetaWP\Module::class,
 ]);
 ```
 

@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPWPSchema\Media\Component::class,
+    \PoPWPSchema\Media\Module::class,
 ]);
 ```
 

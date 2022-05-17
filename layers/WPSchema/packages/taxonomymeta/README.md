@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPWPSchema\TaxonomyMeta\Component::class,
+    \PoPWPSchema\TaxonomyMeta\Module::class,
 ]);
 ```
 

@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLByPoP\GraphQLRequest\Component::class,
+    \GraphQLByPoP\GraphQLRequest\Module::class,
 ]);
 ```
 

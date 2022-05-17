@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\EmojiDefinitions\Component::class,
+    \PoP\EmojiDefinitions\Module::class,
 ]);
 ```
 

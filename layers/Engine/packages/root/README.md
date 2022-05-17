@@ -31,7 +31,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\Root\Component::class,
+    \PoP\Root\Module::class,
 ]);
 ```
 

@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPAPI\APIMirrorQuery\Component::class,
+    \PoPAPI\APIMirrorQuery\Module::class,
 ]);
 ```
 

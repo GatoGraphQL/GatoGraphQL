@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addModuleClassesToInitialize([
-    \PoPSchema\EverythingElse\Component::class,
+    \PoPSchema\EverythingElse\Module::class,
 ]);
 ```
 

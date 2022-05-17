@@ -111,7 +111,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPAPI\API\Component::class,
+    \PoPAPI\API\Module::class,
 ]);
 ```
 

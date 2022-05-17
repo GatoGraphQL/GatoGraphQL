@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PHPUnitForGraphQLAPI\GraphQLAPITesting\Component::class,
+    \PHPUnitForGraphQLAPI\GraphQLAPITesting\Module::class,
 ]);
 ```
 

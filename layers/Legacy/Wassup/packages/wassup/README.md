@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addModuleClassesToInitialize([
-    \PoPSitesWassup\Wassup\Component::class,
+    \PoPSitesWassup\Wassup\Module::class,
 ]);
 ```
 

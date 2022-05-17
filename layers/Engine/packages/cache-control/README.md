@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\CacheControl\Component::class,
+    \PoP\CacheControl\Module::class,
 ]);
 ```
 

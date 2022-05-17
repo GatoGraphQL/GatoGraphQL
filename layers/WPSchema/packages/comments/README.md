@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPWPSchema\Comments\Component::class,
+    \PoPWPSchema\Comments\Module::class,
 ]);
 ```
 

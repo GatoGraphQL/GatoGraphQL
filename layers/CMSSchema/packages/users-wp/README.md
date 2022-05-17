@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\UsersWP\Component::class,
+    \PoPCMSSchema\UsersWP\Module::class,
 ]);
 ```
 

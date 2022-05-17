@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLAPI\MarkdownConvertor\Component::class,
+    \GraphQLAPI\MarkdownConvertor\Module::class,
 ]);
 ```
 

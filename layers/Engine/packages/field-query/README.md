@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\FieldQuery\Component::class,
+    \PoP\FieldQuery\Module::class,
 ]);
 ```
 

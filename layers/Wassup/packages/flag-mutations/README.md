@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPSitesWassup\FlagMutations\Component::class,
+    \PoPSitesWassup\FlagMutations\Module::class,
 ]);
 ```
 

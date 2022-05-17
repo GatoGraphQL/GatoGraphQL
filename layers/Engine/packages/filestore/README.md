@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\FileStore\Component::class,
+    \PoP\FileStore\Module::class,
 ]);
 ```
 

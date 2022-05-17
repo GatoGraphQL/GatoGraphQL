@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\QueryParsing\Component::class,
+    \PoP\QueryParsing\Module::class,
 ]);
 ```
 

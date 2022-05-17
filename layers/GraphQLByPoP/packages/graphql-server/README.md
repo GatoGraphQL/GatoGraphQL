@@ -65,7 +65,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \GraphQLByPoP\GraphQLServer\Component::class,
+    \GraphQLByPoP\GraphQLServer\Module::class,
 ]);
 ```
 

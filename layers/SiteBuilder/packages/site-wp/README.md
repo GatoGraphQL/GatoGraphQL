@@ -28,7 +28,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\SiteWP\Component::class,
+    \PoP\SiteWP\Module::class,
 ]);
 ```
 

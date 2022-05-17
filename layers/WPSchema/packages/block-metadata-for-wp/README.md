@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPWPSchema\BlockMetadataWP\Component::class,
+    \PoPWPSchema\BlockMetadataWP\Module::class,
 ]);
 ```
 

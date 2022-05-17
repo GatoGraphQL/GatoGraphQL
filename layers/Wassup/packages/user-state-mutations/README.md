@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPSitesWassup\UserStateMutations\Component::class,
+    \PoPSitesWassup\UserStateMutations\Module::class,
 ]);
 ```
 

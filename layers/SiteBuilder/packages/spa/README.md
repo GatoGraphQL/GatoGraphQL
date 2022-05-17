@@ -28,7 +28,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoP\SPA\Component::class,
+    \PoP\SPA\Module::class,
 ]);
 ```
 

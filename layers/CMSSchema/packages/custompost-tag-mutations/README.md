@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPCMSSchema\CustomPostTagMutations\Component::class,
+    \PoPCMSSchema\CustomPostTagMutations\Module::class,
 ]);
 ```
 

@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\App::stockAndInitializeModuleClasses([([
-    \PoPSitesWassup\SocialNetworkMutations\Component::class,
+    \PoPSitesWassup\SocialNetworkMutations\Module::class,
 ]);
 ```
 

@@ -29,7 +29,7 @@ Initialize the component:
 
 ``` php
 \PoP\Root\AppLoader::addModuleClassesToInitialize([
-    \PoPSchema\HighlightsWP\Component::class,
+    \PoPSchema\HighlightsWP\Module::class,
 ]);
 ```
 
