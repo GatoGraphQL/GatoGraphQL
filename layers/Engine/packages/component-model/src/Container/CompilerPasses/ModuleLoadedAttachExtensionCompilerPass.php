@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\Container\CompilerPasses;
 
 use PoP\Root\Module\ApplicationEvents;
 
-class ComponentLoadedAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
+class ModuleLoadedAttachExtensionCompilerPass extends AbstractAttachExtensionCompilerPass
 {
     protected function getAttachExtensionEvent(): string
     {
