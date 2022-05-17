@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\Root\Module\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 
@@ -53,7 +53,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
                 return;
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 GraphQLServerComponent::class,
                 GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS
             );
@@ -62,7 +62,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
                 fn () => $mutationScheme != MutationSchemes::STANDARD,
                 PHP_INT_MAX
             );
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 EngineComponent::class,
                 EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS
             );

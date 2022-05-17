@@ -56,7 +56,7 @@ abstract class AbstractModuleConfiguration implements ComponentConfigurationInte
         }
 
         $class = $this->getComponentClass();
-        $hookName = ComponentConfigurationHelpers::getHookName(
+        $hookName = ModuleConfigurationHelpers::getHookName(
             $class,
             $envVariable
         );

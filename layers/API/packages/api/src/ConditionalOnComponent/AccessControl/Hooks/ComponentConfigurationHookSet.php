@@ -9,7 +9,7 @@ use PoP\AccessControl\Module as AccessControlComponent;
 use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoPAPI\API\Module;
 use PoPAPI\API\Environment;
-use PoP\Root\Module\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
@@ -22,7 +22,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
         /** @var AccessControlComponentConfiguration */
         $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
         if ($componentConfiguration->canSchemaBePrivate()) {
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 Module::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE
             );

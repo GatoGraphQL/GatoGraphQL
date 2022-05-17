@@ -7,7 +7,7 @@ namespace PoP\Root\Module;
 /**
  * Helpers for the ModuleConfiguration class
  */
-class ComponentConfigurationHelpers
+class ModuleConfigurationHelpers
 {
     public static function getHookName(string $class, string $envVariable): string
     {

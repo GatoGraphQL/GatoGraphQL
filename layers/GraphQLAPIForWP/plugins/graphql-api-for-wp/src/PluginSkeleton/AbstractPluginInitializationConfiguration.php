@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\Root\Module\ComponentConfigurationHelpers;
+use PoP\Root\Module\ModuleConfigurationHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -57,7 +57,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $class,
                 $envVariable
             );
@@ -112,7 +112,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $mapping['class'],
                 $envVariable
             );
@@ -154,7 +154,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            $hookName = ComponentConfigurationHelpers::getHookName(
+            $hookName = ModuleConfigurationHelpers::getHookName(
                 $mapping['class'],
                 $envVariable
             );
