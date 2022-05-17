@@ -17,8 +17,6 @@ class Module extends AbstractModule
     }
 
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
      * @return string[]
      */
     public function getDependedModuleClasses(): array

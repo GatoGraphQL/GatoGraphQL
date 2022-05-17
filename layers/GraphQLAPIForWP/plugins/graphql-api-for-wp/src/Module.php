@@ -17,8 +17,6 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 class Module extends AbstractPluginModule
 {
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
      * @return string[]
      */
     public function getDependedModuleClasses(): array

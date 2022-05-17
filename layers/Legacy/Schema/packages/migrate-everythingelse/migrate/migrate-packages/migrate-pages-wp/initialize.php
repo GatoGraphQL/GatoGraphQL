@@ -2,8 +2,6 @@
 $class = (new class() extends \PoP\Root\Module\AbstractModule
 {
     /**
-     * Classes from PoP components that must be initialized before this component
-     *
      * @return string[]
      */
     public function getDependedModuleClasses(): array
