@@ -149,22 +149,22 @@ class AppLoader implements AppLoaderInterface
             $this->initializedComponentClasses[] = $moduleClass;
 
             // Initialize and register the Module
-            $component = $moduleManager->register($moduleClass);
+            $module = $moduleManager->register($moduleClass);
 
             // Initialize all depended-upon PoP components
             $this->addComponentsOrderedForInitialization(
-                $component->getDependedComponentClasses(),
+                $module->getDependedComponentClasses(),
                 $isDev
             );
 
             if ($isDev) {
                 $this->addComponentsOrderedForInitialization(
-                    $component->getDevDependedComponentClasses(),
+                    $module->getDevDependedComponentClasses(),
                     $isDev
                 );
                 if (Environment::isApplicationEnvironmentDevPHPUnit()) {
                     $this->addComponentsOrderedForInitialization(
-                        $component->getDevPHPUnitDependedComponentClasses(),
+                        $module->getDevPHPUnitDependedComponentClasses(),
                         $isDev
                     );
                 }
@@ -173,7 +173,7 @@ class AppLoader implements AppLoaderInterface
             // Initialize all depended-upon PoP conditional components, if they are installed
             $this->addComponentsOrderedForInitialization(
                 array_filter(
-                    $component->getDependedConditionalComponentClasses(),
+                    $module->getDependedConditionalComponentClasses(),
                     // Rector does not downgrade `class_exists(...)` properly, so keep as string
                     'class_exists'
                 ),
@@ -187,9 +187,9 @@ class AppLoader implements AppLoaderInterface
              * If this compononent satisfies the contracts for other
              * components, set them as "satisfied".
              */
-            foreach ($component->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
+            foreach ($module->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
                 $satisfiedComponent = App::getModule($satisfiedComponentClass);
-                $satisfiedComponent->setSatisfyingComponent($component);
+                $satisfiedComponent->setSatisfyingComponent($module);
             }
         }
     }
@@ -256,11 +256,11 @@ class AppLoader implements AppLoaderInterface
          * Application Container services.
          */
         foreach ($this->orderedComponentClasses as $moduleClass) {
-            $component = App::getModule($moduleClass);
-            if (!$component->isEnabled()) {
+            $module = App::getModule($moduleClass);
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->initializeSystem();
+            $module->initializeSystem();
         }
         $systemCompilerPasses = array_map(
             fn ($class) => new $class(),
@@ -298,13 +298,13 @@ class AppLoader implements AppLoaderInterface
         // Collect the compiler pass classes from all components
         $compilerPassClasses = [];
         foreach ($this->orderedComponentClasses as $moduleClass) {
-            $component = App::getModule($moduleClass);
-            if (!$component->isEnabled()) {
+            $module = App::getModule($moduleClass);
+            if (!$module->isEnabled()) {
                 continue;
             }
             $compilerPassClasses = [
                 ...$compilerPassClasses,
-                ...$component->getSystemContainerCompilerPassClasses()
+                ...$module->getSystemContainerCompilerPassClasses()
             ];
         }
         return array_values(array_unique($compilerPassClasses));
@@ -331,11 +331,11 @@ class AppLoader implements AppLoaderInterface
          * Hence this is executed from bottom to top
          */
         foreach (array_reverse($this->orderedComponentClasses) as $moduleClass) {
-            $component = App::getModule($moduleClass);
-            if (!$component->isEnabled()) {
+            $module = App::getModule($moduleClass);
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->customizeComponentClassConfiguration($this->moduleClassConfiguration);
+            $module->customizeComponentClassConfiguration($this->moduleClassConfiguration);
         }
 
         /**
@@ -352,13 +352,13 @@ class AppLoader implements AppLoaderInterface
          */
         foreach ($this->orderedComponentClasses as $moduleClass) {
             // Initialize the component, passing its configuration, and checking if its schema must be skipped
-            $component = App::getModule($moduleClass);
-            if (!$component->isEnabled()) {
+            $module = App::getModule($moduleClass);
+            if (!$module->isEnabled()) {
                 continue;
             }
             $moduleConfiguration = $this->moduleClassConfiguration[$moduleClass] ?? [];
-            $skipSchemaForComponent = $this->skipSchemaForComponent($component);
-            $component->initialize(
+            $skipSchemaForComponent = $this->skipSchemaForComponent($module);
+            $module->initialize(
                 $moduleConfiguration,
                 $skipSchemaForComponent,
                 $this->skipSchemaComponentClasses
@@ -375,11 +375,11 @@ class AppLoader implements AppLoaderInterface
         App::getModuleManager()->componentLoaded();
     }
 
-    public function skipSchemaForComponent(ModuleInterface $component): bool
+    public function skipSchemaForComponent(ModuleInterface $module): bool
     {
-        $moduleClass = \get_class($component);
+        $moduleClass = \get_class($module);
         if (!isset($this->skipSchemaForComponentCache[$moduleClass])) {
-            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaComponentClasses) || $component->skipSchema();
+            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaComponentClasses) || $module->skipSchema();
         }
         return $this->skipSchemaForComponentCache[$moduleClass];
     }

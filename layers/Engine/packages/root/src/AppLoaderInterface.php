@@ -100,5 +100,5 @@ interface AppLoaderInterface
      */
     public function bootApplicationComponents(): void;
 
-    public function skipSchemaForComponent(ModuleInterface $component): bool;
+    public function skipSchemaForComponent(ModuleInterface $module): bool;
 }

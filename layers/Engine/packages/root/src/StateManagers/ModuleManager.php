@@ -13,20 +13,20 @@ use PoP\Root\Exception\ComponentNotExistsException;
 class ModuleManager implements ModuleManagerInterface
 {
     /**
-     * The initialized components, stored under their class
+     * The initialized modules, stored under their class
      *
      * @var array<string,ModuleInterface>
      */
-    protected array $components = [];
+    protected array $modules = [];
 
     /**
      * Register and initialize a component
      */
     public function register(string $moduleClass): ModuleInterface
     {
-        $component = new $moduleClass();
-        $this->components[$moduleClass] = $component;
-        return $component;
+        $module = new $moduleClass();
+        $this->modules[$moduleClass] = $module;
+        return $module;
     }
 
     /**
@@ -34,77 +34,77 @@ class ModuleManager implements ModuleManagerInterface
      */
     public function getModule(string $moduleClass): ModuleInterface
     {
-        if (!isset($this->components[$moduleClass])) {
+        if (!isset($this->modules[$moduleClass])) {
             throw new ComponentNotExistsException(\sprintf(
                 'Module of class \'%s\' does not exist, or it has not been added for initialization',
                 $moduleClass
             ));
         }
-        return $this->components[$moduleClass];
+        return $this->modules[$moduleClass];
     }
 
     /**
-     * Configure components
+     * Configure modules
      */
     public function configureComponents(): void
     {
-        foreach ($this->components as $component) {
-            if (!$component->isEnabled()) {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->configure();
+            $module->configure();
         }
     }
 
     /**
-     * Boot all components
+     * Boot all modules
      */
     public function bootSystem(): void
     {
-        foreach ($this->components as $component) {
-            if (!$component->isEnabled()) {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->bootSystem();
+            $module->bootSystem();
         }
     }
 
     /**
-     * Boot all components
+     * Boot all modules
      */
     public function componentLoaded(): void
     {
-        foreach ($this->components as $component) {
-            if (!$component->isEnabled()) {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->componentLoaded();
+            $module->componentLoaded();
         }
     }
 
     /**
-     * Boot all components
+     * Boot all modules
      */
     public function boot(): void
     {
-        foreach ($this->components as $component) {
-            if (!$component->isEnabled()) {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->boot();
+            $module->boot();
         }
     }
 
     /**
-     * Boot all components
+     * Boot all modules
      */
     public function afterBoot(): void
     {
-        foreach ($this->components as $component) {
-            if (!$component->isEnabled()) {
+        foreach ($this->modules as $module) {
+            if (!$module->isEnabled()) {
                 continue;
             }
-            $component->afterBoot();
+            $module->afterBoot();
         }
     }
 }

@@ -12,8 +12,8 @@ abstract class AbstractModule implements ModuleInterface
     use InitializeContainerServicesInModuleTrait;
 
     /**
-     * Indicate what other component satisfies the contracts
-     * by this component.
+     * Indicate what other module satisfies the contracts
+     * by this module.
      *
      * For instance, the packages under CMSSchema have generic contracts
      * for any CMS, that require to be satisfied for some specific CMS
@@ -25,7 +25,7 @@ abstract class AbstractModule implements ModuleInterface
     protected ?ModuleInfoInterface $componentInfo = null;
 
     /**
-     * Enable each component to set default configuration for
+     * Enable each module to set default configuration for
      * itself and its depended components
      *
      * @param array<string, mixed> $moduleClassConfiguration
@@ -36,7 +36,7 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * Initialize the component
+     * Initialize the module
      *
      * @param array<string, mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
@@ -53,10 +53,10 @@ abstract class AbstractModule implements ModuleInterface
         // Have the Module set its own info on the corresponding ModuleInfo
         $this->initializeInfo();
 
-        // Initialize the self component
+        // Initialize the self module
         $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
 
-        // Allow the component to define runtime constants
+        // Allow the module to define runtime constants
         $this->defineRuntimeConstants($skipSchema, $skipSchemaComponentClasses);
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * Indicate if this component requires some other component
+     * Indicate if this module requires some other module
      * to satisfy its contracts.
      *
      * For instance, the packages under CMSSchema have generic contracts
@@ -90,15 +90,15 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * Indicate what other component satisfies the contracts by this component.
+     * Indicate what other module satisfies the contracts by this module.
      */
-    public function setSatisfyingComponent(ModuleInterface $component): void
+    public function setSatisfyingComponent(ModuleInterface $module): void
     {
-        $this->satisfyingComponent = $component;
+        $this->satisfyingComponent = $module;
     }
 
     /**
-     * All component classes that this component satisfies
+     * All module classes that this module satisfies
      *
      * @return string[]
      */
@@ -108,14 +108,14 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * All component classes that this component depends upon, to initialize them
+     * All module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
     abstract public function getDependedComponentClasses(): array;
 
     /**
-     * All DEV component classes that this component depends upon, to initialize them
+     * All DEV module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
@@ -125,7 +125,7 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * All DEV PHPUnit component classes that this component depends upon, to initialize them
+     * All DEV PHPUnit module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
@@ -135,7 +135,7 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * All conditional component classes that this component depends upon, to initialize them
+     * All conditional module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
@@ -221,18 +221,18 @@ abstract class AbstractModule implements ModuleInterface
     }
 
     /**
-     * Calculate if the component must be enabled or not.
+     * Calculate if the module must be enabled or not.
      *
-     * @param boolean $ignoreDependencyOnSatisfiedComponents Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
+     * @param boolean $ignoreDependencyOnSatisfiedComponents Indicate if to check if the satisfied module is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
      */
     public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedComponents): bool
     {
         /**
-         * Check that there is some other component that satisfies
-         * the contracts of this component (if required), and
+         * Check that there is some other module that satisfies
+         * the contracts of this module (if required), and
          * that this components is itself enabled.
          *
-         * The satisfying component depends on the satisfied component,
+         * The satisfying module depends on the satisfied module,
          * and the other way around too. To avoid circular recursions
          * there is param $ignoreDependencyOnSatisfiedComponents.
          */
@@ -245,7 +245,7 @@ abstract class AbstractModule implements ModuleInterface
             }
         }
 
-        // If any dependency is disabled, then disable this component too
+        // If any dependency is disabled, then disable this module too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
             $satisfiedComponentClasses = $this->getSatisfiedComponentClasses();
             foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
