@@ -40,11 +40,11 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
 
@@ -55,7 +55,7 @@ class Module extends AbstractModule
             );
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(UsersModule::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(UsersModule::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/Users'
             );
         }

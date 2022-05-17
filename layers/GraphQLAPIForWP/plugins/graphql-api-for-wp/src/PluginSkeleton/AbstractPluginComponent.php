@@ -51,11 +51,11 @@ abstract class AbstractPluginComponent extends AbstractModule implements PluginC
      * It uses Convention over Configuration: if the requested files exist,
      * load them.
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         $pluginFolder = $this->getPluginFolder();
         if ($pluginFolder === null) {

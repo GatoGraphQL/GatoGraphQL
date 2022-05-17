@@ -38,11 +38,11 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
@@ -50,7 +50,7 @@ class Module extends AbstractModule
         if (class_exists(CacheControlModule::class)) {
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/CacheControl'
             );
         }

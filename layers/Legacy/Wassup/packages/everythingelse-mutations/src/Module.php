@@ -27,11 +27,11 @@ class Module extends AbstractModule
      * Initialize services
      *
      * @param array<string, mixed> $configuration
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
     }

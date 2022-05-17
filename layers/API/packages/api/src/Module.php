@@ -62,11 +62,11 @@ class Module extends AbstractModule
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
         $this->initServices(dirname(__DIR__), '/Overrides');
@@ -86,7 +86,7 @@ class Module extends AbstractModule
         ) {
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaModuleClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaModuleClasses),
                 '/ConditionalOnModule/CacheControl/ConditionalOnModule/AccessControl/ConditionalOnContext/PrivateSchema'
             );
         }

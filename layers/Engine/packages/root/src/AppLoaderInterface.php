@@ -43,10 +43,10 @@ interface AppLoaderInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @param string[] $skipSchemaComponentClasses List of `Module` class which must not initialize their Schema services
+     * @param string[] $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
-        array $skipSchemaComponentClasses
+        array $skipSchemaModuleClasses
     ): void;
 
     /**

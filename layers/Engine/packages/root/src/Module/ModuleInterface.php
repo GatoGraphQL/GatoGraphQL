@@ -14,12 +14,12 @@ interface ModuleInterface
      *
      * @param array<string, mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     public function initialize(
         array $configuration,
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void;
 
     /**

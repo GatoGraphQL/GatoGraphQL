@@ -91,15 +91,15 @@ class Module extends AbstractPluginComponent
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         parent::initializeContainerServices(
             $skipSchema,
-            $skipSchemaComponentClasses
+            $skipSchemaModuleClasses
         );
         // Override DI services
         $this->initServices(dirname(__DIR__), '/Overrides');

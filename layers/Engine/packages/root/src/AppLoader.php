@@ -49,7 +49,7 @@ class AppLoader implements AppLoaderInterface
      *
      * @var string[]
      */
-    protected array $skipSchemaComponentClasses = [];
+    protected array $skipSchemaModuleClasses = [];
     /**
      * Cache if a component must skipSchema or not, stored under its class
      *
@@ -115,14 +115,14 @@ class AppLoader implements AppLoaderInterface
     /**
      * Add schema Module classes to skip initializing
      *
-     * @param string[] $skipSchemaComponentClasses List of `Module` class which must not initialize their Schema services
+     * @param string[] $skipSchemaModuleClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
-        array $skipSchemaComponentClasses
+        array $skipSchemaModuleClasses
     ): void {
-        $this->skipSchemaComponentClasses = array_merge(
-            $this->skipSchemaComponentClasses,
-            $skipSchemaComponentClasses
+        $this->skipSchemaModuleClasses = array_merge(
+            $this->skipSchemaModuleClasses,
+            $skipSchemaModuleClasses
         );
     }
 
@@ -361,7 +361,7 @@ class AppLoader implements AppLoaderInterface
             $module->initialize(
                 $moduleConfiguration,
                 $skipSchemaForComponent,
-                $this->skipSchemaComponentClasses
+                $this->skipSchemaModuleClasses
             );
         }
 
@@ -379,7 +379,7 @@ class AppLoader implements AppLoaderInterface
     {
         $moduleClass = \get_class($module);
         if (!isset($this->skipSchemaForComponentCache[$moduleClass])) {
-            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaComponentClasses) || $module->skipSchema();
+            $this->skipSchemaForComponentCache[$moduleClass] = in_array($moduleClass, $this->skipSchemaModuleClasses) || $module->skipSchema();
         }
         return $this->skipSchemaForComponentCache[$moduleClass];
     }

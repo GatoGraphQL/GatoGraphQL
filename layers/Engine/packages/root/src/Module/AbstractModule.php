@@ -40,12 +40,12 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @param array<string, mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     final public function initialize(
         array $configuration,
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
         // Set the configuration on the corresponding ModuleConfiguration
         $this->initializeConfiguration($configuration);
@@ -54,10 +54,10 @@ abstract class AbstractModule implements ModuleInterface
         $this->initializeInfo();
 
         // Initialize the self module
-        $this->initializeContainerServices($skipSchema, $skipSchemaComponentClasses);
+        $this->initializeContainerServices($skipSchema, $skipSchemaModuleClasses);
 
         // Allow the module to define runtime constants
-        $this->defineRuntimeConstants($skipSchema, $skipSchemaComponentClasses);
+        $this->defineRuntimeConstants($skipSchema, $skipSchemaModuleClasses);
     }
 
     /**
@@ -157,11 +157,11 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Initialize services
      *
-     * @param string[] $skipSchemaComponentClasses
+     * @param string[] $skipSchemaModuleClasses
      */
     protected function initializeContainerServices(
         bool $skipSchema,
-        array $skipSchemaComponentClasses,
+        array $skipSchemaModuleClasses,
     ): void {
     }
 
@@ -170,7 +170,7 @@ abstract class AbstractModule implements ModuleInterface
      */
     protected function defineRuntimeConstants(
         bool $skipSchema,
-        array $skipSchemaComponentClasses
+        array $skipSchemaModuleClasses
     ): void {
     }
 
