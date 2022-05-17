@@ -38,9 +38,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
     public final const HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES = __CLASS__ . ':addHeaddatasetmoduleDataProperties';
 
     protected const MODULECOMPONENT_SUBMODULES = 'submodules';
-    protected const MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES = 'domain-switching-submodules';
+    protected const MODULECOMPONENT_RELATIONALSUBMODULES = 'relational-submodules';
     protected const MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES = 'conditional-on-data-field-submodules';
-    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES = 'conditional-on-data-field-domain-switching-submodules';
+    protected const MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES = 'conditional-on-data-field-relational-submodules';
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -1318,9 +1318,9 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         if (empty($components)) {
             $components = array(
                 self::MODULECOMPONENT_SUBMODULES,
-                self::MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES,
+                self::MODULECOMPONENT_RELATIONALSUBMODULES,
                 self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES,
-                self::MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES,
+                self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES,
             );
         }
 
@@ -1334,7 +1334,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             );
         }
 
-        if (in_array(self::MODULECOMPONENT_DOMAINSWITCHINGSUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_RELATIONALSUBMODULES, $components)) {
             foreach ($this->getRelationalSubmodules($module) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
@@ -1359,7 +1359,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
             }
         }
 
-        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDDOMAINSWITCHINGSUBMODULES, $components)) {
+        if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES, $components)) {
             foreach ($this->getConditionalOnDataFieldRelationalSubmodules($module) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(
