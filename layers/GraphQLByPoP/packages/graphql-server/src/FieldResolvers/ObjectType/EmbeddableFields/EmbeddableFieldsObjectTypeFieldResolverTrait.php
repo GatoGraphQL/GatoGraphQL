@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\FieldResolvers\ObjectType\EmbeddableFields;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\Module as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 
 trait EmbeddableFieldsObjectTypeFieldResolverTrait

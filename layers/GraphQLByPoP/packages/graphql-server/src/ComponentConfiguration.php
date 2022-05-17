@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer;
 
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponentConfiguration;
-use PoPAPI\API\Component as APIComponent;
+use PoP\Root\Module\AbstractComponentConfiguration;
+use PoPAPI\API\Module as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
-use PoP\Root\Component\EnvironmentValueHelpers;
+use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

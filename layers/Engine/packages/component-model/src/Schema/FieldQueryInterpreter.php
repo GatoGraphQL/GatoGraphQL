@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Schema;
 
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
@@ -396,7 +396,7 @@ class FieldQueryInterpreter extends UpstreamFieldQueryInterpreter implements Fie
         }
         $fieldOrDirectiveArgs = [];
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $setFailingFieldResponseAsNull = $componentConfiguration->setFailingFieldResponseAsNull();
         for ($i = 0; $i < count($fieldOrDirectiveArgElems); $i++) {
             $fieldOrDirectiveArg = $fieldOrDirectiveArgElems[$i];

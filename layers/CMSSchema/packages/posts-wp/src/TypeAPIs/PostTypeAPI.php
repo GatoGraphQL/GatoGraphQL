@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostsWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Posts\Component;
+use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ComponentConfiguration;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use WP_Post;
@@ -86,7 +86,7 @@ class PostTypeAPI extends AbstractCustomPostTypeAPI implements PostTypeAPIInterf
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getPostListMaxLimit();
     }
 

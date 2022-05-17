@@ -7,7 +7,7 @@ namespace PoPCMSSchema\GenericCustomPosts\FilterInputProcessors;
 use PoP\Root\App;
 use PoP\ComponentModel\FilterInputProcessors\AbstractFilterInputProcessor;
 use PoPCMSSchema\CustomPosts\FilterInput\FilterInputHelper;
-use PoPCMSSchema\GenericCustomPosts\Component;
+use PoPCMSSchema\GenericCustomPosts\Module;
 use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class FilterInputProcessor extends AbstractFilterInputProcessor
@@ -24,7 +24,7 @@ class FilterInputProcessor extends AbstractFilterInputProcessor
     public function filterDataloadQueryArgs(array $filterInput, array &$query, mixed $value): void
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($filterInput[1]) {
             case self::FILTERINPUT_GENERICCUSTOMPOSTTYPES:
                 // Make sure the provided postTypes have been whitelisted

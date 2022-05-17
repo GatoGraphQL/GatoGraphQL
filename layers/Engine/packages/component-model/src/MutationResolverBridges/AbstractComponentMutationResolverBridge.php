@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\MutationResolverBridges;
 
 use Exception;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
@@ -107,7 +107,7 @@ abstract class AbstractComponentMutationResolverBridge implements ComponentMutat
             $errorTypeKey = ResponseConstants::ERRORSTRINGS;
         } catch (Exception $e) {
             /** @var ComponentConfiguration */
-            $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+            $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
             if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                 // @todo: Implement for Log
             }

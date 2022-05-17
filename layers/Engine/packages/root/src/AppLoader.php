@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 use PoP\Root\Constants\HookNames;
 use PoP\Root\Dotenv\DotenvBuilderFactory;
 use PoP\Root\Facades\SystemCompilerPassRegistryFacade;
@@ -21,19 +21,19 @@ class AppLoader implements AppLoaderInterface
      */
     protected array $initializedComponentClasses = [];
     /**
-     * Component in their initialization order
+     * Module in their initialization order
      *
      * @var string[]
      */
     protected array $orderedComponentClasses = [];
     /**
-     * Component classes to be initialized
+     * Module classes to be initialized
      *
      * @var string[]
      */
     protected array $componentClassesToInitialize = [];
     /**
-     * [key]: Component class, [value]: Configuration
+     * [key]: Module class, [value]: Configuration
      *
      * @var array<string, array<string, mixed>>
      */
@@ -45,7 +45,7 @@ class AppLoader implements AppLoaderInterface
      */
     protected array $initialAppState = [];
     /**
-     * List of `Component` class which must not initialize their Schema services
+     * List of `Module` class which must not initialize their Schema services
      *
      * @var string[]
      */
@@ -58,9 +58,9 @@ class AppLoader implements AppLoaderInterface
     protected array $skipSchemaForComponentCache = [];
 
     /**
-     * Add Component classes to be initialized
+     * Add Module classes to be initialized
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $componentClasses List of `Module` class to initialize
      */
     public function addComponentClassesToInitialize(
         array $componentClasses
@@ -72,14 +72,14 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Module class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
         array $componentClassConfiguration
     ): void {
-        // Allow to override entries under each Component
+        // Allow to override entries under each Module
         foreach ($componentClassConfiguration as $componentClass => $componentConfiguration) {
             $this->componentClassConfiguration[$componentClass] ??= [];
             $this->componentClassConfiguration[$componentClass] = array_merge(
@@ -113,9 +113,9 @@ class AppLoader implements AppLoaderInterface
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
+     * @param string[] $skipSchemaComponentClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
         array $skipSchemaComponentClasses
@@ -130,7 +130,7 @@ class AppLoader implements AppLoaderInterface
      * Get the array of components ordered by how they must be initialized,
      * following the Composer dependencies tree
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $componentClasses List of `Module` class to initialize
      */
     private function addComponentsOrderedForInitialization(
         array $componentClasses,
@@ -148,7 +148,7 @@ class AppLoader implements AppLoaderInterface
         foreach ($componentClasses as $componentClass) {
             $this->initializedComponentClasses[] = $componentClass;
 
-            // Initialize and register the Component
+            // Initialize and register the Module
             $component = $componentManager->register($componentClass);
 
             // Initialize all depended-upon PoP components

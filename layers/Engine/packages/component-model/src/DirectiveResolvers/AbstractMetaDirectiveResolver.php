@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\FieldSymbols;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
-use PoP\GraphQLParser\Component;
+use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\Root\App;
 
@@ -35,7 +35,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
     public function isServiceEnabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->enableComposableDirectives();
     }
 

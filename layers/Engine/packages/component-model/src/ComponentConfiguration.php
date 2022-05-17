@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponentConfiguration;
-use PoP\Root\Component\EnvironmentValueHelpers;
+use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\EnvironmentValueHelpers;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Component as RootComponent;
+use PoP\Root\Module as RootComponent;
 use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

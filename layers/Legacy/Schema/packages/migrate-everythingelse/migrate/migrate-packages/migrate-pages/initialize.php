@@ -1,5 +1,5 @@
 <?php
-$class = (new class() extends \PoP\Root\Component\AbstractComponent
+$class = (new class() extends \PoP\Root\Module\AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component

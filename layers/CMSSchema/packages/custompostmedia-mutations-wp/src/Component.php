@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutationsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMediaMutations\Component::class,
+            \PoPCMSSchema\CustomPostMediaMutations\Module::class,
         ];
     }
 
@@ -31,10 +31,10 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMediaMutations\Component::class,
-            \PoPCMSSchema\CustomPostMutationsWP\Component::class,
-            \PoPCMSSchema\MediaWP\Component::class,
-            \PoPCMSSchema\UserStateMutationsWP\Component::class,
+            \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+            \PoPCMSSchema\CustomPostMutationsWP\Module::class,
+            \PoPCMSSchema\MediaWP\Module::class,
+            \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -58,10 +58,10 @@ interface AppInterface
     public static function isHTTPRequest(): bool;
 
     /**
-     * Store Component classes to be initialized, and
+     * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $componentClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeComponentClasses(
         array $componentClasses

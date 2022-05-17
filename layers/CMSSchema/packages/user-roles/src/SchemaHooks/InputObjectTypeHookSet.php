@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInte
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\UserRoles\Component;
+use PoPCMSSchema\UserRoles\Module;
 use PoPCMSSchema\UserRoles\ComponentConfiguration;
 use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\Users\TypeResolvers\InputObjectType\AbstractUsersFilterInputObjectTypeResolver;
@@ -94,7 +94,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $adminInputFieldNames;
         }
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->treatUserRoleAsAdminData()) {
             $adminInputFieldNames[] = 'roles';
             $adminInputFieldNames[] = 'excludeRoles';

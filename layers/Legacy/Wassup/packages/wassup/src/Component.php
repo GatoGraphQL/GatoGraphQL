@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSitesWassup\Wassup;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -34,66 +34,66 @@ class Component extends AbstractComponent
         return array_merge(
             [
                 // These ones are working OK
-                \GraphQLByPoP\GraphQLServer\Component::class,
-                \PoPAPI\RESTAPI\Component::class,
-                \PoP\TraceTools\Component::class,
-                \PoPWPSchema\BlockMetadataWP\Component::class,
-                \PoPSchema\CDNDirective\Component::class,
-                \PoPSchema\ConvertCaseDirectives\Component::class,
-                \PoPCMSSchema\CustomPostMediaWP\Component::class,
-                \PoPCMSSchema\GoogleTranslateDirectiveForCustomPosts\Component::class,
-                \PoPCMSSchema\PagesWP\Component::class,
-                \PoPCMSSchema\PostsWP\Component::class,
-                \PoPCMSSchema\PostTagsWP\Component::class,
-                \PoPCMSSchema\TaxonomyQueryWP\Component::class,
-                \PoPCMSSchema\UserRolesACL\Component::class,
-                \PoPCMSSchema\UserRolesWP\Component::class,
-                \PoPCMSSchema\UserStateWP\Component::class,
-                \PoPCMSSchema\PostMutations\Component::class,
-                \PoPCMSSchema\CustomPostMediaMutationsWP\Component::class,
-                \PoPCMSSchema\PostTagMutationsWP\Component::class,
-                \PoPCMSSchema\PostCategoryMutationsWP\Component::class,
-                \PoPCMSSchema\CommentMutationsWP\Component::class,
-                \PoPCMSSchema\UserStateMutationsWP\Component::class,
-                \PoPCMSSchema\PostCategoriesWP\Component::class,
-                \PoPCMSSchema\MenusWP\Component::class,
-                \PoPCMSSchema\SettingsWP\Component::class,
+                \GraphQLByPoP\GraphQLServer\Module::class,
+                \PoPAPI\RESTAPI\Module::class,
+                \PoP\TraceTools\Module::class,
+                \PoPWPSchema\BlockMetadataWP\Module::class,
+                \PoPSchema\CDNDirective\Module::class,
+                \PoPSchema\ConvertCaseDirectives\Module::class,
+                \PoPCMSSchema\CustomPostMediaWP\Module::class,
+                \PoPCMSSchema\GoogleTranslateDirectiveForCustomPosts\Module::class,
+                \PoPCMSSchema\PagesWP\Module::class,
+                \PoPCMSSchema\PostsWP\Module::class,
+                \PoPCMSSchema\PostTagsWP\Module::class,
+                \PoPCMSSchema\TaxonomyQueryWP\Module::class,
+                \PoPCMSSchema\UserRolesACL\Module::class,
+                \PoPCMSSchema\UserRolesWP\Module::class,
+                \PoPCMSSchema\UserStateWP\Module::class,
+                \PoPCMSSchema\PostMutations\Module::class,
+                \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
+                \PoPCMSSchema\PostTagMutationsWP\Module::class,
+                \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
+                \PoPCMSSchema\PostCategoriesWP\Module::class,
+                \PoPCMSSchema\MenusWP\Module::class,
+                \PoPCMSSchema\SettingsWP\Module::class,
 
-                \PoPSchema\NotificationsWP\Component::class,
-                \PoPSchema\HighlightsWP\Component::class,
+                \PoPSchema\NotificationsWP\Module::class,
+                \PoPSchema\HighlightsWP\Module::class,
                 // Moved to outside repo
-                // \PoPCMSSchema\LocationPostsWP\Component::class,
-                \PoPSchema\StancesWP\Component::class,
+                // \PoPCMSSchema\LocationPostsWP\Module::class,
+                \PoPSchema\StancesWP\Module::class,
             ],
             $skipLoadingUnmigratedComponents ? [] : [
                 // These ones must have their ModuleProcessors defined as services
-                \PoPSchema\EverythingElseWP\Component::class,
-                \PoP\SiteWP\Component::class,
-                \PoP\SPA\Component::class,
-                \PoPSitesWassup\PostMutations\Component::class,
-                \PoPSitesWassup\HighlightMutations\Component::class,
-                \PoPSitesWassup\StanceMutations\Component::class,
-                \PoPSitesWassup\CommentMutations\Component::class,
-                \PoPSitesWassup\SystemMutations\Component::class,
-                \PoPSitesWassup\GravityFormsMutations\Component::class,
-                \PoPSitesWassup\ContactUsMutations\Component::class,
-                \PoPSitesWassup\ContactUserMutations\Component::class,
-                \PoPSitesWassup\NewsletterMutations\Component::class,
-                \PoPSitesWassup\FlagMutations\Component::class,
-                \PoPSitesWassup\ShareMutations\Component::class,
-                \PoPSitesWassup\VolunteerMutations\Component::class,
+                \PoPSchema\EverythingElseWP\Module::class,
+                \PoP\SiteWP\Module::class,
+                \PoP\SPA\Module::class,
+                \PoPSitesWassup\PostMutations\Module::class,
+                \PoPSitesWassup\HighlightMutations\Module::class,
+                \PoPSitesWassup\StanceMutations\Module::class,
+                \PoPSitesWassup\CommentMutations\Module::class,
+                \PoPSitesWassup\SystemMutations\Module::class,
+                \PoPSitesWassup\GravityFormsMutations\Module::class,
+                \PoPSitesWassup\ContactUsMutations\Module::class,
+                \PoPSitesWassup\ContactUserMutations\Module::class,
+                \PoPSitesWassup\NewsletterMutations\Module::class,
+                \PoPSitesWassup\FlagMutations\Module::class,
+                \PoPSitesWassup\ShareMutations\Module::class,
+                \PoPSitesWassup\VolunteerMutations\Module::class,
                 // Moved to outside repo
-                // \PoPCMSSchema\EventMutationsWPEM\Component::class,
-                // \PoPSitesWassup\EventMutations\Component::class,
-                // \PoPSitesWassup\LocationMutations\Component::class,
-                // \PoPSitesWassup\LocationPostMutations\Component::class,
-                // \PoPSitesWassup\EventLinkMutations\Component::class,
-                // \PoPSitesWassup\LocationPostLinkMutations\Component::class,
-                \PoPSitesWassup\PostLinkMutations\Component::class,
-                \PoPSitesWassup\NotificationMutations\Component::class,
-                \PoPSitesWassup\SocialNetworkMutations\Component::class,
-                \PoPSitesWassup\UserStateMutations\Component::class,
-                \PoPSitesWassup\EverythingElseMutations\Component::class,
+                // \PoPCMSSchema\EventMutationsWPEM\Module::class,
+                // \PoPSitesWassup\EventMutations\Module::class,
+                // \PoPSitesWassup\LocationMutations\Module::class,
+                // \PoPSitesWassup\LocationPostMutations\Module::class,
+                // \PoPSitesWassup\EventLinkMutations\Module::class,
+                // \PoPSitesWassup\LocationPostLinkMutations\Module::class,
+                \PoPSitesWassup\PostLinkMutations\Module::class,
+                \PoPSitesWassup\NotificationMutations\Module::class,
+                \PoPSitesWassup\SocialNetworkMutations\Module::class,
+                \PoPSitesWassup\UserStateMutations\Module::class,
+                \PoPSitesWassup\EverythingElseMutations\Module::class,
             ]
         );
     }

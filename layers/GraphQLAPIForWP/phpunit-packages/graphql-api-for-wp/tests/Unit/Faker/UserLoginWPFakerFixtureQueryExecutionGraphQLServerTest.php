@@ -24,11 +24,11 @@ class UserLoginWPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPF
         return [
             ...parent::getGraphQLServerComponentClasses(),
             ...[
-                \PoPWPSchema\Users\Component::class,
-                \PoPCMSSchema\UserStateMutationsWP\Component::class,
-                \PoPWPSchema\Posts\Component::class,
-                \PoPCMSSchema\CustomPostMutationsWP\Component::class,
-                \PoPCMSSchema\PostMutations\Component::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPCMSSchema\UserStateMutationsWP\Module::class,
+                \PoPWPSchema\Posts\Module::class,
+                \PoPCMSSchema\CustomPostMutationsWP\Module::class,
+                \PoPCMSSchema\PostMutations\Module::class,
             ]
         ];
     }

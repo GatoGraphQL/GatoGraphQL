@@ -83,9 +83,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
     public function getComponentClassConfiguration(): array
     {
@@ -93,9 +93,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaComponentClassesToSkip(): array
     {

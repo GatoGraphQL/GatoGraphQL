@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;

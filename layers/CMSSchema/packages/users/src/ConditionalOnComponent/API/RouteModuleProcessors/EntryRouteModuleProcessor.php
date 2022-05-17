@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
-use PoPCMSSchema\Users\Component;
+use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ComponentConfiguration;
 use PoPCMSSchema\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
@@ -37,7 +37,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
     {
         $ret = array();
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getUsersRoute() => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST],
         );

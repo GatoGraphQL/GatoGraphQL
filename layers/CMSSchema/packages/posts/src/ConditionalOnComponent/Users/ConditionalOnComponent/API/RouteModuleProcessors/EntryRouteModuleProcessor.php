@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
-use PoPCMSSchema\Posts\Component;
+use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ComponentConfiguration;
 use PoPCMSSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature;
@@ -23,7 +23,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
 
         // Author's posts
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,

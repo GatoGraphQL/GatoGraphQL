@@ -19,10 +19,10 @@ abstract class AbstractSkipDangerouslyNonSpecificScalarTypeTypeFixtureQueryExecu
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::SKIP_EXPOSING_DANGEROUSLY_NON_SPECIFIC_SCALAR_TYPE_IN_SCHEMA => static::isEnabled(),
                 ],
-                \GraphQLByPoP\GraphQLServer\Component::class => [
+                \GraphQLByPoP\GraphQLServer\Module::class => [
                     \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => true,
                 ],
             ]

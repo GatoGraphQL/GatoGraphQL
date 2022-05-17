@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoPCMSSchema\CustomPosts\Component;
+use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration;
 use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -105,7 +105,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCustomPostListMaxLimit();
     }
     /**

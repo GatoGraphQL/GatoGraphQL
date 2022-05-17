@@ -27,8 +27,8 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
         return [
             ...parent::getGraphQLServerComponentClasses(),
             ...[
-                \PoPWPSchema\Users\Component::class,
-                \PoPWPSchema\Posts\Component::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPWPSchema\Posts\Module::class,
             ]
         ];
     }
@@ -41,7 +41,7 @@ abstract class AbstractNamespacingWPFakerFixtureQueryExecutionGraphQLServerTest 
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => static::isEnabled(),
                 ],
             ]

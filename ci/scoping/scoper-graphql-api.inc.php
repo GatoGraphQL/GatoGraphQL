@@ -22,7 +22,7 @@ use Isolated\Symfony\Component\Finder\Finder;
  * 
  * 1. getpop/root-wp, which uses Brain\Cortex:
  *
- * in getpop/root-wp/src/Component.php:
+ * in getpop/root-wp/src/Module.php:
  *   use Brain\Cortex;
  *
  * in getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php:
@@ -70,7 +70,7 @@ return [
             ])
             ->in(convertRelativeToFullPath('vendor')),
         Finder::create()->append([
-            convertRelativeToFullPath('vendor/getpop/root-wp/src/Component.php'),
+            convertRelativeToFullPath('vendor/getpop/root-wp/src/Module.php'),
             convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
         ])
     ],

@@ -8,7 +8,7 @@ use GraphQLAPI\GraphQLAPI\Facades\Registries\SystemModuleRegistryFacade;
 use GraphQLAPI\GraphQLAPI\Facades\UserSettingsManagerFacade;
 use GraphQLAPI\GraphQLAPI\StaticHelpers\PluginEnvironmentHelpers;
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
-use PoP\Root\Component\ComponentConfigurationHelpers;
+use PoP\Root\Module\ComponentConfigurationHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
@@ -177,7 +177,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Provide the configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Module class, [value]: Configuration
      */
     public function getComponentClassConfiguration(): array
     {
@@ -190,7 +190,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Get the fixed configuration for all components required in the plugin
      *
-     * @return array<string, array> [key]: Component class, [value]: Configuration
+     * @return array<string, array> [key]: Module class, [value]: Configuration
      */
     protected function getPredefinedComponentClassConfiguration(): array
     {
@@ -200,7 +200,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     /**
      * Add configuration values if modules are enabled or disabled
      *
-     * @return array<string, array> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @return array<string, array> $componentClassConfiguration [key]: Module class, [value]: Configuration
      */
     protected function getBasedOnModuleEnabledStateComponentClassConfiguration(): array
     {
@@ -228,9 +228,9 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
     public function getSchemaComponentClassesToSkip(): array
     {
@@ -242,7 +242,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             return [];
         }
 
-        // Component classes are skipped if the module is disabled
+        // Module classes are skipped if the module is disabled
         $moduleRegistry = SystemModuleRegistryFacade::getInstance();
         $skipSchemaModuleComponentClasses = array_filter(
             $this->getModuleComponentClassesToSkipIfDisabled(),

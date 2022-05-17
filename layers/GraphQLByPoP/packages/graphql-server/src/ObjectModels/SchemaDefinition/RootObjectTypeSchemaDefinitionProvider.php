@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinition;
 
-use GraphQLByPoP\GraphQLServer\Component;
+use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use PoP\ComponentModel\App;
 use PoPAPI\API\ObjectModels\SchemaDefinition\RootObjectTypeSchemaDefinitionProvider as UpstreamRootObjectTypeSchemaDefinitionProvider;
@@ -21,7 +21,7 @@ class RootObjectTypeSchemaDefinitionProvider extends UpstreamRootObjectTypeSchem
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return !$componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
     }
 }

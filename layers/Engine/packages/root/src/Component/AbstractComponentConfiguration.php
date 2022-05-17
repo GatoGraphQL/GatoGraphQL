@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Component;
+namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
@@ -76,12 +76,12 @@ abstract class AbstractComponentConfiguration implements ComponentConfigurationI
     }
 
     /**
-     * Package's Component class, of type ComponentInterface.
-     * By standard, it is "NamespaceOwner\Project\Component::class"
+     * Package's Module class, of type ComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Module::class"
      */
     protected function getComponentClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        return $classNamespace . '\\Component';
+        return $classNamespace . '\\Module';
     }
 }

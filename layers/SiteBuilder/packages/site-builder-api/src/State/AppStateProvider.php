@@ -8,7 +8,7 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\StratumManagerFactory;
 use PoP\ConfigurationComponentModel\Constants\Stratum;
 use PoP\Root\App;
-use PoP\Root\Component as RootComponent;
+use PoP\Root\Module as RootComponent;
 use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 

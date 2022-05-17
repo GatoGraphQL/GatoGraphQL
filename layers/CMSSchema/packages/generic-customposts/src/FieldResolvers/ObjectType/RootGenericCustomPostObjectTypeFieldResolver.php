@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration as CustomPostsComponentConfiguration;
 use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;

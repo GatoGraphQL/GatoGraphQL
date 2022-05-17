@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UsersWP;
 
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -20,7 +20,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Users\Component::class,
+            \PoPCMSSchema\Users\Module::class,
         ];
     }
 
@@ -32,8 +32,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Users\Component::class,
-            \PoPCMSSchema\QueriedObjectWP\Component::class,
+            \PoPCMSSchema\Users\Module::class,
+            \PoPCMSSchema\QueriedObjectWP\Module::class,
         ];
     }
 
@@ -43,7 +43,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
         ];
     }
 

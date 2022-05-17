@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\Notifications;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Engine\Component::class,
-            \PoPCMSSchema\SchemaCommons\Component::class,
+            \PoP\Engine\Module::class,
+            \PoPCMSSchema\SchemaCommons\Module::class,
         ];
     }
 
@@ -30,7 +30,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 

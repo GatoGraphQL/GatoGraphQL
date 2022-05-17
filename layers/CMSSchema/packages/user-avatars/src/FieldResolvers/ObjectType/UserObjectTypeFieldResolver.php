@@ -10,7 +10,7 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPCMSSchema\UserAvatars\Component;
+use PoPCMSSchema\UserAvatars\Module;
 use PoPCMSSchema\UserAvatars\ComponentConfiguration;
 use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
@@ -101,7 +101,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
             ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
@@ -126,7 +126,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     ): mixed {
         $user = $object;
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':
                 // Create the avatar, and store it in the dynamic registry

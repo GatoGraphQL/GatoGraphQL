@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLAPI\GraphQLAPI\PluginSkeleton;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 
 interface PluginComponentInterface extends ComponentInterface
 {

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations;
 
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\Users\Component as UsersComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\Users\Module as UsersComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -25,8 +25,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Comments\Component::class,
-            \PoPCMSSchema\UserStateMutations\Component::class,
+            \PoPCMSSchema\Comments\Module::class,
+            \PoPCMSSchema\UserStateMutations\Module::class,
         ];
     }
 

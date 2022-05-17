@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Engine\Engine;
 
-use PoP\CacheControl\Component as CacheControlComponent;
+use PoP\CacheControl\Module as CacheControlComponent;
 use PoP\CacheControl\Managers\CacheControlEngineInterface;
 use PoP\ComponentModel\Engine\Engine as UpstreamEngine;
 use PoP\Engine\Exception\ContractNotSatisfiedException;

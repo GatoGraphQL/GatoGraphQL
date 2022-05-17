@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPAPI\API\Schema\SchemaDefinition;
 use PoPAPI\API\Schema\SchemaDefinitionHelpers;
 use PoPAPI\API\Schema\TypeKinds;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
@@ -75,7 +75,7 @@ class ObjectTypeSchemaDefinitionProvider extends AbstractNamedTypeSchemaDefiniti
     {
         $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */

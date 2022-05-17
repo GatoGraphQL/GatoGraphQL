@@ -19,7 +19,7 @@ abstract class AbstractConvertInputValueFromSingleToListFixtureQueryExecutionGra
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::CONVERT_INPUT_VALUE_FROM_SINGLE_TO_LIST => static::isEnabled(),
                 ],
             ]

@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
-use PoPCMSSchema\Comments\Component;
+use PoPCMSSchema\Comments\Module;
 use PoPCMSSchema\Comments\ComponentConfiguration;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
@@ -194,7 +194,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'comment':
                 if ($componentConfiguration->treatCommentStatusAsAdminData()) {

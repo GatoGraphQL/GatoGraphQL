@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories;
 
-use PoP\Root\Component\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractComponentConfiguration;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

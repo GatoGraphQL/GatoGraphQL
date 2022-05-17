@@ -22,7 +22,7 @@ class NamespacingFixtureQueryExecutionGraphQLServerTest extends AbstractFixtureQ
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoP\ComponentModel\Component::class => [
+                \PoP\ComponentModel\Module::class => [
                     \PoP\ComponentModel\Environment::NAMESPACE_TYPES_AND_INTERFACES => true,
                 ],
             ]

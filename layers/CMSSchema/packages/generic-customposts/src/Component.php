@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\GenericCustomPosts;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoPAPI\API\Module as APIComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -21,7 +21,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPAPI\API\Component::class,
+            \PoPAPI\API\Module::class,
         ];
     }
 

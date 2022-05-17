@@ -9,7 +9,7 @@ use GraphQLAPI\GraphQLAPI\Constants\ModuleSettingOptions;
 use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
-use GraphQLByPoP\GraphQLClientsForWP\Component as GraphQLClientsForWPComponent;
+use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPComponent;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
 
 /**

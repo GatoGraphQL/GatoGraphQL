@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Component;
+namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
@@ -50,7 +50,7 @@ abstract class AbstractComponent implements ComponentInterface
         // Set the configuration on the corresponding ComponentConfiguration
         $this->initializeConfiguration($configuration);
 
-        // Have the Component set its own info on the corresponding ComponentInfo
+        // Have the Module set its own info on the corresponding ComponentInfo
         $this->initializeInfo();
 
         // Initialize the self component
@@ -210,7 +210,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Indicates if the Component is enabled
+     * Indicates if the Module is enabled
      */
     public function isEnabled(): bool
     {
@@ -273,7 +273,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * Indicates if the Component must skipSchema
+     * Indicates if the Module must skipSchema
      */
     public function skipSchema(): bool
     {
@@ -281,7 +281,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentConfiguration class for the Component
+     * ComponentConfiguration class for the Module
      */
     public function getConfiguration(): ?ComponentConfigurationInterface
     {
@@ -289,7 +289,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentInfo class for the Component
+     * ComponentInfo class for the Module
      */
     public function getInfo(): ?ComponentInfoInterface
     {
@@ -309,7 +309,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentConfiguration class for the Component
+     * ComponentConfiguration class for the Module
      */
     protected function getComponentConfigurationClass(): ?string
     {
@@ -331,7 +331,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentInfo class for the Component
+     * ComponentInfo class for the Module
      */
     protected function getComponentInfoClass(): ?string
     {

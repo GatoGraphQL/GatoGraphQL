@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMutations\Component::class,
-            \PoPCMSSchema\Categories\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
+            \PoPCMSSchema\Categories\Module::class,
         ];
     }
 

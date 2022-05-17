@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\QueriedObjectWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\QueriedObject\Component::class,
+            \PoPCMSSchema\QueriedObject\Module::class,
         ];
     }
 
@@ -31,8 +31,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\QueriedObject\Component::class,
-            \PoPCMSSchema\SchemaCommonsWP\Component::class,
+            \PoPCMSSchema\QueriedObject\Module::class,
+            \PoPCMSSchema\SchemaCommonsWP\Module::class,
         ];
     }
 

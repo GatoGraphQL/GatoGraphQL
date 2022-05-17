@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CustomPosts\Component;
+use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration;
 use PoPCMSSchema\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumTypeResolver;
@@ -69,7 +69,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     protected function treatCustomPostStatusAsAdminData(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->treatCustomPostStatusAsAdminData();
     }
 

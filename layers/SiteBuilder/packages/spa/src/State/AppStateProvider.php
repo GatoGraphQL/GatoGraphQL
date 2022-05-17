@@ -8,7 +8,7 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\Root\App;
-use PoP\Root\Component as RootComponent;
+use PoP\Root\Module as RootComponent;
 use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 

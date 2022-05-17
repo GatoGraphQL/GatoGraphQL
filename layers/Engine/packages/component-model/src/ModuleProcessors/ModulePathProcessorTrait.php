@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleProcessors;
 
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Constants\Props;
 use PoP\Root\Feedback\FeedbackItemResolution;
@@ -53,7 +53,7 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ComponentInfo */
-            $componentInfo = App::getComponent(Component::class)->getInfo();
+            $componentInfo = App::getComponent(Module::class)->getInfo();
             $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
@@ -124,7 +124,7 @@ trait ModulePathProcessorTrait
         }
         if ($submodules_ret) {
             /** @var ComponentInfo */
-            $componentInfo = App::getComponent(Component::class)->getInfo();
+            $componentInfo = App::getComponent(Module::class)->getInfo();
             $submodulesOutputProperty = $componentInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }

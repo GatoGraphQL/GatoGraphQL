@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Engine\Cache;
 
 use PoP\Root\App;
-use PoP\Engine\Component as EngineComponent;
+use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
 
 class CacheUtils

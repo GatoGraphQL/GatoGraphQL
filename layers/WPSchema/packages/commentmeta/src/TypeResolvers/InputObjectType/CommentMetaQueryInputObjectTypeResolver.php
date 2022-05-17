@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\CommentMeta\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\CommentMeta\Component;
+use PoPCMSSchema\CommentMeta\Module;
 use PoPCMSSchema\CommentMeta\ComponentConfiguration;
 use PoPWPSchema\Meta\TypeResolvers\InputObjectType\AbstractMetaQueryInputObjectTypeResolver;
 
@@ -22,13 +22,13 @@ class CommentMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObje
     protected function getAllowOrDenyEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCommentMetaEntries();
     }
     protected function getAllowOrDenyBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCommentMetaBehavior();
     }
 }

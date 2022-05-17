@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateAccessControl;
 
-use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\Root\Component\AbstractComponent;
+use PoP\CacheControl\Module as CacheControlComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserState\Component::class,
-            \PoP\AccessControl\Component::class,
+            \PoPCMSSchema\UserState\Module::class,
+            \PoP\AccessControl\Module::class,
         ];
     }
 
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoP\CacheControl\Component::class,
+            \PoP\CacheControl\Module::class,
         ];
     }
 
@@ -51,7 +51,7 @@ class Component extends AbstractComponent
         if (class_exists(CacheControlComponent::class)) {
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/CacheControl'
             );
         }

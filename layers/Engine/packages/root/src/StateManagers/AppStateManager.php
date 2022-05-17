@@ -15,7 +15,7 @@ use PoP\Root\Translation\TranslationAPIInterface;
 class AppStateManager implements AppStateManagerInterface
 {
     /**
-     * The state, stored under their own property as added by each Component
+     * The state, stored under their own property as added by each Module
      *
      * @var array<string,mixed>
      */

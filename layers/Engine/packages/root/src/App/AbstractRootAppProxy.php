@@ -7,7 +7,7 @@ namespace PoP\Root\App;
 use PoP\Root\App as RootApp;
 use PoP\Root\AppInterface as RootAppInterface;
 use PoP\Root\AppLoaderInterface;
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -102,10 +102,10 @@ abstract class AbstractRootAppProxy implements RootAppInterface
     }
 
     /**
-     * Store Component classes to be initialized, and
+     * Store Module classes to be initialized, and
      * inject them into the AppLoader when this is initialized.
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $componentClasses List of `Module` class to initialize
      */
     public static function stockAndInitializeComponentClasses(
         array $componentClasses

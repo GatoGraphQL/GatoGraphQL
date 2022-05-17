@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserStateMutations;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -24,7 +24,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserState\Component::class,
+            \PoPCMSSchema\UserState\Module::class,
         ];
     }
 

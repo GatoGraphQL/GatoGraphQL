@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
@@ -29,7 +29,7 @@ trait ExcludeFieldNamesFromSchemaTypeResolverTrait
         // Whenever:
         // 1. Exclude the admin fields, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $excludedFieldNames = $objectTypeOrInterfaceTypeFieldResolver->getAdminFieldNames();
         }

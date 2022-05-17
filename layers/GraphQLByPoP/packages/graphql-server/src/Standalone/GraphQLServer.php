@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Standalone;
 
 use GraphQLByPoP\GraphQLQuery\Facades\GraphQLQueryConvertorFacade;
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
-use GraphQLByPoP\GraphQLServer\Component;
+use GraphQLByPoP\GraphQLServer\Module;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
@@ -38,9 +38,9 @@ class GraphQLServer implements GraphQLServerInterface
         $this->componentClasses = array_merge(
             $componentClasses,
             [
-                // This is the one Component that is required to produce the GraphQL server.
+                // This is the one Module that is required to produce the GraphQL server.
                 // The other classes provide the schema and extra functionality.
-                Component::class,
+                Module::class,
             ]
         );
 

@@ -24,13 +24,13 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
         return [
             ...parent::getGraphQLServerComponentClasses(),
             ...[
-                \PoPCMSSchema\PostCategoriesWP\Component::class,
-                \PoPCMSSchema\PostTagsWP\Component::class,
-                \PoPWPSchema\Users\Component::class,
-                \PoPWPSchema\Posts\Component::class,
-                \PoPWPSchema\Pages\Component::class,
-                \PoPWPSchema\Comments\Component::class,
-                \PoPCMSSchema\CommentMutationsWP\Component::class,
+                \PoPCMSSchema\PostCategoriesWP\Module::class,
+                \PoPCMSSchema\PostTagsWP\Module::class,
+                \PoPWPSchema\Users\Module::class,
+                \PoPWPSchema\Posts\Module::class,
+                \PoPWPSchema\Pages\Module::class,
+                \PoPWPSchema\Comments\Module::class,
+                \PoPCMSSchema\CommentMutationsWP\Module::class,
             ]
         ];
     }
@@ -43,10 +43,10 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \PoPCMSSchema\Pages\Component::class => [
+                \PoPCMSSchema\Pages\Module::class => [
                     \PoPCMSSchema\Pages\Environment::ADD_PAGE_TYPE_TO_CUSTOMPOST_UNION_TYPES => true,
                 ],
-                \PoPCMSSchema\CommentMutations\Component::class => [
+                \PoPCMSSchema\CommentMutations\Module::class => [
                     \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                 ],
             ]

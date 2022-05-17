@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPSchema\NotificationsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Notifications\Component::class,
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPSchema\Notifications\Module::class,
+            \PoPSchema\SchemaCommons\Module::class,
         ];
     }
 }

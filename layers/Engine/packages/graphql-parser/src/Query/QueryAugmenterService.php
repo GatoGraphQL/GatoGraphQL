@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\Query;
 
-use PoP\GraphQLParser\Component;
+use PoP\GraphQLParser\Module;
 use PoP\GraphQLParser\ComponentConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
@@ -26,7 +26,7 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
     public function getMultipleQueryExecutionOperations(string $operationName, array $operations): ?array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableMultipleQueryExecution()) {
             return null;
         }
@@ -51,7 +51,7 @@ class QueryAugmenterService implements QueryAugmenterServiceInterface
         ?Variable $variable,
     ): bool {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableDynamicVariables()) {
             return false;
         }

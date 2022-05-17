@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserMeta\Component::class,
+            \PoPCMSSchema\UserMeta\Module::class,
         ];
     }
 
@@ -31,9 +31,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserMeta\Component::class,
-            \PoPCMSSchema\UsersWP\Component::class,
-            \PoPCMSSchema\MetaQueryWP\Component::class,
+            \PoPCMSSchema\UserMeta\Module::class,
+            \PoPCMSSchema\UsersWP\Module::class,
+            \PoPCMSSchema\MetaQueryWP\Module::class,
         ];
     }
 

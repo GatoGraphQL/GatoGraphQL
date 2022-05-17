@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Component;
+namespace PoP\Root\Module;
 
 use PoP\Root\App;
 use PoP\Root\Container\Loader\ForceAutoconfigureYamlFileLoader;

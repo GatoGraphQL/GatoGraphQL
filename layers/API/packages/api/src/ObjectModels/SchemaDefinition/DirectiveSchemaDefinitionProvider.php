@@ -7,7 +7,7 @@ namespace PoPAPI\API\ObjectModels\SchemaDefinition;
 use PoP\Root\App;
 use PoPAPI\API\Schema\SchemaDefinition;
 use PoPAPI\API\Schema\SchemaDefinitionHelpers;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectiveResolvers\DirectiveResolverInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -28,7 +28,7 @@ class DirectiveSchemaDefinitionProvider extends AbstractSchemaDefinitionProvider
 
         $dangerouslyNonSpecificScalarTypeScalarTypeResolver = null;
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var DangerouslyNonSpecificScalarTypeScalarTypeResolver */

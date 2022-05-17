@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\HighlightsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 use PoPSchema\Highlights\Environment;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\Highlights\Component::class,
-            \PoPCMSSchema\CustomPostsWP\Component::class,
+            \PoPSchema\Highlights\Module::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
         ];
     }
 

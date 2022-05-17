@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\API\Engine;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\Module as APIComponent;
 use PoPAPI\API\Constants\Actions;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Constants\DataOutputModes;

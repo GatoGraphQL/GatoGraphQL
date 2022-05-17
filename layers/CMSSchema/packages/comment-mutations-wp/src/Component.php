@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutationsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CommentMutations\Component::class,
+            \PoPCMSSchema\CommentMutations\Module::class,
         ];
     }
 
@@ -31,9 +31,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CommentMutations\Component::class,
-            \PoPCMSSchema\CommentsWP\Component::class,
-            \PoPCMSSchema\UserStateMutationsWP\Component::class,
+            \PoPCMSSchema\CommentMutations\Module::class,
+            \PoPCMSSchema\CommentsWP\Module::class,
+            \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
 

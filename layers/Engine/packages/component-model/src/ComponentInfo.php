@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Component\AbstractComponentInfo;
+use PoP\Root\Module\AbstractComponentInfo;
 
 class ComponentInfo extends AbstractComponentInfo
 {

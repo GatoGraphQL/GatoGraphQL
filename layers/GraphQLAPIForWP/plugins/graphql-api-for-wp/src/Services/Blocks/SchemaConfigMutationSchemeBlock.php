@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
-use GraphQLAPI\GraphQLAPI\Component;
+use GraphQLAPI\GraphQLAPI\Module;
 use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -48,7 +48,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
             MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS => \__('✳️ Nested mutations enabled, removing the redundant mutation fields from the root type', 'graphql-api'),
         ];
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
             \__('Mutation Scheme', 'graphql-api'),

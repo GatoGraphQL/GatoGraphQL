@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CommentMeta\TypeAPIs;
 
 use PoP\Root\App;
-use PoPCMSSchema\CommentMeta\Component;
+use PoPCMSSchema\CommentMeta\Module;
 use PoPCMSSchema\CommentMeta\ComponentConfiguration;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
@@ -35,13 +35,13 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
     public function getAllowOrDenyMetaEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCommentMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCommentMetaBehavior();
     }
 

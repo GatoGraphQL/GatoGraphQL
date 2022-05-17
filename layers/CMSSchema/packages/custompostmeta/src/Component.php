@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMeta;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -24,8 +24,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Meta\Component::class,
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\Meta\Module::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 

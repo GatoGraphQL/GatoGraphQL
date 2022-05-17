@@ -6,7 +6,7 @@ namespace PoPCMSSchema\GenericCustomPosts\TypeResolvers\EnumType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\EnumType\AbstractEnumTypeResolver;
-use PoPCMSSchema\GenericCustomPosts\Component;
+use PoPCMSSchema\GenericCustomPosts\Module;
 use PoPCMSSchema\GenericCustomPosts\ComponentConfiguration;
 
 class GenericCustomPostEnumTypeResolver extends AbstractEnumTypeResolver
@@ -22,7 +22,7 @@ class GenericCustomPostEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValues(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getGenericCustomPostTypes();
     }
 }

@@ -9,12 +9,12 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractExtensionComponent;
 /**
  * Initialize component
  */
-class Component extends AbstractExtensionComponent
+class Module extends AbstractExtensionComponent
 {
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoPSchema\SchemaCommons\Module::class,
         ];
     }
 }

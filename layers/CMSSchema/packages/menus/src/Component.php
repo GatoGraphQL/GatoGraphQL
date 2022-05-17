@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Menus;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -24,8 +24,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Engine\Component::class,
-            \PoPCMSSchema\Taxonomies\Component::class,
+            \PoP\Engine\Module::class,
+            \PoPCMSSchema\Taxonomies\Module::class,
         ];
     }
 

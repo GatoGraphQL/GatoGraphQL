@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\PostTags\Component::class,
+            \PoPCMSSchema\PostTags\Module::class,
         ];
     }
 
@@ -31,8 +31,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\PostTags\Component::class,
-            \PoPCMSSchema\CustomPostTagsWP\Component::class,
+            \PoPCMSSchema\PostTags\Module::class,
+            \PoPCMSSchema\CustomPostTagsWP\Module::class,
         ];
     }
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMeta;
 
-use PoP\Root\Component\AbstractComponentConfiguration;
-use PoP\Root\Component\EnvironmentValueHelpers;
+use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\Root\Module\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

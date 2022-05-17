@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
-use PoPCMSSchema\Media\Component;
+use PoPCMSSchema\Media\Module;
 use PoPCMSSchema\Media\ComponentConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
@@ -24,14 +24,14 @@ class RootMediaItemPaginationInputObjectTypeResolver extends PaginationInputObje
     protected function getDefaultLimit(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getMediaListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getMediaListMaxLimit();
     }
 }

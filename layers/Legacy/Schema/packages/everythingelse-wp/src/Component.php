@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\EverythingElseWP;
 
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -20,8 +20,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPSchema\EverythingElse\Component::class,
-            \PoP\EngineWP\Component::class,
+            \PoPSchema\EverythingElse\Module::class,
+            \PoP\EngineWP\Module::class,
         ];
     }
 
@@ -31,7 +31,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 

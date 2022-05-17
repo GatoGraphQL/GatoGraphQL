@@ -7,11 +7,11 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
-use GraphQLByPoP\GraphQLServer\Component as GraphQLServerComponent;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerComponent;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
-use PoP\Root\Component\ComponentConfigurationHelpers;
-use PoP\Engine\Component as EngineComponent;
+use PoP\Root\Module\ComponentConfigurationHelpers;
+use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface

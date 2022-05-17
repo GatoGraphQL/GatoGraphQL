@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\Stances;
 
-use PoP\Root\Component\AbstractComponentConfiguration;
+use PoP\Root\Module\AbstractComponentConfiguration;
 use PoP\ComponentModel\ComponentConfiguration\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration

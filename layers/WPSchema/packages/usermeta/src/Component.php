@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\UserMeta;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -19,9 +19,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserMetaWP\Component::class,
-            \PoPWPSchema\Users\Component::class,
-            \PoPWPSchema\Meta\Component::class,
+            \PoPCMSSchema\UserMetaWP\Module::class,
+            \PoPWPSchema\Users\Module::class,
+            \PoPWPSchema\Meta\Module::class,
         ];
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\Root\Component;
+namespace PoP\Root\Module;
 
 /**
  * Initialize component
@@ -117,22 +117,22 @@ interface ComponentInterface
     ): void;
 
     /**
-     * Indicates if the Component is enabled
+     * Indicates if the Module is enabled
      */
     public function isEnabled(): bool;
 
     /**
-     * Indicates if the Component must skipSchema
+     * Indicates if the Module must skipSchema
      */
     public function skipSchema(): bool;
 
     /**
-     * ComponentConfiguration for the Component
+     * ComponentConfiguration for the Module
      */
     public function getConfiguration(): ?ComponentConfigurationInterface;
 
     /**
-     * ComponentInfo for the Component
+     * ComponentInfo for the Module
      */
     public function getInfo(): ?ComponentInfoInterface;
 }

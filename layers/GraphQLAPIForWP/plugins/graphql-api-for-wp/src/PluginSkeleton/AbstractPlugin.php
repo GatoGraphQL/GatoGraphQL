@@ -135,13 +135,13 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function configureComponents(): void
     {
-        // Set the plugin folder on the plugin's Component
+        // Set the plugin folder on the plugin's Module
         $pluginFolder = dirname($this->pluginFile);
         $this->getPluginComponent()->setPluginFolder($pluginFolder);
     }
 
     /**
-     * Plugin's Component
+     * Plugin's Module
      */
     protected function getPluginComponent(): PluginComponentInterface
     {
@@ -150,19 +150,19 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
-     * Package's Component class, of type PluginComponentInterface.
-     * By standard, it is "NamespaceOwner\Project\Component::class"
+     * Package's Module class, of type PluginComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Module::class"
      */
     protected function getComponentClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        return $classNamespace . '\\Component';
+        return $classNamespace . '\\Module';
     }
 
     /**
-     * Add Component classes to be initialized
+     * Add Module classes to be initialized
      *
-     * @return string[] List of `Component` class to initialize
+     * @return string[] List of `Module` class to initialize
      */
     public function getComponentClassesToInitialize(): array
     {
@@ -203,9 +203,9 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
     public function getComponentClassConfiguration(): array
     {
@@ -213,9 +213,9 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @return string[] List of `Component` class which must not initialize their Schema services
+     * @return string[] List of `Module` class which must not initialize their Schema services
      */
     abstract protected function getSchemaComponentClassesToSkip(): array;
 

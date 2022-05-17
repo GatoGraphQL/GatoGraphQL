@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media;
 
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\Users\Component as UsersComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\Users\Module as UsersComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -25,8 +25,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Engine\Component::class,
-            \PoPSchema\SchemaCommons\Component::class,
+            \PoP\Engine\Module::class,
+            \PoPSchema\SchemaCommons\Module::class,
         ];
     }
 
@@ -36,7 +36,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Users\Component::class,
+            \PoPCMSSchema\Users\Module::class,
         ];
     }
 

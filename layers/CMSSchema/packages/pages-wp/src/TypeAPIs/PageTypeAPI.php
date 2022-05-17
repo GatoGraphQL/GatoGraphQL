@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PagesWP\TypeAPIs;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
-use PoPCMSSchema\Pages\Component;
+use PoPCMSSchema\Pages\Module;
 use PoPCMSSchema\Pages\ComponentConfiguration;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -140,7 +140,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
     protected function getCustomPostListMaxLimit(): int
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getPageListMaxLimit();
     }
 

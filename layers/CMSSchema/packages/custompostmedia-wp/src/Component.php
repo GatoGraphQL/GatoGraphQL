@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMedia\Component::class,
+            \PoPCMSSchema\CustomPostMedia\Module::class,
         ];
     }
 
@@ -31,9 +31,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMedia\Component::class,
-            \PoPCMSSchema\CustomPostsWP\Component::class,
-            \PoPCMSSchema\MediaWP\Component::class,
+            \PoPCMSSchema\CustomPostMedia\Module::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
+            \PoPCMSSchema\MediaWP\Module::class,
         ];
     }
 

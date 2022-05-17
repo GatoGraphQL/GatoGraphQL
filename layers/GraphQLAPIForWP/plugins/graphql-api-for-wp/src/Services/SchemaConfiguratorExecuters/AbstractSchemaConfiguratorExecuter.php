@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfiguratorExecuters;
 
 use GraphQLAPI\GraphQLAPI\Services\SchemaConfigurators\SchemaConfiguratorInterface;
 use PoP\Root\Services\BasicServiceTrait;
-use PoP\Root\Component\ApplicationEvents;
+use PoP\Root\Module\ApplicationEvents;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractSchemaConfiguratorExecuter extends AbstractAutomaticallyInstantiatedService

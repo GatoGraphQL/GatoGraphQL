@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 use PoP\Root\Exception\ComponentNotExistsException;
 
 /**
@@ -36,7 +36,7 @@ class ComponentManager implements ComponentManagerInterface
     {
         if (!isset($this->components[$componentClass])) {
             throw new ComponentNotExistsException(\sprintf(
-                'Component of class \'%s\' does not exist, or it has not been added for initialization',
+                'Module of class \'%s\' does not exist, or it has not been added for initialization',
                 $componentClass
             ));
         }

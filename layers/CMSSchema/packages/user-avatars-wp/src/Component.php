@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserAvatarsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserAvatars\Component::class,
+            \PoPCMSSchema\UserAvatars\Module::class,
         ];
     }
 
@@ -31,8 +31,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserAvatars\Component::class,
-            \PoPCMSSchema\UsersWP\Component::class,
+            \PoPCMSSchema\UserAvatars\Module::class,
+            \PoPCMSSchema\UsersWP\Module::class,
         ];
     }
 
@@ -42,7 +42,7 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\UserStateWP\Component::class,
+            \PoPCMSSchema\UserStateWP\Module::class,
         ];
     }
 

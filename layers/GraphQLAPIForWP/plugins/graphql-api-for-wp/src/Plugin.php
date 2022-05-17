@@ -134,14 +134,14 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Add Component classes to be initialized
+     * Add Module classes to be initialized
      *
-     * @return string[] List of `Component` class to initialize
+     * @return string[] List of `Module` class to initialize
      */
     public function getComponentClassesToInitialize(): array
     {
         return [
-            Component::class,
+            Module::class,
         ];
     }
 

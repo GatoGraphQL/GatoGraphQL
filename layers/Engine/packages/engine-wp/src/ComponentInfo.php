@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP;
 
-use PoP\Root\Component\AbstractComponentInfo;
+use PoP\Root\Module\AbstractComponentInfo;
 
 class ComponentInfo extends AbstractComponentInfo
 {

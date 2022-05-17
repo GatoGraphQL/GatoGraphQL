@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutationsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\PostTagMutations\Component::class,
+            \PoPCMSSchema\PostTagMutations\Module::class,
         ];
     }
 
@@ -31,10 +31,10 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\PostTagMutations\Component::class,
-            \PoPCMSSchema\CustomPostMutationsWP\Component::class,
-            \PoPCMSSchema\PostTagsWP\Component::class,
-            \PoPCMSSchema\UserStateMutationsWP\Component::class,
+            \PoPCMSSchema\PostTagMutations\Module::class,
+            \PoPCMSSchema\CustomPostMutationsWP\Module::class,
+            \PoPCMSSchema\PostTagsWP\Module::class,
+            \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
 

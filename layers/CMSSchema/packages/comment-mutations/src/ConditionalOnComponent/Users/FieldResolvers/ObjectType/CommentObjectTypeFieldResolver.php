@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CommentMutations\ConditionalOnComponent\Users\FieldResolv
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
 use PoPCMSSchema\Comments\ConditionalOnComponent\Users\TypeAPIs\CommentTypeAPIInterface as UserCommentTypeAPIInterface;
 use PoPCMSSchema\Comments\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
@@ -53,7 +53,7 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
     public function isServiceEnabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->mustUserBeLoggedInToAddComment();
     }
 

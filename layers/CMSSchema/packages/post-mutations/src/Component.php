@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostMutations;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\Users\Component as UsersComponent;
+use PoPAPI\API\Module as APIComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\Users\Module as UsersComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -22,8 +22,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMutations\Component::class,
-            \PoPCMSSchema\Posts\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
+            \PoPCMSSchema\Posts\Module::class,
         ];
     }
 
@@ -33,8 +33,8 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPAPI\API\Component::class,
-            \PoPCMSSchema\Users\Component::class,
+            \PoPAPI\API\Module::class,
+            \PoPCMSSchema\Users\Module::class,
         ];
     }
 

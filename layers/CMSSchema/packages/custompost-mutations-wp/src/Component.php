@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutationsWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMutations\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
         ];
     }
 
@@ -31,10 +31,10 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPostMutations\Component::class,
-            \PoPCMSSchema\CustomPostsWP\Component::class,
-            \PoPCMSSchema\UserStateWP\Component::class,
-            \PoPCMSSchema\UserRolesWP\Component::class,
+            \PoPCMSSchema\CustomPostMutations\Module::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
+            \PoPCMSSchema\UserStateWP\Module::class,
+            \PoPCMSSchema\UserRolesWP\Module::class,
         ];
     }
 

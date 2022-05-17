@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\HookNames;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
 use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\MutationInputProperties;
@@ -51,7 +51,7 @@ class ObjectTypeHookSet extends AbstractHookSet
         }
 
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (
             !$componentConfiguration->mustUserBeLoggedInToAddComment()
             && App::getState('is-user-logged-in')

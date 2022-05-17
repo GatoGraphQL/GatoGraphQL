@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLServer\Registries;
 
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
-use GraphQLByPoP\GraphQLServer\Component;
+use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
@@ -16,11 +16,11 @@ use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
-use PoP\GraphQLParser\Component as GraphQLParserComponent;
+use PoP\GraphQLParser\Module as GraphQLParserComponent;
 use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPAPI\API\Component as APIComponent;
+use PoPAPI\API\Module as APIComponent;
 use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoPAPI\API\Schema\TypeKinds;
@@ -143,7 +143,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     {
         $enableNestedMutations = App::getState('nested-mutations-enabled');
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = $componentConfiguration->exposeGlobalFieldsInGraphQLSchema();
 

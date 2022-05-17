@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\Settings\Component;
+use PoPCMSSchema\Settings\Module;
 use PoPCMSSchema\Settings\ComponentConfiguration;
 use PoPCMSSchema\Settings\Exception\OptionNotAllowedException;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
@@ -47,13 +47,13 @@ abstract class AbstractSettingsTypeAPI implements SettingsTypeAPIInterface
     public function getAllowOrDenyOptionEntries(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getSettingsEntries();
     }
     public function getAllowOrDenyOptionBehavior(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getSettingsBehavior();
     }
 

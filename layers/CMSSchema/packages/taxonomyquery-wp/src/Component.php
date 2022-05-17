@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyQueryWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -19,8 +19,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\TaxonomyQuery\Component::class,
-            \PoPCMSSchema\SchemaCommonsWP\Component::class,
+            \PoPCMSSchema\TaxonomyQuery\Module::class,
+            \PoPCMSSchema\SchemaCommonsWP\Module::class,
         ];
     }
 }

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace PoPAPI\API;
 
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponentConfiguration;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\Root\Module\AbstractComponentConfiguration;
+use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
-use PoP\Root\Component\EnvironmentValueHelpers;
+use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ComponentConfiguration extends AbstractComponentConfiguration
 {

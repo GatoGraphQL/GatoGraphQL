@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\Component;
+use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ComponentConfiguration;
 use PoPCMSSchema\CustomPosts\ModuleProcessors\CommonCustomPostFilterInputContainerModuleProcessor;
 use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
@@ -86,7 +86,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'post':
                 if ($componentConfiguration->treatCustomPostStatusAsAdminData()) {

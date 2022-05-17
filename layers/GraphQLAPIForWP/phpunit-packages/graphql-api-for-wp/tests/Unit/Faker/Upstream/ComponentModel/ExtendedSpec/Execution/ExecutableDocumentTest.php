@@ -23,7 +23,7 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
         return [
             ...parent::getComponentClassesToInitialize(),
             ...[
-                \PoPWPSchema\Posts\Component::class,
+                \PoPWPSchema\Posts\Module::class,
             ]
         ];
     }

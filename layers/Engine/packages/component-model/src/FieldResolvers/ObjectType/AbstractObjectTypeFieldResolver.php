@@ -8,7 +8,7 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\CheckpointSets\CheckpointSets;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Environment;
@@ -422,7 +422,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($objectTypeResolver, $fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
@@ -784,7 +784,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         array $fieldArgs,
     ): bool {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->validateFieldTypeResponseWithSchemaDefinition();
     }
 
@@ -872,7 +872,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     public function skipExposingFieldInSchema(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:
@@ -1268,7 +1268,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
                 return $mutationResolver->executeMutation($mutationFieldArgs);
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
-                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(
                         new ObjectTypeFieldResolutionFeedback(

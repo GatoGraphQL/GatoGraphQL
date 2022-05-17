@@ -8,7 +8,7 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CommentMutations\Component;
+use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ComponentConfiguration;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
@@ -59,7 +59,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 
         // Check that the user is logged-in
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
             if ($errorFeedbackItemResolution !== null) {
@@ -125,7 +125,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
          * Override with the user's properties
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->mustUserBeLoggedInToAddComment()) {
             $userID = App::getState('current-user-id');
             $comment_data['userID'] = $userID;

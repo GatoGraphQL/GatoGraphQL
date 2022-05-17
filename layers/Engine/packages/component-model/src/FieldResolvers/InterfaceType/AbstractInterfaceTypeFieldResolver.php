@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\FieldResolvers\InterfaceType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\FieldResolvers\AbstractFieldResolver;
@@ -326,7 +326,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
 
         // Exclude the admin field args, if "Admin" Schema is not enabled
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminFieldArgNames = $this->getConsolidatedAdminFieldArgNames($fieldName);
             $consolidatedFieldArgNameTypeResolvers = array_filter(
@@ -566,7 +566,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
         }
         $schemaFieldArgs = [];
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema = $componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema();
         $consolidatedFieldArgNameTypeResolvers = $this->getConsolidatedFieldArgNameTypeResolvers($fieldName);
         foreach ($consolidatedFieldArgNameTypeResolvers as $fieldArgName => $fieldArgInputTypeResolver) {
@@ -637,7 +637,7 @@ abstract class AbstractInterfaceTypeFieldResolver extends AbstractFieldResolver 
     public function skipExposingFieldInSchema(string $fieldName): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:

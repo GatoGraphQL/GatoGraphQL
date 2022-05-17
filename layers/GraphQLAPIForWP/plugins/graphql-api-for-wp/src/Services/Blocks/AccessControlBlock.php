@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
-use PoP\AccessControl\Component;
+use PoP\AccessControl\Module;
 use PoP\AccessControl\ComponentConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
@@ -58,7 +58,7 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getBlockContentTitle(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return \__('Access Control Rules:', 'graphql-api');
         }
@@ -73,7 +73,7 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getLocalizedData(): array
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return array_merge(
             parent::getLocalizedData(),
             [
@@ -91,7 +91,7 @@ class AccessControlBlock extends AbstractControlBlock
     {
         $maybeSchemaModeContent = '';
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             $blockContentPlaceholder = <<<EOT
                 <p><strong>%s</strong> %s</p>

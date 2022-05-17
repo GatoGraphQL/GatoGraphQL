@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Users;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
-use PoPAPI\RESTAPI\Component as RESTAPIComponent;
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\CustomPosts\Component as CustomPostsComponent;
+use PoPAPI\API\Module as APIComponent;
+use PoPAPI\RESTAPI\Module as RESTAPIComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -28,7 +28,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\QueriedObject\Component::class,
+            \PoPCMSSchema\QueriedObject\Module::class,
         ];
     }
 
@@ -38,9 +38,9 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPAPI\API\Component::class,
-            \PoPAPI\RESTAPI\Component::class,
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPAPI\API\Module::class,
+            \PoPAPI\RESTAPI\Module::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 
@@ -67,7 +67,7 @@ class Component extends AbstractComponent
             $this->initServices(dirname(__DIR__), '/ConditionalOnComponent/CustomPosts');
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoPCMSSchema\CustomPosts\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoPCMSSchema\CustomPosts\Module::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/CustomPosts'
             );
             if (class_exists(APIComponent::class) && App::getComponent(APIComponent::class)->isEnabled()) {

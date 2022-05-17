@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostsWP;
 
 use PoP\Root\App;
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\Posts\Component as PostsComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\Posts\Module as PostsComponent;
 use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -22,7 +22,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Posts\Component::class,
+            \PoPCMSSchema\Posts\Module::class,
         ];
     }
 
@@ -34,8 +34,8 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\Posts\Component::class,
-            \PoPCMSSchema\CustomPostsWP\Component::class,
+            \PoPCMSSchema\Posts\Module::class,
+            \PoPCMSSchema\CustomPostsWP\Module::class,
         ];
     }
 

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPAPI\API\ConditionalOnComponent\AccessControl\Hooks;
 
 use PoP\Root\App;
-use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoPAPI\API\Component;
+use PoPAPI\API\Module;
 use PoPAPI\API\Environment;
-use PoP\Root\Component\ComponentConfigurationHelpers;
+use PoP\Root\Module\ComponentConfigurationHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class ComponentConfigurationHookSet extends AbstractHookSet
@@ -23,7 +23,7 @@ class ComponentConfigurationHookSet extends AbstractHookSet
         $componentConfiguration = App::getComponent(AccessControlComponent::class)->getConfiguration();
         if ($componentConfiguration->canSchemaBePrivate()) {
             $hookName = ComponentConfigurationHelpers::getHookName(
-                Component::class,
+                Module::class,
                 Environment::USE_SCHEMA_DEFINITION_CACHE
             );
             App::addFilter(

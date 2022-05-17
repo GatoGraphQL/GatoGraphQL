@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 
 use PoP\Root\App;
-use GraphQLByPoP\GraphQLClientsForWP\Component;
+use GraphQLByPoP\GraphQLClientsForWP\Module;
 use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration;
 
 class VoyagerClient extends AbstractClient
@@ -16,13 +16,13 @@ class VoyagerClient extends AbstractClient
     protected function isClientDisabled(): bool
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->isVoyagerClientEndpointDisabled();
     }
     public function getEndpoint(): string
     {
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getVoyagerClientEndpoint();
     }
     protected function getClientRelativePath(): string

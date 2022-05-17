@@ -80,9 +80,9 @@ abstract class AbstractTestCase extends TestCase
     }
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getComponentClassConfiguration(): array
     {
@@ -90,13 +90,13 @@ abstract class AbstractTestCase extends TestCase
     }
 
     /**
-     * Package's Component class, of type ComponentInterface.
-     * By standard, it is "NamespaceOwner\Project\Component::class"
+     * Package's Module class, of type ComponentInterface.
+     * By standard, it is "NamespaceOwner\Project\Module::class"
      */
     protected static function getComponentClass(): string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        return $classNamespace . '\\Component';
+        return $classNamespace . '\\Module';
     }
 
     public static function tearDownAfterClass(): void

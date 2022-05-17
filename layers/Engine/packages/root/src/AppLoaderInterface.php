@@ -4,23 +4,23 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 
 interface AppLoaderInterface
 {
     /**
-     * Add Component classes to be initialized
+     * Add Module classes to be initialized
      *
-     * @param string[] $componentClasses List of `Component` class to initialize
+     * @param string[] $componentClasses List of `Module` class to initialize
      */
     public function addComponentClassesToInitialize(
         array $componentClasses
     ): void;
 
     /**
-     * Add configuration for the Component classes
+     * Add configuration for the Module classes
      *
-     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Component class, [value]: Configuration
+     * @param array<string, array<string, mixed>> $componentClassConfiguration [key]: Module class, [value]: Configuration
      */
     public function addComponentClassConfiguration(
         array $componentClassConfiguration
@@ -41,9 +41,9 @@ interface AppLoaderInterface
     public function mergeInitialAppState(array $initialAppState): void;
 
     /**
-     * Add schema Component classes to skip initializing
+     * Add schema Module classes to skip initializing
      *
-     * @param string[] $skipSchemaComponentClasses List of `Component` class which must not initialize their Schema services
+     * @param string[] $skipSchemaComponentClasses List of `Module` class which must not initialize their Schema services
      */
     public function addSchemaComponentClassesToSkip(
         array $skipSchemaComponentClasses

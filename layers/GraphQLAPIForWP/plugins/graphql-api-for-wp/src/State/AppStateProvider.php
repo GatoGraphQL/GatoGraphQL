@@ -11,7 +11,7 @@ use PoP\Root\Routing\RequestNature;
 use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
 
 /**

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMetaWP;
 
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * All component classes that this component satisfies
@@ -19,7 +19,7 @@ class Component extends AbstractComponent
     public function getSatisfiedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CommentMeta\Component::class,
+            \PoPCMSSchema\CommentMeta\Module::class,
         ];
     }
 
@@ -31,9 +31,9 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CommentMeta\Component::class,
-            \PoPCMSSchema\CommentsWP\Component::class,
-            \PoPCMSSchema\MetaQueryWP\Component::class,
+            \PoPCMSSchema\CommentMeta\Module::class,
+            \PoPCMSSchema\CommentsWP\Module::class,
+            \PoPCMSSchema\MetaQueryWP\Module::class,
         ];
     }
 

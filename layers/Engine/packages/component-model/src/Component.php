@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoP\ComponentModel;
 
 use PoP\ComponentModel\Facades\AttachableExtensions\AttachExtensionServiceFacade;
-use PoP\Root\Component\AbstractComponent;
-use PoP\Root\Component\ApplicationEvents;
+use PoP\Root\Module\AbstractComponent;
+use PoP\Root\Module\ApplicationEvents;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -21,11 +21,11 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoP\Definitions\Component::class,
-            \PoP\FieldQuery\Component::class,
-            \PoP\GraphQLParser\Component::class,
-            \PoP\LooseContracts\Component::class,
-            \PoP\ModuleRouting\Component::class,
+            \PoP\Definitions\Module::class,
+            \PoP\FieldQuery\Module::class,
+            \PoP\GraphQLParser\Module::class,
+            \PoP\LooseContracts\Module::class,
+            \PoP\ModuleRouting\Module::class,
         ];
     }
 

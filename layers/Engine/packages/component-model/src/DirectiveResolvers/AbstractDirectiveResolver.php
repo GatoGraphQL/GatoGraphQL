@@ -7,7 +7,7 @@ namespace PoP\ComponentModel\DirectiveResolvers;
 use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
-use PoP\ComponentModel\Component;
+use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ComponentConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
@@ -973,7 +973,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                 );
             } catch (Exception $e) {
                 /** @var ComponentConfiguration */
-                $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+                $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
                         foreach ($dataFields['direct'] as $field) {
@@ -1093,7 +1093,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
             $this->removeIDsDataFields(
@@ -1205,7 +1205,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
         /** @var ComponentConfiguration */
-        $componentConfiguration = App::getComponent(Component::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**
              * If `DangerouslyNonSpecificScalar` is disabled, do not expose the field if either:

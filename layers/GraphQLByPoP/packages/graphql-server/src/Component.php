@@ -7,17 +7,17 @@ namespace GraphQLByPoP\GraphQLServer;
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
-use PoP\AccessControl\Component as AccessControlComponent;
+use PoP\AccessControl\Module as AccessControlComponent;
 use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
-use PoP\CacheControl\Component as CacheControlComponent;
-use PoP\Engine\Component as EngineComponent;
+use PoP\CacheControl\Module as CacheControlComponent;
+use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoP\Root\Component\AbstractComponent;
+use PoP\Root\Module\AbstractComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     /**
      * Classes from PoP components that must be initialized before this component
@@ -27,7 +27,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \GraphQLByPoP\GraphQLRequest\Component::class,
+            \GraphQLByPoP\GraphQLRequest\Module::class,
         ];
     }
 
@@ -37,8 +37,8 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoP\AccessControl\Component::class,
-            \PoP\CacheControl\Component::class,
+            \PoP\AccessControl\Module::class,
+            \PoP\CacheControl\Module::class,
         ];
     }
 
@@ -99,7 +99,7 @@ class Component extends AbstractComponent
         ) {
             $this->initSchemaServices(
                 dirname(__DIR__),
-                $skipSchema || in_array(\PoP\CacheControl\Component::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Component::class, $skipSchemaComponentClasses),
+                $skipSchema || in_array(\PoP\CacheControl\Module::class, $skipSchemaComponentClasses) || in_array(\PoP\AccessControl\Module::class, $skipSchemaComponentClasses),
                 '/ConditionalOnComponent/CacheControl/ConditionalOnComponent/AccessControl/ConditionalOnContext/PrivateSchema'
             );
         }

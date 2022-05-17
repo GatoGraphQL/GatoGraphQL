@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Component as ComponentModelComponent;
+use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\ComponentInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;

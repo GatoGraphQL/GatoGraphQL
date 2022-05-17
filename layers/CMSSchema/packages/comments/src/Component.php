@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Comments;
 
 use PoP\Root\App;
-use PoPAPI\API\Component as APIComponent;
-use PoPAPI\RESTAPI\Component as RESTAPIComponent;
-use PoP\Root\Component\AbstractComponent;
-use PoPCMSSchema\Users\Component as UsersComponent;
+use PoPAPI\API\Module as APIComponent;
+use PoPAPI\RESTAPI\Module as RESTAPIComponent;
+use PoP\Root\Module\AbstractComponent;
+use PoPCMSSchema\Users\Module as UsersComponent;
 
 /**
  * Initialize component
  */
-class Component extends AbstractComponent
+class Module extends AbstractComponent
 {
     protected function requiresSatisfyingComponent(): bool
     {
@@ -28,7 +28,7 @@ class Component extends AbstractComponent
     public function getDependedComponentClasses(): array
     {
         return [
-            \PoPCMSSchema\CustomPosts\Component::class,
+            \PoPCMSSchema\CustomPosts\Module::class,
         ];
     }
 
@@ -38,9 +38,9 @@ class Component extends AbstractComponent
     public function getDependedConditionalComponentClasses(): array
     {
         return [
-            \PoPAPI\API\Component::class,
-            \PoPAPI\RESTAPI\Component::class,
-            \PoPCMSSchema\Users\Component::class,
+            \PoPAPI\API\Module::class,
+            \PoPAPI\RESTAPI\Module::class,
+            \PoPCMSSchema\Users\Module::class,
         ];
     }
 

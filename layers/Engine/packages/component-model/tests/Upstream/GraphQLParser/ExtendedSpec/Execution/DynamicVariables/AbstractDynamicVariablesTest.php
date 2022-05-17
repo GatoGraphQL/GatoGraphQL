@@ -23,12 +23,12 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 abstract class AbstractDynamicVariablesTest extends AbstractTestCase
 {
     /**
-     * @return array<string, mixed> [key]: Component class, [value]: Configuration
+     * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
     protected static function getComponentClassConfiguration(): array
     {
         $componentClassConfiguration = parent::getComponentClassConfiguration();
-        $componentClassConfiguration[\PoP\GraphQLParser\Component::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = static::enabled();
+        $componentClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_DYNAMIC_VARIABLES] = static::enabled();
         return $componentClassConfiguration;
     }
 

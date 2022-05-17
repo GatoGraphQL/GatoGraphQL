@@ -19,7 +19,7 @@ abstract class AbstractExposeGlobalFieldsInGraphQLSchemaFixtureQueryExecutionGra
         return [
             ...parent::getGraphQLServerComponentClassConfiguration(),
             ...[
-                \GraphQLByPoP\GraphQLServer\Component::class => [
+                \GraphQLByPoP\GraphQLServer\Module::class => [
                     \GraphQLByPoP\GraphQLServer\Environment::EXPOSE_GLOBAL_FIELDS_IN_GRAPHQL_SCHEMA => static::isEnabled(),
                 ],
             ]

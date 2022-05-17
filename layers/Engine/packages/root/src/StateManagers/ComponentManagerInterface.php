@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\StateManagers;
 
-use PoP\Root\Component\ComponentInterface;
+use PoP\Root\Module\ComponentInterface;
 use PoP\Root\Exception\ComponentNotExistsException;
 
 interface ComponentManagerInterface
