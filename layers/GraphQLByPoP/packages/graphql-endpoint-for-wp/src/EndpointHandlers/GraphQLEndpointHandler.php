@@ -9,7 +9,7 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPAPI\GraphQLAPI\Module as GraphQLAPIComponent;
+use PoPAPI\GraphQLAPI\Module as GraphQLAPIModule;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
@@ -54,8 +54,8 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
         /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return
-            class_exists(GraphQLAPIComponent::class)
-            && App::getComponent(GraphQLAPIComponent::class)->isEnabled()
+            class_exists(GraphQLAPIModule::class)
+            && App::getComponent(GraphQLAPIModule::class)->isEnabled()
             && !$componentConfiguration->isGraphQLAPIEndpointDisabled();
     }
 }
