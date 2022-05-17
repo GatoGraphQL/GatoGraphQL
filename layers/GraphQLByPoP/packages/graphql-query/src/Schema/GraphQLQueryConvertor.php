@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
-use GraphQLByPoP\GraphQLQuery\Module as GraphQLQueryComponent;
+use GraphQLByPoP\GraphQLQuery\Module as GraphQLQueryModule;
 use GraphQLByPoP\GraphQLQuery\ModuleConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
@@ -218,7 +218,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
     protected function convertArgumentValue($value)
     {
         /** @var GraphQLQueryComponentConfiguration */
-        $componentConfiguration = App::getComponent(GraphQLQueryComponent::class)->getConfiguration();
+        $componentConfiguration = App::getComponent(GraphQLQueryModule::class)->getConfiguration();
         /**
          * Generate the field AST as composable field `{{ field }}`,
          * so its value can be computed on runtime.
