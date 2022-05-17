@@ -2,7 +2,7 @@
 
 namespace PoPCMSSchema\PostCategories;
 
-use PoPCMSSchema\PostCategories\ComponentConfiguration as PostCategoriesComponentConfiguration;
+use PoPCMSSchema\PostCategories\ModuleConfiguration as PostCategoriesComponentConfiguration;
 
 trait SettingsProcessor_Trait
 {

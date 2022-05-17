@@ -16,7 +16,7 @@ use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\AbstractCustomPostObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\Stances\ComponentConfiguration;
+use PoPSchema\Stances\ModuleConfiguration;
 use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
@@ -128,7 +128,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'stances':
                 $query = array(
-                    'limit' => ComponentConfiguration::getStanceListDefaultLimit(),
+                    'limit' => ModuleConfiguration::getStanceListDefaultLimit(),
                     'orderby' => $this->getNameResolver()->getName('popcms:dbcolumn:orderby:customposts:date'),
                     'order' => 'ASC',
                 );

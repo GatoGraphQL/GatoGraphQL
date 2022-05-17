@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
@@ -95,7 +95,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
         );
 
         // Exclude the admin input fields, if "Admin" Schema is not enabled
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminInputFieldNames = $this->getConsolidatedAdminInputFieldNames();
@@ -473,7 +473,7 @@ abstract class AbstractInputObjectTypeResolver extends AbstractTypeResolver impl
      */
     public function skipExposingInputFieldInSchema(string $inputFieldName): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**

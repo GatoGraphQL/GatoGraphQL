@@ -7,7 +7,7 @@ namespace PoPCMSSchema\GenericCustomPosts;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     public function getGenericCustomPostListDefaultLimit(): ?int
     {

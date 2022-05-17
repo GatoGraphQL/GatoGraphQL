@@ -6,7 +6,7 @@ namespace PoP\AccessControl\ConfigurationEntries;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module;
-use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
 trait AccessControlConfigurableMandatoryDirectivesForItemsTrait
@@ -19,7 +19,7 @@ trait AccessControlConfigurableMandatoryDirectivesForItemsTrait
     protected function doesSchemaModeProcessNullControlEntry(): bool
     {
         $individualControlSchemaMode = $this->getSchemaMode();
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return
             ($componentConfiguration->usePrivateSchemaMode() && $individualControlSchemaMode == SchemaModes::PRIVATE_SCHEMA_MODE) ||

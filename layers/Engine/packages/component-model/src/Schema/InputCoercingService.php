@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Schema;
 
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
@@ -46,7 +46,7 @@ class InputCoercingService implements InputCoercingServiceInterface
         bool $inputIsArrayType,
         bool $inputIsArrayOfArraysType,
     ): mixed {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (
             is_array($inputValue)

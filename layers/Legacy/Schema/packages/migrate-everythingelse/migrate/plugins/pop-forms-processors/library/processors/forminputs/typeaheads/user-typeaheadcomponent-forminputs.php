@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\HelperServices\DataloadHelperServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputsBase
 {

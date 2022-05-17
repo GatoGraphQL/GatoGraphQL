@@ -6,7 +6,7 @@ namespace PoP\Root\State;
 
 use PoP\Root\App;
 use PoP\Root\Module;
-use PoP\Root\ComponentConfiguration;
+use PoP\Root\ModuleConfiguration;
 use PoP\Root\Routing\RequestNature;
 use PoP\Root\Routing\RoutingManagerInterface;
 
@@ -25,7 +25,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
 
         if ($componentConfiguration->enablePassingRoutingStateViaRequest()) {

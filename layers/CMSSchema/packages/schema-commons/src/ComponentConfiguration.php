@@ -7,7 +7,7 @@ namespace PoPCMSSchema\SchemaCommons;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     /**
      * Remove unwanted data added to the REQUEST_URI, replacing

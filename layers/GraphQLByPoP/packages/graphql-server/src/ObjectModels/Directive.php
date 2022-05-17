@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\ObjectModels;
 
 use PoP\Root\App;
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 
@@ -45,7 +45,7 @@ class Directive extends AbstractSchemaDefinitionReferenceObject
     {
         $directives = [];
         $directiveKind = $this->schemaDefinition[SchemaDefinition::DIRECTIVE_KIND];
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         /**
          * There are 3 cases for adding the "Query" type locations:

@@ -47,7 +47,7 @@ abstract class AbstractComponent implements ComponentInterface
         bool $skipSchema,
         array $skipSchemaComponentClasses,
     ): void {
-        // Set the configuration on the corresponding ComponentConfiguration
+        // Set the configuration on the corresponding ModuleConfiguration
         $this->initializeConfiguration($configuration);
 
         // Have the Module set its own info on the corresponding ComponentInfo
@@ -281,7 +281,7 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentConfiguration class for the Module
+     * ModuleConfiguration class for the Module
      */
     public function getConfiguration(): ?ComponentConfigurationInterface
     {
@@ -309,12 +309,12 @@ abstract class AbstractComponent implements ComponentInterface
     }
 
     /**
-     * ComponentConfiguration class for the Module
+     * ModuleConfiguration class for the Module
      */
     protected function getComponentConfigurationClass(): ?string
     {
         $classNamespace = ClassHelpers::getClassPSR4Namespace(\get_called_class());
-        $componentConfigurationClass = $classNamespace . '\\ComponentConfiguration';
+        $componentConfigurationClass = $classNamespace . '\\ModuleConfiguration';
         if (!class_exists($componentConfigurationClass)) {
             return null;
         }

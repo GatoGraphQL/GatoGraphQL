@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLAPI\GraphQLAPI\PluginEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPComponent;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPComponentConfiguration;
 use PoP\Root\App;
 use PoP\Root\Environment as RootEnvironment;
 

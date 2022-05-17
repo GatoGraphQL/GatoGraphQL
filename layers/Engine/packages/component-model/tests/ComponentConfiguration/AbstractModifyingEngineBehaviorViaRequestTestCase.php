@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ComponentConfiguration;
+namespace PoP\ComponentModel\ModuleConfiguration;
 
 use PoP\ComponentModel\Module as ComponentModelComponent;
 use PoP\ComponentModel\Constants\Params;

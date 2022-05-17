@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedback;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionErrorFeedbackItemProvider;
@@ -190,7 +190,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         );
 
         // Exclude the admin enum values, if "Admin" Schema is not enabled
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableAdminSchema()) {
             $adminEnumValues = $this->getConsolidatedAdminEnumValues();

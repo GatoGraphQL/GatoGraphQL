@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DirectiveResolvers;
 
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -81,7 +81,7 @@ abstract class AbstractValidateDirectiveResolver extends AbstractGlobalDirective
                 $idsDataFieldsToRemove,
                 $succeedingPipelineIDsDataFields
             );
-            /** @var ComponentConfiguration */
+            /** @var ModuleConfiguration */
             $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
             if ($componentConfiguration->setFailingFieldResponseAsNull()) {
                 $this->setIDsDataFieldsAsNull(

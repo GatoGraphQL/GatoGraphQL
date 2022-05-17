@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\RootWP\Routing\HookNames;
 use PoPCMSSchema\PostCategories\Module;
-use PoPCMSSchema\PostCategories\ComponentConfiguration;
+use PoPCMSSchema\PostCategories\ModuleConfiguration;
 
 class RoutingHookSet extends AbstractHookSet
 {
@@ -22,7 +22,7 @@ class RoutingHookSet extends AbstractHookSet
 
     public function registerRoutes(array $routes): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return [
             ...$routes,

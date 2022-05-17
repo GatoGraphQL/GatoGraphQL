@@ -9,9 +9,9 @@ use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     /**
      * Access layer to the environment variable, enabling to override its value

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser;
 
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ResolvedFieldVariableReference;
@@ -50,7 +50,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
     protected function parseDirectiveList(): array
     {
         $directives = parent::parseDirectiveList();
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableComposableDirectives()) {
             return $directives;
@@ -286,7 +286,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $fragments,
         );
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableResolvedFieldVariableReferences()) {
             $this->replaceResolvedFieldVariableReferences($document);

@@ -6,7 +6,7 @@ namespace PoP\AccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module;
-use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
 abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends AbstractAccessControlForFieldsHookSet
@@ -16,7 +16,7 @@ abstract class AbstractAccessControlForFieldsInPrivateSchemaHookSet extends Abst
      */
     protected function enabled(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->canSchemaBePrivate();
     }

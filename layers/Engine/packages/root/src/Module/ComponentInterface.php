@@ -127,7 +127,7 @@ interface ComponentInterface
     public function skipSchema(): bool;
 
     /**
-     * ComponentConfiguration for the Module
+     * ModuleConfiguration for the Module
      */
     public function getConfiguration(): ?ComponentConfigurationInterface;
 

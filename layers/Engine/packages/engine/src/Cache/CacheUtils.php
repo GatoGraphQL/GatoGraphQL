@@ -6,7 +6,7 @@ namespace PoP\Engine\Cache;
 
 use PoP\Root\App;
 use PoP\Engine\Module as EngineComponent;
-use PoP\Engine\ComponentConfiguration as EngineComponentConfiguration;
+use PoP\Engine\ModuleConfiguration as EngineComponentConfiguration;
 
 class CacheUtils
 {

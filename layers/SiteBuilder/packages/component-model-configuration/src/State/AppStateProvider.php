@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace PoP\ConfigurationComponentModel\State;
 
 use PoP\ComponentModel\Module as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\ConfigurationComponentModel\Configuration\EngineRequest;
 use PoP\ConfigurationComponentModel\Constants\Params;
 use PoP\ConfigurationComponentModel\Constants\Targets;
 use PoP\ConfigurationComponentModel\Constants\Values;
 use PoP\Root\App;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider

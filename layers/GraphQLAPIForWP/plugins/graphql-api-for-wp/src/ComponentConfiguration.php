@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     // /**
     //  * URL base for the module, pointing to graphql-api.com

@@ -77,7 +77,7 @@ class Module extends AbstractComponent
             }
         }
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = $this->getConfiguration();
         if ($componentConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes');

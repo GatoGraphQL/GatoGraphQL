@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\State;
 
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
@@ -14,7 +14,7 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -41,7 +41,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $state['namespace-types-and-interfaces'] = $componentConfiguration->mustNamespaceTypes();
         $state['are-mutations-enabled'] = $componentConfiguration->enableMutations();

@@ -21,7 +21,7 @@ use PoP\Root\App;
 use PoP\Root\Exception\ImpossibleToHappenException;
 use PoPAPI\API\Cache\CacheTypes;
 use PoPAPI\API\Module;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\ObjectModels\SchemaDefinition\DirectiveSchemaDefinitionProvider;
 use PoPAPI\API\ObjectModels\SchemaDefinition\EnumTypeSchemaDefinitionProvider;
 use PoPAPI\API\ObjectModels\SchemaDefinition\InputObjectTypeSchemaDefinitionProvider;
@@ -87,7 +87,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
     {
         $schemaDefinition = null;
         // Attempt to retrieve from the cache, if enabled
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($useCache = $componentConfiguration->useSchemaDefinitionCache()) {
             $persistentCache = $this->getPersistentCache();
@@ -315,7 +315,7 @@ class SchemaDefinitionService extends UpstreamSchemaDefinitionService implements
      */
     protected function skipExposingGlobalFieldsInSchema(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->skipExposingGlobalFieldsInFullSchema();
     }

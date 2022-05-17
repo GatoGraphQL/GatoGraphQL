@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 
 /**
@@ -61,7 +61,7 @@ abstract class AbstractControlBlock extends AbstractBlock
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
         $fieldTypeContent = $directiveContent = '';
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$this->disableFields()) {
             $fieldTypeContent = $componentConfiguration->getEmptyLabel();

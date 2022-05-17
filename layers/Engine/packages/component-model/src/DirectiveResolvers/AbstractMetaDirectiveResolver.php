@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\Root\App;
 
 abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver implements MetaDirectiveResolverInterface
@@ -34,7 +34,7 @@ abstract class AbstractMetaDirectiveResolver extends AbstractDirectiveResolver i
 
     public function isServiceEnabled(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->enableComposableDirectives();
     }

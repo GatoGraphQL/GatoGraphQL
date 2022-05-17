@@ -11,7 +11,7 @@ class DefinitionPersistenceFile extends AbstractFile
 {
     public function getDir(): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getDefinitionPersistenceBuildDir();
     }

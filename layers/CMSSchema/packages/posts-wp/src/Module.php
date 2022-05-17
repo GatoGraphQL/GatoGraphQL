@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostsWP;
 use PoP\Root\App;
 use PoP\Root\Module\AbstractComponent;
 use PoPCMSSchema\Posts\Module as PostsComponent;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 
 /**
  * Initialize component

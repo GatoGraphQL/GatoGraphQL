@@ -34,7 +34,7 @@ class Module extends AbstractComponent
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = $this->getConfiguration();
         if ($componentConfiguration->useGraphiQLExplorer()) {
             $this->initServices(dirname(__DIR__), '/ConditionalOnContext/UseGraphiQLExplorer/Overrides');

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Parser\Ast;
 
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document as UpstreamDocument;
@@ -20,7 +20,7 @@ class Document extends UpstreamDocument
     protected function isVariableDefined(
         VariableReference $variableReference,
     ): bool {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableDynamicVariables() && $variableReference instanceof DynamicVariableReferenceInterface) {
             return true;

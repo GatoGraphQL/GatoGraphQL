@@ -8,7 +8,7 @@ use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     /**
      * @return string[]

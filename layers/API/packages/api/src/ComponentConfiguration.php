@@ -7,10 +7,10 @@ namespace PoPAPI\API;
 use PoP\Root\App;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\ComponentModel\Module as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     public function useSchemaDefinitionCache(): bool
     {

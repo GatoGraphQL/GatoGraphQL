@@ -8,7 +8,7 @@ use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Environment;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -508,7 +508,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                     $options
                 );
             } catch (Exception $e) {
-                /** @var ComponentConfiguration */
+                /** @var ModuleConfiguration */
                 $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     $objectTypeFieldResolutionFeedbackStore->addLog(

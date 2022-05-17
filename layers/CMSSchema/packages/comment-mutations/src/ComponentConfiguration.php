@@ -8,7 +8,7 @@ use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 use PoPCMSSchema\Users\Module as UsersComponent;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     public function mustUserBeLoggedInToAddComment(): bool
     {

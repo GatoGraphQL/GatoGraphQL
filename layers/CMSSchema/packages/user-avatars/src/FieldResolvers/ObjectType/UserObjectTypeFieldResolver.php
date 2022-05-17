@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPCMSSchema\UserAvatars\Module;
-use PoPCMSSchema\UserAvatars\ComponentConfiguration;
+use PoPCMSSchema\UserAvatars\ModuleConfiguration;
 use PoPCMSSchema\UserAvatars\ObjectModels\UserAvatar;
 use PoPCMSSchema\UserAvatars\RuntimeRegistries\UserAvatarRuntimeRegistryInterface;
 use PoPCMSSchema\UserAvatars\TypeAPIs\UserAvatarTypeAPIInterface;
@@ -100,7 +100,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return match ([$fieldName => $fieldArgName]) {
             ['avatar' => 'size'] => $componentConfiguration->getUserAvatarDefaultSize(),
@@ -125,7 +125,7 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         array $options = []
     ): mixed {
         $user = $object;
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         switch ($fieldName) {
             case 'avatar':

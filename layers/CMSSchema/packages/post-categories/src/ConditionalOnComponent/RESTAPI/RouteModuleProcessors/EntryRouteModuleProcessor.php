@@ -10,12 +10,12 @@ use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Module;
-use PoPCMSSchema\PostCategories\ComponentConfiguration;
+use PoPCMSSchema\PostCategories\ModuleConfiguration;
 use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostCategories\ConditionalOnComponent\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsComponent;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -69,7 +69,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostCategoriesRoute() => [

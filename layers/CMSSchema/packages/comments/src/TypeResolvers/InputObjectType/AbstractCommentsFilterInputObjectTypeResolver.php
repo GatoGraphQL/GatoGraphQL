@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Comments\Module;
-use PoPCMSSchema\Comments\ComponentConfiguration;
+use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\FilterInputProcessors\FilterInputProcessor;
@@ -80,7 +80,7 @@ abstract class AbstractCommentsFilterInputObjectTypeResolver extends AbstractObj
 
     protected function treatCommentStatusAsAdminData(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->treatCommentStatusAsAdminData();
     }

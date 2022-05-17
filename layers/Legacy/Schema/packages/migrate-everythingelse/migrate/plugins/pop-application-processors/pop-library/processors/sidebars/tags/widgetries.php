@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
 
 class GD_Custom_Module_Processor_TagWidgets extends PoP_Module_Processor_WidgetsBase
 {

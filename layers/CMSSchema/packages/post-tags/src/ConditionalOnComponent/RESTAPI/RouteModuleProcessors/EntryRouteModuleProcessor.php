@@ -9,9 +9,9 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Module as PostsComponent;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 use PoPCMSSchema\PostTags\Module;
-use PoPCMSSchema\PostTags\ComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration;
 use PoPCMSSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostTags\ConditionalOnComponent\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
@@ -69,7 +69,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostTagsRoute() => [

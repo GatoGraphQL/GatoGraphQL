@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockConstants;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 
@@ -23,7 +23,7 @@ trait WithTypeFieldControlBlockTrait
      */
     public function getTypeFieldsForPrint(array $typeFields): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $groupFieldsUnderTypeForPrint = $componentConfiguration->groupFieldsUnderTypeForPrint();
         // For each class, obtain its namespacedTypeName

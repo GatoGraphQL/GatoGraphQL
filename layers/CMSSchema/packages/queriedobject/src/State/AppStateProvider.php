@@ -7,7 +7,7 @@ namespace PoPCMSSchema\QueriedObject\State;
 use PoP\Root\App;
 use PoPCMSSchema\QueriedObject\Routing\CMSRoutingStateServiceInterface;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider

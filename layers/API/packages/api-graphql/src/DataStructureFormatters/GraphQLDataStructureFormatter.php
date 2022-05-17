@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPAPI\GraphQLAPI\DataStructureFormatters;
 
 use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\Tokens;
@@ -44,7 +44,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
          * @see http://spec.graphql.org/June2018/#sec-Response-Format
          */
         if ($this->addTopLevelExtensionsEntryToResponse()) {
-            /** @var ComponentConfiguration */
+            /** @var ModuleConfiguration */
             $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
 
             // Warnings

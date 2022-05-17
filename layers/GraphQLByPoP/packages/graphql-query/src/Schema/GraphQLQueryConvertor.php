@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Module as GraphQLQueryComponent;
-use GraphQLByPoP\GraphQLQuery\ComponentConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\ModuleConfiguration as GraphQLQueryComponentConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
@@ -16,7 +16,7 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Module as GraphQLParserComponent;
-use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;

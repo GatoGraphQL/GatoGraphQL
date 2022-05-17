@@ -4,8 +4,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 
 \PoP\Root\App::addFilter('mce_external_plugins', gdMentionsExternalPlugins(...));
 function gdMentionsExternalPlugins($plugins)

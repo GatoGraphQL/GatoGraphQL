@@ -13,7 +13,7 @@ use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\Module;
-use PoP\Engine\ComponentConfiguration;
+use PoP\Engine\ModuleConfiguration;
 use PoP\Engine\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
 use PoP\Root\App;
@@ -50,7 +50,7 @@ class AppStateOperatorGlobalObjectTypeFieldResolver extends AbstractGlobalObject
 
     public function isServiceEnabled(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->enableQueryingAppStateFields();
     }

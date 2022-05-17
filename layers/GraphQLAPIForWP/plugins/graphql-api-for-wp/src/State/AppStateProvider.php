@@ -12,7 +12,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\Module as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 
 /**
  * If the single endpoint is disabled, or if pointing to a different URL

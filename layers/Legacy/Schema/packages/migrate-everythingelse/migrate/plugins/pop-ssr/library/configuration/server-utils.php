@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_SSR_ServerUtils

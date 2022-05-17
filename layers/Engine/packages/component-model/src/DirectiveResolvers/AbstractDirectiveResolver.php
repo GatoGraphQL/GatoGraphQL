@@ -8,7 +8,7 @@ use Exception;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Environment;
@@ -972,7 +972,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
                     ]
                 );
             } catch (Exception $e) {
-                /** @var ComponentConfiguration */
+                /** @var ModuleConfiguration */
                 $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
                 if ($componentConfiguration->logExceptionErrorMessagesAndTraces()) {
                     foreach ($idsDataFields as $id => $dataFields) {
@@ -1092,7 +1092,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
             }
         }
         // If the failure must be processed as an error, we must also remove the fields from the directive pipeline
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $removeFieldIfDirectiveFailed = $componentConfiguration->removeFieldIfDirectiveFailed();
         if ($removeFieldIfDirectiveFailed) {
@@ -1204,7 +1204,7 @@ abstract class AbstractDirectiveResolver implements DirectiveResolverInterface
          * If disabled, then do not expose the directive if it
          * has any mandatory argument of type `DangerouslyNonSpecificScalar`
          */
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->skipExposingDangerouslyNonSpecificScalarTypeTypeInSchema()) {
             /**

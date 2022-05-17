@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLEndpointForWP\EndpointHandlers;
 
 use PoP\Root\App;
 use GraphQLByPoP\GraphQLEndpointForWP\Module;
-use GraphQLByPoP\GraphQLEndpointForWP\ComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\GraphQLAPI\Module as GraphQLAPIComponent;
@@ -41,7 +41,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     public function getEndpoint(): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getGraphQLAPIEndpoint();
     }
@@ -51,7 +51,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
      */
     protected function isGraphQLAPIEnabled(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return
             class_exists(GraphQLAPIComponent::class)

@@ -1,5 +1,5 @@
 <?php
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 
 
 class PoPThemeWassup_CDN_Hooks

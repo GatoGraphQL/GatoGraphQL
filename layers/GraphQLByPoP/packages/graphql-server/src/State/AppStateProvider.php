@@ -6,9 +6,9 @@ namespace GraphQLByPoP\GraphQLServer\State;
 
 use PoP\Root\App;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\Root\State\AbstractAppStateProvider;
@@ -36,7 +36,7 @@ class AppStateProvider extends AbstractAppStateProvider
             $state['edit-schema'] = null;
         }
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
 
         // The PQL always has nested mutations enabled. Only the for the standard GraphQL server

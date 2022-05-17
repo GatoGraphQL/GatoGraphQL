@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Root\Module;
 
 /**
- * Helpers for the ComponentConfiguration class
+ * Helpers for the ModuleConfiguration class
  */
 class ComponentConfigurationHelpers
 {

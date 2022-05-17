@@ -10,7 +10,7 @@ use GraphQLAPI\GraphQLAPI\ContentProcessors\MarkdownContentParserInterface;
 use GraphQLAPI\GraphQLAPI\ModuleSettings\Properties;
 use GraphQLAPI\GraphQLAPI\Plugin;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPComponent;
-use GraphQLByPoP\GraphQLClientsForWP\ComponentConfiguration as GraphQLClientsForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPComponentConfiguration;
 
 /**
  * Modules exposing clients to interact with the API

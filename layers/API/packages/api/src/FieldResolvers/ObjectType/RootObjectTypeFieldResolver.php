@@ -6,7 +6,7 @@ namespace PoPAPI\API\FieldResolvers\ObjectType;
 
 use PoP\Root\App;
 use PoPAPI\API\Module;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\PersistedQueries\PersistedQueryManagerInterface;
@@ -83,7 +83,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function isServiceEnabled(): bool
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->addFullSchemaFieldToSchema();
     }

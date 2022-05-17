@@ -6,7 +6,7 @@ namespace PoPAPI\API\ConditionalOnComponent\AccessControl\Hooks;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module as AccessControlComponent;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoPAPI\API\Module;
 use PoPAPI\API\Environment;
 use PoP\Root\Module\ComponentConfigurationHelpers;

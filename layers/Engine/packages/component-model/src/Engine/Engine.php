@@ -8,7 +8,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Cache\PersistentCacheInterface;
 use PoP\ComponentModel\CheckpointProcessors\CheckpointProcessorManagerInterface;
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ComponentInfo;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
@@ -471,7 +471,7 @@ class Engine implements EngineInterface
 
     public function getModelPropsModuletree(array $module): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
@@ -647,7 +647,7 @@ class Engine implements EngineInterface
     public function getModuleDatasetSettings(array $module, $model_props, array &$props): array
     {
         $ret = [];
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
@@ -1041,7 +1041,7 @@ class Engine implements EngineInterface
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
     public function getModuleData(array $root_module, array $root_model_props, array $root_props): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $useCache = $componentConfiguration->useComponentModelCache();
         $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
@@ -1750,7 +1750,7 @@ class Engine implements EngineInterface
         $ret[Response::OBJECT_FEEDBACK] = [];
         $ret[Response::SCHEMA_FEEDBACK] = [];
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $enabledFeedbackCategoryExtensions = $componentConfiguration->getEnabledFeedbackCategoryExtensions();
         $sendFeedbackWarnings = in_array(FeedbackCategories::WARNING, $enabledFeedbackCategoryExtensions);

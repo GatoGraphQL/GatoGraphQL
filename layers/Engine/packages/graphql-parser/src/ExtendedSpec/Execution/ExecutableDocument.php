@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GraphQLParser\ExtendedSpec\Execution;
 
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReference;
 use PoP\GraphQLParser\Facades\Query\QueryAugmenterServiceFacade;
 use PoP\GraphQLParser\Spec\Execution\Context;
@@ -25,7 +25,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
      */
     protected function assertAndGetRequestedOperations(): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableMultipleQueryExecution()) {
             return parent::assertAndGetRequestedOperations();
@@ -48,7 +48,7 @@ class ExecutableDocument extends UpstreamExecutableDocument
     {
         parent::propagateContext($operation, $context);
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if (!$componentConfiguration->enableDynamicVariables()) {
             return;

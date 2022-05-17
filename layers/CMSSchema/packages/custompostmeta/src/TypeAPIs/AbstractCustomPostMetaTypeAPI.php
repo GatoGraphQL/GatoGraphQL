@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostMeta\TypeAPIs;
 
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMeta\Module;
-use PoPCMSSchema\CustomPostMeta\ComponentConfiguration;
+use PoPCMSSchema\CustomPostMeta\ModuleConfiguration;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 
@@ -34,13 +34,13 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getCustomPostMetaBehavior();
     }

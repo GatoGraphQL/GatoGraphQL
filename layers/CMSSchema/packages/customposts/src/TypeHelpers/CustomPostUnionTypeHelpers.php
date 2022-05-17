@@ -9,7 +9,7 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoPCMSSchema\CustomPosts\Module;
-use PoPCMSSchema\CustomPosts\ComponentConfiguration;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\ObjectTypeResolverPickers\CustomPostObjectTypeResolverPickerInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 
@@ -57,7 +57,7 @@ class CustomPostUnionTypeHelpers
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
-            /** @var ComponentConfiguration */
+            /** @var ModuleConfiguration */
             $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
             if ($componentConfiguration->useSingleTypeInsteadOfCustomPostUnionType()) {
                 return count($targetTypeResolvers) === 1 ?

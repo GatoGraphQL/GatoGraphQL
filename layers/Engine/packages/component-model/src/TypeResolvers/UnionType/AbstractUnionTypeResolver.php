@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Exception\SchemaReferenceException;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
@@ -295,7 +295,7 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
          * - But Post is still part of CustomPostUnion, then the code below will throw an exception
          *   stating that the member Post type does not implement the IsCustomPost interface!
          */
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableUnionTypeImplementingInterfaceType()) {
             // Validate that all typeResolvers implement the required interface

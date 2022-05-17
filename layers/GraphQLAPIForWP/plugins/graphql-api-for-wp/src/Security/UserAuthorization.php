@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GraphQLAPI\GraphQLAPI\Security;
 
 use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Exception\UserAuthorizationException;
 use GraphQLAPI\GraphQLAPI\Registries\UserAuthorizationSchemeRegistryInterface;
 use PoP\Root\App;
@@ -38,7 +38,7 @@ class UserAuthorization implements UserAuthorizationInterface
     public function getSchemaEditorAccessCapability(): string
     {
         $accessSchemeCapability = null;
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($accessScheme = $componentConfiguration->getEditingAccessScheme()) {
             // If the capability does not exist, catch the exception

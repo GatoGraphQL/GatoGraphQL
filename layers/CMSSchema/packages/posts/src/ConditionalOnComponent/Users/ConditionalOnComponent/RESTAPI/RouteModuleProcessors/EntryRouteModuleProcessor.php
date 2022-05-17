@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPCMSSchema\Posts\Module;
-use PoPCMSSchema\Posts\ComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\ConditionalOnComponent\Users\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\ConditionalOnComponent\CustomPosts\ConditionalOnComponent\RESTAPI\Hooks\CustomPostHookSet;
 use PoPCMSSchema\Users\Routing\RequestNature;
@@ -37,7 +37,7 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     {
         $ret = array();
         // Author's posts
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $routemodules = array(
             $componentConfiguration->getPostsRoute() => [

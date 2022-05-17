@@ -6,7 +6,7 @@ namespace PoPAPI\API;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module as AccessControlComponent;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoPAPI\API\Configuration\Request;
 use PoP\CacheControl\Module as CacheControlComponent;
 use PoP\Root\Module\AbstractComponent;

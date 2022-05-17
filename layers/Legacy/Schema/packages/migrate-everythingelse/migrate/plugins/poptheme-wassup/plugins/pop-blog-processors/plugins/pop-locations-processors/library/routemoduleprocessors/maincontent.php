@@ -1,7 +1,7 @@
 <?php
 
 use PoP\Root\Routing\RequestNature;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 
 class Wassup_EM_Blog_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
 {

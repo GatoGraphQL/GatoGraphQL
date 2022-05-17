@@ -8,7 +8,7 @@ use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\AccessControl\Module as AccessControlComponent;
-use PoP\AccessControl\ComponentConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoP\CacheControl\Module as CacheControlComponent;
 use PoP\Engine\Module as EngineComponent;
 use PoP\Engine\Environment as EngineEnvironment;

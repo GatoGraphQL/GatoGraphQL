@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\TypeResolvers\UnionType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Module;
-use PoP\ComponentModel\ComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
 use function explode;
@@ -68,7 +68,7 @@ class UnionTypeHelpers
         $targetTypeResolvers = $unionTypeResolver->getTargetObjectTypeResolvers();
         if ($targetTypeResolvers) {
             // By configuration: If there is only 1 item, return only that one
-            /** @var ComponentConfiguration */
+            /** @var ModuleConfiguration */
             $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
             if ($componentConfiguration->useSingleTypeInsteadOfUnionType()) {
                 return count($targetTypeResolvers) == 1 ?

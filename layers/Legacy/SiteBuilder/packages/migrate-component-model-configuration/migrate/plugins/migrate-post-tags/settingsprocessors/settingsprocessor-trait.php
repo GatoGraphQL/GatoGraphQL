@@ -1,7 +1,7 @@
 <?php
 namespace PoPCMSSchema\PostTags;
 
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
 
 trait SettingsProcessor_Trait
 {

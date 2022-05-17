@@ -6,7 +6,7 @@ namespace PoPAPI\API\Schema;
 
 use PoP\Root\App;
 use PoPAPI\API\Module;
-use PoPAPI\API\ComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration;
 use PoPAPI\API\PersistedQueries\PersistedFragmentManagerInterface;
 use PoPAPI\API\Schema\FieldQueryInterpreterInterface as APIFieldQueryInterpreterInterface;
 use PoPAPI\API\Schema\QuerySyntax as APIQuerySyntax;
@@ -87,7 +87,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
         // If it is a string, split the ElemCount with ',', the inner ElemCount with '.', and the inner fields with '|'
         $requestedFields = [];
         $executableFields = [];
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $executeQueryBatchInStrictOrder = $componentConfiguration->executeQueryBatchInStrictOrder();
         $operationMaxLevels = 0;
@@ -311,7 +311,7 @@ class FieldQueryConvertor implements FieldQueryConvertorInterface
      */
     protected function maybeReplaceEmbeddableFields(string $field): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableEmbeddableFields()) {
             /**

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 
 class PoP_FrontEndOptimization_ResourceLoaderProcessor_Hooks
 {

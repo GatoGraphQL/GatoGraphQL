@@ -1,8 +1,8 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
-use PoPCMSSchema\PostTags\ComponentConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 
 /**
  * Implementation of the icons

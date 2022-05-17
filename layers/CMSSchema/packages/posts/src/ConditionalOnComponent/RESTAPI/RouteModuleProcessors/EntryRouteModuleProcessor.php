@@ -7,12 +7,12 @@ namespace PoPCMSSchema\Posts\ConditionalOnComponent\RESTAPI\RouteModuleProcessor
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Module as ComponentModelComponent;
-use PoP\ComponentModel\ComponentConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\ConditionalOnComponent\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Posts\Module;
-use PoPCMSSchema\Posts\ComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\ConditionalOnComponent\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
 class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
@@ -48,7 +48,7 @@ class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModulePr
     public function getModulesVarsPropertiesByNatureAndRoute(): array
     {
         $ret = array();
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         /** @var ComponentModelComponentConfiguration */
         $componentModelComponentConfiguration = App::getComponent(ComponentModelComponent::class)->getConfiguration();

@@ -75,7 +75,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * Configure the plugin.
      * This defines hooks to set environment variables,
      * so must be executed before those hooks are triggered for first time
-     * (in ComponentConfiguration classes)
+     * (in ModuleConfiguration classes)
      */
     protected function callPluginInitializationConfiguration(): void
     {

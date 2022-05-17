@@ -8,7 +8,7 @@ use PoP\Root\Module\AbstractModuleConfiguration;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     /**
      * URL under which the clients are loaded.

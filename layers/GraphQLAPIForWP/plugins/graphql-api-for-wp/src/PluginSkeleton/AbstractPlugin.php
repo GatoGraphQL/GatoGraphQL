@@ -176,7 +176,7 @@ abstract class AbstractPlugin implements PluginInterface
     {
         // Configure the plugin. This defines hooks to set environment variables,
         // so must be executed before those hooks are triggered for first time
-        // (in ComponentConfiguration classes)
+        // (in ModuleConfiguration classes)
         $this->callPluginInitializationConfiguration();
 
         // Only after initializing the System Container,

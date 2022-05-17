@@ -8,7 +8,7 @@ use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\AccessControlBlockCategory;
 use GraphQLAPI\GraphQLAPI\Services\BlockCategories\BlockCategoryInterface;
 use PoP\AccessControl\Module;
-use PoP\AccessControl\ComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration;
 use PoP\AccessControl\Schema\SchemaModes;
 
 /**
@@ -57,7 +57,7 @@ class AccessControlBlock extends AbstractControlBlock
     }
     protected function getBlockContentTitle(): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             return \__('Access Control Rules:', 'graphql-api');
@@ -72,7 +72,7 @@ class AccessControlBlock extends AbstractControlBlock
      */
     protected function getLocalizedData(): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return array_merge(
             parent::getLocalizedData(),
@@ -90,7 +90,7 @@ class AccessControlBlock extends AbstractControlBlock
     protected function getBlockContent(array $attributes, string $content): string
     {
         $maybeSchemaModeContent = '';
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         if ($componentConfiguration->enableIndividualControlForPublicPrivateSchemaMode()) {
             $blockContentPlaceholder = <<<EOT

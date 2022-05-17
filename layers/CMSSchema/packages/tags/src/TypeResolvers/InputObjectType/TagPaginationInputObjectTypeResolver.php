@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 use PoP\Root\App;
 use PoPCMSSchema\Tags\Module;
-use PoPCMSSchema\Tags\ComponentConfiguration;
+use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\PaginationInputObjectTypeResolver;
 
 class TagPaginationInputObjectTypeResolver extends PaginationInputObjectTypeResolver
@@ -23,14 +23,14 @@ class TagPaginationInputObjectTypeResolver extends PaginationInputObjectTypeReso
 
     protected function getDefaultLimit(): ?int
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getTagListDefaultLimit();
     }
 
     protected function getMaxLimit(): ?int
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getTagListMaxLimit();
     }

@@ -10,7 +10,7 @@ use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Tokens\ModulePath;
 use PoP\Root\App;
 use PoP\Root\Module as RootComponent;
-use PoP\Root\ComponentConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
 class ModulePathHelpers implements ModulePathHelpersInterface

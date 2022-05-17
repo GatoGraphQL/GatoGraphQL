@@ -8,7 +8,7 @@ use PoP\Root\App;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
 use PoPCMSSchema\Meta\TypeAPIs\AbstractMetaTypeAPI;
 use PoPCMSSchema\UserMeta\Module;
-use PoPCMSSchema\UserMeta\ComponentConfiguration;
+use PoPCMSSchema\UserMeta\ModuleConfiguration;
 
 abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements UserMetaTypeAPIInterface
 {
@@ -34,13 +34,13 @@ abstract class AbstractUserMetaTypeAPI extends AbstractMetaTypeAPI implements Us
      */
     public function getAllowOrDenyMetaEntries(): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getUserMetaEntries();
     }
     public function getAllowOrDenyMetaBehavior(): string
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return $componentConfiguration->getUserMetaBehavior();
     }

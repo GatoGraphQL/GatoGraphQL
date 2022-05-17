@@ -6,7 +6,7 @@ namespace PoP\DefinitionPersistence;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 
-class ComponentConfiguration extends AbstractModuleConfiguration
+class ModuleConfiguration extends AbstractModuleConfiguration
 {
     public function getDefinitionPersistenceBuildDir(): string
     {

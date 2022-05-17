@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PagesWP;
 
 use PoP\Root\App;
 use PoP\Root\Module\AbstractComponent;
-use PoPCMSSchema\Pages\ComponentConfiguration as PagesComponentConfiguration;
+use PoPCMSSchema\Pages\ModuleConfiguration as PagesComponentConfiguration;
 use PoPCMSSchema\Pages\Module as PagesComponent;
 
 /**

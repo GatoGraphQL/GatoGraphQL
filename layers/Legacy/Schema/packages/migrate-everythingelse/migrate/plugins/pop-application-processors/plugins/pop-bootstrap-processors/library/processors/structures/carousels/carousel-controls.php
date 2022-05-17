@@ -1,7 +1,7 @@
 <?php
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 
 class PoP_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {

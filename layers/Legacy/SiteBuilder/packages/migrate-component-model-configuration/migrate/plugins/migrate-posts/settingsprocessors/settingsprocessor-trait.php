@@ -1,7 +1,7 @@
 <?php
 namespace PoPCMSSchema\Posts;
 
-use PoPCMSSchema\Posts\ComponentConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
 
 trait SettingsProcessor_Trait
 {

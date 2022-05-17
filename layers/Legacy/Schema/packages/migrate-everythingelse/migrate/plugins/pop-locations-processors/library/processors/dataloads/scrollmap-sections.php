@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPCMSSchema\Users\ComponentConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\Registries;
 
 use GraphQLByPoP\GraphQLServer\Cache\CacheTypes;
 use GraphQLByPoP\GraphQLServer\Module;
-use GraphQLByPoP\GraphQLServer\ComponentConfiguration;
+use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\ObjectModels\SchemaDefinitionReferenceObjectInterface;
 use GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface;
 use GraphQLByPoP\GraphQLServer\Schema\SchemaDefinitionHelpers;
@@ -17,11 +17,11 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\GraphQLParser\Module as GraphQLParserComponent;
-use PoP\GraphQLParser\ComponentConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\API\Module as APIComponent;
-use PoPAPI\API\ComponentConfiguration as APIComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration as APIComponentConfiguration;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoPAPI\API\Schema\TypeKinds;
 
@@ -142,7 +142,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     protected function prepareSchemaDefinitionForGraphQL(): void
     {
         $enableNestedMutations = App::getState('nested-mutations-enabled');
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $exposeSchemaIntrospectionFieldInSchema = $componentConfiguration->exposeSchemaIntrospectionFieldInSchema();
         $exposeGlobalFieldsInGraphQLSchema = $componentConfiguration->exposeGlobalFieldsInGraphQLSchema();

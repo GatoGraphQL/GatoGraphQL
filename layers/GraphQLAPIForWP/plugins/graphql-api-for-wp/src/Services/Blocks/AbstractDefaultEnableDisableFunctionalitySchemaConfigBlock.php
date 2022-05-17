@@ -6,7 +6,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\Blocks;
 
 use PoP\Root\App;
 use GraphQLAPI\GraphQLAPI\Module;
-use GraphQLAPI\GraphQLAPI\ComponentConfiguration;
+use GraphQLAPI\GraphQLAPI\ModuleConfiguration;
 use GraphQLAPI\GraphQLAPI\Constants\BlockAttributeNames;
 
 abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extends AbstractSchemaConfigBlock
@@ -26,7 +26,7 @@ abstract class AbstractDefaultEnableDisableFunctionalitySchemaConfigBlock extend
 
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         $enabledDisabledLabels = $this->getEnabledDisabledLabels();
         $blockContent = sprintf(

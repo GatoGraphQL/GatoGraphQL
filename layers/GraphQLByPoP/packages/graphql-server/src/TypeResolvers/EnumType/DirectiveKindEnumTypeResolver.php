@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\TypeResolvers\EnumType;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Feedback\SchemaInputValidationFeedbackStore;
 use PoP\GraphQLParser\Module;
-use PoP\GraphQLParser\ComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration;
 use PoP\Root\App;
 use stdClass;
 
@@ -23,7 +23,7 @@ class DirectiveKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolve
      */
     public function getEnumValues(): array
     {
-        /** @var ComponentConfiguration */
+        /** @var ModuleConfiguration */
         $componentConfiguration = App::getComponent(Module::class)->getConfiguration();
         return array_merge(
             [
