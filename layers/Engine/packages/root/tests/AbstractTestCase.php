@@ -45,7 +45,7 @@ abstract class AbstractTestCase extends TestCase
         self::$container = App::getContainer();
 
         // Allow to modify the $_GET when testing
-        static::beforeBootApplicationComponents();
+        static::beforeBootApplicationModules();
 
         // Finish the initialization
         App::getAppLoader()->bootApplicationComponents();
@@ -54,7 +54,7 @@ abstract class AbstractTestCase extends TestCase
     /**
      * Allow to modify the $_GET when testing.
      */
-    protected static function beforeBootApplicationComponents(): void
+    protected static function beforeBootApplicationModules(): void
     {
         // Do nothing
     }

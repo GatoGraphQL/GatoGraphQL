@@ -16,7 +16,7 @@ use PoP\Root\Environment as RootEnvironment;
 
 abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends AbstractTestCase
 {
-    protected static function beforeBootApplicationComponents(): void
+    protected static function beforeBootApplicationModules(): void
     {
         /**
          * Pretend we are sending ?datastructure=html in the request.
