@@ -6,7 +6,7 @@ namespace PoP\Engine\Cache;
 
 use PoP\Root\App;
 use PoP\Engine\Module as EngineModule;
-use PoP\Engine\ModuleConfiguration as EngineComponentConfiguration;
+use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 
 class CacheUtils
 {
@@ -14,7 +14,7 @@ class CacheUtils
 
     public static function getSchemaCacheKeyComponents(): array
     {
-        /** @var EngineComponentConfiguration */
+        /** @var EngineModuleConfiguration */
         $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
         return (array)App::applyFilters(
             self::HOOK_SCHEMA_CACHE_KEY_COMPONENTS,

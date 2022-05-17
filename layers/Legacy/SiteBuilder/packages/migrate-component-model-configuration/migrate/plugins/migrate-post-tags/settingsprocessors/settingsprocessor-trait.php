@@ -1,7 +1,7 @@
 <?php
 namespace PoPCMSSchema\PostTags;
 
-use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 
 trait SettingsProcessor_Trait
 {
@@ -9,7 +9,7 @@ trait SettingsProcessor_Trait
     {
         return array_filter(
             array(
-                PostTagsComponentConfiguration::getPostTagsRoute(),
+                PostTagsModuleConfiguration::getPostTagsRoute(),
             )
         );
     }

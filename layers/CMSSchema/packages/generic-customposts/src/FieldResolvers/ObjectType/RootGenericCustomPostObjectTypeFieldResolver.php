@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
-use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsComponentConfiguration;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration as CustomPostsModuleConfiguration;
 use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
@@ -192,7 +192,7 @@ class RootGenericCustomPostObjectTypeFieldResolver extends AbstractQueryableObje
     public function getAdminFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $adminFieldArgNames = parent::getAdminFieldArgNames($objectTypeResolver, $fieldName);
-        /** @var CustomPostsComponentConfiguration */
+        /** @var CustomPostsModuleConfiguration */
         $moduleConfiguration = App::getComponent(CustomPostsModule::class)->getConfiguration();
         switch ($fieldName) {
             case 'genericCustomPost':

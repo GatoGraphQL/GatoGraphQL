@@ -8,7 +8,7 @@ use PoP\Root\App;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\AccessControl\Module as AccessControlModule;
-use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration as AccessControlModuleConfiguration;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
@@ -90,7 +90,7 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/Overrides');
 
         // Boot conditionals
-        /** @var AccessControlComponentConfiguration */
+        /** @var AccessControlModuleConfiguration */
         $moduleConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
         if (
             class_exists(CacheControlModule::class)

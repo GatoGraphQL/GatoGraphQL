@@ -1,7 +1,7 @@
 <?php
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
@@ -18,7 +18,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         // If so, just return it from there directly
         global $pop_resourceloader_generatedfilesmanager, $pop_resourceloaderprocessor_manager;
         $cachemanager = null;
-        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
         }
 
@@ -574,7 +574,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
                     if (is_null(self::$dynamic_module_resources)) {
 
                         $cachemanager = null;
-                        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+                        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
                             $cachemanager = PersistentCacheFacade::getInstance();
                         }
 

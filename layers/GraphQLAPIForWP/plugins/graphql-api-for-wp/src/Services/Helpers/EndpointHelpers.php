@@ -114,7 +114,7 @@ class EndpointHelpers
         $endpoint = RequestHelpers::maybeAddParamToDebugRequest($endpoint);
 
         // If namespaced, add /?use_namespace=1 to the endpoint
-        // /** @var ComponentModelComponentConfiguration */
+        // /** @var ComponentModelModuleConfiguration */
         // $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         // if ($moduleConfiguration->mustNamespaceTypes()) {
         //     $endpoint = \add_query_arg(APIParams::USE_NAMESPACE, true, $endpoint);

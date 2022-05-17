@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLServer\State;
 
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
-use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\Module;
 use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\Configuration\Request;
@@ -28,9 +28,9 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function initialize(array &$state): void
     {
-        /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
-        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+        /** @var RootModuleConfiguration */
+        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['edit-schema'] = Request::editSchema();
         } else {
             $state['edit-schema'] = null;

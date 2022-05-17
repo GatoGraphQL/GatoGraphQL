@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
@@ -47,8 +47,8 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     {
         return match($module[1]) {
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
-            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             default => parent::getRelevantRoute($module, $props),
         };
     }

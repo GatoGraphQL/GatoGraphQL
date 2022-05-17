@@ -2,7 +2,7 @@
 
 namespace PoPCMSSchema\PostCategories;
 
-use PoPCMSSchema\PostCategories\ModuleConfiguration as PostCategoriesComponentConfiguration;
+use PoPCMSSchema\PostCategories\ModuleConfiguration as PostCategoriesModuleConfiguration;
 
 trait SettingsProcessor_Trait
 {
@@ -10,7 +10,7 @@ trait SettingsProcessor_Trait
     {
         return array_filter(
             array(
-                PostCategoriesComponentConfiguration::getPostCategoriesRoute(),
+                PostCategoriesModuleConfiguration::getPostCategoriesRoute(),
             )
         );
     }

@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Users\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Module;
@@ -54,12 +54,12 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getComponent(Module::class)->getConfiguration();
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         $routemodules = array(
             $moduleConfiguration->getUsersRoute() => [
                 FieldDataloadModuleProcessor::class,
-                $componentModelComponentConfiguration->enableAdminSchema() ?
+                $componentModelModuleConfiguration->enableAdminSchema() ?
                     FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
                     : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [

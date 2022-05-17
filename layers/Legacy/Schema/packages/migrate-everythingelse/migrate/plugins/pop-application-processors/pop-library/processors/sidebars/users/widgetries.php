@@ -1,6 +1,6 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_WidgetsBase
 {
@@ -40,7 +40,7 @@ class GD_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_Widget
     public function getFontawesome(array $module, array &$props)
     {
         $fontawesomes = array(
-            self::MODULE_WIDGETCOMPACT_GENERICUSERINFO => getRouteIcon(UsersComponentConfiguration::getUsersRoute(), false),
+            self::MODULE_WIDGETCOMPACT_GENERICUSERINFO => getRouteIcon(UsersModuleConfiguration::getUsersRoute(), false),
         );
 
         return $fontawesomes[$module[1]] ?? null;

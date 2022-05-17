@@ -4,8 +4,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\LooseContracts\Facades\NameResolverFacade;
-use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
-use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 \PoP\Root\App::addFilter('mce_external_plugins', gdMentionsExternalPlugins(...));
 function gdMentionsExternalPlugins($plugins)
@@ -65,9 +65,9 @@ function gdJqueryConstantsMentionsManagerImpl($jqueryConstants)
     $query_wildcard = urlencode(GD_JSPLACEHOLDER_QUERY);
 
     // $filter_wildcardusers = $filter_manager->getFilter(POP_FILTER_USERS);
-    $users_url = RouteUtils::getRouteURL(UsersComponentConfiguration::getUsersRoute());
+    $users_url = RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
     // $filter_wildcardtags = $filter_manager->getFilter(POP_FILTER_TAGS);
-    $tags_url = RouteUtils::getRouteURL(PostTagsComponentConfiguration::getPostTagsRoute());
+    $tags_url = RouteUtils::getRouteURL(PostTagsModuleConfiguration::getPostTagsRoute());
 
     // // Add a hook, so we can use the content CDN
     // $users_url = \PoP\Root\App::applyFilters(

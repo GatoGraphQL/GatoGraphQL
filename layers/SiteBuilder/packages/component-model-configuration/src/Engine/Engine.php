@@ -6,7 +6,7 @@ namespace PoP\ConfigurationComponentModel\Engine;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataSourceSelectors;
 use PoP\ComponentModel\Constants\Response;
@@ -78,7 +78,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $ret = array();
 
         $processor = $this->getModuleProcessorManager()->getProcessor($module);
-        /** @var ComponentModelComponentConfiguration */
+        /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
 

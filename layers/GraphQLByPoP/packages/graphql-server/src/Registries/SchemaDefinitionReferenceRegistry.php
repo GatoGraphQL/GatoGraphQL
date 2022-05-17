@@ -17,11 +17,11 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\Cache\CacheUtils;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
-use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\API\Module as APIModule;
-use PoPAPI\API\ModuleConfiguration as APIComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration as APIModuleConfiguration;
 use PoPAPI\API\Schema\SchemaDefinitionServiceInterface;
 use PoPAPI\API\Schema\TypeKinds;
 
@@ -101,7 +101,7 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
     private function &doGetGraphQLSchemaDefinition(): array
     {
         // Attempt to retrieve from the cache, if enabled
-        /** @var APIComponentConfiguration */
+        /** @var APIModuleConfiguration */
         $moduleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if ($useCache = $moduleConfiguration->useSchemaDefinitionCache()) {
             // Use different caches for the normal and namespaced schemas,
@@ -212,9 +212,9 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         $addVersionToGraphQLSchemaFieldDescription = $moduleConfiguration->addVersionToGraphQLSchemaFieldDescription();
         // When doing nested mutations, differentiate mutating fields by adding label "[Mutation]" in the description
         $addMutationLabelToSchemaFieldDescription = $enableNestedMutations;
-        /** @var GraphQLParserComponentConfiguration */
-        $graphQLParserComponentConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
-        $enableComposableDirectives = $graphQLParserComponentConfiguration->enableComposableDirectives();
+        /** @var GraphQLParserModuleConfiguration */
+        $graphQLParserModuleConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
+        $enableComposableDirectives = $graphQLParserModuleConfiguration->enableComposableDirectives();
 
         // Modify the schema definitions
         // 1. Global fields and directives
@@ -285,10 +285,10 @@ class SchemaDefinitionReferenceRegistry implements SchemaDefinitionReferenceRegi
         }
 
         // Sort the elements in the schema alphabetically (if not already sorted!)
-        /** @var APIComponentConfiguration */
-        $apiComponentConfiguration = App::getComponent(APIModule::class)->getConfiguration();
+        /** @var APIModuleConfiguration */
+        $apiModuleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if (
-            !$apiComponentConfiguration->sortFullSchemaAlphabetically()
+            !$apiModuleConfiguration->sortFullSchemaAlphabetically()
             && $moduleConfiguration->sortGraphQLSchemaAlphabetically()
         ) {
             $this->getSchemaDefinitionService()->sortFullSchemaAlphabetically($this->fullSchemaDefinitionForGraphQL);

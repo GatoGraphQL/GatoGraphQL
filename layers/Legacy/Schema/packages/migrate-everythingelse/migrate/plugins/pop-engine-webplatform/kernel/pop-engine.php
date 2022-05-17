@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelComponentInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
@@ -50,7 +50,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $processor = $moduleprocessor_manager->getProcessor($module);
 
         $cachemanager = null;
-        if ($useCache = ComponentModelComponentConfiguration::useComponentModelCache()) {
+        if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
             $cachemanager = PersistentCacheFacade::getInstance();
         }
 

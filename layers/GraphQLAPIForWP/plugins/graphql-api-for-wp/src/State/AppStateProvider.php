@@ -12,7 +12,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 /**
  * If the single endpoint is disabled, or if pointing to a different URL
@@ -53,9 +53,9 @@ class AppStateProvider extends AbstractAppStateProvider
      */
     public function isServiceEnabled(): bool
     {
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
-        return $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        return $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
     }
 
     public function initialize(array &$state): void

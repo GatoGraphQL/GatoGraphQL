@@ -11,7 +11,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\Module as EngineModule;
-use PoP\Engine\ModuleConfiguration as EngineComponentConfiguration;
+use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
@@ -27,7 +27,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldNamesToResolve(): array
     {
-        /** @var EngineComponentConfiguration */
+        /** @var EngineModuleConfiguration */
         $moduleConfiguration = App::getComponent(EngineModule::class)->getConfiguration();
         if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];

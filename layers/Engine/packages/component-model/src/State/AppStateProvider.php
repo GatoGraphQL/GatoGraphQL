@@ -14,7 +14,7 @@ use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;
-use PoP\Root\ModuleConfiguration as RootComponentConfiguration;
+use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\State\AbstractAppStateProvider;
 
 class AppStateProvider extends AbstractAppStateProvider
@@ -51,9 +51,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
-        /** @var RootComponentConfiguration */
-        $rootComponentConfiguration = App::getComponent(RootModule::class)->getConfiguration();
-        if ($rootComponentConfiguration->enablePassingStateViaRequest()) {
+        /** @var RootModuleConfiguration */
+        $rootModuleConfiguration = App::getComponent(RootModule::class)->getConfiguration();
+        if ($rootModuleConfiguration->enablePassingStateViaRequest()) {
             $state['mangled'] = DefinitionsRequest::getMangledValue();
             $state['actionpath'] = Request::getActionPath();
             $state['actions'] = Request::getActions();

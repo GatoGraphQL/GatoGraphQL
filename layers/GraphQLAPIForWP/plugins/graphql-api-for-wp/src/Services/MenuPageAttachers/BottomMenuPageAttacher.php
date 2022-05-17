@@ -16,7 +16,7 @@ use GraphQLAPI\GraphQLAPI\Services\MenuPages\ModulesMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GraphQLAPI\GraphQLAPI\Services\MenuPages\SettingsMenuPage;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
-use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration as GraphQLClientsForWPModuleConfiguration;
 
 class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 {
@@ -135,7 +135,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        /** @var GraphQLClientsForWPComponentConfiguration */
+        /** @var GraphQLClientsForWPModuleConfiguration */
         $moduleConfiguration = App::getComponent(GraphQLClientsForWPModule::class)->getConfiguration();
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             global $submenu;

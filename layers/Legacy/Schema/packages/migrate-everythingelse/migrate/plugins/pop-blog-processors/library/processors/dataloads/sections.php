@@ -2,11 +2,11 @@
 use PoP\LooseContracts\Facades\NameResolverFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
-use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
-use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsComponentConfiguration;
+use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
@@ -163,11 +163,11 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_AUTHORPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
             self::MODULE_DATALOAD_CONTENT_SCROLL_ADDONS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_CONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_CONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
@@ -176,14 +176,14 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_CONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_CONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_CONTENT_TYPEAHEAD => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_DATALOAD_POSTS_SCROLL_ADDONS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_NAVIGATOR => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_POSTS_TYPEAHEAD => PostsComponentConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_ADDONS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_NAVIGATOR => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_POSTS_TYPEAHEAD => PostsModuleConfiguration::getPostsRoute(),
             self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_SEARCHCONTENT,
             self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_SEARCHCONTENT,
             self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_SEARCHCONTENT,
@@ -201,24 +201,24 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_TAGCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL => POP_BLOG_ROUTE_CONTENT,
-            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_DETAILS => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL => PostsComponentConfiguration::getPostsRoute(),
-            self::MODULE_DATALOAD_TAGS_MENTIONS => PostTagsComponentConfiguration::getPostTagsRoute() ,
-            self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS => PostTagsComponentConfiguration::getPostTagsRoute() ,
-            self::MODULE_DATALOAD_TAGS_SCROLL_LIST => PostTagsComponentConfiguration::getPostTagsRoute() ,
-            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_MENTIONS => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_ADDONS => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_DETAILS => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_FULLVIEW => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_LIST => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL => UsersComponentConfiguration::getUsersRoute(),
-            self::MODULE_DATALOAD_USERS_TYPEAHEAD => UsersComponentConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_DETAILS => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_LIST => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL => PostsModuleConfiguration::getPostsRoute(),
+            self::MODULE_DATALOAD_TAGS_MENTIONS => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::MODULE_DATALOAD_TAGS_SCROLL_DETAILS => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::MODULE_DATALOAD_TAGS_SCROLL_LIST => PostTagsModuleConfiguration::getPostTagsRoute() ,
+            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_CAROUSEL => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_MENTIONS => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_ADDONS => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_DETAILS => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_FULLVIEW => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_LIST => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
+            self::MODULE_DATALOAD_USERS_TYPEAHEAD => UsersModuleConfiguration::getUsersRoute(),
             default => parent::getRelevantRoute($module, $props),
         };
     }

@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLClientsForWP\Clients;
 use GraphQLByPoP\GraphQLClientsForWP\Module;
 use GraphQLByPoP\GraphQLClientsForWP\ModuleConfiguration;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
-use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPComponentConfiguration;
+use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
 
 trait WPClientTrait
@@ -34,7 +34,7 @@ trait WPClientTrait
      */
     protected function getEndpointURLOrURLPath(): string
     {
-        /** @var GraphQLEndpointForWPComponentConfiguration */
+        /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getComponent(GraphQLEndpointForWPModule::class)->getConfiguration();
         return $moduleConfiguration->getGraphQLAPIEndpoint();
     }

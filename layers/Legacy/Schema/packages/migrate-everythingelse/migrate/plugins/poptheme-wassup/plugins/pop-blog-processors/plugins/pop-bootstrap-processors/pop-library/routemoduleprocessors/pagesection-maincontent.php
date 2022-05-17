@@ -1,9 +1,9 @@
 <?php
 
 use PoP\Root\Routing\RequestNature;
-use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
-use PoPCMSSchema\Users\ModuleConfiguration as UsersComponentConfiguration;
+use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
@@ -18,9 +18,9 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionRouteModuleProcessor 
         // Page modules
         $routemodules = array(
             POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_CONTENT],
-            PostsComponentConfiguration::getPostsRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_POSTS],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_POSTS],
             POP_BLOG_ROUTE_SEARCHCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SEARCHCONTENT],
-            UsersComponentConfiguration::getUsersRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_USERS],
+            UsersModuleConfiguration::getUsersRoute() => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_USERS],
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_SEARCHUSERS],
         );
         foreach ($routemodules as $route => $module) {
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionRouteModuleProcessor 
         // Author route modules
         $routemodules = array(
             POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
-            PostsComponentConfiguration::getPostsRoute() => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORPOSTS],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORPOSTS],
         );
         foreach ($routemodules as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_Blog_Bootstrap_Module_MainPageSectionRouteModuleProcessor 
         // Tag route modules
         $routemodules = array(
             POP_BLOG_ROUTE_CONTENT => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
-            PostsComponentConfiguration::getPostsRoute() => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGPOSTS],
+            PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGPOSTS],
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [

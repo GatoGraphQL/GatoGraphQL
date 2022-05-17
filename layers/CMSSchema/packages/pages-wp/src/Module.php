@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PagesWP;
 
 use PoP\Root\App;
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\Pages\ModuleConfiguration as PagesComponentConfiguration;
+use PoPCMSSchema\Pages\ModuleConfiguration as PagesModuleConfiguration;
 use PoPCMSSchema\Pages\Module as PagesModule;
 
 /**
@@ -49,7 +49,7 @@ class Module extends AbstractModule
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        /** @var PagesComponentConfiguration */
+        /** @var PagesModuleConfiguration */
         $moduleConfiguration = App::getComponent(PagesModule::class)->getConfiguration();
         if ($moduleConfiguration->addPageTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPageTypeToCustomPostUnionTypes/Overrides');

@@ -6,7 +6,7 @@ namespace GraphQLByPoP\GraphQLQuery\Schema;
 
 use Exception;
 use GraphQLByPoP\GraphQLQuery\Module as GraphQLQueryModule;
-use GraphQLByPoP\GraphQLQuery\ModuleConfiguration as GraphQLQueryComponentConfiguration;
+use GraphQLByPoP\GraphQLQuery\ModuleConfiguration as GraphQLQueryModuleConfiguration;
 use GraphQLByPoP\GraphQLQuery\Schema\QuerySymbols;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\DocumentFeedback;
@@ -16,7 +16,7 @@ use PoP\FieldQuery\FeedbackMessageStoreInterface;
 use PoP\FieldQuery\QueryHelpers;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
-use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserComponentConfiguration;
+use PoP\GraphQLParser\ModuleConfiguration as GraphQLParserModuleConfiguration;
 use PoP\GraphQLParser\Exception\Parser\AbstractParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySymbols as GraphQLParserQuerySymbols;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
@@ -217,7 +217,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
     protected function convertArgumentValue($value)
     {
-        /** @var GraphQLQueryComponentConfiguration */
+        /** @var GraphQLQueryModuleConfiguration */
         $moduleConfiguration = App::getComponent(GraphQLQueryModule::class)->getConfiguration();
         /**
          * Generate the field AST as composable field `{{ field }}`,
@@ -580,7 +580,7 @@ class GraphQLQueryConvertor implements GraphQLQueryConvertorInterface
 
         // @todo Migrate this, currently this code is not working
         if ($operations === []) {
-            /** @var GraphQLParserComponentConfiguration */
+            /** @var GraphQLParserModuleConfiguration */
             $moduleConfiguration = App::getComponent(GraphQLParserModule::class)->getConfiguration();
             if ($moduleConfiguration->enableMultipleQueryExecution()) {
                 // Add a suggestion indicating to pass __ALL in the query

@@ -6,7 +6,7 @@ namespace PoPAPI\API\State;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\DataOutputModes;
@@ -44,9 +44,9 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['does-api-query-have-errors'] = null;
 
         // Passing the query via URL param?
-        /** @var ComponentModelComponentConfiguration */
-        $componentModelComponentConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
-        $enableModifyingEngineBehaviorViaRequest = $componentModelComponentConfiguration->enableModifyingEngineBehaviorViaRequest();
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
+        $enableModifyingEngineBehaviorViaRequest = $componentModelModuleConfiguration->enableModifyingEngineBehaviorViaRequest();
         $state['query'] = EngineRequest::getQuery($enableModifyingEngineBehaviorViaRequest);
     }
 

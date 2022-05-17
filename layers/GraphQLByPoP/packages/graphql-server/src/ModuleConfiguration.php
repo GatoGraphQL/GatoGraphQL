@@ -7,7 +7,7 @@ namespace GraphQLByPoP\GraphQLServer;
 use PoP\Root\App;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoPAPI\API\Module as APIModule;
-use PoPAPI\API\ModuleConfiguration as APIComponentConfiguration;
+use PoPAPI\API\ModuleConfiguration as APIModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
@@ -213,7 +213,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function exposeGlobalFieldsInGraphQLSchema(): bool
     {
-        /** @var APIComponentConfiguration */
+        /** @var APIModuleConfiguration */
         $moduleConfiguration = App::getComponent(APIModule::class)->getConfiguration();
         if ($moduleConfiguration->skipExposingGlobalFieldsInFullSchema()) {
             return false;

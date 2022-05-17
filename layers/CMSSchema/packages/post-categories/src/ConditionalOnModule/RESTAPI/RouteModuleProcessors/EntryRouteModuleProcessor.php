@@ -15,7 +15,7 @@ use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\Categor
 use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsModule;
-use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
 class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
 {
@@ -91,7 +91,7 @@ class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
                 ],
             ];
         }
-        /** @var PostsComponentConfiguration */
+        /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getComponent(PostsModule::class)->getConfiguration();
         $routemodules = array(
             $moduleConfiguration->getPostsRoute() => [

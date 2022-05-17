@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PagesWP\TypeAPIs;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoPCMSSchema\CustomPostsWP\TypeAPIs\AbstractCustomPostTypeAPI;
 use PoPCMSSchema\Pages\Module;
 use PoPCMSSchema\Pages\ModuleConfiguration;
@@ -152,7 +152,7 @@ class PageTypeAPI extends AbstractCustomPostTypeAPI implements PageTypeAPIInterf
         if ($paths = $query['paths'] ?? []) {
             $returnIDs = ($options[QueryOptions::RETURN_TYPE] ?? null) === ReturnTypes::IDS;
             $pageIDs = [];
-            /** @var ComponentModelComponentConfiguration */
+            /** @var ComponentModelModuleConfiguration */
             $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
             $enableAdminSchema = $moduleConfiguration->enableAdminSchema();
             foreach ($paths as $path) {

@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\ModuleConfiguration;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\MutationRootObjectTypeResolver;
 use GraphQLByPoP\GraphQLServer\TypeResolvers\ObjectType\QueryRootObjectTypeResolver;
 use PoP\ComponentModel\Module as ComponentModelModule;
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -61,7 +61,7 @@ class RegisterQueryAndMutationRootsRootObjectTypeFieldResolver extends AbstractO
         if (App::getState('nested-mutations-enabled') && !$moduleConfiguration->addConnectionFromRootToQueryRootAndMutationRoot()) {
             return [];
         }
-        /** @var ComponentModelComponentConfiguration */
+        /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getComponent(ComponentModelModule::class)->getConfiguration();
         return array_merge(
             [

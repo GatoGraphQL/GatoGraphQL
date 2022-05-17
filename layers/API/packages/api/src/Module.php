@@ -6,7 +6,7 @@ namespace PoPAPI\API;
 
 use PoP\Root\App;
 use PoP\AccessControl\Module as AccessControlModule;
-use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
+use PoP\AccessControl\ModuleConfiguration as AccessControlModuleConfiguration;
 use PoPAPI\API\Configuration\Request;
 use PoP\CacheControl\Module as CacheControlModule;
 use PoP\Root\Module\AbstractModule;
@@ -77,7 +77,7 @@ class Module extends AbstractModule
             $this->initServices(dirname(__DIR__), '/ConditionalOnModule/AccessControl');
         }
 
-        /** @var AccessControlComponentConfiguration */
+        /** @var AccessControlModuleConfiguration */
         $moduleConfiguration = App::getComponent(AccessControlModule::class)->getConfiguration();
         if (
             class_exists(CacheControlModule::class)

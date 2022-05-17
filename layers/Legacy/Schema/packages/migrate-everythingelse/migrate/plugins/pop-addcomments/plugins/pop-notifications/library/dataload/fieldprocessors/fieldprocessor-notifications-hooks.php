@@ -164,7 +164,7 @@ class PoP_AddComments_DataLoad_ObjectTypeFieldResolver_Notifications extends Abs
                         );
 
                     case AAL_POP_ACTION_COMMENT_ADDED:
-                        // TODO: Integrate with `CommentsComponentConfiguration::mustUserBeLoggedInToAddComment()`
+                        // TODO: Integrate with `CommentsModuleConfiguration::mustUserBeLoggedInToAddComment()`
                         $comment = $commentTypeAPI->getComment($notification->object_id);
                         $user_id = \PoP\Root\App::getState('current-user-id');
 

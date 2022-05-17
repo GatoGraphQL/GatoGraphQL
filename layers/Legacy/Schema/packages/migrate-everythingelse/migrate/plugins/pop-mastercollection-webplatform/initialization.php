@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelComponentConfiguration;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 class PoP_MasterCollectionWebPlatform_Initialization
 {

@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostsWP;
 use PoP\Root\App;
 use PoP\Root\Module\AbstractModule;
 use PoPCMSSchema\Posts\Module as PostsModule;
-use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
 /**
  * Initialize component
@@ -49,7 +49,7 @@ class Module extends AbstractModule
         array $skipSchemaComponentClasses,
     ): void {
         $this->initServices(dirname(__DIR__));
-        /** @var PostsComponentConfiguration */
+        /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getComponent(PostsModule::class)->getConfiguration();
         if ($moduleConfiguration->addPostTypeToCustomPostUnionTypes()) {
             $this->initSchemaServices(dirname(__DIR__), $skipSchema, '/ConditionalOnContext/AddPostTypeToCustomPostUnionTypes/Overrides');

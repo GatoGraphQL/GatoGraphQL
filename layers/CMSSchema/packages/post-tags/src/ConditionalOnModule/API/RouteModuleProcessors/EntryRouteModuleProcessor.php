@@ -9,7 +9,7 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ModuleRouting\AbstractEntryRouteModuleProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Module as PostsModule;
-use PoPCMSSchema\Posts\ModuleConfiguration as PostsComponentConfiguration;
+use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 use PoPCMSSchema\PostTags\Module;
 use PoPCMSSchema\PostTags\ModuleConfiguration;
 use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
@@ -67,7 +67,7 @@ class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
                 ],
             ];
         }
-        /** @var PostsComponentConfiguration */
+        /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getComponent(PostsModule::class)->getConfiguration();
         $routemodules = array(
             $moduleConfiguration->getPostsRoute() => [TagPostFieldDataloadModuleProcessor::class, TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
