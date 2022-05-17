@@ -2,7 +2,7 @@
 
 namespace PoP\Root;
 
-class ComponentTest extends AbstractTestCase
+class ModuleTest extends AbstractTestCase
 {
     /**
      * The root component cannot have any dependency

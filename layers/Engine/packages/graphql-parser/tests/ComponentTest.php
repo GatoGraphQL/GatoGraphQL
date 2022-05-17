@@ -4,6 +4,6 @@ namespace PoP\GraphQLParser;
 
 use PoP\Root\AbstractModuleTest;
 
-class ComponentTest extends AbstractModuleTest
+class ModuleTest extends AbstractModuleTest
 {
 }
