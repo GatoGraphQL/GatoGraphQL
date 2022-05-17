@@ -41,7 +41,7 @@ use PoPCMSSchema\CommentMeta\Module as CommentMetaComponent;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
 use PoPCMSSchema\Comments\Module as CommentsComponent;
 use PoPCMSSchema\Comments\Environment as CommentsEnvironment;
-use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaComponent;
+use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsComponent;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
@@ -425,7 +425,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // White/Blacklisted entries to CustomPost.meta
             [
-                'class' => CustomPostMetaComponent::class,
+                'class' => CustomPostMetaModule::class,
                 'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -433,7 +433,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => CustomPostMetaComponent::class,
+                'class' => CustomPostMetaModule::class,
                 'envVariable' => CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
