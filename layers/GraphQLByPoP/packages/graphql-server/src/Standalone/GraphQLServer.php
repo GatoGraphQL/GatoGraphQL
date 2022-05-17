@@ -56,7 +56,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        $appLoader->addComponentClassConfiguration($this->moduleClassConfiguration);
+        $appLoader->addModuleClassConfiguration($this->moduleClassConfiguration);
 
         // Boot the application
         $appLoader->bootApplication(

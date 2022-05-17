@@ -22,7 +22,7 @@ interface AppLoaderInterface
      *
      * @param array<string, array<string, mixed>> $moduleClassConfiguration [key]: Module class, [value]: Configuration
      */
-    public function addComponentClassConfiguration(
+    public function addModuleClassConfiguration(
         array $moduleClassConfiguration
     ): void;
 

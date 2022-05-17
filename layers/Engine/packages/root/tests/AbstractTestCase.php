@@ -35,7 +35,7 @@ abstract class AbstractTestCase extends TestCase
 
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
-        App::getAppLoader()->addComponentClassConfiguration(
+        App::getAppLoader()->addModuleClassConfiguration(
             static::getComponentClassConfiguration()
         );
 
