@@ -66,14 +66,14 @@ trait ClientTrait
          * different than the URL under which the client is accessed.
          * Then add the URL to the plugin to all assets (they are all located under "assets/...")
          */
-        if ($componentBaseURL = $this->getModuleBaseURL()) {
+        if ($moduleBaseURL = $this->getModuleBaseURL()) {
             // The client could have several folders where to store the assets
             // GraphiQL Explorer loads under "/assets...", so the dirname starts with "/"
             // But otherwise it does not. So don't add "/" again if it already has
             $assetDirname = $this->getAssetDirname();
             $fileContents = \str_replace(
                 '"' . $assetDirname . '/',
-                '"' . \trim($componentBaseURL, '/') . $assetRelativePath . (\str_starts_with($assetDirname, '/') ? '' : '/') . $assetDirname . '/',
+                '"' . \trim($moduleBaseURL, '/') . $assetRelativePath . (\str_starts_with($assetDirname, '/') ? '' : '/') . $assetDirname . '/',
                 $fileContents
             );
         }
