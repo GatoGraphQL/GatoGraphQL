@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoP\Root\Module;
 
 /**
- * Initialize component
+ * Initialize module
  */
 interface ModuleInterface
 {
     /**
-     * Initialize the component
+     * Initialize the module
      *
      * @param array<string, mixed> $configuration
      * @param boolean $skipSchema Indicate if to skip initializing the schema
@@ -23,16 +23,16 @@ interface ModuleInterface
     ): void;
 
     /**
-     * Calculate if the component must be enabled or not.
+     * Calculate if the module must be enabled or not.
      *
-     * @param boolean $ignoreDependencyOnSatisfiedModules Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
+     * @param boolean $ignoreDependencyOnSatisfiedModules Indicate if to check if the satisfied module is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied modules.
      */
     public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedModules): bool;
 
     /**
-     * Indicate what other component satisfies the contracts by this component.
+     * Indicate what other module satisfies the contracts by this module.
      */
-    public function setSatisfyingModule(ModuleInterface $component): void;
+    public function setSatisfyingModule(ModuleInterface $module): void;
 
     /**
      * @return string[]
@@ -40,28 +40,28 @@ interface ModuleInterface
     public function getSatisfiedModuleClasses(): array;
 
     /**
-     * All component classes that this component depends upon, to initialize them
+     * All module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
     public function getDependedModuleClasses(): array;
 
     /**
-     * All DEV component classes that this component depends upon, to initialize them
+     * All DEV module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
     public function getDevDependedModuleClasses(): array;
 
     /**
-     * All DEV PHPUnit component classes that this component depends upon, to initialize them
+     * All DEV PHPUnit module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
     public function getDevPHPUnitDependedModuleClasses(): array;
 
     /**
-     * All conditional component classes that this component depends upon, to initialize them
+     * All conditional module classes that this module depends upon, to initialize them
      *
      * @return string[]
      */
@@ -78,7 +78,7 @@ interface ModuleInterface
     public function bootSystem(): void;
 
     /**
-     * Function called by the Bootloader after all components have been loaded
+     * Function called by the Bootloader after all modules have been loaded
      */
     public function moduleLoaded(): void;
 
@@ -105,8 +105,8 @@ interface ModuleInterface
     public function getSystemContainerCompilerPassClasses(): array;
 
      /**
-     * Enable each component to set default configuration for
-     * itself and its depended components
+     * Enable each module to set default configuration for
+     * itself and its depended modules
      *
      * @param array<string, mixed> $moduleClassConfiguration
      */
