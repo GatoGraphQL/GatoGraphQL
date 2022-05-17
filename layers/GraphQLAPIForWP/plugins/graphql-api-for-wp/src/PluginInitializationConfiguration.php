@@ -65,7 +65,7 @@ use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
 use PoPCMSSchema\UserMeta\Module as UserMetaModule;
-use PoPCMSSchema\UserAvatars\Module as UserAvatarsComponent;
+use PoPCMSSchema\UserAvatars\Module as UserAvatarsModule;
 use PoPCMSSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPCMSSchema\UserMeta\Environment as UserMetaEnvironment;
 use PoPCMSSchema\Users\Module as UsersModule;
@@ -484,7 +484,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => ModuleSettingOptions::BEHAVIOR,
             ],
             [
-                'class' => UserAvatarsComponent::class,
+                'class' => UserAvatarsModule::class,
                 'envVariable' => UserAvatarsEnvironment::USER_AVATAR_DEFAULT_SIZE,
                 'module' => SchemaTypeModuleResolver::SCHEMA_USER_AVATARS,
                 'option' => SchemaTypeModuleResolver::OPTION_DEFAULT_AVATAR_SIZE,
