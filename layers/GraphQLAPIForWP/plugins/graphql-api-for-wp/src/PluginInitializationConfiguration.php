@@ -19,7 +19,7 @@ use GraphQLAPI\GraphQLAPI\PluginSkeleton\AbstractMainPluginInitializationConfigu
 use GraphQLAPI\GraphQLAPI\Services\Helpers\EndpointHelpers;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
-use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPComponent;
+use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
@@ -99,7 +99,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         return [
             // GraphQL single endpoint slug
             [
-                'class' => GraphQLEndpointForWPComponent::class,
+                'class' => GraphQLEndpointForWPModule::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
@@ -534,7 +534,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
             ],
             [
-                'class' => GraphQLEndpointForWPComponent::class,
+                'class' => GraphQLEndpointForWPModule::class,
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
             ],
             [
