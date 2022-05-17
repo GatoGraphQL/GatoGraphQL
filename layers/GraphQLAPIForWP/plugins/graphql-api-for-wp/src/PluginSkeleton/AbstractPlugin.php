@@ -182,7 +182,7 @@ abstract class AbstractPlugin implements PluginInterface
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         App::getAppLoader()->addModuleClassConfiguration(
-            $this->getComponentClassConfiguration()
+            $this->getModuleClassConfiguration()
         );
         App::getAppLoader()->addSchemaComponentClassesToSkip(
             $this->getSchemaComponentClassesToSkip()
@@ -207,7 +207,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
         return [];
     }

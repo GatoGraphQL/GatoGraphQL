@@ -87,9 +87,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      *
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
-        return $this->pluginInitializationConfiguration->getComponentClassConfiguration();
+        return $this->pluginInitializationConfiguration->getModuleClassConfiguration();
     }
 
     /**

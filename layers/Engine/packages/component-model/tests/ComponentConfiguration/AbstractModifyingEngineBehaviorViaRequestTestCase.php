@@ -30,7 +30,7 @@ abstract class AbstractModifyingEngineBehaviorViaRequestTestCase extends Abstrac
      *
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
         return [
             RootModule::class => [

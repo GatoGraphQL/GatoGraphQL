@@ -179,7 +179,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      *
      * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
         return array_merge_recursive(
             $this->getPredefinedComponentClassConfiguration(),

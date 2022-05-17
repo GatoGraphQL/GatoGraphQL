@@ -93,9 +93,9 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
      *
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array
+    public function getModuleClassConfiguration(): array
     {
-        return $this->extensionInitializationConfiguration?->getComponentClassConfiguration() ?? parent::getComponentClassConfiguration();
+        return $this->extensionInitializationConfiguration?->getModuleClassConfiguration() ?? parent::getModuleClassConfiguration();
     }
 
     /**

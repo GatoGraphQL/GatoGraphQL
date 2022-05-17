@@ -36,7 +36,7 @@ abstract class AbstractTestCase extends TestCase
         // Only after initializing the System Container,
         // we can obtain the configuration (which may depend on hooks)
         App::getAppLoader()->addModuleClassConfiguration(
-            static::getComponentClassConfiguration()
+            static::getModuleClassConfiguration()
         );
 
         App::getAppLoader()->bootApplication($cacheContainerConfiguration, $containerNamespace, $containerDirectory);
@@ -84,7 +84,7 @@ abstract class AbstractTestCase extends TestCase
      *
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
         return [];
     }

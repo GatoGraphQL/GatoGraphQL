@@ -16,7 +16,7 @@ interface PluginInitializationConfigurationInterface
      *
      * @return array<string, array> [key]: Module class, [value]: Configuration
      */
-    public function getComponentClassConfiguration(): array;
+    public function getModuleClassConfiguration(): array;
 
     /**
      * Add schema Module classes to skip initializing

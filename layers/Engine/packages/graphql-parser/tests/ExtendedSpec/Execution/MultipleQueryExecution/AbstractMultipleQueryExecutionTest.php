@@ -23,9 +23,9 @@ abstract class AbstractMultipleQueryExecutionTest extends AbstractTestCase
     /**
      * @return array<string, mixed> [key]: Module class, [value]: Configuration
      */
-    protected static function getComponentClassConfiguration(): array
+    protected static function getModuleClassConfiguration(): array
     {
-        $moduleClassConfiguration = parent::getComponentClassConfiguration();
+        $moduleClassConfiguration = parent::getModuleClassConfiguration();
         $moduleClassConfiguration[\PoP\GraphQLParser\Module::class][\PoP\GraphQLParser\Environment::ENABLE_MULTIPLE_QUERY_EXECUTION] = static::enabled();
         return $moduleClassConfiguration;
     }
