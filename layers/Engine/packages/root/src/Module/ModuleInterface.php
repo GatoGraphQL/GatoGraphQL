@@ -25,9 +25,9 @@ interface ModuleInterface
     /**
      * Calculate if the component must be enabled or not.
      *
-     * @param boolean $ignoreDependencyOnSatisfiedComponents Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
+     * @param boolean $ignoreDependencyOnSatisfiedModules Indicate if to check if the satisfied component is resolved or not. Needed to avoid circular references to enable both satisfying and satisfied components.
      */
-    public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedComponents): bool;
+    public function calculateIsEnabled(bool $ignoreDependencyOnSatisfiedModules): bool;
 
     /**
      * Indicate what other component satisfies the contracts by this component.
