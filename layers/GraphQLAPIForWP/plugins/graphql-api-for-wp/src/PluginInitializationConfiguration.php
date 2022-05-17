@@ -45,7 +45,7 @@ use PoPCMSSchema\CustomPostMeta\Module as CustomPostMetaModule;
 use PoPCMSSchema\CustomPostMeta\Environment as CustomPostMetaEnvironment;
 use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
 use PoPCMSSchema\CustomPosts\Environment as CustomPostsEnvironment;
-use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsComponent;
+use PoPCMSSchema\GenericCustomPosts\Module as GenericCustomPostsModule;
 use PoPCMSSchema\GenericCustomPosts\Environment as GenericCustomPostsEnvironment;
 use PoPCMSSchema\Media\Module as MediaComponent;
 use PoPCMSSchema\Media\Environment as MediaEnvironment;
@@ -215,21 +215,21 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Custom Post default/max limits, Supported custom post types
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
             [
-                'class' => GenericCustomPostsComponent::class,
+                'class' => GenericCustomPostsModule::class,
                 'envVariable' => GenericCustomPostsEnvironment::GENERIC_CUSTOMPOST_TYPES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_GENERIC_CUSTOMPOSTS,
                 'option' => ModuleSettingOptions::CUSTOMPOST_TYPES,
