@@ -9,7 +9,7 @@ use PoP\Root\Helpers\ClassHelpers;
 
 abstract class AbstractModule implements ModuleInterface
 {
-    use InitializeContainerServicesInComponentTrait;
+    use InitializeContainerServicesInModuleTrait;
 
     /**
      * Indicate what other component satisfies the contracts

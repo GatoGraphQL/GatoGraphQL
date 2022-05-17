@@ -10,7 +10,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-trait InitializeContainerServicesInComponentTrait
+trait InitializeContainerServicesInModuleTrait
 {
     /**
      * Initialize the services defined in the YAML configuration file.
