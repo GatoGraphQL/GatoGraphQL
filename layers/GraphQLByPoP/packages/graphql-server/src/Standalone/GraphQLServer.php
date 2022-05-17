@@ -46,7 +46,7 @@ class GraphQLServer implements GraphQLServerInterface
 
         $this->initializeApp();
         $appLoader = App::getAppLoader();
-        $appLoader->addComponentClassesToInitialize($this->moduleClasses);
+        $appLoader->addModuleClassesToInitialize($this->moduleClasses);
         $appLoader->initializeComponents();
         $appLoader->bootSystem(
             $this->cacheContainerConfiguration,

@@ -66,7 +66,7 @@ class App implements AppInterface
         static::regenerateResponse();
 
         // Inject the Components slated for initialization
-        self::$appLoader->addComponentClassesToInitialize(self::$moduleClassesToInitialize);
+        self::$appLoader->addModuleClassesToInitialize(self::$moduleClassesToInitialize);
         self::$moduleClassesToInitialize = [];
 
         /**

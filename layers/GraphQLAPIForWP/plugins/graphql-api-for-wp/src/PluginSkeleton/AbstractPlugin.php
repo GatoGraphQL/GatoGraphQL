@@ -126,7 +126,7 @@ abstract class AbstractPlugin implements PluginInterface
     {
         // Initialize the containers
         $moduleClasses = $this->getModuleClassesToInitialize();
-        App::getAppLoader()->addComponentClassesToInitialize($moduleClasses);
+        App::getAppLoader()->addModuleClassesToInitialize($moduleClasses);
     }
 
     /**
