@@ -10,7 +10,7 @@ use GraphQLByPoP\GraphQLServer\Configuration\Request;
 use PoP\AccessControl\Module as AccessControlModule;
 use PoP\AccessControl\ModuleConfiguration as AccessControlComponentConfiguration;
 use PoP\CacheControl\Module as CacheControlModule;
-use PoP\Engine\Module as EngineComponent;
+use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Root\Module\AbstractModule;
 
@@ -57,7 +57,7 @@ class Module extends AbstractModule
         $mutationScheme = Request::getMutationScheme();
         if ($mutationScheme !== null) {
             $componentClassConfiguration[self::class][Environment::ENABLE_NESTED_MUTATIONS] = $mutationScheme !== MutationSchemes::STANDARD;
-            $componentClassConfiguration[EngineComponent::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
+            $componentClassConfiguration[EngineModule::class][EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS] = $mutationScheme === MutationSchemes::NESTED_WITHOUT_REDUNDANT_ROOT_FIELDS;
         }
 
         // Enable GraphQL Introspection for PQL by doing ?enable_graphql_introspection=1

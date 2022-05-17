@@ -33,7 +33,7 @@ use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
-use PoP\Engine\Module as EngineComponent;
+use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
 use PoPCMSSchema\Categories\Module as CategoriesComponent;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
@@ -200,7 +200,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Disable redundant mutation fields in the root type?
             [
-                'class' => EngineComponent::class,
+                'class' => EngineModule::class,
                 'envVariable' => EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,

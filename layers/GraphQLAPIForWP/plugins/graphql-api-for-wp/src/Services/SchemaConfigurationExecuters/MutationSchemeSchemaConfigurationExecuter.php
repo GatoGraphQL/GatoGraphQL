@@ -11,7 +11,7 @@ use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\Root\Module\ModuleConfigurationHelpers;
-use PoP\Engine\Module as EngineComponent;
+use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
 
 class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -63,7 +63,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
                 PHP_INT_MAX
             );
             $hookName = ModuleConfigurationHelpers::getHookName(
-                EngineComponent::class,
+                EngineModule::class,
                 EngineEnvironment::DISABLE_REDUNDANT_ROOT_TYPE_MUTATION_FIELDS
             );
             \add_filter(
