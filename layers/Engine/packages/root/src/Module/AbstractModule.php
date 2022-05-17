@@ -119,7 +119,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @return string[]
      */
-    public function getDevDependedComponentClasses(): array
+    public function getDevDependedModuleClasses(): array
     {
         return [];
     }

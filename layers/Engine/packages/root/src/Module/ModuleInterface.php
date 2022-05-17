@@ -53,7 +53,7 @@ interface ModuleInterface
      *
      * @return string[]
      */
-    public function getDevDependedComponentClasses(): array;
+    public function getDevDependedModuleClasses(): array;
 
     /**
      * All DEV PHPUnit component classes that this component depends upon, to initialize them

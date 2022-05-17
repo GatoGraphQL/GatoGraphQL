@@ -159,7 +159,7 @@ class AppLoader implements AppLoaderInterface
 
             if ($isDev) {
                 $this->addComponentsOrderedForInitialization(
-                    $module->getDevDependedComponentClasses(),
+                    $module->getDevDependedModuleClasses(),
                     $isDev
                 );
                 if (Environment::isApplicationEnvironmentDevPHPUnit()) {
