@@ -56,7 +56,7 @@ use PoPCMSSchema\Pages\Environment as PagesEnvironment;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\Environment as PostsEnvironment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
-use PoPCMSSchema\Settings\Module as SettingsComponent;
+use PoPCMSSchema\Settings\Module as SettingsModule;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
 use PoPCMSSchema\Tags\Module as TagsModule;
 use PoPCMSSchema\Tags\Environment as TagsEnvironment;
@@ -402,7 +402,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // White/Blacklisted entries to Root.option
             [
-                'class' => SettingsComponent::class,
+                'class' => SettingsModule::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_ENTRIES,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -410,7 +410,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => SettingsComponent::class,
+                'class' => SettingsModule::class,
                 'envVariable' => SettingsEnvironment::SETTINGS_BEHAVIOR,
                 'module' => SchemaTypeModuleResolver::SCHEMA_SETTINGS,
                 'option' => ModuleSettingOptions::BEHAVIOR,
