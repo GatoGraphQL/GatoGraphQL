@@ -704,7 +704,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      *
      * @return array<string,string[]>
      */
-    protected function getModuleComponentClassesToSkipIfDisabled(): array
+    protected function getModuleClassesToSkipIfModuleDisabled(): array
     {
         return [
             SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS => [
