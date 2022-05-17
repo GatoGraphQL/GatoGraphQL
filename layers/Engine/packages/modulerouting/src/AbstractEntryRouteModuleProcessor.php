@@ -12,7 +12,7 @@ abstract class AbstractEntryRouteModuleProcessor extends AbstractRouteModuleProc
     public function getGroups(): array
     {
         return [
-            ModuleRoutingGroups::ENTRYMODULE,
+            ModuleRoutingGroups::ENTRYCOMPONENT,
         ];
     }
 }

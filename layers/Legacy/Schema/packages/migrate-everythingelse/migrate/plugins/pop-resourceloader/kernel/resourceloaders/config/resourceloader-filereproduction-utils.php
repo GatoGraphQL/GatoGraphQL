@@ -56,7 +56,7 @@ class PoP_ResourceLoader_FileReproduction_Utils {
         // Extract the resources from the current vars: needed when doing generate_bundlefile_on_runtime()
         if ($options['from-current-vars'] ?? null) {
             // Re-use the already-generated $props
-            $options['use-engine-entrymodule-props'] = true;
+            $options['use-engine-entrycomponent-props'] = true;
             $resources = PoP_ResourceLoaderProcessorUtils::getResourcesFromCurrentVars($modulefilter, $options);
 
             $nature = \PoP\Root\App::getState('nature');

@@ -74,7 +74,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $state['dboutputmode'] = DatabasesOutputModes::COMBINED;
 
         // Do not print the entry module
-        $state['actions'][] = Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT;
+        $state['actions'][] = Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT;
 
         // Entry to indicate if the query has errors (eg: some GraphQL variable not submitted)
         $state['does-api-query-have-errors'] = false;

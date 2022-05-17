@@ -53,7 +53,7 @@ class Engine extends UpstreamEngine implements EngineInterface
         $engineState = App::getEngineState();
 
         // Get the entry module based on the application configuration and the nature
-        $module = $this->getEntryModule();
+        $module = $this->getEntryComponent();
 
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
         $dataoutputitems = App::getState('dataoutputitems');

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\EntryModule;
+namespace PoP\ComponentModel\EntryComponent;
 
-use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use PoP\ModuleRouting\ModuleRoutingGroups;
 use PoP\ModuleRouting\RouteModuleProcessorManagerInterface;
 
-class EntryModuleManager implements EntryModuleManagerInterface
+class EntryComponentManager implements EntryComponentManagerInterface
 {
     use BasicServiceTrait;
 
@@ -24,8 +24,8 @@ class EntryModuleManager implements EntryModuleManagerInterface
         return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(RouteModuleProcessorManagerInterface::class);
     }
 
-    public function getEntryModule(): ?array
+    public function getEntryComponent(): ?array
     {
-        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYMODULE);
+        return $this->getRouteModuleProcessorManager()->getRouteModuleByMostAllmatchingVarsProperties(ModuleRoutingGroups::ENTRYCOMPONENT);
     }
 }

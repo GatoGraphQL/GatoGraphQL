@@ -10,7 +10,7 @@ use PoPAPI\API\Constants\Actions;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Constants\DataOutputModes;
 
-trait RemoveEntryModuleFromOutputEngineTrait
+trait RemoveEntryComponentFromOutputEngineTrait
 {
     protected function getEncodedDataObject(array $data): array
     {
@@ -20,27 +20,27 @@ trait RemoveEntryModuleFromOutputEngineTrait
         if (
             App::getModule(APIModule::class)->isEnabled() &&
             App::getState('scheme') === APISchemes::API &&
-            in_array(Actions::REMOVE_ENTRYMODULE_FROM_OUTPUT, App::getState('actions')) &&
+            in_array(Actions::REMOVE_ENTRYCOMPONENT_FROM_OUTPUT, App::getState('actions')) &&
             App::getState('dataoutputmode') == DataOutputModes::COMBINED
         ) {
             if ($data['datasetmodulesettings'] ?? null) {
-                $data['datasetmodulesettings'] = $this->removeEntryModuleFromOutput($data['datasetmodulesettings']);
+                $data['datasetmodulesettings'] = $this->removeEntryComponentFromOutput($data['datasetmodulesettings']);
             }
             if ($data['moduledata'] ?? null) {
-                $data['moduledata'] = $this->removeEntryModuleFromOutput($data['moduledata']);
+                $data['moduledata'] = $this->removeEntryComponentFromOutput($data['moduledata']);
             }
             if ($data['datasetmoduledata'] ?? null) {
-                $data['datasetmoduledata'] = $this->removeEntryModuleFromOutput($data['datasetmoduledata']);
+                $data['datasetmoduledata'] = $this->removeEntryComponentFromOutput($data['datasetmoduledata']);
             }
             if ($data['modulesettings'] ?? null) {
-                $data['modulesettings'] = $this->removeEntryModuleFromOutput($data['modulesettings']);
+                $data['modulesettings'] = $this->removeEntryComponentFromOutput($data['modulesettings']);
             }
         }
 
         return $data;
     }
 
-    protected function removeEntryModuleFromOutput(array $results): array
+    protected function removeEntryComponentFromOutput(array $results): array
     {
         list($has_extra_routes) = $this->listExtraRouteVars();
         return $has_extra_routes ? array_values(array_values($results)[0])[0] : array_values($results)[0];

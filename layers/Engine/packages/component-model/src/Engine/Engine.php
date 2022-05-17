@@ -21,7 +21,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
-use PoP\ComponentModel\EntryModule\EntryModuleManagerInterface;
+use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\DocumentFeedbackInterface;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -75,7 +75,7 @@ class Engine implements EngineInterface
     private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
     private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
-    private ?EntryModuleManagerInterface $entryModuleManager = null;
+    private ?EntryComponentManagerInterface $entryComponentManager = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?ApplicationInfoInterface $applicationInfo = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
@@ -173,13 +173,13 @@ class Engine implements EngineInterface
     {
         return $this->dataloadHelperService ??= $this->instanceManager->getInstance(DataloadHelperServiceInterface::class);
     }
-    final public function setEntryModuleManager(EntryModuleManagerInterface $entryModuleManager): void
+    final public function setEntryComponentManager(EntryComponentManagerInterface $entryComponentManager): void
     {
-        $this->entryModuleManager = $entryModuleManager;
+        $this->entryComponentManager = $entryComponentManager;
     }
-    final protected function getEntryModuleManager(): EntryModuleManagerInterface
+    final protected function getEntryComponentManager(): EntryComponentManagerInterface
     {
-        return $this->entryModuleManager ??= $this->instanceManager->getInstance(EntryModuleManagerInterface::class);
+        return $this->entryComponentManager ??= $this->instanceManager->getInstance(EntryComponentManagerInterface::class);
     }
     final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
     {
@@ -218,24 +218,24 @@ class Engine implements EngineInterface
         $engineState->backgroundload_urls[$url] = $targets;
     }
 
-    public function getEntryModule(): array
+    public function getEntryComponent(): array
     {
         $engineState = App::getEngineState();
 
         // Use cached results
-        if ($engineState->entryModule !== null) {
-            return $engineState->entryModule;
+        if ($engineState->entryComponent !== null) {
+            return $engineState->entryComponent;
         }
 
         // Obtain, validate and cache
-        $engineState->entryModule = $this->getEntryModuleManager()->getEntryModule();
-        if ($engineState->entryModule === null) {
+        $engineState->entryComponent = $this->getEntryComponentManager()->getEntryComponent();
+        if ($engineState->entryComponent === null) {
             throw new ImpossibleToHappenException(
                 $this->__('No entry module for this request', 'component-model')
             );
         }
 
-        return $engineState->entryModule;
+        return $engineState->entryComponent;
     }
 
     /**
@@ -517,7 +517,7 @@ class Engine implements EngineInterface
         $datasourceselector = App::getState('datasourceselector');
 
         // Get the entry module based on the application configuration and the nature
-        $module = $this->getEntryModule();
+        $module = $this->getEntryComponent();
 
         $engineState = App::getEngineState();
 
@@ -696,7 +696,7 @@ class Engine implements EngineInterface
         /** @var ModuleInfo */
         $componentInfo = App::getModule(Module::class)->getInfo();
         $meta = array(
-            Response::ENTRY_MODULE => $this->getEntryModule()[1],
+            Response::ENTRY_MODULE => $this->getEntryComponent()[1],
             Response::UNIQUE_ID => $componentInfo->getUniqueID(),
             'modelinstanceid' => $this->getModelInstance()->getModelInstanceId(),
         );

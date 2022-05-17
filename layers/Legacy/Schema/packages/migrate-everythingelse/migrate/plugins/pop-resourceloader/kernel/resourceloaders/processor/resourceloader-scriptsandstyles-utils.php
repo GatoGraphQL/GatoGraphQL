@@ -586,15 +586,15 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                             // If not, calculate the values now...
                             $engine = EngineFacade::getInstance();
-                            $entryModule = $engine->getEntryModule();
+                            $entryComponent = $engine->getEntryComponent();
 
-                            // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryModule, $props);
+                            // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryComponent, $props);
                             global $pop_resourcemoduledecoratorprocessor_manager;
                             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
-                            $processor = $moduleprocessor_manager->getProcessor($entryModule);
+                            $processor = $moduleprocessor_manager->getProcessor($entryComponent);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error
-                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryModule, []/*$props*/);
+                            self::$dynamic_module_resources = $processorresourcedecorator->getDynamicResourcesMergedmoduletree($entryComponent, []/*$props*/);
 
                             // And store them on the cache
                             if ($useCache) {

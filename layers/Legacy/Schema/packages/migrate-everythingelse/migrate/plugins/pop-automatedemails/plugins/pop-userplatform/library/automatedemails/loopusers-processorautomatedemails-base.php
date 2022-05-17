@@ -23,7 +23,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
-            $module = $engine->getEntryModule();
+            $module = $engine->getEntryComponent();
             $processor = $moduleprocessor_manager->getProcessor($module);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
