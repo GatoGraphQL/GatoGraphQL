@@ -1221,17 +1221,17 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
-        $domainSwitchingSubmodules = [];
+        $relationalSubmodules = [];
         foreach ($this->getRelationalSubmodules($module) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
             $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
-            $domainSwitchingSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
+            $relationalSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedModules();
         }
         foreach ($this->getConditionalOnDataFieldRelationalSubmodules($module) as $conditionalRelationalModuleField) {
             foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                 $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
-                $domainSwitchingSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
-                    $domainSwitchingSubmodules[$conditionalDataField] ?? [],
+                $relationalSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
+                    $relationalSubmodules[$conditionalDataField] ?? [],
                     $relationalModuleField->getNestedModules()
                 )));
             }
@@ -1239,7 +1239,7 @@ abstract class AbstractModuleProcessor implements ModuleProcessorInterface
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $this->getModuleFilterManager()->prepareForPropagation($module, $props);
-        foreach ($domainSwitchingSubmodules as $subcomponent_data_field => $subcomponent_modules) {
+        foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_modules_data_properties = array(
                 'data-fields' => array(),
                 'conditional-data-fields' => array(),
