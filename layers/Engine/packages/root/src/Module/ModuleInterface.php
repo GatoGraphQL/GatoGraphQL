@@ -39,7 +39,7 @@ interface ModuleInterface
      *
      * @return string[]
      */
-    public function getSatisfiedComponentClasses(): array;
+    public function getSatisfiedModuleClasses(): array;
 
     /**
      * All component classes that this component depends upon, to initialize them

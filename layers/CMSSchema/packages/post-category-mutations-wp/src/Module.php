@@ -16,7 +16,7 @@ class Module extends AbstractModule
      *
      * @return string[]
      */
-    public function getSatisfiedComponentClasses(): array
+    public function getSatisfiedModuleClasses(): array
     {
         return [
             \PoPCMSSchema\PostCategoryMutations\Module::class,

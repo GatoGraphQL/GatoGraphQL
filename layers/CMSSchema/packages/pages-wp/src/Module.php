@@ -19,7 +19,7 @@ class Module extends AbstractModule
      *
      * @return string[]
      */
-    public function getSatisfiedComponentClasses(): array
+    public function getSatisfiedModuleClasses(): array
     {
         return [
             \PoPCMSSchema\Pages\Module::class,

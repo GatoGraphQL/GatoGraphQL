@@ -187,7 +187,7 @@ class AppLoader implements AppLoaderInterface
              * If this compononent satisfies the contracts for other
              * components, set them as "satisfied".
              */
-            foreach ($module->getSatisfiedComponentClasses() as $satisfiedComponentClass) {
+            foreach ($module->getSatisfiedModuleClasses() as $satisfiedComponentClass) {
                 $satisfiedComponent = App::getModule($satisfiedComponentClass);
                 $satisfiedComponent->setSatisfyingModule($module);
             }

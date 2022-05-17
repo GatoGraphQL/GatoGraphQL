@@ -102,7 +102,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @return string[]
      */
-    public function getSatisfiedComponentClasses(): array
+    public function getSatisfiedModuleClasses(): array
     {
         return [];
     }
@@ -247,7 +247,7 @@ abstract class AbstractModule implements ModuleInterface
 
         // If any dependency is disabled, then disable this module too
         if ($this->onlyEnableIfAllDependenciesAreEnabled()) {
-            $satisfiedComponentClasses = $this->getSatisfiedComponentClasses();
+            $satisfiedComponentClasses = $this->getSatisfiedModuleClasses();
             foreach ($this->getDependedComponentClasses() as $dependedComponentClass) {
                 if ($ignoreDependencyOnSatisfiedComponents && in_array($dependedComponentClass, $satisfiedComponentClasses)) {
                     continue;
