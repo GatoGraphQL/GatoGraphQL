@@ -38,7 +38,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if ($authors_module = $this->getAuthorsModule($module)) {
             return [
@@ -51,7 +51,7 @@ abstract class PoP_Module_Processor_PostMapScriptCustomizationsBase extends PoP_
             ];
         }
 
-        return parent::getDomainSwitchingSubmodules($module);
+        return parent::getRelationalSubmodules($module);
     }
 
     public function getThumbField(array $module, array &$props)

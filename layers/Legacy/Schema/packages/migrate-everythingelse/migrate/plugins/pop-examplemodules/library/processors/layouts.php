@@ -58,9 +58,9 @@ class ModuleProcessor_Layouts extends AbstractModuleProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
-        $ret = parent::getDomainSwitchingSubmodules($module);
+        $ret = parent::getRelationalSubmodules($module);
 
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_COMMENT:

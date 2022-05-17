@@ -49,7 +49,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if ($this->showEachLocation($module)) {
             $modules = [];
@@ -70,7 +70,7 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonsBase extends PoP
             }
         }
 
-        return parent::getDomainSwitchingSubmodules($module);
+        return parent::getRelationalSubmodules($module);
     }
 
     public function getUrlField(array $module)

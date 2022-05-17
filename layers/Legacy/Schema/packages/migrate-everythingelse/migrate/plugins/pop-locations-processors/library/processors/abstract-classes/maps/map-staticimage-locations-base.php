@@ -12,7 +12,7 @@ abstract class PoP_Module_Processor_MapStaticImageLocationsBase extends PoPEngin
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         $urlparam = $this->getUrlparamSubmodule($module);
         return [

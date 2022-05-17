@@ -204,7 +204,7 @@ abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQ
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];

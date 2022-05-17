@@ -58,9 +58,9 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array
+    public function getRelationalSubmodules(array $module): array
     {
-        $ret = parent::getDomainSwitchingSubmodules($module);
+        $ret = parent::getRelationalSubmodules($module);
 
         $modules = array(
             $this->getAuthornameModule($module),

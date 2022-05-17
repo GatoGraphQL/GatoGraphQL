@@ -1400,12 +1400,12 @@ Consider the image below: Starting from the object type "post", and moving down 
 
 ![Changing the DB object from one domain to another](https://uploads.getpop.org/wp-content/uploads/2018/12/loading-data-at-intervals-relational.jpg)
 
-Switching domins is accomplished through function `getDomainSwitchingSubmodules`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the modules to use:
+Switching domins is accomplished through function `getRelationalSubmodules`. It must return an array, in which each key is the property, or "data-field", containing the ID of the object to switch to, and its value is another array, in which the key is the [Dataloader](#dataloader) to use to load this object, and its values are the modules to use:
 
 ```php
-function getDomainSwitchingSubmodules($module) 
+function getRelationalSubmodules($module) 
 {
-  $ret = parent::getDomainSwitchingSubmodules($module);
+  $ret = parent::getRelationalSubmodules($module);
 
   switch ($module[1]) {
     case self::MODULE_AUTHORARTICLES:
@@ -1432,9 +1432,9 @@ function getDomainSwitchingSubmodules($module)
 Alternatively, instead of explicitly defining the name of the dataloader, we can also select the default dataloader defined for that field through constant `POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD`, which are defined through the [ObjectTypeFieldResolver](#ObjectTypeFieldResolver). In the example below, the default dataloaders for fields `"author"` and `"comments"` will be automatically selected:
 
 ```php
-function getDomainSwitchingSubmodules($module) 
+function getRelationalSubmodules($module) 
 {
-  $ret = parent::getDomainSwitchingSubmodules($module);
+  $ret = parent::getRelationalSubmodules($module);
 
   switch ($module[1]) {
     case self::MODULE_AUTHORARTICLES:
@@ -1645,7 +1645,7 @@ class ObjectTypeFieldResolver_Posts extends \PoP\Engine\AbstractObjectTypeFieldR
 }
 ```
 
-The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getDomainSwitchingSubmodules` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
+The ObjectTypeFieldResolver also allows to select the default dataloader to process a specific field through function `getFieldDefaultDataloader`. This feature is required for [switching domain](#Switching-domain-to-a-relational-object) through function `getRelationalSubmodules` and deciding to not explicitly indicate the dataloader to use to load relationships, but use the default one for that field instead. For instance, for the fieldprocessor for posts, it is implemented like this:
 
 ```php
 function getFieldDefaultDataloader($field) 

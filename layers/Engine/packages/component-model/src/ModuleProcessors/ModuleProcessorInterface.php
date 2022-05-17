@@ -52,7 +52,7 @@ interface ModuleProcessorInterface
     /**
      * @return RelationalModuleField[]
      */
-    public function getDomainSwitchingSubmodules(array $module): array;
+    public function getRelationalSubmodules(array $module): array;
     /**
      * @return ConditionalLeafModuleField[]
      */
