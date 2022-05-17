@@ -35,7 +35,7 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\Environment as EngineEnvironment;
-use PoPCMSSchema\Categories\Module as CategoriesComponent;
+use PoPCMSSchema\Categories\Module as CategoriesModule;
 use PoPCMSSchema\Categories\Environment as CategoriesEnvironment;
 use PoPCMSSchema\CommentMeta\Module as CommentMetaComponent;
 use PoPCMSSchema\CommentMeta\Environment as CommentMetaEnvironment;
@@ -342,13 +342,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Categories default/max limits
             [
-                'class' => CategoriesComponent::class,
+                'class' => CategoriesModule::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_DEFAULT_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => ModuleSettingOptions::LIST_DEFAULT_LIMIT,
             ],
             [
-                'class' => CategoriesComponent::class,
+                'class' => CategoriesModule::class,
                 'envVariable' => CategoriesEnvironment::CATEGORY_LIST_MAX_LIMIT,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CATEGORIES,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
