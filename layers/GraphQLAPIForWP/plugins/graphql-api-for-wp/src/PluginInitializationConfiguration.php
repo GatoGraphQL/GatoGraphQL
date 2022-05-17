@@ -64,7 +64,7 @@ use PoPCMSSchema\TaxonomyMeta\Module as TaxonomyMetaModule;
 use PoPCMSSchema\TaxonomyMeta\Environment as TaxonomyMetaEnvironment;
 use PoPCMSSchema\UserRoles\Module as UserRolesModule;
 use PoPCMSSchema\UserRoles\Environment as UserRolesEnvironment;
-use PoPCMSSchema\UserMeta\Module as UserMetaComponent;
+use PoPCMSSchema\UserMeta\Module as UserMetaModule;
 use PoPCMSSchema\UserAvatars\Module as UserAvatarsComponent;
 use PoPCMSSchema\UserAvatars\Environment as UserAvatarsEnvironment;
 use PoPCMSSchema\UserMeta\Environment as UserMetaEnvironment;
@@ -440,7 +440,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // White/Blacklisted entries to User.meta
             [
-                'class' => UserMetaComponent::class,
+                'class' => UserMetaModule::class,
                 'envVariable' => UserMetaEnvironment::USER_META_ENTRIES,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
                 'option' => ModuleSettingOptions::ENTRIES,
@@ -448,7 +448,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn (array $value) => array_filter(array_map(trim(...), $value)),
             ],
             [
-                'class' => UserMetaComponent::class,
+                'class' => UserMetaModule::class,
                 'envVariable' => UserMetaEnvironment::USER_META_BEHAVIOR,
                 'module' => MetaSchemaTypeModuleResolver::SCHEMA_USER_META,
                 'option' => ModuleSettingOptions::BEHAVIOR,
