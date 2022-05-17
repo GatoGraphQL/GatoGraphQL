@@ -7,7 +7,7 @@ namespace GraphQLAPI\GraphQLAPI\Services\SchemaConfigurationExecuters;
 use GraphQLAPI\GraphQLAPI\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\BlockInterface;
 use GraphQLAPI\GraphQLAPI\Services\Blocks\SchemaConfigMutationSchemeBlock;
-use GraphQLByPoP\GraphQLServer\Module as GraphQLServerComponent;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\Root\Module\ModuleConfigurationHelpers;
@@ -54,7 +54,7 @@ class MutationSchemeSchemaConfigurationExecuter extends AbstractSchemaConfigurat
             }
             // Define the settings value through a hook. Execute last so it overrides the default settings
             $hookName = ModuleConfigurationHelpers::getHookName(
-                GraphQLServerComponent::class,
+                GraphQLServerModule::class,
                 GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS
             );
             \add_filter(

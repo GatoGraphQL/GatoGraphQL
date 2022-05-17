@@ -21,7 +21,7 @@ use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPComponent;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPComponent;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
-use GraphQLByPoP\GraphQLServer\Module as GraphQLServerComponent;
+use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use PoP\AccessControl\Module as AccessControlComponent;
@@ -192,7 +192,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             // Enable nested mutations?
             // Only assign for Admin clients. For configuration it is assigned always, via the Fixed endpoint
             [
-                'class' => GraphQLServerComponent::class,
+                'class' => GraphQLServerModule::class,
                 'envVariable' => GraphQLServerEnvironment::ENABLE_NESTED_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::NESTED_MUTATIONS,
                 'option' => $isRequestingGraphQLEndpointForAdminClientOnly ? ModuleSettingOptions::VALUE_FOR_ADMIN_CLIENTS : ModuleSettingOptions::DEFAULT_VALUE,
