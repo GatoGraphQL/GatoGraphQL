@@ -1,4 +1,4 @@
-# Module Routing
+# Component Routing
 
 <!--
 [![Build Status][ico-travis]][link-travis]
@@ -9,7 +9,7 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 -->
 
-Configure and obtain what module will be added to the component hierarchy at each level, based on the attributes from the request
+Configure and obtain what component will be added to the component hierarchy at each level, based on the attributes from the request
 
 ## Install
 
