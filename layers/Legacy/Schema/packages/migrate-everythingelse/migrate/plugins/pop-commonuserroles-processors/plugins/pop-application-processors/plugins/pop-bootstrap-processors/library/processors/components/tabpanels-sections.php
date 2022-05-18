@@ -65,10 +65,10 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
             case self::COMPONENT_TABPANEL_ORGANIZATIONS:
                 return array(
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
                         'subheader-submodules' =>  array(
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL],
@@ -76,17 +76,17 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomScrollMapSectionDataloads::class, GD_URE_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomScrollMapSectionDataloads::class, GD_URE_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_ORGANIZATIONS_SCROLLMAP],
                     ],
                 );
 
             case self::COMPONENT_TABPANEL_INDIVIDUALS:
                 return array(
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
                         'subheader-submodules' =>  array(
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS],
                             [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL],
@@ -94,7 +94,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_URE_Module_Processor_CustomScrollMapSectionDataloads::class, GD_URE_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP],
+                        'header-subcomponent' => [GD_URE_Module_Processor_CustomScrollMapSectionDataloads::class, GD_URE_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_INDIVIDUALS_SCROLLMAP],
                     ],
                 );
         }

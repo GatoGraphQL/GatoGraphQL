@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $input = $this->getInputSubmodule($component);
 
-        // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
+        // Because getLabel is used on initModelProps, the structure in $props for the subcomponent may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
         $submodule_props = [];
         if ($props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {

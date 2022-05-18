@@ -27,7 +27,7 @@ class ModulePathManager implements ModulePathManagerInterface
     public function prepareForPropagation(array $component, array &$props): void
     {
         // Add the module to the path
-        // Prepare for the submodule, going one level down, and adding it to the current path
+        // Prepare for the subcomponent, going one level down, and adding it to the current path
         // We add $component instead of the first element from $this->propagation_unsettled_paths, so that calculating $this->propagation_current_path works also when not doing ?componentPaths=...
         $this->propagation_current_path[] = $component;
     }

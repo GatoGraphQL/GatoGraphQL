@@ -78,17 +78,17 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
             case self::COMPONENT_TABPANEL_AUTHOREVENTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_SIMPLEVIEW],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
+                        'header-subcomponent' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLLMAP],
                     ],
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_DETAILS],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHOREVENTS_SCROLL_THUMBNAIL],
@@ -101,17 +101,17 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
             case self::COMPONENT_TABPANEL_AUTHORPASTEVENTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_SIMPLEVIEW],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
+                        'header-subcomponent' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP],
                     ],
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_DETAILS],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORPASTEVENTS_SCROLL_THUMBNAIL],

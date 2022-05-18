@@ -61,10 +61,10 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
             case self::COMPONENT_TABPANEL_MYEVENTS:
                 return array(
                     [
-                        'header-submodule' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT],
+                        'header-subcomponent' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
                             [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
@@ -75,10 +75,10 @@ class PoP_EventsCreation_Module_Processor_SectionTabPanelComponents extends PoP_
             case self::COMPONENT_TABPANEL_MYPASTEVENTS:
                 return array(
                     [
-                        'header-submodule' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
+                        'header-subcomponent' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
                             [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],

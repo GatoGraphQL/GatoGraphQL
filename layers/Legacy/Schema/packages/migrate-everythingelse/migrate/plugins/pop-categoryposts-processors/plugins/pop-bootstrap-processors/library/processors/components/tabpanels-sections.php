@@ -351,14 +351,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS00:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_SCROLL_THUMBNAIL],
@@ -370,14 +370,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS01:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_SCROLL_THUMBNAIL],
@@ -389,14 +389,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS02:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -408,14 +408,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS03:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS03_SCROLL_THUMBNAIL],
@@ -427,14 +427,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS04:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS04_SCROLL_THUMBNAIL],
@@ -446,14 +446,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS05:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS05_SCROLL_THUMBNAIL],
@@ -465,14 +465,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS06:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS06_SCROLL_THUMBNAIL],
@@ -484,14 +484,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS07:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS07_SCROLL_THUMBNAIL],
@@ -503,14 +503,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS08:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS08_SCROLL_THUMBNAIL],
@@ -522,14 +522,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS09:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS09_SCROLL_THUMBNAIL],
@@ -541,14 +541,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS10:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS10_SCROLL_THUMBNAIL],
@@ -560,14 +560,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS11:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS11_SCROLL_THUMBNAIL],
@@ -579,14 +579,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS12:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS12_SCROLL_THUMBNAIL],
@@ -598,14 +598,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS13:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS13_SCROLL_THUMBNAIL],
@@ -617,14 +617,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS14:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS14_SCROLL_THUMBNAIL],
@@ -636,14 +636,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS15:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS15_SCROLL_THUMBNAIL],
@@ -655,14 +655,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS16:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS16_SCROLL_THUMBNAIL],
@@ -674,14 +674,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS17:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS17_SCROLL_THUMBNAIL],
@@ -693,14 +693,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS18:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_SCROLL_THUMBNAIL],
@@ -712,14 +712,14 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             case self::COMPONENT_TABPANEL_CATEGORYPOSTS19:
                 return array(
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_LIST],
+                        'header-subcomponent' => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_DETAILS],
                             [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_SCROLL_THUMBNAIL],

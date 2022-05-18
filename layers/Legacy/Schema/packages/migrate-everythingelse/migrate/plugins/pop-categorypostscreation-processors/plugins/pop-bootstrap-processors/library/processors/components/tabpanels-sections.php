@@ -313,10 +313,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS00:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
@@ -327,10 +327,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS01:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
@@ -341,10 +341,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS02:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
@@ -355,10 +355,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS03:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS03_SCROLL_FULLVIEWPREVIEW],
@@ -369,10 +369,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS04:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS04_SCROLL_FULLVIEWPREVIEW],
@@ -383,10 +383,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS05:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS05_SCROLL_FULLVIEWPREVIEW],
@@ -397,10 +397,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS06:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS06_SCROLL_FULLVIEWPREVIEW],
@@ -411,10 +411,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS07:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS07_SCROLL_FULLVIEWPREVIEW],
@@ -425,10 +425,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS08:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS08_SCROLL_FULLVIEWPREVIEW],
@@ -439,10 +439,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS09:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS09_SCROLL_FULLVIEWPREVIEW],
@@ -453,10 +453,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS10:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS10_SCROLL_FULLVIEWPREVIEW],
@@ -467,10 +467,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS11:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS11_SCROLL_FULLVIEWPREVIEW],
@@ -481,10 +481,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS12:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS12_SCROLL_FULLVIEWPREVIEW],
@@ -495,10 +495,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS13:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS13_SCROLL_FULLVIEWPREVIEW],
@@ -509,10 +509,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS14:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS14_SCROLL_FULLVIEWPREVIEW],
@@ -523,10 +523,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS15:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS15_SCROLL_FULLVIEWPREVIEW],
@@ -537,10 +537,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS16:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS16_SCROLL_FULLVIEWPREVIEW],
@@ -551,10 +551,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS17:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS17_SCROLL_FULLVIEWPREVIEW],
@@ -565,10 +565,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS18:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
@@ -579,10 +579,10 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
             case self::COMPONENT_TABPANEL_MYCATEGORYPOSTS19:
                 return array(
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_TABLE_EDIT],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
                             [LPPC_Module_Processor_MySectionDataloads::class, LPPC_Module_Processor_MySectionDataloads::COMPONENT_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],

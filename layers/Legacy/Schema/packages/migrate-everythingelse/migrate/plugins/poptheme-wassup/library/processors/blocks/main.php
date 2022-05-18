@@ -172,7 +172,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                     ],
                 );
                 foreach ($submodule_descriptions as $submodule_description) {
-                    $subComponent = $submodule_description['submodule'];
+                    $subComponent = $submodule_description['subcomponent'];
                     $description = sprintf(
                         '<h4>%s</h4>',
                         sprintf(

@@ -89,10 +89,10 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
             case self::COMPONENT_TABPANEL_TAGSTANCES:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_SCROLL_THUMBNAIL],
@@ -104,10 +104,10 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
             case self::COMPONENT_TABPANEL_TAGSTANCES_PRO:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_PRO_SCROLL_THUMBNAIL],
@@ -119,10 +119,10 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
             case self::COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
@@ -134,10 +134,10 @@ class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Modul
             case self::COMPONENT_TABPANEL_TAGSTANCES_AGAINST:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSTANCES_AGAINST_SCROLL_THUMBNAIL],

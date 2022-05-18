@@ -61,10 +61,10 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
             case self::COMPONENT_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST],
                             [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
@@ -76,10 +76,10 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
             case self::COMPONENT_TABPANEL_STANCES_BYINDIVIDUALS:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST],
                             [UserStance_URE_Module_Processor_CustomSectionDataloads::class, UserStance_URE_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],

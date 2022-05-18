@@ -78,17 +78,17 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
             case self::COMPONENT_TABPANEL_EVENTS:
                 return array(
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_SIMPLEVIEW],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
+                        'header-subcomponent' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLLMAP],
                     ],
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_DETAILS],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_EVENTS_SCROLL_THUMBNAIL],
@@ -100,14 +100,14 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
             case self::COMPONENT_TABPANEL_PASTEVENTS:
                 return array(
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_SIMPLEVIEW],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_DETAILS],
                             [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLL_THUMBNAIL],
@@ -115,7 +115,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
+                        'header-subcomponent' => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_PASTEVENTS_SCROLLMAP],
                     ],
                 );
         }

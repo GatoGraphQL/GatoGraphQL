@@ -36,7 +36,7 @@ trait ModulePathProcessorTrait
             }
         }
 
-        // Stop iterating when the submodule starts a new cycle of loading data
+        // Stop iterating when the subcomponent starts a new cycle of loading data
         $subComponents = array_filter($this->getAllSubmodules($component), function ($subComponent) {
             return !$this->getComponentProcessor($subComponent)->startDataloadingSection($subComponent);
         });
@@ -54,8 +54,8 @@ trait ModulePathProcessorTrait
         if ($subcomponents_ret) {
             /** @var ModuleInfo */
             $moduleInfo = App::getModule(Module::class)->getInfo();
-            $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
-            $ret[$key][$submodulesOutputProperty] = $subcomponents_ret;
+            $subcomponentsOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
+            $ret[$key][$subcomponentsOutputProperty] = $subcomponents_ret;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
@@ -73,7 +73,7 @@ trait ModulePathProcessorTrait
             $ret = [];
         }
 
-        // Stop iterating when the submodule starts a new cycle of loading data
+        // Stop iterating when the subcomponent starts a new cycle of loading data
         $subComponents = array_filter($this->getAllSubmodules($component), function ($subComponent) {
             return !$this->getComponentProcessor($subComponent)->startDataloadingSection($subComponent);
         });
@@ -125,8 +125,8 @@ trait ModulePathProcessorTrait
         if ($subcomponents_ret) {
             /** @var ModuleInfo */
             $moduleInfo = App::getModule(Module::class)->getInfo();
-            $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
-            $ret[$key][$submodulesOutputProperty] = $subcomponents_ret;
+            $subcomponentsOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
+            $ret[$key][$subcomponentsOutputProperty] = $subcomponents_ret;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 

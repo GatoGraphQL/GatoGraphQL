@@ -47,10 +47,10 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
             case self::COMPONENT_TABPANEL_MYLINKS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT],
+                        'header-subcomponent' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_TABLE_EDIT],
                     ],
                     [
-                        'header-submodule' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
+                        'header-subcomponent' => [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW],
                             [PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW],

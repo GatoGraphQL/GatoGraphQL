@@ -40,14 +40,14 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends
             case self::COMPONENT_TABPANEL_AUTHORLOCATIONPOSTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW],
                             [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_DETAILS],
                             [PoP_LocationPosts_Module_Processor_CustomSectionDataloads::class, PoP_LocationPosts_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL],
@@ -55,7 +55,7 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends
                         ),
                     ],
                     [
-                        'header-submodule' => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
+                        'header-subcomponent' => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
                     ],
                 );
                 break;

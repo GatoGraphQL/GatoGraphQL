@@ -89,10 +89,10 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
             case self::COMPONENT_TABPANEL_AUTHORSTANCES:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_SCROLL_THUMBNAIL],
@@ -104,10 +104,10 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
             case self::COMPONENT_TABPANEL_AUTHORSTANCES_PRO:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_PRO_SCROLL_THUMBNAIL],
@@ -119,10 +119,10 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
             case self::COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_NEUTRAL_SCROLL_THUMBNAIL],
@@ -134,10 +134,10 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
             case self::COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST:
                 $ret = array(
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
+                        'header-subcomponent' => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_LIST],
                             [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL],

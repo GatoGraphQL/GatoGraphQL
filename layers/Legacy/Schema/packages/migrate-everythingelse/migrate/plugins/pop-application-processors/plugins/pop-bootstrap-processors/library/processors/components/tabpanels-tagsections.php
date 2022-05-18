@@ -81,14 +81,14 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
             case self::COMPONENT_TABPANEL_TAGCONTENT:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_SIMPLEVIEW],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST],
+                        'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_LIST],
                         'subheader-submodules' =>  array(
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_DETAILS],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGCONTENT_SCROLL_THUMBNAIL],
@@ -101,14 +101,14 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
             case self::COMPONENT_TABPANEL_TAGPOSTS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
+                        'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
                         'subheader-submodules' =>  array(
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_SIMPLEVIEW],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_FULLVIEW],
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
+                        'header-subcomponent' => [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
                         'subheader-submodules' =>  array(
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_DETAILS],
                             [PoP_Blog_Module_Processor_CustomSectionDataloads::class, PoP_Blog_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGPOSTS_SCROLL_THUMBNAIL],
@@ -121,10 +121,10 @@ class PoP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Proce
             case self::COMPONENT_TABPANEL_TAGSUBSCRIBERS:
                 $ret = array(
                     [
-                        'header-submodule' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
+                        'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
                     ],
                     [
-                        'header-submodule' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS],
+                        'header-subcomponent' => [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS],
                         'subheader-submodules' =>  array(
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_DETAILS],
                             [PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::class, PoP_SocialNetwork_Module_Processor_CustomSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLL_THUMBNAIL],

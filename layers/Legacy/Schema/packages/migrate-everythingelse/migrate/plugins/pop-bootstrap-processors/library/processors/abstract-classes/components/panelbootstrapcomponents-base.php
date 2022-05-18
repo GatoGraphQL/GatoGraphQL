@@ -151,7 +151,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
         foreach ($this->getSubcomponents($component) as $subComponent) {
             $ret[] = [
-                'header-submodule' => $subComponent,
+                'header-subcomponent' => $subComponent,
             ];
         }
 
@@ -221,7 +221,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
             $panel_headers = array();
             foreach ($this->getPanelHeaders($component, $props) as $panelHeader) {
-                $header_submodule = $panelHeader['header-submodule'];
+                $header_submodule = $panelHeader['header-subcomponent'];
                 $subheader_submodules = $panelHeader['subheader-submodules'];
                 $headerSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($header_submodule);
                 $header = array(

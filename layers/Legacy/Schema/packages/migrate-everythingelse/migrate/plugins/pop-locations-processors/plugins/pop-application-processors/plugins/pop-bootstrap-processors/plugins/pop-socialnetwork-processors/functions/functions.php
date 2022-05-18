@@ -19,11 +19,11 @@ function gdEmSocialnetworkAuthorsectiontabpanelPanelheaders($panelheaders, array
 {
     if ($component == [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORFOLLOWERS]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWERS_SCROLLMAP],
         ];
     } elseif ($component == [PoP_Module_Processor_AuthorSectionTabPanelComponents::class, PoP_Module_Processor_AuthorSectionTabPanelComponents::COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_AUTHORFOLLOWINGUSERS_SCROLLMAP],
         ];
     }
 
@@ -48,15 +48,15 @@ function gdEmSocialnetworkSinglesectiontabpanelPanelheaders($panelheaders, array
 {
     if ($component == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLERECOMMENDEDBY]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLERECOMMENDEDBY_SCROLLMAP],
         ];
     } elseif ($component == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEUPVOTEDBY]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEUPVOTEDBY_SCROLLMAP],
         ];
     } elseif ($component == [PoP_Module_Processor_SingleSectionTabPanelComponents::class, PoP_Module_Processor_SingleSectionTabPanelComponents::COMPONENT_TABPANEL_SINGLEDOWNVOTEDBY]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_SINGLEDOWNVOTEDBY_SCROLLMAP],
         ];
     }
 
@@ -77,7 +77,7 @@ function gdEmSocialnetworkTagsectiontabpanelPanelheaders($panelheaders, array $c
 {
     if ($component == [PoP_Module_Processor_TagSectionTabPanelComponents::class, PoP_Module_Processor_TagSectionTabPanelComponents::COMPONENT_TABPANEL_TAGSUBSCRIBERS]) {
         $panelheaders[] = [
-            'header-submodule' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
+            'header-subcomponent' => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionDataloads::COMPONENT_DATALOAD_TAGSUBSCRIBERS_SCROLLMAP],
         ];
     }
 

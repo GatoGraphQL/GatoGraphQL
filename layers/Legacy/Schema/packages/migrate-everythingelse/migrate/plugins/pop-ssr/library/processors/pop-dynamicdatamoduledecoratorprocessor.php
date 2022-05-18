@@ -140,7 +140,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
             foreach ($subComponents as $subComponent) {
                 $submodule_processor = $componentprocessor_manager->getProcessor($subComponent);
 
-                // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
+                // Propagate only if the subcomponent start a new dataloading section. If it does, this is the end of the data line
                 if (!$submodule_processor->startDataloadingSection($subComponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
                     if ($submodule_ret = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subComponent))->$propagate_fn($subComponent, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
