@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_LINK = 'sidebarmulticomponent-link';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_LINK = 'sidebarmulticomponent-link';
 
     public function getComponentsToProcess(): array
     {

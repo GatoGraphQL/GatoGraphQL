@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CommentsFeedbackMessageLayouts extends PoP_Module_Processor_FeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_COMMENTS = 'layout-feedbackmessage-comments';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT = 'layout-feedbackmessage-addcomment';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_COMMENTS = 'layout-feedbackmessage-comments';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_ADDCOMMENT = 'layout-feedbackmessage-addcomment';
 
     public function getComponentsToProcess(): array
     {

@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Processor_SingleSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_SINGLERELATEDCONTENT = 'tabpanel-singlerelatedcontent';
-    public final const MODULE_TABPANEL_SINGLEAUTHORS = 'tabpanel-singleauthors';
-    public final const MODULE_TABPANEL_SINGLERECOMMENDEDBY = 'tabpanel-singlerecommendedby';
-    public final const MODULE_TABPANEL_SINGLEUPVOTEDBY = 'tabpanel-singleupvotedby';
-    public final const MODULE_TABPANEL_SINGLEDOWNVOTEDBY = 'tabpanel-singledownvotedby';
+    public final const COMPONENT_TABPANEL_SINGLERELATEDCONTENT = 'tabpanel-singlerelatedcontent';
+    public final const COMPONENT_TABPANEL_SINGLEAUTHORS = 'tabpanel-singleauthors';
+    public final const COMPONENT_TABPANEL_SINGLERECOMMENDEDBY = 'tabpanel-singlerecommendedby';
+    public final const COMPONENT_TABPANEL_SINGLEUPVOTEDBY = 'tabpanel-singleupvotedby';
+    public final const COMPONENT_TABPANEL_SINGLEDOWNVOTEDBY = 'tabpanel-singledownvotedby';
 
     public function getComponentsToProcess(): array
     {

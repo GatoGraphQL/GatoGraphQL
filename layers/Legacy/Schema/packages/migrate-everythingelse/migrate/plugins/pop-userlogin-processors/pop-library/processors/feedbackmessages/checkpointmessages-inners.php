@@ -2,10 +2,10 @@
 
 class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Module_Processor_CheckpointMessageInnersBase
 {
-    public final const MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN = 'checkpointmessageinner-notloggedin';
-    public final const MODULE_CHECKPOINTMESSAGEINNER_LOGGEDIN = 'checkpointmessageinner-loggedin';
-    public final const MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT = 'checkpointmessageinner-loggedincanedit';
-    public final const MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN = 'checkpointmessageinner-loggedinisadmin';
+    public final const COMPONENT_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN = 'checkpointmessageinner-notloggedin';
+    public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDIN = 'checkpointmessageinner-loggedin';
+    public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT = 'checkpointmessageinner-loggedincanedit';
+    public final const COMPONENT_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN = 'checkpointmessageinner-loggedinisadmin';
 
     public function getComponentsToProcess(): array
     {

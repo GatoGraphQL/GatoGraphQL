@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_INVITENEWUSERS = 'forminner-inviteusers';
-    public final const MODULE_FORMINNER_MYPREFERENCES = 'forminner-mypreferences';
+    public final const COMPONENT_FORMINNER_INVITENEWUSERS = 'forminner-inviteusers';
+    public final const COMPONENT_FORMINNER_MYPREFERENCES = 'forminner-mypreferences';
 
     public function getComponentsToProcess(): array
     {

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class CommonPages_EM_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_MYLOCATIONPOSTLIST = 'controlgroup-mylocationpostlist';
+    public final const COMPONENT_CONTROLGROUP_MYLOCATIONPOSTLIST = 'controlgroup-mylocationpostlist';
 
     public function getComponentsToProcess(): array
     {

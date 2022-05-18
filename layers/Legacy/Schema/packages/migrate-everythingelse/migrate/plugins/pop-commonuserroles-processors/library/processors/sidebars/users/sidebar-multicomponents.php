@@ -2,8 +2,8 @@
 
 class GD_URE_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_ORGANIZATION = 'sidebarmulticomponent-organization';
-    public final const MODULE_SIDEBARMULTICOMPONENT_INDIVIDUAL = 'sidebarmulticomponent-individual';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_ORGANIZATION = 'sidebarmulticomponent-organization';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_INDIVIDUAL = 'sidebarmulticomponent-individual';
 
     public function getComponentsToProcess(): array
     {

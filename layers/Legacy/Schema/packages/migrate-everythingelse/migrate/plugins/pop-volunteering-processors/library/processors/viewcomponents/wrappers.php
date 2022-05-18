@@ -2,9 +2,9 @@
 
 class PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG = 'viewcomponent-postcompactbuttonwrapper-volunteer-big';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG = 'viewcomponent-postbuttonwrapper-volunteer-big';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY = 'viewcomponent-postbuttonwrapper-volunteer-tiny';
+    public final const COMPONENT_VIEWCOMPONENT_COMPACTBUTTONWRAPPER_POST_VOLUNTEER_BIG = 'viewcomponent-postcompactbuttonwrapper-volunteer-big';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_BIG = 'viewcomponent-postbuttonwrapper-volunteer-big';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY = 'viewcomponent-postbuttonwrapper-volunteer-tiny';
 
     public function getComponentsToProcess(): array
     {

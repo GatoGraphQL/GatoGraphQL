@@ -2,26 +2,26 @@
 
 class NSCPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00 = 'tabpanel-authornosearchcategoryposts00';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01 = 'tabpanel-authornosearchcategoryposts01';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02 = 'tabpanel-authornosearchcategoryposts02';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03 = 'tabpanel-authornosearchcategoryposts03';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04 = 'tabpanel-authornosearchcategoryposts04';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05 = 'tabpanel-authornosearchcategoryposts05';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06 = 'tabpanel-authornosearchcategoryposts06';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07 = 'tabpanel-authornosearchcategoryposts07';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08 = 'tabpanel-authornosearchcategoryposts08';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09 = 'tabpanel-authornosearchcategoryposts09';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10 = 'tabpanel-authornosearchcategoryposts10';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11 = 'tabpanel-authornosearchcategoryposts11';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12 = 'tabpanel-authornosearchcategoryposts12';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13 = 'tabpanel-authornosearchcategoryposts13';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14 = 'tabpanel-authornosearchcategoryposts14';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15 = 'tabpanel-authornosearchcategoryposts15';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16 = 'tabpanel-authornosearchcategoryposts16';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17 = 'tabpanel-authornosearchcategoryposts17';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'tabpanel-authornosearchcategoryposts18';
-    public final const MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'tabpanel-authornosearchcategoryposts19';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00 = 'tabpanel-authornosearchcategoryposts00';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01 = 'tabpanel-authornosearchcategoryposts01';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02 = 'tabpanel-authornosearchcategoryposts02';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS03 = 'tabpanel-authornosearchcategoryposts03';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS04 = 'tabpanel-authornosearchcategoryposts04';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS05 = 'tabpanel-authornosearchcategoryposts05';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS06 = 'tabpanel-authornosearchcategoryposts06';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS07 = 'tabpanel-authornosearchcategoryposts07';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS08 = 'tabpanel-authornosearchcategoryposts08';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS09 = 'tabpanel-authornosearchcategoryposts09';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS10 = 'tabpanel-authornosearchcategoryposts10';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS11 = 'tabpanel-authornosearchcategoryposts11';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS12 = 'tabpanel-authornosearchcategoryposts12';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS13 = 'tabpanel-authornosearchcategoryposts13';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS14 = 'tabpanel-authornosearchcategoryposts14';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS15 = 'tabpanel-authornosearchcategoryposts15';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS16 = 'tabpanel-authornosearchcategoryposts16';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS17 = 'tabpanel-authornosearchcategoryposts17';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'tabpanel-authornosearchcategoryposts18';
+    public final const COMPONENT_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'tabpanel-authornosearchcategoryposts19';
 
     public function getComponentsToProcess(): array
     {

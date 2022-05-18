@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_COMMENTS_LIST = 'scrollinner-comments-list';
-    public final const MODULE_SCROLLINNER_COMMENTS_ADD = 'scrollinner-comments-add';
-    public final const MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS = 'layout-postcommentscroll-inner';
-    public final const MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE = 'layout-postcommentscroll-inner-appendable';
+    public final const COMPONENT_SCROLLINNER_COMMENTS_LIST = 'scrollinner-comments-list';
+    public final const COMPONENT_SCROLLINNER_COMMENTS_ADD = 'scrollinner-comments-add';
+    public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS = 'layout-postcommentscroll-inner';
+    public final const COMPONENT_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE = 'layout-postcommentscroll-inner-appendable';
 
     public function getComponentsToProcess(): array
     {

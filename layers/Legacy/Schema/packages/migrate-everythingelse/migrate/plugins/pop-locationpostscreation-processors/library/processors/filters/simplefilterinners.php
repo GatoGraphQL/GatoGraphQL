@@ -2,7 +2,7 @@
 
 class PoPSPEM_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinputcontainer-mylocationposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYLOCATIONPOSTS = 'simplefilterinputcontainer-mylocationposts';
 
     public function getComponentsToProcess(): array
     {

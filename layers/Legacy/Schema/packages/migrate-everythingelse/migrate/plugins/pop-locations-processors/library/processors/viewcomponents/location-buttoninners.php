@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_LocationViewComponentButtonInners extends PoP_Module_Processor_LocationViewComponentButtonInnersBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_LOCATIONS = 'viewcomponent-buttoninner-locations';
 
     public function getComponentsToProcess(): array
     {

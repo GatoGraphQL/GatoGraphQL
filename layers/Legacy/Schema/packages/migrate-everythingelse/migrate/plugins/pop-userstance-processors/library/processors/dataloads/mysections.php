@@ -4,8 +4,8 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class UserStance_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_MYSTANCES_TABLE_EDIT = 'dataload-mystances-table-edit';
-    public final const MODULE_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'dataload-mystances-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYSTANCES_TABLE_EDIT = 'dataload-mystances-table-edit';
+    public final const COMPONENT_DATALOAD_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'dataload-mystances-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

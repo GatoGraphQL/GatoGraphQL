@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomSettingsBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_SETTINGS = 'block-settings';
+    public final const COMPONENT_BLOCK_SETTINGS = 'block-settings';
 
     public function getComponentsToProcess(): array
     {

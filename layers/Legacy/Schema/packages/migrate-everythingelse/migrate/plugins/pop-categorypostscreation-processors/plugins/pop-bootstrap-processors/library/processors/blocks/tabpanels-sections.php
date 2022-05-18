@@ -2,26 +2,26 @@
 
 class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS00 = 'block-mycategoryposts00-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS01 = 'block-mycategoryposts01-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS02 = 'block-mycategoryposts02-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS03 = 'block-mycategoryposts03-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS04 = 'block-mycategoryposts04-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS05 = 'block-mycategoryposts05-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS06 = 'block-mycategoryposts06-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS07 = 'block-mycategoryposts07-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS08 = 'block-mycategoryposts08-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS09 = 'block-mycategoryposts09-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS10 = 'block-mycategoryposts10-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS11 = 'block-mycategoryposts11-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS12 = 'block-mycategoryposts12-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS13 = 'block-mycategoryposts13-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS14 = 'block-mycategoryposts14-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS15 = 'block-mycategoryposts15-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS16 = 'block-mycategoryposts16-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS17 = 'block-mycategoryposts17-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS18 = 'block-mycategoryposts18-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19 = 'block-mycategoryposts19-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00 = 'block-mycategoryposts00-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01 = 'block-mycategoryposts01-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02 = 'block-mycategoryposts02-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS03 = 'block-mycategoryposts03-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS04 = 'block-mycategoryposts04-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS05 = 'block-mycategoryposts05-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS06 = 'block-mycategoryposts06-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS07 = 'block-mycategoryposts07-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS08 = 'block-mycategoryposts08-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS09 = 'block-mycategoryposts09-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS10 = 'block-mycategoryposts10-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS11 = 'block-mycategoryposts11-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS12 = 'block-mycategoryposts12-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS13 = 'block-mycategoryposts13-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS14 = 'block-mycategoryposts14-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS15 = 'block-mycategoryposts15-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS16 = 'block-mycategoryposts16-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS17 = 'block-mycategoryposts17-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS18 = 'block-mycategoryposts18-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19 = 'block-mycategoryposts19-tabpanel';
 
     public function getComponentsToProcess(): array
     {

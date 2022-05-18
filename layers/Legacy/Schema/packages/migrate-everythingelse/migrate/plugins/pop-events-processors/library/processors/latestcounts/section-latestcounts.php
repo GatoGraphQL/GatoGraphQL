@@ -5,12 +5,12 @@ use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 class GD_EM_Module_Processor_SectionLatestCounts extends PoP_Module_Processor_SectionLatestCountsBase
 {
-    public final const MODULE_LATESTCOUNT_EVENTS = 'latestcount-events';
-    public final const MODULE_LATESTCOUNT_AUTHOR_EVENTS = 'latestcount-author-events';
-    public final const MODULE_LATESTCOUNT_TAG_EVENTS = 'latestcount-tag-events';
-    public final const MODULE_LATESTCOUNT_PASTEVENTS = 'latestcount-pastevents';
-    public final const MODULE_LATESTCOUNT_AUTHOR_PASTEVENTS = 'latestcount-author-pastevents';
-    public final const MODULE_LATESTCOUNT_TAG_PASTEVENTS = 'latestcount-tag-pastevents';
+    public final const COMPONENT_LATESTCOUNT_EVENTS = 'latestcount-events';
+    public final const COMPONENT_LATESTCOUNT_AUTHOR_EVENTS = 'latestcount-author-events';
+    public final const COMPONENT_LATESTCOUNT_TAG_EVENTS = 'latestcount-tag-events';
+    public final const COMPONENT_LATESTCOUNT_PASTEVENTS = 'latestcount-pastevents';
+    public final const COMPONENT_LATESTCOUNT_AUTHOR_PASTEVENTS = 'latestcount-author-pastevents';
+    public final const COMPONENT_LATESTCOUNT_TAG_PASTEVENTS = 'latestcount-tag-pastevents';
 
     public function getComponentsToProcess(): array
     {

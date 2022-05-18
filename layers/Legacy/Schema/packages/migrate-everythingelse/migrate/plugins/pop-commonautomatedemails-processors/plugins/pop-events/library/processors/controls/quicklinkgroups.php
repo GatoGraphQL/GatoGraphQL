@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_QuicklinkGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_QUICKLINKGROUP_EVENTBOTTOM = 'quicklinkgroup-automatedemails-eventbottom';
+    public final const COMPONENT_QUICKLINKGROUP_EVENTBOTTOM = 'quicklinkgroup-automatedemails-eventbottom';
 
     public function getComponentsToProcess(): array
     {

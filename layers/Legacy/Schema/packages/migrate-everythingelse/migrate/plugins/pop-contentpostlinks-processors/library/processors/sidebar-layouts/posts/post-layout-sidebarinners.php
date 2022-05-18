@@ -2,9 +2,9 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK = 'layout-postsidebarinner-vertical-link';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK = 'layout-postsidebarinner-horizontal-link';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK = 'layout-postsidebarinner-compacthorizontal-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_LINK = 'layout-postsidebarinner-vertical-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_LINK = 'layout-postsidebarinner-horizontal-link';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LINK = 'layout-postsidebarinner-compacthorizontal-link';
 
     public function getComponentsToProcess(): array
     {

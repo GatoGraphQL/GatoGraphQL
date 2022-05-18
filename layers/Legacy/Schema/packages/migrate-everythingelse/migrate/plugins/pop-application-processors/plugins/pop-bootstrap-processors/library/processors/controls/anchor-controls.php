@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPCore_GenericForms_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_SHAREBYEMAIL = 'anchorcontrol-sharebyemail';
+    public final const COMPONENT_ANCHORCONTROL_SHAREBYEMAIL = 'anchorcontrol-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

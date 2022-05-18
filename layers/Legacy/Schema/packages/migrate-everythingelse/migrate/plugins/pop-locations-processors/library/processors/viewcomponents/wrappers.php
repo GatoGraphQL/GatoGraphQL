@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS = 'viewcomponent-buttonwrapper-postlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS = 'viewcomponent-buttonwrapper-postlocations-noinitmarkers';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS = 'viewcomponent-buttonwrapper-userlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS = 'viewcomponent-buttonwrapper-userlocations-noinitmarkers';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-postsidebarlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-usersidebarlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS = 'viewcomponent-buttonwrapper-postlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS = 'viewcomponent-buttonwrapper-postlocations-noinitmarkers';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS = 'viewcomponent-buttonwrapper-userlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS_NOINITMARKERS = 'viewcomponent-buttonwrapper-userlocations-noinitmarkers';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-postsidebarlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-usersidebarlocations';
 
     public function getComponentsToProcess(): array
     {

@@ -2,26 +2,26 @@
 
 class PoP_NoSearchCategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW = 'scroll-nosearchcategoryposts00-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW = 'scroll-nosearchcategoryposts01-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW = 'scroll-nosearchcategoryposts02-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS03_SIMPLEVIEW = 'scroll-nosearchcategoryposts03-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS04_SIMPLEVIEW = 'scroll-nosearchcategoryposts04-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS05_SIMPLEVIEW = 'scroll-nosearchcategoryposts05-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS06_SIMPLEVIEW = 'scroll-nosearchcategoryposts06-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS07_SIMPLEVIEW = 'scroll-nosearchcategoryposts07-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS08_SIMPLEVIEW = 'scroll-nosearchcategoryposts08-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS09_SIMPLEVIEW = 'scroll-nosearchcategoryposts09-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS10_SIMPLEVIEW = 'scroll-nosearchcategoryposts10-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS11_SIMPLEVIEW = 'scroll-nosearchcategoryposts11-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS12_SIMPLEVIEW = 'scroll-nosearchcategoryposts12-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS13_SIMPLEVIEW = 'scroll-nosearchcategoryposts13-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS14_SIMPLEVIEW = 'scroll-nosearchcategoryposts14-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS15_SIMPLEVIEW = 'scroll-nosearchcategoryposts15-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS16_SIMPLEVIEW = 'scroll-nosearchcategoryposts16-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS17_SIMPLEVIEW = 'scroll-nosearchcategoryposts17-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scroll-nosearchcategoryposts18-simpleview';
-    public final const MODULE_SCROLL_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scroll-nosearchcategoryposts19-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS00_SIMPLEVIEW = 'scroll-nosearchcategoryposts00-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS01_SIMPLEVIEW = 'scroll-nosearchcategoryposts01-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS02_SIMPLEVIEW = 'scroll-nosearchcategoryposts02-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS03_SIMPLEVIEW = 'scroll-nosearchcategoryposts03-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS04_SIMPLEVIEW = 'scroll-nosearchcategoryposts04-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS05_SIMPLEVIEW = 'scroll-nosearchcategoryposts05-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS06_SIMPLEVIEW = 'scroll-nosearchcategoryposts06-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS07_SIMPLEVIEW = 'scroll-nosearchcategoryposts07-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS08_SIMPLEVIEW = 'scroll-nosearchcategoryposts08-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS09_SIMPLEVIEW = 'scroll-nosearchcategoryposts09-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS10_SIMPLEVIEW = 'scroll-nosearchcategoryposts10-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS11_SIMPLEVIEW = 'scroll-nosearchcategoryposts11-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS12_SIMPLEVIEW = 'scroll-nosearchcategoryposts12-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS13_SIMPLEVIEW = 'scroll-nosearchcategoryposts13-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS14_SIMPLEVIEW = 'scroll-nosearchcategoryposts14-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS15_SIMPLEVIEW = 'scroll-nosearchcategoryposts15-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS16_SIMPLEVIEW = 'scroll-nosearchcategoryposts16-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS17_SIMPLEVIEW = 'scroll-nosearchcategoryposts17-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS18_SIMPLEVIEW = 'scroll-nosearchcategoryposts18-simpleview';
+    public final const COMPONENT_SCROLL_NOSEARCHCATEGORYPOSTS19_SIMPLEVIEW = 'scroll-nosearchcategoryposts19-simpleview';
 
     public function getComponentsToProcess(): array
     {

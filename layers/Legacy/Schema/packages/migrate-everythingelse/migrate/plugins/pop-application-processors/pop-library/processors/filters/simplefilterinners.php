@@ -2,21 +2,21 @@
 
 class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor_SimpleFilterInnersBase
 {
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS = 'simplefilterinputcontainer-tags';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_CONTENT = 'simplefilterinputcontainer-content';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT = 'simplefilterinputcontainer-authorcontent';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS = 'simplefilterinputcontainer-posts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS = 'simplefilterinputcontainer-categoryposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS = 'simplefilterinputcontainer-authorposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'simplefilterinputcontainer-authorcategoryposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS = 'simplefilterinputcontainer-tagposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'simplefilterinputcontainer-tagcategoryposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_USERS = 'simplefilterinputcontainer-users';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'simplefilterinputcontainer-authorcommunitymembers';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCONTENT = 'simplefilterinputcontainer-mycontent';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYPOSTS = 'simplefilterinputcontainer-myposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
-    public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGS = 'simplefilterinputcontainer-tags';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_CONTENT = 'simplefilterinputcontainer-content';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCONTENT = 'simplefilterinputcontainer-authorcontent';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_POSTS = 'simplefilterinputcontainer-posts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_CATEGORYPOSTS = 'simplefilterinputcontainer-categoryposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORPOSTS = 'simplefilterinputcontainer-authorposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS = 'simplefilterinputcontainer-authorcategoryposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGPOSTS = 'simplefilterinputcontainer-tagposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCATEGORYPOSTS = 'simplefilterinputcontainer-tagcategoryposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_USERS = 'simplefilterinputcontainer-users';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_AUTHORCOMMUNITYMEMBERS = 'simplefilterinputcontainer-authorcommunitymembers';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCONTENT = 'simplefilterinputcontainer-mycontent';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYPOSTS = 'simplefilterinputcontainer-myposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
+    public final const COMPONENT_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
 
     public function getComponentsToProcess(): array
     {

@@ -4,7 +4,7 @@ use PoPSitesWassup\ShareMutations\MutationResolverBridges\ShareByEmailMutationRe
 
 class PoP_Share_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
-    public final const MODULE_DATALOAD_SHAREBYEMAIL = 'dataload-sharebyemail';
+    public final const COMPONENT_DATALOAD_SHAREBYEMAIL = 'dataload-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

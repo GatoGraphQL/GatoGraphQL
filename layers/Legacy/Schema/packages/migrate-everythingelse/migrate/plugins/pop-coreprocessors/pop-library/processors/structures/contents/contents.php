@@ -4,9 +4,9 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-postconclusionsidebar-horizontal';
-    public final const MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-subjugatedpostconclusionsidebar-horizontal';
-    public final const MODULE_CONTENT_LATESTCOUNTS = 'content-latestcounts';
+    public final const COMPONENT_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-postconclusionsidebar-horizontal';
+    public final const COMPONENT_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-subjugatedpostconclusionsidebar-horizontal';
+    public final const COMPONENT_CONTENT_LATESTCOUNTS = 'content-latestcounts';
 
     public function getComponentsToProcess(): array
     {

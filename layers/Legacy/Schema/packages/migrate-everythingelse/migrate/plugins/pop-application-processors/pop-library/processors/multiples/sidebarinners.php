@@ -2,26 +2,26 @@
 
 class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR = 'multiple-sectioninner-content-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR = 'multiple-sectioninner-posts-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-sectioninner-categoryposts-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_USERS_SIDEBAR = 'multiple-sectioninner-users-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR = 'multiple-sectioninner-users-nofilter-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR = 'multiple-sectioninner-trendingtags-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR = 'multiple-sectioninner-tags-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR = 'multiple-sectioninner-authortags-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR = 'multiple-sectioninner-mycontent-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR = 'multiple-sectioninner-myposts-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR = 'multiple-sectioninner-mycategoryposts-sidebar';
-    public final const MODULE_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR = 'multiple-tagsectioninner-mainallcontent-sidebar';
-    public final const MODULE_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR = 'multiple-tagsectioninner-content-sidebar';
-    public final const MODULE_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR = 'multiple-tagsectioninner-posts-sidebar';
-    public final const MODULE_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-tagsectioninner-categoryposts-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR = 'multiple-authorsectioninner-maincontent-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR = 'multiple-authorsectioninner-content-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR = 'multiple-authorsectioninner-posts-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-authorsectioninner-categoryposts-sidebar';
-    public final const MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR = 'multiple-homesectioninner-content-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR = 'multiple-sectioninner-content-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_POSTS_SIDEBAR = 'multiple-sectioninner-posts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-sectioninner-categoryposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_USERS_SIDEBAR = 'multiple-sectioninner-users-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR = 'multiple-sectioninner-users-nofilter-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR = 'multiple-sectioninner-trendingtags-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGS_SIDEBAR = 'multiple-sectioninner-tags-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_AUTHORTAGS_SIDEBAR = 'multiple-sectioninner-authortags-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYCONTENT_SIDEBAR = 'multiple-sectioninner-mycontent-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYPOSTS_SIDEBAR = 'multiple-sectioninner-myposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYCATEGORYPOSTS_SIDEBAR = 'multiple-sectioninner-mycategoryposts-sidebar';
+    public final const COMPONENT_MULTIPLE_TAGSECTIONINNER_MAINCONTENT_SIDEBAR = 'multiple-tagsectioninner-mainallcontent-sidebar';
+    public final const COMPONENT_MULTIPLE_TAGSECTIONINNER_CONTENT_SIDEBAR = 'multiple-tagsectioninner-content-sidebar';
+    public final const COMPONENT_MULTIPLE_TAGSECTIONINNER_POSTS_SIDEBAR = 'multiple-tagsectioninner-posts-sidebar';
+    public final const COMPONENT_MULTIPLE_TAGSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-tagsectioninner-categoryposts-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_MAINCONTENT_SIDEBAR = 'multiple-authorsectioninner-maincontent-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CONTENT_SIDEBAR = 'multiple-authorsectioninner-content-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR = 'multiple-authorsectioninner-posts-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-authorsectioninner-categoryposts-sidebar';
+    public final const COMPONENT_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR = 'multiple-homesectioninner-content-sidebar';
 
     public function getComponentsToProcess(): array
     {

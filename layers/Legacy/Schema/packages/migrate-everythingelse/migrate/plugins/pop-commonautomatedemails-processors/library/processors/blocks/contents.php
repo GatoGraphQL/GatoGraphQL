@@ -5,7 +5,7 @@ use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 
 class PoPTheme_Wassup_AE_Module_Processor_ContentBlocks extends PoP_CommonAutomatedEmails_Module_Processor_ContentBlocksBase
 {
-    public final const MODULE_BLOCK_AUTOMATEDEMAILS_SINGLEPOST = 'block-automatedemails-singlepost';
+    public final const COMPONENT_BLOCK_AUTOMATEDEMAILS_SINGLEPOST = 'block-automatedemails-singlepost';
 
     public function getComponentsToProcess(): array
     {

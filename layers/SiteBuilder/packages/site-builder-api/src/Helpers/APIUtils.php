@@ -19,7 +19,7 @@ class APIUtils
         $dataoutputitems = $dataoutputitems ?? [
             DataOutputItems::COMPONENT_DATA,
             DataOutputItems::DATABASES,
-            DataOutputItems::DATASET_MODULE_SETTINGS,
+            DataOutputItems::DATASET_COMPONENT_SETTINGS,
         ];
         $endpoint = GeneralUtils::addQueryArgs([
             Params::SCHEME => APISchemes::API,

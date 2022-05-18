@@ -2,7 +2,7 @@
 
 class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
+    public final const COMPONENT_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
 
     public function getComponentsToProcess(): array
     {

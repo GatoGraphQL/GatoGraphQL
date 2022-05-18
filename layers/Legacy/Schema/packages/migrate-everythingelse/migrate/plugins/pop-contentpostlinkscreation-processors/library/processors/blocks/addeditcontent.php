@@ -2,8 +2,8 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public final const MODULE_BLOCK_CONTENTPOSTLINK_UPDATE = 'block-postlink-update';
-    public final const MODULE_BLOCK_CONTENTPOSTLINK_CREATE = 'block-postlink-create';
+    public final const COMPONENT_BLOCK_CONTENTPOSTLINK_UPDATE = 'block-postlink-update';
+    public final const COMPONENT_BLOCK_CONTENTPOSTLINK_CREATE = 'block-postlink-create';
 
     public function getComponentsToProcess(): array
     {

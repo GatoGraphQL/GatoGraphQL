@@ -2,13 +2,13 @@
 
 class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONNAME = 'forminputgroup-location_name';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONADDRESS = 'forminputgroup-location_address';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONTOWN = 'forminputgroup-location_town';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONSTATE = 'forminputgroup-location_state';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONPOSTCODE = 'forminputgroup-location_postcode';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONREGION = 'forminputgroup-location_region';
-    public final const MODULE_FORMINPUTGROUP_EM_LOCATIONCOUNTRY = 'forminputgroup-location_country';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONNAME = 'forminputgroup-location_name';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONADDRESS = 'forminputgroup-location_address';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONTOWN = 'forminputgroup-location_town';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONSTATE = 'forminputgroup-location_state';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONPOSTCODE = 'forminputgroup-location_postcode';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONREGION = 'forminputgroup-location_region';
+    public final const COMPONENT_FORMINPUTGROUP_EM_LOCATIONCOUNTRY = 'forminputgroup-location_country';
 
     public function getComponentsToProcess(): array
     {

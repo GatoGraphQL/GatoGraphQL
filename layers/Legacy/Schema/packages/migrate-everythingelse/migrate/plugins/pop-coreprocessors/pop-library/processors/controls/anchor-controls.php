@@ -5,15 +5,15 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS = 'anchorcontrol-toggleoptionalfields';
-    public final const MODULE_ANCHORCONTROL_EXPANDCOLLAPSIBLE = 'anchorcontrol-expandcollapsible';
-    public final const MODULE_ANCHORCONTROL_FILTERTOGGLE = 'anchorcontrol-filtertoggle';
-    public final const MODULE_ANCHORCONTROL_CURRENTURL = 'anchorcontrol-currenturl';
-    public final const MODULE_ANCHORCONTROL_SUBMENUTOGGLE_XS = 'anchorcontrol-submenutoggle-xs';
-    public final const MODULE_ANCHORCONTROL_PRINT = 'anchorcontrol-print';
-    public final const MODULE_ANCHORCONTROL_CLOSEPAGE = 'anchorcontrol-closepage';
-    public final const MODULE_ANCHORCONTROL_CLOSEPAGEBTN = 'anchorcontrol-closepagebtn';
-    public final const MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG = 'anchorcontrol-closepagebtnbig';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLEOPTIONALFIELDS = 'anchorcontrol-toggleoptionalfields';
+    public final const COMPONENT_ANCHORCONTROL_EXPANDCOLLAPSIBLE = 'anchorcontrol-expandcollapsible';
+    public final const COMPONENT_ANCHORCONTROL_FILTERTOGGLE = 'anchorcontrol-filtertoggle';
+    public final const COMPONENT_ANCHORCONTROL_CURRENTURL = 'anchorcontrol-currenturl';
+    public final const COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS = 'anchorcontrol-submenutoggle-xs';
+    public final const COMPONENT_ANCHORCONTROL_PRINT = 'anchorcontrol-print';
+    public final const COMPONENT_ANCHORCONTROL_CLOSEPAGE = 'anchorcontrol-closepage';
+    public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTN = 'anchorcontrol-closepagebtn';
+    public final const COMPONENT_ANCHORCONTROL_CLOSEPAGEBTNBIG = 'anchorcontrol-closepagebtnbig';
 
     public function getComponentsToProcess(): array
     {

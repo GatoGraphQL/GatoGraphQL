@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_TypeaheadButtonControls extends PoP_Module_Processor_ButtonControlsBase
 {
-    public final const MODULE_BUTTONCONTROL_TYPEAHEADSEARCH = 'buttoncontrol-typeaheadsearch';
+    public final const COMPONENT_BUTTONCONTROL_TYPEAHEADSEARCH = 'buttoncontrol-typeaheadsearch';
 
     public function getComponentsToProcess(): array
     {

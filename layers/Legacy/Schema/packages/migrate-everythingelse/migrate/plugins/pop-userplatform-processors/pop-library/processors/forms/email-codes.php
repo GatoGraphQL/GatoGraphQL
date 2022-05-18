@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_CODE_EMAILNOTIFICATIONS_LABEL = 'code-emailnotifications-label';
-    public final const MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL = 'code-emailnotifications-generallabel';
-    public final const MODULE_CODE_EMAILDIGESTS_LABEL = 'code-dailyemaildigestslabel';
+    public final const COMPONENT_CODE_EMAILNOTIFICATIONS_LABEL = 'code-emailnotifications-label';
+    public final const COMPONENT_CODE_EMAILNOTIFICATIONS_GENERALLABEL = 'code-emailnotifications-generallabel';
+    public final const COMPONENT_CODE_EMAILDIGESTS_LABEL = 'code-dailyemaildigestslabel';
 
     public function getComponentsToProcess(): array
     {

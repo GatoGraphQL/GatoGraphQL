@@ -2,26 +2,26 @@
 
 class NSCPP_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Processor_TagTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 = 'block-tabpanel-tagnosearchcategoryposts00';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 = 'block-tabpanel-tagnosearchcategoryposts01';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 = 'block-tabpanel-tagnosearchcategoryposts02';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 = 'block-tabpanel-tagnosearchcategoryposts03';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 = 'block-tabpanel-tagnosearchcategoryposts04';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 = 'block-tabpanel-tagnosearchcategoryposts05';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 = 'block-tabpanel-tagnosearchcategoryposts06';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 = 'block-tabpanel-tagnosearchcategoryposts07';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 = 'block-tabpanel-tagnosearchcategoryposts08';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 = 'block-tabpanel-tagnosearchcategoryposts09';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 = 'block-tabpanel-tagnosearchcategoryposts10';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 = 'block-tabpanel-tagnosearchcategoryposts11';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 = 'block-tabpanel-tagnosearchcategoryposts12';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 = 'block-tabpanel-tagnosearchcategoryposts13';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 = 'block-tabpanel-tagnosearchcategoryposts14';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 = 'block-tabpanel-tagnosearchcategoryposts15';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 = 'block-tabpanel-tagnosearchcategoryposts16';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 = 'block-tabpanel-tagnosearchcategoryposts17';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-tagnosearchcategoryposts18';
-    public final const MODULE_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-tagnosearchcategoryposts19';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 = 'block-tabpanel-tagnosearchcategoryposts00';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 = 'block-tabpanel-tagnosearchcategoryposts01';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 = 'block-tabpanel-tagnosearchcategoryposts02';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 = 'block-tabpanel-tagnosearchcategoryposts03';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 = 'block-tabpanel-tagnosearchcategoryposts04';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 = 'block-tabpanel-tagnosearchcategoryposts05';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 = 'block-tabpanel-tagnosearchcategoryposts06';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 = 'block-tabpanel-tagnosearchcategoryposts07';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 = 'block-tabpanel-tagnosearchcategoryposts08';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 = 'block-tabpanel-tagnosearchcategoryposts09';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 = 'block-tabpanel-tagnosearchcategoryposts10';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 = 'block-tabpanel-tagnosearchcategoryposts11';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 = 'block-tabpanel-tagnosearchcategoryposts12';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 = 'block-tabpanel-tagnosearchcategoryposts13';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 = 'block-tabpanel-tagnosearchcategoryposts14';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 = 'block-tabpanel-tagnosearchcategoryposts15';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 = 'block-tabpanel-tagnosearchcategoryposts16';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 = 'block-tabpanel-tagnosearchcategoryposts17';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-tagnosearchcategoryposts18';
+    public final const COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-tagnosearchcategoryposts19';
 
     public function getComponentsToProcess(): array
     {

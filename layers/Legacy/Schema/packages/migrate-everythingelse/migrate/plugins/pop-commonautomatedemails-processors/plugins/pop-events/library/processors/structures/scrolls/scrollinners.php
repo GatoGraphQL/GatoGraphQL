@@ -2,11 +2,11 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS = 'scrollinner-automatedemails-events-details';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW = 'scrollinner-automatedemails-events-simpleview';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW = 'scrollinner-automatedemails-events-fullview';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scrollinner-automatedemails-events-thumbnail';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST = 'scrollinner-automatedemails-events-list';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS = 'scrollinner-automatedemails-events-details';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW = 'scrollinner-automatedemails-events-simpleview';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW = 'scrollinner-automatedemails-events-fullview';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scrollinner-automatedemails-events-thumbnail';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST = 'scrollinner-automatedemails-events-list';
 
     public function getComponentsToProcess(): array
     {

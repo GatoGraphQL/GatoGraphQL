@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Volunteering_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_VOLUNTEER = 'form-volunteer';
+    public final const COMPONENT_FORM_VOLUNTEER = 'form-volunteer';
 
     public function getComponentsToProcess(): array
     {

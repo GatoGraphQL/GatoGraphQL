@@ -2,7 +2,7 @@
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT = 'layout-automatedemails-fullview-event';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT = 'layout-automatedemails-fullview-event';
     
     public function getComponentsToProcess(): array
     {

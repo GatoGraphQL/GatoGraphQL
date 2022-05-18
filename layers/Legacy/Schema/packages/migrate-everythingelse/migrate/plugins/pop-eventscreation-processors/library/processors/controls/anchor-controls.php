@@ -5,8 +5,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS = 'custombuttoncontrol-mypastevents';
-    public final const MODULE_CUSTOMANCHORCONTROL_ADDEVENT = 'custombuttoncontrol-addevent';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_MYPASTEVENTS = 'custombuttoncontrol-mypastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_ADDEVENT = 'custombuttoncontrol-addevent';
 
     public function getComponentsToProcess(): array
     {

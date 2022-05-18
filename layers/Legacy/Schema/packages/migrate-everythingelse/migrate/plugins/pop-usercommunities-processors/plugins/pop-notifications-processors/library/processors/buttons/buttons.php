@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
-    public final const MODULE_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
+    public final const COMPONENT_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
+    public final const COMPONENT_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
 
     public function getComponentsToProcess(): array
     {

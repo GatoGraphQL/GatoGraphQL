@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public final const MODULE_CAROUSEL_USERS = 'carousel-users';
+    public final const COMPONENT_CAROUSEL_USERS = 'carousel-users';
 
     public function getComponentsToProcess(): array
     {

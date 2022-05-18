@@ -2,7 +2,7 @@
 
 class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module_Processor_SubcomponentFormComponentGroupsBase
 {
-    public final const MODULE_FILTERINPUTGROUP_EVENTSCOPE = 'filterinputgroup-eventscope';
+    public final const COMPONENT_FILTERINPUTGROUP_EVENTSCOPE = 'filterinputgroup-eventscope';
 
     public function getComponentsToProcess(): array
     {

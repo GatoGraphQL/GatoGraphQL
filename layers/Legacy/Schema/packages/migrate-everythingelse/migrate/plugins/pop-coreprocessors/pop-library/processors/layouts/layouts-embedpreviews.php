@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_EmbedPreviewLayouts extends PoP_Module_Processor_EmbedPreviewLayoutsBase
 {
-    public final const MODULE_LAYOUT_EMBEDPREVIEW = 'layout-urlembedpreview';
-    public final const MODULE_LAYOUT_USERINPUTEMBEDPREVIEW = 'layout-userinputembedpreview';
+    public final const COMPONENT_LAYOUT_EMBEDPREVIEW = 'layout-urlembedpreview';
+    public final const COMPONENT_LAYOUT_USERINPUTEMBEDPREVIEW = 'layout-userinputembedpreview';
 
     public function getComponentsToProcess(): array
     {

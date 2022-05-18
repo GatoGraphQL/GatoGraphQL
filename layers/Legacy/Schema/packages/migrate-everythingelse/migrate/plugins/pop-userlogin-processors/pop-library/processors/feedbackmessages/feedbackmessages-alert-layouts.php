@@ -2,11 +2,11 @@
 
 class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_Module_Processor_FeedbackMessageAlertLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN = 'layout-feedbackmessagealert-login';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD = 'layout-feedbackmessagealert-lostpwd';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET = 'layout-feedbackmessagealert-lostpwdreset';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT = 'layout-feedbackmessagealert-logout';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD = 'layout-feedbackmessagealert-user-changepassword';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN = 'layout-feedbackmessagealert-login';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWD = 'layout-feedbackmessagealert-lostpwd';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOSTPWDRESET = 'layout-feedbackmessagealert-lostpwdreset';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT = 'layout-feedbackmessagealert-logout';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD = 'layout-feedbackmessagealert-user-changepassword';
 
     public function getComponentsToProcess(): array
     {

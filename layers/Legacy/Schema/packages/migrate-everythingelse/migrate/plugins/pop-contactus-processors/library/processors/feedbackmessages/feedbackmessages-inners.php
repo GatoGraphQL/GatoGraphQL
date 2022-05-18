@@ -2,7 +2,7 @@
 
 class PoP_ContactUs_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_CONTACTUS = 'feedbackmessageinner-contactus';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUS = 'feedbackmessageinner-contactus';
 
     public function getComponentsToProcess(): array
     {

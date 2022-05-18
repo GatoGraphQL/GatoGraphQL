@@ -5,9 +5,9 @@ use PoP\Root\App;
 
 class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_FLAG = 'feedbackmessageinner-flag';
-    public final const MODULE_FEEDBACKMESSAGEINNER_CREATECONTENT = 'feedbackmessageinner-createcontent';
-    public final const MODULE_FEEDBACKMESSAGEINNER_UPDATECONTENT = 'feedbackmessageinner-updatecontent';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_FLAG = 'feedbackmessageinner-flag';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_CREATECONTENT = 'feedbackmessageinner-createcontent';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_UPDATECONTENT = 'feedbackmessageinner-updatecontent';
 
     public function getComponentsToProcess(): array
     {

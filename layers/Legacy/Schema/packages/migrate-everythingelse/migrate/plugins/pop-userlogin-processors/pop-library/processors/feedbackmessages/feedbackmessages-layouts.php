@@ -4,11 +4,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN = 'layout-feedbackmessage-login';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWD = 'layout-feedbackmessage-lostpwd';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET = 'layout-feedbackmessage-lostpwdreset';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGIN = 'layout-feedbackmessage-login';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWD = 'layout-feedbackmessage-lostpwd';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOSTPWDRESET = 'layout-feedbackmessage-lostpwdreset';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
 
     public function getComponentsToProcess(): array
     {

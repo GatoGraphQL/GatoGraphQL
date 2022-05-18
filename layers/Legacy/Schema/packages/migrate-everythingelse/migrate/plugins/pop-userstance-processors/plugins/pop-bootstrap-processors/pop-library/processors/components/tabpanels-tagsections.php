@@ -2,10 +2,10 @@
 
 class UserStance_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Processor_TagSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_TAGSTANCES = 'tabpanel-tagstances';
-    public final const MODULE_TABPANEL_TAGSTANCES_PRO = 'tabpanel-tagstances-pro';
-    public final const MODULE_TABPANEL_TAGSTANCES_NEUTRAL = 'tabpanel-tagstances-neutral';
-    public final const MODULE_TABPANEL_TAGSTANCES_AGAINST = 'tabpanel-tagstances-against';
+    public final const COMPONENT_TABPANEL_TAGSTANCES = 'tabpanel-tagstances';
+    public final const COMPONENT_TABPANEL_TAGSTANCES_PRO = 'tabpanel-tagstances-pro';
+    public final const COMPONENT_TABPANEL_TAGSTANCES_NEUTRAL = 'tabpanel-tagstances-neutral';
+    public final const COMPONENT_TABPANEL_TAGSTANCES_AGAINST = 'tabpanel-tagstances-against';
 
     public function getComponentsToProcess(): array
     {

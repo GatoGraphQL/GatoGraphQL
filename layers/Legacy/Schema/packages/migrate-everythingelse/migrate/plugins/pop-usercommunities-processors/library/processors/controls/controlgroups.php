@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_URE_CONTROLGROUP_CONTENTSOURCE = 'ure-controlgroup-contentsource';
+    public final const COMPONENT_URE_CONTROLGROUP_CONTENTSOURCE = 'ure-controlgroup-contentsource';
 
     public function getComponentsToProcess(): array
     {

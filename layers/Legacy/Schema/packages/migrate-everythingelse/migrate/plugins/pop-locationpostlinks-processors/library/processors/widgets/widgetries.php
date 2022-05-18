@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_LocationPostLinks_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_FORM_LOCATIONPOSTLINKDETAILS = 'widget-form-locationpostlinkdetails';
+    public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTLINKDETAILS = 'widget-form-locationpostlinkdetails';
 
     public function getComponentsToProcess(): array
     {

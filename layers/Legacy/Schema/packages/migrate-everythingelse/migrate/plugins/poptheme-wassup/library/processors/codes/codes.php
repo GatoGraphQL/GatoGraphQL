@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_HTMLCODE_HOMEWELCOMETOP = 'htmlcode-home-welcome-top';
-    public final const MODULE_HTMLCODE_HOMEWELCOMEBOTTOM = 'htmlcode-home-welcome-bottom';
-    public final const MODULE_HTMLCODE_HOMECOMPACTWELCOMETOP = 'htmlcode-home-compactwelcome-top';
-    public final const MODULE_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM = 'htmlcode-home-compactwelcome-bottom';
-    public final const MODULE_HTMLCODE_AUTHORDESCRIPTIONTOP = 'htmlcode-author-description-top';
-    public final const MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM = 'htmlcode-author-description-bottom';
+    public final const COMPONENT_HTMLCODE_HOMEWELCOMETOP = 'htmlcode-home-welcome-top';
+    public final const COMPONENT_HTMLCODE_HOMEWELCOMEBOTTOM = 'htmlcode-home-welcome-bottom';
+    public final const COMPONENT_HTMLCODE_HOMECOMPACTWELCOMETOP = 'htmlcode-home-compactwelcome-top';
+    public final const COMPONENT_HTMLCODE_HOMECOMPACTWELCOMEBOTTOM = 'htmlcode-home-compactwelcome-bottom';
+    public final const COMPONENT_HTMLCODE_AUTHORDESCRIPTIONTOP = 'htmlcode-author-description-top';
+    public final const COMPONENT_HTMLCODE_AUTHORDESCRIPTIONBOTTOM = 'htmlcode-author-description-bottom';
 
     public function getComponentsToProcess(): array
     {

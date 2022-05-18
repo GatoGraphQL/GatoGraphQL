@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_ShareMultiples extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_EMBED = 'multiple-embed';
-    public final const MODULE_MULTIPLE_API = 'multiple-api';
-    public final const MODULE_MULTIPLE_COPYSEARCHURL = 'multiple-copysearchurl';
+    public final const COMPONENT_MULTIPLE_EMBED = 'multiple-embed';
+    public final const COMPONENT_MULTIPLE_API = 'multiple-api';
+    public final const COMPONENT_MULTIPLE_COPYSEARCHURL = 'multiple-copysearchurl';
 
     public function getComponentsToProcess(): array
     {

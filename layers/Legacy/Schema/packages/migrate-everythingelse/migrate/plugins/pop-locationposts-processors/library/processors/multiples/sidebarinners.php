@@ -2,9 +2,9 @@
 
 class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-locationposts-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-taglocationposts-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-authorlocationposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-locationposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-taglocationposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-authorlocationposts-sidebar';
 
     public function getComponentsToProcess(): array
     {

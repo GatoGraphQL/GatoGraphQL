@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_Contents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_AUTHOR = 'content-author';
-    public final const MODULE_CONTENT_SINGLE = 'content-single';
-    public final const MODULE_CONTENT_USERPOSTINTERACTION = 'content-userpostinteraction';
-    public final const MODULE_CONTENT_PAGECONTENT = 'content-pagecontent';
-    public final const MODULE_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
+    public final const COMPONENT_CONTENT_AUTHOR = 'content-author';
+    public final const COMPONENT_CONTENT_SINGLE = 'content-single';
+    public final const COMPONENT_CONTENT_USERPOSTINTERACTION = 'content-userpostinteraction';
+    public final const COMPONENT_CONTENT_PAGECONTENT = 'content-pagecontent';
+    public final const COMPONENT_CONTENT_PAGECONTENT_PRETTYPRINT = 'content-pagecontent-prettyprint';
 
     public function getComponentsToProcess(): array
     {

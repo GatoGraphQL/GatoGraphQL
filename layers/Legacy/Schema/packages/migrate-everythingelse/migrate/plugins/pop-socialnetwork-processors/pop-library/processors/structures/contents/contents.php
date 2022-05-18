@@ -2,16 +2,16 @@
 
 class PoP_Module_Processor_FunctionsContents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_FOLLOWSUSERS = 'content-followsusers';
-    public final const MODULE_CONTENT_UNFOLLOWSUSERS = 'content-unfollowsusers';
-    public final const MODULE_CONTENT_RECOMMENDSPOSTS = 'content-recommendsposts';
-    public final const MODULE_CONTENT_UNRECOMMENDSPOSTS = 'content-unrecommendsposts';
-    public final const MODULE_CONTENT_SUBSCRIBESTOTAGS = 'content-subscribestotags';
-    public final const MODULE_CONTENT_UNSUBSCRIBESFROMTAGS = 'content-unsubscribesfromtags';
-    public final const MODULE_CONTENT_UPVOTESPOSTS = 'content-upvotesposts';
-    public final const MODULE_CONTENT_UNDOUPVOTESPOSTS = 'content-undoupvotesposts';
-    public final const MODULE_CONTENT_DOWNVOTESPOSTS = 'content-downvotesposts';
-    public final const MODULE_CONTENT_UNDODOWNVOTESPOSTS = 'content-undodownvotesposts';
+    public final const COMPONENT_CONTENT_FOLLOWSUSERS = 'content-followsusers';
+    public final const COMPONENT_CONTENT_UNFOLLOWSUSERS = 'content-unfollowsusers';
+    public final const COMPONENT_CONTENT_RECOMMENDSPOSTS = 'content-recommendsposts';
+    public final const COMPONENT_CONTENT_UNRECOMMENDSPOSTS = 'content-unrecommendsposts';
+    public final const COMPONENT_CONTENT_SUBSCRIBESTOTAGS = 'content-subscribestotags';
+    public final const COMPONENT_CONTENT_UNSUBSCRIBESFROMTAGS = 'content-unsubscribesfromtags';
+    public final const COMPONENT_CONTENT_UPVOTESPOSTS = 'content-upvotesposts';
+    public final const COMPONENT_CONTENT_UNDOUPVOTESPOSTS = 'content-undoupvotesposts';
+    public final const COMPONENT_CONTENT_DOWNVOTESPOSTS = 'content-downvotesposts';
+    public final const COMPONENT_CONTENT_UNDODOWNVOTESPOSTS = 'content-undodownvotesposts';
 
     public function getComponentsToProcess(): array
     {

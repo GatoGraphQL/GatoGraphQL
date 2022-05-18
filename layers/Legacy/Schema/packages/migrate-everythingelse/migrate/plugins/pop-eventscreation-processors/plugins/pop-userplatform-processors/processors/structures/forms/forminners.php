@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public final const MODULE_FORMINNER_EVENT = 'forminner-event';
+    public final const COMPONENT_FORMINNER_EVENT = 'forminner-event';
 
     public function getComponentsToProcess(): array
     {

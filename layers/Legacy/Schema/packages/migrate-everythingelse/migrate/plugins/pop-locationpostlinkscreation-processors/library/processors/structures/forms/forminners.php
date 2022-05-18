@@ -2,7 +2,7 @@
 
 class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public final const MODULE_FORMINNER_LOCATIONPOSTLINK = 'forminner-locationpostlink';
+    public final const COMPONENT_FORMINNER_LOCATIONPOSTLINK = 'forminner-locationpostlink';
 
     public function getComponentsToProcess(): array
     {

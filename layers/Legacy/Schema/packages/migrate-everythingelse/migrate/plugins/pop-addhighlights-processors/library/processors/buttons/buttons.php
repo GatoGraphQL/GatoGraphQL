@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddHighlights_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_BUTTON_HIGHLIGHTEDIT = 'button-highlightedit';
-    public final const MODULE_BUTTON_HIGHLIGHTVIEW = 'button-highlightview';
+    public final const COMPONENT_BUTTON_HIGHLIGHTEDIT = 'button-highlightedit';
+    public final const COMPONENT_BUTTON_HIGHLIGHTVIEW = 'button-highlightview';
 
     public function getComponentsToProcess(): array
     {

@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_LOGIN_USERNAME = 'forminputgroup-log';
-    public final const MODULE_FORMINPUTGROUP_LOGIN_PWD = 'forminputgroup-pwd';
-    public final const MODULE_FORMINPUTGROUP_LOSTPWD_USERNAME = 'forminputgroup-lostpwd-username';
-    public final const MODULE_FORMINPUTGROUP_LOSTPWDRESET_CODE = 'forminputgroup-lostpwdreset-code';
-    public final const MODULE_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
-    public final const MODULE_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
+    public final const COMPONENT_FORMINPUTGROUP_LOGIN_USERNAME = 'forminputgroup-log';
+    public final const COMPONENT_FORMINPUTGROUP_LOGIN_PWD = 'forminputgroup-pwd';
+    public final const COMPONENT_FORMINPUTGROUP_LOSTPWD_USERNAME = 'forminputgroup-lostpwd-username';
+    public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_CODE = 'forminputgroup-lostpwdreset-code';
+    public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
+    public final const COMPONENT_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
 
     public function getComponentsToProcess(): array
     {

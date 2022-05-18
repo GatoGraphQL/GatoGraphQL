@@ -2,7 +2,7 @@
 
 class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public final const MODULE_FORMINNER_EVENTLINK = 'forminner-eventlink';
+    public final const COMPONENT_FORMINNER_EVENTLINK = 'forminner-eventlink';
 
     public function getComponentsToProcess(): array
     {

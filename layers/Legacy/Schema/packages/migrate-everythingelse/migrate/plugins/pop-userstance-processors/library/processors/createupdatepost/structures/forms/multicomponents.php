@@ -2,8 +2,8 @@
 
 class UserStance_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE = 'multicomponent-form-stance-maybeleftside';
-    public final const MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE = 'multicomponent-form-stance-mayberightside';
+    public final const COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE = 'multicomponent-form-stance-maybeleftside';
+    public final const COMPONENT_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE = 'multicomponent-form-stance-mayberightside';
 
     public function getComponentsToProcess(): array
     {

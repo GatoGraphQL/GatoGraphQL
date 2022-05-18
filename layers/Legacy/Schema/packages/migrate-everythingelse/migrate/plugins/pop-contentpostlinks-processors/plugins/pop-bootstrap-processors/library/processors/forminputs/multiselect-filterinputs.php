@@ -12,8 +12,8 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
-    public final const MODULE_FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
+    public final const COMPONENT_FILTERINPUT_LINKCATEGORIES = 'filterinput-linkcategories';
+    public final const COMPONENT_FILTERINPUT_LINKACCESS = 'filterinput-linkaccess';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;

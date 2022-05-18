@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_UpdateProfileBlocks extends PoP_Module_Processor_UpdateProfileBlocksBase
 {
-    public final const MODULE_BLOCK_PROFILEORGANIZATION_UPDATE = 'block-profileorganization-update';
-    public final const MODULE_BLOCK_PROFILEINDIVIDUAL_UPDATE = 'block-profileindividual-update';
+    public final const COMPONENT_BLOCK_PROFILEORGANIZATION_UPDATE = 'block-profileorganization-update';
+    public final const COMPONENT_BLOCK_PROFILEINDIVIDUAL_UPDATE = 'block-profileindividual-update';
 
     public function getComponentsToProcess(): array
     {

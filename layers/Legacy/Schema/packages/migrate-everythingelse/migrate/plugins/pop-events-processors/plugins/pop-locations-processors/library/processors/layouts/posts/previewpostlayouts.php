@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS = 'layout-previewpost-event-mapdetails';
-    public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS = 'layout-previewpost-event-horizontalmapdetails';
-    public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS = 'layout-previewost-pastevent-mapdetails';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS = 'layout-previewpost-event-mapdetails';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS = 'layout-previewpost-event-horizontalmapdetails';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS = 'layout-previewost-pastevent-mapdetails';
 
     public function getComponentsToProcess(): array
     {

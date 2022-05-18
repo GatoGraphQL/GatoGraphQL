@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ShareContents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_EMBEDPREVIEW = 'content-embedpreview';
-    public final const MODULE_CONTENT_EMBED = 'content-embed';
-    public final const MODULE_CONTENT_API = 'content-api';
-    public final const MODULE_CONTENT_COPYSEARCHURL = 'content-copysearchurl';
+    public final const COMPONENT_CONTENT_EMBEDPREVIEW = 'content-embedpreview';
+    public final const COMPONENT_CONTENT_EMBED = 'content-embed';
+    public final const COMPONENT_CONTENT_API = 'content-api';
+    public final const COMPONENT_CONTENT_COPYSEARCHURL = 'content-copysearchurl';
 
     public function getComponentsToProcess(): array
     {

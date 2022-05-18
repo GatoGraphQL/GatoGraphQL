@@ -2,7 +2,7 @@
 
 class UserStance_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_USERSTANCE_HTMLCODE_STANCESLIDESTITLE = 'htmlcode-stanceslidestitle';
+    public final const COMPONENT_USERSTANCE_HTMLCODE_STANCESLIDESTITLE = 'htmlcode-stanceslidestitle';
 
     public function getComponentsToProcess(): array
     {

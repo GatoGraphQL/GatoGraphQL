@@ -4,7 +4,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\SaveDefinitionFileMut
 
 class PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions extends AbstractDataloadComponentProcessor
 {
-    public final const MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE = 'dataloadaction-system-savedefinitionfile';
+    public final const COMPONENT_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE = 'dataloadaction-system-savedefinitionfile';
 
     // use PoP_PersistentDefinitionsSystem_Module_Processor_SystemActionsTrait;
     public function getComponentsToProcess(): array

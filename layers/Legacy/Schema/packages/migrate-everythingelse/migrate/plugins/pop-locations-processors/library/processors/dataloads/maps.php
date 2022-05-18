@@ -6,7 +6,7 @@ class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_Da
 {
     use ObjectIDsFromURLParamComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_LOCATIONSMAP = 'dataload-locationsmap';
+    public final const COMPONENT_DATALOAD_LOCATIONSMAP = 'dataload-locationsmap';
 
     public function getComponentsToProcess(): array
     {

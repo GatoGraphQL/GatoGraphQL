@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_EM_BUTTON_GOOGLECALENDAR = 'em-button-googlecalendar';
-    public final const MODULE_EM_BUTTON_ICAL = 'em-button-ical';
+    public final const COMPONENT_EM_BUTTON_GOOGLECALENDAR = 'em-button-googlecalendar';
+    public final const COMPONENT_EM_BUTTON_ICAL = 'em-button-ical';
 
     public function getComponentsToProcess(): array
     {

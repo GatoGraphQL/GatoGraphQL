@@ -2,18 +2,18 @@
 
 class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS = 'controlbuttongroup-toggleoptionalfields';
-    public final const MODULE_CONTROLBUTTONGROUP_FILTER = 'controlbuttongroup-filter';
-    public final const MODULE_CONTROLBUTTONGROUP_CURRENTURL = 'controlbuttongroup-currenturl';
-    public final const MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP = 'controlbuttongroup-reloadblockgroup';
-    public final const MODULE_CONTROLBUTTONGROUP_RELOADBLOCK = 'controlbuttongroup-reloadblock';
-    public final const MODULE_CONTROLBUTTONGROUP_LOADLATESTBLOCK = 'controlbuttongroup-loadlatestblock';
-    public final const MODULE_CONTROLBUTTONGROUP_SUBMENU_XS = 'controlbuttongroup-submenu-xs';
-    public final const MODULE_CONTROLBUTTONGROUP_RESETEDITOR = 'controlbuttongroup-reseteditor';
-    public final const MODULE_CONTROLBUTTONGROUP_SHARE = 'controlbuttongroup-share';
-    public final const MODULE_CONTROLBUTTONGROUP_RESULTSSHARE = 'controlbuttongroup-resultsshare';
-    public final const MODULE_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
-    public final const MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
+    public final const COMPONENT_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS = 'controlbuttongroup-toggleoptionalfields';
+    public final const COMPONENT_CONTROLBUTTONGROUP_FILTER = 'controlbuttongroup-filter';
+    public final const COMPONENT_CONTROLBUTTONGROUP_CURRENTURL = 'controlbuttongroup-currenturl';
+    public final const COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCKGROUP = 'controlbuttongroup-reloadblockgroup';
+    public final const COMPONENT_CONTROLBUTTONGROUP_RELOADBLOCK = 'controlbuttongroup-reloadblock';
+    public final const COMPONENT_CONTROLBUTTONGROUP_LOADLATESTBLOCK = 'controlbuttongroup-loadlatestblock';
+    public final const COMPONENT_CONTROLBUTTONGROUP_SUBMENU_XS = 'controlbuttongroup-submenu-xs';
+    public final const COMPONENT_CONTROLBUTTONGROUP_RESETEDITOR = 'controlbuttongroup-reseteditor';
+    public final const COMPONENT_CONTROLBUTTONGROUP_SHARE = 'controlbuttongroup-share';
+    public final const COMPONENT_CONTROLBUTTONGROUP_RESULTSSHARE = 'controlbuttongroup-resultsshare';
+    public final const COMPONENT_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
+    public final const COMPONENT_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
     public function getComponentsToProcess(): array
     {

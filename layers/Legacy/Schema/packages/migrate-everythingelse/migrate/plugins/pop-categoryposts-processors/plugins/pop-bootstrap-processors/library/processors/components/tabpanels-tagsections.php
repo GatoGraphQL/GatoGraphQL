@@ -2,26 +2,26 @@
 
 class CPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Processor_TagSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS00 = 'tabpanel-tagcategoryposts00';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS01 = 'tabpanel-tagcategoryposts01';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS02 = 'tabpanel-tagcategoryposts02';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS03 = 'tabpanel-tagcategoryposts03';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS04 = 'tabpanel-tagcategoryposts04';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS05 = 'tabpanel-tagcategoryposts05';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS06 = 'tabpanel-tagcategoryposts06';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS07 = 'tabpanel-tagcategoryposts07';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS08 = 'tabpanel-tagcategoryposts08';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS09 = 'tabpanel-tagcategoryposts09';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS10 = 'tabpanel-tagcategoryposts10';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS11 = 'tabpanel-tagcategoryposts11';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS12 = 'tabpanel-tagcategoryposts12';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS13 = 'tabpanel-tagcategoryposts13';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS14 = 'tabpanel-tagcategoryposts14';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS15 = 'tabpanel-tagcategoryposts15';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS16 = 'tabpanel-tagcategoryposts16';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS17 = 'tabpanel-tagcategoryposts17';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS18 = 'tabpanel-tagcategoryposts18';
-    public final const MODULE_TABPANEL_TAGCATEGORYPOSTS19 = 'tabpanel-tagcategoryposts19';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS00 = 'tabpanel-tagcategoryposts00';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS01 = 'tabpanel-tagcategoryposts01';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS02 = 'tabpanel-tagcategoryposts02';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS03 = 'tabpanel-tagcategoryposts03';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS04 = 'tabpanel-tagcategoryposts04';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS05 = 'tabpanel-tagcategoryposts05';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS06 = 'tabpanel-tagcategoryposts06';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS07 = 'tabpanel-tagcategoryposts07';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS08 = 'tabpanel-tagcategoryposts08';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS09 = 'tabpanel-tagcategoryposts09';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS10 = 'tabpanel-tagcategoryposts10';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS11 = 'tabpanel-tagcategoryposts11';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS12 = 'tabpanel-tagcategoryposts12';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS13 = 'tabpanel-tagcategoryposts13';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS14 = 'tabpanel-tagcategoryposts14';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS15 = 'tabpanel-tagcategoryposts15';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS16 = 'tabpanel-tagcategoryposts16';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS17 = 'tabpanel-tagcategoryposts17';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS18 = 'tabpanel-tagcategoryposts18';
+    public final const COMPONENT_TABPANEL_TAGCATEGORYPOSTS19 = 'tabpanel-tagcategoryposts19';
 
     public function getComponentsToProcess(): array
     {

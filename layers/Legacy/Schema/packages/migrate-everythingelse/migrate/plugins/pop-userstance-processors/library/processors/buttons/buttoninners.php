@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_BUTTONINNER_STANCE_CREATE = 'buttoninner-stance-create';
-    public final const MODULE_BUTTONINNER_STANCE_UPDATE = 'buttoninner-stance-update';
-    public final const MODULE_LAZYBUTTONINNER_STANCE_CREATEORUPDATE = 'lazybuttoninner-stance-createorupdate';
-    public final const MODULE_BUTTONINNER_POSTSTANCE_PRO = 'buttoninner-poststance-pro';
-    public final const MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL = 'buttoninner-poststance-neutral';
-    public final const MODULE_BUTTONINNER_POSTSTANCE_AGAINST = 'buttoninner-poststance-against';
+    public final const COMPONENT_BUTTONINNER_STANCE_CREATE = 'buttoninner-stance-create';
+    public final const COMPONENT_BUTTONINNER_STANCE_UPDATE = 'buttoninner-stance-update';
+    public final const COMPONENT_LAZYBUTTONINNER_STANCE_CREATEORUPDATE = 'lazybuttoninner-stance-createorupdate';
+    public final const COMPONENT_BUTTONINNER_POSTSTANCE_PRO = 'buttoninner-poststance-pro';
+    public final const COMPONENT_BUTTONINNER_POSTSTANCE_NEUTRAL = 'buttoninner-poststance-neutral';
+    public final const COMPONENT_BUTTONINNER_POSTSTANCE_AGAINST = 'buttoninner-poststance-against';
 
     public function getComponentsToProcess(): array
     {

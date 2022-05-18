@@ -4,11 +4,11 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class PoPTheme_Wassup_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'dataload-automatedemails-latestcontent-scroll-details';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'dataload-automatedemails-latestcontent-scroll-simpleview';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'dataload-automatedemails-latestcontent-scroll-fullview';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'dataload-automatedemails-latestcontent-scroll-thumbnail';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'dataload-automatedemails-latestcontent-scroll-list';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_DETAILS = 'dataload-automatedemails-latestcontent-scroll-details';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_SIMPLEVIEW = 'dataload-automatedemails-latestcontent-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_FULLVIEW = 'dataload-automatedemails-latestcontent-scroll-fullview';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_THUMBNAIL = 'dataload-automatedemails-latestcontent-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_LATESTCONTENT_SCROLL_LIST = 'dataload-automatedemails-latestcontent-scroll-list';
 
     public function getComponentsToProcess(): array
     {

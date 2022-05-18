@@ -6,8 +6,8 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_MYMEMBERS_TABLE_EDIT = 'dataload-mymembers-table-edit';
-    public final const MODULE_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW = 'dataload-mymembers-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYMEMBERS_TABLE_EDIT = 'dataload-mymembers-table-edit';
+    public final const COMPONENT_DATALOAD_MYMEMBERS_SCROLL_FULLVIEW = 'dataload-mymembers-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

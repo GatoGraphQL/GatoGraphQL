@@ -5,8 +5,8 @@ use PoPSitesWassup\NewsletterMutations\MutationResolverBridges\NewsletterUnsubsc
 
 class PoP_Newsletter_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
-    public final const MODULE_DATALOAD_NEWSLETTER = 'dataload-newsletter';
-    public final const MODULE_DATALOAD_NEWSLETTERUNSUBSCRIPTION = 'dataload-newsletterunsubscription';
+    public final const COMPONENT_DATALOAD_NEWSLETTER = 'dataload-newsletter';
+    public final const COMPONENT_DATALOAD_NEWSLETTERUNSUBSCRIPTION = 'dataload-newsletterunsubscription';
 
     public function getComponentsToProcess(): array
     {

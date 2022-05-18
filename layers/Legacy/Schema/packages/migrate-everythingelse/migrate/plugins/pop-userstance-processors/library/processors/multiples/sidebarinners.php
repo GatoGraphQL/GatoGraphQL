@@ -2,15 +2,15 @@
 
 class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR = 'multiple-sectioninner-stances-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR = 'multiple-sectioninner-mystances-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR = 'multiple-sectioninner-authorstances-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-authorrole';
-    public final const MODULE_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-stance';
-    public final const MODULE_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-authorstances-sidebar-stance';
-    public final const MODULE_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-generalstance';
-    public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar-stance';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR = 'multiple-sectioninner-stances-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYSTANCES_SIDEBAR = 'multiple-sectioninner-mystances-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_SIDEBAR = 'multiple-sectioninner-authorstances-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_STANCES_AUTHORROLE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-authorrole';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_STANCES_STANCE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-stance';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_AUTHORSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-authorstances-sidebar-stance';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_STANCES_GENERALSTANCE_SIDEBAR = 'multiple-sectioninner-stances-sidebar-generalstance';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar-stance';
 
     public function getComponentsToProcess(): array
     {

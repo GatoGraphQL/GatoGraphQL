@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS = 'group-tagcontent-scroll-details';
-    public final const MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW = 'group-tagcontent-scroll-simpleview';
-    public final const MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW = 'group-tagcontent-scroll-fullview';
-    public final const MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
-    public final const MODULE_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
+    public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_DETAILS = 'group-tagcontent-scroll-details';
+    public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW = 'group-tagcontent-scroll-simpleview';
+    public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_FULLVIEW = 'group-tagcontent-scroll-fullview';
+    public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
+    public final const COMPONENT_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
 
     public function getComponentsToProcess(): array
     {

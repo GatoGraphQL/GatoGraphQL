@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_BUTTONINNER_POSTEDIT = 'buttoninner-postedit';
-    public final const MODULE_BUTTONINNER_POSTVIEW = 'buttoninner-postview';
-    public final const MODULE_BUTTONINNER_POSTPREVIEW = 'buttoninner-postpreview';
+    public final const COMPONENT_BUTTONINNER_POSTEDIT = 'buttoninner-postedit';
+    public final const COMPONENT_BUTTONINNER_POSTVIEW = 'buttoninner-postview';
+    public final const COMPONENT_BUTTONINNER_POSTPREVIEW = 'buttoninner-postpreview';
 
     public function getComponentsToProcess(): array
     {

@@ -4,11 +4,11 @@ define('POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT', 'automatedemails-po
 
 class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_MultipleLayoutsBase
 {
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS = 'layout-automatedemails-multiplepost-details';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL = 'layout-automatedemails-multiplepost-thumbnail';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST = 'layout-automatedemails-multiplepost-list';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW = 'layout-automatedemails-multiplepost-simpleview';
-    public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW = 'layout-automatedemails-multiplepost-fullview';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS = 'layout-automatedemails-multiplepost-details';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL = 'layout-automatedemails-multiplepost-thumbnail';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST = 'layout-automatedemails-multiplepost-list';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW = 'layout-automatedemails-multiplepost-simpleview';
+    public final const COMPONENT_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW = 'layout-automatedemails-multiplepost-fullview';
 
     public function getComponentsToProcess(): array
     {

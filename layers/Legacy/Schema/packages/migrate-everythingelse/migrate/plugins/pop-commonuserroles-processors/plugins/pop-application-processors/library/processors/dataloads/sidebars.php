@@ -7,8 +7,8 @@ class GD_URE_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processo
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
-    public final const MODULE_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
+    public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_ORGANIZATION = 'dataload-author-sidebar-organization';
+    public final const COMPONENT_DATALOAD_AUTHOR_SIDEBAR_INDIVIDUAL = 'dataload-author-sidebar-individual';
 
     public function getComponentsToProcess(): array
     {

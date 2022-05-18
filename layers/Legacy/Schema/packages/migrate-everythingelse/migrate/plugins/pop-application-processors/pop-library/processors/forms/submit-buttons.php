@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public final const MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH = 'submitbutton-instantaneoussearch';
+    public final const COMPONENT_SUBMITBUTTON_INSTANTANEOUSSEARCH = 'submitbutton-instantaneoussearch';
 
     public function getComponentsToProcess(): array
     {

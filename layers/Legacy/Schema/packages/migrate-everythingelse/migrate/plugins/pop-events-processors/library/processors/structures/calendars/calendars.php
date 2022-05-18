@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_Calendars extends PoP_Module_Processor_CalendarsBase
 {
-    public final const MODULE_CALENDAR_EVENTS_NAVIGATOR = 'calendar-events-navigator';
-    public final const MODULE_CALENDAR_EVENTS_ADDONS = 'calendar-events-addons';
-    public final const MODULE_CALENDAR_EVENTS_MAIN = 'calendar-events-main';
+    public final const COMPONENT_CALENDAR_EVENTS_NAVIGATOR = 'calendar-events-navigator';
+    public final const COMPONENT_CALENDAR_EVENTS_ADDONS = 'calendar-events-addons';
+    public final const COMPONENT_CALENDAR_EVENTS_MAIN = 'calendar-events-main';
 
     public function getComponentsToProcess(): array
     {

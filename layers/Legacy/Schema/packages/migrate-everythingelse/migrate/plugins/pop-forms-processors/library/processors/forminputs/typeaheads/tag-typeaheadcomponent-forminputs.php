@@ -5,7 +5,7 @@ use PoPCMSSchema\PostTags\ModuleConfiguration as PostTagsModuleConfiguration;
 
 class PoP_Module_Processor_TagTypeaheadComponentFormInputs extends PoP_Module_Processor_TagTypeaheadComponentFormInputsBase
 {
-    public final const MODULE_TYPEAHEAD_COMPONENT_TAGS = 'forminput-typeaheadcomponent-tags';
+    public final const COMPONENT_TYPEAHEAD_COMPONENT_TAGS = 'forminput-typeaheadcomponent-tags';
 
     public function getComponentsToProcess(): array
     {

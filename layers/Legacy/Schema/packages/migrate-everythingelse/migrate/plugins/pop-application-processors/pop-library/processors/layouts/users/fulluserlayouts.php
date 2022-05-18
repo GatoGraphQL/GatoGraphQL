@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor_CustomFullUserLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLUSER = 'layout-fulluser';
+    public final const COMPONENT_LAYOUT_FULLUSER = 'layout-fulluser';
 
     public function getComponentsToProcess(): array
     {

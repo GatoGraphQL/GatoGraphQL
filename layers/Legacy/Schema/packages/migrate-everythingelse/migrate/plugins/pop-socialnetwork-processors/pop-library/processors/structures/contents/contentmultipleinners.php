@@ -2,16 +2,16 @@
 
 class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Processor_ContentMultipleInnersBase
 {
-    public final const MODULE_CONTENTINNER_FOLLOWSUSERS = 'contentinner-followsusers';
-    public final const MODULE_CONTENTINNER_UNFOLLOWSUSERS = 'contentinner-unfollowsusers';
-    public final const MODULE_CONTENTINNER_RECOMMENDSPOSTS = 'contentinner-recommendsposts';
-    public final const MODULE_CONTENTINNER_UNRECOMMENDSPOSTS = 'contentinner-unrecommendsposts';
-    public final const MODULE_CONTENTINNER_SUBSCRIBESTOTAGS = 'contentinner-subscribestotags';
-    public final const MODULE_CONTENTINNER_UNSUBSCRIBESFROMTAGS = 'contentinner-unsubscribesfromtags';
-    public final const MODULE_CONTENTINNER_UPVOTESPOSTS = 'contentinner-upvotesposts';
-    public final const MODULE_CONTENTINNER_UNDOUPVOTESPOSTS = 'contentinner-undoupvotesposts';
-    public final const MODULE_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
-    public final const MODULE_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
+    public final const COMPONENT_CONTENTINNER_FOLLOWSUSERS = 'contentinner-followsusers';
+    public final const COMPONENT_CONTENTINNER_UNFOLLOWSUSERS = 'contentinner-unfollowsusers';
+    public final const COMPONENT_CONTENTINNER_RECOMMENDSPOSTS = 'contentinner-recommendsposts';
+    public final const COMPONENT_CONTENTINNER_UNRECOMMENDSPOSTS = 'contentinner-unrecommendsposts';
+    public final const COMPONENT_CONTENTINNER_SUBSCRIBESTOTAGS = 'contentinner-subscribestotags';
+    public final const COMPONENT_CONTENTINNER_UNSUBSCRIBESFROMTAGS = 'contentinner-unsubscribesfromtags';
+    public final const COMPONENT_CONTENTINNER_UPVOTESPOSTS = 'contentinner-upvotesposts';
+    public final const COMPONENT_CONTENTINNER_UNDOUPVOTESPOSTS = 'contentinner-undoupvotesposts';
+    public final const COMPONENT_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
+    public final const COMPONENT_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
 
     public function getComponentsToProcess(): array
     {

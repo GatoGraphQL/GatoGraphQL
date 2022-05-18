@@ -3,24 +3,24 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CustomPreviewPostLayouts extends PoP_Module_Processor_CustomPreviewPostLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWPOST_HEADER = 'layout-previewpost-header';
-    public final const MODULE_LAYOUT_PREVIEWPOST_NAVIGATOR = 'layout-previewpost-navigator';
-    public final const MODULE_LAYOUT_PREVIEWPOST_ADDONS = 'layout-previewpost-addons';
-    public final const MODULE_LAYOUT_PREVIEWPOST_DETAILS = 'layout-previewpost-details';
-    public final const MODULE_LAYOUT_PREVIEWPOST_THUMBNAIL = 'layout-previewpost-thumbnail';
-    public final const MODULE_LAYOUT_PREVIEWPOST_LIST = 'layout-previewpost-list';
-    public final const MODULE_LAYOUT_PREVIEWPOST_LINE = 'layout-previewpost-line';
-    public final const MODULE_LAYOUT_PREVIEWPOST_RELATED = 'layout-previewpost-related';
-    public final const MODULE_LAYOUT_PREVIEWPOST_EDIT = 'layout-previewpost-edit';
-    public final const MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT = 'layout-previewpost-highlight-content';
-    public final const MODULE_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT = 'layout-previewpost-highlight-edit';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR = 'layout-previewpost-post-navigator';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_THUMBNAIL = 'layout-previewpost-post-thumbnail';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_ADDONS = 'layout-previewpost-post-addons';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_DETAILS = 'layout-previewpost-post-details';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_LIST = 'layout-previewpost-post-list';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_RELATED = 'layout-previewpost-post-related';
-    public final const MODULE_LAYOUT_PREVIEWPOST_POST_EDIT = 'layout-previewpost-post-edit';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_HEADER = 'layout-previewpost-header';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_NAVIGATOR = 'layout-previewpost-navigator';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_ADDONS = 'layout-previewpost-addons';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_DETAILS = 'layout-previewpost-details';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_THUMBNAIL = 'layout-previewpost-thumbnail';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_LIST = 'layout-previewpost-list';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_LINE = 'layout-previewpost-line';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_RELATED = 'layout-previewpost-related';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_EDIT = 'layout-previewpost-edit';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_CONTENT = 'layout-previewpost-highlight-content';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_HIGHLIGHT_EDIT = 'layout-previewpost-highlight-edit';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_NAVIGATOR = 'layout-previewpost-post-navigator';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_THUMBNAIL = 'layout-previewpost-post-thumbnail';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_ADDONS = 'layout-previewpost-post-addons';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_DETAILS = 'layout-previewpost-post-details';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_LIST = 'layout-previewpost-post-list';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_RELATED = 'layout-previewpost-post-related';
+    public final const COMPONENT_LAYOUT_PREVIEWPOST_POST_EDIT = 'layout-previewpost-post-edit';
 
     public function getComponentsToProcess(): array
     {

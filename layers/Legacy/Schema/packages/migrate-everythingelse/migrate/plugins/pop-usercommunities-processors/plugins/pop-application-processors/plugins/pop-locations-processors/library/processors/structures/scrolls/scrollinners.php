@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_EM_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_COMMUNITIES_MAP = 'scrollinner-communities-map';
+    public final const COMPONENT_SCROLLINNER_COMMUNITIES_MAP = 'scrollinner-communities-map';
 
     public function getComponentsToProcess(): array
     {

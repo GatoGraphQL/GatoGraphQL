@@ -2,8 +2,8 @@
 
 class GD_URE_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR = 'multiple-sectioninner-organizations-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_INDIVIDUALS_SIDEBAR = 'multiple-sectioninner-individuals-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_ORGANIZATIONS_SIDEBAR = 'multiple-sectioninner-organizations-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_INDIVIDUALS_SIDEBAR = 'multiple-sectioninner-individuals-sidebar';
 
     public function getComponentsToProcess(): array
     {

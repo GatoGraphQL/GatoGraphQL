@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_ContentCreation_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_BUTTON_POSTEDIT = 'button-postedit';
-    public final const MODULE_BUTTON_POSTVIEW = 'button-postview';
-    public final const MODULE_BUTTON_POSTPREVIEW = 'button-postpreview';
+    public final const COMPONENT_BUTTON_POSTEDIT = 'button-postedit';
+    public final const COMPONENT_BUTTON_POSTVIEW = 'button-postview';
+    public final const COMPONENT_BUTTON_POSTPREVIEW = 'button-postpreview';
 
     public function getComponentsToProcess(): array
     {

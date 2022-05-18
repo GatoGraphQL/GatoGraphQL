@@ -8,11 +8,11 @@ use PoPCMSSchema\UserState\CheckpointSets\UserStateCheckpointSets;
 
 class PoP_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_FOLLOWSUSERS = 'dataload-followsusers';
-    public final const MODULE_DATALOAD_RECOMMENDSPOSTS = 'dataload-recommendsposts';
-    public final const MODULE_DATALOAD_SUBSCRIBESTOTAGS = 'dataload-subscribestotags';
-    public final const MODULE_DATALOAD_UPVOTESPOSTS = 'dataload-upvotesposts';
-    public final const MODULE_DATALOAD_DOWNVOTESPOSTS = 'dataload-downvotesposts';
+    public final const COMPONENT_DATALOAD_FOLLOWSUSERS = 'dataload-followsusers';
+    public final const COMPONENT_DATALOAD_RECOMMENDSPOSTS = 'dataload-recommendsposts';
+    public final const COMPONENT_DATALOAD_SUBSCRIBESTOTAGS = 'dataload-subscribestotags';
+    public final const COMPONENT_DATALOAD_UPVOTESPOSTS = 'dataload-upvotesposts';
+    public final const COMPONENT_DATALOAD_DOWNVOTESPOSTS = 'dataload-downvotesposts';
 
     public function getComponentsToProcess(): array
     {

@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_CUP_SHORTDESCRIPTION = 'forminputgroup-cup-shortdescription';
-    public final const MODULE_FORMINPUTGROUP_CUP_FACEBOOK = 'forminputgroup-cup-facebook';
-    public final const MODULE_FORMINPUTGROUP_CUP_TWITTER = 'forminputgroup-cup-twitter';
-    public final const MODULE_FORMINPUTGROUP_CUP_LINKEDIN = 'forminputgroup-cup-linkedin';
-    public final const MODULE_FORMINPUTGROUP_CUP_YOUTUBE = 'forminputgroup-cup-youtube';
-    public final const MODULE_FORMINPUTGROUP_CUP_INSTAGRAM = 'forminputgroup-cup-instagram';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_SHORTDESCRIPTION = 'forminputgroup-cup-shortdescription';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_FACEBOOK = 'forminputgroup-cup-facebook';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_TWITTER = 'forminputgroup-cup-twitter';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_LINKEDIN = 'forminputgroup-cup-linkedin';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_YOUTUBE = 'forminputgroup-cup-youtube';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_INSTAGRAM = 'forminputgroup-cup-instagram';
 
     public function getComponentsToProcess(): array
     {

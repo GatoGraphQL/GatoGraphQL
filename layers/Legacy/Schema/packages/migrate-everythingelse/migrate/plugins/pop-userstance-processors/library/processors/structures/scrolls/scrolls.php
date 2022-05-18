@@ -2,16 +2,16 @@
 
 class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW = 'scroll-mystances-fullviewpreview';
-    public final const MODULE_SCROLL_STANCES_NAVIGATOR = 'scroll-stances-navigator';
-    public final const MODULE_SCROLL_STANCES_ADDONS = 'scroll-stances-addons';
-    public final const MODULE_SCROLL_STANCES_FULLVIEW = 'scroll-stances-fullview';
-    public final const MODULE_SCROLL_STANCES_THUMBNAIL = 'scroll-stances-thumbnail';
-    public final const MODULE_SCROLL_STANCES_LIST = 'scroll-stances-list';
-    public final const MODULE_SCROLL_AUTHORSTANCES_FULLVIEW = 'scroll-authorstances-fullview';
-    public final const MODULE_SCROLL_AUTHORSTANCES_THUMBNAIL = 'scroll-authorstances-thumbnail';
-    public final const MODULE_SCROLL_AUTHORSTANCES_LIST = 'scroll-authorstances-list';
-    public final const MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scroll-singlerelatedstancecontent-fullview';
+    public final const COMPONENT_SCROLL_MYSTANCES_FULLVIEWPREVIEW = 'scroll-mystances-fullviewpreview';
+    public final const COMPONENT_SCROLL_STANCES_NAVIGATOR = 'scroll-stances-navigator';
+    public final const COMPONENT_SCROLL_STANCES_ADDONS = 'scroll-stances-addons';
+    public final const COMPONENT_SCROLL_STANCES_FULLVIEW = 'scroll-stances-fullview';
+    public final const COMPONENT_SCROLL_STANCES_THUMBNAIL = 'scroll-stances-thumbnail';
+    public final const COMPONENT_SCROLL_STANCES_LIST = 'scroll-stances-list';
+    public final const COMPONENT_SCROLL_AUTHORSTANCES_FULLVIEW = 'scroll-authorstances-fullview';
+    public final const COMPONENT_SCROLL_AUTHORSTANCES_THUMBNAIL = 'scroll-authorstances-thumbnail';
+    public final const COMPONENT_SCROLL_AUTHORSTANCES_LIST = 'scroll-authorstances-list';
+    public final const COMPONENT_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scroll-singlerelatedstancecontent-fullview';
 
     public function getComponentsToProcess(): array
     {

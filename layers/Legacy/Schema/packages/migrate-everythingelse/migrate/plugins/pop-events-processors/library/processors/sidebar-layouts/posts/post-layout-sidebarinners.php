@@ -2,12 +2,12 @@
 
 class GD_EM_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT = 'layout-postsidebarinner-vertical-event';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT = 'layout-postsidebarinner-vertical-pastevent';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT = 'layout-postsidebarinner-horizontal-event';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT = 'layout-postsidebarinner-horizontal-pastevent';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT = 'layout-postsidebarinner-compacthorizontal-event';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT = 'layout-postsidebarinner-compacthorizontal-pastevent';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_EVENT = 'layout-postsidebarinner-vertical-event';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_PASTEVENT = 'layout-postsidebarinner-vertical-pastevent';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_EVENT = 'layout-postsidebarinner-horizontal-event';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_PASTEVENT = 'layout-postsidebarinner-horizontal-pastevent';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_EVENT = 'layout-postsidebarinner-compacthorizontal-event';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_PASTEVENT = 'layout-postsidebarinner-compacthorizontal-pastevent';
 
     public function getComponentsToProcess(): array
     {

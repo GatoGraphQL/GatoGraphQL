@@ -2,10 +2,10 @@
 
 class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Processor_StylesLayoutsBase
 {
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES = 'layout-marknotificationasread-showelemstyles';
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES = 'layout-marknotificationasread-hideelemstyles';
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES = 'layout-marknotificationasunread-showelemstyles';
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES = 'layout-marknotificationasunread-hideelemstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES = 'layout-marknotificationasread-showelemstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES = 'layout-marknotificationasread-hideelemstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES = 'layout-marknotificationasunread-showelemstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES = 'layout-marknotificationasunread-hideelemstyles';
 
     public function getComponentsToProcess(): array
     {

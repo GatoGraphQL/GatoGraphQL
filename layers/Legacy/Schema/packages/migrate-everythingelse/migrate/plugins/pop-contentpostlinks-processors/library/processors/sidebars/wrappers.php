@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_WidgetWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_LAYOUTWRAPPER_LINK_CATEGORIES = 'layoutwrapper-link-categories';
+    public final const COMPONENT_LAYOUTWRAPPER_LINK_CATEGORIES = 'layoutwrapper-link-categories';
 
     public function getComponentsToProcess(): array
     {

@@ -2,9 +2,9 @@
 
 class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public final const MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS = 'filterinputcontainer-locationposts';
-    public final const MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
-    public final const MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_LOCATIONPOSTS = 'filterinputcontainer-locationposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
+    public final const COMPONENT_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
 
     public function getComponentsToProcess(): array
     {

@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module_Processor_CheckboxFormInputsBase
 {
-    public final const MODULE_FILTERINPUT_FILTERBYCOMMUNITY = 'filterinput-filterbycommunity';
+    public final const COMPONENT_FILTERINPUT_FILTERBYCOMMUNITY = 'filterinput-filterbycommunity';
 
     public function getComponentsToProcess(): array
     {

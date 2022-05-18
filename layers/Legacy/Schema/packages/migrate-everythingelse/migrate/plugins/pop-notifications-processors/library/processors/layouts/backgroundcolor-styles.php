@@ -2,8 +2,8 @@
 
 class Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts extends PoP_Module_Processor_StylesLayoutsBase
 {
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES = 'layout-marknotificationasread-bgcolorstyles';
-    public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES = 'layout-marknotificationasunread-bgcolorstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES = 'layout-marknotificationasread-bgcolorstyles';
+    public final const COMPONENT_LAYOUT_MARKNOTIFICATIONASUNREAD_BGCOLORSTYLES = 'layout-marknotificationasunread-bgcolorstyles';
 
     public function getComponentsToProcess(): array
     {

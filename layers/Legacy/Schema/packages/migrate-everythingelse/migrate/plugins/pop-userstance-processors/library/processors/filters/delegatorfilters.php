@@ -2,15 +2,15 @@
 
 class PoPVP_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public final const MODULE_DELEGATORFILTER_STANCES = 'delegatorfilter-stances';
-    public final const MODULE_DELEGATORFILTER_AUTHORSTANCES = 'delegatorfilter-authorstance';
-    public final const MODULE_DELEGATORFILTER_MYSTANCES = 'delegatorfilter-mystances';
-    public final const MODULE_DELEGATORFILTER_STANCES_AUTHORROLE = 'delegatorfilter-stances-authorrole';
-    public final const MODULE_DELEGATORFILTER_STANCES_STANCE = 'delegatorfilter-stances-stance';
-    public final const MODULE_DELEGATORFILTER_AUTHORSTANCES_STANCE = 'delegatorfilter-authorstances-stance';
-    public final const MODULE_DELEGATORFILTER_STANCES_GENERALSTANCE = 'delegatorfilter-stances-generalstance';
-    public final const MODULE_DELEGATORFILTER_TAGSTANCES = 'delegatorfilter-tagstances';
-    public final const MODULE_DELEGATORFILTER_TAGSTANCES_STANCE = 'delegatorfilter-tagstances-stance';
+    public final const COMPONENT_DELEGATORFILTER_STANCES = 'delegatorfilter-stances';
+    public final const COMPONENT_DELEGATORFILTER_AUTHORSTANCES = 'delegatorfilter-authorstance';
+    public final const COMPONENT_DELEGATORFILTER_MYSTANCES = 'delegatorfilter-mystances';
+    public final const COMPONENT_DELEGATORFILTER_STANCES_AUTHORROLE = 'delegatorfilter-stances-authorrole';
+    public final const COMPONENT_DELEGATORFILTER_STANCES_STANCE = 'delegatorfilter-stances-stance';
+    public final const COMPONENT_DELEGATORFILTER_AUTHORSTANCES_STANCE = 'delegatorfilter-authorstances-stance';
+    public final const COMPONENT_DELEGATORFILTER_STANCES_GENERALSTANCE = 'delegatorfilter-stances-generalstance';
+    public final const COMPONENT_DELEGATORFILTER_TAGSTANCES = 'delegatorfilter-tagstances';
+    public final const COMPONENT_DELEGATORFILTER_TAGSTANCES_STANCE = 'delegatorfilter-tagstances-stance';
 
     public function getComponentsToProcess(): array
     {

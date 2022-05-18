@@ -2,8 +2,8 @@
 
 class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_GENERICUSER = 'sidebarmulticomponent-genericuser';
-    public final const MODULE_SIDEBARMULTICOMPONENT_AVATAR = 'sidebarmulticomponent-avatar';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_GENERICUSER = 'sidebarmulticomponent-genericuser';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_AVATAR = 'sidebarmulticomponent-avatar';
 
     public function getComponentsToProcess(): array
     {

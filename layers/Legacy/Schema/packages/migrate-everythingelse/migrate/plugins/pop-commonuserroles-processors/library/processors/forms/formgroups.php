@@ -2,15 +2,15 @@
 
 class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON = 'forminputgroup-ure-cup-contactperson';
-    public final const MODULE_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER = 'forminputgroup-ure-cup-contactnumber';
-    public final const MODULE_URE_FORMINPUTGROUP_CUP_LASTNAME = 'forminputgroup-ure-cup-lastName';
-    public final const MODULE_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS = 'ure-forminputgroup-individualinterests';
-    public final const MODULE_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES = 'ure-forminputgroup-organizationcategories';
-    public final const MODULE_URE_FORMINPUTGROUP_ORGANIZATIONTYPES = 'ure-forminputgroup-organizationtypes';
-    public final const MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS = 'filterinputgroup-individualinterests';
-    public final const MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES = 'filterinputgroup-organizationcategories';
-    public final const MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES = 'filterinputgroup-organizationtypes';
+    public final const COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTPERSON = 'forminputgroup-ure-cup-contactperson';
+    public final const COMPONENT_URE_FORMINPUTGROUP_CUP_CONTACTNUMBER = 'forminputgroup-ure-cup-contactnumber';
+    public final const COMPONENT_URE_FORMINPUTGROUP_CUP_LASTNAME = 'forminputgroup-ure-cup-lastName';
+    public final const COMPONENT_URE_FORMINPUTGROUP_INDIVIDUALINTERESTS = 'ure-forminputgroup-individualinterests';
+    public final const COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONCATEGORIES = 'ure-forminputgroup-organizationcategories';
+    public final const COMPONENT_URE_FORMINPUTGROUP_ORGANIZATIONTYPES = 'ure-forminputgroup-organizationtypes';
+    public final const COMPONENT_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS = 'filterinputgroup-individualinterests';
+    public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES = 'filterinputgroup-organizationcategories';
+    public final const COMPONENT_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES = 'filterinputgroup-organizationtypes';
 
     public function getComponentsToProcess(): array
     {

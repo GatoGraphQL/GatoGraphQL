@@ -2,11 +2,11 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_Scrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS = 'scroll-automatedemails-latestcontent-details';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW = 'scroll-automatedemails-latestcontent-simpleview';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW = 'scroll-automatedemails-latestcontent-fullview';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scroll-automatedemails-latestcontent-thumbnail';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scroll-automatedemails-latestcontent-list';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS = 'scroll-automatedemails-latestcontent-details';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW = 'scroll-automatedemails-latestcontent-simpleview';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW = 'scroll-automatedemails-latestcontent-fullview';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scroll-automatedemails-latestcontent-thumbnail';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scroll-automatedemails-latestcontent-list';
 
     public function getComponentsToProcess(): array
     {

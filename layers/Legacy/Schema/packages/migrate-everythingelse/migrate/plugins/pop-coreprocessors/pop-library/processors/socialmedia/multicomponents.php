@@ -2,15 +2,15 @@
 
 class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_POSTSOCIALMEDIA = 'multicomponent-post-sm';
-    public final const MODULE_MULTICOMPONENT_USERSOCIALMEDIA = 'multicomponent-user-sm';
-    public final const MODULE_MULTICOMPONENT_TAGSOCIALMEDIA = 'multicomponent-tag-sm';
-    public final const MODULE_MULTICOMPONENT_POSTSECINTERACTIONS = 'multicomponent-postsecinteractions';
-    public final const MODULE_MULTICOMPONENT_USERSECINTERACTIONS = 'multicomponent-usersecinteractions';
-    public final const MODULE_MULTICOMPONENT_TAGSECINTERACTIONS = 'multicomponent-tagsecinteractions';
-    public final const MODULE_MULTICOMPONENT_POSTOPTIONS = 'multicomponent-postoptions';
-    public final const MODULE_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
-    public final const MODULE_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
+    public final const COMPONENT_MULTICOMPONENT_POSTSOCIALMEDIA = 'multicomponent-post-sm';
+    public final const COMPONENT_MULTICOMPONENT_USERSOCIALMEDIA = 'multicomponent-user-sm';
+    public final const COMPONENT_MULTICOMPONENT_TAGSOCIALMEDIA = 'multicomponent-tag-sm';
+    public final const COMPONENT_MULTICOMPONENT_POSTSECINTERACTIONS = 'multicomponent-postsecinteractions';
+    public final const COMPONENT_MULTICOMPONENT_USERSECINTERACTIONS = 'multicomponent-usersecinteractions';
+    public final const COMPONENT_MULTICOMPONENT_TAGSECINTERACTIONS = 'multicomponent-tagsecinteractions';
+    public final const COMPONENT_MULTICOMPONENT_POSTOPTIONS = 'multicomponent-postoptions';
+    public final const COMPONENT_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
+    public final const COMPONENT_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
 
     public function getComponentsToProcess(): array
     {

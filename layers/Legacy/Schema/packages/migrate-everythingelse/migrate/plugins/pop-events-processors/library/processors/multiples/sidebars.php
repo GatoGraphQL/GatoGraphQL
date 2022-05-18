@@ -3,17 +3,17 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR = 'multiple-events-calendar-sidebar';
-    public final const MODULE_MULTIPLE_SECTION_EVENTS_SIDEBAR = 'multiple-section-events-sidebar';
-    public final const MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR = 'multiple-section-pastevents-sidebar';
-    public final const MODULE_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR = 'multiple-tag-events-calendar-sidebar';
-    public final const MODULE_MULTIPLE_TAG_EVENTS_SIDEBAR = 'multiple-tag-events-sidebar';
-    public final const MODULE_MULTIPLE_TAG_PASTEVENTS_SIDEBAR = 'multiple-tag-pastevents-sidebar';
-    public final const MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR = 'multiple-single-event-sidebar';
-    public final const MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR = 'multiple-single-pastevent-sidebar';
-    public final const MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR = 'multiple-authorevents-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR = 'multiple-authorpastevents-sidebar';
-    public final const MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR = 'multiple-authoreventscalendar-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR = 'multiple-events-calendar-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTION_EVENTS_SIDEBAR = 'multiple-section-events-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR = 'multiple-section-pastevents-sidebar';
+    public final const COMPONENT_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR = 'multiple-tag-events-calendar-sidebar';
+    public final const COMPONENT_MULTIPLE_TAG_EVENTS_SIDEBAR = 'multiple-tag-events-sidebar';
+    public final const COMPONENT_MULTIPLE_TAG_PASTEVENTS_SIDEBAR = 'multiple-tag-pastevents-sidebar';
+    public final const COMPONENT_MULTIPLE_SINGLE_EVENT_SIDEBAR = 'multiple-single-event-sidebar';
+    public final const COMPONENT_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR = 'multiple-single-pastevent-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHOREVENTS_SIDEBAR = 'multiple-authorevents-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR = 'multiple-authorpastevents-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR = 'multiple-authoreventscalendar-sidebar';
 
     public function getComponentsToProcess(): array
     {

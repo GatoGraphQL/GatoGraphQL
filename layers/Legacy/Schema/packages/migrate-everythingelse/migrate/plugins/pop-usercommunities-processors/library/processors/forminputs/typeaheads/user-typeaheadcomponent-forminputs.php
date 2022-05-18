@@ -7,8 +7,8 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_Processor_UserTypeaheadComponentFormInputs
 {
-    public final const MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY = 'ure-typeahead-component-community';
-    public final const MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS = 'ure-typeahead-component-communityplusmembers';
+    public final const COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITY = 'ure-typeahead-component-community';
+    public final const COMPONENT_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS = 'ure-typeahead-component-communityplusmembers';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Locations_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_LOCATIONS = 'filter-locations';
+    public final const COMPONENT_FILTER_LOCATIONS = 'filter-locations';
 
     public function getComponentsToProcess(): array
     {

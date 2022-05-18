@@ -12,9 +12,9 @@ class PoP_Module_Processor_TextFilterInputs extends PoP_Module_Processor_TextFor
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_SEARCH = 'filterinput-search';
-    public final const MODULE_FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
-    public final const MODULE_FILTERINPUT_NAME = 'filterinput-name';
+    public final const COMPONENT_FILTERINPUT_SEARCH = 'filterinput-search';
+    public final const COMPONENT_FILTERINPUT_HASHTAGS = 'filterinput-hashtags';
+    public final const COMPONENT_FILTERINPUT_NAME = 'filterinput-name';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

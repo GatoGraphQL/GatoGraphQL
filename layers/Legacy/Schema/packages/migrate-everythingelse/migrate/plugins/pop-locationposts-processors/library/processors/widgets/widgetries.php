@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_FORM_LOCATIONPOSTDETAILS = 'widget-form-locationpostdetails';
+    public final const COMPONENT_WIDGET_FORM_LOCATIONPOSTDETAILS = 'widget-form-locationpostdetails';
 
     public function getComponentsToProcess(): array
     {

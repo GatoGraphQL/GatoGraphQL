@@ -8,14 +8,14 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_HOME = 'block-home';
-    public final const MODULE_BLOCK_404 = 'block-404';
-    public final const MODULE_BLOCK_BACKGROUNDMENU = 'block-backgroundmenu';
-    public final const MODULE_BLOCK_SINGLEPOST = 'block-singlepost';
-    public final const MODULE_BLOCK_AUTHOR = 'block-author';
-    public final const MODULE_BLOCK_AUTHORDESCRIPTION = 'block-authordescription';
-    public final const MODULE_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
-    public final const MODULE_BLOCK_TAG = 'block-tag';
+    public final const COMPONENT_BLOCK_HOME = 'block-home';
+    public final const COMPONENT_BLOCK_404 = 'block-404';
+    public final const COMPONENT_BLOCK_BACKGROUNDMENU = 'block-backgroundmenu';
+    public final const COMPONENT_BLOCK_SINGLEPOST = 'block-singlepost';
+    public final const COMPONENT_BLOCK_AUTHOR = 'block-author';
+    public final const COMPONENT_BLOCK_AUTHORDESCRIPTION = 'block-authordescription';
+    public final const COMPONENT_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
+    public final const COMPONENT_BLOCK_TAG = 'block-tag';
 
     public function getComponentsToProcess(): array
     {

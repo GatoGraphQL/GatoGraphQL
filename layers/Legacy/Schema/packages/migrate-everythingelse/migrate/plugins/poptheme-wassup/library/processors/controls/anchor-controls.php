@@ -4,12 +4,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Wassup_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_TOGGLEQUICKVIEWINFO = 'anchorcontrol-togglequickviewinfo';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFO = 'anchorcontrol-togglesideinfo';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS = 'anchorcontrol-togglesideinfoxs';
-    public final const MODULE_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK = 'anchorcontrol-togglesideinfoxs-back';
-    public final const MODULE_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
-    public final const MODULE_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLEQUICKVIEWINFO = 'anchorcontrol-togglequickviewinfo';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFO = 'anchorcontrol-togglesideinfo';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS = 'anchorcontrol-togglesideinfoxs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLESIDEINFOXS_BACK = 'anchorcontrol-togglesideinfoxs-back';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLETABS = 'anchorcontrol-toggletabs';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLETABSXS = 'anchorcontrol-toggletabsxs';
 
     public function getComponentsToProcess(): array
     {

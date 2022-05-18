@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_Buttons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public final const MODULE_BUTTON_EVENT_CREATE = 'postbutton-event-create';
+    public final const COMPONENT_BUTTON_EVENT_CREATE = 'postbutton-event-create';
 
     public function getComponentsToProcess(): array
     {

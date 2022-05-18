@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentCreation_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA = 'viewcomponent-buttoninner-flag-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-flag-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA = 'viewcomponent-buttoninner-flag-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-flag-previewdropdown';
 
     public function getComponentsToProcess(): array
     {

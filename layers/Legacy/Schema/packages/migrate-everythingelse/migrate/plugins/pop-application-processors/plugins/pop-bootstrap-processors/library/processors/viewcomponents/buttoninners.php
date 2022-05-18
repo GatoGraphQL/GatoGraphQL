@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-buttoninner-sharebyemail-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-sharebyemail-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-buttoninner-sharebyemail-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-sharebyemail-previewdropdown';
 
     public function getComponentsToProcess(): array
     {

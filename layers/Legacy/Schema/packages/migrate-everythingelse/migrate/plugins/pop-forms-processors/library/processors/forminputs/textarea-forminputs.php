@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TEXTAREAEDITOR = 'forminput-textarea-editor';
-    public final const MODULE_FORMINPUT_EMAILS = 'forminput-emails';
-    public final const MODULE_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
+    public final const COMPONENT_FORMINPUT_TEXTAREAEDITOR = 'forminput-textarea-editor';
+    public final const COMPONENT_FORMINPUT_EMAILS = 'forminput-emails';
+    public final const COMPONENT_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
 
     public function getComponentsToProcess(): array
     {

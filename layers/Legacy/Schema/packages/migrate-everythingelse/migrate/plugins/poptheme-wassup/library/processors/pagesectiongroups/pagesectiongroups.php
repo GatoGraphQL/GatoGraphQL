@@ -4,9 +4,9 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_ENTRY_DEFAULT = 'entry-default';
-    public final const MODULE_ENTRY_PRINT = 'entry-print';
-    public final const MODULE_ENTRY_EMBED = 'entry-embed';
+    public final const COMPONENT_ENTRY_DEFAULT = 'entry-default';
+    public final const COMPONENT_ENTRY_PRINT = 'entry-print';
+    public final const COMPONENT_ENTRY_EMBED = 'entry-embed';
 
     public function getComponentsToProcess(): array
     {

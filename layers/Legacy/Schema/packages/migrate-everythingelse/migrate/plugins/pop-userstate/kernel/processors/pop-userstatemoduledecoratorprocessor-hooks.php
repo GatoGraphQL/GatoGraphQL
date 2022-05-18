@@ -7,7 +7,7 @@ class PoP_UserStateModuleDecoratorProcessorHooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            AbstractComponentProcessor::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
+            AbstractComponentProcessor::HOOK_ADD_HEADDATASETCOMPONENT_DATAPROPERTIES,
             $this->addHeaddatasetmoduleDataProperties(...),
             10,
             4

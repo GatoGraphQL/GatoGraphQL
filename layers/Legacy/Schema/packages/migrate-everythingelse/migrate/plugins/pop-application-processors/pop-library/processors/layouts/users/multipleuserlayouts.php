@@ -7,15 +7,15 @@ define('POP_MULTILAYOUT_HANDLE_USERCONTEXTUALPOSTAUTHOR', 'usercontextualpostaut
 
 class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_MultipleLayoutsBase
 {
-    public final const MODULE_LAYOUT_MULTIPLEUSER_POPOVER = 'layout-multipleuser-popover';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_POSTAUTHOR = 'layout-multipleuser-postauthor';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR = 'layout-multipleuser-contextualpostauthor';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_NAVIGATOR = 'layout-multipleuser-navigator';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_ADDONS = 'layout-multipleuser-addons';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_DETAILS = 'layout-multipleuser-details';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_THUMBNAIL = 'layout-multipleuser-thumbnail';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
-    public final const MODULE_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_POPOVER = 'layout-multipleuser-popover';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_POSTAUTHOR = 'layout-multipleuser-postauthor';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR = 'layout-multipleuser-contextualpostauthor';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_NAVIGATOR = 'layout-multipleuser-navigator';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_ADDONS = 'layout-multipleuser-addons';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_DETAILS = 'layout-multipleuser-details';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_THUMBNAIL = 'layout-multipleuser-thumbnail';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
+    public final const COMPONENT_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
 
     public function getComponentsToProcess(): array
     {

@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_LocationViewComponentButtons extends PoP_Module_Processor_LocationViewComponentButtonsBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS = 'em-viewcomponent-button-postlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS = 'em-viewcomponent-button-postlocations-noinitmarkers';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS = 'em-viewcomponent-button-userlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS = 'em-viewcomponent-button-userlocations-noinitmarkers';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS = 'em-viewcomponent-button-postsidebarlocations';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS = 'em-viewcomponent-button-usersidebarlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS = 'em-viewcomponent-button-postlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_POSTLOCATIONS_NOINITMARKERS = 'em-viewcomponent-button-postlocations-noinitmarkers';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS = 'em-viewcomponent-button-userlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_USERLOCATIONS_NOINITMARKERS = 'em-viewcomponent-button-userlocations-noinitmarkers';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS = 'em-viewcomponent-button-postsidebarlocations';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS = 'em-viewcomponent-button-usersidebarlocations';
 
     public function getComponentsToProcess(): array
     {

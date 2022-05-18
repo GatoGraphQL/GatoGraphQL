@@ -2,7 +2,7 @@
 
 class PoP_UserAvatarProcessors_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_USERAVATAR_UPDATE = 'forminner-useravatar-update';
+    public final const COMPONENT_FORMINNER_USERAVATAR_UPDATE = 'forminner-useravatar-update';
 
     public function getComponentsToProcess(): array
     {

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class PoP_TrendingTags_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_TRENDINGTAGLIST = 'controlgroup-trendingtaglist';
+    public final const COMPONENT_CONTROLGROUP_TRENDINGTAGLIST = 'controlgroup-trendingtaglist';
 
     public function getComponentsToProcess(): array
     {

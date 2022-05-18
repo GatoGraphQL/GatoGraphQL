@@ -7,8 +7,8 @@ class PoP_Module_Processor_CustomSidebarDataloads extends PoP_Module_Processor_D
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
-    public final const MODULE_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
+    public final const COMPONENT_DATALOAD_TAG_SIDEBAR = 'dataload-tag-sidebar';
+    public final const COMPONENT_DATALOAD_SINGLE_POST_SIDEBAR = 'dataload-single-post-sidebar';
 
     public function getComponentsToProcess(): array
     {

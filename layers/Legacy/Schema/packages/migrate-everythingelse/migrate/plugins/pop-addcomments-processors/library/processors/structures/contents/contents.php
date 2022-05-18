@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentsContents extends PoP_Module_Processor_ContentsBase
 {
-    public final const MODULE_CONTENT_COMMENTSINGLE = 'content-commentsingle';
+    public final const COMPONENT_CONTENT_COMMENTSINGLE = 'content-commentsingle';
 
     public function getComponentsToProcess(): array
     {

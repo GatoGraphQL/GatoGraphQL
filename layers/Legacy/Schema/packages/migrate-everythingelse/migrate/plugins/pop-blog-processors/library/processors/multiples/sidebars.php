@@ -3,11 +3,11 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_AUTHOR_SIDEBAR = 'multiple-author-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR = 'multiple-authormaincontent-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORCONTENT_SIDEBAR = 'multiple-authorcontent-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR = 'multiple-authorposts-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR = 'multiple-authorcategoryposts-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHOR_SIDEBAR = 'multiple-author-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR = 'multiple-authormaincontent-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORCONTENT_SIDEBAR = 'multiple-authorcontent-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORPOSTS_SIDEBAR = 'multiple-authorposts-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR = 'multiple-authorcategoryposts-sidebar';
 
     public function getComponentsToProcess(): array
     {

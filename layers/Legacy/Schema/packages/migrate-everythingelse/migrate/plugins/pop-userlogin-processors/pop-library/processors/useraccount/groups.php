@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
+    public final const COMPONENT_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
 
     public function getComponentsToProcess(): array
     {

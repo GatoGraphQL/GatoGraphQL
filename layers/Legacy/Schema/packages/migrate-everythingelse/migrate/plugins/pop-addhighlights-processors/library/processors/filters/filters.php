@@ -2,9 +2,9 @@
 
 class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_HIGHLIGHTS = 'filter-highlights';
-    public final const MODULE_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
-    public final const MODULE_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
+    public final const COMPONENT_FILTER_HIGHLIGHTS = 'filter-highlights';
+    public final const COMPONENT_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
+    public final const COMPONENT_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
     public function getComponentsToProcess(): array
     {

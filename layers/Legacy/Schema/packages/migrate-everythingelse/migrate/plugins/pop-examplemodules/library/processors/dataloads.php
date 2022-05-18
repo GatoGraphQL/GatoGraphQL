@@ -15,14 +15,14 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_EXAMPLE_LATESTPOSTS = 'example-latestposts';
-    public final const MODULE_EXAMPLE_AUTHORLATESTPOSTS = 'example-authorlatestposts';
-    public final const MODULE_EXAMPLE_AUTHORDESCRIPTION = 'example-authordescription';
-    public final const MODULE_EXAMPLE_TAGLATESTPOSTS = 'example-taglatestposts';
-    public final const MODULE_EXAMPLE_TAGDESCRIPTION = 'example-tagdescription';
-    public final const MODULE_EXAMPLE_SINGLE = 'example-single';
-    public final const MODULE_EXAMPLE_PAGE = 'example-page';
-    public final const MODULE_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
+    public final const COMPONENT_EXAMPLE_LATESTPOSTS = 'example-latestposts';
+    public final const COMPONENT_EXAMPLE_AUTHORLATESTPOSTS = 'example-authorlatestposts';
+    public final const COMPONENT_EXAMPLE_AUTHORDESCRIPTION = 'example-authordescription';
+    public final const COMPONENT_EXAMPLE_TAGLATESTPOSTS = 'example-taglatestposts';
+    public final const COMPONENT_EXAMPLE_TAGDESCRIPTION = 'example-tagdescription';
+    public final const COMPONENT_EXAMPLE_SINGLE = 'example-single';
+    public final const COMPONENT_EXAMPLE_PAGE = 'example-page';
+    public final const COMPONENT_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
     public function getComponentsToProcess(): array
     {

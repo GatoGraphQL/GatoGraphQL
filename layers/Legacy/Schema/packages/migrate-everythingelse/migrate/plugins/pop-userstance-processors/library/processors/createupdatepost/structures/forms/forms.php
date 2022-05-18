@@ -2,7 +2,7 @@
 
 class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_STANCE = 'form-stance';
+    public final const COMPONENT_FORM_STANCE = 'form-stance';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_ControlMulticomponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS = 'multicomponent-anchorcontrol-toggletabs';
+    public final const COMPONENT_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS = 'multicomponent-anchorcontrol-toggletabs';
 
     public function getComponentsToProcess(): array
     {

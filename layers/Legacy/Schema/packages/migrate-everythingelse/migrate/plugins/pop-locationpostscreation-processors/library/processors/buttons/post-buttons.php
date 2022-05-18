@@ -2,7 +2,7 @@
 
 class PoP_LocationPostsCreation_Module_Processor_Buttons extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public final const MODULE_BUTTON_LOCATIONPOST_CREATE = 'postbutton-locationpost-create';
+    public final const COMPONENT_BUTTON_LOCATIONPOST_CREATE = 'postbutton-locationpost-create';
 
     public function getComponentsToProcess(): array
     {

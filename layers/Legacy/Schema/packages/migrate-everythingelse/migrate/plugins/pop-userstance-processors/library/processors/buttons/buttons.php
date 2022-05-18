@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_BUTTON_STANCEEDIT = 'button-stanceedit';
-    public final const MODULE_BUTTON_STANCEVIEW = 'button-stanceview';
-    public final const MODULE_BUTTON_POSTSTANCES_PRO = 'button-poststances-pro';
-    public final const MODULE_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
-    public final const MODULE_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
+    public final const COMPONENT_BUTTON_STANCEEDIT = 'button-stanceedit';
+    public final const COMPONENT_BUTTON_STANCEVIEW = 'button-stanceview';
+    public final const COMPONENT_BUTTON_POSTSTANCES_PRO = 'button-poststances-pro';
+    public final const COMPONENT_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
+    public final const COMPONENT_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
 
     public function getComponentsToProcess(): array
     {

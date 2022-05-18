@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
-    public final const MODULE_TABLE_MYSTANCES = 'table-mystances';
+    public final const COMPONENT_TABLE_MYSTANCES = 'table-mystances';
 
     public function getComponentsToProcess(): array
     {

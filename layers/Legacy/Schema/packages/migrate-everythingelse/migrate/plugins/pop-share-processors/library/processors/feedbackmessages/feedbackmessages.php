@@ -2,7 +2,7 @@
 
 class PoP_Share_Module_Processor_FeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_SHAREBYEMAIL = 'feedbackmessage-sharebyemail';
+    public final const COMPONENT_FEEDBACKMESSAGE_SHAREBYEMAIL = 'feedbackmessage-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

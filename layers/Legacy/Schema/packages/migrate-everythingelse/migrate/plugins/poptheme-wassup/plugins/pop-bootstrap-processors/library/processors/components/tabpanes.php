@@ -6,7 +6,7 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
  */
 class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelComponentsBase
 {
-    public final const MODULE_PAGESECTION_ADDONS = 'pagesection-addons';
+    public final const COMPONENT_PAGESECTION_ADDONS = 'pagesection-addons';
 
     public function getComponentsToProcess(): array
     {

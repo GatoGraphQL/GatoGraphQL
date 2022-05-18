@@ -6,7 +6,7 @@ class PoP_LocationPosts_Module_Processor_CustomSidebarDataloads extends PoP_Modu
 {
     use QueriedDBObjectComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR = 'dataload-single-locationpost-sidebar';
+    public final const COMPONENT_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR = 'dataload-single-locationpost-sidebar';
 
     public function getComponentsToProcess(): array
     {

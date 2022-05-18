@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {
-    public final const MODULE_MESSAGE_NOREFERENCES = 'message-noreferences';
-    public final const MODULE_MESSAGE_NOCONTACT = 'message-nocontact';
+    public final const COMPONENT_MESSAGE_NOREFERENCES = 'message-noreferences';
+    public final const COMPONENT_MESSAGE_NOCONTACT = 'message-nocontact';
 
     public function getComponentsToProcess(): array
     {

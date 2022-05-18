@@ -2,13 +2,13 @@
 
 class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_QUICKLINKBUTTONGROUP_POSTSHARE = 'quicklinkbuttongroup-postshare';
-    public final const MODULE_QUICKLINKBUTTONGROUP_POSTPERMALINK = 'quicklinkbuttongroup-postpermalink';
-    public final const MODULE_QUICKLINKBUTTONGROUP_USERSHARE = 'quicklinkbuttongroup-usershare';
-    public final const MODULE_QUICKLINKBUTTONGROUP_USERCONTACTINFO = 'quicklinkbuttongroup-usercontactinfo';
-    public final const MODULE_QUICKLINKBUTTONGROUP_COMMENTS = 'quicklinkbuttongroup-comments';
-    public final const MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL = 'quicklinkbuttongroup-comments-label';
-    public final const MODULE_QUICKLINKBUTTONGROUP_TAGSHARE = 'quicklinkbuttongroup-tagshare';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTSHARE = 'quicklinkbuttongroup-postshare';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTPERMALINK = 'quicklinkbuttongroup-postpermalink';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_USERSHARE = 'quicklinkbuttongroup-usershare';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_USERCONTACTINFO = 'quicklinkbuttongroup-usercontactinfo';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS = 'quicklinkbuttongroup-comments';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_COMMENTS_LABEL = 'quicklinkbuttongroup-comments-label';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_TAGSHARE = 'quicklinkbuttongroup-tagshare';
 
     public function getComponentsToProcess(): array
     {

@@ -4,11 +4,11 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 class PoP_RelatedPosts_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS = 'dataload-singlerelatedcontent-scroll-details';
-    public final const MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW = 'dataload-singlerelatedcontent-scroll-simpleview';
-    public final const MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW = 'dataload-singlerelatedcontent-scroll-fullview';
-    public final const MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedcontent-scroll-thumbnail';
-    public final const MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST = 'dataload-singlerelatedcontent-scroll-list';
+    public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS = 'dataload-singlerelatedcontent-scroll-details';
+    public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW = 'dataload-singlerelatedcontent-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW = 'dataload-singlerelatedcontent-scroll-fullview';
+    public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedcontent-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST = 'dataload-singlerelatedcontent-scroll-list';
 
     public function getComponentsToProcess(): array
     {

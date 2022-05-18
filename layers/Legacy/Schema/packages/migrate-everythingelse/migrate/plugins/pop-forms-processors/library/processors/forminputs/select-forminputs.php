@@ -11,10 +11,10 @@ class PoP_Module_Processor_SelectFilterInputs extends PoP_Module_Processor_Selec
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_ORDERUSER = 'filterinput-order-user';
-    public final const MODULE_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
-    public final const MODULE_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
-    public final const MODULE_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
+    public final const COMPONENT_FILTERINPUT_ORDERUSER = 'filterinput-order-user';
+    public final const COMPONENT_FILTERINPUT_ORDERPOST = 'filterinput-order-post';
+    public final const COMPONENT_FILTERINPUT_ORDERTAG = 'filterinput-order-tag';
+    public final const COMPONENT_FILTERINPUT_ORDERCOMMENT = 'filterinput-order-comment';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

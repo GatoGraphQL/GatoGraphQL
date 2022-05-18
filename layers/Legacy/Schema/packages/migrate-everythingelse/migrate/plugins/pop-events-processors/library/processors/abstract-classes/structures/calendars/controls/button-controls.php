@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_ButtonControlsBase
 {
-    public final const MODULE_CALENDARBUTTONCONTROL_CALENDARPREV = 'calendarbuttoncontrol-calendarprev';
-    public final const MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT = 'calendarbuttoncontrol-calendarnext';
+    public final const COMPONENT_CALENDARBUTTONCONTROL_CALENDARPREV = 'calendarbuttoncontrol-calendarprev';
+    public final const COMPONENT_CALENDARBUTTONCONTROL_CALENDARNEXT = 'calendarbuttoncontrol-calendarnext';
 
     public function getComponentsToProcess(): array
     {

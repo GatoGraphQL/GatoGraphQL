@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_BUTTON_ADDONSPOSTEDIT = 'button-addonspostedit';
-    public final const MODULE_BUTTON_ADDONSORMAINPOSTEDIT = 'button-addonsormainpostedit';
+    public final const COMPONENT_BUTTON_ADDONSPOSTEDIT = 'button-addonspostedit';
+    public final const COMPONENT_BUTTON_ADDONSORMAINPOSTEDIT = 'button-addonsormainpostedit';
 
     public function getComponentsToProcess(): array
     {

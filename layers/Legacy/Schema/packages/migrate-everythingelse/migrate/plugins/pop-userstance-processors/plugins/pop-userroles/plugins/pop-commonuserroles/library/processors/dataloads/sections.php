@@ -3,14 +3,14 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class UserStance_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW = 'dataload-stances-byorganizations-scroll-fullview';
-    public final const MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW = 'dataload-stances-byindividuals-scroll-fullview';
-    public final const MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL = 'dataload-stances-byorganizations-scroll-thumbnail';
-    public final const MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL = 'dataload-stances-byindividuals-scroll-thumbnail';
-    public final const MODULE_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST = 'dataload-stances-byorganizations-scroll-list';
-    public final const MODULE_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST = 'dataload-stances-byindividuals-scroll-list';
-    public final const MODULE_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL = 'dataload-stances-byorganizations-carousel';
-    public final const MODULE_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL = 'dataload-stances-byindividuals-carousel';
+    public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW = 'dataload-stances-byorganizations-scroll-fullview';
+    public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW = 'dataload-stances-byindividuals-scroll-fullview';
+    public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL = 'dataload-stances-byorganizations-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL = 'dataload-stances-byindividuals-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_SCROLL_LIST = 'dataload-stances-byorganizations-scroll-list';
+    public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_SCROLL_LIST = 'dataload-stances-byindividuals-scroll-list';
+    public final const COMPONENT_DATALOAD_STANCES_BYORGANIZATIONS_CAROUSEL = 'dataload-stances-byorganizations-carousel';
+    public final const COMPONENT_DATALOAD_STANCES_BYINDIVIDUALS_CAROUSEL = 'dataload-stances-byindividuals-carousel';
 
     public function getComponentsToProcess(): array
     {

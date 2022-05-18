@@ -2,7 +2,7 @@
 
 class PoP_Locations_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_LOCATIONS_SCROLL = 'block-locations-scroll';
+    public final const COMPONENT_BLOCK_LOCATIONS_SCROLL = 'block-locations-scroll';
 
     public function getComponentsToProcess(): array
     {

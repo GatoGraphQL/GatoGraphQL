@@ -32,7 +32,7 @@ class EngineRequest extends UpstreamEngineRequest
         array_splice(
             $defaultDataOutputItems,
             array_search(
-                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_MODULE_SETTINGS,
+                \PoP\ComponentModel\Constants\DataOutputItems::DATASET_COMPONENT_SETTINGS,
                 $defaultDataOutputItems
             ),
             1,

@@ -4,8 +4,8 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class Wassup_Module_Processor_MultipleComponentLayouts extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
-    public final const MODULE_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
+    public final const COMPONENT_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION = 'multicomponent-userhighlightpostinteraction';
+    public final const COMPONENT_MULTICOMPONENT_USERPOSTINTERACTION = 'multicomponent-userpostinteraction';
 
     public function getComponentsToProcess(): array
     {

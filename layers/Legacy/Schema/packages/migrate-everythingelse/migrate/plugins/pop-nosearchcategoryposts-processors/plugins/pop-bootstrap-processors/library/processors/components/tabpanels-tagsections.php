@@ -2,26 +2,26 @@
 
 class NSCPP_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Processor_TagSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 = 'tabpanel-tagnosearchcategoryposts00';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 = 'tabpanel-tagnosearchcategoryposts01';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 = 'tabpanel-tagnosearchcategoryposts02';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 = 'tabpanel-tagnosearchcategoryposts03';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 = 'tabpanel-tagnosearchcategoryposts04';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 = 'tabpanel-tagnosearchcategoryposts05';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 = 'tabpanel-tagnosearchcategoryposts06';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 = 'tabpanel-tagnosearchcategoryposts07';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 = 'tabpanel-tagnosearchcategoryposts08';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 = 'tabpanel-tagnosearchcategoryposts09';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 = 'tabpanel-tagnosearchcategoryposts10';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 = 'tabpanel-tagnosearchcategoryposts11';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 = 'tabpanel-tagnosearchcategoryposts12';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 = 'tabpanel-tagnosearchcategoryposts13';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 = 'tabpanel-tagnosearchcategoryposts14';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 = 'tabpanel-tagnosearchcategoryposts15';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 = 'tabpanel-tagnosearchcategoryposts16';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 = 'tabpanel-tagnosearchcategoryposts17';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'tabpanel-tagnosearchcategoryposts18';
-    public final const MODULE_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'tabpanel-tagnosearchcategoryposts19';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00 = 'tabpanel-tagnosearchcategoryposts00';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01 = 'tabpanel-tagnosearchcategoryposts01';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02 = 'tabpanel-tagnosearchcategoryposts02';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS03 = 'tabpanel-tagnosearchcategoryposts03';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS04 = 'tabpanel-tagnosearchcategoryposts04';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS05 = 'tabpanel-tagnosearchcategoryposts05';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS06 = 'tabpanel-tagnosearchcategoryposts06';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS07 = 'tabpanel-tagnosearchcategoryposts07';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS08 = 'tabpanel-tagnosearchcategoryposts08';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS09 = 'tabpanel-tagnosearchcategoryposts09';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS10 = 'tabpanel-tagnosearchcategoryposts10';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS11 = 'tabpanel-tagnosearchcategoryposts11';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS12 = 'tabpanel-tagnosearchcategoryposts12';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS13 = 'tabpanel-tagnosearchcategoryposts13';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS14 = 'tabpanel-tagnosearchcategoryposts14';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS15 = 'tabpanel-tagnosearchcategoryposts15';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS16 = 'tabpanel-tagnosearchcategoryposts16';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS17 = 'tabpanel-tagnosearchcategoryposts17';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18 = 'tabpanel-tagnosearchcategoryposts18';
+    public final const COMPONENT_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19 = 'tabpanel-tagnosearchcategoryposts19';
 
     public function getComponentsToProcess(): array
     {

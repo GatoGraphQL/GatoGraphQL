@@ -2,7 +2,7 @@
 
 class PoP_Share_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_SHAREBYEMAIL = 'form-sharebyemail';
+    public final const COMPONENT_FORM_SHAREBYEMAIL = 'form-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

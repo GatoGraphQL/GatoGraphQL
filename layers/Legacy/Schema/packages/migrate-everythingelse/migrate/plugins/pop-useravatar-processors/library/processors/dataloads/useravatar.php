@@ -8,7 +8,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class PoP_UserAvatarProcessors_Module_Processor_UserDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_USERAVATAR_UPDATE = 'dataload-useravatar-update';
+    public final const COMPONENT_DATALOAD_USERAVATAR_UPDATE = 'dataload-useravatar-update';
 
     public function getComponentsToProcess(): array
     {

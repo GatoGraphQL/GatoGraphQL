@@ -2,12 +2,12 @@
 
 class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_AUTHOREVENTS = 'filter-authorevents';
-    public final const MODULE_FILTER_TAGEVENTS = 'filter-tagevents';
-    public final const MODULE_FILTER_AUTHOREVENTSCALENDAR = 'filter-authoreventscalendar';
-    public final const MODULE_FILTER_TAGEVENTSCALENDAR = 'filter-tageventscalendar';
-    public final const MODULE_FILTER_EVENTS = 'filter-events';
-    public final const MODULE_FILTER_EVENTSCALENDAR = 'filter-eventscalendar';
+    public final const COMPONENT_FILTER_AUTHOREVENTS = 'filter-authorevents';
+    public final const COMPONENT_FILTER_TAGEVENTS = 'filter-tagevents';
+    public final const COMPONENT_FILTER_AUTHOREVENTSCALENDAR = 'filter-authoreventscalendar';
+    public final const COMPONENT_FILTER_TAGEVENTSCALENDAR = 'filter-tageventscalendar';
+    public final const COMPONENT_FILTER_EVENTS = 'filter-events';
+    public final const COMPONENT_FILTER_EVENTSCALENDAR = 'filter-eventscalendar';
 
     public function getComponentsToProcess(): array
     {

@@ -2,10 +2,10 @@
 
 class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_EVENTLIST = 'controlgroup-eventlist';
-    public final const MODULE_CONTROLGROUP_BLOCKEVENTLIST = 'controlgroup-blockeventlist';
-    public final const MODULE_CONTROLGROUP_BLOCKAUTHOREVENTLIST = 'controlgroup-blockauthoreventlist';
-    public final const MODULE_CONTROLGROUP_BLOCKTAGEVENTLIST = 'controlgroup-blocktageventlist';
+    public final const COMPONENT_CONTROLGROUP_EVENTLIST = 'controlgroup-eventlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKEVENTLIST = 'controlgroup-blockeventlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKAUTHOREVENTLIST = 'controlgroup-blockauthoreventlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKTAGEVENTLIST = 'controlgroup-blocktageventlist';
 
     public function getComponentsToProcess(): array
     {

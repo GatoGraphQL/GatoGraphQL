@@ -4,7 +4,7 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_ButtonWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_BUTTONWRAPPER_POSTPERMALINK = 'buttonwrapper-postpermalink';
+    public final const COMPONENT_BUTTONWRAPPER_POSTPERMALINK = 'buttonwrapper-postpermalink';
 
     public function getComponentsToProcess(): array
     {

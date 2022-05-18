@@ -12,8 +12,8 @@ class PoP_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Processor_
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
-    public final const MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
+    public final const COMPONENT_FILTERINPUT_MODERATEDPOSTSTATUS = 'filterinput-moderatedpoststatus';
+    public final const COMPONENT_FILTERINPUT_UNMODERATEDPOSTSTATUS = 'filterinput-unmoderatedpoststatus';
 
     private ?CustomPostModeratedStatusEnumTypeResolver $customPostModeratedStatusEnumTypeResolver = null;
     private ?CustomPostUnmoderatedStatusEnumTypeResolver $customPostUnmoderatedStatusEnumTypeResolver = null;

@@ -2,8 +2,8 @@
 
 class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'checkpointmessage-profileorganization';
-    public final const MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'checkpointmessage-profileindividual';
+    public final const COMPONENT_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'checkpointmessage-profileorganization';
+    public final const COMPONENT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'checkpointmessage-profileindividual';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_SideGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_SIDE = 'group-side';
+    public final const COMPONENT_GROUP_SIDE = 'group-side';
 
     public function getComponentsToProcess(): array
     {

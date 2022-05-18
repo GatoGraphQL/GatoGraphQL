@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonControlsBase
 {
-    public final const MODULE_BUTTONCONTROL_RELOADBLOCKGROUP = 'buttoncontrol-reloadblockgroup';
-    public final const MODULE_BUTTONCONTROL_RELOADBLOCK = 'buttoncontrol-reloadblock';
-    public final const MODULE_BUTTONCONTROL_LOADLATESTBLOCK = 'buttoncontrol-loadlatestblock';
-    public final const MODULE_BUTTONCONTROL_RESETEDITOR = 'buttoncontrol-reseteditor';
+    public final const COMPONENT_BUTTONCONTROL_RELOADBLOCKGROUP = 'buttoncontrol-reloadblockgroup';
+    public final const COMPONENT_BUTTONCONTROL_RELOADBLOCK = 'buttoncontrol-reloadblock';
+    public final const COMPONENT_BUTTONCONTROL_LOADLATESTBLOCK = 'buttoncontrol-loadlatestblock';
+    public final const COMPONENT_BUTTONCONTROL_RESETEDITOR = 'buttoncontrol-reseteditor';
 
     public function getComponentsToProcess(): array
     {

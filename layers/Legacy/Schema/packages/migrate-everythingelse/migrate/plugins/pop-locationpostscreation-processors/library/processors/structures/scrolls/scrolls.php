@@ -2,8 +2,8 @@
 
 class GD_Custom_EM_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW = 'scroll-mylocationposts-fullviewpreview';
-    public final const MODULE_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW = 'scroll-mylocationposts-simpleviewpreview';
+    public final const COMPONENT_SCROLL_MYLOCATIONPOSTS_FULLVIEWPREVIEW = 'scroll-mylocationposts-fullviewpreview';
+    public final const COMPONENT_SCROLL_MYLOCATIONPOSTS_SIMPLEVIEWPREVIEW = 'scroll-mylocationposts-simpleviewpreview';
 
     public function getComponentsToProcess(): array
     {

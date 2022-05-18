@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_CODE_HOMEWELCOME = 'code-homewelcome';
-    public final const MODULE_CODE_EMPTY = 'code-empty';
-    public final const MODULE_CODE_TRENDINGTAGSDESCRIPTION = 'code-trendingtagsdescription';
-    public final const MODULE_CODE_404 = 'code-404';
-    public final const MODULE_CODE_EMPTYSIDEINFO = 'code-emptysideinfo';
+    public final const COMPONENT_CODE_HOMEWELCOME = 'code-homewelcome';
+    public final const COMPONENT_CODE_EMPTY = 'code-empty';
+    public final const COMPONENT_CODE_TRENDINGTAGSDESCRIPTION = 'code-trendingtagsdescription';
+    public final const COMPONENT_CODE_404 = 'code-404';
+    public final const COMPONENT_CODE_EMPTYSIDEINFO = 'code-emptysideinfo';
 
     public function getComponentsToProcess(): array
     {

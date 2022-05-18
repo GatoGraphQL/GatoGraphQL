@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {
-    public final const MODULE_MESSAGE_NOCATEGORIES = 'message-nocategories';
+    public final const COMPONENT_MESSAGE_NOCATEGORIES = 'message-nocategories';
 
     public function getComponentsToProcess(): array
     {

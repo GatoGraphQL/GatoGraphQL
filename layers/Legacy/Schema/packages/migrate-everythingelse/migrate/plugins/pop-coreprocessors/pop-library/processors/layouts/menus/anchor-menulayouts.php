@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_AnchorMenuLayouts extends PoP_Module_Processor_AnchorMenuLayoutsBase
 {
-    public final const MODULE_LAYOUT_MENU_BUTTON = 'layout-menu-button';
+    public final const COMPONENT_LAYOUT_MENU_BUTTON = 'layout-menu-button';
 
     public function getComponentsToProcess(): array
     {

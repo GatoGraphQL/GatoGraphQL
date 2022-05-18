@@ -3,7 +3,7 @@ use PoP\ConfigurationComponentModel\ComponentProcessors\AbstractComponentProcess
 
 class PoP_ConfigurationComponentModel_Module_Processor_Elements extends AbstractComponentProcessor
 {
-    public final const MODULE_EMPTY = 'empty';
+    public final const COMPONENT_EMPTY = 'empty';
 
     public function getComponentsToProcess(): array
     {

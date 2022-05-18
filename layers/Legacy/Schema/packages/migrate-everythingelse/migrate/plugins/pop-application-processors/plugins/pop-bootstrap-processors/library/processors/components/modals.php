@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_GFModalComponents extends PoP_Module_Processor_FormModalViewComponentsBase
 {
-    public final const MODULE_MODAL_SHAREBYEMAIL = 'modal-sharebyemail';
+    public final const COMPONENT_MODAL_SHAREBYEMAIL = 'modal-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

@@ -5,9 +5,9 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_CustomWrapperLayouts extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'layoutwrapper-userpostinteraction';
-    public final const MODULE_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'layoutwrapper-userhighlightpostinteraction';
-    public final const MODULE_CODEWRAPPER_LAZYLOADINGSPINNER = 'codewrapper-lazyloadingspinner';
+    public final const COMPONENT_LAYOUTWRAPPER_USERPOSTINTERACTION = 'layoutwrapper-userpostinteraction';
+    public final const COMPONENT_LAYOUTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'layoutwrapper-userhighlightpostinteraction';
+    public final const COMPONENT_CODEWRAPPER_LAZYLOADINGSPINNER = 'codewrapper-lazyloadingspinner';
 
     public function getComponentsToProcess(): array
     {

@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatform_Module_Processor_UserPreferencesCheckboxFormInputs
 {
-    public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminput-emailnotifications-general-newpost';
-    public final const MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminput-emaildigests-weeklylatestposts';
-    public final const MODULE_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS = 'forminput-emaildigests-specialposts';
+    public final const COMPONENT_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST = 'forminput-emailnotifications-general-newpost';
+    public final const COMPONENT_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminput-emaildigests-weeklylatestposts';
+    public final const COMPONENT_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS = 'forminput-emaildigests-specialposts';
 
     public function getComponentsToProcess(): array
     {

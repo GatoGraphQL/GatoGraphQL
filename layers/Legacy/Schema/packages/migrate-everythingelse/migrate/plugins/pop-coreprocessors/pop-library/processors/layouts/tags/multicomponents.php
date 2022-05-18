@@ -2,7 +2,7 @@
 
 class PoP_Module_ProcessorTagMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_LAYOUT_TAG_DETAILS = 'multicomponent-tag';
+    public final const COMPONENT_LAYOUT_TAG_DETAILS = 'multicomponent-tag';
 
     public function getComponentsToProcess(): array
     {

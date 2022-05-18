@@ -3,14 +3,14 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class Wassup_Module_Processor_FormMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH = 'multicomponent-forminputs-moderatedpublish';
-    public final const MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH = 'multicomponent-forminputs-unmoderatedpublish';
-    public final const MODULE_MULTICOMPONENT_FORM_LEFTSIDE = 'multicomponent-form-leftside';
-    public final const MODULE_MULTICOMPONENT_FORM_LINK_LEFTSIDE = 'multicomponent-form-link-left';
-    public final const MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE = 'multicomponent-form-contentpostlink-left';
-    public final const MODULE_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE = 'multicomponent-form-contentpostlink-rightside';
-    public final const MODULE_MULTICOMPONENT_FORM_POST_LEFTSIDE = 'multicomponent-form-post-leftside';
-    public final const MODULE_MULTICOMPONENT_FORM_POST_RIGHTSIDE = 'multicomponent-form-post-rightside';
+    public final const COMPONENT_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH = 'multicomponent-forminputs-moderatedpublish';
+    public final const COMPONENT_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH = 'multicomponent-forminputs-unmoderatedpublish';
+    public final const COMPONENT_MULTICOMPONENT_FORM_LEFTSIDE = 'multicomponent-form-leftside';
+    public final const COMPONENT_MULTICOMPONENT_FORM_LINK_LEFTSIDE = 'multicomponent-form-link-left';
+    public final const COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_LEFTSIDE = 'multicomponent-form-contentpostlink-left';
+    public final const COMPONENT_MULTICOMPONENT_FORM_CONTENTPOSTLINK_RIGHTSIDE = 'multicomponent-form-contentpostlink-rightside';
+    public final const COMPONENT_MULTICOMPONENT_FORM_POST_LEFTSIDE = 'multicomponent-form-post-leftside';
+    public final const COMPONENT_MULTICOMPONENT_FORM_POST_RIGHTSIDE = 'multicomponent-form-post-rightside';
 
     public function getComponentsToProcess(): array
     {

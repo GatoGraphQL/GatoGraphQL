@@ -2,20 +2,20 @@
 
 class Wassup_Module_Processor_WidgetWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_LAYOUTWRAPPER_CATEGORIES = 'layoutwrapper-categories';
-    public final const MODULE_LAYOUTWRAPPER_APPLIESTO = 'layoutwrapper-appliesto';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW = 'widgetwrapper-highlights-simpleview';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW = 'widgetwrapper-highlights-fullview';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_DETAILS = 'widgetwrapper-highlights-details';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW = 'widgetwrapper-referencedby-simpleview';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW = 'widgetwrapper-referencedby-fullview';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_DETAILS = 'widgetwrapper-referencedby-details';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW = 'widgetwrapper-highrefby-simpleview';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-highrefby-fullview';
-    public final const MODULE_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-highrefby-details';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-refby-details';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widgetwrapper-refby-simpleview';
-    public final const MODULE_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-refby-fullview';
+    public final const COMPONENT_LAYOUTWRAPPER_CATEGORIES = 'layoutwrapper-categories';
+    public final const COMPONENT_LAYOUTWRAPPER_APPLIESTO = 'layoutwrapper-appliesto';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_SIMPLEVIEW = 'widgetwrapper-highlights-simpleview';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_FULLVIEW = 'widgetwrapper-highlights-fullview';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_DETAILS = 'widgetwrapper-highlights-details';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_SIMPLEVIEW = 'widgetwrapper-referencedby-simpleview';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_FULLVIEW = 'widgetwrapper-referencedby-fullview';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_DETAILS = 'widgetwrapper-referencedby-details';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_SIMPLEVIEW = 'widgetwrapper-highrefby-simpleview';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-highrefby-fullview';
+    public final const COMPONENT_WIDGETWRAPPER_HIGHLIGHTS_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-highrefby-details';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-refby-details';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_SIMPLEVIEW = 'widgetwrapper-refby-simpleview';
+    public final const COMPONENT_WIDGETWRAPPER_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'widgetwrapper-refby-fullview';
 
     public function getComponentsToProcess(): array
     {

@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class GD_Core_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_CODE_APPSHELL = 'code-appshell';
+    public final const COMPONENT_CODE_APPSHELL = 'code-appshell';
 
     public function getComponentsToProcess(): array
     {

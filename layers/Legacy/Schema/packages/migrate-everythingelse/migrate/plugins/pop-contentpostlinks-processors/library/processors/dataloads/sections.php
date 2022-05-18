@@ -4,24 +4,24 @@ use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolv
 
 class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_LINKS_TYPEAHEAD = 'dataload-links-typeahead';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_NAVIGATOR = 'dataload-links-scroll-navigator';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_ADDONS = 'dataload-links-scroll-addons';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_DETAILS = 'dataload-links-scroll-details';
-    public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_DETAILS = 'dataload-authorlinks-scroll-details';
-    public final const MODULE_DATALOAD_TAGLINKS_SCROLL_DETAILS = 'dataload-taglinks-scroll-details';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_SIMPLEVIEW = 'dataload-links-scroll-simpleview';
-    public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW = 'dataload-authorlinks-scroll-simpleview';
-    public final const MODULE_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW = 'dataload-taglinks-scroll-simpleview';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_FULLVIEW = 'dataload-links-scroll-fullview';
-    public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW = 'dataload-authorlinks-scroll-fullview';
-    public final const MODULE_DATALOAD_TAGLINKS_SCROLL_FULLVIEW = 'dataload-taglinks-scroll-fullview';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_THUMBNAIL = 'dataload-links-scroll-thumbnail';
-    public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL = 'dataload-authorlinks-scroll-thumbnail';
-    public final const MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL = 'dataload-taglinks-scroll-thumbnail';
-    public final const MODULE_DATALOAD_LINKS_SCROLL_LIST = 'dataload-links-scroll-list';
-    public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_LIST = 'dataload-authorlinks-scroll-list';
-    public final const MODULE_DATALOAD_TAGLINKS_SCROLL_LIST = 'dataload-taglinks-scroll-list';
+    public final const COMPONENT_DATALOAD_LINKS_TYPEAHEAD = 'dataload-links-typeahead';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_NAVIGATOR = 'dataload-links-scroll-navigator';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_ADDONS = 'dataload-links-scroll-addons';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_DETAILS = 'dataload-links-scroll-details';
+    public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_DETAILS = 'dataload-authorlinks-scroll-details';
+    public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_DETAILS = 'dataload-taglinks-scroll-details';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_SIMPLEVIEW = 'dataload-links-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW = 'dataload-authorlinks-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW = 'dataload-taglinks-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_FULLVIEW = 'dataload-links-scroll-fullview';
+    public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW = 'dataload-authorlinks-scroll-fullview';
+    public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_FULLVIEW = 'dataload-taglinks-scroll-fullview';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_THUMBNAIL = 'dataload-links-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_THUMBNAIL = 'dataload-authorlinks-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL = 'dataload-taglinks-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_LINKS_SCROLL_LIST = 'dataload-links-scroll-list';
+    public final const COMPONENT_DATALOAD_AUTHORLINKS_SCROLL_LIST = 'dataload-authorlinks-scroll-list';
+    public final const COMPONENT_DATALOAD_TAGLINKS_SCROLL_LIST = 'dataload-taglinks-scroll-list';
 
     public function getComponentsToProcess(): array
     {

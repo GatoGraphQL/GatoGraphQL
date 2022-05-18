@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_StanceTargetSubcomponentLayouts extends PoP_Module_Processor_StanceTargetSubcomponentLayoutsBase
 {
-    public final const MODULE_LAYOUT_STANCETARGET_LINE = 'layout-stancetarget-line';
-    public final const MODULE_LAYOUT_STANCETARGET_POSTTITLE = 'layout-stancetarget-posttitle';
-    public final const MODULE_LAYOUT_STANCETARGET_AUTHORPOSTTITLE = 'layout-stancetarget-authorposttitle';
-    public final const MODULE_LAYOUT_STANCETARGET_ADDONS = 'layout-stancetarget-addons';
+    public final const COMPONENT_LAYOUT_STANCETARGET_LINE = 'layout-stancetarget-line';
+    public final const COMPONENT_LAYOUT_STANCETARGET_POSTTITLE = 'layout-stancetarget-posttitle';
+    public final const COMPONENT_LAYOUT_STANCETARGET_AUTHORPOSTTITLE = 'layout-stancetarget-authorposttitle';
+    public final const COMPONENT_LAYOUT_STANCETARGET_ADDONS = 'layout-stancetarget-addons';
 
     public function getComponentsToProcess(): array
     {

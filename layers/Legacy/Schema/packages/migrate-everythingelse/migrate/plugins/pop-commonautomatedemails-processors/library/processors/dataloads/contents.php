@@ -7,7 +7,7 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
 {
     use ObjectIDFromURLParamComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
 
     public function getComponentsToProcess(): array
     {

@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GenericForms_Module_Processor_SelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public final const MODULE_FORMINPUT_TOPIC = 'gf-field-topic';
+    public final const COMPONENT_FORMINPUT_TOPIC = 'gf-field-topic';
 
     public function getComponentsToProcess(): array
     {

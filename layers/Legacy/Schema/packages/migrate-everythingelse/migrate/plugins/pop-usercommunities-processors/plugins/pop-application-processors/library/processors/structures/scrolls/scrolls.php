@@ -2,11 +2,11 @@
 
 class PoP_UserCommunities_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_MYMEMBERS_FULLVIEWPREVIEW = 'scroll-mymembers-fullviewpreview';
-    public final const MODULE_SCROLL_COMMUNITIES_DETAILS = 'scroll-communities-details';
-    public final const MODULE_SCROLL_COMMUNITIES_FULLVIEW = 'scroll-communities-fullview';
-    public final const MODULE_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
-    public final const MODULE_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
+    public final const COMPONENT_SCROLL_MYMEMBERS_FULLVIEWPREVIEW = 'scroll-mymembers-fullviewpreview';
+    public final const COMPONENT_SCROLL_COMMUNITIES_DETAILS = 'scroll-communities-details';
+    public final const COMPONENT_SCROLL_COMMUNITIES_FULLVIEW = 'scroll-communities-fullview';
+    public final const COMPONENT_SCROLL_COMMUNITIES_THUMBNAIL = 'scroll-communities-thumbnail';
+    public final const COMPONENT_SCROLL_COMMUNITIES_LIST = 'scroll-communities-list';
 
     public function getComponentsToProcess(): array
     {

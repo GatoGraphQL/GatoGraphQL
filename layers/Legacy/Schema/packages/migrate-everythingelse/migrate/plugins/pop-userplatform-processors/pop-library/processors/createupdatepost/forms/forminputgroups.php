@@ -3,26 +3,26 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostFormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_CUP_TITLE = 'forminputgroup-cup-title';
-    public final const MODULE_FORMINPUTGROUP_CUP_STATUS = 'forminputgroup-cup-status';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-link';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE = 'forminputgroup-linktitle';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS = 'forminputgroup-linkaccess';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES = 'forminputgroup-linkcategories';
-    public final const MODULE_FORMINPUTGROUP_APPLIESTO = 'forminputgroup-appliesto';
-    public final const MODULE_FORMINPUTGROUP_CATEGORIES = 'forminputgroup-categories';
-    public final const MODULE_FORMINPUTGROUP_HIGHLIGHTEDITOR = 'forminput-highlighteditorgroup';
-    public final const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION = 'forminputgroup-buttongroup-postsection';
-    public final const MODULE_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'forminputgroup-buttongroup-postsections';
-    public final const MODULE_FILTERINPUTGROUP_LINKACCESS = 'filterinputgroup-linkaccess';
-    public final const MODULE_FILTERINPUTGROUP_LINKCATEGORIES = 'filterinputgroup-linkcategories';
-    public final const MODULE_FILTERINPUTGROUP_APPLIESTO = 'filterinputgroup-appliesto';
-    public final const MODULE_FILTERINPUTGROUP_CATEGORIES = 'filterinputgroup-categories';
-    public final const MODULE_FILTERINPUTGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections';
-    public final const MODULE_FILTERINPUTGROUP_POSTSECTIONS = 'filterinputgroup-postsections';
-    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES = 'filterinputgroup-categories-btngroup';
-    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections-btngroup';
-    public final const MODULE_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'filterinputgroup-postsections-btngroup';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_TITLE = 'forminputgroup-cup-title';
+    public final const COMPONENT_FORMINPUTGROUP_CUP_STATUS = 'forminputgroup-cup-status';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-link';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKTITLE = 'forminputgroup-linktitle';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKACCESS = 'forminputgroup-linkaccess';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUTGROUP_LINKCATEGORIES = 'forminputgroup-linkcategories';
+    public final const COMPONENT_FORMINPUTGROUP_APPLIESTO = 'forminputgroup-appliesto';
+    public final const COMPONENT_FORMINPUTGROUP_CATEGORIES = 'forminputgroup-categories';
+    public final const COMPONENT_FORMINPUTGROUP_HIGHLIGHTEDITOR = 'forminput-highlighteditorgroup';
+    public final const COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTION = 'forminputgroup-buttongroup-postsection';
+    public final const COMPONENT_FORMINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'forminputgroup-buttongroup-postsections';
+    public final const COMPONENT_FILTERINPUTGROUP_LINKACCESS = 'filterinputgroup-linkaccess';
+    public final const COMPONENT_FILTERINPUTGROUP_LINKCATEGORIES = 'filterinputgroup-linkcategories';
+    public final const COMPONENT_FILTERINPUTGROUP_APPLIESTO = 'filterinputgroup-appliesto';
+    public final const COMPONENT_FILTERINPUTGROUP_CATEGORIES = 'filterinputgroup-categories';
+    public final const COMPONENT_FILTERINPUTGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections';
+    public final const COMPONENT_FILTERINPUTGROUP_POSTSECTIONS = 'filterinputgroup-postsections';
+    public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CATEGORIES = 'filterinputgroup-categories-btngroup';
+    public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_CONTENTSECTIONS = 'filterinputgroup-contentsections-btngroup';
+    public final const COMPONENT_FILTERINPUTGROUP_BUTTONGROUP_POSTSECTIONS = 'filterinputgroup-postsections-btngroup';
 
     public function getComponentsToProcess(): array
     {

@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ShareTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_COPYSEARCHURL = 'copysearchurl';
-    public final const MODULE_FORMINPUT_API = 'api';
+    public final const COMPONENT_FORMINPUT_COPYSEARCHURL = 'copysearchurl';
+    public final const COMPONENT_FORMINPUT_API = 'api';
 
     public function getComponentsToProcess(): array
     {

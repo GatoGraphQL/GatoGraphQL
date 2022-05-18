@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_USER_CHANGEPASSWORD = 'block-user-changepwd';
-    public final const MODULE_BLOCK_MYPREFERENCES = 'block-mypreferences';
-    public final const MODULE_BLOCK_INVITENEWUSERS = 'block-inviteusers';
+    public final const COMPONENT_BLOCK_USER_CHANGEPASSWORD = 'block-user-changepwd';
+    public final const COMPONENT_BLOCK_MYPREFERENCES = 'block-mypreferences';
+    public final const COMPONENT_BLOCK_INVITENEWUSERS = 'block-inviteusers';
 
     public function getComponentsToProcess(): array
     {

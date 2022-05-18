@@ -3,16 +3,16 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_UserFormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_CUU_USERNAME = 'forminputgroup-cuu-username';
-    public final const MODULE_FORMINPUTGROUP_CUU_EMAIL = 'forminputgroup-cuu-email';
-    public final const MODULE_FORMINPUTGROUP_CUU_CURRENTPASSWORD = 'forminputgroup-cuu-currentpassword';
-    public final const MODULE_FORMINPUTGROUP_CUU_PASSWORD = 'forminputgroup-cuu-password';
-    public final const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORD = 'forminputgroup-cuu-newpassword';
-    public final const MODULE_FORMINPUTGROUP_CUU_PASSWORDREPEAT = 'forminputgroup-cuu-passwordrepeat';
-    public final const MODULE_FORMINPUTGROUP_CUU_NEWPASSWORDREPEAT = 'forminputgroup-cuu-newpasswordrepeat';
-    public final const MODULE_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstName';
-    public final const MODULE_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
-    public final const MODULE_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_USERNAME = 'forminputgroup-cuu-username';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_EMAIL = 'forminputgroup-cuu-email';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_CURRENTPASSWORD = 'forminputgroup-cuu-currentpassword';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_PASSWORD = 'forminputgroup-cuu-password';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_NEWPASSWORD = 'forminputgroup-cuu-newpassword';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_PASSWORDREPEAT = 'forminputgroup-cuu-passwordrepeat';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_NEWPASSWORDREPEAT = 'forminputgroup-cuu-newpasswordrepeat';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_FIRSTNAME = 'forminputgroup-cuu-firstName';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_USERWEBSITEURL = 'forminputgroup-cuu-userwebsiteurl';
+    public final const COMPONENT_FORMINPUTGROUP_CUU_DESCRIPTION = 'forminputgroup-cuu-description';
 
     public function getComponentsToProcess(): array
     {

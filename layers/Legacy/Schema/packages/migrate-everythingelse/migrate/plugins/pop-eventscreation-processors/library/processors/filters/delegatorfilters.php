@@ -2,7 +2,7 @@
 
 class PoP_EventsCreation_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public final const MODULE_DELEGATORFILTER_MYEVENTS = 'delegatorfilter-myevents';
+    public final const COMPONENT_DELEGATORFILTER_MYEVENTS = 'delegatorfilter-myevents';
 
     public function getComponentsToProcess(): array
     {

@@ -8,9 +8,9 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_USER_CHANGEPASSWORD = 'dataload-user-changepwd';
-    public final const MODULE_DATALOAD_MYPREFERENCES = 'dataload-mypreferences';
-    public final const MODULE_DATALOAD_INVITENEWUSERS = 'dataload-inviteusers';
+    public final const COMPONENT_DATALOAD_USER_CHANGEPASSWORD = 'dataload-user-changepwd';
+    public final const COMPONENT_DATALOAD_MYPREFERENCES = 'dataload-mypreferences';
+    public final const COMPONENT_DATALOAD_INVITENEWUSERS = 'dataload-inviteusers';
 
     public function getComponentsToProcess(): array
     {

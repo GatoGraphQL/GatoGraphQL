@@ -4,7 +4,7 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 {
-    public final const MODULE_MODAL_QUICKVIEW = 'modal-quickview';
+    public final const COMPONENT_MODAL_QUICKVIEW = 'modal-quickview';
 
     public function getComponentsToProcess(): array
     {

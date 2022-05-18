@@ -11,9 +11,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
-    public final const MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
-    public final const MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
+    public final const COMPONENT_URE_FILTERINPUT_INDIVIDUALINTERESTS = 'filterinput-individualinterests';
+    public final const COMPONENT_URE_FILTERINPUT_ORGANIZATIONCATEGORIES = 'filterinput-organizationcategories';
+    public final const COMPONENT_URE_FILTERINPUT_ORGANIZATIONTYPES = 'filterinput-organizationtypes';
 
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 

@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_POSTCOMMENTS = 'widget-postcomments';
-    public final const MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT = 'widget-postcomments-appendtoscript';
+    public final const COMPONENT_WIDGET_POSTCOMMENTS = 'widget-postcomments';
+    public final const COMPONENT_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT = 'widget-postcomments-appendtoscript';
 
     public function getComponentsToProcess(): array
     {

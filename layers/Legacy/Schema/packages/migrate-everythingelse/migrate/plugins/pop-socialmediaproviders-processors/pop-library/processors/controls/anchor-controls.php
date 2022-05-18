@@ -5,12 +5,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_SHARE_FACEBOOK = 'anchorcontrol-share-facebook';
-    public final const MODULE_ANCHORCONTROL_SHARE_TWITTER = 'anchorcontrol-share-twitter';
-    public final const MODULE_ANCHORCONTROL_SHARE_LINKEDIN = 'anchorcontrol-share-linkedin';
-    public final const MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK = 'anchorcontrol-fixedshare-facebook';
-    public final const MODULE_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
-    public final const MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
+    public final const COMPONENT_ANCHORCONTROL_SHARE_FACEBOOK = 'anchorcontrol-share-facebook';
+    public final const COMPONENT_ANCHORCONTROL_SHARE_TWITTER = 'anchorcontrol-share-twitter';
+    public final const COMPONENT_ANCHORCONTROL_SHARE_LINKEDIN = 'anchorcontrol-share-linkedin';
+    public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_FACEBOOK = 'anchorcontrol-fixedshare-facebook';
+    public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
+    public final const COMPONENT_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
 
     public function getComponentsToProcess(): array
     {

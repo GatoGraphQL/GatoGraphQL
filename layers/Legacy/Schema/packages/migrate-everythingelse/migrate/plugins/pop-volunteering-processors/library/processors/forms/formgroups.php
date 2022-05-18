@@ -2,8 +2,8 @@
 
 class PoP_Volunteering_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_PHONE = 'gf-forminputgroup-field-phone';
-    public final const MODULE_FORMINPUTGROUP_WHYVOLUNTEER = 'gf-forminputgroup-field-whyvolunteer';
+    public final const COMPONENT_FORMINPUTGROUP_PHONE = 'gf-forminputgroup-field-phone';
+    public final const COMPONENT_FORMINPUTGROUP_WHYVOLUNTEER = 'gf-forminputgroup-field-whyvolunteer';
 
     public function getComponentsToProcess(): array
     {

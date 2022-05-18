@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_Module_Processor_CustomCarousels extends PoP_Module_Processor_CarouselsBase
 {
-    public final const MODULE_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
+    public final const COMPONENT_CAROUSEL_AUTHORMEMBERS = 'carousel-authormembers';
 
     public function getComponentsToProcess(): array
     {

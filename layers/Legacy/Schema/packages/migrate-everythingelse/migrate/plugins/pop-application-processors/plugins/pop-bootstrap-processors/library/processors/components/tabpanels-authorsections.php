@@ -2,12 +2,12 @@
 
 class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORCONTENT = 'tabpanel-authorcontent';
-    public final const MODULE_TABPANEL_AUTHORPOSTS = 'tabpanel-authorposts';
-    public final const MODULE_TABPANEL_AUTHORFOLLOWERS = 'tabpanel-authorfollowers';
-    public final const MODULE_TABPANEL_AUTHORFOLLOWINGUSERS = 'tabpanel-authorfollowingusers';
-    public final const MODULE_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
-    public final const MODULE_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
+    public final const COMPONENT_TABPANEL_AUTHORCONTENT = 'tabpanel-authorcontent';
+    public final const COMPONENT_TABPANEL_AUTHORPOSTS = 'tabpanel-authorposts';
+    public final const COMPONENT_TABPANEL_AUTHORFOLLOWERS = 'tabpanel-authorfollowers';
+    public final const COMPONENT_TABPANEL_AUTHORFOLLOWINGUSERS = 'tabpanel-authorfollowingusers';
+    public final const COMPONENT_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
+    public final const COMPONENT_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
 
     public function getComponentsToProcess(): array
     {

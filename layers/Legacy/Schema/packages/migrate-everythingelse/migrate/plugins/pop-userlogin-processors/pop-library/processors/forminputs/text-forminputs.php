@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_LOGIN_USERNAME = 'forminput-login-username';
-    public final const MODULE_FORMINPUT_LOGIN_PWD = 'forminput-login-pwd';
-    public final const MODULE_FORMINPUT_LOSTPWD_USERNAME = 'forminput-lostpwd-username';
-    public final const MODULE_FORMINPUT_LOSTPWDRESET_CODE = 'forminput-lostpwdreset-code';
-    public final const MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD = 'forminput-lostpwdreset-newpassword';
-    public final const MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT = 'forminput-lostpwdreset-passwordrepeat';
+    public final const COMPONENT_FORMINPUT_LOGIN_USERNAME = 'forminput-login-username';
+    public final const COMPONENT_FORMINPUT_LOGIN_PWD = 'forminput-login-pwd';
+    public final const COMPONENT_FORMINPUT_LOSTPWD_USERNAME = 'forminput-lostpwd-username';
+    public final const COMPONENT_FORMINPUT_LOSTPWDRESET_CODE = 'forminput-lostpwdreset-code';
+    public final const COMPONENT_FORMINPUT_LOSTPWDRESET_NEWPASSWORD = 'forminput-lostpwdreset-newpassword';
+    public final const COMPONENT_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT = 'forminput-lostpwdreset-passwordrepeat';
 
     public function getComponentsToProcess(): array
     {

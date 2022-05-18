@@ -5,8 +5,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_URE_Module_Processor_CustomCarouselControls extends PoP_Module_Processor_CarouselControlsBase
 {
-    public final const MODULE_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS = 'carouselcontrols-stances-byorganizations';
-    public final const MODULE_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS = 'carouselcontrols-stances-byindividuals';
+    public final const COMPONENT_CAROUSELCONTROLS_STANCES_BYORGANIZATIONS = 'carouselcontrols-stances-byorganizations';
+    public final const COMPONENT_CAROUSELCONTROLS_STANCES_BYINDIVIDUALS = 'carouselcontrols-stances-byindividuals';
 
     public function getComponentsToProcess(): array
     {

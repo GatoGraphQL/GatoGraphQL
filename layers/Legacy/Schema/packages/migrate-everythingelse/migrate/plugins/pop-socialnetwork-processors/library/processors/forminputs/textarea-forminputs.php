@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_SocialNetwork_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public final const MODULE_FORMINPUT_MESSAGETOUSER = 'gf-field-messagetouser';
+    public final const COMPONENT_FORMINPUT_MESSAGETOUSER = 'gf-field-messagetouser';
 
     public function getComponentsToProcess(): array
     {

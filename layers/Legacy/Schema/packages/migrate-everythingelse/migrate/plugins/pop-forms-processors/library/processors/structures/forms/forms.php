@@ -3,7 +3,7 @@ use PoP\Engine\Route\RouteUtils;
 
 class PoP_Core_Module_Processor_Forms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_EVERYTHINGQUICKLINKS = 'form-everythingquicklinks';
+    public final const COMPONENT_FORM_EVERYTHINGQUICKLINKS = 'form-everythingquicklinks';
 
     public function getComponentsToProcess(): array
     {

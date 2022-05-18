@@ -2,7 +2,7 @@
 
 class UserStance_Module_Processor_CreateUpdatePostFormInners extends Wassup_Module_Processor_CreateUpdatePostFormInnersBase
 {
-    public final const MODULE_FORMINNER_STANCE = 'forminner-stance';
+    public final const COMPONENT_FORMINNER_STANCE = 'forminner-stance';
 
     public function getComponentsToProcess(): array
     {

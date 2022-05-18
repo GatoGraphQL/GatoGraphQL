@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public final const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
+    public final const COMPONENT_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
 
     public function getComponentsToProcess(): array
     {

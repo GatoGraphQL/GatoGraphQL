@@ -2,7 +2,7 @@
 
 class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_GROUP_WHOWEARE = 'group-whoweare';
+    public final const COMPONENT_GROUP_WHOWEARE = 'group-whoweare';
 
     public function getComponentsToProcess(): array
     {

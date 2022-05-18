@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomMenuSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_SIDEBARINNER_MENU_ABOUT = 'sidebarinner-menu-about';
+    public final const COMPONENT_SIDEBARINNER_MENU_ABOUT = 'sidebarinner-menu-about';
 
     public function getComponentsToProcess(): array
     {

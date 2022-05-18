@@ -2,7 +2,7 @@
 
 class PoP_SocialNetwork_Module_Processor_GFForms extends PoP_Module_Processor_FormsBase
 {
-    public final const MODULE_FORM_CONTACTUSER = 'form-contactuser';
+    public final const COMPONENT_FORM_CONTACTUSER = 'form-contactuser';
 
     public function getComponentsToProcess(): array
     {

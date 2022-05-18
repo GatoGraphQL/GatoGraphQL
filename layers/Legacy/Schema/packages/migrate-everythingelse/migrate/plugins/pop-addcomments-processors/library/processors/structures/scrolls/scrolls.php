@@ -4,10 +4,10 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_COMMENTS_LIST = 'scroll-comments-list';
-    public final const MODULE_SCROLL_COMMENTS_ADD = 'scroll-comments-add';
-    public final const MODULE_SCROLLLAYOUT_POSTCOMMENT = 'layout-postcomment-scroll';
-    public final const MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE = 'layout-postcomment-scroll-appendable';
+    public final const COMPONENT_SCROLL_COMMENTS_LIST = 'scroll-comments-list';
+    public final const COMPONENT_SCROLL_COMMENTS_ADD = 'scroll-comments-add';
+    public final const COMPONENT_SCROLLLAYOUT_POSTCOMMENT = 'layout-postcomment-scroll';
+    public final const COMPONENT_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE = 'layout-postcomment-scroll-appendable';
 
     public function getComponentsToProcess(): array
     {

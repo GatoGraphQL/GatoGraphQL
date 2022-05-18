@@ -4,8 +4,8 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_PAGESECTIONCONTAINER_HOLE = 'pagesectioncontainer-hole';
-    public final const MODULE_PAGESECTIONCONTAINER_MODALS = 'pagesectioncontainer-modals';
+    public final const COMPONENT_PAGESECTIONCONTAINER_HOLE = 'pagesectioncontainer-hole';
+    public final const COMPONENT_PAGESECTIONCONTAINER_MODALS = 'pagesectioncontainer-modals';
 
     public function getComponentsToProcess(): array
     {

@@ -2,9 +2,9 @@
 
 class PoP_PostsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySectionBlocksBase
 {
-    public final const MODULE_BLOCK_MYPOSTS_TABLE_EDIT = 'block-myposts-table-edit';
-    public final const MODULE_BLOCK_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-myposts-scroll-simpleviewpreview';
-    public final const MODULE_BLOCK_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'block-myposts-scroll-fullviewpreview';
+    public final const COMPONENT_BLOCK_MYPOSTS_TABLE_EDIT = 'block-myposts-table-edit';
+    public final const COMPONENT_BLOCK_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW = 'block-myposts-scroll-simpleviewpreview';
+    public final const COMPONENT_BLOCK_MYPOSTS_SCROLL_FULLVIEWPREVIEW = 'block-myposts-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

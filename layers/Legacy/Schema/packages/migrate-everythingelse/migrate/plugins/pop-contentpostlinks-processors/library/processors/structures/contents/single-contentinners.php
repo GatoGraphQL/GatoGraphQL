@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public final const MODULE_CONTENTINNER_LINKSINGLE = 'contentinner-linksingle';
+    public final const COMPONENT_CONTENTINNER_LINKSINGLE = 'contentinner-linksingle';
 
     public function getComponentsToProcess(): array
     {

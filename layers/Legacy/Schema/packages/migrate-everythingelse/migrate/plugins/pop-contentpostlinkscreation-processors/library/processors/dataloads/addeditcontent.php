@@ -5,8 +5,8 @@ use PoPSitesWassup\PostLinkMutations\MutationResolverBridges\UpdatePostLinkMutat
 
 class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public final const MODULE_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
-    public final const MODULE_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
+    public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_UPDATE = 'dataload-postlink-update';
+    public final const COMPONENT_DATALOAD_CONTENTPOSTLINK_CREATE = 'dataload-postlink-create';
 
     public function getComponentsToProcess(): array
     {

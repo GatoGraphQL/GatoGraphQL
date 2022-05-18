@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_NEWSLETTER = 'forminner-newsletter';
-    public final const MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION = 'forminner-newsletterunsubscription';
+    public final const COMPONENT_FORMINNER_NEWSLETTER = 'forminner-newsletter';
+    public final const COMPONENT_FORMINNER_NEWSLETTERUNSUBSCRIPTION = 'forminner-newsletterunsubscription';
 
     public function getComponentsToProcess(): array
     {

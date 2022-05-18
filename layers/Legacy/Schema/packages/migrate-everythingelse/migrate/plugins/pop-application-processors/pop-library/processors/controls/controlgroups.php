@@ -2,32 +2,32 @@
 
 class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_COMMENTS = 'controlgroup-comments';
-    public final const MODULE_CONTROLGROUP_TAGLIST = 'controlgroup-taglist';
-    public final const MODULE_CONTROLGROUP_POSTLIST = 'controlgroup-postlist';
-    public final const MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST = 'controlgroup-blockauthorpostlist';
-    public final const MODULE_CONTROLGROUP_BLOCKPOSTLIST = 'controlgroup-blockpostlist';
-    public final const MODULE_CONTROLGROUP_BLOCKRELOAD = 'controlgroup-blockreload';
-    public final const MODULE_CONTROLGROUP_BLOCKLOADLATEST = 'controlgroup-blockloadlatest';
-    public final const MODULE_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST = 'controlgroup-quickviewblockpostlist';
-    public final const MODULE_CONTROLGROUP_SUBMENUPOSTLIST = 'controlgroup-submenupostlist';
-    public final const MODULE_CONTROLGROUP_SUBMENUPOSTLISTMAIN = 'controlgroup-submenupostlistmain';
-    public final const MODULE_CONTROLGROUP_USERLIST = 'controlgroup-userlist';
-    public final const MODULE_CONTROLGROUP_BLOCKUSERLIST = 'controlgroup-blockuserlist';
-    public final const MODULE_CONTROLGROUP_SUBMENUUSERLIST = 'controlgroup-submenuuserlist';
-    public final const MODULE_CONTROLGROUP_SUBMENUUSERLISTMAIN = 'controlgroup-submenuuserlistmain';
-    public final const MODULE_CONTROLGROUP_SUBMENUSHARE = 'controlgroup-submenushare';
-    public final const MODULE_CONTROLGROUP_SHARE = 'controlgroup-share';
-    public final const MODULE_CONTROLGROUP_MYPOSTLIST = 'controlgroup-mypostlist';
-    public final const MODULE_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST = 'controlgroup-myblockcustompostlist';
-    public final const MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST = 'controlgroup-mycustompostlist';
-    public final const MODULE_CONTROLGROUP_MYBLOCKPOSTLIST = 'controlgroup-myblockpostlist';
-    public final const MODULE_CONTROLGROUP_ACCOUNT = 'controlgroup-account';
-    public final const MODULE_CONTROLGROUP_CREATEACCOUNT = 'controlgroup-createaccount';
-    public final const MODULE_CONTROLGROUP_CREATEPOST = 'controlgroup-createpost';
-    public final const MODULE_CONTROLGROUP_CREATERESETPOST = 'controlgroup-createresetpost';
-    public final const MODULE_CONTROLGROUP_EDITPOST = 'controlgroup-editpost';
-    public final const MODULE_CONTROLGROUP_USERPOSTINTERACTION = 'controlgroup-userpostinteraction';
+    public final const COMPONENT_CONTROLGROUP_COMMENTS = 'controlgroup-comments';
+    public final const COMPONENT_CONTROLGROUP_TAGLIST = 'controlgroup-taglist';
+    public final const COMPONENT_CONTROLGROUP_POSTLIST = 'controlgroup-postlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKAUTHORPOSTLIST = 'controlgroup-blockauthorpostlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKPOSTLIST = 'controlgroup-blockpostlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKRELOAD = 'controlgroup-blockreload';
+    public final const COMPONENT_CONTROLGROUP_BLOCKLOADLATEST = 'controlgroup-blockloadlatest';
+    public final const COMPONENT_CONTROLGROUP_QUICKVIEWBLOCKPOSTLIST = 'controlgroup-quickviewblockpostlist';
+    public final const COMPONENT_CONTROLGROUP_SUBMENUPOSTLIST = 'controlgroup-submenupostlist';
+    public final const COMPONENT_CONTROLGROUP_SUBMENUPOSTLISTMAIN = 'controlgroup-submenupostlistmain';
+    public final const COMPONENT_CONTROLGROUP_USERLIST = 'controlgroup-userlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKUSERLIST = 'controlgroup-blockuserlist';
+    public final const COMPONENT_CONTROLGROUP_SUBMENUUSERLIST = 'controlgroup-submenuuserlist';
+    public final const COMPONENT_CONTROLGROUP_SUBMENUUSERLISTMAIN = 'controlgroup-submenuuserlistmain';
+    public final const COMPONENT_CONTROLGROUP_SUBMENUSHARE = 'controlgroup-submenushare';
+    public final const COMPONENT_CONTROLGROUP_SHARE = 'controlgroup-share';
+    public final const COMPONENT_CONTROLGROUP_MYPOSTLIST = 'controlgroup-mypostlist';
+    public final const COMPONENT_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST = 'controlgroup-myblockcustompostlist';
+    public final const COMPONENT_CONTROLGROUP_MYCUSTOMPOSTLIST = 'controlgroup-mycustompostlist';
+    public final const COMPONENT_CONTROLGROUP_MYBLOCKPOSTLIST = 'controlgroup-myblockpostlist';
+    public final const COMPONENT_CONTROLGROUP_ACCOUNT = 'controlgroup-account';
+    public final const COMPONENT_CONTROLGROUP_CREATEACCOUNT = 'controlgroup-createaccount';
+    public final const COMPONENT_CONTROLGROUP_CREATEPOST = 'controlgroup-createpost';
+    public final const COMPONENT_CONTROLGROUP_CREATERESETPOST = 'controlgroup-createresetpost';
+    public final const COMPONENT_CONTROLGROUP_EDITPOST = 'controlgroup-editpost';
+    public final const COMPONENT_CONTROLGROUP_USERPOSTINTERACTION = 'controlgroup-userpostinteraction';
 
     public function getComponentsToProcess(): array
     {

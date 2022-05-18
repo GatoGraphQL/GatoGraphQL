@@ -2,13 +2,13 @@
 
 class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processor_FilterInnersBase
 {
-    public final const MODULE_FILTERINPUTCONTAINER_STANCES = 'filterinputcontainer-stances';
-    public final const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES = 'filterinputcontainer-authorstances';
-    public final const MODULE_FILTERINPUTCONTAINER_MYSTANCES = 'filterinputcontainer-mystances';
-    public final const MODULE_FILTERINPUTCONTAINER_STANCES_AUTHORROLE = 'filterinputcontainer-stances-authorrole';
-    public final const MODULE_FILTERINPUTCONTAINER_STANCES_STANCE = 'filterinputcontainer-stances-stance';
-    public final const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinputcontainer-authorstances-stance';
-    public final const MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinputcontainer-stances-generalstance';
+    public final const COMPONENT_FILTERINPUTCONTAINER_STANCES = 'filterinputcontainer-stances';
+    public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORSTANCES = 'filterinputcontainer-authorstances';
+    public final const COMPONENT_FILTERINPUTCONTAINER_MYSTANCES = 'filterinputcontainer-mystances';
+    public final const COMPONENT_FILTERINPUTCONTAINER_STANCES_AUTHORROLE = 'filterinputcontainer-stances-authorrole';
+    public final const COMPONENT_FILTERINPUTCONTAINER_STANCES_STANCE = 'filterinputcontainer-stances-stance';
+    public final const COMPONENT_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinputcontainer-authorstances-stance';
+    public final const COMPONENT_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinputcontainer-stances-generalstance';
 
     public function getComponentsToProcess(): array
     {

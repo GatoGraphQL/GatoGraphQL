@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module_Processor_TextareaFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUU_DESCRIPTION = 'forminput-cuu-description';
+    public final const COMPONENT_FORMINPUT_CUU_DESCRIPTION = 'forminput-cuu-description';
 
     public function getComponentsToProcess(): array
     {

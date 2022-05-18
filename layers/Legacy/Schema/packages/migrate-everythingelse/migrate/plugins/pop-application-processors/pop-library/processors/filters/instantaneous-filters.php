@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_InstantaneousFiltersBase
 {
-    public final const MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS = 'instantaneousfilter-contentsections';
-    public final const MODULE_INSTANTANEOUSFILTER_POSTSECTIONS = 'instantaneousfilter-postsections';
+    public final const COMPONENT_INSTANTANEOUSFILTER_CONTENTSECTIONS = 'instantaneousfilter-contentsections';
+    public final const COMPONENT_INSTANTANEOUSFILTER_POSTSECTIONS = 'instantaneousfilter-postsections';
 
     public function getComponentsToProcess(): array
     {

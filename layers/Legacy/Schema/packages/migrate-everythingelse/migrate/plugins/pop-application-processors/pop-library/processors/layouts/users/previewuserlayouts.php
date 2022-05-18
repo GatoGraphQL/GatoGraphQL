@@ -2,14 +2,14 @@
 
 class PoP_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Processor_CustomPreviewUserLayoutsBase
 {
-    public final const MODULE_LAYOUT_PREVIEWUSER_NAVIGATOR = 'layout-previewuser-navigator';
-    public final const MODULE_LAYOUT_PREVIEWUSER_ADDONS = 'layout-previewuser-addons';
-    public final const MODULE_LAYOUT_PREVIEWUSER_DETAILS = 'layout-previewuser-details';
-    public final const MODULE_LAYOUT_PREVIEWUSER_THUMBNAIL = 'layout-previewuser-thumbnail';
-    public final const MODULE_LAYOUT_PREVIEWUSER_LIST = 'layout-previewuser-list';
-    public final const MODULE_LAYOUT_PREVIEWUSER_POPOVER = 'layout-previewuser-popover';
-    public final const MODULE_LAYOUT_PREVIEWUSER_POSTAUTHOR = 'layout-previewuser-postauthor';
-    public final const MODULE_LAYOUT_PREVIEWUSER_HEADER = 'layout-previewuser-header';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_NAVIGATOR = 'layout-previewuser-navigator';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_ADDONS = 'layout-previewuser-addons';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_DETAILS = 'layout-previewuser-details';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_THUMBNAIL = 'layout-previewuser-thumbnail';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_LIST = 'layout-previewuser-list';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_POPOVER = 'layout-previewuser-popover';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_POSTAUTHOR = 'layout-previewuser-postauthor';
+    public final const COMPONENT_LAYOUT_PREVIEWUSER_HEADER = 'layout-previewuser-header';
 
     public function getComponentsToProcess(): array
     {

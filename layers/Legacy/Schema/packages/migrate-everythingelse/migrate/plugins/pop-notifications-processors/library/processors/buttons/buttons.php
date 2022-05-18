@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK = 'notifications-button-notificationpreviewlink';
-    public final const MODULE_AAL_BUTTON_USERVIEW = 'notifications-button-userview';
-    public final const MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD = 'notifications-button-notification-markasread';
-    public final const MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD = 'notifications-button-notification-markasunread';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATIONPREVIEWLINK = 'notifications-button-notificationpreviewlink';
+    public final const COMPONENT_AAL_BUTTON_USERVIEW = 'notifications-button-userview';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASREAD = 'notifications-button-notification-markasread';
+    public final const COMPONENT_AAL_BUTTON_NOTIFICATION_MARKASUNREAD = 'notifications-button-notification-markasunread';
 
     public function getComponentsToProcess(): array
     {

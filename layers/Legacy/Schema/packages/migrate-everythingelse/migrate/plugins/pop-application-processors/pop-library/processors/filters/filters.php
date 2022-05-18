@@ -2,21 +2,21 @@
 
 class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_TAGS = 'filter-tags';
-    public final const MODULE_FILTER_CONTENT = 'filter-content';
-    public final const MODULE_FILTER_AUTHORCONTENT = 'filter-authorcontent';
-    public final const MODULE_FILTER_TAGCONTENT = 'filter-tagcontent';
-    public final const MODULE_FILTER_POSTS = 'filter-posts';
-    public final const MODULE_FILTER_CATEGORYPOSTS = 'filter-categoryposts';
-    public final const MODULE_FILTER_AUTHORPOSTS = 'filter-authorposts';
-    public final const MODULE_FILTER_AUTHORCATEGORYPOSTS = 'filter-authorcategoryposts';
-    public final const MODULE_FILTER_TAGPOSTS = 'filter-tagposts';
-    public final const MODULE_FILTER_TAGCATEGORYPOSTS = 'filter-tagcategoryposts';
-    public final const MODULE_FILTER_USERS = 'filter-users';
-    public final const MODULE_FILTER_AUTHORCOMMUNITYMEMBERS = 'filter-authorcommunitymembers';
-    public final const MODULE_FILTER_MYCONTENT = 'filter-mycontent';
-    public final const MODULE_FILTER_MYPOSTS = 'filter-myposts';
-    public final const MODULE_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
+    public final const COMPONENT_FILTER_TAGS = 'filter-tags';
+    public final const COMPONENT_FILTER_CONTENT = 'filter-content';
+    public final const COMPONENT_FILTER_AUTHORCONTENT = 'filter-authorcontent';
+    public final const COMPONENT_FILTER_TAGCONTENT = 'filter-tagcontent';
+    public final const COMPONENT_FILTER_POSTS = 'filter-posts';
+    public final const COMPONENT_FILTER_CATEGORYPOSTS = 'filter-categoryposts';
+    public final const COMPONENT_FILTER_AUTHORPOSTS = 'filter-authorposts';
+    public final const COMPONENT_FILTER_AUTHORCATEGORYPOSTS = 'filter-authorcategoryposts';
+    public final const COMPONENT_FILTER_TAGPOSTS = 'filter-tagposts';
+    public final const COMPONENT_FILTER_TAGCATEGORYPOSTS = 'filter-tagcategoryposts';
+    public final const COMPONENT_FILTER_USERS = 'filter-users';
+    public final const COMPONENT_FILTER_AUTHORCOMMUNITYMEMBERS = 'filter-authorcommunitymembers';
+    public final const COMPONENT_FILTER_MYCONTENT = 'filter-mycontent';
+    public final const COMPONENT_FILTER_MYPOSTS = 'filter-myposts';
+    public final const COMPONENT_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
 
     public function getComponentsToProcess(): array
     {

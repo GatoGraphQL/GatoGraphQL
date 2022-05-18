@@ -2,9 +2,9 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_POST = 'sidebarmulticomponent-automatedemails-post';
-    public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGE = 'sidebarmulticomponent-automatedemails-featuredimage';
-    public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER = 'sidebarmulticomponent-automatedemails-featuredimagevolunteer';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_POST = 'sidebarmulticomponent-automatedemails-post';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGE = 'sidebarmulticomponent-automatedemails-featuredimage';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER = 'sidebarmulticomponent-automatedemails-featuredimagevolunteer';
 
     public function getComponentsToProcess(): array
     {

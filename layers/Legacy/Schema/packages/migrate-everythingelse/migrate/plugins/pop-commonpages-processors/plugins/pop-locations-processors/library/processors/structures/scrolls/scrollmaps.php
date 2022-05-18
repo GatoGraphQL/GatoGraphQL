@@ -2,7 +2,7 @@
 
 class PoP_CommonPagesProcessors_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
+    public final const COMPONENT_SCROLL_WHOWEARE_MAP = 'scroll-whoweare-map';
 
     public function getComponentsToProcess(): array
     {

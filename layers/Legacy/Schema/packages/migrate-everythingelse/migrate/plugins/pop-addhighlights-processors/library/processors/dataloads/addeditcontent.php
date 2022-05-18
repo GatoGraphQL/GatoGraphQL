@@ -4,8 +4,8 @@ use PoPSitesWassup\HighlightMutations\MutationResolverBridges\CreateHighlightMut
 use PoPSitesWassup\HighlightMutations\MutationResolverBridges\UpdateHighlightMutationResolverBridge;
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    public final const MODULE_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';
-    public final const MODULE_DATALOAD_HIGHLIGHT_CREATE = 'dataload-highlight-create';
+    public final const COMPONENT_DATALOAD_HIGHLIGHT_UPDATE = 'dataload-highlight-update';
+    public final const COMPONENT_DATALOAD_HIGHLIGHT_CREATE = 'dataload-highlight-create';
 
     public function getComponentsToProcess(): array
     {

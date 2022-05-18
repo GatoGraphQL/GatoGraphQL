@@ -2,7 +2,7 @@
 
 class GD_Custom_EM_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_MYLOCATIONPOSTS = 'filter-mylocationposts';
+    public final const COMPONENT_FILTER_MYLOCATIONPOSTS = 'filter-mylocationposts';
 
     public function getComponentsToProcess(): array
     {

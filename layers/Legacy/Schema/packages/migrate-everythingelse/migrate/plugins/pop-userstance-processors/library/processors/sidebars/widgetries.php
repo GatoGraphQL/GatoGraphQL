@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_STANCETARGET = 'widget-stancetarget';
-    public final const MODULE_WIDGET_STANCES = 'widget-stances';
-    public final const MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widget-stances-appendtoscript-fullview';
-    public final const MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS = 'widget-stances-appendtoscript-details';
+    public final const COMPONENT_WIDGET_STANCETARGET = 'widget-stancetarget';
+    public final const COMPONENT_WIDGET_STANCES = 'widget-stances';
+    public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widget-stances-appendtoscript-fullview';
+    public final const COMPONENT_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS = 'widget-stances-appendtoscript-details';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_Processor_FetchlinkTypeaheadFormComponentsBase
 {
-    public final const MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING = 'formcomponent-quicklinktypeahead-everything';
+    public final const COMPONENT_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING = 'formcomponent-quicklinktypeahead-everything';
 
     public function getComponentsToProcess(): array
     {

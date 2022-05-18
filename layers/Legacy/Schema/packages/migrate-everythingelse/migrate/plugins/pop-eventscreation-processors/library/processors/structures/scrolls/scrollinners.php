@@ -2,10 +2,10 @@
 
 class PoP_EventsCreation_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW = 'scrollinner-myevents-simpleviewpreview';
-    public final const MODULE_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW = 'scrollinner-mypastevents-simpleviewpreview';
-    public final const MODULE_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW = 'scrollinner-myevents-fullviewpreview';
-    public final const MODULE_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW = 'scrollinner-mypastevents-fullviewpreview';
+    public final const COMPONENT_SCROLLINNER_MYEVENTS_SIMPLEVIEWPREVIEW = 'scrollinner-myevents-simpleviewpreview';
+    public final const COMPONENT_SCROLLINNER_MYPASTEVENTS_SIMPLEVIEWPREVIEW = 'scrollinner-mypastevents-simpleviewpreview';
+    public final const COMPONENT_SCROLLINNER_MYEVENTS_FULLVIEWPREVIEW = 'scrollinner-myevents-fullviewpreview';
+    public final const COMPONENT_SCROLLINNER_MYPASTEVENTS_FULLVIEWPREVIEW = 'scrollinner-mypastevents-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

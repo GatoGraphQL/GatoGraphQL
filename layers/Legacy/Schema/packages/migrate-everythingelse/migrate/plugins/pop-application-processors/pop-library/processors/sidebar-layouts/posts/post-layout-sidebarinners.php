@@ -2,15 +2,15 @@
 
 class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Processor_SidebarInnersBase
 {
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL = 'layout-postsidebarinner-vertical';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_HIGHLIGHT = 'layout-postsidebarinner-vertical-highlight';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_POST = 'layout-postsidebarinner-vertical-post';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL = 'layout-postsidebarinner-horizontal';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-horizontal-highlight';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST = 'layout-postsidebarinner-horizontal-post';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL = 'layout-postsidebarinner-compacthorizontal';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-compacthorizontal-highlight';
-    public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-postsidebarinner-compacthorizontal-post';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL = 'layout-postsidebarinner-vertical';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_HIGHLIGHT = 'layout-postsidebarinner-vertical-highlight';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_VERTICAL_POST = 'layout-postsidebarinner-vertical-post';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL = 'layout-postsidebarinner-horizontal';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-horizontal-highlight';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST = 'layout-postsidebarinner-horizontal-post';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL = 'layout-postsidebarinner-compacthorizontal';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-compacthorizontal-highlight';
+    public final const COMPONENT_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-postsidebarinner-compacthorizontal-post';
 
     public function getComponentsToProcess(): array
     {

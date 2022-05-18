@@ -2,9 +2,9 @@
 
 class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_QUICKLINKBUTTONGROUP_POSTEDIT = 'quicklinkbuttongroup-postedit';
-    public final const MODULE_QUICKLINKBUTTONGROUP_POSTVIEW = 'quicklinkbuttongroup-postview';
-    public final const MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW = 'quicklinkbuttongroup-postpreview';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTEDIT = 'quicklinkbuttongroup-postedit';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTVIEW = 'quicklinkbuttongroup-postview';
+    public final const COMPONENT_QUICKLINKBUTTONGROUP_POSTPREVIEW = 'quicklinkbuttongroup-postpreview';
 
     public function getComponentsToProcess(): array
     {

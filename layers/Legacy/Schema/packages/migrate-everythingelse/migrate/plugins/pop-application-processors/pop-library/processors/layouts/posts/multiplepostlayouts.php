@@ -6,19 +6,19 @@ define('POP_MULTILAYOUT_HANDLE_POSTABOVECONTENT', 'postabovecontent');
 
 class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_MultipleLayoutsBase
 {
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR = 'layout-multiplepost-navigator';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_ADDONS = 'layout-multiplepost-addons';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_DETAILS = 'layout-multiplepost-details';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_THUMBNAIL = 'layout-multiplepost-thumbnail';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_LIST = 'layout-multiplepost-list';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_LINE = 'layout-multiplepost-line';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_RELATED = 'layout-multiplepost-related';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_EDIT = 'layout-multiplepost-edit';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW = 'layout-multiplepost-simpleview';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_FULLVIEW = 'layout-multiplepost-fullview';
-    public final const MODULE_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW = 'layout-authormultiplepost-fullview';
-    public final const MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW = 'layout-singlemultiplepost-fullview';
-    public final const MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT = 'layout-multiplepost-simpleview-abovecontent';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_NAVIGATOR = 'layout-multiplepost-navigator';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_ADDONS = 'layout-multiplepost-addons';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_DETAILS = 'layout-multiplepost-details';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_THUMBNAIL = 'layout-multiplepost-thumbnail';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_LIST = 'layout-multiplepost-list';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_LINE = 'layout-multiplepost-line';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_RELATED = 'layout-multiplepost-related';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_EDIT = 'layout-multiplepost-edit';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW = 'layout-multiplepost-simpleview';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_FULLVIEW = 'layout-multiplepost-fullview';
+    public final const COMPONENT_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW = 'layout-authormultiplepost-fullview';
+    public final const COMPONENT_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW = 'layout-singlemultiplepost-fullview';
+    public final const COMPONENT_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT = 'layout-multiplepost-simpleview-abovecontent';
 
     public function getComponentsToProcess(): array
     {

@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Share_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL = 'layout-feedbackmessage-sharebyemail';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_SHAREBYEMAIL = 'layout-feedbackmessage-sharebyemail';
 
     public function getComponentsToProcess(): array
     {

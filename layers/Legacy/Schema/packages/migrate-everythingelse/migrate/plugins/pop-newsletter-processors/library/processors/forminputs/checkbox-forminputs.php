@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GenericForms_Module_Processor_CheckboxFormInputs extends PoP_Module_Processor_BooleanCheckboxFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUP_NEWSLETTER = 'gf-cup-newsletter';
+    public final const COMPONENT_FORMINPUT_CUP_NEWSLETTER = 'gf-cup-newsletter';
 
     public function getComponentsToProcess(): array
     {

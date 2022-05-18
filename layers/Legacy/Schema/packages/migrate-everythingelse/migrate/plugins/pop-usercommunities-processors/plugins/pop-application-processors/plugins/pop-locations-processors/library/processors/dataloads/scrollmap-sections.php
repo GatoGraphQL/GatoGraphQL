@@ -6,8 +6,8 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
-    public final const MODULE_DATALOAD_COMMUNITIES_SCROLLMAP = 'dataload-communities-scrollmap';
-    public final const MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'dataload-authormembers-scrollmap';
+    public final const COMPONENT_DATALOAD_COMMUNITIES_SCROLLMAP = 'dataload-communities-scrollmap';
+    public final const COMPONENT_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'dataload-authormembers-scrollmap';
 
     public function getComponentsToProcess(): array
     {

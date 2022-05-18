@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public final const MODULE_BLOCK_HIGHLIGHT_UPDATE = 'block-highlight-update';
-    public final const MODULE_BLOCK_HIGHLIGHT_CREATE = 'block-highlight-create';
+    public final const COMPONENT_BLOCK_HIGHLIGHT_UPDATE = 'block-highlight-update';
+    public final const COMPONENT_BLOCK_HIGHLIGHT_CREATE = 'block-highlight-create';
 
     public function getComponentsToProcess(): array
     {

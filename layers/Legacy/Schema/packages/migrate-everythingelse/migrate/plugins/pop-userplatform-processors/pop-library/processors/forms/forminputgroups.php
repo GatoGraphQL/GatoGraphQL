@@ -2,7 +2,7 @@
 
 class GD_UserPlatform_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_SETTINGSFORMAT = 'forminputgroup-settingsformat';
+    public final const COMPONENT_FORMINPUTGROUP_SETTINGSFORMAT = 'forminputgroup-settingsformat';
 
     public function getComponentsToProcess(): array
     {

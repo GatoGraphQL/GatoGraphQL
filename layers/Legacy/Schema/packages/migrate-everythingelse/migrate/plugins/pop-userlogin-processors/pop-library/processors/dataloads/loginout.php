@@ -7,10 +7,10 @@ use PoPSitesWassup\UserStateMutations\MutationResolverBridges\ResetLostPasswordM
 
 class PoP_UserLogin_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_LOGIN = 'dataload-login';
-    public final const MODULE_DATALOAD_LOSTPWD = 'dataload-lostpwd';
-    public final const MODULE_DATALOAD_LOSTPWDRESET = 'dataload-lostpwdreset';
-    public final const MODULE_DATALOAD_LOGOUT = 'dataload-logout';
+    public final const COMPONENT_DATALOAD_LOGIN = 'dataload-login';
+    public final const COMPONENT_DATALOAD_LOSTPWD = 'dataload-lostpwd';
+    public final const COMPONENT_DATALOAD_LOSTPWDRESET = 'dataload-lostpwdreset';
+    public final const COMPONENT_DATALOAD_LOGOUT = 'dataload-logout';
 
     public function getComponentsToProcess(): array
     {

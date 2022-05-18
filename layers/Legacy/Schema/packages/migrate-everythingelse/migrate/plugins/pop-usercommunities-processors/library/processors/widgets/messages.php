@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {
-    public final const MODULE_URE_MESSAGE_NOCOMMUNITIES = 'ure-message-nocommunities';
+    public final const COMPONENT_URE_MESSAGE_NOCOMMUNITIES = 'ure-message-nocommunities';
 
     public function getComponentsToProcess(): array
     {

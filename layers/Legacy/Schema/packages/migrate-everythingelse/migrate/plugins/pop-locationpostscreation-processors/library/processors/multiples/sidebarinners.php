@@ -2,7 +2,7 @@
 
 class PoP_LocationPostsCreation_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-mylocationposts-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-mylocationposts-sidebar';
 
     public function getComponentsToProcess(): array
     {

@@ -4,10 +4,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_TagViewComponentButtons extends PoP_Module_Processor_TagViewComponentButtonsBase
 {
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA = 'viewcomponent-tagbutton-embed-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-embed-previewdropdown';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA = 'viewcomponent-tagbutton-api-socialmedia';
-    public final const MODULE_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-api-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_SOCIALMEDIA = 'viewcomponent-tagbutton-embed-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_EMBED_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-embed-previewdropdown';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_SOCIALMEDIA = 'viewcomponent-tagbutton-api-socialmedia';
+    public final const COMPONENT_VIEWCOMPONENT_BUTTON_TAG_API_PREVIEWDROPDOWN = 'viewcomponent-tagbutton-api-previewdropdown';
 
     public function getComponentsToProcess(): array
     {

@@ -4,9 +4,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Core_Bootstrap_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_EMBED = 'anchorcontrol-embed';
-    public final const MODULE_ANCHORCONTROL_API = 'anchorcontrol-api';
-    public final const MODULE_ANCHORCONTROL_COPYSEARCHURL = 'anchorcontrol-copysearchurl';
+    public final const COMPONENT_ANCHORCONTROL_EMBED = 'anchorcontrol-embed';
+    public final const COMPONENT_ANCHORCONTROL_API = 'anchorcontrol-api';
+    public final const COMPONENT_ANCHORCONTROL_COPYSEARCHURL = 'anchorcontrol-copysearchurl';
 
     public function getComponentsToProcess(): array
     {

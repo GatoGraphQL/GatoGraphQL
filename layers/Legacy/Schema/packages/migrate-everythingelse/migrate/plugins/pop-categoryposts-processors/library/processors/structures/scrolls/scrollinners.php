@@ -2,26 +2,26 @@
 
 class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW = 'scrollinner-categoryposts00-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS01_SIMPLEVIEW = 'scrollinner-categoryposts01-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS02_SIMPLEVIEW = 'scrollinner-categoryposts02-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS03_SIMPLEVIEW = 'scrollinner-categoryposts03-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS04_SIMPLEVIEW = 'scrollinner-categoryposts04-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS05_SIMPLEVIEW = 'scrollinner-categoryposts05-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS06_SIMPLEVIEW = 'scrollinner-categoryposts06-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS07_SIMPLEVIEW = 'scrollinner-categoryposts07-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS08_SIMPLEVIEW = 'scrollinner-categoryposts08-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS09_SIMPLEVIEW = 'scrollinner-categoryposts09-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS10_SIMPLEVIEW = 'scrollinner-categoryposts10-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS11_SIMPLEVIEW = 'scrollinner-categoryposts11-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS12_SIMPLEVIEW = 'scrollinner-categoryposts12-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS13_SIMPLEVIEW = 'scrollinner-categoryposts13-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS14_SIMPLEVIEW = 'scrollinner-categoryposts14-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS15_SIMPLEVIEW = 'scrollinner-categoryposts15-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS16_SIMPLEVIEW = 'scrollinner-categoryposts16-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS17_SIMPLEVIEW = 'scrollinner-categoryposts17-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-categoryposts18-simpleview';
-    public final const MODULE_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-categoryposts19-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW = 'scrollinner-categoryposts00-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS01_SIMPLEVIEW = 'scrollinner-categoryposts01-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS02_SIMPLEVIEW = 'scrollinner-categoryposts02-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS03_SIMPLEVIEW = 'scrollinner-categoryposts03-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS04_SIMPLEVIEW = 'scrollinner-categoryposts04-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS05_SIMPLEVIEW = 'scrollinner-categoryposts05-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS06_SIMPLEVIEW = 'scrollinner-categoryposts06-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS07_SIMPLEVIEW = 'scrollinner-categoryposts07-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS08_SIMPLEVIEW = 'scrollinner-categoryposts08-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS09_SIMPLEVIEW = 'scrollinner-categoryposts09-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS10_SIMPLEVIEW = 'scrollinner-categoryposts10-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS11_SIMPLEVIEW = 'scrollinner-categoryposts11-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS12_SIMPLEVIEW = 'scrollinner-categoryposts12-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS13_SIMPLEVIEW = 'scrollinner-categoryposts13-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS14_SIMPLEVIEW = 'scrollinner-categoryposts14-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS15_SIMPLEVIEW = 'scrollinner-categoryposts15-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS16_SIMPLEVIEW = 'scrollinner-categoryposts16-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS17_SIMPLEVIEW = 'scrollinner-categoryposts17-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-categoryposts18-simpleview';
+    public final const COMPONENT_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-categoryposts19-simpleview';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class GD_CommonPages_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLLMAP_WHOWEARE_SCROLLMAP = 'scrollmap-whoweare-scrollmap';
+    public final const COMPONENT_SCROLLMAP_WHOWEARE_SCROLLMAP = 'scrollmap-whoweare-scrollmap';
 
     public function getComponentsToProcess(): array
     {

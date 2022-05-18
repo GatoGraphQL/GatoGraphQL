@@ -2,9 +2,9 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySectionBlocksBase
 {
-    public final const MODULE_BLOCK_MYLINKS_TABLE_EDIT = 'block-mylinks-table-edit';
-    public final const MODULE_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW = 'block-mylinks-scroll-simpleviewpreview';
-    public final const MODULE_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW = 'block-mylinks-scroll-fullviewpreview';
+    public final const COMPONENT_BLOCK_MYLINKS_TABLE_EDIT = 'block-mylinks-table-edit';
+    public final const COMPONENT_BLOCK_MYLINKS_SCROLL_SIMPLEVIEWPREVIEW = 'block-mylinks-scroll-simpleviewpreview';
+    public final const COMPONENT_BLOCK_MYLINKS_SCROLL_FULLVIEWPREVIEW = 'block-mylinks-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

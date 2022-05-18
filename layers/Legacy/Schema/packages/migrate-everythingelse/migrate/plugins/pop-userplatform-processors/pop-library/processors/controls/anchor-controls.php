@@ -4,8 +4,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_UserPlatform_Module_Processor_AnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
-    public final const MODULE_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
+    public final const COMPONENT_ANCHORCONTROL_INVITENEWUSERS = 'anchorcontrol-invitenewusers';
+    public final const COMPONENT_ANCHORCONTROL_SHARE_INVITENEWUSERS = 'anchorcontrol-share-invitenewusers';
 
     public function getComponentsToProcess(): array
     {

@@ -2,11 +2,11 @@
 
 class GD_UserLogin_Module_Processor_UserFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_LOGIN = 'feedbackmessage-login';
-    public final const MODULE_FEEDBACKMESSAGE_LOSTPWD = 'feedbackmessage-lostpwd';
-    public final const MODULE_FEEDBACKMESSAGE_LOSTPWDRESET = 'feedbackmessage-lostpwdreset';
-    public final const MODULE_FEEDBACKMESSAGE_LOGOUT = 'feedbackmessage-logout';
-    public final const MODULE_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'feedbackmessage-user-changepassword';
+    public final const COMPONENT_FEEDBACKMESSAGE_LOGIN = 'feedbackmessage-login';
+    public final const COMPONENT_FEEDBACKMESSAGE_LOSTPWD = 'feedbackmessage-lostpwd';
+    public final const COMPONENT_FEEDBACKMESSAGE_LOSTPWDRESET = 'feedbackmessage-lostpwdreset';
+    public final const COMPONENT_FEEDBACKMESSAGE_LOGOUT = 'feedbackmessage-logout';
+    public final const COMPONENT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'feedbackmessage-user-changepassword';
 
     public function getComponentsToProcess(): array
     {

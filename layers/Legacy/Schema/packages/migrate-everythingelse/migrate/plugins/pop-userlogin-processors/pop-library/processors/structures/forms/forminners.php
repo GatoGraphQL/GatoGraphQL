@@ -4,11 +4,11 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_LOGIN = 'forminner-login';
-    public final const MODULE_FORMINNER_LOSTPWD = 'forminner-lostpwd';
-    public final const MODULE_FORMINNER_LOSTPWDRESET = 'forminner-lostpwdreset';
-    public final const MODULE_FORMINNER_LOGOUT = 'forminner-logout';
-    public final const MODULE_FORMINNER_USER_CHANGEPASSWORD = 'forminner-user-changepwd';
+    public final const COMPONENT_FORMINNER_LOGIN = 'forminner-login';
+    public final const COMPONENT_FORMINNER_LOSTPWD = 'forminner-lostpwd';
+    public final const COMPONENT_FORMINNER_LOSTPWDRESET = 'forminner-lostpwdreset';
+    public final const COMPONENT_FORMINNER_LOGOUT = 'forminner-logout';
+    public final const COMPONENT_FORMINNER_USER_CHANGEPASSWORD = 'forminner-user-changepwd';
 
     public function getComponentsToProcess(): array
     {

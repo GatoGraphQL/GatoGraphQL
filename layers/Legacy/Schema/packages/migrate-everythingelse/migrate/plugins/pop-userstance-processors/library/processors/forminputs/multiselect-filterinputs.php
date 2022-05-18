@@ -11,7 +11,7 @@ class UserStance_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Pro
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
+    public final const COMPONENT_FILTERINPUT_STANCE_MULTISELECT = 'filterinput-multiselect-stance';
 
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 

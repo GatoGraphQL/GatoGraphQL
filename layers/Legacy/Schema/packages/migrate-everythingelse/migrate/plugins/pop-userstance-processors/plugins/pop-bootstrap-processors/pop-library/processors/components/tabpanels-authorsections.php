@@ -2,10 +2,10 @@
 
 class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORSTANCES = 'tabpanel-authorstances';
-    public final const MODULE_TABPANEL_AUTHORSTANCES_PRO = 'tabpanel-authorstances-pro';
-    public final const MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL = 'tabpanel-authorstances-neutral';
-    public final const MODULE_TABPANEL_AUTHORSTANCES_AGAINST = 'tabpanel-authorstances-against';
+    public final const COMPONENT_TABPANEL_AUTHORSTANCES = 'tabpanel-authorstances';
+    public final const COMPONENT_TABPANEL_AUTHORSTANCES_PRO = 'tabpanel-authorstances-pro';
+    public final const COMPONENT_TABPANEL_AUTHORSTANCES_NEUTRAL = 'tabpanel-authorstances-neutral';
+    public final const COMPONENT_TABPANEL_AUTHORSTANCES_AGAINST = 'tabpanel-authorstances-against';
 
     public function getComponentsToProcess(): array
     {

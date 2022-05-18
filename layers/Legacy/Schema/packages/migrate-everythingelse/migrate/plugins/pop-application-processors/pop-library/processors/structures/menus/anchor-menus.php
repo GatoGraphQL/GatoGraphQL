@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_AnchorMenus extends PoP_Module_Processor_AnchorMenusBase
 {
-    public final const MODULE_ANCHORMENU = 'anchormenu';
+    public final const COMPONENT_ANCHORMENU = 'anchormenu';
 
     public function getComponentsToProcess(): array
     {

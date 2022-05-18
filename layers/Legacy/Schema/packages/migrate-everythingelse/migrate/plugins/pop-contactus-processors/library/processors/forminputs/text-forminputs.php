@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContactUs_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_SUBJECT = 'gf-field-subject';
+    public final const COMPONENT_FORMINPUT_SUBJECT = 'gf-field-subject';
 
     public function getComponentsToProcess(): array
     {

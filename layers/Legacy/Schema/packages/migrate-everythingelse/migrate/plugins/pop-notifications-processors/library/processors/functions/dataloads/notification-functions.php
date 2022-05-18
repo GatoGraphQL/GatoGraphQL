@@ -8,9 +8,9 @@ use PoPSitesWassup\NotificationMutations\MutationResolverBridges\MarkAsUnreadNot
 
 class GD_AAL_Module_Processor_FunctionsDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_MARKALLNOTIFICATIONSASREAD = 'dataload-markallnotificationsasread';
-    public final const MODULE_DATALOAD_MARKNOTIFICATIONASREAD = 'dataload-marknotificationasread';
-    public final const MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD = 'dataload-marknotificationasunread';
+    public final const COMPONENT_DATALOAD_MARKALLNOTIFICATIONSASREAD = 'dataload-markallnotificationsasread';
+    public final const COMPONENT_DATALOAD_MARKNOTIFICATIONASREAD = 'dataload-marknotificationasread';
+    public final const COMPONENT_DATALOAD_MARKNOTIFICATIONASUNREAD = 'dataload-marknotificationasunread';
 
     public function getComponentsToProcess(): array
     {

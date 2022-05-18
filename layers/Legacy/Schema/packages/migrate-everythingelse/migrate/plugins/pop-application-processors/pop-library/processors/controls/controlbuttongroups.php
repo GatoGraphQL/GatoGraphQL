@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processor_ControlButtonGroupsBase
 {
-    public final const MODULE_CONTROLBUTTONGROUP_ADDPOST = 'controlbuttongroup-addpost';
+    public final const COMPONENT_CONTROLBUTTONGROUP_ADDPOST = 'controlbuttongroup-addpost';
 
     public function getComponentsToProcess(): array
     {

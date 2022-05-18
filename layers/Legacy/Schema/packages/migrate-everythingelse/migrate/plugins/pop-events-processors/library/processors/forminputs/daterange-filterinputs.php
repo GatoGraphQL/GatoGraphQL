@@ -10,7 +10,7 @@ class PoP_Events_Module_Processor_DateRangeComponentFilterInputs extends PoP_Mod
 {
     use DataloadQueryArgsSchemaFilterInputComponentProcessorTrait;
 
-    public final const MODULE_FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
+    public final const COMPONENT_FILTERINPUT_EVENTSCOPE = 'filterinput-eventscope';
 
     private ?DateScalarTypeResolver $dateScalarTypeResolver = null;
 

@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLayoutsBase
 {
-    public final const MODULE_LAYOUT_CONTENT_POST = 'layout-content-post';
-    public final const MODULE_LAYOUT_CONTENT_POSTFEED = 'layout-content-postfeed';
-    public final const MODULE_LAYOUT_CONTENT_POSTCOMPACT = 'layout-content-postcompact';
-    public final const MODULE_LAYOUT_CONTENT_COMMENT = 'layout-content-comment';
-    public final const MODULE_LAYOUT_CONTENT_PAGE = 'layout-content-page';
+    public final const COMPONENT_LAYOUT_CONTENT_POST = 'layout-content-post';
+    public final const COMPONENT_LAYOUT_CONTENT_POSTFEED = 'layout-content-postfeed';
+    public final const COMPONENT_LAYOUT_CONTENT_POSTCOMPACT = 'layout-content-postcompact';
+    public final const COMPONENT_LAYOUT_CONTENT_COMMENT = 'layout-content-comment';
+    public final const COMPONENT_LAYOUT_CONTENT_PAGE = 'layout-content-page';
 
     public function getComponentsToProcess(): array
     {

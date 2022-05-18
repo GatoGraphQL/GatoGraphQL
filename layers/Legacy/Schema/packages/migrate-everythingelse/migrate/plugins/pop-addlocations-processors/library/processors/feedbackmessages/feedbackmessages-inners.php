@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CreateLocationFeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_CREATELOCATION = 'feedbackmessageinner-createlocation';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_CREATELOCATION = 'feedbackmessageinner-createlocation';
 
     public function getComponentsToProcess(): array
     {

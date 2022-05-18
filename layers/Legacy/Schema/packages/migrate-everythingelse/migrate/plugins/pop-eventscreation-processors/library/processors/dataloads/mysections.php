@@ -6,12 +6,12 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
 {
     use PastEventComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_MYEVENTS_TABLE_EDIT = 'dataload-myevents-table-edit';
-    public final const MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT = 'dataload-mypastevents-table-edit';
-    public final const MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myevents-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mypastevents-scroll-simpleviewpreview';
-    public final const MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
-    public final const MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYEVENTS_TABLE_EDIT = 'dataload-myevents-table-edit';
+    public final const COMPONENT_DATALOAD_MYPASTEVENTS_TABLE_EDIT = 'dataload-mypastevents-table-edit';
+    public final const COMPONENT_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-myevents-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mypastevents-scroll-simpleviewpreview';
+    public final const COMPONENT_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
+    public final const COMPONENT_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

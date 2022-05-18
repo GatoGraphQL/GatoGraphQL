@@ -7,8 +7,8 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class GD_URE_Module_Processor_CreateProfileDataloads extends PoP_Module_Processor_CreateProfileDataloadsBase
 {
-    public final const MODULE_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
-    public final const MODULE_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
+    public final const COMPONENT_DATALOAD_PROFILEORGANIZATION_CREATE = 'dataload-profileorganization-create';
+    public final const COMPONENT_DATALOAD_PROFILEINDIVIDUAL_CREATE = 'dataload-profileindividual-create';
 
     public function getComponentsToProcess(): array
     {

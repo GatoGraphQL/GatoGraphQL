@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Locations_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_ANCHORCONTROL_TOGGLEMAP = 'anchorcontrol-togglemap';
-    public final const MODULE_ANCHORCONTROL_TOGGLEAUTHORMAP = 'anchorcontrol-toggleauthormap';
-    public final const MODULE_ANCHORCONTROL_TOGGLETAGMAP = 'anchorcontrol-toggletagmap';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLEMAP = 'anchorcontrol-togglemap';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLEAUTHORMAP = 'anchorcontrol-toggleauthormap';
+    public final const COMPONENT_ANCHORCONTROL_TOGGLETAGMAP = 'anchorcontrol-toggletagmap';
 
     public function getComponentsToProcess(): array
     {

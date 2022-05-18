@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_CreateLocationFormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_CREATELOCATION = 'em-forminner-createlocation';
+    public final const COMPONENT_FORMINNER_CREATELOCATION = 'em-forminner-createlocation';
 
     public function getComponentsToProcess(): array
     {

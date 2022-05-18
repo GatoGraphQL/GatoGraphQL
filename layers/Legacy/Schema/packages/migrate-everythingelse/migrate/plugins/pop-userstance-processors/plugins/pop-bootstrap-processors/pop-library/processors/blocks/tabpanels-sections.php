@@ -2,17 +2,17 @@
 
 class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_STANCES = 'block-stances-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_PRO = 'block-stances-pro-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_AGAINST = 'block-stances-against-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL = 'block-stances-neutral-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_PRO_GENERAL = 'block-stances-pro-general-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL = 'block-stances-against-general-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL = 'block-stances-neutral-general-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_PRO_ARTICLE = 'block-stances-pro-article-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE = 'block-stances-against-article-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'block-stances-neutral-article-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_MYSTANCES = 'block-mystances-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES = 'block-stances-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_PRO = 'block-stances-pro-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST = 'block-stances-against-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL = 'block-stances-neutral-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_PRO_GENERAL = 'block-stances-pro-general-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_GENERAL = 'block-stances-against-general-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_GENERAL = 'block-stances-neutral-general-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_PRO_ARTICLE = 'block-stances-pro-article-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST_ARTICLE = 'block-stances-against-article-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'block-stances-neutral-article-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_MYSTANCES = 'block-mystances-tabpanel';
 
     public function getComponentsToProcess(): array
     {

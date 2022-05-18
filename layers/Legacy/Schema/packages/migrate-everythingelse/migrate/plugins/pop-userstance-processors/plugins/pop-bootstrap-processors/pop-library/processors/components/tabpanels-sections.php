@@ -2,17 +2,17 @@
 
 class UserStance_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_STANCES = 'tabpanel-stances';
-    public final const MODULE_TABPANEL_STANCES_PRO = 'tabpanel-stances-pro';
-    public final const MODULE_TABPANEL_STANCES_AGAINST = 'tabpanel-stances-against';
-    public final const MODULE_TABPANEL_STANCES_NEUTRAL = 'tabpanel-stances-neutral';
-    public final const MODULE_TABPANEL_STANCES_PRO_GENERAL = 'tabpanel-stances-pro-general';
-    public final const MODULE_TABPANEL_STANCES_AGAINST_GENERAL = 'tabpanel-stances-against-general';
-    public final const MODULE_TABPANEL_STANCES_NEUTRAL_GENERAL = 'tabpanel-stances-neutral-general';
-    public final const MODULE_TABPANEL_STANCES_PRO_ARTICLE = 'tabpanel-stances-pro-article';
-    public final const MODULE_TABPANEL_STANCES_AGAINST_ARTICLE = 'tabpanel-stances-against-article';
-    public final const MODULE_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'tabpanel-stances-neutral-article';
-    public final const MODULE_TABPANEL_MYSTANCES = 'tabpanel-mystances';
+    public final const COMPONENT_TABPANEL_STANCES = 'tabpanel-stances';
+    public final const COMPONENT_TABPANEL_STANCES_PRO = 'tabpanel-stances-pro';
+    public final const COMPONENT_TABPANEL_STANCES_AGAINST = 'tabpanel-stances-against';
+    public final const COMPONENT_TABPANEL_STANCES_NEUTRAL = 'tabpanel-stances-neutral';
+    public final const COMPONENT_TABPANEL_STANCES_PRO_GENERAL = 'tabpanel-stances-pro-general';
+    public final const COMPONENT_TABPANEL_STANCES_AGAINST_GENERAL = 'tabpanel-stances-against-general';
+    public final const COMPONENT_TABPANEL_STANCES_NEUTRAL_GENERAL = 'tabpanel-stances-neutral-general';
+    public final const COMPONENT_TABPANEL_STANCES_PRO_ARTICLE = 'tabpanel-stances-pro-article';
+    public final const COMPONENT_TABPANEL_STANCES_AGAINST_ARTICLE = 'tabpanel-stances-against-article';
+    public final const COMPONENT_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'tabpanel-stances-neutral-article';
+    public final const COMPONENT_TABPANEL_MYSTANCES = 'tabpanel-mystances';
 
     public function getComponentsToProcess(): array
     {

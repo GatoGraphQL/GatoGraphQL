@@ -3,8 +3,8 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 class Wassup_URE_AAL_Module_Processor_MultiMembershipWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP = 'ure-aal-multicomponentactionwrapper-layoutuser-membership';
-    public final const MODULE_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY = 'ure-aal-quicklinkgroupactionwrapper-user-joinedcommunity';
+    public final const COMPONENT_UREAAL_MULTICOMPONENTACTIONWRAPPER_LAYOUTUSER_MEMBERSHIP = 'ure-aal-multicomponentactionwrapper-layoutuser-membership';
+    public final const COMPONENT_UREAAL_QUICKLINKGROUPACTIONWRAPPER_USER_JOINEDCOMMUNITY = 'ure-aal-quicklinkgroupactionwrapper-user-joinedcommunity';
 
     public function getComponentsToProcess(): array
     {

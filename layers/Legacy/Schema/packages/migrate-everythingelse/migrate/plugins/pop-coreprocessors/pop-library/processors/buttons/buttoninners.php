@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN = 'buttoninner-print-previewdropdown';
-    public final const MODULE_BUTTONINNER_PRINT_SOCIALMEDIA = 'buttoninner-print-socialmedia';
-    public final const MODULE_BUTTONINNER_POSTPERMALINK = 'buttoninner-postpermalink';
-    public final const MODULE_BUTTONINNER_POSTCOMMENTS = 'buttoninner-comments';
-    public final const MODULE_BUTTONINNER_POSTCOMMENTS_LABEL = 'buttoninner-comments-label';
+    public final const COMPONENT_BUTTONINNER_PRINT_PREVIEWDROPDOWN = 'buttoninner-print-previewdropdown';
+    public final const COMPONENT_BUTTONINNER_PRINT_SOCIALMEDIA = 'buttoninner-print-socialmedia';
+    public final const COMPONENT_BUTTONINNER_POSTPERMALINK = 'buttoninner-postpermalink';
+    public final const COMPONENT_BUTTONINNER_POSTCOMMENTS = 'buttoninner-comments';
+    public final const COMPONENT_BUTTONINNER_POSTCOMMENTS_LABEL = 'buttoninner-comments-label';
 
     public function getComponentsToProcess(): array
     {

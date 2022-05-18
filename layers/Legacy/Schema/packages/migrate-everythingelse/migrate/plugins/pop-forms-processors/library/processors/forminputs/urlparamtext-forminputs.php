@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_UrlParamTextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_POSTID = 'forminput-urlparamtext-pid';
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
-    public final const MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_POSTID = 'forminput-urlparamtext-pid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
+    public final const COMPONENT_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
 
     public function getComponentsToProcess(): array
     {

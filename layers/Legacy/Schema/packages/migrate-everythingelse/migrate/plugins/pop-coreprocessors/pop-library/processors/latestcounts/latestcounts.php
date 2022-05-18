@@ -4,10 +4,10 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCountsBase
 {
-    public final const MODULE_LATESTCOUNT_TAG_CONTENT = 'latestcount-tag-content';
-    public final const MODULE_LATESTCOUNT_CONTENT = 'latestcount-content';
-    public final const MODULE_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
-    public final const MODULE_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
+    public final const COMPONENT_LATESTCOUNT_TAG_CONTENT = 'latestcount-tag-content';
+    public final const COMPONENT_LATESTCOUNT_CONTENT = 'latestcount-content';
+    public final const COMPONENT_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
+    public final const COMPONENT_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
 
     public function getComponentsToProcess(): array
     {

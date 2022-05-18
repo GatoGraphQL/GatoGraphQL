@@ -6,11 +6,11 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class PoP_Module_Processor_SingleTabPanelSectionBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDCONTENT = 'block-tabpanel-singlerelatedcontent';
-    public final const MODULE_BLOCK_TABPANEL_SINGLEAUTHORS = 'block-tabpanel-singleauthors';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERECOMMENDEDBY = 'block-tabpanel-singlerecommendedby';
-    public final const MODULE_BLOCK_TABPANEL_SINGLEUPVOTEDBY = 'block-tabpanel-singleupvotedby';
-    public final const MODULE_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY = 'block-tabpanel-singledownvotedby';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDCONTENT = 'block-tabpanel-singlerelatedcontent';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS = 'block-tabpanel-singleauthors';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERECOMMENDEDBY = 'block-tabpanel-singlerecommendedby';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLEUPVOTEDBY = 'block-tabpanel-singleupvotedby';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLEDOWNVOTEDBY = 'block-tabpanel-singledownvotedby';
 
     public function getComponentsToProcess(): array
     {

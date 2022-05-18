@@ -2,8 +2,8 @@
 
 class GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public final const MODULE_BLOCK_LOCATIONPOST_UPDATE = 'block-locationpost-update';
-    public final const MODULE_BLOCK_LOCATIONPOST_CREATE = 'block-locationpost-create';
+    public final const COMPONENT_BLOCK_LOCATIONPOST_UPDATE = 'block-locationpost-update';
+    public final const COMPONENT_BLOCK_LOCATIONPOST_CREATE = 'block-locationpost-create';
 
     public function getComponentsToProcess(): array
     {

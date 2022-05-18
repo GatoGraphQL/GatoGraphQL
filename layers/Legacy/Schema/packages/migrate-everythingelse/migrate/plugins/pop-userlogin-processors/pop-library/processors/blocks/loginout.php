@@ -5,10 +5,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserLogin_Module_Processor_Blocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_LOGIN = 'block-login';
-    public final const MODULE_BLOCK_LOSTPWD = 'block-lostpwd';
-    public final const MODULE_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
-    public final const MODULE_BLOCK_LOGOUT = 'block-logout';
+    public final const COMPONENT_BLOCK_LOGIN = 'block-login';
+    public final const COMPONENT_BLOCK_LOSTPWD = 'block-lostpwd';
+    public final const COMPONENT_BLOCK_LOSTPWDRESET = 'block-lostpwdreset';
+    public final const COMPONENT_BLOCK_LOGOUT = 'block-logout';
 
     public function getComponentsToProcess(): array
     {

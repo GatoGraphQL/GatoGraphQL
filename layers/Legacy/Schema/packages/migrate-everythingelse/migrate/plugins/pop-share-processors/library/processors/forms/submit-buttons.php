@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Share_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public final const MODULE_GF_SUBMITBUTTON_SENDEMAIL = 'gf-submitbutton-sendemail';
+    public final const COMPONENT_GF_SUBMITBUTTON_SENDEMAIL = 'gf-submitbutton-sendemail';
 
     public function getComponentsToProcess(): array
     {

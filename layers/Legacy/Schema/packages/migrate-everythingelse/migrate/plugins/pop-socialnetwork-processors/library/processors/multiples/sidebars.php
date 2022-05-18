@@ -3,10 +3,10 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_SocialNetwork_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR = 'multiple-authorfollowers-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR = 'multiple-authorfollowingusers-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR = 'multiple-authorsubscribedtotags-sidebar';
-    public final const MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR = 'multiple-authorrecommendedposts-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR = 'multiple-authorfollowers-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR = 'multiple-authorfollowingusers-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR = 'multiple-authorsubscribedtotags-sidebar';
+    public final const COMPONENT_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR = 'multiple-authorrecommendedposts-sidebar';
 
     public function getComponentsToProcess(): array
     {

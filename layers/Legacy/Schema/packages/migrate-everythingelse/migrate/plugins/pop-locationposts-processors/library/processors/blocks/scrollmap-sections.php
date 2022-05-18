@@ -4,12 +4,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_Processor_ScrollMapBlocksBase
 {
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP = 'block-locationposts-scrollmap';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-locationposts-horizontalscrollmap';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP = 'block-authorlocationposts-scrollmap';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-authorlocationposts-horizontalscrollmap';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP = 'block-taglocationposts-scrollmap';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-taglocationposts-horizontalscrollmap';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLLMAP = 'block-locationposts-scrollmap';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-locationposts-horizontalscrollmap';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP = 'block-authorlocationposts-scrollmap';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-authorlocationposts-horizontalscrollmap';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP = 'block-taglocationposts-scrollmap';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-taglocationposts-horizontalscrollmap';
 
     public function getComponentsToProcess(): array
     {

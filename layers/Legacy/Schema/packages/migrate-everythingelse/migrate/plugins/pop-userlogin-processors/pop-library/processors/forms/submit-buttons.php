@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public final const MODULE_SUBMITBUTTON_LOGIN = 'submitbutton-login';
-    public final const MODULE_SUBMITBUTTON_LOSTPWD = 'submitbutton-lostpwd';
-    public final const MODULE_SUBMITBUTTON_LOSTPWDRESET = 'submitbutton-lostpwdreset';
-    public final const MODULE_SUBMITBUTTON_LOGOUT = 'submitbutton-logout';
+    public final const COMPONENT_SUBMITBUTTON_LOGIN = 'submitbutton-login';
+    public final const COMPONENT_SUBMITBUTTON_LOSTPWD = 'submitbutton-lostpwd';
+    public final const COMPONENT_SUBMITBUTTON_LOSTPWDRESET = 'submitbutton-lostpwdreset';
+    public final const COMPONENT_SUBMITBUTTON_LOGOUT = 'submitbutton-logout';
 
     public function getComponentsToProcess(): array
     {

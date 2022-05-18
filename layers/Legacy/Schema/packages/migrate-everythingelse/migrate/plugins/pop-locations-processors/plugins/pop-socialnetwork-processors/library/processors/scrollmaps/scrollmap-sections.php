@@ -2,12 +2,12 @@
 
 class PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP = 'scrollmap-authorfollowers-scrollmap';
-    public final const MODULE_SCROLLMAP_AUTHORFOLLOWINGUSERS_SCROLLMAP = 'scrollmap-authorfollowingusers-scrollmap';
-    public final const MODULE_SCROLLMAP_SINGLERECOMMENDEDBY_SCROLLMAP = 'scrollmap-singlerecommendedby-scrollmap';
-    public final const MODULE_SCROLLMAP_SINGLEUPVOTEDBY_SCROLLMAP = 'scrollmap-singleupvotedby-scrollmap';
-    public final const MODULE_SCROLLMAP_SINGLEDOWNVOTEDBY_SCROLLMAP = 'scrollmap-singledownvotedby-scrollmap';
-    public final const MODULE_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP = 'scrollmap-tagsubscribers-scrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHORFOLLOWERS_SCROLLMAP = 'scrollmap-authorfollowers-scrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHORFOLLOWINGUSERS_SCROLLMAP = 'scrollmap-authorfollowingusers-scrollmap';
+    public final const COMPONENT_SCROLLMAP_SINGLERECOMMENDEDBY_SCROLLMAP = 'scrollmap-singlerecommendedby-scrollmap';
+    public final const COMPONENT_SCROLLMAP_SINGLEUPVOTEDBY_SCROLLMAP = 'scrollmap-singleupvotedby-scrollmap';
+    public final const COMPONENT_SCROLLMAP_SINGLEDOWNVOTEDBY_SCROLLMAP = 'scrollmap-singledownvotedby-scrollmap';
+    public final const COMPONENT_SCROLLMAP_TAGSUBSCRIBERS_SCROLLMAP = 'scrollmap-tagsubscribers-scrollmap';
 
     public function getComponentsToProcess(): array
     {

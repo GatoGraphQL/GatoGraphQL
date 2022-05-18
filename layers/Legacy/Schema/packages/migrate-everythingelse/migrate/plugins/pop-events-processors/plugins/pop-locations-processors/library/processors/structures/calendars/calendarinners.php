@@ -2,7 +2,7 @@
 
 class PoP_Events_Locations_Module_Processor_CalendarInners extends PoP_Module_Processor_CalendarInnersBase
 {
-    public final const MODULE_CALENDARINNER_EVENTSMAP = 'calendarinner-eventsmap';
+    public final const COMPONENT_CALENDARINNER_EVENTSMAP = 'calendarinner-eventsmap';
 
     public function getComponentsToProcess(): array
     {

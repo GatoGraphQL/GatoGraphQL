@@ -2,8 +2,8 @@
 
 class Wassup_Module_Processor_ContentMultipleInners extends PoP_Module_Processor_ContentMultipleInnersBase
 {
-    public final const MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS = 'contentinnerlayout-highlights';
-    public final const MODULE_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE = 'contentinnerlayout-highlights-appendable';
+    public final const COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS = 'contentinnerlayout-highlights';
+    public final const COMPONENT_LAYOUTCONTENTINNER_HIGHLIGHTS_APPENDABLE = 'contentinnerlayout-highlights-appendable';
 
     public function getComponentsToProcess(): array
     {

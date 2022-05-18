@@ -2,15 +2,15 @@
 
 class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS = 'block-communities-scroll-details';
-    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS = 'block-authormembers-scroll-details';
-    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW = 'block-communities-scroll-fullview';
-    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW = 'block-authormembers-scroll-fullview';
-    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL = 'block-communities-scroll-thumbnail';
-    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL = 'block-authormembers-scroll-thumbnail';
-    public final const MODULE_BLOCK_COMMUNITIES_SCROLL_LIST = 'block-communities-scroll-list';
-    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
-    public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
+    public final const COMPONENT_BLOCK_COMMUNITIES_SCROLL_DETAILS = 'block-communities-scroll-details';
+    public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS = 'block-authormembers-scroll-details';
+    public final const COMPONENT_BLOCK_COMMUNITIES_SCROLL_FULLVIEW = 'block-communities-scroll-fullview';
+    public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW = 'block-authormembers-scroll-fullview';
+    public final const COMPONENT_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL = 'block-communities-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL = 'block-authormembers-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_COMMUNITIES_SCROLL_LIST = 'block-communities-scroll-list';
+    public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
+    public final const COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
 
     public function getComponentsToProcess(): array
     {

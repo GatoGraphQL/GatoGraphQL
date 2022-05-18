@@ -4,7 +4,7 @@ define('POP_HOOK_CAROUSEL_USERS_GRIDCLASS', 'carousel-users-gridclass');
 
 class PoP_Module_Processor_CustomCarouselInners extends PoP_Module_Processor_CarouselInnersBase
 {
-    public final const MODULE_CAROUSELINNER_USERS = 'carouselinner-users';
+    public final const COMPONENT_CAROUSELINNER_USERS = 'carouselinner-users';
     
     public function getComponentsToProcess(): array
     {

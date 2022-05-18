@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_Processor_SelectFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
+    public final const COMPONENT_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
 
     public function getComponentsToProcess(): array
     {

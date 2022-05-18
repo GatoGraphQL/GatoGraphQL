@@ -2,8 +2,8 @@
 
 class GD_EM_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_SIDEBARMULTICOMPONENT_EVENT = 'sidebarmulticomponent-event';
-    public final const MODULE_SIDEBARMULTICOMPONENT_PASTEVENT = 'sidebarmulticomponent-pastevent';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_EVENT = 'sidebarmulticomponent-event';
+    public final const COMPONENT_SIDEBARMULTICOMPONENT_PASTEVENT = 'sidebarmulticomponent-pastevent';
 
     public function getComponentsToProcess(): array
     {

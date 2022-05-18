@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS = 'multicomponent-emailnotifications';
-    public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL = 'multicomponent-emailnotifications-general';
-    public final const MODULE_MULTICOMPONENT_EMAILDIGESTS = 'multicomponent-emaildigests';
+    public final const COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS = 'multicomponent-emailnotifications';
+    public final const COMPONENT_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL = 'multicomponent-emailnotifications-general';
+    public final const COMPONENT_MULTICOMPONENT_EMAILDIGESTS = 'multicomponent-emaildigests';
 
     public function getComponentsToProcess(): array
     {

@@ -8,10 +8,10 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_CUSTOMANCHORCONTROL_CALENDAR = 'custombuttoncontrol-calendar';
-    public final const MODULE_CUSTOMANCHORCONTROL_PASTEVENTS = 'custombuttoncontrol-pastevents';
-    public final const MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
-    public final const MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_CALENDAR = 'custombuttoncontrol-calendar';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_PASTEVENTS = 'custombuttoncontrol-pastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
 
     public function getComponentsToProcess(): array
     {

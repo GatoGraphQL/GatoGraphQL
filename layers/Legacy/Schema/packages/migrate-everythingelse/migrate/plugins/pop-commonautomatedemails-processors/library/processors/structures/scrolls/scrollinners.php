@@ -2,11 +2,11 @@
 
 class PoPTheme_Wassup_AE_Module_Processor_ScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS = 'scrollinner-automatedemails-latestcontent-details';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW = 'scrollinner-automatedemails-latestcontent-simpleview';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW = 'scrollinner-automatedemails-latestcontent-fullview';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scrollinner-automatedemails-latestcontent-thumbnail';
-    public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scrollinner-automatedemails-latestcontent-list';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_DETAILS = 'scrollinner-automatedemails-latestcontent-details';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_SIMPLEVIEW = 'scrollinner-automatedemails-latestcontent-simpleview';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_FULLVIEW = 'scrollinner-automatedemails-latestcontent-fullview';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_THUMBNAIL = 'scrollinner-automatedemails-latestcontent-thumbnail';
+    public final const COMPONENT_SCROLLINNER_AUTOMATEDEMAILS_LATESTCONTENT_LIST = 'scrollinner-automatedemails-latestcontent-list';
 
     public function getComponentsToProcess(): array
     {

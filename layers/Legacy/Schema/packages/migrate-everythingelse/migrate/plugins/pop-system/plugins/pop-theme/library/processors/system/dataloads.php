@@ -4,7 +4,7 @@ use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateThemeMutation
 
 class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadComponentProcessor
 {
-    public final const MODULE_DATALOADACTION_SYSTEM_GENERATETHEME = 'dataloadaction-system-generate-theme';
+    public final const COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME = 'dataloadaction-system-generate-theme';
 
     // use PoP_System_Theme_Module_Processor_SystemActionsTrait;
     public function getComponentsToProcess(): array

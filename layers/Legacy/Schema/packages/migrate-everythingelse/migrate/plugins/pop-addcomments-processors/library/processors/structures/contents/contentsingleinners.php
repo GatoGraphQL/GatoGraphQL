@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public final const MODULE_CONTENTINNER_COMMENTSINGLE = 'contentinner-commentsingle';
+    public final const COMPONENT_CONTENTINNER_COMMENTSINGLE = 'contentinner-commentsingle';
 
     public function getComponentsToProcess(): array
     {

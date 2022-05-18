@@ -2,7 +2,7 @@
 
 class PoP_Core_Module_Processor_FormInners extends PoP_Module_Processor_FormInnersBase
 {
-    public final const MODULE_FORMINNER_EVERYTHINGQUICKLINKS = 'forminner-everythingquicklinks';
+    public final const COMPONENT_FORMINNER_EVERYTHINGQUICKLINKS = 'forminner-everythingquicklinks';
 
     public function getComponentsToProcess(): array
     {

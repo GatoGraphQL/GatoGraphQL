@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public final const MODULE_CONTENTINNER_EMBEDPREVIEW = 'contentinner-embedpreview';
-    public final const MODULE_CONTENTINNER_EMBED = 'contentinner-embed';
-    public final const MODULE_CONTENTINNER_API = 'contentinner-api';
-    public final const MODULE_CONTENTINNER_COPYSEARCHURL = 'contentinner-copysearchurl';
+    public final const COMPONENT_CONTENTINNER_EMBEDPREVIEW = 'contentinner-embedpreview';
+    public final const COMPONENT_CONTENTINNER_EMBED = 'contentinner-embed';
+    public final const COMPONENT_CONTENTINNER_API = 'contentinner-api';
+    public final const COMPONENT_CONTENTINNER_COPYSEARCHURL = 'contentinner-copysearchurl';
 
     public function getComponentsToProcess(): array
     {

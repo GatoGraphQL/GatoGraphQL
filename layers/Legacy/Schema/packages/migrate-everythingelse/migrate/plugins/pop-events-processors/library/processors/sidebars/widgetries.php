@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS = 'em-widget-datetimedownloadlinks';
-    public final const MODULE_EM_WIDGET_DATETIME = 'em-widget-datetime';
-    public final const MODULE_EM_WIDGETCOMPACT_EVENTINFO = 'em-widgetcompact-eventinfo';
-    public final const MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO = 'em-widgetcompact-pasteventinfo';
+    public final const COMPONENT_EM_WIDGET_DATETIMEDOWNLOADLINKS = 'em-widget-datetimedownloadlinks';
+    public final const COMPONENT_EM_WIDGET_DATETIME = 'em-widget-datetime';
+    public final const COMPONENT_EM_WIDGETCOMPACT_EVENTINFO = 'em-widgetcompact-eventinfo';
+    public final const COMPONENT_EM_WIDGETCOMPACT_PASTEVENTINFO = 'em-widgetcompact-pasteventinfo';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'tabpanel-authorcommunitymembers';
+    public final const COMPONENT_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'tabpanel-authorcommunitymembers';
 
     public function getComponentsToProcess(): array
     {

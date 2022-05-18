@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
+    public final const COMPONENT_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
 
     public function getComponentsToProcess(): array
     {

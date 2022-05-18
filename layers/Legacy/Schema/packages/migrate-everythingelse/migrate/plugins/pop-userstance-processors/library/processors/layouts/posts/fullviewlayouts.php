@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class UserStance_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLVIEW_STANCE = 'layout-fullview-stance';
+    public final const COMPONENT_LAYOUT_FULLVIEW_STANCE = 'layout-fullview-stance';
 
     public function getComponentsToProcess(): array
     {

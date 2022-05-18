@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_AAL_CONTROLGROUP_NOTIFICATIONLIST = 'controlgroup-notificationlist';
+    public final const COMPONENT_AAL_CONTROLGROUP_NOTIFICATIONLIST = 'controlgroup-notificationlist';
 
     public function getComponentsToProcess(): array
     {

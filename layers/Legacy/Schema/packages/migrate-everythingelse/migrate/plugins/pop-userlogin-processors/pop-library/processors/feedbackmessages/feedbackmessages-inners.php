@@ -2,11 +2,11 @@
 
 class GD_UserLogin_Module_Processor_UserFeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_LOGIN = 'feedbackmessageinner-login';
-    public final const MODULE_FEEDBACKMESSAGEINNER_LOSTPWD = 'feedbackmessageinner-lostpwd';
-    public final const MODULE_FEEDBACKMESSAGEINNER_LOSTPWDRESET = 'feedbackmessageinner-lostpwdreset';
-    public final const MODULE_FEEDBACKMESSAGEINNER_LOGOUT = 'feedbackmessageinner-logout';
-    public final const MODULE_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD = 'feedbackmessageinner-user-changepassword';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_LOGIN = 'feedbackmessageinner-login';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWD = 'feedbackmessageinner-lostpwd';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_LOSTPWDRESET = 'feedbackmessageinner-lostpwdreset';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_LOGOUT = 'feedbackmessageinner-logout';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_USER_CHANGEPASSWORD = 'feedbackmessageinner-user-changepassword';
 
     public function getComponentsToProcess(): array
     {

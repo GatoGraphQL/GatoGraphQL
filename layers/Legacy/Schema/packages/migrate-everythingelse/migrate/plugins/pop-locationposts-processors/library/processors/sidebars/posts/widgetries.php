@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_Custom_EM_Module_Processor_PostWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_LOCATIONPOST_CATEGORIES = 'widget-locationpost-categories';
-    public final const MODULE_WIDGETCOMPACT_LOCATIONPOSTINFO = 'widgetcompact-locationpost-info';
+    public final const COMPONENT_WIDGET_LOCATIONPOST_CATEGORIES = 'widget-locationpost-categories';
+    public final const COMPONENT_WIDGETCOMPACT_LOCATIONPOSTINFO = 'widgetcompact-locationpost-info';
 
     public function getComponentsToProcess(): array
     {

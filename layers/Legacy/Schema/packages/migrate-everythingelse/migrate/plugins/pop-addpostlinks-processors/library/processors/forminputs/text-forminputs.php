@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_ADDPOSTLINKS_FORMINPUT_LINK = 'forminput-postlink';
+    public final const COMPONENT_ADDPOSTLINKS_FORMINPUT_LINK = 'forminput-postlink';
 
     public function getComponentsToProcess(): array
     {

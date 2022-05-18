@@ -3,10 +3,10 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
-    public final const MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST = 'controlgroup-blockmappostlist';
-    public final const MODULE_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST = 'controlgroup-blockauthormappostlist';
-    public final const MODULE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
-    public final const MODULE_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKMAPPOSTLIST = 'controlgroup-blockmappostlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKAUTHORMAPPOSTLIST = 'controlgroup-blockauthormappostlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
+    public final const COMPONENT_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
 
     public function getComponentsToProcess(): array
     {

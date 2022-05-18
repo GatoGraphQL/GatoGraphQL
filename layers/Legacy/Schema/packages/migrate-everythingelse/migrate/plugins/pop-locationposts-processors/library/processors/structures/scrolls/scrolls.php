@@ -2,14 +2,14 @@
 
 class PoP_LocationPosts_Module_Processor_CustomScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_LOCATIONPOSTS_NAVIGATOR = 'scroll-locationposts-navigator';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_ADDONS = 'scroll-locationposts-addons';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_DETAILS = 'scroll-locationposts-details';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_SIMPLEVIEW = 'scroll-locationposts-simpleview';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_FULLVIEW = 'scroll-locationposts-fullview';
-    public final const MODULE_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW = 'scroll-authorlocationposts-fullview';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_THUMBNAIL = 'scroll-locationposts-thumbnail';
-    public final const MODULE_SCROLL_LOCATIONPOSTS_LIST = 'scroll-locationposts-list';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_NAVIGATOR = 'scroll-locationposts-navigator';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_ADDONS = 'scroll-locationposts-addons';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_DETAILS = 'scroll-locationposts-details';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_SIMPLEVIEW = 'scroll-locationposts-simpleview';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_FULLVIEW = 'scroll-locationposts-fullview';
+    public final const COMPONENT_SCROLL_AUTHORLOCATIONPOSTS_FULLVIEW = 'scroll-authorlocationposts-fullview';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_THUMBNAIL = 'scroll-locationposts-thumbnail';
+    public final const COMPONENT_SCROLL_LOCATIONPOSTS_LIST = 'scroll-locationposts-list';
 
     public function getComponentsToProcess(): array
     {

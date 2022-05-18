@@ -2,8 +2,8 @@
 
 class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
 {
-    public final const MODULE_LAYOUT_FULLVIEW_EVENT = 'layout-fullview-event';
-    public final const MODULE_LAYOUT_FULLVIEW_PASTEVENT = 'layout-fullview-pastevent';
+    public final const COMPONENT_LAYOUT_FULLVIEW_EVENT = 'layout-fullview-event';
+    public final const COMPONENT_LAYOUT_FULLVIEW_PASTEVENT = 'layout-fullview-pastevent';
 
     public function getComponentsToProcess(): array
     {

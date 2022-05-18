@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_HIGHLIGHTS = 'tabpanel-highlights';
-    public final const MODULE_TABPANEL_MYHIGHLIGHTS = 'tabpanel-myhighlights';
+    public final const COMPONENT_TABPANEL_HIGHLIGHTS = 'tabpanel-highlights';
+    public final const COMPONENT_TABPANEL_MYHIGHLIGHTS = 'tabpanel-myhighlights';
 
     public function getComponentsToProcess(): array
     {

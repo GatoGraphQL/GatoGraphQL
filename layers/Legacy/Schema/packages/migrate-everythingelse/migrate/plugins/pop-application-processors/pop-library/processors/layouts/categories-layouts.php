@@ -2,8 +2,8 @@
 
 class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_CategoriesLayoutsBase
 {
-    public final const MODULE_LAYOUT_CATEGORIES = 'layout-categories';
-    public final const MODULE_LAYOUT_APPLIESTO = 'layout-appliesto';
+    public final const COMPONENT_LAYOUT_CATEGORIES = 'layout-categories';
+    public final const COMPONENT_LAYOUT_APPLIESTO = 'layout-appliesto';
 
     public function getComponentsToProcess(): array
     {

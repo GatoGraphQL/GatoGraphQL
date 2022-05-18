@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_SingleCommentFramesLayouts extends PoP_Module_Processor_SingleCommentScriptFrameLayoutsBase
 {
-    public final const MODULE_LAYOUT_COMMENTFRAME_LIST = 'layout-commentframe-list';
-    public final const MODULE_LAYOUT_COMMENTFRAME_ADD = 'layout-commentframe-add';
+    public final const COMPONENT_LAYOUT_COMMENTFRAME_LIST = 'layout-commentframe-list';
+    public final const COMPONENT_LAYOUT_COMMENTFRAME_ADD = 'layout-commentframe-add';
 
     public function getComponentsToProcess(): array
     {

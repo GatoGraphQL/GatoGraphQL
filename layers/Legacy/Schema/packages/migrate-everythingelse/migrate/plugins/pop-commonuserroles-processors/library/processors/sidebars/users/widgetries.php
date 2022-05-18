@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Custom_Module_Processor_UserWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGETCOMPACT_ORGANIZATIONINFO = 'widgetcompact-organization-info';
-    public final const MODULE_WIDGETCOMPACT_INDIVIDUALINFO = 'widgetcompact-individual-info';
+    public final const COMPONENT_WIDGETCOMPACT_ORGANIZATIONINFO = 'widgetcompact-organization-info';
+    public final const COMPONENT_WIDGETCOMPACT_INDIVIDUALINFO = 'widgetcompact-individual-info';
 
     public function getComponentsToProcess(): array
     {

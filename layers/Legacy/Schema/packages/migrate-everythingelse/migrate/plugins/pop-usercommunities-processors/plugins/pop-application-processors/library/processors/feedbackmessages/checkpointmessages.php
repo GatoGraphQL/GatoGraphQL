@@ -2,8 +2,8 @@
 
 class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY = 'checkpointmessage-profilecommunity';
-    public final const MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP = 'checkpointmessage-profilecommunityeditmembership';
+    public final const COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITY = 'checkpointmessage-profilecommunity';
+    public final const COMPONENT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP = 'checkpointmessage-profilecommunityeditmembership';
 
     public function getComponentsToProcess(): array
     {

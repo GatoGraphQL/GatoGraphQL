@@ -8,7 +8,7 @@ class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processo
 {
     use ObjectIDFromURLParamComponentProcessorTrait;
 
-    public final const MODULE_DATALOAD_FLAG = 'dataload-flag';
+    public final const COMPONENT_DATALOAD_FLAG = 'dataload-flag';
 
     public function getComponentsToProcess(): array
     {

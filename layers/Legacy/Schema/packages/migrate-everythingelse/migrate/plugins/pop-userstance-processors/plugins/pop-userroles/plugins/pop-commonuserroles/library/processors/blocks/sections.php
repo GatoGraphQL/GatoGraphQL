@@ -4,14 +4,14 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class UserStance_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW = 'block-stances-byorganizations-scroll-fullview';
-    public final const MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW = 'block-stances-byindividuals-scroll-fullview';
-    public final const MODULE_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL = 'block-stances-byorganizations-scroll-thumbnail';
-    public final const MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL = 'block-stances-byindividuals-scroll-thumbnail';
-    public final const MODULE_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST = 'block-stances-byorganizations-scroll-list';
-    public final const MODULE_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST = 'block-stances-byindividuals-scroll-list';
-    public final const MODULE_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL = 'block-stances-byorganizations-carousel';
-    public final const MODULE_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL = 'block-stances-byindividuals-carousel';
+    public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW = 'block-stances-byorganizations-scroll-fullview';
+    public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW = 'block-stances-byindividuals-scroll-fullview';
+    public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL = 'block-stances-byorganizations-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL = 'block-stances-byindividuals-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST = 'block-stances-byorganizations-scroll-list';
+    public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST = 'block-stances-byindividuals-scroll-list';
+    public final const COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL = 'block-stances-byorganizations-carousel';
+    public final const COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL = 'block-stances-byindividuals-carousel';
 
     public function getComponentsToProcess(): array
     {

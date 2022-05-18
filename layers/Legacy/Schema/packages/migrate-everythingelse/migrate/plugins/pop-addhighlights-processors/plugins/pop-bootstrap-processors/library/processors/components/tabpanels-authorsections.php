@@ -2,7 +2,7 @@
 
 class PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
+    public final const COMPONENT_TABPANEL_AUTHORHIGHLIGHTS = 'tabpanel-authorhighlights';
 
     public function getComponentsToProcess(): array
     {

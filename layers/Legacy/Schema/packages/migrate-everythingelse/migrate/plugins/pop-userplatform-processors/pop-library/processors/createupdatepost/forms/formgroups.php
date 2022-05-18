@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostFormGroups extends PoP_Module_Processor_FormGroupsBase
 {
-    public final const MODULE_FORMGROUP_EMBEDPREVIEW = 'formgroup-embedpreview';
+    public final const COMPONENT_FORMGROUP_EMBEDPREVIEW = 'formgroup-embedpreview';
 
     public function getComponentsToProcess(): array
     {

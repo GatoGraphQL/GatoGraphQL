@@ -3,11 +3,11 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES = 'ure-formcomponentgroup-selectabletypeahead-ure-communities';
-    public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponentgroup-selectabletypeahead-users';
-    public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filtercomponentgroup-selectabletypeahead-communityplusmembers';
-    public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filtercomponentgroup-selectabletypeahead-communities-post';
-    public final const MODULE_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filtercomponentgroup-selectabletypeahead-communities-user';
+    public final const COMPONENT_URE_FORMCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES = 'ure-formcomponentgroup-selectabletypeahead-ure-communities';
+    public final const COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES = 'filtercomponentgroup-selectabletypeahead-users';
+    public final const COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITYPLUSMEMBERS = 'filtercomponentgroup-selectabletypeahead-communityplusmembers';
+    public final const COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_POST = 'filtercomponentgroup-selectabletypeahead-communities-post';
+    public final const COMPONENT_URE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_COMMUNITIES_USER = 'filtercomponentgroup-selectabletypeahead-communities-user';
 
     public function getComponentsToProcess(): array
     {

@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndividualsBase
 {
-    public final const MODULE_MAP_INDIVIDUAL = 'em-map-individual';
-    public final const MODULE_MAP_SIDEBARINDIVIDUAL = 'em-map-sidebarindividual';
-    public final const MODULE_MAP_INDIVIDUAL_POST = 'em-map-individual-post';
-    public final const MODULE_MAP_INDIVIDUAL_USER = 'em-map-individual-user';
+    public final const COMPONENT_MAP_INDIVIDUAL = 'em-map-individual';
+    public final const COMPONENT_MAP_SIDEBARINDIVIDUAL = 'em-map-sidebarindividual';
+    public final const COMPONENT_MAP_INDIVIDUAL_POST = 'em-map-individual-post';
+    public final const COMPONENT_MAP_INDIVIDUAL_USER = 'em-map-individual-user';
 
     public function getComponentsToProcess(): array
     {

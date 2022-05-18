@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentPostLinksCreation_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
-    public final const MODULE_TABLE_MYLINKS = 'table-mylinks';
+    public final const COMPONENT_TABLE_MYLINKS = 'table-mylinks';
 
     public function getComponentsToProcess(): array
     {

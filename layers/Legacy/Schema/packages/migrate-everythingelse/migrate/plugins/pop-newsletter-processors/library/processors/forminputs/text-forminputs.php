@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_NEWSLETTERNAME = 'forminput-newslettername';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAIL = 'forminput-newsletteremail';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
-    public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
+    public final const COMPONENT_FORMINPUT_NEWSLETTERNAME = 'forminput-newslettername';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAIL = 'forminput-newsletteremail';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
+    public final const COMPONENT_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
 
     public function getComponentsToProcess(): array
     {

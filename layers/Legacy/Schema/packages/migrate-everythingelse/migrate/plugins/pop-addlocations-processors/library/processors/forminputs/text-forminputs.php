@@ -3,14 +3,14 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_CreateLocationTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_EM_LOCATIONLAT = 'forminput-locationlatitude';
-    public final const MODULE_FORMINPUT_EM_LOCATIONLNG = 'forminput-locationlongitude';
-    public final const MODULE_FORMINPUT_EM_LOCATIONNAME = 'forminput-locationname';
-    public final const MODULE_FORMINPUT_EM_LOCATIONADDRESS = 'forminput-locationaddress';
-    public final const MODULE_FORMINPUT_EM_LOCATIONTOWN = 'forminput-locationtown';
-    public final const MODULE_FORMINPUT_EM_LOCATIONSTATE = 'forminput-locationstate';
-    public final const MODULE_FORMINPUT_EM_LOCATIONPOSTCODE = 'forminput-locationpostcode';
-    public final const MODULE_FORMINPUT_EM_LOCATIONREGION = 'forminput-locationregion';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONLAT = 'forminput-locationlatitude';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONLNG = 'forminput-locationlongitude';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONNAME = 'forminput-locationname';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONADDRESS = 'forminput-locationaddress';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONTOWN = 'forminput-locationtown';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONSTATE = 'forminput-locationstate';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONPOSTCODE = 'forminput-locationpostcode';
+    public final const COMPONENT_FORMINPUT_EM_LOCATIONREGION = 'forminput-locationregion';
 
     public function getComponentsToProcess(): array
     {

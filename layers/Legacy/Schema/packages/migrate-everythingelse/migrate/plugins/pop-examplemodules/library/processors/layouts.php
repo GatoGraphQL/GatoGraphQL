@@ -6,11 +6,11 @@ use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
 class ComponentProcessor_Layouts extends AbstractComponentProcessor
 {
-    public final const MODULE_EXAMPLE_404 = 'example-404';
-    public final const MODULE_EXAMPLE_HOMEWELCOME = 'example-homewelcome';
-    public final const MODULE_EXAMPLE_COMMENT = 'example-comment';
-    public final const MODULE_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
-    public final const MODULE_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
+    public final const COMPONENT_EXAMPLE_404 = 'example-404';
+    public final const COMPONENT_EXAMPLE_HOMEWELCOME = 'example-homewelcome';
+    public final const COMPONENT_EXAMPLE_COMMENT = 'example-comment';
+    public final const COMPONENT_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
+    public final const COMPONENT_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
     public function getComponentsToProcess(): array
     {

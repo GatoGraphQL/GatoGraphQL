@@ -2,7 +2,7 @@
 
 class PoP_SocialNetwork_Module_Processor_FeedbackMessageInners extends PoP_Module_Processor_ActionExecutionFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER = 'feedbackmessageinner-contactuser';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_CONTACTUSER = 'feedbackmessageinner-contactuser';
 
     public function getComponentsToProcess(): array
     {

@@ -4,8 +4,8 @@ use PoPCMSSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Locations_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_LOCATIONS_TYPEAHEAD = 'dataload-locations-typeahead';
-    public final const MODULE_DATALOAD_LOCATIONS_SCROLL = 'dataload-locations-scroll';
+    public final const COMPONENT_DATALOAD_LOCATIONS_TYPEAHEAD = 'dataload-locations-typeahead';
+    public final const COMPONENT_DATALOAD_LOCATIONS_SCROLL = 'dataload-locations-scroll';
 
     public function getComponentsToProcess(): array
     {

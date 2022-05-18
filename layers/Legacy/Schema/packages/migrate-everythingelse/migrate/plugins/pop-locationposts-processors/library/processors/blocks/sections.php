@@ -2,23 +2,23 @@
 
 class PoP_LocationPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_SectionBlocksBase
 {
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR = 'block-locationposts-scroll-navigator';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS = 'block-locationposts-scroll-addons';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS = 'block-locationposts-scroll-details';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS = 'block-authorlocationposts-scroll-details';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS = 'block-taglocationposts-scroll-details';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-locationposts-scroll-simpleview';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-authorlocationposts-scroll-simpleview';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-taglocationposts-scroll-simpleview';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW = 'block-locationposts-scroll-fullview';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW = 'block-authorlocationposts-scroll-fullview';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW = 'block-taglocationposts-scroll-fullview';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-locationposts-scroll-thumbnail';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-authorlocationposts-scroll-thumbnail';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-taglocationposts-scroll-thumbnail';
-    public final const MODULE_BLOCK_LOCATIONPOSTS_SCROLL_LIST = 'block-locationposts-scroll-list';
-    public final const MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'block-authorlocationposts-scroll-list';
-    public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST = 'block-taglocationposts-scroll-list';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_NAVIGATOR = 'block-locationposts-scroll-navigator';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_ADDONS = 'block-locationposts-scroll-addons';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_DETAILS = 'block-locationposts-scroll-details';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_DETAILS = 'block-authorlocationposts-scroll-details';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_DETAILS = 'block-taglocationposts-scroll-details';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-locationposts-scroll-simpleview';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-authorlocationposts-scroll-simpleview';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_SIMPLEVIEW = 'block-taglocationposts-scroll-simpleview';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_FULLVIEW = 'block-locationposts-scroll-fullview';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_FULLVIEW = 'block-authorlocationposts-scroll-fullview';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_FULLVIEW = 'block-taglocationposts-scroll-fullview';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-locationposts-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-authorlocationposts-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_THUMBNAIL = 'block-taglocationposts-scroll-thumbnail';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTS_SCROLL_LIST = 'block-locationposts-scroll-list';
+    public final const COMPONENT_BLOCK_AUTHORLOCATIONPOSTS_SCROLL_LIST = 'block-authorlocationposts-scroll-list';
+    public final const COMPONENT_BLOCK_TAGLOCATIONPOSTS_SCROLL_LIST = 'block-taglocationposts-scroll-list';
 
     public function getComponentsToProcess(): array
     {

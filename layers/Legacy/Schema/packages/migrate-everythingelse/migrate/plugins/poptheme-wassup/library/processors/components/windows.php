@@ -4,7 +4,7 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Windows extends PoP_Module_Processor_WindowBase
 {
-    public final const MODULE_WINDOW_ADDONS = 'window-addons';
+    public final const COMPONENT_WINDOW_ADDONS = 'window-addons';
 
     public function getComponentsToProcess(): array
     {

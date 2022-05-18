@@ -2,9 +2,9 @@
 
 class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_CategoriesLayoutsBase
 {
-    public final const MODULE_LAYOUT_ORGANIZATIONCATEGORIES = 'layout-organizationcategories';
-    public final const MODULE_LAYOUT_ORGANIZATIONTYPES = 'layout-organizationtypes';
-    public final const MODULE_LAYOUT_INDIVIDUALINTERESTS = 'layout-individualinterests';
+    public final const COMPONENT_LAYOUT_ORGANIZATIONCATEGORIES = 'layout-organizationcategories';
+    public final const COMPONENT_LAYOUT_ORGANIZATIONTYPES = 'layout-organizationtypes';
+    public final const COMPONENT_LAYOUT_INDIVIDUALINTERESTS = 'layout-individualinterests';
 
     public function getComponentsToProcess(): array
     {

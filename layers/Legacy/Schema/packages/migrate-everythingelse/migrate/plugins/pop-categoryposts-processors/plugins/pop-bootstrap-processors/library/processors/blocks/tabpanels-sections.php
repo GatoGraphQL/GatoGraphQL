@@ -2,26 +2,26 @@
 
 class CPP_Module_Processor_TabPanelSectionBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS00 = 'block-categoryposts00-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS01 = 'block-categoryposts01-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS02 = 'block-categoryposts02-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS03 = 'block-categoryposts03-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS04 = 'block-categoryposts04-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS05 = 'block-categoryposts05-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS06 = 'block-categoryposts06-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS07 = 'block-categoryposts07-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS08 = 'block-categoryposts08-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS09 = 'block-categoryposts09-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS10 = 'block-categoryposts10-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS11 = 'block-categoryposts11-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS12 = 'block-categoryposts12-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS13 = 'block-categoryposts13-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS14 = 'block-categoryposts14-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS15 = 'block-categoryposts15-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS16 = 'block-categoryposts16-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS17 = 'block-categoryposts17-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS18 = 'block-categoryposts18-tabpanel';
-    public final const MODULE_BLOCK_TABPANEL_CATEGORYPOSTS19 = 'block-categoryposts19-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00 = 'block-categoryposts00-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS01 = 'block-categoryposts01-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS02 = 'block-categoryposts02-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS03 = 'block-categoryposts03-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS04 = 'block-categoryposts04-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS05 = 'block-categoryposts05-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS06 = 'block-categoryposts06-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS07 = 'block-categoryposts07-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS08 = 'block-categoryposts08-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS09 = 'block-categoryposts09-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS10 = 'block-categoryposts10-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS11 = 'block-categoryposts11-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS12 = 'block-categoryposts12-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS13 = 'block-categoryposts13-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS14 = 'block-categoryposts14-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS15 = 'block-categoryposts15-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS16 = 'block-categoryposts16-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS17 = 'block-categoryposts17-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS18 = 'block-categoryposts18-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS19 = 'block-categoryposts19-tabpanel';
 
     public function getComponentsToProcess(): array
     {

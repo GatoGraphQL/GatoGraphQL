@@ -3,12 +3,12 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButtonsBase
 {
-    public final const MODULE_SUBMITBUTTON_SUBMIT = 'submitbutton-submit';
-    public final const MODULE_SUBMITBUTTON_OK = 'submitbutton-ok';
-    public final const MODULE_SUBMITBUTTON_SEND = 'submitbutton-send';
-    public final const MODULE_SUBMITBUTTON_SAVE = 'submitbutton-save';
-    public final const MODULE_SUBMITBUTTON_UPDATE = 'submitbutton-update';
-    public final const MODULE_SUBMITBUTTON_SEARCH = 'submitbutton-search';
+    public final const COMPONENT_SUBMITBUTTON_SUBMIT = 'submitbutton-submit';
+    public final const COMPONENT_SUBMITBUTTON_OK = 'submitbutton-ok';
+    public final const COMPONENT_SUBMITBUTTON_SEND = 'submitbutton-send';
+    public final const COMPONENT_SUBMITBUTTON_SAVE = 'submitbutton-save';
+    public final const COMPONENT_SUBMITBUTTON_UPDATE = 'submitbutton-update';
+    public final const COMPONENT_SUBMITBUTTON_SEARCH = 'submitbutton-search';
 
     public function getComponentsToProcess(): array
     {

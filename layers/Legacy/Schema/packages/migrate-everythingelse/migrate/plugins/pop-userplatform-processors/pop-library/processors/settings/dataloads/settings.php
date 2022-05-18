@@ -5,7 +5,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class PoP_Module_Processor_CustomSettingsDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    public final const MODULE_DATALOAD_SETTINGS = 'dataload-settings';
+    public final const COMPONENT_DATALOAD_SETTINGS = 'dataload-settings';
 
     public function getComponentsToProcess(): array
     {

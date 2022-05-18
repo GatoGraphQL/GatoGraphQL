@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
 class GD_EM_Module_Processor_CreateLocationBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_CREATELOCATION = 'block-createlocation';
+    public final const COMPONENT_BLOCK_CREATELOCATION = 'block-createlocation';
 
     public function getComponentsToProcess(): array
     {

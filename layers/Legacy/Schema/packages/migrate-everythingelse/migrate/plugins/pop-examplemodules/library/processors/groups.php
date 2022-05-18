@@ -5,9 +5,9 @@ use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
 class ComponentProcessor_Groups extends AbstractComponentProcessor
 {
-    public final const MODULE_EXAMPLE_HOME = 'example-home';
-    public final const MODULE_EXAMPLE_AUTHOR = 'example-author';
-    public final const MODULE_EXAMPLE_TAG = 'example-tag';
+    public final const COMPONENT_EXAMPLE_HOME = 'example-home';
+    public final const COMPONENT_EXAMPLE_AUTHOR = 'example-author';
+    public final const COMPONENT_EXAMPLE_TAG = 'example-tag';
 
     public function getComponentsToProcess(): array
     {

@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_LINK_ACCESS = 'widget-link-access';
-    public final const MODULE_WIDGET_LINK_CATEGORIES = 'widget-link-categories';
-    public final const MODULE_WIDGETCOMPACT_LINKINFO = 'widgetcompact-link-info';
+    public final const COMPONENT_WIDGET_LINK_ACCESS = 'widget-link-access';
+    public final const COMPONENT_WIDGET_LINK_CATEGORIES = 'widget-link-categories';
+    public final const COMPONENT_WIDGETCOMPACT_LINKINFO = 'widgetcompact-link-info';
 
     public function getComponentsToProcess(): array
     {

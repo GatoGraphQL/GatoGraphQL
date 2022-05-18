@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_MultipleComponents extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW = 'multicomponent-userpostactivity-simpleview';
-    public final const MODULE_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW = 'multicomponent-userpostactivity-lazysimpleview';
-    public final const MODULE_MULTICOMPONENT_USERPOSTACTIVITY = 'multicomponent-userpostactivity';
+    public final const COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY_SIMPLEVIEW = 'multicomponent-userpostactivity-simpleview';
+    public final const COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY_LAZYSIMPLEVIEW = 'multicomponent-userpostactivity-lazysimpleview';
+    public final const COMPONENT_MULTICOMPONENT_USERPOSTACTIVITY = 'multicomponent-userpostactivity';
 
     public function getComponentsToProcess(): array
     {

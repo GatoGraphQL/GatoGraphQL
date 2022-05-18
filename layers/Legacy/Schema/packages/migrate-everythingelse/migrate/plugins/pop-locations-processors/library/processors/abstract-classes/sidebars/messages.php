@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_EM_Module_Processor_WidgetMessages extends PoP_Module_Processor_WidgetMessagesBase
 {
-    public final const MODULE_EM_MESSAGE_NOLOCATION = 'em-message-nolocation';
+    public final const COMPONENT_EM_MESSAGE_NOLOCATION = 'em-message-nolocation';
 
     public function getComponentsToProcess(): array
     {

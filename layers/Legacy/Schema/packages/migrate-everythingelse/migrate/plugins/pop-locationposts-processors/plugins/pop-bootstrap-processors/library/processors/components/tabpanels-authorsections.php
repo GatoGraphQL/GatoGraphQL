@@ -2,7 +2,7 @@
 
 class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Processor_AuthorSectionTabPanelComponentsBase
 {
-    public final const MODULE_TABPANEL_AUTHORLOCATIONPOSTS = 'tabpanel-authorlocationposts';
+    public final const COMPONENT_TABPANEL_AUTHORLOCATIONPOSTS = 'tabpanel-authorlocationposts';
 
     public function getComponentsToProcess(): array
     {

@@ -2,14 +2,14 @@
 
 class PoP_ContentPostLinks_Module_Processor_CustomScrollInners extends PoP_Module_Processor_ScrollInnersBase
 {
-    public final const MODULE_SCROLLINNER_LINKS_NAVIGATOR = 'scrollinner-links-navigator';
-    public final const MODULE_SCROLLINNER_LINKS_ADDONS = 'scrollinner-links-addons';
-    public final const MODULE_SCROLLINNER_LINKS_DETAILS = 'scrollinner-links-details';
-    public final const MODULE_SCROLLINNER_LINKS_SIMPLEVIEW = 'scrollinner-links-simpleview';
-    public final const MODULE_SCROLLINNER_LINKS_FULLVIEW = 'scrollinner-links-fullview';
-    public final const MODULE_SCROLLINNER_AUTHORLINKS_FULLVIEW = 'scrollinner-authorlinks-fullview';
-    public final const MODULE_SCROLLINNER_LINKS_THUMBNAIL = 'scrollinner-links-thumbnail';
-    public final const MODULE_SCROLLINNER_LINKS_LIST = 'scrollinner-links-list';
+    public final const COMPONENT_SCROLLINNER_LINKS_NAVIGATOR = 'scrollinner-links-navigator';
+    public final const COMPONENT_SCROLLINNER_LINKS_ADDONS = 'scrollinner-links-addons';
+    public final const COMPONENT_SCROLLINNER_LINKS_DETAILS = 'scrollinner-links-details';
+    public final const COMPONENT_SCROLLINNER_LINKS_SIMPLEVIEW = 'scrollinner-links-simpleview';
+    public final const COMPONENT_SCROLLINNER_LINKS_FULLVIEW = 'scrollinner-links-fullview';
+    public final const COMPONENT_SCROLLINNER_AUTHORLINKS_FULLVIEW = 'scrollinner-authorlinks-fullview';
+    public final const COMPONENT_SCROLLINNER_LINKS_THUMBNAIL = 'scrollinner-links-thumbnail';
+    public final const COMPONENT_SCROLLINNER_LINKS_LIST = 'scrollinner-links-list';
 
     public function getComponentsToProcess(): array
     {

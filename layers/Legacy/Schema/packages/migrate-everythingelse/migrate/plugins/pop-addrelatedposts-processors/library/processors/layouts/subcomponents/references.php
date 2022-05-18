@@ -2,9 +2,9 @@
 
 class PoP_Module_Processor_ReferencesLayouts extends PoP_Module_Processor_ReferencesLayoutsBase
 {
-    public final const MODULE_LAYOUT_REFERENCES_LINE = 'layout-references-line';
-    public final const MODULE_LAYOUT_REFERENCES_RELATED = 'layout-references-related';
-    public final const MODULE_LAYOUT_REFERENCES_ADDONS = 'layout-references-addons';
+    public final const COMPONENT_LAYOUT_REFERENCES_LINE = 'layout-references-line';
+    public final const COMPONENT_LAYOUT_REFERENCES_RELATED = 'layout-references-related';
+    public final const COMPONENT_LAYOUT_REFERENCES_ADDONS = 'layout-references-addons';
 
     public function getComponentsToProcess(): array
     {

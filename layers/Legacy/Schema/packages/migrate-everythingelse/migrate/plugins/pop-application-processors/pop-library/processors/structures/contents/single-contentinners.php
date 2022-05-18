@@ -2,11 +2,11 @@
 
 class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_ContentSingleInnersBase
 {
-    public final const MODULE_CONTENTINNER_AUTHOR = 'contentinner-author';
-    public final const MODULE_CONTENTINNER_SINGLE = 'contentinner-single';
-    public final const MODULE_CONTENTINNER_HIGHLIGHTSINGLE = 'contentinner-highlightsingle';
-    public final const MODULE_CONTENTINNER_USERPOSTINTERACTION = 'contentinner-userpostinteraction';
-    public final const MODULE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION = 'contentinner-userhighlightpostinteraction';
+    public final const COMPONENT_CONTENTINNER_AUTHOR = 'contentinner-author';
+    public final const COMPONENT_CONTENTINNER_SINGLE = 'contentinner-single';
+    public final const COMPONENT_CONTENTINNER_HIGHLIGHTSINGLE = 'contentinner-highlightsingle';
+    public final const COMPONENT_CONTENTINNER_USERPOSTINTERACTION = 'contentinner-userpostinteraction';
+    public final const COMPONENT_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION = 'contentinner-userhighlightpostinteraction';
 
     public function getComponentsToProcess(): array
     {

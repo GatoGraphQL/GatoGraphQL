@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_CreateUpdatePostTextFormInputs extends PoP_Module_Processor_TextFormInputsBase
 {
-    public final const MODULE_FORMINPUT_CUP_TITLE = 'forminput-cup-title';
-    public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINK = 'forminput-link';
+    public final const COMPONENT_FORMINPUT_CUP_TITLE = 'forminput-cup-title';
+    public final const COMPONENT_CONTENTPOSTLINKS_FORMINPUT_LINK = 'forminput-link';
 
     public function getComponentsToProcess(): array
     {

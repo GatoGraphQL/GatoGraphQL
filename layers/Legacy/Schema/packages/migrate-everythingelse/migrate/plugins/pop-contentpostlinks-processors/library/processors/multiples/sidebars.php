@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinks_Module_Processor_SidebarMultiples extends PoP_Module_Processor_SidebarMultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR = 'multiple-section-contentpostlinks-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTION_POSTLINKS_SIDEBAR = 'multiple-section-contentpostlinks-sidebar';
 
     public function getComponentsToProcess(): array
     {

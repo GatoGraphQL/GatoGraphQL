@@ -3,13 +3,13 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_USERSTANCE_GROUP_HOMETOP = 'group-userstance-hometop';
-    public final const MODULE_USERSTANCE_GROUP_HOME_WIDGETAREA = 'group-userstance-home-widgetarea';
-    public final const MODULE_USERSTANCE_GROUP_HOME_STANCESLIDES = 'group-userstance-home-stanceslides';
-    public final const MODULE_USERSTANCE_GROUP_HOME_RIGHTPANE = 'group-userstance-home-rightpane';
-    public final const MODULE_USERSTANCE_GROUP_AUTHORTOP = 'group-userstance-author-top';
-    public final const MODULE_USERSTANCE_GROUP_AUTHOR_WIDGETAREA = 'group-userstance-author-widgetarea';
-    public final const MODULE_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES = 'group-userstance-author-stanceslides';
+    public final const COMPONENT_USERSTANCE_GROUP_HOMETOP = 'group-userstance-hometop';
+    public final const COMPONENT_USERSTANCE_GROUP_HOME_WIDGETAREA = 'group-userstance-home-widgetarea';
+    public final const COMPONENT_USERSTANCE_GROUP_HOME_STANCESLIDES = 'group-userstance-home-stanceslides';
+    public final const COMPONENT_USERSTANCE_GROUP_HOME_RIGHTPANE = 'group-userstance-home-rightpane';
+    public final const COMPONENT_USERSTANCE_GROUP_AUTHORTOP = 'group-userstance-author-top';
+    public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_WIDGETAREA = 'group-userstance-author-widgetarea';
+    public final const COMPONENT_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES = 'group-userstance-author-stanceslides';
 
     public function getComponentsToProcess(): array
     {

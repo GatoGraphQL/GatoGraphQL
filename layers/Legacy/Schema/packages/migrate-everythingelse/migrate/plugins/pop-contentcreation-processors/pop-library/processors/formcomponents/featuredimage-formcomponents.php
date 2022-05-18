@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Processor_FeaturedImageFormComponentsBase
 {
-    public final const MODULE_FORMCOMPONENT_FEATUREDIMAGE = 'formcomponent-featuredimage';
+    public final const COMPONENT_FORMCOMPONENT_FEATUREDIMAGE = 'formcomponent-featuredimage';
 
     public function getComponentsToProcess(): array
     {

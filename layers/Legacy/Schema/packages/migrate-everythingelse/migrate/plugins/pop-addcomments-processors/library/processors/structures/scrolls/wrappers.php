@@ -2,8 +2,8 @@
 
 class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public final const MODULE_WIDGETWRAPPER_POSTCOMMENTS = 'widgetwrapper-postcomments';
-    public final const MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT = 'widgetwrapper-postcomments-appendtoscript';
+    public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS = 'widgetwrapper-postcomments';
+    public final const COMPONENT_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT = 'widgetwrapper-postcomments-appendtoscript';
 
     public function getComponentsToProcess(): array
     {

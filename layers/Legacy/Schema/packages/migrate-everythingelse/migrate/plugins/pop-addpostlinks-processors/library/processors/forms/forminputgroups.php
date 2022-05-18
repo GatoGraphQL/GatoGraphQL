@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddPostLinks_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_ADDPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-postlink';
+    public final const COMPONENT_ADDPOSTLINKS_FORMINPUTGROUP_LINK = 'forminputgroup-postlink';
 
     public function getComponentsToProcess(): array
     {

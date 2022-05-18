@@ -3,7 +3,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
-    public final const MODULE_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
+    public final const COMPONENT_DATALOAD_WHOWEARE_SCROLLMAP = 'dataload-whoweare-scrollmap';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_UserFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_MYPREFERENCES = 'feedbackmessage-mypreferences';
+    public final const COMPONENT_FEEDBACKMESSAGE_MYPREFERENCES = 'feedbackmessage-mypreferences';
 
     public function getComponentsToProcess(): array
     {

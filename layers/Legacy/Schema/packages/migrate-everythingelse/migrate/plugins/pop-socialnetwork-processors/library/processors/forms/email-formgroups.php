@@ -2,14 +2,14 @@
 
 class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Processor_NoLabelFormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT = 'forminputgroup-emailnotifications-network-createdpost';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST = 'forminputgroup-emailnotifications-network-recommendedpost';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER = 'forminputgroup-emailnotifications-network-followeduser';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC = 'forminputgroup-emailnotifications-network-subscribedtotopic';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT = 'forminputgroup-emailnotifications-network-addedcomment';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST = 'forminputgroup-emailnotifications-network-updownvotedpost';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminputgroup-emailnotifications-subscribedtopic-createdcontent';
-    public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminputgroup-emailnotifications-subscribedtopic-addedcomment';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT = 'forminputgroup-emailnotifications-network-createdpost';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST = 'forminputgroup-emailnotifications-network-recommendedpost';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER = 'forminputgroup-emailnotifications-network-followeduser';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_SUBSCRIBEDTOTOPIC = 'forminputgroup-emailnotifications-network-subscribedtotopic';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_ADDEDCOMMENT = 'forminputgroup-emailnotifications-network-addedcomment';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_UPDOWNVOTEDPOST = 'forminputgroup-emailnotifications-network-updownvotedpost';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminputgroup-emailnotifications-subscribedtopic-createdcontent';
+    public final const COMPONENT_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminputgroup-emailnotifications-subscribedtopic-addedcomment';
 
     public function getComponentsToProcess(): array
     {

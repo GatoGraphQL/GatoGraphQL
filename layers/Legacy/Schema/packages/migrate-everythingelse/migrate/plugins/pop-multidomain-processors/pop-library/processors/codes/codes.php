@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_MultidomainCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_CODE_EXTERNAL = 'code-external';
+    public final const COMPONENT_CODE_EXTERNAL = 'code-external';
 
     public function getComponentsToProcess(): array
     {

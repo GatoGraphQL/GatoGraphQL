@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserLogin_Module_Processor_HTMLCodes extends PoP_Module_Processor_HTMLCodesBase
 {
-    public final const MODULE_HTMLCODE_USERMUSTBELOGGEDIN = 'htmlcode-usermustbeloggedin';
+    public final const COMPONENT_HTMLCODE_USERMUSTBELOGGEDIN = 'htmlcode-usermustbeloggedin';
 
     public function getComponentsToProcess(): array
     {

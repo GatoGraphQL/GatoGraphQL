@@ -4,7 +4,7 @@ use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_UserAvatarProcessors_Module_Processor_UserBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_USERAVATAR_UPDATE = 'block-useravatar-update';
+    public final const COMPONENT_BLOCK_USERAVATAR_UPDATE = 'block-useravatar-update';
 
     public function getComponentsToProcess(): array
     {

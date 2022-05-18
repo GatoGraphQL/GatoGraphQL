@@ -2,7 +2,7 @@
 
 class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor_DropdownButtonControlsBase
 {
-    public final const MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS = 'em-dropdownbuttonquicklink-downloadlinks';
+    public final const COMPONENT_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS = 'em-dropdownbuttonquicklink-downloadlinks';
 
     public function getComponentsToProcess(): array
     {

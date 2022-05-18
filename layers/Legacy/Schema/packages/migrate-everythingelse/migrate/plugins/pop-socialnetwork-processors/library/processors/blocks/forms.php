@@ -2,7 +2,7 @@
 
 class PoP_SocialNetwork_Module_Processor_Blocks extends PoP_Module_Processor_FormBlocksBase
 {
-    public final const MODULE_BLOCK_CONTACTUSER = 'block-contactuser';
+    public final const COMPONENT_BLOCK_CONTACTUSER = 'block-contactuser';
 
     public function getComponentsToProcess(): array
     {

@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_HomeTabPanelSectionBlocks extends PoP_Module_Processor_HomeTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_HOMECONTENT = 'block-homecontent-tabpanel';
+    public final const COMPONENT_BLOCK_TABPANEL_HOMECONTENT = 'block-homecontent-tabpanel';
 
     public function getComponentsToProcess(): array
     {

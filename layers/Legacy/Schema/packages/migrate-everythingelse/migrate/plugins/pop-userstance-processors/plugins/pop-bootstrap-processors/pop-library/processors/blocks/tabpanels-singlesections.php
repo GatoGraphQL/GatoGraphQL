@@ -5,10 +5,10 @@ use PoPCMSSchema\CustomPosts\Types\Status;
 
 class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module_Processor_SingleTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT = 'block-tabpanel-singlerelatedstancecontent';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'block-tabpanel-singlerelatedstancecontent-pro';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
-    public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT = 'block-tabpanel-singlerelatedstancecontent';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO = 'block-tabpanel-singlerelatedstancecontent-pro';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
+    public final const COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
 
     public function getComponentsToProcess(): array
     {

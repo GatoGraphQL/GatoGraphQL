@@ -2,13 +2,13 @@
 
 class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLL_USERS_MAP = 'scroll-users-map';
-    public final const MODULE_SCROLL_USER_MAP = 'scroll-user-map';
-    public final const MODULE_SCROLL_USERS_HORIZONTALMAP = 'scroll-users-horizontalmap';
-    public final const MODULE_SCROLL_LOCATIONS_MAP = 'scroll-locations-map';
-    public final const MODULE_SCROLL_EVENTS_MAP = 'scroll-events-map';
-    public final const MODULE_SCROLL_PASTEVENTS_MAP = 'scroll-pastevents-map';
-    public final const MODULE_SCROLL_EVENTS_HORIZONTALMAP = 'scroll-events-horizontalmap';
+    public final const COMPONENT_SCROLL_USERS_MAP = 'scroll-users-map';
+    public final const COMPONENT_SCROLL_USER_MAP = 'scroll-user-map';
+    public final const COMPONENT_SCROLL_USERS_HORIZONTALMAP = 'scroll-users-horizontalmap';
+    public final const COMPONENT_SCROLL_LOCATIONS_MAP = 'scroll-locations-map';
+    public final const COMPONENT_SCROLL_EVENTS_MAP = 'scroll-events-map';
+    public final const COMPONENT_SCROLL_PASTEVENTS_MAP = 'scroll-pastevents-map';
+    public final const COMPONENT_SCROLL_EVENTS_HORIZONTALMAP = 'scroll-events-horizontalmap';
 
     public function getComponentsToProcess(): array
     {

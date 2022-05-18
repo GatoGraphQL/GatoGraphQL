@@ -2,12 +2,12 @@
 
 class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Processor_CustomDelegatorFiltersBase
 {
-    public final const MODULE_DELEGATORFILTER_AUTHOREVENTS = 'delegatorfilter-authorevents';
-    public final const MODULE_DELEGATORFILTER_TAGEVENTS = 'delegatorfilter-tagevents';
-    public final const MODULE_DELEGATORFILTER_AUTHOREVENTSCALENDAR = 'delegatorfilter-authoreventscalendar';
-    public final const MODULE_DELEGATORFILTER_TAGEVENTSCALENDAR = 'delegatorfilter-tageventscalendar';
-    public final const MODULE_DELEGATORFILTER_EVENTS = 'delegatorfilter-events';
-    public final const MODULE_DELEGATORFILTER_EVENTSCALENDAR = 'delegatorfilter-eventscalendar';
+    public final const COMPONENT_DELEGATORFILTER_AUTHOREVENTS = 'delegatorfilter-authorevents';
+    public final const COMPONENT_DELEGATORFILTER_TAGEVENTS = 'delegatorfilter-tagevents';
+    public final const COMPONENT_DELEGATORFILTER_AUTHOREVENTSCALENDAR = 'delegatorfilter-authoreventscalendar';
+    public final const COMPONENT_DELEGATORFILTER_TAGEVENTSCALENDAR = 'delegatorfilter-tageventscalendar';
+    public final const COMPONENT_DELEGATORFILTER_EVENTS = 'delegatorfilter-events';
+    public final const COMPONENT_DELEGATORFILTER_EVENTSCALENDAR = 'delegatorfilter-eventscalendar';
 
     public function getComponentsToProcess(): array
     {

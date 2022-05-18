@@ -2,18 +2,18 @@
 
 class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
-    public final const MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP = 'scrollmap-searchusers-scrollmap';
-    public final const MODULE_SCROLLMAP_USERS_SCROLLMAP = 'scrollmap-users-scrollmap';
-    public final const MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP = 'scrollmap-users-horizontalscrollmap';
-    public final const MODULE_SCROLLMAP_EVENTS_SCROLLMAP = 'scrollmap-events-scrollmap';
-    public final const MODULE_SCROLLMAP_PASTEVENTS_SCROLLMAP = 'scrollmap-pastevents-scrollmap';
-    public final const MODULE_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP = 'scrollmap-events-horizontalscrollmap';
-    public final const MODULE_SCROLLMAP_AUTHOREVENTS_SCROLLMAP = 'scrollmap-authorevents-scrollmap';
-    public final const MODULE_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP = 'scrollmap-authorpastevents-scrollmap';
-    public final const MODULE_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'scrollmap-authorevents-horizontalscrollmap';
-    public final const MODULE_SCROLLMAP_TAGEVENTS_SCROLLMAP = 'scrollmap-tagevents-scrollmap';
-    public final const MODULE_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP = 'scrollmap-tagpastevents-scrollmap';
-    public final const MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP = 'scrollmap-tagevents-horizontalscrollmap';
+    public final const COMPONENT_SCROLLMAP_SEARCHUSERS_SCROLLMAP = 'scrollmap-searchusers-scrollmap';
+    public final const COMPONENT_SCROLLMAP_USERS_SCROLLMAP = 'scrollmap-users-scrollmap';
+    public final const COMPONENT_SCROLLMAP_USERS_HORIZONTALSCROLLMAP = 'scrollmap-users-horizontalscrollmap';
+    public final const COMPONENT_SCROLLMAP_EVENTS_SCROLLMAP = 'scrollmap-events-scrollmap';
+    public final const COMPONENT_SCROLLMAP_PASTEVENTS_SCROLLMAP = 'scrollmap-pastevents-scrollmap';
+    public final const COMPONENT_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP = 'scrollmap-events-horizontalscrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHOREVENTS_SCROLLMAP = 'scrollmap-authorevents-scrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHORPASTEVENTS_SCROLLMAP = 'scrollmap-authorpastevents-scrollmap';
+    public final const COMPONENT_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP = 'scrollmap-authorevents-horizontalscrollmap';
+    public final const COMPONENT_SCROLLMAP_TAGEVENTS_SCROLLMAP = 'scrollmap-tagevents-scrollmap';
+    public final const COMPONENT_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP = 'scrollmap-tagpastevents-scrollmap';
+    public final const COMPONENT_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP = 'scrollmap-tagevents-horizontalscrollmap';
 
     public function getComponentsToProcess(): array
     {

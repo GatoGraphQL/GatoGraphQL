@@ -2,10 +2,10 @@
 
 class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_SocialMediaPostWrapperBase
 {
-    public final const MODULE_POSTSOCIALMEDIA_POSTWRAPPER = 'post-socialmedia-wrapper';
-    public final const MODULE_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'post-socialmedia-counter-wrapper';
-    public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER = 'subjugatedpost-socialmedia-wrapper';
-    public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'subjugatedpost-socialmedia-counter-wrapper';
+    public final const COMPONENT_POSTSOCIALMEDIA_POSTWRAPPER = 'post-socialmedia-wrapper';
+    public final const COMPONENT_POSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'post-socialmedia-counter-wrapper';
+    public final const COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER = 'subjugatedpost-socialmedia-wrapper';
+    public final const COMPONENT_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'subjugatedpost-socialmedia-counter-wrapper';
 
     public function getComponentsToProcess(): array
     {

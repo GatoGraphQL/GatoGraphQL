@@ -2,8 +2,8 @@
 
 class PoP_LocationPostLinksCreation_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Processor_AddEditContentBlocksBase
 {
-    public final const MODULE_BLOCK_LOCATIONPOSTLINK_UPDATE = 'block-locationpostlink-update';
-    public final const MODULE_BLOCK_LOCATIONPOSTLINK_CREATE = 'block-locationpostlink-create';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTLINK_UPDATE = 'block-locationpostlink-update';
+    public final const COMPONENT_BLOCK_LOCATIONPOSTLINK_CREATE = 'block-locationpostlink-create';
 
     public function getComponentsToProcess(): array
     {

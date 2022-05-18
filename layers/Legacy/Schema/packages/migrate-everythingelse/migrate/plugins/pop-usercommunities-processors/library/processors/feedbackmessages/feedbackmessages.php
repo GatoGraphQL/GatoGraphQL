@@ -2,9 +2,9 @@
 
 class GD_URE_Module_Processor_ProfileFeedbackMessages extends PoP_Module_Processor_FeedbackMessagesBase
 {
-    public final const MODULE_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES = 'feedbackmessage-updatemycommunities';
-    public final const MODULE_FEEDBACKMESSAGE_INVITENEWMEMBERS = 'feedbackmessage-invitemembers';
-    public final const MODULE_FEEDBACKMESSAGE_EDITMEMBERSHIP = 'feedbackmessage-editmembership';
+    public final const COMPONENT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES = 'feedbackmessage-updatemycommunities';
+    public final const COMPONENT_FEEDBACKMESSAGE_INVITENEWMEMBERS = 'feedbackmessage-invitemembers';
+    public final const COMPONENT_FEEDBACKMESSAGE_EDITMEMBERSHIP = 'feedbackmessage-editmembership';
 
     public function getComponentsToProcess(): array
     {

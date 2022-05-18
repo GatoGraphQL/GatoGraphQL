@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_MapMarkerScripts extends PoP_Module_Processor_MapMarkerScriptsBase
 {
-    public final const MODULE_MAP_SCRIPT_MARKERS = 'em-map-script-markers';
+    public final const COMPONENT_MAP_SCRIPT_MARKERS = 'em-map-script-markers';
 
     public function getComponentsToProcess(): array
     {

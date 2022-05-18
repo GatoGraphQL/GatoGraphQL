@@ -2,7 +2,7 @@
 
 class PoP_Module_Processor_ListFeedbackMessageInners extends PoP_Module_Processor_ListFeedbackMessageInnersBase
 {
-    public final const MODULE_FEEDBACKMESSAGEINNER_ITEMLIST = 'feedbackmessageinner-itemlist';
+    public final const COMPONENT_FEEDBACKMESSAGEINNER_ITEMLIST = 'feedbackmessageinner-itemlist';
 
     public function getComponentsToProcess(): array
     {

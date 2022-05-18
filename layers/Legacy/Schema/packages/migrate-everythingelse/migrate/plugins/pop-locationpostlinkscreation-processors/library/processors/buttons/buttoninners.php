@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_SP_Custom_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInnersBase
 {
-    public final const MODULE_BUTTONINNER_LOCATIONPOSTLINK_CREATE = 'buttoninner-locationpostlink-create';
+    public final const COMPONENT_BUTTONINNER_LOCATIONPOSTLINK_CREATE = 'buttoninner-locationpostlink-create';
 
     public function getComponentsToProcess(): array
     {

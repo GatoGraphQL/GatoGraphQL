@@ -3,8 +3,8 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoPTheme_Wassup_Module_Processor_FormGroups extends PoP_Module_Processor_FormComponentGroupsBase
 {
-    public final const MODULE_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT = 'forminputgroup-volunteersneeded';
-    public final const MODULE_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT = 'filterinputgroup-volunteersneededmulti';
+    public final const COMPONENT_FORMINPUTGROUP_VOLUNTEERSNEEDED_SELECT = 'forminputgroup-volunteersneeded';
+    public final const COMPONENT_FILTERINPUTGROUP_VOLUNTEERSNEEDED_MULTISELECT = 'filterinputgroup-volunteersneededmulti';
 
     public function getComponentsToProcess(): array
     {

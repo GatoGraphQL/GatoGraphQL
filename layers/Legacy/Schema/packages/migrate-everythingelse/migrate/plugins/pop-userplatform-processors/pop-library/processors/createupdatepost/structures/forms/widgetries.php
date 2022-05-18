@@ -3,10 +3,10 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class Wassup_Module_Processor_FormWidgets extends PoP_Module_Processor_WidgetsBase
 {
-    public final const MODULE_WIDGET_FORM_FEATUREDIMAGE = 'widget-form-featuredimage';
-    public final const MODULE_WIDGET_FORM_METAINFORMATION = 'widget-form-metainformation';
-    public final const MODULE_WIDGET_FORM_CONTENTPOSTLINKDETAILS = 'widget-form-linkdetails';
-    public final const MODULE_WIDGET_FORM_CONTENTPOSTDETAILS = 'widget-form-postdetails';
+    public final const COMPONENT_WIDGET_FORM_FEATUREDIMAGE = 'widget-form-featuredimage';
+    public final const COMPONENT_WIDGET_FORM_METAINFORMATION = 'widget-form-metainformation';
+    public final const COMPONENT_WIDGET_FORM_CONTENTPOSTLINKDETAILS = 'widget-form-linkdetails';
+    public final const COMPONENT_WIDGET_FORM_CONTENTPOSTDETAILS = 'widget-form-postdetails';
 
     public function getComponentsToProcess(): array
     {

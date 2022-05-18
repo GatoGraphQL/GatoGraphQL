@@ -2,8 +2,8 @@
 
 class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS = 'scroll-automatedemails-notifications-details';
-    public final const MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST = 'scroll-automatedemails-notifications-list';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS = 'scroll-automatedemails-notifications-details';
+    public final const COMPONENT_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST = 'scroll-automatedemails-notifications-list';
 
     public function getComponentsToProcess(): array
     {

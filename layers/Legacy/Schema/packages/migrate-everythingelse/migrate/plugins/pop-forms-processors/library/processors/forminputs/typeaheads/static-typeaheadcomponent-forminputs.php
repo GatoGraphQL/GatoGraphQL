@@ -4,7 +4,7 @@ use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
 
 class PoP_Module_Processor_StaticTypeaheadComponentFormInputs extends PoP_Module_Processor_StaticTypeaheadComponentFormInputsBase
 {
-    public final const MODULE_TYPEAHEAD_COMPONENT_STATICSEARCH = 'forminput-typeaheadcomponent-staticsearch';
+    public final const COMPONENT_TYPEAHEAD_COMPONENT_STATICSEARCH = 'forminput-typeaheadcomponent-staticsearch';
 
     public function getComponentsToProcess(): array
     {

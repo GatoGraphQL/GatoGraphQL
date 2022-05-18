@@ -4,20 +4,20 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_URE_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_ORGANIZATIONS_TYPEAHEAD = 'dataload-organizations-typeahead';
-    public final const MODULE_DATALOAD_INDIVIDUALS_TYPEAHEAD = 'dataload-individuals-typeahead';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR = 'dataload-organizations-scroll-navigator';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR = 'dataload-individuals-scroll-navigator';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS = 'dataload-organizations-scroll-addons';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_ADDONS = 'dataload-individuals-scroll-addons';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS = 'dataload-organizations-scroll-details';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_DETAILS = 'dataload-individuals-scroll-details';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW = 'dataload-organizations-scroll-fullview';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW = 'dataload-individuals-scroll-fullview';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL = 'dataload-organizations-scroll-thumbnail';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL = 'dataload-individuals-scroll-thumbnail';
-    public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLL_LIST = 'dataload-organizations-scroll-list';
-    public final const MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST = 'dataload-individuals-scroll-list';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_TYPEAHEAD = 'dataload-organizations-typeahead';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_TYPEAHEAD = 'dataload-individuals-typeahead';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR = 'dataload-organizations-scroll-navigator';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR = 'dataload-individuals-scroll-navigator';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS = 'dataload-organizations-scroll-addons';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_ADDONS = 'dataload-individuals-scroll-addons';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_DETAILS = 'dataload-organizations-scroll-details';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_DETAILS = 'dataload-individuals-scroll-details';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_FULLVIEW = 'dataload-organizations-scroll-fullview';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_FULLVIEW = 'dataload-individuals-scroll-fullview';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_THUMBNAIL = 'dataload-organizations-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_THUMBNAIL = 'dataload-individuals-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_ORGANIZATIONS_SCROLL_LIST = 'dataload-organizations-scroll-list';
+    public final const COMPONENT_DATALOAD_INDIVIDUALS_SCROLL_LIST = 'dataload-individuals-scroll-list';
 
     public function getComponentsToProcess(): array
     {

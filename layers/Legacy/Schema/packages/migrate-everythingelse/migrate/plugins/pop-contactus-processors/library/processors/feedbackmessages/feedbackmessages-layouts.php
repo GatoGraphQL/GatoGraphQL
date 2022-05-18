@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_ContactUs_Module_Processor_FeedbackMessageLayouts extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public final const MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUS = 'layout-feedbackmessage-contactus';
+    public final const COMPONENT_LAYOUT_FEEDBACKMESSAGE_CONTACTUS = 'layout-feedbackmessage-contactus';
 
     public function getComponentsToProcess(): array
     {

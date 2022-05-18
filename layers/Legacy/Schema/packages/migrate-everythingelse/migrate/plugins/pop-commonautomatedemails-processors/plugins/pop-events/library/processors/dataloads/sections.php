@@ -4,11 +4,11 @@ use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads extends PoP_CommonAutomatedEmails_Module_Processor_SectionDataloadsBase
 {
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS = 'dataload-automatedemails-events-scroll-details';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW = 'dataload-automatedemails-events-scroll-simpleview';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW = 'dataload-automatedemails-events-scroll-fullview';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'dataload-automatedemails-events-scroll-thumbnail';
-    public final const MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'dataload-automatedemails-events-scroll-list';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS = 'dataload-automatedemails-events-scroll-details';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW = 'dataload-automatedemails-events-scroll-simpleview';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW = 'dataload-automatedemails-events-scroll-fullview';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'dataload-automatedemails-events-scroll-thumbnail';
+    public final const COMPONENT_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'dataload-automatedemails-events-scroll-list';
 
     public function getComponentsToProcess(): array
     {

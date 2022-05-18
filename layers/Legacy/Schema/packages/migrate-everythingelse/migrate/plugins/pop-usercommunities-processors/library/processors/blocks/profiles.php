@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksBase
 {
-    public final const MODULE_BLOCK_MYCOMMUNITIES_UPDATE = 'block-mycommunities-update';
-    public final const MODULE_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
-    public final const MODULE_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
+    public final const COMPONENT_BLOCK_MYCOMMUNITIES_UPDATE = 'block-mycommunities-update';
+    public final const COMPONENT_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
+    public final const COMPONENT_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
 
     public function getComponentsToProcess(): array
     {

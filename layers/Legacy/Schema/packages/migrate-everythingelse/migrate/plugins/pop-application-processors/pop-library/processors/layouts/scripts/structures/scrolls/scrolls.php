@@ -2,10 +2,10 @@
 
 class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBase
 {
-    public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS = 'layout-referencedby-scroll-details';
-    public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW = 'layout-referencedby-scroll-simpleview';
-    public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW = 'layout-referencedby-scroll-fullview';
-    public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE = 'layout-referencedby-scroll-appendable';
+    public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_DETAILS = 'layout-referencedby-scroll-details';
+    public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW = 'layout-referencedby-scroll-simpleview';
+    public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW = 'layout-referencedby-scroll-fullview';
+    public final const COMPONENT_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE = 'layout-referencedby-scroll-appendable';
 
     public function getComponentsToProcess(): array
     {

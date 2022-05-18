@@ -4,7 +4,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_EventLinksCreation_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_AnchorControlsBase
 {
-    public final const MODULE_CUSTOMANCHORCONTROL_ADDEVENTLINK = 'custombuttoncontrol-addeventlink';
+    public final const COMPONENT_CUSTOMANCHORCONTROL_ADDEVENTLINK = 'custombuttoncontrol-addeventlink';
 
     public function getComponentsToProcess(): array
     {

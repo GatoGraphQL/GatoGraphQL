@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_MultiplesBase
 {
-    public final const MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR = 'multiple-sectioninner-highlights-sidebar';
-    public final const MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR = 'multiple-sectioninner-myhighlights-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR = 'multiple-sectioninner-highlights-sidebar';
+    public final const COMPONENT_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR = 'multiple-sectioninner-myhighlights-sidebar';
 
     public function getComponentsToProcess(): array
     {

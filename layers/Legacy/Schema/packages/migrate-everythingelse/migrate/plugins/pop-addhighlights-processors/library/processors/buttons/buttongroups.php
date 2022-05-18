@@ -2,8 +2,8 @@
 
 class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
-    public final const MODULE_BUTTONGROUP_HIGHLIGHTS = 'buttongroup-highlights';
-    public final const MODULE_BUTTONGROUP_MYHIGHLIGHTS = 'buttongroup-myhighlights';
+    public final const COMPONENT_BUTTONGROUP_HIGHLIGHTS = 'buttongroup-highlights';
+    public final const COMPONENT_BUTTONGROUP_MYHIGHLIGHTS = 'buttongroup-myhighlights';
 
     public function getComponentsToProcess(): array
     {

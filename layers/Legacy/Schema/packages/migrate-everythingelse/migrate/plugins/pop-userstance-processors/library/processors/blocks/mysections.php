@@ -2,8 +2,8 @@
 
 class UserStance_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySectionBlocksBase
 {
-    public final const MODULE_BLOCK_MYSTANCES_TABLE_EDIT = 'block-mystances-table-edit';
-    public final const MODULE_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'block-mystances-scroll-fullviewpreview';
+    public final const COMPONENT_BLOCK_MYSTANCES_TABLE_EDIT = 'block-mystances-table-edit';
+    public final const COMPONENT_BLOCK_MYSTANCES_SCROLL_FULLVIEWPREVIEW = 'block-mystances-scroll-fullviewpreview';
 
     public function getComponentsToProcess(): array
     {

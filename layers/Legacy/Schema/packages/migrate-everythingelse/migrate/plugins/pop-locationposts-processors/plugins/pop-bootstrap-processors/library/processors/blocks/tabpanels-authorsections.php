@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
-    public final const MODULE_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS = 'block-tabpanel-authorlocationposts';
+    public final const COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS = 'block-tabpanel-authorlocationposts';
 
     public function getComponentsToProcess(): array
     {

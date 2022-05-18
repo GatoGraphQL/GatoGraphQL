@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class GD_URE_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
 {
-    public final const MODULE_URE_BUTTON_EDITMEMBERSHIP = 'ure-button-editmembership';
+    public final const COMPONENT_URE_BUTTON_EDITMEMBERSHIP = 'ure-button-editmembership';
 
     public function getComponentsToProcess(): array
     {

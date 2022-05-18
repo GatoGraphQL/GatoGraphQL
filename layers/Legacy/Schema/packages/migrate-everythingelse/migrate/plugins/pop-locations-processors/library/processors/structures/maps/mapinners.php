@@ -2,8 +2,8 @@
 
 class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersBase
 {
-    public final const MODULE_EM_MAPINNER_POST = 'em-mapinner-post';
-    public final const MODULE_EM_MAPINNER_USER = 'em-mapinner-user';
+    public final const COMPONENT_EM_MAPINNER_POST = 'em-mapinner-post';
+    public final const COMPONENT_EM_MAPINNER_USER = 'em-mapinner-user';
 
     public function getComponentsToProcess(): array
     {

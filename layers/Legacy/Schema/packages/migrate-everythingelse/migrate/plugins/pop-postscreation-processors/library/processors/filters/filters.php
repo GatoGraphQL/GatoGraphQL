@@ -2,7 +2,7 @@
 
 class PoP_ContentPostLinksCreation_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBase
 {
-    public final const MODULE_FILTER_MYLINKS = 'filter-mylinks';
+    public final const COMPONENT_FILTER_MYLINKS = 'filter-mylinks';
 
     public function getComponentsToProcess(): array
     {
