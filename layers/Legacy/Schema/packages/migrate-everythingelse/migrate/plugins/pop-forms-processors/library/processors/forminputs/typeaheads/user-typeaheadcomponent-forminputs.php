@@ -36,7 +36,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 
         if (defined('POP_POSTS_INITIALIZED')) {
             $ret[] = [
-                'module' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
+                'component-variation' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:post-count').'|DESC',
             ];
         }
@@ -52,7 +52,7 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
             $url,
             [
                 [
-                    'module' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
+                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
         );
         foreach ($routemodules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -38,19 +38,19 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
         $ret = array();
 
         $ret[UserRequestNature::USER][] = [
-            'module' => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
+            'component-variation' => [PoP_Module_Processor_AuthorTabPanelSectionBlocks::class, PoP_Module_Processor_AuthorTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],
         ];
         $ret[TagRequestNature::TAG][] = [
-            'module' => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
+            'component-variation' => [PoP_Module_Processor_TagTabPanelSectionBlocks::class, PoP_Module_Processor_TagTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_TAGCONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],
         ];
         $ret[RequestNature::HOME][] = [
-            'module' => [PoP_Module_Processor_HomeTabPanelSectionBlocks::class, PoP_Module_Processor_HomeTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_HOMECONTENT],
+            'component-variation' => [PoP_Module_Processor_HomeTabPanelSectionBlocks::class, PoP_Module_Processor_HomeTabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_HOMECONTENT],
             'conditions' => [
                 'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
             ],

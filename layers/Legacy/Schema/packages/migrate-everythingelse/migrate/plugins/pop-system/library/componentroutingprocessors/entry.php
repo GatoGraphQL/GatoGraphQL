@@ -17,7 +17,7 @@ class PoPSystem_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRout
             POP_SYSTEM_ROUTE_SYSTEM_INSTALL => [PoP_System_Module_Processor_SystemActions::class, PoP_System_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_INSTALL],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

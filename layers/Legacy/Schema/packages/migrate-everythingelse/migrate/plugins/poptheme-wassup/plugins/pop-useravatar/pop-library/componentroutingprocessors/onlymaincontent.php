@@ -17,10 +17,10 @@ class PoPTheme_Wassup_UserAvatar_Module_OnlyMainContentComponentRoutingProcessor
         // 2. Update the avatar, on the POST operation
         $module = [PoP_UserAvatarProcessors_Module_Processor_UserDataloads::class, PoP_UserAvatarProcessors_Module_Processor_UserDataloads::MODULE_DATALOAD_USERAVATAR_UPDATE];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
-            'module' => $module,
+            'component-variation' => $module,
         ];
         $ret[RequestNature::GENERIC][POP_USERAVATAR_ROUTE_EDITAVATAR][] = [
-            'module' => [
+            'component-variation' => [
                 $module[0],
                 $module[1],
                 [

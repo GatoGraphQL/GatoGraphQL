@@ -10,13 +10,13 @@ class PoP_Module_SideInfoPageSectionTopLevelComponentRoutingProcessor extends Po
         $ret = array();
 
         $ret[] = [
-        	'module' => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_QUICKVIEWSIDEINFO],
+        	'component-variation' => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_QUICKVIEWSIDEINFO],
         	'conditions' => [
 	            'target' => POP_TARGET_QUICKVIEW,
 	        ],
         ];
         $ret[] = [
-        	'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODYSIDEINFO],
+        	'component-variation' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODYSIDEINFO],
         ];
 
         return $ret;

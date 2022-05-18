@@ -17,7 +17,7 @@ class Wassup_AAL_PoPProcessors_Module_MainContentComponentRoutingProcessor exten
             POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKASUNREAD => [GD_AAL_Module_Processor_FunctionsDataloads::class, GD_AAL_Module_Processor_FunctionsDataloads::MODULE_DATALOAD_MARKNOTIFICATIONASUNREAD],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         $default_format_notifications = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_NOTIFICATIONS);
@@ -27,13 +27,13 @@ class Wassup_AAL_PoPProcessors_Module_MainContentComponentRoutingProcessor exten
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_notifications == POP_FORMAT_DETAILS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -41,13 +41,13 @@ class Wassup_AAL_PoPProcessors_Module_MainContentComponentRoutingProcessor exten
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_notifications == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

@@ -19,14 +19,14 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
             RoutingRoutes::$MAIN => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -34,7 +34,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
             POP_ROUTE_DESCRIPTION => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
         }
 
         return $ret;
@@ -49,17 +49,17 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
 
         // Default for Single
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
+            'component-variation' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
         ];
 
         // Default for Author
         $ret[UserRequestNature::USER][] = [
-            'module' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR]
+            'component-variation' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR]
         ];
 
         // Default for Tag
         $ret[TagRequestNature::TAG][] = [
-            'module' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
+            'component-variation' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
         ];
 
         // Default for Home
@@ -69,7 +69,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );
         $ret[RequestNature::HOME][] = [
-            'module' => $home_module,
+            'component-variation' => $home_module,
         ];
 
         return $ret;
@@ -84,7 +84,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
 
         // For the body, instead of adding no SideInfo, add the one that causes the SideInfo to close. This way, if we open a route without Sideinfo (eg: Add Post), from one which does (eg: Posts), then make it close, otherwise the Sideinfo from the 1st route will remain open
         $ret[] = [
-            'module' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO],
+            'component-variation' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO],
         ];
 
         return $ret;

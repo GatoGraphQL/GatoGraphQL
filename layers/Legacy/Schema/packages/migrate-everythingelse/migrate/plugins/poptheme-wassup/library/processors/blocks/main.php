@@ -159,15 +159,15 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
             case self::MODULE_BLOCK_404:
                 $submodule_descriptions = array(
                     [
-                        'module' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS],
+                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup'),
                     ],
                     [
-                        'module' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS],
+                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('My Content', 'poptheme-wassup'),
                     ],
                     [
-                        'module' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
+                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
                         'description' => TranslationAPIFacade::getInstance()->__('Add Content', 'poptheme-wassup'),
                     ],
                 );

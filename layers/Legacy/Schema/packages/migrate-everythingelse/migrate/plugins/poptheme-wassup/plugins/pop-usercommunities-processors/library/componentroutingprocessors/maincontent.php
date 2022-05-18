@@ -18,7 +18,7 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
             POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES => [GD_URE_Module_Processor_ProfileBlocks::class, GD_URE_Module_Processor_ProfileBlocks::MODULE_BLOCK_MYCOMMUNITIES_UPDATE],
         );
         foreach ($routemodules_allothers as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
@@ -29,13 +29,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_typeahead as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_TYPEAHEAD) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -44,13 +44,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_DETAILS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -58,13 +58,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -72,13 +72,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_THUMBNAIL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -86,13 +86,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent = array(
@@ -100,13 +100,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_mycontent as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_myusers == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent_previews = array(
@@ -114,13 +114,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_mycontent_previews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_myusers == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -132,13 +132,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_typeahead as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_TYPEAHEAD) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -147,13 +147,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -161,13 +161,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -175,13 +175,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -189,13 +189,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_carousels = array(
@@ -203,13 +203,13 @@ class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_carousels as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_CAROUSEL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 

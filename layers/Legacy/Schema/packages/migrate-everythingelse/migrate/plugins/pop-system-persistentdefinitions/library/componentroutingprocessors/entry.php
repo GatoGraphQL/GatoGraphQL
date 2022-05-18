@@ -15,7 +15,7 @@ class PoPSystem_PersistentDefinitions_Module_EntryComponentRoutingProcessor exte
             POP_SYSTEM_ROUTE_SYSTEM_SAVEDEFINITIONFILE => [PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::class, PoP_PersistentDefinitionsSystem_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_SAVEDEFINITIONFILE],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

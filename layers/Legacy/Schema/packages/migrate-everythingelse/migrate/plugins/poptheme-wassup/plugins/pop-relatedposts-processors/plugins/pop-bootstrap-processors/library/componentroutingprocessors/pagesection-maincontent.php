@@ -17,7 +17,7 @@ class PoPTheme_Wassup_RelatedPosts_Bootstrap_Module_MainPageSectionComponentRout
         );
         foreach ($routemodules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

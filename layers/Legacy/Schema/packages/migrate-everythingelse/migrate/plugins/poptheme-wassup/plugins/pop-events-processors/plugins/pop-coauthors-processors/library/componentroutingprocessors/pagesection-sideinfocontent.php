@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionComponentRouti
         );
         foreach ($modules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
@@ -36,7 +36,7 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionComponentRouti
         );
         foreach ($modules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),

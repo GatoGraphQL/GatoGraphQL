@@ -19,7 +19,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelComponentRoutin
         );
         foreach ($routes as $route) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
+                'component-variation' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],
@@ -32,7 +32,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelComponentRoutin
         );
         foreach ($routes as $route) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
+                'component-variation' => [PoP_Module_Processor_PageSectionContainers::class, PoP_Module_Processor_PageSectionContainers::MODULE_PAGESECTIONCONTAINER_HOLE],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],

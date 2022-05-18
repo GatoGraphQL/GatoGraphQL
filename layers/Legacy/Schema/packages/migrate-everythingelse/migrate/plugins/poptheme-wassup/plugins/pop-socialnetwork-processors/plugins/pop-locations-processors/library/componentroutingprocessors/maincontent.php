@@ -20,13 +20,13 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -39,13 +39,13 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_MAP) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -56,13 +56,13 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_MAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
 

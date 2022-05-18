@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
     //     if (!\PoPAPI\API\Environment::disableAPI()) {
     //         // Home
     //         $ret[RequestNature::HOME][] = [
-    //             'module' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
+    //             'component-variation' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
     //             'conditions' => [
     //                 'scheme' => APISchemes::API,
     //             ],
@@ -46,7 +46,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RequestNature::GENERIC][$route][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             );
             foreach ($routemodules as $route => $module) {
                 $ret[RequestNature::GENERIC][$route][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                         'datastructure' => $this->restDataStructureFormatter->getName(),
@@ -73,7 +73,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             );
             foreach ($routemodules as $route => $module) {
                 $ret[UserRequestNature::USER][$route][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -86,7 +86,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             );
             foreach ($routemodules as $route => $module) {
                 $ret[TagRequestNature::TAG][$route][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -99,7 +99,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             );
             foreach ($routemodules as $route => $module) {
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],

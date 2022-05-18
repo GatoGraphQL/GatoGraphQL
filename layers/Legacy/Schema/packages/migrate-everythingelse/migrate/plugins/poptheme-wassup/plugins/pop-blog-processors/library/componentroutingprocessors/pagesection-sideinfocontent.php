@@ -21,7 +21,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionComponentRoutingProc
             PostsModuleConfiguration::getPostsRoute() => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_POSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -29,7 +29,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionComponentRoutingProc
             PostsModuleConfiguration::getPostsRoute() => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -41,7 +41,7 @@ class PoPTheme_Wassup_Blog_Module_SideInfoContentPageSectionComponentRoutingProc
             POP_BLOG_ROUTE_SEARCHUSERS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_USERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

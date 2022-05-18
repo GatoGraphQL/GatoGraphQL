@@ -18,13 +18,13 @@ class PoP_CommonAutomatedEmails_EM_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -32,13 +32,13 @@ class PoP_CommonAutomatedEmails_EM_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($routemodules_simpleview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -46,13 +46,13 @@ class PoP_CommonAutomatedEmails_EM_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -60,13 +60,13 @@ class PoP_CommonAutomatedEmails_EM_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -74,13 +74,13 @@ class PoP_CommonAutomatedEmails_EM_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

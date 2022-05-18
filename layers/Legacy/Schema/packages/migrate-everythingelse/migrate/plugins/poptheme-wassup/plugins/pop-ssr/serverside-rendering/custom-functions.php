@@ -13,7 +13,7 @@ class Wassup_ServerSide_CustomFunctions
 
         $domain = $args['domain'];
         $pageSection = $args['pageSection'];
-        $moduleName = $args['module'];
+        $moduleName = $args['component-variation'];
         $pssId = $popManager->getSettingsId($pageSection);
         // $psId = $pageSection->attr('id');
 

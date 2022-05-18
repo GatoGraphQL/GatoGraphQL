@@ -15,7 +15,7 @@ class PoPTheme_Wassup_RelatedPosts_Module_SideInfoContentPageSectionComponentRou
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_RELATEDCONTENTSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

@@ -18,7 +18,7 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
             POP_ADDHIGHLIGHTS_ROUTE_EDITHIGHLIGHT => [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_HIGHLIGHT_UPDATE],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         // Page modules
@@ -33,13 +33,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_addons as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_ADDONS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -48,13 +48,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlighttypeahead as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_TYPEAHEAD) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -63,13 +63,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightfullview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightthumbnail = array(
@@ -77,13 +77,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightthumbnail as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_THUMBNAIL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightlist = array(
@@ -91,13 +91,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightlist as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_myhighlights = array(
@@ -105,13 +105,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_myhighlights as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_myhighlights == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_myhighlights_fullviewpreviews = array(
@@ -119,13 +119,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_myhighlights_fullviewpreviews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -141,13 +141,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightfullview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightthumbnail = array(
@@ -155,13 +155,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightthumbnail as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightlist = array(
@@ -169,13 +169,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightlist as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_highlights == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -189,13 +189,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightfullview as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_FULLVIEW) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightthumbnail = array(
@@ -203,13 +203,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightthumbnail as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_THUMBNAIL) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_highlightlist = array(
@@ -217,13 +217,13 @@ class PoPTheme_Wassup_AddHighlights_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_highlightlist as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singlehighlights == POP_FORMAT_LIST) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
 

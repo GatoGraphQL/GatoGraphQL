@@ -18,13 +18,13 @@ class PoP_Locations_CommonUserRoles_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -35,13 +35,13 @@ class PoP_Locations_CommonUserRoles_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 

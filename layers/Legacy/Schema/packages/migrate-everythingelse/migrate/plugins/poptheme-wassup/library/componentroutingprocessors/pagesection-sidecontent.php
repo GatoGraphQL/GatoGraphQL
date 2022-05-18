@@ -10,7 +10,7 @@ class PoP_Module_SideContentPageSectionComponentRoutingProcessor extends PoP_Mod
         $ret = array();
 
         $ret[] = [
-        	'module' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_SIDE],
+        	'component-variation' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_SIDE],
         ];
 
         return $ret;

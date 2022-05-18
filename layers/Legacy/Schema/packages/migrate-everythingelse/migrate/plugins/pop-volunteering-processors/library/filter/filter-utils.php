@@ -13,7 +13,7 @@ class PoP_VolunteeringProcessors_FilterUtils
             );
             self::$volunteer_modules = [];
             foreach ($volunteer_modules as $volunteer_module) {
-                $module = $volunteer_module['module'];
+                $module = $volunteer_module['component-variation'];
                 $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
                 self::$volunteer_modules[$moduleFullName] = $volunteer_module['volunteerModule'];
             }

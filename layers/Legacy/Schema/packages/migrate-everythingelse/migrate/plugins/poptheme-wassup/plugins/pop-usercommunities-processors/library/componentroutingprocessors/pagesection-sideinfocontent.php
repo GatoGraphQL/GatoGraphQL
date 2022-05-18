@@ -17,7 +17,7 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionComponent
         );
         foreach ($modules as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'routing' => [
                         'queried-object-is-community' => true,
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_UserCommunities_Module_SideInfoContentPageSectionComponent
             POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_Module_Processor_SidebarMultiples::class, PoP_UserCommunities_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYMEMBERS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

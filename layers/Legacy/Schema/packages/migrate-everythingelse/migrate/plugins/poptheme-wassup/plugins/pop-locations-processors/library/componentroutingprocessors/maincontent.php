@@ -17,7 +17,7 @@ class Wassup_EM_Module_MainContentComponentRoutingProcessor extends \PoP\Applica
             POP_LOCATIONS_ROUTE_LOCATIONS => [PoP_Locations_Module_Processor_CustomSectionBlocks::class, PoP_Locations_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_LOCATIONS_SCROLL],
         );
         foreach ($routemodules_allothers as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
@@ -27,13 +27,13 @@ class Wassup_EM_Module_MainContentComponentRoutingProcessor extends \PoP\Applica
         );
         foreach ($routemodules_modals as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MODALS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MODALS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -42,13 +42,13 @@ class Wassup_EM_Module_MainContentComponentRoutingProcessor extends \PoP\Applica
         );
         foreach ($routemodules_typeahead as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

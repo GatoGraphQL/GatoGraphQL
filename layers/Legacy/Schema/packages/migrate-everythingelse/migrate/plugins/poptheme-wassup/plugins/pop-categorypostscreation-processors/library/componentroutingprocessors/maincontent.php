@@ -37,13 +37,13 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_mycontent as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
@@ -70,13 +70,13 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
@@ -103,13 +103,13 @@ class PoP_CategoryPostsCreation_Module_MainContentComponentRoutingProcessor exte
         );
         foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

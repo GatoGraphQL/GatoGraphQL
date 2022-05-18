@@ -18,7 +18,7 @@ class PoPTheme_Wassup_Newsletter_Module_ContentPageSectionTopLevelComponentRouti
         );
         foreach ($routes as $route) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
+                'component-variation' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_HOVER],
                 'conditions' => [
                     'target' => \PoP\ConfigurationComponentModel\Constants\Targets::MAIN,
                 ],

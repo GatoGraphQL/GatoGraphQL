@@ -15,7 +15,7 @@ class Wassup_Share_Module_MainContentComponentRoutingProcessor extends \PoP\Appl
             POP_SHARE_ROUTE_SHAREBYEMAIL => [PoP_Share_Module_Processor_Blocks::class, PoP_Share_Module_Processor_Blocks::MODULE_BLOCK_SHAREBYEMAIL],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

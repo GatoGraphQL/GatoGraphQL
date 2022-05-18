@@ -18,13 +18,13 @@ class Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor extends \PoP\App
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
 

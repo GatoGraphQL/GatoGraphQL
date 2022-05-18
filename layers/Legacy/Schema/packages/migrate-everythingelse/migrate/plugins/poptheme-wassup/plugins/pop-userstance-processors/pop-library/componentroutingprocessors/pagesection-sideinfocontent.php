@@ -21,7 +21,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -31,7 +31,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;
@@ -62,7 +62,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
         $ret = array();
 
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
+            'component-variation' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => POP_USERSTANCE_POSTTYPE_USERSTANCE,

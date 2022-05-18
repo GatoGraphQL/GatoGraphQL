@@ -16,7 +16,7 @@ class PoP_CommonPages_UserPlatform_Module_MainContentComponentRoutingProcessor e
         );
         foreach ($modules as $page => $module) {
             $ret[PageRequestNature::PAGE][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'routing' => [
                         'queried-object-id' => $page,

@@ -32,7 +32,7 @@ abstract class PoP_Module_Processor_TagTypeaheadComponentFormInputsBase extends 
 
         // bring the tags ordering by tag count
         $ret[] = [
-            'module' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERTAG],
+            'component-variation' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERTAG],
             'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:tags:count').'|DESC',
         ];
 

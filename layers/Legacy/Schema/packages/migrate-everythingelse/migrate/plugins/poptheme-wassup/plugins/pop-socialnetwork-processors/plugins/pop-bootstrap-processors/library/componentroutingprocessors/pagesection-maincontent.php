@@ -21,7 +21,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
         );
         foreach ($routemodules as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -34,7 +34,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -49,7 +49,7 @@ class PoPTheme_Wassup_SocialNetwork_Bootstrap_Module_MainPageSectionComponentRou
         );
         foreach ($routemodules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

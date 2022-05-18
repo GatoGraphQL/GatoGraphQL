@@ -24,7 +24,7 @@ class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP
         );
         foreach ($target_modules as $target => $module) {
             $ret[] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'target' => $target,
                 ],
@@ -32,7 +32,7 @@ class PoP_Module_ContentPageSectionTopLevelComponentRoutingProcessor extends PoP
         }
 
         $ret[] = [
-            'module' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODY],
+            'component-variation' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODY],
         ];
 
         return $ret;

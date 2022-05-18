@@ -17,7 +17,7 @@ class PoP_EventsCreation_Bootstrap_Module_MainPageSectionComponentRoutingProcess
         );
         foreach ($routemodules as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

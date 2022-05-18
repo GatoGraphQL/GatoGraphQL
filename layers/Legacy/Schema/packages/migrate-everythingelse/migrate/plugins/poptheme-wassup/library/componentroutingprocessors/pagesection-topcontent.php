@@ -15,7 +15,7 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
         );
         foreach ($thememode_modules as $thememode => $module) {
             $ret[] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'thememode' => $thememode,
                 ],
@@ -24,7 +24,7 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
 
         // Default for everything
         $ret[] = [
-            'module' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOP],
+            'component-variation' => [PoPTheme_Wassup_Module_Processor_Frames::class, PoPTheme_Wassup_Module_Processor_Frames::MODULE_FRAME_TOP],
         ];
 
         return $ret;

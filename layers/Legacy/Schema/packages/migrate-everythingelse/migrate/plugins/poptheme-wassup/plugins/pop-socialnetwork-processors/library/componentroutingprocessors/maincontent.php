@@ -28,7 +28,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
             POP_SOCIALNETWORK_ROUTE_UNDODOWNVOTEPOST => [PoP_Module_Processor_FunctionsBlocks::class, PoP_Module_Processor_FunctionsBlocks::MODULE_BLOCK_UNDODOWNVOTEPOST],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         // Tag modules
@@ -40,13 +40,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userdetails as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_DETAILS) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userfullview = array(
@@ -54,13 +54,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userfullview as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_FULLVIEW) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userthumbnail = array(
@@ -68,13 +68,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_THUMBNAIL) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userlist = array(
@@ -82,13 +82,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userlist as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_LIST) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -104,13 +104,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userdetails = array(
@@ -119,13 +119,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userdetails as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_tagdetails = array(
@@ -133,13 +133,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_tagdetails as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_authortags == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -147,13 +147,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_simpleview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -161,13 +161,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userfullview = array(
@@ -176,13 +176,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userfullview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -190,13 +190,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userthumbnail = array(
@@ -205,13 +205,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -219,13 +219,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userlist = array(
@@ -234,13 +234,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userlist as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_taglist = array(
@@ -248,13 +248,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_taglist as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_authortags == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -270,13 +270,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userdetails as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_DETAILS) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userfullview = array(
@@ -286,13 +286,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userfullview as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_FULLVIEW) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userthumbnail = array(
@@ -302,13 +302,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_THUMBNAIL) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userlist = array(
@@ -318,13 +318,13 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         );
         foreach ($routemodules_userlist as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_LIST) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
 

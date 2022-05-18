@@ -48,7 +48,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
         // bring the posts ordering by comment count
         if (defined('POP_COMMENTS_INITIALIZED')) {
             $ret[] = [
-                'module' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+                'component-variation' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:comment-count').'|DESC',
             ];
         }
@@ -64,7 +64,7 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
             $url,
             [
                 [
-                    'module' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

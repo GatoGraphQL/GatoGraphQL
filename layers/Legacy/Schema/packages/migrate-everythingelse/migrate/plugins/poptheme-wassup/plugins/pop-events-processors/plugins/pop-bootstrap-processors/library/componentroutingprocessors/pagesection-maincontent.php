@@ -20,7 +20,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         );
         foreach ($routemodules as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -34,7 +34,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         );
         foreach ($routemodules as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -48,7 +48,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

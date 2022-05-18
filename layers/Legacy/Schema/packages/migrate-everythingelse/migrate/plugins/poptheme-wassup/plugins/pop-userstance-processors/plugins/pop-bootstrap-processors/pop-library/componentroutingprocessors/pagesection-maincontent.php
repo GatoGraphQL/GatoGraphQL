@@ -29,7 +29,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         );
         foreach ($routemodules as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -45,7 +45,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         );
         foreach ($routemodules as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -61,7 +61,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         );
         foreach ($routemodules as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -77,7 +77,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         );
         foreach ($routemodules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

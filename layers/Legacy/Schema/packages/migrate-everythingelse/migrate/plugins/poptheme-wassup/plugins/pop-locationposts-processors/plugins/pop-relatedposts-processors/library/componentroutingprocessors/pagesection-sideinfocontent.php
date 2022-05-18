@@ -16,7 +16,7 @@ class PoPTheme_Wassup_LocationPosts_RelatedPosts_Module_SideInfoContentPageSecti
         );
         foreach ($modules as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => POP_LOCATIONPOSTS_POSTTYPE_LOCATIONPOST,

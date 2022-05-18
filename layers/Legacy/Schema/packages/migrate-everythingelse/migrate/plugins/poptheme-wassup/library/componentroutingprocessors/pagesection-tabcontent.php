@@ -26,7 +26,7 @@ class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Modu
         );
         foreach ($nature_modules as $nature => $module) {
             $ret[$nature][] = [
-                'module' => $module,
+                'component-variation' => $module,
             ];
         }
 

@@ -16,7 +16,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionComponentRo
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
         }
 
         $modules = array(
@@ -24,7 +24,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionComponentRo
             POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionComponentRo
         $ret = array();
 
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
+            'component-variation' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT,

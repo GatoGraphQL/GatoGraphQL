@@ -25,14 +25,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
         );
         foreach ($format_modules as $format => $module) {
             $ret[RequestNature::HOME][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[RequestNature::HOME][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                 ];
             }
         }
@@ -47,14 +47,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
         );
         foreach ($format_modules as $format => $module) {
             $ret[UserRequestNature::USER][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[UserRequestNature::USER][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                 ];
             }
         }
@@ -69,14 +69,14 @@ class PoPTheme_Wassup_Blog_Module_OnlyMainContentComponentRoutingProcessor exten
         );
         foreach ($format_modules as $format => $module) {
             $ret[TagRequestNature::TAG][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => $format,
                 ],
             ];
             if ($default_format_section == $format) {
                 $ret[TagRequestNature::TAG][] = [
-                    'module' => $module,
+                    'component-variation' => $module,
                 ];
             }
         }

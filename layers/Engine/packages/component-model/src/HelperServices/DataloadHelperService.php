@@ -104,7 +104,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     {
         $args = [];
         foreach ($moduleValues as $moduleValue) {
-            $module = $moduleValue['module'];
+            $module = $moduleValue['component-variation'];
             $value = $moduleValue['value'];
             /** @var FilterInputComponentProcessorInterface */
             $componentProcessor = $this->getComponentProcessorManager()->getProcessor($module);

@@ -17,13 +17,13 @@ class Wassup_EM_URE_Module_MainContentComponentRoutingProcessor extends \PoP\App
         );
         foreach ($routemodules_addons as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

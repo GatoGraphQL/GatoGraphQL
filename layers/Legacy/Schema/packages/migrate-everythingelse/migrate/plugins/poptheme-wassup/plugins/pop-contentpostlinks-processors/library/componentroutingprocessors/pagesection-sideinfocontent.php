@@ -15,7 +15,7 @@ class PoPTheme_Wassup_ContentPostLinks_Module_SideInfoContentPageSectionComponen
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SidebarMultiples::class, PoP_ContentPostLinks_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR],
         );
         foreach ($modules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         return $ret;

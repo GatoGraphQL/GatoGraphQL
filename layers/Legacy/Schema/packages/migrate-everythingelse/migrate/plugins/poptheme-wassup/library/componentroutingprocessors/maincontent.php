@@ -20,14 +20,14 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
         );
         foreach ($modules as $route => $module) {
-            $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
         }
         // Tag
         $modules = array(
             POP_ROUTE_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT],
         );
         foreach ($modules as $route => $module) {
-            $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
         }
 
         // Single main content
@@ -37,13 +37,13 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         );
         foreach ($routemodules_userdetails as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_DETAILS) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userfullview = array(
@@ -51,13 +51,13 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         );
         foreach ($routemodules_userfullview as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_FULLVIEW) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userthumbnail = array(
@@ -65,13 +65,13 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         );
         foreach ($routemodules_userthumbnail as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_THUMBNAIL) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_userlist = array(
@@ -79,13 +79,13 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
         );
         foreach ($routemodules_userlist as $route => $module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_LIST) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['module' => $module];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -101,17 +101,17 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
 
         // 404
         $ret[RequestNature::NOTFOUND][] = [
-            'module' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_404]
+            'component-variation' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_404]
         ];
 
         // Single
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'module' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT]
+            'component-variation' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT]
         ];
 
         // Page
         $ret[PageRequestNature::PAGE][] = [
-            'module' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_PAGE_CONTENT]
+            'component-variation' => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_PAGE_CONTENT]
         ];
 
         return $ret;

@@ -16,32 +16,32 @@ class MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMain
         return array(
             RequestNature::HOME => [
                 [
-                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_HOME],
+                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_HOME],
                 ],
             ],
             RequestNature::NOTFOUND => [
                 [
-                    'module' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_404],
+                    'component-variation' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_404],
                 ],
             ],
             TagRequestNature::TAG => [
                 [
-                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_TAG],
+                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_TAG],
                 ],
             ],
             UserRequestNature::USER => [
                 [
-                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
+                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
                 ],
             ],
             CustomPostRequestNature::CUSTOMPOST => [
                 [
-                    'module' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
+                    'component-variation' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
                 ],
             ],
             PageRequestNature::PAGE => [
                 [
-                    'module' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
+                    'component-variation' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
                 ],
             ],
         );

@@ -47,7 +47,7 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
             $url, 
             [
                 [
-                    'module' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

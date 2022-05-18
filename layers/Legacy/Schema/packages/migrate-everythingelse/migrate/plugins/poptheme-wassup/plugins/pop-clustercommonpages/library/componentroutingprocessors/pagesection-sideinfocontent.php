@@ -20,7 +20,7 @@ class PoPTheme_Wassup_ClusterCommonPages_Module_SideInfoContentPageSectionCompon
         );
         foreach ($pages as $page) {
             $ret[PageRequestNature::PAGE][] = [
-                'module' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
+                'component-variation' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
                 'conditions' => [
                     'routing' => [
                         'queried-object-id' => $page,

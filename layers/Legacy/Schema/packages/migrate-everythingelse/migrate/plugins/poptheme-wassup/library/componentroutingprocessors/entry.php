@@ -16,7 +16,7 @@ class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\Ab
         );
         foreach ($thememode_modules as $thememode => $module) {
             $ret[] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'thememode' => $thememode,
                 ],
@@ -25,7 +25,7 @@ class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\Ab
 
         // The TopLevel is the entry module by default
         $ret[] = [
-            'module' => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_DEFAULT],
+            'component-variation' => [PoP_Module_Processor_Entries::class, PoP_Module_Processor_Entries::MODULE_ENTRY_DEFAULT],
         ];
 
         return $ret;

@@ -22,7 +22,7 @@ class PoP_Module_QuickviewFrameBottomOptionsPageSectionComponentRoutingProcessor
 
         if ($load_module) {
             $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-                'module' => [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG]
+                'component-variation' => [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_CLOSEPAGEBTNBIG]
             ];
         }
 

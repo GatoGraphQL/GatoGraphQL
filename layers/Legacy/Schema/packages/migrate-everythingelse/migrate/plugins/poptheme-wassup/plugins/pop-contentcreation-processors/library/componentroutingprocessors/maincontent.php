@@ -16,7 +16,7 @@ class PoPTheme_Wassup_ContentCreation_Module_MainContentComponentRoutingProcesso
             POP_CONTENTCREATION_ROUTE_ADDCONTENT => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
         );
         foreach ($routemodules as $route => $module) {
-            $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
@@ -26,13 +26,13 @@ class PoPTheme_Wassup_ContentCreation_Module_MainContentComponentRoutingProcesso
         );
         foreach ($routemodules_mycontent as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TABLE,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_TABLE) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent_simpleviewpreviews = array(
@@ -40,13 +40,13 @@ class PoPTheme_Wassup_ContentCreation_Module_MainContentComponentRoutingProcesso
         );
         foreach ($routemodules_mycontent_simpleviewpreviews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_mycontent_fullviewpreviews = array(
@@ -54,13 +54,13 @@ class PoPTheme_Wassup_ContentCreation_Module_MainContentComponentRoutingProcesso
         );
         foreach ($routemodules_mycontent_fullviewpreviews as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_mycontent == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 

@@ -23,13 +23,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_typeahead as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_TYPEAHEAD,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_TYPEAHEAD) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_details = array(
@@ -38,13 +38,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -53,13 +53,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_simpleview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -68,13 +68,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -83,13 +83,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -98,13 +98,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_map = array(
@@ -113,13 +113,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_horizontalmap = array(
@@ -127,13 +127,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_horizontalmap as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_navigator = array(
@@ -142,18 +142,18 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_navigator as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_NAVIGATOR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
                 ],
@@ -165,13 +165,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_addons as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_ADDONS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_carousels = array(
@@ -179,13 +179,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_carousels as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -194,13 +194,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendar as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_calendar_map = array(
@@ -208,13 +208,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendar_map as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_navigator = array(
@@ -222,18 +222,18 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_navigator as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_NAVIGATOR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_NAVIGATOR) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
 
             // Navigator special case: use the NAVIGATOR module when the target is the navigator
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'target' => POP_TARGET_NAVIGATOR,
                 ],
@@ -244,13 +244,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_addons as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_ADDONS,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_ADDONS) {
-                $ret[RequestNature::GENERIC][$route][] = ['module' => $module];
+                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -264,13 +264,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_DETAILS) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -279,13 +279,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_simpleview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_SIMPLEVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -294,13 +294,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_FULLVIEW) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -309,13 +309,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_THUMBNAIL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -324,13 +324,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_LIST) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_map = array(
@@ -339,13 +339,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_horizontalmap = array(
@@ -353,13 +353,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_horizontalmap as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_carousels = array(
@@ -367,13 +367,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_carousels as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_authorsection == POP_FORMAT_CAROUSEL) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -382,13 +382,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendar as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_authorsectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_calendarmap = array(
@@ -396,13 +396,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendarmap as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_authorsectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[UserRequestNature::USER][$route][] = ['module' => $module];
+                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -416,13 +416,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_details as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_DETAILS,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_DETAILS) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_simpleview = array(
@@ -431,13 +431,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_simpleview as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_SIMPLEVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_SIMPLEVIEW) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_fullview = array(
@@ -446,13 +446,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_fullview as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_FULLVIEW,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_FULLVIEW) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_thumbnail = array(
@@ -461,13 +461,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_thumbnail as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_THUMBNAIL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_THUMBNAIL) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_list = array(
@@ -476,13 +476,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_list as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_LIST,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_LIST) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_map = array(
@@ -491,13 +491,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_map as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_MAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_horizontalmap = array(
@@ -505,13 +505,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_horizontalmap as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_HORIZONTALMAP,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_HORIZONTALMAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -520,13 +520,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_carousels as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CAROUSEL,
                 ],
             ];
             if ($default_format_section == POP_FORMAT_CAROUSEL) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
 
@@ -535,13 +535,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendar as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDAR,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDAR) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
         $routemodules_calendarmap = array(
@@ -549,13 +549,13 @@ class PoP_Events_Module_MainContentComponentRoutingProcessor extends \PoP\Applic
         );
         foreach ($routemodules_calendarmap as $route => $module) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'module' => $module,
+                'component-variation' => $module,
                 'conditions' => [
                     'format' => POP_FORMAT_CALENDARMAP,
                 ],
             ];
             if ($default_format_sectioncalendar == POP_FORMAT_CALENDARMAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['module' => $module];
+                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $module];
             }
         }
 
