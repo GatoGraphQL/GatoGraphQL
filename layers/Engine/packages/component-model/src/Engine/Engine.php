@@ -1056,7 +1056,7 @@ class Engine implements EngineInterface
         $immutable_componentdata = $mutableonmodel_componentdata = $mutableonrequest_componentdata = [];
         $immutable_datasetcomponentdata = $mutableonmodel_datasetcomponentdata = $mutableonrequest_datasetcomponentdata = [];
         if ($add_meta) {
-            $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
+            $immutable_datasetcomponentmeta = $mutableonmodel_datasetcomponentmeta = $mutableonrequest_datasetcomponentmeta = [];
         }
         $engineState->dbdata = [];
 
@@ -1286,23 +1286,23 @@ class Engine implements EngineInterface
             }
 
             // Save the results on either the static or mutableonrequest branches
-            $datasetcomponentdata = $datasetmodulemeta = null;
+            $datasetcomponentdata = $datasetcomponentmeta = null;
             if ($datasource == DataSources::IMMUTABLE) {
                 $datasetcomponentdata = &$immutable_datasetcomponentdata;
                 if ($add_meta) {
-                    $datasetmodulemeta = &$immutable_datasetmodulemeta;
+                    $datasetcomponentmeta = &$immutable_datasetcomponentmeta;
                 }
                 $engineState->componentdata = &$immutable_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONMODEL) {
                 $datasetcomponentdata = &$mutableonmodel_datasetcomponentdata;
                 if ($add_meta) {
-                    $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
+                    $datasetcomponentmeta = &$mutableonmodel_datasetcomponentmeta;
                 }
                 $engineState->componentdata = &$mutableonmodel_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                 $datasetcomponentdata = &$mutableonrequest_datasetcomponentdata;
                 if ($add_meta) {
-                    $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
+                    $datasetcomponentmeta = &$mutableonrequest_datasetcomponentmeta;
                 }
                 $engineState->componentdata = &$mutableonrequest_componentdata;
             }
@@ -1313,11 +1313,11 @@ class Engine implements EngineInterface
                 $this->assignValueForModule($datasetcomponentdata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
-            // Save the meta into $datasetmodulemeta
+            // Save the meta into $datasetcomponentmeta
             if ($add_meta) {
-                if (!is_null($datasetmodulemeta)) {
+                if (!is_null($datasetcomponentmeta)) {
                     if ($dataset_meta = $processor->getDatasetmeta($component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForModule($datasetmodulemeta, $module_path, $component, DataLoading::META, $dataset_meta);
+                        $this->assignValueForModule($datasetcomponentmeta, $module_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
             }
@@ -1414,16 +1414,16 @@ class Engine implements EngineInterface
 
                 if ($add_meta) {
                     /** @phpstan-ignore-next-line */
-                    if ($immutable_datasetmodulemeta) {
-                        $ret['datasetmodulemeta']['immutable'] = $immutable_datasetmodulemeta;
+                    if ($immutable_datasetcomponentmeta) {
+                        $ret['datasetcomponentmeta']['immutable'] = $immutable_datasetcomponentmeta;
                     }
                     /** @phpstan-ignore-next-line */
-                    if ($mutableonmodel_datasetmodulemeta) {
-                        $ret['datasetmodulemeta']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetmodulemeta) : $mutableonmodel_datasetmodulemeta;
+                    if ($mutableonmodel_datasetcomponentmeta) {
+                        $ret['datasetcomponentmeta']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_datasetcomponentmeta) : $mutableonmodel_datasetcomponentmeta;
                     }
                     /** @phpstan-ignore-next-line */
-                    if ($mutableonrequest_datasetmodulemeta) {
-                        $ret['datasetmodulemeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetmodulemeta) : $mutableonrequest_datasetmodulemeta;
+                    if ($mutableonrequest_datasetcomponentmeta) {
+                        $ret['datasetcomponentmeta']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_datasetcomponentmeta) : $mutableonrequest_datasetcomponentmeta;
                     }
                 }
             } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
@@ -1448,13 +1448,13 @@ class Engine implements EngineInterface
                 }
                 if ($add_meta) {
                     if (
-                        $combined_datasetmodulemeta = array_merge_recursive(
-                            $immutable_datasetmodulemeta ?? [],
-                            $mutableonmodel_datasetmodulemeta ?? [],
-                            $mutableonrequest_datasetmodulemeta ?? []
+                        $combined_datasetcomponentmeta = array_merge_recursive(
+                            $immutable_datasetcomponentmeta ?? [],
+                            $mutableonmodel_datasetcomponentmeta ?? [],
+                            $mutableonrequest_datasetcomponentmeta ?? []
                         )
                     ) {
-                        $ret['datasetmodulemeta'] = $has_extra_routes ? array($current_uri => $combined_datasetmodulemeta) : $combined_datasetmodulemeta;
+                        $ret['datasetcomponentmeta'] = $has_extra_routes ? array($current_uri => $combined_datasetcomponentmeta) : $combined_datasetcomponentmeta;
                     }
                 }
             }
