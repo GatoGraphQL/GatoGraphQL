@@ -71,7 +71,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostCategoriesRoute() => [
                 PostCategoryFieldDataloadModuleProcessor::class,
                 PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
@@ -82,7 +82,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                 ]
             ],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $component,
                 'conditions' => [
@@ -93,7 +93,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         }
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 CategoryPostFieldDataloadModuleProcessor::class,
                 CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
@@ -104,7 +104,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
                     ]
                 ],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[CategoryRequestNature::CATEGORY][$route][] = [
                 'module' => $component,
                 'conditions' => [

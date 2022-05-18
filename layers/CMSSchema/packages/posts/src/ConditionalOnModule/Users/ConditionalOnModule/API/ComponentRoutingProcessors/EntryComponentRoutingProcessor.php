@@ -24,13 +24,13 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         // Author's posts
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::USER][$route][] = [
                 'module' => $component,
                 'conditions' => [

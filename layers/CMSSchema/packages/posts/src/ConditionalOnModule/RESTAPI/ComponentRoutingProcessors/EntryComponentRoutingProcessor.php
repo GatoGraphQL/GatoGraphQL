@@ -52,7 +52,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         /** @var ComponentModelModuleConfiguration */
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
                 FieldDataloadModuleProcessor::class,
                 $componentModelModuleConfiguration->enableAdminSchema() ?
@@ -65,7 +65,7 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
                     ]
                 ],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $component,
                 'conditions' => [

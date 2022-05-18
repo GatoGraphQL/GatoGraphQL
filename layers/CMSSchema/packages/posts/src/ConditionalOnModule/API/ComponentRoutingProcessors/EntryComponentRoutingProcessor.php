@@ -38,10 +38,10 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $component,
                 'conditions' => [

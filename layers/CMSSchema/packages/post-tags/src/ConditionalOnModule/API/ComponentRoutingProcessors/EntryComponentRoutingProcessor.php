@@ -56,10 +56,10 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostTagsRoute() => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'module' => $component,
                 'conditions' => [
@@ -69,10 +69,10 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         }
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
-        $routemodules = array(
+        $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [TagPostFieldDataloadModuleProcessor::class, TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'module' => $component,
                 'conditions' => [
