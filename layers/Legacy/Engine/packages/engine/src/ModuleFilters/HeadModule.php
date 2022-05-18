@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ModuleFilters;
+namespace PoP\Engine\ComponentFilters;
 
 use PoP\Root\App;
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
+use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
 
-class HeadModule extends AbstractModuleFilter
+class HeadModule extends AbstractComponentFilter
 {
     public function getName(): string
     {

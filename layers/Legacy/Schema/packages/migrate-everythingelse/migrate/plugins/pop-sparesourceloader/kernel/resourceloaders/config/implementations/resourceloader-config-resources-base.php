@@ -2,7 +2,7 @@
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
-use PoP\SPA\ModuleFilters\Page;
+use PoP\SPA\ComponentFilters\Page;
 
 abstract class PoP_SPAResourceLoader_FileReproduction_ResourcesConfigBase extends \PoP\FileStore\File\AbstractRenderableFileFragment
 {

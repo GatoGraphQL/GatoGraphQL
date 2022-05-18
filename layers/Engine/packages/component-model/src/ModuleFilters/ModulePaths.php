@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleFilters;
+namespace PoP\ComponentModel\ComponentFilters;
 
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 
-class ModulePaths extends AbstractModuleFilter
+class ModulePaths extends AbstractComponentFilter
 {
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
 

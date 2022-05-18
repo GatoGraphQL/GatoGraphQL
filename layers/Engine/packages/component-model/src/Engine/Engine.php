@@ -38,7 +38,7 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\Info\ApplicationInfoInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
@@ -71,7 +71,7 @@ class Engine implements EngineInterface
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModulePathManagerInterface $modulePathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ComponentFilterManagerInterface $moduleFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
     private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
@@ -141,13 +141,13 @@ class Engine implements EngineInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    final public function setComponentFilterManager(ComponentFilterManagerInterface $moduleFilterManager): void
     {
         $this->moduleFilterManager = $moduleFilterManager;
     }
-    final protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
@@ -711,7 +711,7 @@ class Engine implements EngineInterface
         };
 
         // Starting from what component variations must do the rendering. Allow for empty arrays (eg: modulepaths[]=somewhatevervalue)
-        $not_excluded_componentVariation_sets = $this->getModuleFilterManager()->getNotExcludedComponentVariationSets();
+        $not_excluded_componentVariation_sets = $this->getComponentFilterManager()->getNotExcludedComponentVariationSets();
         if (!is_null($not_excluded_componentVariation_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
@@ -910,7 +910,7 @@ class Engine implements EngineInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
+        if (!$this->getComponentFilterManager()->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($interreferenced_modulepath = $processor->getDataFeedbackInterreferencedModulepath($module, $props)) {
                 $referenced_modulepath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_modulepath);
@@ -933,14 +933,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->getComponentFilterManager()->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
+        $this->getComponentFilterManager()->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addInterreferencedModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($module, $props);
     }
 
     protected function getDataloadingModuleFullpaths(array $module, array &$props): array
@@ -960,7 +960,7 @@ class Engine implements EngineInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
+        if (!$this->getComponentFilterManager()->excludeModule($module, $props)) {
             // If the current module loads data, then add its path to the list
             if ($processor->moduleLoadsData($module)) {
                 $paths[] = array_merge(
@@ -981,14 +981,14 @@ class Engine implements EngineInterface
 
         // Propagate to its inner modules
         $submodules = $processor->getAllSubmodules($module);
-        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
+        $submodules = $this->getComponentFilterManager()->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->getModuleFilterManager()->prepareForPropagation($module, $props);
+        $this->getComponentFilterManager()->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
             $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($module, $props);
     }
 
     protected function assignValueForModule(
@@ -1123,7 +1123,7 @@ class Engine implements EngineInterface
         $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
         // The modules below are already included, so tell the filtermanager to not validate if they must be excluded or not
-        $this->getModuleFilterManager()->neverExclude(true);
+        $this->getComponentFilterManager()->neverExclude(true);
         foreach ($module_fullpaths as $module_path) {
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
@@ -1377,7 +1377,7 @@ class Engine implements EngineInterface
         }
 
         // Reset the filtermanager state and the pathmanager current path
-        $this->getModuleFilterManager()->neverExclude(false);
+        $this->getComponentFilterManager()->neverExclude(false);
         $this->getModulePathManager()->setPropagationCurrentPath();
 
         $ret = [];

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Hooks\ModuleFilters;
+namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Facades\ModulePath\ModulePathHelpersFacade;
 use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ComponentFilters\ModulePaths;
 use PoP\Root\Hooks\AbstractHookSet;
 
 class ModulePathsHookSet extends AbstractHookSet

@@ -1,8 +1,8 @@
 <?php
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
-use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManager;
+use PoP\Engine\ComponentFilters\MainContentModule;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 define('GD_SUBMITFORMTYPE_DELEGATE', 'delegate');

@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
+use PoP\ComponentModel\Facades\ComponentFiltering\ComponentFilterManagerFacade;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
 
@@ -134,7 +134,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // Exclude the subcomponent modules here
         $processor = $this->getDecoratedcomponentProcessor($module);
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
+        $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
         if ($submodules = $processor->getModulesToPropagateDataProperties($module)) {
             foreach ($submodules as $submodule) {
@@ -168,7 +168,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
         $processor = $this->getDecoratedcomponentProcessor($module);
-        $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
+        $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($processor->getRelationalSubmodules($module) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first

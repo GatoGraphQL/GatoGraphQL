@@ -51,8 +51,8 @@ services:
     PoP\ComponentModel\Info\ApplicationInfoInterface:
         class: \PoP\ComponentModel\Info\ApplicationInfo
 
-    PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface:
-        class: \PoP\ComponentModel\ModuleFiltering\ModuleFilterManager
+    PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface:
+        class: \PoP\ComponentModel\ComponentFiltering\ComponentFilterManager
 
     PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface:
         class: \PoP\ComponentModel\HelperServices\DataloadHelperService
@@ -75,8 +75,8 @@ services:
     PoP\ComponentModel\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
 
-    PoP\ComponentModel\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'
+    PoP\ComponentModel\ComponentFilters\:
+        resource: '../src/ComponentFilters/*'
 
     PoP\ComponentModel\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'

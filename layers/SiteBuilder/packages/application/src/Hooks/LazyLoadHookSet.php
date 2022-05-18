@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\Application\Hooks;
 
 use PoP\Application\Constants\Actions;
-use PoP\Application\ModuleFilters\Lazy;
+use PoP\Application\ComponentFilters\Lazy;
 use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;

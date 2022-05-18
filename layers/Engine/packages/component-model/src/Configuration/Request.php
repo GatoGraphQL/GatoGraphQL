@@ -58,7 +58,7 @@ class Request
         return $extraRoutes;
     }
 
-    public static function getModuleFilter(): ?string
+    public static function getComponentFilter(): ?string
     {
         return App::request(Params::MODULEFILTER) ?? App::query(Params::MODULEFILTER);
     }

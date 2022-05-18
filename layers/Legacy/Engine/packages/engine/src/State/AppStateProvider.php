@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\Engine\State;
 
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ComponentFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\Engine\Configuration\Request;
-use PoP\Engine\ModuleFilters\HeadModule;
-use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\HeadModule;
+use PoP\Engine\ComponentFilters\MainContentModule;
 use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Module as RootModule;

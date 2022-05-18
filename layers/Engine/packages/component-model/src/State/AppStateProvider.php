@@ -8,7 +8,7 @@ use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Configuration\EngineRequest;
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\Definitions\Configuration\Request as DefinitionsRequest;
 use PoP\Definitions\Constants\ParamValues;
@@ -20,7 +20,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ComponentFilterManagerInterface $moduleFilterManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -30,13 +30,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    final public function setComponentFilterManager(ComponentFilterManagerInterface $moduleFilterManager): void
     {
         $this->moduleFilterManager = $moduleFilterManager;
     }
-    final protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
 
     public function initialize(array &$state): void
@@ -48,7 +48,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['only-fieldname-as-outputkey'] = false;
 
-        $state['modulefilter'] = $this->getModuleFilterManager()->getSelectedModuleFilterName();
+        $state['modulefilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
         /** @var RootModuleConfiguration */

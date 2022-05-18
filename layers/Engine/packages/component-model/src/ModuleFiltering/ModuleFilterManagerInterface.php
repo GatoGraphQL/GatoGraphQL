@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleFiltering;
+namespace PoP\ComponentModel\ComponentFiltering;
 
-use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 
-interface ModuleFilterManagerInterface
+interface ComponentFilterManagerInterface
 {
-    public function addModuleFilter(ModuleFilterInterface $moduleFilter): void;
-    public function getSelectedModuleFilterName(): ?string;
-    public function setSelectedModuleFilterName(string $selectedModuleFilterName): void;
+    public function addComponentFilter(ComponentFilterInterface $moduleFilter): void;
+    public function getSelectedComponentFilterName(): ?string;
+    public function setSelectedComponentFilterName(string $selectedComponentFilterName): void;
     public function getNotExcludedComponentVariationSets(): ?array;
     public function neverExclude($neverExclude): void;
     public function excludeModule(array $module, array &$props): bool;

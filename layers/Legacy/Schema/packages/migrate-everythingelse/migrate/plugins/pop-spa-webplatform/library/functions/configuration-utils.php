@@ -3,7 +3,7 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\SPA\ModuleFilters\Page;
+use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPAWebPlatform_ConfigurationUtils
 {

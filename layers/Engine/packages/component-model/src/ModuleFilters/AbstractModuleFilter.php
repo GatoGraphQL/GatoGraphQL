@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleFilters;
+namespace PoP\ComponentModel\ComponentFilters;
 
 use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
-abstract class AbstractModuleFilter implements ModuleFilterInterface
+abstract class AbstractComponentFilter implements ComponentFilterInterface
 {
     use BasicServiceTrait;
 

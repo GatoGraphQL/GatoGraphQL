@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleFilters;
+namespace PoP\ComponentModel\ComponentFilters;
 
-interface ModuleFilterInterface
+interface ComponentFilterInterface
 {
     public function getName(): string;
     public function excludeModule(array $module, array &$props): bool;

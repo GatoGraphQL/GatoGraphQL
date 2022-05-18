@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\SPA\ModuleFilters;
+namespace PoP\SPA\ComponentFilters;
 
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
+use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
 use PoP\SPA\Modules\PageInterface;
 
-class Page extends AbstractModuleFilter
+class Page extends AbstractComponentFilter
 {
     public function getName(): string
     {

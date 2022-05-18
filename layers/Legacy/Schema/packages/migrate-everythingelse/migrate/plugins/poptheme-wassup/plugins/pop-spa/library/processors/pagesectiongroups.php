@@ -3,7 +3,7 @@
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
-use PoP\SPA\ModuleFilters\Page;
+use PoP\SPA\ComponentFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 {

@@ -3,9 +3,9 @@
 define('POP_MODULEFILTER_USERSTATE', 'userstate');
 
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
+use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
 
-class PoP_ModuleFilter_UserState extends AbstractModuleFilter
+class PoP_ComponentFilter_UserState extends AbstractComponentFilter
 {
     public function getName(): string
     {
@@ -26,4 +26,4 @@ class PoP_ModuleFilter_UserState extends AbstractModuleFilter
 /**
  * Initialization
  */
-new PoP_ModuleFilter_UserState();
+new PoP_ComponentFilter_UserState();

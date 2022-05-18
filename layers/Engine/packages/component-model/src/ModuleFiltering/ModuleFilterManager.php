@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleFiltering;
+namespace PoP\ComponentModel\ComponentFiltering;
 
 use PoP\ComponentModel\Configuration\Request;
-use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
 use PoP\Root\App;
@@ -13,14 +13,14 @@ use PoP\Root\Module as RootModule;
 use PoP\Root\ModuleConfiguration as RootModuleConfiguration;
 use PoP\Root\Services\BasicServiceTrait;
 
-class ModuleFilterManager implements ModuleFilterManagerInterface
+class ComponentFilterManager implements ComponentFilterManagerInterface
 {
     use BasicServiceTrait;
 
     protected ?string $selected_filter_name = null;
-    private ?ModuleFilterInterface $selected_filter = null;
+    private ?ComponentFilterInterface $selected_filter = null;
     /**
-     * @var array<string, ModuleFilterInterface>
+     * @var array<string, ComponentFilterInterface>
      */
     protected array $modulefilters = [];
     protected bool $initialized = false;
@@ -63,7 +63,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
 
-    public function addModuleFilter(ModuleFilterInterface $moduleFilter): void
+    public function addComponentFilter(ComponentFilterInterface $moduleFilter): void
     {
         $this->modulefilters[$moduleFilter->getName()] = $moduleFilter;
     }
@@ -71,7 +71,7 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     protected function init(): void
     {
         // Lazy initialize so that we can inject all the moduleFilters before checking the selected one
-        $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedModuleFilterName();
+        $this->selected_filter_name = $this->selected_filter_name ?? $this->getSelectedComponentFilterName();
         if ($this->selected_filter_name) {
             $this->selected_filter = $this->modulefilters[$this->selected_filter_name];
 
@@ -84,12 +84,12 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
     /**
      * The selected filter can be set from outside by the engine
      */
-    public function setSelectedModuleFilterName(string $selectedModuleFilterName): void
+    public function setSelectedComponentFilterName(string $selectedComponentFilterName): void
     {
-        $this->selected_filter_name = $selectedModuleFilterName;
+        $this->selected_filter_name = $selectedComponentFilterName;
     }
 
-    public function getSelectedModuleFilterName(): ?string
+    public function getSelectedComponentFilterName(): ?string
     {
         if ($this->selected_filter_name) {
             return $this->selected_filter_name;
@@ -101,9 +101,9 @@ class ModuleFilterManager implements ModuleFilterManagerInterface
         }
 
         // Only valid if there's a corresponding moduleFilter
-        $selectedModuleFilterName = Request::getModuleFilter();
-        if ($selectedModuleFilterName !== null && in_array($selectedModuleFilterName, array_keys($this->modulefilters))) {
-            return $selectedModuleFilterName;
+        $selectedComponentFilterName = Request::getComponentFilter();
+        if ($selectedComponentFilterName !== null && in_array($selectedComponentFilterName, array_keys($this->modulefilters))) {
+            return $selectedComponentFilterName;
         }
 
         return null;

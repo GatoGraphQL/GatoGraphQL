@@ -4,10 +4,10 @@ use PoP\ComponentModel\Constants\Outputs;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManager;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManager;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\DataStructureFormatters\DBItemListDataStructureFormatter;
-use PoP\Engine\ModuleFilters\MainContentModule;
+use PoP\Engine\ComponentFilters\MainContentModule;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPCore_ModuleManager_Utils

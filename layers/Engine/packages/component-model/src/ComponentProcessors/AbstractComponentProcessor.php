@@ -14,8 +14,8 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ModuleFieldInterfa
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\HelperServices\DataloadHelperServiceInterface;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\ComponentFilters\ModulePaths;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface;
@@ -44,7 +44,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
-    private ?ModuleFilterManagerInterface $moduleFilterManager = null;
+    private ?ComponentFilterManagerInterface $moduleFilterManager = null;
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
@@ -68,13 +68,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         return $this->modulePathHelpers ??= $this->instanceManager->getInstance(ModulePathHelpersInterface::class);
     }
-    final public function setModuleFilterManager(ModuleFilterManagerInterface $moduleFilterManager): void
+    final public function setComponentFilterManager(ComponentFilterManagerInterface $moduleFilterManager): void
     {
         $this->moduleFilterManager = $moduleFilterManager;
     }
-    final protected function getModuleFilterManager(): ModuleFilterManagerInterface
+    final protected function getComponentFilterManager(): ComponentFilterManagerInterface
     {
-        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
+        return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ComponentFilterManagerInterface::class);
     }
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
@@ -192,10 +192,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         // Propagate
         $submodules = $this->getAllSubmodules($componentVariation);
-        $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
+        $submodules = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         if ($submodules) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
             foreach ($submodules as $submodule) {
@@ -213,7 +213,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
-        $this->getModuleFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
 
     public function initModelPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
@@ -640,7 +640,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
         if ($relationalTypeResolver = $this->getProp($componentVariation, $props, 'succeeding-typeResolver')) {
-            $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
+            $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
             foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
@@ -684,7 +684,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             foreach ($submodules as $submodule) {
                 $this->getComponentProcessorManager()->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
             }
-            $this->getModuleFilterManager()->restoreFromPropagation($componentVariation, $props);
+            $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
         }
     }
 
@@ -1113,7 +1113,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
 
         // Exclude the subcomponent modules here
-        $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         if ($submodules = $this->getModulesToPropagateDataProperties($componentVariation)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
@@ -1213,7 +1213,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
-        $this->getModuleFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
 
     protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $componentVariation, array &$props): void
@@ -1238,7 +1238,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $this->getModuleFilterManager()->prepareForPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_modules) {
             $subcomponent_modules_data_properties = array(
                 'data-fields' => array(),
@@ -1281,7 +1281,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 );
             }
         }
-        $this->getModuleFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
 
 

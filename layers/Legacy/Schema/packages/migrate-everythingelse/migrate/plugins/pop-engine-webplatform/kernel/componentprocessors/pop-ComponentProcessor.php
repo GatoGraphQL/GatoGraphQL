@@ -85,7 +85,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
         // component variation
         // methods: map of group => methods
         // next: repeats this sequence down the line for all the component variation's modules
-        if ($priority_jsmethod = $this->getModuleFilteredPagesectionJsmethods($componentVariation, $props)) {
+        if ($priority_jsmethod = $this->getComponentFilteredPagesectionJsmethods($componentVariation, $props)) {
             foreach ($priority_jsmethod as $priority => $jsmethod) {
                 if (!$jsmethod) {
                     continue;
@@ -439,7 +439,7 @@ abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCS
 
         return $ret;
     }
-    protected function getModuleFilteredPagesectionJsmethods(array $componentVariation, array &$props)
+    protected function getComponentFilteredPagesectionJsmethods(array $componentVariation, array &$props)
     {
         $jsmethod = $this->getPagesectionJsmethod($componentVariation, $props);
         $jsmethod = \PoP\Root\App::applyFilters(POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD, $jsmethod, $componentVariation);

@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\Container\CompilerPasses;
 
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
-use PoP\ComponentModel\ModuleFilters\ModuleFilterInterface;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
+use PoP\ComponentModel\ComponentFilters\ComponentFilterInterface;
 use PoP\Root\Container\CompilerPasses\AbstractInjectServiceIntoRegistryCompilerPass;
 
-class RegisterModuleFilterCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
+class RegisterComponentFilterCompilerPass extends AbstractInjectServiceIntoRegistryCompilerPass
 {
     protected function getRegistryServiceDefinition(): string
     {
-        return ModuleFilterManagerInterface::class;
+        return ComponentFilterManagerInterface::class;
     }
     protected function getServiceClass(): string
     {
-        return ModuleFilterInterface::class;
+        return ComponentFilterInterface::class;
     }
     protected function getRegistryMethodCallName(): string
     {
-        return 'addModuleFilter';
+        return 'addComponentFilter';
     }
 }

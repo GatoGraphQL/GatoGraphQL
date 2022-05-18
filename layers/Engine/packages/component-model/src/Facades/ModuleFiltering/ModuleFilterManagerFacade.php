@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\ModuleFiltering;
+namespace PoP\ComponentModel\Facades\ComponentFiltering;
 
 use PoP\Root\App;
-use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
+use PoP\ComponentModel\ComponentFiltering\ComponentFilterManagerInterface;
 
-class ModuleFilterManagerFacade
+class ComponentFilterManagerFacade
 {
-    public static function getInstance(): ModuleFilterManagerInterface
+    public static function getInstance(): ComponentFilterManagerInterface
     {
         /**
-         * @var ModuleFilterManagerInterface
+         * @var ComponentFilterManagerInterface
          */
-        $service = App::getContainer()->get(ModuleFilterManagerInterface::class);
+        $service = App::getContainer()->get(ComponentFilterManagerInterface::class);
         return $service;
     }
 }

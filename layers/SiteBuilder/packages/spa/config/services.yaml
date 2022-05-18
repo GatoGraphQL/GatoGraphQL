@@ -7,5 +7,5 @@ services:
     PoP\SPA\State\:
         resource: '../src/State/*'
 
-    PoP\SPA\ModuleFilters\:
-        resource: '../src/ModuleFilters/*'
+    PoP\SPA\ComponentFilters\:
+        resource: '../src/ComponentFilters/*'

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\Application\ModuleFilters;
+namespace PoP\Application\ComponentFilters;
 
 use PoP\Application\ComponentProcessors\ComponentProcessorInterface;
-use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
+use PoP\ComponentModel\ComponentFilters\AbstractComponentFilter;
 
-class Lazy extends AbstractModuleFilter
+class Lazy extends AbstractComponentFilter
 {
     public function getName(): string
     {

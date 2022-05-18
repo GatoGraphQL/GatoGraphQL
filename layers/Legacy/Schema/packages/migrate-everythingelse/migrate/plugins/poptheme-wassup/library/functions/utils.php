@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
-use PoP\ComponentModel\ModuleFilters\ModulePaths;
+use PoP\ComponentModel\ComponentFilters\ModulePaths;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 class PoPThemeWassup_Utils

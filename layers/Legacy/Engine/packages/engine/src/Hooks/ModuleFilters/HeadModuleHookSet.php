@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\Hooks\ModuleFilters;
+namespace PoP\Engine\Hooks\ComponentFilters;
 
 use PoP\ComponentModel\ModelInstance\ModelInstance;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
-use PoP\Engine\ModuleFilters\HeadModule;
+use PoP\Engine\ComponentFilters\HeadModule;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
