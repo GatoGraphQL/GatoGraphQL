@@ -22,15 +22,15 @@ abstract class PoP_Module_Processor_TypeaheadFormComponentsBase extends PoPEngin
 
     public function getLabel(array $component, array &$props)
     {
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $input = $this->getInputSubmodule($component);
 
         // Because getLabel is used on initModelProps, the structure in $props for the submodule may not be created yet, throwing an error since then it's null
         // Just for this case, pass another array, not $props
         $submodule_props = [];
-        if ($props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {
-            $submodule_props = &$props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
+        if ($props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]) {
+            $submodule_props = &$props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS];
         }
         return $componentprocessor_manager->getProcessor($input)->getLabel($input, $submodule_props);
     }

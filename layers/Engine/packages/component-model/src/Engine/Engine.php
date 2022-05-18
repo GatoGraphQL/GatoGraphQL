@@ -907,7 +907,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
@@ -938,7 +938,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS]);
+            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -957,7 +957,7 @@ class Engine implements EngineInterface
         array &$props
     ): void {
         $processor = $this->getComponentProcessorManager()->getProcessor($component);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
@@ -986,7 +986,7 @@ class Engine implements EngineInterface
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS]);
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$componentFullName][Props::SUBCOMPONENTS]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
@@ -1034,8 +1034,8 @@ class Engine implements EngineInterface
 
     protected function getModulePathKey(array $module_path, array $component): string
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
-        return $moduleFullName . '-' . implode('.', $module_path);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        return $componentFullName . '-' . implode('.', $module_path);
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
@@ -1128,7 +1128,7 @@ class Engine implements EngineInterface
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
             $component = array_pop($module_path);
-            $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+            $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
             $this->getModulePathManager()->setPropagationCurrentPath($module_path);
@@ -1139,7 +1139,7 @@ class Engine implements EngineInterface
                 $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
                 $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
             }
-            $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
+            $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading module depends on mutableonrequest, then skip it

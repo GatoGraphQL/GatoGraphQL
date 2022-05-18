@@ -27,12 +27,12 @@ trait ModulePathProcessorTrait
     {
         $ret = [];
         $key = $this->getModuleHelpers()->getModuleOutputName($component);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
-            if ($module_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
-                $ret[$key] = $module_ret;
+            if ($component_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+                $ret[$key] = $component_ret;
             }
         }
 
@@ -44,18 +44,18 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        $submodules_ret = array();
+        $subcomponents_ret = array();
         foreach ($subComponents as $subComponent) {
-            $submodules_ret = array_merge(
-                $submodules_ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+            $subcomponents_ret = array_merge(
+                $subcomponents_ret,
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
-        if ($submodules_ret) {
+        if ($subcomponents_ret) {
             /** @var ModuleInfo */
             $moduleInfo = App::getModule(Module::class)->getInfo();
             $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
-            $ret[$key][$submodulesOutputProperty] = $submodules_ret;
+            $ret[$key][$submodulesOutputProperty] = $subcomponents_ret;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
@@ -64,7 +64,7 @@ trait ModulePathProcessorTrait
 
     protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
@@ -84,7 +84,7 @@ trait ModulePathProcessorTrait
         foreach ($subComponents as $subComponent) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
@@ -97,15 +97,15 @@ trait ModulePathProcessorTrait
     protected function executeOnSelfAndPropagateToComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $use_component_output_name_as_key = true, $options = array())
     {
         $ret = [];
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
-        $key = $use_component_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($component) : $moduleFullName;
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $key = $use_component_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($component) : $componentFullName;
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
             // Maybe only execute function on the dataloading modules
             if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($component)->startDataloadingSection($component)) {
-                if ($module_ret = $this->$eval_self_fn($component, $props)) {
-                    $ret[$key] = $module_ret;
+                if ($component_ret = $this->$eval_self_fn($component, $props)) {
+                    $ret[$key] = $component_ret;
                 }
             }
         }
@@ -115,18 +115,18 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
-        $submodules_ret = array();
+        $subcomponents_ret = array();
         foreach ($subComponents as $subComponent) {
-            $submodules_ret = array_merge(
-                $submodules_ret,
-                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS])
+            $subcomponents_ret = array_merge(
+                $subcomponents_ret,
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS])
             );
         }
-        if ($submodules_ret) {
+        if ($subcomponents_ret) {
             /** @var ModuleInfo */
             $moduleInfo = App::getModule(Module::class)->getInfo();
             $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
-            $ret[$key][$submodulesOutputProperty] = $submodules_ret;
+            $ret[$key][$submodulesOutputProperty] = $subcomponents_ret;
         }
         $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
@@ -135,7 +135,7 @@ trait ModulePathProcessorTrait
 
     protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $recursive = true)
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $componentFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
         if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
@@ -150,7 +150,7 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         foreach ($subComponents as $subComponent) {
-            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBCOMPONENTS], $recursive);
+            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$componentFullName][Props::SUBCOMPONENTS], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,

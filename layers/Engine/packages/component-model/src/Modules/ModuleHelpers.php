@@ -15,9 +15,9 @@ class ModuleHelpers implements ModuleHelpersInterface
     {
         return ProcessorItemUtils::getItemFullName($component);
     }
-    public function getModuleFromFullName(string $moduleFullName): ?array
+    public function getModuleFromFullName(string $componentFullName): ?array
     {
-        return ProcessorItemUtils::getItemFromFullName($moduleFullName);
+        return ProcessorItemUtils::getItemFromFullName($componentFullName);
     }
     public function getModuleOutputName(array $component): string
     {

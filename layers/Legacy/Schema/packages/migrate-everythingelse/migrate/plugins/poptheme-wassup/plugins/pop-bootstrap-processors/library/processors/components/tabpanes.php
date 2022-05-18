@@ -104,9 +104,9 @@ class PoP_Module_Processor_TabPanes extends PoP_Module_Processor_TabPanelCompone
     public function initModelProps(array $component, array &$props): void
     {
         // The module must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
-        $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
+        $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
         $module_props = array(
-            $moduleFullName => &$props[$moduleFullName],
+            $componentFullName => &$props[$componentFullName],
         );
         switch ($component[1]) {
             case self::COMPONENT_PAGESECTION_ADDONS:

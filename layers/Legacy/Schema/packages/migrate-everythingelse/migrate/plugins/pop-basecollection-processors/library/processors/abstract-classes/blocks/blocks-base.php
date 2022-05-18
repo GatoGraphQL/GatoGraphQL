@@ -139,8 +139,8 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submenu = $this->getSubmenuSubmodule($component)) {
-            $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
-            $submenu_id = $componentprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
+            $componentFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($component);
+            $submenu_id = $componentprocessor_manager->getProcessor($submenu)->getFrontendId($submenu, $props[$componentFullName][\PoP\ComponentModel\Constants\Props::SUBCOMPONENTS]);
             $submenu_target = '#'.$submenu_id.'-xs';
             $this->setProp([PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::COMPONENT_ANCHORCONTROL_SUBMENUTOGGLE_XS], $props, 'submenu-target', $submenu_target);
         }
