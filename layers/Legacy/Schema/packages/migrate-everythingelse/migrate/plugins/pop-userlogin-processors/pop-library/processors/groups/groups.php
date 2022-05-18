@@ -35,8 +35,8 @@ class PoP_Module_Processor_LoginGroups extends PoP_Module_Processor_MultiplesBas
                 $this->appendProp($componentVariation, $props, 'class', 'blockgroup-login');
 
                 // Make the Login Block and others show the submenu
-                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                    $this->setProp([$submodule], $props, 'show-submenu', true);
+                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                    $this->setProp([$subComponentVariation], $props, 'show-submenu', true);
 
                     // Allow to set $props for the extra blocks. Eg: WSL setting the loginBlock for setting the disabled layer
                     $hooks = \PoP\Root\App::applyFilters(

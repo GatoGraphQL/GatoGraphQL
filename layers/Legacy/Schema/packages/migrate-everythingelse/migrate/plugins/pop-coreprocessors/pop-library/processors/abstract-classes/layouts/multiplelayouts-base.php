@@ -37,8 +37,8 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     {
         $ret = parent::getConditionalOnDataFieldSubmodules($componentVariation);
 
-        // The function below returns an array with value => $submodule.
-        // It must be converted to value => [$submodule]
+        // The function below returns an array with value => $subComponentVariation.
+        // It must be converted to value => [$subComponentVariation]
         foreach ($this->getMultipleLayoutSubmodules($componentVariation) as $conditionDataField => $conditionalSubmodule) {
             $ret[] = new ConditionalLeafModuleField(
                 $conditionDataField,

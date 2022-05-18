@@ -33,8 +33,8 @@ class GetPoPDemo_Processors_GroupHooks
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA:
                 // Hide if block is empty
-                foreach ($processor->getSubComponentVariations($componentVariation) as $submodule) {
-                    $processor->setProp([$submodule], $props, 'do-not-render-if-no-results', true);
+                foreach ($processor->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                    $processor->setProp([$subComponentVariation], $props, 'do-not-render-if-no-results', true);
                 }
                 break;
         }

@@ -29,8 +29,8 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         switch ($componentVariation[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
                 if ($target = $this->getProp($componentVariation, $props, 'carousel-target')) {
-                    foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                        $this->setProp([$submodule], $props, 'carousel-target', $target);
+                    foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                        $this->setProp([$subComponentVariation], $props, 'carousel-target', $target);
                     }
                 }
                 break;

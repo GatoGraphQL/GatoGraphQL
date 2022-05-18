@@ -175,8 +175,8 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
         switch ($componentVariation[1]) {
          // Make the frame components have a unique ID
             case self::MODULE_PAGE_FRAMECOMPONENTS:
-                foreach (RequestUtils::getFramecomponentComponentVariations() as $submodule) {
-                    $this->setProp([$submodule], $props, 'unique-frontend-id', true);
+                foreach (RequestUtils::getFramecomponentComponentVariations() as $subComponentVariation) {
+                    $this->setProp([$subComponentVariation], $props, 'unique-frontend-id', true);
                 }
                 break;
         }

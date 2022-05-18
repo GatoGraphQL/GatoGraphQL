@@ -92,22 +92,22 @@ class PoPSP_URE_EM_Module_Processor_SidebarMultiples extends PoP_Module_Processo
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_SIDEBAR => [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR],
                 );
-                $submodule = $inners[$componentVariation[1]];
+                $subComponentVariation = $inners[$componentVariation[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
 
                 // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                $this->appendProp([$submodule], $props, 'class', 'collapse');
+                $this->appendProp([$subComponentVariation], $props, 'class', 'collapse');
                 $this->mergeProp(
-                    [$submodule],
+                    [$subComponentVariation],
                     $props,
                     'params',
                     array(
                         'data-collapse-target' => $mainblock_taget
                     )
                 );
-                $this->mergeJsmethodsProp([$submodule], $props, array('waypointsToggleCollapse'));
+                $this->mergeJsmethodsProp([$subComponentVariation], $props, array('waypointsToggleCollapse'));
                 break;
         }
 

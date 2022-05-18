@@ -62,19 +62,19 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
     {
 
         // All blocks added under the pageSection can have class "pop-outerblock"
-        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-            $this->appendProp([$submodule], $props, 'class', 'pop-outerblock');
+        foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+            $this->appendProp([$subComponentVariation], $props, 'class', 'pop-outerblock');
         }
 
         $topframeoptions = $this->getFrametopoptionsSubmodules($componentVariation);
         $bottomframeoptions = $this->getFramebottomoptionsSubmodules($componentVariation);
-        foreach ($this->getFrameoptionsSubmodules($componentVariation) as $submodule) {
-            $this->appendProp([$submodule], $props, 'class', 'blocksection-controls pull-right');
+        foreach ($this->getFrameoptionsSubmodules($componentVariation) as $subComponentVariation) {
+            $this->appendProp([$subComponentVariation], $props, 'class', 'blocksection-controls pull-right');
 
-            if (in_array($submodule, $topframeoptions)) {
-                $this->appendProp([$submodule], $props, 'class', 'top');
-            } elseif (in_array($submodule, $bottomframeoptions)) {
-                $this->appendProp([$submodule], $props, 'class', 'bottom');
+            if (in_array($subComponentVariation, $topframeoptions)) {
+                $this->appendProp([$subComponentVariation], $props, 'class', 'top');
+            } elseif (in_array($subComponentVariation, $bottomframeoptions)) {
+                $this->appendProp([$subComponentVariation], $props, 'class', 'bottom');
             }
         }
 

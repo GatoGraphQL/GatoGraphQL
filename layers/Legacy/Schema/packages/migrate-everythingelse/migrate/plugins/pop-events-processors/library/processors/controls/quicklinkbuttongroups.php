@@ -35,8 +35,8 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     {
         switch ($componentVariation[1]) {
             case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                    $this->appendProp([$submodule], $props, 'class', 'btn btn-link btn-compact');
+                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                    $this->appendProp([$subComponentVariation], $props, 'class', 'btn btn-link btn-compact');
                 }
                 break;
         }

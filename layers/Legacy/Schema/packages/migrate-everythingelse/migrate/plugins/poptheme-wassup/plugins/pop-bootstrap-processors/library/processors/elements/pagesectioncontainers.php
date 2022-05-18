@@ -33,16 +33,16 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
                     self::MODULE_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_HOLE],
                     self::MODULE_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS],
                 );
-                $submodule = $subComponentVariations[$componentVariation[1]];
+                $subComponentVariation = $subComponentVariations[$componentVariation[1]];
 
                 if ($load_module) {
-                    $ret[] = $submodule;
+                    $ret[] = $subComponentVariation;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
-                        $submodule[0],
-                        $submodule[1],
+                        $subComponentVariation[0],
+                        $subComponentVariation[1],
                         $moduleAtts
                     ];
                 }

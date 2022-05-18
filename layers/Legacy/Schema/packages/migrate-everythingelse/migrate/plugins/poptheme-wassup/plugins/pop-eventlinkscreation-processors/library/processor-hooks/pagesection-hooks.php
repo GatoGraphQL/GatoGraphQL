@@ -22,8 +22,8 @@ class PoP_EventLinksCreation_PageSectionHooks
                         [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_CREATE],
                         [PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_EventLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENTLINK_UPDATE],
                     );
-                    foreach ($subComponentVariations as $submodule) {
-                        $processor->setProp($submodule, $props, 'title', '');
+                    foreach ($subComponentVariations as $subComponentVariation) {
+                        $processor->setProp($subComponentVariation, $props, 'title', '');
                     }
                 }
                 break;

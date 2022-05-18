@@ -137,12 +137,12 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $modulefilter_manager = ComponentFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($componentVariation, $props);
         if ($subComponentVariations = $processor->getModulesToPropagateDataProperties($componentVariation)) {
-            foreach ($subComponentVariations as $submodule) {
-                $submodule_processor = $componentprocessor_manager->getProcessor($submodule);
+            foreach ($subComponentVariations as $subComponentVariation) {
+                $submodule_processor = $componentprocessor_manager->getProcessor($subComponentVariation);
 
                 // Propagate only if the submodule start a new dataloading section. If it does, this is the end of the data line
-                if (!$submodule_processor->startDataloadingSection($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
-                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($submodule))->$propagate_fn($submodule, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                if (!$submodule_processor->startDataloadingSection($subComponentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
+                    if ($submodule_ret = $pop_module_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($subComponentVariation))->$propagate_fn($subComponentVariation, $props[$moduleFullName][\PoP\ComponentModel\Constants\Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,

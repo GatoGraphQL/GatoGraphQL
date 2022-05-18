@@ -99,8 +99,8 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
             case self::MODULE_MULTICOMPONENT_USEROPTIONS:
             case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
                 $this->appendProp($componentVariation, $props, 'class', 'options-group');
-                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                    $this->appendProp([$submodule], $props, 'class', 'inline');
+                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                    $this->appendProp([$subComponentVariation], $props, 'class', 'inline');
                 }
                 break;
         }

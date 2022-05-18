@@ -20,11 +20,11 @@ trait FilterDataComponentProcessorTrait
     public function filterHeadmoduleDataloadQueryArgs(array $componentVariation, array &$query, array $source = null): void
     {
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation, $source)) {
-            foreach ($activeDataloadQueryArgsFilteringModules as $submodule) {
+            foreach ($activeDataloadQueryArgsFilteringModules as $subComponentVariation) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($submodule);
-                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($submodule, $source);
-                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($submodule)) {
+                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponentVariation, $source);
+                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subComponentVariation)) {
                     /** @var FilterInputProcessorInterface */
                     $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
                     $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);

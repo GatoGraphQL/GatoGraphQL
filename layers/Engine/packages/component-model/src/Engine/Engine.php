@@ -937,8 +937,8 @@ class Engine implements EngineInterface
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
-            $this->addInterreferencedComponentVariationFullPaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
+        foreach ($subComponentVariations as $subComponentVariation) {
+            $this->addInterreferencedComponentVariationFullPaths($paths, $submodule_path, $subComponentVariation, $props[$moduleFullName][Props::SUBMODULES]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
@@ -985,8 +985,8 @@ class Engine implements EngineInterface
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $submodule, $props[$moduleFullName][Props::SUBMODULES]);
+        foreach ($subComponentVariations as $subComponentVariation) {
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponentVariation, $props[$moduleFullName][Props::SUBMODULES]);
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
     }
@@ -1002,9 +1002,9 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
-        foreach ($module_path as $submodule) {
+        foreach ($module_path as $subComponentVariation) {
             // Notice that when generating the array for the response, we don't use $componentVariation anymore, but $moduleOutputName
-            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($submodule);
+            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponentVariation);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$submoduleOutputName][$submodulesOutputProperty])) {
@@ -1135,8 +1135,8 @@ class Engine implements EngineInterface
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
-            foreach ($module_path as $submodule) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
+            foreach ($module_path as $subComponentVariation) {
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
                 $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
             }
             $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
@@ -1164,8 +1164,8 @@ class Engine implements EngineInterface
             // The $props is directly moving the array to the corresponding path
             $props = &$root_props;
             $model_props = &$root_model_props;
-            foreach ($module_path as $submodule) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
+            foreach ($module_path as $subComponentVariation) {
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
                 $props = &$props[$submoduleFullName][Props::SUBMODULES];
                 $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
             }
@@ -1332,8 +1332,8 @@ class Engine implements EngineInterface
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
-                    foreach ($referencer_modulepath as $submodule) {
-                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($submodule);
+                    foreach ($referencer_modulepath as $subComponentVariation) {
+                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
                         $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBMODULES];
                         $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBMODULES];
                     }
@@ -2462,8 +2462,8 @@ class Engine implements EngineInterface
                 $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
                 // Advance the position of the array into the current module
-                foreach ($module_path as $submodule) {
-                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($submodule);
+                foreach ($module_path as $subComponentVariation) {
+                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponentVariation);
                     $moduledata[$submoduleOutputName][$submodulesOutputProperty] = $moduledata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
                     $moduledata = &$moduledata[$submoduleOutputName][$submodulesOutputProperty];
                 }

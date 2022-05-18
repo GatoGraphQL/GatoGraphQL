@@ -38,8 +38,8 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
     {
         switch ($componentVariation[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
-                foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                    $this->appendProp([$submodule], $props, 'class', 'inline');
+                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                    $this->appendProp([$subComponentVariation], $props, 'class', 'inline');
                 }
                 break;
         }

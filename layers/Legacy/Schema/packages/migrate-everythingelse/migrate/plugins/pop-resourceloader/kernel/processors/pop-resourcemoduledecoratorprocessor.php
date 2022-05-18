@@ -80,9 +80,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
+        foreach ($subComponentVariations as $subComponentVariation) {
 
-            if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getComponentProcessordecorator($subComponentVariation)->getDynamicResourcesMergedmoduletree($subComponentVariation, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -113,9 +113,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //         $ret[$componentVariation[1]] = $resources;
     //     }
 
-    //     foreach ($this->getDecoratedcomponentProcessor($componentVariation)->get_descendant_modules_to_propagate($componentVariation) as $submodule) {
+    //     foreach ($this->getDecoratedcomponentProcessor($componentVariation)->get_descendant_modules_to_propagate($componentVariation) as $subComponentVariation) {
 
-    //         if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+    //         if ($submodule_ret = $this->getComponentProcessordecorator($subComponentVariation)->getModulesResources($subComponentVariation, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -156,9 +156,9 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $modulefilter_manager->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
+        foreach ($subComponentVariations as $subComponentVariation) {
 
-            if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getComponentProcessordecorator($subComponentVariation)->getDynamicTemplateResourcesMergedmoduletree($subComponentVariation, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(

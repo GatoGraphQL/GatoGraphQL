@@ -198,19 +198,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         if ($subComponentVariations) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
-            foreach ($subComponentVariations as $submodule) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($submodule);
+            foreach ($subComponentVariations as $subComponentVariation) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
                 $submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
                 // If the submodule belongs to the same dataset, then set the shared attributies for the same-dataset modules
-                if (!$submodule_processor->startDataloadingSection($submodule)) {
+                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
                     $submodule_wildcard_props_to_propagate = array_merge(
                         $submodule_wildcard_props_to_propagate,
                         $get_props_for_descendant_datasetmodules_fn($componentVariation, $module_props)
                     );
                 }
 
-                $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
+                $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
@@ -256,8 +256,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
         if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all submodules, and the explicit one (or get the default one for "*") for relational objects
-            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                $this->setProp($submodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
+            foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                $this->setProp($subComponentVariation, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
             foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
@@ -650,8 +650,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 // Only modules which do not load data
                 $subcomponent_modules = array_filter(
                     $relationalModuleField->getNestedComponentVariations(),
-                    function ($submodule) {
-                        return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
+                    function ($subComponentVariation) {
+                        return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
                     }
                 );
                 foreach ($subcomponent_modules as $subcomponent_module) {
@@ -667,8 +667,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     // Only modules which do not load data
                     $subcomponent_modules = array_filter(
                         $relationalModuleField->getNestedComponentVariations(),
-                        function ($submodule) {
-                            return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
+                        function ($subComponentVariation) {
+                            return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
                         }
                     );
                     foreach ($subcomponent_modules as $subcomponent_module) {
@@ -678,11 +678,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Only modules which do not load data
-            $subComponentVariations = array_filter($this->getSubComponentVariations($componentVariation), function ($submodule) {
-                return !$this->getComponentProcessorManager()->getProcessor($submodule)->startDataloadingSection($submodule);
+            $subComponentVariations = array_filter($this->getSubComponentVariations($componentVariation), function ($subComponentVariation) {
+                return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
             });
-            foreach ($subComponentVariations as $submodule) {
-                $this->getComponentProcessorManager()->getProcessor($submodule)->addToDatasetDatabaseKeys($submodule, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
+            foreach ($subComponentVariations as $subComponentVariation) {
+                $this->getComponentProcessorManager()->getProcessor($subComponentVariation)->addToDatasetDatabaseKeys($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
             }
             $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
         }
@@ -865,12 +865,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         // $this->flattenDatasetmoduletreeComponentVariations(__FUNCTION__, $ret, $componentVariation);
         // Exclude the subcomponent modules here
         if ($subComponentVariations = $this->getModulesToPropagateDataProperties($componentVariation)) {
-            foreach ($subComponentVariations as $submodule) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($submodule);
+            foreach ($subComponentVariations as $subComponentVariation) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                if (!$submodule_processor->startDataloadingSection($submodule)) {
-                    $submodule_processor->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $submodule);
+                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
+                    $submodule_processor->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $subComponentVariation);
                 }
             }
         }
@@ -880,12 +880,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // {
     //     // Exclude the subcomponent modules here
     //     if ($subComponentVariations = $this->getModulesToPropagateDataProperties($componentVariation)) {
-    //         foreach ($subComponentVariations as $submodule) {
-    //             $submodule_processor = $this->getComponentProcessorManager()->getProcessor($submodule);
+    //         foreach ($subComponentVariations as $subComponentVariation) {
+    //             $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
 
     //             // Propagate only if the submodule doesn't have a typeResolver. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-    //             if (!$submodule_processor->startDataloadingSection($submodule)) {
-    //                 if ($submodule_ret = $submodule_processor->$propagate_fn($submodule)) {
+    //             if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
+    //                 if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation)) {
     //                     $ret = array_merge(
     //                         $ret,
     //                         $submodule_ret
@@ -1148,12 +1148,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             array_splice($conditionalSubmodules, $i, 1);
                         }
                     }
-                    foreach ($conditionalSubmodules as $submodule) {
-                        $submodule_processor = $this->getComponentProcessorManager()->getProcessor($submodule);
+                    foreach ($conditionalSubmodules as $subComponentVariation) {
+                        $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                        if (!$submodule_processor->startDataloadingSection($submodule)) {
-                            if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
+                        if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
+                            if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($submodule_ret['data-fields'] ?? null) {
@@ -1193,12 +1193,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             }
 
             // Second step: all the other submodules can be calculated directly
-            foreach ($subComponentVariations as $submodule) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($submodule);
+            foreach ($subComponentVariations as $subComponentVariation) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                if (!$submodule_processor->startDataloadingSection($submodule)) {
-                    if ($submodule_ret = $submodule_processor->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])) {
+                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
+                    if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,

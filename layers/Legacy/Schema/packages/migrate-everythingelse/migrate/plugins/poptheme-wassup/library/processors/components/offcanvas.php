@@ -48,16 +48,16 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     self::MODULE_OFFCANVAS_NAVIGATOR => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_NAVIGATOR],
                     self::MODULE_OFFCANVAS_BODY => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODY],
                 );
-                $submodule = $subComponentVariations[$componentVariation[1]];
+                $subComponentVariation = $subComponentVariations[$componentVariation[1]];
 
                 if ($load_module) {
-                    $ret[] = $submodule;
+                    $ret[] = $subComponentVariation;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
-                        $submodule[0],
-                        $submodule[1],
+                        $subComponentVariation[0],
+                        $subComponentVariation[1],
                         $moduleAtts
                     ];
                 }
@@ -78,16 +78,16 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
                     self::MODULE_OFFCANVAS_BODYTABS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYTABS],
                     self::MODULE_OFFCANVAS_BODYSIDEINFO => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_BODYSIDEINFO],
                 );
-                $submodule = $subComponentVariations[$componentVariation[1]];
+                $subComponentVariation = $subComponentVariations[$componentVariation[1]];
 
                 if ($load_module) {
-                    $ret[] = $submodule;
+                    $ret[] = $subComponentVariation;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
-                        $submodule[0],
-                        $submodule[1],
+                        $subComponentVariation[0],
+                        $subComponentVariation[1],
                         $moduleAtts
                     ];
                 }

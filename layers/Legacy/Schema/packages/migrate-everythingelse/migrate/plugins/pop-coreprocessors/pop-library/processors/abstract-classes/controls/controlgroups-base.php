@@ -10,8 +10,8 @@ abstract class PoP_Module_Processor_ControlGroupsBase extends PoPEngine_QueryDat
     public function initModelProps(array $componentVariation, array &$props): void
     {
         if ($blocktarget = $this->getProp($componentVariation, $props, 'control-target')) {
-            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                $this->setProp([$submodule], $props, 'control-target', $blocktarget);
+            foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                $this->setProp([$subComponentVariation], $props, 'control-target', $blocktarget);
             }
         }
 

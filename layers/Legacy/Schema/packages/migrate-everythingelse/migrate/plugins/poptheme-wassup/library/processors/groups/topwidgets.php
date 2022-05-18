@@ -180,8 +180,8 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
                     ),
                 );
-                foreach ($label_submodules_set[$componentVariation[1]] as $submodule) {
-                    $this->setProp([$submodule], $props, 'target-id', $collapsible_frontend_id);
+                foreach ($label_submodules_set[$componentVariation[1]] as $subComponentVariation) {
+                    $this->setProp([$subComponentVariation], $props, 'target-id', $collapsible_frontend_id);
                 }
                 break;
         }

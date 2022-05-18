@@ -23,8 +23,8 @@ class PoPTheme_Wassup_ContentPostLinksProcessors_PageSectionHooks
                         [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_CONTENTPOSTLINK_UPDATE],
                     );
                 }
-                foreach ($subComponentVariations as $submodule) {
-                    $processor->setProp($submodule, $props, 'title', '');
+                foreach ($subComponentVariations as $subComponentVariation) {
+                    $processor->setProp($subComponentVariation, $props, 'title', '');
                 }
                 break;
         }

@@ -49,8 +49,8 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $submodule = $this->getInnerSubmodule($componentVariation);
-                $this->setProp([$submodule], $props, 'title-htmltag', 'h2');
+                $subComponentVariation = $this->getInnerSubmodule($componentVariation);
+                $this->setProp([$subComponentVariation], $props, 'title-htmltag', 'h2');
                 break;
         }
 
@@ -65,11 +65,11 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $submodule = $this->getInnerSubmodule($componentVariation);
+                $subComponentVariation = $this->getInnerSubmodule($componentVariation);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
                 $title = getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
-                $this->setProp([$submodule], $props, 'title', $title);
+                $this->setProp([$subComponentVariation], $props, 'title', $title);
                 break;
         }
 

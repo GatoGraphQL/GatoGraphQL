@@ -5,17 +5,17 @@ use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
 {
-    public function isSubmoduleActivePanel(array $componentVariation, $submodule)
+    public function isSubmoduleActivePanel(array $componentVariation, $subComponentVariation)
     {
-        return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($componentVariation, $submodule);
+        return \PoP\Root\App::getState('format') == $this->getSubmoduleFormat($componentVariation, $subComponentVariation);
     }
 
-    protected function getSubmoduleFormat(array $componentVariation, $submodule)
+    protected function getSubmoduleFormat(array $componentVariation, $subComponentVariation)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($submodule);
+        $processor = $componentprocessor_manager->getProcessor($subComponentVariation);
         if ($processor instanceof FormattableModuleInterface) {
-            return $processor->getFormat($submodule);
+            return $processor->getFormat($subComponentVariation);
         }
     
         return null;
@@ -29,9 +29,9 @@ trait FormatActiveTrait
     public function getDefaultActivepanelSubmodule(array $componentVariation)
     {
         if ($default_format = $this->getDefaultActivepanelFormat($componentVariation)) {
-            foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
-                if ($default_format == $this->getSubmoduleFormat($componentVariation, $submodule)) {
-                    return $submodule;
+            foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+                if ($default_format == $this->getSubmoduleFormat($componentVariation, $subComponentVariation)) {
+                    return $subComponentVariation;
                 }
             }
         }

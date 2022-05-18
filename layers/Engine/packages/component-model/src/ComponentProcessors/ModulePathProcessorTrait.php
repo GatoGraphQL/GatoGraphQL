@@ -37,18 +37,18 @@ trait ModulePathProcessorTrait
         }
 
         // Stop iterating when the submodule starts a new cycle of loading data
-        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($submodule) {
-            return !$this->getComponentProcessor($submodule)->startDataloadingSection($submodule);
+        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($subComponentVariation) {
+            return !$this->getComponentProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
         });
         $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         $submodules_ret = array();
-        foreach ($subComponentVariations as $submodule) {
+        foreach ($subComponentVariations as $subComponentVariation) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         if ($submodules_ret) {
@@ -74,17 +74,17 @@ trait ModulePathProcessorTrait
         }
 
         // Stop iterating when the submodule starts a new cycle of loading data
-        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($submodule) {
-            return !$this->getComponentProcessor($submodule)->startDataloadingSection($submodule);
+        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($subComponentVariation) {
+            return !$this->getComponentProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
         });
         $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
+        foreach ($subComponentVariations as $subComponentVariation) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
@@ -116,10 +116,10 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
         $submodules_ret = array();
-        foreach ($subComponentVariations as $submodule) {
+        foreach ($subComponentVariations as $subComponentVariation) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])
+                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])
             );
         }
         if ($submodules_ret) {
@@ -149,8 +149,8 @@ trait ModulePathProcessorTrait
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
         $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $submodule) {
-            $submodule_ret = $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $recursive);
+        foreach ($subComponentVariations as $subComponentVariation) {
+            $submodule_ret = $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,

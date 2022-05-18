@@ -30,8 +30,8 @@ class PoPTheme_Wassup_ApplicationProcessors_PageSectionHooks
                         )
                     );
                 }
-                foreach ($subComponentVariations as $submodule) {
-                    $processor->setProp($submodule, $props, 'title', '');
+                foreach ($subComponentVariations as $subComponentVariation) {
+                    $processor->setProp($subComponentVariation, $props, 'title', '');
                 }
                 break;
         }

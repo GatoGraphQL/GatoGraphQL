@@ -94,21 +94,21 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     $this->getSubComponentVariations($componentVariation),
                     $this->getPermanentSubmodules($componentVariation)
                 );
-                foreach ($subComponentVariations as $submodule) {
+                foreach ($subComponentVariations as $subComponentVariation) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
                     // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                    $this->appendProp([$submodule], $props, 'class', 'collapse');
+                    $this->appendProp([$subComponentVariation], $props, 'class', 'collapse');
                     $this->mergeProp(
-                        [$submodule],
+                        [$subComponentVariation],
                         $props,
                         'params',
                         array(
                             'data-collapse-target' => $mainblock_taget
                         )
                     );
-                    $this->mergeJsmethodsProp([$submodule], $props, array('waypointsToggleCollapse'));
+                    $this->mergeJsmethodsProp([$subComponentVariation], $props, array('waypointsToggleCollapse'));
                 }
                 break;
         }

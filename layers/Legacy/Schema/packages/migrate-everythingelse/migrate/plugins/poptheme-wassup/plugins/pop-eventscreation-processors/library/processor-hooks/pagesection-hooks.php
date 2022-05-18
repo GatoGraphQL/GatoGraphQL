@@ -22,8 +22,8 @@ class PoP_EventsCreation_PageSectionHooks
                         [GD_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENT_CREATE],
                         [GD_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_EVENT_UPDATE],
                     );
-                    foreach ($subComponentVariations as $submodule) {
-                        $processor->setProp($submodule, $props, 'title', '');
+                    foreach ($subComponentVariations as $subComponentVariation) {
+                        $processor->setProp($subComponentVariation, $props, 'title', '');
                     }
                 }
                 break;

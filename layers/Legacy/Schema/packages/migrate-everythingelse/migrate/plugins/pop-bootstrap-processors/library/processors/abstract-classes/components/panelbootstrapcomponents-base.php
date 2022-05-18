@@ -47,9 +47,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         $ret = array();
 
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
+        // foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
 
-        //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
+        //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
         //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($componentVariation, $props), $this->getBootstrapcomponentType($componentVariation));
         //     $ret[$submoduleOutputName]['data-initjs-targets'] = sprintf(
         //         '%s > %s',
@@ -80,9 +80,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     //     $ret = array();
 
-    //     foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
+    //     foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
 
-    //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
+    //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
     //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($componentVariation, $props), $this->getBootstrapcomponentType($componentVariation));
     //         $ret[] = sprintf(
     //             '%s > %s > %s',
@@ -100,16 +100,16 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return array();
     }
 
-    public function isSubmoduleActivePanel(array $componentVariation, $submodule)
+    public function isSubmoduleActivePanel(array $componentVariation, $subComponentVariation)
     {
         return false;
     }
     public function getActivepanelSubmodule(array $componentVariation)
     {
         $subComponentVariations = $this->getSubComponentVariations($componentVariation);
-        foreach ($subComponentVariations as $submodule) {
-            if ($this->isSubmoduleActivePanel($componentVariation, $submodule)) {
-                return $submodule;
+        foreach ($subComponentVariations as $subComponentVariation) {
+            if ($this->isSubmoduleActivePanel($componentVariation, $subComponentVariation)) {
+                return $subComponentVariation;
             }
         }
 
@@ -149,9 +149,9 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = array();
 
-        foreach ($this->getSubComponentVariations($componentVariation) as $submodule) {
+        foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
             $ret[] = [
-                'header-submodule' => $submodule,
+                'header-submodule' => $subComponentVariation,
             ];
         }
 
@@ -170,7 +170,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // return $componentprocessor_manager->getProcessor($submodule)->getTitle($submodule, $props);
+        // return $componentprocessor_manager->getProcessor($subComponentVariation)->getTitle($subComponentVariation, $props);
         return array();
     }
     public function getPanelheaderClass(array $componentVariation)
@@ -332,8 +332,8 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
                     $active_submodule
                 )
             );
-            foreach ($inactive_submodules as $submodule) {
-                $this->setProp([$submodule], $props, 'skip-data-load', true);
+            foreach ($inactive_submodules as $subComponentVariation) {
+                $this->setProp([$subComponentVariation], $props, 'skip-data-load', true);
             }
         }
 
