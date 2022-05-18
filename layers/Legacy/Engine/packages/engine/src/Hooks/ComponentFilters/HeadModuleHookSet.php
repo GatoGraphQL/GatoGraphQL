@@ -42,7 +42,7 @@ class HeadModuleHookSet extends AbstractHookSet
     
     public function maybeAddComponent($components)
     {
-        if (App::getState('modulefilter') === $this->headModule->getName()) {
+        if (App::getState('componentFilter') === $this->headModule->getName()) {
             if ($headmodule = App::getState('headmodule')) {
                 $components[] = $this->getTranslationAPI()->__('head module:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headmodule);
             }

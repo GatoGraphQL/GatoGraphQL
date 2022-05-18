@@ -95,8 +95,8 @@ class ModelInstance implements ModelInstanceInterface
         if ($actions = App::getState('actions')) {
             $components[] = $this->__('actions:', 'component-model') . implode(';', $actions);
         }
-        if ($modulefilter = App::getState('modulefilter')) {
-            $components[] = $this->__('module filter:', 'component-model') . $modulefilter;
+        if ($componentFilter = App::getState('componentFilter')) {
+            $components[] = $this->__('module filter:', 'component-model') . $componentFilter;
         }
 
         // Can the configuration change when doing a POST or GET?

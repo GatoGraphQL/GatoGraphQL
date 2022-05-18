@@ -4,7 +4,7 @@ use PoP\Root\Routing\RequestNature;
 
 class PoP_SPAResourceLoader_FrontEndEngine_NatureResources extends PoP_ResourceLoader_NatureResources_ProcessorBase
 {
-    public function addGenericNatureResources(&$resources, $modulefilter, $options)
+    public function addGenericNatureResources(&$resources, $componentFilter, $options)
     {
                 
         // The Initial Loaders page is a particular case:
@@ -20,7 +20,7 @@ class PoP_SPAResourceLoader_FrontEndEngine_NatureResources extends PoP_ResourceL
                 $components = array(
                     'target' => $target,
                 );
-                PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, $ids, $merge, $components, $options);
+                PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($componentFilter, $resources, $nature, $ids, $merge, $components, $options);
             }
         }
     }

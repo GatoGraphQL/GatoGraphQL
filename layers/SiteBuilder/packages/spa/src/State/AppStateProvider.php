@@ -27,7 +27,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function consolidate(array &$state): void
     {
-        $state['fetching-site'] = $state['modulefilter'] === null;
+        $state['fetching-site'] = $state['componentFilter'] === null;
         $state['loading-site'] = $state['fetching-site'] && $state['output'] === Outputs::HTML;
 
         // Settings format: the format set by the application when first visiting it, configurable by the user

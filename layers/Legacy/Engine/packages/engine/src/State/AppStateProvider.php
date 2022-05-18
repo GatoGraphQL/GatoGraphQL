@@ -76,7 +76,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
     public function augment(array &$state): void
     {
-        if ($state['modulefilter'] === null) {
+        if ($state['componentFilter'] === null) {
             return;
         }
 
@@ -84,14 +84,14 @@ class AppStateProvider extends AbstractAppStateProvider
         $rootModuleConfiguration = App::getModule(RootModule::class)->getConfiguration();
         $enablePassingStateViaRequest = $rootModuleConfiguration->enablePassingStateViaRequest();
 
-        if ($state['modulefilter'] === $this->headModule->getName()) {
+        if ($state['componentFilter'] === $this->headModule->getName()) {
             if ($enablePassingStateViaRequest) {
                 if ($headmodule = Request::getHeadModule()) {
                     $state['headmodule'] = $this->getModuleHelpers()->getModuleFromOutputName($headmodule);
                 }
             }
         }
-        if ($state['modulefilter'] === $this->componentPaths->getName()) {
+        if ($state['componentFilter'] === $this->componentPaths->getName()) {
             if ($enablePassingStateViaRequest) {
                 $state['componentPaths'] = $this->getModulePathHelpers()->getModulePaths();
             }
@@ -99,7 +99,7 @@ class AppStateProvider extends AbstractAppStateProvider
         // Function `getRoutingComponentByMostAllMatchingStateProperties` actually needs to access all values in $state
         // Hence, calculate only at the very end
         // If filtering module by "maincontent", then calculate which is the main content module
-        if ($state['modulefilter'] === $this->mainContentModule->getName()) {
+        if ($state['componentFilter'] === $this->mainContentModule->getName()) {
             $state['maincontentmodule'] = $this->getComponentRoutingProcessorManager()->getRoutingComponentByMostAllMatchingStateProperties(\POP_PAGECOMPONENTGROUPPLACEHOLDER_MAINCONTENTCOMPONENT);
         }
     }

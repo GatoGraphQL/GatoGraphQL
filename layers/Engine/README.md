@@ -102,7 +102,7 @@ Hence, in PoP everything is a component, and the top-most component represents t
 
 **2. The component is its own API**
 
-Every component, at whichever level inside the component hierarchy (i.e. the composition of components starting from the top-most, all the way down to the last level), is independently accessible simply by passing along its component path in the URL: `/page-url/?output=json&componentfilter=componentpaths&componentpaths[]=path-to-the-component`
+Every component, at whichever level inside the component hierarchy (i.e. the composition of components starting from the top-most, all the way down to the last level), is independently accessible simply by passing along its component path in the URL: `/page-url/?output=json&componentFilter=componentpaths&componentpaths[]=path-to-the-component`
 <!--
 **3. The API and the application use the same code**
 

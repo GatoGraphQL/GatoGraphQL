@@ -48,7 +48,7 @@ class AppStateProvider extends AbstractAppStateProvider
 
         $state['only-fieldname-as-outputkey'] = false;
 
-        $state['modulefilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
+        $state['componentFilter'] = $this->getComponentFilterManager()->getSelectedComponentFilterName();
         $state['variables'] = $this->getFieldQueryInterpreter()->getVariablesFromRequest();
 
         /** @var RootModuleConfiguration */

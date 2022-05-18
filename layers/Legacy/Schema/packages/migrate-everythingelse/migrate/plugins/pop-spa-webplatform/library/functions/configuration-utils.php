@@ -13,7 +13,7 @@ class PoP_SPAWebPlatform_ConfigurationUtils
         foreach (PoP_SPA_ConfigurationUtils::getBackgroundloadRouteConfigurations() as $route => $configuration) {
             $url = RouteUtils::getRouteURL($route);
 
-            // If preloading (eg: INITIALFRAMES) then add the action=preload and modulefilter=page URL parameters
+            // If preloading (eg: INITIALFRAMES) then add the action=preload and componentFilter=page URL parameters
             if ($configuration['preload'] ?? null) {
                 $instanceManager = InstanceManagerFacade::getInstance();
                 /** @var Page */

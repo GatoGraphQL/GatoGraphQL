@@ -75,7 +75,7 @@ class ComponentFilterManager implements ComponentFilterManagerInterface
         if ($this->selected_filter_name) {
             $this->selected_filter = $this->componentfilters[$this->selected_filter_name];
 
-            // Initialize only if we are intending to filter components. This way, passing componentfilter=somewrongpath will return an empty array, meaning to not render anything
+            // Initialize only if we are intending to filter components. This way, passing componentFilter=somewrongpath will return an empty array, meaning to not render anything
             $this->not_excluded_component_sets = $this->not_excluded_component_sets_as_string = array();
         }
         $this->initialized = true;

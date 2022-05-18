@@ -5,7 +5,7 @@ class PoP_ResourceLoader_StorageGenerator {
     // Generate and Save the file containing what resources/bundle/bundlegroups were generated for each model_instance_id
     public function generate() {
         
-        // modulefilter is null => loadingSite
+        // componentFilter is null => loadingSite
         $resource_mapping = PoP_ResourceLoader_FileReproduction_Utils::getResourceMapping(null);
 
         // Save the bundle-ids under their model_instance_id, so no need to calculate it again when accessing a page

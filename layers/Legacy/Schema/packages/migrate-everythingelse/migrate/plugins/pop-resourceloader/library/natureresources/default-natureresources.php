@@ -37,7 +37,7 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
         return $options;
     }
 
-    public function addHomeResources(&$resources, $modulefilter, $options)
+    public function addHomeResources(&$resources, $componentFilter, $options)
     {
         $nature = RequestNature::HOME;
         $options = $this->maybeAddExtraVars($options, $nature);
@@ -51,22 +51,22 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             POP_RESOURCELOADERCONFIGURATION_HOME_FEED
         );
         if ($scheme == POP_RESOURCELOADERCONFIGURATION_HOME_FEED) {
-            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, array(), false, $options);
+            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, array(), false, $options);
         } elseif ($scheme == POP_RESOURCELOADERCONFIGURATION_HOME_STATIC) {
             // Add a single item
-            PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, array(), false, array(), $options);
+            PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($componentFilter, $resources, $nature, array(), false, array(), $options);
         }
     }
 
-    public function add404Resources(&$resources, $modulefilter, $options)
+    public function add404Resources(&$resources, $componentFilter, $options)
     {
         $nature = RequestNature::NOTFOUND;
         $options = $this->maybeAddExtraVars($options, $nature);
 
-        PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($modulefilter, $resources, $nature, array(), false, array(), $options);
+        PoP_ResourceLoaderProcessorUtils::addResourcesFromCurrentVars($componentFilter, $resources, $nature, array(), false, array(), $options);
     }
 
-    public function addTagResources(&$resources, $modulefilter, $options)
+    public function addTagResources(&$resources, $componentFilter, $options)
     {
 
         // Get any one tag from the DB
@@ -79,11 +79,11 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             $nature = TagRequestNature::TAG;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
-            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, false, $options);
+            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, $ids, false, $options);
         }
     }
 
-    public function addAuthorResources(&$resources, $modulefilter, $options)
+    public function addAuthorResources(&$resources, $componentFilter, $options)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         // The author is a special case: different roles will have different configurations
@@ -134,11 +134,11 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
             $merge = true;
             $options = $this->maybeAddExtraVars($options, $nature, $ids);
 
-            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
+            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, $ids, $merge, $options);
         }
     }
 
-    public function addSingleResources(&$resources, $modulefilter, $options)
+    public function addSingleResources(&$resources, $componentFilter, $options)
     {
         $nature = CustomPostRequestNature::CUSTOMPOST;
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -220,23 +220,23 @@ class PoP_ResourceLoader_NatureResources_DefaultResources extends PoP_ResourceLo
                     $unique_path_ids[] =  $post_path_ids[0];
                 } else {
                     $merge = true;
-                    PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $post_path_ids, $merge, $options);
+                    PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, $post_path_ids, $merge, $options);
                 }
             }
 
             if ($unique_path_ids) {
                 $merge = false;
-                PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
+                PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, $ids, $merge, $options);
             }
         }
     }
 
-    public function addPageResources(&$resources, $modulefilter, $options)
+    public function addPageResources(&$resources, $componentFilter, $options)
     {
         $nature = PageRequestNature::PAGE;
         $options = $this->maybeAddExtraVars($options, $nature);
 
-        PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, array(), false, $options);
+        PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, array(), false, $options);
     }
 }
 

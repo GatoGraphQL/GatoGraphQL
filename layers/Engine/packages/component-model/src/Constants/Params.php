@@ -17,7 +17,7 @@ class Params
     public final const DATA_SOURCE = 'datasource';
     public final const EXTRA_ROUTES = 'extraroutes';
     public final const OUTPUT = 'output';
-    public final const COMPONENTFILTER = 'componentfilter';
+    public final const COMPONENTFILTER = 'componentFilter';
     public final const COMPONENTPATHS = 'componentPaths';
 
     /**

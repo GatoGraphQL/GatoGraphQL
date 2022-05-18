@@ -418,7 +418,7 @@ GET - /url-of-the-page/?output=json
 
 Every component can interact with itself from client to server just by adding its component path to the webpage URL in which it has been included. This way, when creating a component, we don't need to create an API to go alongside with it (such as REST or GraphQL), because the component is already able to talk to itself in the server and load its own data: it is completely autonomous and self-serving. 
 
-This is accomplished by allowing to select what component paths (i.e. the path to a specific component starting from the top-most component) will be included in the response, so as to load data only starting from that level, and ignore anything above that level. This is done through adding parameters `componentfilter=componentpaths` and `componentpaths[]=path-to-the-component` to the URL (we use `componentpaths[]` instead of `componentpaths` for versatility, so that we can include more than one component path in a single request). The value for the `componentpaths[]` parameter is a list of components separated by dots. Hence, fetching data for component "component5", located under `component1 => component2 => component5`, is done by adding parameter `componentpaths[]=component1.component2.component5` to the URL. 
+This is accomplished by allowing to select what component paths (i.e. the path to a specific component starting from the top-most component) will be included in the response, so as to load data only starting from that level, and ignore anything above that level. This is done through adding parameters `componentFilter=componentpaths` and `componentpaths[]=path-to-the-component` to the URL (we use `componentpaths[]` instead of `componentpaths` for versatility, so that we can include more than one component path in a single request). The value for the `componentpaths[]` parameter is a list of components separated by dots. Hence, fetching data for component "component5", located under `component1 => component2 => component5`, is done by adding parameter `componentpaths[]=component1.component2.component5` to the URL. 
 
 For instance, in the following component hierarchy every component is loading data, hence every level has an entry `dbobjectids`:
 
@@ -440,7 +440,7 @@ For instance, in the following component hierarchy every component is loading da
               dbobjectids: [...]
 ```
 
-Then requesting the webpage URL adding parameters `componentfilter=componentpaths` and `componentpaths[]=component1.component2.component5` will produce the following response:
+Then requesting the webpage URL adding parameters `componentFilter=componentpaths` and `componentpaths[]=component1.component2.component5` will produce the following response:
 
 ```javascript
 "component1"
@@ -467,12 +467,12 @@ Each component that loads data exports the URL to interact with it under entry `
           components: {
             "component5":  {
               meta: {
-                dataloadsource: "https://page-url/?componentfilter=componentpaths&componentpaths[]=component1.component2.component5"
+                dataloadsource: "https://page-url/?componentFilter=componentpaths&componentpaths[]=component1.component2.component5"
               },
               components: {
                 "component6": {
                   meta: {
-                    dataloadsource: "https://page-url/?componentfilter=componentpaths&componentpaths[]=component1.component2.component5.component6"
+                    dataloadsource: "https://page-url/?componentFilter=componentpaths&componentpaths[]=component1.component2.component5.component6"
                   }
                 }
               }
@@ -1974,7 +1974,7 @@ For instance, property `output`, which is obtained through `$_GET["output"]` and
 
 **2. Properties which, upon changing their value, alter the component hierarchy**
 
-Changing the values of certain properties will alter the component hierarchy. For instance, passing parameter `componentfilter=componentpaths` in the URL will make the component hierarchy only include those components specified under parameter `componentpaths[]`. Hence, property `componentfilter` must be in `$vars`.
+Changing the values of certain properties will alter the component hierarchy. For instance, passing parameter `componentFilter=componentpaths` in the URL will make the component hierarchy only include those components specified under parameter `componentpaths[]`. Hence, property `componentFilter` must be in `$vars`.
 
 Keeping these properties in `$vars` is needed for the following reasons:
 

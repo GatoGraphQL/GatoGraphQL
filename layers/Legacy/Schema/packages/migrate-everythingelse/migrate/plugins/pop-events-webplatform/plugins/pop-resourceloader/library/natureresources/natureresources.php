@@ -14,7 +14,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
         $this->future_events = array();
     }
 
-    public function addSingleResources(&$resources, $modulefilter, $options)
+    public function addSingleResources(&$resources, $componentFilter, $options)
     {
 
         // The event is a special case: both future and past events have different configurations
@@ -98,7 +98,7 @@ class PoP_Events_ResourceLoader_Hooks extends PoP_ResourceLoader_NatureResources
 
             // Add the hook before the execution of the method, and remove it immediately afterwards
             \PoP\Root\App::addFilter('em_get_event', $this->forceEventScope(...), PHP_INT_MAX, 2);
-            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($modulefilter, $resources, $nature, $ids, $merge, $options);
+            PoP_ResourceLoaderProcessorUtils::addResourcesFromSettingsprocessors($componentFilter, $resources, $nature, $ids, $merge, $options);
             \PoP\Root\App::removeFilter('em_get_event', $this->forceEventScope(...), PHP_INT_MAX, 2);
         }
     }

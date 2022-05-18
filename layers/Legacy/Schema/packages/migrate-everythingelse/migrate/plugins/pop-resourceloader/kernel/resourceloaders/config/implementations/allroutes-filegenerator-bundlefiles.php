@@ -4,7 +4,7 @@ class PoP_ResourceLoader_AllRoutesFileGenerator_BundleFiles extends PoP_Resource
 
     protected function getResourceMapping() {
 
-        // modulefilter is null => loadingSite
+        // componentFilter is null => loadingSite
         return PoP_ResourceLoader_FileReproduction_Utils::getResourceMapping(null);
     }
 
