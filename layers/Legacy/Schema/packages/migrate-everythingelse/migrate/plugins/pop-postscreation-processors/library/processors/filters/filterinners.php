@@ -42,7 +42,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomFilterInners extends P
             );
         }
         if ($modules = \PoP\Root\App::applyFilters(
-            'Links:FilterInnerModuleProcessor:inputmodules',
+            'Links:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

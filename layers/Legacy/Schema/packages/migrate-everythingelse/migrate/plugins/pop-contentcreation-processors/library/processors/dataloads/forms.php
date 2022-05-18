@@ -1,12 +1,12 @@
 <?php
-use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\ObjectIDFromURLParamComponentProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPSitesWassup\FlagMutations\MutationResolverBridges\FlagCustomPostMutationResolverBridge;
 
 class PoP_ContentCreation_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
-    use ObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_FLAG = 'dataload-flag';
 

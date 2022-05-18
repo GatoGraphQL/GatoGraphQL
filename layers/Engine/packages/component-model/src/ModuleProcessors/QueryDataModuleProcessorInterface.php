@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-interface QueryDataModuleProcessorInterface extends FilterDataModuleProcessorInterface
+interface QueryDataComponentProcessorInterface extends FilterDataComponentProcessorInterface
 {
 }

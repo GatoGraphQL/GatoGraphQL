@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoPCMSSchema\Media\Facades\MediaTypeAPIFacade;
 
-abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalModuleField;
@@ -12,7 +12,7 @@ use PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeIn
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
-interface ModuleProcessorInterface
+interface ComponentProcessorInterface
 {
     public function getModulesToProcess(): array;
     public function getSubmodules(array $module): array;

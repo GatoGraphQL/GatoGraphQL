@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extends PoP_Module_Processor_TypeaheadFormComponentsBase
 {
@@ -101,7 +101,7 @@ abstract class PoP_Module_Processor_SelectableTypeaheadFormComponentsBase extend
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $trigger_layout = $this->getTriggerLayoutSubmodule($module);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['trigger-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($trigger_layout);

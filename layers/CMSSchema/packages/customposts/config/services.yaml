@@ -13,8 +13,8 @@ services:
     PoPCMSSchema\CustomPosts\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPCMSSchema\CustomPosts\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\CustomPosts\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\CustomPosts\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

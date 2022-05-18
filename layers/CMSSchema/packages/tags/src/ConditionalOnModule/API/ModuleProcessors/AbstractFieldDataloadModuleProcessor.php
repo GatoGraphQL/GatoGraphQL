@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Tags\ConditionalOnModule\API\ModuleProcessors;
+namespace PoPCMSSchema\Tags\ConditionalOnModule\API\ComponentProcessors;
 
-use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPCMSSchema\Tags\ModuleProcessors\TagFilterInputContainerModuleProcessor;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
+use PoPCMSSchema\Tags\ComponentProcessors\TagFilterInputContainerComponentProcessor;
 
-abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
+abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_RELATIONALFIELDS_TAG = 'dataload-relationalfields-tag';
     public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST = 'dataload-relationalfields-taglist';
@@ -84,9 +84,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
-                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGS];
+                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
-                return [TagFilterInputContainerModuleProcessor::class, TagFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT];
+                return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

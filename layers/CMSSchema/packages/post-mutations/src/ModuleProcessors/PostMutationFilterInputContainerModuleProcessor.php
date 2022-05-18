@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostMutations\ModuleProcessors;
+namespace PoPCMSSchema\PostMutations\ComponentProcessors;
 
-use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
-use PoPCMSSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
+use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
 
-class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
+class PostMutationFilterInputContainerComponentProcessor extends AbstractPostFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -33,7 +33,7 @@ class PostMutationFilterInputContainerModuleProcessor extends AbstractPostFilter
             default => null,
         };
         $filterInputModules = parent::getFilterInputModules($targetModule);
-        $filterInputModules[] = [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
+        $filterInputModules[] = [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS];
         return $filterInputModules;
     }
 

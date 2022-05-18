@@ -56,7 +56,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSimpleFilterInners extends PoP
             );
         }
         if ($modules = \PoP\Root\App::applyFilters(
-            'Links:FilterInnerModuleProcessor:inputmodules',
+            'Links:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

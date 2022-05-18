@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -47,7 +47,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
     }
     public function getHref(array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
         switch ($module[1]) {
@@ -72,7 +72,7 @@ class GD_URE_Module_Processor_CustomAnchorControls extends PoP_Module_Processor_
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_ANCHORCONTROL_INVITENEWMEMBERS:

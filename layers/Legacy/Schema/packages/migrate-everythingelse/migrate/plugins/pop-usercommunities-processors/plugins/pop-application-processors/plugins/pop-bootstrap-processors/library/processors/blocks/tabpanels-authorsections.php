@@ -1,6 +1,6 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
+class PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks extends PoP_Module_Processor_AuthorTabPanelSectionBlocksBase
 {
     public final const MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'block-tabpanel-authorcommunitymembers';
 
@@ -16,7 +16,7 @@ class PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks extends PoP_Module
         $ret = parent::getInnerSubmodules($module);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ModuleProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            self::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
         if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;

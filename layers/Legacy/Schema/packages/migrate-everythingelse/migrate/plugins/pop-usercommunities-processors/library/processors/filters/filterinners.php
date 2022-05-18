@@ -32,7 +32,7 @@ class GD_URE_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Fi
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'UserCommunities:FilterInnerModuleProcessor:inputmodules',
+            'UserCommunities:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

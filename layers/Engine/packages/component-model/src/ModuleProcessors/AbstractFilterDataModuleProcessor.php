@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 
-abstract class AbstractFilterDataModuleProcessor extends AbstractModuleProcessor implements FilterDataModuleProcessorInterface
+abstract class AbstractFilterDataComponentProcessor extends AbstractComponentProcessor implements FilterDataComponentProcessorInterface
 {
-    use FilterDataModuleProcessorTrait;
+    use FilterDataComponentProcessorTrait;
 
     private ?FilterInputProcessorManagerInterface $filterInputProcessorManager = null;
 

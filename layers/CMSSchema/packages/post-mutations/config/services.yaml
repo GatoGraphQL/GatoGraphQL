@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\PostMutations\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\PostMutations\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'

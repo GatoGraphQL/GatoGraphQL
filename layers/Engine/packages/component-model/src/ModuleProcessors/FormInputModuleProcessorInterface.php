@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-interface FormInputModuleProcessorInterface
+interface FormInputComponentProcessorInterface
 {
     public function getValue(array $module, ?array $source = null): mixed;
     public function getDefaultValue(array $module, array &$props): mixed;

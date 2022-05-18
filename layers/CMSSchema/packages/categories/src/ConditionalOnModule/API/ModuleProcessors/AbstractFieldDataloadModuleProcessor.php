@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Categories\ConditionalOnModule\API\ModuleProcessors;
+namespace PoPCMSSchema\Categories\ConditionalOnModule\API\ComponentProcessors;
 
-use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
-use PoPCMSSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\Categories\ComponentProcessors\CategoryFilterInputContainerComponentProcessor;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 
-abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
+abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY = 'dataload-relationalfields-category';
     public final const MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST = 'dataload-relationalfields-categorylist';
@@ -62,9 +62,9 @@ abstract class AbstractFieldDataloadModuleProcessor extends AbstractRelationalFi
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
-                return [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES];
+                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORIES];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYCOUNT:
-                return [CategoryFilterInputContainerModuleProcessor::class, CategoryFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT];
+                return [CategoryFilterInputContainerComponentProcessor::class, CategoryFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_CATEGORYCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

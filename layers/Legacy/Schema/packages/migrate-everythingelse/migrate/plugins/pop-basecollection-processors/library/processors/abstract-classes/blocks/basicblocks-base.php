@@ -1,10 +1,10 @@
 <?php
-use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\Engine\Route\RouteUtils;
 
-abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {
@@ -53,7 +53,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['block-inners'] = array_map(
@@ -116,7 +116,7 @@ abstract class PoP_Module_Processor_BasicBlocksBase extends PoPEngine_QueryDataM
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $this->appendProp($module, $props, 'class', 'pop-block');
 

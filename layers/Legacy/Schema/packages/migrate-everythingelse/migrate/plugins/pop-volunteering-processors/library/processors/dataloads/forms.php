@@ -1,12 +1,12 @@
 <?php
-use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\ObjectIDFromURLParamComponentProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPSitesWassup\VolunteerMutations\MutationResolverBridges\VolunteerMutationResolverBridge;
 
 class PoP_Volunteering_Module_Processor_Dataloads extends PoP_Module_Processor_FormDataloadsBase
 {
-    use ObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_VOLUNTEER = 'dataload-volunteer';
 

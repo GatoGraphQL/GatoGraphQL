@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ModuleProcessors;
+namespace PoPAPI\API\ComponentProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\Engine\ObjectModels\Root;
 use PoP\Engine\Schema\SchemaDefinitionServiceInterface;
 
-class RootRelationalFieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
+class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
     public final const MODULE_DATALOAD_RELATIONALFIELDS_ROOT = 'dataload-relationalfields-root';
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ModuleProcessors;
+namespace PoPAPI\API\ComponentProcessors;
 
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\ComponentModel\GraphQLEngine\Model\FieldFragmentModelsTuple;
-use PoP\ComponentModel\ModuleProcessors\AbstractQueryDataModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractQueryDataComponentProcessor;
 use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocument;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\InputList;
@@ -22,7 +22,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\StaticHelpers\LocationHelper;
 
-abstract class AbstractRelationalFieldQueryDataModuleProcessor extends AbstractQueryDataModuleProcessor
+abstract class AbstractRelationalFieldQueryDataComponentProcessor extends AbstractQueryDataComponentProcessor
 {
     protected const MODULE_ATTS_FIELD_IDS = 'fieldIDs';
     protected const MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS = 'ignoreConditionalFields';

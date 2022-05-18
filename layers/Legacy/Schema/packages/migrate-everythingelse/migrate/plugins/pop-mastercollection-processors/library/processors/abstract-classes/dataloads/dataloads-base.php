@@ -1,6 +1,6 @@
 <?php
-use PoP\Application\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Processor_DataloadsBase
@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submodules = $this->getInnerSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
@@ -69,7 +69,7 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Allow Skeleton Screens: if setting $att 'use-skeletonscreen' then do not validate if the content is loaded
         // Then, the content will be loaded nevertheless, and this content will be used for the skeleton screen effect,

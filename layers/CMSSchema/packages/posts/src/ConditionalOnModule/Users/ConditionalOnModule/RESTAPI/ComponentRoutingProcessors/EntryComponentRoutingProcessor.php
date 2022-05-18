@@ -9,7 +9,7 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\AbstractCustomPostRESTEntryComponentRoutingProcessor;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ConditionalOnModule\RESTAPI\Hooks\CustomPostHookSet;
 use PoPCMSSchema\Users\Routing\RequestNature;
 
@@ -41,8 +41,8 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
-                FieldDataloadModuleProcessor::class,
-                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
+                FieldDataloadComponentProcessor::class,
+                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\PostMutations\ConditionalOnModule\API\ModuleProcessors\:
-        resource: '../../../src/ConditionalOnModule/API/ModuleProcessors/*'
+    PoPCMSSchema\PostMutations\ConditionalOnModule\API\ComponentProcessors\:
+        resource: '../../../src/ConditionalOnModule/API/ComponentProcessors/*'

@@ -1,12 +1,12 @@
 <?php
-use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\Utils;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_FetchMoreBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

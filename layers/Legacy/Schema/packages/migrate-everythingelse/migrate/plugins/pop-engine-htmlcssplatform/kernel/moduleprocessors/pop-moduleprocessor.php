@@ -1,11 +1,11 @@
 <?php
-use PoP\Application\ModuleProcessors\AbstractQueryDataModuleProcessor;
+use PoP\Application\ComponentProcessors\AbstractQueryDataComponentProcessor;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Definitions\Facades\DefinitionManagerFacade;
 
-abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQueryDataModuleProcessor
+abstract class PoP_HTMLCSSPlatformQueryDataComponentProcessorBase extends AbstractQueryDataComponentProcessor
 {
     public function fixedId(array $module, array &$props): bool
     {
@@ -154,7 +154,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     // function getModulesCbs(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	// Return initialized empty array at the last level
     // 	$ret = array(
@@ -194,7 +194,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
     // function getModulesPaths(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($module);
 
@@ -251,7 +251,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         // Allow CSS to Styles to modify these value
         return \PoP\Root\App::applyFilters(
-            'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
+            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
             $props,
@@ -334,7 +334,7 @@ abstract class PoP_HTMLCSSPlatformQueryDataModuleProcessorBase extends AbstractQ
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_HTMLCSSPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
+            'PoP_HTMLCSSPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
             $ret,
             $module,
             $props,

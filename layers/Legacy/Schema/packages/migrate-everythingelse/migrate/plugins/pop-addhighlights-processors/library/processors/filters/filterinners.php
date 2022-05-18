@@ -41,7 +41,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilterInners extends PoP_Module_P
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Highlights:FilterInnerModuleProcessor:inputmodules',
+            'Highlights:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

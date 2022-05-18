@@ -1,6 +1,6 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
+class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Processor_CustomButtonGroupsBase
 {
     public final const MODULE_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 

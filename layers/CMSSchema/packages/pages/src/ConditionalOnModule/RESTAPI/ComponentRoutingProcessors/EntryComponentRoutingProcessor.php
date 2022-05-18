@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Pages\ConditionalOnModule\RESTAPI\ComponentRoutingProcess
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
-use PoPCMSSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Pages\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Pages\Routing\RequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
@@ -26,8 +26,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
 
         $ret[RequestNature::PAGE][] = [
             'component' => [
-                FieldDataloadModuleProcessor::class,
-                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
+                FieldDataloadComponentProcessor::class,
+                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query')

@@ -2,7 +2,7 @@
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;
 
-abstract class PoP_Module_Processor_PostStatusDateLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_PostStatusDateLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

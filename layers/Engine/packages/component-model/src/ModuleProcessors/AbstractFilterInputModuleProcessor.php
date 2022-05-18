@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Schema\SchemaDefinitionServiceInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-abstract class AbstractFilterInputModuleProcessor extends AbstractFormInputModuleProcessor implements FilterInputModuleProcessorInterface
+abstract class AbstractFilterInputComponentProcessor extends AbstractFormInputComponentProcessor implements FilterInputComponentProcessorInterface
 {
     private ?SchemaDefinitionServiceInterface $schemaDefinitionService = null;
 
@@ -21,7 +21,7 @@ abstract class AbstractFilterInputModuleProcessor extends AbstractFormInputModul
         return $this->schemaDefinitionService ??= $this->instanceManager->getInstance(SchemaDefinitionServiceInterface::class);
     }
 
-    protected function getFilterInputSchemaDefinitionResolver(array $module): FilterInputModuleProcessorInterface
+    protected function getFilterInputSchemaDefinitionResolver(array $module): FilterInputComponentProcessorInterface
     {
         return $this;
     }

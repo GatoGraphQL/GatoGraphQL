@@ -13,8 +13,8 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
         $ret = array();
 
         $routemodules = array(
-            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_COMMUNITIES],
-            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionBlocks::class, PoP_UserCommunities_ModuleProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
+            POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_COMMUNITIES],
+            POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
         );
         foreach ($routemodules as $route => $module) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -27,7 +27,7 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
 
         // Author route modules
         $routemodules = array(
-            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ModuleProcessor_AuthorSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
+            POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
         foreach ($routemodules as $route => $module) {
             $ret[UserRequestNature::USER][$route][] = [

@@ -2,9 +2,9 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
-class ModuleProcessor_Layouts extends AbstractModuleProcessor
+class ComponentProcessor_Layouts extends AbstractComponentProcessor
 {
     public final const MODULE_EXAMPLE_404 = 'example-404';
     public final const MODULE_EXAMPLE_HOMEWELCOME = 'example-homewelcome';

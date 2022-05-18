@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\Users\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPCMSSchema\Users\FilterInputProcessors\FilterInputProcessor;
 
-class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const MODULE_FILTERINPUT_NAME = 'filterinput-name';
     public final const MODULE_FILTERINPUT_EMAILS = 'filterinput-emails';

@@ -1,11 +1,11 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class PoP_Share_GFHelpers
 {
     public static function getSharebyemailFormFieldNames()
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $gfinputname_modules = array(
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_NAME_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
             POP_GENERICFORMS_GF_FORM_SHAREBYEMAIL_FIELDNAME_DESTINATIONEMAILS_ID => [PoP_Share_Module_Processor_TextFormInputs::class, PoP_Share_Module_Processor_TextFormInputs::MODULE_FORMINPUT_DESTINATIONEMAIL],

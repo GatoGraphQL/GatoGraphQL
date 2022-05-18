@@ -65,7 +65,7 @@ class CreateUpdateWithCommunityOrganizationProfileMutationResolverBridge extends
             parent::getFormData(),
             $this->getCommonuserrolesFormData(),
             array(
-                'is_community' => (bool)$this->getModuleProcessorManager()->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
+                'is_community' => (bool)$this->getComponentProcessorManager()->getProcessor($inputs['is_community'])->getValue($inputs['is_community']),
             )
         );
     }

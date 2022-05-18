@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\Application\ModuleProcessors;
+namespace PoP\Application\ComponentProcessors;
 
 use PoP\Application\Constants\Actions;
 use PoP\Application\Environment;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ConfigurationComponentModel\ModuleProcessors\AbstractModuleProcessor as UpstreamAbstractModuleProcessor;
+use PoP\ConfigurationComponentModel\ComponentProcessors\AbstractComponentProcessor as UpstreamAbstractComponentProcessor;
 use PoP\Root\App;
-use PoP\SiteBuilderAPI\ModuleProcessors\AddAPIQueryToSourcesModuleProcessorTrait;
+use PoP\SiteBuilderAPI\ComponentProcessors\AddAPIQueryToSourcesComponentProcessorTrait;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
 
-abstract class AbstractModuleProcessor extends UpstreamAbstractModuleProcessor implements ModuleProcessorInterface
+abstract class AbstractComponentProcessor extends UpstreamAbstractComponentProcessor implements ComponentProcessorInterface
 {
-    use AddAPIQueryToSourcesModuleProcessorTrait;
+    use AddAPIQueryToSourcesComponentProcessorTrait;
 
     private ?CMSServiceInterface $cmsService = null;
 

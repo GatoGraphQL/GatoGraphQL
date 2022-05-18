@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\LooseContracts\Facades\NameResolverFacade;
 
@@ -7,7 +7,7 @@ abstract class GD_EM_Module_Processor_ScrollMapBlocksBase extends PoP_Module_Pro
 {
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $this->appendProp($module, $props, 'class', 'pop-block-map');
         $this->appendProp($module, $props, 'class', 'pop-block-scrollmap');

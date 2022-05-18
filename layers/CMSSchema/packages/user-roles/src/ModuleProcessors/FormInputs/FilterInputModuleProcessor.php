@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\UserRoles\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\UserRoles\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\UserRoles\FilterInputProcessors\FilterInputProcessor;
 
-class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const MODULE_FILTERINPUT_USER_ROLES = 'filterinput-user-roles';
     public final const MODULE_FILTERINPUT_EXCLUDE_USER_ROLES = 'filterinput-exclude-user-roles';

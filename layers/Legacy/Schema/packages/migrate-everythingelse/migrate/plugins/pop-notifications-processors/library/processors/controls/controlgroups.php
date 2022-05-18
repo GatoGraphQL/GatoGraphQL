@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
@@ -16,7 +16,7 @@ class AAL_PoPProcessors_Module_Processor_ControlGroups extends PoP_Module_Proces
     {
         $ret = parent::getSubmodules($module);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_AAL_CONTROLGROUP_NOTIFICATIONLIST:

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\QueriedObject\ModuleProcessors;
+namespace PoPCMSSchema\QueriedObject\ComponentProcessors;
 
 use PoP\Root\App;
 
-trait QueriedDBObjectModuleProcessorTrait
+trait QueriedDBObjectComponentProcessorTrait
 {
     protected function getQueriedDBObjectID(array $module, array &$props, &$data_properties): string | int | array | null
     {

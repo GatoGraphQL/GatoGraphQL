@@ -1,5 +1,5 @@
 <?php
 
-abstract class PoPEngine_QueryDataModuleProcessorBase extends PoP_WebPlatformQueryDataModuleProcessorBase
+abstract class PoPEngine_QueryDataComponentProcessorBase extends PoP_WebPlatformQueryDataComponentProcessorBase
 {
 }

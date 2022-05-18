@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\HelperServices\RequestHelperServiceFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Misc\RequestUtils;
 use PoP\Root\Exception\GenericSystemException;
@@ -267,7 +267,7 @@ class PoP_ServerSideManager
         // We need to provide the proper $props, however just to get the pageSection id it works without $props too, so just pass array()
         // (this is hacky, but well, it works)
         // $psId = pageSection.attr('id');
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $props = array();
         $psId = $moduleprocessor_manager->getProcessor($moduleName)->getID($moduleName, $props);
 

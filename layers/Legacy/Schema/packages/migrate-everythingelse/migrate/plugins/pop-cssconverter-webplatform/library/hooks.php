@@ -4,13 +4,13 @@ class PoP_WebPlatform_CSSConverter_Hooks
     public function __construct()
     {
         \PoP\Root\App::addAction(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
             $this->getImmutableConfiguration(...),
             10,
             4
         );
         \PoP\Root\App::addAction(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
             $this->getMutableonrequestConfiguration(...),
             10,
             4

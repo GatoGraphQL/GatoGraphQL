@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\Tokens\Param;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -19,7 +19,7 @@ use PoPCMSSchema\SchemaCommons\FilterInputProcessors\FilterInputProcessor;
 use PoPCMSSchema\SchemaCommons\FormInputs\MultiValueFromStringFormInput;
 use PoPCMSSchema\SchemaCommons\FormInputs\OrderFormInput;
 
-class CommonFilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const MODULE_FILTERINPUT_SORT = 'filterinput-sort';
     public final const MODULE_FILTERINPUT_LIMIT = 'filterinput-limit';

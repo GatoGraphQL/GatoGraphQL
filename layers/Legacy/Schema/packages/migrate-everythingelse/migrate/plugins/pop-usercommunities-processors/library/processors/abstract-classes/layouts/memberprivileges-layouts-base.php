@@ -1,6 +1,6 @@
 <?php
 
-abstract class GD_URE_Module_Processor_MemberPrivilegesLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class GD_URE_Module_Processor_MemberPrivilegesLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

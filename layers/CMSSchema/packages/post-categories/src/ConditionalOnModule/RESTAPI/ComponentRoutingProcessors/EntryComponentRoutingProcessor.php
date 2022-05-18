@@ -11,8 +11,8 @@ use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Module;
 use PoPCMSSchema\PostCategories\ModuleConfiguration;
-use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\CategoryPostFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors\PostCategoryFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentProcessors\CategoryPostFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentProcessors\PostCategoryFieldDataloadComponentProcessor;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
@@ -43,8 +43,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret = array();
         $ret[CategoryRequestNature::CATEGORY][] = [
             'component' => [
-                PostCategoryFieldDataloadModuleProcessor::class,
-                PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
+                PostCategoryFieldDataloadComponentProcessor::class,
+                PostCategoryFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -73,8 +73,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getPostCategoriesRoute() => [
-                PostCategoryFieldDataloadModuleProcessor::class,
-                PostCategoryFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
+                PostCategoryFieldDataloadComponentProcessor::class,
+                PostCategoryFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -95,8 +95,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
-                CategoryPostFieldDataloadModuleProcessor::class,
-                CategoryPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
+                CategoryPostFieldDataloadComponentProcessor::class,
+                CategoryPostFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

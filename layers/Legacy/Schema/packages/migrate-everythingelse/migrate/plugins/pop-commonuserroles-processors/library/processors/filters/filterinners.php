@@ -30,7 +30,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilterInners extends PoP_Module
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'CommonUserRoles:FilterInnerModuleProcessor:inputmodules',
+            'CommonUserRoles:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

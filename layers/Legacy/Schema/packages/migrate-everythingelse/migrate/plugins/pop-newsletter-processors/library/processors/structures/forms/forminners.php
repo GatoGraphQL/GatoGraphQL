@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_FormInnersBase
 {
@@ -56,7 +56,7 @@ class PoP_Newsletter_Module_Processor_GFFormInners extends PoP_Module_Processor_
     {
         switch ($module[1]) {
             case self::MODULE_FORMINNER_NEWSLETTERUNSUBSCRIPTION:
-                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $inputs = array(
                     [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL],
                     [PoP_Newsletter_Module_Processor_TextFormInputs::class, PoP_Newsletter_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE],

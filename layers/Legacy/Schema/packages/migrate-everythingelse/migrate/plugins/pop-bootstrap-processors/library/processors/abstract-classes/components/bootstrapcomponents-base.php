@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_BootstrapComponentsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getBootstrapcomponentClass(array $module)
     {

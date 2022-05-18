@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_MultiplesBase
 {
@@ -48,7 +48,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Artificial property added to identify the template when adding module-resources
         $this->setProp($module, $props, 'resourceloader', 'map');

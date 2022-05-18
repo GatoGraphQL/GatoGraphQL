@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($this->showDisabledLayer($module, $props)) {
             $ret['show-disabled-layer'] = true;
@@ -83,7 +83,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
     {
         $ret = parent::getMutableonrequestConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
         // Also, only add submenu if single post is published, hence this goes under mutableonrequest
@@ -136,7 +136,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
 
     public function initWebPlatformRequestProps(array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($submenu = $this->getSubmenuSubmodule($module)) {
             $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
@@ -150,7 +150,7 @@ abstract class PoP_Module_Processor_BlocksBase extends PoP_Module_Processor_Basi
 
     public function initRequestProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // // Only add the submenu if this is the main block! That way, both blockgroups and blocks can define the submenu, but only the main of them will show it
         // $this->setProp($module, $props, 'is-mainblock', false);

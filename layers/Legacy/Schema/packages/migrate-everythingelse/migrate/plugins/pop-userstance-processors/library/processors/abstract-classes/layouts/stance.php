@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class UserStance_Module_Processor_StanceLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

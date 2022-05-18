@@ -1,9 +1,9 @@
 <?php
 use PoP\ComponentModel\Facades\ModulePath\ModulePathManagerFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingModuleInterface;
+use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Root\Routing\RequestNature;
@@ -20,7 +20,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     // public function getNature(array $module)
     // {
     //     if ($inner = $this->getInnerSubmodule($module)) {
-    //         $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    //         $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $processor = $moduleprocessor_manager->getProcessor($inner);
     //         return $processor->getNature($inner);
     //     }
@@ -101,7 +101,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     public function getFormat(array $module): ?string
     {
         if ($inner = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $moduleprocessor_manager->getProcessor($inner);
             if ($processor instanceof FormattableModuleInterface) {
                 return $processor->getFormat($inner);
@@ -115,7 +115,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
     {
         // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
         if ($inner_module = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             if ($moduleprocessor_manager->getProcessor($inner_module) instanceof DataloadingModuleInterface) {
 
                 $skip_data_load = $this->getProp($module, $props, 'skip-data-load');
@@ -206,7 +206,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         // If the inner module is a DataloadingModule, then calculate the datafeedback of this module
         // based on the results from the inner dataloading module. Then, can calculate "do-not-render-if-no-results"
         if ($inner = $this->getInnerSubmodule($module)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $moduleprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
                 $module_path_manager = ModulePathManagerFacade::getInstance();

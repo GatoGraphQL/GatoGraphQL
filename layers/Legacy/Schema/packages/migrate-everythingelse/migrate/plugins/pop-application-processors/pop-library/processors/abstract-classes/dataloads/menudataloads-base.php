@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoPCMSSchema\Menus\Facades\MenuTypeAPIFacade;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuObjectTypeResolver;
 

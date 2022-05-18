@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-interface ModuleProcessorManagerInterface
+interface ComponentProcessorManagerInterface
 {
     /**
      * @deprecated Use the Service Container instead
      */
     public function overrideProcessorClass(string $overrideClass, string $withClass, array $forItemNames): void;
-    public function getProcessor(array $item): ModuleProcessorInterface;
+    public function getProcessor(array $item): ComponentProcessorInterface;
 }

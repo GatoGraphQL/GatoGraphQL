@@ -3,12 +3,12 @@ use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_AUTHOR_CONTENT = 'dataload-author-content';
     public final const MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT = 'dataload-author-summarycontent';

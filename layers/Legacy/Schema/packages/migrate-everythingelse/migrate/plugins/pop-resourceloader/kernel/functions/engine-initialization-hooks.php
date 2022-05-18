@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 class PoP_ResourceLoader_EngineInitialization_Hooks {
@@ -45,7 +45,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
 			global $pop_resourcemoduledecoratorprocessor_manager;
-			$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+			$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 			$props = &$props_in_array[0];
 			$helperCalculations = &$helper_calculations_in_array[0];
 

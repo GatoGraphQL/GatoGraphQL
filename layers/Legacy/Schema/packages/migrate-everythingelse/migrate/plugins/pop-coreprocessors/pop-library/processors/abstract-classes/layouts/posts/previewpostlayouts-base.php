@@ -3,7 +3,7 @@ define('GD_CONSTANT_AUTHORPOSITION_ABOVETHUMB', 'abovethumb');
 define('GD_CONSTANT_AUTHORPOSITION_ABOVETITLE', 'abovetitle');
 define('GD_CONSTANT_AUTHORPOSITION_BELOWCONTENT', 'belowcontent');
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
@@ -211,7 +211,7 @@ abstract class PoP_Module_Processor_PreviewPostLayoutsBase extends PoP_Module_Pr
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($belowthumb_modules = $this->getBelowthumbLayoutSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['belowthumb'] = array_map(

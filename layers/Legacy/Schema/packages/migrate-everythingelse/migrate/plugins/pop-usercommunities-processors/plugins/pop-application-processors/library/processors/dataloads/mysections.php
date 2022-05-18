@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
@@ -28,7 +28,7 @@ class PoP_UserCommunities_Module_Processor_MySectionDataloads extends PoP_Module
 
     protected function getInnerSubmodules(array $module): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getInnerSubmodules($module);
 

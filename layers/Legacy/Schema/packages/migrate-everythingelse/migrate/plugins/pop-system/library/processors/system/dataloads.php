@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\BuildSystemMutationResolverBridge;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateSystemMutationResolverBridge;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\InstallSystemMutationResolverBridge;
 
-class PoP_System_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
+class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponentProcessor
 {
     public final const MODULE_DATALOADACTION_SYSTEM_BUILD = 'dataloadaction-system-build';
     public final const MODULE_DATALOADACTION_SYSTEM_GENERATE = 'dataloadaction-system-generate';

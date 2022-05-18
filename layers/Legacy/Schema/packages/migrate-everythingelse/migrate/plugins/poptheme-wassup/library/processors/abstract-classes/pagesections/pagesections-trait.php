@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 {
@@ -40,7 +40,7 @@ trait PoPTheme_Wassup_Module_Processor_PageSectionsTrait
 
     public function getMutableonmodelConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getMutableonmodelConfiguration($module, $props);
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Media\ModuleProcessors;
+namespace PoPCMSSchema\Media\ComponentProcessors;
 
-use PoPCMSSchema\Media\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\Media\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
-class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
+class MediaFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -27,8 +27,8 @@ class MediaFilterInputContainerModuleProcessor extends AbstractFilterInputContai
     {
         $mediaFilterInputModules = [
             ...$this->getIDFilterInputModules(),
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SEARCH],
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_MIME_TYPES],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_MIME_TYPES],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {

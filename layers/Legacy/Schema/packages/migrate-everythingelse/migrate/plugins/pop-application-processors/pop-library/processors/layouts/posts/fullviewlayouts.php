@@ -1,6 +1,6 @@
 <?php
 use PoP\Application\Constants\Actions;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_CustomFullViewLayoutsBase
@@ -102,7 +102,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
 

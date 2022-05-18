@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-interface FilterInputModuleProcessorInterface extends FormInputModuleProcessorInterface
+interface FilterInputComponentProcessorInterface extends FormInputComponentProcessorInterface
 {
     public function getFilterInputTypeResolver(array $module): InputTypeResolverInterface;
     public function getFilterInputDescription(array $module): ?string;

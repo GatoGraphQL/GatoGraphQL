@@ -6,7 +6,7 @@ use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 use PoP\Engine\Route\RouteUtils;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataModuleProcessorBase
+class PoPTheme_Wassup_Module_Processor_Frames extends PoPEngine_QueryDataComponentProcessorBase
 {
     public final const MODULE_FRAME_TOP = 'frame-top';
     public final const MODULE_FRAME_SIDE = 'frame-side';

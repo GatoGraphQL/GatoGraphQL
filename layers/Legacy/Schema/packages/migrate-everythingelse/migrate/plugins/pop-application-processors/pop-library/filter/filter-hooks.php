@@ -1,12 +1,12 @@
 <?php
-use PoPCMSSchema\Posts\ModuleProcessors\FilterInnerModuleProcessor as PostFilterInners;
+use PoPCMSSchema\Posts\ComponentProcessors\FilterInnerComponentProcessor as PostFilterInners;
 
 class PoPThemeWassup_DataLoad_FilterHooks
 {
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'Blog:FilterInnerModuleProcessor:inputmodules',
+            'Blog:FilterInnerComponentProcessor:inputmodules',
             $this->modifyPostFilterInputs(...),
             10,
             2

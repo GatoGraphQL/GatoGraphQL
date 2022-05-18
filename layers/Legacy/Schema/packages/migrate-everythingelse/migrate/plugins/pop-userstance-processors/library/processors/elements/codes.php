@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
@@ -86,7 +86,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
          // case self::MODULE_CODE_STANCECOUNT_GENERAL:

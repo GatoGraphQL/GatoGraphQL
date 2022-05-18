@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\ItemProcessors\ItemProcessorManagerTrait;
 use PoP\Root\Services\BasicServiceTrait;
 
-class ModuleProcessorManager implements ModuleProcessorManagerInterface
+class ComponentProcessorManager implements ComponentProcessorManagerInterface
 {
     use ItemProcessorManagerTrait;
     use BasicServiceTrait;
 
-    public function getProcessor(array $item): ModuleProcessorInterface
+    public function getProcessor(array $item): ComponentProcessorInterface
     {
         return $this->getItemProcessor($item);
     }

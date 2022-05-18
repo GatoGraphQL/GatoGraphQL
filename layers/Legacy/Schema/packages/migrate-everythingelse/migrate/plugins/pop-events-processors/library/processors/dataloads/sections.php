@@ -1,15 +1,15 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchema\Events\ComponentProcessors\PastEventComponentProcessorTrait;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Processor_SectionDataloadsBase
 {
-    use PastEventModuleProcessorTrait;
+    use PastEventComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_EVENTS_TYPEAHEAD = 'dataload-events-typeahead';
     public final const MODULE_DATALOAD_PASTEVENTS_TYPEAHEAD = 'dataload-pastevents-typeahead';
@@ -171,7 +171,7 @@ class PoP_Events_Module_Processor_CustomSectionDataloads extends PoP_Module_Proc
 
     protected function getInnerSubmodules(array $module): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getInnerSubmodules($module);
 

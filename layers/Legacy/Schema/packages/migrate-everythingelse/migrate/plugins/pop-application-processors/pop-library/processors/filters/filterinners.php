@@ -142,7 +142,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Blog:FilterInnerModuleProcessor:inputmodules',
+            'Blog:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\Facades\ModuleProcessors;
+namespace PoP\ComponentModel\Facades\ComponentProcessors;
 
 use PoP\Root\App;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 
-class ModuleProcessorManagerFacade
+class ComponentProcessorManagerFacade
 {
-    public static function getInstance(): ModuleProcessorManagerInterface
+    public static function getInstance(): ComponentProcessorManagerInterface
     {
         /**
-         * @var ModuleProcessorManagerInterface
+         * @var ComponentProcessorManagerInterface
          */
-        $service = App::getContainer()->get(ModuleProcessorManagerInterface::class);
+        $service = App::getContainer()->get(ComponentProcessorManagerInterface::class);
         return $service;
     }
 }

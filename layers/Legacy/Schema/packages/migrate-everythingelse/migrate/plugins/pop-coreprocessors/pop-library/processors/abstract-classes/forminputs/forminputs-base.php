@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\FormInputModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\FormInputComponentProcessorTrait;
 
-abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_FormInputsBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
-    use FormComponentValueTrait, FormInputModuleProcessorTrait;
+    use FormComponentValueTrait, FormInputComponentProcessorTrait;
 
     //-------------------------------------------------
     // PUBLIC Functions

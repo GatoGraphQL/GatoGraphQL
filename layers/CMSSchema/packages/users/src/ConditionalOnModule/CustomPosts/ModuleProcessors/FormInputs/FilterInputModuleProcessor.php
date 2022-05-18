@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\FormInputs;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputProcessors\FilterInputProcessor;
 
-class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const MODULE_FILTERINPUT_AUTHOR_IDS = 'filterinput-author-ids';
     public final const MODULE_FILTERINPUT_AUTHOR_SLUG = 'filterinput-author-slug';

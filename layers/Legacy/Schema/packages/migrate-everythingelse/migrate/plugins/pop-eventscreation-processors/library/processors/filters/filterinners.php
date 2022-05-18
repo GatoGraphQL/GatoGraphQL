@@ -29,7 +29,7 @@ class PoP_EventsCreation_Module_Processor_CustomFilterInners extends PoP_Module_
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Events:FilterInnerModuleProcessor:inputmodules',
+            'Events:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

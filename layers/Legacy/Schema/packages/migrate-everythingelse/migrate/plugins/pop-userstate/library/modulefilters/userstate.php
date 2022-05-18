@@ -2,7 +2,7 @@
 
 define('POP_MODULEFILTER_USERSTATE', 'userstate');
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\ModuleFilters\AbstractModuleFilter;
 
 class PoP_ModuleFilter_UserState extends AbstractModuleFilter
@@ -16,7 +16,7 @@ class PoP_ModuleFilter_UserState extends AbstractModuleFilter
     {
 
         // Exclude if it has no user state
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
         $processoruserstate = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
         return !$processoruserstate->requiresUserState($module, $props);

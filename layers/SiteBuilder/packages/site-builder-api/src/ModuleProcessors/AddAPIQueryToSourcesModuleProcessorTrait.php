@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\SiteBuilderAPI\ModuleProcessors;
+namespace PoP\SiteBuilderAPI\ComponentProcessors;
 
 use PoPAPI\API\Schema\QueryInputs;
 use PoP\ComponentModel\Constants\DataOutputItems;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\FieldQuery\QuerySyntax;
 use PoP\SiteBuilderAPI\Helpers\APIUtils;
 
-trait AddAPIQueryToSourcesModuleProcessorTrait
+trait AddAPIQueryToSourcesComponentProcessorTrait
 {
     public function addAPIQueryToSources(array $sources, array $module, array &$props): array
     {

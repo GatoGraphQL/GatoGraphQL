@@ -1,6 +1,6 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_SectionBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
+class PoP_UserCommunities_ComponentProcessor_SectionBlocks extends PoP_Module_Processor_TabPanelSectionBlocksBase
 {
     public final const MODULE_BLOCK_TABPANEL_COMMUNITIES = 'block-communities-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_MYMEMBERS = 'block-mymembers-tabpanel';
@@ -18,8 +18,8 @@ class PoP_UserCommunities_ModuleProcessor_SectionBlocks extends PoP_Module_Proce
         $ret = parent::getInnerSubmodules($module);
 
         $inners = array(
-            self::MODULE_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::MODULE_TABPANEL_COMMUNITIES],
-            self::MODULE_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents::MODULE_TABPANEL_MYMEMBERS],
+            self::MODULE_BLOCK_TABPANEL_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::MODULE_TABPANEL_COMMUNITIES],
+            self::MODULE_BLOCK_TABPANEL_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::class, PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents::MODULE_TABPANEL_MYMEMBERS],
         );
         if ($inner = $inners[$module[1]] ?? null) {
             $ret[] = $inner;

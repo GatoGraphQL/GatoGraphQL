@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\ModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ConditionalOnModule\API\ComponentProcessors;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\Categories\ConditionalOnModule\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
+use PoPCMSSchema\Categories\ConditionalOnModule\API\ComponentProcessors\AbstractFieldDataloadComponentProcessor;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 
-class PostCategoryFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
+class PostCategoryFieldDataloadComponentProcessor extends AbstractFieldDataloadComponentProcessor
 {
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
 

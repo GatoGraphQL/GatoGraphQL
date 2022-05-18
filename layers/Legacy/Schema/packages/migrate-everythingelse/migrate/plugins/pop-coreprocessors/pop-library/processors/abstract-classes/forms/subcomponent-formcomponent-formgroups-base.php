@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 
-abstract class PoP_Module_Processor_SubcomponentFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_SubcomponentFormComponentGroupsBase extends PoP_Module_Processor_FormComponentGroupsBase implements FormComponentComponentProcessorInterface
 {
     public function getComponentSubname(array $module)
     {

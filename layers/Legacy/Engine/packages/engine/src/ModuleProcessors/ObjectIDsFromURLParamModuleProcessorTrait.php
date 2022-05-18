@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ModuleProcessors;
+namespace PoP\Engine\ComponentProcessors;
 
 use PoP\Root\App;
-trait ObjectIDsFromURLParamModuleProcessorTrait
+trait ObjectIDsFromURLParamComponentProcessorTrait
 {
     abstract protected function getObjectIDsParamName(array $module, array &$props, &$data_properties);
     protected function getObjectIDsFromURLParam(array $module, array &$props, &$data_properties)

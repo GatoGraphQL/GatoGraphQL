@@ -10,8 +10,8 @@ use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnrecommendPo
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UnsubscribeFromTagMutationResolverBridge;
 use \PoPSitesWassup\SocialNetworkMutations\MutationResolverBridges\UpvoteCustomPostMutationResolverBridge;
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\Engine\ComponentProcessors\ObjectIDFromURLParamComponentProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
@@ -19,7 +19,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class PoP_Module_Processor_ActionDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use ObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOADACTION_FOLLOWUSER = 'dataloadaction-followuser';
     public final const MODULE_DATALOADACTION_UNFOLLOWUSER = 'dataloadaction-unfollowuser';

@@ -5,7 +5,7 @@ use PoP\ComponentModel\State\ApplicationState;
 define('POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD', 'processorbase-pagesectionjsmethod');
 define('POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD', 'processorbase-blockjsmethod');
 
-abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPlatformQueryDataModuleProcessorBase
+abstract class PoP_WebPlatformQueryDataComponentProcessorBase extends PoP_HTMLCSSPlatformQueryDataComponentProcessorBase
 {
 
     //-------------------------------------------------
@@ -40,7 +40,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-settings',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-settings',
             $ret,
             $module,
             $props,
@@ -244,7 +244,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Allow CSS to Styles to modify these value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-mutableonrequest-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-mutableonrequest-configuration',
             $ret,
             $module,
             $props,
@@ -299,7 +299,7 @@ abstract class PoP_WebPlatformQueryDataModuleProcessorBase extends PoP_HTMLCSSPl
 
         // Allow PoP Resource Loader to inject this value
         return \PoP\Root\App::applyFilters(
-            'PoP_WebPlatformQueryDataModuleProcessorBase:module-immutable-configuration',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:module-immutable-configuration',
             $ret,
             $module,
             $props,

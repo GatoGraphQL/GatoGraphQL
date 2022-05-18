@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getLabel(array $module, array &$props)
     {

@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
-use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchema\Events\ComponentProcessors\PastEventComponentProcessorTrait;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\ModuleConfiguration as UsersModuleConfiguration;
@@ -10,7 +10,7 @@ use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
 class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Module_Processor_ScrollMapDataloadsBase
 {
-    use PastEventModuleProcessorTrait;
+    use PastEventComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP = 'dataload-searchusers-scrollmap';
     public final const MODULE_DATALOAD_USERS_SCROLLMAP = 'dataload-users-scrollmap';
@@ -236,7 +236,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
                 // if ($filter_module = $this->getFilterSubmodule($module)) {
-                //     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 //     $filter = $moduleprocessor_manager->getProcessor($filter_module)->getFilter($filter_module);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {

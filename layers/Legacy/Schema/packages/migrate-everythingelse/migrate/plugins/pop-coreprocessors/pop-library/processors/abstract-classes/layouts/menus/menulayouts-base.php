@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_MenuLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     /**
      * @todo Migrate from string to LeafModuleField

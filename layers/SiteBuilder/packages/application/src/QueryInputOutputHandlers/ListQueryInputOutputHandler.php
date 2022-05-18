@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Application\QueryInputOutputHandlers;
 
-use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Constants\DataSources;

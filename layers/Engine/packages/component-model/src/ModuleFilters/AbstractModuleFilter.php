@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ModuleFilters;
 
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractModuleFilter implements ModuleFilterInterface
 {
     use BasicServiceTrait;
 
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
 
-    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     public function excludeModule(array $module, array &$props): bool

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorInterface;
 use PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface;
 
-trait FilterDataModuleProcessorTrait
+trait FilterDataComponentProcessorTrait
 {
-    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
+    abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
     abstract protected function getFilterInputProcessorManager(): FilterInputProcessorManagerInterface;
 
     /**
@@ -21,10 +21,10 @@ trait FilterDataModuleProcessorTrait
     {
         if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringModules($module, $source)) {
             foreach ($activeDataloadQueryArgsFilteringModules as $submodule) {
-                /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($submodule);
-                $value = $dataloadQueryArgsFilterInputModuleProcessor->getValue($submodule, $source);
-                if ($filterInput = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInput($submodule)) {
+                /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($submodule);
+                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($submodule, $source);
+                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($submodule)) {
                     /** @var FilterInputProcessorInterface */
                     $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
                     $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
@@ -49,9 +49,9 @@ trait FilterDataModuleProcessorTrait
             $modules = array_filter(
                 $dataloadQueryArgsFilteringModules,
                 function (array $module) use ($source) {
-                    /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-                    $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-                    return $dataloadQueryArgsFilterInputModuleProcessor->isInputSetInSource($module, $source);
+                    /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+                    return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($module, $source);
                 }
             );
         }
@@ -65,7 +65,7 @@ trait FilterDataModuleProcessorTrait
         return array_values(array_filter(
             $this->getDatasetmoduletreeSectionFlattenedModules($module),
             function ($module) {
-                return $this->getModuleProcessorManager()->getProcessor($module) instanceof DataloadQueryArgsFilterInputModuleProcessorInterface;
+                return $this->getComponentProcessorManager()->getProcessor($module) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface;
             }
         ));
     }

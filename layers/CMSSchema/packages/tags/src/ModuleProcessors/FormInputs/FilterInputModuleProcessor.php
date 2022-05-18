@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Tags\ModuleProcessors\FormInputs;
+namespace PoPCMSSchema\Tags\ComponentProcessors\FormInputs;
 
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputModuleProcessor;
-use PoP\ComponentModel\ModuleProcessors\DataloadQueryArgsFilterInputModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
+use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Tags\FilterInputProcessors\FilterInputProcessor;
 
-class FilterInputModuleProcessor extends AbstractFilterInputModuleProcessor implements DataloadQueryArgsFilterInputModuleProcessorInterface
+class FilterInputComponentProcessor extends AbstractFilterInputComponentProcessor implements DataloadQueryArgsFilterInputComponentProcessorInterface
 {
     public final const MODULE_FILTERINPUT_TAG_SLUGS = 'filterinput-tag-slugs';
     public final const MODULE_FILTERINPUT_TAG_IDS = 'filterinput-tag-ids';

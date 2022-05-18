@@ -13,5 +13,5 @@ services:
     PoPCMSSchema\Pages\LooseContracts\:
         resource: '../src/LooseContracts/*'
 
-    PoPCMSSchema\Pages\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\Pages\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'

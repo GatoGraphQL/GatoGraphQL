@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 
-abstract class AbstractQueryDataModuleProcessor extends AbstractFilterDataModuleProcessor implements QueryDataModuleProcessorInterface
+abstract class AbstractQueryDataComponentProcessor extends AbstractFilterDataComponentProcessor implements QueryDataComponentProcessorInterface
 {
-    use QueryDataModuleProcessorTrait;
+    use QueryDataComponentProcessorTrait;
 
     private ?ActionExecutionQueryInputOutputHandler $actionExecutionQueryInputOutputHandler = null;
 

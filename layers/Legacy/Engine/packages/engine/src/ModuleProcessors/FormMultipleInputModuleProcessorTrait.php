@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\Engine\ModuleProcessors;
+namespace PoP\Engine\ComponentProcessors;
 
 use PoP\Engine\FormInputs\MultipleInputFormInput;
 
-trait FormMultipleInputModuleProcessorTrait
+trait FormMultipleInputComponentProcessorTrait
 {
     /**
      * @return string[]

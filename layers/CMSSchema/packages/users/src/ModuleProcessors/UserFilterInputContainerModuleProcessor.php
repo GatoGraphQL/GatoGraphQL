@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ModuleProcessors;
+namespace PoPCMSSchema\Users\ComponentProcessors;
 
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
-use PoPCMSSchema\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Users\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
-class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
+class UserFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -30,10 +30,10 @@ class UserFilterInputContainerModuleProcessor extends AbstractFilterInputContain
     {
         $userFilterInputModules = [
             ...$this->getIDFilterInputModules(),
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_NAME],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_NAME],
         ];
         $adminUserFilterInputModules = [
-            [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_EMAILS],
+            [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_EMAILS],
         ];
         $paginationFilterInputModules = $this->getPaginationFilterInputModules();
         return match ($module[1]) {

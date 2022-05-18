@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolvers;
 
 use PoP\Root\Exception\AbstractException;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoPCMSSchema\SchemaCommons\Facades\CMS\CMSServiceFacade;
 
@@ -32,7 +32,7 @@ class SettingsMutationResolver extends AbstractMutationResolver
      */
     public function executeMutation(array $form_data): mixed
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $cmsService = CMSServiceFacade::getInstance();
 
         // Return the redirect. Use Hard redirect

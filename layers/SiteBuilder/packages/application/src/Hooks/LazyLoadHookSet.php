@@ -6,7 +6,7 @@ namespace PoP\Application\Hooks;
 
 use PoP\Application\Constants\Actions;
 use PoP\Application\ModuleFilters\Lazy;
-use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Constants\DataOutputItems;
 use PoP\ComponentModel\Constants\Params;
 use PoP\Root\Feedback\FeedbackItemResolution;

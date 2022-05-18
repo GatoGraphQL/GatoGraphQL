@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CommentMutations\ModuleProcessors;
+namespace PoPCMSSchema\CommentMutations\ComponentProcessors;
 
-use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor as UpstreamCommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\CommentFilterInputContainerComponentProcessor as UpstreamCommentFilterInputContainerComponentProcessor;
 
-class CommentFilterInputContainerModuleProcessor extends UpstreamCommentFilterInputContainerModuleProcessor
+class CommentFilterInputContainerComponentProcessor extends UpstreamCommentFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 

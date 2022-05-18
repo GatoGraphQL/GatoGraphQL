@@ -5,7 +5,7 @@ use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
@@ -590,7 +590,7 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
 
                             // self::$dynamic_module_resources = $processorresourcedecorator->getDynamicModulesResources($entryComponent, $props);
                             global $pop_resourcemoduledecoratorprocessor_manager;
-                            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                             $processor = $moduleprocessor_manager->getProcessor($entryComponent);
                             $processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
                             // @todo Check where $props comes from. Temporarily replaced with [] to avoid IDE error

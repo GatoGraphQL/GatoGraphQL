@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HTMLCodesBase
@@ -17,7 +17,7 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
     {
         switch ($module[1]) {
             case self::MODULE_CODE_INVITENEWMEMBERSHELP:
-                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $invitenew_processor = $moduleprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS]);
                 $invitenew = sprintf(
                     '<a class="btn btn-xs btn-success" href="%s" target="%s"><i class="fa fa-fw %s"></i>%s</a>',

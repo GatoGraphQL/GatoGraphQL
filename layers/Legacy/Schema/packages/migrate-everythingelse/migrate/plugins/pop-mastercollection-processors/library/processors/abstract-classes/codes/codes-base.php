@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_Processor_CodesBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_CodesBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getCode(array $module, array &$props)
     {

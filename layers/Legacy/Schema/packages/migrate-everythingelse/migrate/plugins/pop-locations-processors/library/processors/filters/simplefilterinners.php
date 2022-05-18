@@ -21,7 +21,7 @@ class PoP_Locations_Module_Processor_CustomSimpleFilterInners extends PoP_Module
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Locations:FilterInnerModuleProcessor:inputmodules',
+            'Locations:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

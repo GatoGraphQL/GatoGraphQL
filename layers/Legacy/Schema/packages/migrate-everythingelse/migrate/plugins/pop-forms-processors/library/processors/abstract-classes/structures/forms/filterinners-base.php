@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_FilterInnersBase extends PoP_Module_Processo
     protected function getFilteredInputSubmodules(array $module)
     {
         return \PoP\Root\App::applyFilters(
-            'FilterInnerModuleProcessor:inputmodules',
+            'FilterInnerComponentProcessor:inputmodules',
             $this->getInputSubmodules($module),
             $module
         );

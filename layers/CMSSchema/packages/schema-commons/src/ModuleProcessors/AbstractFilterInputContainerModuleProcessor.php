@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\ModuleProcessors;
+namespace PoPCMSSchema\SchemaCommons\ComponentProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\AbstractFilterInputContainerModuleProcessor as UpstreamAbstractFilterInputContainerModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputContainerComponentProcessor as UpstreamAbstractFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
-abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstractFilterInputContainerModuleProcessor
+abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAbstractFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -28,9 +28,9 @@ abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstr
     protected function getPaginationFilterInputModules(): array
     {
         return [
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SORT],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_OFFSET],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SORT],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_LIMIT],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_OFFSET],
         ];
     }
 
@@ -40,8 +40,8 @@ abstract class AbstractFilterInputContainerModuleProcessor extends UpstreamAbstr
     protected function getIDFilterInputModules(): array
     {
         return [
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_IDS],
-            [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_IDS],
+            [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_IDS],
         ];
     }
 }

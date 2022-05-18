@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 
-abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
     use FormComponentValueTrait, FormComponentModuleDelegatorTrait;
 
@@ -212,7 +212,7 @@ abstract class PoP_Module_Processor_TriggerLayoutFormComponentValuesBase extends
     public function getMutableonrequestSupplementaryDbobjectdata(array $module, array &$props): array
     {
         if ($value = $this->getModuleMutableonrequestSupplementaryDbobjectdataValues($module, $props)) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             // The Typeahead set the data-settings under 'typeahead-trigger'
             $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);

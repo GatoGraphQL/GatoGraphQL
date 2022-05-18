@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\RESTAPI\ComponentRoutingProcessors;
 
-use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoP\Root\App;
@@ -25,8 +25,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
 
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
-                RootRelationalFieldDataloadModuleProcessor::class,
-                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,
+                RootRelationalFieldDataloadComponentProcessor::class,
+                RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query')

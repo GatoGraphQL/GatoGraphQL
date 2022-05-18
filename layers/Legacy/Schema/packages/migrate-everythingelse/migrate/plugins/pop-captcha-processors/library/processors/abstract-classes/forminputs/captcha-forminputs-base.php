@@ -1,11 +1,11 @@
 <?php
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\FormMultipleInputComponentProcessorTrait;
 
 abstract class PoP_Module_Processor_CaptchaFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    use FormMultipleInputModuleProcessorTrait;
+    use FormMultipleInputComponentProcessorTrait;
 
     public function getTemplateResource(array $module, array &$props): ?array
     {

@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoPSitesWassup\SystemMutations\MutationResolverBridges\GenerateThemeMutationResolverBridge;
 
-class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadModuleProcessor
+class PoP_System_Theme_Module_Processor_SystemActions extends AbstractDataloadComponentProcessor
 {
     public final const MODULE_DATALOADACTION_SYSTEM_GENERATETHEME = 'dataloadaction-system-generate-theme';
 

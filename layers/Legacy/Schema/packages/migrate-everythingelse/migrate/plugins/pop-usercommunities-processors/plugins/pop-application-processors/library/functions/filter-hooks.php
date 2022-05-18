@@ -4,7 +4,7 @@ use PoP\ComponentModel\State\ApplicationState;
 /**
  * Add the filtercomponents to all filters
  */
-\PoP\Root\App::addFilter('Users:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
+\PoP\Root\App::addFilter('Users:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesUser', 10, 2);
 function gdUreAddFiltercomponentCommunitiesUser($filterinputs, array $module)
 {
     if (in_array($module, [
@@ -51,7 +51,7 @@ function gdUreAddSimpleFiltercomponentCommunitiesUser($filterinputs, array $modu
     return $filterinputs;
 }
 
-\PoP\Root\App::addFilter('FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
+\PoP\Root\App::addFilter('FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunitiesPost');
 function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 {
     // Place the 'communities' component before the 'profiles' one, so that we can use {{lastGeneratedId}} to reference it
@@ -91,7 +91,7 @@ function gdUreAddFiltercomponentCommunitiesPost($filterinputs)
 }
 
 // Add the author users filtercomponent on the Community author page
-\PoP\Root\App::addFilter('Blog:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
+\PoP\Root\App::addFilter('Blog:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponentCommunityusers', 10, 2);
 function gdUreAddFiltercomponentCommunityusers($filterinputs, array $module)
 {
     if (in_array($module, [

@@ -1,8 +1,8 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormComponentModuleProcessorInterface;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\FormComponentComponentProcessorInterface;
 
-abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngine_QueryDataModuleProcessorBase implements FormComponentModuleProcessorInterface
+abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngine_QueryDataComponentProcessorBase implements FormComponentComponentProcessorInterface
 {
     use FormComponentModuleDelegatorTrait;
 
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_InputGroupFormComponentsBase extends PoPEngi
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['input-group-btn'] = $this->getInputgroupbtnClass($module);
 

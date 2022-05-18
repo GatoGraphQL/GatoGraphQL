@@ -77,7 +77,7 @@ class Engine extends UpstreamEngine implements EngineInterface
     {
         $ret = array();
 
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
         /** @var ComponentModelModuleConfiguration */
         $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();

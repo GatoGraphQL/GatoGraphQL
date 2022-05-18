@@ -2,7 +2,7 @@
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 
-abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_ButtonGroupsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

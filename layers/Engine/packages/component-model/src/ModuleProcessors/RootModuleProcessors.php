@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-class RootModuleProcessors extends AbstractModuleProcessor
+class RootComponentProcessors extends AbstractComponentProcessor
 {
     public final const MODULE_EMPTY = 'empty';
 

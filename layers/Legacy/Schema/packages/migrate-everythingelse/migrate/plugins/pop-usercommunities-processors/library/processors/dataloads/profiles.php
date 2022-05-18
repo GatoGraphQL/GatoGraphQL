@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\ObjectIDFromURLParamComponentProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridges\EditMembershipMutationResolverBridge;
@@ -10,7 +10,7 @@ use PoPSitesWassup\EverythingElseMutations\SchemaServices\MutationResolverBridge
 
 class GD_URE_Module_Processor_ProfileDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use ObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_MYCOMMUNITIES_UPDATE = 'dataload-mycommunities-update';
     public final const MODULE_DATALOAD_INVITENEWMEMBERS = 'dataload-invitemembers';

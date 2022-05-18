@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 
-abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilterDataModuleProcessor implements FilterInputContainerModuleProcessorInterface
+abstract class AbstractFilterInputContainerComponentProcessor extends AbstractFilterDataComponentProcessor implements FilterInputContainerComponentProcessorInterface
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -46,10 +46,10 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         $schemaFieldArgNameTypeResolvers = [];
         foreach ($filterQueryArgsModules as $module) {
-            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
-            $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeResolver($module);
+            /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
+            $schemaFieldArgNameTypeResolvers[$filterInputName] = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeResolver($module);
         }
         return $schemaFieldArgNameTypeResolvers;
     }
@@ -58,11 +58,11 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
-            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDescription($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDescription($module);
             }
         }
         return null;
@@ -72,11 +72,11 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
-            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputDefaultValue($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputDefaultValue($module);
             }
         }
         return null;
@@ -86,11 +86,11 @@ abstract class AbstractFilterInputContainerModuleProcessor extends AbstractFilte
     {
         $filterQueryArgsModules = $this->getDataloadQueryArgsFilteringModules($module);
         foreach ($filterQueryArgsModules as $module) {
-            /** @var DataloadQueryArgsFilterInputModuleProcessorInterface */
-            $dataloadQueryArgsFilterInputModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-            $filterInputName = $dataloadQueryArgsFilterInputModuleProcessor->getName($module);
+            /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
+            $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+            $filterInputName = $dataloadQueryArgsFilterInputComponentProcessor->getName($module);
             if ($filterInputName === $fieldArgName) {
-                return $dataloadQueryArgsFilterInputModuleProcessor->getFilterInputTypeModifiers($module);
+                return $dataloadQueryArgsFilterInputComponentProcessor->getFilterInputTypeModifiers($module);
             }
         }
         return SchemaTypeModifiers::NONE;

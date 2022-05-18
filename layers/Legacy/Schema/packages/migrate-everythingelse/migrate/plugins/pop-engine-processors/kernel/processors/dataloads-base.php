@@ -1,11 +1,11 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadingModuleInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadingModuleInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadComponentProcessorTrait;
 
-abstract class PoP_Engine_Module_Processor_DataloadsBase extends PoPEngine_QueryDataModuleProcessorBase implements DataloadingModuleInterface
+abstract class PoP_Engine_Module_Processor_DataloadsBase extends PoPEngine_QueryDataComponentProcessorBase implements DataloadingModuleInterface
 {
-    use DataloadModuleProcessorTrait, PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait {
+    use DataloadComponentProcessorTrait, PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait {
 
-        PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait::initModelProps insteadof DataloadModuleProcessorTrait;
+        PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait::initModelProps insteadof DataloadComponentProcessorTrait;
     }
 }

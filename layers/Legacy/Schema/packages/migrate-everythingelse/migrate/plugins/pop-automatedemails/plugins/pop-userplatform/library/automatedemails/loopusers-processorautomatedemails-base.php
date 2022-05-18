@@ -3,7 +3,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\DataStructure\DataStructureManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
@@ -19,7 +19,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
         if ($users = $this->getUsers()) {
             // All the variables needed to operate into the pop-engine.php getData function
             $userTypeAPI = UserTypeAPIFacade::getInstance();
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();

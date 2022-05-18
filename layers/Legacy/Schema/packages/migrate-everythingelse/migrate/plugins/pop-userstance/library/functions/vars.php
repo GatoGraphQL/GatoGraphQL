@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
@@ -14,7 +14,7 @@ function popUserstanceModuleInstanceComponents($components)
         $route = \PoP\Root\App::getState('route');
 
         if ($route == POP_USERSTANCE_ROUTE_ADDOREDITSTANCE) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $stancetarget_name = $moduleprocessor_manager->getProcessor([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET])->getName([PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET]);
             $components[] = TranslationAPIFacade::getInstance()->__('stancetarget:', 'pop-userstance').(App::getRequest()->query->has($stancetarget_name) ? 'singlepost' : 'general');
         }

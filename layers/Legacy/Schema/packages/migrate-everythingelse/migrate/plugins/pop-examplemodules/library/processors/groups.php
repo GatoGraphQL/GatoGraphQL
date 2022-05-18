@@ -1,9 +1,9 @@
 <?php
 namespace PoP\ExampleModules;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 
-class ModuleProcessor_Groups extends AbstractModuleProcessor
+class ComponentProcessor_Groups extends AbstractComponentProcessor
 {
     public final const MODULE_EXAMPLE_HOME = 'example-home';
     public final const MODULE_EXAMPLE_AUTHOR = 'example-author';
@@ -26,21 +26,21 @@ class ModuleProcessor_Groups extends AbstractModuleProcessor
             case self::MODULE_EXAMPLE_HOME:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 if ($pageTypeAPI->getHomeStaticPageID()) {
-                    $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_HOMESTATICPAGE];
+                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_HOMESTATICPAGE];
                 } else {
-                    $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_HOMEWELCOME];
-                    $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_LATESTPOSTS];
+                    $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_HOMEWELCOME];
+                    $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_LATESTPOSTS];
                 }
                 break;
 
             case self::MODULE_EXAMPLE_AUTHOR:
-                $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_AUTHORDESCRIPTION];
-                $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_AUTHORLATESTPOSTS];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_AUTHORDESCRIPTION];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_AUTHORLATESTPOSTS];
                 break;
 
             case self::MODULE_EXAMPLE_TAG:
-                $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_TAGDESCRIPTION];
-                $ret[] = [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_TAGLATESTPOSTS];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_TAGDESCRIPTION];
+                $ret[] = [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_TAGLATESTPOSTS];
                 break;
         }
 

@@ -42,7 +42,7 @@ class LostPasswordMutationResolver extends AbstractMutationResolver
         $code = MutationResolverUtils::getLostPasswordCode($key, $user_login);
         $cmsapplicationapi = FunctionAPIFactory::getInstance();
 
-        // protected ModuleProcessorManagerInterface $moduleprocessor_manager,
+        // protected ComponentProcessorManagerInterface $moduleprocessor_manager,
         // $input_name = $moduleprocessor_manager->getProcessor([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE])->getName([PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_CODE]);
         $input_name = POP_INPUTNAME_CODE;
         $link = GeneralUtils::addQueryArgs([

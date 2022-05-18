@@ -173,7 +173,7 @@ class CustomPostFunctionalObjectTypeFieldResolver extends AbstractObjectTypeFiel
                 );
                 $route = $routes[$fieldName];
 
-                // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                // $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 // $input = [PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_UserStance_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_STANCETARGET];
                 // $input_name = $moduleprocessor_manager->getProcessor($input)->getName($input);
                 $input_name = POP_INPUTNAME_STANCETARGET;

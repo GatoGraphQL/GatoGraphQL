@@ -1,6 +1,6 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
+class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_EM_Module_Processor_ScrollMapsBase
 {
     public final const MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP = 'scrollmap-communities-scrollmap';
     public final const MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'scrollmap-authormembers-scrollmap';
@@ -27,7 +27,7 @@ class PoP_UserCommunities_ModuleProcessor_CustomScrollMapSections extends GD_EM_
     public function getInnerSubmodule(array $module)
     {
         $inner_modules = array(
-            self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ModuleProcessor_CustomScrollMaps::MODULE_SCROLL_COMMUNITIES_MAP],
+            self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::MODULE_SCROLL_COMMUNITIES_MAP],
             self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 

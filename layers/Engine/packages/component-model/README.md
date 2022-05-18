@@ -638,10 +638,10 @@ Having the component-based structure, we can now add the actual information requ
 }
 ```
 
-Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ModuleProcessor](#moduleprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ModuleProcessor, and create the nested associative array with all properties for all modules. A ModuleProcessor for a module called `MODULE_SOMENAME` looks like this:
+Module properties (configuration values, what database data to fetch, etc) and descendant modules are not added manually to the associative array. Instead, they are defined through an object called a [ComponentProcessor](#moduleprocessor) on a module by module basis. The PoP engine will traverse all modules in the component hierarchy, starting from the entry module, fetch the properties for each from the corresponding ComponentProcessor, and create the nested associative array with all properties for all modules. A ComponentProcessor for a module called `MODULE_SOMENAME` looks like this:
 
 ```php
-class SomeModuleProcessor extends AbstractModuleProcessor {
+class SomeComponentProcessor extends AbstractComponentProcessor {
 
   const MODULE_SOMENAME = 'somename';
 
@@ -780,7 +780,7 @@ Every module has a unique name that identifies it, defined as a constant:
 const MODULE_SOMENAME = 'somename';
 ```
 
-All the properties of the modules are implemented through objects called [ModuleProcessor](#moduleprocessor).
+All the properties of the modules are implemented through objects called [ComponentProcessor](#moduleprocessor).
 <!--
 > Note: the name of a module cannot include the special character "|" (`POP_CONSTANT_VIRTUALMODULEATTS_SEPARATOR`), as will be explained below
 -->
@@ -804,24 +804,24 @@ To generate a virtual module is done through function `create_virtualmodule`, li
 $virtualmodule = \PoP\Engine\VirtualModuleUtils::createVirtualmodule($module, $virtualmoduleatts),
 ```
 -->
-### ModuleProcessor
+### ComponentProcessor
 
-A ModuleProcessor is an object class in which to define all the properties of a module. ModuleProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ModuleProcessors is `AbstractModuleProcessor`:
+A ComponentProcessor is an object class in which to define all the properties of a module. ComponentProcessors are implemented following the [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design) methodology, establishing an object inheritance scheme to progressively add properties to modules. The base class for all ComponentProcessors is `AbstractComponentProcessor`:
 
 ```php
 namespace PoP\Engine;
-abstract class AbstractModuleProcessor {
+abstract class AbstractComponentProcessor {
 
   // ...
 }
 ```
 
-In practice, because a module is implemented through a ModuleProcessor object, describing a module equals to describing how the ModuleProcessor implements all functions to define the properties of the module.
+In practice, because a module is implemented through a ComponentProcessor object, describing a module equals to describing how the ComponentProcessor implements all functions to define the properties of the module.
 
-Every ModuleProcessor can handle more than 1 module: Because different modules will naturally share many properties, then having a single ModuleProcessor implement many modules is more legible and reduces the amount of code required compared to having 1 ModuleProcessor per module. Which modules are handled by the ModuleProcessor is defined through function `getSubmodulesToProcess`:
+Every ComponentProcessor can handle more than 1 module: Because different modules will naturally share many properties, then having a single ComponentProcessor implement many modules is more legible and reduces the amount of code required compared to having 1 ComponentProcessor per module. Which modules are handled by the ComponentProcessor is defined through function `getSubmodulesToProcess`:
 
 ```php
-class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
+class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
   const MODULE_SOMENAME1 = 'somename1';
   const MODULE_SOMENAME2 = 'somename2';
@@ -841,16 +841,16 @@ class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 }
 ```
 
-Once the ModuleProcessor class is instantiated, all of its defined modules become available to be added to the component hirarchy.
+Once the ComponentProcessor class is instantiated, all of its defined modules become available to be added to the component hirarchy.
 
-To access the properties of a module, we must reference its corresponding ModuleProcessor through function `getProcessor` from class `ModuleProcessor_Manager`:
+To access the properties of a module, we must reference its corresponding ComponentProcessor through function `getProcessor` from class `ComponentProcessor_Manager`:
 
 ```php
-// Retrive the PoP_ModuleProcessor_Manager object from the factory
-$moduleprocessor_manager = \PoP\Engine\ModuleProcessor_Manager_Factory::getInstance();
+// Retrive the PoP_ComponentProcessor_Manager object from the factory
+$moduleprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
-// Obtain the ModuleProcessor for module MODULE_SOMENAME
-$processor = $moduleprocessor_manager->getProcessor([SomeModuleProcessor::class, SomeModuleProcessor::MODULE_SOMENAME]);
+// Obtain the ComponentProcessor for module MODULE_SOMENAME
+$processor = $moduleprocessor_manager->getProcessor([SomeComponentProcessor::class, SomeComponentProcessor::MODULE_SOMENAME]);
 
 // Do something...
 // $processor->...
@@ -858,10 +858,10 @@ $processor = $moduleprocessor_manager->getProcessor([SomeModuleProcessor::class,
 
 ### Anatomy of a Module
 
-Because a ModuleProcessor can handle several modules, then each of its functions will receive a parameter `$module` indicating which is the module being processed. Please notice how, inside the function, we can conveniently use `switch` statements to operate accordingly (modules with shared properties can easily share the logic) and, according to [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design), we first obtain the results of the parent class and then the ModuleProcessor adds its own properties:
+Because a ComponentProcessor can handle several modules, then each of its functions will receive a parameter `$module` indicating which is the module being processed. Please notice how, inside the function, we can conveniently use `switch` statements to operate accordingly (modules with shared properties can easily share the logic) and, according to [SOLID](https://scotch.io/bar-talk/s-o-l-i-d-the-first-five-principles-of-object-oriented-design), we first obtain the results of the parent class and then the ComponentProcessor adds its own properties:
 
 ```php
-class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
+class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
   function foo($module) 
   {
@@ -894,7 +894,7 @@ class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 In addition to parameter `$module`, most functions will also receive a `$props` parameter, with the value of the "props" set on the module (more on section [Props](#props)):
 
 ```php
-class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
+class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
   function foo($module, &$atts) 
   {
@@ -912,7 +912,7 @@ class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 Modules are composed of other modules through function `getSubmodules`:
 
 ```php
-class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
+class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
   function getSubmodules($module) 
   {
@@ -928,9 +928,9 @@ class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
       case self::MODULE_SOMENAME2:
       case self::MODULE_SOMENAME3:
         
-        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT1];
-        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT2];
-        $ret[] = [LayoutModuleProcessor::class, LayoutModuleProcessor::MODULE_LAYOUT3];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT1];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT2];
+        $ret[] = [LayoutComponentProcessor::class, LayoutComponentProcessor::MODULE_LAYOUT3];
         break;
     }
 
@@ -941,10 +941,10 @@ class SomeModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
 
 > Note: the component hierarchy is created by calling `getSubmodules` on the entry-module and then repeating the process, iteratively, for its descendant modules.
 
-Abstract ModuleProcessors can define what descendant modules will be required through placeholder functions, to be implemented by an inheriting ModuleProcessor:
+Abstract ComponentProcessors can define what descendant modules will be required through placeholder functions, to be implemented by an inheriting ComponentProcessor:
 
 ```php
-abstract class PostLayoutAbstractModuleProcessor extends \PoP\Engine\AbstractModuleProcessor {
+abstract class PostLayoutAbstractComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 
   function getSubmodules($module) {
   
@@ -985,7 +985,7 @@ abstract class PostLayoutAbstractModuleProcessor extends \PoP\Engine\AbstractMod
   }
 }
 
-class PostLayoutModuleProcessor extends PostLayoutAbstractModuleProcessor {
+class PostLayoutComponentProcessor extends PostLayoutAbstractComponentProcessor {
 
   protected function getContentModule($module) 
   {
@@ -1035,7 +1035,7 @@ class PostLayoutModuleProcessor extends PostLayoutAbstractModuleProcessor {
 }
 
 // Initialize
-new PostLayoutModuleProcessor();
+new PostLayoutComponentProcessor();
 ```
 
 ### Function Names and Caching
@@ -1110,7 +1110,7 @@ Modules can set props on descendant modules whichever number of levels below in 
 
 Setting props is done through functions `initModelProps($module, &$props)` and `initRequestProps($module, &$props)`. A prop must be implemented in either function, but not on both of them. `initRequestProps` is used for defining props that depend directly on the requested URL, such as adding a classname `post-{id}` to prop `"class"`, where `{id}` is the ID of the requested post on that URL. `initModelProps` is used for everything else. 
 
-Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubmodules` and those inner functions invoked by `getSubmodules`), every function in the `ModuleProcessor` can receive `$props`. 
+Setting props is done at the very beginning: Immediately after obtaining the component hierarchy, PoP Engine will invoke these 2 functions **before anything else** (i.e. before getting the configuration, fetching database data, etc). Hence, with the exception of the functions to create the component hierarchy (i.e. `getSubmodules` and those inner functions invoked by `getSubmodules`), every function in the `ComponentProcessor` can receive `$props`. 
 
 `initModelProps` and `initRequestProps` store the props under parameter `$props`, hence it is passed by reference. In all other functions, `$props` may also be passed by reference, but only for performance issues, to not duplicate the object in memory.
 
@@ -1230,7 +1230,7 @@ function getDbobjectIds($module, &$props, $data_properties)
 }
 ```
 
-However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ModuleProcessor must inherit from class `QueryDataAbstractModuleProcessor`, which implements `getDbobjectIds` transferring the responsibility of finding the database object IDs to function `getDbobjectIds` from the corresponding [Dataloader](#dataloader).
+However, most likely, the objects are not known in advance, and must be found through a query. In this case, the ComponentProcessor must inherit from class `QueryDataAbstractComponentProcessor`, which implements `getDbobjectIds` transferring the responsibility of finding the database object IDs to function `getDbobjectIds` from the corresponding [Dataloader](#dataloader).
 
 ##### Defining the Dataloader
 
@@ -1441,12 +1441,12 @@ function getRelationalSubmodules($module)
     
       $ret['author'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeModuleProcessor::class, SomeModuleProcessor::MODULE_AUTHORNAME],
+          [SomeComponentProcessor::class, SomeComponentProcessor::MODULE_AUTHORNAME],
         ]
       ];
       $ret['comments'] = [
         POP_CONSTANT_SUBCOMPONENTDATALOADER_DEFAULTFROMFIELD => [
-          [SomeModuleProcessor::class, SomeModuleProcessor::MODULE_COMMENTLAYOUT],
+          [SomeComponentProcessor::class, SomeComponentProcessor::MODULE_COMMENTLAYOUT],
         ]
       ];
       break;
@@ -1727,7 +1727,7 @@ After fecthing data from the database, functions `getQueryState`, `getQueryParam
 
 In addition to loading data, "dataloading" modules can also post data, or execute any operation supported by the underlying CMS (log in/out the user, send emails, logging, etc).
 
-To achieve this, the ModuleProcessor must define the ActionExecuter object for the module through function `getActionExecuterClass`:
+To achieve this, the ComponentProcessor must define the ActionExecuter object for the module through function `getActionExecuterClass`:
 
 ```php
 function getActionExecuterClass($module) {
@@ -1789,7 +1789,7 @@ class ActionExecuter_Logout extends \PoP\Engine\AbstractActionExecuter {
 
 #### Storing and reusing the results from an execution
 
-The results obtained in function `execute` can be stored for other objects (ModuleProcessors, ActionExecuters) to use and base their logic upon them. For instance, a module is able to load data or not depending on the success or not of an execution.
+The results obtained in function `execute` can be stored for other objects (ComponentProcessors, ActionExecuters) to use and base their logic upon them. For instance, a module is able to load data or not depending on the success or not of an execution.
 
 Storing and accessing the execution results is done through function `setResult` and `getResult` from the `ActionExecution_Manager` object. For instance, an ActionExecuter to create a comment will store the new comment ID:
 
@@ -1832,7 +1832,7 @@ function execute(&$data_properties)
 }
 ```
 
-A ModuleProcessor can modify what data it will fetch from the database through function `prepareDataPropertiesAfterMutationExecution`, which is invoked after executing the module's corresponding ActionExecuter. For instance, after creating a comment, we can load it immediately or, if the creation was not successful, state to skip loading any database object:
+A ComponentProcessor can modify what data it will fetch from the database through function `prepareDataPropertiesAfterMutationExecution`, which is invoked after executing the module's corresponding ActionExecuter. For instance, after creating a comment, we can load it immediately or, if the creation was not successful, state to skip loading any database object:
 
 ```php
 function prepareDataPropertiesAfterMutationExecution($module, &$props, &$data_properties) {
@@ -1860,7 +1860,7 @@ function prepareDataPropertiesAfterMutationExecution($module, &$props, &$data_pr
 
 A "checkpoint" is a condition that must be satisfied when performing an operation-access validation. These validations do not include content validations, such as checking if the user has filled-in the form correctly; instead, they are used to find out if the user can access a certain page or functionality, such as checking if the user is logged in to access the user account page, checking if the user IP has been whitelisted to execute special scripts, etc.
 
-Modules can specify their checkpoints through 2 functions in the ModuleProcessor:
+Modules can specify their checkpoints through 2 functions in the ComponentProcessor:
 
 - `getDataAccessCheckpoints`: Define the checkpoints to access data for the module: both load data or execute the module's actionexecuter
 - `getActionExecutionCheckpoints`: Define the checkpoints to execute the module's actionexecuter
@@ -1882,7 +1882,7 @@ function getDataAccessCheckpoints($module, &$props)
 }
 ```
 
-Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ModuleProcessor, like this:
+Pages can also be assigned checkpoints through their [SettingsProcessor](#settingsprocessor). Whenever a module is directly associated with a page (eg: module `MODULE_MYPOSTS_SCROLL` is directly associated to `POP_PAGE_MYPOSTS`) then it is assigned the checkpoints associated with that page. Associating a module with a page is done through function `getRelevantPage` from the ComponentProcessor, like this:
 
 ```php
 function getRelevantPage($module, &$props) {
@@ -1980,7 +1980,7 @@ Keeping these properties in `$vars` is needed for the following reasons:
 
 _1. To calculate the `modelInstanceId`:_ the `modelInstanceId` is the unique identifier representing the particular instance of the component hierarchy. This id is calculated by function `ModelInstanceProcessor_Utils::getModelInstanceId()`, which simply calculates a hash of the values of all properties which alter the component hierarchy. Because not all properties in `$vars` alter the component hierarchy, these ones must be defined by implementing hook `"ModelInstanceProcessor:model_instance_components"`.
 
-_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module (more on this under [PageModuleProcessors](#pagemoduleprocessor)).
+_2. To determine the entry module_: The component hierarchy's top-most module is called the entry module. Every potential entry module must define a list of conditions, to be evaluated against `$vars`, that need be satisfied to be chosen the entry module (more on this under [PageComponentProcessors](#pagemoduleprocessor)).
 
 _3. To decouple processed page from requested page_: Storing all properties which modify the component hierarchy under `$vars`, making sure that these properties are only accessed through `$vars` all throughout the application, and then modifying these values directly in `$vars`, makes it possible to manipulate the response, for instance adding more data. This way, it is possible to fetch more than one page's content on a single request (for preloading views to cache on the client or other use cases), or send personalized transactional emails to many users on a single request, among other use cases.
 
@@ -1997,7 +1997,7 @@ When first accessed, `$vars` is initialized with certain current request values,
 
 Plugins must add their own properties and corresponding values in `$vars` by implementing hook `"\PoP\ComponentModel\Engine_Vars:add_vars"`. `$vars` can be `reset` at any moment and filled with different values, for instance to process a different request.
 
-### PageModuleProcessor
+### PageComponentProcessor
 
 Will be added soon...
 

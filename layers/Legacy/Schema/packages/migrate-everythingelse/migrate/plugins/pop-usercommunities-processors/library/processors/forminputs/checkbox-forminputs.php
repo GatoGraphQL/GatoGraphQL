@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module_Processor_CheckboxFormInputsBase
@@ -54,7 +54,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
-                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 return $moduleprocessor_manager->getProcessor($input)->getName($input);
         }
         
@@ -67,7 +67,7 @@ class PoP_UserCommunities_Module_Processor_CheckboxFormInputs extends PoP_Module
             case self::MODULE_FILTERINPUT_FILTERBYCOMMUNITY:
                 // By having the same name/multiple, that other forminput will get its value
                 $input = $this->getCommunitiesInput();
-                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 return $moduleprocessor_manager->getProcessor($input)->isMultiple($input);
         }
         

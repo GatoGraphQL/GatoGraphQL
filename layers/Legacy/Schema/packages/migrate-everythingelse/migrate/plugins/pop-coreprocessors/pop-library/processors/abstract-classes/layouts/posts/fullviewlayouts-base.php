@@ -2,7 +2,7 @@
 define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP', 'top');
 define('GD_CONSTANT_FULLVIEW_TITLEPOSITION_BODY', 'body');
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['title'] = '';
 

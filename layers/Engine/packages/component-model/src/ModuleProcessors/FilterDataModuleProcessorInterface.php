@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-interface FilterDataModuleProcessorInterface
+interface FilterDataComponentProcessorInterface
 {
     public function getDataloadQueryArgsFilteringModules(array $module): array;
     public function getActiveDataloadQueryArgsFilteringModules(array $module, array $source = null): array;

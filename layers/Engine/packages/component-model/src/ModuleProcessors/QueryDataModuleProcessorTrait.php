@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\PaginationParams;
@@ -12,9 +12,9 @@ use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
 use PoP\Root\App;
 
-trait QueryDataModuleProcessorTrait
+trait QueryDataComponentProcessorTrait
 {
-    use FilterDataModuleProcessorTrait;
+    use FilterDataComponentProcessorTrait;
 
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
@@ -104,7 +104,7 @@ trait QueryDataModuleProcessorTrait
             );
 
             $params_from_request = App::applyFilters(
-                'QueryDataModuleProcessorTrait:request:filter_params',
+                'QueryDataComponentProcessorTrait:request:filter_params',
                 $params_from_request
             );
 

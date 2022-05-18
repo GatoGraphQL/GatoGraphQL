@@ -1,6 +1,6 @@
 <?php
 
-abstract class Wassup_Module_Processor_LinkAccessLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class Wassup_Module_Processor_LinkAccessLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

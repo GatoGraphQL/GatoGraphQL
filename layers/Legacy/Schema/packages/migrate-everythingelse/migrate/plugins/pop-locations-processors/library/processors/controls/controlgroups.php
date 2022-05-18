@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
@@ -22,7 +22,7 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     {
         $ret = parent::getSubmodules($module);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST:

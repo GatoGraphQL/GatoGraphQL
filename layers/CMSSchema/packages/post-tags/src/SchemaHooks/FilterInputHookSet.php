@@ -6,15 +6,15 @@ namespace PoPCMSSchema\PostTags\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Posts\ModuleProcessors\AbstractPostFilterInputContainerModuleProcessor;
-use PoPCMSSchema\Tags\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Posts\ComponentProcessors\AbstractPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Tags\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
-            AbstractPostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            AbstractPostFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
             $this->getFilterInputModules(...)
         );
     }
@@ -24,12 +24,12 @@ class FilterInputHookSet extends AbstractHookSet
         return [
             ...$filterInputModules,
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_TAG_SLUGS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_TAG_SLUGS
             ],
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_TAG_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_TAG_IDS
             ],
         ];
     }

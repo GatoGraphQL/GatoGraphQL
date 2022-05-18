@@ -3,7 +3,7 @@
 /**
  * Add filtercomponents
  */
-\PoP\Root\App::addFilter('CommonUserRoles:FilterInnerModuleProcessor:inputmodules', 'gdUreAddFiltercomponent', 10, 2);
+\PoP\Root\App::addFilter('CommonUserRoles:FilterInnerComponentProcessor:inputmodules', 'gdUreAddFiltercomponent', 10, 2);
 function gdUreAddFiltercomponent($filterinputs, array $module)
 {
 	if ($module == [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS]) {

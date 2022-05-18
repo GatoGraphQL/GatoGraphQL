@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Pages\ModuleProcessors;
+namespace PoPCMSSchema\Pages\ComponentProcessors;
 
-use PoPCMSSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\CustomPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
-class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
+class PageFilterInputContainerComponentProcessor extends CustomPostFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -38,9 +38,9 @@ class PageFilterInputContainerModuleProcessor extends CustomPostFilterInputConta
         };
         $filterInputModules = parent::getFilterInputModules($targetModule);
         // Add the parentIDs and parentID filterInputs
-        $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_IDS];
-        $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_PARENT_ID];
-        $filterInputModules[] = [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS];
+        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_IDS];
+        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_ID];
+        $filterInputModules[] = [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_PARENT_IDS];
         return $filterInputModules;
     }
 

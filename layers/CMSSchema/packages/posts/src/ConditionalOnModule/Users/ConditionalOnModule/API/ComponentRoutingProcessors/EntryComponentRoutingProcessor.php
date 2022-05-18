@@ -9,7 +9,7 @@ use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
@@ -26,8 +26,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
-                FieldDataloadModuleProcessor::class,
-                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
+                FieldDataloadComponentProcessor::class,
+                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST
             ],
         );
         foreach ($routeComponents as $route => $component) {

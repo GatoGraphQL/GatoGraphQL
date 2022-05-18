@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
@@ -46,7 +46,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = array();
 
-        // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        // $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         // foreach ($this->getSubmodules($module) as $submodule) {
 
         //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($submodule);
@@ -76,7 +76,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
 
     // function getActivemoduleSelectors(array $module, array &$props) {
 
-    //     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     //     $ret = array();
 
@@ -169,7 +169,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     public function getPanelHeaderTitles(array $module, array &$props)
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
-        // $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        // $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         // return $moduleprocessor_manager->getProcessor($submodule)->getTitle($submodule, $props);
         return array();
     }
@@ -201,7 +201,7 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($panel_modules = $this->getPanelSubmodules($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['panels'] = array_map(

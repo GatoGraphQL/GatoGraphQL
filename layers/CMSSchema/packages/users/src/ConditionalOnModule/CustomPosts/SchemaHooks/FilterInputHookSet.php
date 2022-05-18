@@ -6,15 +6,15 @@ namespace PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPosts\ModuleProcessors\AbstractCustomPostFilterInputContainerModuleProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\AbstractCustomPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
-            AbstractCustomPostFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            AbstractCustomPostFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
             $this->getFilterInputModules(...)
         );
     }
@@ -31,16 +31,16 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
             ],
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_SLUG
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_SLUG
             ],
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
             ],
         ];
     }

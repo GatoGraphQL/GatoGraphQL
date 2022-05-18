@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_BlocksBase
 {
@@ -66,7 +66,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\Root\App;
 
-trait DataloadModuleProcessorTrait
+trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 

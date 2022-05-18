@@ -16,32 +16,32 @@ class MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMain
         return array(
             RequestNature::HOME => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_HOME],
+                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_HOME],
                 ],
             ],
             RequestNature::NOTFOUND => [
                 [
-                    'module' => [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_404],
+                    'module' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_404],
                 ],
             ],
             TagRequestNature::TAG => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_TAG],
+                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_TAG],
                 ],
             ],
             UserRequestNature::USER => [
                 [
-                    'module' => [ModuleProcessor_Groups::class, ModuleProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
+                    'module' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
                 ],
             ],
             CustomPostRequestNature::CUSTOMPOST => [
                 [
-                    'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
+                    'module' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
                 ],
             ],
             PageRequestNature::PAGE => [
                 [
-                    'module' => [ModuleProcessor_Dataloads::class, ModuleProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
+                    'module' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
                 ],
             ],
         );

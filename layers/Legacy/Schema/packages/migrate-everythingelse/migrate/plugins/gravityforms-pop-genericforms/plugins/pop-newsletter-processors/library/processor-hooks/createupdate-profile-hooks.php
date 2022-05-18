@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
@@ -27,7 +27,7 @@ class PoP_Newsletter_GF_CreateUpdate_Profile_Hooks
             return $form_data;
         }
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $form_data['newsletter'] = $moduleprocessor_manager->getProcessor([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER])->getValue([GenericForms_Module_Processor_CheckboxFormInputs::class, GenericForms_Module_Processor_CheckboxFormInputs::MODULE_FORMINPUT_CUP_NEWSLETTER]);
         return $form_data;
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\MutationResolverBridges;
 
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 
 abstract class AbstractCRUDComponentMutationResolverBridge extends AbstractComponentMutationResolverBridge
 {

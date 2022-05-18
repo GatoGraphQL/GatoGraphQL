@@ -4,8 +4,8 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\GenericCustomPosts\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\GenericCustomPosts\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\GenericCustomPosts\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

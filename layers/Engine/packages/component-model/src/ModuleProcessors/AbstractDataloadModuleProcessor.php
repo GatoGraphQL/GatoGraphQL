@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-abstract class AbstractDataloadModuleProcessor extends AbstractQueryDataModuleProcessor implements DataloadingModuleInterface
+abstract class AbstractDataloadComponentProcessor extends AbstractQueryDataComponentProcessor implements DataloadingModuleInterface
 {
-    use DataloadModuleProcessorTrait;
+    use DataloadComponentProcessorTrait;
 }

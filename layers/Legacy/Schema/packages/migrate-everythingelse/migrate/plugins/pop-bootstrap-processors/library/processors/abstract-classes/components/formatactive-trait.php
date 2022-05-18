@@ -1,6 +1,6 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\FormattableModuleInterface;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\FormattableModuleInterface;
 use PoP\ComponentModel\State\ApplicationState;
 
 trait FormatActiveTrait
@@ -12,7 +12,7 @@ trait FormatActiveTrait
 
     protected function getSubmoduleFormat(array $module, $submodule)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($submodule);
         if ($processor instanceof FormattableModuleInterface) {
             return $processor->getFormat($submodule);

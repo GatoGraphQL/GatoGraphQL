@@ -1,7 +1,7 @@
 <?php
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\ModuleFiltering\ModuleFilterManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
 
 class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor {
 
@@ -38,7 +38,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         return array_values(
             array_unique(
                 \PoP\Root\App::applyFilters(
-                    'PoP_WebPlatformQueryDataModuleProcessorBase:module-resources',
+                    'PoP_WebPlatformQueryDataComponentProcessorBase:module-resources',
                     array(),
                     $module,
                     $templateResource,
@@ -82,7 +82,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
 
-            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getDynamicResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -115,7 +115,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
     //     foreach ($this->getDecoratedmoduleProcessor($module)->get_descendant_modules_to_propagate($module) as $submodule) {
 
-    //         if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+    //         if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
     //             $ret = array_merge(
     //                 $ret,
@@ -158,7 +158,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
 
-            if ($submodule_ret = $this->getModuleProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
+            if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getDynamicTemplateResourcesMergedmoduletree($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
                 $ret = array_unique(
                     array_merge(
@@ -179,5 +179,5 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
  * Settings Initialization
  */
 global $pop_resourcemoduledecoratorprocessor_manager;
-$pop_resourcemoduledecoratorprocessor_manager->add(PoP_WebPlatformQueryDataModuleProcessorBase::class, PoP_ResourceModuleDecoratorProcessor::class);
+$pop_resourcemoduledecoratorprocessor_manager->add(PoP_WebPlatformQueryDataComponentProcessorBase::class, PoP_ResourceModuleDecoratorProcessor::class);
 // $pop_resourcemoduledecoratorprocessor_manager->add(PoP_Module_ProcessorBaseWrapper::class, PoP_ResourceModuleDecoratorProcessor::class);

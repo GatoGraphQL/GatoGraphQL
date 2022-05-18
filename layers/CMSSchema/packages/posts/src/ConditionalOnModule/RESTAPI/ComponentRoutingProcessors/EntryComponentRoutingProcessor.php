@@ -13,7 +13,7 @@ use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcess
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 
 class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponentRoutingProcessor
 {
@@ -25,8 +25,8 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $ret = array();
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
             'component' => [
-                FieldDataloadModuleProcessor::class,
-                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
+                FieldDataloadComponentProcessor::class,
+                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -54,10 +54,10 @@ class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponen
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getPostsRoute() => [
-                FieldDataloadModuleProcessor::class,
+                FieldDataloadComponentProcessor::class,
                 $componentModelModuleConfiguration->enableAdminSchema() ?
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
-                    : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
+                    FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINPOSTLIST
+                    : FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

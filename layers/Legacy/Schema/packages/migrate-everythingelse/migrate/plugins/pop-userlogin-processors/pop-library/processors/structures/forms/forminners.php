@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\RequestUtils;
 
 class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_FormInnersBase
@@ -109,7 +109,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
 
     //         case self::MODULE_FORMINNER_LOSTPWDRESET:
 
-    //             $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    //             $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     //             // If loading the page straight, then set the value on the input directly
     //             // Otherwise, use Javascript to fill in the value

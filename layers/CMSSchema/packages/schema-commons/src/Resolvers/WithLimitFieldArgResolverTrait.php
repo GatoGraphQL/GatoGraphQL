@@ -6,7 +6,7 @@ namespace PoPCMSSchema\SchemaCommons\Resolvers;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\Root\Translation\TranslationAPIInterface;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
 trait WithLimitFieldArgResolverTrait
 {
@@ -26,8 +26,8 @@ trait WithLimitFieldArgResolverTrait
         // Check we are dealing with the "limit" fieldArg
         if ($this->limitFilterInputName === null) {
             $this->limitFilterInputName = FilterInputHelper::getFilterInputName([
-                CommonFilterInputModuleProcessor::class,
-                CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_LIMIT
+                CommonFilterInputComponentProcessor::class,
+                CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_LIMIT
             ]);
         }
         if ($fieldArgName !== $this->limitFilterInputName) {

@@ -1,5 +1,5 @@
 <?php
-use PoP\Engine\ModuleProcessors\ObjectIDFromURLParamModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\ObjectIDFromURLParamComponentProcessorTrait;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 use PoPSitesWassup\EventLinkMutations\MutationResolverBridges\CreateEventLinkMutationResolverBridge;
@@ -7,7 +7,7 @@ use PoPSitesWassup\EventLinkMutations\MutationResolverBridges\UpdateEventLinkMut
 
 class PoP_EventLinksCreation_Module_Processor_CreateUpdatePostDataloads extends PoP_Module_Processor_AddEditContentDataloadsBase
 {
-    use ObjectIDFromURLParamModuleProcessorTrait;
+    use ObjectIDFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_EVENTLINK_UPDATE = 'dataload-eventlink-update';
     public final const MODULE_DATALOAD_EVENTLINK_CREATE = 'dataload-eventlink-create';

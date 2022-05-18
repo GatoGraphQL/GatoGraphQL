@@ -13,15 +13,15 @@ class EntryComponentManager implements EntryComponentManagerInterface
 {
     use BasicServiceTrait;
 
-    private ?ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager = null;
+    private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
 
-    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {
-        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+        $this->routeComponentProcessorManager = $routeComponentProcessorManager;
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+        return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
 
     public function getEntryComponent(): ?array

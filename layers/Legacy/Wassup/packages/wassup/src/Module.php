@@ -15,7 +15,7 @@ class Module extends AbstractModule
     {
         /**
          * Comment Leo 17/03/2021:
-         * All the ModuleProcessors for all the migrate-* packages
+         * All the ComponentProcessors for all the migrate-* packages
          * must be defined as services, otherwise we get a
          * "service not-defined" Exception, in
          * layers/Engine/packages/component-model/src/ItemProcessors/ItemProcessorManagerTrait.php:
@@ -61,7 +61,7 @@ class Module extends AbstractModule
                 \PoPSchema\StancesWP\Module::class,
             ],
             $skipLoadingUnmigratedComponents ? [] : [
-                // These ones must have their ModuleProcessors defined as services
+                // These ones must have their ComponentProcessors defined as services
                 \PoPSchema\EverythingElseWP\Module::class,
                 \PoP\SiteWP\Module::class,
                 \PoP\SPA\Module::class,

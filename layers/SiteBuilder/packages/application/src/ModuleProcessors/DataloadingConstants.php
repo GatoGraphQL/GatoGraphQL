@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\Application\ModuleProcessors;
+namespace PoP\Application\ComponentProcessors;
 
-use PoP\ConfigurationComponentModel\ModuleProcessors\DataloadingConstants as UpstreamDataloadingConstants;
+use PoP\ConfigurationComponentModel\ComponentProcessors\DataloadingConstants as UpstreamDataloadingConstants;
 
 class DataloadingConstants extends UpstreamDataloadingConstants
 {

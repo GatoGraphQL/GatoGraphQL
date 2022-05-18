@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Processor_FormComponentGroupsBase
@@ -40,7 +40,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                     self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT => 'bg-warning',
                 );
 
-                $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+                $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $trigger = $moduleprocessor_manager->getProcessor($component)->getTriggerSubmodule($component);
 
                 $descriptions = array(

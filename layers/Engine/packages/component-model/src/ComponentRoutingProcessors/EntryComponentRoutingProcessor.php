@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentRoutingProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\RootModuleProcessors;
+use PoP\ComponentModel\ComponentProcessors\RootComponentProcessors;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
@@ -17,7 +17,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[] = [
-            'component' => [RootModuleProcessors::class, RootModuleProcessors::MODULE_EMPTY],
+            'component' => [RootComponentProcessors::class, RootComponentProcessors::MODULE_EMPTY],
         ];
 
         return $ret;

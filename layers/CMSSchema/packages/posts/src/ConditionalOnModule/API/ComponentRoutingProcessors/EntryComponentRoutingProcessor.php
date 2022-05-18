@@ -11,7 +11,7 @@ use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
-use PoPCMSSchema\Posts\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Posts\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
@@ -22,7 +22,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     {
         $ret = array();
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component' => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
+            'component' => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],
@@ -39,7 +39,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
+            $moduleConfiguration->getPostsRoute() => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST],
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [

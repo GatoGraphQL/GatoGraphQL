@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors;
+namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentProcessors;
 
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\Tags\ConditionalOnModule\API\ModuleProcessors\AbstractFieldDataloadModuleProcessor;
+use PoPCMSSchema\Tags\ConditionalOnModule\API\ComponentProcessors\AbstractFieldDataloadComponentProcessor;
 
-class PostTagFieldDataloadModuleProcessor extends AbstractFieldDataloadModuleProcessor
+class PostTagFieldDataloadComponentProcessor extends AbstractFieldDataloadComponentProcessor
 {
     public function getRelationalTypeResolver(array $module): ?RelationalTypeResolverInterface
     {

@@ -1,10 +1,10 @@
 <?php
-use PoP\ComponentModel\ModuleProcessors\DataloadModuleProcessorTrait;
+use PoP\ComponentModel\ComponentProcessors\DataloadComponentProcessorTrait;
 
-abstract class PoPHTMLCSSPlatform_Processor_DataloadsBase extends PoP_HTMLCSSPlatformQueryDataModuleProcessorBase
+abstract class PoPHTMLCSSPlatform_Processor_DataloadsBase extends PoP_HTMLCSSPlatformQueryDataComponentProcessorBase
 {
-    use DataloadModuleProcessorTrait, PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait {
+    use DataloadComponentProcessorTrait, PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait {
 
-        PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait::initModelProps insteadof DataloadModuleProcessorTrait;
+        PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait::initModelProps insteadof DataloadComponentProcessorTrait;
     }
 }

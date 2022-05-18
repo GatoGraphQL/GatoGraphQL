@@ -1,5 +1,5 @@
 <?php
-use PoP\Application\ModuleProcessors\DataloadingConstants;
+use PoP\Application\ComponentProcessors\DataloadingConstants;
 use PoP\Application\QueryInputOutputHandlers\ParamConstants;
 
 \PoP\Root\App::addFilter('gd_jquery_constants', gdJqueryConstantsQueryhandler(...));

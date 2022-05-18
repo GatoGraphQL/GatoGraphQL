@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_Processor_CommentClippedViewComponentHeadersBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_CommentClippedViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

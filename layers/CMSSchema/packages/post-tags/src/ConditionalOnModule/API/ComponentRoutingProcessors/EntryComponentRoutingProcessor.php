@@ -12,8 +12,8 @@ use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 use PoPCMSSchema\PostTags\Module;
 use PoPCMSSchema\PostTags\ModuleConfiguration;
-use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
+use PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentProcessors\PostTagFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentProcessors\TagPostFieldDataloadComponentProcessor;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 
@@ -37,7 +37,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
-            'component' => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
+            'component' => [PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing' => [
@@ -57,7 +57,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostTagsRoute() => [PostTagFieldDataloadModuleProcessor::class, PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
+            $moduleConfiguration->getPostTagsRoute() => [PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST],
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
@@ -70,7 +70,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         /** @var PostsModuleConfiguration */
         $moduleConfiguration = App::getModule(PostsModule::class)->getConfiguration();
         $routeComponents = array(
-            $moduleConfiguration->getPostsRoute() => [TagPostFieldDataloadModuleProcessor::class, TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
+            $moduleConfiguration->getPostsRoute() => [TagPostFieldDataloadComponentProcessor::class, TagPostFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST],
         );
         foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [

@@ -1,6 +1,6 @@
 <?php
 
-abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

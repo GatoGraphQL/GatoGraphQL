@@ -6,21 +6,21 @@ namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\Root\App;
 use PoP\ComponentModel\Constants\PaginationParams;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\ModuleProcessors\FilterDataModuleProcessorInterface;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\FilterDataComponentProcessorInterface;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
 
-    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     /**
@@ -66,9 +66,9 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
         // Apply filtering of the data
         if ($filtering_modules = $data_properties[DataloadingConstants::QUERYARGSFILTERINGMODULES] ?? null) {
             foreach ($filtering_modules as $module) {
-                /** @var FilterDataModuleProcessorInterface */
-                $filterDataModuleProcessor = $this->getModuleProcessorManager()->getProcessor($module);
-                $filterDataModuleProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
+                /** @var FilterDataComponentProcessorInterface */
+                $filterDataComponentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+                $filterDataComponentProcessor->filterHeadmoduleDataloadQueryArgs($module, $query);
             }
         }
 

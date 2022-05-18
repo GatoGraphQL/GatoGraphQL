@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\ModuleProcessors;
+namespace PoPAPI\API\ComponentProcessors;
 
-class RelationalFieldQueryDataModuleProcessor extends AbstractRelationalFieldQueryDataModuleProcessor
+class RelationalFieldQueryDataComponentProcessor extends AbstractRelationalFieldQueryDataComponentProcessor
 {
     public final const MODULE_LAYOUT_RELATIONALFIELDS = 'layout-relationalfields';
 

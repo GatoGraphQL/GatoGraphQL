@@ -1,7 +1,7 @@
 <?php
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
-abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class GD_URE_Custom_Module_Processor_ProfileOrganizationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

@@ -23,7 +23,7 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Comments:FilterInnerModuleProcessor:inputmodules',
+            'Comments:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

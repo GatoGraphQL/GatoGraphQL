@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\API\ComponentRoutingProcessors;
 
-use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ComponentProcessors\RootRelationalFieldDataloadComponentProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
@@ -20,8 +20,8 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
 
         $ret[RequestNature::QUERY_ROOT][] = [
             'component' => [
-                RootRelationalFieldDataloadModuleProcessor::class,
-                RootRelationalFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT
+                RootRelationalFieldDataloadComponentProcessor::class,
+                RootRelationalFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ROOT
             ],
             'conditions' => [
                 'scheme' => APISchemes::API,

@@ -6,16 +6,16 @@ namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks;
 
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Comments\ConditionalOnModule\Users\ModuleProcessors\FormInputs\FilterInputModuleProcessor as UserFilterInputModuleProcessor;
-use PoPCMSSchema\Comments\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ConditionalOnModule\Users\ComponentProcessors\FormInputs\FilterInputComponentProcessor as UserFilterInputComponentProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\CommentFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 
 class FilterInputHookSet extends AbstractHookSet
 {
     protected function init(): void
     {
         App::addFilter(
-            CommentFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS,
+            CommentFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
             $this->getFilterInputModules(...)
         );
     }
@@ -33,12 +33,12 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_AUTHOR_IDS
             ],
             [
-                FilterInputModuleProcessor::class,
-                FilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
+                FilterInputComponentProcessor::class,
+                FilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_AUTHOR_IDS
             ],
         ];
     }
@@ -47,12 +47,12 @@ class FilterInputHookSet extends AbstractHookSet
     {
         return [
             [
-                UserFilterInputModuleProcessor::class,
-                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::class,
+                UserFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOST_AUTHOR_IDS
             ],
             [
-                UserFilterInputModuleProcessor::class,
-                UserFilterInputModuleProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
+                UserFilterInputComponentProcessor::class,
+                UserFilterInputComponentProcessor::MODULE_FILTERINPUT_EXCLUDE_CUSTOMPOST_AUTHOR_IDS
             ],
         ];
     }

@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleDecoratorProcessor;
-use PoP\ComponentModel\ModuleProcessors\AbstractModuleProcessor;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoP\ComponentModel\ComponentProcessors\AbstractModuleDecoratorProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractComponentProcessor;
 
 class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProcessor
 {
@@ -21,7 +21,7 @@ class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProce
 
     public function requiresUserState(array $module, array &$props)
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
 
         // Dataloading modules need to check for user state
@@ -44,4 +44,4 @@ class PoP_UserStateModuleDecoratorProcessor extends AbstractModuleDecoratorProce
 /**
  * Settings Initialization
  */
-PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->add(AbstractModuleProcessor::class, PoP_UserStateModuleDecoratorProcessor::class);
+PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->add(AbstractComponentProcessor::class, PoP_UserStateModuleDecoratorProcessor::class);

@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Pages\ConditionalOnModule\API\ComponentRoutingProcessors;
 
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
-use PoPCMSSchema\Pages\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Pages\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Pages\Routing\RequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
@@ -19,7 +19,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[RequestNature::PAGE][] = [
-            'component' => [FieldDataloadModuleProcessor::class, FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],
+            'component' => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_PAGE],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],

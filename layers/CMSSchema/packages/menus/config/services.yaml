@@ -7,5 +7,5 @@ services:
     PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface:
         class: \PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistry
 
-    PoPCMSSchema\Menus\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\Menus\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'

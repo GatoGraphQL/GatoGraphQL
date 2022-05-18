@@ -3,7 +3,7 @@
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Facades\Cache\TransientCacheManagerFacade;
 use PoP\ComponentModel\Facades\Engine\EngineFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
@@ -688,7 +688,7 @@ class PoP_ResourceLoaderProcessorUtils {
     public static function getResourcesFromCurrentVars($modulefilter, $options = array()) {
 
         global $pop_resourcemoduledecoratorprocessor_manager;
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Get the current model_instance_id where to store $noncritical_resources
         $model_instance_id = \PoP\ComponentModel\Facades\ModelInstance\ModelInstanceFacade::getInstance()->getModelInstanceId();
@@ -741,7 +741,7 @@ class PoP_ResourceLoaderProcessorUtils {
 
     public static function getJsmethodsFromModule($addInitial, $entryComponent, $entry_model_props) {
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($entryComponent);
         $pageSectionJSMethods = $processor->getPagesectionJsmethods($entryComponent, $entry_model_props);
         $blockJSMethods = $processor->getJsmethodsModuletree($entryComponent, $entry_model_props);

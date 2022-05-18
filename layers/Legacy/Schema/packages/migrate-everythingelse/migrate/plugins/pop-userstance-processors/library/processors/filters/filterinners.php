@@ -80,7 +80,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
             ],
         ];
         if ($modules = \PoP\Root\App::applyFilters(
-            'Stances:FilterInnerModuleProcessor:inputmodules',
+            'Stances:FilterInnerComponentProcessor:inputmodules',
             $inputmodules[$module[1]],
             $module
         )) {

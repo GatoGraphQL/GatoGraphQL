@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ComponentProcessors;
 
-use PoPCMSSchema\Categories\ModuleProcessors\CategoryFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Categories\ComponentProcessors\CategoryFilterInputContainerComponentProcessor;
 
-class PostCategoryFilterInputContainerModuleProcessor extends CategoryFilterInputContainerModuleProcessor
+class PostCategoryFilterInputContainerComponentProcessor extends CategoryFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 

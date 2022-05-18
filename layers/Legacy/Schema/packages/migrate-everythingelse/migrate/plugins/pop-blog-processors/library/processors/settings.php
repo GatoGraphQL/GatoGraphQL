@@ -1,12 +1,12 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoPCMSSchema\Posts\ConditionalOnModule\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserPostFieldDataloads;
-use PoPCMSSchema\Posts\ModuleProcessors\FieldDataloadModuleProcessor as PostFieldDataloads;
-use PoPCMSSchema\PostTags\ModuleProcessors\PostTagFieldDataloadModuleProcessor;
-use PoPCMSSchema\PostTags\ModuleProcessors\TagPostFieldDataloadModuleProcessor;
-use PoPCMSSchema\Users\ModuleProcessors\FieldDataloadModuleProcessor as UserFieldDataloads;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
+use PoPCMSSchema\Posts\ConditionalOnModule\Users\ComponentProcessors\FieldDataloadComponentProcessor as UserPostFieldDataloads;
+use PoPCMSSchema\Posts\ComponentProcessors\FieldDataloadComponentProcessor as PostFieldDataloads;
+use PoPCMSSchema\PostTags\ComponentProcessors\PostTagFieldDataloadComponentProcessor;
+use PoPCMSSchema\PostTags\ComponentProcessors\TagPostFieldDataloadComponentProcessor;
+use PoPCMSSchema\Users\ComponentProcessors\FieldDataloadComponentProcessor as UserFieldDataloads;
 
-$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
     PostFieldDataloads::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
@@ -29,10 +29,10 @@ $moduleprocessor_manager->overrideProcessorClass(
     ]
 );
 $moduleprocessor_manager->overrideProcessorClass(
-    FieldDataloadModuleProcessor::class,
+    FieldDataloadComponentProcessor::class,
     PoP_Blog_Module_Processor_FieldDataloads::class,
     [
-        PostTagFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
-        TagPostFieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
+        PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST,
+        TagPostFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST,
     ]
 );

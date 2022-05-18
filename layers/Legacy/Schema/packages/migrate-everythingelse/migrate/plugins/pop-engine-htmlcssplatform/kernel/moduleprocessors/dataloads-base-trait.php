@@ -1,7 +1,7 @@
 <?php
 define('POP_HOOK_DATALOADINGSBASE_FILTERINGBYSHOWFILTER', 'hook-dataloadingsbase-filteringbyshowfilter');
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
 
 trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
@@ -30,7 +30,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             $this->setProp($module, $props, 'show-filter', true);
 
@@ -63,7 +63,7 @@ trait PoPHTMLCSSPlatform_Processor_DataloadsBaseTrait
         // Validate that the strata includes the required stratum
         if (in_array(POP_STRATUM_HTMLCSS, \PoP\Root\App::getState('strata'))) {
 
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
             if ($filter_module = $this->getFilterSubmodule($module)) {
 

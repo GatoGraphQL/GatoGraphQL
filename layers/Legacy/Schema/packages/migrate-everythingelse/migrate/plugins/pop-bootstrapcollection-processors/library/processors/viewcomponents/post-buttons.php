@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor_PostHeaderViewComponentButtonsBase
@@ -100,7 +100,7 @@ class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor
 
         // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+            $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             switch ($module[1]) {
                 case self::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA:
                 case self::MODULE_VIEWCOMPONENT_BUTTON_POST_EMBED_PREVIEWDROPDOWN:

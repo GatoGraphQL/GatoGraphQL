@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\FormInputs\FormInput;
 use PoP\ComponentModel\FormInputs\FormMultipleInput;
 
-abstract class AbstractFormInputModuleProcessor extends AbstractQueryDataModuleProcessor implements FormInputModuleProcessorInterface
+abstract class AbstractFormInputComponentProcessor extends AbstractQueryDataComponentProcessor implements FormInputComponentProcessorInterface
 {
     /**
      * @var array<string,FormInput>

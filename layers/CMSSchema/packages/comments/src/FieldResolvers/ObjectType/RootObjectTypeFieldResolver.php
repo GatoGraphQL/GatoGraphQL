@@ -16,8 +16,8 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoPCMSSchema\Comments\Module;
 use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\Constants\CommentStatus;
-use PoPCMSSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPCMSSchema\Comments\ModuleProcessors\SingleCommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\SingleCommentFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
@@ -149,7 +149,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
     {
         return match ($fieldName) {
-            'comment' => [SingleCommentFilterInputContainerModuleProcessor::class, SingleCommentFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
+            'comment' => [SingleCommentFilterInputContainerComponentProcessor::class, SingleCommentFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
             default => parent::getFieldFilterInputContainerModule($objectTypeResolver, $fieldName),
         };
     }
@@ -199,8 +199,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'comment':
                 if ($moduleConfiguration->treatCommentStatusAsAdminData()) {
                     $commentStatusFilterInputName = FilterInputHelper::getFilterInputName([
-                        FilterInputModuleProcessor::class,
-                        FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS
+                        FilterInputComponentProcessor::class,
+                        FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS
                     ]);
                     $adminFieldArgNames[] = $commentStatusFilterInputName;
                 }

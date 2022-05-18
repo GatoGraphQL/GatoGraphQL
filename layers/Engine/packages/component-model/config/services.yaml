@@ -78,8 +78,8 @@ services:
     PoP\ComponentModel\ModuleFilters\:
         resource: '../src/ModuleFilters/*'
 
-    PoP\ComponentModel\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoP\ComponentModel\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoP\ComponentModel\ComponentRoutingProcessors\:
         resource: '../src/ComponentRoutingProcessors/*'
@@ -111,8 +111,8 @@ services:
     PoP\ComponentModel\ModulePath\ModulePathHelpersInterface:
         class: \PoP\ComponentModel\ModulePath\ModulePathHelpers
 
-    PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface:
-        class: \PoP\ComponentModel\ModuleProcessors\ModuleProcessorManager
+    PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface:
+        class: \PoP\ComponentModel\ComponentProcessors\ComponentProcessorManager
 
     PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManagerInterface:
         class: \PoP\ComponentModel\FilterInputProcessors\FilterInputProcessorManager

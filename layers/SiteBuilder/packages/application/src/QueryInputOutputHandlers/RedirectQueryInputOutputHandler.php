@@ -6,7 +6,7 @@ namespace PoP\Application\QueryInputOutputHandlers;
 
 use PoP\Application\Constants\Response;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\Root\App;
 

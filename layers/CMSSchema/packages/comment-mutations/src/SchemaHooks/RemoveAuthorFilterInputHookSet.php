@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\SchemaHooks;
 
-use PoPCMSSchema\CommentMutations\ModuleProcessors\CommentFilterInputContainerModuleProcessor;
+use PoPCMSSchema\CommentMutations\ComponentProcessors\CommentFilterInputContainerComponentProcessor;
 use PoPCMSSchema\CustomPostMutations\ConditionalOnModule\Users\SchemaHooks\AbstractRemoveAuthorFilterInputHookSet;
 
 class RemoveAuthorFilterInputHookSet extends AbstractRemoveAuthorFilterInputHookSet
 {
     protected function getHookNameToRemoveFilterInput(): string
     {
-        return CommentFilterInputContainerModuleProcessor::HOOK_FILTER_INPUTS;
+        return CommentFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS;
     }
 }

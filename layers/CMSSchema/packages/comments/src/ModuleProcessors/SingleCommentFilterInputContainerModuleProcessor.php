@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Comments\ModuleProcessors;
+namespace PoPCMSSchema\Comments\ComponentProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoPCMSSchema\Comments\ModuleProcessors\FormInputs\FilterInputModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\AbstractFilterInputContainerModuleProcessor;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\Comments\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\AbstractFilterInputContainerComponentProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
-class SingleCommentFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
+class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -29,11 +29,11 @@ class SingleCommentFilterInputContainerModuleProcessor extends AbstractFilterInp
     {
         return match ((string)$module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [
-                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
             ],
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
-                [FilterInputModuleProcessor::class, FilterInputModuleProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID],
+                [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
             ],
             default => [],
         };
@@ -45,8 +45,8 @@ class SingleCommentFilterInputContainerModuleProcessor extends AbstractFilterInp
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                    CommonFilterInputComponentProcessor::class,
+                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;

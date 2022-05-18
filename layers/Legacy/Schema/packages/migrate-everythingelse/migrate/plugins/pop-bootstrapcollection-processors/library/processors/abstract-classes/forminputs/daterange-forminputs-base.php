@@ -1,12 +1,12 @@
 <?php
 
-use PoP\Engine\ModuleProcessors\FormMultipleInputModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\FormMultipleInputComponentProcessorTrait;
 use PoP\Engine\FormInputs\DateRangeFormInput;
 use PoP\Engine\FormInputs\DateRangeTimeFormInput;
 
 abstract class PoP_Module_Processor_DateRangeFormInputsBase extends PoP_Module_Processor_FormInputsBase
 {
-    use FormMultipleInputModuleProcessorTrait;
+    use FormMultipleInputComponentProcessorTrait;
 
     public function getTemplateResource(array $module, array &$props): ?array
     {

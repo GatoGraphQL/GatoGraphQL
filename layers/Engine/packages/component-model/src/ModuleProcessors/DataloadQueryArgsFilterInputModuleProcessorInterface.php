@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
-interface DataloadQueryArgsFilterInputModuleProcessorInterface extends FilterInputModuleProcessorInterface
+interface DataloadQueryArgsFilterInputComponentProcessorInterface extends FilterInputComponentProcessorInterface
 {
     public function getFilterInput(array $module): ?array;
 }

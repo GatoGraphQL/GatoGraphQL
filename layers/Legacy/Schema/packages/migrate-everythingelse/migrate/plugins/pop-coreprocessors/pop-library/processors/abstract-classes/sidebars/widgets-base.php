@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {
@@ -167,7 +167,7 @@ abstract class PoP_Module_Processor_WidgetsBase extends PoPEngine_QueryDataModul
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret['menu-title'] = $this->getProp($module, $props, 'menu-title');
         $ret[GD_JS_FONTAWESOME] = $this->getProp($module, $props, 'fontawesome');

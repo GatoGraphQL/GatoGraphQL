@@ -21,7 +21,7 @@ class AppStateProvider extends AbstractAppStateProvider
     private ?HeadModule $headModule = null;
     private ?ModulePaths $modulePaths = null;
     private ?MainContentModule $mainContentModule = null;
-    private ?ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager = null;
+    private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleHelpersInterface $moduleHelpers = null;
 
@@ -49,13 +49,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->mainContentModule ??= $this->instanceManager->getInstance(MainContentModule::class);
     }
-    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeModuleProcessorManager): void
+    final public function setComponentRoutingProcessorManager(ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager): void
     {
-        $this->routeModuleProcessorManager = $routeModuleProcessorManager;
+        $this->routeComponentProcessorManager = $routeComponentProcessorManager;
     }
     final protected function getComponentRoutingProcessorManager(): ComponentRoutingProcessorManagerInterface
     {
-        return $this->routeModuleProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
+        return $this->routeComponentProcessorManager ??= $this->instanceManager->getInstance(ComponentRoutingProcessorManagerInterface::class);
     }
     final public function setModulePathHelpers(ModulePathHelpersInterface $modulePathHelpers): void
     {

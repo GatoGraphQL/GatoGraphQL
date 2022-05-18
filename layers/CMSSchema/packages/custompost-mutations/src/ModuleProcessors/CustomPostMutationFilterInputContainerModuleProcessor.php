@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMutations\ModuleProcessors;
+namespace PoPCMSSchema\CustomPostMutations\ComponentProcessors;
 
-use PoP\ComponentModel\ModuleProcessors\FilterInputContainerModuleProcessorInterface;
-use PoPCMSSchema\CustomPosts\ModuleProcessors\CustomPostFilterInputContainerModuleProcessor;
-use PoPCMSSchema\CustomPosts\ModuleProcessors\FormInputs\FilterInputModuleProcessor as CustomPostFilterInputModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\FilterInputContainerComponentProcessorInterface;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\CustomPostFilterInputContainerComponentProcessor;
+use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor as CustomPostFilterInputComponentProcessor;
 
-class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFilterInputContainerModuleProcessor
+class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPostFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -33,13 +33,13 @@ class CustomPostMutationFilterInputContainerModuleProcessor extends CustomPostFi
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
             default => null,
         };
-        /** @var FilterInputContainerModuleProcessorInterface */
-        $targetModuleProcessor = $this->getModuleProcessorManager()->getProcessor($targetModule);
-        $targetFilterInputModules = $targetModuleProcessor->getFilterInputModules($targetModule);
+        /** @var FilterInputContainerComponentProcessorInterface */
+        $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetModule);
+        $targetFilterInputModules = $targetComponentProcessor->getFilterInputModules($targetModule);
         return array_merge(
             $targetFilterInputModules,
             [
-                [CustomPostFilterInputModuleProcessor::class, CustomPostFilterInputModuleProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
+                [CustomPostFilterInputComponentProcessor::class, CustomPostFilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ]
         );
     }

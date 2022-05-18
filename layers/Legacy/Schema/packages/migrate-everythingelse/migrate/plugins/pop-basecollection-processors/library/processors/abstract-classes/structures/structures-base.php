@@ -1,7 +1,7 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getInnerSubmodule(array $module)
     {
@@ -37,7 +37,7 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataMo
 
     public function getImmutableConfiguration(array $module, array &$props): array
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret = parent::getImmutableConfiguration($module, $props);
 

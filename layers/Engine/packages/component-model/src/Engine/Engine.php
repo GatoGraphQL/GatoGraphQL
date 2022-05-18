@@ -41,8 +41,8 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\ModuleFiltering\ModuleFilterManagerInterface;
 use PoP\ComponentModel\ModulePath\ModulePathHelpersInterface;
 use PoP\ComponentModel\ModulePath\ModulePathManagerInterface;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
-use PoP\ComponentModel\ModuleProcessors\ModuleProcessorManagerInterface;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\ComponentProcessorManagerInterface;
 use PoP\ComponentModel\Modules\ModuleHelpersInterface;
 use PoP\ComponentModel\Schema\FieldQueryInterpreterInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -72,7 +72,7 @@ class Engine implements EngineInterface
     private ?ModulePathManagerInterface $modulePathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    private ?ModuleProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
     private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
@@ -149,13 +149,13 @@ class Engine implements EngineInterface
     {
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
-    final public function setModuleProcessorManager(ModuleProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
     {
         $this->moduleProcessorManager = $moduleProcessorManager;
     }
-    final protected function getModuleProcessorManager(): ModuleProcessorManagerInterface
+    final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ModuleProcessorManagerInterface::class);
+        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
     {
@@ -474,7 +474,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
@@ -500,7 +500,7 @@ class Engine implements EngineInterface
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
     public function addRequestPropsModuletree(array $module, array $props): array
     {
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
         $processor->initRequestPropsModuletree($module, $props, [], []);
@@ -650,7 +650,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -906,7 +906,7 @@ class Engine implements EngineInterface
         array $module,
         array &$props
     ): void {
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
@@ -956,7 +956,7 @@ class Engine implements EngineInterface
         array $module,
         array &$props
     ): void {
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
         $moduleFullName = $this->getModuleHelpers()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
@@ -1044,7 +1044,7 @@ class Engine implements EngineInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getModuleProcessorManager()->getProcessor($root_module);
+        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_module);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1185,7 +1185,7 @@ class Engine implements EngineInterface
                 $module_props = &$props;
             }
 
-            $processor = $this->getModuleProcessorManager()->getProcessor($module);
+            $processor = $this->getComponentProcessorManager()->getProcessor($module);
 
             // The module path key is used for storing temporary results for later retrieval
             $module_path_key = $this->getModulePathKey($module_path, $module);
@@ -2300,7 +2300,7 @@ class Engine implements EngineInterface
                             // Transform the IDs, adding their type
                             // Do it always, for UnionTypeResolvers and non-union ones.
                             // This is because if it's a relational field that comes after a UnionTypeResolver, its dbKey could not be inferred (since it depends from the dbObject, and can't be obtained in the settings, where "dbkeys" is obtained and which doesn't depend on data items)
-                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataModuleProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
+                            // Eg: /?query=content.comments.id. In this case, "content" is handled by UnionTypeResolver, and "comments" would not be found since its entry can't be added under "datasetmodulesettings.dbkeys", since the module (of class AbstractRelationalFieldQueryDataComponentProcessor) with a UnionTypeResolver can't resolve the 'succeeding-typeResolver' to set to its submodules
                             // Having 'succeeding-typeResolver' being NULL, then it is not able to locate its data
                             $typed_database_field_ids = array_map(
                                 function ($field_id) use ($typedSubcomponentIDs) {
@@ -2448,7 +2448,7 @@ class Engine implements EngineInterface
         $executed,
         $objectIDs
     ): void {
-        $processor = $this->getModuleProcessorManager()->getProcessor($module);
+        $processor = $this->getComponentProcessorManager()->getProcessor($module);
         $engineState = App::getEngineState();
 
         // Integrate the feedback into $moduledata

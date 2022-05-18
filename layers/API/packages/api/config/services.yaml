@@ -28,8 +28,8 @@ services:
     PoPAPI\API\ComponentRoutingProcessors\:
         resource: '../src/ComponentRoutingProcessors/*'
 
-    PoPAPI\API\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPAPI\API\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPAPI\API\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

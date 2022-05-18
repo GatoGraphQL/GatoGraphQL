@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnModule\API\ModuleProcessors;
+namespace PoPCMSSchema\Users\ConditionalOnModule\API\ComponentProcessors;
 
-use PoPAPI\API\ModuleProcessors\AbstractRelationalFieldDataloadModuleProcessor;
+use PoPAPI\API\ComponentProcessors\AbstractRelationalFieldDataloadComponentProcessor;
 use PoP\ComponentModel\QueryInputOutputHandlers\ListQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
-use PoPCMSSchema\Users\ModuleProcessors\UserFilterInputContainerModuleProcessor;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
+use PoPCMSSchema\Users\ComponentProcessors\UserFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
-class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModuleProcessor
+class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadComponentProcessor
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER = 'dataload-relationalfields-singleuser';
     public final const MODULE_DATALOAD_RELATIONALFIELDS_USERLIST = 'dataload-relationalfields-userlist';
@@ -90,13 +90,13 @@ class FieldDataloadModuleProcessor extends AbstractRelationalFieldDataloadModule
     {
         switch ($module[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
-                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERS];
+                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_USERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERCOUNT:
-                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_USERCOUNT];
+                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_USERCOUNT];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST:
-                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS];
+                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERCOUNT:
-                return [UserFilterInputContainerModuleProcessor::class, UserFilterInputContainerModuleProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT];
+                return [UserFilterInputContainerComponentProcessor::class, UserFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_ADMINUSERCOUNT];
         }
 
         return parent::getFilterSubmodule($module);

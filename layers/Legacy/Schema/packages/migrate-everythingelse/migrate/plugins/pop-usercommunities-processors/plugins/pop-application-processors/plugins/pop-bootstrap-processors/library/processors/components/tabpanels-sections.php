@@ -1,6 +1,6 @@
 <?php
 
-class PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
+class PoP_UserCommunities_ComponentProcessor_SectionTabPanelComponents extends PoP_Module_Processor_SectionTabPanelComponentsBase
 {
     public final const MODULE_TABPANEL_COMMUNITIES = 'tabpanel-communities';
     public final const MODULE_TABPANEL_MYMEMBERS = 'tabpanel-mymembers';
@@ -37,7 +37,7 @@ class PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents extends PoP_
                         [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
                         [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
                         [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST],
-                        [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
+                        [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
                     )
                 );
                 break;
@@ -73,7 +73,7 @@ class PoP_UserCommunities_ModuleProcessor_SectionTabPanelComponents extends PoP_
                         ),
                     ],
                     [
-                        'header-submodule' => [PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ModuleProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
+                        'header-submodule' => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLLMAP],
                     ],
                 );
         }

@@ -5,7 +5,7 @@
  */
 // use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
-// // Override ModuleProcessorClass
+// // Override ComponentProcessorClass
 // $instanceManager = InstanceManagerFacade::getInstance();
 // $instanceManager->overrideClass(
 //     PoP_Module_Processor_Entries::class,

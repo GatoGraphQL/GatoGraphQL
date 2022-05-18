@@ -4,9 +4,9 @@ use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo as ComponentModelModuleInfo;
 use PoP\ComponentModel\Facades\Cache\PersistentCacheFacade;
 use PoP\ComponentModel\Facades\Info\ApplicationInfoFacade;
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\Root\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\ModuleProcessors\DataloadingConstants;
+use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Root\App;
 
@@ -46,7 +46,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             return $ret;
         }
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
 
         $cachemanager = null;
@@ -129,11 +129,11 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $ret = parent::getModuleData($root_module, $root_model_props, $root_props);
 
         // Only add the extra information if the entry-module is of the right object class
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $root_processor = $moduleprocessor_manager->getProcessor($root_module);
 
         // Only add the extra information if the entry-module is of the right object class
-        if ($root_processor instanceof PoP_WebPlatformQueryDataModuleProcessorBase) {
+        if ($root_processor instanceof PoP_WebPlatformQueryDataComponentProcessorBase) {
 
             $dataoutputmode = App::getState('dataoutputmode');
 
@@ -186,7 +186,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             return;
         }
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $processor = $moduleprocessor_manager->getProcessor($module);
 
         $datasource = $data_properties[DataloadingConstants::DATASOURCE];
@@ -342,7 +342,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     // protected function getJsonModuleImmutableSettings(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$json_settings = parent::getJsonModuleImmutableSettings($module, $props);
 
@@ -369,7 +369,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     // protected function getJsonModuleMutableonrequestSettings(array $module, array &$props) {
 
-    // 	$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    // 	$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($module, $props);
 

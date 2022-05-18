@@ -1,10 +1,10 @@
 <?php
-use PoPCMSSchema\Events\ModuleProcessors\PastEventModuleProcessorTrait;
+use PoPCMSSchema\Events\ComponentProcessors\PastEventComponentProcessorTrait;
 use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsCreation_Module_Processor_MySectionDataloadsBase
 {
-    use PastEventModuleProcessorTrait;
+    use PastEventComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_MYEVENTS_TABLE_EDIT = 'dataload-myevents-table-edit';
     public final const MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT = 'dataload-mypastevents-table-edit';

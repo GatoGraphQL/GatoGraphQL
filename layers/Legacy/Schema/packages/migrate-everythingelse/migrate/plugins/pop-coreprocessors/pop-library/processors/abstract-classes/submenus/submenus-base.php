@@ -2,7 +2,7 @@
 use PoP\ComponentModel\State\ApplicationState;
 use PoP\Engine\Route\RouteUtils;
 
-abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataModuleProcessorBase
+abstract class PoP_Module_Processor_SubMenusBase extends PoPEngine_QueryDataComponentProcessorBase
 {
     public function getTemplateResource(array $module, array &$props): ?array
     {

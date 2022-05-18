@@ -2,18 +2,18 @@
 namespace PoP\ExampleModules;
 
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleField;
-use PoP\ComponentModel\ModuleProcessors\AbstractDataloadModuleProcessor;
+use PoP\ComponentModel\ComponentProcessors\AbstractDataloadComponentProcessor;
 use PoP\ComponentModel\State\ApplicationState;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolver;
 use PoPCMSSchema\Pages\Facades\PageTypeAPIFacade;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
-use PoPCMSSchema\QueriedObject\ModuleProcessors\QueriedDBObjectModuleProcessorTrait;
+use PoPCMSSchema\QueriedObject\ComponentProcessors\QueriedDBObjectComponentProcessorTrait;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
 
-class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
+class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
 {
-    use QueriedDBObjectModuleProcessorTrait;
+    use QueriedDBObjectComponentProcessorTrait;
 
     public final const MODULE_EXAMPLE_LATESTPOSTS = 'example-latestposts';
     public final const MODULE_EXAMPLE_AUTHORLATESTPOSTS = 'example-authorlatestposts';
@@ -44,11 +44,11 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
 
         switch ($module[1]) {
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES];
+                $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES];
                 break;
 
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
-                $ret[] = [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_TAGPROPERTIES];
+                $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_TAGPROPERTIES];
                 break;
         }
 
@@ -126,13 +126,13 @@ class ModuleProcessor_Dataloads extends AbstractDataloadModuleProcessor
                 $ret[] = new RelationalModuleField(
                     'author',
                     [
-                        [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES],
+                        [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES],
                     ]
                 );
                 $ret[] = new RelationalModuleField(
                     'comments',
                     [
-                        [ModuleProcessor_Layouts::class, ModuleProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
+                        [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_COMMENT],
                     ]
                 );
                 break;

@@ -12,7 +12,7 @@ use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingP
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
-use PoPCMSSchema\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
+use PoPCMSSchema\Users\ConditionalOnModule\API\ComponentProcessors\FieldDataloadComponentProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
@@ -30,8 +30,8 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $ret = array();
         $ret[UserRequestNature::USER][] = [
             'component' => [
-                FieldDataloadModuleProcessor::class,
-                FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
+                FieldDataloadComponentProcessor::class,
+                FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEUSER,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :
@@ -58,10 +58,10 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $routeComponents = array(
             $moduleConfiguration->getUsersRoute() => [
-                FieldDataloadModuleProcessor::class,
+                FieldDataloadComponentProcessor::class,
                 $componentModelModuleConfiguration->enableAdminSchema() ?
-                    FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
-                    : FieldDataloadModuleProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
+                    FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_ADMINUSERLIST
+                    : FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST,
                 [
                     'fields' => !empty(App::getState('query')) ?
                         App::getState('query') :

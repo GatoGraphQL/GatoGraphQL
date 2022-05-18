@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
@@ -30,7 +30,7 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
     
     protected function hasResults()
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $pagesection_settings_id = $this->getPagesectionSettingsid();
         $block_module = $this->getBlockModule();
         $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_module);

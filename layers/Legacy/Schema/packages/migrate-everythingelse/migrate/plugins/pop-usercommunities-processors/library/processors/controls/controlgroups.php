@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_ControlGroupsBase
 {
@@ -16,7 +16,7 @@ class GD_URE_Module_Processor_ControlGroups extends PoP_Module_Processor_Control
     {
         $ret = parent::getSubmodules($module);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_URE_CONTROLGROUP_CONTENTSOURCE:

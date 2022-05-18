@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\SchemaCommons\ModuleProcessors;
+namespace PoPCMSSchema\SchemaCommons\ComponentProcessors;
 
 use PoP\ComponentModel\FilterInput\FilterInputHelper;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoPCMSSchema\SchemaCommons\CMS\CMSServiceInterface;
-use PoPCMSSchema\SchemaCommons\ModuleProcessors\FormInputs\CommonFilterInputModuleProcessor;
+use PoPCMSSchema\SchemaCommons\ComponentProcessors\FormInputs\CommonFilterInputComponentProcessor;
 
-class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputContainerModuleProcessor
+class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
@@ -45,20 +45,20 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
     {
         return match ($module[1]) {
             self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID],
             ],
             self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUG],
             ],
             self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT],
             ],
             self::MODULE_FILTERINPUTCONTAINER_GMTDATE => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT],
             ],
             self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING => [
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT],
-                [CommonFilterInputModuleProcessor::class, CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT],
+                [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT],
             ],
             default => [],
         };
@@ -70,8 +70,8 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $formatFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_DATEFORMAT
+                    CommonFilterInputComponentProcessor::class,
+                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_DATEFORMAT
                 ]);
                 if ($fieldArgName === $formatFilterInputName) {
                     return $this->getCMSService()->getOption($this->getNameResolver()->getName('popcms:option:dateFormat'));
@@ -82,8 +82,8 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE:
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_GMT
+                    CommonFilterInputComponentProcessor::class,
+                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_GMT
                 ]);
                 if ($fieldArgName === $gmtFilterInputName) {
                     return false;
@@ -99,8 +99,8 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
         switch ($module[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_ID
+                    CommonFilterInputComponentProcessor::class,
+                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID
                 ]);
                 if ($fieldArgName === $idFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;
@@ -108,8 +108,8 @@ class CommonFilterInputContainerModuleProcessor extends AbstractFilterInputConta
                 break;
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_SLUG:
                 $slugFilterInputName = FilterInputHelper::getFilterInputName([
-                    CommonFilterInputModuleProcessor::class,
-                    CommonFilterInputModuleProcessor::MODULE_FILTERINPUT_SLUG
+                    CommonFilterInputComponentProcessor::class,
+                    CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUG
                 ]);
                 if ($fieldArgName === $slugFilterInputName) {
                     return $fieldFilterInputTypeModifiers | SchemaTypeModifiers::MANDATORY;

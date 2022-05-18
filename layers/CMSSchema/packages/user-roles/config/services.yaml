@@ -7,8 +7,8 @@ services:
     PoPCMSSchema\UserRoles\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPCMSSchema\UserRoles\ModuleProcessors\:
-        resource: '../src/ModuleProcessors/*'
+    PoPCMSSchema\UserRoles\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
 
     PoPCMSSchema\UserRoles\FilterInputProcessors\:
         resource: '../src/FilterInputProcessors/*'

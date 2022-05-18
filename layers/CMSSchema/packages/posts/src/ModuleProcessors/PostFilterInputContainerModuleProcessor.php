@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\ModuleProcessors;
+namespace PoPCMSSchema\Posts\ComponentProcessors;
 
-class PostFilterInputContainerModuleProcessor extends AbstractPostFilterInputContainerModuleProcessor
+class PostFilterInputContainerComponentProcessor extends AbstractPostFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleProcessors;
+namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleInfo;
@@ -14,13 +14,13 @@ use PoP\Root\App;
 
 trait ModulePathProcessorTrait
 {
-    abstract protected function getModuleProcessorManager(): ModuleProcessorManagerInterface;
+    abstract protected function getComponentProcessorManager(): ComponentProcessorManagerInterface;
     abstract protected function getModuleFilterManager(): ModuleFilterManagerInterface;
     abstract protected function getModuleHelpers(): ModuleHelpersInterface;
 
-    protected function getModuleProcessor(array $module)
+    protected function getComponentProcessor(array $module)
     {
-        return $this->getModuleProcessorManager()->getProcessor($module);
+        return $this->getComponentProcessorManager()->getProcessor($module);
     }
 
     protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $module, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
@@ -38,7 +38,7 @@ trait ModulePathProcessorTrait
 
         // Stop iterating when the submodule starts a new cycle of loading data
         $submodules = array_filter($this->getAllSubmodules($module), function ($submodule) {
-            return !$this->getModuleProcessor($submodule)->startDataloadingSection($submodule);
+            return !$this->getComponentProcessor($submodule)->startDataloadingSection($submodule);
         });
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
 
@@ -48,7 +48,7 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         if ($submodules_ret) {
@@ -75,7 +75,7 @@ trait ModulePathProcessorTrait
 
         // Stop iterating when the submodule starts a new cycle of loading data
         $submodules = array_filter($this->getAllSubmodules($module), function ($submodule) {
-            return !$this->getModuleProcessor($submodule)->startDataloadingSection($submodule);
+            return !$this->getComponentProcessor($submodule)->startDataloadingSection($submodule);
         });
         $submodules = $this->getModuleFilterManager()->removeExcludedSubmodules($module, $submodules);
 
@@ -84,7 +84,7 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         $this->getModuleFilterManager()->restoreFromPropagation($module, $props);
@@ -103,7 +103,7 @@ trait ModulePathProcessorTrait
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
         if (!$this->getModuleFilterManager()->excludeModule($module, $props)) {
             // Maybe only execute function on the dataloading modules
-            if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getModuleProcessor($module)->startDataloadingSection($module)) {
+            if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($module)->startDataloadingSection($module)) {
                 if ($module_ret = $this->$eval_self_fn($module, $props)) {
                     $ret[$key] = $module_ret;
                 }
@@ -119,7 +119,7 @@ trait ModulePathProcessorTrait
         foreach ($submodules as $submodule) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])
+                $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES])
             );
         }
         if ($submodules_ret) {
@@ -150,7 +150,7 @@ trait ModulePathProcessorTrait
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
         $this->getModuleFilterManager()->prepareForPropagation($module, $props);
         foreach ($submodules as $submodule) {
-            $submodule_ret = $this->getModuleProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $recursive);
+            $submodule_ret = $this->getComponentProcessor($submodule)->$propagate_fn($submodule, $props[$moduleFullName][Props::SUBMODULES], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,

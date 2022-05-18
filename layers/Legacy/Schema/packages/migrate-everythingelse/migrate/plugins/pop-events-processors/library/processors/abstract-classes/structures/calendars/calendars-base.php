@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_StructuresBase
 {
@@ -43,7 +43,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     {
         $ret = parent::getImmutableConfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         if ($controlgroup = $this->getControlgroupSubmodule($module)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['controlgroup'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($controlgroup);
@@ -66,7 +66,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
     {
         $ret = parent::getImmutableJsconfiguration($module, $props);
 
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $inner = $this->getInnerSubmodule($module);
         $ret['calendar']['layouts'] = $moduleprocessor_manager->getProcessor($inner)->getLayoutSubmodules($inner);
@@ -80,7 +80,7 @@ abstract class PoP_Module_Processor_CalendarsBase extends PoP_Module_Processor_S
 
     public function initModelProps(array $module, array &$props): void
     {
-        $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+        $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // The Calendar uses JS to be rendered, so we need the DB data to be always present in the webplatform
         // Mark the layouts as needing dynamic data, so the DB data is sent to the webplatform also when doing SSR

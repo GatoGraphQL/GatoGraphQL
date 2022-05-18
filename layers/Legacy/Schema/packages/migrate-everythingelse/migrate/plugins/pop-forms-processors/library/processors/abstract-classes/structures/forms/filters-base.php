@@ -2,7 +2,7 @@
 
 define('GD_SUBMITFORMTYPE_FILTERBLOCK', 'filterblock');
 define('GD_SUBMITFORMTYPE_FILTERBLOCKGROUP', 'filterblockgroup');
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
 abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_FormsBase
 {
@@ -61,13 +61,13 @@ abstract class PoP_Module_Processor_FiltersBase extends PoP_Module_Processor_For
 
     // public function getFilterObject(array $module)
     // {
-    //     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubmodule($module);
     //     return $moduleprocessor_manager->getProcessor($filterinner)->getFilterObject($filterinner);
     // }
     // public function getFilter(array $module)
     // {
-    //     $moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+    //     $moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //     $filterinner = $this->getInnerSubmodule($module);
     //     return $moduleprocessor_manager->getProcessor($filterinner)->getFilter($filterinner);
     // }

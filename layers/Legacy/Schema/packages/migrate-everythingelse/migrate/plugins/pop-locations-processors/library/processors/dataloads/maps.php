@@ -1,10 +1,10 @@
 <?php
-use PoP\Engine\ModuleProcessors\ObjectIDsFromURLParamModuleProcessorTrait;
+use PoP\Engine\ComponentProcessors\ObjectIDsFromURLParamComponentProcessorTrait;
 use PoPCMSSchema\Locations\TypeResolvers\ObjectType\LocationObjectTypeResolver;
 
 class PoP_Module_Processor_LocationsMapDataloads extends PoP_Module_Processor_DataloadsBase
 {
-    use ObjectIDsFromURLParamModuleProcessorTrait;
+    use ObjectIDsFromURLParamComponentProcessorTrait;
 
     public final const MODULE_DATALOAD_LOCATIONSMAP = 'dataload-locationsmap';
 

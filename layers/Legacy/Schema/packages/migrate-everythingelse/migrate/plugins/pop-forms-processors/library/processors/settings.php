@@ -1,9 +1,9 @@
 <?php
 
-use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
+use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFacade;
 
-// Override ModuleProcessorClass
-$moduleprocessor_manager = ModuleProcessorManagerFacade::getInstance();
+// Override ComponentProcessorClass
+$moduleprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 $moduleprocessor_manager->overrideProcessorClass(
     PoP_Posts_Module_Processor_TextFilterInputs::class,
     PoP_Module_Processor_TextFilterInputs::class,
