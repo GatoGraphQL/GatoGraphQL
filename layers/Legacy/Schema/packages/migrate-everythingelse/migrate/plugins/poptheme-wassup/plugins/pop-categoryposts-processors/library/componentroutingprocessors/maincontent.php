@@ -17,7 +17,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTION);
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
 
-        $routemodules_typeahead = array(
+        $routeComponents_typeahead = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS00_TYPEAHEAD],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS01_TYPEAHEAD],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS02_TYPEAHEAD],
@@ -39,7 +39,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS18_TYPEAHEAD],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::COMPONENT_DATALOAD_CATEGORYPOSTS19_TYPEAHEAD],
         );
-        foreach ($routemodules_typeahead as $route => $component) {
+        foreach ($routeComponents_typeahead as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -51,7 +51,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             }
         }
 
-        $routemodules_navigator = array(
+        $routeComponents_navigator = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_NAVIGATOR],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_NAVIGATOR],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_NAVIGATOR],
@@ -73,7 +73,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_NAVIGATOR],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_NAVIGATOR],
         );
-        foreach ($routemodules_navigator as $route => $component) {
+        foreach ($routeComponents_navigator as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -93,7 +93,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             ];
         }
 
-        $routemodules_addons = array(
+        $routeComponents_addons = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_ADDONS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_ADDONS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_ADDONS],
@@ -115,7 +115,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_ADDONS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_ADDONS],
         );
-        foreach ($routemodules_addons as $route => $component) {
+        foreach ($routeComponents_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -127,7 +127,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             }
         }
 
-        $routemodules_details = array(
+        $routeComponents_details = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_DETAILS],
@@ -149,7 +149,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $component) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -160,7 +160,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
+        $routeComponents_simpleview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -182,7 +182,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $component) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -193,7 +193,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
+        $routeComponents_fullview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_FULLVIEW],
@@ -215,7 +215,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $component) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -226,7 +226,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
+        $routeComponents_thumbnail = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -248,7 +248,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $component) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -259,7 +259,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_LIST],
@@ -281,7 +281,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -292,7 +292,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_line = array(
+        $routeComponents_line = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_SCROLL_LINE],
@@ -314,7 +314,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_SCROLL_LINE],
         );
-        foreach ($routemodules_line as $route => $component) {
+        foreach ($routeComponents_line as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -325,7 +325,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_carousels = array(
+        $routeComponents_carousels = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_CAROUSEL],
@@ -347,7 +347,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $component) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -358,7 +358,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_carousels = array(
+        $routeComponents_carousels = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS00_CAROUSEL_CONTENT],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS01_CAROUSEL_CONTENT],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS02_CAROUSEL_CONTENT],
@@ -380,7 +380,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS18_CAROUSEL_CONTENT],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_CATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
-        foreach ($routemodules_carousels as $route => $component) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -395,7 +395,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
         // Author route modules
         $default_format_authorsection = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTION);
 
-        $routemodules_details = array(
+        $routeComponents_details = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS],
@@ -417,7 +417,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $component) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -428,7 +428,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
+        $routeComponents_simpleview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -450,7 +450,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $component) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -461,7 +461,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
+        $routeComponents_fullview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_FULLVIEW],
@@ -483,7 +483,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $component) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -494,7 +494,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
+        $routeComponents_thumbnail = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -516,7 +516,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $component) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -527,7 +527,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_LIST],
@@ -549,7 +549,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -560,7 +560,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_line = array(
+        $routeComponents_line = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_LINE],
@@ -582,7 +582,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_SCROLL_LINE],
         );
-        foreach ($routemodules_line as $route => $component) {
+        foreach ($routeComponents_line as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -593,7 +593,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_carousels = array(
+        $routeComponents_carousels = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS00_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS01_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS02_CAROUSEL],
@@ -615,7 +615,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS18_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTHORCATEGORYPOSTS19_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $component) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -630,7 +630,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
         // Tag route modules
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
 
-        $routemodules_details = array(
+        $routeComponents_details = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_DETAILS],
@@ -652,7 +652,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_DETAILS],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $component) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -663,7 +663,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
+        $routeComponents_simpleview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_SIMPLEVIEW],
@@ -685,7 +685,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_SIMPLEVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $component) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -696,7 +696,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
+        $routeComponents_fullview = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_FULLVIEW],
@@ -718,7 +718,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_FULLVIEW],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $component) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -729,7 +729,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
+        $routeComponents_thumbnail = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_THUMBNAIL],
@@ -751,7 +751,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_THUMBNAIL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $component) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -762,7 +762,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_LIST],
@@ -784,7 +784,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_LIST],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -795,7 +795,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_line = array(
+        $routeComponents_line = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_SCROLL_LINE],
@@ -817,7 +817,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_SCROLL_LINE],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_SCROLL_LINE],
         );
-        foreach ($routemodules_line as $route => $component) {
+        foreach ($routeComponents_line as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -830,7 +830,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
         }
 
 
-        $routemodules_carousels = array(
+        $routeComponents_carousels = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS00_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS01_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS02_CAROUSEL],
@@ -852,7 +852,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_SectionBlocks::class, CPP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $component) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [

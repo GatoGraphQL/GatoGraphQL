@@ -15,10 +15,10 @@ class PoPTheme_Wassup_Bootstrap_Module_MainPageSectionComponentRoutingProcessor 
         $ret = array();
 
         // Single
-        $routemodules = array(
+        $routeComponents = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SingleTabPanelSectionBlocks::class, PoP_Module_Processor_SingleTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_SINGLEAUTHORS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [

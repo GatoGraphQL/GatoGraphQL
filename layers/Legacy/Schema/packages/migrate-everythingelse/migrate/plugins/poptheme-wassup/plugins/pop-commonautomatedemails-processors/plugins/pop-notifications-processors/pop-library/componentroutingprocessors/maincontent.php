@@ -13,10 +13,10 @@ class PoP_CommonAutomatedEmails_AAL_Module_MainContentComponentRoutingProcessor 
 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_AUTOMATEDEMAIL_SCREEN_NOTIFICATIONS);
 
-        $routemodules_details = array(
+        $routeComponents_details = array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $component) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -27,10 +27,10 @@ class PoP_CommonAutomatedEmails_AAL_Module_MainContentComponentRoutingProcessor 
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks::COMPONENT_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

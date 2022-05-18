@@ -11,10 +11,10 @@ class PoPSystem_Theme_Module_EntryComponentRoutingProcessor extends \PoP\Compone
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_SYSTEM_ROUTE_SYSTEM_GENERATETHEME => [PoP_System_Theme_Module_Processor_SystemActions::class, PoP_System_Theme_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_GENERATETHEME],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

@@ -13,11 +13,11 @@ class UserStance_URE_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
 
         $default_format_votes = PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
 
-        $routemodules_carousels = array(
+        $routeComponents_carousels = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_CAROUSEL],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_CAROUSEL],
         );
-        foreach ($routemodules_carousels as $route => $component) {
+        foreach ($routeComponents_carousels as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -29,11 +29,11 @@ class UserStance_URE_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
             }
         }
 
-        $routemodules_fullview = array(
+        $routeComponents_fullview = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_FULLVIEW],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $component) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -44,11 +44,11 @@ class UserStance_URE_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
+        $routeComponents_thumbnail = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_THUMBNAIL],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $component) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -59,11 +59,11 @@ class UserStance_URE_Module_MainContentComponentRoutingProcessor extends \PoP\Ap
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYORGANIZATIONS_SCROLL_LIST],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_CustomSectionBlocks::class, UserStance_URE_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_STANCES_BYINDIVIDUALS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

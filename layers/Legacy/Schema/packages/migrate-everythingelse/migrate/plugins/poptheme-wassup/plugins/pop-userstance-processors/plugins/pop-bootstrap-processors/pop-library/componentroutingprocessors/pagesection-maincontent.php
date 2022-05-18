@@ -14,7 +14,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES_PRO],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES_AGAINST],
@@ -27,7 +27,7 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE],
             POP_USERSTANCE_ROUTE_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelBlocks::class, UserStance_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYSTANCES],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -37,13 +37,13 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         }
 
         // Author route modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_PRO],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_AuthorSectionTabPanelBlocks::class, UserStance_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -53,13 +53,13 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         }
 
         // Tag route modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGSTANCES],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGSTANCES_PRO],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_TagSectionTabPanelBlocks::class, UserStance_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGSTANCES_AGAINST],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -69,13 +69,13 @@ class UserStance_Bootstrap_Module_MainPageSectionComponentRoutingProcessor exten
         }
 
         // Single route modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERSTANCE_ROUTE_STANCES => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelBlocks::class, UserStance_Module_Processor_SingleSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [

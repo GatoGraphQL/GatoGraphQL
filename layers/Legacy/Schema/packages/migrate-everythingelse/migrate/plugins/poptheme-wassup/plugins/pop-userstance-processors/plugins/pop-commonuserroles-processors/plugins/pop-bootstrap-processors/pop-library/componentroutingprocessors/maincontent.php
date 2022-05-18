@@ -11,11 +11,11 @@ class UserStance_URE_Bootstrap_Module_MainContentComponentRoutingProcessor exten
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_SectionTabPanelBlocks::class, UserStance_URE_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS],
             POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelBlocks::class, UserStance_URE_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

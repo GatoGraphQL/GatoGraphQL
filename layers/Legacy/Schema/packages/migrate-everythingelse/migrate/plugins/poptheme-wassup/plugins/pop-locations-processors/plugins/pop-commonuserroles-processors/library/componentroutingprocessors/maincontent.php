@@ -11,11 +11,11 @@ class Wassup_EM_URE_Module_MainContentComponentRoutingProcessor extends \PoP\App
     {
         $ret = array();
 
-        $routemodules_addons = array(
+        $routeComponents_addons = array(
             POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomScrollMapSectionBlocks::class, GD_URE_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_ORGANIZATIONS_SCROLLMAP],
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomScrollMapSectionBlocks::class, GD_URE_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_INDIVIDUALS_SCROLLMAP],
         );
-        foreach ($routemodules_addons as $route => $component) {
+        foreach ($routeComponents_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

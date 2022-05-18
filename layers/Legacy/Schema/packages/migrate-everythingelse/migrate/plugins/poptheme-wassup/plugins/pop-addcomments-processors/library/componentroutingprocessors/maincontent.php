@@ -11,10 +11,10 @@ class PoPTheme_Wassup_AddComments_Module_MainContentComponentRoutingProcessor ex
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_ADDCOMMENTS_ROUTE_ADDCOMMENT => [PoP_Module_Processor_CommentsBlocks::class, PoP_Module_Processor_CommentsBlocks::COMPONENT_BLOCK_ADDCOMMENT],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

@@ -11,10 +11,10 @@ class PoP_LocationPostsCreation_Bootstrap_Module_MainPageSectionComponentRouting
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock::COMPONENT_BLOCK_TABPANEL_MYLOCATIONPOSTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

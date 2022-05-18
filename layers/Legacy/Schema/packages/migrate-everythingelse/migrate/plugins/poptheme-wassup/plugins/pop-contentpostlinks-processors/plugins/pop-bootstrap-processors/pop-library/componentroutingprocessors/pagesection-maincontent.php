@@ -13,10 +13,10 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_LINKS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -25,10 +25,10 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORLINKS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -37,10 +37,10 @@ class PoPTheme_Wassup_CPL_Bootstrap_Module_MainPageSectionComponentRoutingProces
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS => [PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::class, PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGLINKS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [

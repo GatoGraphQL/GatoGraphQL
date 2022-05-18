@@ -11,21 +11,21 @@ class PoPTheme_Wassup_PostsCreation_Module_MainContentComponentRoutingProcessor 
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_POSTSCREATION_ROUTE_ADDPOST => [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_POST_CREATE],
             POP_POSTSCREATION_ROUTE_EDITPOST => [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_POST_UPDATE],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         // Page modules
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
 
-        $routemodules_mycontent = array(
+        $routeComponents_mycontent = array(
             POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_PostsCreation_Module_Processor_MySectionBlocks::class, PoP_PostsCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYPOSTS_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $component) {
+        foreach ($routeComponents_mycontent as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -36,10 +36,10 @@ class PoPTheme_Wassup_PostsCreation_Module_MainContentComponentRoutingProcessor 
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_simpleviewpreviews = array(
+        $routeComponents_mycontent_simpleviewpreviews = array(
             POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_PostsCreation_Module_Processor_MySectionBlocks::class, PoP_PostsCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_simpleviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -50,10 +50,10 @@ class PoPTheme_Wassup_PostsCreation_Module_MainContentComponentRoutingProcessor 
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_fullviewpreviews = array(
+        $routeComponents_mycontent_fullviewpreviews = array(
             POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_PostsCreation_Module_Processor_MySectionBlocks::class, PoP_PostsCreation_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYPOSTS_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_fullviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

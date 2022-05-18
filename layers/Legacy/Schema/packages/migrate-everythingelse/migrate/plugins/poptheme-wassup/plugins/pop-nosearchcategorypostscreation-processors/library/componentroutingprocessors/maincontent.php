@@ -12,7 +12,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
         $ret = array();
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
-        $routemodules_mycontent = array(
+        $routeComponents_mycontent = array(
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS00 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS00_TABLE_EDIT],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS01 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS01_TABLE_EDIT],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS02 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS02_TABLE_EDIT],
@@ -34,7 +34,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS18_TABLE_EDIT],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS19_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $component) {
+        foreach ($routeComponents_mycontent as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -45,7 +45,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_simpleviewpreviews = array(
+        $routeComponents_mycontent_simpleviewpreviews = array(
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS00 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS01 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS01_SCROLL_SIMPLEVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS02 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS02_SCROLL_SIMPLEVIEWPREVIEW],
@@ -67,7 +67,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS18_SCROLL_SIMPLEVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_simpleviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -78,7 +78,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_fullviewpreviews = array(
+        $routeComponents_mycontent_fullviewpreviews = array(
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS00 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS01 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS01_SCROLL_FULLVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS02 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS02_SCROLL_FULLVIEWPREVIEW],
@@ -100,7 +100,7 @@ class PoP_NoSearchCategoryPostsCreation_Module_MainContentComponentRoutingProces
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS18 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
             POP_NOSEARCHCATEGORYPOSTSCREATION_ROUTE_MYNOSEARCHCATEGORYPOSTS19 => [LPPC_Module_Processor_MySectionBlocks::class, LPPC_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_fullviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

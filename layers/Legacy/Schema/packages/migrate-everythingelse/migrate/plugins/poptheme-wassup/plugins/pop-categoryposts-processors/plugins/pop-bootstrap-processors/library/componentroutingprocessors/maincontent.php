@@ -13,7 +13,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS00],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS01],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS02],
@@ -35,7 +35,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_TabPanelSectionBlocks::class, CPP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_CATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -44,7 +44,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02],
@@ -66,7 +66,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_AuthorTabPanelSectionBlocks::class, CPP_Module_Processor_AuthorTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -75,7 +75,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS00],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS01],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS02],
@@ -97,7 +97,7 @@ class PoPTheme_Wassup_AppCatPro_Bootstrap_Module_MainContentComponentRoutingProc
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS18],
             POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19 => [CPP_Module_Processor_TagTabPanelSectionBlocks::class, CPP_Module_Processor_TagTabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_TAGCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [

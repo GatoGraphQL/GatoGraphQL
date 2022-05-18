@@ -12,7 +12,7 @@ class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionComponentRouting
         $ret = array();
 
         // Page modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00 => [LPPC_Module_Processor_SectionTabPanelBlocks::class, LPPC_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS00],
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS01 => [LPPC_Module_Processor_SectionTabPanelBlocks::class, LPPC_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS01],
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS02 => [LPPC_Module_Processor_SectionTabPanelBlocks::class, LPPC_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS02],
@@ -35,7 +35,7 @@ class PoP_CategoryPostsCreation_Bootstrap_Module_MainPageSectionComponentRouting
             POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_SectionTabPanelBlocks::class, LPPC_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYCATEGORYPOSTS19],
         );
 
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

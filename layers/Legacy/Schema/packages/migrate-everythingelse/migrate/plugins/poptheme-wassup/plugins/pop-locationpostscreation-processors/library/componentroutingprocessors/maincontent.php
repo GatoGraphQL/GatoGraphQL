@@ -11,20 +11,20 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_ADDLOCATIONPOST => [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOST_CREATE],
             POP_LOCATIONPOSTSCREATION_ROUTE_EDITLOCATIONPOST => [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::COMPONENT_BLOCK_LOCATIONPOST_UPDATE],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         $default_format_mycontent = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
 
-        $routemodules_mycontent = array(
+        $routeComponents_mycontent = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLOCATIONPOSTS_TABLE_EDIT],
         );
-        foreach ($routemodules_mycontent as $route => $component) {
+        foreach ($routeComponents_mycontent as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -35,10 +35,10 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_simpleviewpreviews = array(
+        $routeComponents_mycontent_simpleviewpreviews = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLOCATIONPOSTS_SCROLL_SIMPLEVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_simpleviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_simpleviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -49,10 +49,10 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
                 $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
-        $routemodules_mycontent_fullviewpreviews = array(
+        $routeComponents_mycontent_fullviewpreviews = array(
             POP_LOCATIONPOSTSCREATION_ROUTE_MYLOCATIONPOSTS => [GD_Custom_EM_Module_Processor_MySectionBlocks::class, GD_Custom_EM_Module_Processor_MySectionBlocks::COMPONENT_BLOCK_MYLOCATIONPOSTS_SCROLL_FULLVIEWPREVIEW],
         );
-        foreach ($routemodules_mycontent_fullviewpreviews as $route => $component) {
+        foreach ($routeComponents_mycontent_fullviewpreviews as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

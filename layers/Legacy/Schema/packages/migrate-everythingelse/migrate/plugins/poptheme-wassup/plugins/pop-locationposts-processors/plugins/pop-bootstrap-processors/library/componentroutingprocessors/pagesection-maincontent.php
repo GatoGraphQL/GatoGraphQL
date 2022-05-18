@@ -11,10 +11,10 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
      */
     public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
-        $routemodules = array(
+        $routeComponents = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_LOCATIONPOSTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -23,10 +23,10 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORLOCATIONPOSTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -35,10 +35,10 @@ class PoPTheme_Wassup_SP_EM_Bootstrap_Module_MainContentComponentRoutingProcesso
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS => [PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::class, PoP_LocationPosts_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGLOCATIONPOSTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [

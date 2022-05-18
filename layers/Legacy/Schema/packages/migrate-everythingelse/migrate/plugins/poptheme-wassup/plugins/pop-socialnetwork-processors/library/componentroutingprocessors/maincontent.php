@@ -35,10 +35,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         $default_format_section = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTION);
         $default_format_tagusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGUSERS);
 
-        $routemodules_userdetails = array(
+        $routeComponents_userdetails = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_userdetails as $route => $component) {
+        foreach ($routeComponents_userdetails as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -49,10 +49,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userfullview = array(
+        $routeComponents_userfullview = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_userfullview as $route => $component) {
+        foreach ($routeComponents_userfullview as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -63,10 +63,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userthumbnail = array(
+        $routeComponents_userthumbnail = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_userthumbnail as $route => $component) {
+        foreach ($routeComponents_userthumbnail as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -77,10 +77,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userlist = array(
+        $routeComponents_userlist = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLL_LIST],
         );
-        foreach ($routemodules_userlist as $route => $component) {
+        foreach ($routeComponents_userlist as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -99,10 +99,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         $default_format_users = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         $default_format_highlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
 
-        $routemodules_details = array(
+        $routeComponents_details = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_details as $route => $component) {
+        foreach ($routeComponents_details as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -113,11 +113,11 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userdetails = array(
+        $routeComponents_userdetails = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_DETAILS],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_userdetails as $route => $component) {
+        foreach ($routeComponents_userdetails as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -128,10 +128,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_tagdetails = array(
+        $routeComponents_tagdetails = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_tagdetails as $route => $component) {
+        foreach ($routeComponents_tagdetails as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -142,10 +142,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_simpleview = array(
+        $routeComponents_simpleview = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_SIMPLEVIEW],
         );
-        foreach ($routemodules_simpleview as $route => $component) {
+        foreach ($routeComponents_simpleview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -156,10 +156,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_fullview = array(
+        $routeComponents_fullview = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_fullview as $route => $component) {
+        foreach ($routeComponents_fullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -170,11 +170,11 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userfullview = array(
+        $routeComponents_userfullview = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_FULLVIEW],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_userfullview as $route => $component) {
+        foreach ($routeComponents_userfullview as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -185,10 +185,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_thumbnail = array(
+        $routeComponents_thumbnail = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_thumbnail as $route => $component) {
+        foreach ($routeComponents_thumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -199,11 +199,11 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userthumbnail = array(
+        $routeComponents_userthumbnail = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_THUMBNAIL],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_userthumbnail as $route => $component) {
+        foreach ($routeComponents_userthumbnail as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -214,10 +214,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_list = array(
+        $routeComponents_list = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORRECOMMENDEDPOSTS_SCROLL_LIST],
         );
-        foreach ($routemodules_list as $route => $component) {
+        foreach ($routeComponents_list as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -228,11 +228,11 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userlist = array(
+        $routeComponents_userlist = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLL_LIST],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLL_LIST],
         );
-        foreach ($routemodules_userlist as $route => $component) {
+        foreach ($routeComponents_userlist as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -243,10 +243,10 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
-        $routemodules_taglist = array(
+        $routeComponents_taglist = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_AUTHORSUBSCRIBEDTOTAGS_SCROLL_LIST],
         );
-        foreach ($routemodules_taglist as $route => $component) {
+        foreach ($routeComponents_taglist as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -263,12 +263,12 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
         $default_format_singlehighlights = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEHIGHLIGHTS);
 
-        $routemodules_userdetails = array(
+        $routeComponents_userdetails = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLL_DETAILS],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLL_DETAILS],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_DETAILS],
         );
-        foreach ($routemodules_userdetails as $route => $component) {
+        foreach ($routeComponents_userdetails as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -279,12 +279,12 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userfullview = array(
+        $routeComponents_userfullview = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLL_FULLVIEW],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLL_FULLVIEW],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_userfullview as $route => $component) {
+        foreach ($routeComponents_userfullview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -295,12 +295,12 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userthumbnail = array(
+        $routeComponents_userthumbnail = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLL_THUMBNAIL],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLL_THUMBNAIL],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_userthumbnail as $route => $component) {
+        foreach ($routeComponents_userthumbnail as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -311,12 +311,12 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor 
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userlist = array(
+        $routeComponents_userlist = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLL_LIST],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLL_LIST],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::class, PoP_SocialNetwork_Module_Processor_CustomSectionBlocks::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLL_LIST],
         );
-        foreach ($routemodules_userlist as $route => $component) {
+        foreach ($routeComponents_userlist as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [

@@ -32,10 +32,10 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
 
         // Single main content
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
-        $routemodules_userdetails = array(
+        $routeComponents_userdetails = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS],
         );
-        foreach ($routemodules_userdetails as $route => $component) {
+        foreach ($routeComponents_userdetails as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -46,10 +46,10 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userfullview = array(
+        $routeComponents_userfullview = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW],
         );
-        foreach ($routemodules_userfullview as $route => $component) {
+        foreach ($routeComponents_userfullview as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -60,10 +60,10 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userthumbnail = array(
+        $routeComponents_userthumbnail = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL],
         );
-        foreach ($routemodules_userthumbnail as $route => $component) {
+        foreach ($routeComponents_userthumbnail as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -74,10 +74,10 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
-        $routemodules_userlist = array(
+        $routeComponents_userlist = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SectionBlocks::class, PoP_Module_Processor_SectionBlocks::COMPONENT_BLOCK_SINGLEAUTHORS_SCROLL_LIST],
         );
-        foreach ($routemodules_userlist as $route => $component) {
+        foreach ($routeComponents_userlist as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [

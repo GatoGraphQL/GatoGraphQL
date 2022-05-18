@@ -11,11 +11,11 @@ class PoP_EventsCreation_Bootstrap_Module_MainPageSectionComponentRoutingProcess
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_EVENTSCREATION_ROUTE_MYEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYEVENTS],
             POP_EVENTSCREATION_ROUTE_MYPASTEVENTS => [PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::class, PoP_EventsCreation_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYPASTEVENTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [

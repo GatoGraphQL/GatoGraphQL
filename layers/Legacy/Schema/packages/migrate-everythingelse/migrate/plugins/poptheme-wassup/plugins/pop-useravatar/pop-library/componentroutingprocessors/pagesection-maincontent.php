@@ -11,10 +11,10 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionComponentRoutingProcessor
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_USERAVATAR_ROUTE_EDITAVATAR => [PoP_UserAvatarProcessors_Module_Processor_UserBlocks::class, PoP_UserAvatarProcessors_Module_Processor_UserBlocks::COMPONENT_BLOCK_USERAVATAR_UPDATE],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

@@ -13,12 +13,12 @@ class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComp
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks::class, PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_HIGHLIGHTS],
             POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks::class, PoP_AddHighlights_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_MYHIGHLIGHTS],
             POP_POSTSCREATION_ROUTE_MYPOSTS => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::COMPONENT_BLOCK_TABPANEL_MYPOSTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -27,10 +27,10 @@ class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComp
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks::class, PoP_AddHighlights_Module_Processor_SingleSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_SINGLERELATEDHIGHLIGHTCONTENT],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -39,10 +39,10 @@ class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComp
             ];
         }
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelBlocks::class, PoP_AddHighlights_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORHIGHLIGHTS],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [

@@ -11,10 +11,10 @@ class Wassup_Share_Module_MainContentComponentRoutingProcessor extends \PoP\Appl
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_SHARE_ROUTE_SHAREBYEMAIL => [PoP_Share_Module_Processor_Blocks::class, PoP_Share_Module_Processor_Blocks::COMPONENT_BLOCK_SHAREBYEMAIL],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

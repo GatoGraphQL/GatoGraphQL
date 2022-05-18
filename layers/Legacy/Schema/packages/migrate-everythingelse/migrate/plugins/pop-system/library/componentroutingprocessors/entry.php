@@ -11,12 +11,12 @@ class PoPSystem_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRout
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_SYSTEM_ROUTE_SYSTEM_BUILD => [PoP_System_Module_Processor_SystemActions::class, PoP_System_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_BUILD],
             POP_SYSTEM_ROUTE_SYSTEM_GENERATE => [PoP_System_Module_Processor_SystemActions::class, PoP_System_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_GENERATE],
             POP_SYSTEM_ROUTE_SYSTEM_INSTALL => [PoP_System_Module_Processor_SystemActions::class, PoP_System_Module_Processor_SystemActions::COMPONENT_DATALOADACTION_SYSTEM_INSTALL],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

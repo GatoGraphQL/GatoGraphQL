@@ -11,10 +11,10 @@ class PoP_AddLocations_Module_MainContentComponentRoutingProcessor extends \PoP\
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_ADDLOCATIONS_ROUTE_ADDLOCATION => [GD_EM_Module_Processor_CreateLocationBlocks::class, GD_EM_Module_Processor_CreateLocationBlocks::COMPONENT_BLOCK_CREATELOCATION],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 

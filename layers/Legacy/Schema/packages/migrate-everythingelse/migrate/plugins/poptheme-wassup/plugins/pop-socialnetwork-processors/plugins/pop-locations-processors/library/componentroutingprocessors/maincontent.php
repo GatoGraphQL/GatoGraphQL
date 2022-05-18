@@ -14,11 +14,11 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
         $ret = array();
 
         $default_format_authorusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
-        $routemodules_map = array(
+        $routeComponents_map = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWERS_SCROLLMAP],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $component) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -32,12 +32,12 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
 
         // Single route modules
         $default_format_singleusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
-        $routemodules_map = array(
+        $routeComponents_map = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_SINGLERECOMMENDEDBY_SCROLLMAP],
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $component) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -51,10 +51,10 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
 
         // Tag route modules
         $default_format_tagusers = PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGUSERS);
-        $routemodules_map = array(
+        $routeComponents_map = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::COMPONENT_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $component) {
+        foreach ($routeComponents_map as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [

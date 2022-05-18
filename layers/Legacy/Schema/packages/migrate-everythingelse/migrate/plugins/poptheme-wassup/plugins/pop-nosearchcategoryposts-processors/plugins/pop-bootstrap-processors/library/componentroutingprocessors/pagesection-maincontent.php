@@ -13,7 +13,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
     {
         $ret = array();
 
-        $routemodules = array(
+        $routeComponents = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionTabPanelBlocks::class, NSCPP_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_SectionTabPanelBlocks::class, NSCPP_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS01],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS02 => [NSCPP_Module_Processor_SectionTabPanelBlocks::class, NSCPP_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS02],
@@ -36,7 +36,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionTabPanelBlocks::class, NSCPP_Module_Processor_SectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19],
         );
 
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -46,7 +46,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
         }
 
         // Author route modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::class, NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::class, NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS02 => [NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::class, NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02],
@@ -68,7 +68,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::class, NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::class, NSCPP_Module_Processor_AuthorSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
                 'component' => $component,
                 'conditions' => [
@@ -78,7 +78,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
         }
 
         // Tag route modules
-        $routemodules = array(
+        $routeComponents = array(
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS00],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS01 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS01],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS02 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS02],
@@ -100,7 +100,7 @@ class PoPTheme_Wassup_NSAppCatPro_Bootstrap_Module_MainPageSectionComponentRouti
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS18],
             POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_TagSectionTabPanelBlocks::class, NSCPP_Module_Processor_TagSectionTabPanelBlocks::COMPONENT_BLOCK_TABPANEL_TAGNOSEARCHCATEGORYPOSTS19],
         );
-        foreach ($routemodules as $route => $component) {
+        foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
                 'component' => $component,
                 'conditions' => [
