@@ -5,7 +5,7 @@
 		<a {{#generateId group='minimize'}}{{id}}{{/generateId}} data-target="#{{lastGeneratedId}}" data-toggle="window-minimize" href="#" class="minimize close" title="{{titles.minimize}}"><span class="glyphicon glyphicon-minus"></span></a>
 	</div>
 	{{#each subcomponentoutputnames.elements}}
-		<div class="{{../classes.wrapper}} {{{get ../moduleclasses .}}}" style="{{styles.wrapper}}" {{#withget ../moduleparams .}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
+		<div class="{{../classes.wrapper}} {{{get ../componentclasses .}}}" style="{{styles.wrapper}}" {{#withget ../componentparams .}}{{#each .}} {{@key}}="{{this}}"{{/each}}{{/withget}}>
 			{{#withModule ../. this}}
 				{{enterModule ../../.}}
 			{{/withModule}}

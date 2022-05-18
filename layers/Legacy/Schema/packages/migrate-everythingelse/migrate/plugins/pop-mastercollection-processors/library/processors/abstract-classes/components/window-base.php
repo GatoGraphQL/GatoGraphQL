@@ -41,12 +41,12 @@ abstract class PoP_Module_Processor_WindowBase extends PoPEngine_QueryDataCompon
             $ret[GD_JS_CLASSES]['wrapper'] = $wrapper_class;
         }
 
-        if ($moduleclasses = $this->getModuleClasses($component, $props)) {
-            $ret['moduleclasses'] = $moduleclasses;
+        if ($componentclasses = $this->getModuleClasses($component, $props)) {
+            $ret['componentclasses'] = $componentclasses;
         }
 
-        if ($moduleparams = $this->getModuleParams($component, $props)) {
-            $ret['moduleparams'] = $moduleparams;
+        if ($componentparams = $this->getModuleParams($component, $props)) {
+            $ret['componentparams'] = $componentparams;
         }
         
         if ($subComponents = $this->getSubcomponents($component)) {
