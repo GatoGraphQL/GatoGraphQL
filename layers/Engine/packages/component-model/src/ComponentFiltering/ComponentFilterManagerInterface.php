@@ -12,7 +12,7 @@ interface ComponentFilterManagerInterface
     public function getSelectedComponentFilterName(): ?string;
     public function setSelectedComponentFilterName(string $selectedComponentFilterName): void;
     public function getNotExcludedComponentVariationSets(): ?array;
-    public function neverExclude($neverExclude): void;
+    public function neverExclude(bool $neverExclude): void;
     public function excludeModule(array $componentVariation, array &$props): bool;
     public function removeExcludedSubmodules(array $componentVariation, array $submodules): array;
     /**
