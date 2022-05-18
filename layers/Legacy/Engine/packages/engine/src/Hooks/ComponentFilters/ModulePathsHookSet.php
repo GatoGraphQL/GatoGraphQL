@@ -12,15 +12,15 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 class ModulePathsHookSet extends AbstractHookSet
 {
-    private ?ModulePaths $modulePaths = null;
+    private ?ModulePaths $componentPaths = null;
     
-    final public function setModulePaths(ModulePaths $modulePaths): void
+    final public function setModulePaths(ModulePaths $componentPaths): void
     {
-        $this->modulePaths = $modulePaths;
+        $this->componentPaths = $componentPaths;
     }
     final protected function getModulePaths(): ModulePaths
     {
-        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+        return $this->componentPaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
 
     protected function init(): void
@@ -33,7 +33,7 @@ class ModulePathsHookSet extends AbstractHookSet
     
     public function maybeAddComponent(array $components): array
     {
-        if (App::getState('modulefilter') === $this->modulePaths->getName()) {
+        if (App::getState('modulefilter') === $this->componentPaths->getName()) {
             if ($componentPaths = App::getState('componentPaths')) {
                 $modulePathHelpers = ModulePathHelpersFacade::getInstance();
                 $paths = array_map(

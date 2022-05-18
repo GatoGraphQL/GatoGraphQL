@@ -4503,8 +4503,8 @@ window.pop.Manager = {
 	
 		var that = this;
 		
-		var modulePaths = that.getStatelessSettings(domain, pageSection, target, 'modules-paths');
-		return modulePaths[moduleName];
+		var componentPaths = that.getStatelessSettings(domain, pageSection, target, 'modules-paths');
+		return componentPaths[moduleName];
 	},
 	
 	getExecutableTemplate : function(domain, moduleOrTemplateName) {

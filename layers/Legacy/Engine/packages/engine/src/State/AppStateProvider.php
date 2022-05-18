@@ -19,7 +19,7 @@ use PoP\Root\State\AbstractAppStateProvider;
 class AppStateProvider extends AbstractAppStateProvider
 {
     private ?HeadModule $headModule = null;
-    private ?ModulePaths $modulePaths = null;
+    private ?ModulePaths $componentPaths = null;
     private ?MainContentModule $mainContentModule = null;
     private ?ComponentRoutingProcessorManagerInterface $routeComponentProcessorManager = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
@@ -33,13 +33,13 @@ class AppStateProvider extends AbstractAppStateProvider
     {
         return $this->headModule ??= $this->instanceManager->getInstance(HeadModule::class);
     }    
-    final public function setModulePaths(ModulePaths $modulePaths): void
+    final public function setModulePaths(ModulePaths $componentPaths): void
     {
-        $this->modulePaths = $modulePaths;
+        $this->componentPaths = $componentPaths;
     }
     final protected function getModulePaths(): ModulePaths
     {
-        return $this->modulePaths ??= $this->instanceManager->getInstance(ModulePaths::class);
+        return $this->componentPaths ??= $this->instanceManager->getInstance(ModulePaths::class);
     }
     final public function setMainContentModule(MainContentModule $mainContentModule): void
     {
@@ -91,7 +91,7 @@ class AppStateProvider extends AbstractAppStateProvider
                 }
             }
         }
-        if ($state['modulefilter'] === $this->modulePaths->getName()) {
+        if ($state['modulefilter'] === $this->componentPaths->getName()) {
             if ($enablePassingStateViaRequest) {
                 $state['componentPaths'] = $this->getModulePathHelpers()->getModulePaths();
             }

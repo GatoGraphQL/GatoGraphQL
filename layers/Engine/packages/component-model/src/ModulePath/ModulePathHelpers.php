@@ -98,12 +98,12 @@ class ModulePathHelpers implements ModulePathHelpersInterface
             }
         );
 
-        $modulePaths = [];
+        $componentPaths = [];
         foreach ($paths as $path) {
             // Each path must be converted to an array of the modules
-            $modulePaths[] = ModulePathHelpersFacade::getInstance()->recastModulePath($path);
+            $componentPaths[] = ModulePathHelpersFacade::getInstance()->recastModulePath($path);
         }
 
-        return $modulePaths;
+        return $componentPaths;
     }
 }

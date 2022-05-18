@@ -12,12 +12,12 @@ class PoPThemeWassup_Utils
         if (is_null(self::$checkLoadingPagesectionModule)) {
             $instanceManager = InstanceManagerFacade::getInstance();
             /** @var ModulePaths */
-            $modulePaths = $instanceManager->getInstance(ModulePaths::class);
+            $componentPaths = $instanceManager->getInstance(ModulePaths::class);
 
             // If we are targeting specific module paths, then no need to validate. Otherwise, we must check that the module is under only 1 pageSection, or it may be repeated here and there
             self::$checkLoadingPagesectionModule = \PoP\Root\App::applyFilters(
                 'PoPThemeWassup_Utils:checkLoadingPagesectionModule',
-                \PoP\Root\App::getState('modulefilter') !== $modulePaths->getName()
+                \PoP\Root\App::getState('modulefilter') !== $componentPaths->getName()
             );
         }
 

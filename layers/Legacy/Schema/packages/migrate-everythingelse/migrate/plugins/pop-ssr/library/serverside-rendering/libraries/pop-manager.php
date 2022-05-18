@@ -514,8 +514,8 @@ class PoP_ServerSideManager
 
     public function getModulePath($domain, $pageSection, $target, $moduleName)
     {
-        $modulePaths = $this->getStatelessSettings($domain, $pageSection, $target, 'modules-paths');
-        return $modulePaths[$moduleName];
+        $componentPaths = $this->getStatelessSettings($domain, $pageSection, $target, 'modules-paths');
+        return $componentPaths[$moduleName];
     }
 
     public function getExecutableTemplate($domain, $moduleOrTemplateName)

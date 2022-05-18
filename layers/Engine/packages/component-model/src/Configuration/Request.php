@@ -68,10 +68,10 @@ class Request
      */
     public static function getModulePaths(): array
     {
-        $modulePaths = App::getRequest()->request->all()[Params::COMPONENTPATHS] ?? App::getRequest()->query->all()[Params::COMPONENTPATHS] ?? [];
-        if (!is_array($modulePaths)) {
-            return [$modulePaths];
+        $componentPaths = App::getRequest()->request->all()[Params::COMPONENTPATHS] ?? App::getRequest()->query->all()[Params::COMPONENTPATHS] ?? [];
+        if (!is_array($componentPaths)) {
+            return [$componentPaths];
         }
-        return $modulePaths;
+        return $componentPaths;
     }
 }
