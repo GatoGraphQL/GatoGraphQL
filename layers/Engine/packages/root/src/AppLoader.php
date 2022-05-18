@@ -357,10 +357,10 @@ class AppLoader implements AppLoaderInterface
                 continue;
             }
             $moduleConfiguration = $this->moduleClassConfiguration[$moduleClass] ?? [];
-            $skipSchemaForComponent = $this->skipSchemaForComponent($module);
+            $skipSchemaForModule = $this->skipSchemaForModule($module);
             $module->initialize(
                 $moduleConfiguration,
-                $skipSchemaForComponent,
+                $skipSchemaForModule,
                 $this->skipSchemaModuleClasses
             );
         }
@@ -375,7 +375,7 @@ class AppLoader implements AppLoaderInterface
         App::getModuleManager()->moduleLoaded();
     }
 
-    public function skipSchemaForComponent(ModuleInterface $module): bool
+    public function skipSchemaForModule(ModuleInterface $module): bool
     {
         $moduleClass = \get_class($module);
         if (!isset($this->skipSchemaForModuleCache[$moduleClass])) {
