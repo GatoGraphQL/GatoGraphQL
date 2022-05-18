@@ -75,7 +75,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
 
         // If there was a satisfying module, then return it
         // We can override the default module, for a specific route, by setting it to module null! Hence, here ask if the chosen module is not false,
-        // and if so already return it, allowing for null values too (eg: POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES in poptheme-wassup/library/routemoduleprocessors/pagesection-maincontent.php)
+        // and if so already return it, allowing for null values too (eg: POPTHEME_WASSUP_ROUTE_LOADERS_INITIALFRAMES in poptheme-wassup/library/componentroutingprocessors/pagesection-maincontent.php)
         if ($most_matching_module !== false) {
             return $most_matching_module;
         }

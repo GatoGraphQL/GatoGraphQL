@@ -106,8 +106,8 @@ class PoP_ResourceLoaderProcessorUtils {
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
         $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        $routemoduleprocessors = $pop_module_routemoduleprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
-        foreach ($routemoduleprocessors as $routemoduleprocessor) {
+        $componentroutingprocessors = $pop_module_routemoduleprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        foreach ($componentroutingprocessors as $routemoduleprocessor) {
             foreach ($routemoduleprocessor->getModulesVarsPropertiesByNatureAndRoute() as $nature => $route_vars_properties) {
                 foreach ($route_vars_properties as $route => $vars_properties) {
 
