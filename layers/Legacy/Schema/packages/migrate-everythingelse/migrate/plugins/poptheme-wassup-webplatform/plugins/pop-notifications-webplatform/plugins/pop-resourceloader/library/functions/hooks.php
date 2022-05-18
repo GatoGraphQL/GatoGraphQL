@@ -5,7 +5,7 @@ class PopThemeWassup_AAL_ResourceLoaderProcessor_Hooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_WebPlatformQueryDataComponentProcessorBase:module-resources',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
             $this->getModuleCssResources(...),
             10,
             6

@@ -55,11 +55,11 @@ abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataCo
         // if ($this->addFetchedData($component, $props)) {
 
         //     if ($inner = $this->getInnerSubmodule($component)) {
-        //         $this->setProp($inner, $props, 'module-cb', true);
+        //         $this->setProp($inner, $props, 'component-cb', true);
         //     }
         // }
 
-        // Artificial property added to identify the module when adding module-resources
+        // Artificial property added to identify the module when adding component-resources
         $this->setProp($component, $props, 'resourceloader', 'structure');
 
         parent::initModelProps($component, $props);

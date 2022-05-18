@@ -81,7 +81,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     {
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
-                // // Artificial property added to identify the template when adding module-resources
+                // // Artificial property added to identify the template when adding component-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;

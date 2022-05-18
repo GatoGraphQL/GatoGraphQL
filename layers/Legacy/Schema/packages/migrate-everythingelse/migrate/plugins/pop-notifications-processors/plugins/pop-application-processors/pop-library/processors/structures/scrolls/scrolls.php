@@ -50,7 +50,7 @@ class GD_AAL_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
         switch ($component[1]) {
             case self::COMPONENT_SCROLL_NOTIFICATIONS_DETAILS:
             case self::COMPONENT_SCROLL_NOTIFICATIONS_LIST:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'scroll-notifications');
                 $this->appendProp($component, $props, 'class', 'scroll-notifications');
                 break;

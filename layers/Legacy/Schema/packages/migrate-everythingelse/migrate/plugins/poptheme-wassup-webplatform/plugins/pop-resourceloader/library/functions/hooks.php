@@ -15,7 +15,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
         );
 
         \PoP\Root\App::addFilter(
-            'PoP_WebPlatformQueryDataComponentProcessorBase:module-resources',
+            'PoP_WebPlatformQueryDataComponentProcessorBase:component-resources',
             $this->getModuleCssResources(...),
             10,
             6
@@ -97,7 +97,7 @@ class PoPTheme_Wassup_ResourceLoaderProcessor_Hooks
             $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_SKELETONSCREEN];
         }
 
-        // Artificial property added to identify the template when adding module-resources
+        // Artificial property added to identify the template when adding component-resources
         if ($resourceloader_att = $processor->getProp($component, $props, 'resourceloader')) {
             if ($resourceloader_att == 'block-carousel') {
                 $resources[] = [PoPTheme_Wassup_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_CSSResourceLoaderProcessor::RESOURCE_CSS_BLOCKCAROUSEL];

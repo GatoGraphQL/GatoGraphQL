@@ -68,7 +68,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     {
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }

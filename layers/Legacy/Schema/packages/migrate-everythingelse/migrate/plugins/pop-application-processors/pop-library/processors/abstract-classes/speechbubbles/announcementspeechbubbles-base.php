@@ -14,7 +14,7 @@ abstract class PoP_Module_Processor_AnnouncementSpeechBubblesBase extends PoP_Mo
     public function initModelProps(array $component, array &$props): void
     {
 
-        // Artificial property added to identify the template when adding module-resources
+        // Artificial property added to identify the template when adding component-resources
         $this->setProp($component, $props, 'resourceloader', 'littleguy');
         parent::initModelProps($component, $props);
     }

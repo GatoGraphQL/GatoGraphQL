@@ -145,7 +145,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             case self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS:
             case self::COMPONENT_MULTIPLE_MENU_SIDE_SECTIONS_MULTITARGET:
             case self::COMPONENT_MULTIPLE_MENU_SIDE_MYSECTIONS:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'side-sections-menu');
                 $this->appendProp($component, $props, 'class', 'side-sections-menu');
                 break;
@@ -154,7 +154,7 @@ class PoP_Module_Processor_CustomMenuMultiples extends PoP_Module_Processor_Menu
             case self::COMPONENT_MULTIPLE_MENU_BODY_SECTIONS:
             case self::COMPONENT_MULTIPLE_MENU_BODY_MYSECTIONS:
             case self::COMPONENT_MULTIPLE_MENU_BODY_ABOUT:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'side-sections-menu');
                 $this->appendProp($component, $props, 'class', 'side-sections-menu');
                 break;

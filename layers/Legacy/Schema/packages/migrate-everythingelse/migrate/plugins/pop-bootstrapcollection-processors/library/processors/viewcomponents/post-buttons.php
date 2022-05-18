@@ -87,7 +87,7 @@ class PoP_Module_Processor_PostViewComponentButtons extends PoP_Module_Processor
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_EMBED_SOCIALMEDIA:
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_POST_API_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }

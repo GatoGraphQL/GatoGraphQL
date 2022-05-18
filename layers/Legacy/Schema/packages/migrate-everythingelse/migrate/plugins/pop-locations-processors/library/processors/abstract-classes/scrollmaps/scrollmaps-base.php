@@ -50,7 +50,7 @@ abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processo
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // Artificial property added to identify the template when adding module-resources
+        // Artificial property added to identify the template when adding component-resources
         $this->setProp($component, $props, 'resourceloader', 'map');
         $this->appendProp($component, $props, 'class', 'map');
 

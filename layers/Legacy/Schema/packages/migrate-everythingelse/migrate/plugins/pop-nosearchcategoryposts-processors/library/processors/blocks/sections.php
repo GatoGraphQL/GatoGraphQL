@@ -3057,7 +3057,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             case self::COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS17_CAROUSEL_CONTENT:
             case self::COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT:
             case self::COMPONENT_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;

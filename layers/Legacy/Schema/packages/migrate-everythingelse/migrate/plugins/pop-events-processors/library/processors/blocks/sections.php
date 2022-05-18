@@ -288,7 +288,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             case self::COMPONENT_BLOCK_EVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGEVENTS_CAROUSEL:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel block-events-carousel');
                 break;

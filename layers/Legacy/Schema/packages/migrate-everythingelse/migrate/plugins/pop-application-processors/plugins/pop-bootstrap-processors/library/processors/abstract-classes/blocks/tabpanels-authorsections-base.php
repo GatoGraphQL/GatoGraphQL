@@ -15,7 +15,7 @@ abstract class PoP_Module_Processor_AuthorTabPanelSectionBlocksBase extends PoP_
     public function initModelProps(array $component, array &$props): void
     {
 
-        // Artificial property added to identify the template when adding module-resources
+        // Artificial property added to identify the template when adding component-resources
         $this->setProp($component, $props, 'resourceloader', 'blockgroup-authorsections');
 
         // Needed for the URE ControlSource to show stacked on the right

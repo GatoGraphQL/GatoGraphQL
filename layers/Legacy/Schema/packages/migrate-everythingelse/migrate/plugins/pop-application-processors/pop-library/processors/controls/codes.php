@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
     {
         switch ($component[1]) {
             case self::COMPONENT_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'functionbutton');
                 break;
         }

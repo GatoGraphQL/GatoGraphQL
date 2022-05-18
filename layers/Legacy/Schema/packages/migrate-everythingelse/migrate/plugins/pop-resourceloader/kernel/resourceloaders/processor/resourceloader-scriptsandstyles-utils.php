@@ -503,8 +503,8 @@ class PoPWebPlatform_ResourceLoader_ScriptsAndStylesUtils {
         $noncritical_methods = $methods[POP_PROGRESSIVEBOOTING_NONCRITICAL];
 
         // Get all the resources the template is dependent on. Eg: inline CSS styles
-        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['componentsettings']['combinedstate']['module-resources'] ?? array()))));
-        $modules_resources = $engineState->helperCalculations['module-resources'];
+        // $modules_resources = array_values(array_unique(arrayFlatten(array_values($data['componentsettings']['combinedstate']['component-resources'] ?? array()))));
+        $modules_resources = $engineState->helperCalculations['component-resources'];
 
         // Get all the resources from the current request, from the loaded Handlebars templates and Javascript methods
         self::$calculated_resources[$key] = PoP_ResourceLoaderProcessorUtils::calculateResources(true, $templateResources, $critical_methods, $noncritical_methods, $modules_resources, $model_instance_id, $options);

@@ -121,7 +121,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             case self::COMPONENT_BLOCK_UNDOUPVOTEPOST:
             case self::COMPONENT_BLOCK_DOWNVOTEPOST:
             case self::COMPONENT_BLOCK_UNDODOWNVOTEPOST:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'functionalblock');
                 $this->appendProp($component, $props, 'class', 'pop-functionalblock');
                 break;

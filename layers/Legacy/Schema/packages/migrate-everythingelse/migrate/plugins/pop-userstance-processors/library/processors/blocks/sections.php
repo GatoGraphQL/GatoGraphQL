@@ -466,7 +466,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_AUTHORSTANCES_CAROUSEL:
             case self::COMPONENT_BLOCK_TAGSTANCES_CAROUSEL:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-stances-carousel');
                 break;
         }

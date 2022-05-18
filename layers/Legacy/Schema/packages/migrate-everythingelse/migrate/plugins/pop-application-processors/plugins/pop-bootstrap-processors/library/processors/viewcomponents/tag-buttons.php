@@ -70,7 +70,7 @@ class PoPCore_GenericForms_Module_Processor_TagViewComponentButtons extends PoP_
 
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }

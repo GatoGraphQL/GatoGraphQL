@@ -93,7 +93,7 @@ abstract class PoP_Module_Processor_PreviewObjectLayoutsBase extends PoPEngine_Q
     public function initModelProps(array $component, array &$props): void
     {
 
-        // Artificial property added to identify the module when adding module-resources
+        // Artificial property added to identify the module when adding component-resources
         $this->setProp($component, $props, 'resourceloader', 'layout');
 
         parent::initModelProps($component, $props);

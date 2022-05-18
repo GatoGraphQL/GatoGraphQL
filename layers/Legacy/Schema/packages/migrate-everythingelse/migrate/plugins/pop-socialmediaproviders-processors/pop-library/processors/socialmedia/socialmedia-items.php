@@ -219,7 +219,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::COMPONENT_POSTSOCIALMEDIA_LINKEDIN:
             case self::COMPONENT_USERSOCIALMEDIA_LINKEDIN:
             case self::COMPONENT_TAGSOCIALMEDIA_LINKEDIN:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmediaproviders');
                 $this->appendProp($component, $props, 'class', 'socialmediaproviders-changebg icon-only');
                 break;

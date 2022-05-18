@@ -70,7 +70,7 @@ class PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons exten
 
         switch ($component[1]) {
             case self::COMPONENT_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }

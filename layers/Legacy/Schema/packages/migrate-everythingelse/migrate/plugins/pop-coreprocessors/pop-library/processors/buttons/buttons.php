@@ -115,7 +115,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     {
         switch ($component[1]) {
             case self::COMPONENT_BUTTON_PRINT_SOCIALMEDIA:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }

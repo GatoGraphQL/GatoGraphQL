@@ -26,7 +26,7 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
         // will update itself with the URL in the input
         $iframe = $this->getProp($component, $props, 'iframe-component');
-        // $this->setProp($iframe, $props, 'module-cb', true);
+        // $this->setProp($iframe, $props, 'component-cb', true);
 
         $input = $this->getProp($component, $props, 'input-component');
         $this->mergeProp(

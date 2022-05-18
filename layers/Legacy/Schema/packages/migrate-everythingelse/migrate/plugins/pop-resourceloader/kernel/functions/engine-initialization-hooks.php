@@ -53,7 +53,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
 			
 			// Do array_merge because it may already contain data from doing 'extra-uris'
-			// Then, "templates" and "module-resources" are all the values required by the current URI and all the extra ones
+			// Then, "templates" and "component-resources" are all the values required by the current URI and all the extra ones
 			$helperCalculations['template-resources'] = array_unique(
 				array_merge(
 					$helperCalculations['template-resources'] ?? array(),
@@ -61,9 +61,9 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 				),
 				SORT_REGULAR
 			);
-			$helperCalculations['module-resources'] = array_unique(
+			$helperCalculations['component-resources'] = array_unique(
 				array_merge(
-					$helperCalculations['module-resources'] ?? array(),
+					$helperCalculations['component-resources'] ?? array(),
 					$processorresourcedecorator->getResourcesMergedmoduletree($component, $props)
 				),
 				SORT_REGULAR

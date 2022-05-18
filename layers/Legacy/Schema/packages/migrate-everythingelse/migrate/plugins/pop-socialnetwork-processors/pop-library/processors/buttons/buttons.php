@@ -361,7 +361,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::COMPONENT_BUTTON_UNDOUPVOTEPOST_FULL:
             case self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
             case self::COMPONENT_BUTTON_UNDODOWNVOTEPOST_FULL:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'functionbutton');
 
                 // Tell the Search engines to not follow the link

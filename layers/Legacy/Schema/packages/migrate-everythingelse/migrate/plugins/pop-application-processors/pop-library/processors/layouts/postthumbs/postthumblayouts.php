@@ -178,7 +178,7 @@ class GD_Custom_Module_Processor_PostThumbLayouts extends PoP_Module_Processor_P
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFORIGINALFEATUREDIMAGE:
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED:
             case self::COMPONENT_LAYOUT_POSTTHUMB_LINKSELFCROPPEDFEED_VOLUNTEER:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'thumb-feed');
 
                 // Style to add a background-image while loading the feed image

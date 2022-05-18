@@ -3058,7 +3058,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             case self::COMPONENT_BLOCK_TAGCATEGORYPOSTS17_CAROUSEL_CONTENT:
             case self::COMPONENT_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT:
             case self::COMPONENT_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
                 $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;

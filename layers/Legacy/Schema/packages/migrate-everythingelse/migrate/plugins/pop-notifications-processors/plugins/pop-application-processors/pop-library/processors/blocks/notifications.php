@@ -126,7 +126,7 @@ class AAL_PoPProcessors_Module_Processor_NotificationBlocks extends PoP_Module_P
         switch ($component[1]) {
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_DETAILS:
             case self::COMPONENT_BLOCK_NOTIFICATIONS_SCROLL_LIST:
-                // Artificial property added to identify the template when adding module-resources
+                // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', 'block-notifications');
                 $this->appendProp($component, $props, 'class', 'block-notifications');
                 break;

@@ -157,7 +157,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 POP_FORMAT_CALENDARMAP => 'calendarmap',
             );
             if ($resourceloader = $resourceloaders[$format] ?? null) {
-                   // Artificial property added to identify the template when adding module-resources
+                   // Artificial property added to identify the template when adding component-resources
                 $this->setProp($component, $props, 'resourceloader', $resourceloader);
             }
         }
