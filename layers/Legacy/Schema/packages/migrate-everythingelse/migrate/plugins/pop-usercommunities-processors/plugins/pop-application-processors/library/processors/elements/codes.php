@@ -6,16 +6,16 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
 {
     public final const MODULE_CODE_INVITENEWMEMBERSHELP = 'code-invitenewmembershelp';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_INVITENEWMEMBERSHELP],
         );
     }
 
-    public function getCode(array $componentVariation, array &$props)
+    public function getCode(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_INVITENEWMEMBERSHELP:
                 $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
                 $invitenew_processor = $componentprocessor_manager->getProcessor([GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS]);
@@ -104,7 +104,7 @@ class PoP_UserCommunities_Module_Processor_Codes extends PoP_Module_Processor_HT
                 );
         }
     
-        return parent::getCode($componentVariation, $props);
+        return parent::getCode($component, $props);
     }
 }
 

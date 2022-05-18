@@ -79,7 +79,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     public final const MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST = 'dataload-authorcontent-scroll-fixedlist';
     public final const MODULE_DATALOAD_USERS_CAROUSEL = 'dataload-users-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_SEARCHCONTENT_TYPEAHEAD],
@@ -155,9 +155,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW => POP_BLOG_ROUTE_CONTENT,
             self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_LIST => POP_BLOG_ROUTE_CONTENT,
@@ -219,13 +219,13 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_USERS_SCROLL_NAVIGATOR => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_DATALOAD_USERS_SCROLL_THUMBNAIL => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_DATALOAD_USERS_TYPEAHEAD => UsersModuleConfiguration::getUsersRoute(),
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             /*********************************************
          * Typeaheads
@@ -328,12 +328,12 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             self::MODULE_DATALOAD_USERS_CAROUSEL => [PoP_Module_Processor_CustomCarousels::class, PoP_Module_Processor_CustomCarousels::MODULE_CAROUSEL_USERS],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_SEARCHCONTENT_TYPEAHEAD:
             case self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
@@ -410,10 +410,10 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_USERS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -519,34 +519,34 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         $carousels = array(
             [self::class, self::MODULE_DATALOAD_USERS_CAROUSEL],
         );
-        if (in_array($componentVariation, $navigators)) {
+        if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;
-        } elseif (in_array($componentVariation, $addons)) {
+        } elseif (in_array($component, $addons)) {
             $format = POP_FORMAT_ADDONS;
-        } elseif (in_array($componentVariation, $details)) {
+        } elseif (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($componentVariation, $lists) || in_array($componentVariation, $fixedlists)) {
+        } elseif (in_array($component, $lists) || in_array($component, $fixedlists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($componentVariation, $typeaheads)) {
+        } elseif (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
-        } elseif (in_array($componentVariation, $mentions)) {
+        } elseif (in_array($component, $mentions)) {
             $format = POP_FORMAT_MENTION;
-        } elseif (in_array($componentVariation, $carousels)) {
+        } elseif (in_array($component, $carousels)) {
             $format = POP_FORMAT_CAROUSEL;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_SIMPLEVIEW:
     //         case self::MODULE_DATALOAD_HOMECONTENT_SCROLL_FULLVIEW:
@@ -580,15 +580,15 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
     //             return TagRequestNature::TAG;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_POSTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_POSTS_SCROLL_ADDONS:
@@ -655,18 +655,18 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             [self::class, self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST],
         );
 
-        if (in_array($componentVariation, $fixedlists)) {
+        if (in_array($component, $fixedlists)) {
             $ret['limit'] = 4;
         }
 
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FULLVIEW:
@@ -701,9 +701,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_POSTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_POSTS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_POSTS_SCROLL_SIMPLEVIEW:
@@ -780,14 +780,14 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($componentVariation, $props);
+        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORCONTENT_SCROLL_FIXEDLIST:
                 // Don't bring anymore
                 $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_LIST_STOPFETCHING] = true;
@@ -797,9 +797,9 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_DATALOAD_SEARCHCONTENT_SCROLL_FULLVIEW:
@@ -810,23 +810,23 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLL_LIST:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
+                // if ($filter_component = $this->getFilterSubmodule($component)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation);
+                //     $filter = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
-                if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
-                    $this->setProp($componentVariation, $props, 'skip-data-load', true);
+                if (!$this->getActiveDataloadQueryArgsFilteringComponents($component)) {
+                    $this->setProp($component, $props, 'skip-data-load', true);
                 }
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_POSTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_POSTS_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_POSTS_SCROLL_DETAILS:
@@ -898,7 +898,7 @@ class PoP_Blog_Module_Processor_CustomSectionDataloads extends PoP_Module_Proces
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

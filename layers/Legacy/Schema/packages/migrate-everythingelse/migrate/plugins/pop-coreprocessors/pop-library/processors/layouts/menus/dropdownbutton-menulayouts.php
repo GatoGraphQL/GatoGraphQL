@@ -6,7 +6,7 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
     public final const MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP = 'layout-menu-dropdownbutton-top';
     public final const MODULE_LAYOUT_MENU_DROPDOWNBUTTON_SIDE = 'layout-menu-dropdownbutton-side';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
         );
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'btn btn-warning';
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
                 return 'btn btn-warning btn-block btn-addnew-side';
         }
     
-        return parent::getBtnClass($componentVariation, $props);
+        return parent::getBtnClass($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation, array &$props)
+    public function getBtnTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return '<i class="fa fa-fw fa-plus"></i>';
             
@@ -37,27 +37,27 @@ class PoP_Module_Processor_DropdownButtonMenuLayouts extends PoP_Module_Processo
                 return '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add new', 'pop-coreprocessors').' <span class="caret"></span>';
         }
     
-        return parent::getBtnTitle($componentVariation, $props);
+        return parent::getBtnTitle($component, $props);
     }
 
-    public function getDropdownbtnClass(array $componentVariation, array &$props)
+    public function getDropdownbtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return 'dropdown';
         }
     
-        return parent::getDropdownbtnClass($componentVariation, $props);
+        return parent::getDropdownbtnClass($component, $props);
     }
 
-    public function innerList(array $componentVariation, array &$props)
+    public function innerList(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MENU_DROPDOWNBUTTON_TOP:
                 return true;
         }
     
-        return parent::innerList($componentVariation, $props);
+        return parent::innerList($component, $props);
     }
 }
 

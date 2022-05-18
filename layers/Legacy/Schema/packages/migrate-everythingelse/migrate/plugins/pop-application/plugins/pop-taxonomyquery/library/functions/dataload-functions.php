@@ -18,7 +18,7 @@ function gdDataloadAllcontentTaxqueryItems()
             );
 
             // Allow to add the taxonomies for all custom types
-            return \PoP\Root\App::applyFilters('pop_componentVariation:allcontent:tax_query_items', $tax_query_items);
+            return \PoP\Root\App::applyFilters('pop_component:allcontent:tax_query_items', $tax_query_items);
         }
 
         // Calculate all the terms automatically, by querying the category-like taxonomies from all searchable post types,

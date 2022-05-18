@@ -4,18 +4,18 @@ class PoP_Module_Processor_CommentContentInners extends PoP_Module_Processor_Con
 {
     public final const MODULE_CONTENTINNER_COMMENTSINGLE = 'contentinner-commentsingle';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_COMMENTSINGLE],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_COMMENTSINGLE:
                 $ret[] = [PoP_Module_Processor_CommentsLayouts::class, PoP_Module_Processor_CommentsLayouts::MODULE_LAYOUT_COMMENT_LIST];
                 break;

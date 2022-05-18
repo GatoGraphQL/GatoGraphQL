@@ -11,7 +11,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
     public final const MODULE_SCROLLINNER_PASTEVENTS_MAP = 'scrollinner-pastevents-map';
     public final const MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP = 'scrollinner-events-horizontalmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_USERS_MAP],
@@ -25,9 +25,9 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_USERS_MAP:
             case self::MODULE_SCROLLINNER_USER_MAP:
             case self::MODULE_SCROLLINNER_USERS_HORIZONTALMAP:
@@ -41,12 +41,12 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_USERS_MAP => [GD_EM_Module_Processor_MultipleUserLayouts::class, GD_EM_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_MAPDETAILS],
@@ -60,7 +60,7 @@ class PoP_Locations_Module_Processor_CustomScrollInners extends PoP_Module_Proce
             self::MODULE_SCROLLINNER_PASTEVENTS_MAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS],
             self::MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP => [PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::class, PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

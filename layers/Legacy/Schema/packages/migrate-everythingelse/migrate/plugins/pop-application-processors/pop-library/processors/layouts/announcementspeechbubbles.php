@@ -4,14 +4,14 @@ class PoP_Module_Processor_AnnouncementSpeechBubbles extends PoP_Module_Processo
 {
     public final const MODULE_ANNOUNCEMENTSPEECHBUBBLE_STICKY = 'announcementspeechbubble-sticky';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANNOUNCEMENTSPEECHBUBBLE_STICKY],
         );
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
 
         // return [self::class, self::MODULE_LAYOUT_PREVIEWPOST_NOTHUMB_STICKY];

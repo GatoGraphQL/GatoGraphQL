@@ -7,7 +7,7 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
     public final const MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW = 'subcomponent-referencedby-fullview';
     public final const MODULE_LAZYSUBCOMPONENT_REFERENCEDBY = 'lazysubcomponent-referencedby';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS],
@@ -17,9 +17,9 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
         );
     }
 
-    public function getSubcomponentField(array $componentVariation)
+    public function getSubcomponentField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
@@ -29,14 +29,14 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 return 'referencedbyLazy';
         }
 
-        return parent::getSubcomponentField($componentVariation);
+        return parent::getSubcomponentField($component);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
                 $ret[] = [PoPApplicationProcessors_Module_Processor_CommentScrolls::class, PoPApplicationProcessors_Module_Processor_CommentScrolls::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS];
                 break;
@@ -57,9 +57,9 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
         return $ret;
     }
 
-    public function isIndividual(array $componentVariation, array &$props)
+    public function isIndividual(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
@@ -67,21 +67,21 @@ class PoP_Module_Processor_ReferencedbyLayouts extends PoP_Module_Processor_Subc
                 return false;
         }
 
-        return parent::isIndividual($componentVariation, $props);
+        return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW:
             case self::MODULE_LAZYSUBCOMPONENT_REFERENCEDBY:
-                $this->appendProp($componentVariation, $props, 'class', 'referencedby clearfix');
+                $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

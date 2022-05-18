@@ -7,7 +7,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
     public final const MODULE_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL = 'block-tabpanel-tagstances-neutral';
     public final const MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST = 'block-tabpanel-tagstances-against';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_TAGSTANCES],
@@ -17,9 +17,9 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES],
@@ -27,16 +27,16 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_NEUTRAL => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_NEUTRAL],
             self::MODULE_BLOCK_TABPANEL_TAGSTANCES_AGAINST => [UserStance_Module_Processor_TagSectionTabPanelComponents::class, UserStance_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGSTANCES_AGAINST],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_TAGSTANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_TAGSTANCES];
 
@@ -46,7 +46,7 @@ class UserStance_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Pr
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_TAGSTANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

@@ -15,8 +15,8 @@ class Wassup_Newsletter_Module_MainContentComponentRoutingProcessor extends \PoP
             POP_NEWSLETTER_ROUTE_NEWSLETTER => [PoP_Newsletter_Module_Processor_Blocks::class, PoP_Newsletter_Module_Processor_Blocks::MODULE_BLOCK_NEWSLETTER],
             POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION => [PoP_Newsletter_Module_Processor_Blocks::class, PoP_Newsletter_Module_Processor_Blocks::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

@@ -7,7 +7,7 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     public final const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG = 'viewcomponent-postbutton-volunteer-big';
     public final const MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY = 'viewcomponent-postbutton-volunteer-tiny';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG],
@@ -16,9 +16,9 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
         );
     }
 
-    // function headerShowUrl(array $componentVariation) {
+    // function headerShowUrl(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
@@ -27,28 +27,28 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
     //             return true;
     //     }
 
-    //     return parent::headerShowUrl($componentVariation);
+    //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_COMPACTBUTTONINNER_VOLUNTEER_BIG],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_FULL],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY => [PoP_Volunteering_Module_Processor_ViewComponentButtonInners::class, PoP_Volunteering_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_VOLUNTEER_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
                 $ret .= 'btn btn-info btn-block btn-important';
                 break;
@@ -65,40 +65,40 @@ class PoPCore_GenericForms_Module_Processor_PostViewComponentButtons extends PoP
         return $ret;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
                 return TranslationAPIFacade::getInstance()->__('Volunteer!', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
                 return 'volunteerURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_COMPACTBUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_BIG:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_VOLUNTEER_TINY:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 }
 

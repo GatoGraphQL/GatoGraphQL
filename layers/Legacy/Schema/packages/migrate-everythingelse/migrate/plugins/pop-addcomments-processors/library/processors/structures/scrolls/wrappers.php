@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
     public final const MODULE_WIDGETWRAPPER_POSTCOMMENTS = 'widgetwrapper-postcomments';
     public final const MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT = 'widgetwrapper-postcomments-appendtoscript';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGETWRAPPER_POSTCOMMENTS],
@@ -13,11 +13,11 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_CommentsWidgets::class, PoP_Module_Processor_CommentsWidgets::MODULE_WIDGET_POSTCOMMENTS];
                 break;
@@ -30,21 +30,21 @@ class PoP_Module_Processor_CommentsWrappers extends PoP_Module_Processor_Conditi
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
-                $this->appendProp($componentVariation, $props, 'class', 'postcomments clearfix');
+                $this->appendProp($component, $props, 'class', 'postcomments clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS:
             case self::MODULE_WIDGETWRAPPER_POSTCOMMENTS_APPENDTOSCRIPT:
                 return 'hasComments';

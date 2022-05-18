@@ -4,18 +4,18 @@ class PoP_Module_Processor_ControlMulticomponents extends PoP_Module_Processor_M
 {
     public final const MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS = 'multicomponent-anchorcontrol-toggletabs';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_ANCHORCONTROL_TOGGLETABS:
                 $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLETABS];
                 $ret[] = [GD_Wassup_Module_Processor_AnchorControls::class, GD_Wassup_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLETABSXS];

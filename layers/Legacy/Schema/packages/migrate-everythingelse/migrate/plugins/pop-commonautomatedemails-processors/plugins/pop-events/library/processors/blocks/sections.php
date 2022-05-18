@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL = 'block-automatedemails-events-scroll-thumbnail';
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST = 'block-automatedemails-events-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS],
@@ -23,21 +23,21 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_THUMBNAIL => POP_COMMONAUTOMATEDEMAILS_ROUTE_UPCOMINGEVENTS_WEEKLY,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW],
@@ -45,13 +45,13 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
             self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_EM_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_EVENTS_SCROLL_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -66,13 +66,13 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
                 );
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $componentVariation, array &$props)
+    protected function getDescriptionAbovetitle(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -88,13 +88,13 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
                 );
         }
 
-        return parent::getDescriptionAbovetitle($componentVariation, $props);
+        return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $componentVariation, array &$props)
+    protected function getDescriptionBottom(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_EVENTS_SCROLL_FULLVIEW:
@@ -113,7 +113,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_SectionBlocks extends PoP_CommonAut
                 );
         }
 
-        return parent::getDescriptionBottom($componentVariation, $props);
+        return parent::getDescriptionBottom($component, $props);
     }
 }
 

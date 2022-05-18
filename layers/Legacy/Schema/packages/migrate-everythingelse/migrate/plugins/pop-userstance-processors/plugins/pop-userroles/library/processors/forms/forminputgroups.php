@@ -5,38 +5,38 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
 {
     public final const MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT = 'filterinputgroup-authorrole-multiselect';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT],
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 return [UserStance_URE_Module_Processor_MultiSelectFilterInputs::class, UserStance_URE_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_AUTHORROLE_MULTISELECT];
         }
         
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 return TranslationAPIFacade::getInstance()->__('By who:', 'pop-userstance-processors');
         }
         
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getLabelClass(array $componentVariation)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($componentVariation);
+        $ret = parent::getLabelClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 $ret .= ' col-sm-2';
                 break;
@@ -44,11 +44,11 @@ class UserStance_URE_Module_Processor_FormInputGroups extends PoP_Module_Process
 
         return $ret;
     }
-    public function getFormcontrolClass(array $componentVariation)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($componentVariation);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_AUTHORROLE_MULTISELECT:
                 $ret .= ' col-sm-10';
                 break;

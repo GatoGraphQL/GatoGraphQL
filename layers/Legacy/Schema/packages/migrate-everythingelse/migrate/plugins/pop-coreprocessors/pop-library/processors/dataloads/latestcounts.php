@@ -8,33 +8,33 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
 {
     public final const MODULE_DATALOAD_LATESTCOUNTS = 'dataload-latestcounts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_LATESTCOUNTS => [PoPCore_Module_Processor_Contents::class, PoPCore_Module_Processor_Contents::MODULE_CONTENT_LATESTCOUNTS],
         );
 
-        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 PoP_Application_SectionUtils::addDataloadqueryargsLatestcounts($ret);
                 break;
@@ -43,7 +43,7 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
         return $ret;
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Set the display configuration
@@ -51,48 +51,48 @@ class GD_Core_Module_Processor_Dataloads extends PoP_Module_Processor_DataloadsB
             [self::class, self::MODULE_DATALOAD_LATESTCOUNTS],
         );
 
-        if (in_array($componentVariation, $latestcounts)) {
+        if (in_array($component, $latestcounts)) {
             $format = POP_FORMAT_LATESTCOUNT;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandler($componentVariation);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LATESTCOUNTS:
                 // It can be invisible, nothing to show
-                $this->appendProp($componentVariation, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
 
                 // Do not load initially. Load only needed when executing the setTimeout with loadLatest
                 if (\PoP\Root\App::getState('fetching-site')) {
-                    $this->setProp($componentVariation, $props, 'skip-data-load', true);
+                    $this->setProp($component, $props, 'skip-data-load', true);
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

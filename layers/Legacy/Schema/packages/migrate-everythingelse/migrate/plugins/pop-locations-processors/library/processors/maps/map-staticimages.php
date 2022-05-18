@@ -5,7 +5,7 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
     public final const MODULE_MAP_STATICIMAGE = 'em-map-staticimage';
     public final const MODULE_MAP_STATICIMAGE_USERORPOST = 'em-map-staticimage-userorpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_STATICIMAGE],
@@ -13,9 +13,9 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
         );
     }
 
-    public function getUrlparamSubmodule(array $componentVariation)
+    public function getUrlparamSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAP_STATICIMAGE:
                 return [PoP_Module_Processor_MapStaticImageURLParams::class, PoP_Module_Processor_MapStaticImageURLParams::MODULE_MAP_STATICIMAGE_URLPARAM];
 
@@ -23,19 +23,19 @@ class PoP_Module_Processor_MapStaticImages extends PoP_Module_Processor_MapStati
                 return [PoP_Module_Processor_MapStaticImageLocations::class, PoP_Module_Processor_MapStaticImageLocations::MODULE_MAP_STATICIMAGE_LOCATIONS];
         }
 
-        return parent::getUrlparamSubmodule($componentVariation);
+        return parent::getUrlparamSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAP_STATICIMAGE:
             case self::MODULE_MAP_STATICIMAGE_USERORPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'img-responsive');
+                $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

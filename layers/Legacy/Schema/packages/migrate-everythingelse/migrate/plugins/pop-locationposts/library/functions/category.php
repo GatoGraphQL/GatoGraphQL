@@ -4,7 +4,7 @@ use PoPCMSSchema\Taxonomies\Facades\TaxonomyTypeAPIFacade;
 /**
  * Integration with Latest Everything Block
  */
-\PoP\Root\App::addFilter('pop_componentVariation:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
+\PoP\Root\App::addFilter('pop_component:allcontent:tax_query_items', 'popLocationpostsSearchablecontentTaxquery');
 function popLocationpostsSearchablecontentTaxquery($tax_query_items)
 {
     if (POP_LOCATIONPOSTS_CAT_ALL) {

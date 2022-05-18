@@ -19,9 +19,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
         );
     }
 
-    public function modifyPostFilterInputs($filterinputs, array $componentVariation)
+    public function modifyPostFilterInputs($filterinputs, array $component)
     {
-        $is_post = in_array($componentVariation, [
+        $is_post = in_array($component, [
             [PostFilterInners::class, PostFilterInners::MODULE_FILTERINPUTCONTAINER_POSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
@@ -30,7 +30,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         ]);
-        $is_content = in_array($componentVariation, [
+        $is_content = in_array($component, [
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_CONTENT],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCONTENT],
@@ -89,9 +89,9 @@ class PoPThemeWassup_DataLoad_FilterHooks
         return $filterinputs;
     }
 
-    public function modifyPostSimpleFilterInputs($filterinputs, array $componentVariation)
+    public function modifyPostSimpleFilterInputs($filterinputs, array $component)
     {
-        $is_post = in_array($componentVariation, [
+        $is_post = in_array($component, [
             [PostFilterInners::class, PostFilterInners::MODULE_FILTERINPUTCONTAINER_POSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCATEGORYPOSTS],
@@ -100,7 +100,7 @@ class PoPThemeWassup_DataLoad_FilterHooks
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYPOSTS],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         ]);
-        $is_content = in_array($componentVariation, [
+        $is_content = in_array($component, [
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_CONTENT],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORCONTENT],
             [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGCONTENT],

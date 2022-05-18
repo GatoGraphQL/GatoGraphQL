@@ -3,40 +3,40 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_MapsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP];
     }
     
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
-        $ret[] = $this->getMapdivSubmodule($componentVariation);
+        $ret = parent::getSubComponents($component);
+        $ret[] = $this->getMapdivSubmodule($component);
         return $ret;
     }
 
-    public function getMapdivSubmodule(array $componentVariation)
+    public function getMapdivSubmodule(array $component)
     {
     
         // return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAP_DIV];
         return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
     }
     
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        $mapdiv = $this->getMapdivSubmodule($componentVariation);
+        $mapdiv = $this->getMapdivSubmodule($component);
         $this->mergeJsmethodsProp($mapdiv, $props, array('mapStandalone'));
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
     
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $mapdiv = $this->getMapdivSubmodule($componentVariation);
+        $mapdiv = $this->getMapdivSubmodule($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-div'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($mapdiv);
         
         return $ret;

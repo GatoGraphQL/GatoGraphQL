@@ -6,7 +6,7 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
     public final const MODULE_WIDGET_POSTCOMMENTS = 'widget-postcomments';
     public final const MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT = 'widget-postcomments-appendtoscript';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_POSTCOMMENTS],
@@ -14,11 +14,11 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_PostCommentSubcomponentLayouts::class, PoP_Module_Processor_PostCommentSubcomponentLayouts::MODULE_SUBCOMPONENT_POSTCOMMENTS];
                 break;
@@ -31,88 +31,88 @@ class PoP_Module_Processor_CommentsWidgets extends PoP_Module_Processor_WidgetsB
         return $ret;
     }
 
-    public function getMenuTitle(array $componentVariation, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGET_POSTCOMMENTS => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
             self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors'),
         );
 
-        return $titles[$componentVariation[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_POSTCOMMENTS => 'fa-comments',
             self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT => 'fa-comments',
         );
 
-        return $fontawesomes[$componentVariation[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $componentVariation, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
             case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
 
-        return parent::getBodyClass($componentVariation, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $componentVariation, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
             case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
 
-        return parent::getItemWrapper($componentVariation, $props);
+        return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $componentVariation, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
             case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
 
-        return parent::getWidgetClass($componentVariation, $props);
+        return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $componentVariation, array &$props)
+    public function getTitleWrapperClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
             case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return '';
         }
 
-        return parent::getTitleWrapperClass($componentVariation, $props);
+        return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $componentVariation, array &$props)
+    public function getTitleClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
 
                 return '';
         }
 
-        return parent::getTitleClass($componentVariation, $props);
+        return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $componentVariation)
+    public function getQuicklinkgroupSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_POSTCOMMENTS:
             case self::MODULE_WIDGET_POSTCOMMENTS_APPENDTOSCRIPT:
 
                 return [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT];
         }
 
-        return parent::getQuicklinkgroupSubmodule($componentVariation);
+        return parent::getQuicklinkgroupSubmodule($component);
     }
 }
 

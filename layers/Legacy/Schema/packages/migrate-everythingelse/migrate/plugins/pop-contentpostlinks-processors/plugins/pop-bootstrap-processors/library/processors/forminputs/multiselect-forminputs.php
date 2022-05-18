@@ -5,41 +5,41 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostMultiSelectF
 {
     public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES = 'forminput-linkcategories';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return GD_FormInput_LinkCategories::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKCATEGORIES:
                 return 'linkcategories';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

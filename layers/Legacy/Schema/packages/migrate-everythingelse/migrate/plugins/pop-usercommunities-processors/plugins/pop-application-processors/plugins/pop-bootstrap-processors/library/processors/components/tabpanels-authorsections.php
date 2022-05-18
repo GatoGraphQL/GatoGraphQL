@@ -4,28 +4,28 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
 {
     public final const MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS = 'tabpanel-authorcommunitymembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array_merge(
                     $ret,
@@ -43,9 +43,9 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCOMMUNITYMEMBERS:
                 $ret = array(
                     [
@@ -67,10 +67,10 @@ class PoP_UserCommunities_ComponentProcessor_AuthorSectionTabPanelComponents ext
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $componentVariation);
+            return \PoP\Root\App::applyFilters('GD_URE_Module_Processor_AuthorSectionTabPanels:panel_headers', $ret, $component);
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

@@ -4,49 +4,49 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
-        $ret[] = $this->getBtnreplyModule($componentVariation);
+        $ret = parent::getSubComponents($component);
+        $ret[] = $this->getBtnreplyModule($component);
 
-        if ($abovelayout_componentVariations = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
+        if ($abovelayout_components = $this->getAbovelayoutLayoutSubmodules($component)) {
             $ret = array_merge(
                 $ret,
-                $abovelayout_componentVariations
+                $abovelayout_components
             );
         }
-        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
-            $ret[] = $content_componentVariation;
+        if ($content_component = $this->getContentSubmodule($component)) {
+            $ret[] = $content_component;
         }
         return $ret;
     }
 
-    public function getContentSubmodule(array $componentVariation)
+    public function getContentSubmodule(array $component)
     {
         return [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_COMMENT];
     }
 
-    public function getAbovelayoutLayoutSubmodules(array $componentVariation)
+    public function getAbovelayoutLayoutSubmodules(array $component)
     {
         return array();
     }
 
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_COMMENT];
     }
 
-    public function getBtnreplyModule(array $componentVariation)
+    public function getBtnreplyModule(array $component)
     {
         return [PoP_Module_Processor_CommentViewComponentButtons::class, PoP_Module_Processor_CommentViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY];
     }
 
-    public function getAuthornameModule(array $componentVariation)
+    public function getAuthornameModule(array $component)
     {
         return [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR];
     }
 
-    public function getAuthoravatarModule(array $componentVariation)
+    public function getAuthoravatarModule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR];
@@ -58,29 +58,29 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($componentVariation);
+        $ret = parent::getRelationalSubmodules($component);
 
-        $componentVariations = array(
-            $this->getAuthornameModule($componentVariation),
+        $components = array(
+            $this->getAuthornameModule($component),
         );
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($authoravatar = $this->getAuthoravatarModule($componentVariation)) {
-                $componentVariations[] = $authoravatar;
+            if ($authoravatar = $this->getAuthoravatarModule($component)) {
+                $components[] = $authoravatar;
             }
         }
 
         $ret[] = new RelationalModuleField(
             'author',
-            $componentVariations
+            $components
         );
 
         return $ret;
     }
 
-    public function isRuntimeAdded(array $componentVariation, array &$props)
+    public function isRuntimeAdded(array $component, array &$props)
     {
         return false;
     }
@@ -90,9 +90,9 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
         $ret = array_merge(
             $ret,
@@ -102,43 +102,43 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $btnreply = $this->getBtnreplyModule($componentVariation);
-        $authorname = $this->getAuthornameModule($componentVariation);
+        $btnreply = $this->getBtnreplyModule($component);
+        $authorname = $this->getAuthornameModule($component);
 
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['btn-replycomment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($btnreply);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authorname'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authorname);
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($authoravatar = $this->getAuthoravatarModule($componentVariation)) {
+            if ($authoravatar = $this->getAuthoravatarModule($component)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['authoravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($authoravatar);
             }
         }
 
-        if ($content_componentVariation = $this->getContentSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_componentVariation);
+        if ($content_component = $this->getContentSubmodule($component)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($content_component);
         }
 
-        if ($abovelayout_componentVariations = $this->getAbovelayoutLayoutSubmodules($componentVariation)) {
+        if ($abovelayout_components = $this->getAbovelayoutLayoutSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovelayout'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $abovelayout_componentVariations
+                $abovelayout_components
             );
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->isRuntimeAdded($componentVariation, $props)) {
+        if ($this->isRuntimeAdded($component, $props)) {
             // The 2 functions below keep them in this order: first must open the collapse, only then can scroll down to that position
 
             // Also add the collapse if the comment is inside the collapse. Eg: SimpleView Feed
@@ -151,12 +151,12 @@ abstract class PoP_Module_Processor_CommentLayoutsBase extends PoPEngine_QueryDa
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($this->isRuntimeAdded($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'class', 'pop-highlight');
+        if ($this->isRuntimeAdded($component, $props)) {
+            $this->appendProp($component, $props, 'class', 'pop-highlight');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

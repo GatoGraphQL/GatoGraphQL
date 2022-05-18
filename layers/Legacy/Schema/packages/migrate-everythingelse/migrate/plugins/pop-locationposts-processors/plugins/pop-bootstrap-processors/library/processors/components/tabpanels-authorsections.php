@@ -4,18 +4,18 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends
 {
     public final const MODULE_TABPANEL_AUTHORLOCATIONPOSTS = 'tabpanel-authorlocationposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORLOCATIONPOSTS],
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,
@@ -34,9 +34,9 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORLOCATIONPOSTS:
                 $ret = array(
                     [
@@ -61,7 +61,7 @@ class PoP_LocationPosts_Module_Processor_AuthorSectionTabPanelComponents extends
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

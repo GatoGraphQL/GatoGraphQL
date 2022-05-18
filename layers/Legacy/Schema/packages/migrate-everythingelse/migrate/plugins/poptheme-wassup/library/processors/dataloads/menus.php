@@ -17,7 +17,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
     public final const MODULE_DATALOAD_MENU_BODY_MYSECTIONS = 'dataload-menu-body-mysections';
     public final const MODULE_DATALOAD_MENU_BODY_ABOUT = 'dataload-menu-body-about';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT],
@@ -37,18 +37,18 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
         );
     }
 
-    // function getRelevantRoute(array $componentVariation, array &$props) {
+    // function getRelevantRoute(array $component, array &$props) {
 
     //     $routes = array(
     //         self::MODULE_DATALOAD_MENU_BODY_ABOUT => POP_COMMONPAGES_ROUTE_ABOUT,
     //         self::MODULE_DATALOAD_MENU_BODY_ADDCONTENT => POP_CONTENTCREATION_ROUTE_ADDCONTENT,
     //     );
-    //     return $routes[$componentVariation[1]] ?? parent::getRelevantRoute($componentVariation, $props);
+    //     return $routes[$component[1]] ?? parent::getRelevantRoute($component, $props);
     // }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT => [PoP_Module_Processor_CustomMenuSidebars::class, PoP_Module_Processor_CustomMenuSidebars::MODULE_SIDEBAR_MENU_ABOUT],
@@ -67,16 +67,16 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => [PoP_Module_Processor_IndentMenus::class, PoP_Module_Processor_IndentMenus::MODULE_INDENTMENU],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getMenu(array $componentVariation)
+    public function getMenu(array $component)
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_MENU_SIDEBAR_ABOUT => GD_MENU_SIDEBAR_ABOUT,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERLOGGEDIN => GD_MENU_TOPNAV_USERLOGGEDIN,
             self::MODULE_DATALOAD_MENU_TOPNAV_USERNOTLOGGEDIN => GD_MENU_TOPNAV_USERNOTLOGGEDIN,
@@ -91,7 +91,7 @@ class PoP_Module_Processor_CustomMenuDataloads extends PoP_Module_Processor_Menu
             self::MODULE_DATALOAD_MENU_BODY_SECTIONS => GD_MENU_SIDENAV_SECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_MYSECTIONS => GD_MENU_SIDENAV_MYSECTIONS,
             self::MODULE_DATALOAD_MENU_BODY_ABOUT => GD_MENU_TOPNAV_ABOUT,
-            default => parent::getMenu($componentVariation),
+            default => parent::getMenu($component),
         };
     }
 }

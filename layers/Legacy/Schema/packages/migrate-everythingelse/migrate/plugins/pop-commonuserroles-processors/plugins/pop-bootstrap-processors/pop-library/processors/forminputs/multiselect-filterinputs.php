@@ -26,7 +26,7 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS],
@@ -35,31 +35,31 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         );
     }
 
-    public function getFilterInput(array $componentVariation): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_INDIVIDUALINTERESTS],
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONCATEGORIES],
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputProcessor::class, GD_URE_Module_Processor_MultiSelectFilterInputProcessor::URE_FILTERINPUT_ORGANIZATIONTYPES],
         ];
-        return $filterInputs[$componentVariation[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $componentVariation)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
     //         case self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES:
     //         case self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($componentVariation);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
 
@@ -78,12 +78,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
                 );
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
 
@@ -94,12 +94,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
                 return GD_FormInput_OrganizationTypes::class;
         }
 
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS:
                 return 'interests';
 
@@ -110,12 +110,12 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
                 return 'types';
         }
 
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $this->stringScalarTypeResolver,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $this->stringScalarTypeResolver,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $this->stringScalarTypeResolver,
@@ -123,9 +123,9 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getFilterInputTypeModifiers(array $componentVariation): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES,
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES
@@ -135,10 +135,10 @@ class GD_URE_Module_Processor_MultiSelectFilterInputs extends PoP_Module_Process
         };
     }
 
-    public function getFilterInputDescription(array $componentVariation): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_URE_FILTERINPUT_INDIVIDUALINTERESTS => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONCATEGORIES => $translationAPI->__('', ''),
             self::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES => $translationAPI->__('', ''),

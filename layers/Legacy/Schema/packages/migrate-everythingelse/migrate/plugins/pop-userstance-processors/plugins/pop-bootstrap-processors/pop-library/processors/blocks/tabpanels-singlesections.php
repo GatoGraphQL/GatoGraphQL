@@ -10,7 +10,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
     public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST = 'block-tabpanel-singlerelatedstancecontent-against';
     public final const MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL = 'block-tabpanel-singlerelatedstancecontent-neutral';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT],
@@ -20,9 +20,9 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT],
@@ -30,16 +30,16 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST],
             self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL => [UserStance_Module_Processor_SingleSectionTabPanelComponents::class, UserStance_Module_Processor_SingleSectionTabPanelComponents::MODULE_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupBottomSubmodule(array $componentVariation)
+    protected function getControlgroupBottomSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
@@ -47,30 +47,30 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUPOSTLIST];
         }
 
-        return parent::getControlgroupBottomSubmodule($componentVariation);
+        return parent::getControlgroupBottomSubmodule($component);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_PRO:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_AGAINST:
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT_NEUTRAL:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
-                    $this->setProp($componentVariation, $props, 'show-controls-bottom', false);
+                    $this->setProp($component, $props, 'show-controls-bottom', false);
                 }
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_SINGLERELATEDSTANCECONTENT:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES];
 
@@ -80,7 +80,7 @@ class UserStance_Module_Processor_SingleSectionTabPanelBlocks extends PoP_Module
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

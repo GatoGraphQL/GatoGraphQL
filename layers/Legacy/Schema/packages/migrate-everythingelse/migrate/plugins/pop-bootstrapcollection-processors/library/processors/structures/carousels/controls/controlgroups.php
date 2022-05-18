@@ -4,18 +4,18 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
 {
     public final const MODULE_CAROUSELCONTROLGROUP_CAROUSEL = 'carouselcontrolgroup-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
                 $ret[] = [PoP_Module_Processor_CarouselControlButtonGroups::class, PoP_Module_Processor_CarouselControlButtonGroups::MODULE_CAROUSELCONTROLBUTTONGROUP_CAROUSEL];
                 break;
@@ -24,19 +24,19 @@ class PoP_Module_Processor_CarouselControlGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELCONTROLGROUP_CAROUSEL:
-                if ($target = $this->getProp($componentVariation, $props, 'carousel-target')) {
-                    foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                        $this->setProp([$subComponentVariation], $props, 'carousel-target', $target);
+                if ($target = $this->getProp($component, $props, 'carousel-target')) {
+                    foreach ($this->getSubComponents($component) as $subComponent) {
+                        $this->setProp([$subComponent], $props, 'carousel-target', $target);
                     }
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

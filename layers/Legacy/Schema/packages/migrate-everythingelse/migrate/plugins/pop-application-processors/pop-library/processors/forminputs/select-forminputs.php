@@ -5,53 +5,53 @@ class GD_Custom_Module_Processor_SelectFormInputs extends PoP_Module_Processor_B
 {
     public final const MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT = 'forminput-custom-volunteersneeded';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return TranslationAPIFacade::getInstance()->__('Volunteers Needed?', 'poptheme-wassup');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return GD_FormInput_YesNo::class;
         }
 
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 return 'volunteersNeeded';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_VOLUNTEERSNEEDED_SELECT:
                 // By default, set it on "No"
-                $this->setProp($componentVariation, $props, 'default-value', false);
+                $this->setProp($component, $props, 'default-value', false);
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

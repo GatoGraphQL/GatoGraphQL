@@ -42,7 +42,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
-            'component-variation' => [
+            'component' => [
                 PostTagFieldDataloadComponentProcessor::class,
                 PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG,
                 [
@@ -84,7 +84,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),
@@ -106,7 +106,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
         );
         foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'datastructure' => $this->getRestDataStructureFormatter()->getName(),

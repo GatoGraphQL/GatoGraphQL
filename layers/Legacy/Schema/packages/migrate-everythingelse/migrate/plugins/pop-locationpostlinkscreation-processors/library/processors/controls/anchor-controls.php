@@ -6,44 +6,44 @@ class PoP_LocationPostLinksCreation_Module_Processor_AnchorControls extends PoP_
 {
     public final const MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK = 'custombuttoncontrol-addlocationpostlink';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [CommonPagesEM_Module_Processor_AnchorControls::class, CommonPagesEM_Module_Processor_AnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK],
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
                 return TranslationAPIFacade::getInstance()->__('as Link', 'pop-locationpostlinkscreation-processors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
                 return 'fa-link';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $componentVariation, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
                 return RouteUtils::getRouteURL(POP_LOCATIONPOSTLINKSCREATION_ROUTE_ADDLOCATIONPOSTLINK);
         }
 
-        return parent::getHref($componentVariation, $props);
+        return parent::getHref($component, $props);
     }
-    public function getTarget(array $componentVariation, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -51,17 +51,17 @@ class PoP_LocationPostLinksCreation_Module_Processor_AnchorControls extends PoP_
                 break;
         }
 
-        return parent::getTarget($componentVariation, $props);
+        return parent::getTarget($component, $props);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDLOCATIONPOSTLINK:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-info aslink');
+                $this->appendProp($component, $props, 'class', 'btn btn-info aslink');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -9,65 +9,65 @@ class PoP_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Module_P
 {
     public final const MODULE_TYPEAHEAD_COMPONENT_USERS = 'forminput-typeaheadcomponent-users';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TYPEAHEAD_COMPONENT_USERS],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
                 return getRouteIcon(UsersModuleConfiguration::getUsersRoute(), true).TranslationAPIFacade::getInstance()->__('Users:', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    // protected function getSourceFilter(array $componentVariation, array &$props)
+    // protected function getSourceFilter(array $component, array &$props)
     // {
     //     return POP_FILTER_USERS;
     // }
-    protected function getSourceFilterParams(array $componentVariation, array &$props)
+    protected function getSourceFilterParams(array $component, array &$props)
     {
-        $ret = parent::getSourceFilterParams($componentVariation, $props);
+        $ret = parent::getSourceFilterParams($component, $props);
 
         if (defined('POP_POSTS_INITIALIZED')) {
             $ret[] = [
-                'component-variation' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
+                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:post-count').'|DESC',
             ];
         }
 
         return $ret;
     }
-    protected function getRemoteUrl(array $componentVariation, array &$props)
+    protected function getRemoteUrl(array $component, array &$props)
     {
-        $url = parent::getRemoteUrl($componentVariation, $props);
+        $url = parent::getRemoteUrl($component, $props);
 
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(
             $url,
             [
                 [
-                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_NAME],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]
         );
     }
 
-    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
+    protected function getTypeaheadDataloadSource(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_USERS:
                 return RouteUtils::getRouteURL(UsersModuleConfiguration::getUsersRoute());
         }
 
-        return parent::getTypeaheadDataloadSource($componentVariation, $props);
+        return parent::getTypeaheadDataloadSource($component, $props);
     }
 }
 

@@ -7,7 +7,7 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public final const MODULE_TABLE_MYHIGHLIGHTS = 'table-myhighlights';
     public final const MODULE_TABLE_MYPOSTS = 'table-myposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLE_MYCONTENT],
@@ -16,9 +16,9 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYCONTENT:
             case self::MODULE_TABLE_MYHIGHLIGHTS:
             case self::MODULE_TABLE_MYPOSTS:
@@ -28,17 +28,17 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::MODULE_TABLE_MYPOSTS => [PoP_Module_Processor_TableInners::class, PoP_Module_Processor_TableInners::MODULE_TABLEINNER_MYPOSTS],
                 );
 
-                return $inners[$componentVariation[1]];
+                return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
-        $ret = parent::getHeaderTitles($componentVariation);
+        $ret = parent::getHeaderTitles($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYCONTENT:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Status', 'poptheme-wassup');
@@ -60,15 +60,15 @@ class PoP_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYHIGHLIGHTS:
-                $this->appendProp($componentVariation, $props, 'class', 'table-myhighlights');
+                $this->appendProp($component, $props, 'class', 'table-myhighlights');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -4,45 +4,45 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelBlock extends Po
 {
     public final const MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS = 'block-mylocationposts-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS],
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS => [PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::class, PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYLOCATIONPOSTS],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS:
                 return [CommonPages_EM_Module_Processor_ControlGroups::class, CommonPages_EM_Module_Processor_ControlGroups::MODULE_CONTROLGROUP_MYLOCATIONPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYLOCATIONPOSTS:
                 return [GD_Custom_EM_Module_Processor_CustomFilters::class, GD_Custom_EM_Module_Processor_CustomFilters::MODULE_FILTER_MYLOCATIONPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

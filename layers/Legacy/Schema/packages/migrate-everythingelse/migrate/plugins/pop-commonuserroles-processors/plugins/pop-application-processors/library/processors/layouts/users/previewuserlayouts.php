@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
     public final const MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS = 'layout-previewuser-organization-details';
     public final const MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS = 'layout-previewuser-individual-details';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS],
@@ -13,44 +13,44 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
+    public function getQuicklinkgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
+        return parent::getQuicklinkgroupTopSubmodule($component);
     }
 
-    public function getTitleHtmlmarkup(array $componentVariation, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($componentVariation, $props);
+        return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
+    public function getQuicklinkgroupBottomSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USERBOTTOM];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
+        return parent::getQuicklinkgroupBottomSubmodule($component);
     }
 
-    public function getBelowexcerptLayoutSubmodules(array $componentVariation)
+    public function getBelowexcerptLayoutSubmodules(array $component)
     {
-        $ret = parent::getBelowexcerptLayoutSubmodules($componentVariation);
+        $ret = parent::getBelowexcerptLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
                 $ret[] = [GD_URE_Module_Processor_LayoutMultipleComponents::class, GD_URE_Module_Processor_LayoutMultipleComponents::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS];
                 if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
@@ -66,11 +66,11 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getBelowavatarLayoutSubmodules(array $componentVariation)
+    public function getBelowavatarLayoutSubmodules(array $component)
     {
-        $ret = parent::getBelowavatarLayoutSubmodules($componentVariation);
+        $ret = parent::getBelowavatarLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS];
@@ -80,47 +80,47 @@ class GD_URE_Module_Processor_CustomPreviewUserLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getUseravatarSubmodule(array $componentVariation)
+    public function getUseravatarSubmodule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
                 case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                     return [PoP_Module_Processor_CustomUserAvatarLayouts::class, PoP_Module_Processor_CustomUserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE];
             }
         }
 
-        return parent::getUseravatarSubmodule($componentVariation);
+        return parent::getUseravatarSubmodule($component);
     }
 
 
-    public function showExcerpt(array $componentVariation)
+    public function showExcerpt(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($componentVariation);
+        return parent::showExcerpt($component);
     }
 
-    public function horizontalLayout(array $componentVariation)
+    public function horizontalLayout(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 return true;
         }
 
-        return parent::horizontalLayout($componentVariation);
+        return parent::horizontalLayout($component);
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWUSER_INDIVIDUAL_DETAILS:
                 $ret[GD_JS_CLASSES]['belowavatar'] = 'bg-info text-info belowavatar';

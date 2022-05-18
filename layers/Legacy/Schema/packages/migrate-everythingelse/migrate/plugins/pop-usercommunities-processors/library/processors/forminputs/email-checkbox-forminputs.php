@@ -5,34 +5,34 @@ class GD_URE_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlat
 {
     public final const MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY = 'ure-forminput-emailnotifications-network-joinscommunity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Joins a community', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getCheckboxValue(array $componentVariation, array &$props)
+    public function getCheckboxValue(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 $values = array(
                     self::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => POP_USERPREFERENCES_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY,
                 );
-                return $values[$componentVariation[1]];
+                return $values[$component[1]];
         }
 
-        return parent::getCheckboxValue($componentVariation, $props);
+        return parent::getCheckboxValue($component, $props);
     }
 }
 

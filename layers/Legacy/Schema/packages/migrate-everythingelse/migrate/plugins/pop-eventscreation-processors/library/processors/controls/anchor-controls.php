@@ -8,7 +8,7 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
     public final const MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS = 'custombuttoncontrol-mypastevents';
     public final const MODULE_CUSTOMANCHORCONTROL_ADDEVENT = 'custombuttoncontrol-addevent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS],
@@ -16,9 +16,9 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return TranslationAPIFacade::getInstance()->__('My Past Events', 'poptheme-wassup');
 
@@ -26,11 +26,11 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
                 return TranslationAPIFacade::getInstance()->__('Add Event', 'poptheme-wassup');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
                 return getRouteIcon(POP_EVENTSCREATION_ROUTE_MYPASTEVENTS, false);
 
@@ -38,28 +38,28 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
                 return 'fa-plus';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $componentVariation, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
             case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
                 $routes = array(
                     self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
                     self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT => POP_EVENTSCREATION_ROUTE_ADDEVENT,
                 );
-                $route = $routes[$componentVariation[1]];
+                $route = $routes[$component[1]];
 
                 return RouteUtils::getRouteURL($route);
         }
 
-        return parent::getHref($componentVariation, $props);
+        return parent::getHref($component, $props);
     }
-    public function getTarget(array $componentVariation, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -67,22 +67,22 @@ class PoP_EventsCreation_Module_Processor_CustomAnchorControls extends PoP_Modul
                 break;
         }
 
-        return parent::getTarget($componentVariation, $props);
+        return parent::getTarget($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_MYPASTEVENTS:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
 
             case self::MODULE_CUSTOMANCHORCONTROL_ADDEVENT:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-primary');
+                $this->appendProp($component, $props, 'class', 'btn btn-primary');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -9,26 +9,26 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
 
     public final const MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST = 'dataload-automatedemails-singlepost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST],
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST => POP_COMMONAUTOMATEDEMAILS_ROUTE_SINGLEPOST_SPECIAL,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Add the Sidebar on the top
                 $pid = App::query(\PoPCMSSchema\Posts\Constants\InputNames::POST_ID);
@@ -48,33 +48,33 @@ class PoPTheme_Wassup_AE_Module_Processor_ContentDataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
-                return $this->getObjectIDFromURLParam($componentVariation, $props, $data_properties);
+                return $this->getObjectIDFromURLParam($component, $props, $data_properties);
         }
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    protected function getObjectIDParamName(array $componentVariation, array &$props, array &$data_properties): ?string
+    protected function getObjectIDParamName(array $component, array &$props, array &$data_properties): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 return \PoPCMSSchema\Posts\Constants\InputNames::POST_ID;
         }
         return null;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTOMATEDEMAILS_SINGLEPOST:
                 // Decide on the typeResolver based on the type of the single element
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 }
 

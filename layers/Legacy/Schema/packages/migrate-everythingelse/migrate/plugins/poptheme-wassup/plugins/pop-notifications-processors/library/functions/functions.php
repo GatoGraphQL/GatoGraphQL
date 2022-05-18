@@ -1,9 +1,9 @@
 <?php
 
 \PoP\Root\App::addFilter('PopThemeWassup_AAL_Module_Processor_BackgroundColorStyleLayouts:bgcolor', 'popthemeWassupBgcolor', 10, 2);
-function popthemeWassupBgcolor($color, array $componentVariation)
+function popthemeWassupBgcolor($color, array $component)
 {
-    switch ($componentVariation[1]) {
+    switch ($component[1]) {
         case Pop_Notifications_Module_Processor_BackgroundColorStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_BGCOLORSTYLES:
             return '#fff';
 

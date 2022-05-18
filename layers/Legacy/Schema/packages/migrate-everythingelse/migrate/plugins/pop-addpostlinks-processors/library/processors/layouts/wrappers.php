@@ -5,7 +5,7 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
     public final const MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE = 'layoutwrapper-addpostlinks-linkframevisible';
     public final const MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED = 'layoutwrapper-addpostlinks-linkframecollapsed';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE],
@@ -13,11 +13,11 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
                 $ret[] = [PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::class, PoP_AddPostLinks_Module_Processor_LinkFrameLayouts::MODULE_ADDPOSTLINKS_LAYOUT_LINKFRAMEVISIBLE];
                 break;
@@ -30,9 +30,9 @@ class PoP_AddPostLinks_Module_Processor_LayoutWrappers extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE:
             case self::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMECOLLAPSED:
                 return 'hasLink';

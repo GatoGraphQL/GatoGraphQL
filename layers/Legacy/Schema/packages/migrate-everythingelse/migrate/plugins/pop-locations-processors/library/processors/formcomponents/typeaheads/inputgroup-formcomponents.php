@@ -4,18 +4,18 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
 {
     public final const MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION = 'formcomponent-inputgroup-typeaheadaddlocation';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION],
         );
     }
 
-    public function getInputSubmodule(array $componentVariation)
+    public function getInputSubmodule(array $component)
     {
-        $ret = parent::getInputSubmodule($componentVariation);
+        $ret = parent::getInputSubmodule($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 return [GD_EM_Module_Processor_TextFormInputs::class, GD_EM_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION];
         }
@@ -23,17 +23,17 @@ class GD_EM_Module_Processor_InputGroupFormComponents extends PoP_Module_Process
         return $ret;
     }
 
-    public function getControlSubmodules(array $componentVariation)
+    public function getControlSubmodules(array $component)
     {
-        $ret = parent::getControlSubmodules($componentVariation);
+        $ret = parent::getControlSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADADDLOCATION:
                 // Allow PoP Add Locations Processors to inject the "+" button
                 if ($control = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_InputGroupFormComponents:control-layout',
                     null,
-                    $componentVariation
+                    $component
                 )
                 ) {
                     $ret[] = $control;

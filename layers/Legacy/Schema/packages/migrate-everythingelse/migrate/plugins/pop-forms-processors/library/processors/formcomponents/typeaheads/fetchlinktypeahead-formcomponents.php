@@ -4,16 +4,16 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
 {
     public final const MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING = 'formcomponent-quicklinktypeahead-everything';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING],
         );
     }
 
-    public function getComponentSubmodules(array $componentVariation)
+    public function getComponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
                 return array(
                     [PoP_Module_Processor_UserTypeaheadComponentFormInputs::class, PoP_Module_Processor_UserTypeaheadComponentFormInputs::MODULE_TYPEAHEAD_COMPONENT_USERS],
@@ -23,17 +23,17 @@ class PoP_Module_Processor_FetchlinkTypeaheadFormComponents extends PoP_Module_P
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation);
+        return parent::getComponentSubmodules($component);
     }
 
-    public function getInputSubmodule(array $componentVariation)
+    public function getInputSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_QUICKLINKTYPEAHEAD_EVERYTHING:
                 return [PoP_Module_Processor_InputGroupFormComponents::class, PoP_Module_Processor_InputGroupFormComponents::MODULE_FORMCOMPONENT_INPUTGROUP_TYPEAHEADSEARCH];
         }
 
-        return parent::getInputSubmodule($componentVariation);
+        return parent::getInputSubmodule($component);
     }
 }
 

@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
     public final const MODULE_FORM_EDITMEMBERSHIP = 'form-editmembership';
     public final const MODULE_FORM_MYCOMMUNITIES_UPDATE = 'form-mycommunities-update';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_EDITMEMBERSHIP],
@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_EDITMEMBERSHIP:
                 return [GD_URE_Module_Processor_ProfileFormInners::class, GD_URE_Module_Processor_ProfileFormInners::MODULE_FORMINNER_EDITMEMBERSHIP];
 
@@ -23,7 +23,7 @@ class GD_URE_Module_Processor_ProfileForms extends PoP_Module_Processor_FormsBas
                 return [GD_URE_Module_Processor_ProfileFormInners::class, GD_URE_Module_Processor_ProfileFormInners::MODULE_FORMINNER_MYCOMMUNITIES_UPDATE];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

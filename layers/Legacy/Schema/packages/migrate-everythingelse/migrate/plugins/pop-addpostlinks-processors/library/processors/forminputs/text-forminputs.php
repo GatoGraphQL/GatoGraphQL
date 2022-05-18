@@ -5,41 +5,41 @@ class PoP_AddPostLinks_Module_Processor_TextFormInputs extends PoP_Module_Proces
 {
     public final const MODULE_ADDPOSTLINKS_FORMINPUT_LINK = 'forminput-postlink';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ADDPOSTLINKS_FORMINPUT_LINK],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_FORMINPUT_LINK:
                 return TranslationAPIFacade::getInstance()->__('Embed external link', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_FORMINPUT_LINK:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_FORMINPUT_LINK:
                 return 'link';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

@@ -2,10 +2,10 @@
 
 // Add a module to include Community members in the filter
 \PoP\Root\App::addFilter('PoP_Module_Processor_UserCardLayoutsBase:getAdditionalSubmodules', 'gdUreUsercardlayoutAddcommunitytemplate', 10, 2);
-function gdUreUsercardlayoutAddcommunitytemplate($extra_componentVariations, array $componentVariation)
+function gdUreUsercardlayoutAddcommunitytemplate($extra_components, array $component)
 {
-    if ($componentVariation == [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_FILTERCARD]) {
-        $extra_componentVariations[] = [PoP_UserCommunities_Module_Processor_FormInputInputWrappers::class, PoP_UserCommunities_Module_Processor_FormInputInputWrappers::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY];
+    if ($component == [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_FILTERCARD]) {
+        $extra_components[] = [PoP_UserCommunities_Module_Processor_FormInputInputWrappers::class, PoP_UserCommunities_Module_Processor_FormInputInputWrappers::MODULE_FILTERINPUTWRAPPER_FILTERBYCOMMUNITY];
     }
-    return $extra_componentVariations;
+    return $extra_components;
 }

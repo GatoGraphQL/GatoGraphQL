@@ -48,7 +48,7 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const MODULE_BLOCK_AUTHOREVENTS_CAROUSEL = 'block-authorevents-carousel';
     public final const MODULE_BLOCK_TAGEVENTS_CAROUSEL = 'block-tagevents-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_PASTEVENTS_SCROLL_NAVIGATOR],
@@ -102,9 +102,9 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_DETAILS => POP_EVENTS_ROUTE_EVENTS,
             self::MODULE_BLOCK_AUTHOREVENTS_SCROLL_FULLVIEW => POP_EVENTS_ROUTE_EVENTS,
@@ -150,13 +150,13 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_LIST => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_SIMPLEVIEW => POP_EVENTS_ROUTE_PASTEVENTS,
             self::MODULE_BLOCK_TAGPASTEVENTS_SCROLL_THUMBNAIL => POP_EVENTS_ROUTE_PASTEVENTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_EVENTSCALENDAR_CALENDARMAP => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_EVENTSCALENDAR_CALENDARMAP],
             self::MODULE_BLOCK_AUTHOREVENTSCALENDAR_CALENDARMAP => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHOREVENTSCALENDAR_CALENDARMAP],
             self::MODULE_BLOCK_TAGEVENTSCALENDAR_CALENDARMAP => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGEVENTSCALENDAR_CALENDARMAP],
@@ -204,12 +204,12 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGEVENTS_CAROUSEL => [PoP_Events_Module_Processor_CustomSectionDataloads::class, PoP_Events_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGEVENTS_CAROUSEL],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PASTEVENTS_SCROLL_ADDONS:
             case self::MODULE_BLOCK_EVENTS_SCROLL_ADDONS:
             case self::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR_ADDONS:
@@ -267,34 +267,34 @@ class PoP_Events_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_CAROUSEL:
             case self::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::MODULE_BLOCK_TAGEVENTS_CAROUSEL:
                 return '';
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_CAROUSEL:
             case self::MODULE_BLOCK_AUTHOREVENTS_CAROUSEL:
             case self::MODULE_BLOCK_TAGEVENTS_CAROUSEL:
                 // Artificial property added to identify the template when adding module-resources
-                // $this->setProp($componentVariation, $props, 'resourceloader', 'block-carousel');
-                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-posts-carousel block-events-carousel');
+                // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
+                $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel block-events-carousel');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

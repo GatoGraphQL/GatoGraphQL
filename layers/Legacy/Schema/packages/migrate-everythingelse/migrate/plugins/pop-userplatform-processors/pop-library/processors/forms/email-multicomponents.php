@@ -6,7 +6,7 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
     public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL = 'multicomponent-emailnotifications-general';
     public final const MODULE_MULTICOMPONENT_EMAILDIGESTS = 'multicomponent-emaildigests';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS],
@@ -15,11 +15,11 @@ class PoP_Module_Processor_UserMultipleComponents extends PoP_Module_Processor_M
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS:
                 $ret[] = [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_LABEL];
                 $ret[] = [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_GENERAL];

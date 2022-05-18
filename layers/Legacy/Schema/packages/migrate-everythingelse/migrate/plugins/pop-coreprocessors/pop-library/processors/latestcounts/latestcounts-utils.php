@@ -2,14 +2,14 @@
 
 class GD_LatestCounts_Utils
 {
-    public static function authorFilters($classes, array $componentVariation, array &$props)
+    public static function authorFilters($classes, array $component, array &$props)
     {
 
         // Allow URE to add Organization members
-        return \PoP\Root\App::applyFilters('latestcounts:author:classes', $classes, $componentVariation, $props);
+        return \PoP\Root\App::applyFilters('latestcounts:author:classes', $classes, $component, $props);
     }
 
-    public static function getAllcontentClasses(array $componentVariation, array &$props)
+    public static function getAllcontentClasses(array $component, array &$props)
     {
         $ret = array();
 
@@ -28,6 +28,6 @@ class GD_LatestCounts_Utils
         }
 
         // WordPress can hook in the terms
-        return \PoP\Root\App::applyFilters('latestcounts:allcontent:classes', $ret, $componentVariation, $props);
+        return \PoP\Root\App::applyFilters('latestcounts:allcontent:classes', $ret, $component, $props);
     }
 }

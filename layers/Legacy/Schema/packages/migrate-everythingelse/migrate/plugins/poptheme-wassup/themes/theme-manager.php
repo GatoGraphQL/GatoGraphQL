@@ -102,7 +102,7 @@ class PoPTheme_WassupManager
         );
         return App::applyFilters($filtername, $routeConfigurations);
     }
-    public function getPagesectionjsmethod($jsmethod, array $componentVariation)
+    public function getPagesectionjsmethod($jsmethod, array $component)
     {
         $thememanager = \PoP\Theme\Themes\ThemeManagerFactory::getInstance();
         if (!($theme = $thememanager->getTheme())) {
@@ -114,9 +114,9 @@ class PoPTheme_WassupManager
             POP_HOOK_PROCESSORBASE_PAGESECTIONJSMETHOD,
             $theme->getName()
         );
-        return App::applyFilters($filtername, $jsmethod, $componentVariation);
+        return App::applyFilters($filtername, $jsmethod, $component);
     }
-    public function getBlockjsmethod($jsmethod, array $componentVariation)
+    public function getBlockjsmethod($jsmethod, array $component)
     {
         $thememanager = \PoP\Theme\Themes\ThemeManagerFactory::getInstance();
         if (!($theme = $thememanager->getTheme())) {
@@ -128,7 +128,7 @@ class PoPTheme_WassupManager
             POP_HOOK_PROCESSORBASE_BLOCKJSMETHOD,
             $theme->getName()
         );
-        return App::applyFilters($filtername, $jsmethod, $componentVariation);
+        return App::applyFilters($filtername, $jsmethod, $component);
     }
     public function filteringbyShowfilter($showfilter)
     {

@@ -6,7 +6,7 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
     public final const MODULE_SUBJUGATEDPOSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT = 'subjugatedpostconclusion-sidebarmulticomponent-left';
     public final const MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT = 'postconclusion-sidebarmulticomponent-right';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT],
@@ -15,11 +15,11 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT:
                 $ret[] = [PoP_Module_Processor_SocialMediaPostWrappers::class, PoP_Module_Processor_SocialMediaPostWrappers::MODULE_POSTSOCIALMEDIA_POSTWRAPPER];
                 break;
@@ -36,15 +36,15 @@ class PoP_Module_Processor_PostMultipleSidebarComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT:
                 $this->appendProp([PoP_Module_Processor_PostAuthorLayouts::class, PoP_Module_Processor_PostAuthorLayouts::MODULE_LAYOUT_SIMPLEPOSTAUTHORS], $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

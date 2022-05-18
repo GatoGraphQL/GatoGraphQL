@@ -3,7 +3,7 @@
 /**
  * Integration with Latest Everything Block
  */
-\PoP\Root\App::addFilter('pop_componentVariation:allcontent:tax_query_items', 'popUserstanceSearchablecontentTaxquery');
+\PoP\Root\App::addFilter('pop_component:allcontent:tax_query_items', 'popUserstanceSearchablecontentTaxquery');
 function popUserstanceSearchablecontentTaxquery($tax_query_items)
 {
     $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

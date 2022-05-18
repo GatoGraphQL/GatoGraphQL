@@ -5,7 +5,7 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
     public final const MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR = 'multiple-sectioninner-myevents-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR = 'multiple-sectioninner-mypastevents-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
@@ -13,11 +13,11 @@ class PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners extends PoP
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_MYCONTENT];
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::class, PoP_EventsCreation_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYEVENTS];

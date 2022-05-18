@@ -11,7 +11,7 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
     public final const MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS = 'widgetwrapper-opvotereferencedby-details';
     public final const MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT = 'buttonwrapper-opvote-createorupdate';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGETWRAPPER_STANCETARGET],
@@ -25,11 +25,11 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:
                 $ret[] = [UserStance_Module_Processor_Widgets::class, UserStance_Module_Processor_Widgets::MODULE_WIDGET_STANCETARGET];
                 break;
@@ -66,11 +66,11 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
                 $ret[] = [UserStance_Module_Processor_PostButtons::class, UserStance_Module_Processor_PostButtons::MODULE_BUTTON_STANCE_CREATE];
                 break;
@@ -84,46 +84,46 @@ class UserStance_Module_Processor_WidgetWrappers extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:
-                $this->appendProp($componentVariation, $props, 'class', 'references');
+                $this->appendProp($component, $props, 'class', 'references');
                 break;
 
             case self::MODULE_WIDGETWRAPPER_STANCES:
             case self::MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGETWRAPPER_STANCES_APPENDTOSCRIPT_DETAILS:
-                $this->appendProp($componentVariation, $props, 'class', 'referencedby clearfix');
+                $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
 
             case self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE:
                 $classes = array(
                     self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE => 'createorupdatestance',
                 );
-                $this->setProp($componentVariation, $props, 'appendable', true);
-                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
+                $this->setProp($component, $props, 'appendable', true);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAZYBUTTONWRAPPER_STANCE_CREATEORUPDATE:
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE_APPENDTOSCRIPT:
             case self::MODULE_BUTTONWRAPPER_STANCE_CREATEORUPDATE:
-                $this->appendProp($componentVariation, $props, 'class', 'inline');
+                $this->appendProp($component, $props, 'class', 'inline');
                 break;
 
             case self::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-stancecount-wrapper');
+                $this->appendProp($component, $props, 'class', 'pop-stancecount-wrapper');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETWRAPPER_STANCETARGET:
                 return 'hasStanceTarget';
 

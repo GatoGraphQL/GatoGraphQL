@@ -6,7 +6,7 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
     public final const MODULE_LATESTCOUNT_AUTHOR_POSTS = 'latestcount-author-posts';
     public final const MODULE_LATESTCOUNT_TAG_POSTS = 'latestcount-tag-posts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_POSTS],
@@ -15,11 +15,11 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         );
     }
 
-    public function getSectionClasses(array $componentVariation, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($componentVariation, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_POSTS:
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
             case self::MODULE_LATESTCOUNT_TAG_POSTS:
@@ -32,24 +32,24 @@ class PoPThemeWassup_Module_Processor_SectionLatestCounts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function isAuthor(array $componentVariation, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTS:
                 return true;
         }
     
-        return parent::isAuthor($componentVariation, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $componentVariation, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_POSTS:
                 return true;
         }
     
-        return parent::isTag($componentVariation, $props);
+        return parent::isTag($component, $props);
     }
 }
 

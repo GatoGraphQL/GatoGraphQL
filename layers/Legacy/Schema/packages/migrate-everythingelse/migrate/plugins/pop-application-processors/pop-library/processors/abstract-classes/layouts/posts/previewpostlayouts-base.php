@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Module_Processor_PreviewPostLayoutsBase
 {
-    protected function getDetailsfeedBottomSubmodules(array $componentVariation)
+    protected function getDetailsfeedBottomSubmodules(array $component)
     {
         $layouts = array();
 
@@ -17,35 +17,35 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         }
 
         // Allow to override. Eg: TPP Debate website adds the Stance Counter
-        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_componentVariations', $layouts, $componentVariation);
+        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:detailsfeed_bottom_components', $layouts, $component);
 
         return $layouts;
     }
 
-    public function horizontalLayout(array $componentVariation)
+    public function horizontalLayout(array $component)
     {
         return false;
     }
 
-    public function horizontalMediaLayout(array $componentVariation)
+    public function horizontalMediaLayout(array $component)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getQuicklinkgroupTopSubmodule($componentVariation)) {
+        if ($this->getQuicklinkgroupTopSubmodule($component)) {
             $ret[GD_JS_CLASSES]['quicklinkgroup-top'] = 'icon-only pull-right';
         }
 
         $ret[GD_JS_CLASSES]['title'] = 'media-heading';
-        if ($this->horizontalLayout($componentVariation)) {
+        if ($this->horizontalLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'row';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'col-xsm-4';
             $ret[GD_JS_CLASSES]['content-body'] = 'col-xsm-8';
-        } elseif ($this->horizontalMediaLayout($componentVariation)) {
+        } elseif ($this->horizontalMediaLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'media'; //' overflow-visible';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'media-left';
             $ret[GD_JS_CLASSES]['content-body'] = 'media-body';
@@ -54,16 +54,16 @@ abstract class PoP_Module_Processor_CustomPreviewPostLayoutsBase extends PoP_Mod
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Make the thumb image responsive if it is not the media layout
-        if (!$this->horizontalMediaLayout($componentVariation)) {
-            if ($thumb = $this->getPostThumbSubmodule($componentVariation)) {
+        if (!$this->horizontalMediaLayout($component)) {
+            if ($thumb = $this->getPostThumbSubmodule($component)) {
                 $this->appendProp($thumb, $props, 'img-class', 'img-responsive');
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

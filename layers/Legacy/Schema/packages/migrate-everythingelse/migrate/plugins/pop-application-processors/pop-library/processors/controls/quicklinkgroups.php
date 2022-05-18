@@ -16,7 +16,7 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
     public final const MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST = 'quicklinkgroup-updownvoteundoupdownvotepost';
     public final const MODULE_QUICKLINKGROUP_TAG = 'quicklinkgroup-tag';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKGROUP_POST],
@@ -35,11 +35,11 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKGROUP_POST:
                 $ret[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE];
                 break;
@@ -47,44 +47,44 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOM:
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $subComponentVariations = array();
-                $subComponentVariations[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $subComponentVariations[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
-                if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
-                    $subComponentVariations[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                $subComponents = array();
+                $subComponents[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponents[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
+                if ($component == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED]) {
+                    $subComponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $subComponentVariations = \PoP\Root\App::applyFilters(
+                $subComponents = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $subComponentVariations,
-                    $componentVariation
+                    $subComponents,
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
-                    $subComponentVariations
+                    $subComponents
                 );
                 break;
 
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMVOLUNTEER:
             case self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER:
                 // Allow TPP Debate website to remove the Comments from the post list
-                $subComponentVariations = array();
-                $subComponentVariations[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
-                $subComponentVariations[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
+                $subComponents = array();
+                $subComponents[] = [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND];
+                $subComponents[] = [PoP_Module_Processor_QuicklinkButtonGroups::class, PoP_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_COMMENTS];
                 // Only if the Volunteering is enabled
                 if (defined('POP_VOLUNTEERING_ROUTE_VOLUNTEER') && POP_VOLUNTEERING_ROUTE_VOLUNTEER) {
-                    $subComponentVariations[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
+                    $subComponents[] = [PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::class, PoP_Volunteering_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER];
                 }
-                if ($componentVariation == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
-                    $subComponentVariations[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
+                if ($component == [self::class, self::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDEDVOLUNTEER]) {
+                    $subComponents[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 }
-                $subComponentVariations = \PoP\Root\App::applyFilters(
+                $subComponents = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomQuicklinkGroups:modules',
-                    $subComponentVariations,
-                    $componentVariation
+                    $subComponents,
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
-                    $subComponentVariations
+                    $subComponents
                 );
                 break;
 
@@ -150,26 +150,26 @@ class PoP_Module_Processor_CustomQuicklinkGroups extends PoP_Module_Processor_Co
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-functiongroup');
+                $this->appendProp($component, $props, 'class', 'pop-functiongroup');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST => [PoP_Module_Processor_CustomCodes::class, PoP_Module_Processor_CustomCodes::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
                 );
-                // $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group bg-warning');
-                $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group');
+                // $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group bg-warning');
+                $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

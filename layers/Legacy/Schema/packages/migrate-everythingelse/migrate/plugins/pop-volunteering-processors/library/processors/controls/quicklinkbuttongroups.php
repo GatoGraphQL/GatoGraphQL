@@ -4,18 +4,18 @@ class PoP_Volunteering_Module_Processor_QuicklinkButtonGroups extends PoP_Module
 {
     public final const MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER = 'quicklinkbuttongroup-postvolunteer';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTVOLUNTEER:
                 $ret[] = [PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::class, PoPCore_GenericForms_Module_Processor_ViewComponentButtonWrappers::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POST_VOLUNTEER_TINY];
                 break;

@@ -3,41 +3,41 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_ALERT];
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
         return array();
     }
 
-    public function useCookie(array $componentVariation, array &$props)
+    public function useCookie(array $component, array &$props)
     {
         return false;
     }
 
-    public function showCloseButton(array $componentVariation, array &$props)
+    public function showCloseButton(array $component, array &$props)
     {
         return true;
     }
 
-    public function getClosebuttonTitle(array $componentVariation, array &$props)
+    public function getClosebuttonTitle(array $component, array &$props)
     {
         return TranslationAPIFacade::getInstance()->__('Dismiss', 'pop-coreprocessors');
     }
 
-    public function getClosebuttonText(array $componentVariation, array &$props)
+    public function getClosebuttonText(array $component, array &$props)
     {
         return 'x';
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
@@ -47,92 +47,92 @@ abstract class PoP_Module_Processor_AlertsBase extends PoPEngine_QueryDataCompon
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->useCookie($componentVariation, $props)) {
+        if ($this->useCookie($component, $props)) {
             $this->addJsmethod($ret, 'cookies');
         }
 
         return $ret;
     }
 
-    public function getAlertClass(array $componentVariation, array &$props)
+    public function getAlertClass(array $component, array &$props)
     {
         return 'alert-info alert-sm';
     }
 
-    public function getAlertBaseClass(array $componentVariation, array &$props)
+    public function getAlertBaseClass(array $component, array &$props)
     {
         return 'alert fade in';
     }
 
-    public function getClosebuttonClass(array $componentVariation, array &$props)
+    public function getClosebuttonClass(array $component, array &$props)
     {
         return 'close';
     }
 
-    public function addFeedbackobjectClass(array $componentVariation, array &$props)
+    public function addFeedbackobjectClass(array $component, array &$props)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
-        if ($this->addFeedbackobjectClass($componentVariation, $props)) {
+        if ($this->addFeedbackobjectClass($component, $props)) {
             $ret['add-feedbackobject-class'] = true;
         }
 
-        if ($this->useCookie($componentVariation, $props)) {
+        if ($this->useCookie($component, $props)) {
             $ret['use-cookies'] = true;
         }
 
-        if ($this->showCloseButton($componentVariation, $props)) {
+        if ($this->showCloseButton($component, $props)) {
             $ret['show-close-btn'] = true;
             $ret[GD_JS_TITLES] = array(
-                'closebtn-title' => $this->getClosebuttonTitle($componentVariation, $props),
-                'closebtn-text' => $this->getClosebuttonText($componentVariation, $props),
+                'closebtn-title' => $this->getClosebuttonTitle($component, $props),
+                'closebtn-text' => $this->getClosebuttonText($component, $props),
             );
             $ret[GD_JS_CLASSES] = array(
-                'close-btn' => $this->getClosebuttonClass($componentVariation, $props),
+                'close-btn' => $this->getClosebuttonClass($component, $props),
             );
         }
 
-        if ($description = $this->getProp($componentVariation, $props, 'description')) {
+        if ($description = $this->getProp($component, $props, 'description')) {
             $ret[GD_JS_DESCRIPTION] = $description;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($class = $this->getAlertBaseClass($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'class', $class);
+        if ($class = $this->getAlertBaseClass($component, $props)) {
+            $this->appendProp($component, $props, 'class', $class);
         }
 
         // Allow this value to be set from above
-        if ($class = $this->getProp($componentVariation, $props, 'alert-class')) {
-            $this->appendProp($componentVariation, $props, 'class', $class);
+        if ($class = $this->getProp($component, $props, 'alert-class')) {
+            $this->appendProp($component, $props, 'class', $class);
         }
         // Otherwise, use the default value
-        elseif ($class = $this->getAlertClass($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'class', $class);
+        elseif ($class = $this->getAlertClass($component, $props)) {
+            $this->appendProp($component, $props, 'class', $class);
         }
 
-        if ($this->useCookie($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'class', 'cookie hidden');
+        if ($this->useCookie($component, $props)) {
+            $this->appendProp($component, $props, 'class', 'cookie hidden');
         }
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

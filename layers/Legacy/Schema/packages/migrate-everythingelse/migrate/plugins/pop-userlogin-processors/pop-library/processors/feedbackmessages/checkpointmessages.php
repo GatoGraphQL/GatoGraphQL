@@ -7,7 +7,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
     public final const MODULE_CHECKPOINTMESSAGE_LOGGEDINCANEDIT = 'checkpointmessage-loggedincanedit';
     public final const MODULE_CHECKPOINTMESSAGE_LOGGEDINISADMIN = 'checkpointmessage-loggedinisadmin';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGE_NOTLOGGEDIN],
@@ -17,7 +17,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_CHECKPOINTMESSAGE_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
@@ -26,11 +26,11 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessages extends PoP_Module_Pr
             self::MODULE_CHECKPOINTMESSAGE_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageInners::class, GD_UserLogin_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

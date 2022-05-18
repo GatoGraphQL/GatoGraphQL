@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
     public final const MODULE_BLOCK_TABPANEL_TAGPASTEVENTS = 'block-tabpanel-tagpastevents';
     public final const MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR = 'block-tabpanel-tageventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_TAGEVENTS],
@@ -15,25 +15,25 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_TAGEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGEVENTS],
             self::MODULE_BLOCK_TABPANEL_TAGPASTEVENTS => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGPASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_TAGEVENTSCALENDAR => [GD_EM_Module_Processor_TagSectionTabPanelComponents::class, GD_EM_Module_Processor_TagSectionTabPanelComponents::MODULE_TABPANEL_TAGEVENTSCALENDAR],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_TAGEVENTS:
             case self::MODULE_BLOCK_TABPANEL_TAGPASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTS];
@@ -42,14 +42,14 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($filter_componentVariation = $this->getDelegatorfilterSubmodule($componentVariation)) {
+        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
             // Events: choose to only select past/future
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_BLOCK_TABPANEL_TAGPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
@@ -59,11 +59,11 @@ class GD_EM_Module_Processor_TagSectionTabPanelBlocks extends PoP_Module_Process
                     break;
             }
             if ($daterange_class) {
-                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_componentVariation]);
+                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_component]);
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

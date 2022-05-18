@@ -10,7 +10,7 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const MODULE_TABPANEL_MYCONTENT = 'tabpanel-mycontent';
     public final const MODULE_TABPANEL_MYPOSTS = 'tabpanel-myposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_SEARCHCONTENT],
@@ -25,9 +25,9 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_SEARCHUSERS:
             case self::MODULE_TABPANEL_USERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
@@ -37,14 +37,14 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
         
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_CONTENT:
                 $ret = array_merge(
                     $ret,
@@ -132,14 +132,14 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         }
 
         // Allow Events Manager to add the Map format
-        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_SectionTabPanelComponents:modules', $ret, $componentVariation);
+        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_SectionTabPanelComponents:modules', $ret, $component);
 
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_CONTENT:
                 $ret = array(
                     [
@@ -264,10 +264,10 @@ class PoP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_SectionTabPanelComponents:panel_headers', $ret, $componentVariation);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_SectionTabPanelComponents:panel_headers', $ret, $component);
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

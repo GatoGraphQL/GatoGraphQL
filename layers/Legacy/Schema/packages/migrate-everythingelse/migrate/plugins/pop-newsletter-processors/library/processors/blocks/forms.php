@@ -7,7 +7,7 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
     public final const MODULE_BLOCKCODE_NEWSLETTER = 'blockcode-newsletter';
     public final const MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION = 'block-newsletterunsubscription';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_NEWSLETTER],
@@ -16,31 +16,31 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::MODULE_BLOCKCODE_NEWSLETTER => POP_NEWSLETTER_ROUTE_NEWSLETTER,
             self::MODULE_BLOCK_NEWSLETTERUNSUBSCRIPTION => POP_NEWSLETTER_ROUTE_NEWSLETTERUNSUBSCRIPTION,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NEWSLETTER:
                 return '';
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NEWSLETTER:
                 $ret[] = [PoP_Newsletter_Module_Processor_Dataloads::class, PoP_Newsletter_Module_Processor_Dataloads::MODULE_DATALOAD_NEWSLETTER];
                 break;
@@ -58,14 +58,14 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $newsletter_description = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_GFBlocks:newsletter:description',
             ''
         );
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NEWSLETTER:
                 $this->appendProp([PoP_Newsletter_Module_Processor_GFForms::class, PoP_Newsletter_Module_Processor_GFForms::MODULE_FORM_NEWSLETTER], $props, 'class', 'form-inline');
                 if ($newsletter_description) {
@@ -109,14 +109,14 @@ class PoP_Newsletter_Module_Processor_Blocks extends PoP_Module_Processor_FormBl
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NEWSLETTER:
             case self::MODULE_BLOCKCODE_NEWSLETTER:
-                $this->appendProp($componentVariation, $props, 'class', 'block-newsletter');
+                $this->appendProp($component, $props, 'class', 'block-newsletter');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

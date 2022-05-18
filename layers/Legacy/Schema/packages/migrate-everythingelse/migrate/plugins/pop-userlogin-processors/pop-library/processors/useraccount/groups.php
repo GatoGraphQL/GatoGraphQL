@@ -4,30 +4,30 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
 {
     public final const MODULE_GROUP_LOGGEDINUSERDATA = 'group-loggedinuserdata';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GROUP_LOGGEDINUSERDATA],
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_GROUP_LOGGEDINUSERDATA => POP_USERLOGIN_ROUTE_LOGGEDINUSERDATA,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
                 $ret = array_merge(
                     $ret,
-                    PoP_Module_Processor_UserAccountUtils::getLoginComponentVariations()
+                    PoP_Module_Processor_UserAccountUtils::getLoginComponents()
                 );
                 break;
         }
@@ -35,15 +35,15 @@ class PoP_Module_Processor_UserAccountGroups extends PoP_Module_Processor_Multip
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_LOGGEDINUSERDATA:
-                $this->appendProp($componentVariation, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

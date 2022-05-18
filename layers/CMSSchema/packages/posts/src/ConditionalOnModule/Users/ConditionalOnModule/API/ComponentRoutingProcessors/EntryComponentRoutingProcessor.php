@@ -32,7 +32,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::USER][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                 ],

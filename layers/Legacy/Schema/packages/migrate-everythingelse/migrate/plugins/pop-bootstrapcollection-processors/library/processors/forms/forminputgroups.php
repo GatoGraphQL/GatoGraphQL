@@ -5,7 +5,7 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
     public final const MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS = 'filterinputgroup-moderatedpoststatus';
     public final const MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS = 'filterinputgroup-unmoderatedpoststatus';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS],
@@ -13,11 +13,11 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
         );
     }
 
-    public function getLabelClass(array $componentVariation)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($componentVariation);
+        $ret = parent::getLabelClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-2';
@@ -26,11 +26,11 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
 
         return $ret;
     }
-    public function getFormcontrolClass(array $componentVariation)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($componentVariation);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS:
             case self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS:
                 $ret .= ' col-sm-10';
@@ -40,18 +40,18 @@ class GD_Core_Bootstrap_Module_Processor_FormInputGroups extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FILTERINPUTGROUP_MODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_MODERATEDPOSTSTATUS],
             self::MODULE_FILTERINPUTGROUP_UNMODERATEDPOSTSTATUS => [PoP_Module_Processor_MultiSelectFilterInputs::class, PoP_Module_Processor_MultiSelectFilterInputs::MODULE_FILTERINPUT_UNMODERATEDPOSTSTATUS],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

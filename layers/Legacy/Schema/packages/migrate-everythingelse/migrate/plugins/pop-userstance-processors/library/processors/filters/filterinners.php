@@ -10,7 +10,7 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     public final const MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE = 'filterinputcontainer-authorstances-stance';
     public final const MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE = 'filterinputcontainer-stances-generalstance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_STANCES],
@@ -23,9 +23,9 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_STANCES => [
@@ -79,20 +79,20 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Stances:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_STANCES => POP_FILTER_STANCES,
@@ -103,11 +103,11 @@ class UserStance_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::MODULE_FILTERINPUTCONTAINER_AUTHORSTANCES_STANCE => POP_FILTER_AUTHORSTANCES_STANCE,
     //         self::MODULE_FILTERINPUTCONTAINER_STANCES_GENERALSTANCE => POP_FILTER_STANCES_GENERALSTANCE,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

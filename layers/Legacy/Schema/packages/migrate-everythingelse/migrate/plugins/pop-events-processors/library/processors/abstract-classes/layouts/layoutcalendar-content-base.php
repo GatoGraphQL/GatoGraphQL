@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTCALENDAR_CONTENT_POPOVER];
     }
@@ -12,41 +12,41 @@ abstract class PoP_Module_Processor_CalendarContentLayoutsBase extends PoPEngine
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
         $ret[] = 'volunteersNeeded';
         $ret[] = 'url';
-        if ($this->getProp($componentVariation, $props, 'show-title')) {
+        if ($this->getProp($component, $props, 'show-title')) {
             $ret[] = 'title';
         }
         return $ret;
     }
 
     // Comment Leo 18/07/2017: commented since removing the "hidden-md hidden-lg" view for smartphones. Now there is only one
-    // function getJsmethods(array $componentVariation, array &$props) {
+    // function getJsmethods(array $component, array &$props) {
 
-    //     $ret = parent::getJsmethods($componentVariation, $props);
+    //     $ret = parent::getJsmethods($component, $props);
     //     $this->addJsmethod($ret, 'doNothing', 'void-link');
     //     return $ret;
     // }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->getProp($componentVariation, $props, 'show-title')) {
+        if ($this->getProp($component, $props, 'show-title')) {
             $ret['show-title'] = true;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Show the title by default
-        $this->setProp($componentVariation, $props, 'show-title', true);
-        parent::initModelProps($componentVariation, $props);
+        $this->setProp($component, $props, 'show-title', true);
+        parent::initModelProps($component, $props);
     }
 }

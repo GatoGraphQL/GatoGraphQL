@@ -8,7 +8,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
     public final const MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL = 'layout-usersidebarinner-horizontal-individual';
     public final const MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebarinner-compacthorizontal-organization';
     public final const MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebarinner-compacthorizontal-individual';
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION],
@@ -20,11 +20,11 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION:
                 $ret = array_merge(
@@ -59,9 +59,9 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
         return $ret;
     }
 
-    public function getWrapperClass(array $componentVariation)
+    public function getWrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL:
             case self::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_ORGANIZATION:
@@ -69,12 +69,12 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
                 return 'row';
         }
     
-        return parent::getWrapperClass($componentVariation);
+        return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $componentVariation)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBARINNER_HORIZONTAL_INDIVIDUAL:
                 return 'col-xsm-4';
@@ -84,7 +84,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebarInners extends PoP_Module_P
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($componentVariation);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

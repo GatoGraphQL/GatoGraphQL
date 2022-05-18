@@ -11,11 +11,11 @@ class PoP_Application_ClusterCommonPages_Module_MainContentComponentRoutingProce
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_CLUSTERCOMMONPAGES_ROUTE_ABOUT_OURSPONSORS => [GD_ClusterCommonPages_Module_Processor_CustomGroups::class, GD_ClusterCommonPages_Module_Processor_CustomGroups::MODULE_GROUP_OURSPONSORS],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

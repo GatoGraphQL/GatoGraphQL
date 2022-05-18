@@ -63,7 +63,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
     public final const MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'block-mynosearchcategoryposts18-scroll-fullviewpreview';
     public final const MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'block-mynosearchcategoryposts19-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
@@ -131,9 +131,9 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
         );
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT],
@@ -199,12 +199,12 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
             self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [NSLPPC_Module_Processor_MySectionDataloads::class, NSLPPC_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
             case self::MODULE_BLOCK_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
@@ -268,7 +268,7 @@ class NSLPPC_Module_Processor_MySectionBlocks extends PoP_Module_Processor_MySec
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYBLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 }
 

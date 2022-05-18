@@ -4,34 +4,34 @@ class PoP_UserCommunitiesProcessors_Module_Processor_EmailFormGroups extends PoP
 {
     public final const MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY = 'ure-forminputgroup-emailnotifications-network-joinscommunity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY => [GD_URE_Module_Processor_UserProfileCheckboxFormInputs::class, GD_URE_Module_Processor_UserProfileCheckboxFormInputs::MODULE_URE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function useModuleConfiguration(array $componentVariation)
+    public function useModuleConfiguration(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_JOINSCOMMUNITY:
                 return false;
         }
 
-        return parent::useModuleConfiguration($componentVariation);
+        return parent::useModuleConfiguration($component);
     }
 }
 

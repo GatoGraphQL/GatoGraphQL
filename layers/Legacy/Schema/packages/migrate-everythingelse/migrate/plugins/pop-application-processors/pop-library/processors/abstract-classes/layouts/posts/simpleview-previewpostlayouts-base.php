@@ -3,7 +3,7 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase extends PoP_Module_Processor_BareSimpleViewPreviewPostLayoutsBase
 {
-    protected function getSimpleviewfeedBottomSubmodules(array $componentVariation)
+    protected function getSimpleviewfeedBottomSubmodules(array $component)
     {
         $layouts = array();
 
@@ -20,22 +20,22 @@ abstract class PoP_Module_Processor_CustomSimpleViewPreviewPostLayoutsBase exten
         }
 
         // Allow to override. Eg: TPP Debate website adds the Stance Counter
-        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_componentVariations', $layouts, $componentVariation);
+        $layouts = \PoP\Root\App::applyFilters('PoP_Module_Processor_CustomPreviewPostLayoutsBase:simpleviewfeed_bottom_components', $layouts, $component);
 
         return $layouts;
     }
 
-    public function getAftercontentSubmodules(array $componentVariation)
+    public function getAftercontentSubmodules(array $component)
     {
-        $ret = parent::getAftercontentSubmodules($componentVariation);
+        $ret = parent::getAftercontentSubmodules($component);
 
         return array_merge(
             $ret,
-            $this->getSimpleviewfeedBottomSubmodules($componentVariation)
+            $this->getSimpleviewfeedBottomSubmodules($component)
         );
     }
 
-    public function getTitleBeforeauthors(array $componentVariation, array &$props)
+    public function getTitleBeforeauthors(array $component, array &$props)
     {
         return array(
             'abovetitle' => sprintf(

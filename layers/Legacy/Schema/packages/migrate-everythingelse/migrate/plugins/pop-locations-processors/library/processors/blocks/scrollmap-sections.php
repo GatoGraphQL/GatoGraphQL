@@ -16,7 +16,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
     public final const MODULE_BLOCK_TAGPASTEVENTS_SCROLLMAP = 'block-tagpastevents-scrollmap';
     public final const MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP = 'block-tagevents-horizontalscrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_EVENTS_SCROLLMAP],
@@ -34,19 +34,19 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_BLOCK_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP],
             self::MODULE_BLOCK_USERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_USERS_SCROLLMAP],
             self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP],
@@ -61,12 +61,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
             self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHOREVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_AUTHORPASTEVENTS_SCROLLMAP:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -76,12 +76,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle();
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_PASTEVENTS_SCROLLMAP:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKEVENTLIST];
@@ -111,18 +111,18 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKMAPUSERLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    protected function getModuleTogglemapanchorcontrolPath(array $componentVariation)
+    protected function getModuleTogglemapanchorcontrolPath(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
                 $users_events_path = array(
-                    $this->getControlgroupTopSubmodule($componentVariation),
+                    $this->getControlgroupTopSubmodule($component),
                     [PoP_Locations_Module_Processor_CustomControlButtonGroups::class, PoP_Locations_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_TOGGLEMAP],
                     [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLEMAP],
                 );
@@ -140,47 +140,47 @@ class GD_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Module_P
                         [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLETAGMAP],
                     ),
                 );
-                return $paths[$componentVariation[1]];
+                return $paths[$component[1]];
         }
 
         return null;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHOREVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGEVENTS_SCROLLMAP:
             case self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
-                $this->appendProp($componentVariation, $props, 'class', 'block-events-scrollmap');
+                $this->appendProp($component, $props, 'class', 'block-events-scrollmap');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_USERS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP:
-                if ($path = $this->getModuleTogglemapanchorcontrolPath($componentVariation)) {
+                if ($path = $this->getModuleTogglemapanchorcontrolPath($component)) {
                     $this->setProp(
                         $path,
                         $props,
                         'target',
-                        '#'.$this->getFrontendId($componentVariation, $props).' > .blocksection-inners .collapse.map'
+                        '#'.$this->getFrontendId($component, $props).' > .blocksection-inners .collapse.map'
                     );
                 }
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }
 

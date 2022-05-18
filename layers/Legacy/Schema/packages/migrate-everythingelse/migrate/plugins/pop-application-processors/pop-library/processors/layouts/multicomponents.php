@@ -4,18 +4,18 @@ class PoP_Module_Processor_MaxHeightLayoutMultipleComponents extends PoP_Module_
 {
     public final const MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT = 'multicomponent-simpleview-postcontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT:
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES_LINE];
                 $ret[] = [PoP_Module_Processor_MaxHeightLayouts::class, PoP_Module_Processor_MaxHeightLayouts::MODULE_LAYOUT_MAXHEIGHT_POSTCONTENT];
@@ -25,16 +25,16 @@ class PoP_Module_Processor_MaxHeightLayoutMultipleComponents extends PoP_Module_
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_SIMPLEVIEW_POSTCONTENT:
                 // Change the "In response to" tag from 'h4' to 'em'
                 $this->setProp([PoP_Module_Processor_Widgets::class, PoP_Module_Processor_Widgets::MODULE_WIDGET_REFERENCES_LINE], $props, 'title-htmltag', 'em');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

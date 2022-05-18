@@ -4,11 +4,11 @@
  * Uniqueblocks
  */
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupBootstrapFramecomponentModules');
-function getWassupBootstrapFramecomponentComponentVariations($componentVariations)
+function getWassupBootstrapFramecomponentComponents($components)
 {
-    $componentVariations[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED];
-    $componentVariations[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API];
-    $componentVariations[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_COPYSEARCHURL];
+    $components[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_EMBED];
+    $components[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_API];
+    $components[] = [PoP_Module_Processor_ShareModalComponents::class, PoP_Module_Processor_ShareModalComponents::MODULE_MODAL_COPYSEARCHURL];
 
-    return $componentVariations;
+    return $components;
 }

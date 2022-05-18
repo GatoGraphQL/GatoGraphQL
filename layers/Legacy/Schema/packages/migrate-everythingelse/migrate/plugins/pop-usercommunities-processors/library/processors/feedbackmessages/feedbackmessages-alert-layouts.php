@@ -6,7 +6,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_INVITENEWMEMBERS = 'layout-feedbackmessagealert-invitemembers';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP = 'layout-feedbackmessagealert-editmembership';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES],
@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
         );
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_UPDATEMYCOMMUNITIES => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATEMYCOMMUNITIES],
@@ -23,11 +23,11 @@ class GD_URE_Module_Processor_ProfileFeedbackMessageAlertLayouts extends PoP_Mod
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::class, GD_URE_Module_Processor_ProfileFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_EDITMEMBERSHIP],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($componentVariation);
+        return parent::getLayoutSubmodule($component);
     }
 }
 

@@ -5,7 +5,7 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-postconclusionsidebarinner-horizontal';
     public final const MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL = 'layout-subjugatedpostconclusionsidebarinner-horizontal';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL],
@@ -13,11 +13,11 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
                 $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT];
                 $ret[] = [PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_LEFT];
@@ -32,9 +32,9 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    // function getWrapperClass(array $componentVariation) {
+    // function getWrapperClass(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
@@ -42,12 +42,12 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
     //             return 'row';
     //     }
 
-    //     return parent::getWrapperClass($componentVariation);
+    //     return parent::getWrapperClass($component);
     // }
 
-    // function getWidgetwrapperClass(array $componentVariation) {
+    // function getWidgetwrapperClass(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
     //         case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
@@ -55,19 +55,19 @@ class PoP_Module_Processor_PostLayoutSidebarInners extends PoP_Module_Processor_
     //             return 'col-xsm-6';
     //     }
 
-    //     return parent::getWidgetwrapperClass($componentVariation);
+    //     return parent::getWidgetwrapperClass($component);
     // }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
             case self::MODULE_LAYOUT_SUBJUGATEDPOSTCONCLUSIONSIDEBARINNER_HORIZONTAL:
                 $this->appendProp([PoP_Module_Processor_PostMultipleSidebarComponents::class, PoP_Module_Processor_PostMultipleSidebarComponents::MODULE_POSTCONCLUSIONSIDEBARMULTICOMPONENT_RIGHT], $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

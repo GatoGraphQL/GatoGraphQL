@@ -8,7 +8,7 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
     public final const MODULE_BLOCK_STANCE_CREATEORUPDATE = 'block-stance-createorupdate';
     public final const MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE = 'block-singlepoststance-createorupdate';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_STANCE_UPDATE],
@@ -18,31 +18,31 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::MODULE_BLOCK_STANCE_CREATE => POP_USERSTANCE_ROUTE_ADDSTANCE,
             self::MODULE_BLOCK_STANCE_CREATEORUPDATE => POP_USERSTANCE_ROUTE_ADDOREDITSTANCE,
             self::MODULE_BLOCK_STANCE_UPDATE => POP_USERSTANCE_ROUTE_EDITSTANCE,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_CREATEORUPDATE:
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_EDITPOST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_STANCE_UPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_STANCE_UPDATE],
@@ -50,37 +50,37 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_STANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_STANCE_CREATEORUPDATE],
             self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE => [UserStance_Module_Processor_CreateUpdatePostDataloads::class, UserStance_Module_Processor_CreateUpdatePostDataloads::MODULE_DATALOAD_SINGLEPOSTSTANCE_CREATEORUPDATE],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function isCreate(array $componentVariation)
+    protected function isCreate(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_CREATE:
                 return true;
         }
 
-        return parent::isCreate($componentVariation);
+        return parent::isCreate($component);
     }
-    protected function isUpdate(array $componentVariation)
+    protected function isUpdate(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_UPDATE:
                 return true;
         }
 
-        return parent::isUpdate($componentVariation);
+        return parent::isUpdate($component);
     }
 
-    protected function getBlocksectionsClasses(array $componentVariation)
+    protected function getBlocksectionsClasses(array $component)
     {
-        $ret = parent::getBlocksectionsClasses($componentVariation);
+        $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['blocksection-inners'] = 'well';
                 break;
@@ -89,9 +89,9 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 // Allow Events to have a different title
                 $title = sprintf(
@@ -104,14 +104,14 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
                 );
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_CREATEORUPDATE:
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 $ret['loadBlockContent']['loadcontent-showdisabledlayer'] = true;
@@ -121,32 +121,32 @@ class UserStance_Module_Processor_CreateUpdatePostBlocks extends PoP_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_CREATEORUPDATE:
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-blockstance-createorupdate');
+                $this->appendProp($component, $props, 'class', 'pop-blockstance-createorupdate');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Make it horizontal
             case self::MODULE_BLOCK_SINGLEPOSTSTANCE_CREATEORUPDATE:
                 // Do not show in the quickview
-                $this->appendProp($componentVariation, $props, 'class', 'pop-singlepoststance pop-hidden-quickview');
+                $this->appendProp($component, $props, 'class', 'pop-singlepoststance pop-hidden-quickview');
                 $this->setProp([UserStance_Module_Processor_CreateUpdatePostForms::class, UserStance_Module_Processor_CreateUpdatePostForms::MODULE_FORM_STANCE], $props, 'horizontal', true);
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCE_UPDATE:
             case self::MODULE_BLOCK_STANCE_CREATE:
-                $this->appendProp($componentVariation, $props, 'class', 'addons-nocontrols');
+                $this->appendProp($component, $props, 'class', 'addons-nocontrols');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

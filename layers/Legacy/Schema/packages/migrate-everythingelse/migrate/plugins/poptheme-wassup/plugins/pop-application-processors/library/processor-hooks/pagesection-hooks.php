@@ -12,26 +12,26 @@ class PoPTheme_Wassup_ApplicationProcessors_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $componentVariation, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
-                $subComponentVariations = array(
+                $subComponents = array(
                     [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_HIGHLIGHT_CREATE],
                     [PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::class, PoP_AddHighlights_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_HIGHLIGHT_UPDATE],
                 );
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $subComponentVariations = array_merge(
-                        $subComponentVariations,
+                    $subComponents = array_merge(
+                        $subComponents,
                         array(
                             [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_POST_CREATE],
                             [PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::class, PoP_PostsCreation_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_POST_UPDATE],
                         )
                     );
                 }
-                foreach ($subComponentVariations as $subComponentVariation) {
-                    $processor->setProp($subComponentVariation, $props, 'title', '');
+                foreach ($subComponents as $subComponent) {
+                    $processor->setProp($subComponent, $props, 'title', '');
                 }
                 break;
         }

@@ -4,18 +4,18 @@ class GD_URE_Module_Processor_CustomControlButtonGroups extends PoP_Module_Proce
 {
     public final const MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS = 'controlbuttongroup-invitenewmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_CustomAnchorControls::class, GD_URE_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_INVITENEWMEMBERS];
                 break;

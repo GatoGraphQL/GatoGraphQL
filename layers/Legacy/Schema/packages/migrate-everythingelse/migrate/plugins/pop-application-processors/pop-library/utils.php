@@ -7,7 +7,7 @@ define('POP_HOOK_WASSUPUTILS_SCROLLABLEMAIN', 'wassuputils-scrollablemain');
 
 class PoP_ApplicationProcessors_Utils
 {
-    public static function getInitializedomainComponentVariations()
+    public static function getInitializedomainComponents()
     {
         return \PoP\Root\App::applyFilters(
             'PoP_ApplicationProcessors_Utils:initializedomain:modules',

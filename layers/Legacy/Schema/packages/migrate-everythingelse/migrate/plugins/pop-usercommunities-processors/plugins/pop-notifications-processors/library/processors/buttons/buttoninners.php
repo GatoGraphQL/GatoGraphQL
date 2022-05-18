@@ -6,7 +6,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
     public final const MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP = 'ure-aal-buttoninner-editmembership';
     public final const MODULE_UREAAL_BUTTONINNER_VIEWALLMEMBERS = 'ure-aal-buttoninner-viewallmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP],
@@ -14,9 +14,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return 'fa-fw fa-asterisk';
 
@@ -24,12 +24,12 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
                 return 'fa-fw fa-users';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
 
@@ -37,7 +37,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Mod
                 return TranslationAPIFacade::getInstance()->__('View all members', 'poptheme-wassup');
         }
 
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

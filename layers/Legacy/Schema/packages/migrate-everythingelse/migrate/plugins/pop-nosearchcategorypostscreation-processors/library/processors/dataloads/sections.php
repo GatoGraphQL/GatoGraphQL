@@ -65,7 +65,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
     public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts18-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mynosearchcategoryposts19-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT],
@@ -133,9 +133,9 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             /*********************************************
          * My Content Tables
@@ -207,12 +207,12 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
             self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS01_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS02_TABLE_EDIT:
@@ -276,10 +276,10 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -349,22 +349,22 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
             [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
             [self::class, self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($componentVariation, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_FULLVIEWPREVIEW:
@@ -489,14 +489,14 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
@@ -633,7 +633,7 @@ class NSLPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_My
             );
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

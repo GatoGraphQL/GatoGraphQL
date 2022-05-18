@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS = 'simplefilterinputcontainer-mymembers';
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES = 'simplefilterinputcontainer-communities';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS],
@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS => [
@@ -31,30 +31,30 @@ class GD_URE_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Proces
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERUSER],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'UserCommunities:SimpleFilterInners:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYMEMBERS => POP_FILTER_MYMEMBERS,
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_COMMUNITIES => POP_FILTER_COMMUNITIES,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

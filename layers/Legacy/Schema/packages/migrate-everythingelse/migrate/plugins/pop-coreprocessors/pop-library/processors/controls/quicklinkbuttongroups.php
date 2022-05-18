@@ -10,7 +10,7 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
     public final const MODULE_QUICKLINKBUTTONGROUP_COMMENTS_LABEL = 'quicklinkbuttongroup-comments-label';
     public final const MODULE_QUICKLINKBUTTONGROUP_TAGSHARE = 'quicklinkbuttongroup-tagshare';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE],
@@ -23,11 +23,11 @@ class PoP_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_Co
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTSHARE:
                 $ret[] = [PoP_Module_Processor_DropdownButtonQuicklinks::class, PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE];
                 break;

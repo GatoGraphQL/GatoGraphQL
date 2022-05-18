@@ -53,10 +53,10 @@ class ModulePaths extends AbstractComponentFilter
 
     public function getName(): string
     {
-        return 'componentVariationPaths';
+        return 'componentPaths';
     }
 
-    public function excludeModule(array $componentVariation, array &$props): bool
+    public function excludeModule(array $component, array &$props): bool
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -73,9 +73,9 @@ class ModulePaths extends AbstractComponentFilter
             return false;
         }
 
-        // Check if this module is the last item of any componentVariationPath
+        // Check if this module is the last item of any componentPath
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-            if (count($unsettled_path) == 1 && $unsettled_path[0] == $componentVariation) {
+            if (count($unsettled_path) == 1 && $unsettled_path[0] == $component) {
                 return false;
             }
         }
@@ -83,7 +83,7 @@ class ModulePaths extends AbstractComponentFilter
         return true;
     }
 
-    public function removeExcludedSubmodules(array $componentVariation, array $subComponentVariations): array
+    public function removeExcludedSubmodules(array $component, array $subComponents): array
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -91,38 +91,38 @@ class ModulePaths extends AbstractComponentFilter
 
         // If there are no remaining path left, then everything goes in
         if (!$this->propagation_unsettled_paths) {
-            return $subComponentVariations;
+            return $subComponents;
         }
 
-        // $componentVariation_unsettled_path: Start only from the specified module. It is passed under URL param "componentVariationPaths", and it's the list of module paths
-        // starting from the entry, and joined by ".", like this: componentVariationPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
+        // $component_unsettled_path: Start only from the specified module. It is passed under URL param "componentPaths", and it's the list of module paths
+        // starting from the entry, and joined by ".", like this: componentPaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
-        $matching_subComponentVariations = array();
+        $matching_subComponents = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             // Validate that the current module is at the head of the path
             // This validation will work for the entry module only, since the array_intersect below will guarantee that only the path modules are returned
-            $unsettled_path_componentVariation = $unsettled_path[0];
+            $unsettled_path_component = $unsettled_path[0];
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all modules must be included
-                if ($unsettled_path_componentVariation == $componentVariation) {
-                    return $subComponentVariations;
+                if ($unsettled_path_component == $component) {
+                    return $subComponents;
                 }
             } else {
-                // Then, check that the following element in the unsettled_path, which is the subComponentVariation, is on the subComponentVariations
-                $unsettled_path_subComponentVariation = $unsettled_path[1];
-                if ($unsettled_path_componentVariation == $componentVariation && in_array($unsettled_path_subComponentVariation, $subComponentVariations) && !in_array($unsettled_path_subComponentVariation, $matching_subComponentVariations)) {
-                    $matching_subComponentVariations[] = $unsettled_path_subComponentVariation;
+                // Then, check that the following element in the unsettled_path, which is the subComponent, is on the subComponents
+                $unsettled_path_subComponent = $unsettled_path[1];
+                if ($unsettled_path_component == $component && in_array($unsettled_path_subComponent, $subComponents) && !in_array($unsettled_path_subComponent, $matching_subComponents)) {
+                    $matching_subComponents[] = $unsettled_path_subComponent;
                 }
             }
         }
 
-        return $matching_subComponentVariations;
+        return $matching_subComponents;
     }
 
     /**
-     * The `prepare` function advances the componentVariationPath one level down, when interating into the subComponentVariations, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when interating into the subComponents, and then calling `restore` the value goes one level up again
      */
-    public function prepareForPropagation(array $componentVariation, array &$props): void
+    public function prepareForPropagation(array $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();
@@ -133,8 +133,8 @@ class ModulePaths extends AbstractComponentFilter
 
             $matching_unsettled_paths = array();
             foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-                $componentVariation_unsettled_path = $unsettled_path[0];
-                if ($componentVariation_unsettled_path == $componentVariation) {
+                $component_unsettled_path = $unsettled_path[0];
+                if ($component_unsettled_path == $component) {
                     array_shift($unsettled_path);
                     // If there are still elements, then add it to the list
                     if ($unsettled_path) {
@@ -145,7 +145,7 @@ class ModulePaths extends AbstractComponentFilter
             $this->propagation_unsettled_paths = $matching_unsettled_paths;
         }
     }
-    public function restoreFromPropagation(array $componentVariation, array &$props): void
+    public function restoreFromPropagation(array $component, array &$props): void
     {
         if (is_null($this->paths)) {
             $this->init();

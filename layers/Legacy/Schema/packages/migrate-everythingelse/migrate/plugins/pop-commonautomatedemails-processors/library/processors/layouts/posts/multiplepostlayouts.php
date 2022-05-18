@@ -10,7 +10,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
     public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_SIMPLEVIEW = 'layout-automatedemails-multiplepost-simpleview';
     public final const MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW = 'layout-automatedemails-multiplepost-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS],
@@ -21,7 +21,7 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $componentVariation)
+    public function getDefaultLayoutSubmodule(array $component)
     {
         $defaults = array(
             self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS => [PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts::class, PoPTheme_Wassup_AE_Module_Processor_PreviewPostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_POST_DETAILS],
@@ -31,16 +31,16 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
             self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_FULLVIEW => [PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts::class, PoPTheme_Wassup_AE_Module_Processor_FullViewLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$componentVariation[1]] ?? null) {
+        if ($default = $defaults[$component[1]] ?? null) {
             return $default;
         }
 
-        return parent::getDefaultLayoutSubmodule($componentVariation);
+        return parent::getDefaultLayoutSubmodule($component);
     }
 
-    public function getMultipleLayoutSubmodules(array $componentVariation)
+    public function getMultipleLayoutSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_DETAILS:
             case self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_THUMBNAIL:
             case self::MODULE_LAYOUT_AUTOMATEDEMAILS_MULTIPLECONTENT_LIST:
@@ -55,10 +55,10 @@ class PoPTheme_Wassup_AE_Module_Processor_MultiplePostLayouts extends PoP_Module
                 );
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-                return $multilayout_manager->getLayoutComponentVariations(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$componentVariation[1]]);
+                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_AUTOMATEDEMAILS_POSTCONTENT, $formats[$component[1]]);
         }
 
-        return parent::getMultipleLayoutSubmodules($componentVariation);
+        return parent::getMultipleLayoutSubmodules($component);
     }
 }
 

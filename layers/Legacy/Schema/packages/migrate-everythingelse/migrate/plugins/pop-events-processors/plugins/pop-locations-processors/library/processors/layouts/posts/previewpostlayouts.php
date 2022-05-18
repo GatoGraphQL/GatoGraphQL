@@ -7,7 +7,7 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
     public final const MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS = 'layout-previewpost-event-horizontalmapdetails';
     public final const MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS = 'layout-previewost-pastevent-mapdetails';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS],
@@ -16,23 +16,23 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         );
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
+    public function getQuicklinkgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
+        return parent::getQuicklinkgroupTopSubmodule($component);
     }
 
-    public function getBelowthumbLayoutSubmodules(array $componentVariation)
+    public function getBelowthumbLayoutSubmodules(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($componentVariation);
+        $ret = parent::getBelowthumbLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
@@ -47,11 +47,11 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBottomSubmodules(array $componentVariation)
+    public function getBottomSubmodules(array $component)
     {
-        $ret = parent::getBottomSubmodules($componentVariation);
+        $ret = parent::getBottomSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS];
@@ -61,9 +61,9 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $componentVariation)
+    public function getPostThumbSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
 
@@ -74,12 +74,12 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_XSMALL];
         }
 
-        return parent::getPostThumbSubmodule($componentVariation);
+        return parent::getPostThumbSubmodule($component);
     }
 
-    public function authorPositions(array $componentVariation)
+    public function authorPositions(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -89,12 +89,12 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
                 );
         }
 
-        return parent::authorPositions($componentVariation);
+        return parent::authorPositions($component);
     }
 
-    public function getTitleBeforeauthors(array $componentVariation, array &$props)
+    public function getTitleBeforeauthors(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
@@ -103,32 +103,32 @@ class PoP_Events_Locations_Module_Processor_CustomPreviewPostLayouts extends PoP
                 );
         }
 
-        return parent::getTitleBeforeauthors($componentVariation, $props);
+        return parent::getTitleBeforeauthors($component, $props);
     }
 
-    public function horizontalMediaLayout(array $componentVariation)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($componentVariation);
+        return parent::horizontalMediaLayout($component);
     }
     
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
                 $ret[GD_JS_CLASSES]['belowthumb'] = 'bg-info text-info belowthumb';
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_MAPDETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_EVENT_HORIZONTALMAPDETAILS:

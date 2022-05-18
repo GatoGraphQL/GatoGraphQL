@@ -25,7 +25,7 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     public final const MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP = 'dataload-tagpastevents-scrollmap';
     public final const MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP = 'dataload-tagevents-horizontalscrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_EVENTS_SCROLLMAP],
@@ -43,19 +43,19 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => POP_BLOG_ROUTE_SEARCHUSERS,
             self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
             self::MODULE_DATALOAD_USERS_SCROLLMAP => UsersModuleConfiguration::getUsersRoute(),
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP],
             self::MODULE_DATALOAD_USERS_SCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_SCROLLMAP],
             self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP],
@@ -70,12 +70,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP => [GD_EM_Module_Processor_CustomScrollMapSections::class, GD_EM_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_SCROLLMAP:
             case self::MODULE_DATALOAD_USERS_HORIZONTALSCROLLMAP:
@@ -97,10 +97,10 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_TAGEVENTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
         $maps = array(
             [self::class, self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP],
@@ -121,18 +121,18 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_HORIZONTALSCROLLMAP],
         );
-        if (in_array($componentVariation, $maps)) {
+        if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
-        } elseif (in_array($componentVariation, $horizontalmaps)) {
+        } elseif (in_array($component, $horizontalmaps)) {
             $format = POP_FORMAT_HORIZONTALMAP;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
     //         case self::MODULE_DATALOAD_AUTHOREVENTS_HORIZONTALSCROLLMAP:
@@ -144,14 +144,14 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
     //             return TagRequestNature::TAG;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
@@ -169,11 +169,11 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         return $ret;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_PASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_AUTHORPASTEVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_TAGPASTEVENTS_SCROLLMAP:
@@ -184,9 +184,9 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
@@ -204,12 +204,12 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_EVENTS_SCROLLMAP:
             case self::MODULE_DATALOAD_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP:
@@ -232,16 +232,16 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_SEARCHUSERS_SCROLLMAP:
                 // Search: don't bring anything unless we're filtering (no results initially)
-                // if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
+                // if ($filter_component = $this->getFilterSubmodule($component)) {
                 //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-                //     $filter = $componentprocessor_manager->getProcessor($filter_componentVariation)->getFilter($filter_componentVariation);
+                //     $filter = $componentprocessor_manager->getProcessor($filter_component)->getFilter($filter_component);
                 // }
                 // if (!$filter || !\PoP\Engine\FilterUtils::filteringBy($filter)) {
-                if (!$this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
-                    $this->setProp($componentVariation, $props, 'skip-data-load', true);
+                if (!$this->getActiveDataloadQueryArgsFilteringComponents($component)) {
+                    $this->setProp($component, $props, 'skip-data-load', true);
                 }
                 break;
         }
@@ -257,16 +257,16 @@ class GD_EM_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modul
             [self::class, self::MODULE_DATALOAD_AUTHOREVENTS_SCROLLMAP],
             [self::class, self::MODULE_DATALOAD_TAGEVENTS_SCROLLMAP],
         );
-        if (in_array($componentVariation, $past)) {
+        if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';
-        } elseif (in_array($componentVariation, $future)) {
+        } elseif (in_array($component, $future)) {
             $daterange_class = 'daterange-future opens-right';
         }
         if ($daterange_class) {
             $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

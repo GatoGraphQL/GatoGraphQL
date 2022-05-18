@@ -6,14 +6,14 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
 {
     
     // Comment Leo 12/01/2017: make it runtime instead of static, since it needs to validate if the user is logged in
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($componentVariation, $props);
+        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
     
         // Check if needed to validate Captcha
         if (defined('POP_FORMSWEBPLATFORM_INITIALIZED')) {
             if (PoP_Forms_ConfigurationUtils::captchaEnabled()) {
-                if ($this->validateCaptcha($componentVariation, $props)) {
+                if ($this->validateCaptcha($component, $props)) {
                     if (!(PoP_FormUtils::useLoggedinuserData() && \PoP\Root\App::getState('is-user-logged-in'))) {
                         $ret[GD_DATALOAD_QUERYHANDLERPROPERTY_FORM_VALIDATECAPTCHA] = true;
                     }
@@ -24,7 +24,7 @@ abstract class PoP_Module_Processor_FormDataloadsBase extends PoP_Module_Process
         return $ret;
     }
 
-    protected function validateCaptcha(array $componentVariation, array &$props)
+    protected function validateCaptcha(array $component, array &$props)
     {
         return false;
     }

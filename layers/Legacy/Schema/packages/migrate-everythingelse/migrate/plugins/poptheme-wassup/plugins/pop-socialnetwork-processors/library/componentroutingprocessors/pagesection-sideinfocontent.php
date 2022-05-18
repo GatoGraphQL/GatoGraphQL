@@ -13,28 +13,28 @@ class PoPTheme_Wassup_SocialNetwork_Module_SideInfoContentPageSectionComponentRo
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_RECOMMENDEDBYSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_SUBSCRIBERS_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORFOLLOWERS_SIDEBAR],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORFOLLOWINGUSERS_SIDEBAR],
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBEDTO => [PoP_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORSUBSCRIBEDTOTAGS_SIDEBAR],
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDPOSTS => [PoP_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORRECOMMENDEDPOSTS_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
 
         return $ret;

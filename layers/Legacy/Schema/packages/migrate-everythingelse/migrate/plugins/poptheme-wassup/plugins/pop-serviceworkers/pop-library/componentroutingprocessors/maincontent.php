@@ -14,8 +14,8 @@ class PoPTheme_Wassup_PoPSW_Module_MainContentComponentRoutingProcessor extends 
         $routemodules = array(
             POP_ENGINEWEBPLATFORM_ROUTE_APPSHELL => [GD_Core_Module_Processor_HTMLCodes::class, GD_Core_Module_Processor_HTMLCodes::MODULE_CODE_APPSHELL],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

@@ -4,21 +4,21 @@ class GD_URE_Module_Processor_MembersLayouts extends GD_URE_Module_Processor_Mem
 {
     public final const MODULE_URE_LAYOUT_COMMUNITYMEMBERS = 'ure-layout-communitymembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUT_COMMUNITYMEMBERS],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_URE_LAYOUT_COMMUNITYMEMBERS => [PoP_Module_Processor_CustomPopoverLayouts::class, PoP_Module_Processor_CustomPopoverLayouts::MODULE_LAYOUT_POPOVER_USER_AVATAR60],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

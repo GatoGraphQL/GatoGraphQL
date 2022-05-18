@@ -2,10 +2,10 @@
 
 abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
         $components =  array_merge(
-            parent::getLayoutSubmodules($componentVariation),
+            parent::getLayoutSubmodules($component),
             array(
                 [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_USERNAME],
                 [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_PASSWORD],
@@ -38,12 +38,12 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         }
 
         // Hook for User Avatar
-        $components = \PoP\Root\App::applyFilters('pop_componentVariation:createuser:components', $components, $componentVariation, $this);
+        $components = \PoP\Root\App::applyFilters('pop_component:createuser:components', $components, $component, $this);
 
         return $components;
     }
 
-    protected function getMandatoryLayouts(array $componentVariation, array &$props)
+    protected function getMandatoryLayouts(array $component, array &$props)
     {
 
         // Make all formComponentGroups be collapsed if they are non-mandatory
@@ -63,20 +63,20 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
         }
 
         return \PoP\Root\App::applyFilters(
-            'pop_componentVariation:createuser:mandatory-components',
+            'pop_component:createuser:mandatory-components',
             $mandatory,
-            $componentVariation
+            $component
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Make all formComponentGroups be collapsed if they are non-mandatory
         $collapsible = array_values(
             array_diff(
-                $this->getLayoutSubmodules($componentVariation),
-                $this->getMandatoryLayouts($componentVariation, $props)
+                $this->getLayoutSubmodules($component),
+                $this->getMandatoryLayouts($component, $props)
             )
         );
         foreach ($collapsible as $layout) {
@@ -84,6 +84,6 @@ abstract class PoP_Module_Processor_CreateUserFormInnersBase extends PoP_Module_
             $this->appendProp($layout, $props, 'class', 'collapse pop-highlight');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

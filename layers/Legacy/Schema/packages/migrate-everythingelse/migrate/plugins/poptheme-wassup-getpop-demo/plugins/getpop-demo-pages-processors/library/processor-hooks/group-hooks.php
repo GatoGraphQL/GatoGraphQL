@@ -26,20 +26,20 @@ class GetPoPDemo_Processors_GroupHooks
         );
     }
 
-    public function setModelProps(array $componentVariation, $props_in_array, $processor)
+    public function setModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA:
                 // Hide if block is empty
-                foreach ($processor->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $processor->setProp([$subComponentVariation], $props, 'do-not-render-if-no-results', true);
+                foreach ($processor->getSubComponents($component) as $subComponent) {
+                    $processor->setProp([$subComponent], $props, 'do-not-render-if-no-results', true);
                 }
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Format
                 $processor->setProp([[GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP]], $props, 'title-htmltag', 'h3');
@@ -56,31 +56,31 @@ class GetPoPDemo_Processors_GroupHooks
     }
 
     
-    public function homeTopmodules($componentVariations)
+    public function homeTopmodules($components)
     {
         return array(
             [GetPoPDemo_Module_Processor_CustomGroups::class, GetPoPDemo_Module_Processor_CustomGroups::MODULE_GETPOPDEMO_GROUP_HOMETOP],
         );
     }
 
-    public function getAuthortopWidgetSubmodules($componentVariations)
+    public function getAuthortopWidgetSubmodules($components)
     {
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $componentVariations[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
+            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHOREVENTS_HORIZONTALSCROLLMAP];
         }
-        return $componentVariations;
+        return $components;
     }
 
-    public function getTagtopWidgetSubmodules($componentVariations)
+    public function getTagtopWidgetSubmodules($components)
     {
 
         // Add the Group which has the Featured widget
         if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
-            $componentVariations[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
+            $components[] = [GD_EM_Module_Processor_CustomScrollMapSectionBlocks::class, GD_EM_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGEVENTS_HORIZONTALSCROLLMAP];
         }
-        return $componentVariations;
+        return $components;
     }
 }
 

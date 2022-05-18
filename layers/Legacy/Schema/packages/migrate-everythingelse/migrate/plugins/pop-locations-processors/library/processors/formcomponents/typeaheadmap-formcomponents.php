@@ -6,7 +6,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
     public final const MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP = 'formcomponent-locationsmap';
     public final const MODULE_EM_FORMCOMPONENT_SINGLELOCATIONTYPEAHEADMAP = 'formcomponent-singlelocationlocationsmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
         );
     }
 
-    public function getLocationsTypeaheadSubmodule(array $componentVariation)
+    public function getLocationsTypeaheadSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS];
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
                 return [PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::class, PoP_Module_Processor_LocationSelectableTypeaheadFormInputs::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION];
         }
     
-        return parent::getLocationsTypeaheadSubmodule($componentVariation);
+        return parent::getLocationsTypeaheadSubmodule($component);
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
 
@@ -37,7 +37,7 @@ class PoP_Module_Processor_SelectableTypeaheadMapFormComponents extends PoP_Modu
                 return TranslationAPIFacade::getInstance()->__('Location', 'em-popprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 }
 

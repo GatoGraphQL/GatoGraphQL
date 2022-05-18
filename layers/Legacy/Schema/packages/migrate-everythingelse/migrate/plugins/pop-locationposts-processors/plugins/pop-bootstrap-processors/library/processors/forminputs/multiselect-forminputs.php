@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
     public final const MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES = 'forminput-locationpostcategories';
     public final const MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES = 'filterinput-locationpostcategories';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES],
@@ -14,56 +14,56 @@ class GD_Custom_EM_Module_Processor_MultiSelectFormInputs extends PoP_Module_Pro
         );
     }
 
-    // public function isFiltercomponent(array $componentVariation)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
     //             return true;
     //     }
         
-    //     return parent::isFiltercomponent($componentVariation);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
             case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'pop-locationposts-processors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
             case self::MODULE_FILTERINPUT_LOCATIONPOSTCATEGORIES:
                 return GD_FormInput_LocationPostCategories::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'locationpostcategories';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOCATIONPOSTCATEGORIES:
                 return 'categories';
         }
         
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 }
 

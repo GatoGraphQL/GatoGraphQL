@@ -15,11 +15,11 @@ class FilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             AbstractPostFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
-            $this->getFilterInputComponentVariations(...)
+            $this->getFilterInputComponents(...)
         );
     }
 
-    public function getFilterInputComponentVariations(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputModules): array
     {
         return [
             ...$filterInputModules,

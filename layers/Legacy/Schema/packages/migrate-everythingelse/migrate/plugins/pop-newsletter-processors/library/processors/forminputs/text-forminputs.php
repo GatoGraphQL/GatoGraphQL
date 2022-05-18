@@ -8,7 +8,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL = 'forminput-newsletteremailverificationemail';
     public final const MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE = 'forminput-newsletteremailverificationcode';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_NEWSLETTERNAME],
@@ -18,9 +18,9 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_NEWSLETTERNAME:
                 return TranslationAPIFacade::getInstance()->__('Your Name', 'pop-genericforms');
             
@@ -32,34 +32,34 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
                 return TranslationAPIFacade::getInstance()->__('Verification code', 'pop-genericforms');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
             case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function isHidden(array $componentVariation, array &$props)
+    public function isHidden(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONCODE:
                 return true;
         }
         
-        return parent::isHidden($componentVariation, $props);
+        return parent::isHidden($component, $props);
     }
 
-    // function getName(array $componentVariation) {
+    // function getName(array $component) {
     
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
         
     //         case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
             
@@ -70,12 +70,12 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
     //             return 'code';
     //     }
         
-    //     return parent::getName($componentVariation);
+    //     return parent::getName($component);
     // }
 
-    public function clearInput(array $componentVariation, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_NEWSLETTERNAME:
             case self::MODULE_FORMINPUT_NEWSLETTEREMAIL:
             case self::MODULE_FORMINPUT_NEWSLETTEREMAILVERIFICATIONEMAIL:
@@ -83,7 +83,7 @@ class PoP_Newsletter_Module_Processor_TextFormInputs extends PoP_Module_Processo
                 return true;
         }
 
-        return parent::clearInput($componentVariation, $props);
+        return parent::clearInput($component, $props);
     }
 }
 

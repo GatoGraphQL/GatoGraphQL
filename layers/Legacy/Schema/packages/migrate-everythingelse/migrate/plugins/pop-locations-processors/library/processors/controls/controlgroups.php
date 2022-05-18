@@ -8,7 +8,7 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
     public final const MODULE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST = 'controlgroup-blocktagmappostlist';
     public final const MODULE_CONTROLGROUP_BLOCKMAPUSERLIST = 'controlgroup-blockmapuserlist';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST],
@@ -18,13 +18,13 @@ class PoP_Locations_Module_Processor_CustomControlGroups extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLGROUP_BLOCKMAPPOSTLIST:
             case self::MODULE_CONTROLGROUP_BLOCKMAPUSERLIST:
                 $ret[] = [PoP_Locations_Module_Processor_CustomControlButtonGroups::class, PoP_Locations_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_TOGGLEMAP];

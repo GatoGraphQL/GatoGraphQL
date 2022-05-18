@@ -6,7 +6,7 @@ use PoPSchema\Stances\TypeResolvers\ObjectType\StanceObjectTypeResolver;
 
 class PoP_UserStance_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         // Only if this post type is shown in All Content
         $cmsapplicationpostsapi = \PoP\Application\PostsFunctionAPIFactory::getInstance();

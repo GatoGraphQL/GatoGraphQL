@@ -4,21 +4,21 @@ class PoP_ContentPostLinks_Module_Processor_CategoriesLayouts extends PoP_Module
 {
     public final const MODULE_LAYOUT_LINK_CATEGORIES = 'layout-link-categories';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_LINK_CATEGORIES],
         );
     }
 
-    public function getCategoriesField(array $componentVariation, array &$props)
+    public function getCategoriesField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_LINK_CATEGORIES:
                 return 'linkCategoriesByName';
         }
         
-        return parent::getCategoriesField($componentVariation, $props);
+        return parent::getCategoriesField($component, $props);
     }
 }
 

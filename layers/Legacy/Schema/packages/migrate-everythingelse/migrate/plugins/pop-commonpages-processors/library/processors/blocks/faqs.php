@@ -5,7 +5,7 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
     public final const MODULE_BLOCK_ADDCONTENTFAQ = 'block-addcontentfaq';
     public final const MODULE_BLOCK_ACCOUNTFAQ = 'block-accountfaq';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_ADDCONTENTFAQ],
@@ -13,20 +13,20 @@ class GD_CommonPages_Module_Processor_CustomBlocks extends PoP_Module_Processor_
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_ADDCONTENTFAQ => POP_COMMONPAGES_PAGE_ADDCONTENTFAQ,
             self::MODULE_BLOCK_ACCOUNTFAQ => POP_COMMONPAGES_PAGE_ACCOUNTFAQ,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_ADDCONTENTFAQ:
                 $ret[] = [GD_CommonPages_Module_Processor_PageCodes::class, GD_CommonPages_Module_Processor_PageCodes::MODULE_PAGECODE_ADDCONTENTFAQ];
                 break;

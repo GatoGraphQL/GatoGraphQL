@@ -3,36 +3,36 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_HEADER_REPLYCOMMENT];
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($post_componentVariation = $this->getPostSubmodule($componentVariation)) {
-            $ret[] = $post_componentVariation;
+        if ($post_component = $this->getPostSubmodule($component)) {
+            $ret[] = $post_component;
         }
-        if ($comment_componentVariation = $this->getCommentSubmodule($componentVariation)) {
-            $ret[] = $comment_componentVariation;
+        if ($comment_component = $this->getCommentSubmodule($component)) {
+            $ret[] = $comment_component;
         }
 
         return $ret;
     }
 
-    public function getPostSubmodule(array $componentVariation)
+    public function getPostSubmodule(array $component)
     {
         return null;
     }
 
-    public function getCommentSubmodule(array $componentVariation)
+    public function getCommentSubmodule(array $component)
     {
         return null;
     }
 
-    public function getInresponsetoTitle(array $componentVariation, array &$props)
+    public function getInresponsetoTitle(array $component, array &$props)
     {
         return sprintf(
             '<p><em>%s</em></p>',
@@ -40,18 +40,18 @@ abstract class PoP_Module_Processor_ReplyCommentViewComponentHeadersBase extends
         );
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($componentVariation, $props);
+        $ret[GD_JS_TITLES]['inresponseto'] = $this->getInresponsetoTitle($component, $props);
 
-        if ($post_componentVariation = $this->getPostSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_componentVariation);
+        if ($post_component = $this->getPostSubmodule($component)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['post'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $post_component);
         }
 
-        if ($comment_componentVariation = $this->getCommentSubmodule($componentVariation)) {
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_componentVariation);
+        if ($comment_component = $this->getCommentSubmodule($component)) {
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['comment'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName((array) $comment_component);
         }
 
         return $ret;

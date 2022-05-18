@@ -5,16 +5,16 @@ class Wassup_URE_AAL_Module_Processor_MemberStatusLayouts extends GD_URE_Module_
 {
     public final const MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS = 'ure-aal-layoutuser-memberstatus-nodesc';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS],
         );
     }
 
-    public function getDescription(array $componentVariation, array &$props)
+    public function getDescription(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_LAYOUTUSER_MEMBERSTATUS:
                 return sprintf(
                     '<em>%s</em>',
@@ -22,7 +22,7 @@ class Wassup_URE_AAL_Module_Processor_MemberStatusLayouts extends GD_URE_Module_
                 );
         }
     
-        return parent::getDescription($componentVariation, $props);
+        return parent::getDescription($component, $props);
     }
 }
 

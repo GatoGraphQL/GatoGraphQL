@@ -8,7 +8,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
     public final const MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL = 'content-subjugatedpostconclusionsidebar-horizontal';
     public final const MODULE_CONTENT_LATESTCOUNTS = 'content-latestcounts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
@@ -16,7 +16,7 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             [self::class, self::MODULE_CONTENT_LATESTCOUNTS],
         );
     }
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL => [PoPCore_Module_Processor_SingleContentInners::class, PoPCore_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_POSTCONCLUSIONSIDEBAR_HORIZONTAL],
@@ -24,24 +24,24 @@ class PoPCore_Module_Processor_Contents extends PoP_Module_Processor_ContentsBas
             self::MODULE_CONTENT_LATESTCOUNTS => [PoPCore_Module_Processor_MultipleContentInners::class, PoPCore_Module_Processor_MultipleContentInners::MODULE_CONTENTINNER_LATESTCOUNTS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENT_POSTCONCLUSIONSIDEBAR_HORIZONTAL:
             case self::MODULE_CONTENT_SUBJUGATEDPOSTCONCLUSIONSIDEBAR_HORIZONTAL:
-                $this->appendProp($componentVariation, $props, 'class', 'conclusion horizontal sidebar');
+                $this->appendProp($component, $props, 'class', 'conclusion horizontal sidebar');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

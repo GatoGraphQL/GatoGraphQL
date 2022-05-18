@@ -15,7 +15,7 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
     public final const MODULE_CONTROLBUTTONGROUP_ADDCOMMENT = 'controlbuttongroup-addcomment';
     public final const MODULE_CONTROLBUTTONGROUP_ALLTAGSLINK = 'controlbuttongroup-alltagslink';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS],
@@ -33,11 +33,11 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_TOGGLEOPTIONALFIELDS:
                 $ret[] = [PoP_Module_Processor_AnchorControls::class, PoP_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_TOGGLEOPTIONALFIELDS];
                 break;
@@ -90,15 +90,15 @@ class PoP_Module_Processor_ControlButtonGroups extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_SUBMENU_XS:
-                $this->appendProp($componentVariation, $props, 'class', 'hidden-sm hidden-md hidden-lg');
+                $this->appendProp($component, $props, 'class', 'hidden-sm hidden-md hidden-lg');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

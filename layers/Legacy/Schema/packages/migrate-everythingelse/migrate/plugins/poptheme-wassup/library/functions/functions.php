@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_componentVariationmanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
+\PoP\Root\App::addFilter('pop_componentmanager:userloggedin_loadingmsg_target', 'gdCustomUserloggedinLoadingmsgTarget');
 function gdCustomUserloggedinLoadingmsgTarget($target)
 {
 
@@ -14,17 +14,17 @@ function gdCustomUserloggedinLoadingmsgTarget($target)
  */
 
 \PoP\Root\App::addFilter('RequestUtils:getFramecomponentModules', 'getWassupFramecomponentModules');
-function getWassupFramecomponentComponentVariations($componentVariations)
+function getWassupFramecomponentComponents($components)
 {
     if (\PoP\Root\App::applyFilters('poptheme_wassup_loadlatest', true)) {
-        $componentVariations[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
+        $components[] = [GD_Core_Module_Processor_Blocks::class, GD_Core_Module_Processor_Blocks::MODULE_MULTIPLE_LATESTCOUNTS];
     }
 
-    return $componentVariations;
+    return $components;
 }
 
 
-\PoP\Root\App::addFilter('pop_componentVariationmanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
+\PoP\Root\App::addFilter('pop_componentmanager:fetchtarget_settings', 'gdCustomFetchtargetSettings');
 function gdCustomFetchtargetSettings($fetchtarget_settings)
 {
     return array_merge(
@@ -49,7 +49,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 }
 
 // \PoP\Root\App::addFilter('PoP_Module_Processor_MenuMultiplesBase:js-setting:add-active-parent-item', 'popAddMenuitemParentpageActive', 10, 3);
-// function popAddMenuitemParentpageActive($add_active, array $componentVariation, array &$props) {
+// function popAddMenuitemParentpageActive($add_active, array $component, array &$props) {
 
 //     // Only if not in Side or Top pageSections
 //     $pagesection_settings_id = $props['pagesection-moduleoutputname'];
@@ -65,7 +65,7 @@ function gdCustomFetchtargetSettings($fetchtarget_settings)
 //     return $add_active;
 // }
 
-\PoP\Root\App::addFilter('pop_componentVariationmanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
+\PoP\Root\App::addFilter('pop_componentmanager:fetchpagesection_settings', 'gdCustomFetchpagesectionSettings');
 function gdCustomFetchpagesectionSettings($fetchpagesection_settings)
 {
     $settings_main = array(

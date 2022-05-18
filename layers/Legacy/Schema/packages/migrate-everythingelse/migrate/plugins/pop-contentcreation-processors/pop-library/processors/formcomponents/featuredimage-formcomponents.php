@@ -5,16 +5,16 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
 {
     public final const MODULE_FORMCOMPONENT_FEATUREDIMAGE = 'formcomponent-featuredimage';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_FEATUREDIMAGE],
         );
     }
 
-    public function getFeaturedimageinnerSubmodule(array $componentVariation): ?array
+    public function getFeaturedimageinnerSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return [PoP_Module_Processor_FeaturedImageInnerComponentInputs::class, PoP_Module_Processor_FeaturedImageInnerComponentInputs::MODULE_FORMINPUT_FEATUREDIMAGEINNER];
         }
@@ -22,24 +22,24 @@ class PoP_Module_Processor_FeaturedImageFormComponents extends PoP_Module_Proces
         return null;
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return TranslationAPIFacade::getInstance()->__('Featured Image', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_FEATUREDIMAGE:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 }
 

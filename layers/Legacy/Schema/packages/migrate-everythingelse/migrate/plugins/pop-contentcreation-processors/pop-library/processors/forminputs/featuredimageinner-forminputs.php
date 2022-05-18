@@ -4,7 +4,7 @@ class PoP_Module_Processor_FeaturedImageInnerComponentInputs extends PoP_Module_
 {
     public final const MODULE_FORMINPUT_FEATUREDIMAGEINNER = 'forminput-featuredimage-inner';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_FEATUREDIMAGEINNER],

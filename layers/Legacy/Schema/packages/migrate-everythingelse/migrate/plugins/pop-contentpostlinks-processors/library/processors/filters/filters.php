@@ -5,7 +5,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
     public final const MODULE_FILTER_LINKS = 'filter-links';
     public final const MODULE_FILTER_AUTHORLINKS = 'filter-authorlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_LINKS],
@@ -13,18 +13,18 @@ class PoP_ContentPostLinks_Module_Processor_CustomFilters extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_LINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_LINKS],
             self::MODULE_FILTER_AUTHORLINKS => [PoP_ContentPostLinks_Module_Processor_CustomFilterInners::class, PoP_ContentPostLinks_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_AUTHORLINKS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

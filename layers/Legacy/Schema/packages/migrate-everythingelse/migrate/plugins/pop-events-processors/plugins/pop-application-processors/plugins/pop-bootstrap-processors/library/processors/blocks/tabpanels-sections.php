@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
     public final const MODULE_BLOCK_TABPANEL_PASTEVENTS = 'block-pastevents-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_EVENTSCALENDAR = 'block-eventscalendar-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_EVENTS],
@@ -15,25 +15,25 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_EVENTS => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_EVENTS],
             self::MODULE_BLOCK_TABPANEL_PASTEVENTS => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_PASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_EVENTSCALENDAR => [GD_EM_Module_Processor_SectionTabPanelComponents::class, GD_EM_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_EVENTSCALENDAR],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_EVENTS:
                 return [PoP_Events_Module_Processor_CustomControlGroups::class, PoP_Events_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_EVENTLIST];
 
@@ -42,12 +42,12 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_EVENTS:
             case self::MODULE_BLOCK_TABPANEL_PASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_EVENTS];
@@ -56,14 +56,14 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_EVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($filter_componentVariation = $this->getDelegatorfilterSubmodule($componentVariation)) {
+        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
             // Events: choose to only select past/future
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_BLOCK_TABPANEL_PASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
@@ -73,11 +73,11 @@ class GD_EM_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                     break;
             }
             if ($daterange_class) {
-                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_componentVariation]);
+                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_component]);
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

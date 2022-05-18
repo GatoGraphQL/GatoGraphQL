@@ -6,7 +6,7 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
     public final const MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS = 'em-map-staticimage-script-drawmarkers';
     public final const MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS = 'em-map-staticimage-userorpost-script-drawmarkers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_SCRIPT_DRAWMARKERS],
@@ -15,9 +15,9 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
         );
     }
 
-    public function getMapdivSubmodule(array $componentVariation)
+    public function getMapdivSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAPSTATICIMAGE_SCRIPT_DRAWMARKERS:
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_DIV];
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_MapDrawMarkerScripts extends PoP_Module_Processor_Map
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
         }
     
-        return parent::getMapdivSubmodule($componentVariation);
+        return parent::getMapdivSubmodule($component);
     }
 }
 

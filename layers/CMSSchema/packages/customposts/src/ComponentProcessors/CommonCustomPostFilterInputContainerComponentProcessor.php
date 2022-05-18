@@ -24,7 +24,7 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_UNIONTYPE = 'filterinputcontainer-custompost-by-slug-uniontype';
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_UNIONTYPE = 'filterinputcontainer-custompost-by-slug-status-uniontype';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS],
@@ -39,9 +39,9 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOSTSTATUS => [
                 [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
             ],
@@ -82,10 +82,10 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
         };
     }
 
-    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
     {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($componentVariation, $fieldArgName);
-        switch ($componentVariation[1]) {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_UNIONTYPE:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_UNIONTYPE:

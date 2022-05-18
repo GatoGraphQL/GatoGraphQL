@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_P
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES = 'layout-marknotificationasread-showhideelemstyles';
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWHIDEELEMSTYLES = 'layout-marknotificationasunread-showhideelemstyles';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES],
@@ -13,11 +13,11 @@ class GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_P
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES:
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES];
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES];

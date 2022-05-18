@@ -9,7 +9,7 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const MODULE_TABPANEL_AUTHORSUBSCRIBEDTOTAGS = 'tabpanel-authorsubscribedtotags';
     public final const MODULE_TABPANEL_AUTHORRECOMMENDEDPOSTS = 'tabpanel-authorrecommendedposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORCONTENT],
@@ -21,9 +21,9 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORFOLLOWERS:
             case self::MODULE_TABPANEL_AUTHORFOLLOWINGUSERS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORUSERS);
@@ -32,14 +32,14 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORTAGS);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -115,14 +115,14 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         // Allow Events Manager to add the Map format
-        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', $ret, $componentVariation);
+        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_AuthorSectionTabPanelComponents:modules', $ret, $component);
 
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCONTENT:
                 $ret = array(
                     [
@@ -228,10 +228,10 @@ class PoP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_AuthorSectionTabPanelComponents:panel_headers', $ret, $componentVariation);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_AuthorSectionTabPanelComponents:panel_headers', $ret, $component);
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

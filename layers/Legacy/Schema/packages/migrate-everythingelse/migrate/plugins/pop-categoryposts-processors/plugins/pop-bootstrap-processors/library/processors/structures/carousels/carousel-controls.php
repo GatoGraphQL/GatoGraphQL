@@ -68,7 +68,7 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
     public final const MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 = 'carouselcontrols-tagcategoryposts18';
     public final const MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 = 'carouselcontrols-tagcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00],
@@ -134,9 +134,9 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
         );
     }
 
-    public function getControlClass(array $componentVariation)
+    public function getControlClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -200,12 +200,12 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getControlClass($componentVariation);
+        return parent::getControlClass($component);
     }
 
-    public function getTitleClass(array $componentVariation)
+    public function getTitleClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00:
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS01:
             case self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS02:
@@ -269,9 +269,9 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
                 return 'btn btn-link btn-compact';
         }
 
-        return parent::getTitleClass($componentVariation);
+        return parent::getTitleClass($component);
     }
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $routes = array(
             self::MODULE_CAROUSELCONTROLS_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -335,13 +335,13 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$componentVariation[1]] ?? null) {
+        if ($route = $routes[$component[1]] ?? null) {
             return RouteUtils::getRouteTitle($route);
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
-    protected function getTitleLink(array $componentVariation, array &$props)
+    protected function getTitleLink(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
@@ -411,18 +411,18 @@ class CPP_Module_Processor_CarouselControls extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_CAROUSELCONTROLS_TAGCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
         );
-        if ($route = $routes[$componentVariation[1]] ?? null) {
+        if ($route = $routes[$component[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
-        } elseif ($route = $authorroutes[$componentVariation[1]] ?? null) {
+        } elseif ($route = $authorroutes[$component[1]] ?? null) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $url = $userTypeAPI->getUserURL($author);
             return RequestUtils::addRoute($url, $route);
-        } elseif ($route = $tagroutes[$componentVariation[1]] ?? null) {
+        } elseif ($route = $tagroutes[$component[1]] ?? null) {
             $url = $postTagTypeAPI->getTagURL(\PoP\Root\App::getState(['routing', 'queried-object-id']));
             return RequestUtils::addRoute($url, $route);
         }
 
-        return parent::getTitleLink($componentVariation, $props);
+        return parent::getTitleLink($component, $props);
     }
 }
 

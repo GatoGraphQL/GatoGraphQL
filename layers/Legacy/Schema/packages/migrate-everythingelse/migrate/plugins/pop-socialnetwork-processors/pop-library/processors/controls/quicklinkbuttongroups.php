@@ -8,7 +8,7 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
     public final const MODULE_QUICKLINKBUTTONGROUP_POSTDOWNVOTEUNDODOWNVOTE = 'quicklinkbuttongroup-postdownvoteundodownvote';
     public final const MODULE_QUICKLINKBUTTONGROUP_TAGSUBSCRIBETOUNSUBSCRIBEFROM = 'quicklinkbuttongroup-tagsubscribetounsubscribefrom';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER],
@@ -19,11 +19,11 @@ class GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups extends PoP_Module
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_USERFOLLOWUNFOLLOWUSER:
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::MODULE_BUTTON_FOLLOWUSER_PREVIEW];
                 $ret[] = [PoP_Module_Processor_FunctionButtons::class, PoP_Module_Processor_FunctionButtons::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW];

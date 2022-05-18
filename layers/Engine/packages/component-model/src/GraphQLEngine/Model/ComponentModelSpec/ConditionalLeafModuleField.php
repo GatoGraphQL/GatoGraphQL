@@ -40,7 +40,7 @@ class ConditionalLeafModuleField extends LeafField implements ModuleFieldInterfa
         );
     }
 
-    public function getConditionalNestedComponentVariations(): array
+    public function getConditionalNestedComponents(): array
     {
         return $this->conditionalNestedModules;
     }

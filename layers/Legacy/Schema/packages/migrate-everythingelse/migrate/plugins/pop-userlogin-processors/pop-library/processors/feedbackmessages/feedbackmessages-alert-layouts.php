@@ -8,7 +8,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGOUT = 'layout-feedbackmessagealert-logout';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD = 'layout-feedbackmessagealert-user-changepassword';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN],
@@ -19,7 +19,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
         );
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_LOGIN => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN],
@@ -29,11 +29,11 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageAlertLayouts extends PoP_
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::class, GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($componentVariation);
+        return parent::getLayoutSubmodule($component);
     }
 }
 

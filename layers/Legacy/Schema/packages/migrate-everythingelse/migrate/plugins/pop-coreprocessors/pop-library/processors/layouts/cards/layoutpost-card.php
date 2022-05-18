@@ -4,7 +4,7 @@ class PoP_Module_Processor_PostCardLayouts extends PoP_Module_Processor_PostCard
 {
     public final const MODULE_LAYOUTPOST_CARD = 'layoutpost-card';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTPOST_CARD],

@@ -6,48 +6,48 @@ class PoP_Module_Processor_LocationTypeaheadComponentFormInputs extends PoP_Modu
 {
     public final const MODULE_TYPEAHEAD_COMPONENT_LOCATIONS = 'forminput-typeaheadcomponent-locations';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS],
         );
     }
 
-    protected function getLimit(array $componentVariation, array &$props)
+    protected function getLimit(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return 8;
         }
 
-        return parent::getLimit($componentVariation, $props);
+        return parent::getLimit($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
+    protected function getTypeaheadDataloadSource(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_LOCATIONS:
                 return RouteUtils::getRouteURL(POP_LOCATIONS_ROUTE_LOCATIONS);
         }
 
-        return parent::getTypeaheadDataloadSource($componentVariation, $props);
+        return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    // protected function getSourceFilter(array $componentVariation, array &$props)
+    // protected function getSourceFilter(array $component, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getRemoteUrl(array $componentVariation, array &$props)
+    protected function getRemoteUrl(array $component, array &$props)
     {
-        $url = parent::getRemoteUrl($componentVariation, $props);
+        $url = parent::getRemoteUrl($component, $props);
         
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(
             $url, 
             [
                 [
-                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

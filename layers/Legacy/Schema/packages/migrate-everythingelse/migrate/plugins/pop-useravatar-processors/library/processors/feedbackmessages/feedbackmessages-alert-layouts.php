@@ -4,24 +4,24 @@ class PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageAlertLayouts 
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE = 'layout-feedbackmessagealert-useravatar-update';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE],
         );
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
             self::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_USERAVATAR_UPDATE => [PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts::class, PoP_UserAvatarProcessors_Module_Processor_UserFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_USERAVATAR_UPDATE],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($componentVariation);
+        return parent::getLayoutSubmodule($component);
     }
 }
 

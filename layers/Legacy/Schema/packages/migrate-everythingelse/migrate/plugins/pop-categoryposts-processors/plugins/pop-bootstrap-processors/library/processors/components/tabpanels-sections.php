@@ -23,7 +23,7 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
     public final const MODULE_TABPANEL_CATEGORYPOSTS18 = 'categoryposts18-tabpanel';
     public final const MODULE_TABPANEL_CATEGORYPOSTS19 = 'categoryposts19-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_CATEGORYPOSTS00],
@@ -49,9 +49,9 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_TABPANEL_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_TABPANEL_CATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::MODULE_TABPANEL_CATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -72,15 +72,15 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
             self::MODULE_TABPANEL_CATEGORYPOSTS17 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS17,
             self::MODULE_TABPANEL_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_TABPANEL_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_CATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -345,9 +345,9 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_CATEGORYPOSTS00:
                 return array(
                     [
@@ -729,7 +729,7 @@ class CPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Processo
                 );
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

@@ -19,7 +19,7 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
     public final const MODULE_LAYOUT_PAGETABS_AUTHOR = 'layout-pagetabs-author';
     public final const MODULE_LAYOUT_PAGETABS_404 = 'layout-pagetabs-404';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PAGETABS_HOME],
@@ -32,21 +32,21 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
         );
     }
 
-    protected function getFontawesome(array $componentVariation, array &$props)
+    protected function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_LAYOUT_PAGETABS_HOME => 'fa-home',
             self::MODULE_LAYOUT_PAGETABS_TAG => 'fa-hashtag',
             self::MODULE_LAYOUT_PAGETABS_404 => 'fa-exclamation-circle',
         );
-        if ($fontawesome = $fontawesomes[$componentVariation[1]] ?? null) {
+        if ($fontawesome = $fontawesomes[$component[1]] ?? null) {
             return $fontawesome;
         }
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    protected function getThumb(array $componentVariation, array &$props)
+    protected function getThumb(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $avatar = gdGetAvatar($author, GD_AVATAR_SIZE_16);
@@ -71,12 +71,12 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
                 break;
         }
 
-        return parent::getThumb($componentVariation, $props);
+        return parent::getThumb($component, $props);
     }
-    // protected function getPretitle(array $componentVariation, array &$props)
+    // protected function getPretitle(array $component, array &$props)
     // {
     //     $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
     //         case self::MODULE_LAYOUT_PAGETABS_SINGLE:
     //             $natures = array(
@@ -86,20 +86,20 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
 
     //             // For the default page add the thumbnail. For the others, add the pretitle
     //             $page_id = RequestUtils::getRoute();
-    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$componentVariation[1]] ?? null)) {
+    //             if ($page_id != RequestUtils::getNatureDefaultPage($natures[$component[1]] ?? null)) {
     //                 return $cmsengineapi->getTitle($page_id);
     //             }
     //             break;
     //     }
 
-    //     return parent::getPretitle($componentVariation, $props);
+    //     return parent::getPretitle($component, $props);
     // }
-    protected function getTitle(array $componentVariation, array &$props)
+    protected function getTitle(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PAGETABS_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return $userTypeAPI->getUserDisplayName($author);
@@ -122,10 +122,10 @@ class PoP_Module_Processor_PageTabsLayouts extends PoP_Module_Processor_PageTabs
             self::MODULE_LAYOUT_PAGETABS_HOME => TranslationAPIFacade::getInstance()->__('Home', 'poptheme-wassup'),
             self::MODULE_LAYOUT_PAGETABS_404 => TranslationAPIFacade::getInstance()->__('Page not found!', 'poptheme-wassup'),
         );
-        if ($title = $titles[$componentVariation[1]] ?? null) {
+        if ($title = $titles[$component[1]] ?? null) {
             return $title;
         }
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 }
 

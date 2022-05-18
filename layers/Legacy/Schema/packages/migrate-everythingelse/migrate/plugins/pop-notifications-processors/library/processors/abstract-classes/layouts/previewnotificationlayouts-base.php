@@ -6,49 +6,49 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_PREVIEWNOTIFICATION];
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
+    public function getQuicklinkgroupTopSubmodule(array $component)
     {
         return [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION];
     }
-    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
+    public function getQuicklinkgroupBottomSubmodule(array $component)
     {
         return [PoP_Module_Processor_MultipleComponentLayouts::class, PoP_Module_Processor_MultipleComponentLayouts::MODULE_AAL_MULTICOMPONENT_QUICKLINKGROUP_BOTTOM];
     }
-    public function getLinkSubmodule(array $componentVariation)
+    public function getLinkSubmodule(array $component)
     {
         return [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATIONPREVIEWLINK];
     }
 
-    // function addUrl(array $componentVariation, array &$props) {
+    // function addUrl(array $component, array &$props) {
 
     //     return true;
     // }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($link = $this->getLinkSubmodule($componentVariation)) {
+        if ($link = $this->getLinkSubmodule($component)) {
             $ret[] = $link;
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($componentVariation)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
             $ret[] = $quicklinkgroup_top;
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($componentVariation)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
             $ret[] = $quicklinkgroup_bottom;
         }
-        if ($bottom_submodules = $this->getBottomSubmodules($componentVariation)) {
+        if ($bottom_submodules = $this->getBottomSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $bottom_submodules
             );
         }
-        if ($post_thumb = $this->getPostThumbSubmodule($componentVariation)) {
+        if ($post_thumb = $this->getPostThumbSubmodule($component)) {
             $ret[] = $post_thumb;
         }
 
@@ -58,30 +58,30 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($componentVariation);
+        $ret = parent::getRelationalSubmodules($component);
 
-        $componentVariations = array();
+        $components = array();
 
         // Show author avatar: only if no thumb module defined, and author avatar is defined
-        if (!$this->getPostThumbSubmodule($componentVariation) && PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($user_avatar = $this->getUserAvatarModule($componentVariation)) {
-                $componentVariations[] = $user_avatar;
+        if (!$this->getPostThumbSubmodule($component) && PoP_Application_ConfigurationUtils::useUseravatar()) {
+            if ($user_avatar = $this->getUserAvatarModule($component)) {
+                $components[] = $user_avatar;
             }
         }
 
-        if ($componentVariations) {
+        if ($components) {
             $ret[] = new RelationalModuleField(
                 'userID',
-                $componentVariations
+                $components
             );
         }
 
         return $ret;
     }
 
-    public function addUrlLink(array $componentVariation, array &$props)
+    public function addUrlLink(array $component, array &$props)
     {
         return false;
     }
@@ -91,9 +91,9 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
         // From the combination of object_type and action, we obtain the layout to use for the notification
         // $ret[] = 'objectType';
@@ -103,7 +103,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         $ret[] = 'status';
         $ret[] = 'message';
 
-        if ($this->addUrlLink($componentVariation, $props)) {
+        if ($this->addUrlLink($component, $props)) {
             $ret[] = 'url';
             $ret[] = 'target';
         }
@@ -111,11 +111,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $componentVariation)
+    public function getPostThumbSubmodule(array $component)
     {
         return null;
     }
-    public function getUserAvatarModule(array $componentVariation)
+    public function getUserAvatarModule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
             return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR];
@@ -127,20 +127,20 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
+    public function getConditionalOnDataFieldSubmodules(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($componentVariation);
+        $ret = parent::getConditionalOnDataFieldSubmodules($component);
 
         return array_merge(
             $ret,
-            $this->getConditionalBottomSubmodules($componentVariation)
+            $this->getConditionalBottomSubmodules($component)
         );
     }
 
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalBottomSubmodules(array $componentVariation): array
+    public function getConditionalBottomSubmodules(array $component): array
     {
         $ret = [];
         // Only fetch data if doing loadingLatest and is a comment notification
@@ -165,11 +165,11 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_PreviewNotificationLayoutsBase:getConditionalBottomSubmodules',
             $ret,
-            $componentVariation
+            $component
         );
     }
 
-    public function getBottomSubmodules(array $componentVariation)
+    public function getBottomSubmodules(array $component)
     {
         return array(
             [PoP_Module_Processor_NotificationActionIconLayouts::class, PoP_Module_Processor_NotificationActionIconLayouts::MODULE_LAYOUT_NOTIFICATIONICON],
@@ -177,62 +177,62 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         );
     }
 
-    public function horizontalMediaLayout(array $componentVariation)
+    public function horizontalMediaLayout(array $component)
     {
         return true;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        // if ($this->addUrl($componentVariation, $props)) {
+        // if ($this->addUrl($component, $props)) {
 
         //     $ret['add-url'] = true;
         // }
-        if ($this->addUrlLink($componentVariation, $props)) {
+        if ($this->addUrlLink($component, $props)) {
             $ret['add-url-link'] = true;
         }
         // Classes
         $ret[GD_JS_CLASSES] = array();
-        if ($this->horizontalMediaLayout($componentVariation)) {
+        if ($this->horizontalMediaLayout($component)) {
             $ret[GD_JS_CLASSES]['wrapper'] = 'media';// ' overflow-visible';
             $ret[GD_JS_CLASSES]['thumb-wrapper'] = 'media-left';
             $ret[GD_JS_CLASSES]['content-body'] = 'media-body clearfix';
         }
 
-        if ($link = $this->getLinkSubmodule($componentVariation)) {
+        if ($link = $this->getLinkSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['link'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($link);
         }
-        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($componentVariation)) {
+        if ($quicklinkgroup_top = $this->getQuicklinkgroupTopSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-top'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_top);
         }
-        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($componentVariation)) {
+        if ($quicklinkgroup_bottom = $this->getQuicklinkgroupBottomSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['quicklinkgroup-bottom'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($quicklinkgroup_bottom);
         }
-        if ($this->getBottomSubmodules($componentVariation)) {
+        if ($this->getBottomSubmodules($component)) {
             $ret[GD_JS_CLASSES]['bottom'] = 'clearfix';
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $this->getBottomSubmodules($componentVariation)
+                $this->getBottomSubmodules($component)
             );
-            foreach ($this->getConditionalBottomSubmodules($componentVariation) as $conditionalLeafModuleField) {
+            foreach ($this->getConditionalBottomSubmodules($component) as $conditionalLeafModuleField) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'] = array_merge(
                     $ret[GD_JS_SUBMODULEOUTPUTNAMES]['bottom'],
                     array_map(
                         [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                        $conditionalLeafModuleField->getConditionalNestedComponentVariations()
+                        $conditionalLeafModuleField->getConditionalNestedComponents()
                     )
                 );
             }
         }
 
-        if ($post_thumb = $this->getPostThumbSubmodule($componentVariation)) {
+        if ($post_thumb = $this->getPostThumbSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['postthumb'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($post_thumb);
         } elseif (PoP_Application_ConfigurationUtils::useUseravatar()) {
-            if ($user_avatar = $this->getUserAvatarModule($componentVariation)) {
+            if ($user_avatar = $this->getUserAvatarModule($component)) {
                 $ret[GD_JS_SUBMODULEOUTPUTNAMES]['user-avatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
             }
         }
@@ -240,16 +240,16 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
         if (in_array(
             [GD_AAL_Module_Processor_QuicklinkGroups::class, GD_AAL_Module_Processor_QuicklinkGroups::MODULE_AAL_QUICKLINKGROUP_NOTIFICATION],
-            $this->getSubComponentVariations($componentVariation)
+            $this->getSubComponents($component)
         )) {
             //-----------------------------------
             // Whenever clicking on the link on the notification, also "click" on the `Mark as read` button
             //-----------------------------------
-            if ($link = $this->getLinkSubmodule($componentVariation)) {
+            if ($link = $this->getLinkSubmodule($component)) {
                 $this->mergeProp(
                     [AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD],
                     $props,
@@ -278,7 +278,7 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 $props,
                 'previousmodules-ids',
                 array(
-                    'data-target' => $componentVariation,
+                    'data-target' => $component,
                 )
             );
             $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASREAD], $props, array('switchTargetClass'));
@@ -300,12 +300,12 @@ abstract class PoP_Module_Processor_PreviewNotificationLayoutsBase extends PoPEn
                 $props,
                 'previousmodules-ids',
                 array(
-                    'data-target' => $componentVariation,
+                    'data-target' => $component,
                 )
             );
             $this->mergeJsmethodsProp([AAL_PoPProcessors_Module_Processor_Buttons::class, AAL_PoPProcessors_Module_Processor_Buttons::MODULE_AAL_BUTTON_NOTIFICATION_MARKASUNREAD], $props, array('switchTargetClass'));
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }

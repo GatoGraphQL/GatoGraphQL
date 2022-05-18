@@ -4,45 +4,45 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MENU_COLLAPSESEGMENTEDBUTTON];
     }
 
-    public function getSegmentedbuttonSubmodules(array $componentVariation)
+    public function getSegmentedbuttonSubmodules(array $component)
     {
         return array();
     }
-    public function getDropdownsegmentedbuttonSubmodules(array $componentVariation)
+    public function getDropdownsegmentedbuttonSubmodules(array $component)
     {
         return array();
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         $ret = array_merge(
             $ret,
-            $this->getSegmentedbuttonSubmodules($componentVariation),
-            $this->getDropdownsegmentedbuttonSubmodules($componentVariation)
+            $this->getSegmentedbuttonSubmodules($component),
+            $this->getDropdownsegmentedbuttonSubmodules($component)
         );
 
         return $ret;
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
         return 'btn btn-default';
     }
-    public function getCollapseClass(array $componentVariation)
+    public function getCollapseClass(array $component)
     {
         return 'pop-showactive';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
@@ -52,16 +52,16 @@ abstract class PoP_Module_Processor_SegmentedButtonLayoutsBase extends PoPEngine
         }
 
         $ret[GD_JS_TITLES]['toggle'] = TranslationAPIFacade::getInstance()->__('Toggle menu', 'pop-coreprocessors');
-        $ret[GD_JS_CLASSES]['btn'] = $this->getBtnClass($componentVariation, $props);
-        $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($componentVariation);
+        $ret[GD_JS_CLASSES]['btn'] = $this->getBtnClass($component, $props);
+        $ret[GD_JS_CLASSES]['collapse'] = $this->getCollapseClass($component);
 
-        $segmentedbuttons = $this->getSegmentedbuttonSubmodules($componentVariation);
+        $segmentedbuttons = $this->getSegmentedbuttonSubmodules($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['segmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons
         );
 
-        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($componentVariation);
+        $segmentedbuttons = $this->getDropdownsegmentedbuttonSubmodules($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['dropdownsegmentedbuttons'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
             $segmentedbuttons

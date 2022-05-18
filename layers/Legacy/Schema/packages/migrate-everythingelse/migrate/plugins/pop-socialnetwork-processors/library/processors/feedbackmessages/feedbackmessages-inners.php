@@ -4,22 +4,22 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageInners extends PoP_Modul
 {
     public final const MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER = 'feedbackmessageinner-contactuser';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_FEEDBACKMESSAGEINNER_CONTACTUSER => [PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_SocialNetwork_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_CONTACTUSER],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

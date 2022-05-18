@@ -8,7 +8,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
     public final const MODULE_SUBMITBUTTON_LOSTPWDRESET = 'submitbutton-lostpwdreset';
     public final const MODULE_SUBMITBUTTON_LOGOUT = 'submitbutton-logout';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMITBUTTON_LOGIN],
@@ -18,9 +18,9 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Log in', 'pop-coreprocessors');
 
@@ -34,12 +34,12 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
                 return TranslationAPIFacade::getInstance()->__('Yes, please log me out', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getLoadingText(array $componentVariation, array &$props)
+    public function getLoadingText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_LOGIN:
                 return TranslationAPIFacade::getInstance()->__('Logging in...', 'pop-coreprocessors');
 
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LoginSubmitButtons extends PoP_Module_Processor_Submi
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-coreprocessors');
         }
         
-        return parent::getLoadingText($componentVariation, $props);
+        return parent::getLoadingText($component, $props);
     }
 }
 

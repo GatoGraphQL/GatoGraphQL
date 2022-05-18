@@ -8,7 +8,7 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
     public final const MODULE_BUTTONCONTROL_LOADLATESTBLOCK = 'buttoncontrol-loadlatestblock';
     public final const MODULE_BUTTONCONTROL_RESETEDITOR = 'buttoncontrol-reseteditor';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP],
@@ -17,9 +17,9 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
             [self::class, self::MODULE_BUTTONCONTROL_RESETEDITOR],
         );
     }
-    public function getText(array $componentVariation, array &$props)
+    public function getText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -27,12 +27,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return null;
         }
 
-        return parent::getText($componentVariation, $props);
+        return parent::getText($component, $props);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -42,12 +42,12 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return TranslationAPIFacade::getInstance()->__('Reset', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
@@ -57,47 +57,47 @@ class PoP_Module_Processor_ButtonControls extends PoP_Module_Processor_ButtonCon
                 return 'fa-repeat';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RESETEDITOR:
                 return 'btn btn-compact btn-link';
         }
 
-        return parent::getBtnClass($componentVariation, $props);
+        return parent::getBtnClass($component, $props);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
             case self::MODULE_BUTTONCONTROL_RELOADBLOCK:
             case self::MODULE_BUTTONCONTROL_LOADLATESTBLOCK:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-compact btn-link');
+                $this->appendProp($component, $props, 'class', 'btn btn-compact btn-link');
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
-                        'data-blocktarget' => $this->getProp($componentVariation, $props, 'control-target')
+                        'data-blocktarget' => $this->getProp($component, $props, 'control-target')
                     )
                 );
                 break;
 
             case self::MODULE_BUTTONCONTROL_RESETEDITOR:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-reset');
+                $this->appendProp($component, $props, 'class', 'pop-reset');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONCONTROL_RELOADBLOCKGROUP:
                 $this->addJsmethod($ret, 'reloadBlockGroup');
                 break;

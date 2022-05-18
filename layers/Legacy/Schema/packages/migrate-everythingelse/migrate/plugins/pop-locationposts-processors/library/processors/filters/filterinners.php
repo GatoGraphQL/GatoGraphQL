@@ -6,7 +6,7 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
     public final const MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS = 'filterinputcontainer-authorlocationposts';
     public final const MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS = 'filterinputcontainer-taglocationposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS],
@@ -15,9 +15,9 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS => [
@@ -40,31 +40,31 @@ class PoP_LocationPosts_Module_Processor_CustomFilterInners extends PoP_Module_P
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Locations:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_LOCATIONPOSTS => POP_FILTER_LOCATIONPOSTS,
     //         self::MODULE_FILTERINPUTCONTAINER_AUTHORLOCATIONPOSTS => POP_FILTER_AUTHORLOCATIONPOSTS,
     //         self::MODULE_FILTERINPUTCONTAINER_TAGLOCATIONPOSTS => POP_FILTER_TAGLOCATIONPOSTS,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

@@ -5,63 +5,63 @@ class PoP_Module_Processor_PostSelectableTypeaheadFormComponents extends PoP_Mod
 {
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES = 'formcomponent-selectabletypeahead-references';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return TranslationAPIFacade::getInstance()->__('Posted in response / as an addition to', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubmodule(array $componentVariation)
+    public function getInputSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADRELATEDCONTENT];
         }
 
-        return parent::getInputSubmodule($componentVariation);
+        return parent::getInputSubmodule($component);
     }
 
-    public function getComponentSubmodules(array $componentVariation)
+    public function getComponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return array(
                     [PoP_Module_Processor_PostTypeaheadComponentFormInputs::class, PoP_Module_Processor_PostTypeaheadComponentFormInputs::MODULE_TYPEAHEAD_COMPONENT_CONTENT],
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation);
+        return parent::getComponentSubmodules($component);
     }
     
-    public function getTriggerLayoutSubmodule(array $componentVariation)
+    public function getTriggerLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return [PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_PostSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_REFERENCES];
         }
 
-        return parent::getTriggerLayoutSubmodule($componentVariation);
+        return parent::getTriggerLayoutSubmodule($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_REFERENCES:
                 return 'references';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

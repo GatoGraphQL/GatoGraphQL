@@ -125,17 +125,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $this->moduleHelpers ??= $this->instanceManager->getInstance(ModuleHelpersInterface::class);
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
         return [];
     }
 
-    final public function getAllSubmodules(array $componentVariation): array
+    final public function getAllSubmodules(array $component): array
     {
-        return $this->getSubmodulesByGroup($componentVariation);
+        return $this->getSubmodulesByGroup($component);
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
     //     return null;
     // }
@@ -144,13 +144,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Atts
     //-------------------------------------------------
 
-    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_componentVariations_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $componentVariation, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
+    public function executeInitPropsModuletree(callable $eval_self_fn, callable $get_props_for_descendant_components_fn, callable $get_props_for_descendant_datasetmodules_fn, string $propagate_fn, array $component, array &$props, $wildcard_props_to_propagate, $targetted_props_to_propagate): void
     {
-        // Convert the component variation to its string representation to access it in the array
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        // Convert the component to its string representation to access it in the array
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // Initialize. If this component variation had been added props, then use them already
-        // 1st element to merge: the general props for this component variation passed down the line
+        // Initialize. If this component had been added props, then use them already
+        // 1st element to merge: the general props for this component passed down the line
         // 2nd element to merge: the props set exactly to the path. They have more priority, that's why they are 2nd
         // It may contain more than one group (\PoP\ComponentModel\Constants\Props::ATTRIBUTES). Eg: maybe also POP_PROPS_JSMETHODS
         $props[$moduleFullName] = array_merge_recursive(
@@ -158,14 +158,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $props[$moduleFullName] ?? array()
         );
 
-        // The component variation must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
+        // The component must be at the head of the $props array passed to all `initModelProps`, so that function `getPathHeadModule` can work
         $module_props = array(
             $moduleFullName => &$props[$moduleFullName],
         );
 
-        // If ancestor modules set general props, or props targetted at this current component variation, then add them to the current component variation props
+        // If ancestor modules set general props, or props targetted at this current component, then add them to the current component props
         foreach ($wildcard_props_to_propagate as $key => $value) {
-            $this->setProp($componentVariation, $module_props, $key, $value);
+            $this->setProp($component, $module_props, $key, $value);
         }
 
         // Before initiating the current level, set the children attributes on the array, so that doing ->setProp, ->appendProp, etc, keeps working
@@ -175,64 +175,64 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
 
         // Initiate the current level.
-        $eval_self_fn($componentVariation, $module_props);
+        $eval_self_fn($component, $module_props);
 
         // Immediately after initiating the current level, extract all child attributes out from the $props, and place it on the other variable
         $targetted_props_to_propagate = $module_props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES];
         unset($module_props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES]);
 
-        // But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current component variation from the targeted props
+        // But because modules can't repeat themselves down the line (or it would generate an infinite loop), then can remove the current component from the targeted props
         unset($targetted_props_to_propagate[$moduleFullName]);
 
-        // Allow the $componentVariation to add general props for all its descendant modules
+        // Allow the $component to add general props for all its descendant modules
         $wildcard_props_to_propagate = array_merge(
             $wildcard_props_to_propagate,
-            $get_props_for_descendant_componentVariations_fn($componentVariation, $module_props)
+            $get_props_for_descendant_components_fn($component, $module_props)
         );
 
         // Propagate
-        $subComponentVariations = $this->getAllSubmodules($componentVariation);
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $this->getAllSubmodules($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        if ($subComponentVariations) {
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        if ($subComponents) {
             $props[$moduleFullName][Props::SUBMODULES] = $props[$moduleFullName][Props::SUBMODULES] ?? array();
-            foreach ($subComponentVariations as $subComponentVariation) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+            foreach ($subComponents as $subComponent) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
                 $submodule_wildcard_props_to_propagate = $wildcard_props_to_propagate;
 
                 // If the submodule belongs to the same dataset, then set the shared attributies for the same-dataset modules
-                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
+                if (!$submodule_processor->startDataloadingSection($subComponent)) {
                     $submodule_wildcard_props_to_propagate = array_merge(
                         $submodule_wildcard_props_to_propagate,
-                        $get_props_for_descendant_datasetmodules_fn($componentVariation, $module_props)
+                        $get_props_for_descendant_datasetmodules_fn($component, $module_props)
                     );
                 }
 
-                $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
+                $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $submodule_wildcard_props_to_propagate, $targetted_props_to_propagate);
             }
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    public function initModelPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initModelPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantComponentVariations(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initModelProps(...), $this->getModelPropsForDescendantComponents(...), $this->getModelPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getModelPropsForDescendantComponentVariations(array $componentVariation, array &$props): array
+    public function getModelPropsForDescendantComponents(array $component, array &$props): array
     {
         $ret = array();
 
-        // If we set property 'skip-data-load' on any component variation, not just dataset, spread it down to its children so it reaches its contained dataset submodules
-        $skip_data_load = $this->getProp($componentVariation, $props, 'skip-data-load');
+        // If we set property 'skip-data-load' on any component, not just dataset, spread it down to its children so it reaches its contained dataset submodules
+        $skip_data_load = $this->getProp($component, $props, 'skip-data-load');
         if (!is_null($skip_data_load)) {
             $ret['skip-data-load'] = $skip_data_load;
         }
 
-        // Property 'ignore-request-params' => true makes a dataloading component variation not get values from the request
-        $ignore_params_from_request = $this->getProp($componentVariation, $props, 'ignore-request-params');
+        // Property 'ignore-request-params' => true makes a dataloading component not get values from the request
+        $ignore_params_from_request = $this->getProp($component, $props, 'ignore-request-params');
         if (!is_null($ignore_params_from_request)) {
             $ret['ignore-request-params'] = $ignore_params_from_request;
         }
@@ -240,44 +240,44 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getModelPropsForDescendantDatasetmodules(array $componentVariation, array &$props): array
+    public function getModelPropsForDescendantDatasetmodules(array $component, array &$props): array
     {
         return [];
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        // Set property "succeeding-typeResolver" on every component variation, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
-        if ($relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation)) {
-            $this->setProp($componentVariation, $props, 'succeeding-typeResolver', $relationalTypeResolver);
+        // Set property "succeeding-typeResolver" on every component, so they know which is their typeResolver, needed to calculate the subcomponent data-fields when using typeResolver "*"
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
+            $this->setProp($component, $props, 'succeeding-typeResolver', $relationalTypeResolver);
         } else {
-            // Get the prop assigned to the component variation by its ancestor
-            $relationalTypeResolver = $this->getProp($componentVariation, $props, 'succeeding-typeResolver');
+            // Get the prop assigned to the component by its ancestor
+            $relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver');
         }
         if ($relationalTypeResolver !== null) {
             // Set the property "succeeding-typeResolver" on all descendants: the same typeResolver for all submodules, and the explicit one (or get the default one for "*") for relational objects
-            foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                $this->setProp($subComponentVariation, $props, 'succeeding-typeResolver', $relationalTypeResolver);
+            foreach ($this->getSubComponents($component) as $subComponent) {
+                $this->setProp($subComponent, $props, 'succeeding-typeResolver', $relationalTypeResolver);
             }
-            foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
+            foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 if ($subcomponent_typeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $subcomponent_data_field)) {
-                    foreach ($relationalModuleField->getNestedComponentVariations() as $subcomponent_componentVariation) {
-                        $this->setProp($subcomponent_componentVariation, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
+                    foreach ($relationalModuleField->getNestedComponents() as $subcomponent_component) {
+                        $this->setProp($subcomponent_component, $props, 'succeeding-typeResolver', $subcomponent_typeResolver);
                     }
                 }
             }
-            foreach ($this->getConditionalOnDataFieldSubmodules($componentVariation) as $conditionalLeafModuleField) {
-                foreach ($conditionalLeafModuleField->getConditionalNestedComponentVariations() as $conditionalSubmodule) {
+            foreach ($this->getConditionalOnDataFieldSubmodules($component) as $conditionalLeafModuleField) {
+                foreach ($conditionalLeafModuleField->getConditionalNestedComponents() as $conditionalSubmodule) {
                     $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $relationalTypeResolver);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
+            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     if ($subcomponentTypeResolver = $this->getDataloadHelperService()->getTypeResolverFromSubcomponentDataField($relationalTypeResolver, $conditionalDataField)) {
-                        foreach ($relationalModuleField->getNestedComponentVariations() as $conditionalSubmodule) {
+                        foreach ($relationalModuleField->getNestedComponents() as $conditionalSubmodule) {
                             $this->setProp($conditionalSubmodule, $props, 'succeeding-typeResolver', $subcomponentTypeResolver);
                         }
                     }
@@ -291,27 +291,27 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         App::doAction(
             self::HOOK_INIT_MODEL_PROPS,
             array(&$props),
-            $componentVariation,
+            $component,
             $this
         );
     }
 
-    public function initRequestPropsModuletree(array $componentVariation, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
+    public function initRequestPropsModuletree(array $component, array &$props, array $wildcard_props_to_propagate, array $targetted_props_to_propagate): void
     {
-        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponentVariations(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $componentVariation, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
+        $this->executeInitPropsModuletree($this->initRequestProps(...), $this->getRequestPropsForDescendantComponents(...), $this->getRequestPropsForDescendantDatasetmodules(...), __FUNCTION__, $component, $props, $wildcard_props_to_propagate, $targetted_props_to_propagate);
     }
 
-    public function getRequestPropsForDescendantComponentVariations(array $componentVariation, array &$props): array
-    {
-        return [];
-    }
-
-    public function getRequestPropsForDescendantDatasetmodules(array $componentVariation, array &$props): array
+    public function getRequestPropsForDescendantComponents(array $component, array &$props): array
     {
         return [];
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function getRequestPropsForDescendantDatasetmodules(array $component, array &$props): array
+    {
+        return [];
+    }
+
+    public function initRequestProps(array $component, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -319,7 +319,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         App::doAction(
             self::HOOK_INIT_REQUEST_PROPS,
             array(&$props),
-            $componentVariation,
+            $component,
             $this
         );
     }
@@ -330,56 +330,56 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     private function getPathHeadModule(array &$props): string
     {
-        // From the root of the $props we obtain the current component variation
+        // From the root of the $props we obtain the current component
         reset($props);
         return (string)key($props);
     }
 
-    private function isModulePath(array $componentVariation_or_componentVariationPath): bool
+    private function isModulePath(array $component_or_componentPath): bool
     {
-        // $componentVariation_or_componentVariationPath can be either a single component variation (the current one, or its descendant), or a targetted path of modules
-        // Because a component variation is itself represented as an array, to know which is the case, we must ask if it is:
-        // - an array => single component variation
-        // - an array of arrays (component variation path)
-        return is_array($componentVariation_or_componentVariationPath[0]);
+        // $component_or_componentPath can be either a single component (the current one, or its descendant), or a targetted path of modules
+        // Because a component is itself represented as an array, to know which is the case, we must ask if it is:
+        // - an array => single component
+        // - an array of arrays (component path)
+        return is_array($component_or_componentPath[0]);
     }
 
-    private function isDescendantModule(array $componentVariation_or_componentVariationPath, array &$props): bool
+    private function isDescendantModule(array $component_or_componentPath, array &$props): bool
     {
-        // If it is not an array of arrays, then this array is directly the component variation, or the descendant component variation on which to set the property
-        if (!$this->isModulePath($componentVariation_or_componentVariationPath)) {
-            // From the root of the $props we obtain the current component variation
+        // If it is not an array of arrays, then this array is directly the component, or the descendant component on which to set the property
+        if (!$this->isModulePath($component_or_componentPath)) {
+            // From the root of the $props we obtain the current component
             $moduleFullName = $this->getPathHeadModule($props);
 
-            // If the component variation were we are adding the att, is this same component variation, then we are already at the path
-            // If it is not, then go down one level to that component variation
-            return ($moduleFullName !== $this->getModuleHelpers()->getModuleFullName($componentVariation_or_componentVariationPath));
+            // If the component were we are adding the att, is this same component, then we are already at the path
+            // If it is not, then go down one level to that component
+            return ($moduleFullName !== $this->getModuleHelpers()->getModuleFullName($component_or_componentPath));
         }
 
         return false;
     }
 
-    protected function getModulepath(array $componentVariation_or_componentVariationPath, array &$props): array
+    protected function getModulepath(array $component_or_componentPath, array &$props): array
     {
-        // This function is used to get the path to the current component variation, or to a component variation path
-        // It is not used for getting the path to a single component variation which is not the current one (since we do not know its path)
+        // This function is used to get the path to the current component, or to a component path
+        // It is not used for getting the path to a single component which is not the current one (since we do not know its path)
         if (!$props) {
             return [];
         }
 
-        // From the root of the $props we obtain the current component variation
+        // From the root of the $props we obtain the current component
         $moduleFullName = $this->getPathHeadModule($props);
 
-        // Calculate the path to iterate down. It always starts with the current component variation
+        // Calculate the path to iterate down. It always starts with the current component
         $ret = array($moduleFullName);
 
-        // If it is an array, then we're passing the path to find the component variation to which to add the att
-        if ($this->isModulePath($componentVariation_or_componentVariationPath)) {
+        // If it is an array, then we're passing the path to find the component to which to add the att
+        if ($this->isModulePath($component_or_componentPath)) {
             $ret = array_merge(
                 $ret,
                 array_map(
                     [$this->getModuleHelpers(), 'getModuleFullName'],
-                    $componentVariation_or_componentVariationPath
+                    $component_or_componentPath
                 )
             );
         }
@@ -387,24 +387,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    protected function addPropGroupField(string $group, array $componentVariation_or_componentVariationPath, array &$props, $field, $value, array $starting_from_componentVariationPath = array(), array $options = array()): void
+    protected function addPropGroupField(string $group, array $component_or_componentPath, array &$props, $field, $value, array $starting_from_componentPath = array(), array $options = array()): void
     {
         // Iterate down to the submodule, which must be an array of modules
-        if ($starting_from_componentVariationPath) {
+        if ($starting_from_componentPath) {
             // Convert it to string
             $startingFromModulepathFullNames = array_map(
                 [$this->getModuleHelpers(), 'getModuleFullName'],
-                $starting_from_componentVariationPath
+                $starting_from_componentPath
             );
 
-            // Attach the current component variation, which is not included on "starting_from", to step down this level too
+            // Attach the current component, which is not included on "starting_from", to step down this level too
             $moduleFullName = $this->getPathHeadModule($props);
             array_unshift($startingFromModulepathFullNames, $moduleFullName);
 
-            // Descend into the path to find the component variation for which to add the att
+            // Descend into the path to find the component for which to add the att
             $module_props = &$props;
             foreach ($startingFromModulepathFullNames as $pathlevelModuleFullName) {
-                $last_componentVariation_props = &$module_props;
+                $last_component_props = &$module_props;
                 $lastModuleFullName = $pathlevelModuleFullName;
 
                 $module_props[$pathlevelModuleFullName][Props::SUBMODULES] = $module_props[$pathlevelModuleFullName][Props::SUBMODULES] ?? array();
@@ -415,19 +415,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             // Save the current $props, and restore later, to make sure this array has only one key, otherwise it will not work
             $current_props = $props;
             $props = array(
-                $lastModuleFullName => &$last_componentVariation_props[$lastModuleFullName]
+                $lastModuleFullName => &$last_component_props[$lastModuleFullName]
             );
         }
 
-        // If the component variation is a string, there are 2 possibilities: either it is the current component variation or not
-        // If it is not, then it is a descendant component variation, which will appear at some point down the path.
+        // If the component is a string, there are 2 possibilities: either it is the current component or not
+        // If it is not, then it is a descendant component, which will appear at some point down the path.
         // For that case, simply save it under some other entry, from where it will propagate the props later on in `initModelPropsModuletree`
-        if ($this->isDescendantModule($componentVariation_or_componentVariationPath, $props)) {
-            // It is a child component variation
-            $att_componentVariation = $componentVariation_or_componentVariationPath;
-            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_componentVariation);
+        if ($this->isDescendantModule($component_or_componentPath, $props)) {
+            // It is a child component
+            $att_component = $component_or_componentPath;
+            $attModuleFullName = $this->getModuleHelpers()->getModuleFullName($att_component);
 
-            // From the root of the $props we obtain the current component variation
+            // From the root of the $props we obtain the current component
             $moduleFullName = $this->getPathHeadModule($props);
 
             // Set the child attributes under a different entry
@@ -435,14 +435,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $module_props = &$props[$moduleFullName][Props::DESCENDANT_ATTRIBUTES];
         } else {
             // Calculate the path to iterate down
-            $componentVariationPath = $this->getModulepath($componentVariation_or_componentVariationPath, $props);
+            $componentPath = $this->getModulepath($component_or_componentPath, $props);
 
-            // Extract the lastlevel, that's the component variation to with to add the att
-            $attModuleFullName = array_pop($componentVariationPath);
+            // Extract the lastlevel, that's the component to with to add the att
+            $attModuleFullName = array_pop($componentPath);
 
-            // Descend into the path to find the component variation for which to add the att
+            // Descend into the path to find the component for which to add the att
             $module_props = &$props;
-            foreach ($componentVariationPath as $pathlevelFullName) {
+            foreach ($componentPath as $pathlevelFullName) {
                 $module_props[$pathlevelFullName][Props::SUBMODULES] = $module_props[$pathlevelFullName][Props::SUBMODULES] ?? array();
                 $module_props = &$module_props[$pathlevelFullName][Props::SUBMODULES];
             }
@@ -485,83 +485,83 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Restore original $props
-        if ($starting_from_componentVariationPath) {
+        if ($starting_from_componentPath) {
             $props = $current_props;
         }
     }
-    protected function getPropGroupField(string $group, array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
+    protected function getPropGroupField(string $group, array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
-        $group = $this->getPropGroup($group, $componentVariation, $props, $starting_from_componentVariationPath);
+        $group = $this->getPropGroup($group, $component, $props, $starting_from_componentPath);
         return $group[$field] ?? null;
     }
-    protected function getPropGroup(string $group, array $componentVariation, array &$props, array $starting_from_componentVariationPath = array()): array
+    protected function getPropGroup(string $group, array $component, array &$props, array $starting_from_componentPath = array()): array
     {
         if (!$props) {
             return [];
         }
 
         $module_props = &$props;
-        foreach ($starting_from_componentVariationPath as $pathlevelModule) {
+        foreach ($starting_from_componentPath as $pathlevelModule) {
             $pathlevelModuleFullName = $this->getModuleHelpers()->getModuleFullName($pathlevelModule);
             $module_props = &$module_props[$pathlevelModuleFullName][Props::SUBMODULES];
         }
 
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
         return $module_props[$moduleFullName][$group] ?? array();
     }
-    protected function addGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    protected function addGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function setProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function setProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
+        $this->addGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function appendGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function appendGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('append' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('append' => true));
     }
-    public function appendProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function appendProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->appendGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
+        $this->appendGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function mergeGroupProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function mergeGroupProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'merge' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge' => true));
     }
-    public function mergeProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function mergeProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
+        $this->mergeGroupProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function getGroupProp(string $group, array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
+    public function getGroupProp(string $group, array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getPropGroupField($group, $componentVariation, $props, $field, $starting_from_componentVariationPath);
+        return $this->getPropGroupField($group, $component, $props, $field, $starting_from_componentPath);
     }
-    public function getProp(array $componentVariation, array &$props, string $field, array $starting_from_componentVariationPath = array()): mixed
+    public function getProp(array $component, array &$props, string $field, array $starting_from_componentPath = array()): mixed
     {
-        return $this->getGroupProp(Props::ATTRIBUTES, $componentVariation, $props, $field, $starting_from_componentVariationPath);
+        return $this->getGroupProp(Props::ATTRIBUTES, $component, $props, $field, $starting_from_componentPath);
     }
-    public function mergeGroupIterateKeyProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function mergeGroupIterateKeyProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'merge-iterate-key' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'merge-iterate-key' => true));
     }
-    public function mergeIterateKeyProp(array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function mergeIterateKeyProp(array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath);
+        $this->mergeGroupIterateKeyProp(Props::ATTRIBUTES, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath);
     }
-    public function pushProp(string $group, array $componentVariation_or_componentVariationPath, array &$props, string $field, $value, array $starting_from_componentVariationPath = array()): void
+    public function pushProp(string $group, array $component_or_componentPath, array &$props, string $field, $value, array $starting_from_componentPath = array()): void
     {
-        $this->addPropGroupField($group, $componentVariation_or_componentVariationPath, $props, $field, $value, $starting_from_componentVariationPath, array('array' => true, 'push' => true));
+        $this->addPropGroupField($group, $component_or_componentPath, $props, $field, $value, $starting_from_componentPath, array('array' => true, 'push' => true));
     }
 
     //-------------------------------------------------
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getDatabaseKeys(array $componentVariation, array &$props): array
+    public function getDatabaseKeys(array $component, array &$props): array
     {
         $ret = array();
-        if ($relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation)) {
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
             if ($dbkey = $relationalTypeResolver->getTypeOutputDBKey()) {
                 // Place it under "id" because it is for fetching the current object from the DB, which is found through dbObject.id
                 $ret['id'] = $dbkey;
@@ -569,8 +569,8 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // This prop is set for both dataloading and non-dataloading modules
-        if ($relationalTypeResolver = $this->getProp($componentVariation, $props, 'succeeding-typeResolver')) {
-            foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
+        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+            foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponent_typeResolver_class will be empty
@@ -582,7 +582,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                     $ret[$subcomponent_data_field_outputkey] = $this->getFieldQueryInterpreter()->getTargetObjectTypeUniqueFieldOutputKeys($relationalTypeResolver, $subcomponent_data_field);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
+            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     // If passing a subcomponent fieldname that doesn't exist to the API, then $subcomponentTypeResolverClass will be empty
@@ -604,30 +604,30 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Model Static Settings
     //-------------------------------------------------
 
-    public function getImmutableSettingsDatasetmoduletree(array $componentVariation, array &$props): array
+    public function getImmutableSettingsDatasetmoduletree(array $component, array &$props): array
     {
         $options = array(
             'only-execute-on-dataloading-modules' => true,
         );
-        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableDatasetsettings', __FUNCTION__, $componentVariation, $props, true, $options);
+        return $this->executeOnSelfAndPropagateToComponents('getImmutableDatasetsettings', __FUNCTION__, $component, $props, true, $options);
     }
 
-    public function getImmutableDatasetsettings(array $componentVariation, array &$props): array
+    public function getImmutableDatasetsettings(array $component, array &$props): array
     {
         $ret = array();
 
-        if ($database_keys = $this->getDatasetDatabaseKeys($componentVariation, $props)) {
+        if ($database_keys = $this->getDatasetDatabaseKeys($component, $props)) {
             $ret['dbkeys'] = $database_keys;
         }
 
         return $ret;
     }
 
-    public function addToDatasetDatabaseKeys(array $componentVariation, array &$props, array $path, array &$ret): void
+    public function addToDatasetDatabaseKeys(array $component, array &$props, array $path, array &$ret): void
     {
-        // Add the current component variation's dbkeys
-        if ($relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation)) {
-            $dbkeys = $this->getDatabaseKeys($componentVariation, $props);
+        // Add the current component's dbkeys
+        if ($relationalTypeResolver = $this->getRelationalTypeResolver($component)) {
+            $dbkeys = $this->getDatabaseKeys($component, $props);
             foreach ($dbkeys as $field => $dbkey) {
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
@@ -637,61 +637,61 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Propagate to all submodules which have no typeResolver
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        if ($relationalTypeResolver = $this->getProp($componentVariation, $props, 'succeeding-typeResolver')) {
-            $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-            foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
+        if ($relationalTypeResolver = $this->getProp($component, $props, 'succeeding-typeResolver')) {
+            $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+            foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 // @todo Pass the ModuleField directly, do not convert to string first
                 $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
                 // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                 // @see https://github.com/leoloso/PoP/issues/1050
                 $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($subcomponent_data_field);
                 // Only modules which do not load data
-                $subcomponent_componentVariations = array_filter(
-                    $relationalModuleField->getNestedComponentVariations(),
-                    function ($subComponentVariation) {
-                        return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
+                $subcomponent_components = array_filter(
+                    $relationalModuleField->getNestedComponents(),
+                    function ($subComponent) {
+                        return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
                     }
                 );
-                foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
-                    $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation)->addToDatasetDatabaseKeys($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                foreach ($subcomponent_components as $subcomponent_component) {
+                    $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                 }
             }
-            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
+            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                     // @todo: Check if it should use `getUniqueFieldOutputKeyByTypeResolverClass`, or pass some $object to `getUniqueFieldOutputKey`, or what
                     // @see https://github.com/leoloso/PoP/issues/1050
                     $subcomponent_data_field_outputkey = $this->getFieldQueryInterpreter()->getFieldOutputKey($conditionalDataField);
                     // Only modules which do not load data
-                    $subcomponent_componentVariations = array_filter(
-                        $relationalModuleField->getNestedComponentVariations(),
-                        function ($subComponentVariation) {
-                            return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
+                    $subcomponent_components = array_filter(
+                        $relationalModuleField->getNestedComponents(),
+                        function ($subComponent) {
+                            return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
                         }
                     );
-                    foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
-                        $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation)->addToDatasetDatabaseKeys($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
+                    foreach ($subcomponent_components as $subcomponent_component) {
+                        $this->getComponentProcessorManager()->getProcessor($subcomponent_component)->addToDatasetDatabaseKeys($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES], array_merge($path, [$subcomponent_data_field_outputkey]), $ret);
                     }
                 }
             }
 
             // Only modules which do not load data
-            $subComponentVariations = array_filter($this->getSubComponentVariations($componentVariation), function ($subComponentVariation) {
-                return !$this->getComponentProcessorManager()->getProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
+            $subComponents = array_filter($this->getSubComponents($component), function ($subComponent) {
+                return !$this->getComponentProcessorManager()->getProcessor($subComponent)->startDataloadingSection($subComponent);
             });
-            foreach ($subComponentVariations as $subComponentVariation) {
-                $this->getComponentProcessorManager()->getProcessor($subComponentVariation)->addToDatasetDatabaseKeys($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
+            foreach ($subComponents as $subComponent) {
+                $this->getComponentProcessorManager()->getProcessor($subComponent)->addToDatasetDatabaseKeys($subComponent, $props[$moduleFullName][Props::SUBMODULES], $path, $ret);
             }
-            $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+            $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
         }
     }
 
-    public function getDatasetDatabaseKeys(array $componentVariation, array &$props): array
+    public function getDatasetDatabaseKeys(array $component, array &$props): array
     {
         $ret = array();
-        $this->addToDatasetDatabaseKeys($componentVariation, $props, array(), $ret);
+        $this->addToDatasetDatabaseKeys($component, $props, array(), $ret);
         return $ret;
     }
 
@@ -699,39 +699,39 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static + Stateful Data
     //-------------------------------------------------
 
-    public function getDatasource(array $componentVariation, array &$props): string
+    public function getDatasource(array $component, array &$props): string
     {
-        // Each component variation can only return one piece of data, and it must be indicated if it static or mutableonrequest
+        // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
         // Retrieving only 1 piece is needed so that its children do not get confused what data their getDataFields applies to
         return DataSources::MUTABLEONREQUEST;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         return [];
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
         return null;
     }
 
-    public function moduleLoadsData(array $componentVariation): bool
+    public function moduleLoadsData(array $component): bool
     {
-        return $this->getRelationalTypeResolver($componentVariation) !== null;
+        return $this->getRelationalTypeResolver($component) !== null;
     }
 
-    public function startDataloadingSection(array $componentVariation): bool
+    public function startDataloadingSection(array $component): bool
     {
-        return $this->moduleLoadsData($componentVariation);
+        return $this->moduleLoadsData($component);
     }
 
-    public function getComponentMutationResolverBridge(array $componentVariation): ?ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?ComponentMutationResolverBridgeInterface
     {
         return null;
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $componentVariation, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
     {
         // Do nothing
     }
@@ -739,7 +739,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return [];
     }
@@ -747,7 +747,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
         return [];
     }
@@ -755,7 +755,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
+    public function getConditionalOnDataFieldSubmodules(array $component): array
     {
         return [];
     }
@@ -763,7 +763,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     /**
      * @return ConditionalRelationalModuleField[]
      */
-    public function getConditionalOnDataFieldRelationalSubmodules(array $componentVariation): array
+    public function getConditionalOnDataFieldRelationalSubmodules(array $component): array
     {
         return [];
     }
@@ -772,24 +772,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Properties
     //-------------------------------------------------
 
-    public function getImmutableDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
+    public function getImmutableDataPropertiesDatasetmoduletree(array $component, array &$props): array
     {
-        // The data-properties start on a dataloading component variation, and finish on the next dataloding component variation down the line
-        // This way, we can collect all the data-fields that the component variation will need to load for its dbobjects
-        return $this->executeOnSelfAndPropagateToComponentVariations('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        // The data-properties start on a dataloading component, and finish on the next dataloding component down the line
+        // This way, we can collect all the data-fields that the component will need to load for its dbobjects
+        return $this->executeOnSelfAndPropagateToComponents('getImmutableDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
+    public function getImmutableDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
-        // Only if this component variation loads data => We are at the head nodule of the dataset section
-        if ($this->moduleLoadsData($componentVariation)) {
+        // Only if this component loads data => We are at the head nodule of the dataset section
+        if ($this->moduleLoadsData($component)) {
             // Load the data-fields from all modules inside this section
             // And then, only for the top node, add its extra properties
             $properties = array_merge(
-                $this->getDatasetmoduletreeSectionFlattenedDataFields($componentVariation, $props),
-                $this->getImmutableHeaddatasetmoduleDataProperties($componentVariation, $props)
+                $this->getDatasetmoduletreeSectionFlattenedDataFields($component, $props),
+                $this->getImmutableHeaddatasetmoduleDataProperties($component, $props)
             );
 
             if ($properties) {
@@ -800,7 +800,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getDatasetmoduletreeSectionFlattenedDataFields(array $componentVariation, array &$props): array
+    public function getDatasetmoduletreeSectionFlattenedDataFields(array $component, array &$props): array
     {
         $ret = array();
 
@@ -817,10 +817,10 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             /** @var ModuleFieldInterface[] */
             $astModuleFields = array_unique(
                 array_merge(
-                    $this->getDataFields($componentVariation, $props),
-                    $this->getRelationalSubmodules($componentVariation),
-                    $this->getConditionalOnDataFieldSubmodules($componentVariation),
-                    $this->getConditionalOnDataFieldRelationalSubmodules($componentVariation),
+                    $this->getDataFields($component, $props),
+                    $this->getRelationalSubmodules($component),
+                    $this->getConditionalOnDataFieldSubmodules($component),
+                    $this->getConditionalOnDataFieldRelationalSubmodules($component),
                 )
             )
         ) {
@@ -835,19 +835,19 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         // Propagate down to the components
-        $this->flattenDatasetmoduletreeDataProperties(__FUNCTION__, $ret, $componentVariation, $props);
+        $this->flattenDatasetmoduletreeDataProperties(__FUNCTION__, $ret, $component, $props);
 
         // Propagate down to the subcomponent modules
-        $this->flattenRelationalDBObjectDataProperties(__FUNCTION__, $ret, $componentVariation, $props);
+        $this->flattenRelationalDBObjectDataProperties(__FUNCTION__, $ret, $component, $props);
 
         return $ret;
     }
 
-    public function getDatasetmoduletreeSectionFlattenedComponentVariations(array $componentVariation): array
+    public function getDatasetmoduletreeSectionFlattenedComponents(array $component): array
     {
         $ret = [];
 
-        $this->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $componentVariation);
+        $this->addDatasetmoduletreeSectionFlattenedComponents($ret, $component);
 
         return array_values(
             array_unique(
@@ -857,35 +857,35 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    public function addDatasetmoduletreeSectionFlattenedComponentVariations(&$ret, array $componentVariation): void
+    public function addDatasetmoduletreeSectionFlattenedComponents(&$ret, array $component): void
     {
-        $ret[] = $componentVariation;
+        $ret[] = $component;
 
         // Propagate down to the components
-        // $this->flattenDatasetmoduletreeComponentVariations(__FUNCTION__, $ret, $componentVariation);
+        // $this->flattenDatasetmoduletreeComponents(__FUNCTION__, $ret, $component);
         // Exclude the subcomponent modules here
-        if ($subComponentVariations = $this->getModulesToPropagateDataProperties($componentVariation)) {
-            foreach ($subComponentVariations as $subComponentVariation) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+        if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
+            foreach ($subComponents as $subComponent) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
-                    $submodule_processor->addDatasetmoduletreeSectionFlattenedComponentVariations($ret, $subComponentVariation);
+                if (!$submodule_processor->startDataloadingSection($subComponent)) {
+                    $submodule_processor->addDatasetmoduletreeSectionFlattenedComponents($ret, $subComponent);
                 }
             }
         }
     }
 
-    // protected function flattenDatasetmoduletreeComponentVariations($propagate_fn, &$ret, array $componentVariation)
+    // protected function flattenDatasetmoduletreeComponents($propagate_fn, &$ret, array $component)
     // {
     //     // Exclude the subcomponent modules here
-    //     if ($subComponentVariations = $this->getModulesToPropagateDataProperties($componentVariation)) {
-    //         foreach ($subComponentVariations as $subComponentVariation) {
-    //             $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+    //     if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
+    //         foreach ($subComponents as $subComponent) {
+    //             $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
     //             // Propagate only if the submodule doesn't have a typeResolver. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-    //             if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
-    //                 if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation)) {
+    //             if (!$submodule_processor->startDataloadingSection($subComponent)) {
+    //                 if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent)) {
     //                     $ret = array_merge(
     //                         $ret,
     //                         $submodule_ret
@@ -896,24 +896,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     //     }
     // }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
         // By default return nothing at the last level
         $ret = array();
 
         // From the State property we find out if it's Static of Stateful
-        $datasource = $this->getDatasource($componentVariation, $props);
+        $datasource = $this->getDatasource($component, $props);
         $ret[DataloadingConstants::DATASOURCE] = $datasource;
 
         // Add the properties below either as static or mutableonrequest
         if ($datasource == DataSources::IMMUTABLE) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
+            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
         }
 
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $componentVariation, array &$props): void
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props): void
     {
         /**
          * Allow to add more stuff
@@ -921,24 +921,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         App::doAction(
             self::HOOK_ADD_HEADDATASETMODULE_DATAPROPERTIES,
             array(&$ret),
-            $componentVariation,
+            $component,
             array(&$props),
             $this
         );
     }
 
-    public function getMutableonmodelDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetmoduletree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonmodelDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndPropagateToComponents('getMutableonmodelDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
+    public function getMutableonmodelDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
-        // Only if this component variation loads data
-        if ($this->moduleLoadsData($componentVariation)) {
-            $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($componentVariation, $props);
+        // Only if this component loads data
+        if ($this->moduleLoadsData($component)) {
+            $properties = $this->getMutableonmodelHeaddatasetmoduleDataProperties($component, $props);
             if ($properties) {
                 $ret[DataLoading::DATA_PROPERTIES] = $properties;
             }
@@ -947,14 +947,14 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
         $ret = array();
 
         // Add the properties below either as static or mutableonrequest
-        $datasource = $this->getDatasource($componentVariation, $props);
+        $datasource = $this->getDatasource($component, $props);
         if ($datasource == DataSources::MUTABLEONMODEL) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
+            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
         }
 
         // Fetch params from request?
@@ -963,7 +963,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if (!$rootModuleConfiguration->enablePassingStateViaRequest()) {
             $ignore_params_from_request = true;
         } else {
-            $ignore_params_from_request = $this->getProp($componentVariation, $props, 'ignore-request-params');
+            $ignore_params_from_request = $this->getProp($component, $props, 'ignore-request-params');
         }
         if ($ignore_params_from_request !== null) {
             $ret[DataloadingConstants::IGNOREREQUESTPARAMS] = $ignore_params_from_request;
@@ -972,24 +972,24 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestDataPropertiesDatasetmoduletree(array $componentVariation, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetmoduletree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndPropagateToComponentVariations('getMutableonrequestDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $componentVariation, $props, false);
+        return $this->executeOnSelfAndPropagateToComponents('getMutableonrequestDataPropertiesDatasetmoduletreeFullsection', __FUNCTION__, $component, $props, false);
     }
 
-    public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $componentVariation, array &$props): array
+    public function getMutableonrequestDataPropertiesDatasetmoduletreeFullsection(array $component, array &$props): array
     {
         $ret = array();
 
-        // Only if this component variation loads data
-        if ($this->moduleLoadsData($componentVariation)) {
+        // Only if this component loads data
+        if ($this->moduleLoadsData($component)) {
             // // Load the data-fields from all modules inside this section
             // // And then, only for the top node, add its extra properties
             // $properties = array_merge(
-            //     $this->get_mutableonrequest_data_properties_datasetmoduletree_section($componentVariation, $props),
-            //     $this->getMutableonrequestHeaddatasetmoduleDataProperties($componentVariation, $props)
+            //     $this->get_mutableonrequest_data_properties_datasetmoduletree_section($component, $props),
+            //     $this->getMutableonrequestHeaddatasetmoduleDataProperties($component, $props)
             // );
-            $properties = $this->getMutableonrequestHeaddatasetmoduleDataProperties($componentVariation, $props);
+            $properties = $this->getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
 
             if ($properties) {
                 $ret[DataLoading::DATA_PROPERTIES] = $properties;
@@ -999,25 +999,25 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
         $ret = array();
 
         // Add the properties below either as static or mutableonrequest
-        $datasource = $this->getDatasource($componentVariation, $props);
+        $datasource = $this->getDatasource($component, $props);
         if ($datasource == DataSources::MUTABLEONREQUEST) {
-            $this->addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
+            $this->addHeaddatasetmoduleDataProperties($ret, $component, $props);
         }
 
         // When loading data or execution an action, check if to validate checkpoints?
         // This is in MUTABLEONREQUEST instead of STATIC because the checkpoints can change depending on doingPost()
         // (such as done to set-up checkpoint configuration for POP_USERSTANCE_ROUTE_ADDOREDITSTANCE, or within POPUSERLOGIN_CHECKPOINTCONFIGURATION_REQUIREUSERSTATEONDOINGPOST)
-        if ($checkpoints = $this->getDataAccessCheckpoints($componentVariation, $props)) {
+        if ($checkpoints = $this->getDataAccessCheckpoints($component, $props)) {
             $ret[DataLoading::DATA_ACCESS_CHECKPOINTS] = $checkpoints;
         }
 
         // To trigger the actionexecuter, its own checkpoints must be successful
-        if ($checkpoints = $this->getActionExecutionCheckpoints($componentVariation, $props)) {
+        if ($checkpoints = $this->getActionExecutionCheckpoints($component, $props)) {
             $ret[DataLoading::ACTION_EXECUTION_CHECKPOINTS] = $checkpoints;
         }
 
@@ -1028,28 +1028,28 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Data Feedback
     //-------------------------------------------------
 
-    public function getDataFeedbackDatasetmoduletree(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackDatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        return $this->executeOnSelfAndPropagateToDatasetmodules('getDataFeedbackModuletree', __FUNCTION__, $componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        return $this->executeOnSelfAndPropagateToDatasetmodules('getDataFeedbackModuletree', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
     }
 
-    public function getDataFeedbackModuletree(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedbackModuletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         $ret = array();
 
-        if ($feedback = $this->getDataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+        if ($feedback = $this->getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
             $ret[DataLoading::FEEDBACK] = $feedback;
         }
 
         return $ret;
     }
 
-    public function getDataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
         return [];
     }
 
-    public function getDataFeedbackInterreferencedComponentVariationPath(array $componentVariation, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
     {
         return null;
     }
@@ -1058,12 +1058,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Background URLs
     //-------------------------------------------------
 
-    public function getBackgroundurlsMergeddatasetmoduletree(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurlsMergeddatasetmoduletree(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        return $this->executeOnSelfAndMergeWithDatasetmodules('getBackgroundurls', __FUNCTION__, $componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
+        return $this->executeOnSelfAndMergeWithDatasetmodules('getBackgroundurls', __FUNCTION__, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
     }
 
-    public function getBackgroundurls(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurls(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
         return [];
     }
@@ -1072,7 +1072,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Dataset Meta
     //-------------------------------------------------
 
-    public function getDatasetmeta(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
         return [];
     }
@@ -1081,26 +1081,26 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // Others
     //-------------------------------------------------
 
-    public function getDataAccessCheckpoints(array $componentVariation, array &$props): array
+    public function getDataAccessCheckpoints(array $component, array &$props): array
     {
         return [];
     }
 
-    public function getActionExecutionCheckpoints(array $componentVariation, array &$props): array
+    public function getActionExecutionCheckpoints(array $component, array &$props): array
     {
         return [];
     }
 
-    public function shouldExecuteMutation(array $componentVariation, array &$props): bool
+    public function shouldExecuteMutation(array $component, array &$props): bool
     {
-        // By default, execute only if the component variation is targeted for execution and doing POST
-        return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($componentVariation);
+        // By default, execute only if the component is targeted for execution and doing POST
+        return 'POST' === App::server('REQUEST_METHOD') && App::getState('actionpath') === $this->getModulePathHelpers()->getStringifiedModulePropagationCurrentPath($component);
     }
 
-    public function getModulesToPropagateDataProperties(array $componentVariation): array
+    public function getModulesToPropagateDataProperties(array $component): array
     {
         return $this->getSubmodulesByGroup(
-            $componentVariation,
+            $component,
             array(
                 self::MODULECOMPONENT_SUBMODULES,
                 self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES,
@@ -1108,31 +1108,31 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         );
     }
 
-    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $componentVariation, array &$props): void
+    protected function flattenDatasetmoduletreeDataProperties($propagate_fn, &$ret, array $component, array &$props): void
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // Exclude the subcomponent modules here
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        if ($subComponentVariations = $this->getModulesToPropagateDataProperties($componentVariation)) {
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        if ($subComponents = $this->getModulesToPropagateDataProperties($component)) {
             // Calculate in 2 steps:
             // First step: The conditional-on-data-field-submodules must have their data-fields added under entry "conditional-data-fields"
-            $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($componentVariation);
-            $conditionalRelationalModuleFields = $this->getConditionalOnDataFieldRelationalSubmodules($componentVariation);
+            $conditionalLeafModuleFields = $this->getConditionalOnDataFieldSubmodules($component);
+            $conditionalRelationalModuleFields = $this->getConditionalOnDataFieldRelationalSubmodules($component);
             if ($conditionalLeafModuleFields !== [] || $conditionalRelationalModuleFields !== []) {
-                $directSubmodules = $this->getSubComponentVariations($componentVariation);
+                $directSubmodules = $this->getSubComponents($component);
                 $conditionalModuleFields = [];
                 // Instead of assigning to $ret, first assign it to a temporary variable, so we can then replace 'data-fields' with 'conditional-data-fields' before merging to $ret
                 foreach ($conditionalLeafModuleFields as $conditionalLeafModuleField) {
                     $conditionDataField = $conditionalLeafModuleField->asFieldOutputQueryString();
-                    $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedComponentVariations();
+                    $conditionalSubmodules = $conditionalLeafModuleField->getConditionalNestedComponents();
                     $conditionalModuleFields[$conditionDataField] = $conditionalSubmodules;
                 }
                 foreach ($conditionalRelationalModuleFields as $conditionalRelationalModuleField) {
                     $conditionDataField = $conditionalRelationalModuleField->asFieldOutputQueryString();
                     $conditionalModuleFields[$conditionDataField] = [];
                     foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $subConditionalRelationalModuleField) {
-                        $conditionalSubmodules = $subConditionalRelationalModuleField->getNestedComponentVariations();
+                        $conditionalSubmodules = $subConditionalRelationalModuleField->getNestedComponents();
                         $conditionalModuleFields[$conditionDataField] = array_merge(
                             $conditionalModuleFields[$conditionDataField],
                             $conditionalSubmodules
@@ -1148,12 +1148,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                             array_splice($conditionalSubmodules, $i, 1);
                         }
                     }
-                    foreach ($conditionalSubmodules as $subComponentVariation) {
-                        $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+                    foreach ($conditionalSubmodules as $subComponent) {
+                        $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
                         // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                        if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
-                            if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
+                        if (!$submodule_processor->startDataloadingSection($subComponent)) {
+                            if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])) {
                                 // Chain the "data-fields" from the sublevels under the current "conditional-data-fields"
                                 // Move from "data-fields" to "conditional-data-fields"
                                 if ($submodule_ret['data-fields'] ?? null) {
@@ -1162,7 +1162,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                                     }
                                     unset($submodule_ret['data-fields']);
                                 }
-                                // Chain the conditional-data-fields at the end of the one from this component variation
+                                // Chain the conditional-data-fields at the end of the one from this component
                                 if ($submodule_ret['conditional-data-fields'] ?? null) {
                                     foreach ($submodule_ret['conditional-data-fields'] as $submodule_condition_data_field => $submodule_conditional_data_fields) {
                                         $ret['conditional-data-fields'][$conditionDataField][$submodule_condition_data_field] = array_merge(
@@ -1184,21 +1184,21 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
                     // Extract the conditional submodules from the rest of the submodules, which will be processed below
                     foreach ($conditionalSubmodules as $conditionalSubmodule) {
-                        $pos = array_search($conditionalSubmodule, $subComponentVariations);
+                        $pos = array_search($conditionalSubmodule, $subComponents);
                         if ($pos !== false) {
-                            array_splice($subComponentVariations, $pos, 1);
+                            array_splice($subComponents, $pos, 1);
                         }
                     }
                 }
             }
 
             // Second step: all the other submodules can be calculated directly
-            foreach ($subComponentVariations as $subComponentVariation) {
-                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
+            foreach ($subComponents as $subComponent) {
+                $submodule_processor = $this->getComponentProcessorManager()->getProcessor($subComponent);
 
                 // Propagate only if the submodule doesn't load data. If it does, this is the end of the data line, and the submodule is the beginning of a new datasetmoduletree
-                if (!$submodule_processor->startDataloadingSection($subComponentVariation)) {
-                    if ($submodule_ret = $submodule_processor->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
+                if (!$submodule_processor->startDataloadingSection($subComponent)) {
+                    if ($submodule_ret = $submodule_processor->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])) {
                         // array_merge_recursive => data-fields from different sidebar-components can be integrated all together
                         $ret = array_merge_recursive(
                             $ret,
@@ -1213,59 +1213,59 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 $ret['data-fields'] = array_values(array_unique($ret['data-fields']));
             }
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $componentVariation, array &$props): void
+    protected function flattenRelationalDBObjectDataProperties($propagate_fn, &$ret, array $component, array &$props): void
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
         // Combine the direct and conditionalOnDataField modules all together to iterate below
         $relationalSubmodules = [];
-        foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
+        foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
             // @todo Pass the ModuleField directly, do not convert to string first
             $subcomponent_data_field = $relationalModuleField->asFieldOutputQueryString();
-            $relationalSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedComponentVariations();
+            $relationalSubmodules[$subcomponent_data_field] = $relationalModuleField->getNestedComponents();
         }
-        foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
+        foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
             foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                 $conditionalDataField = $relationalModuleField->asFieldOutputQueryString();
                 $relationalSubmodules[$conditionalDataField] = array_values(array_unique(array_merge(
                     $relationalSubmodules[$conditionalDataField] ?? [],
-                    $relationalModuleField->getNestedComponentVariations()
+                    $relationalModuleField->getNestedComponents()
                 )));
             }
         }
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_componentVariations) {
-            $subcomponent_componentVariations_data_properties = array(
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        foreach ($relationalSubmodules as $subcomponent_data_field => $subcomponent_components) {
+            $subcomponent_components_data_properties = array(
                 'data-fields' => array(),
                 'conditional-data-fields' => array(),
                 'subcomponents' => array()
             );
-            foreach ($subcomponent_componentVariations as $subcomponent_componentVariation) {
-                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent_componentVariation);
-                if ($subcomponent_componentVariation_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_componentVariation, $props[$moduleFullName][Props::SUBMODULES])) {
-                    $subcomponent_componentVariations_data_properties = array_merge_recursive(
-                        $subcomponent_componentVariations_data_properties,
-                        $subcomponent_componentVariation_data_properties
+            foreach ($subcomponent_components as $subcomponent_component) {
+                $subcomponent_processor = $this->getComponentProcessorManager()->getProcessor($subcomponent_component);
+                if ($subcomponent_component_data_properties = $subcomponent_processor->$propagate_fn($subcomponent_component, $props[$moduleFullName][Props::SUBMODULES])) {
+                    $subcomponent_components_data_properties = array_merge_recursive(
+                        $subcomponent_components_data_properties,
+                        $subcomponent_component_data_properties
                     );
                 }
             }
 
             $ret['subcomponents'][$subcomponent_data_field] = $ret['subcomponents'][$subcomponent_data_field] ?? array();
-            if ($subcomponent_componentVariations_data_properties['data-fields'] ?? null) {
-                $subcomponent_componentVariations_data_properties['data-fields'] = array_unique($subcomponent_componentVariations_data_properties['data-fields']);
+            if ($subcomponent_components_data_properties['data-fields'] ?? null) {
+                $subcomponent_components_data_properties['data-fields'] = array_unique($subcomponent_components_data_properties['data-fields']);
                 $ret['subcomponents'][$subcomponent_data_field]['data-fields'] = array_values(array_unique(array_merge(
                     $ret['subcomponents'][$subcomponent_data_field]['data-fields'] ?? [],
-                    $subcomponent_componentVariations_data_properties['data-fields']
+                    $subcomponent_components_data_properties['data-fields']
                 )));
             }
-            if ($subcomponent_componentVariations_data_properties['conditional-data-fields'] ?? null) {
+            if ($subcomponent_components_data_properties['conditional-data-fields'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] = $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'] ?? [];
-                foreach ($subcomponent_componentVariations_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
+                foreach ($subcomponent_components_data_properties['conditional-data-fields'] as $conditionDataField => $conditionalDataFields) {
                     $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] = array_merge_recursive(
                         $ret['subcomponents'][$subcomponent_data_field]['conditional-data-fields'][$conditionDataField] ?? [],
                         $conditionalDataFields
@@ -1273,15 +1273,15 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
                 }
             }
 
-            if ($subcomponent_componentVariations_data_properties['subcomponents'] ?? null) {
+            if ($subcomponent_components_data_properties['subcomponents'] ?? null) {
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] ?? array();
                 $ret['subcomponents'][$subcomponent_data_field]['subcomponents'] = array_merge_recursive(
                     $ret['subcomponents'][$subcomponent_data_field]['subcomponents'],
-                    $subcomponent_componentVariations_data_properties['subcomponents']
+                    $subcomponent_components_data_properties['subcomponents']
                 );
             }
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
 
@@ -1289,12 +1289,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Static Data
     //-------------------------------------------------
 
-    public function getModelSupplementaryDBObjectDataModuletree(array $componentVariation, array &$props): array
+    public function getModelSupplementaryDBObjectDataModuletree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithComponentVariations('getModelSupplementaryDBObjectData', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndMergeWithComponents('getModelSupplementaryDBObjectData', __FUNCTION__, $component, $props);
     }
 
-    public function getModelSupplementaryDBObjectData(array $componentVariation, array &$props): array
+    public function getModelSupplementaryDBObjectData(array $component, array &$props): array
     {
         return [];
     }
@@ -1303,17 +1303,17 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     // New PUBLIC Functions: Stateful Data
     //-------------------------------------------------
 
-    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $componentVariation, array &$props): array
+    public function getMutableonrequestSupplementaryDBObjectDataModuletree(array $component, array &$props): array
     {
-        return $this->executeOnSelfAndMergeWithComponentVariations('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $componentVariation, $props);
+        return $this->executeOnSelfAndMergeWithComponents('getMutableonrequestSupplementaryDbobjectdata', __FUNCTION__, $component, $props);
     }
 
-    public function getMutableonrequestSupplementaryDbobjectdata(array $componentVariation, array &$props): array
+    public function getMutableonrequestSupplementaryDbobjectdata(array $component, array &$props): array
     {
         return [];
     }
 
-    private function getSubmodulesByGroup(array $componentVariation, $components = array()): array
+    private function getSubmodulesByGroup(array $component, $components = array()): array
     {
         if (empty($components)) {
             $components = array(
@@ -1329,16 +1329,16 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         if (in_array(self::MODULECOMPONENT_SUBMODULES, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
             $ret = array_unique(
-                $this->getSubComponentVariations($componentVariation),
+                $this->getSubComponents($component),
                 SORT_REGULAR
             );
         }
 
         if (in_array(self::MODULECOMPONENT_RELATIONALSUBMODULES, $components)) {
-            foreach ($this->getRelationalSubmodules($componentVariation) as $relationalModuleField) {
+            foreach ($this->getRelationalSubmodules($component) as $relationalModuleField) {
                 $ret = array_values(array_unique(
                     array_merge(
-                        $relationalModuleField->getNestedComponentVariations(),
+                        $relationalModuleField->getNestedComponents(),
                         $ret
                     ),
                     SORT_REGULAR
@@ -1348,11 +1348,11 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
         if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDSUBMODULES, $components)) {
             // Modules are arrays, comparing them through the default SORT_STRING fails
-            foreach ($this->getConditionalOnDataFieldSubmodules($componentVariation) as $conditionalLeafModuleField) {
+            foreach ($this->getConditionalOnDataFieldSubmodules($component) as $conditionalLeafModuleField) {
                 $ret = array_unique(
                     array_merge(
                         $ret,
-                        $conditionalLeafModuleField->getConditionalNestedComponentVariations()
+                        $conditionalLeafModuleField->getConditionalNestedComponents()
                     ),
                     SORT_REGULAR
                 );
@@ -1360,12 +1360,12 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
         }
 
         if (in_array(self::MODULECOMPONENT_CONDITIONALONDATAFIELDRELATIONALSUBMODULES, $components)) {
-            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($componentVariation) as $conditionalRelationalModuleField) {
+            foreach ($this->getConditionalOnDataFieldRelationalSubmodules($component) as $conditionalRelationalModuleField) {
                 foreach ($conditionalRelationalModuleField->getConditionalRelationalModuleFields() as $relationalModuleField) {
                     $ret = array_values(
                         array_unique(
                             array_merge(
-                                $relationalModuleField->getNestedComponentVariations(),
+                                $relationalModuleField->getNestedComponents(),
                                 $ret
                             ),
                             SORT_REGULAR

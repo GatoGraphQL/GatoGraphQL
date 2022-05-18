@@ -6,7 +6,7 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
     public final const MODULE_LATESTCOUNT_AUTHOR_POSTLINKS = 'latestcount-author-postlinks';
     public final const MODULE_LATESTCOUNT_TAG_POSTLINKS = 'latestcount-tag-postlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_POSTLINKS],
@@ -15,40 +15,40 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         );
     }
 
-    public function getObjectName(array $componentVariation, array &$props)
+    public function getObjectName(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $componentVariation, array &$props)
+    public function getObjectNames(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
             self::MODULE_LATESTCOUNT_TAG_POSTLINKS => POP_CONTENTPOSTLINKS_CAT_CONTENTPOSTLINKS,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
             ;
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $componentVariation, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($componentVariation, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_POSTLINKS:
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS:
             case self::MODULE_LATESTCOUNT_TAG_POSTLINKS:
@@ -59,24 +59,24 @@ class PoP_ContentPostLinks_Module_Processor_SectionLatestCounts extends PoP_Modu
         return $ret;
     }
 
-    public function isAuthor(array $componentVariation, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_POSTLINKS:
                 return true;
         }
 
-        return parent::isAuthor($componentVariation, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $componentVariation, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_POSTLINKS:
                 return true;
         }
 
-        return parent::isTag($componentVariation, $props);
+        return parent::isTag($component, $props);
     }
 }
 

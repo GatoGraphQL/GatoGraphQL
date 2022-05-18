@@ -6,7 +6,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
     public final const MODULE_URE_FORMINPUT_MEMBERPRIVILEGES = 'ure-forminput-memberprivileges';
     public final const MODULE_URE_FORMINPUT_MEMBERTAGS = 'ure-forminput-membertags';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES],
@@ -14,9 +14,9 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return TranslationAPIFacade::getInstance()->__('Privileges', 'ure-popprocessors');
 
@@ -24,12 +24,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return TranslationAPIFacade::getInstance()->__('Tags', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return GD_URE_FormInput_MemberPrivileges::class;
             
@@ -37,12 +37,12 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return GD_URE_FormInput_MemberTags::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_MEMBERPRIVILEGES:
                 return 'memberprivileges';
 
@@ -50,7 +50,7 @@ class GD_URE_Module_Processor_ProfileMultiSelectFormInputs extends PoP_Module_Pr
                 return 'membertags';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

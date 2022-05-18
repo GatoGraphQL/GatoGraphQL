@@ -5,7 +5,7 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
     public final const MODULE_FORMINPUTGROUP_NAME = 'gf-forminputgroup-field-name';
     public final const MODULE_FORMINPUTGROUP_EMAIL = 'gf-forminputgroup-field-email';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_NAME],
@@ -13,25 +13,25 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_NAME => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
             self::MODULE_FORMINPUTGROUP_EMAIL => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUTGROUP_NAME:
             case self::MODULE_FORMINPUTGROUP_EMAIL:
                 $this->addJsmethod($ret, 'addDomainClass');
@@ -40,11 +40,11 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUTGROUP_NAME:
             case self::MODULE_FORMINPUTGROUP_EMAIL:
                 // For function addDomainClass
@@ -55,21 +55,21 @@ class PoP_Forms_Module_Processor_FormGroups extends PoP_Module_Processor_FormCom
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUTGROUP_NAME:
             case self::MODULE_FORMINPUTGROUP_EMAIL:
-                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin');
+                $this->appendProp($component, $props, 'class', 'visible-notloggedin');
 
                 // If we don't use the loggedinuser-data, then show the inputs always
                 if (!PoP_FormUtils::useLoggedinuserData()) {
-                    $this->appendProp($componentVariation, $props, 'class', 'visible-always');
+                    $this->appendProp($component, $props, 'class', 'visible-always');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

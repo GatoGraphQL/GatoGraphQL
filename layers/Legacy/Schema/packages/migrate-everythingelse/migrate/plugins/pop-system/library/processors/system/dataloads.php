@@ -11,7 +11,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
     public final const MODULE_DATALOADACTION_SYSTEM_INSTALL = 'dataloadaction-system-install';
 
     // use PoP_System_Module_Processor_SystemActionsTrait;
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOADACTION_SYSTEM_BUILD],
@@ -20,23 +20,23 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
         );
     }
 
-    public function shouldExecuteMutation(array $componentVariation, array &$props): bool
+    public function shouldExecuteMutation(array $component, array &$props): bool
     {
 
         // The actionexecution is triggered directly
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
             case self::MODULE_DATALOADACTION_SYSTEM_GENERATE:
             case self::MODULE_DATALOADACTION_SYSTEM_INSTALL:
                 return true;
         }
 
-        return parent::shouldExecuteMutation($componentVariation, $props);
+        return parent::shouldExecuteMutation($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOADACTION_SYSTEM_BUILD:
                 return $this->instanceManager->getInstance(BuildSystemMutationResolverBridge::class);
 
@@ -47,7 +47,7 @@ class PoP_System_Module_Processor_SystemActions extends AbstractDataloadComponen
                 return $this->instanceManager->getInstance(InstallSystemMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($componentVariation);
+        return parent::getComponentMutationResolverBridge($component);
     }
 }
 

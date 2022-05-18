@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     public final const MODULE_TABPANEL_PASTEVENTS = 'tabpanel-pastevents';
     public final const MODULE_TABPANEL_EVENTSCALENDAR = 'tabpanel-eventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_EVENTS],
@@ -15,21 +15,21 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_EVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SECTIONCALENDAR);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_EVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_EVENTS:
                 return array(
                     [
@@ -120,7 +120,7 @@ class GD_EM_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
                 );
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

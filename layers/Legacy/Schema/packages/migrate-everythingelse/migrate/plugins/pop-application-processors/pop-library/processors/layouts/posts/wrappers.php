@@ -8,7 +8,7 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
     public final const MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION = 'multicomponentwrapper-userhighlightpostinteraction';
     public final const MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION = 'multicomponentwrapper-userpostinteraction';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION],
@@ -16,11 +16,11 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
                 $ret[] = [Wassup_Module_Processor_MultipleComponentLayouts::class, Wassup_Module_Processor_MultipleComponentLayouts::MODULE_MULTICOMPONENT_USERHIGHLIGHTPOSTINTERACTION];
                 break;
@@ -33,9 +33,9 @@ class Wassup_Module_Processor_MultipleComponentLayoutWrappers extends PoP_Module
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENTWRAPPER_USERHIGHLIGHTPOSTINTERACTION:
             case self::MODULE_MULTICOMPONENTWRAPPER_USERPOSTINTERACTION:
                 return FieldQueryInterpreterFacade::getInstance()->getField('isStatus', ['status' => Status::PUBLISHED], 'published');

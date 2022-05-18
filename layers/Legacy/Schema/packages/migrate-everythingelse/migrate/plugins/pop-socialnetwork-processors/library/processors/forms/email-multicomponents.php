@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
     public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK = 'multicomponent-emailnotifications-network';
     public final const MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC = 'multicomponent-emailnotifications-subscribedtopic';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK],
@@ -13,11 +13,11 @@ class PoP_SocialNetwork_Module_Processor_UserMultipleComponents extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK:
                 $ret[] = [PoP_SocialNetwork_Module_Processor_UserCodes::class, PoP_SocialNetwork_Module_Processor_UserCodes::MODULE_CODE_EMAILNOTIFICATIONS_NETWORKLABEL];
 

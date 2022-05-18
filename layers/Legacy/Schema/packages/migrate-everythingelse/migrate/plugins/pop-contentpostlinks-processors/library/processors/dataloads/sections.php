@@ -23,7 +23,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     public final const MODULE_DATALOAD_AUTHORLINKS_SCROLL_LIST = 'dataload-authorlinks-scroll-list';
     public final const MODULE_DATALOAD_TAGLINKS_SCROLL_LIST = 'dataload-taglinks-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_LINKS_TYPEAHEAD],
@@ -47,9 +47,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_DETAILS => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_LIST => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
@@ -67,13 +67,13 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::MODULE_DATALOAD_TAGLINKS_SCROLL_SIMPLEVIEW => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
             self::MODULE_DATALOAD_TAGLINKS_SCROLL_THUMBNAIL => POP_CONTENTPOSTLINKS_ROUTE_CONTENTPOSTLINKS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             /*********************************************
              * Typeaheads
@@ -115,12 +115,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
             self::MODULE_DATALOAD_TAGLINKS_SCROLL_LIST => [PoP_ContentPostLinks_Module_Processor_CustomScrolls::class, PoP_ContentPostLinks_Module_Processor_CustomScrolls::MODULE_SCROLL_LINKS_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
             case self::MODULE_DATALOAD_LINKS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_LINKS_SCROLL_SIMPLEVIEW:
@@ -144,10 +144,10 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
                 return [self::class, self::MODULE_FILTER_TAGLINKS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -185,29 +185,29 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         $typeaheads = array(
             [self::class, self::MODULE_DATALOAD_LINKS_TYPEAHEAD],
         );
-        if (in_array($componentVariation, $navigators)) {
+        if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;
-        } elseif (in_array($componentVariation, $addons)) {
+        } elseif (in_array($component, $addons)) {
             $format = POP_FORMAT_ADDONS;
-        } elseif (in_array($componentVariation, $details)) {
+        } elseif (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($componentVariation, $typeaheads)) {
+        } elseif (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW:
     //         case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_FULLVIEW:
@@ -223,14 +223,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
     //             return TagRequestNature::TAG;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
             case self::MODULE_DATALOAD_LINKS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_LINKS_SCROLL_ADDONS:
@@ -256,11 +256,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Filter by the Profile/Community
             case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORLINKS_SCROLL_SIMPLEVIEW:
@@ -282,9 +282,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LINKS_TYPEAHEAD:
             case self::MODULE_DATALOAD_LINKS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_LINKS_SCROLL_SIMPLEVIEW:
@@ -306,12 +306,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
                 return $this->instanceManager->getInstance(CustomPostObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_LINKS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_LINKS_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_LINKS_SCROLL_DETAILS:
@@ -333,7 +333,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomSectionDataloads extends PoP_M
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

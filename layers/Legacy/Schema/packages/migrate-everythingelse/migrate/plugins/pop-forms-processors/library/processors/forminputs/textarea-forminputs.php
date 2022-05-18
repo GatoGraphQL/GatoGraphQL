@@ -7,7 +7,7 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
     public final const MODULE_FORMINPUT_EMAILS = 'forminput-emails';
     public final const MODULE_FORMINPUT_ADDITIONALMESSAGE = 'forminput-additionalmessage';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXTAREAEDITOR],
@@ -16,19 +16,19 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
         );
     }
 
-    public function getRows(array $componentVariation, array &$props)
+    public function getRows(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
                 return 5;
         }
 
-        return parent::getRows($componentVariation, $props);
+        return parent::getRows($component, $props);
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Content', 'pop-coreprocessors');
                 
@@ -39,38 +39,38 @@ class PoP_Module_Processor_TextareaFormInputs extends PoP_Module_Processor_Texta
                 return TranslationAPIFacade::getInstance()->__('Additional message', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
             case self::MODULE_FORMINPUT_EMAILS:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXTAREAEDITOR:
                 return 'contentEdit';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
-    public function clearInput(array $componentVariation, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EMAILS:
                 return true;
         }
 
-        return parent::clearInput($componentVariation, $props);
+        return parent::clearInput($component, $props);
     }
 }
 

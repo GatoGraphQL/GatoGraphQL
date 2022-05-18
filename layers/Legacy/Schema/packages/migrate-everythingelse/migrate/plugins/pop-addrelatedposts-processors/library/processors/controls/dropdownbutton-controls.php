@@ -5,18 +5,18 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
 {
     public final const MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST = 'dropdownbuttoncontrol-addrelatedpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 $ret = array_merge(
                     $ret,
@@ -31,45 +31,45 @@ class PoP_AddRelatedPosts_Module_Processor_DropdownButtonControls extends PoP_Mo
         return $ret;
     }
 
-    public function getBtnClass(array $componentVariation)
+    public function getBtnClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'btn btn-compact btn-link';
         }
 
-        return parent::getBtnClass($componentVariation);
+        return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return 'fa-reply';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
                 return TranslationAPIFacade::getInstance()->__('Reply with...', 'pop-coreprocessors').' <span class="caret"></span>';
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONCONTROL_ADDRELATEDPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-addrelatedpost-dropdown');
+                $this->appendProp($component, $props, 'class', 'pop-addrelatedpost-dropdown');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

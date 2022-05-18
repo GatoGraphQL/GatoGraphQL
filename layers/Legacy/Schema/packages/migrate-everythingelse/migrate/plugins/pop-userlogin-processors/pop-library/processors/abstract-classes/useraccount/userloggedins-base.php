@@ -3,63 +3,63 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_UserLoggedInsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_UserLogin_TemplateResourceLoaderProcessor::class, PoP_UserLogin_TemplateResourceLoaderProcessor::RESOURCE_USERLOGGEDIN];
     }
 
-    public function addLink(array $componentVariation, array &$props)
+    public function addLink(array $component, array &$props)
     {
         return false;
     }
 
-    public function addUseravatar(array $componentVariation, array &$props)
+    public function addUseravatar(array $component, array &$props)
     {
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
 
-    public function getTitleTop(array $componentVariation, array &$props)
+    public function getTitleTop(array $component, array &$props)
     {
         return '';
     }
 
-    public function getTitleBottom(array $componentVariation, array &$props)
+    public function getTitleBottom(array $component, array &$props)
     {
         return '';
     }
 
-    public function getNameHtmlmarkup(array $componentVariation, array &$props)
+    public function getNameHtmlmarkup(array $component, array &$props)
     {
         return 'h2';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($this->addLink($componentVariation, $props)) {
+        if ($this->addLink($component, $props)) {
             $ret['add-link'] = true;
         }
 
-        if ($title_top = $this->getTitleTop($componentVariation, $props)) {
+        if ($title_top = $this->getTitleTop($component, $props)) {
             $ret[GD_JS_TITLES]['top'] = $title_top;
         }
-        if ($title_bottom = $this->getTitleBottom($componentVariation, $props)) {
+        if ($title_bottom = $this->getTitleBottom($component, $props)) {
             $ret[GD_JS_TITLES]['bottom'] = $title_bottom;
         }
 
-        $ret['add-useravatar'] = $this->addUseravatar($componentVariation, $props);
+        $ret['add-useravatar'] = $this->addUseravatar($component, $props);
     
-        $ret['name-htmlmarkup'] = $this->getNameHtmlmarkup($componentVariation, $props);
+        $ret['name-htmlmarkup'] = $this->getNameHtmlmarkup($component, $props);
         
         return $ret;
     }
     
-    // function initModelProps(array $componentVariation, array &$props) {
+    // function initModelProps(array $component, array &$props) {
 
-    //     $this->appendProp($componentVariation, $props, 'class', 'visible-loggedin');
-    //     parent::initModelProps($componentVariation, $props);
+    //     $this->appendProp($component, $props, 'class', 'visible-loggedin');
+    //     parent::initModelProps($component, $props);
     // }
 }

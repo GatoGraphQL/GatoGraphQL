@@ -3,16 +3,16 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POSTTHUMB];
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($componentVariation)) {
+        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $thumb_extras
@@ -22,7 +22,7 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function getExtraThumbLayoutSubmodules(array $componentVariation)
+    public function getExtraThumbLayoutSubmodules(array $component)
     {
 
         // Add the MultiLayout item always, since the layouts will also be referenced by the MultLayout
@@ -37,80 +37,80 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        $ret[] = $this->getThumbField($componentVariation, $props);
-        $ret[] = $this->getUrlField($componentVariation);
+        $ret[] = $this->getThumbField($component, $props);
+        $ret[] = $this->getUrlField($component);
 
         return $ret;
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
         return 'url';
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
         return '';
     }
 
-    public function getThumbField(array $componentVariation, array &$props)
+    public function getThumbField(array $component, array &$props)
     {
         return FieldQueryInterpreterFacade::getInstance()->getField(
-            $this->getThumbFieldName($componentVariation, $props),
-            $this->getThumbFieldArgs($componentVariation, $props),
-            $this->getThumbFieldAlias($componentVariation, $props)
+            $this->getThumbFieldName($component, $props),
+            $this->getThumbFieldArgs($component, $props),
+            $this->getThumbFieldAlias($component, $props)
         );
     }
 
-    protected function getThumbFieldName(array $componentVariation, array &$props)
+    protected function getThumbFieldName(array $component, array &$props)
     {
         return 'thumb';
     }
 
-    protected function getThumbFieldArgs(array $componentVariation, array &$props)
+    protected function getThumbFieldArgs(array $component, array &$props)
     {
         return ['size' => 'thumb-sm'];
     }
 
-    protected function getThumbFieldAlias(array $componentVariation, array &$props)
+    protected function getThumbFieldAlias(array $component, array &$props)
     {
         return 'thumb';
     }
 
-    public function getThumbImgClass(array $componentVariation)
+    public function getThumbImgClass(array $component)
     {
         return '';
     }
 
-    public function getThumbLinkClass(array $componentVariation)
+    public function getThumbLinkClass(array $component)
     {
         return '';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['url-field'] = $this->getUrlField($componentVariation);
+        $ret['url-field'] = $this->getUrlField($component);
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($componentVariation, $props, 'succeeding-typeResolver'),
-                $this->getThumbField($componentVariation, $props))
+                $this->getProp($component, $props, 'succeeding-typeResolver'),
+                $this->getThumbField($component, $props))
         );
-        if ($target = $this->getLinktarget($componentVariation, $props)) {
+        if ($target = $this->getLinktarget($component, $props)) {
             $ret['link-target'] = $target;
         }
-        $ret[GD_JS_CLASSES]['img'] = $this->getProp($componentVariation, $props, 'img-class');
+        $ret[GD_JS_CLASSES]['img'] = $this->getProp($component, $props, 'img-class');
         $ret[GD_JS_CLASSES]['thumb-extras'] = 'thumb-extras';
-        if ($link_class = $this->getThumbLinkClass($componentVariation)) {
+        if ($link_class = $this->getThumbLinkClass($component)) {
             $ret[GD_JS_CLASSES]['link'] = $link_class;
         }
 
-        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($componentVariation)) {
+        if ($thumb_extras = $this->getExtraThumbLayoutSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['thumb-extras'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $thumb_extras
@@ -120,9 +120,9 @@ abstract class PoP_Module_Processor_PostThumbLayoutsBase extends PoPEngine_Query
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'img-class', $this->getThumbImgClass($componentVariation));
-        parent::initModelProps($componentVariation, $props);
+        $this->appendProp($component, $props, 'img-class', $this->getThumbImgClass($component));
+        parent::initModelProps($component, $props);
     }
 }

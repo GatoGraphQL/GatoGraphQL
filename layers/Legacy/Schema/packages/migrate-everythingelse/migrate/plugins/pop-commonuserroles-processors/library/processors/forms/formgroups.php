@@ -12,7 +12,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
     public final const MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES = 'filterinputgroup-organizationcategories';
     public final const MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES = 'filterinputgroup-organizationtypes';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON],
@@ -27,11 +27,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         );
     }
 
-    public function getLabelClass(array $componentVariation)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($componentVariation);
+        $ret = parent::getLabelClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -41,11 +41,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
 
         return $ret;
     }
-    public function getFormcontrolClass(array $componentVariation)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($componentVariation);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FILTERINPUTGROUP_INDIVIDUALINTERESTS:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONCATEGORIES:
             case self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES:
@@ -56,7 +56,7 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
         return $ret;
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_CUP_CONTACTPERSON => [GD_URE_Module_Processor_TextFormInputs::class, GD_URE_Module_Processor_TextFormInputs::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON],
@@ -70,11 +70,11 @@ class GD_CommonUserRoles_Module_Processor_ProfileFormGroups extends PoP_Module_P
             self::MODULE_URE_FILTERINPUTGROUP_ORGANIZATIONTYPES => [GD_URE_Module_Processor_MultiSelectFilterInputs::class, GD_URE_Module_Processor_MultiSelectFilterInputs::MODULE_URE_FILTERINPUT_ORGANIZATIONTYPES],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

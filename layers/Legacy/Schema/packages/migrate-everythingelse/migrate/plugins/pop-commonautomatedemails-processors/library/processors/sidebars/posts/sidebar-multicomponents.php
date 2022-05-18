@@ -6,7 +6,7 @@ class PoPTheme_Wassup_AE_Module_Processor_PostMultipleSidebarComponents extends 
     public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGE = 'sidebarmulticomponent-automatedemails-featuredimage';
     public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_FEATUREDIMAGEVOLUNTEER = 'sidebarmulticomponent-automatedemails-featuredimagevolunteer';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_POST],
@@ -15,11 +15,11 @@ class PoPTheme_Wassup_AE_Module_Processor_PostMultipleSidebarComponents extends 
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_POST:
                 $ret[] = [PoPTheme_Wassup_AE_Module_Processor_Widgets::class, PoPTheme_Wassup_AE_Module_Processor_Widgets::MODULE_WIDGETCOMPACT_AUTOMATEDEMAILS_POSTINFO];
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES];

@@ -4,21 +4,21 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\RelationalModuleFi
 
 abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_SCRIPT];
     }
 
-    public function getCustomizationSubmodule(array $componentVariation)
+    public function getCustomizationSubmodule(array $component)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($script_customize = $this->getCustomizationSubmodule($componentVariation)) {
+        if ($script_customize = $this->getCustomizationSubmodule($component)) {
             $ret[] = $script_customize;
         }
 
@@ -28,7 +28,7 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
         return [
             new RelationalModuleField(
@@ -40,13 +40,13 @@ abstract class PoP_Module_Processor_MapScriptsBase extends PoPEngine_QueryDataCo
         ];
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($script_customize = $this->getCustomizationSubmodule($componentVariation)) {
+        if ($script_customize = $this->getCustomizationSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['map-script-customize'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($script_customize);
         }
         $markers = [PoP_Module_Processor_MapMarkerScripts::class, PoP_Module_Processor_MapMarkerScripts::MODULE_MAP_SCRIPT_MARKERS];

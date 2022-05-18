@@ -20,7 +20,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
     public final const MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW = 'layout-singlemultiplepost-fullview';
     public final const MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT = 'layout-multiplepost-simpleview-abovecontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
@@ -39,7 +39,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $componentVariation)
+    public function getDefaultLayoutSubmodule(array $component)
     {
         $defaults = array(
             self::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_NAVIGATOR],
@@ -56,16 +56,16 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
             self::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_SINGLELAYOUT_FULLVIEW_POST],
         );
 
-        if ($default = $defaults[$componentVariation[1]] ?? null) {
+        if ($default = $defaults[$component[1]] ?? null) {
             return $default;
         }
 
-        return parent::getDefaultLayoutSubmodule($componentVariation);
+        return parent::getDefaultLayoutSubmodule($component);
     }
 
-    public function getMultipleLayoutSubmodules(array $componentVariation)
+    public function getMultipleLayoutSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR:
             case self::MODULE_LAYOUT_MULTIPLECONTENT_ADDONS:
             case self::MODULE_LAYOUT_MULTIPLECONTENT_DETAILS:
@@ -84,7 +84,7 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT,
                     self::MODULE_LAYOUT_MULTIPLECONTENT_SIMPLEVIEW_ABOVECONTENT => POP_MULTILAYOUT_HANDLE_POSTABOVECONTENT,
                 );
-                $handle = $handles[$componentVariation[1]] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
+                $handle = $handles[$component[1]] ?? POP_MULTILAYOUT_HANDLE_POSTCONTENT;
 
                 $formats = array(
                     self::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR => POP_FORMAT_NAVIGATOR,
@@ -100,13 +100,13 @@ class PoP_Module_Processor_MultiplePostLayouts extends PoP_Module_Processor_Mult
                     self::MODULE_LAYOUT_AUTHORMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                     self::MODULE_LAYOUT_SINGLEMULTIPLECONTENT_FULLVIEW => POP_FORMAT_FULLVIEW,
                 );
-                $format = $formats[$componentVariation[1]] ?? '';
+                $format = $formats[$component[1]] ?? '';
 
                 $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-                return $multilayout_manager->getLayoutComponentVariations($handle, $format);
+                return $multilayout_manager->getLayoutComponents($handle, $format);
         }
 
-        return parent::getMultipleLayoutSubmodules($componentVariation);
+        return parent::getMultipleLayoutSubmodules($component);
     }
 }
 

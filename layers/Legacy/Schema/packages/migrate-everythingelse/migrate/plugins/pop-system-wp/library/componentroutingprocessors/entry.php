@@ -14,8 +14,8 @@ class PoPSystem_WP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentR
         $routemodules = array(
             POP_SYSTEMWP_ROUTE_SYSTEM_ACTIVATEPLUGINS => [PoP_SystemWP_WP_Module_Processor_SystemActions::class, PoP_SystemWP_WP_Module_Processor_SystemActions::MODULE_DATALOADACTION_SYSTEM_ACTIVATEPLUGINS],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

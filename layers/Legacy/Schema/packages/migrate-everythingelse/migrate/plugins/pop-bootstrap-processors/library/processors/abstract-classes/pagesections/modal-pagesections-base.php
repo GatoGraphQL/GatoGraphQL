@@ -2,77 +2,77 @@
 
 abstract class PoP_Module_Processor_ModalPageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_MODAL];
     }
 
-    public function getHeaderClass(array $componentVariation)
+    public function getHeaderClass(array $component)
     {
         return '';
     }
-    public function getDialogClasses(array $componentVariation)
+    public function getDialogClasses(array $component)
     {
         return array();
     }
-    public function getBodyClasses(array $componentVariation)
+    public function getBodyClasses(array $component)
     {
         $ret = array();
 
-        foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-            $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
+        foreach ($this->getSubComponents($component) as $subComponent) {
+            $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
             $ret[$submoduleOutputName] = 'modal-body';
         }
 
         return $ret;
     }
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($header_class = $this->getHeaderClass($componentVariation)) {
+        if ($header_class = $this->getHeaderClass($component)) {
             $ret[GD_JS_CLASSES]['header'] = $header_class;
         }
         // Only send the classes/titles that are targetted to any of the submodules
-        $subComponentVariations = array_flip($this->getInnerSubmodules($componentVariation));
-        if ($dialogs_class = array_intersect_key($this->getDialogClasses($componentVariation), $subComponentVariations)) {
+        $subComponents = array_flip($this->getInnerSubmodules($component));
+        if ($dialogs_class = array_intersect_key($this->getDialogClasses($component), $subComponents)) {
             $ret[GD_JS_CLASSES]['dialogs'] = $dialogs_class;
         }
-        if ($bodies_class = array_intersect_key($this->getBodyClasses($componentVariation), $subComponentVariations)) {
+        if ($bodies_class = array_intersect_key($this->getBodyClasses($component), $subComponents)) {
             $ret[GD_JS_CLASSES]['bodies'] = $bodies_class;
         }
-        if ($headerTitles = array_intersect_key($this->getHeaderTitles($componentVariation), $subComponentVariations)) {
+        if ($headerTitles = array_intersect_key($this->getHeaderTitles($component), $subComponents)) {
             $ret[GD_JS_TITLES]['headers'] = $headerTitles;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
+        $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
-            $componentVariation,
+            $component,
             $props,
             'params',
             array(
                 'data-paramsscope' => GD_SETTINGS_PARAMSSCOPE_URL
             )
         );
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $componentVariation, array &$props)
+    protected function getInitjsBlockbranches(array $component, array &$props)
     {
-        $ret = parent::getInitjsBlockbranches($componentVariation, $props);
+        $ret = parent::getInitjsBlockbranches($component, $props);
 
         // 2 possibilities: with the merge container (eg: main) or without it (eg: quickview)
-        $id = $this->getFrontendId($componentVariation, $props);
+        $id = $this->getFrontendId($component, $props);
         $ret[] = '#'.$id.' > .modal.in > .pop-modaldialog > .pop-modalcontent > .pop-modalbody > .pop-block';
 
         return $ret;

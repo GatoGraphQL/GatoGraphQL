@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
     public final const MODULE_TABPANEL_AUTHORPASTEVENTS = 'tabpanel-authorpastevents';
     public final const MODULE_TABPANEL_AUTHOREVENTSCALENDAR = 'tabpanel-authoreventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHOREVENTS],
@@ -15,21 +15,21 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHOREVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_AUTHORSECTIONCALENDAR);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHOREVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHOREVENTS:
                 $ret = array(
                     [
@@ -122,7 +122,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

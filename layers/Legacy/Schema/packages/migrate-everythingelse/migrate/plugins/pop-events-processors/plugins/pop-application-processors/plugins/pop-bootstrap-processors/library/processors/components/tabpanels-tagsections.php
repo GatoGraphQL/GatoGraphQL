@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
     public final const MODULE_TABPANEL_TAGPASTEVENTS = 'tabpanel-tagpastevents';
     public final const MODULE_TABPANEL_TAGEVENTSCALENDAR = 'tabpanel-tageventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_TAGEVENTS],
@@ -15,21 +15,21 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_TAGEVENTSCALENDAR:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_TAGSECTIONCALENDAR);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_TAGEVENTS:
                 $ret = array_merge(
                     $ret,
@@ -72,9 +72,9 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_TAGEVENTS:
                 $ret = array(
                     [
@@ -122,7 +122,7 @@ class GD_EM_Module_Processor_TagSectionTabPanelComponents extends PoP_Module_Pro
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

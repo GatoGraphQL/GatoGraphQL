@@ -4,18 +4,18 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
 {
     public final const MODULE_FORMINNER_SHAREBYEMAIL = 'forminner-sharebyemail';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_SHAREBYEMAIL],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_SHAREBYEMAIL:
                 $ret = array_merge(
                     $ret,
@@ -50,24 +50,24 @@ class PoP_Share_Module_Processor_GFFormInners extends PoP_Module_Processor_FormI
         $ret = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_GFFormInners:layouts',
             $ret,
-            $componentVariation
+            $component
         );
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Allow Gravity Forms to set props on its added fields
         \PoP\Root\App::doAction(
             'PoP_Module_Processor_GFFormInners:init-props',
-            $componentVariation,
+            $component,
             array(&$props),
             $this
         );
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

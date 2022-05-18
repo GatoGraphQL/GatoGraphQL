@@ -40,7 +40,7 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
@@ -49,46 +49,46 @@ abstract class AbstractFieldDataloadComponentProcessor extends AbstractRelationa
         );
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
-                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getPostTagObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($componentVariation);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGCOUNT:
                 return [TagFilterInputContainerComponentProcessor::class, TagFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_TAGCOUNT];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 }

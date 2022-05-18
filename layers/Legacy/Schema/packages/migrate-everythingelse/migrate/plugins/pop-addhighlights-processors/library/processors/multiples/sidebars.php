@@ -7,7 +7,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
     public final const MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR = 'multiple-single-highlight-sidebar';
     public final const MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR = 'multiple-single-post-highlightssidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
@@ -17,17 +17,17 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
                 $filters = array(
                     self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_HIGHLIGHTS_SIDEBAR],
                 );
-                $ret[] = $filters[$componentVariation[1]];
+                $ret[] = $filters[$component[1]];
                 $ret[] = [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_POST_SIDEBAR];
                 break;
 
@@ -37,7 +37,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                     self::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR => [PoP_AddHighlights_Module_Processor_SidebarMultipleInners::class, PoP_AddHighlights_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_MYHIGHLIGHTS_SIDEBAR],
                     self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
-                if ($inner = $inners[$componentVariation[1]] ?? null) {
+                if ($inner = $inners[$component[1]] ?? null) {
                     $ret[] = $inner;
                 }
                 break;
@@ -46,7 +46,7 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getScreen(array $componentVariation)
+    public function getScreen(array $component)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR => POP_SCREEN_HIGHLIGHTS,
@@ -54,16 +54,16 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
             self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => POP_SCREEN_SINGLE,
             self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR => POP_SCREEN_SINGLEHIGHLIGHTS,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($componentVariation);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $componentVariation)
+    public function getScreengroup(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
             case self::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR:
@@ -73,36 +73,36 @@ class PoP_AddHighlights_Module_Processor_SidebarMultiples extends PoP_Module_Pro
                 return POP_SCREENGROUP_CONTENTWRITE;
         }
 
-        return parent::getScreengroup($componentVariation);
+        return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR:
                 $inners = array(
                     self::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR => [PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::class, PoP_AddHighlights_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_HIGHLIGHT_SIDEBAR],
                 );
-                $subComponentVariation = $inners[$componentVariation[1]];
+                $subComponent = $inners[$component[1]];
 
                 // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                 $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-singlepost > .blocksection-extensions > .pop-block > .blocksection-inners .content-single';
 
                 // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                $this->appendProp(array($subComponentVariation), $props, 'class', 'collapse');
+                $this->appendProp(array($subComponent), $props, 'class', 'collapse');
                 $this->mergeProp(
-                    array($subComponentVariation),
+                    array($subComponent),
                     $props,
                     'params',
                     array(
                         'data-collapse-target' => $mainblock_taget
                     )
                 );
-                $this->mergeJsmethodsProp(array($subComponentVariation), $props, array('waypointsToggleCollapse'));
+                $this->mergeJsmethodsProp(array($subComponent), $props, array('waypointsToggleCollapse'));
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }
 

@@ -5,7 +5,7 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
     public final const MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER = 'post-socialmedia-simpleview-volunteer';
     public final const MODULE_POSTSOCIALMEDIA_VOLUNTEER = 'post-socialmedia-volunteer';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER],
@@ -13,9 +13,9 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
                 return array(
                     [GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::class, GD_SocialNetwork_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_POSTRECOMMENDUNRECOMMEND],
@@ -31,20 +31,20 @@ class PoPCore_GenericForms_Module_Processor_SocialMedia extends PoP_Module_Proce
                 );
         }
 
-        return parent::getSubComponentVariations($componentVariation);
+        return parent::getSubComponents($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_SIMPLEVIEW_VOLUNTEER:
-                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'inline');
+                foreach ($this->getSubComponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

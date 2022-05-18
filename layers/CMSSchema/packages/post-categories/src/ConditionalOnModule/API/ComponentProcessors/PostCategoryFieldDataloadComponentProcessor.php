@@ -21,14 +21,14 @@ class PostCategoryFieldDataloadComponentProcessor extends AbstractFieldDataloadC
         return $this->postCategoryObjectTypeResolver ??= $this->instanceManager->getInstance(PostCategoryObjectTypeResolver::class);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORY:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYLIST:
                 return $this->getPostCategoryObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 }

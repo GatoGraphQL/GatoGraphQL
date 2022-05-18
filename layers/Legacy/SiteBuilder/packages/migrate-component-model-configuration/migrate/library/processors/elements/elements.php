@@ -5,7 +5,7 @@ class PoP_ConfigurationComponentModel_Module_Processor_Elements extends Abstract
 {
     public final const MODULE_EMPTY = 'empty';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EMPTY],

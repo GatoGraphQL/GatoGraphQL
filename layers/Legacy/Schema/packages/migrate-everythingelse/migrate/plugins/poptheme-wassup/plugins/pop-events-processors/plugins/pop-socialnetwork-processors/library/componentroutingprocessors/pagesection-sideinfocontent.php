@@ -15,12 +15,12 @@ class PoPTheme_Wassup_Events_SocialNetwork_Module_SideInfoContentPageSectionComp
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
-        $componentVariations = array(
+        $components = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_RECOMMENDEDBYSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
+        foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
@@ -31,12 +31,12 @@ class PoPTheme_Wassup_Events_SocialNetwork_Module_SideInfoContentPageSectionComp
         }
 
         // Future and current single event
-        $componentVariations = array(
+        $components = array(
             POP_SOCIALNETWORK_ROUTE_RECOMMENDEDBY => [PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::class, PoP_Events_SocialNetwork_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_RECOMMENDEDBYSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
+        foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),

@@ -5,32 +5,32 @@ class PoP_ContentPostLinksCreation_Module_Processor_Tables extends PoP_Module_Pr
 {
     public final const MODULE_TABLE_MYLINKS = 'table-mylinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLE_MYLINKS],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYLINKS:
                 $inners = array(
                     self::MODULE_TABLE_MYLINKS => [PoP_ContentPostLinksCreation_Module_Processor_TableInners::class, PoP_ContentPostLinksCreation_Module_Processor_TableInners::MODULE_TABLEINNER_MYLINKS],
                 );
 
-                return $inners[$componentVariation[1]];
+                return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
-        $ret = parent::getHeaderTitles($componentVariation);
+        $ret = parent::getHeaderTitles($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYLINKS:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'poptheme-wassup');

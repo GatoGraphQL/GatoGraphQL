@@ -12,7 +12,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
     public final const MODULE_DATALOAD_MYPREFERENCES = 'dataload-mypreferences';
     public final const MODULE_DATALOAD_INVITENEWUSERS = 'dataload-inviteusers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_USER_CHANGEPASSWORD],
@@ -21,30 +21,30 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
             self::MODULE_DATALOAD_MYPREFERENCES => POP_USERPLATFORM_ROUTE_MYPREFERENCES,
             self::MODULE_DATALOAD_USER_CHANGEPASSWORD => POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $componentVariation, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INVITENEWUSERS:
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($componentVariation, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 return $this->instanceManager->getInstance(ChangeUserPasswordMutationResolverBridge::class);
 
@@ -55,14 +55,14 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 return $this->instanceManager->getInstance(InviteUsersMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($componentVariation);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 $this->addJsmethod($ret, 'destroyPageOnUserLoggedOut');
                 break;
@@ -76,45 +76,45 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
                 return \PoP\Root\App::getState('current-user-id');
         }
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYPREFERENCES:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_USER_CHANGEPASSWORD => [GD_UserLogin_Module_Processor_UserForms::class, GD_UserLogin_Module_Processor_UserForms::MODULE_FORM_USER_CHANGEPASSWORD],
             self::MODULE_DATALOAD_MYPREFERENCES => [PoP_Module_Processor_UserForms::class, PoP_Module_Processor_UserForms::MODULE_FORM_MYPREFERENCES],
             self::MODULE_DATALOAD_INVITENEWUSERS => [PoP_Module_Processor_UserForms::class, PoP_Module_Processor_UserForms::MODULE_FORM_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getFeedbackmessageModule(array $componentVariation)
+    protected function getFeedbackmessageModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 return [GD_UserLogin_Module_Processor_UserFeedbackMessages::class, GD_UserLogin_Module_Processor_UserFeedbackMessages::MODULE_FEEDBACKMESSAGE_USER_CHANGEPASSWORD];
 
@@ -125,12 +125,12 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 return [PoP_Core_Module_Processor_FeedbackMessages::class, PoP_Core_Module_Processor_FeedbackMessages::MODULE_FEEDBACKMESSAGE_INVITENEWUSERS];
         }
 
-        return parent::getFeedbackmessageModule($componentVariation);
+        return parent::getFeedbackmessageModule($component);
     }
 
-    protected function getCheckpointmessageModule(array $componentVariation)
+    protected function getCheckpointmessageModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_LOGGEDIN];
 
@@ -138,17 +138,17 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 return [GD_UserLogin_Module_Processor_UserCheckpointMessages::class, GD_UserLogin_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_LOGGEDIN];
         }
 
-        return parent::getCheckpointmessageModule($componentVariation);
+        return parent::getCheckpointmessageModule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_USER_CHANGEPASSWORD:
                 if ($extra_checkpoint_msgs = \PoP\Root\App::applyFilters(
                     'PoP_UserLogin_Module_Processor_Blocks:extra-checkpoint-msgs:change-pwd',
                     array(),
-                    $componentVariation
+                    $component
                 )
                 ) {
                     $this->mergeProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'extra-checkpoint-messages', $extra_checkpoint_msgs);
@@ -167,7 +167,7 @@ class PoP_UserPlatform_Module_Processor_Dataloads extends PoP_Module_Processor_D
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

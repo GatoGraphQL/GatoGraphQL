@@ -6,11 +6,11 @@ define('GD_CONSTANT_REPLICATETYPE_SINGLE', 'single');
 
 trait PoP_Module_Processor_InterceptablePageSectionsTrait
 {
-    public function getModuleInterceptUrls(array $componentVariation, array &$props)
+    public function getModuleInterceptUrls(array $component, array &$props)
     {
-        $ret = parent::getModuleInterceptUrls($componentVariation, $props);
+        $ret = parent::getModuleInterceptUrls($component, $props);
 
-        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($componentVariation);
+        $moduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($component);
 
         // Intercept current page
         $requestHelperService = RequestHelperServiceFacade::getInstance();
@@ -20,9 +20,9 @@ trait PoP_Module_Processor_InterceptablePageSectionsTrait
         return $ret;
     }
     
-    public function getPagesectionJsmethod(array $componentVariation, array &$props)
+    public function getPagesectionJsmethod(array $component, array &$props)
     {
-        $ret = parent::getPagesectionJsmethod($componentVariation, $props);
+        $ret = parent::getPagesectionJsmethod($component, $props);
 
         $this->addJsmethod($ret, 'destroyPage', 'destroy-interceptor');
 

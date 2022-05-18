@@ -13,7 +13,7 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS = 'custombuttoncontrol-authorpastevents';
     public final const MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS = 'custombuttoncontrol-tagpastevents';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CUSTOMANCHORCONTROL_CALENDAR],
@@ -23,9 +23,9 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Calendar', 'poptheme-wassup');
 
@@ -35,11 +35,11 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return TranslationAPIFacade::getInstance()->__('Past Events', 'poptheme-wassup');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
                 return getRouteIcon(POP_EVENTS_ROUTE_EVENTSCALENDAR, false);
 
@@ -49,20 +49,20 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return getRouteIcon(POP_EVENTS_ROUTE_PASTEVENTS, false);
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $componentVariation, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
                 $routes = array(
                     self::MODULE_CUSTOMANCHORCONTROL_CALENDAR => POP_EVENTS_ROUTE_EVENTSCALENDAR,
                     self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS => POP_EVENTS_ROUTE_PASTEVENTS,
                 );
-                $route = $routes[$componentVariation[1]];
+                $route = $routes[$component[1]];
 
                 return RouteUtils::getRouteURL($route);
 
@@ -81,22 +81,22 @@ class PoP_Events_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return RequestUtils::addRoute($url, POP_EVENTS_ROUTE_PASTEVENTS);
         }
 
-        return parent::getHref($componentVariation, $props);
+        return parent::getHref($component, $props);
     }
 
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMANCHORCONTROL_CALENDAR:
             case self::MODULE_CUSTOMANCHORCONTROL_PASTEVENTS:
             case self::MODULE_CUSTOMANCHORCONTROL_AUTHORPASTEVENTS:
             case self::MODULE_CUSTOMANCHORCONTROL_TAGPASTEVENTS:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -2,18 +2,18 @@
 
 class UserStance_WP_Module_Processor_CustomSectionDataloads extends UserStance_Module_Processor_CustomSectionDataloads
 {
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL],
         );
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
         
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             // Order the Author Thoughts Carousel, so that it always shows the General thought first, and the then article-related ones
             case self::MODULE_DATALOAD_AUTHORSTANCES_CAROUSEL:
                 // General thought: menu_order = 0. Article-related thought: menu_order = 1. So order ASC.

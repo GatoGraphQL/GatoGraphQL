@@ -4,14 +4,14 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Processor_BlocksBase
 {
-    public function getCustomPostTypes(array $componentVariation)
+    public function getCustomPostTypes(array $component)
     {
         return [];
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         // If no sticky posts, then make sure we're bringing no results
         $cmsService = CMSServiceFacade::getInstance();
@@ -21,23 +21,23 @@ abstract class PoP_Module_Processor_MessageBlocksBase extends PoP_Module_Process
             $ret['load'] = false;
         }
 
-        $ret['custompost-types'] = $this->getCustomPostTypes($componentVariation);
+        $ret['custompost-types'] = $this->getCustomPostTypes($component);
         // $ret['limit'] = 1;
         $ret['include'] = [$sticky];
 
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
     }
 
-    // function initModelProps(array $componentVariation, array &$props) {
+    // function initModelProps(array $component, array &$props) {
 
-    //     $layout = $this->getLayoutSubmodule($componentVariation);
+    //     $layout = $this->getLayoutSubmodule($component);
     //     $this->setProp($layout, $props, 'layout-inner', [self::class, self::MODULE_LAYOUTPOST_SPEECHBUBBLE]);
 
-    //     parent::initModelProps($componentVariation, $props);
+    //     parent::initModelProps($component, $props);
     // }
 }

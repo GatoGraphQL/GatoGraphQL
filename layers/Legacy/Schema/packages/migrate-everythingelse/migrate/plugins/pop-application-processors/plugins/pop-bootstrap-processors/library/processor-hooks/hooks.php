@@ -24,14 +24,14 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
         );
     }
 
-    public function getDropdownSubmodules($subComponentVariations, array $componentVariation)
+    public function getDropdownSubmodules($subComponents, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponentVariations
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
                     ), 
                     0, 
                     array(
@@ -42,9 +42,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponentVariations
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
                     ), 
                     0, 
                     array(
@@ -55,9 +55,9 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     array_search(
-                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponentVariations
+                        [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN], $subComponents
                     ), 
                     0, 
                     array(
@@ -67,44 +67,44 @@ class PoP_GenericFormsProcessors_Bootstrap_Hooks
                 break;
         }
         
-        return $subComponentVariations;
+        return $subComponents;
     }
 
-    public function getSocialmediaSubmodules($subComponentVariations, array $componentVariation)
+    public function getSocialmediaSubmodules($subComponents, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
-                $subComponentVariations[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
+                $subComponents[] = [PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::class, PoPGenericForms_Bootstrap_Module_Processor_PostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
-                $subComponentVariations[] = [PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::class, PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA];
+                $subComponents[] = [PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::class, PoP_GenericForms_Bootstrap_Module_Processor_UserViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USER_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
-                $subComponentVariations[] = [PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA];
+                $subComponents[] = [PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::class, PoPCore_GenericForms_Module_Processor_TagViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_TAG_SHAREBYEMAIL_SOCIALMEDIA];
                 break;
         }
         
-        return $subComponentVariations;
+        return $subComponents;
     }
 
-    public function getShareSubmodules($subComponentVariations, array $componentVariation)
+    public function getShareSubmodules($subComponents, array $component)
     {
 
         // Insert before the Embed button
         array_splice(
-            $subComponentVariations, 
+            $subComponents, 
             array_search(
                 [GD_Core_Bootstrap_Module_Processor_AnchorControls::class, GD_Core_Bootstrap_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_EMBED], 
-                $subComponentVariations
+                $subComponents
             ), 
             0, 
             array(
                 [PoPCore_GenericForms_Module_Processor_AnchorControls::class, PoPCore_GenericForms_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SHAREBYEMAIL]
             )
         );
-        return $subComponentVariations;
+        return $subComponents;
     }
 }
 

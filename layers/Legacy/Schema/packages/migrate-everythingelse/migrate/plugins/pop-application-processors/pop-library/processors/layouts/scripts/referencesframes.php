@@ -9,7 +9,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedby-appendtoscript-fullview';
     public final const MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW = 'layout-referencedbyempty-appendtoscript-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS],
@@ -21,21 +21,21 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function doAppend(array $componentVariation)
+    public function doAppend(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_SIMPLEVIEW:
             case self::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_FULLVIEW:
                 return false;
         }
         
-        return parent::doAppend($componentVariation);
+        return parent::doAppend($component);
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_REFERENCEDBY_APPENDTOSCRIPT_DETAILS:
             case self::MODULE_LAYOUT_REFERENCEDBYEMPTY_APPENDTOSCRIPT_DETAILS:
                 return [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_SUBCOMPONENT_REFERENCEDBY_DETAILS];
@@ -49,7 +49,7 @@ class PoP_Module_Processor_ReferencesFramesLayouts extends PoP_Module_Processor_
                 return [PoP_Module_Processor_ReferencedbyLayouts::class, PoP_Module_Processor_ReferencedbyLayouts::MODULE_SUBCOMPONENT_REFERENCEDBY_FULLVIEW];
         }
         
-        return parent::getLayoutSubmodule($componentVariation);
+        return parent::getLayoutSubmodule($component);
     }
 }
 

@@ -7,7 +7,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES = 'layout-marknotificationasunread-showelemstyles';
     public final const MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_HIDEELEMSTYLES = 'layout-marknotificationasunread-hideelemstyles';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES],
@@ -17,9 +17,9 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getElemTarget(array $componentVariation, array &$props)
+    public function getElemTarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_HIDEELEMSTYLES:
                 return '.preview.notification-layout .pop-functional.'.AAL_CLASS_NOTIFICATION_MARKASREAD;
@@ -29,12 +29,12 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
                 return '.preview.notification-layout .pop-functional.'.AAL_CLASS_NOTIFICATION_MARKASUNREAD;
         }
 
-        return parent::getElemTarget($componentVariation, $props);
+        return parent::getElemTarget($component, $props);
     }
     
-    public function getElemStyles(array $componentVariation, array &$props)
+    public function getElemStyles(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWELEMSTYLES:
             case self::MODULE_LAYOUT_MARKNOTIFICATIONASUNREAD_SHOWELEMSTYLES:
                 return array(
@@ -48,7 +48,7 @@ class GD_AAL_Module_Processor_ShowHideElemStyleLayouts extends PoP_Module_Proces
                 );
         }
 
-        return parent::getElemStyles($componentVariation, $props);
+        return parent::getElemStyles($component, $props);
     }
 }
 

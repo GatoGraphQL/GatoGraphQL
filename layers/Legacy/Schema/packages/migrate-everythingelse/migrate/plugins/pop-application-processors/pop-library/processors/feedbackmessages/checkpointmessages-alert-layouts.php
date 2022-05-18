@@ -4,24 +4,24 @@ class PoP_Application_Module_Processor_UserCheckpointMessageAlertLayouts extends
 {
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN = 'layout-checkpointmessagealert-domain';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN],
         );
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
         $layouts = array(
             self::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_DOMAIN => [PoP_Application_Module_Processor_UserCheckpointMessageLayouts::class, PoP_Application_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_DOMAIN],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             return $layout;
         }
 
-        return parent::getLayoutSubmodule($componentVariation);
+        return parent::getLayoutSubmodule($component);
     }
 }
 

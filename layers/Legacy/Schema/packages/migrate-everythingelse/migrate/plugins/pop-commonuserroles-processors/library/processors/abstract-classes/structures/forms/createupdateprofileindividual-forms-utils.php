@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CreateUpdateProfileIndividualFormsUtils
 {
-    public static function getFormSubmodules(array $componentVariation, &$components, $processor)
+    public static function getFormSubmodules(array $component, &$components, $processor)
     {
         // Add extra components
         array_splice(

@@ -7,7 +7,7 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER = 'layout-feedbackmessage-newsletter';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTERUNSUBSCRIPTION = 'layout-feedbackmessage-newsletterunsubscription';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER],
@@ -15,12 +15,12 @@ class PoP_Newsletter_Module_Processor_FeedbackMessageLayouts extends PoP_Module_
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_NEWSLETTER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Subscription Successful!', 'pop-genericforms');
                 $ret['success'] = sprintf(

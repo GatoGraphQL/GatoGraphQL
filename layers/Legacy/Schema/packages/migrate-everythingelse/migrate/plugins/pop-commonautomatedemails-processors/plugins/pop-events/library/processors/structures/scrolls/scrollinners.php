@@ -8,7 +8,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
     public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scrollinner-automatedemails-events-thumbnail';
     public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST = 'scrollinner-automatedemails-events-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS],
@@ -19,9 +19,9 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL:
 
                 // Allow ThemeStyle Expansive to override the grid
@@ -44,12 +44,12 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts::class, PoPTheme_Wassup_EM_AE_Module_Processor_PreviewPostLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWPOST_EVENT_DETAILS],
@@ -59,26 +59,26 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners extends PoP_Module_Pro
             self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW => [PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts::class, PoPTheme_Wassup_EM_AE_Module_Processor_FullViewLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_FULLVIEW_EVENT],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS:
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_THUMBNAIL:
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST:
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_SIMPLEVIEW:
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_FULLVIEW:
                 // Add an extra space at the bottom of each post
-                $this->appendProp($componentVariation, $props, 'class', 'email-scrollelem-post');
+                $this->appendProp($component, $props, 'class', 'email-scrollelem-post');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

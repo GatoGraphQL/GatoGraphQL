@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
     public final const MODULE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT = 'singlelayout-fullview-highlight';
     public final const MODULE_SINGLELAYOUT_FULLVIEW_POST = 'singlelayout-fullview-post';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLVIEW],
@@ -30,12 +30,12 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         );
     }
 
-    public function getFooterSubmodules(array $componentVariation)
+    public function getFooterSubmodules(array $component)
     {
-        $ret = parent::getFooterSubmodules($componentVariation);
+        $ret = parent::getFooterSubmodules($component);
 
         $loadingLazy = in_array(Actions::LOADLAZY, \PoP\Root\App::getState('actions'));
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_POST:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_POST:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_POST:
@@ -70,9 +70,9 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $componentVariation)
+    public function getSidebarSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLVIEW:
             case self::MODULE_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_LAYOUT_FULLVIEW_POST:
@@ -94,19 +94,19 @@ class PoP_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_Cu
                     self::MODULE_SINGLELAYOUT_FULLVIEW_POST => [PoP_Module_Processor_CustomPostLayoutSidebars::class, PoP_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST],
                 );
 
-                return $sidebars[$componentVariation[1]];
+                return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($componentVariation);
+        return parent::getSidebarSubmodule($component);
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_AUTHORLAYOUT_FULLVIEW_HIGHLIGHT:
             case self::MODULE_SINGLELAYOUT_FULLVIEW_HIGHLIGHT:

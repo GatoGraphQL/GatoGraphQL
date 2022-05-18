@@ -4,16 +4,16 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
 {
     public final const MODULE_FILTERINPUTCONTAINER_COMMENTS = 'filterinputcontainer-comments';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_COMMENTS => [
@@ -22,27 +22,27 @@ class PoP_Module_Processor_CommentFilterInners extends PoP_Module_Processor_Filt
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERCOMMENT],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Comments:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_FILTERINPUTCONTAINER_COMMENTS:
     //             return POP_FILTER_COMMENTS;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

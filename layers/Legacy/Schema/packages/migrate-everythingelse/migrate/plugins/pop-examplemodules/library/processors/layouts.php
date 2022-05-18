@@ -12,7 +12,7 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     public final const MODULE_EXAMPLE_AUTHORPROPERTIES = 'example-authorproperties';
     public final const MODULE_EXAMPLE_TAGPROPERTIES = 'example-tagproperties';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_404],
@@ -28,11 +28,11 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_COMMENT:
                 $ret[] = 'content';
                 break;
@@ -58,11 +58,11 @@ class ComponentProcessor_Layouts extends AbstractComponentProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($componentVariation);
+        $ret = parent::getRelationalSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_COMMENT:
                 $ret[] = new RelationalModuleField(
                     'author',

@@ -6,7 +6,7 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
     public final const MODULE_QUICKLINKBUTTONGROUP_POSTVIEW = 'quicklinkbuttongroup-postview';
     public final const MODULE_QUICKLINKBUTTONGROUP_POSTPREVIEW = 'quicklinkbuttongroup-postpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_POSTEDIT],
@@ -15,11 +15,11 @@ class GD_ContentCreation_Module_Processor_QuicklinkButtonGroups extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_POSTEDIT:
                 $ret[] = [GD_ContentCreation_Module_Processor_Buttons::class, GD_ContentCreation_Module_Processor_Buttons::MODULE_BUTTON_POSTEDIT];
                 break;

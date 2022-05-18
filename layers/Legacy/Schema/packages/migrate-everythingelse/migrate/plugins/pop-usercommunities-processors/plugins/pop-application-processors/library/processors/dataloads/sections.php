@@ -20,7 +20,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     public final const MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'dataload-authormembers-scroll-list';
     public final const MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'dataload-authormembers-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD],
@@ -37,9 +37,9 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITYPLUSMEMBERS,
             self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
             self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
@@ -51,13 +51,13 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             self::MODULE_DATALOAD_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             self::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD => [PoP_Module_Processor_UserTypeaheadComponentLayouts::class, PoP_Module_Processor_UserTypeaheadComponentLayouts::MODULE_LAYOUTUSER_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomScrolls::class, PoP_UserCommunities_Module_Processor_CustomScrolls::MODULE_SCROLL_COMMUNITIES_DETAILS],
@@ -71,12 +71,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
             self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomCarousels::class, PoP_UserCommunities_Module_Processor_CustomCarousels::MODULE_CAROUSEL_AUTHORMEMBERS],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD:
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
@@ -94,10 +94,10 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCOMMUNITYMEMBERS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -124,26 +124,26 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         $carousels = array(
             [self::class, self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
-        if (in_array($componentVariation, $details)) {
+        if (in_array($component, $details)) {
             $format = POP_FORMAT_DETAILS;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($componentVariation, $typeaheads)) {
+        } elseif (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
-        } elseif (in_array($componentVariation, $carousels)) {
+        } elseif (in_array($component, $carousels)) {
             $format = POP_FORMAT_CAROUSEL;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
     //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
     //         case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
@@ -153,14 +153,14 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
     //             return UserRequestNature::USER;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 $ret['orderby'] = NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:users:registrationdate');
                 $ret['order'] = 'DESC';
@@ -177,11 +177,11 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         return $ret;
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
              // Members of the Community
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
@@ -200,11 +200,11 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        $ret = parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        $ret = parent::getObjectIDOrIDs($component, $props, $data_properties);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
                 // Also include the current author
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -215,9 +215,9 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_COMMUNITIES_TYPEAHEAD:
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW:
@@ -232,12 +232,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_THUMBNAIL:
@@ -254,14 +254,14 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Members of the Community
             case self::MODULE_DATALOAD_AUTHORPLUSCOMMUNITYMEMBERS_TYPEAHEAD:
             case self::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS:
@@ -271,12 +271,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionDataloads extends PoP_Mo
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 // If the profile is not a community, then return no users at all (Eg: a community opting out from having members)
                 if (!gdUreIsCommunity($author)) {
-                    $this->setProp($componentVariation, $props, 'skip-data-load', true);
+                    $this->setProp($component, $props, 'skip-data-load', true);
                 }
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 }
 

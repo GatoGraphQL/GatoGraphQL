@@ -7,7 +7,7 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
     public final const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS = 'buttoncontrol-notifications';
     public final const MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD = 'buttoncontrol-notifications-markallasread';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS],
@@ -15,9 +15,9 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return TranslationAPIFacade::getInstance()->__('View all', 'pop-notifications-processors');
 
@@ -25,11 +25,11 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 return TranslationAPIFacade::getInstance()->__('Mark all as read', 'pop-notifications-processors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS, false);
 
@@ -37,42 +37,42 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 return getRouteIcon(POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD, false);
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $componentVariation, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 $routes = array(
                     self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS,
                     self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD => POP_NOTIFICATIONS_ROUTE_NOTIFICATIONS_MARKALLASREAD,
                 );
-                $route = $routes[$componentVariation[1]];
+                $route = $routes[$component[1]];
 
                 return RouteUtils::getRouteURL($route);
         }
 
-        return parent::getHref($componentVariation, $props);
+        return parent::getHref($component, $props);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS:
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link btn-compact');
+                $this->appendProp($component, $props, 'class', 'btn btn-link btn-compact');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_ANCHORCONTROL_NOTIFICATIONS_MARKALLASREAD:
                 // Only if the user is logged in on any one domain
-                $this->appendProp($componentVariation, $props, 'class', 'visible-loggedin-anydomain');
+                $this->appendProp($component, $props, 'class', 'visible-loggedin-anydomain');
 
                 // Tell the Search engines to not follow the link
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -82,7 +82,7 @@ class AAL_PoPProcessors_Module_Processor_AnchorControls extends PoP_Module_Proce
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

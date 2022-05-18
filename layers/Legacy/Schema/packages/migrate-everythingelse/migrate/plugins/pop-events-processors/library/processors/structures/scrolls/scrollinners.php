@@ -19,7 +19,7 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const MODULE_SCROLLINNER_EVENTS_LIST = 'scrollinner-events-list';
     public final const MODULE_SCROLLINNER_PASTEVENTS_LIST = 'scrollinner-pastevents-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_EVENTS_NAVIGATOR],
@@ -41,9 +41,9 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_EVENTS_THUMBNAIL:
             case self::MODULE_SCROLLINNER_PASTEVENTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
@@ -75,12 +75,12 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_PASTEVENTS_NAVIGATOR => [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_PASTEVENT_NAVIGATOR],
@@ -107,7 +107,7 @@ class PoP_Events_Module_Processor_CustomScrollInners extends PoP_Module_Processo
             self::MODULE_SCROLLINNER_AUTHOREVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_EVENT],
             self::MODULE_SCROLLINNER_AUTHORPASTEVENTS_FULLVIEW => [GD_EM_Module_Processor_CustomFullViewLayouts::class, GD_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_PASTEVENT],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

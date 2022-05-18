@@ -23,7 +23,7 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
     public final const MODULE_TAGSOCIALMEDIA_LINKEDIN_PREVIEW = 'tag-socialmediaproviders-linkedin-preview';
     public final const MODULE_USERSOCIALMEDIA_LINKEDIN_PREVIEW = 'user-socialmediaproviders-linkedin-preview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTSOCIALMEDIA_FB],
@@ -47,9 +47,9 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
         );
     }
 
-    public function getProvider(array $componentVariation)
+    public function getProvider(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -75,12 +75,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return GD_SOCIALMEDIA_PROVIDER_LINKEDIN;
         }
 
-        return parent::getProvider($componentVariation);
+        return parent::getProvider($component);
     }
 
-    public function getShareurlField(array $componentVariation, array &$props)
+    public function getShareurlField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -106,12 +106,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return FieldQueryInterpreterFacade::getInstance()->getField('shareURL', ['provider' => 'linkedin']);
         }
 
-        return parent::getTitleField($componentVariation);
+        return parent::getTitleField($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -137,11 +137,11 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return TranslationAPIFacade::getInstance()->__('LinkedIn', 'pop-coreprocessors');
         }
 
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
-    public function getShortname(array $componentVariation)
+    public function getShortname(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -168,11 +168,11 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return 'linkedin';
         }
 
-        return parent::getShortname($componentVariation);
+        return parent::getShortname($component);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -204,12 +204,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
                 return 'fa-linkedin';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_FB:
             case self::MODULE_USERSOCIALMEDIA_FB:
             case self::MODULE_TAGSOCIALMEDIA_FB:
@@ -220,12 +220,12 @@ class PoP_Module_Processor_SocialMediaItems extends PoP_Module_Processor_SocialM
             case self::MODULE_USERSOCIALMEDIA_LINKEDIN:
             case self::MODULE_TAGSOCIALMEDIA_LINKEDIN:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'socialmediaproviders');
-                $this->appendProp($componentVariation, $props, 'class', 'socialmediaproviders-changebg icon-only');
+                $this->setProp($component, $props, 'resourceloader', 'socialmediaproviders');
+                $this->appendProp($component, $props, 'class', 'socialmediaproviders-changebg icon-only');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

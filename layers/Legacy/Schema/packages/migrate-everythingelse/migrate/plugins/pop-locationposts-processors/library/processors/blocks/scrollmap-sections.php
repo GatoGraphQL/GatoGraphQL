@@ -11,7 +11,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
     public final const MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP = 'block-taglocationposts-scrollmap';
     public final const MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'block-taglocationposts-horizontalscrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP],
@@ -23,22 +23,22 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP => POP_LOCATIONPOSTS_ROUTE_LOCATIONPOSTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_SCROLLMAP],
             self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_LOCATIONPOSTS_HORIZONTALSCROLLMAP],
             self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_AUTHORLOCATIONPOSTS_SCROLLMAP],
@@ -47,13 +47,13 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
             self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::class, GD_Custom_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $applicationtaxonomyapi = \PoP\ApplicationTaxonomies\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP:
                 $tag_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 return
@@ -65,12 +65,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                     );
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP:
                 // Allow URE to add the ContentSource switch
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKAUTHORPOSTLIST];
@@ -89,12 +89,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 return [PoP_Locations_Module_Processor_CustomControlGroups::class, PoP_Locations_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKTAGMAPPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getLatestcountSubmodule(array $componentVariation)
+    public function getLatestcountSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return [PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_LOCATIONPOSTS];
@@ -108,12 +108,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                 return [PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CommonPages_EM_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_LOCATIONPOSTS];
         }
 
-        return parent::getLatestcountSubmodule($componentVariation);
+        return parent::getLatestcountSubmodule($component);
     }
 
-    protected function getModuleTogglemapanchorcontrolPath(array $componentVariation)
+    protected function getModuleTogglemapanchorcontrolPath(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
@@ -134,46 +134,46 @@ class GD_Custom_Module_Processor_CustomScrollMapSectionBlocks extends GD_EM_Modu
                         [PoP_Locations_Module_Processor_CustomAnchorControls::class, PoP_Locations_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_TOGGLETAGMAP],
                     ),
                 );
-                return $paths[$componentVariation[1]];
+                return $paths[$component[1]];
         }
 
         return null;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_LOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                $this->appendProp($componentVariation, $props, 'class', 'block-locationposts-scrollmap');
+                $this->appendProp($component, $props, 'class', 'block-locationposts-scrollmap');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_BLOCK_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
-                if ($path = $this->getModuleTogglemapanchorcontrolPath($componentVariation)) {
+                if ($path = $this->getModuleTogglemapanchorcontrolPath($component)) {
                     $this->setProp(
                         $path,
                         $props,
                         'target',
-                        '#'.$this->getFrontendId($componentVariation, $props).' > .blocksection-inners .collapse.map'
+                        '#'.$this->getFrontendId($component, $props).' > .blocksection-inners .collapse.map'
                     );
                 }
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }
 

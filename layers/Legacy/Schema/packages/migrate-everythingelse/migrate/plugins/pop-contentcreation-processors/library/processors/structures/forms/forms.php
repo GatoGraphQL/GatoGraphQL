@@ -5,40 +5,40 @@ class PoP_ContentCreation_Module_Processor_GFForms extends PoP_Module_Processor_
 {
     public final const MODULE_FORM_FLAG = 'form-flag';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_FLAG],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FORM_FLAG => [PoP_ContentCreation_Module_Processor_GFFormInners::class, PoP_ContentCreation_Module_Processor_GFFormInners::MODULE_FORMINNER_FLAG],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_FLAG:
                 // Add the description
                 $description = sprintf(
                     '<p><em>%s</em></p>',
                     TranslationAPIFacade::getInstance()->__('Based on our users\' feedback, we will consider removing this post. You will receive a confirmation by email.', 'pop-genericforms')
                 );
-                $this->setProp($componentVariation, $props, 'description', $description);
+                $this->setProp($component, $props, 'description', $description);
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -14,27 +14,27 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_USERSTANCE_ROUTE_STANCES => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_STANCES_STANCE_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_USERSTANCE_ROUTE_STANCES => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_AGAINST => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_STANCES_STANCE_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_USERSTANCE_ROUTE_MYSTANCES => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYSTANCES_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_PRO => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_STANCE_SIDEBAR],
@@ -47,8 +47,8 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
             POP_USERSTANCE_ROUTE_STANCES_AGAINST_GENERAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
             POP_USERSTANCE_ROUTE_STANCES_NEUTRAL_GENERAL => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_STANCES_GENERALSTANCE_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;
@@ -62,7 +62,7 @@ class PoPTheme_Wassup_UserStance_Module_SideInfoContentPageSectionComponentRouti
         $ret = array();
 
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
+            'component' => [PoPVP_Module_Processor_SidebarMultiples::class, PoPVP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_STANCE_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => POP_USERSTANCE_POSTTYPE_USERSTANCE,

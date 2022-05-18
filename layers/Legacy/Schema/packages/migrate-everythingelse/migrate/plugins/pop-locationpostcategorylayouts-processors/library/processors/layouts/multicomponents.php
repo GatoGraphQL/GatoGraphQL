@@ -4,18 +4,18 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
 {
     public final const MODULE_MULTICOMPONENT_LOCATIONMAP = 'multicomponent-locationmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_LOCATIONMAP],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
                 $ret[] = [PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST];
                 break;
@@ -24,15 +24,15 @@ class PoP_LocationPostCategoryLayouts_Module_Processor_MultipleComponents extend
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_LOCATIONMAP:
                 $this->setProp([PoP_Module_Processor_MapStaticImages::class, PoP_Module_Processor_MapStaticImages::MODULE_MAP_STATICIMAGE_USERORPOST], $props, 'staticmap-size', '480x150');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

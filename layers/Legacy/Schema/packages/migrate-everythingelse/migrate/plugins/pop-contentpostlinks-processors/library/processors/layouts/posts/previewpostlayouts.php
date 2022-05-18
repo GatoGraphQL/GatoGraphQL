@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
     public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED = 'layout-previewpost-contentpostlink-related';
     public final const MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT = 'layout-previewpost-contentpostlink-edit';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR],
@@ -24,19 +24,19 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         );
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 return 'editURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
                     return POP_TARGET_ADDONS;
@@ -44,12 +44,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 break;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
+    public function getQuicklinkgroupBottomSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTEDIT];
 
@@ -57,12 +57,12 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POSTBOTTOMEXTENDED];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
+        return parent::getQuicklinkgroupBottomSubmodule($component);
     }
 
-    public function getQuicklinkgroupTopSubmodule(array $componentVariation)
+    public function getQuicklinkgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
@@ -71,18 +71,18 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_POST];
         }
 
-        return parent::getQuicklinkgroupTopSubmodule($componentVariation);
+        return parent::getQuicklinkgroupTopSubmodule($component);
     }
 
-    public function getBottomSubmodules(array $componentVariation)
+    public function getBottomSubmodules(array $component)
     {
-        $ret = parent::getBottomSubmodules($componentVariation);
+        $ret = parent::getBottomSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 $ret = array_merge(
                     $ret,
-                    $this->getDetailsfeedBottomSubmodules($componentVariation)
+                    $this->getDetailsfeedBottomSubmodules($component)
                 );
                 break;
         }
@@ -90,11 +90,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getBelowthumbLayoutSubmodules(array $componentVariation)
+    public function getBelowthumbLayoutSubmodules(array $component)
     {
-        $ret = parent::getBelowthumbLayoutSubmodules($componentVariation);
+        $ret = parent::getBelowthumbLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
@@ -111,9 +111,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getPostThumbSubmodule(array $componentVariation)
+    public function getPostThumbSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDSMALL_EDIT];
 
@@ -128,32 +128,32 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return [GD_Custom_Module_Processor_PostThumbLayouts::class, GD_Custom_Module_Processor_PostThumbLayouts::MODULE_LAYOUT_POSTTHUMB_CROPPEDMEDIUM];
         }
 
-        return parent::getPostThumbSubmodule($componentVariation);
+        return parent::getPostThumbSubmodule($component);
     }
 
-    public function showExcerpt(array $componentVariation)
+    public function showExcerpt(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return true;
         }
 
-        return parent::showExcerpt($componentVariation);
+        return parent::showExcerpt($component);
     }
 
-    public function getTitleHtmlmarkup(array $componentVariation, array &$props)
+    public function getTitleHtmlmarkup(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return 'h3';
         }
 
-        return parent::getTitleHtmlmarkup($componentVariation, $props);
+        return parent::getTitleHtmlmarkup($component, $props);
     }
 
-    public function authorPositions(array $componentVariation)
+    public function authorPositions(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
@@ -168,22 +168,22 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return array();
         }
 
-        return parent::authorPositions($componentVariation);
+        return parent::authorPositions($component);
     }
 
-    public function horizontalLayout(array $componentVariation)
+    public function horizontalLayout(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 return true;
         }
 
-        return parent::horizontalLayout($componentVariation);
+        return parent::horizontalLayout($component);
     }
 
-    public function horizontalMediaLayout(array $componentVariation)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_LIST:
@@ -191,14 +191,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 return true;
         }
 
-        return parent::horizontalMediaLayout($componentVariation);
+        return parent::horizontalMediaLayout($component);
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
@@ -209,7 +209,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_THUMBNAIL:
@@ -217,7 +217,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_DETAILS:
                 $ret[GD_JS_CLASSES]['thumb'] = 'pop-thumb-framed';
                 break;
@@ -226,9 +226,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
         return $ret;
     }
 
-    public function getTitleBeforeauthors(array $componentVariation, array &$props)
+    public function getTitleBeforeauthors(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_NAVIGATOR:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_ADDONS:
             case self::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_RELATED:
@@ -240,7 +240,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts extends PoP
                 );
         }
 
-        return parent::getTitleBeforeauthors($componentVariation, $props);
+        return parent::getTitleBeforeauthors($component, $props);
     }
 }
 

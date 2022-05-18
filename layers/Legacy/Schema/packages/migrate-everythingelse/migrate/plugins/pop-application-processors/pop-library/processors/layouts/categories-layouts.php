@@ -5,7 +5,7 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public final const MODULE_LAYOUT_CATEGORIES = 'layout-categories';
     public final const MODULE_LAYOUT_APPLIESTO = 'layout-appliesto';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CATEGORIES],
@@ -13,9 +13,9 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
         );
     }
 
-    public function getCategoriesField(array $componentVariation, array &$props)
+    public function getCategoriesField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CATEGORIES:
                 return 'topicsByName';
 
@@ -23,16 +23,16 @@ class Wassup_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
                 return 'appliestoByName';
         }
         
-        return parent::getCategoriesField($componentVariation, $props);
+        return parent::getCategoriesField($component, $props);
     }
-    public function getLabelClass(array $componentVariation, array &$props)
+    public function getLabelClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_APPLIESTO:
                 return 'label-primary';
         }
         
-        return parent::getLabelClass($componentVariation, $props);
+        return parent::getLabelClass($component, $props);
     }
 }
 

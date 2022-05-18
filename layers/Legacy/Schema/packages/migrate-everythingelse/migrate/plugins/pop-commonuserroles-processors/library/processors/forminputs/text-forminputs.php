@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
     public final const MODULE_URE_FORMINPUT_CUP_CONTACTNUMBER = 'forminput-ure-cup-contactnumber';
     public final const MODULE_URE_FORMINPUT_CUP_LASTNAME = 'forminput-ure-cup-lastName';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_CUP_LASTNAME],
@@ -16,9 +16,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_LASTNAME:
                 return TranslationAPIFacade::getInstance()->__('Last name', 'ure-popprocessors');
 
@@ -29,14 +29,14 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
                 return TranslationAPIFacade::getInstance()->__('Telephone / Fax', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        $ret = parent::getLabel($componentVariation, $props);
+        $ret = parent::getLabel($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_CONTACTPERSON:
                 return '<i class="fa fa-fw fa-user"></i>'.$ret;
 
@@ -47,9 +47,9 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
         return $ret;
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_LASTNAME:
                 return 'lastName';
 
@@ -60,7 +60,7 @@ class GD_URE_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFo
                 return 'contactNumber';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

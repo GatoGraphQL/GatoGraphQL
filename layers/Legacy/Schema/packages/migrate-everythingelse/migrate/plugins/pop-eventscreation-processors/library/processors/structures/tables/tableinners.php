@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
     public final const MODULE_TABLEINNER_MYEVENTS = 'tableinner-myevents';
     public final const MODULE_TABLEINNER_MYPASTEVENTS = 'tableinner-mypastevents';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLEINNER_MYEVENTS],
@@ -13,12 +13,12 @@ class GD_EM_Module_Processor_TableInners extends PoP_Module_Processor_TableInner
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         // Main layout
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLEINNER_MYEVENTS:
                 $ret[] = [GD_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_EVENT_EDIT];
                 $ret[] = [PoP_Module_Processor_EventDateAndTimeLayouts::class, PoP_Module_Processor_EventDateAndTimeLayouts::MODULE_EM_LAYOUTEVENT_TABLECOL];

@@ -15,7 +15,7 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS = 'filterinputcontainer-mycustomposts';
     public final const MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT = 'filterinputcontainer-mycustompostcount';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS],
@@ -26,16 +26,16 @@ class CustomPostMutationFilterInputContainerComponentProcessor extends CustomPos
     /**
      * Retrieve the same elements as for Posts, and add the "status" filter
      */
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
-        $targetModule = match ($componentVariation[1]) {
+        $targetModule = match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTS => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
             self::MODULE_FILTERINPUTCONTAINER_MYCUSTOMPOSTCOUNT => [parent::class, parent::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTCOUNT],
             default => null,
         };
         /** @var FilterInputContainerComponentProcessorInterface */
         $targetComponentProcessor = $this->getComponentProcessorManager()->getProcessor($targetModule);
-        $targetFilterInputModules = $targetComponentProcessor->getFilterInputComponentVariations($targetModule);
+        $targetFilterInputModules = $targetComponentProcessor->getFilterInputComponents($targetModule);
         return array_merge(
             $targetFilterInputModules,
             [

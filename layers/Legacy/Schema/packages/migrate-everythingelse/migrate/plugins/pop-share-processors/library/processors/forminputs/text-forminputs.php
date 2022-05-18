@@ -5,31 +5,31 @@ class PoP_Share_Module_Processor_TextFormInputs extends PoP_Module_Processor_Tex
 {
     public final const MODULE_FORMINPUT_DESTINATIONEMAIL = 'gf-field-destinationemail';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_DESTINATIONEMAIL],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_DESTINATIONEMAIL:
                 return TranslationAPIFacade::getInstance()->__('To Email(s)', 'pop-genericforms');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_DESTINATIONEMAIL:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 }
 

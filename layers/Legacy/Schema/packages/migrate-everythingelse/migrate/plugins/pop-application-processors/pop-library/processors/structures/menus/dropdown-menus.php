@@ -4,7 +4,7 @@ class PoP_Module_Processor_DropdownMenus extends PoP_Module_Processor_DropdownMe
 {
     public final const MODULE_DROPDOWNMENU = 'dropdownmenu';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DROPDOWNMENU],

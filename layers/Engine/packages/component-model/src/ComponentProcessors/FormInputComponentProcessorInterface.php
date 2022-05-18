@@ -6,10 +6,10 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 interface FormInputComponentProcessorInterface
 {
-    public function getValue(array $componentVariation, ?array $source = null): mixed;
-    public function getDefaultValue(array $componentVariation, array &$props): mixed;
-    public function getName(array $componentVariation): string;
-    public function getInputName(array $componentVariation): string;
-    public function isMultiple(array $componentVariation): bool;
-    public function isInputSetInSource(array $componentVariation, ?array $source = null): mixed;
+    public function getValue(array $component, ?array $source = null): mixed;
+    public function getDefaultValue(array $component, array &$props): mixed;
+    public function getName(array $component): string;
+    public function getInputName(array $component): string;
+    public function isMultiple(array $component): bool;
+    public function isInputSetInSource(array $component, ?array $source = null): mixed;
 }

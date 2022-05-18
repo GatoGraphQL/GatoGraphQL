@@ -523,7 +523,7 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
     public final const MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts18-carousel-content';
     public final const MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT = 'block-tagnosearchcategoryposts19-carousel-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR],
@@ -1074,9 +1074,9 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_CAROUSEL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS00,
@@ -1557,13 +1557,13 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_LIST => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_SIMPLEVIEW => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_SCROLL_THUMBNAIL => POP_NOSEARCHCATEGORYPOSTS_ROUTE_NOSEARCHCATEGORYPOSTS19,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS00_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS01_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_SCROLL_NAVIGATOR => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_NOSEARCHCATEGORYPOSTS02_SCROLL_NAVIGATOR],
@@ -2111,12 +2111,12 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT => [NSCPP_Module_Processor_SectionDataloads::class, NSCPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS01_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORNOSEARCHCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -2444,12 +2444,12 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getLatestcountSubmodule(array $componentVariation)
+    public function getLatestcountSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_SCROLL_FULLVIEW:
@@ -2931,12 +2931,12 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
                 return [NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts::class, NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19];
         }
 
-        return parent::getLatestcountSubmodule($componentVariation);
+        return parent::getLatestcountSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS00_CAROUSEL:
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS01_CAROUSEL:
             case self::MODULE_BLOCK_NOSEARCHCATEGORYPOSTS02_CAROUSEL:
@@ -3058,12 +3058,12 @@ class NSCPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionB
             case self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS18_CAROUSEL_CONTENT:
             case self::MODULE_BLOCK_TAGNOSEARCHCATEGORYPOSTS19_CAROUSEL_CONTENT:
                 // Artificial property added to identify the template when adding module-resources
-                // $this->setProp($componentVariation, $props, 'resourceloader', 'block-carousel');
-                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-posts-carousel');
+                // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
+                $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

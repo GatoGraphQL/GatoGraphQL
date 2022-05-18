@@ -4,32 +4,32 @@ class GD_Core_Module_Processor_Blocks extends PoP_Module_Processor_MultiplesBase
 {
     public final const MODULE_MULTIPLE_LATESTCOUNTS = 'multiple-latestcounts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_LATESTCOUNTS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_MULTIPLE_LATESTCOUNTS => [GD_Core_Module_Processor_Dataloads::class, GD_Core_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTCOUNTS],
         );
-        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_LATESTCOUNTS:
                 // Fetch latest notifications every 30 seconds
                 $this->addJsmethod($ret, 'timeoutLoadLatestBlock');

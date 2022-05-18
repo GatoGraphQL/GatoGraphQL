@@ -15,15 +15,15 @@ class Wassup_EM_URE_Module_MainContentComponentRoutingProcessor extends \PoP\App
             POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_CustomScrollMapSectionBlocks::class, GD_URE_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_ORGANIZATIONS_SCROLLMAP],
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_CustomScrollMapSectionBlocks::class, GD_URE_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_INDIVIDUALS_SCROLLMAP],
         );
-        foreach ($routemodules_addons as $route => $componentVariation) {
+        foreach ($routemodules_addons as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 

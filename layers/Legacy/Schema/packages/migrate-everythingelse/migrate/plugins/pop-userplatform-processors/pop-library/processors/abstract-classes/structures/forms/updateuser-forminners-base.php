@@ -2,10 +2,10 @@
 
 abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_Processor_FormInnersBase
 {
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
         return array_merge(
-            parent::getLayoutSubmodules($componentVariation),
+            parent::getLayoutSubmodules($component),
             array(
                 [PoP_Module_Processor_UserFormGroups::class, PoP_Module_Processor_UserFormGroups::MODULE_FORMINPUTGROUP_CUU_USERNAME],
                 [PoP_Module_Processor_Dividers::class, PoP_Module_Processor_Dividers::MODULE_DIVIDER],
@@ -20,9 +20,9 @@ abstract class PoP_Module_Processor_UpdateUserFormInnersBase extends PoP_Module_
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $this->setProp([PoP_Module_Processor_CreateUpdateUserTextFormInputs::class, PoP_Module_Processor_CreateUpdateUserTextFormInputs::MODULE_FORMINPUT_CUU_USERNAME], $props, 'readonly', true);
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

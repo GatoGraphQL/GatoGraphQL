@@ -9,7 +9,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
     public final const MODULE_LATESTCOUNT_AUTHOR_CONTENT = 'latestcount-author-content';
     public final const MODULE_LATESTCOUNT_SINGLE_CONTENT = 'latestcount-single-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_TAG_CONTENT],
@@ -19,16 +19,16 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
         );
     }
 
-    public function getClasses(array $componentVariation, array &$props)
+    public function getClasses(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CONTENT:
                 return array(
                     'tag'.\PoP\Root\App::getState(['routing', 'queried-object-id'])
                 );
             
             case self::MODULE_LATESTCOUNT_CONTENT:
-                return GD_LatestCounts_Utils::getAllcontentClasses($componentVariation, $props);
+                return GD_LatestCounts_Utils::getAllcontentClasses($component, $props);
             
             case self::MODULE_LATESTCOUNT_AUTHOR_CONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -37,12 +37,12 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
                 );
 
                 // Add prefix "author" before each class
-                $classes = GD_LatestCounts_Utils::getAllcontentClasses($componentVariation, $props);
+                $classes = GD_LatestCounts_Utils::getAllcontentClasses($component, $props);
                 foreach ($classes as $class) {
                     $ret[] = 'author-'.$class;
                 }
 
-                return GD_LatestCounts_Utils::authorFilters($ret, $componentVariation, $props);
+                return GD_LatestCounts_Utils::authorFilters($ret, $component, $props);
             
             case self::MODULE_LATESTCOUNT_SINGLE_CONTENT:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -51,7 +51,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
                 );
 
                 // Add prefix "single" before each class
-                $classes = GD_LatestCounts_Utils::getAllcontentClasses($componentVariation, $props);
+                $classes = GD_LatestCounts_Utils::getAllcontentClasses($component, $props);
                 foreach ($classes as $class) {
                     $ret[] = 'single-'.$class;
                 }
@@ -59,7 +59,7 @@ class PoP_Module_Processor_LatestCounts extends PoP_Module_Processor_LatestCount
                 return $ret;
         }
     
-        return parent::getClasses($componentVariation, $props);
+        return parent::getClasses($component, $props);
     }
 }
 

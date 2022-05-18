@@ -39,19 +39,19 @@ Initialize the component:
 
 Configuration values are added under functions:
 
-- `function getImmutableConfiguration($componentVariation, &$props)`
-- `function getMutableonmodelConfiguration($componentVariation, &$props)`
-- `function getMutableonrequestConfiguration($componentVariation, &$props)`
+- `function getImmutableConfiguration($component, &$props)`
+- `function getMutableonmodelConfiguration($component, &$props)`
+- `function getMutableonrequestConfiguration($component, &$props)`
 
 For instance:
 
 ```php
 // Implement the modules properties ...
-function getImmutableConfiguration($componentVariation, &$props) 
+function getImmutableConfiguration($component, &$props) 
 {
-  $ret = parent::getImmutableConfiguration($componentVariation, $props);
+  $ret = parent::getImmutableConfiguration($component, $props);
 
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_SOMENAME:
       $ret['description'] = __('Some description');
       $ret['classes']['description'] = 'jumbotron';
@@ -66,30 +66,30 @@ Please notice that the configuration receives the `$props` parameter, hence it c
 
 ```php
 // Implement the modules properties ...
-function getImmutableConfiguration($componentVariation, &$props) 
+function getImmutableConfiguration($component, &$props) 
 {
-  $ret = parent::getImmutableConfiguration($componentVariation, $props);
+  $ret = parent::getImmutableConfiguration($component, $props);
 
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_SOMENAME:
-      $ret['showmore'] = $this->getProp($componentVariation, $props, 'showmore');
-      $ret['class'] = $this->getProp($componentVariation, $props, 'class');
+      $ret['showmore'] = $this->getProp($component, $props, 'showmore');
+      $ret['class'] = $this->getProp($component, $props, 'class');
       break;
   }
 
   return $ret;
 }
 
-function initModelProps($componentVariation, &$props) 
+function initModelProps($component, &$props) 
 {
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_SOMENAME:      
-      $this->setProp($componentVariation, $props, 'showmore', false);
-      $this->appendProp($componentVariation, $props, 'class', 'text-center');
+      $this->setProp($component, $props, 'showmore', false);
+      $this->appendProp($component, $props, 'class', 'text-center');
       break;
   }
 
-  parent::initModelProps($componentVariation, $props);
+  parent::initModelProps($component, $props);
 }
 ```
 

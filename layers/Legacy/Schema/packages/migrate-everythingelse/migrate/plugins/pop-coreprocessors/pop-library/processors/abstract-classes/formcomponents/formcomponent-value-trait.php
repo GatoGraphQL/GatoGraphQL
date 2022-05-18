@@ -7,19 +7,19 @@ trait FormComponentValueTrait
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
         return null;
     }
 
-    public function addMetaFormcomponentDataFields(&$ret, array $componentVariation, array &$props)
+    public function addMetaFormcomponentDataFields(&$ret, array $component, array &$props)
     {
-        if ($field = $this->getDbobjectField($componentVariation)) {
+        if ($field = $this->getDbobjectField($component)) {
             $ret[] = $field;
         }
     }
 
-    public function printValue(array $componentVariation, array &$props)
+    public function printValue(array $component, array &$props)
     {
 
         // Currently there is a bug: calling https://www.mesym.com/en/posts/?profiles[0]=1782&profiles[1]=1764&filter=posts
@@ -30,16 +30,16 @@ trait FormComponentValueTrait
         return true;
     }
 
-    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, array $componentVariation, array &$props)
+    public function addMetaFormcomponentModuleRuntimeconfiguration(&$ret, array $component, array &$props)
     {
 
         // Sometimes we do not want to print the value. Check the description in function `printValue`
-        if ($this->printValue($componentVariation, $props)) {
+        if ($this->printValue($component, $props)) {
             // The value goes into the runtime configuration and not the configuration, so that the configuration can be cached without particular values attached.
             // Eg: calling https://www.mesym.com/add-discussion/?related[]=19373 would initiate the value to 19373 and cache it
             // This way, take all particular stuff to any one URL out from its settings
-            // $filter = $this->getProp($componentVariation, $props, 'filter');
-            $value = $this->getValue($componentVariation);
+            // $filter = $this->getProp($component, $props, 'filter');
+            $value = $this->getValue($component);
 
             // If it is null, then fetch value from the dbObject
             // If it is empty, then it's a valid value, it takes priority over dbObject
@@ -50,15 +50,15 @@ trait FormComponentValueTrait
 
         // After {{value}} and {{dbObject[dbObjectField]}} both fail, print {{default-value}}
         // The value can also be the boolean false, so check for the !is_null condition
-        $default_value = $this->getDefaultValue($componentVariation, $props);
+        $default_value = $this->getDefaultValue($component, $props);
         if (!is_null($default_value)) {
             $ret['default-value'] = $default_value;
         }
     }
 
-    public function addMetaFormcomponentModuleConfiguration(&$ret, array $componentVariation, array &$props)
+    public function addMetaFormcomponentModuleConfiguration(&$ret, array $component, array &$props)
     {
-        if ($field = $this->getDbobjectField($componentVariation)) {
+        if ($field = $this->getDbobjectField($component)) {
             $ret['dbobject-field'] = $field;
         }
     }

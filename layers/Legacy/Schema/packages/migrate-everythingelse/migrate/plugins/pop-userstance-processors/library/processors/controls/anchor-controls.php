@@ -16,7 +16,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
     public final const MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT = 'buttoncontrol-stance-neutral-count';
     public final const MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT = 'buttoncontrol-stance-against-count';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT],
@@ -31,9 +31,9 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
         );
     }
 
-    public function getTarget(array $componentVariation, array &$props)
+    public function getTarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -46,13 +46,13 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 return POP_TARGET_QUICKVIEW;
         }
 
-        return parent::getTarget($componentVariation, $props);
+        return parent::getTarget($component, $props);
     }
 
-    public function getMutableonrequestText(array $componentVariation, array &$props)
+    public function getMutableonrequestText(array $component, array &$props)
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                     self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => $neutral,
                     self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT => $against,
                 );
-                $label = $labels[$componentVariation[1]];
+                $label = $labels[$component[1]];
                 $cats = array(
                     self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_PRO,
                     self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT => POP_USERSTANCE_TERM_STANCE_NEUTRAL,
@@ -108,20 +108,20 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
 
                 $query = array();
 
-                if (in_array($componentVariation, $general)) {
+                if (in_array($component, $general)) {
                       // Query all the General thoughts about TPP: add query args
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsGeneralstances($query);
-                } elseif (in_array($componentVariation, $article)) {
+                } elseif (in_array($component, $article)) {
                      // Query all the General thoughts about TPP: add query args
                     UserStance_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsPoststances($query);
-                } elseif (in_array($componentVariation, $combined)) {
+                } elseif (in_array($component, $combined)) {
                     $query['custompost-types'] = [POP_USERSTANCE_POSTTYPE_USERSTANCE];
                 }
 
                 // Override the category
                 $query['tax-query'][] = [
                     'taxonomy' => POP_USERSTANCE_TAXONOMY_STANCE,
-                    'terms'    => $cats[$componentVariation[1]],
+                    'terms'    => $cats[$component[1]],
                 ];
 
                 // // All results
@@ -137,9 +137,9 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
                 );
         }
 
-        return parent::getMutableonrequestText($componentVariation, $props);
+        return parent::getMutableonrequestText($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $routes = array(
             self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT => POP_USERSTANCE_ROUTE_STANCES_PRO_GENERAL,
@@ -152,13 +152,13 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$componentVariation[1]] ?? null) {
+        if ($route = $routes[$component[1]] ?? null) {
             return getRouteIcon($route, false);
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
-    public function getHref(array $componentVariation, array &$props)
+    public function getHref(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
         $routes = array(
@@ -172,15 +172,15 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT => POP_USERSTANCE_ROUTE_STANCES_NEUTRAL,
             self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
         );
-        if ($route = $routes[$componentVariation[1]] ?? null) {
+        if ($route = $routes[$component[1]] ?? null) {
             return RouteUtils::getRouteURL($route);
         }
 
-        return parent::getHref($componentVariation, $props);
+        return parent::getHref($component, $props);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_GENERALCOUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_AGAINST_GENERALCOUNT:
@@ -190,11 +190,11 @@ class UserStance_Module_Processor_CustomAnchorControls extends PoP_Module_Proces
             case self::MODULE_ANCHORCONTROL_STANCE_PRO_COUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_NEUTRAL_COUNT:
             case self::MODULE_ANCHORCONTROL_STANCE_AGAINST_COUNT:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-link');
+                $this->appendProp($component, $props, 'class', 'btn btn-link');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

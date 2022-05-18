@@ -5,7 +5,7 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
     public final const MODULE_SIDEBARMULTICOMPONENT_TAGLEFT = 'sidebarmulticomponent-tagleft';
     public final const MODULE_SIDEBARMULTICOMPONENT_TAGRIGHT = 'sidebarmulticomponent-tagright';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT],
@@ -13,11 +13,11 @@ class GD_Custom_Module_Processor_TagMultipleSidebarComponents extends PoP_Module
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_TAGLEFT:
                 $ret[] = [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_TAGSOCIALMEDIA];
                 break;

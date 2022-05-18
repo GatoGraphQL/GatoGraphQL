@@ -29,13 +29,13 @@ class PoP_UserState_EngineHooks
         );
     }
 
-    public function start($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
+    public function start($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-userstatedata-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $componentVariation, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
+    public function calculateDataloadingModuleData(array $component, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array)
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -45,7 +45,7 @@ class PoP_UserState_EngineHooks
         }
     }
 
-    public function end($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
+    public function end($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine)
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

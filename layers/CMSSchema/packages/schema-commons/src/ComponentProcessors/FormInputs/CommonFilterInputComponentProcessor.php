@@ -75,7 +75,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         return $this->stringScalarTypeResolver ??= $this->instanceManager->getInstance(StringScalarTypeResolver::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUT_SORT],
@@ -96,7 +96,7 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         );
     }
 
-    public function getFilterInput(array $componentVariation): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERINPUT_SORT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_SORT],
@@ -115,12 +115,12 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             self::MODULE_FILTERINPUT_DATEFORMAT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_DATEFORMAT],
             self::MODULE_FILTERINPUT_GMT => [FilterInputProcessor::class, FilterInputProcessor::FILTERINPUT_GMT],
         ];
-        return $filterInputs[$componentVariation[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUT_SORT:
                 return OrderFormInput::class;
             case self::MODULE_FILTERINPUT_IDS:
@@ -135,13 +135,13 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
                 return BooleanFormInput::class;
         }
 
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
         // Add a nice name, so that the URL params when filtering make sense
-        return match ((string) $componentVariation[1]) {
+        return match ((string) $component[1]) {
             self::MODULE_FILTERINPUT_SORT => 'order',
             self::MODULE_FILTERINPUT_LIMIT => 'limit',
             self::MODULE_FILTERINPUT_OFFSET => 'offset',
@@ -157,13 +157,13 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
             self::MODULE_FILTERINPUT_SLUG => 'slug',
             self::MODULE_FILTERINPUT_DATEFORMAT => 'format',
             self::MODULE_FILTERINPUT_GMT => 'gmt',
-            default => parent::getName($componentVariation),
+            default => parent::getName($component),
         };
     }
 
-    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match ((string)$componentVariation[1]) {
+        return match ((string)$component[1]) {
             self::MODULE_FILTERINPUT_SORT => $this->getStringScalarTypeResolver(),
             self::MODULE_FILTERINPUT_LIMIT => $this->getIntScalarTypeResolver(),
             self::MODULE_FILTERINPUT_OFFSET => $this->getIntScalarTypeResolver(),
@@ -183,9 +183,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputTypeModifiers(array $componentVariation): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_FILTERINPUT_IDS,
             self::MODULE_FILTERINPUT_EXCLUDE_IDS,
             self::MODULE_FILTERINPUT_PARENT_IDS,
@@ -197,9 +197,9 @@ class CommonFilterInputComponentProcessor extends AbstractFilterInputComponentPr
         };
     }
 
-    public function getFilterInputDescription(array $componentVariation): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
-        return match ((string)$componentVariation[1]) {
+        return match ((string)$component[1]) {
             self::MODULE_FILTERINPUT_SORT => $this->__('Order the results. Specify the \'orderby\' and \'order\' (\'ASC\' or \'DESC\') fields in this format: \'orderby|order\'', 'schema-commons'),
             self::MODULE_FILTERINPUT_LIMIT => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
             self::MODULE_FILTERINPUT_OFFSET => $this->__('Offset the results by how many positions', 'schema-commons'),

@@ -16,9 +16,9 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
             POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_COMMUNITIES],
             POP_USERCOMMUNITIES_ROUTE_MYMEMBERS => [PoP_UserCommunities_ComponentProcessor_SectionBlocks::class, PoP_UserCommunities_ComponentProcessor_SectionBlocks::MODULE_BLOCK_TABPANEL_MYMEMBERS],
         );
-        foreach ($routemodules as $route => $componentVariation) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],
@@ -29,9 +29,9 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
         $routemodules = array(
             POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_AuthorSectionBlocks::MODULE_BLOCK_TABPANEL_AUTHORCOMMUNITYMEMBERS],
         );
-        foreach ($routemodules as $route => $componentVariation) {
+        foreach ($routemodules as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

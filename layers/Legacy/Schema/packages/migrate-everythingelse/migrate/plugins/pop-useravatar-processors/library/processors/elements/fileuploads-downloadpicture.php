@@ -4,7 +4,7 @@ class PoP_Module_Processor_DownloadPictureFileUpload extends PoP_Module_Processo
 {
     public final const MODULE_FILEUPLOAD_PICTURE_DOWNLOAD = 'fileupload-picture-download';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILEUPLOAD_PICTURE_DOWNLOAD],

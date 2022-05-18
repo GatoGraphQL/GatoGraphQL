@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
     public final const MODULE_TABLE_MYEVENTS = 'table-myevents';
     public final const MODULE_TABLE_MYPASTEVENTS = 'table-mypastevents';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLE_MYEVENTS],
@@ -14,9 +14,9 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYEVENTS:
             case self::MODULE_TABLE_MYPASTEVENTS:
                 $inners = array(
@@ -24,17 +24,17 @@ class GD_EM_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
                     self::MODULE_TABLE_MYPASTEVENTS => [GD_EM_Module_Processor_TableInners::class, GD_EM_Module_Processor_TableInners::MODULE_TABLEINNER_MYPASTEVENTS],
                 );
 
-                return $inners[$componentVariation[1]];
+                return $inners[$component[1]];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
-        $ret = parent::getHeaderTitles($componentVariation);
+        $ret = parent::getHeaderTitles($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYEVENTS:
                 $ret[] = TranslationAPIFacade::getInstance()->__('Event', 'poptheme-wassup');
                 $ret[] = TranslationAPIFacade::getInstance()->__('When', 'poptheme-wassup');

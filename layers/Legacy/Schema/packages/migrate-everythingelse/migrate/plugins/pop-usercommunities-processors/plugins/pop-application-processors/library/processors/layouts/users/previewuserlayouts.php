@@ -4,53 +4,53 @@ class PoP_UserCommunities_Module_Processor_PreviewUserLayouts extends PoP_Module
 {
     public final const MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS = 'layout-previewuser-editmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS],
         );
     }
 
-    public function getQuicklinkgroupBottomSubmodule(array $componentVariation)
+    public function getQuicklinkgroupBottomSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_USER_EDITMEMBERS];
         }
 
-        return parent::getQuicklinkgroupBottomSubmodule($componentVariation);
+        return parent::getQuicklinkgroupBottomSubmodule($component);
     }
 
-    public function getUseravatarSubmodule(array $componentVariation)
+    public function getUseravatarSubmodule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                     return [PoP_Module_Processor_UserAvatarLayouts::class, PoP_Module_Processor_UserAvatarLayouts::MODULE_LAYOUT_USERAVATAR_60_RESPONSIVE];
             }
         }
 
-        return parent::getUseravatarSubmodule($componentVariation);
+        return parent::getUseravatarSubmodule($component);
     }
 
-    public function showShortDescription(array $componentVariation)
+    public function showShortDescription(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return false;
         }
 
-        return parent::showShortDescription($componentVariation);
+        return parent::showShortDescription($component);
     }
 
-    public function horizontalMediaLayout(array $componentVariation)
+    public function horizontalMediaLayout(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWUSER_EDITMEMBERS:
                 return true;
         }
 
-        return parent::horizontalMediaLayout($componentVariation);
+        return parent::horizontalMediaLayout($component);
     }
 }
 

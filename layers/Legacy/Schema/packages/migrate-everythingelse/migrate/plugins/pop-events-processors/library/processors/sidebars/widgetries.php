@@ -8,7 +8,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
     public final const MODULE_EM_WIDGETCOMPACT_EVENTINFO = 'em-widgetcompact-eventinfo';
     public final const MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO = 'em-widgetcompact-pasteventinfo';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS],
@@ -18,11 +18,11 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 break;
@@ -57,7 +57,7 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
         return $ret;
     }
 
-    public function getMenuTitle(array $componentVariation, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
             self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS => TranslationAPIFacade::getInstance()->__('Date/Time', 'poptheme-wassup'),
@@ -66,9 +66,9 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO => TranslationAPIFacade::getInstance()->__('Past Event', 'poptheme-wassup'),
         );
 
-        return $titles[$componentVariation[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS => 'fa-calendar',
@@ -77,11 +77,11 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
             self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO => 'fa-calendar',
         );
 
-        return $fontawesomes[$componentVariation[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $componentVariation, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS:
             case self::MODULE_EM_WIDGET_DATETIME:
                 return 'list-group';
@@ -91,11 +91,11 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
                 return 'list-group list-group-sm';
         }
 
-        return parent::getBodyClass($componentVariation, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $componentVariation, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_WIDGET_DATETIMEDOWNLOADLINKS:
             case self::MODULE_EM_WIDGET_DATETIME:
                 return 'list-group-item';
@@ -105,18 +105,18 @@ class GD_EM_Module_Processor_SidebarComponents extends PoP_Module_Processor_Widg
                 return 'pop-hide-empty list-group-item';
         }
 
-        return parent::getItemWrapper($componentVariation, $props);
+        return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $componentVariation, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_WIDGETCOMPACT_EVENTINFO:
             case self::MODULE_EM_WIDGETCOMPACT_PASTEVENTINFO:
                 // return 'panel panel-info panel-sm';
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($componentVariation, $props);
+        return parent::getWidgetClass($component, $props);
     }
 }
 

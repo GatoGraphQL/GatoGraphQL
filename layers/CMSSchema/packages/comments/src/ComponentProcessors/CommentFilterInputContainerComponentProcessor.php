@@ -26,7 +26,7 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTS = 'filterinputcontainer-custompost-admincomments';
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_ADMINCOMMENTCOUNT = 'filterinputcontainer-custompost-admincommentcount';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENTS],
@@ -44,10 +44,10 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
         $responseFilterInputModules = [
-            ...$this->getIDFilterInputComponentVariations(),
+            ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_TYPES],
         ];
@@ -67,8 +67,8 @@ class CommentFilterInputContainerComponentProcessor extends AbstractFilterInputC
         $adminCommentFilterInputModules = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
-        return match ((string)$componentVariation[1]) {
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        return match ((string)$component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_RESPONSECOUNT => $responseFilterInputModules,
             self::MODULE_FILTERINPUTCONTAINER_RESPONSES => [
                 ...$responseFilterInputModules,

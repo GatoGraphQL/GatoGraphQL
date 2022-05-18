@@ -2,12 +2,12 @@
 
 abstract class PoP_Module_Processor_FormInnersBase extends PoP_Module_Processor_StructureInnersBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORM_INNER];
     }
 
-    // function getModuleCbActions(array $componentVariation, array &$props) {
+    // function getModuleCbActions(array $component, array &$props) {
     
     //     // The form inner module, execute it only when doing init-lazy, eg: Edit Individual Profile
     //     // Otherwise do not re-merge it, no need for the form

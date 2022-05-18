@@ -3,9 +3,9 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_CreateUserFormMesageFeedbackLayoutsBase extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
             
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
         $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Your user account was created successfully!', 'pop-coreprocessors');

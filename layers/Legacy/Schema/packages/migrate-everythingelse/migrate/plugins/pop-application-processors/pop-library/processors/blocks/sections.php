@@ -7,7 +7,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
     public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL = 'block-singleauthors-scroll-thumbnail';
     public final const MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST = 'block-singleauthors-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS],
@@ -17,32 +17,32 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => POP_ROUTE_AUTHORS,
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL => POP_ROUTE_AUTHORS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_DETAILS],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_THUMBNAIL => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_LIST => [PoP_Module_Processor_CustomSectionDataloads::class, PoP_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLEAUTHORS_SCROLL_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Single Authors has no filter, so show only the Share control
             case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SINGLEAUTHORS_SCROLL_FULLVIEW:
@@ -51,7 +51,7 @@ class PoP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 }
 

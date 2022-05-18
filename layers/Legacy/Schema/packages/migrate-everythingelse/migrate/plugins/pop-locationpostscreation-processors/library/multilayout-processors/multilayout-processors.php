@@ -6,18 +6,18 @@ use PoPCMSSchema\LocationPosts\TypeResolvers\ObjectType\LocationPostObjectTypeRe
 
 class PoP_LocationPostsCreation_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         switch ($handle) {
             case POP_MULTILAYOUT_HANDLE_POSTCONTENT:
-                $location_componentVariations = array();
+                $location_components = array();
                 if ($handle == POP_MULTILAYOUT_HANDLE_POSTCONTENT) {
-                    $location_componentVariations = array(
+                    $location_components = array(
                         POP_FORMAT_TABLE => [PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::class, PoP_LocationPostsCreation_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_EDIT],
                     );
                 }
 
-                if ($layout = $location_componentVariations[$format] ?? null) {
+                if ($layout = $location_components[$format] ?? null) {
                     $instanceManager = InstanceManagerFacade::getInstance();
                     /** @var RelationalTypeResolverInterface */
                     $locationPostTypeResolver = $instanceManager->getInstance(LocationPostObjectTypeResolver::class);

@@ -7,7 +7,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT = 'layout-feedbackmessage-createcontent';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT = 'layout-feedbackmessage-updatecontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_FLAG],
@@ -16,11 +16,11 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_FLAG:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Flag received successfully.', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("Noted, we will evaluate your feedback and take appropriate action.", 'pop-genericforms');
@@ -31,8 +31,8 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
 
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT:
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT:
-                $name = $this->getProp($componentVariation, $props, 'objectname');
-                if ($componentVariation == [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT]) {
+                $name = $this->getProp($component, $props, 'objectname');
+                if ($component == [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT]) {
                     $ret['success-header'] = sprintf(
                         TranslationAPIFacade::getInstance()->__('Your %s was created successfully!', 'pop-userstance-processors'),
                         $name
@@ -41,7 +41,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
                         TranslationAPIFacade::getInstance()->__('Your %s was updated successfully!', 'pop-userstance-processors'),
                         $name
                     );
-                } elseif ($componentVariation == [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT]) {
+                } elseif ($component == [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT]) {
                     $ret['success-header'] = sprintf(
                         TranslationAPIFacade::getInstance()->__('Your %s was updated successfully.', 'pop-userstance-processors'),
                         $name
@@ -53,16 +53,16 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageLayouts extends PoP_Mo
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATECONTENT:
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_UPDATECONTENT:
-                $this->setProp($componentVariation, $props, 'objectname', TranslationAPIFacade::getInstance()->__('content', 'poptheme-wassup'));
+                $this->setProp($component, $props, 'objectname', TranslationAPIFacade::getInstance()->__('content', 'poptheme-wassup'));
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

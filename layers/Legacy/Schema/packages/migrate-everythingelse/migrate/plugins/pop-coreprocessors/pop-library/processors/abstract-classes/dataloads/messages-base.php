@@ -5,27 +5,27 @@ use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 
 abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getCustomPostTypes(array $componentVariation)
+    public function getCustomPostTypes(array $component)
     {
         return [];
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
         $cmsService = CMSServiceFacade::getInstance();
         if ($sticky = $cmsService->getOption('sticky_posts')) {
             $ret['include'] = [$sticky];
-            $ret['custompost-types'] = $this->getCustomPostTypes($componentVariation);
+            $ret['custompost-types'] = $this->getCustomPostTypes($component);
         }
 
         return $ret;
     }
 
-    protected function addHeaddatasetmoduleDataProperties(&$ret, array $componentVariation, array &$props)
+    protected function addHeaddatasetmoduleDataProperties(&$ret, array $component, array &$props)
     {
-        parent::addHeaddatasetmoduleDataProperties($ret, $componentVariation, $props);
+        parent::addHeaddatasetmoduleDataProperties($ret, $component, $props);
 
         // If no sticky posts, then make sure we're bringing no results
         $cmsService = CMSServiceFacade::getInstance();
@@ -34,7 +34,7 @@ abstract class PoP_Module_Processor_MessageDataloadsBase extends PoP_Module_Proc
         }
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
     }

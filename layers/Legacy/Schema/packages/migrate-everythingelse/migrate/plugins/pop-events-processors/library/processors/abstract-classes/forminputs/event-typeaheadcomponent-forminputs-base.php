@@ -4,9 +4,9 @@ use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
 abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extends PoP_Module_Processor_PostTypeaheadComponentFormInputsBase
 {
-    protected function getThumbprintQuery(array $componentVariation, array &$props)
+    protected function getThumbprintQuery(array $component, array &$props)
     {
-        $ret = parent::getThumbprintQuery($componentVariation, $props);
+        $ret = parent::getThumbprintQuery($component, $props);
 
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $ret['custompost-types'] = [$eventTypeAPI->getEventCustomPostType()];
@@ -14,11 +14,11 @@ abstract class PoP_Module_Processor_EventTypeaheadComponentFormInputsBase extend
         return $ret;
     }
 
-    protected function getPendingMsg(array $componentVariation)
+    protected function getPendingMsg(array $component)
     {
         return TranslationAPIFacade::getInstance()->__('Loading Events', 'em-popprocessors');
     }
-    protected function getNotfoundMsg(array $componentVariation)
+    protected function getNotfoundMsg(array $component)
     {
         return TranslationAPIFacade::getInstance()->__('No Events found', 'em-popprocessors');
     }

@@ -19,7 +19,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
     public final const MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST = 'blog-dataload-relationalfields-tagcontentlist';
     public final const MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST = 'blog-dataload-relationalfields-singleauthorlist';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
@@ -34,9 +34,9 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         );
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -57,12 +57,12 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_USERLIST:
@@ -75,14 +75,14 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
         }
 
-        return parent::getQueryInputOutputHandler($componentVariation);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST:
                 PoP_Module_Processor_CustomSectionBlocksUtils::addDataloadqueryargsAuthorcontent($ret);
@@ -103,11 +103,11 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
 
         return $ret;
     }
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_POSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGPOSTLIST:
@@ -126,9 +126,9 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
         return $ret;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CONTENT];
 
@@ -154,7 +154,7 @@ class PoP_Blog_Module_Processor_FieldDataloads extends AbstractRelationalFieldDa
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_TAGCONTENT];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 }
 

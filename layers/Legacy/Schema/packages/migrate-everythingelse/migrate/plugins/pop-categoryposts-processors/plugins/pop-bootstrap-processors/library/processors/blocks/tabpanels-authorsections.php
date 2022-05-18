@@ -25,7 +25,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
     public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 = 'block-tabpanel-authorcategoryposts18';
     public final const MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 = 'block-tabpanel-authorcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00],
@@ -51,9 +51,9 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS01,
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS02,
@@ -74,18 +74,18 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS17 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS17,
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS18,
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($componentVariation[1]) {
+                switch ($component[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:
@@ -134,16 +134,16 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS18 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS19 => [CPP_Module_Processor_AuthorSectionTabPanelComponents::class, CPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_AUTHORCATEGORYPOSTS02:
@@ -167,7 +167,7 @@ class CPP_Module_Processor_AuthorTabPanelSectionBlocks extends PoP_Module_Proces
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCATEGORYPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

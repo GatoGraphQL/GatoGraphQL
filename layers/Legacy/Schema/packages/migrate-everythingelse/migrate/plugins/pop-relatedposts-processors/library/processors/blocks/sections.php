@@ -8,7 +8,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
     public final const MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL = 'block-singlerelatedcontent-scroll-thumbnail';
     public final const MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST = 'block-singlerelatedcontent-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS],
@@ -19,21 +19,21 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_THUMBNAIL => POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW => [PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::class, PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW],
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW => [PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::class, PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS => [PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::class, PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_DETAILS],
@@ -41,12 +41,12 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
             self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_LIST => [PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::class, PoP_RelatedPosts_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_SINGLERELATEDCONTENT_SCROLL_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getSectionfilterModule(array $componentVariation)
+    protected function getSectionfilterModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
@@ -58,12 +58,12 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
                 break;
         }
 
-        return parent::getSectionfilterModule($componentVariation);
+        return parent::getSectionfilterModule($component);
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
@@ -72,12 +72,12 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getLatestcountSubmodule(array $componentVariation)
+    public function getLatestcountSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_DETAILS:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_SINGLERELATEDCONTENT_SCROLL_FULLVIEW:
@@ -85,7 +85,7 @@ class PoP_RelatedPosts_Module_Processor_CustomSectionBlocks extends PoP_Module_P
                 return [PoP_Module_Processor_LatestCounts::class, PoP_Module_Processor_LatestCounts::MODULE_LATESTCOUNT_SINGLE_CONTENT];
         }
 
-        return parent::getLatestcountSubmodule($componentVariation);
+        return parent::getLatestcountSubmodule($component);
     }
 }
 

@@ -9,7 +9,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     public final const MODULE_FEEDBACKMESSAGEINNER_CREATECONTENT = 'feedbackmessageinner-createcontent';
     public final const MODULE_FEEDBACKMESSAGEINNER_UPDATECONTENT = 'feedbackmessageinner-updatecontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGEINNER_FLAG],
@@ -18,9 +18,9 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_FEEDBACKMESSAGEINNER_FLAG => [PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_FLAG],
@@ -28,7 +28,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
             self::MODULE_FEEDBACKMESSAGEINNER_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::class, PoP_ContentCreation_Module_Processor_FeedbackMessageAlertLayouts::MODULE_LAYOUT_FEEDBACKMESSAGEALERT_UPDATECONTENT],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 
@@ -39,11 +39,11 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessageInners extends PoP_Mod
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getDataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FEEDBACKMESSAGEINNER_CREATECONTENT:
                 // If $executed != null, then $checkpoint succeded, no need to ask for this condition before printing the messages
                 if ($executed) {

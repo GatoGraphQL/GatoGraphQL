@@ -9,7 +9,7 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
     public final const MODULE_DELEGATORFILTER_EVENTS = 'delegatorfilter-events';
     public final const MODULE_DELEGATORFILTER_EVENTSCALENDAR = 'delegatorfilter-eventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DELEGATORFILTER_EVENTS],
@@ -21,7 +21,7 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_DELEGATORFILTER_EVENTS => [PoP_Events_Module_Processor_CustomSimpleFilterInners::class, PoP_Events_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_EVENTS],
@@ -32,11 +32,11 @@ class PoP_Events_Module_Processor_CustomDelegatorFilters extends PoP_Module_Proc
             self::MODULE_DELEGATORFILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomSimpleFilterInners::class, PoP_Events_Module_Processor_CustomSimpleFilterInners::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

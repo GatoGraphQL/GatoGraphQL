@@ -5,18 +5,18 @@ class PoP_Module_Processor_UserFeedbackMessageLayouts extends PoP_Module_Process
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES = 'layout-feedbackmessage-mypreferences';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES],
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_MYPREFERENCES:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Preferences saved.', 'pop-coreprocessors');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__('You have successfully updated your preferences.', 'pop-coreprocessors');

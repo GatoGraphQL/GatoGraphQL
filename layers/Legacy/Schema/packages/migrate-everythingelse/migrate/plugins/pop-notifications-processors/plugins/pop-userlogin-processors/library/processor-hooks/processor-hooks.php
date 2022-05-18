@@ -6,7 +6,7 @@ class AAL_PoPProcessors_ProcessorHooks
     {
         \PoP\Root\App::addFilter(
             'PoP_Module_Processor_UserAccountUtils:login:modules',
-            $this->getLoginComponentVariations(...)
+            $this->getLoginComponents(...)
         );
     }
 
@@ -18,14 +18,14 @@ class AAL_PoPProcessors_ProcessorHooks
         );
     }
 
-    public function getLoginComponentVariations($componentVariations)
+    public function getLoginComponents($components)
     {
 
         // Add the Notifications since the last time the user fetched content from website
         if ($this->enableLatestnotifications()) {
-            $componentVariations[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::MODULE_MULTIPLE_LATESTNOTIFICATIONS];
+            $components[] = [AAL_PoPProcessors_Module_Processor_Multiples::class, AAL_PoPProcessors_Module_Processor_Multiples::MODULE_MULTIPLE_LATESTNOTIFICATIONS];
         }
-        return $componentVariations;
+        return $components;
     }
 }
 

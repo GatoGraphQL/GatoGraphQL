@@ -10,7 +10,7 @@ class GetPoPDemo_ResourceLoader_Hooks
         );
     }
 
-    public function getCollapseHometopModule(?array $componentVariation)
+    public function getCollapseHometopModule(?array $component)
     {
         return [GetPoPDemo_Module_Processor_TopLevelCollapseComponents::class, GetPoPDemo_Module_Processor_TopLevelCollapseComponents::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP];
     }

@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
     public final const MODULE_BLOCK_INVITENEWMEMBERS = 'block-invitemembers';
     public final const MODULE_BLOCK_EDITMEMBERSHIP = 'block-editmembership';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE],
@@ -16,20 +16,20 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_EDITMEMBERSHIP => POP_USERCOMMUNITIES_ROUTE_EDITMEMBERSHIP,
             self::MODULE_BLOCK_INVITENEWMEMBERS => POP_USERCOMMUNITIES_ROUTE_INVITENEWMEMBERS,
             self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => POP_USERCOMMUNITIES_ROUTE_MYCOMMUNITIES,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getDescription(array $componentVariation, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_INVITENEWMEMBERS:
                 return sprintf(
                     '<div class="alert alert-info"><p>%s</p><ul><li>%s</li><li>%s</li></ul></div>',
@@ -42,34 +42,34 @@ class GD_URE_Module_Processor_ProfileBlocks extends PoP_Module_Processor_BlocksB
                 );
         }
 
-        return parent::getDescription($componentVariation, $props);
+        return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_MYCOMMUNITIES_UPDATE],
             self::MODULE_BLOCK_INVITENEWMEMBERS => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_INVITENEWMEMBERS],
             self::MODULE_BLOCK_EDITMEMBERSHIP => [GD_URE_Module_Processor_ProfileDataloads::class, GD_URE_Module_Processor_ProfileDataloads::MODULE_DATALOAD_EDITMEMBERSHIP],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $componentVariation, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_MYCOMMUNITIES_UPDATE:
             case self::MODULE_BLOCK_EDITMEMBERSHIP:
                 return true;
         }
 
-        return parent::showDisabledLayerIfCheckpointFailed($componentVariation, $props);
+        return parent::showDisabledLayerIfCheckpointFailed($component, $props);
         ;
     }
 }

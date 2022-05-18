@@ -12,32 +12,32 @@ class PoPTheme_Wassup_PageSectionHooks
         );
     }
 
-    public function initModelPropsSideinfo(array $componentVariation, $props_in_array, $processor)
+    public function initModelPropsSideinfo(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
 
-        $subComponentVariation = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
-        // if (in_array($subComponentVariation, $processor->getSubComponentVariations($componentVariation))) {
+        $subComponent = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
+        // if (in_array($subComponent, $processor->getSubComponents($component))) {
 
         // We need to lazy-load it, so that it doesn't change the ETag value
         // for when visiting any one page on the site (eg: viewing a post should not say "click here to update" since the post itself was not updated,
         // only the sideinfo with some unrelated content was)
         if (defined('POP_SERVICEWORKERS_INITIALIZED')) {
             if (!PoP_ServiceWorkers_ServerUtils::disableServiceworkers()) {
-                $processor->setProp($subComponentVariation, $props, 'lazy-load', true);
+                $processor->setProp($subComponent, $props, 'lazy-load', true);
             }
         }
 
         // Comment Leo 29/10/2017: we can't use skeleton screen, since it will then load posts
         // which may change the ETag value for the page... not worth it
         // // Use the Skeleton screen to load the lazy-load content
-        // $processor->setProp($subComponentVariation, $ret, 'use-skeletonscreen', true);
+        // $processor->setProp($subComponent, $ret, 'use-skeletonscreen', true);
         // }
 
         // Formatting
         $processor->setProp([PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_TAGS_LIST], $props, 'show-fetchmore', false);
-        $processor->setProp($subComponentVariation, $props, 'title-htmltag', 'h4');
-        $processor->setProp($subComponentVariation, $props, 'add-titlelink', true);
+        $processor->setProp($subComponent, $props, 'title-htmltag', 'h4');
+        $processor->setProp($subComponent, $props, 'add-titlelink', true);
 
         // Limit to only few elems
         $processor->setProp([PoP_TrendingTags_Module_Processor_SectionDataloads::class, PoP_TrendingTags_Module_Processor_SectionDataloads::MODULE_DATALOAD_TRENDINGTAGS_SCROLL_LIST], $props, 'limit', 5);

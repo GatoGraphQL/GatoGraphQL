@@ -8,7 +8,7 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
     public final const MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS = 'block-tabpanel-authorpastevents';
     public final const MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR = 'block-tabpanel-authoreventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS],
@@ -17,14 +17,14 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($componentVariation[1]) {
+                switch ($component[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR:
@@ -39,16 +39,16 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORPASTEVENTS],
             self::MODULE_BLOCK_TABPANEL_AUTHOREVENTSCALENDAR => [GD_EM_Module_Processor_AuthorSectionTabPanelComponents::class, GD_EM_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHOREVENTSCALENDAR],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_AUTHOREVENTS:
             case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTS];
@@ -57,14 +57,14 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
                 return [PoP_Events_Module_Processor_CustomFilters::class, PoP_Events_Module_Processor_CustomFilters::MODULE_FILTER_AUTHOREVENTSCALENDAR];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($filter_componentVariation = $this->getDelegatorfilterSubmodule($componentVariation)) {
+        if ($filter_component = $this->getDelegatorfilterSubmodule($component)) {
             // Events: choose to only select past/future
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_BLOCK_TABPANEL_AUTHORPASTEVENTS:
                     $daterange_class = 'daterange-past opens-right';
                     break;
@@ -74,11 +74,11 @@ class GD_EM_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
                     break;
             }
             if ($daterange_class) {
-                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_componentVariation]);
+                $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class, [$filter_component]);
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

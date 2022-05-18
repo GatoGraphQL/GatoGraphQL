@@ -15,26 +15,26 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_ROUTE_AUTHORS => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_POSTAUTHORSSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             RoutingRoutes::$MAIN => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_MAINCONTENT_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             RoutingRoutes::$MAIN => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR],
             POP_ROUTE_DESCRIPTION => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
 
         return $ret;
@@ -49,27 +49,27 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
 
         // Default for Single
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
+            'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_SIDEBAR]
         ];
 
         // Default for Author
         $ret[UserRequestNature::USER][] = [
-            'component-variation' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR]
+            'component' => [PoP_Blog_Module_Processor_SidebarMultiples::class, PoP_Blog_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOR_SIDEBAR]
         ];
 
         // Default for Tag
         $ret[TagRequestNature::TAG][] = [
-            'component-variation' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
+            'component' => [PoP_Module_Processor_CustomSidebarDataloads::class, PoP_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_TAG_SIDEBAR]
         ];
 
         // Default for Home
         // Allow GetPoP website to change the sidebar, since it is changing the homeroute
-        $home_componentVariation = \PoP\Root\App::applyFilters(
+        $home_component = \PoP\Root\App::applyFilters(
             'PoPTheme_Wassup_PageSectionSettingsProcessor:sideinfo_home:blockgroup',
             [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_HOMESECTION_CONTENT_SIDEBAR]
         );
         $ret[RequestNature::HOME][] = [
-            'component-variation' => $home_componentVariation,
+            'component' => $home_component,
         ];
 
         return $ret;
@@ -84,7 +84,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
 
         // For the body, instead of adding no SideInfo, add the one that causes the SideInfo to close. This way, if we open a route without Sideinfo (eg: Add Post), from one which does (eg: Posts), then make it close, otherwise the Sideinfo from the 1st route will remain open
         $ret[] = [
-            'component-variation' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO],
+            'component' => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_EMPTYSIDEINFO],
         ];
 
         return $ret;

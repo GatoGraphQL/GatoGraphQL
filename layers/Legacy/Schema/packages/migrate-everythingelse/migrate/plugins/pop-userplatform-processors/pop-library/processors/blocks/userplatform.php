@@ -7,7 +7,7 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
     public final const MODULE_BLOCK_MYPREFERENCES = 'block-mypreferences';
     public final const MODULE_BLOCK_INVITENEWUSERS = 'block-inviteusers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_USER_CHANGEPASSWORD],
@@ -16,31 +16,31 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_INVITENEWUSERS => POP_USERPLATFORM_ROUTE_INVITENEWUSERS,
             self::MODULE_BLOCK_MYPREFERENCES => POP_USERPLATFORM_ROUTE_MYPREFERENCES,
             self::MODULE_BLOCK_USER_CHANGEPASSWORD => POP_USERPLATFORM_ROUTE_CHANGEPASSWORDPROFILE,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function showDisabledLayerIfCheckpointFailed(array $componentVariation, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_MYPREFERENCES:
                 return true;
         }
 
-        return parent::showDisabledLayerIfCheckpointFailed($componentVariation, $props);
+        return parent::showDisabledLayerIfCheckpointFailed($component, $props);
         ;
     }
 
-    protected function getDescription(array $componentVariation, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_INVITENEWUSERS:
                 // Allow Organik Fundraising to override it, changing the title to "Share by email"
                 return \PoP\Root\App::applyFilters(
@@ -55,20 +55,20 @@ class PoP_UserPlatform_Module_Processor_Blocks extends PoP_Module_Processor_Bloc
                 );
         }
 
-        return parent::getDescription($componentVariation, $props);
+        return parent::getDescription($component, $props);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_USER_CHANGEPASSWORD => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_USER_CHANGEPASSWORD],
             self::MODULE_BLOCK_MYPREFERENCES => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_MYPREFERENCES],
             self::MODULE_BLOCK_INVITENEWUSERS => [PoP_UserPlatform_Module_Processor_Dataloads::class, PoP_UserPlatform_Module_Processor_Dataloads::MODULE_DATALOAD_INVITENEWUSERS],
         );
 
-        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 

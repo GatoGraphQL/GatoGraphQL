@@ -5,7 +5,7 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
     public final const MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS = 'layout-previewnotification-details';
     public final const MODULE_LAYOUT_PREVIEWNOTIFICATION_LIST = 'layout-previewnotification-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS],
@@ -13,16 +13,16 @@ class PoP_Module_Processor_PreviewNotificationLayouts extends PoP_Module_Process
         );
     }
     
-    public function getUserAvatarModule(array $componentVariation)
+    public function getUserAvatarModule(array $component)
     {
         if (defined('POP_AVATARPROCESSORS_INITIALIZED')) {
-            switch ($componentVariation[1]) {
+            switch ($component[1]) {
                 case self::MODULE_LAYOUT_PREVIEWNOTIFICATION_DETAILS:
                     return [PoP_Module_Processor_PostAuthorAvatarLayouts::class, PoP_Module_Processor_PostAuthorAvatarLayouts::MODULE_LAYOUTPOST_AUTHORAVATAR60];
             }
         }
 
-        return parent::getUserAvatarModule($componentVariation);
+        return parent::getUserAvatarModule($component);
     }
 }
 

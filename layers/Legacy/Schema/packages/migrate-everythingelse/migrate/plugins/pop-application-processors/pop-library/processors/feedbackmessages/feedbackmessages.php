@@ -5,7 +5,7 @@ class PoP_Module_Processor_DomainFeedbackMessages extends PoP_Module_Processor_F
     public final const MODULE_FEEDBACKMESSAGE_ITEMLIST = 'feedbackmessage-itemlist';
     public final const MODULE_FEEDBACKMESSAGE_EMPTY = 'feedbackmessage-empty';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGE_ITEMLIST],
@@ -13,18 +13,18 @@ class PoP_Module_Processor_DomainFeedbackMessages extends PoP_Module_Processor_F
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FEEDBACKMESSAGE_ITEMLIST => [PoP_Module_Processor_ListFeedbackMessageInners::class, PoP_Module_Processor_ListFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_ITEMLIST],
             self::MODULE_FEEDBACKMESSAGE_EMPTY => [PoP_Module_Processor_DomainFeedbackMessageInners::class, PoP_Module_Processor_DomainFeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_EMPTY],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

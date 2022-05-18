@@ -8,7 +8,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
     public final const MODULE_ENTRY_PRINT = 'entry-print';
     public final const MODULE_ENTRY_EMBED = 'entry-embed';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ENTRY_DEFAULT],
@@ -17,9 +17,9 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ENTRY_DEFAULT:
                 return array(
                     [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_TOP],
@@ -56,41 +56,41 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
                 );
         }
 
-        return parent::getSubComponentVariations($componentVariation);
+        return parent::getSubComponents($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ENTRY_DEFAULT:
             case self::MODULE_ENTRY_PRINT:
             case self::MODULE_ENTRY_EMBED:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-pagesection-group pagesection-group');
+                $this->appendProp($component, $props, 'class', 'pop-pagesection-group pagesection-group');
 
                 $active_pagesections = array(
                     self::MODULE_ENTRY_DEFAULT => array('active-top', 'active-side'),
                     self::MODULE_ENTRY_EMBED => array('active-top'),
                 );
-                if ($active_pagesections[$componentVariation[1]] ?? null) {
-                    $this->appendProp($componentVariation, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$componentVariation[1]] ?? null)));
+                if ($active_pagesections[$component[1]] ?? null) {
+                    $this->appendProp($component, $props, 'class', implode(' ', PoPThemeWassup_Utils::getPagesectiongroupActivePagesectionClasses($active_pagesections[$component[1]] ?? null)));
                 }
 
                 // When loading the whole site, only the main pageSection can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the widgets
-                $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $subComponentVariations = array_diff(
-                    $this->getSubComponentVariations($componentVariation),
+                $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+                $subComponents = array_diff(
+                    $this->getSubComponents($component),
                     [
-                        $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
+                        $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)
                     ]
                 );
-                foreach ($subComponentVariations as $subComponentVariation) {
-                    $this->setProp($subComponentVariation, $props, 'ignore-request-params', true);
+                foreach ($subComponents as $subComponent) {
+                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

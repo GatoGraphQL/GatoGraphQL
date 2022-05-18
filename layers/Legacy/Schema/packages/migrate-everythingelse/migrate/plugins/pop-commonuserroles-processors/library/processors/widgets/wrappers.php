@@ -5,7 +5,7 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
     public final const MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS = 'ure-layoutwrapper-profileindividual-details';
     public final const MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS = 'ure-layoutwrapper-profileorganization-details';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS],
@@ -13,11 +13,11 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::class, GD_URE_Custom_Module_Processor_ProfileIndividualLayouts::MODULE_URE_LAYOUT_PROFILEINDIVIDUAL_DETAILS];
                 break;
@@ -30,11 +30,11 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEORGANIZATION_DETAILS:
                 $ret[] = [GD_URE_Custom_Module_Processor_WidgetMessages::class, GD_URE_Custom_Module_Processor_WidgetMessages::MODULE_URE_MESSAGE_NODETAILS];
@@ -44,9 +44,9 @@ class GD_URE_Custom_Module_Processor_SidebarComponentsWrappers extends PoP_Modul
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_PROFILEINDIVIDUAL_DETAILS:
                 return 'hasIndividualDetails';
 

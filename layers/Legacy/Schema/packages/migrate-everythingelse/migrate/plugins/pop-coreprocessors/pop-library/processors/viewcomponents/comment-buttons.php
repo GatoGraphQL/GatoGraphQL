@@ -6,31 +6,31 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
 {
     public final const MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY = 'viewcomponent-commentbutton-reply';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY],
         );
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $componentVariation)
+    public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return array(
                     [PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT],
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($componentVariation);
+        return parent::getTargetDynamicallyRenderedSubmodules($component);
     }
 
     /**
      * @return RelationalModuleField[]
      */
-    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $componentVariation)
+    public function getTargetDynamicallyRenderedSubcomponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return [
                     new RelationalModuleField(
@@ -42,28 +42,28 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
                 ];
         }
 
-        return parent::getTargetDynamicallyRenderedSubcomponentSubmodules($componentVariation);
+        return parent::getTargetDynamicallyRenderedSubcomponentSubmodules($component);
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY => [PoP_Module_Processor_ViewComponentButtonInners::class, PoP_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT]
         );
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
-                return $buttoninners[$componentVariation[1]];
+                return $buttoninners[$component[1]];
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 $ret .= ' btn btn-link btn-xs';
                 break;
@@ -72,34 +72,34 @@ class PoP_Module_Processor_CommentViewComponentButtons extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return 'replycommentURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_COMMENT_REPLY:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-hidden-print');
+                $this->appendProp($component, $props, 'class', 'pop-hidden-print');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

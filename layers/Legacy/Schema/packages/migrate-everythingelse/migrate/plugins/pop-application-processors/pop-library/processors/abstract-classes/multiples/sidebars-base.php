@@ -2,51 +2,51 @@
 
 abstract class PoP_Module_Processor_SidebarMultiplesBase extends PoP_Module_Processor_MultiplesBase
 {
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
         return array();
     }
 
-    protected function getScreen(array $componentVariation)
+    protected function getScreen(array $component)
     {
         return null;
     }
 
-    protected function getScreengroup(array $componentVariation)
+    protected function getScreengroup(array $component)
     {
         return null;
     }
 
-    protected function getPermanentSubmodules(array $componentVariation)
+    protected function getPermanentSubmodules(array $component)
     {
 
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SidebarMultiplesBase:modules',
             array(),
-            $this->getScreengroup($componentVariation),
-            $this->getScreen($componentVariation),
-            $componentVariation
+            $this->getScreengroup($component),
+            $this->getScreen($component),
+            $component
         );
     }
     
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         // Add the corresponding blocks
-        if ($componentVariations = $this->getInnerSubmodules($componentVariation)) {
+        if ($components = $this->getInnerSubmodules($component)) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         
         // Allow to add the Trending Tags/Events Calendar at the bottom of the sideinfo
-        if ($componentVariations = $this->getPermanentSubmodules($componentVariation)) {
+        if ($components = $this->getPermanentSubmodules($component)) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
 

@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTUSER_TYPEAHEAD_COMPONENT];
     }
@@ -13,7 +13,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
     
         /* FIX THIS: 'url' */
@@ -34,9 +34,9 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
         return $data_fields;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         if (PoP_Application_ConfigurationUtils::useUseravatar()) {
             $avatar_size = GD_AVATAR_SIZE_40;
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_UserTypeaheadComponentLayoutsBase extends Po
 
             $ret['avatar'] = array(
                 'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($componentVariation, $props, 'succeeding-typeResolver'),
+                $this->getProp($component, $props, 'succeeding-typeResolver'),
                 $avatar_field),
                 'size' => $avatar_size
             );

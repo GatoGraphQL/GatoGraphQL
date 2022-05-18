@@ -5,21 +5,21 @@ class PoP_Module_Processor_FileUploadPictures extends PoP_Module_Processor_FileU
 {
     public final const MODULE_FILEUPLOAD_PICTURE = 'fileupload-picture';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILEUPLOAD_PICTURE],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILEUPLOAD_PICTURE:
                 return TranslationAPIFacade::getInstance()->__('Picture', 'pop-useravatar-processors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 }
 

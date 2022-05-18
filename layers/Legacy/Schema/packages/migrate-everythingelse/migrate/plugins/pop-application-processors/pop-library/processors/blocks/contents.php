@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     public final const MODULE_BLOCK_SINGLE_CONTENT = 'block-single-content';
     public final const MODULE_BLOCK_PAGE_CONTENT = 'block-pageabout-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTHOR_CONTENT],
@@ -23,21 +23,21 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             // The Page Content block uses whichever is the current page
             self::MODULE_BLOCK_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::MODULE_BLOCK_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_BLOCK_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getDescriptionBottom(array $componentVariation, array &$props)
+    protected function getDescriptionBottom(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
@@ -48,14 +48,14 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 );
         }
 
-        return parent::getDescriptionBottom($componentVariation, $props);
+        return parent::getDescriptionBottom($component, $props);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHOR_CONTENT:
             case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
@@ -67,22 +67,22 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
                 return $customPostTypeAPI->getTitle($post_id);
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PAGE_CONTENT:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SHARE];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_AUTHOR_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_AUTHOR_CONTENT],
@@ -91,57 +91,57 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
             self::MODULE_BLOCK_SINGLE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLE_CONTENT],
             self::MODULE_BLOCK_PAGE_CONTENT => [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_PAGE_CONTENT],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TAG_CONTENT:
-                $this->appendProp($componentVariation, $props, 'class', 'block-tag-content');
+                $this->appendProp($component, $props, 'class', 'block-tag-content');
                 break;
 
             case self::MODULE_BLOCK_PAGE_CONTENT:
-                $this->appendProp($componentVariation, $props, 'class', 'block-singleabout-content');
-                $inners = $this->getInnerSubmodules($componentVariation);
+                $this->appendProp($component, $props, 'class', 'block-singleabout-content');
+                $inners = $this->getInnerSubmodules($component);
                 foreach ($inners as $inner) {
                     $this->appendProp($inner, $props, 'class', 'col-xs-12');
                 }
                 break;
 
             case self::MODULE_BLOCK_SINGLE_CONTENT:
-                $this->appendProp($componentVariation, $props, 'class', 'block-single-content');
+                $this->appendProp($component, $props, 'class', 'block-single-content');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLE_CONTENT:
                 
                 // Also append the post_status, so we can hide the bottomsidebar for draft posts
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-                $this->appendProp($componentVariation, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);
-                $this->appendProp($componentVariation, $props, 'runtime-class', $customPostTypeAPI->getStatus($post_id));
+                $this->appendProp($component, $props, 'runtime-class', $customPostTypeAPI->getCustomPostType($post_id) . '-' . $post_id);
+                $this->appendProp($component, $props, 'runtime-class', $customPostTypeAPI->getStatus($post_id));
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    protected function getBlocksectionsClasses(array $componentVariation)
+    protected function getBlocksectionsClasses(array $component)
     {
-        $ret = parent::getBlocksectionsClasses($componentVariation);
+        $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PAGE_CONTENT:
                 $ret['blocksection-inners'] = 'row row-item';
                 break;
@@ -150,9 +150,9 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
         return $ret;
     }
 
-    // function getNature(array $componentVariation) {
+    // function getNature(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_BLOCK_AUTHOR_CONTENT:
     //         case self::MODULE_BLOCK_AUTHOR_SUMMARYCONTENT:
@@ -168,7 +168,7 @@ class PoP_Module_Processor_CustomContentBlocks extends PoP_Module_Processor_Bloc
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 }
 

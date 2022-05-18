@@ -7,7 +7,7 @@ use PoPCMSSchema\Events\TypeResolvers\ObjectType\EventObjectTypeResolver;
 
 class PoP_CommonAutomatedEmails_Events_Multilayout_Processor extends PoP_Application_Multilayout_ProcessorBase
 {
-    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
         $event_post_type = $eventTypeAPI->getEventCustomPostType();

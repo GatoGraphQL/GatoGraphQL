@@ -6,7 +6,7 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
     public final const MODULE_MODAL_API = 'modal-api';
     public final const MODULE_MODAL_COPYSEARCHURL = 'modal-copysearchurl';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MODAL_EMBED],
@@ -15,11 +15,11 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         );
     }
     
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MODAL_EMBED:
                 $ret[] = [PoP_Module_Processor_ShareMultiples::class, PoP_Module_Processor_ShareMultiples::MODULE_MULTIPLE_EMBED];
                 break;
@@ -36,10 +36,10 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
         return $ret;
     }
 
-    public function getHeaderTitle(array $componentVariation)
+    public function getHeaderTitle(array $component)
     {
         $header_placeholder = '<i class="fa %s fa-fw"></i><em>%s</em>';
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MODAL_EMBED:
                 return sprintf(
                     $header_placeholder,
@@ -62,12 +62,12 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
                 );
         }
 
-        return parent::getHeaderTitle($componentVariation);
+        return parent::getHeaderTitle($component);
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MODAL_EMBED:
             case self::MODULE_MODAL_API:
                 $urlTypes = array(
@@ -77,13 +77,13 @@ class PoP_Module_Processor_ShareModalComponents extends PoP_Module_Processor_For
 
                 // Since we're in a modal, make the embedPreview get reloaded when opening the modal
                 $this->mergePagesectionJsmethodProp([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW], $props, array('modalReloadEmbedPreview'));
-                $this->mergeImmutableJsconfigurationProp([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW], $props, array('modalReloadEmbedPreview' => array('url-type' => $urlTypes[$componentVariation[1]])));
+                $this->mergeImmutableJsconfigurationProp([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW], $props, array('modalReloadEmbedPreview' => array('url-type' => $urlTypes[$component[1]])));
                 // $this->setProp([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW], $props, 'module-cb', true);
                 $this->appendProp([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW], $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass([PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW]));
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }
 

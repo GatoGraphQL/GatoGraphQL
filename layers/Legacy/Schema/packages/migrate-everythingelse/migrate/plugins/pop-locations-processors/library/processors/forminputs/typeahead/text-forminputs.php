@@ -5,33 +5,33 @@ class GD_EM_Module_Processor_TextFormInputs extends PoP_Module_Processor_TextFor
 {
     public final const MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION = 'forminput-text-typeaheadaddlocation';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 return TranslationAPIFacade::getInstance()->__('Location(s)', 'em-popprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADADDLOCATION:
                 // Use the label as placeholder
-                $this->setProp($componentVariation, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Name or Address', 'em-popprocessors'));
+                $this->setProp($component, $props, 'placeholder', TranslationAPIFacade::getInstance()->__('Name or Address', 'em-popprocessors'));
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

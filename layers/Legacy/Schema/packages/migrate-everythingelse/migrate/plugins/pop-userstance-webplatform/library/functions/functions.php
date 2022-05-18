@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_componentVariationmanager:multilayout_labels', 'userstanceMultilayoutLabels');
+\PoP\Root\App::addFilter('pop_componentmanager:multilayout_labels', 'userstanceMultilayoutLabels');
 function userstanceMultilayoutLabels($labels)
 {
     $stance_names = PoP_UserStance_PostNameUtils::getTermNames();

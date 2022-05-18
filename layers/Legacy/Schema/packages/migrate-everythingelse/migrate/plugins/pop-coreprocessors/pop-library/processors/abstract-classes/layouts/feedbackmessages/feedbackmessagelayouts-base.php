@@ -2,21 +2,21 @@
 
 abstract class PoP_Module_Processor_FeedbackMessageLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FEEDBACKMESSAGE];
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
         
-        $ret['messages'] = $this->getMessages($componentVariation, $props);
+        $ret['messages'] = $this->getMessages($component, $props);
         
         return $ret;
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
         return array();
     }

@@ -5,7 +5,7 @@ class GD_URE_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Proces
     public final const MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES = 'forminput-hiddeninput-selectablelayoutusercommunities';
     public final const MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES = 'filterinput-hiddeninput-selectablelayoutcommunities';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES],
@@ -13,28 +13,28 @@ class GD_URE_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Proces
         );
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERCOMMUNITIES:
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES:
                 return true;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES:
                 $names = array(
                     self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITIES => 'communities',
                 );
-                return $names[$componentVariation[1]];
+                return $names[$component[1]];
         }
         
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 }
 

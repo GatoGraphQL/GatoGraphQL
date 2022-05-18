@@ -3,28 +3,28 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        $ret = parent::getSubComponents($component);
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
             );
         }
 
-        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($componentVariation)) {
+        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($component)) {
             $ret[] = $user_avatar;
         }
         return $ret;
     }
 
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_USERPOSTINTERACTION];
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
         return array();
     }
@@ -38,60 +38,60 @@ abstract class PoP_Module_Processor_UserPostInteractionLayoutsBase extends PoPEn
         return null;
     }
 
-    public function getStyleClass(array $componentVariation, array &$props)
+    public function getStyleClass(array $component, array &$props)
     {
         return '';
     }
 
-    public function addUseravatar(array $componentVariation, array &$props)
+    public function addUseravatar(array $component, array &$props)
     {
 
         // If the plugin to create avatar is defined, then enable it
         return PoP_Application_ConfigurationUtils::useUseravatar();
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $layouts
             );
         }
 
-        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($componentVariation)) {
+        if ($user_avatar = $this->getLoggedinUseravatarSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['useravatar'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($user_avatar);
         }
 
-        $ret['add-useravatar'] = $this->addUseravatar($componentVariation, $props);
+        $ret['add-useravatar'] = $this->addUseravatar($component, $props);
 
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->addUseravatar($componentVariation, $props)) {
+        if ($this->addUseravatar($component, $props)) {
             $this->addJsmethod($ret, 'loadLoggedInUserAvatar', 'useravatar');
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'class', 'frame-addcomment');
+        $this->appendProp($component, $props, 'class', 'frame-addcomment');
 
         // Add the style for the frame
-        if ($classs = $this->getStyleClass($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'class', $classs);
+        if ($classs = $this->getStyleClass($component, $props)) {
+            $this->appendProp($component, $props, 'class', $classs);
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

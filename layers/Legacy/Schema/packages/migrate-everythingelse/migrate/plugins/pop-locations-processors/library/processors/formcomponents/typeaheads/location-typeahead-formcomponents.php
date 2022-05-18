@@ -6,7 +6,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS = 'formcomponent-selectabletypeahead-locations';
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION = 'formcomponent-selectabletypeahead-location';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
         );
     }
 
-    public function getComponentSubmodules(array $componentVariation)
+    public function getComponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return array(
@@ -24,11 +24,11 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation);
+        return parent::getComponentSubmodules($component);
     }
-    public function getTriggerLayoutSubmodule(array $componentVariation)
+    public function getTriggerLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return [PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS];
 
@@ -36,22 +36,22 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
                 return [PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION];
         }
 
-        return parent::getTriggerLayoutSubmodule($componentVariation);
+        return parent::getTriggerLayoutSubmodule($component);
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 return false;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
                 return 'locations';
 
@@ -59,40 +59,40 @@ class PoP_Module_Processor_LocationSelectableTypeaheadFormInputs extends PoP_Mod
                 return 'location';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
-    protected function enableSuggestions(array $componentVariation)
+    protected function enableSuggestions(array $component)
     {
 
         // If there are suggestions, then enable the functionality
-        return !empty($this->getSuggestions($componentVariation));
+        return !empty($this->getSuggestions($component));
     }
 
-    protected function getSuggestions(array $componentVariation)
+    protected function getSuggestions(array $component)
     {
         return \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_LocationSelectableTypeaheadFormInputs:suggestions',
             array(),
-            $componentVariation
+            $component
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATIONS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_LOCATION:
                 // Provide a pre-define list of locations
-                if ($suggestions = $this->getSuggestions($componentVariation)) {
-                    $this->setProp($componentVariation, $props, 'suggestions', $suggestions);
+                if ($suggestions = $this->getSuggestions($component)) {
+                    $this->setProp($component, $props, 'suggestions', $suggestions);
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

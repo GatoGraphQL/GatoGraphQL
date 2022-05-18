@@ -4,28 +4,28 @@ class PoP_LocationPostsCreation_Module_Processor_SectionTabPanelComponents exten
 {
     public final const MODULE_TABPANEL_MYLOCATIONPOSTS = 'tabpanel-mylocationposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_MYLOCATIONPOSTS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYLOCATIONPOSTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYLOCATIONPOSTS:
                 $ret = array_merge(
                     $ret,

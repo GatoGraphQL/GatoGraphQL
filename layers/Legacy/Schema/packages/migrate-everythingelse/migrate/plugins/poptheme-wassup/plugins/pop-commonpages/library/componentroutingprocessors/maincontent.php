@@ -11,12 +11,12 @@ class PoP_CommonPages_Module_MainContentComponentRoutingProcessor extends \PoP\A
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE => [GD_CommonPages_Module_Processor_CustomGroups::class, GD_CommonPages_Module_Processor_CustomGroups::MODULE_GROUP_WHOWEARE],
             POP_COMMONPAGES_ROUTE_ABOUT => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ABOUT],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

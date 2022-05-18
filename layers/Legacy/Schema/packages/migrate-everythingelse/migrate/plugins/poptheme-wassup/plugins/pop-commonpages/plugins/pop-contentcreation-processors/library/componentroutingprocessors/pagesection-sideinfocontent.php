@@ -16,7 +16,7 @@ class PoPTheme_Wassup_CommonPages_ContentCreation_Module_SideInfoContentPageSect
         );
         foreach ($pages as $page) {
             $ret[PageRequestNature::PAGE][] = [
-                'component-variation' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
+                'component' => [PoP_Module_Processor_SidebarMultiples::class, PoP_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLEPAGE_ABOUT_SIDEBAR],
                 'conditions' => [
                     'routing' => [
                         'queried-object-id' => $page,

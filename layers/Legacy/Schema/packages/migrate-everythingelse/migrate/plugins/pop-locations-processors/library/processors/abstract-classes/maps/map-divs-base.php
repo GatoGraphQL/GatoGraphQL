@@ -3,16 +3,16 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_MAP_DIV];
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($inners = $this->getInnerSubmodules($componentVariation)) {
+        if ($inners = $this->getInnerSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -22,18 +22,18 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inners = $this->getInnerSubmodules($componentVariation)) {
+        if ($inners = $this->getInnerSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $inners
@@ -43,28 +43,28 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
         $this->addJsmethod($ret, 'map');
 
         return $ret;
     }
 
-    public function openOnemarkerInfowindow(array $componentVariation, array &$props)
+    public function openOnemarkerInfowindow(array $component, array &$props)
     {
         return true;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Open the infoWindow automatically when the map has only 1 marker?
-        $this->setProp($componentVariation, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($componentVariation, $props));
-        if ($this->getProp($componentVariation, $props, 'open-onemarker-infowindow')) {
+        $this->setProp($component, $props, 'open-onemarker-infowindow', $this->openOnemarkerInfowindow($component, $props));
+        if ($this->getProp($component, $props, 'open-onemarker-infowindow')) {
             $this->mergeProp(
-                $componentVariation,
+                $component,
                 $props,
                 'params',
                 array(
@@ -73,6 +73,6 @@ abstract class PoP_Module_Processor_MapDivsBase extends PoPEngine_QueryDataCompo
             );
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

@@ -39,38 +39,38 @@ class CategoryPostFieldDataloadComponentProcessor extends AbstractRelationalFiel
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST],
         );
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 return $this->getPostObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($componentVariation);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 $ret['category-ids'] = [App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -79,13 +79,13 @@ class CategoryPostFieldDataloadComponentProcessor extends AbstractRelationalFiel
         return $ret;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_CATEGORYPOSTLIST:
                 return [PostFilterInputContainerComponentProcessor::class, PostFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_POSTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 }

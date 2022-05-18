@@ -7,7 +7,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
     public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW = 'layout-referencedby-scroll-fullview';
     public final const MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE = 'layout-referencedby-scroll-appendable';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS],
@@ -17,9 +17,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS];
 
@@ -33,12 +33,12 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 return [PoPApplicationProcessors_Module_Processor_CommentScrollInners::class, PoPApplicationProcessors_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function addFetchedData(array $componentVariation, array &$props)
+    public function addFetchedData(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_DETAILS:
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_FULLVIEW:
@@ -46,24 +46,24 @@ class PoPApplicationProcessors_Module_Processor_CommentScrolls extends PoP_Modul
                 return false;
         }
 
-        return parent::addFetchedData($componentVariation, $props);
+        return parent::addFetchedData($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE:
                 $classes = array(
                     self::MODULE_SCROLLLAYOUT_REFERENCEDBY_APPENDABLE => 'references',
                 );
 
-                $this->setProp($componentVariation, $props, 'appendable', true);
-                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
+                $this->setProp($component, $props, 'appendable', true);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
 
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

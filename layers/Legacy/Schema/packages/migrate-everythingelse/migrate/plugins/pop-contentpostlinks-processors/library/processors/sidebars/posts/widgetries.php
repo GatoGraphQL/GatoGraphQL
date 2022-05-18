@@ -7,7 +7,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
     public final const MODULE_WIDGET_LINK_CATEGORIES = 'widget-link-categories';
     public final const MODULE_WIDGETCOMPACT_LINKINFO = 'widgetcompact-link-info';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_LINK_ACCESS],
@@ -16,11 +16,11 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_LINK_ACCESS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_Layouts::class, PoP_ContentPostLinks_Module_Processor_Layouts::MODULE_LAYOUT_LINK_ACCESS];
                 break;
@@ -41,7 +41,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
         return $ret;
     }
 
-    public function getMenuTitle(array $componentVariation, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $titles = array(
             self::MODULE_WIDGET_LINK_ACCESS => TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup'),
@@ -49,9 +49,9 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => TranslationAPIFacade::getInstance()->__('Link', 'poptheme-wassup'),
         );
 
-        return $titles[$componentVariation[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_LINK_ACCESS => 'fa-link',
@@ -59,35 +59,35 @@ class PoP_ContentPostLinks_Module_Processor_CustomPostWidgets extends PoP_Module
             self::MODULE_WIDGETCOMPACT_LINKINFO => 'fa-link',
         );
 
-        return $fontawesomes[$componentVariation[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $componentVariation, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'list-group list-group-sm';
         }
 
-        return parent::getBodyClass($componentVariation, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $componentVariation, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'pop-hide-empty list-group-item';
         }
 
-        return parent::getItemWrapper($componentVariation, $props);
+        return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $componentVariation, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGETCOMPACT_LINKINFO:
                 return 'panel panel-default panel-sm';
         }
 
-        return parent::getWidgetClass($componentVariation, $props);
+        return parent::getWidgetClass($component, $props);
     }
 }
 

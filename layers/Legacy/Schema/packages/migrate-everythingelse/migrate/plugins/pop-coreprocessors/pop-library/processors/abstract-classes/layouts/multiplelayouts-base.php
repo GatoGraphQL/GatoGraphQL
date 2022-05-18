@@ -4,26 +4,26 @@ use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafMod
 
 abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_MULTIPLE];
     }
 
-    public function getDefaultLayoutSubmodule(array $componentVariation)
+    public function getDefaultLayoutSubmodule(array $component)
     {
         return null;
     }
 
-    public function getMultipleLayoutSubmodules(array $componentVariation)
+    public function getMultipleLayoutSubmodules(array $component)
     {
         return array();
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($default = $this->getDefaultLayoutSubmodule($componentVariation)) {
+        if ($default = $this->getDefaultLayoutSubmodule($component)) {
             $ret[] = $default;
         }
 
@@ -33,13 +33,13 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
     /**
      * @return ConditionalLeafModuleField[]
      */
-    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
+    public function getConditionalOnDataFieldSubmodules(array $component): array
     {
-        $ret = parent::getConditionalOnDataFieldSubmodules($componentVariation);
+        $ret = parent::getConditionalOnDataFieldSubmodules($component);
 
-        // The function below returns an array with value => $subComponentVariation.
-        // It must be converted to value => [$subComponentVariation]
-        foreach ($this->getMultipleLayoutSubmodules($componentVariation) as $conditionDataField => $conditionalSubmodule) {
+        // The function below returns an array with value => $subComponent.
+        // It must be converted to value => [$subComponent]
+        foreach ($this->getMultipleLayoutSubmodules($component) as $conditionDataField => $conditionalSubmodule) {
             $ret[] = new ConditionalLeafModuleField(
                 $conditionDataField,
                 [
@@ -51,22 +51,22 @@ abstract class PoP_Module_Processor_MultipleLayoutsBase extends PoPEngine_QueryD
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'class', 'pop-multilayout');
-        parent::initModelProps($componentVariation, $props);
+        $this->appendProp($component, $props, 'class', 'pop-multilayout');
+        parent::initModelProps($component, $props);
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($defaultLayout = $this->getDefaultLayoutSubmodule($componentVariation)) {
+        if ($defaultLayout = $this->getDefaultLayoutSubmodule($component)) {
             $ret['default-module'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($defaultLayout);
         }
         $ret['condition-on-data-field-modules'] = array_map(
             [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-            $this->getMultipleLayoutSubmodules($componentVariation)
+            $this->getMultipleLayoutSubmodules($component)
         );
 
         return $ret;

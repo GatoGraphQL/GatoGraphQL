@@ -10,7 +10,7 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_LOGOUT = 'layout-feedbackmessage-logout';
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_USER_CHANGEPASSWORD = 'layout-feedbackmessage-user-changepassword';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN],
@@ -21,12 +21,12 @@ class GD_UserLogin_Module_Processor_UserFeedbackMessageLayouts extends PoP_Modul
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_LOGIN:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Hurray, login successful!', 'pop-coreprocessors');
                 $addnew = '<i class="fa fa-fw fa-plus"></i>'.TranslationAPIFacade::getInstance()->__('Add', 'pop-coreprocessors');

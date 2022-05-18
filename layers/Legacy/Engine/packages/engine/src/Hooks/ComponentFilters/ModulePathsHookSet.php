@@ -34,11 +34,11 @@ class ModulePathsHookSet extends AbstractHookSet
     public function maybeAddComponent(array $components): array
     {
         if (App::getState('modulefilter') === $this->modulePaths->getName()) {
-            if ($componentVariationPaths = App::getState('componentVariationPaths')) {
+            if ($componentPaths = App::getState('componentPaths')) {
                 $modulePathHelpers = ModulePathHelpersFacade::getInstance();
                 $paths = array_map(
-                    fn ($componentVariationPath) => $modulePathHelpers->stringifyModulePath($componentVariationPath),
-                    $componentVariationPaths
+                    fn ($componentPath) => $modulePathHelpers->stringifyModulePath($componentPath),
+                    $componentPaths
                 );
                 $components[] = $this->getTranslationAPI()->__('module paths:', 'engine') . implode(',', $paths);
             }

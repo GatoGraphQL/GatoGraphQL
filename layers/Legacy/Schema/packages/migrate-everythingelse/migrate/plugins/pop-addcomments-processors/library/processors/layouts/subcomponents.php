@@ -6,7 +6,7 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
     public final const MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS = 'lazysubcomponent-postcomments';
     public final const MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS = 'lazysubcomponent-noheaderpostcomments';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBCOMPONENT_POSTCOMMENTS],
@@ -15,11 +15,11 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_CommentScrolls::class, PoP_Module_Processor_CommentScrolls::MODULE_SCROLLLAYOUT_POSTCOMMENT];
                 break;
@@ -33,9 +33,9 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
         return $ret;
     }
 
-    public function getSubcomponentField(array $componentVariation)
+    public function getSubcomponentField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:
                 return 'comments';
 
@@ -46,32 +46,32 @@ class PoP_Module_Processor_PostCommentSubcomponentLayouts extends PoP_Module_Pro
                 return 'noheadercommentsLazy';
         }
 
-        return parent::getSubcomponentField($componentVariation);
+        return parent::getSubcomponentField($component);
     }
 
-    public function isIndividual(array $componentVariation, array &$props)
+    public function isIndividual(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:
             case self::MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS:
             case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
                 return false;
         }
 
-        return parent::isIndividual($componentVariation, $props);
+        return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_POSTCOMMENTS:
             case self::MODULE_LAZYSUBCOMPONENT_POSTCOMMENTS:
             case self::MODULE_LAZYSUBCOMPONENT_NOHEADERPOSTCOMMENTS:
-                $this->appendProp($componentVariation, $props, 'class', 'postcomments clearfix');
+                $this->appendProp($component, $props, 'class', 'postcomments clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

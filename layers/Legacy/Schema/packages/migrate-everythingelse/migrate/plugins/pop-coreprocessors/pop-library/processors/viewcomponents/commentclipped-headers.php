@@ -4,22 +4,22 @@ class PoP_Module_Processor_CommentClippedViewComponentHeaders extends PoP_Module
 {
     public final const MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED = 'viewcomponent-header-commentclipped';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED],
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED:
-                $this->appendProp($componentVariation, $props, 'class', 'bg-warning');
+                $this->appendProp($component, $props, 'class', 'bg-warning');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

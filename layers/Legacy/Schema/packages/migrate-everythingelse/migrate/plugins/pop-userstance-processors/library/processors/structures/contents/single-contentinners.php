@@ -7,7 +7,7 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
     public final const MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION = 'contentinner-userstancepostinteraction';
     public final const MODULE_CONTENTINNER_STANCESINGLE = 'contentinner-stancesingle';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION],
@@ -15,9 +15,9 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         );
     }
 
-    protected function getCommentssingleLayouts(array $componentVariation)
+    protected function getCommentssingleLayouts(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $layouts = array(
                     [UserStance_Module_Processor_CustomWrapperLayouts::class, UserStance_Module_Processor_CustomWrapperLayouts::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
@@ -27,18 +27,18 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                 break;
         }
 
-        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $componentVariation);
+        return \PoP\Root\App::applyFilters('UserStance_Module_Processor_SingleContentInners:commentssingle_layouts', $layouts, $component);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
                 $ret = array_merge(
                     $ret,
-                    $this->getCommentssingleLayouts($componentVariation)
+                    $this->getCommentssingleLayouts($component)
                 );
                 break;
 
@@ -51,25 +51,25 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_USERSTANCEPOSTINTERACTION:
-                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction-single');
+                $this->appendProp($component, $props, 'class', 'userpostinteraction-single');
                 break;
 
             case self::MODULE_CONTENTINNER_STANCESINGLE:
-                $this->appendProp($componentVariation, $props, 'class', 'alert');
+                $this->appendProp($component, $props, 'class', 'alert');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $taxonomyapi = TaxonomyTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_STANCESINGLE:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if (POP_USERSTANCE_TERM_STANCE_PRO && $taxonomyapi->hasTerm(POP_USERSTANCE_TERM_STANCE_PRO, POP_USERSTANCE_TAXONOMY_STANCE, $post_id)) {
@@ -80,12 +80,12 @@ class UserStance_Module_Processor_SingleContentInners extends PoP_Module_Process
                     $class = 'alert-info';
                 }
                 if ($class) {
-                    $this->appendProp($componentVariation, $props, 'runtime-class', $class);
+                    $this->appendProp($component, $props, 'runtime-class', $class);
                 }
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 }
 

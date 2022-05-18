@@ -6,37 +6,37 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         // Hack: re-use multiple.tmpl
         return [PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BaseCollectionWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_MULTIPLE];
     }
 
-    public function getFormcomponentModule(array $componentVariation)
+    public function getFormcomponentModule(array $component)
     {
-        return $this->getFeaturedimageinnerSubmodule($componentVariation);
+        return $this->getFeaturedimageinnerSubmodule($component);
     }
 
-    abstract public function getFeaturedimageinnerSubmodule(array $componentVariation): ?array;
+    abstract public function getFeaturedimageinnerSubmodule(array $component): ?array;
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
         return array(
-            $this->getFeaturedimageinnerSubmodule($componentVariation),
+            $this->getFeaturedimageinnerSubmodule($component),
         );
     }
 
-    public function getImageSize(array $componentVariation, array &$props)
+    public function getImageSize(array $component, array &$props)
     {
         return 'thumb-md';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         // Hack: re-use multiple.tmpl
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($componentVariation);
+        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['elements'] = [
             \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($featuredimageinner),
         ];
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return $ret;
     }
 
-    public function getDefaultImage(array $componentVariation, array &$props)
+    public function getDefaultImage(array $component, array &$props)
     {
         if (defined('POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE') && POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE) {
             return POP_CONTENTCREATION_IMAGE_DEFAULTFEATUREDIMAGE;
@@ -53,37 +53,37 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
         return null;
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($componentVariation);
+        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
 
         // Set the "pop-merge" class to be able to redraw the inner layout
-        $this->appendProp($componentVariation, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($featuredimageinner));
+        $this->appendProp($component, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($featuredimageinner));
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($componentVariation, $props);
-        parent::initRequestProps($componentVariation, $props);
+        $this->metaFormcomponentInitModuleRequestProps($component, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($componentVariation);
+        $featuredimageinner = $this->getFeaturedimageinnerSubmodule($component);
 
         // Needed for the JS function
-        $this->appendProp($componentVariation, $props, 'class', 'pop-featuredimage');
+        $this->appendProp($component, $props, 'class', 'pop-featuredimage');
 
         // // The featuredimageinner module will need to be rendered dynamically on runtime
         // $this->setProp($featuredimageinner, $props, 'module-path', true);
         $this->setProp($featuredimageinner, $props, 'dynamic-module', true);
 
         // Set the needed params
-        $img_size = $this->getImageSize($componentVariation, $props);
+        $img_size = $this->getImageSize($component, $props);
         $this->mergeProp(
-            $componentVariation,
+            $component,
             $props,
             'params',
             array(
@@ -92,12 +92,12 @@ abstract class PoP_Module_Processor_FeaturedImageFormComponentsBase extends PoPE
             )
         );
 
-        if ($defaultimg = $this->getDefaultImage($componentVariation, $props)) {
+        if ($defaultimg = $this->getDefaultImage($component, $props)) {
             $mediaTypeAPI = MediaTypeAPIFacade::getInstance();
             $defaultfeatured = $mediaTypeAPI->getImageProperties($defaultimg, $img_size);
             $this->setProp($featuredimageinner, $props, 'default-img', $defaultfeatured);
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

@@ -6,7 +6,7 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
     public final const MODULE_FORMINPUT_URLPARAMTEXT_USERID = 'forminput-urlparamtext-uid';
     public final const MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID = 'forminput-urlparamtext-cid';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID],
@@ -15,9 +15,9 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
         );
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_URLPARAMTEXT_POSTID:
             case self::MODULE_FORMINPUT_URLPARAMTEXT_USERID:
             case self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID:
@@ -27,10 +27,10 @@ class PoP_Module_Processor_UrlParamTextFormInputs extends PoP_Module_Processor_U
                     self::MODULE_FORMINPUT_URLPARAMTEXT_COMMENTID => \PoPCMSSchema\Comments\Constants\InputNames::COMMENT_ID,
                 );
 
-                return $names[$componentVariation[1]];
+                return $names[$component[1]];
         }
 
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 }
 

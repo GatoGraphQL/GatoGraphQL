@@ -13,7 +13,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
     public final const MODULE_SCROLLINNER_AUTHORSTANCES_LIST = 'scrollinner-authorstances-list';
     public final const MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scrollinner-singlerelatedstancecontent-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
@@ -29,9 +29,9 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_STANCES_THUMBNAIL:
             case self::MODULE_SCROLLINNER_AUTHORSTANCES_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
@@ -57,12 +57,12 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_STANCES_NAVIGATOR => [UserStance_Module_Processor_CustomPreviewPostLayouts::class, UserStance_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_STANCE_NAVIGATOR],
@@ -77,7 +77,7 @@ class UserStance_Module_Processor_CustomScrollInners extends PoP_Module_Processo
             self::MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomFullViewLayouts::class, UserStance_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_STANCE],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

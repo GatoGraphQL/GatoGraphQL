@@ -5,40 +5,40 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
 {
     public final const MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY = 'button-toggleuserpostactivity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY],
         );
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY => [PoP_Module_Processor_FeedButtonInners::class, PoP_Module_Processor_FeedButtonInners::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('Comments, responses and highlights', 'poptheme-wassup');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 $ret .= ' btn btn-default';
                 break;
@@ -47,34 +47,34 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
                 // We use the "previousmodules-ids" to obtain the url to point to
                 return null;
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_TOGGLEUSERPOSTACTIVITY:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-collapse-btn');
+                $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
 
-                if ($collapse_componentVariation = $this->getProp($componentVariation, $props, 'target-module')) {
+                if ($collapse_component = $this->getProp($component, $props, 'target-module')) {
                     $this->mergeProp(
-                        $componentVariation,
+                        $component,
                         $props,
                         'previousmodules-ids',
                         array(
-                            'href' => $collapse_componentVariation,
+                            'href' => $collapse_component,
                         )
                     );
                     $this->mergeProp(
-                        $componentVariation,
+                        $component,
                         $props,
                         'params',
                         array(
@@ -85,7 +85,7 @@ class PoP_Module_Processor_FeedButtons extends PoP_Module_Processor_ButtonsBase
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

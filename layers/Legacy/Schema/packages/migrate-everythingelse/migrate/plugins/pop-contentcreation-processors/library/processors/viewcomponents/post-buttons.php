@@ -6,7 +6,7 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     public final const MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA = 'viewcomponent-postbutton-flag-socialmedia';
     public final const MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN = 'viewcomponent-postbutton-flag-previewdropdown';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA],
@@ -14,9 +14,9 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         );
     }
 
-    // function headerShowUrl(array $componentVariation) {
+    // function headerShowUrl(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
     //         case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
@@ -24,27 +24,27 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
     //             return true;
     //     }
 
-    //     return parent::headerShowUrl($componentVariation);
+    //     return parent::headerShowUrl($component);
     // }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_SOCIALMEDIA],
             self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN => [PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::class, PoP_ContentCreation_Module_Processor_ViewComponentButtonInners::MODULE_VIEWCOMPONENT_BUTTONINNER_FLAG_PREVIEWDROPDOWN],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-flag';
                 break;
@@ -53,48 +53,48 @@ class PoP_ContentCreation_Module_Processor_PostViewComponentButtons extends PoP_
         return $ret;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Flag as inappropriate', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'socialmedia');
+                $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return 'flagURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_SOCIALMEDIA:
             case self::MODULE_VIEWCOMPONENT_BUTTON_POST_FLAG_PREVIEWDROPDOWN:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 }
 

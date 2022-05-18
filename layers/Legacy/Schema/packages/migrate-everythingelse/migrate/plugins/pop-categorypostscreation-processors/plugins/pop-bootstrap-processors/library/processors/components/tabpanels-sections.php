@@ -23,7 +23,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
     public final const MODULE_TABPANEL_MYCATEGORYPOSTS18 = 'tabpanel-mycategoryposts18';
     public final const MODULE_TABPANEL_MYCATEGORYPOSTS19 = 'tabpanel-mycategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_MYCATEGORYPOSTS00],
@@ -49,9 +49,9 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS01:
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS02:
@@ -75,14 +75,14 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -307,9 +307,9 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYCATEGORYPOSTS00:
                 return array(
                     [
@@ -591,7 +591,7 @@ class LPPC_Module_Processor_SectionTabPanelComponents extends PoP_Module_Process
                 );
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

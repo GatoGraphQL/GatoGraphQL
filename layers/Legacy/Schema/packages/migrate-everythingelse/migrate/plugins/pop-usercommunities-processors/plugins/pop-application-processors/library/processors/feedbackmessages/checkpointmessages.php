@@ -5,7 +5,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
     public final const MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY = 'checkpointmessage-profilecommunity';
     public final const MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP = 'checkpointmessage-profilecommunityeditmembership';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
@@ -13,18 +13,18 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessages extends PoP_Mod
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITY => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITY],
             self::MODULE_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP => [GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::class, GD_UserCommunities_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILECOMMUNITYEDITMEMBERSHIP],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

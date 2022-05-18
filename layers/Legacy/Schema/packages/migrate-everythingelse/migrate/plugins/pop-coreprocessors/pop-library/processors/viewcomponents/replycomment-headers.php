@@ -5,7 +5,7 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
     public final const MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT = 'viewcomponent-header-replycomment';
     public final const MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL = 'viewcomponent-header-replycomment-url';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT],
@@ -13,9 +13,9 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
         );
     }
 
-    public function getPostSubmodule(array $componentVariation)
+    public function getPostSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
                 return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST];
         
@@ -23,18 +23,18 @@ class PoP_Module_Processor_ReplyCommentViewComponentHeaders extends PoP_Module_P
                 return [PoP_Module_Processor_CommentViewComponentHeaders::class, PoP_Module_Processor_CommentViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTPOST_URL];
         }
         
-        return parent::getPostSubmodule($componentVariation);
+        return parent::getPostSubmodule($component);
     }
 
-    public function getCommentSubmodule(array $componentVariation)
+    public function getCommentSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT:
             case self::MODULE_VIEWCOMPONENT_HEADER_REPLYCOMMENT_URL:
                 return [PoP_Module_Processor_CommentClippedViewComponentHeaders::class, PoP_Module_Processor_CommentClippedViewComponentHeaders::MODULE_VIEWCOMPONENT_HEADER_COMMENTCLIPPED];
         }
         
-        return parent::getCommentSubmodule($componentVariation);
+        return parent::getCommentSubmodule($component);
     }
 }
 

@@ -9,7 +9,7 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     public final const MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR = 'filterinputcontainer-authoreventscalendar';
     public final const MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR = 'filterinputcontainer-tageventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_EVENTS],
@@ -21,9 +21,9 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_EVENTS => [
@@ -59,20 +59,20 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
                 [PoP_Module_Processor_FormComponentGroups::class, PoP_Module_Processor_FormComponentGroups::MODULE_FILTERCOMPONENTGROUP_SELECTABLETYPEAHEAD_PROFILES],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_EVENTS => POP_FILTER_EVENTS,
@@ -82,11 +82,11 @@ class PoP_Events_Module_Processor_CustomFilterInners extends PoP_Module_Processo
     //         self::MODULE_FILTERINPUTCONTAINER_AUTHOREVENTSCALENDAR => POP_FILTER_AUTHOREVENTSCALENDAR,
     //         self::MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR => POP_FILTER_TAGEVENTSCALENDAR,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

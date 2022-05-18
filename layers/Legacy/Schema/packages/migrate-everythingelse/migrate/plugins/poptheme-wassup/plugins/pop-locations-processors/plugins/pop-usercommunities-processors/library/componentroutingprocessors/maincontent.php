@@ -16,15 +16,15 @@ class PoP_Locations_CommonUserRoles_Module_MainContentComponentRoutingProcessor 
         $routemodules_map = array(
             POP_USERCOMMUNITIES_ROUTE_COMMUNITIES => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::MODULE_BLOCK_COMMUNITIES_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $componentVariation) {
+        foreach ($routemodules_map as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_users == POP_FORMAT_MAP) {
-                $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+                $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
             }
         }
 
@@ -33,15 +33,15 @@ class PoP_Locations_CommonUserRoles_Module_MainContentComponentRoutingProcessor 
         $routemodules_map = array(
             POP_USERCOMMUNITIES_ROUTE_MEMBERS => [PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::class, PoP_UserCommunities_ComponentProcessor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $componentVariation) {
+        foreach ($routemodules_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
 

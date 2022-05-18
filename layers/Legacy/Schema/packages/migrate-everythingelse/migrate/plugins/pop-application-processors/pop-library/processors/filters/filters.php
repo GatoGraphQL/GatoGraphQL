@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
     public final const MODULE_FILTER_MYPOSTS = 'filter-myposts';
     public final const MODULE_FILTER_MYCATEGORYPOSTS = 'filter-mycategoryposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_TAGS],
@@ -39,7 +39,7 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_TAGS => [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGS],
@@ -59,11 +59,11 @@ class PoP_Module_Processor_CustomFilters extends PoP_Module_Processor_FiltersBas
             self::MODULE_FILTER_MYCATEGORYPOSTS => [PoP_Module_Processor_CustomFilterInners::class, PoP_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

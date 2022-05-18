@@ -5,7 +5,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
     public final const MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS = 'block-stances-byorganizations-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS = 'block-stances-byindividuals-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS],
@@ -13,50 +13,50 @@ class UserStance_URE_Module_Processor_SectionTabPanelBlocks extends PoP_Module_P
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => POP_USERSTANCE_ROUTE_STANCES_BYINDIVIDUALS,
             self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => POP_USERSTANCE_ROUTE_STANCES_BYORGANIZATIONS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_BYINDIVIDUALS],
             self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS => [UserStance_URE_Module_Processor_SectionTabPanelComponents::class, UserStance_URE_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_BYORGANIZATIONS],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::MODULE_BLOCK_TABPANEL_STANCES_BYINDIVIDUALS:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES_AUTHORROLE];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

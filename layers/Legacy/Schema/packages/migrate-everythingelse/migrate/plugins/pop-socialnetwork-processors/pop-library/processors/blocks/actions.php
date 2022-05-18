@@ -13,7 +13,7 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
     public final const MODULE_BLOCK_DOWNVOTEPOST = 'block-downvotepost';
     public final const MODULE_BLOCK_UNDODOWNVOTEPOST = 'block-undodownvotepost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_FOLLOWUSER],
@@ -29,9 +29,9 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_DOWNVOTEPOST => POP_SOCIALNETWORK_ROUTE_DOWNVOTEPOST,
             self::MODULE_BLOCK_FOLLOWUSER => POP_SOCIALNETWORK_ROUTE_FOLLOWUSER,
             self::MODULE_BLOCK_RECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_RECOMMENDPOST,
@@ -42,13 +42,13 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::MODULE_BLOCK_UNRECOMMENDPOST => POP_SOCIALNETWORK_ROUTE_UNRECOMMENDPOST,
             self::MODULE_BLOCK_UNSUBSCRIBEFROMTAG => POP_SOCIALNETWORK_ROUTE_UNSUBSCRIBEFROMTAG,
             self::MODULE_BLOCK_UPVOTEPOST => POP_SOCIALNETWORK_ROUTE_UPVOTEPOST,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $layouts = array(
             self::MODULE_BLOCK_FOLLOWUSER => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::MODULE_DATALOADACTION_FOLLOWUSER],
@@ -62,16 +62,16 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             self::MODULE_BLOCK_DOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::MODULE_DATALOADACTION_DOWNVOTEPOST],
             self::MODULE_BLOCK_UNDODOWNVOTEPOST => [PoP_Module_Processor_ActionDataloads::class, PoP_Module_Processor_ActionDataloads::MODULE_DATALOADACTION_UNDODOWNVOTEPOST],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_FOLLOWUSER:
             case self::MODULE_BLOCK_UNFOLLOWUSER:
             case self::MODULE_BLOCK_RECOMMENDPOST:
@@ -105,12 +105,12 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_FOLLOWUSER:
             case self::MODULE_BLOCK_UNFOLLOWUSER:
             case self::MODULE_BLOCK_RECOMMENDPOST:
@@ -122,12 +122,12 @@ class PoP_Module_Processor_FunctionsBlocks extends PoP_Module_Processor_BlocksBa
             case self::MODULE_BLOCK_DOWNVOTEPOST:
             case self::MODULE_BLOCK_UNDODOWNVOTEPOST:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'functionalblock');
-                $this->appendProp($componentVariation, $props, 'class', 'pop-functionalblock');
+                $this->setProp($component, $props, 'resourceloader', 'functionalblock');
+                $this->appendProp($component, $props, 'class', 'pop-functionalblock');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

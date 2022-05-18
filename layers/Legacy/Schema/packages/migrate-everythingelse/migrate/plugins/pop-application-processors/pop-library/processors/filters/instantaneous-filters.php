@@ -5,7 +5,7 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
     public final const MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS = 'instantaneousfilter-contentsections';
     public final const MODULE_INSTANTANEOUSFILTER_POSTSECTIONS = 'instantaneousfilter-postsections';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS],
@@ -13,18 +13,18 @@ class PoP_Module_Processor_InstantaneousFilters extends PoP_Module_Processor_Ins
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_INSTANTANEOUSFILTER_CONTENTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_CONTENTSECTIONS],
             self::MODULE_INSTANTANEOUSFILTER_POSTSECTIONS => [PoP_Module_Processor_InstantaneousSimpleFilterInners::class, PoP_Module_Processor_InstantaneousSimpleFilterInners::MODULE_INSTANTANEOUSFILTERINPUTCONTAINER_POSTSECTIONS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

@@ -7,7 +7,7 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
     public final const MODULE_MAP_INDIVIDUAL_POST = 'em-map-individual-post';
     public final const MODULE_MAP_INDIVIDUAL_USER = 'em-map-individual-user';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_INDIVIDUAL],
@@ -17,38 +17,38 @@ class PoP_Module_Processor_MapIndividuals extends PoP_Module_Processor_MapIndivi
         );
     }
 
-    public function getMapdivSubmodule(array $componentVariation)
+    public function getMapdivSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAP_INDIVIDUAL_POST:
             case self::MODULE_MAP_INDIVIDUAL_USER:
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return [PoP_Module_Processor_MapDivs::class, PoP_Module_Processor_MapDivs::MODULE_MAPSTATICIMAGE_USERORPOST_DIV];
         }
 
-        return parent::getMapdivSubmodule($componentVariation);
+        return parent::getMapdivSubmodule($component);
     }
 
-    public function getDrawmarkersSubmodule(array $componentVariation)
+    public function getDrawmarkersSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAP_INDIVIDUAL_POST:
             case self::MODULE_MAP_INDIVIDUAL_USER:
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return [PoP_Module_Processor_MapDrawMarkerScripts::class, PoP_Module_Processor_MapDrawMarkerScripts::MODULE_MAPSTATICIMAGE_USERORPOST_SCRIPT_DRAWMARKERS];
         }
 
-        return parent::getDrawmarkersSubmodule($componentVariation);
+        return parent::getDrawmarkersSubmodule($component);
     }
 
-    public function openOnemarkerInfowindow(array $componentVariation)
+    public function openOnemarkerInfowindow(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAP_SIDEBARINDIVIDUAL:
                 return false;
         }
 
-        return parent::openOnemarkerInfowindow($componentVariation);
+        return parent::openOnemarkerInfowindow($component);
     }
 }
 

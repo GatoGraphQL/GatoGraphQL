@@ -11,11 +11,11 @@ class MultiDomain_Module_MainContentComponentRoutingProcessor extends \PoP\Appli
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_MULTIDOMAIN_ROUTE_EXTERNAL => [PoP_Module_Processor_MultidomainCodes::class, PoP_Module_Processor_MultidomainCodes::MODULE_CODE_EXTERNAL],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

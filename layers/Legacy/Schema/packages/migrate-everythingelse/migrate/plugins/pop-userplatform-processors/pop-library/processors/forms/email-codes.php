@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
     public final const MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL = 'code-emailnotifications-generallabel';
     public final const MODULE_CODE_EMAILDIGESTS_LABEL = 'code-dailyemaildigestslabel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_EMAILNOTIFICATIONS_LABEL],
@@ -16,9 +16,9 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
         );
     }
 
-    public function getCode(array $componentVariation, array &$props)
+    public function getCode(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_EMAILNOTIFICATIONS_LABEL:
             case self::MODULE_CODE_EMAILDIGESTS_LABEL:
                 $titles = array(
@@ -27,7 +27,7 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
                 );
                 return sprintf(
                     '<h3>%s</h3>',
-                    $titles[$componentVariation[1]]
+                    $titles[$component[1]]
                 );
 
             case self::MODULE_CODE_EMAILNOTIFICATIONS_GENERALLABEL:
@@ -36,11 +36,11 @@ class PoP_Module_Processor_UserCodes extends PoP_Module_Processor_HTMLCodesBase
                 );
                 return sprintf(
                     '<h4>%s</h4>',
-                    $titles[$componentVariation[1]]
+                    $titles[$component[1]]
                 );
         }
     
-        return parent::getCode($componentVariation, $props);
+        return parent::getCode($component, $props);
     }
 }
 

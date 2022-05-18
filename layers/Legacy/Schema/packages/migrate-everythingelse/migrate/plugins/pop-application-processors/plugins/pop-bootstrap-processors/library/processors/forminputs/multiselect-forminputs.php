@@ -6,7 +6,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
     public final const MODULE_FORMINPUT_APPLIESTO = 'forminput-appliesto';
     public final const MODULE_FORMINPUT_CATEGORIES = 'forminput-categories';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_APPLIESTO],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CATEGORIES:
                 return TranslationAPIFacade::getInstance()->__('Categories', 'poptheme-wassup');
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
                 return TranslationAPIFacade::getInstance()->__('Applies to', 'poptheme-wassup');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CATEGORIES:
                 return GD_FormInput_Categories::class;
 
@@ -37,12 +37,12 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
                 return GD_FormInput_AppliesTo::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CATEGORIES:
                 return 'topics';
 
@@ -50,7 +50,7 @@ class PoP_Module_Processor_CreateUpdatePostMultiSelectFormInputs extends PoP_Mod
                 return 'appliesto';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
     public final const MODULE_EM_LAYOUT_DATETIMEHORIZONTAL = 'em-layout-datetimehorizontal';
     public final const MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS = 'em-layout-datetimedownloadlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_LAYOUT_DATETIME],
@@ -14,24 +14,24 @@ class GD_EM_Module_Processor_DateTimeLayouts extends GD_EM_Module_Processor_Date
             [self::class, self::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS],
         );
     }
-    public function getSeparator(array $componentVariation, array &$props)
+    public function getSeparator(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_LAYOUT_DATETIMEHORIZONTAL:
                 return '&nbsp;';
         }
 
-        return parent::getSeparator($componentVariation, $props);
+        return parent::getSeparator($component, $props);
     }
 
-    public function addDownloadlinks(array $componentVariation)
+    public function addDownloadlinks(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS:
                 return true;
         }
 
-        return parent::addDownloadlinks($componentVariation);
+        return parent::addDownloadlinks($component);
     }
 }
 

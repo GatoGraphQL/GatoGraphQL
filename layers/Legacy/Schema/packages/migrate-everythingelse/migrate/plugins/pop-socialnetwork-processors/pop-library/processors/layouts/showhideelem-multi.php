@@ -13,7 +13,7 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
     public final const MODULE_LAYOUT_DOWNVOTEPOST_STYLES = 'layout-downvoteposts-styles';
     public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_STYLES = 'layout-undodownvoteposts-styles';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FOLLOWUSER_STYLES],
@@ -29,11 +29,11 @@ class PoP_Module_Processor_ShowHideElemMultiStyleLayouts extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FOLLOWUSER_STYLES:
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::MODULE_LAYOUT_FOLLOWUSER_HIDE_STYLES];
                 $ret[] = [PoP_Module_Processor_FunctionLayouts::class, PoP_Module_Processor_FunctionLayouts::MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES];

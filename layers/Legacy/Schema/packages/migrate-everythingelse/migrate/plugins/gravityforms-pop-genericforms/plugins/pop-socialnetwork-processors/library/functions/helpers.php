@@ -6,7 +6,7 @@ class PoP_SocialNetwork_GFHelpers
     public static function getContactuserFormFieldNames()
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $gfinputname_componentVariations = array(
+        $gfinputname_components = array(
             POP_GENERICFORMS_GF_FORM_CONTACTUSER_FIELDNAME_NAME_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_NAME],
             POP_GENERICFORMS_GF_FORM_CONTACTUSER_FIELDNAME_EMAIL_ID => [PoP_Forms_Module_Processor_TextFormInputs::class, PoP_Forms_Module_Processor_TextFormInputs::MODULE_FORMINPUT_EMAIL],
             POP_GENERICFORMS_GF_FORM_CONTACTUSER_FIELDNAME_SUBJECT_ID => [PoP_SocialNetwork_Module_Processor_TextFormInputs::class, PoP_SocialNetwork_Module_Processor_TextFormInputs::MODULE_FORMINPUT_MESSAGESUBJECT],
@@ -15,8 +15,8 @@ class PoP_SocialNetwork_GFHelpers
             POP_GENERICFORMS_GF_FORM_CONTACTUSER_FIELDNAME_PAGETITLE_ID => [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_USERNICENAME],
         );
         $fieldnames = array();
-        foreach ($gfinputname_componentVariations as $gf_field_name => $componentVariation) {
-            $fieldnames[$componentprocessor_manager->getProcessor($componentVariation)->getName($componentVariation)] = $gf_field_name;
+        foreach ($gfinputname_components as $gf_field_name => $component) {
+            $fieldnames[$componentprocessor_manager->getProcessor($component)->getName($component)] = $gf_field_name;
         }
         
         return $fieldnames;

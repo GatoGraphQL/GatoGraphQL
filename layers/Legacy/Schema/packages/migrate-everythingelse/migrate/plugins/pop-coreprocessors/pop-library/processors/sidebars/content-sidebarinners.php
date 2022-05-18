@@ -5,7 +5,7 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
     public final const MODULE_SIDEBARINNER_CONTENT_HORIZONTAL = 'contentsidebarinner-horizontal';
     public final const MODULE_SIDEBARINNER_CONTENT_VERTICAL = 'contentsidebarinner-vertical';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARINNER_CONTENT_HORIZONTAL],
@@ -13,24 +13,24 @@ class PoP_Module_Processor_ContentSidebarInners extends PoP_Module_Processor_Sid
         );
     }
 
-    public function getWrapperClass(array $componentVariation)
+    public function getWrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'row';
         }
     
-        return parent::getWrapperClass($componentVariation);
+        return parent::getWrapperClass($component);
     }
 
-    public function getWidgetwrapperClass(array $componentVariation)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARINNER_CONTENT_HORIZONTAL:
                 return 'col-xsm-4';
         }
     
-        return parent::getWidgetwrapperClass($componentVariation);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

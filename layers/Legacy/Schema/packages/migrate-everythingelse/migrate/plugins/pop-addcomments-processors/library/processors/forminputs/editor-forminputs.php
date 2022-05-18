@@ -5,61 +5,61 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
 {
     public final const MODULE_FORMINPUT_COMMENTEDITOR = 'forminputcommenteditor'; // Lowercase letters, no _ or - (http://codex.wordpress.org/Function_Reference/wp_editor)
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_COMMENTEDITOR],
         );
     }
 
-    // function getRows(array $componentVariation, array &$props) {
+    // function getRows(array $component, array &$props) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
     //             return 3;
     //     }
 
-    //     return parent::getRows($componentVariation, $props);
+    //     return parent::getRows($component, $props);
     // }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-editor-form-clear');
+                $this->appendProp($component, $props, 'class', 'pop-editor-form-clear');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return TranslationAPIFacade::getInstance()->__('Comment', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    // function getJsmethods(array $componentVariation, array &$props) {
+    // function getJsmethods(array $component, array &$props) {
 
-    //     $ret = parent::getJsmethods($componentVariation, $props);
+    //     $ret = parent::getJsmethods($component, $props);
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
@@ -69,26 +69,26 @@ class PoP_Module_Processor_CommentEditorFormInputs extends PoP_Module_Processor_
     //     return $ret;
     // }
 
-    public function autofocus(array $componentVariation, array &$props)
+    public function autofocus(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_COMMENTEDITOR:
                 return true;
         }
 
-        return parent::autofocus($componentVariation, $props);
+        return parent::autofocus($component, $props);
     }
 
-    // function getPlaceholder(array $componentVariation, array &$props) {
+    // function getPlaceholder(array $component, array &$props) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_FORMINPUT_COMMENTEDITOR:
 
     //             return TranslationAPIFacade::getInstance()->__('Type comment here...', 'pop-coreprocessors');
     //     }
 
-    //     return parent::getPlaceholder($componentVariation, $props);
+    //     return parent::getPlaceholder($component, $props);
     // }
 }
 

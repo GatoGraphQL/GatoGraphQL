@@ -6,7 +6,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_TAGSIDEBAR_HORIZONTAL = 'layout-tagsidebar-horizontal';
     public final const MODULE_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL = 'layout-tagsidebar-compacthorizontal';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_TAGSIDEBAR_VERTICAL],
@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_TAGSIDEBAR_VERTICAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::MODULE_LAYOUT_TAGSIDEBARINNER_VERTICAL],
@@ -23,27 +23,27 @@ class PoP_Module_Processor_CustomTagLayoutSidebars extends PoP_Module_Processor_
             self::MODULE_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL => [PoP_Module_Processor_CustomTagLayoutSidebarInners::class, PoP_Module_Processor_CustomTagLayoutSidebarInners::MODULE_LAYOUT_TAGSIDEBARINNER_COMPACTHORIZONTAL],
         );
 
-        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_TAGSIDEBAR_VERTICAL:
-                $this->appendProp($componentVariation, $props, 'class', 'vertical');
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_TAGSIDEBAR_HORIZONTAL:
             case self::MODULE_LAYOUT_TAGSIDEBAR_COMPACTHORIZONTAL:
-                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

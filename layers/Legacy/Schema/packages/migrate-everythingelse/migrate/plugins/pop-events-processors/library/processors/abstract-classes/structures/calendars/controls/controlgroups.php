@@ -4,18 +4,18 @@ class PoP_Module_Processor_CalendarControlGroups extends PoP_Module_Processor_Co
 {
     public final const MODULE_CALENDARCONTROLGROUP_CALENDAR = 'calendarcontrolgroup-calendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CALENDARCONTROLGROUP_CALENDAR],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARCONTROLGROUP_CALENDAR:
                 $ret[] = [PoP_Module_Processor_CalendarControlButtonGroups::class, PoP_Module_Processor_CalendarControlButtonGroups::MODULE_CALENDARCONTROLBUTTONGROUP_CALENDAR];
                 break;

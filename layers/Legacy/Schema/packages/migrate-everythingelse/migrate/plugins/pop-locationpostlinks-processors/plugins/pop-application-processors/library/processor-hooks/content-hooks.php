@@ -9,16 +9,16 @@ class PoPTheme_LocationPostLinks_ContentHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_Contents:inner_componentVariation',
+            'PoP_Module_Processor_Contents:inner_component',
             $this->contentInner(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, array $componentVariation)
+    public function contentInner($inner, array $component)
     {
-        if ($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE]) {
+        if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE]) {
             $postTypeAPI = PostTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             $postCategoryTypeAPI = PostCategoryTypeAPIFacade::getInstance();

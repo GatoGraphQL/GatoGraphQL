@@ -18,37 +18,37 @@ trait ModulePathProcessorTrait
     abstract protected function getComponentFilterManager(): ComponentFilterManagerInterface;
     abstract protected function getModuleHelpers(): ModuleHelpersInterface;
 
-    protected function getComponentProcessor(array $componentVariation)
+    protected function getComponentProcessor(array $component)
     {
-        return $this->getComponentProcessorManager()->getProcessor($componentVariation);
+        return $this->getComponentProcessorManager()->getProcessor($component);
     }
 
-    protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndPropagateToDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
         $ret = [];
-        $key = $this->getModuleHelpers()->getModuleOutputName($componentVariation);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $key = $this->getModuleHelpers()->getModuleOutputName($component);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
-            if ($module_ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+            if ($module_ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)) {
                 $ret[$key] = $module_ret;
             }
         }
 
         // Stop iterating when the submodule starts a new cycle of loading data
-        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($subComponentVariation) {
-            return !$this->getComponentProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
+        $subComponents = array_filter($this->getAllSubmodules($component), function ($subComponent) {
+            return !$this->getComponentProcessor($subComponent)->startDataloadingSection($subComponent);
         });
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         $submodules_ret = array();
-        foreach ($subComponentVariations as $subComponentVariation) {
+        foreach ($subComponents as $subComponent) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
         if ($submodules_ret) {
@@ -57,69 +57,69 @@ trait ModulePathProcessorTrait
             $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
+    protected function executeOnSelfAndMergeWithDatasetmodules($eval_self_fn, $propagate_fn, array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids)
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
-            $ret = $this->$eval_self_fn($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+            $ret = $this->$eval_self_fn($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
         } else {
             $ret = [];
         }
 
         // Stop iterating when the submodule starts a new cycle of loading data
-        $subComponentVariations = array_filter($this->getAllSubmodules($componentVariation), function ($subComponentVariation) {
-            return !$this->getComponentProcessor($subComponentVariation)->startDataloadingSection($subComponentVariation);
+        $subComponents = array_filter($this->getAllSubmodules($component), function ($subComponent) {
+            return !$this->getComponentProcessor($subComponent)->startDataloadingSection($subComponent);
         });
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $subComponentVariation) {
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        foreach ($subComponents as $subComponent) {
             $ret = array_merge_recursive(
                 $ret,
-                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids)
             );
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
         return $ret;
     }
 
-    // $use_componentVariation_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
+    // $use_component_output_name_as_key: For response structures (eg: configuration, feedback, etc) must be true
     // for internal structures (eg: $props, $data_properties) no need
-    protected function executeOnSelfAndPropagateToComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $use_componentVariation_output_name_as_key = true, $options = array())
+    protected function executeOnSelfAndPropagateToComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $use_component_output_name_as_key = true, $options = array())
     {
         $ret = [];
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
-        $key = $use_componentVariation_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($componentVariation) : $moduleFullName;
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
+        $key = $use_component_output_name_as_key ? $this->getModuleHelpers()->getModuleOutputName($component) : $moduleFullName;
 
-        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
             // Maybe only execute function on the dataloading modules
-            if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($componentVariation)->startDataloadingSection($componentVariation)) {
-                if ($module_ret = $this->$eval_self_fn($componentVariation, $props)) {
+            if (!isset($options['only-execute-on-dataloading-modules']) || !$options['only-execute-on-dataloading-modules'] || $this->getComponentProcessor($component)->startDataloadingSection($component)) {
+                if ($module_ret = $this->$eval_self_fn($component, $props)) {
                     $ret[$key] = $module_ret;
                 }
             }
         }
 
-        $subComponentVariations = $this->getAllSubmodules($componentVariation);
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $this->getAllSubmodules($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
         $submodules_ret = array();
-        foreach ($subComponentVariations as $subComponentVariation) {
+        foreach ($subComponents as $subComponent) {
             $submodules_ret = array_merge(
                 $submodules_ret,
-                $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES])
+                $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES])
             );
         }
         if ($submodules_ret) {
@@ -128,29 +128,29 @@ trait ModulePathProcessorTrait
             $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
             $ret[$key][$submodulesOutputProperty] = $submodules_ret;
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
         return $ret;
     }
 
-    protected function executeOnSelfAndMergeWithComponentVariations($eval_self_fn, $propagate_fn, array $componentVariation, array &$props, $recursive = true)
+    protected function executeOnSelfAndMergeWithComponents($eval_self_fn, $propagate_fn, array $component, array &$props, $recursive = true)
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentVariationPaths is provided, and we haven't reached the destination component variation yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
-            $ret = $this->$eval_self_fn($componentVariation, $props);
+        // If componentPaths is provided, and we haven't reached the destination component yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
+            $ret = $this->$eval_self_fn($component, $props);
         } else {
             $ret = [];
         }
 
-        $subComponentVariations = $this->getAllSubmodules($componentVariation);
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $this->getAllSubmodules($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
-        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component variation has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $subComponentVariation) {
-            $submodule_ret = $this->getComponentProcessor($subComponentVariation)->$propagate_fn($subComponentVariation, $props[$moduleFullName][Props::SUBMODULES], $recursive);
+        // This function must be called always, to register matching modules into requestmeta.filtermodules even when the component has no submodules
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        foreach ($subComponents as $subComponent) {
+            $submodule_ret = $this->getComponentProcessor($subComponent)->$propagate_fn($subComponent, $props[$moduleFullName][Props::SUBMODULES], $recursive);
             $ret = $recursive ?
                 array_merge_recursive(
                     $ret,
@@ -165,7 +165,7 @@ trait ModulePathProcessorTrait
                     )
                 );
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
 
         return $ret;
     }

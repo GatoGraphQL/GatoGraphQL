@@ -12,19 +12,19 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionComponentRo
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_POST_HIGHLIGHTSSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_HIGHLIGHTS_SIDEBAR],
             POP_ADDHIGHLIGHTS_ROUTE_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_MYHIGHLIGHTS_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;
@@ -38,7 +38,7 @@ class PoPTheme_Wassup_AddHighlights_Module_SideInfoContentPageSectionComponentRo
         $ret = array();
 
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
+            'component' => [PoP_AddHighlights_Module_Processor_SidebarMultiples::class, PoP_AddHighlights_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_HIGHLIGHT_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT,

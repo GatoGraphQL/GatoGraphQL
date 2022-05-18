@@ -7,7 +7,7 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
     public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW = 'layout-referencedbyscroll-inner-fullview';
     public final const MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_APPENDABLE = 'layout-referencedbyscroll-inner-appendable';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS],
@@ -17,9 +17,9 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS:
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_SIMPLEVIEW:
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_FULLVIEW:
@@ -30,14 +30,14 @@ class PoPApplicationProcessors_Module_Processor_CommentScrollInners extends PoP_
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTSCROLLINNER_REFERENCEDBY_DETAILS:
                 $ret[] = [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_RELATED];
                 break;

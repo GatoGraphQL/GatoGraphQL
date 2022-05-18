@@ -11,11 +11,11 @@ class Domain_Module_MainContentComponentRoutingProcessor extends \PoP\Applicatio
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN => [PoP_MultidomainProcessors_Module_Processor_Dataloads::class, PoP_MultidomainProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_INITIALIZEDOMAIN],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

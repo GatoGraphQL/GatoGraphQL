@@ -4,7 +4,7 @@ class PoP_Module_Processor_PostAdditionalLayouts extends PoP_Module_Processor_Po
 {
     public final const MODULE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL = 'layout-postadditional-multilayout-label';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTADDITIONAL_MULTILAYOUT_LABEL],

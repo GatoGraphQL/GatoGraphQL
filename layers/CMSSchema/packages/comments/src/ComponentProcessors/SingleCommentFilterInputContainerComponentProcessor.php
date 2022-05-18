@@ -17,7 +17,7 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
     public final const MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS = 'filterinputcontainer-comment-status';
     public final const MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS = 'filterinputcontainer-comment-by-id-status';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS],
@@ -25,9 +25,9 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
-        return match ((string)$componentVariation[1]) {
+        return match ((string)$component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_COMMENT_STATUS => [
                 [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_COMMENT_STATUS],
             ],
@@ -39,10 +39,10 @@ class SingleCommentFilterInputContainerComponentProcessor extends AbstractFilter
         };
     }
 
-    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
     {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($componentVariation, $fieldArgName);
-        switch ($componentVariation[1]) {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_COMMENT_BY_ID_STATUS:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,

@@ -23,7 +23,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
     public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS18 = 'block-mycategoryposts18-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19 = 'block-mycategoryposts19-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS00],
@@ -49,9 +49,9 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS00 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCATEGORYPOSTS00],
@@ -75,16 +75,16 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
             self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS18 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS19 => [LPPC_Module_Processor_SectionTabPanelComponents::class, LPPC_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS02:
@@ -108,12 +108,12 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_MYCATEGORYPOSTS02:
@@ -137,7 +137,7 @@ class LPPC_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_T
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

@@ -3,51 +3,51 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PopoverLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_POPOVER];
     }
 
-    public function getLayoutSubmodule(array $componentVariation)
+    public function getLayoutSubmodule(array $component)
     {
         return null;
     }
-    public function getLayoutContentSubmodule(array $componentVariation)
+    public function getLayoutContentSubmodule(array $component)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($layout = $this->getLayoutSubmodule($componentVariation)) {
+        if ($layout = $this->getLayoutSubmodule($component)) {
             $ret[] = $layout;
         }
-        if ($layout_content = $this->getLayoutContentSubmodule($componentVariation)) {
+        if ($layout_content = $this->getLayoutContentSubmodule($component)) {
             $ret[] = $layout_content;
         }
 
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'popover');
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($layout = $this->getLayoutSubmodule($componentVariation)) {
+        if ($layout = $this->getLayoutSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout);
         }
-        if ($layout_content = $this->getLayoutContentSubmodule($componentVariation)) {
+        if ($layout_content = $this->getLayoutContentSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layout-content'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($layout_content);
         }
         

@@ -12,7 +12,7 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHORPASTEVENTS = 'multiple-sidebarinner-section-authorpastevents';
     public final const MODULE_MULTIPLE_SIDEBARINNER_SECTION_AUTHOREVENTSCALENDAR = 'multiple-sidebarinner-section-authoreventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS],
@@ -29,11 +29,11 @@ class GD_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_EVENTS:
             case self::MODULE_MULTIPLE_SIDEBARINNER_SECTION_PASTEVENTS:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTIONWITHMAP];

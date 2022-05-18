@@ -29,7 +29,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
     public final const MODULE_CONTROLGROUP_EDITPOST = 'controlgroup-editpost';
     public final const MODULE_CONTROLGROUP_USERPOSTINTERACTION = 'controlgroup-userpostinteraction';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLGROUP_COMMENTS],
@@ -61,11 +61,11 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLGROUP_COMMENTS:
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_FILTER];
                 break;
@@ -185,7 +185,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
                     array(
                         [PoP_Module_Processor_AddCommentPostViewComponentButtons::class, PoP_Module_Processor_AddCommentPostViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POST_ADDCOMMENT],
                     ),
-                    $componentVariation
+                    $component
                 )
                 ) {
                     $ret = array_merge(
@@ -200,7 +200,7 @@ class PoP_Module_Processor_CustomControlGroups extends PoP_Module_Processor_Cont
         if ($layouts = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_CustomControlGroups:layouts',
             array(),
-            $componentVariation
+            $component
         )
         ) {
             $ret = array_merge(

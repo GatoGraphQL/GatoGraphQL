@@ -2,31 +2,31 @@
 
 abstract class PoP_Module_Processor_AddEditContentBlocksBase extends PoP_Module_Processor_BlocksBase
 {
-    protected function isCreate(array $componentVariation)
+    protected function isCreate(array $component)
     {
         return null;
     }
-    protected function isUpdate(array $componentVariation)
+    protected function isUpdate(array $component)
     {
         return null;
     }
-    protected function showDisabledLayerIfCheckpointFailed(array $componentVariation, array &$props)
+    protected function showDisabledLayerIfCheckpointFailed(array $component, array &$props)
     {
-        if ($this->isUpdate($componentVariation)) {
+        if ($this->isUpdate($component)) {
             return true;
         }
 
-        return parent::showDisabledLayerIfCheckpointFailed($componentVariation, $props);
+        return parent::showDisabledLayerIfCheckpointFailed($component, $props);
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        if ($this->isUpdate($componentVariation)) {
+        if ($this->isUpdate($component)) {
             return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_EDITPOST];
-        } elseif ($this->isCreate($componentVariation)) {
+        } elseif ($this->isCreate($component)) {
             return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEPOST];
         }
         
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 }

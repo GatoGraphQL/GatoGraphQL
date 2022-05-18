@@ -4,39 +4,39 @@ use PoP\ComponentModel\Misc\RequestUtils;
 
 abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_Processor_BootstrapPageSectionsBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_PAGESECTION_TABPANE];
     }
 
-    public function getHeaderClass(array $componentVariation)
+    public function getHeaderClass(array $component)
     {
         return '';
     }
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
         return array();
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($header_class = $this->getHeaderClass($componentVariation)) {
+        if ($header_class = $this->getHeaderClass($component)) {
             $ret[GD_JS_CLASSES]['header'] = $header_class;
         }
-        if ($headerTitles = $this->getHeaderTitles($componentVariation)) {
+        if ($headerTitles = $this->getHeaderTitles($component)) {
             $ret[GD_JS_TITLES]['headers'] = $headerTitles;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
+        $this->appendProp($component, $props, 'class', 'pop-pagesection-page pop-viewport toplevel');
         $this->mergeProp(
-            $componentVariation,
+            $component,
             $props,
             'params',
             array(
@@ -49,19 +49,19 @@ abstract class PoP_Module_Processor_TabPanePageSectionsBase extends PoP_Module_P
             // If doing Server-side rendering, then already add "active" to the tabPane, to not depend on javascript
             // (Otherwise, the page will look empty!)
             if (RequestUtils::loadingSite() && !PoP_SSR_ServerUtils::disableServerSideRendering()) {
-                $this->appendProp($componentVariation, $props, 'class', 'active');
+                $this->appendProp($component, $props, 'class', 'active');
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    protected function getInitjsBlockbranches(array $componentVariation, array &$props)
+    protected function getInitjsBlockbranches(array $component, array &$props)
     {
-        $ret = parent::getInitjsBlockbranches($componentVariation, $props);
+        $ret = parent::getInitjsBlockbranches($component, $props);
 
         // 2 possibilities: with the merge container (eg: main) or without it (eg: quickview)
-        $id = $this->getFrontendId($componentVariation, $props);
+        $id = $this->getFrontendId($component, $props);
 
         // Comment Leo 10/12/2016: in the past, we did .tab-pane.active, however that doesn't work anymore for when alt+click to open a link
         // So instead, just pick the last added .tab-pane

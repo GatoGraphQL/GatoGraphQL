@@ -14,8 +14,8 @@ class Wassup_Volunteering_Module_MainContentComponentRoutingProcessor extends \P
         $routemodules = array(
             POP_VOLUNTEERING_ROUTE_VOLUNTEER => [PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

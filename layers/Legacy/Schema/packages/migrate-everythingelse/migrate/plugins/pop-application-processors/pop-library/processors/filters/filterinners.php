@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     public final const MODULE_FILTERINPUTCONTAINER_MYPOSTS = 'filterinputcontainer-myposts';
     public final const MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'filterinputcontainer-mycategoryposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_TAGS],
@@ -39,9 +39,9 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_FILTERINPUTCONTAINER_POSTS => [
@@ -141,20 +141,20 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
                 [PoP_Module_Processor_FormInputGroups::class, PoP_Module_Processor_FormInputGroups::MODULE_FILTERINPUTGROUP_ORDERPOST],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Blog:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_FILTERINPUTCONTAINER_TAGS => POP_FILTER_TAGS,
@@ -173,11 +173,11 @@ class PoP_Module_Processor_CustomFilterInners extends PoP_Module_Processor_Filte
     //         self::MODULE_FILTERINPUTCONTAINER_MYPOSTS => POP_FILTER_MYPOSTS,
     //         self::MODULE_FILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

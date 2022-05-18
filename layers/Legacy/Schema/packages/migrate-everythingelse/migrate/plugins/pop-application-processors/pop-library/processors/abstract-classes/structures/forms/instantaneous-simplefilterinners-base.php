@@ -7,25 +7,25 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
     // PROTECTED Functions
     //-------------------------------------------------
 
-    public function getSubmitbtnModule(array $componentVariation)
+    public function getSubmitbtnModule(array $component)
     {
 
         // Use a special Search button, so it doesn't share the $props with the Search from the filter
         return [PoPTheme_Wassup_Module_Processor_SubmitButtons::class, PoPTheme_Wassup_Module_Processor_SubmitButtons::MODULE_SUBMITBUTTON_INSTANTANEOUSSEARCH];
     }
 
-    public function getTriggerInternaltarget(array $componentVariation, array &$props)
+    public function getTriggerInternaltarget(array $component, array &$props)
     {
         return null;
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
 
         // When clicking on any button, already submit the form
-        if ($submit_btn = $this->getSubmitbtnModule($componentVariation)) {
-            // $trigger_componentVariation can only be the Filter and not the FilterInner, because FilterInner has no id, which is needed for previousmodules-ids
-            if ($trigger_componentVariation = $this->getProp($componentVariation, $props, 'trigger-module')) {
+        if ($submit_btn = $this->getSubmitbtnModule($component)) {
+            // $trigger_component can only be the Filter and not the FilterInner, because FilterInner has no id, which is needed for previousmodules-ids
+            if ($trigger_component = $this->getProp($component, $props, 'trigger-module')) {
                 // Execute JS and set all needed params
                 $this->mergeJsmethodsProp($submit_btn, $props, array('onActionThenClick'));
                 $this->mergeProp(
@@ -33,7 +33,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
                     $props,
                     'previousmodules-ids',
                     array(
-                        'data-triggertarget' => $trigger_componentVariation,
+                        'data-triggertarget' => $trigger_component,
                     )
                 );
                 $this->mergeProp(
@@ -44,7 +44,7 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
                         'data-trigger-action' => 'change',
                     )
                 );
-                if ($internal_target = $this->getTriggerInternaltarget($componentVariation, $props)) {
+                if ($internal_target = $this->getTriggerInternaltarget($component, $props)) {
                     $this->mergeProp(
                         $submit_btn,
                         $props,
@@ -57,16 +57,16 @@ abstract class PoP_Module_Processor_InstantaneousSimpleFilterInnersBase extends 
             }
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // When clicking on any button, already submit the form
-        if ($submit_btn = $this->getSubmitbtnModule($componentVariation)) {
+        if ($submit_btn = $this->getSubmitbtnModule($component)) {
             // Do not show
             $this->appendProp($submit_btn, $props, 'class', 'hidden');
         }
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

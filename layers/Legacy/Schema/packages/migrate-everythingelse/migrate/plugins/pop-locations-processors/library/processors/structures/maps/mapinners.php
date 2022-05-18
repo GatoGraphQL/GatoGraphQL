@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
     public final const MODULE_EM_MAPINNER_POST = 'em-mapinner-post';
     public final const MODULE_EM_MAPINNER_USER = 'em-mapinner-user';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_MAPINNER_POST],
@@ -13,11 +13,11 @@ class GD_EM_Module_Processor_MapInners extends GD_EM_Module_Processor_MapInnersB
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_MAPINNER_POST:
                 $ret[] = [PoP_Module_Processor_MapScripts::class, PoP_Module_Processor_MapScripts::MODULE_MAP_SCRIPT_POST];
                 break;

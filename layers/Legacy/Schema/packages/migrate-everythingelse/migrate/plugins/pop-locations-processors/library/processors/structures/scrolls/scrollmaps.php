@@ -10,7 +10,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
     public final const MODULE_SCROLL_PASTEVENTS_MAP = 'scroll-pastevents-map';
     public final const MODULE_SCROLL_EVENTS_HORIZONTALMAP = 'scroll-events-horizontalmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_USERS_MAP],
@@ -24,7 +24,7 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_USERS_MAP => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_USERS_MAP],
@@ -36,11 +36,11 @@ class PoP_Locations_Module_Processor_CustomScrollMaps extends PoP_Module_Process
             self::MODULE_SCROLL_EVENTS_HORIZONTALMAP => [PoP_Locations_Module_Processor_CustomScrollInners::class, PoP_Locations_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_EVENTS_HORIZONTALMAP],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

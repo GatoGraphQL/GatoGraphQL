@@ -12,7 +12,7 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
     public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_LIST = 'block-authormembers-scroll-list';
     public final const MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL = 'block-authormembers-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS],
@@ -27,9 +27,9 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_DETAILS => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_MEMBERS,
@@ -39,13 +39,13 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_LIST => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => POP_USERCOMMUNITIES_ROUTE_COMMUNITIES,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_DETAILS],
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_FULLVIEW],
             self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_COMMUNITIES_SCROLL_THUMBNAIL],
@@ -57,12 +57,12 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
             self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL => [PoP_UserCommunities_Module_Processor_CustomSectionDataloads::class, PoP_UserCommunities_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_AUTHORCOMMUNITYMEMBERS_CAROUSEL],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_COMMUNITIES_SCROLL_DETAILS:
             case self::MODULE_BLOCK_COMMUNITIES_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_COMMUNITIES_SCROLL_THUMBNAIL:
@@ -74,20 +74,20 @@ class PoP_UserCommunities_Module_Processor_CustomSectionBlocks extends PoP_Modul
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL:
                 // // Artificial property added to identify the template when adding module-resources
-                // $this->setProp($componentVariation, $props, 'resourceloader', 'block-carousel');
-                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-users-carousel');
+                // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
+                $this->appendProp($component, $props, 'class', 'pop-block-carousel block-users-carousel');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

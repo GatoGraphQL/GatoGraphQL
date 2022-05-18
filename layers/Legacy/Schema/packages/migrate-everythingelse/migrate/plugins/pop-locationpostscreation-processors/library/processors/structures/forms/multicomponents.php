@@ -5,27 +5,27 @@ class GD_Custom_EM_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
 {
     public final const MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE = 'multicomponent-form-locationpost-rightside';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         $status = GD_CreateUpdate_Utils::moderate() ?
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_MODERATEDPUBLISH] :
             [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORMINPUTS_UNMODERATEDPUBLISH];
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE:
                 $details = array(
                     self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE => [GD_Custom_EM_Module_Processor_FormWidgets::class, GD_Custom_EM_Module_Processor_FormWidgets::MODULE_WIDGET_FORM_LOCATIONPOSTDETAILS],
                 );
-                $ret[] = $details[$componentVariation[1]];
+                $ret[] = $details[$component[1]];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::MODULE_WIDGET_FORM_FEATUREDIMAGE];
                 $ret[] = [Wassup_Module_Processor_FormWidgets::class, Wassup_Module_Processor_FormWidgets::MODULE_WIDGET_FORM_METAINFORMATION];
                 $ret[] = $status;
@@ -35,13 +35,13 @@ class GD_Custom_EM_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_FORM_LOCATIONPOST_RIGHTSIDE:
-                if (!($classs = $this->getProp($componentVariation, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
+                if (!($classs = $this->getProp($component, $props, 'forminput-publish-class')/*$this->get_general_prop($props, 'forminput-publish-class')*/)) {
                     $classs = 'alert alert-info';
                 }
                 $status = GD_CreateUpdate_Utils::moderate() ?
@@ -51,7 +51,7 @@ class GD_Custom_EM_Module_Processor_FormMultipleComponents extends PoP_Module_Pr
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

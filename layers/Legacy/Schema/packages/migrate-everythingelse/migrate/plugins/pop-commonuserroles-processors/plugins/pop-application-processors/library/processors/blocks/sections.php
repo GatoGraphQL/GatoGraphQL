@@ -15,7 +15,7 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
     public final const MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST = 'block-organizations-scroll-list';
     public final const MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST = 'block-individuals-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR],
@@ -33,9 +33,9 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_INDIVIDUALS_SCROLL_ADDONS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_BLOCK_INDIVIDUALS_SCROLL_DETAILS => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
             self::MODULE_BLOCK_INDIVIDUALS_SCROLL_FULLVIEW => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS ,
@@ -48,13 +48,13 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
             self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_LIST => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
             self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_THUMBNAIL => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS ,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_NAVIGATOR => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_INDIVIDUALS_SCROLL_NAVIGATOR => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_INDIVIDUALS_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_ADDONS => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_ORGANIZATIONS_SCROLL_ADDONS],
@@ -69,12 +69,12 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
             self::MODULE_BLOCK_INDIVIDUALS_SCROLL_LIST => [GD_URE_Module_Processor_CustomSectionDataloads::class, GD_URE_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_INDIVIDUALS_SCROLL_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_INDIVIDUALS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_ORGANIZATIONS_SCROLL_FULLVIEW:
@@ -86,7 +86,7 @@ class GD_URE_Module_Processor_CustomSectionBlocks extends PoP_Module_Processor_S
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKUSERLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 }
 

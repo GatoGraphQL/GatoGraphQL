@@ -24,11 +24,11 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
         );
     }
 
-    public function getShareSubmodules($subComponentVariations, array $componentVariation)
+    public function getShareSubmodules($subComponents, array $component)
     {
         // Insert at the beginning
         array_splice(
-            $subComponentVariations, 
+            $subComponents, 
             0, 
             0, 
             array(
@@ -36,15 +36,15 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
                 [GD_SocialMediaProviders_Module_Processor_AnchorControls::class, GD_SocialMediaProviders_Module_Processor_AnchorControls::MODULE_ANCHORCONTROL_SHARE_TWITTER],
             )
         );
-        return $subComponentVariations;
+        return $subComponents;
     }
 
-    public function getDropdownSubmodules($subComponentVariations, array $componentVariation)
+    public function getDropdownSubmodules($subComponents, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -56,7 +56,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -68,7 +68,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
             case PoP_Module_Processor_DropdownButtonQuicklinks::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -79,15 +79,15 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
                 break;
         }
         
-        return $subComponentVariations;
+        return $subComponents;
     }
 
-    public function getSocialmediaprovidersSubmodules($subComponentVariations, array $componentVariation)
+    public function getSocialmediaprovidersSubmodules($subComponents, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -99,7 +99,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -111,7 +111,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
 
             case PoP_Module_Processor_SocialMediaMultipleComponents::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
                 array_splice(
-                    $subComponentVariations, 
+                    $subComponents, 
                     0, 
                     0, 
                     array(
@@ -122,7 +122,7 @@ class PoP_SocialMediaProviders_CoreProcessors_Hooks
                 break;
         }
 
-        return $subComponentVariations;
+        return $subComponents;
     }
 }
 

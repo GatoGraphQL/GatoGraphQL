@@ -8,7 +8,7 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
     public final const MODULE_CONTROLBUTTONGROUP_TAGEVENTLINKS = 'customcontrolbuttongroup-tageventlinks';
     public final const MODULE_CONTROLBUTTONGROUP_MYEVENTLINKS = 'customcontrolbuttongroup-myeventlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDEVENT],
@@ -19,11 +19,11 @@ class PoP_EventsCreation_Module_Processor_CustomControlButtonGroups extends PoP_
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDEVENT:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomAnchorControls::class, PoP_EventsCreation_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDEVENT];
                 if (defined('POP_EVENTLINKSCREATIONPROCESSORS_INITIALIZED')) {

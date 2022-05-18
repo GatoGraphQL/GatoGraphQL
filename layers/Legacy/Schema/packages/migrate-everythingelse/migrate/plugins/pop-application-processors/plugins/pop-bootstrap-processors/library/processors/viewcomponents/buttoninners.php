@@ -6,7 +6,7 @@ class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners exte
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA = 'viewcomponent-buttoninner-sharebyemail-socialmedia';
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-sharebyemail-previewdropdown';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA],
@@ -14,9 +14,9 @@ class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners exte
         );
     }
     
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_SOCIALMEDIA:
                 return 'fa-fw fa-envelope fa-lg';
                     
@@ -24,17 +24,17 @@ class PoP_GenericForms_Bootstrap_Module_Processor_ViewComponentButtonInners exte
                 return 'fa-fw fa-envelope';
         }
         
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_SHAREBYEMAIL_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Share by email', 'pop-coreprocessors');
         }
         
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

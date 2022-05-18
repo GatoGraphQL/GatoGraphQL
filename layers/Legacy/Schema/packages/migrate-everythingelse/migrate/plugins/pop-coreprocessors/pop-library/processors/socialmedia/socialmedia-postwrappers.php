@@ -7,7 +7,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
     public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_POSTWRAPPER = 'subjugatedpost-socialmedia-wrapper';
     public final const MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER = 'subjugatedpost-socialmedia-counter-wrapper';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER],
@@ -17,7 +17,7 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
         );
     }
 
-    public function getSocialmediaModule(array $componentVariation)
+    public function getSocialmediaModule(array $component)
     {
         $socialmedias = array(
             self::MODULE_POSTSOCIALMEDIA_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_POSTSOCIALMEDIA],
@@ -26,11 +26,11 @@ class PoP_Module_Processor_SocialMediaPostWrappers extends PoP_Module_Processor_
             self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER_POSTWRAPPER => [PoP_Module_Processor_SocialMedia::class, PoP_Module_Processor_SocialMedia::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER],
         );
 
-        if ($socialmedia = $socialmedias[$componentVariation[1]] ?? null) {
+        if ($socialmedia = $socialmedias[$component[1]] ?? null) {
             return $socialmedia;
         }
 
-        return parent::getSocialmediaModule($componentVariation);
+        return parent::getSocialmediaModule($component);
     }
 }
 

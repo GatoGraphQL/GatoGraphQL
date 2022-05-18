@@ -5,7 +5,7 @@ class PoP_SocialNetwork_Module_Processor_FormGroups extends PoP_Module_Processor
     public final const MODULE_FORMINPUTGROUP_MESSAGESUBJECT = 'gf-forminputgroup-field-messagesubject';
     public final const MODULE_FORMINPUTGROUP_MESSAGETOUSER = 'gf-forminputgroup-field-messagetouser';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_MESSAGESUBJECT],
@@ -13,18 +13,18 @@ class PoP_SocialNetwork_Module_Processor_FormGroups extends PoP_Module_Processor
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_MESSAGESUBJECT => [PoP_SocialNetwork_Module_Processor_TextFormInputs::class, PoP_SocialNetwork_Module_Processor_TextFormInputs::MODULE_FORMINPUT_MESSAGESUBJECT],
             self::MODULE_FORMINPUTGROUP_MESSAGETOUSER => [PoP_SocialNetwork_Module_Processor_TextareaFormInputs::class, PoP_SocialNetwork_Module_Processor_TextareaFormInputs::MODULE_FORMINPUT_MESSAGETOUSER],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

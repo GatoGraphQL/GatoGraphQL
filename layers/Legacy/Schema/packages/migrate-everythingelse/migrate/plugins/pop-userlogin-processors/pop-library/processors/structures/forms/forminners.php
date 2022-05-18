@@ -10,7 +10,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     public final const MODULE_FORMINNER_LOGOUT = 'forminner-logout';
     public final const MODULE_FORMINNER_USER_CHANGEPASSWORD = 'forminner-user-changepwd';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_LOGIN],
@@ -21,11 +21,11 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOGIN:
                 $ret = array_merge(
                     $ret,
@@ -85,9 +85,9 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOSTPWDRESET:
                 // If loading the page straight, then set the value on the input directly
                 // Otherwise, use Javascript to fill in the value
@@ -100,12 +100,12 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    // function initModelProps(array $componentVariation, array &$props) {
+    // function initModelProps(array $component, array &$props) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_FORMINNER_LOSTPWDRESET:
 
@@ -124,7 +124,7 @@ class GD_UserLogin_Module_Processor_UserFormInners extends PoP_Module_Processor_
     //             break;
     //     }
 
-    //     parent::initModelProps($componentVariation, $props);
+    //     parent::initModelProps($component, $props);
     // }
 }
 

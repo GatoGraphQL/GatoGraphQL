@@ -8,7 +8,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
     public final const MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW = 'widget-stances-appendtoscript-fullview';
     public final const MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS = 'widget-stances-appendtoscript-details';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_STANCETARGET],
@@ -18,11 +18,11 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCETARGET:
                 $ret[] = [PoP_Module_Processor_StanceTargetSubcomponentLayouts::class, PoP_Module_Processor_StanceTargetSubcomponentLayouts::MODULE_LAYOUT_STANCETARGET_ADDONS];
                 break;
@@ -40,7 +40,7 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
         return $ret;
     }
 
-    public function getMenuTitle(array $componentVariation, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $stances = PoP_UserStance_PostNameUtils::getNamesLc();
         $titles = array(
@@ -53,9 +53,9 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => $stances,
         );
 
-        return $titles[$componentVariation[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $fontawesomes = array(
             self::MODULE_WIDGET_STANCETARGET => 'fa-asterisk',
@@ -64,55 +64,55 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
             self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS => 'fa-commenting-o',
         );
 
-        return $fontawesomes[$componentVariation[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
-    public function getBodyClass(array $componentVariation, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return '';
         }
 
-        return parent::getBodyClass($componentVariation, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $componentVariation, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return '';
         }
 
-        return parent::getItemWrapper($componentVariation, $props);
+        return parent::getItemWrapper($component, $props);
     }
-    public function getWidgetClass(array $componentVariation, array &$props)
+    public function getWidgetClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return '';
         }
 
-        return parent::getWidgetClass($componentVariation, $props);
+        return parent::getWidgetClass($component, $props);
     }
-    public function getTitleWrapperClass(array $componentVariation, array &$props)
+    public function getTitleWrapperClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return '';
         }
 
-        return parent::getTitleWrapperClass($componentVariation, $props);
+        return parent::getTitleWrapperClass($component, $props);
     }
-    public function getTitleClass(array $componentVariation, array &$props)
+    public function getTitleClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
                 // case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
                 // case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
@@ -120,26 +120,26 @@ class UserStance_Module_Processor_Widgets extends PoP_Module_Processor_WidgetsBa
                 return '';
         }
 
-        return parent::getTitleClass($componentVariation, $props);
+        return parent::getTitleClass($component, $props);
     }
-    public function getQuicklinkgroupSubmodule(array $componentVariation)
+    public function getQuicklinkgroupSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES:
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_FULLVIEW:
                 return [UserStance_Module_Processor_PostButtons::class, UserStance_Module_Processor_PostButtons::MODULE_BUTTON_STANCE_CREATE];
         }
 
-        return parent::getQuicklinkgroupSubmodule($componentVariation);
+        return parent::getQuicklinkgroupSubmodule($component);
     }
-    public function collapsible(array $componentVariation, array &$props)
+    public function collapsible(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_STANCES_APPENDTOSCRIPT_DETAILS:
                 return true;
         }
 
-        return parent::collapsible($componentVariation, $props);
+        return parent::collapsible($component, $props);
     }
 }
 

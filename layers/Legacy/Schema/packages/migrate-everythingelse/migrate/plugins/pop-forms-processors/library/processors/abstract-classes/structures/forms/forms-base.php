@@ -4,83 +4,83 @@ define('GD_SUBMITFORMTYPE_FETCHBLOCK', 'fetchblock');
 
 abstract class PoP_Module_Processor_FormsBase extends PoP_Module_Processor_StructuresBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Forms_TemplateResourceLoaderProcessor::class, PoP_Forms_TemplateResourceLoaderProcessor::RESOURCE_FORM];
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
         // $this->addJsmethod($ret, 'formHandleDisabledLayer');
 
-        $form_type = $this->getFormType($componentVariation, $props);
+        $form_type = $this->getFormType($component, $props);
         if ($form_type == GD_SUBMITFORMTYPE_FETCHBLOCK) {
             $this->addJsmethod($ret, 'forms');
         }
 
-        if ($this->getProp($componentVariation, $props, 'intercept-action-url')) {
+        if ($this->getProp($component, $props, 'intercept-action-url')) {
             $this->addJsmethod($ret, 'interceptForm', 'interceptor');
         }
         return $ret;
     }
 
-    public function getFormType(array $componentVariation, array &$props)
+    public function getFormType(array $component, array &$props)
     {
         return GD_SUBMITFORMTYPE_FETCHBLOCK;
     }
 
-    public function getMethod(array $componentVariation, array &$props)
+    public function getMethod(array $component, array &$props)
     {
         return 'POST';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['method'] = $this->getMethod($componentVariation, $props);
-        if ($description = $this->getProp($componentVariation, $props, 'description')) {
+        $ret['method'] = $this->getMethod($component, $props);
+        if ($description = $this->getProp($component, $props, 'description')) {
             $ret[GD_JS_DESCRIPTION] = $description;
         }
-        if ($description_bottom = $this->getProp($componentVariation, $props, 'description-bottom')) {
+        if ($description_bottom = $this->getProp($component, $props, 'description-bottom')) {
             $ret['description-bottom'] = $description_bottom;
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
+    public function getMutableonrequestConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
+        $ret = parent::getMutableonrequestConfiguration($component, $props);
 
-        $ret['action'] = $this->getProp($componentVariation, $props, 'action');
+        $ret['action'] = $this->getProp($component, $props, 'action');
 
         return $ret;
     }
 
-    public function getInterceptType(array $componentVariation, array &$props)
+    public function getInterceptType(array $component, array &$props)
     {
-        if ($this->getProp($componentVariation, $props, 'intercept-action-url')) {
+        if ($this->getProp($component, $props, 'intercept-action-url')) {
             return 'partialurl';
         }
 
-        return parent::getInterceptType($componentVariation, $props);
+        return parent::getInterceptType($component, $props);
     }
 
-    public function getAction(array $componentVariation, array &$props)
+    public function getAction(array $component, array &$props)
     {
-        if ($this->moduleLoadsData($componentVariation)) {
-            return $this->getDataloadSource($componentVariation, $props);
+        if ($this->moduleLoadsData($component)) {
+            return $this->getDataloadSource($component, $props);
         }
 
         return null;
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        $this->setProp($componentVariation, $props, 'action', $this->getAction($componentVariation, $props));
-        parent::initRequestProps($componentVariation, $props);
+        $this->setProp($component, $props, 'action', $this->getAction($component, $props));
+        parent::initRequestProps($component, $props);
     }
 }

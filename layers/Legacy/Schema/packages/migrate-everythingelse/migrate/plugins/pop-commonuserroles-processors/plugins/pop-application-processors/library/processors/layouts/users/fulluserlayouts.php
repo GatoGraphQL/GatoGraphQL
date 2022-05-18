@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
     public final const MODULE_LAYOUT_FULLUSER_ORGANIZATION = 'layout-fulluser-organization';
     public final const MODULE_LAYOUT_FULLUSER_INDIVIDUAL = 'layout-fulluser-individual';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLUSER_ORGANIZATION],
@@ -13,9 +13,9 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
         );
     }
 
-    public function getSidebarSubmodule(array $componentVariation)
+    public function getSidebarSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLUSER_ORGANIZATION:
             case self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL:
                 $sidebars = array(
@@ -23,10 +23,10 @@ class GD_URE_Module_Processor_CustomFullUserLayouts extends PoP_Module_Processor
                     self::MODULE_LAYOUT_FULLUSER_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebars::class, GD_URE_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL],
                 );
 
-                return $sidebars[$componentVariation[1]];
+                return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($componentVariation);
+        return parent::getSidebarSubmodule($component);
     }
 }
 

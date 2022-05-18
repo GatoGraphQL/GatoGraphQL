@@ -2,35 +2,35 @@
 
 abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP_Module_Processor_MarkersBase
 {
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
         $this->addJsmethod($ret, 'reloadEmbedPreview');
         return $ret;
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
 
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
         // will update itself with the URL in the input
-        $iframe = $this->getProp($componentVariation, $props, 'iframe-module');
+        $iframe = $this->getProp($component, $props, 'iframe-module');
         $this->appendProp($iframe, $props, 'class', PoP_WebPlatformEngine_Module_Utils::getMergeClass($iframe));
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Bind the Embed iframe and the input together. When the input value changes, the iframe
         // will update itself with the URL in the input
-        $iframe = $this->getProp($componentVariation, $props, 'iframe-module');
+        $iframe = $this->getProp($component, $props, 'iframe-module');
         // $this->setProp($iframe, $props, 'module-cb', true);
 
-        $input = $this->getProp($componentVariation, $props, 'input-module');
+        $input = $this->getProp($component, $props, 'input-module');
         $this->mergeProp(
-            $componentVariation,
+            $component,
             $props,
             'previousmodules-ids',
             array(
@@ -39,6 +39,6 @@ abstract class PoP_Module_Processor_ReloadEmbedPreviewConnectorsBase extends PoP
             )
         );
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

@@ -6,7 +6,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
 {
     public final const MODULE_PAGE_ADDONTABS = 'page-addontabs';
     public final const MODULE_PAGE_BODYTABS = 'page-bodytabs';
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGE_ADDONTABS],
@@ -14,17 +14,17 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_PAGE_ADDONTABS:
             case self::MODULE_PAGE_BODYTABS:
-                if ($tab_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
-                    $ret[] = $tab_componentVariation;
+                if ($tab_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_PAGESECTION_TAB)) {
+                    $ret[] = $tab_component;
                 }
                 break;
         }
@@ -32,9 +32,9 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
         return $ret;
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_PAGE_ADDONTABS:
                 return 'btn btn-warning btn-sm';
 
@@ -42,7 +42,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
                 return 'btn btn-inverse btn-sm';
         }
 
-        return parent::getBtnClass($componentVariation, $props);
+        return parent::getBtnClass($component, $props);
     }
 }
 

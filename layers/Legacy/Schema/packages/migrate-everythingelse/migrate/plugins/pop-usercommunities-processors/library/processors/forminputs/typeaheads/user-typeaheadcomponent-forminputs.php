@@ -10,7 +10,7 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY = 'ure-typeahead-component-community';
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS = 'ure-typeahead-component-communityplusmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY],
@@ -18,20 +18,20 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Communities', 'ure-popprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
+    protected function getTypeaheadDataloadSource(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITYPLUSMEMBERS:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
@@ -41,14 +41,14 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
                 return RouteUtils::getRouteURL(POP_USERCOMMUNITIES_ROUTE_COMMUNITIES);
         }
 
-        return parent::getTypeaheadDataloadSource($componentVariation, $props);
+        return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    protected function getThumbprintQuery(array $componentVariation, array &$props)
+    protected function getThumbprintQuery(array $component, array &$props)
     {
-        $ret = parent::getThumbprintQuery($componentVariation, $props);
+        $ret = parent::getThumbprintQuery($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 $ret['role'] = GD_URE_ROLE_COMMUNITY;
                 break;
@@ -57,24 +57,24 @@ class GD_URE_Module_Processor_UserTypeaheadComponentFormInputs extends PoP_Modul
         return $ret;
     }
 
-    protected function getPendingMsg(array $componentVariation)
+    protected function getPendingMsg(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Loading Communities', 'ure-popprocessors');
         }
 
-        return parent::getPendingMsg($componentVariation);
+        return parent::getPendingMsg($component);
     }
 
-    protected function getNotfoundMsg(array $componentVariation)
+    protected function getNotfoundMsg(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_COMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('No Communities found', 'ure-popprocessors');
         }
 
-        return parent::getNotfoundMsg($componentVariation);
+        return parent::getNotfoundMsg($component);
     }
 }
 

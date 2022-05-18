@@ -7,7 +7,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
     public final const MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINCANEDIT = 'checkpointmessageinner-loggedincanedit';
     public final const MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN = 'checkpointmessageinner-loggedinisadmin';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN],
@@ -17,9 +17,9 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_CHECKPOINTMESSAGEINNER_NOTLOGGEDIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_NOTLOGGEDIN],
@@ -28,7 +28,7 @@ class GD_UserLogin_Module_Processor_UserCheckpointMessageInners extends PoP_Modu
             self::MODULE_CHECKPOINTMESSAGEINNER_LOGGEDINISADMIN => [GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageAlertLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGEALERT_LOGGEDINISADMIN],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

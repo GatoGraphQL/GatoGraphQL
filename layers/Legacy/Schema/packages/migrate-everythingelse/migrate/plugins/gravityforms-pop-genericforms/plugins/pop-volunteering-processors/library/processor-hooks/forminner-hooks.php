@@ -18,9 +18,9 @@ class PoP_Volunteering_Module_Processor_GFFormInnerHooks
         );
     }
 
-    public function getLayoutSubmodules($layouts, array $componentVariation)
+    public function getLayoutSubmodules($layouts, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Volunteering_Module_Processor_GFFormInners::MODULE_FORMINNER_VOLUNTEER:
                 $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
                 $layouts[] = [PoP_Module_Processor_TextFormInputs::class, PoP_Module_Processor_TextFormInputs::MODULE_FORMINPUT_TARGETURL];
@@ -31,10 +31,10 @@ class PoP_Volunteering_Module_Processor_GFFormInnerHooks
         return $layouts;
     }
 
-    public function initModelProps(array $componentVariation, $props_in_array, $processor)
+    public function initModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Volunteering_Module_Processor_GFFormInners::MODULE_FORMINNER_VOLUNTEER:
                 // Form ID
                 $form_id = PoP_Volunteering_GFHelpers::getVolunteerFormId();

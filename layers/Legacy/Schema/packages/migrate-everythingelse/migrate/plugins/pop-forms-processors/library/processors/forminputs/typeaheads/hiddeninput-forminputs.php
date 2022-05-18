@@ -9,7 +9,7 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
     public final const MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES = 'filterinput-hiddeninput-selectablelayoutprofiles';
     public final const MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS = 'filterinput-hiddeninput-selectablelayoutcommunityusers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES],
@@ -21,9 +21,9 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
         );
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTUSERPROFILES:
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS:
@@ -33,12 +33,12 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
                 return true;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES:
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES:
             case self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS:
@@ -47,10 +47,10 @@ class GD_Processor_SelectableHiddenInputFormInputs extends PoP_Module_Processor_
                     self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTPROFILES => 'profiles',
                     self::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS => 'communityusers',
                 );
-                return $names[$componentVariation[1]];
+                return $names[$component[1]];
         }
         
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 }
 

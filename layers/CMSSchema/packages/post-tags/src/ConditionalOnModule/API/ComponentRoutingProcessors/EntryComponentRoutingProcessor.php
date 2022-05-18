@@ -37,7 +37,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
-            'component-variation' => [PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
+            'component' => [PostTagFieldDataloadComponentProcessor::class, PostTagFieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_TAG],
             'conditions' => [
                 'scheme' => APISchemes::API,
                 'routing' => [
@@ -61,7 +61,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                 ],
@@ -74,7 +74,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         );
         foreach ($routeComponents as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                     'routing' => [

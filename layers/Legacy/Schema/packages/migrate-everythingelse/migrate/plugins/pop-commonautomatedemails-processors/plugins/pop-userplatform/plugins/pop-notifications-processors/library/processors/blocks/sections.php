@@ -10,7 +10,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS = 'block-automatedemails-scroll-details';
     public final const MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST = 'block-automatedemails-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS],
@@ -18,37 +18,37 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => POP_COMMONAUTOMATEDEMAILS_ROUTE_LATESTNOTIFICATIONS_DAILY,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS],
             self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST => [PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::class, PoPTheme_Wassup_AAL_AE_Module_Processor_SectionDataloads::MODULE_DATALOAD_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST],
         );
 
-        if ($inner = $inner_componentVariations[$componentVariation[1]] ?? null) {
+        if ($inner = $inner_components[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $cmsService = CMSServiceFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 // Important: this text can only be in the title, and not in the description, because the description is saved in pop-cache/,
@@ -60,12 +60,12 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
                 );
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getDescriptionAbovetitle(array $componentVariation, array &$props)
+    protected function getDescriptionAbovetitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 return sprintf(
@@ -74,13 +74,13 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
                 );
         }
 
-        return parent::getDescriptionAbovetitle($componentVariation, $props);
+        return parent::getDescriptionAbovetitle($component, $props);
     }
 
-    protected function getDescriptionBottom(array $componentVariation, array &$props)
+    protected function getDescriptionBottom(array $component, array &$props)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTOMATEDEMAILS_NOTIFICATIONS_SCROLL_LIST:
                 return sprintf(
@@ -96,7 +96,7 @@ class PoPTheme_Wassup_AAL_AE_Module_Processor_SectionBlocks extends PoP_CommonAu
                 );
         }
 
-        return parent::getDescriptionBottom($componentVariation, $props);
+        return parent::getDescriptionBottom($component, $props);
     }
 }
 

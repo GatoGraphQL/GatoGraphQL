@@ -27,7 +27,7 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         return $this->graphQLSchemaDefinitionService ??= $this->instanceManager->getInstance(GraphQLSchemaDefinitionServiceInterface::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT],
@@ -35,29 +35,29 @@ class RootRelationalFieldDataloadComponentProcessor extends AbstractRelationalFi
         );
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         if (App::getState('does-api-query-have-errors')) {
             return null;
         }
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return QueryRoot::ID;
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
                 return MutationRoot::ID;
         }
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_QUERYROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaQueryRootObjectTypeResolver();
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MUTATIONROOT:
                 return $this->getGraphQLSchemaDefinitionService()->getSchemaMutationRootObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 }

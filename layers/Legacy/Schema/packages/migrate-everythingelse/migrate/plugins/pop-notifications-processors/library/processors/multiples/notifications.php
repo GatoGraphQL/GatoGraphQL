@@ -6,32 +6,32 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 {
     public final const MODULE_MULTIPLE_LATESTNOTIFICATIONS = 'multiple-notifications-latestnotifications';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_LATESTNOTIFICATIONS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         $inners = array(
             self::MODULE_MULTIPLE_LATESTNOTIFICATIONS => [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Display the dataset also when the block triggers event 'rendered', meaning
          // to do if after the user has logged in with the hover login block
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
@@ -48,25 +48,25 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
 
 
 
-    public function getDataFeedbackInterreferencedComponentVariationPath(array $componentVariation, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
                 $module_path_manager = ModulePathManagerFacade::getInstance();
                 $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $componentVariation;
+                $module_propagation_current_path[] = $component;
                 $module_propagation_current_path[] = [AAL_PoPProcessors_Module_Processor_Dataloads::class, AAL_PoPProcessors_Module_Processor_Dataloads::MODULE_DATALOAD_LATESTNOTIFICATIONS];
                 return $module_propagation_current_path;
         }
 
-        return parent::getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props);
+        return parent::getDataFeedbackInterreferencedComponentPath($component, $props);
     }
 
-    public function getJsdataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getJsdataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getJsdataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getJsdataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
                 // Only add if the count is > 0
                 if ($dbobjectids) {
@@ -80,11 +80,11 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
                 $this->addJsmethod($ret, 'displayBlockDatasetCount');
                 break;
@@ -93,13 +93,13 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_LATESTNOTIFICATIONS:
-                $this->appendProp($componentVariation, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -109,7 +109,7 @@ class AAL_PoPProcessors_Module_Processor_Multiples extends PoP_Module_Processor_
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

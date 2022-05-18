@@ -75,7 +75,7 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
     public final const MODULE_BLOCK_AUTHORSTANCES_CAROUSEL = 'block-authorstances-carousel';
     public final const MODULE_BLOCK_TAGSTANCES_CAROUSEL = 'block-tagstances-carousel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR],
@@ -151,9 +151,9 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
             self::MODULE_BLOCK_AUTHORSTANCES_AGAINST_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES_AGAINST,
@@ -224,13 +224,13 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGSTANCES_SCROLL_FULLVIEW => POP_USERSTANCE_ROUTE_STANCES,
             self::MODULE_BLOCK_TAGSTANCES_SCROLL_LIST => POP_USERSTANCE_ROUTE_STANCES,
             self::MODULE_BLOCK_TAGSTANCES_SCROLL_THUMBNAIL => POP_USERSTANCE_ROUTE_STANCES,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_STANCES_SCROLL_NAVIGATOR => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_STANCES_SCROLL_ADDONS => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_ADDONS],
             self::MODULE_BLOCK_STANCES_SCROLL_FULLVIEW => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_STANCES_SCROLL_FULLVIEW],
@@ -303,12 +303,12 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
             self::MODULE_BLOCK_TAGSTANCES_CAROUSEL => [UserStance_Module_Processor_CustomSectionDataloads::class, UserStance_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_TAGSTANCES_CAROUSEL],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_STANCES_SCROLL_THUMBNAIL:
             case self::MODULE_BLOCK_STANCES_SCROLL_LIST:
@@ -387,12 +387,12 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 return [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCK];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getLatestcountSubmodule(array $componentVariation)
+    public function getLatestcountSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_STANCES_SCROLL_FULLVIEW:
             case self::MODULE_BLOCK_STANCES_SCROLL_LIST:
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_STANCES];
@@ -458,20 +458,20 @@ class UserStance_Module_Processor_CustomSectionBlocks extends PoP_Module_Process
                 return [PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_SINGLE_STANCES_NEUTRAL];
         }
 
-        return parent::getLatestcountSubmodule($componentVariation);
+        return parent::getLatestcountSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHORSTANCES_CAROUSEL:
             case self::MODULE_BLOCK_TAGSTANCES_CAROUSEL:
                 // Artificial property added to identify the template when adding module-resources
-                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-stances-carousel');
+                $this->appendProp($component, $props, 'class', 'pop-block-carousel block-stances-carousel');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

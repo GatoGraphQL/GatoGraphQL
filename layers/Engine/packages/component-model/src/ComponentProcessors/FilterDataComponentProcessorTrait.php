@@ -17,14 +17,14 @@ trait FilterDataComponentProcessorTrait
      */
     protected array $activeDataloadQueryArgsFilteringModules = [];
 
-    public function filterHeadmoduleDataloadQueryArgs(array $componentVariation, array &$query, array $source = null): void
+    public function filterHeadmoduleDataloadQueryArgs(array $component, array &$query, array $source = null): void
     {
-        if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponentVariations($componentVariation, $source)) {
-            foreach ($activeDataloadQueryArgsFilteringModules as $subComponentVariation) {
+        if ($activeDataloadQueryArgsFilteringModules = $this->getActiveDataloadQueryArgsFilteringComponents($component, $source)) {
+            foreach ($activeDataloadQueryArgsFilteringModules as $subComponent) {
                 /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponentVariation);
-                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponentVariation, $source);
-                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subComponentVariation)) {
+                $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($subComponent);
+                $value = $dataloadQueryArgsFilterInputComponentProcessor->getValue($subComponent, $source);
+                if ($filterInput = $dataloadQueryArgsFilterInputComponentProcessor->getFilterInput($subComponent)) {
                     /** @var FilterInputProcessorInterface */
                     $filterInputProcessor = $this->getFilterInputProcessorManager()->getProcessor($filterInput);
                     $filterInputProcessor->filterDataloadQueryArgs($filterInput, $query, $value);
@@ -33,39 +33,39 @@ trait FilterDataComponentProcessorTrait
         }
     }
 
-    public function getActiveDataloadQueryArgsFilteringComponentVariations(array $componentVariation, array $source = null): array
+    public function getActiveDataloadQueryArgsFilteringComponents(array $component, array $source = null): array
     {
         // Search for cached result
         $cacheKey = json_encode($source ?? []);
         $this->activeDataloadQueryArgsFilteringModules[$cacheKey] = $this->activeDataloadQueryArgsFilteringModules[$cacheKey] ?? [];
-        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]] ?? null)) {
-            return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]];
+        if (!is_null($this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]] ?? null)) {
+            return $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]];
         }
 
-        $componentVariations = [];
-        // Check if the component variation has any filtercomponent
-        if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringComponentVariations($componentVariation)) {
+        $components = [];
+        // Check if the component has any filtercomponent
+        if ($dataloadQueryArgsFilteringModules = $this->getDataloadQueryArgsFilteringComponents($component)) {
             // Check if if we're currently filtering by any filtercomponent
-            $componentVariations = array_filter(
+            $components = array_filter(
                 $dataloadQueryArgsFilteringModules,
-                function (array $componentVariation) use ($source) {
+                function (array $component) use ($source) {
                     /** @var DataloadQueryArgsFilterInputComponentProcessorInterface */
-                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
-                    return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($componentVariation, $source);
+                    $dataloadQueryArgsFilterInputComponentProcessor = $this->getComponentProcessorManager()->getProcessor($component);
+                    return $dataloadQueryArgsFilterInputComponentProcessor->isInputSetInSource($component, $source);
                 }
             );
         }
 
-        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$componentVariation[1]] = $componentVariations;
-        return $componentVariations;
+        $this->activeDataloadQueryArgsFilteringModules[$cacheKey][$component[1]] = $components;
+        return $components;
     }
 
-    public function getDataloadQueryArgsFilteringComponentVariations(array $componentVariation): array
+    public function getDataloadQueryArgsFilteringComponents(array $component): array
     {
         return array_values(array_filter(
-            $this->getDatasetmoduletreeSectionFlattenedComponentVariations($componentVariation),
-            function ($componentVariation) {
-                return $this->getComponentProcessorManager()->getProcessor($componentVariation) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface;
+            $this->getDatasetmoduletreeSectionFlattenedComponents($component),
+            function ($component) {
+                return $this->getComponentProcessorManager()->getProcessor($component) instanceof DataloadQueryArgsFilterInputComponentProcessorInterface;
             }
         ));
     }

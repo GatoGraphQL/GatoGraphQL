@@ -4,21 +4,21 @@ class PoP_AddHighlights_Module_Processor_PostHiddenInputAlertFormComponents exte
 {
     public final const MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST = 'formcomponent-hiddeninputalert-highlightedpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST],
         );
     }
     
-    public function getHiddeninputModule(array $componentVariation)
+    public function getHiddeninputModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_HIGHLIGHTEDPOST:
                 return [PoP_AddHighlights_Processor_HiddenInputFormInputs::class, PoP_AddHighlights_Processor_HiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_HIGHLIGHTEDPOST];
         }
 
-        return parent::getHiddeninputModule($componentVariation);
+        return parent::getHiddeninputModule($component);
     }
 }
 

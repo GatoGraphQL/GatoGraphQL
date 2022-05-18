@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
     public final const MODULE_TABPANEL_HIGHLIGHTS = 'tabpanel-highlights';
     public final const MODULE_TABPANEL_MYHIGHLIGHTS = 'tabpanel-myhighlights';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_HIGHLIGHTS],
@@ -13,9 +13,9 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_HIGHLIGHTS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_HIGHLIGHTS);
 
@@ -23,14 +23,14 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYHIGHLIGHTS);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_HIGHLIGHTS:
                 $ret = array_merge(
                     $ret,
@@ -47,9 +47,9 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_HIGHLIGHTS:
                 $ret = array(
                     [
@@ -66,7 +66,7 @@ class PoP_AddHighlights_Module_Processor_SectionTabPanelComponents extends PoP_M
                 break;
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

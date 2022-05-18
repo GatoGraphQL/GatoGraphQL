@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Processor_FullObjectLayoutsBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLVIEW];
     }
@@ -16,96 +16,96 @@ abstract class PoP_Module_Processor_FullViewLayoutsBase extends PoP_Module_Proce
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($componentVariation, $props),
+            parent::getDataFields($component, $props),
             array('catSlugs')
         );
     }
 
-    public function titlePosition(array $componentVariation, array &$props)
+    public function titlePosition(array $component, array &$props)
     {
         return GD_CONSTANT_FULLVIEW_TITLEPOSITION_TOP;
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
             $ret = array_merge(
                 $ret,
-                $abovecontent_componentVariations
+                $abovecontent_components
             );
         }
 
-        if ($content_componentVariations = $this->getContentSubmodules($componentVariation)) {
+        if ($content_components = $this->getContentSubmodules($component)) {
             $ret = array_merge(
                 $ret,
-                $content_componentVariations
+                $content_components
             );
         }
 
         return $ret;
     }
 
-    public function getAbovecontentSubmodules(array $componentVariation)
+    public function getAbovecontentSubmodules(array $component)
     {
         return array();
     }
 
-    public function getContentSubmodules(array $componentVariation)
+    public function getContentSubmodules(array $component)
     {
         return array(
             [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POSTFEED],
         );
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['title'] = '';
 
-        if ($this->getTitleSubmodule($componentVariation, $props)) {
-            $ret['title-position'] = $this->titlePosition($componentVariation, $props);
+        if ($this->getTitleSubmodule($component, $props)) {
+            $ret['title-position'] = $this->titlePosition($component, $props);
         }
 
-        if ($abovecontent_componentVariations = $this->getAbovecontentSubmodules($componentVariation)) {
+        if ($abovecontent_components = $this->getAbovecontentSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['abovecontent'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $abovecontent_componentVariations
+                $abovecontent_components
             );
         }
 
-        if ($content_componentVariations = $this->getContentSubmodules($componentVariation)) {
+        if ($content_components = $this->getContentSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['content'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $content_componentVariations
+                $content_components
             );
         }
 
         return $ret;
     }
 
-    // function getJsmethods(array $componentVariation, array &$props) {
+    // function getJsmethods(array $component, array &$props) {
 
-    //     $ret = parent::getJsmethods($componentVariation, $props);
+    //     $ret = parent::getJsmethods($component, $props);
     //     $this->addJsmethod($ret, 'waypointsHistoryStateNew');
     //     return $ret;
     // }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Make it waypoint
-        $this->appendProp($componentVariation, $props, 'class', 'waypoint');
+        $this->appendProp($component, $props, 'class', 'waypoint');
 
         // This one is independent of Waypoint because of the History, so here add them as separate instructions (just to make it clear)
-        // $this->appendProp($componentVariation, $props, 'class', 'module-historystate newstate');
-        parent::initModelProps($componentVariation, $props);
+        // $this->appendProp($component, $props, 'class', 'module-historystate newstate');
+        parent::initModelProps($component, $props);
     }
 }

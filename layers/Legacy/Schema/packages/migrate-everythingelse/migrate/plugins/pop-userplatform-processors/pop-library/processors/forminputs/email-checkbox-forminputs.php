@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatfor
     public final const MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS = 'forminput-emaildigests-weeklylatestposts';
     public final const MODULE_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS = 'forminput-emaildigests-specialposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST],
@@ -16,9 +16,9 @@ class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatfor
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
                 return TranslationAPIFacade::getInstance()->__('New content is posted on the website', 'pop-coreprocessors');
             
@@ -29,12 +29,12 @@ class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatfor
                 return TranslationAPIFacade::getInstance()->__('Special posts or announcements', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getCheckboxValue(array $componentVariation, array &$props)
+    public function getCheckboxValue(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_GENERAL_NEWPOST:
             case self::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS:
             case self::MODULE_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS:
@@ -43,10 +43,10 @@ class PoP_Module_Processor_UserProfileCheckboxFormInputs extends PoP_UserPlatfor
                     self::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYLATESTPOSTS => POP_USERPREFERENCES_EMAILDIGESTS_WEEKLYLATESTPOSTS,
                     self::MODULE_FORMINPUT_EMAILDIGESTS_SPECIALPOSTS => POP_USERPREFERENCES_EMAILDIGESTS_SPECIALPOSTS,
                 );
-                return $values[$componentVariation[1]];
+                return $values[$component[1]];
         }
 
-        return parent::getCheckboxValue($componentVariation, $props);
+        return parent::getCheckboxValue($component, $props);
     }
 }
 

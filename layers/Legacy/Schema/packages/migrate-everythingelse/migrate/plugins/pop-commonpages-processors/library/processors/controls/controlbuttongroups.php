@@ -5,7 +5,7 @@ class GD_CommonPages_Module_Processor_CustomControlButtonGroups extends PoP_Modu
     public final const MODULE_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ = 'customcontrolbuttongroup-addcontentfaq';
     public final const MODULE_CUSTOMCONTROLBUTTONGROUP_ACCOUNTFAQ = 'customcontrolbuttongroup-accountfaq';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ],
@@ -13,11 +13,11 @@ class GD_CommonPages_Module_Processor_CustomControlButtonGroups extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CUSTOMCONTROLBUTTONGROUP_ADDCONTENTFAQ:
                 $ret[] = [GD_CommonPages_Module_Processor_CustomAnchorControls::class, GD_CommonPages_Module_Processor_CustomAnchorControls::MODULE_CUSTOMANCHORCONTROL_ADDCONTENTFAQ];
                 break;

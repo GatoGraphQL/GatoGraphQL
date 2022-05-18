@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
     public final const MODULE_BUTTONGROUP_TAGCALENDARSECTION = 'buttongroup-tagcalendarsection';
     public final const MODULE_BUTTONGROUP_AUTHORCALENDARSECTION = 'buttongroup-authorcalendarsection';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_CALENDARSECTION],
@@ -15,9 +15,9 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
         );
     }
 
-    protected function getHeadersdataScreen(array $componentVariation, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONGROUP_CALENDARSECTION:
                 return POP_SCREEN_SECTIONCALENDAR;
             
@@ -28,7 +28,7 @@ class GD_Custom_EM_Module_Processor_ButtonGroups extends PoP_Module_Processor_Cu
                 return POP_SCREEN_AUTHORSECTIONCALENDAR;
         }
 
-        return parent::getHeadersdataScreen($componentVariation, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 }
 

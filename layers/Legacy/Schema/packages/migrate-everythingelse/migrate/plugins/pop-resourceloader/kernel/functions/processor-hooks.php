@@ -11,13 +11,13 @@ class PoP_ResourceLoader_ProcessorHooks {
 		);
 	}
 
-	function getImmutableSettings($immutable_settings, array $componentVariation, array $props, $processor) {
+	function getImmutableSettings($immutable_settings, array $component, array $props, $processor) {
 
 		// Load the resources. Enable only if enabled by config
 		if (PoP_ResourceLoader_ServerUtils::includeResourcesInBody()) {
 
 	        global $pop_resourcemoduledecoratorprocessor_manager;
-			if ($resources = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor)->getResources($componentVariation, $props)) {
+			if ($resources = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor)->getResources($component, $props)) {
 				
 				$immutable_settings[GD_JS_RESOURCES] = $resources;
 			}

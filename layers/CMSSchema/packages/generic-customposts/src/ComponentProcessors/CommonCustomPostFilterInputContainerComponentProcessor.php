@@ -22,7 +22,7 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-generictype';
     public final const MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_SLUG_STATUS_GENERICTYPE = 'filterinputcontainer-custompost-by-slug-status-generictype';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE],
@@ -34,9 +34,9 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_GENERICTYPE => [
                 [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_GENERICCUSTOMPOSTTYPES],
             ],
@@ -66,10 +66,10 @@ class CommonCustomPostFilterInputContainerComponentProcessor extends AbstractFil
         };
     }
 
-    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
     {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($componentVariation, $fieldArgName);
-        switch ($componentVariation[1]) {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_GENERICTYPE:
             case self::MODULE_FILTERINPUTCONTAINER_CUSTOMPOST_BY_ID_STATUS_GENERICTYPE:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([

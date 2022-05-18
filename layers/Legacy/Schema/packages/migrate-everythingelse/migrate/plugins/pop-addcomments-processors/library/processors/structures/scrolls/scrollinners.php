@@ -7,7 +7,7 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
     public final const MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS = 'layout-postcommentscroll-inner';
     public final const MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE = 'layout-postcommentscroll-inner-appendable';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_COMMENTS_LIST],
@@ -17,9 +17,9 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_COMMENTS_LIST:
             case self::MODULE_SCROLLINNER_COMMENTS_ADD:
             case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
@@ -30,14 +30,14 @@ class PoP_Module_Processor_CommentScrollInners extends PoP_Module_Processor_Scro
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_COMMENTS_LIST:
             case self::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS:
                 $ret[] = [PoP_Module_Processor_SingleCommentFramesLayouts::class, PoP_Module_Processor_SingleCommentFramesLayouts::MODULE_LAYOUT_COMMENTFRAME_LIST];

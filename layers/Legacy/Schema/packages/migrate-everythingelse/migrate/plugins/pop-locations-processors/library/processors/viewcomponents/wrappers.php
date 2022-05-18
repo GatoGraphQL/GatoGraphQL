@@ -9,7 +9,7 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
     public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-postsidebarlocations';
     public final const MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERSIDEBARLOCATIONS = 'viewcomponent-buttonwrapper-usersidebarlocations';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS],
@@ -21,11 +21,11 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS];
                 break;
@@ -54,9 +54,9 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:
@@ -69,11 +69,11 @@ class PoP_Module_Processor_LocationViewComponentButtonWrapperss extends PoP_Modu
         return null;
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS_NOINITMARKERS:
             case self::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_USERLOCATIONS:

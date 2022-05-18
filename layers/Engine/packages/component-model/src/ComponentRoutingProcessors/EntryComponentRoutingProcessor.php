@@ -17,7 +17,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         $ret = array();
 
         $ret[] = [
-            'component-variation' => [RootComponentProcessors::class, RootComponentProcessors::MODULE_EMPTY],
+            'component' => [RootComponentProcessors::class, RootComponentProcessors::MODULE_EMPTY],
         ];
 
         return $ret;

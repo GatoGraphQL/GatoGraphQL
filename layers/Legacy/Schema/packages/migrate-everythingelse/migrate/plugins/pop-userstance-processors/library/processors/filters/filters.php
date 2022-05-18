@@ -12,7 +12,7 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const MODULE_FILTER_TAGSTANCES = 'filter-tagstances';
     public final const MODULE_FILTER_TAGSTANCES_STANCE = 'filter-tagstances-stance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_STANCES],
@@ -27,7 +27,7 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_STANCES => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES],
@@ -41,11 +41,11 @@ class UserStance_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
             self::MODULE_FILTER_TAGSTANCES_STANCE => [UserStance_Module_Processor_CustomFilterInners::class, UserStance_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_STANCES_STANCE],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

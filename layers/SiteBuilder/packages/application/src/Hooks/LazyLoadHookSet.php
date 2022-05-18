@@ -60,13 +60,13 @@ class LazyLoadHookSet extends AbstractHookSet
         );
     }
 
-    public function start($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
+    public function start($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
         $helperCalculations['has-lazy-load'] = false;
     }
 
-    public function calculateDataloadingModuleData(array $componentVariation, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
+    public function calculateDataloadingModuleData(array $component, $module_props_in_array, $data_properties_in_array, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs, $helperCalculations_in_array): void
     {
         $data_properties = &$data_properties_in_array[0];
 
@@ -76,7 +76,7 @@ class LazyLoadHookSet extends AbstractHookSet
         }
     }
 
-    public function end($root_componentVariation, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
+    public function end($root_component, $root_model_props_in_array, $root_props_in_array, $helperCalculations_in_array, $engine): void
     {
         $helperCalculations = &$helperCalculations_in_array[0];
 

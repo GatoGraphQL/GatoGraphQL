@@ -3,14 +3,14 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LazyLoadingSpinnerLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LAZYLOADINGSPINNER];
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $ret['codes']['spinner'] = sprintf(
             '<div class="pop-lazyload-loading">%s</div>',
@@ -20,11 +20,11 @@ abstract class PoP_Module_Processor_LazyLoadingSpinnerLayoutsBase extends PoPEng
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->setProp($componentVariation, $props, 'appendable', true);
-        $this->setProp($componentVariation, $props, 'appendable-class', GD_CLASS_SPINNER);
+        $this->setProp($component, $props, 'appendable', true);
+        $this->setProp($component, $props, 'appendable-class', GD_CLASS_SPINNER);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

@@ -14,7 +14,7 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
         );
     }
 
-    public function addLayoutComponentVariations(&$layouts, $handle, $format = '')
+    public function addLayoutComponents(&$layouts, $handle, $format = '')
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var RelationalTypeResolverInterface */
@@ -30,9 +30,9 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
             case POP_MULTILAYOUT_HANDLE_POSTCONTENT:
             case POP_MULTILAYOUT_HANDLE_AUTHORPOSTCONTENT:
             case POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT:
-                $location_componentVariations = array();
+                $location_components = array();
                 if ($handle == POP_MULTILAYOUT_HANDLE_POSTCONTENT) {
-                    $location_componentVariations = array(
+                    $location_components = array(
                         POP_FORMAT_NAVIGATOR => [GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_NAVIGATOR],
                         POP_FORMAT_ADDONS => [GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_ADDONS],
                         POP_FORMAT_DETAILS => [GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_DETAILS],
@@ -43,19 +43,19 @@ class PoP_LocationPosts_Multilayout_Processor extends PoP_Application_Multilayou
 
                     // These layouts are needed only if using the Event SimpleView layout. Otherwise, "abovecontent" layout from the default post layout will be used (through handle POP_MULTILAYOUT_HANDLE_POSTABOVECONTENT)
                     if ($this->useSimpleviewLayout()) {
-                        $location_componentVariations[POP_FORMAT_SIMPLEVIEW] = [PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts::class, PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW];
+                        $location_components[POP_FORMAT_SIMPLEVIEW] = [PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts::class, PoPSFEM_Module_Processor_SimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_SIMPLEVIEW];
                     }
                 } elseif ($handle == POP_MULTILAYOUT_HANDLE_AUTHORPOSTCONTENT) {
-                    $location_componentVariations = array(
+                    $location_components = array(
                         POP_FORMAT_FULLVIEW => [GD_Custom_EM_Module_Processor_CustomFullViewLayouts::class, GD_Custom_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST],
                     );
                 } elseif ($handle == POP_MULTILAYOUT_HANDLE_SINGLEPOSTCONTENT) {
-                    $location_componentVariations = array(
+                    $location_components = array(
                         POP_FORMAT_FULLVIEW => [GD_Custom_EM_Module_Processor_CustomFullViewLayouts::class, GD_Custom_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST],
                     );
                 }
 
-                if ($layout = $location_componentVariations[$format] ?? null) {
+                if ($layout = $location_components[$format] ?? null) {
                     $layouts[$field] = $layout;
                 }
                 break;

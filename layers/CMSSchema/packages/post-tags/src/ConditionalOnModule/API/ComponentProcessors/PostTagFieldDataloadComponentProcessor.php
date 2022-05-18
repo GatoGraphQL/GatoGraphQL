@@ -9,14 +9,14 @@ use PoPCMSSchema\Tags\ConditionalOnModule\API\ComponentProcessors\AbstractFieldD
 
 class PostTagFieldDataloadComponentProcessor extends AbstractFieldDataloadComponentProcessor
 {
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAG:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_TAGLIST:
                 return $this->getPostTagObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 }

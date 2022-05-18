@@ -9,7 +9,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
     public final const MODULE_SIDEBARMULTICOMPONENT_HIGHLIGHTRIGHT = 'sidebarmulticomponent-highlightright';
     public final const MODULE_SIDEBARMULTICOMPONENT_POST = 'sidebarmulticomponent-post';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE],
@@ -21,11 +21,11 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_FEATUREDIMAGE:
                 // Allow TPP Debate to override, adding UserStance_Module_Processor_WidgetWrappers::MODULE_BUTTONGROUPWRAPPER_STANCECOUNT
                 $layouts = array();
@@ -34,7 +34,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimage:modules', 
                     $layouts, 
-                    $componentVariation
+                    $component
                 );
                 $ret = array_merge(
                     $ret,
@@ -51,7 +51,7 @@ class PoP_Module_Processor_CustomPostMultipleSidebarComponents extends PoP_Modul
                 $layouts = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomPostMultipleSidebarComponents:featuredimagevolunteer:modules', 
                     $layouts, 
-                    $componentVariation
+                    $component
                 );
                 $ret = array_merge(
                     $ret,

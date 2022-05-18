@@ -16,7 +16,7 @@ class PoP_Application_MultilayoutManager
         $this->processors[] = $processor;
     }
 
-    public function getLayoutComponentVariations($handle, $format = '')
+    public function getLayoutComponents($handle, $format = '')
     {
         // First check if the results have been cached
         $key = $handle.($format ? '-'.$format : '');
@@ -27,7 +27,7 @@ class PoP_Application_MultilayoutManager
     
         $layouts = array();
         foreach ($this->processors as $processor) {
-            $processor->addLayoutComponentVariations($layouts, $handle, $format);
+            $processor->addLayoutComponents($layouts, $handle, $format);
         }
 
         // Cache the results

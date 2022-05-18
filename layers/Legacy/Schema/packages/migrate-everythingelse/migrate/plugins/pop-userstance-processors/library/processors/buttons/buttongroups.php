@@ -7,7 +7,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
     public final const MODULE_BUTTONGROUP_AUTHORSTANCES = 'buttongroup-authorstances';
     public final const MODULE_BUTTONGROUP_TAGSTANCES = 'buttongroup-tagstances';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_STANCES],
@@ -17,7 +17,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
         );
     }
 
-    protected function getHeadersdataScreen(array $componentVariation, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_STANCES => POP_USERSTANCE_SCREEN_STANCES,
@@ -25,18 +25,18 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
             self::MODULE_BUTTONGROUP_AUTHORSTANCES => POP_USERSTANCE_SCREEN_AUTHORSTANCES,
             self::MODULE_BUTTONGROUP_TAGSTANCES => POP_USERSTANCE_SCREEN_TAGSTANCES,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($componentVariation, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $componentVariation, array &$props)
+    protected function getHeadersdataFormats(array $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
-        $screen = $this->getHeadersdataScreen($componentVariation, $props);
+        $screen = $this->getHeadersdataScreen($component, $props);
         switch ($screen) {
             case POP_USERSTANCE_SCREEN_STANCES:
             case POP_USERSTANCE_SCREEN_AUTHORSTANCES:
@@ -57,7 +57,7 @@ class PoPVP_Module_Processor_ButtonGroups extends PoP_Module_Processor_CustomBut
                 );
         }
 
-        return parent::getHeadersdataFormats($componentVariation, $props);
+        return parent::getHeadersdataFormats($component, $props);
     }
 }
 

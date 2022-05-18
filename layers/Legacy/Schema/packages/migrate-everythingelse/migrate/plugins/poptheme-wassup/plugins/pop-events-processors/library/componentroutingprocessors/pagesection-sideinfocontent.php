@@ -15,31 +15,31 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOREVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHORPASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_AUTHOREVENTSCALENDAR_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[UserRequestNature::USER][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_TAG_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
         }
 
-        $componentVariations = array(
+        $components = array(
             POP_EVENTS_ROUTE_EVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_PASTEVENTS => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_PASTEVENTS_SIDEBAR],
             POP_EVENTS_ROUTE_EVENTSCALENDAR => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SECTION_EVENTS_CALENDAR_SIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($components as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;
@@ -56,7 +56,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
 
         // Past single event
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
+            'component' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
@@ -67,7 +67,7 @@ class PoPTheme_Wassup_Events_Module_SideInfoContentPageSectionComponentRoutingPr
 
         // Future and current single event
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR],
+            'component' => [GD_EM_Module_Processor_SidebarMultiples::class, GD_EM_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_SIDEBAR],
             'conditions' => [
                 'routing' => [
                     'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),

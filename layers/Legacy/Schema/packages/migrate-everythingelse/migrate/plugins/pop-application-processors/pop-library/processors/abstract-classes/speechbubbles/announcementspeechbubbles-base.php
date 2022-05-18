@@ -2,20 +2,20 @@
 
 abstract class PoP_Module_Processor_AnnouncementSpeechBubblesBase extends PoP_Module_Processor_SpeechBubblesBase
 {
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $ret[GD_JS_CLASSES]['bubble-wrapper'] = 'littleguy-announcement';
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Artificial property added to identify the template when adding module-resources
-        $this->setProp($componentVariation, $props, 'resourceloader', 'littleguy');
-        parent::initModelProps($componentVariation, $props);
+        $this->setProp($component, $props, 'resourceloader', 'littleguy');
+        parent::initModelProps($component, $props);
     }
 }

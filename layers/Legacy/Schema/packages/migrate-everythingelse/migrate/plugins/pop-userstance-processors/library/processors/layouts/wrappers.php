@@ -8,7 +8,7 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
     public final const MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION = 'userstance-layoutwrapper-userpostinteraction';
     public final const MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION = 'userstance-layoutwrapper-userfullviewinteraction';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION],
@@ -17,11 +17,11 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
                 $ret[] = [UserStance_Module_Processor_UserPostInteractionLayouts::class, UserStance_Module_Processor_UserPostInteractionLayouts::MODULE_LAYOUT_USERSTANCEPOSTINTERACTION];
                 break;
@@ -38,9 +38,9 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
@@ -50,17 +50,17 @@ class UserStance_Module_Processor_CustomWrapperLayouts extends PoP_Module_Proces
         return null;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_USERSTANCEPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERPOSTINTERACTION:
             case self::MODULE_USERSTANCE_LAYOUTWRAPPER_USERFULLVIEWINTERACTION:
-                $this->appendProp($componentVariation, $props, 'class', 'userpostinteraction clearfix');
+                $this->appendProp($component, $props, 'class', 'userpostinteraction clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

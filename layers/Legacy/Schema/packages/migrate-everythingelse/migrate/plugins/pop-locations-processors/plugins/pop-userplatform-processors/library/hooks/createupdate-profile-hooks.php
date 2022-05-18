@@ -10,8 +10,8 @@ class GD_EM_CreateUpdate_Profile_Hooks
         \PoP\Root\App::addFilter('PoP_Location_UserPlatform_ProfileHooks:form-input', $this->getLocationsForminputInput(...));
 
         // Processor Hooks
-        \PoP\Root\App::addFilter('pop_componentVariation:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
-        \PoP\Root\App::addFilter('pop_componentVariation:updateprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_component:createprofile:components', $this->getComponentSubmodules(...), 10, 3);
+        \PoP\Root\App::addFilter('pop_component:updateprofile:components', $this->getComponentSubmodules(...), 10, 3);
     }
 
     public function getLocationsForminputInput()
@@ -19,7 +19,7 @@ class GD_EM_CreateUpdate_Profile_Hooks
         return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
     }
 
-    public function getComponentSubmodules($components, array $componentVariation, $processor)
+    public function getComponentSubmodules($components, array $component, $processor)
     {
 
         // Add before the Captcha

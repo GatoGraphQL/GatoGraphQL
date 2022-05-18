@@ -12,7 +12,7 @@ class PopThemeWassup_AAL_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getModuleCssResources($resources, array $componentVariation, array $templateResource, $template, array $props, $processor)
+    public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
         switch ($template) {
             case POP_TEMPLATE_LAYOUT_PREVIEWNOTIFICATION:

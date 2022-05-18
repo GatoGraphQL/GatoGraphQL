@@ -4,7 +4,7 @@ abstract class PoP_Module_Processor_BooleanCheckboxFormInputsBase extends PoP_Mo
 {
     use PoP_Module_Processor_BooleanFormInputsTrait;
 
-    public function getCheckboxValue(array $componentVariation, array &$props)
+    public function getCheckboxValue(array $component, array &$props)
     {
 
         // If the checkbox is "on", it will have value "1"

@@ -4,18 +4,18 @@ class GD_EM_Module_Processor_CreateLocationFormInners extends PoP_Module_Process
 {
     public final const MODULE_FORMINNER_CREATELOCATION = 'em-forminner-createlocation';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_CREATELOCATION],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_CREATELOCATION:
                 $ret = array_merge(
                     $ret,

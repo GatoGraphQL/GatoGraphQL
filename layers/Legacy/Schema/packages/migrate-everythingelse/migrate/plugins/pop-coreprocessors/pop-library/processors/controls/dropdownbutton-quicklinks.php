@@ -8,7 +8,7 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
     public final const MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO = 'dropdownbuttonquicklink-usercontactinfo';
     public final const MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE = 'dropdownbuttonquicklink-tagshare';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE],
@@ -18,46 +18,46 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $componentVariations = array();
-        switch ($componentVariation[1]) {
+        $components = array();
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN];
                 break;
 
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
-                $componentVariations[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::MODULE_LAYOUTUSER_QUICKLINKS];
+                $components[] = [PoP_Module_Processor_UserQuickLinkLayouts::class, PoP_Module_Processor_UserQuickLinkLayouts::MODULE_LAYOUTUSER_QUICKLINKS];
                 break;
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $componentVariations = \PoP\Root\App::applyFilters(
+        $components = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_DropdownButtonQuicklinks:modules',
-            $componentVariations,
-            $componentVariation
+            $components,
+            $component
         );
         $ret = array_merge(
             $ret,
-            $componentVariations
+            $components
         );
 
         return $ret;
     }
 
-    public function getBtnClass(array $componentVariation)
+    public function getBtnClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
@@ -65,12 +65,12 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
                 return 'btn btn-compact btn-link';
         }
 
-        return parent::getBtnClass($componentVariation);
+        return parent::getBtnClass($component);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -80,12 +80,12 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
                 return TranslationAPIFacade::getInstance()->__('Contact/Links', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
@@ -95,21 +95,21 @@ class PoP_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Processor
                 return 'fa-link';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_POSTSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERSHARE:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_USERCONTACTINFO:
             case self::MODULE_DROPDOWNBUTTONQUICKLINK_TAGSHARE:
-                $this->appendProp($componentVariation, $props, 'class', 'pull-right');
+                $this->appendProp($component, $props, 'class', 'pull-right');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

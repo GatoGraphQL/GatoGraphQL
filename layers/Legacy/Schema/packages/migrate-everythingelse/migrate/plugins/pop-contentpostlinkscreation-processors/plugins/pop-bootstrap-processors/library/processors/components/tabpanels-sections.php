@@ -4,28 +4,28 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
 {
     public final const MODULE_TABPANEL_MYLINKS = 'tabpanel-mylinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_MYLINKS],
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYLINKS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_MYCONTENT);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYLINKS:
                 $ret = array_merge(
                     $ret,
@@ -41,9 +41,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_MYLINKS:
                 $ret = array(
                     [
@@ -60,7 +60,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_SectionTabPanelComponents ex
                 break;
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

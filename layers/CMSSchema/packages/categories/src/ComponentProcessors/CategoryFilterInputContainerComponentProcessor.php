@@ -16,7 +16,7 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
     public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORIES = 'filterinputcontainer-childcategories';
     public final const MODULE_FILTERINPUTCONTAINER_CHILDCATEGORYCOUNT = 'filterinputcontainer-childcategorycount';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_CATEGORIES],
@@ -26,18 +26,18 @@ class CategoryFilterInputContainerComponentProcessor extends AbstractFilterInput
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
         $categoryFilterInputModules = [
-            ...$this->getIDFilterInputComponentVariations(),
+            ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SLUGS],
         ];
         $topLevelCategoryFilterInputModules = [
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_PARENT_ID],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
-        return match ($componentVariation[1]) {
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_CATEGORIES => [
                 ...$categoryFilterInputModules,
                 ...$topLevelCategoryFilterInputModules,

@@ -4,20 +4,20 @@ class PoP_UserStance_Processor_HiddenInputFormInputs extends PoP_Module_Processo
 {
     public final const MODULE_FORMINPUT_HIDDENINPUT_STANCETARGET = 'forminput-hiddeninput-stancetarget';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_HIDDENINPUT_STANCETARGET],
         );
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_STANCETARGET:
                 return POP_INPUTNAME_STANCETARGET;
         }
 
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 }

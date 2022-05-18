@@ -11,17 +11,17 @@ class ModuleHelpers implements ModuleHelpersInterface
 {
     use BasicServiceTrait;
 
-    public function getModuleFullName(array $componentVariation): string
+    public function getModuleFullName(array $component): string
     {
-        return ProcessorItemUtils::getItemFullName($componentVariation);
+        return ProcessorItemUtils::getItemFullName($component);
     }
     public function getModuleFromFullName(string $moduleFullName): ?array
     {
         return ProcessorItemUtils::getItemFromFullName($moduleFullName);
     }
-    public function getModuleOutputName(array $componentVariation): string
+    public function getModuleOutputName(array $component): string
     {
-        return ProcessorItemUtils::getItemOutputName($componentVariation, DefinitionGroups::MODULES);
+        return ProcessorItemUtils::getItemOutputName($component, DefinitionGroups::MODULES);
     }
     public function getModuleFromOutputName(string $moduleOutputName): ?array
     {

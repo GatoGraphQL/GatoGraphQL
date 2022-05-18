@@ -9,7 +9,7 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
     public final const MODULE_FILTER_EVENTS = 'filter-events';
     public final const MODULE_FILTER_EVENTSCALENDAR = 'filter-eventscalendar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_EVENTS],
@@ -21,7 +21,7 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_EVENTS => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_EVENTS],
@@ -32,11 +32,11 @@ class PoP_Events_Module_Processor_CustomFilters extends PoP_Module_Processor_Fil
             self::MODULE_FILTER_TAGEVENTSCALENDAR => [PoP_Events_Module_Processor_CustomFilterInners::class, PoP_Events_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_TAGEVENTSCALENDAR],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

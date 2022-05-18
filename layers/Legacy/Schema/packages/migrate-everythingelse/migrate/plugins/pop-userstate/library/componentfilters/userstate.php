@@ -15,12 +15,12 @@ class PoP_ComponentFilter_UserState extends AbstractComponentFilter
     /**
      * Exclude if it has no user state
      */
-    public function excludeModule(array $componentVariation, array &$props): bool
+    public function excludeModule(array $component, array &$props): bool
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($componentVariation);
+        $processor = $componentprocessor_manager->getProcessor($component);
         $processoruserstate = PoP_UserStateModuleDecoratorProcessorManagerFactory::getInstance()->getProcessorDecorator($processor);
-        return !$processoruserstate->requiresUserState($componentVariation, $props);
+        return !$processoruserstate->requiresUserState($component, $props);
     }
 }
 

@@ -9,7 +9,7 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
     public final const MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL = 'group-tagcontent-scroll-thumbnail';
     public final const MODULE_GROUP_TAGCONTENT_SCROLL_LIST = 'group-tagcontent-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS],
@@ -20,9 +20,9 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
@@ -35,58 +35,58 @@ class PoPTheme_Wassup_Blog_Module_Processor_Groups extends PoP_Module_Processor_
                     self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_THUMBNAIL],
                     self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST => [PoP_Blog_Module_Processor_CustomSectionBlocks::class, PoP_Blog_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_TAGCONTENT_SCROLL_LIST],
                 );
-                return $inners[$componentVariation[1]];
+                return $inners[$component[1]];
         }
 
         return null;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponentVariation = $this->getInnerSubmodule($componentVariation);
-                $this->setProp([$subComponentVariation], $props, 'title-htmltag', 'h2');
+                $subComponent = $this->getInnerSubmodule($component);
+                $this->setProp([$subComponent], $props, 'title-htmltag', 'h2');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $subComponentVariation = $this->getInnerSubmodule($componentVariation);
+                $subComponent = $this->getInnerSubmodule($component);
 
                 // Change the block title from the #hashtag to Latest, because this blockgroup will assume that name
                 $title = getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Latest content', 'poptheme-wassup');
-                $this->setProp([$subComponentVariation], $props, 'title', $title);
+                $this->setProp([$subComponent], $props, 'title', $title);
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_DETAILS:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_SIMPLEVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_FULLVIEW:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_THUMBNAIL:
             case self::MODULE_GROUP_TAGCONTENT_SCROLL_LIST:
-                $ret[] = $this->getInnerSubmodule($componentVariation);
+                $ret[] = $this->getInnerSubmodule($component);
                 break;
         }
 

@@ -10,20 +10,20 @@ class PoP_NotificationsProcessors_MyPreferencesHooks
         );
     }
 
-    public function getEmaildigestsForminputgroups($componentVariations)
+    public function getEmaildigestsForminputgroups($components)
     {
         array_splice(
-            $componentVariations, 
+            $components, 
             array_search(
                 [PoP_Module_Processor_UserCodes::class, PoP_Module_Processor_UserCodes::MODULE_CODE_EMAILDIGESTS_LABEL], 
-                $componentVariations
+                $components
             )+1, 
             0, 
             array(
                 [PoP_Notifications_Module_Processor_EmailFormGroups::class, PoP_Notifications_Module_Processor_EmailFormGroups::MODULE_FORMINPUTGROUP_EMAILDIGESTS_DAILYNOTIFICATIONS],
             )
         );
-        return $componentVariations;
+        return $components;
     }
 }
 

@@ -12,10 +12,10 @@ class PoPTheme_Wassup_Volunteering_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $componentVariation, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 $processor->setProp([PoP_Volunteering_Module_Processor_Blocks::class, PoP_Volunteering_Module_Processor_Blocks::MODULE_BLOCK_VOLUNTEER], $props, 'title', '');
                 break;

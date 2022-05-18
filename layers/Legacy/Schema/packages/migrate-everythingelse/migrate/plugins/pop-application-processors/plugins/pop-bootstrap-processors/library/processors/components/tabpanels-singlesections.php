@@ -8,7 +8,7 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
     public final const MODULE_TABPANEL_SINGLEUPVOTEDBY = 'tabpanel-singleupvotedby';
     public final const MODULE_TABPANEL_SINGLEDOWNVOTEDBY = 'tabpanel-singledownvotedby';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_SINGLERELATEDCONTENT],
@@ -19,9 +19,9 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_SINGLEAUTHORS:
             case self::MODULE_TABPANEL_SINGLERECOMMENDEDBY:
             case self::MODULE_TABPANEL_SINGLEUPVOTEDBY:
@@ -29,14 +29,14 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_SINGLEUSERS);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_SINGLERELATEDCONTENT:
                 $ret = array_merge(
                     $ret,
@@ -100,14 +100,14 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         // Allow Events Manager to add the Map format
-        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', $ret, $componentVariation);
+        $ret = \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:modules', $ret, $component);
 
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_SINGLERELATEDCONTENT:
                 $ret = array(
                     [
@@ -194,10 +194,10 @@ class PoP_Module_Processor_SingleSectionTabPanelComponents extends PoP_Module_Pr
         }
 
         if ($ret) {
-            return \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', $ret, $componentVariation);
+            return \PoP\Root\App::applyFilters('PoP_Module_Processor_SingleSectionTabPanelComponents:panel_headers', $ret, $component);
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

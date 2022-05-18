@@ -7,7 +7,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
     public final const MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL = 'tabpanel-authorstances-neutral';
     public final const MODULE_TABPANEL_AUTHORSTANCES_AGAINST = 'tabpanel-authorstances-against';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORSTANCES],
@@ -17,9 +17,9 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORSTANCES:
             case self::MODULE_TABPANEL_AUTHORSTANCES_PRO:
             case self::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL:
@@ -27,14 +27,14 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_AUTHORSTANCES);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORSTANCES:
                 $ret = array_merge(
                     $ret,
@@ -83,9 +83,9 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORSTANCES:
                 $ret = array(
                     [
@@ -147,7 +147,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Mo
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

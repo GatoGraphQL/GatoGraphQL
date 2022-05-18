@@ -5,7 +5,7 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
     public final const MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR = 'multiple-section-myevents-sidebar';
     public final const MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR = 'multiple-section-mypastevents-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR],
@@ -13,43 +13,43 @@ class PoP_EventsCreation_Module_Processor_SidebarMultiples extends PoP_Module_Pr
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYEVENTS_SIDEBAR],
             self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => [PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::class, PoP_EventsCreation_Module_Processor_CustomSectionSidebarInners::MODULE_MULTIPLE_SECTIONINNER_MYPASTEVENTS_SIDEBAR],
         );
-        if ($block = $blocks[$componentVariation[1]] ?? null) {
+        if ($block = $blocks[$component[1]] ?? null) {
             $ret[] = $block;
         }
 
         return $ret;
     }
 
-    public function getScreen(array $componentVariation)
+    public function getScreen(array $component)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
             self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR => POP_SCREEN_MYCONTENT,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($componentVariation);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $componentVariation)
+    public function getScreengroup(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTION_MYEVENTS_SIDEBAR:
             case self::MODULE_MULTIPLE_SECTION_MYPASTEVENTS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($componentVariation);
+        return parent::getScreengroup($component);
     }
 }
 

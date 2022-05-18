@@ -10,15 +10,15 @@ trait DataloadComponentProcessorTrait
 {
     use FormattableModuleTrait;
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($filter_componentVariation = $this->getFilterSubmodule($componentVariation)) {
-            $ret[] = $filter_componentVariation;
+        if ($filter_component = $this->getFilterSubmodule($component)) {
+            $ret[] = $filter_component;
         }
 
-        if ($inners = $this->getInnerSubmodules($componentVariation)) {
+        if ($inners = $this->getInnerSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $inners
@@ -28,17 +28,17 @@ trait DataloadComponentProcessorTrait
         return $ret;
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
         return array();
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
         return null;
     }
 
-    public function metaInitProps(array $componentVariation, array &$props)
+    public function metaInitProps(array $component, array &$props)
     {
         /**
          * Allow to add more stuff
@@ -46,18 +46,18 @@ trait DataloadComponentProcessorTrait
         App::doAction(
             Constants::HOOK_DATALOAD_INIT_MODEL_PROPS,
             array(&$props),
-            $componentVariation,
+            $component,
             $this
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->metaInitProps($componentVariation, $props);
-        parent::initModelProps($componentVariation, $props);
+        $this->metaInitProps($component, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function startDataloadingSection(array $componentVariation): bool
+    public function startDataloadingSection(array $component): bool
     {
         return true;
     }

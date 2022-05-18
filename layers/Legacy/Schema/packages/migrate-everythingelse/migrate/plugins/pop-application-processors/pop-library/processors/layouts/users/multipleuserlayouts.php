@@ -17,7 +17,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
     public final const MODULE_LAYOUT_MULTIPLEUSER_LIST = 'layout-multipleuser-list';
     public final const MODULE_LAYOUT_MULTIPLEUSER_FULLUSER = 'layout-multipleuser-fulluser';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_MULTIPLEUSER_POPOVER],
@@ -33,9 +33,9 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getDefaultLayoutSubmodule(array $componentVariation)
+    public function getDefaultLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MULTIPLEUSER_POPOVER:
                 return [PoP_Module_Processor_CustomPreviewUserLayouts::class, PoP_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_POPOVER];
 
@@ -64,13 +64,13 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                 return [PoP_Module_Processor_CustomFullUserLayouts::class, PoP_Module_Processor_CustomFullUserLayouts::MODULE_LAYOUT_FULLUSER];
         }
 
-        return parent::getDefaultLayoutSubmodule($componentVariation);
+        return parent::getDefaultLayoutSubmodule($component);
     }
 
-    public function getMultipleLayoutSubmodules(array $componentVariation)
+    public function getMultipleLayoutSubmodules(array $component)
     {
         $multilayout_manager = PoP_Application_MultilayoutManagerFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_MULTIPLEUSER_POPOVER:
             case self::MODULE_LAYOUT_MULTIPLEUSER_POSTAUTHOR:
             case self::MODULE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR:
@@ -79,7 +79,7 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                     self::MODULE_LAYOUT_MULTIPLEUSER_POSTAUTHOR => POP_MULTILAYOUT_HANDLE_USERPOSTAUTHOR,
                     self::MODULE_LAYOUT_MULTIPLEUSER_CONTEXTUALPOSTAUTHOR => POP_MULTILAYOUT_HANDLE_USERCONTEXTUALPOSTAUTHOR,
                 );
-                return $multilayout_manager->getLayoutComponentVariations($handles[$componentVariation[1]]);
+                return $multilayout_manager->getLayoutComponents($handles[$component[1]]);
 
             case self::MODULE_LAYOUT_MULTIPLEUSER_NAVIGATOR:
             case self::MODULE_LAYOUT_MULTIPLEUSER_ADDONS:
@@ -95,10 +95,10 @@ class PoP_Module_Processor_MultipleUserLayouts extends PoP_Module_Processor_Mult
                     self::MODULE_LAYOUT_MULTIPLEUSER_LIST => POP_FORMAT_LIST,
                     self::MODULE_LAYOUT_MULTIPLEUSER_FULLUSER => POP_FORMAT_FULLVIEW,
                 );
-                return $multilayout_manager->getLayoutComponentVariations(POP_MULTILAYOUT_HANDLE_USERCONTENT, $formats[$componentVariation[1]]);
+                return $multilayout_manager->getLayoutComponents(POP_MULTILAYOUT_HANDLE_USERCONTENT, $formats[$component[1]]);
         }
 
-        return parent::getMultipleLayoutSubmodules($componentVariation);
+        return parent::getMultipleLayoutSubmodules($component);
     }
 }
 

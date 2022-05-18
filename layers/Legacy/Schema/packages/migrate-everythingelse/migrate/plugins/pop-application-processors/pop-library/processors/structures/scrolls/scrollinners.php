@@ -41,7 +41,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
     public final const MODULE_SCROLLINNER_USERS_LIST = 'scrollinner-users-list';
     public final const MODULE_SCROLLINNER_USER_LIST = 'scrollinner-user-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR],
@@ -85,9 +85,9 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_CONTENT_THUMBNAIL:
             case self::MODULE_SCROLLINNER_HIGHLIGHTS_THUMBNAIL:
             case self::MODULE_SCROLLINNER_POSTS_THUMBNAIL:
@@ -146,12 +146,12 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_CONTENT_NAVIGATOR => [PoP_Module_Processor_MultiplePostLayouts::class, PoP_Module_Processor_MultiplePostLayouts::MODULE_LAYOUT_MULTIPLECONTENT_NAVIGATOR],
@@ -194,7 +194,7 @@ class PoP_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Scrol
             self::MODULE_SCROLLINNER_AUTHORPOSTS_FULLVIEW => [PoP_Module_Processor_CustomFullViewLayouts::class, PoP_Module_Processor_CustomFullViewLayouts::MODULE_AUTHORLAYOUT_FULLVIEW_POST],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

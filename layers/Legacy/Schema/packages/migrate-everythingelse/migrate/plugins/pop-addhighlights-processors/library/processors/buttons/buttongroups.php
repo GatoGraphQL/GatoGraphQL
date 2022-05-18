@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
     public final const MODULE_BUTTONGROUP_HIGHLIGHTS = 'buttongroup-highlights';
     public final const MODULE_BUTTONGROUP_MYHIGHLIGHTS = 'buttongroup-myhighlights';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_HIGHLIGHTS],
@@ -13,17 +13,17 @@ class PoP_AddHighlights_Module_Processor_ButtonGroups extends PoP_Module_Process
         );
     }
 
-    protected function getHeadersdataScreen(array $componentVariation, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_HIGHLIGHTS => POP_SCREEN_HIGHLIGHTS,
             self::MODULE_BUTTONGROUP_MYHIGHLIGHTS => POP_SCREEN_MYHIGHLIGHTS,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($componentVariation, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 }
 

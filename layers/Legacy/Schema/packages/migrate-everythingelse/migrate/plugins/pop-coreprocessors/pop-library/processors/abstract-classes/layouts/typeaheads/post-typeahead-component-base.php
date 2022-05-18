@@ -3,12 +3,12 @@ use PoP\ComponentModel\Facades\Schema\FieldQueryInterpreterFacade;
 
 abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUTPOST_TYPEAHEAD_COMPONENT];
     }
 
-    public function getThumbField(array $componentVariation, array &$props): array
+    public function getThumbField(array $component, array &$props): array
     {
         return FieldQueryInterpreterFacade::getInstance()->getField('thumb', ['size' => 'thumb-xs'], 'thumb');
     }
@@ -18,20 +18,20 @@ abstract class PoP_Module_Processor_PostTypeaheadComponentLayoutsBase extends Po
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $thumb = $this->getThumbField($componentVariation, $props);
+        $thumb = $this->getThumbField($component, $props);
         return array('id', $thumb, 'title', 'url');
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $thumb = $this->getThumbField($componentVariation, $props);
+        $thumb = $this->getThumbField($component, $props);
         $ret['thumb'] = array(
             'name' => FieldQueryInterpreterFacade::getInstance()->getTargetObjectTypeUniqueFieldOutputKeys(
-                $this->getProp($componentVariation, $props, 'succeeding-typeResolver'),
+                $this->getProp($component, $props, 'succeeding-typeResolver'),
                 $thumb),
         );
         

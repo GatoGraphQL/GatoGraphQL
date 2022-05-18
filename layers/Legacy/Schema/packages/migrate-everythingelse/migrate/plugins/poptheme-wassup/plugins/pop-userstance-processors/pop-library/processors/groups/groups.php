@@ -11,7 +11,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
     public final const MODULE_USERSTANCE_GROUP_AUTHOR_WIDGETAREA = 'group-userstance-author-widgetarea';
     public final const MODULE_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES = 'group-userstance-author-stanceslides';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_USERSTANCE_GROUP_HOMETOP],
@@ -24,11 +24,11 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERSTANCE_GROUP_HOMETOP:
                 $ret[] = [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOME_COMPACTWELCOME];
                 $ret[] = [self::class, self::MODULE_USERSTANCE_GROUP_HOME_WIDGETAREA];
@@ -41,7 +41,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 if ($layouts = \PoP\Root\App::applyFilters(
                     'UserStance_Module_Processor_CustomGroups:modules:hometop',
                     array(),
-                    $componentVariation
+                    $component
                 )) {
                     $ret = array_merge(
                         $ret,
@@ -83,9 +83,9 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERSTANCE_GROUP_HOMETOP:
                 // Hide if no events
                 $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTS_CAROUSEL]], $props, 'do-not-render-if-no-results', true);
@@ -100,7 +100,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 break;
 
             case self::MODULE_USERSTANCE_GROUP_HOME_RIGHTPANE:
-                $this->appendProp($componentVariation, $props, 'class', 'row');
+                $this->appendProp($component, $props, 'class', 'row');
 
                 $this->appendProp([[UserStance_Module_Processor_CreateUpdatePostBlocks::class, UserStance_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_STANCE_CREATEORUPDATE]], $props, 'class', 'col-sm-8 pop-widget');
                 $this->setProp(
@@ -130,7 +130,7 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 break;
 
             case self::MODULE_USERSTANCE_GROUP_HOME_WIDGETAREA:
-                $this->appendProp($componentVariation, $props, 'class', 'vt-home-widgetarea row');
+                $this->appendProp($component, $props, 'class', 'vt-home-widgetarea row');
 
                 $this->appendProp([[self::class, self::MODULE_USERSTANCE_GROUP_HOME_STANCESLIDES]], $props, 'class', 'col-sm-12');
                 $this->setProp(
@@ -147,11 +147,11 @@ class UserStance_Module_Processor_CustomGroups extends PoP_Module_Processor_Mult
                 break;
 
             case self::MODULE_USERSTANCE_GROUP_AUTHOR_THOUGHTSLIDES:
-                $this->appendProp($componentVariation, $props, 'class', 'vt-author-thoughtslides');
+                $this->appendProp($component, $props, 'class', 'vt-author-thoughtslides');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

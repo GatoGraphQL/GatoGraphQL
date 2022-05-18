@@ -23,7 +23,7 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
     public final const MODULE_SCROLLINNER_CATEGORYPOSTS18_SIMPLEVIEW = 'scrollinner-categoryposts18-simpleview';
     public final const MODULE_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW = 'scrollinner-categoryposts19-simpleview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -49,9 +49,9 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW:
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS01_SIMPLEVIEW:
             case self::MODULE_SCROLLINNER_CATEGORYPOSTS02_SIMPLEVIEW:
@@ -78,12 +78,12 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $categories = array(
             self::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -112,7 +112,7 @@ class PoP_CategoryPosts_Module_Processor_ScrollInners extends PoP_Module_Process
         if ($layout = \PoP\Root\App::applyFilters(
             'PoP_CategoryPosts_Module_Processor_ScrollInners:layout',
             [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
-            $categories[$componentVariation[1]]
+            $categories[$component[1]]
         )) {
             $ret[] = $layout;
         }

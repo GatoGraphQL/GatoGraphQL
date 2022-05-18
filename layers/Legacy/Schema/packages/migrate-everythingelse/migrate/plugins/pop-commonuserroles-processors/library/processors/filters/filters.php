@@ -5,7 +5,7 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
     public final const MODULE_FILTER_INDIVIDUALS = 'filter-individuals';
     public final const MODULE_FILTER_ORGANIZATIONS = 'filter-organizations';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_INDIVIDUALS],
@@ -13,18 +13,18 @@ class PoP_CommonUserRoles_Module_Processor_CustomFilters extends PoP_Module_Proc
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_INDIVIDUALS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_INDIVIDUALS],
             self::MODULE_FILTER_ORGANIZATIONS => [PoP_CommonUserRoles_Module_Processor_CustomFilterInners::class, PoP_CommonUserRoles_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_ORGANIZATIONS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

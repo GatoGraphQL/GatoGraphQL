@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_AAL_Processors_TemplateResourceLoaderProcessor::class, PoP_AAL_Processors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_NOTIFICATIONTIME];
     }
@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
         $ret[] = 'histTimeNogmt';
 
@@ -24,16 +24,16 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
     
         $this->addJsmethod($ret, 'timeFromNow');
 
         return $ret;
     }
 
-    public function getMomentFormat(array $componentVariation, array &$props)
+    public function getMomentFormat(array $component, array &$props)
     {
 
         // Documentation: http://momentjs.com/docs/
@@ -41,11 +41,11 @@ abstract class PoP_Module_Processor_NotificationTimeLayoutsBase extends PoPEngin
         return 'X';
     }
     
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        $ret['format'] = $this->getMomentFormat($componentVariation, $props);
+        $ret['format'] = $this->getMomentFormat($component, $props);
 
         return $ret;
     }

@@ -5,7 +5,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
     public final const MODULE_TABPANEL_STANCES_BYORGANIZATIONS = 'tabpanel-stances-byorganizations';
     public final const MODULE_TABPANEL_STANCES_BYINDIVIDUALS = 'tabpanel-stances-byindividuals';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS],
@@ -13,22 +13,22 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
             case self::MODULE_TABPANEL_STANCES_BYINDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_USERSTANCE_SCREEN_STANCES);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -55,9 +55,9 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_STANCES_BYORGANIZATIONS:
                 $ret = array(
                     [
@@ -89,7 +89,7 @@ class UserStance_URE_Module_Processor_SectionTabPanelComponents extends PoP_Modu
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

@@ -7,7 +7,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
     public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES = 'filtercomponent-selectabletypeaheadalert-selectableprofiles';
     public final const MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_COMMUNITYUSERS = 'filtercomponent-selectabletypeaheadalert-communityusers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS],
@@ -17,9 +17,9 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
         );
     }
 
-    public function getSelectedModule(array $componentVariation)
+    public function getSelectedModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
                 return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_CARD];
@@ -29,12 +29,12 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
                 return [PoP_Module_Processor_UserCardLayouts::class, PoP_Module_Processor_UserCardLayouts::MODULE_LAYOUTUSER_FILTERCARD];
         }
 
-        return parent::getSelectedModule($componentVariation);
+        return parent::getSelectedModule($component);
     }
     
-    public function getHiddeninputModule(array $componentVariation)
+    public function getHiddeninputModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTAUTHORS];
 
@@ -48,12 +48,12 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::MODULE_FILTERINPUT_HIDDENINPUT_SELECTABLELAYOUTCOMMUNITYUSERS];
         }
 
-        return parent::getHiddeninputModule($componentVariation);
+        return parent::getHiddeninputModule($component);
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_AUTHORS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_COAUTHORS:
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADALERT_PROFILES:
@@ -61,7 +61,7 @@ class PoP_Module_Processor_UserSelectableTypeaheadAlertFormComponents extends Po
                 return true;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 }
 

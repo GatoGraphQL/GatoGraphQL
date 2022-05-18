@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
     public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_HIGHLIGHT = 'layout-postsidebarinner-compacthorizontal-highlight';
     public final const MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST = 'layout-postsidebarinner-compacthorizontal-post';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL],
@@ -27,11 +27,11 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
                 $ret = array_merge(
@@ -81,9 +81,9 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getWrapperClass(array $componentVariation)
+    public function getWrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:
@@ -93,12 +93,12 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
                 return 'row';
         }
     
-        return parent::getWrapperClass($componentVariation);
+        return parent::getWrapperClass($component);
     }
     
-    public function getWidgetwrapperClass(array $componentVariation)
+    public function getWidgetwrapperClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_HIGHLIGHT:
             case self::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL_POST:
@@ -110,7 +110,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebarInners extends PoP_Module_Proc
                 return 'col-xsm-6';
         }
     
-        return parent::getWidgetwrapperClass($componentVariation);
+        return parent::getWidgetwrapperClass($component);
     }
 }
 

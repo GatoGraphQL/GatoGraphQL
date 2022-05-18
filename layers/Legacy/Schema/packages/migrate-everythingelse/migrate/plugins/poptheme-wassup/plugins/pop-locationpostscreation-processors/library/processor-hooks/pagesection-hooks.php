@@ -12,18 +12,18 @@ class PoP_LocationPostsCreation_PageSectionHooks
         );
     }
 
-    public function initModelPropsAddons(array $componentVariation, $props_in_array, $processor)
+    public function initModelPropsAddons(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_Module_Processor_TabPanes::MODULE_PAGESECTION_ADDONS:
                 if (PoP_Application_Utils::getAddcontentTarget() == POP_TARGET_ADDONS) {
-                    $subComponentVariations = array(
+                    $subComponents = array(
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_CREATE],
                         [GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::class, GD_Custom_EM_Module_Processor_CreateUpdatePostBlocks::MODULE_BLOCK_LOCATIONPOST_UPDATE],
                     );
-                    foreach ($subComponentVariations as $subComponentVariation) {
-                        $processor->setProp($subComponentVariation, $props, 'title', '');
+                    foreach ($subComponents as $subComponent) {
+                        $processor->setProp($subComponent, $props, 'title', '');
                     }
                 }
                 break;

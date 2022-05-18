@@ -6,7 +6,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS = 'forminput-selectabletypeahead-postauthors';
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS = 'forminput-selectabletypeahead-postcoauthors';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS],
@@ -14,9 +14,9 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors');
 
@@ -24,23 +24,23 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 return TranslationAPIFacade::getInstance()->__('Co-authors', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubmodule(array $componentVariation)
+    public function getInputSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return [GD_CAP_Module_Processor_TypeaheadTextFormInputs::class, GD_CAP_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS];
         }
 
-        return parent::getInputSubmodule($componentVariation);
+        return parent::getInputSubmodule($component);
     }
 
-    public function getComponentSubmodules(array $componentVariation)
+    public function getComponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTCOAUTHORS:
                 return array(
@@ -48,12 +48,12 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation);
+        return parent::getComponentSubmodules($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $componentVariation)
+    public function getTriggerLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_AUTHORS];
 
@@ -61,12 +61,12 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_COAUTHORS];
         }
 
-        return parent::getTriggerLayoutSubmodule($componentVariation);
+        return parent::getTriggerLayoutSubmodule($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEAD_POSTAUTHORS:
                 return 'authors';
 
@@ -74,7 +74,7 @@ class GD_CAP_Module_Processor_UserSelectableTypeaheadFormInputs extends PoP_Modu
                 return 'coauthors';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

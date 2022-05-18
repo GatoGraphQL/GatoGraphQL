@@ -5,16 +5,16 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
 {
     public final const MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY = 'buttoninner-toggleuserpostactivity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY],
         );
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return sprintf(
                     '<span class="collapsed">%s</span><span class="expanded">%s</span>',
@@ -23,48 +23,48 @@ class PoP_Module_Processor_FeedButtonInners extends PoP_Module_Processor_ButtonI
                 );
         }
 
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 
-    public function getTextField(array $componentVariation, array &$props)
+    public function getTextField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return 'userPostActivityCount';
             return 'commentCount';
         }
 
-        return parent::getTextField($componentVariation, $props);
+        return parent::getTextField($component, $props);
     }
 
-    public function getTextfieldOpen(array $componentVariation, array &$props)
+    public function getTextfieldOpen(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__('(', 'poptheme-wassup');
         }
 
-        return parent::getTextfieldOpen($componentVariation, $props);
+        return parent::getTextfieldOpen($component, $props);
     }
-    public function getTextfieldClose(array $componentVariation, array &$props)
+    public function getTextfieldClose(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
                 return TranslationAPIFacade::getInstance()->__(')', 'poptheme-wassup');
         }
 
-        return parent::getTextfieldClose($componentVariation, $props);
+        return parent::getTextfieldClose($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_TOGGLEUSERPOSTACTIVITY:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-collapse-btn');
+                $this->appendProp($component, $props, 'class', 'pop-collapse-btn');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

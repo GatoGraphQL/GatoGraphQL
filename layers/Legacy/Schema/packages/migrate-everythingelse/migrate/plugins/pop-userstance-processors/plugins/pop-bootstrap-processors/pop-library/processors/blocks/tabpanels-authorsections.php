@@ -9,7 +9,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
     public final const MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL = 'block-tabpanel-authorstances-neutral';
     public final const MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST = 'block-tabpanel-authorstances-against';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES],
@@ -19,14 +19,14 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($componentVariation[1]) {
+                switch ($component[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_PRO:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL:
@@ -43,16 +43,16 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
             self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_NEUTRAL => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORSTANCES_NEUTRAL],
             self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES_AGAINST => [UserStance_Module_Processor_AuthorSectionTabPanelComponents::class, UserStance_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORSTANCES_AGAINST],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_AUTHORSTANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORSTANCES];
 
@@ -62,7 +62,7 @@ class UserStance_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORSTANCES_STANCE];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

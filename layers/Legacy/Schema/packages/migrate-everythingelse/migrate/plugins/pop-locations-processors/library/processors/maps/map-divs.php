@@ -6,7 +6,7 @@ class PoP_Module_Processor_MapDivs extends PoP_Module_Processor_MapDivsBase
     public final const MODULE_MAPSTATICIMAGE_DIV = 'em-mapstaticimage-div';
     public final const MODULE_MAPSTATICIMAGE_USERORPOST_DIV = 'em-mapstaticimage-userorpost-div';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MAP_DIV],
@@ -15,11 +15,11 @@ class PoP_Module_Processor_MapDivs extends PoP_Module_Processor_MapDivsBase
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MAPSTATICIMAGE_DIV:
                 $ret[] = [PoP_Locations_Module_Processor_CustomScrolls::class, PoP_Locations_Module_Processor_CustomScrolls::MODULE_SCROLL_STATICIMAGE];
                 break;

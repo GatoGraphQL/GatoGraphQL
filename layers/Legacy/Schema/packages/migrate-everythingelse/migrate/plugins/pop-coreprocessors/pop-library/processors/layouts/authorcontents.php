@@ -5,7 +5,7 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
     public final const MODULE_LAYOUTAUTHOR_CONTENT = 'layoutauthor-content';
     public final const MODULE_LAYOUTAUTHOR_LIMITEDCONTENT = 'layoutauthor-limitedcontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTAUTHOR_LIMITEDCONTENT],
@@ -13,25 +13,25 @@ class PoP_Module_Processor_AuthorContentLayouts extends PoP_Module_Processor_Aut
         );
     }
 
-    public function getDescriptionMaxlength(array $componentVariation, array &$props)
+    public function getDescriptionMaxlength(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTAUTHOR_LIMITEDCONTENT:
                 return 300;
         }
 
-        return parent::getDescriptionMaxlength($componentVariation, $props);
+        return parent::getDescriptionMaxlength($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTAUTHOR_CONTENT:
-                $this->appendProp($componentVariation, $props, 'class', 'layoutauthor readable clearfix');
+                $this->appendProp($component, $props, 'class', 'layoutauthor readable clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

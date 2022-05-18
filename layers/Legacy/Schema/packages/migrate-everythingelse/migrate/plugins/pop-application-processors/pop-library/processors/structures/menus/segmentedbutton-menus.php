@@ -4,7 +4,7 @@ class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_Con
 {
     public final const MODULE_SEGMENTEDBUTTONMENU = 'segmentedbuttonmenu';
     public final const MODULE_NAVIGATORSEGMENTEDBUTTONMENU = 'navigatorsegmentedbuttonmenu';
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SEGMENTEDBUTTONMENU],
@@ -12,9 +12,9 @@ class PoP_Module_Processor_SegmentedButtonMenus extends PoP_Module_Processor_Con
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SEGMENTEDBUTTONMENU:
                 return [PoP_Module_Processor_MenuContentInners::class, PoP_Module_Processor_MenuContentInners::MODULE_CONTENTINNER_MENU_SEGMENTEDBUTTON];
 

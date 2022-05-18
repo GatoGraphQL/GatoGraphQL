@@ -4,32 +4,32 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
 {
     public final const MODULE_FORMINNER_LOCATIONPOST = 'forminner-locationpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINNER_LOCATIONPOST],
         );
     }
-    protected function volunteering(array $componentVariation)
+    protected function volunteering(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
                 return true;
         }
 
-        return parent::volunteering($componentVariation);
+        return parent::volunteering($component);
     }
-    protected function getLocationsInput(array $componentVariation)
+    protected function getLocationsInput(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
                 return [PoP_Module_Processor_SelectableTypeaheadMapFormComponents::class, PoP_Module_Processor_SelectableTypeaheadMapFormComponents::MODULE_EM_FORMCOMPONENT_TYPEAHEADMAP];
         }
 
-        return parent::getLocationsInput($componentVariation);
+        return parent::getLocationsInput($component);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
 
         // Comment Leo 03/04/2015: IMPORTANT!
@@ -37,9 +37,9 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
         // Why? because otherwise, if first loading an Edit Discussion (eg: http://m3l.localhost/edit-discussion/?_wpnonce=e88efa07c5&pid=17887)
         // being the user logged out and only then he log in, the refetchBlock doesn't work because it doesn't have the pid/_wpnonce values
         // Adding it through QueryInputOutputHandler EditPost allows us to have it there always, even if the post was not loaded since the user has no access to it
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
                 return array_merge(
                     $ret,
@@ -50,24 +50,24 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation, $props);
+        return parent::getComponentSubmodules($component, $props);
     }
 
-    protected function getEditorInitialvalue(array $componentVariation)
+    protected function getEditorInitialvalue(array $component)
     {
 
         // Allow RIPESS Asia to set an initial value for the Add Project form
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
-                return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $componentVariation);
+                return \PoP\Root\App::applyFilters('GD_Custom_Module_Processor_CreateUpdatePostFormInners:editor_initialvalue', null, $component);
         }
 
-        return parent::getEditorInitialvalue($componentVariation);
+        return parent::getEditorInitialvalue($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINNER_LOCATIONPOST:
                 // Make it into left/right columns
                 $rightsides = array(
@@ -77,18 +77,18 @@ class GD_Custom_EM_Module_Processor_CreateUpdatePostFormInners extends Wassup_Mo
                 $leftside = [Wassup_Module_Processor_FormMultipleComponents::class, Wassup_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_LEFTSIDE];
 
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
-                if (!($form_left_class = $this->getProp($componentVariation, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
+                if (!($form_left_class = $this->getProp($component, $props, 'form-left-class')/*$this->get_general_prop($props, 'form-left-class')*/)) {
                     $form_left_class = 'col-sm-8';
                 }
-                if (!($form_right_class = $this->getProp($componentVariation, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
+                if (!($form_right_class = $this->getProp($component, $props, 'form-right-class')/*$this->get_general_prop($props, 'form-right-class')*/)) {
                     $form_right_class = 'col-sm-4';
                 }
                 $this->appendProp($leftside, $props, 'class', $form_left_class);
-                $this->appendProp($rightsides[$componentVariation[1]], $props, 'class', $form_right_class);
+                $this->appendProp($rightsides[$component[1]], $props, 'class', $form_right_class);
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

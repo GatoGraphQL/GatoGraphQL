@@ -6,7 +6,7 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
     public final const MODULE_EM_BUTTONINNER_GOOGLECALENDAR = 'em-buttoninner-googlecalendar';
     public final const MODULE_EM_BUTTONINNER_ICAL = 'em-buttoninner-ical';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR],
@@ -14,9 +14,9 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR:
                 return 'fa-fw fa-thumb-tack';
             
@@ -24,12 +24,12 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
                 return 'fa-fw fa-download';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_BUTTONINNER_GOOGLECALENDAR:
                 return TranslationAPIFacade::getInstance()->__('Google Calendar', 'em-popprocessors');
             
@@ -37,7 +37,7 @@ class GD_EM_Module_Processor_ButtonInners extends PoP_Module_Processor_ButtonInn
                 return TranslationAPIFacade::getInstance()->__('iCal', 'em-popprocessors');
         }
 
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

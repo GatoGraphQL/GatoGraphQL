@@ -56,7 +56,7 @@ class RelationalModuleField extends LeafField implements ModuleFieldInterface
         );
     }
 
-    public function getNestedComponentVariations(): array
+    public function getNestedComponents(): array
     {
         return $this->nestedModules;
     }

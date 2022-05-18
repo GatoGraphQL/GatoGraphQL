@@ -7,16 +7,16 @@ class PoPTheme_EM_Processors_ContentHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_Contents:inner_componentVariation',
+            'PoP_Module_Processor_Contents:inner_component',
             $this->contentInner(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, array $componentVariation)
+    public function contentInner($inner, array $component)
     {
-        if (($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
+        if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $eventTypeAPI = EventTypeAPIFacade::getInstance();
             if ($eventTypeAPI->isEvent($post_id)) {

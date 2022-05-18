@@ -5,7 +5,7 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
     public final const MODULE_SIDEBARMULTICOMPONENT_STANCELEFT = 'sidebarmulticomponent-stanceleft';
     public final const MODULE_SIDEBARMULTICOMPONENT_STANCERIGHT = 'sidebarmulticomponent-stanceright';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_STANCELEFT],
@@ -13,11 +13,11 @@ class UserStance_Module_Processor_CustomPostMultipleSidebarComponents extends Po
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_STANCELEFT:
                 $ret[] = [UserStance_Module_Processor_CustomPostWidgets::class, UserStance_Module_Processor_CustomPostWidgets::MODULE_WIDGETCOMPACT_STANCEINFO];
                 $ret[] = [UserStance_Module_Processor_WidgetWrappers::class, UserStance_Module_Processor_WidgetWrappers::MODULE_WIDGETWRAPPER_STANCETARGET];

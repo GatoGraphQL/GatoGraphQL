@@ -7,7 +7,7 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
     public final const MODULE_CONTROLGROUP_BLOCKAUTHOREVENTLIST = 'controlgroup-blockauthoreventlist';
     public final const MODULE_CONTROLGROUP_BLOCKTAGEVENTLIST = 'controlgroup-blocktageventlist';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLGROUP_EVENTLIST],
@@ -17,11 +17,11 @@ class PoP_Events_Module_Processor_CustomControlGroups extends PoP_Module_Process
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLGROUP_EVENTLIST:
                 $ret[] = [PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::class, PoP_EventsCreation_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_EVENTLINKS];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];

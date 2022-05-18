@@ -11,7 +11,7 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
     public final const MODULE_CONTENTINNER_MENU_DROPDOWNBUTTON_SIDE = 'contentinner-menu-dropdownbutton-side';
     public final const MODULE_CONTENTINNER_MENU_MULTITARGETINDENT = 'contentinner-menu-multitargetindent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_MENU_BUTTON],
@@ -25,11 +25,11 @@ class PoP_Module_Processor_MenuContentInners extends PoP_Module_Processor_Conten
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_MENU_BUTTON:
                 $ret[] = [PoP_Module_Processor_AnchorMenuLayouts::class, PoP_Module_Processor_AnchorMenuLayouts::MODULE_LAYOUT_MENU_BUTTON];
                 break;

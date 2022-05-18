@@ -3,54 +3,54 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponentVariations($componentVariation),
-            $this->getPanelSubmodules($componentVariation)
+            parent::getSubComponents($component),
+            $this->getPanelSubmodules($component)
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
         return array();
     }
 
-    public function getButtons(array $componentVariation)
+    public function getButtons(array $component)
     {
         return array();
     }
-    public function getBodyClass(array $componentVariation)
+    public function getBodyClass(array $component)
     {
         return array();
     }
-    public function getIcon(array $componentVariation)
-    {
-        return array();
-    }
-
-    public function getPanelParams(array $componentVariation, array &$props)
+    public function getIcon(array $component)
     {
         return array();
     }
 
-    public function getCustomPanelClass(array $componentVariation, array &$props)
+    public function getPanelParams(array $component, array &$props)
     {
         return array();
     }
-    public function getPanelClass(array $componentVariation)
+
+    public function getCustomPanelClass(array $component, array &$props)
+    {
+        return array();
+    }
+    public function getPanelClass(array $component)
     {
         return '';
     }
-    public function getCustomPanelParams(array $componentVariation, array &$props)
+    public function getCustomPanelParams(array $component, array &$props)
     {
         $ret = array();
 
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+        // foreach ($this->getSubComponents($component) as $subComponent) {
 
-        //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
-        //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($componentVariation, $props), $this->getBootstrapcomponentType($componentVariation));
+        //     $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
+        //     $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
         //     $ret[$submoduleOutputName]['data-initjs-targets'] = sprintf(
         //         '%s > %s',
         //         '#'.$frontend_id.'-'.$submoduleOutputName.'-container',
@@ -61,32 +61,32 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
         return $ret;
     }
 
-    public function getPanelactiveClass(array $componentVariation)
+    public function getPanelactiveClass(array $component)
     {
         return '';
     }
 
-    // protected function getInitjsBlockbranches(array $componentVariation, array &$props) {
+    // protected function getInitjsBlockbranches(array $component, array &$props) {
 
     //     return array_merge(
-    //         parent::getInitjsBlockbranches($componentVariation, $props),
-    //         $this->getActivemoduleSelectors($componentVariation, $props)
+    //         parent::getInitjsBlockbranches($component, $props),
+    //         $this->getActivemoduleSelectors($component, $props)
     //     );
     // }
 
-    // function getActivemoduleSelectors(array $componentVariation, array &$props) {
+    // function getActivemoduleSelectors(array $component, array &$props) {
 
     //     $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
     //     $ret = array();
 
-    //     foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+    //     foreach ($this->getSubComponents($component) as $subComponent) {
 
-    //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
-    //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($componentVariation, $props), $this->getBootstrapcomponentType($componentVariation));
+    //         $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
+    //         $frontend_id = PoP_Bootstrap_Utils::getFrontendId(/*$props['block-id']*/$this->getFrontendId($component, $props), $this->getBootstrapcomponentType($component));
     //         $ret[] = sprintf(
     //             '%s > %s > %s',
-    //             '#'.$frontend_id.'-'.$submoduleOutputName.'.'.$this->getPanelactiveClass($componentVariation),
+    //             '#'.$frontend_id.'-'.$submoduleOutputName.'.'.$this->getPanelactiveClass($component),
     //             '#'.$frontend_id.'-'.$submoduleOutputName.'-container',
     //             'div.pop-block'
     //         );
@@ -95,132 +95,132 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
     //     return $ret;
     // }
 
-    public function getButtonsClass(array $componentVariation, array &$props)
+    public function getButtonsClass(array $component, array &$props)
     {
         return array();
     }
 
-    public function isSubmoduleActivePanel(array $componentVariation, $subComponentVariation)
+    public function isSubmoduleActivePanel(array $component, $subComponent)
     {
         return false;
     }
-    public function getActivepanelSubmodule(array $componentVariation)
+    public function getActivepanelSubmodule(array $component)
     {
-        $subComponentVariations = $this->getSubComponentVariations($componentVariation);
-        foreach ($subComponentVariations as $subComponentVariation) {
-            if ($this->isSubmoduleActivePanel($componentVariation, $subComponentVariation)) {
-                return $subComponentVariation;
+        $subComponents = $this->getSubComponents($component);
+        foreach ($subComponents as $subComponent) {
+            if ($this->isSubmoduleActivePanel($component, $subComponent)) {
+                return $subComponent;
             }
         }
 
-        if ($this->isMandatoryActivePanel($componentVariation)) {
-            return $this->getDefaultActivepanelSubmodule($componentVariation);
+        if ($this->isMandatoryActivePanel($component)) {
+            return $this->getDefaultActivepanelSubmodule($component);
         }
 
         return null;
     }
-    protected function isMandatoryActivePanel(array $componentVariation)
+    protected function isMandatoryActivePanel(array $component)
     {
         return false;
     }
 
-    public function getDefaultActivepanelSubmodule(array $componentVariation)
+    public function getDefaultActivepanelSubmodule(array $component)
     {
 
         // Simply return the first one
-        $subComponentVariations = $this->getSubComponentVariations($componentVariation);
-        return $subComponentVariations[0];
+        $subComponents = $this->getSubComponents($component);
+        return $subComponents[0];
     }
 
-    public function getPanelTitle(array $componentVariation)
+    public function getPanelTitle(array $component)
     {
         return null;
     }
-    public function getPanelHeaderType(array $componentVariation)
+    public function getPanelHeaderType(array $component)
     {
         return null;
     }
-    public function getDropdownTitle(array $componentVariation)
+    public function getDropdownTitle(array $component)
     {
         return null;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
         $ret = array();
 
-        foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
+        foreach ($this->getSubComponents($component) as $subComponent) {
             $ret[] = [
-                'header-submodule' => $subComponentVariation,
+                'header-submodule' => $subComponent,
             ];
         }
 
         return $ret;
     }
 
-    public function getPanelHeaderThumbs(array $componentVariation, array &$props)
+    public function getPanelHeaderThumbs(array $component, array &$props)
     {
         return null;
     }
-    public function getPanelHeaderTooltips(array $componentVariation, array &$props)
+    public function getPanelHeaderTooltips(array $component, array &$props)
     {
         return null;
     }
-    public function getPanelHeaderTitles(array $componentVariation, array &$props)
+    public function getPanelHeaderTitles(array $component, array &$props)
     {
         // Comment Leo 19/11/2018: Check this out: initially, this gets the title from the block, but since migrating blocks to dataloads, the processor may not have `getTitle` anymore and the code below explodes
         // $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        // return $componentprocessor_manager->getProcessor($subComponentVariation)->getTitle($subComponentVariation, $props);
+        // return $componentprocessor_manager->getProcessor($subComponent)->getTitle($subComponent, $props);
         return array();
     }
-    public function getPanelheaderClass(array $componentVariation)
+    public function getPanelheaderClass(array $component)
     {
         return '';
     }
-    public function getPanelheaderItemClass(array $componentVariation)
+    public function getPanelheaderItemClass(array $component)
     {
         return '';
     }
-    public function getPanelheaderParams(array $componentVariation)
+    public function getPanelheaderParams(array $component)
     {
         return array();
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->getPanelHeaderTooltips($componentVariation, $props)) {
+        if ($this->getPanelHeaderTooltips($component, $props)) {
             $this->addJsmethod($ret, 'tooltip', 'tooltip');
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($panel_componentVariations = $this->getPanelSubmodules($componentVariation)) {
+        if ($panel_components = $this->getPanelSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['panels'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $panel_componentVariations
+                $panel_components
             );
         }
 
         // Fill in all the properties
-        if ($panel_header_type = $this->getPanelHeaderType($componentVariation)) {
+        if ($panel_header_type = $this->getPanelHeaderType($component)) {
             $ret['panel-header-type'] = $panel_header_type;
-            $ret['panel-title'] = $this->getPanelTitle($componentVariation);
+            $ret['panel-title'] = $this->getPanelTitle($component);
 
-            $titles = $this->getPanelHeaderTitles($componentVariation, $props);
-            $thumbs = $this->getPanelHeaderThumbs($componentVariation, $props);
-            $tooltips = $this->getPanelHeaderTooltips($componentVariation, $props);
+            $titles = $this->getPanelHeaderTitles($component, $props);
+            $thumbs = $this->getPanelHeaderThumbs($component, $props);
+            $tooltips = $this->getPanelHeaderTooltips($component, $props);
 
             $panel_headers = array();
-            foreach ($this->getPanelHeaders($componentVariation, $props) as $panelHeader) {
+            foreach ($this->getPanelHeaders($component, $props) as $panelHeader) {
                 $header_submodule = $panelHeader['header-submodule'];
                 $subheader_submodules = $panelHeader['subheader-submodules'];
                 $headerSubmoduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($header_submodule);
@@ -263,93 +263,93 @@ abstract class PoP_Module_Processor_PanelBootstrapComponentsBase extends PoP_Mod
             }
             $ret['panel-headers'] = $panel_headers;
 
-            if ($panelheader_class = $this->getPanelheaderClass($componentVariation)) {
+            if ($panelheader_class = $this->getPanelheaderClass($component)) {
                 $ret[GD_JS_CLASSES]['panelheader'] = $panelheader_class;
             }
-            if ($panelheader_item_class = $this->getPanelheaderItemClass($componentVariation)) {
+            if ($panelheader_item_class = $this->getPanelheaderItemClass($component)) {
                 $ret[GD_JS_CLASSES]['panelheader-item'] = $panelheader_item_class;
             }
-            if ($panelheader_params = $this->getPanelheaderParams($componentVariation)) {
+            if ($panelheader_params = $this->getPanelheaderParams($component)) {
                 $ret['panelheader-params'] = $panelheader_params;
             }
         }
 
-        if ($dropdown_title = $this->getDropdownTitle($componentVariation)) {
+        if ($dropdown_title = $this->getDropdownTitle($component)) {
             $ret[GD_JS_TITLES] = array(
                 'dropdown' => $dropdown_title
             );
         }
 
-        if ($buttons_class = $this->getButtonsClass($componentVariation, $props)) {
+        if ($buttons_class = $this->getButtonsClass($component, $props)) {
             $ret['buttons-class'] = $buttons_class;
         }
-        if ($panel_class = $this->getPanelClass($componentVariation)) {
+        if ($panel_class = $this->getPanelClass($component)) {
             $ret[GD_JS_CLASSES]['panel'] = $panel_class;
         }
-        if ($custom_panel_class = $this->getCustomPanelClass($componentVariation, $props)) {
+        if ($custom_panel_class = $this->getCustomPanelClass($component, $props)) {
             $ret['custom-panel-class'] = $custom_panel_class;
         }
-        if ($panel_params = $this->getPanelParams($componentVariation, $props)) {
+        if ($panel_params = $this->getPanelParams($component, $props)) {
             $ret['panel-params'] = $panel_params;
         }
-        if ($custom_panel_params = $this->getCustomPanelParams($componentVariation, $props)) {
+        if ($custom_panel_params = $this->getCustomPanelParams($component, $props)) {
             $ret['custom-panel-params'] = $custom_panel_params;
         }
-        if ($icon = $this->getIcon($componentVariation)) {
+        if ($icon = $this->getIcon($component)) {
             $ret['icon'] = $icon;
         }
-        if ($body_class = $this->getBodyClass($componentVariation)) {
+        if ($body_class = $this->getBodyClass($component)) {
             $ret['body-class'] = $body_class;
         }
-        $ret['buttons'] = $this->getButtons($componentVariation);
+        $ret['buttons'] = $this->getButtons($component);
 
         return $ret;
     }
 
-    public function getMutableonmodelConfiguration(array $componentVariation, array &$props): array
+    public function getMutableonmodelConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonmodelConfiguration($componentVariation, $props);
+        $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($active_submodule = $this->getActivepanelSubmodule($componentVariation)) {
+        if ($active_submodule = $this->getActivepanelSubmodule($component)) {
             $ret['active'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($active_submodule);
         }
 
         return $ret;
     }
 
-    protected function lazyLoadInactivePanels(array $componentVariation, array &$props)
+    protected function lazyLoadInactivePanels(array $component, array &$props)
     {
         return false;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($this->lazyLoadInactivePanels($componentVariation, $props)) {
-            $active_submodule = $this->getActivepanelSubmodule($componentVariation);
+        if ($this->lazyLoadInactivePanels($component, $props)) {
+            $active_submodule = $this->getActivepanelSubmodule($component);
             $inactive_submodules = array_diff(
-                $this->getSubComponentVariations($componentVariation),
+                $this->getSubComponents($component),
                 array(
                     $active_submodule
                 )
             );
-            foreach ($inactive_submodules as $subComponentVariation) {
-                $this->setProp([$subComponentVariation], $props, 'skip-data-load', true);
+            foreach ($inactive_submodules as $subComponent) {
+                $this->setProp([$subComponent], $props, 'skip-data-load', true);
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    // function initModelProps(array $componentVariation, array &$props) {
+    // function initModelProps(array $component, array &$props) {
 
-    //     $blocktarget = implode(', ', $this->getActivemoduleSelectors($componentVariation, $props));
-    //     if ($controlgroup_top = $this->getControlgroupTopSubmodule($componentVariation)) {
+    //     $blocktarget = implode(', ', $this->getActivemoduleSelectors($component, $props));
+    //     if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
     //         $this->setProp($controlgroup_top, $props, 'control-target', $blocktarget);
     //     }
-    //     if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($componentVariation)) {
+    //     if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
     //         $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
     //     }
 
-    //     parent::initModelProps($componentVariation, $props);
+    //     parent::initModelProps($component, $props);
     // }
 }

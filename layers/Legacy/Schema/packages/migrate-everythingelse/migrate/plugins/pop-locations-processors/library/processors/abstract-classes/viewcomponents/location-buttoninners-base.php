@@ -4,32 +4,32 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extends PoP_Module_Processor_ButtonInnersBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_LOCATIONBUTTONINNER];
     }
 
-    public function getLocationModule(array $componentVariation)
+    public function getLocationModule(array $component)
     {
         return null;
     }
-    public function separator(array $componentVariation, array &$props)
+    public function separator(array $component, array &$props)
     {
         return ' | ';
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         return 'fa-map-marker';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
-            $ret['separator'] = $this->separator($componentVariation, $props);
-            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_componentVariation);
+        if ($location_component = $this->getLocationModule($component)) {
+            $ret['separator'] = $this->separator($component, $props);
+            $ret[GD_JS_SUBMODULEOUTPUTNAMES]['location-layout'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($location_component);
         } else {
             $ret[GD_JS_TITLES] = array(
                 'locations' => TranslationAPIFacade::getInstance()->__('Locations', 'em-popprocessors')
@@ -42,18 +42,18 @@ abstract class PoP_Module_Processor_LocationViewComponentButtonInnersBase extend
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
-        if ($location_componentVariation = $this->getLocationModule($componentVariation)) {
+        if ($location_component = $this->getLocationModule($component)) {
             return [
                 new RelationalModuleField(
                     'locations',
                     [
-                        $location_componentVariation,
+                        $location_component,
                     ]
                 ),
             ];
         }
-        return parent::getRelationalSubmodules($componentVariation);
+        return parent::getRelationalSubmodules($component);
     }
 }

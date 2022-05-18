@@ -6,7 +6,7 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
     public final const MODULE_LAYOUT_PREVIEWPOSTTITLE = 'layout-previewposttitle';
     public final const MODULE_LAYOUT_POSTTITLE = 'layout-posttitle';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLVIEWTITLE],
@@ -15,9 +15,9 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
         );
     }
 
-    public function getHtmlmarkup(array $componentVariation, array &$props)
+    public function getHtmlmarkup(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_PREVIEWPOSTTITLE:
                 return 'h4';
 
@@ -25,7 +25,7 @@ class PoP_Module_Processor_CustomFullViewTitleLayouts extends PoP_Module_Process
                 return 'span';
         }
         
-        return parent::getHtmlmarkup($componentVariation, $props);
+        return parent::getHtmlmarkup($component, $props);
     }
 }
 

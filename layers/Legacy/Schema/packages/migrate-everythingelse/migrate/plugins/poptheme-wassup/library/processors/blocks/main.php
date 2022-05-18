@@ -17,7 +17,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     public final const MODULE_BLOCK_AUTHORSUMMARY = 'block-authorsummary';
     public final const MODULE_BLOCK_TAG = 'block-tag';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_HOME],
@@ -31,11 +31,11 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         );
     }
 
-    protected function getControlgroupBottomSubmodule(array $componentVariation)
+    protected function getControlgroupBottomSubmodule(array $component)
     {
 
         // Do not add for the quickview, since it is a modal and can't open a new modal (eg: Embed) on top
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -53,14 +53,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_SUBMENUSHARE];
         }
 
-        return parent::getControlgroupBottomSubmodule($componentVariation);
+        return parent::getControlgroupBottomSubmodule($component);
     }
 
-    protected function getBlocksectionsClasses(array $componentVariation)
+    protected function getBlocksectionsClasses(array $component)
     {
-        $ret = parent::getBlocksectionsClasses($componentVariation);
+        $ret = parent::getBlocksectionsClasses($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_404:
             case self::MODULE_BLOCK_BACKGROUNDMENU:
                 $ret['blocksection-extensions'] = 'row';
@@ -77,10 +77,10 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
-        // switch ($componentVariation[1]) {
+        // switch ($component[1]) {
 
         //     case self::MODULE_BLOCK_SINGLEPOST:
         //     case self::MODULE_BLOCK_AUTHOR:
@@ -88,54 +88,54 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
         //     case self::MODULE_BLOCK_AUTHORSUMMARY:
         //     case self::MODULE_BLOCK_TAG:
 
-        //         $blocktarget = $this->get_activeblock_selector($componentVariation, $props);
-        //         if ($controlgroup_top = $this->getControlgroupTopSubmodule($componentVariation)) {
+        //         $blocktarget = $this->get_activeblock_selector($component, $props);
+        //         if ($controlgroup_top = $this->getControlgroupTopSubmodule($component)) {
         //             $this->setProp($controlgroup_top, $props, 'control-target', $blocktarget);
         //         }
-        //         if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($componentVariation)) {
+        //         if ($controlgroup_bottom = $this->getControlgroupBottomSubmodule($component)) {
         //             $this->setProp($controlgroup_bottom, $props, 'control-target', $blocktarget);
         //         }
         //         break;
         // }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_HOME:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-home');
+                $this->appendProp($component, $props, 'class', 'blockgroup-home');
 
                 if (PoP_ApplicationProcessors_Utils::narrowBodyHome()) {
                      // Make it 564px max width
-                    $this->appendProp($componentVariation, $props, 'class', 'narrow');
+                    $this->appendProp($component, $props, 'class', 'narrow');
                 }
                 break;
 
             case self::MODULE_BLOCK_AUTHOR:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-author');
+                $this->appendProp($component, $props, 'class', 'blockgroup-author');
                 break;
 
             case self::MODULE_BLOCK_SINGLEPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-singlepost');
+                $this->appendProp($component, $props, 'class', 'blockgroup-singlepost');
                 break;
 
             case self::MODULE_BLOCK_AUTHORDESCRIPTION:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-author-description');
+                $this->appendProp($component, $props, 'class', 'blockgroup-author-description');
                 break;
 
             case self::MODULE_BLOCK_TAG:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-tag');
+                $this->appendProp($component, $props, 'class', 'blockgroup-tag');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_404:
             case self::MODULE_BLOCK_BACKGROUNDMENU:
-                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'col-xs-12 col-sm-4');
+                foreach ($this->getSubComponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12 col-sm-4');
                 }
                 break;
 
             case self::MODULE_BLOCK_SINGLEPOST:
-                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'col-xs-12');
+                foreach ($this->getSubComponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'col-xs-12');
                 }
 
                 // Hide the Title, but not for the Comments
@@ -154,25 +154,25 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_BACKGROUNDMENU:
             case self::MODULE_BLOCK_404:
                 $submodule_descriptions = array(
                     [
-                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_SECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('Content', 'poptheme-wassup'),
                     ],
                     [
-                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_MYSECTIONS],
                         'description' => TranslationAPIFacade::getInstance()->__('My Content', 'poptheme-wassup'),
                     ],
                     [
-                        'component-variation' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
+                        'component' => [PoP_Module_Processor_CustomMenuMultiples::class, PoP_Module_Processor_CustomMenuMultiples::MODULE_MULTIPLE_MENU_BODY_ADDCONTENT],
                         'description' => TranslationAPIFacade::getInstance()->__('Add Content', 'poptheme-wassup'),
                     ],
                 );
                 foreach ($submodule_descriptions as $submodule_description) {
-                    $subComponentVariation = $submodule_description['submodule'];
+                    $subComponent = $submodule_description['submodule'];
                     $description = sprintf(
                         '<h4>%s</h4>',
                         sprintf(
@@ -180,8 +180,8 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                             $submodule_description['description']
                         )
                     );
-                    $this->setProp([$subComponentVariation], $props, 'title', '');
-                    $this->setProp([$subComponentVariation], $props, 'description', $description);
+                    $this->setProp([$subComponent], $props, 'title', '');
+                    $this->setProp([$subComponent], $props, 'description', $description);
                 }
                 break;
 
@@ -191,41 +191,41 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
-                $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-                $subComponentVariations = array_diff(
-                    $this->getSubComponentVariations($componentVariation),
+                $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+                $subComponents = array_diff(
+                    $this->getSubComponents($component),
                     [
-                        $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
+                        $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)
                     ]
                 );
-                foreach ($subComponentVariations as $subComponentVariation) {
-                    $this->setProp($subComponentVariation, $props, 'ignore-request-params', true);
+                foreach ($subComponents as $subComponent) {
+                    $this->setProp($subComponent, $props, 'ignore-request-params', true);
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 if ($customPostTypeAPI->getStatus($post_id) !== Status::PUBLISHED) {
-                    $this->setProp($componentVariation, $props, 'show-submenu', false);
-                    $this->setProp($componentVariation, $props, 'show-controls-bottom', false);
+                    $this->setProp($component, $props, 'show-submenu', false);
+                    $this->setProp($component, $props, 'show-controls-bottom', false);
                 }
                 break;
         }
 
-        parent::initRequestProps($componentVariation, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function getSubmenuSubmodule(array $componentVariation)
+    public function getSubmenuSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_SINGLEPOST:
                 if ($submenu = PoP_Module_Processor_CustomSectionBlocksUtils::getSingleSubmenu()) {
                     return $submenu;
@@ -240,12 +240,12 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_TAG];
         }
 
-        return parent::getSubmenuSubmodule($componentVariation);
+        return parent::getSubmenuSubmodule($component);
     }
 
-    protected function getDescription(array $componentVariation, array &$props)
+    protected function getDescription(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_404:
                 return sprintf(
                     '<p>%s</p>',
@@ -253,14 +253,14 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 );
         }
 
-        return parent::getDescription($componentVariation, $props);
+        return parent::getDescription($component, $props);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_404:
                 return TranslationAPIFacade::getInstance()->__('Oops, this page doesn\'t exist!', 'poptheme-wassup');
 
@@ -278,19 +278,19 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getTagTitle(true, false);
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_HOME:
                 // Allow TPPDebate to override this
-                if ($top_componentVariations = \PoP\Root\App::applyFilters(
+                if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:home_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_HOMETOP]
@@ -298,18 +298,18 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_componentVariations
+                        $top_components
                     );
                 }
 
                 // Content module
-                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_componentVariation;
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_component;
                 }
                 break;
 
             case self::MODULE_BLOCK_AUTHOR:
-                if ($top_componentVariations = \PoP\Root\App::applyFilters(
+                if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:author_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_AUTHORTOP],
@@ -317,18 +317,18 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_componentVariations
+                        $top_components
                     );
                 }
 
                 // Content module
-                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_componentVariation;
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_component;
                 }
                 break;
 
             case self::MODULE_BLOCK_TAG:
-                if ($top_componentVariations = \PoP\Root\App::applyFilters(
+                if ($top_components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:tag_tops',
                     array(
                         [PoP_Module_Processor_CustomGroups::class, PoP_Module_Processor_CustomGroups::MODULE_GROUP_TAG_WIDGETAREA],
@@ -336,13 +336,13 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $top_componentVariations
+                        $top_components
                     );
                 }
 
                 // Content module
-                if ($content_componentVariation = $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
-                    $ret[] = $content_componentVariation;
+                if ($content_component = $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_MAINCONTENT)) {
+                    $ret[] = $content_component;
                 }
                 break;
 
@@ -364,17 +364,17 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
             case self::MODULE_BLOCK_SINGLEPOST:
                 // Allow TPPDebate to override this, adding the "What do you think about TPP" Create Block
-                $componentVariations = array(
+                $components = array(
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
                     [PoP_Module_Processor_CustomContentDataloads::class, PoP_Module_Processor_CustomContentDataloads::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT],
                 );
-                $componentVariations = \PoP\Root\App::applyFilters(
+                $components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_MainGroups:modules:single',
-                    $componentVariations
+                    $components
                 );
                 $ret = array_merge(
                     $ret,
-                    $componentVariations
+                    $components
                 );
                 break;
         }

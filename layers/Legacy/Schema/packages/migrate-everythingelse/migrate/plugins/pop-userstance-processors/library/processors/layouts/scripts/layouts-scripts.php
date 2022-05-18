@@ -5,7 +5,7 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
     public final const MODULE_SCRIPT_STANCES = 'script-stances';
     public final const MODULE_SCRIPT_STANCESEMPTY = 'script-stancesempty';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCRIPT_STANCES],
@@ -13,28 +13,28 @@ class UserStance_Module_Processor_ScriptsLayouts extends PoP_Module_Processor_Ap
         );
     }
     
-    public function doAppend(array $componentVariation)
+    public function doAppend(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCRIPT_STANCESEMPTY:
                 return false;
         }
         
-        return parent::doAppend($componentVariation);
+        return parent::doAppend($component);
     }
     
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCRIPT_STANCES:
             case self::MODULE_SCRIPT_STANCESEMPTY:
                 $classes = array(
                     self::MODULE_SCRIPT_STANCES => GD_CLASS_STANCES,
                     self::MODULE_SCRIPT_STANCESEMPTY => GD_CLASS_STANCES,
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$componentVariation[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
                 break;
         }
         

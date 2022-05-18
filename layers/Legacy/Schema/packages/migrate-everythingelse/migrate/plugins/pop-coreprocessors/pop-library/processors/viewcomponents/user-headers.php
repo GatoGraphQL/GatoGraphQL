@@ -5,7 +5,7 @@ class PoP_Module_Processor_UserViewComponentHeaders extends PoP_Module_Processor
     public final const MODULE_VIEWCOMPONENT_HEADER_USER = 'viewcomponent-header-user';
     public final const MODULE_VIEWCOMPONENT_HEADER_USER_URL = 'viewcomponent-header-user-url';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_HEADER_USER],
@@ -13,26 +13,26 @@ class PoP_Module_Processor_UserViewComponentHeaders extends PoP_Module_Processor
         );
     }
 
-    public function headerShowUrl(array $componentVariation, array &$props)
+    public function headerShowUrl(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_USER_URL:
                 // Add the URL in the header? Sometimes yes (eg: Addon) sometimes not (eg: modal)
                 return true;
         }
 
-        return parent::headerShowUrl($componentVariation, $props);
+        return parent::headerShowUrl($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_USER_URL:
-                $this->appendProp($componentVariation, $props, 'class', 'alert alert-warning alert-sm');
+                $this->appendProp($component, $props, 'class', 'alert alert-warning alert-sm');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

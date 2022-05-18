@@ -5,7 +5,7 @@ class GD_Processor_SelectableLocationHiddenInputFormInputs extends PoP_Module_Pr
     public final const MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTLOCATIONS = 'forminput-hiddeninput-selectablelayoutlocations';
     public final const MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTLOCATION = 'forminput-hiddeninput-selectablelayoutlocation';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTLOCATIONS],
@@ -13,13 +13,13 @@ class GD_Processor_SelectableLocationHiddenInputFormInputs extends PoP_Module_Pr
         );
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLELAYOUTLOCATIONS:
                 return true;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 }

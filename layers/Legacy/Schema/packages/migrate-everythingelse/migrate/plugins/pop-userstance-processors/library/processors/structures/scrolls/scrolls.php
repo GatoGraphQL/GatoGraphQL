@@ -13,7 +13,7 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     public final const MODULE_SCROLL_AUTHORSTANCES_LIST = 'scroll-authorstances-list';
     public final const MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW = 'scroll-singlerelatedstancecontent-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW],
@@ -30,7 +30,7 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_MYSTANCES_FULLVIEWPREVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_MYSTANCES_FULLVIEWPREVIEW],
@@ -45,14 +45,14 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
             self::MODULE_SCROLL_SINGLERELATEDSTANCECONTENT_FULLVIEW => [UserStance_Module_Processor_CustomScrollInners::class, UserStance_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_SINGLERELATEDSTANCECONTENT_FULLVIEW],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         // Extra classes
         $independentitem_thumbnails = array(
@@ -77,28 +77,28 @@ class UserStance_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scr
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $navigators)) {
+        if (in_array($component, $navigators)) {
             $extra_class = 'navigator';
-        } elseif (in_array($componentVariation, $addons)) {
+        } elseif (in_array($component, $addons)) {
             $extra_class = 'addons';
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
         }
-        elseif (in_array($componentVariation, $independentitem_thumbnails)) {
+        elseif (in_array($component, $independentitem_thumbnails)) {
             $extra_class = 'thumb independent';
-        } elseif (in_array($componentVariation, $independentitem_lists)) {
+        } elseif (in_array($component, $independentitem_lists)) {
             $extra_class = 'list independent';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
 
-        $inner = $this->getInnerSubmodule($componentVariation);
-        if (in_array($componentVariation, $navigators)) {
+        $inner = $this->getInnerSubmodule($component);
+        if (in_array($component, $navigators)) {
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

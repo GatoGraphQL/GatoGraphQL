@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
     public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD = 'contentinner-marknotificationasread';
     public final const MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD = 'contentinner-marknotificationasunread';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD],
@@ -13,11 +13,11 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
                 $ret[] = [GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::class, GD_AAL_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_MARKNOTIFICATIONASREAD_SHOWHIDEELEMSTYLES];
 
@@ -25,7 +25,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasread:layouts',
                     array(),
-                    $componentVariation
+                    $component
                 )
                 ) {
                     $ret = array_merge(
@@ -42,7 +42,7 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
                 if ($extra = \PoP\Root\App::applyFilters(
                     'GD_AAL_Module_Processor_FunctionsContentMultipleInners:markasunread:layouts',
                     array(),
-                    $componentVariation
+                    $component
                 )
                 ) {
                     $ret = array_merge(
@@ -61,11 +61,11 @@ class GD_AAL_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASREAD:
             case self::MODULE_CONTENTINNER_MARKNOTIFICATIONASUNREAD:
                 // In addition, bring the new status (read/unread) of the notification to update the database/userstatedatabase in the webplatform, for consistency

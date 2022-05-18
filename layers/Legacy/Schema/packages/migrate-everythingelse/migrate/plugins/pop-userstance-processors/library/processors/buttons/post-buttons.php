@@ -7,7 +7,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
     public final const MODULE_BUTTON_STANCE_UPDATE = 'postbutton-stance-update';
     public final const MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE = 'lazypostbutton-stance-createorupdate';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_STANCE_CREATE],
@@ -21,11 +21,11 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
                 $ret[] = 'createStanceButtonLazy';
                 break;
@@ -34,23 +34,23 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return $ret;
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_STANCE_CREATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_STANCE_CREATE],
             self::MODULE_BUTTON_STANCE_UPDATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_STANCE_UPDATE],
             self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_LAZYBUTTONINNER_STANCE_CREATEORUPDATE],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getTargetDynamicallyRenderedSubmodules(array $componentVariation)
+    public function getTargetDynamicallyRenderedSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_STANCE_CREATE:
             case self::MODULE_BUTTON_STANCE_UPDATE:
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
@@ -59,26 +59,26 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
                 );
         }
 
-        return parent::getTargetDynamicallyRenderedSubmodules($componentVariation);
+        return parent::getTargetDynamicallyRenderedSubmodules($component);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_STANCE_CREATE:
             case self::MODULE_BUTTON_STANCE_UPDATE:
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
                 return POP_TARGET_ADDONS;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_STANCE_CREATE:
             case self::MODULE_BUTTON_STANCE_UPDATE:
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
@@ -86,7 +86,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE:
                 $ret .= ' disabled';
                 break;
@@ -95,7 +95,7 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
         return $ret;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
 
         // Allow Events to have a different title
@@ -112,25 +112,25 @@ class UserStance_Module_Processor_PostButtons extends PoP_Module_Processor_Prelo
                 PoP_UserStance_PostNameUtils::getNameLc()
             ),
         );
-        if ($title = $titles[$componentVariation[1]] ?? null) {
+        if ($title = $titles[$component[1]] ?? null) {
             return $title;
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
         $fields = array(
             self::MODULE_BUTTON_STANCE_CREATE => 'addStanceURL',
             self::MODULE_LAZYBUTTON_STANCE_CREATEORUPDATE => 'addStanceURL',
             self::MODULE_BUTTON_STANCE_UPDATE => 'editStanceURL',
         );
-        if ($field = $fields[$componentVariation[1]] ?? null) {
+        if ($field = $fields[$component[1]] ?? null) {
             return $field;
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 }
 

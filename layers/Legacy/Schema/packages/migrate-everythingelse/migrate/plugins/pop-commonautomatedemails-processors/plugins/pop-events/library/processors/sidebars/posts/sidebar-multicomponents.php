@@ -4,18 +4,18 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_PostMultipleSidebarComponents exten
 {
     public final const MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT = 'sidebarmulticomponent-automatedemails-event';
     
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_AUTOMATEDEMAILS_EVENT:
                 $ret[] = [PoPTheme_Wassup_EM_AE_Module_Processor_Widgets::class, PoPTheme_Wassup_EM_AE_Module_Processor_Widgets::MODULE_EM_WIDGETCOMPACT_AUTOMATEDEMAILS_EVENTINFO];
                 $ret[] = [PoP_Module_Processor_SidebarComponentWrappers::class, PoP_Module_Processor_SidebarComponentWrappers::MODULE_WIDGETWRAPPER_REFERENCES];

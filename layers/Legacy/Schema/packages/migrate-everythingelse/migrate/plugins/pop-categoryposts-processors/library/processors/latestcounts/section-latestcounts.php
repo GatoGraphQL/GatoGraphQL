@@ -63,7 +63,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
     public final const MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS18 = 'latestcount-tag-categoryposts18';
     public final const MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19 = 'latestcount-tag-categoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_CATEGORYPOSTS00],
@@ -129,7 +129,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         );
     }
 
-    public function getObjectName(array $componentVariation, array &$props)
+    public function getObjectName(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -193,14 +193,14 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $componentVariation, array &$props)
+    public function getObjectNames(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_CATEGORYPOSTS00 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS00,
@@ -264,16 +264,16 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS18 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19 => POP_CATEGORYPOSTS_CAT_CATEGORYPOSTS19,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function isAuthor(array $componentVariation, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS02:
@@ -297,12 +297,12 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
                 return true;
         }
 
-        return parent::isAuthor($componentVariation, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $componentVariation, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS02:
@@ -326,14 +326,14 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
                 return true;
         }
 
-        return parent::isTag($componentVariation, $props);
+        return parent::isTag($component, $props);
     }
 
-    public function getSectionClasses(array $componentVariation, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($componentVariation, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_CATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS00:
@@ -459,7 +459,7 @@ class PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts ext
         $ret = \PoP\Root\App::applyFilters(
             'latestcounts:categoryposts:classes',
             $ret,
-            $componentVariation,
+            $component,
             $props
         );
 

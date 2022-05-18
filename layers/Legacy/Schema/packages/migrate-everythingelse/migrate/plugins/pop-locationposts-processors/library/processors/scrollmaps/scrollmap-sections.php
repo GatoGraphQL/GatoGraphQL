@@ -9,7 +9,7 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
     public final const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_SCROLLMAP = 'scrollmap-taglocationposts-scrollmap';
     public final const MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP = 'scrollmap-taglocationposts-horizontalscrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP],
@@ -21,9 +21,9 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
         );
     }
 
-    protected function isPostMap(array $componentVariation)
+    protected function isPostMap(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP:
@@ -33,12 +33,12 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
                 return true;
         }
 
-        return parent::isPostMap($componentVariation);
+        return parent::isPostMap($component);
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_SCROLLMAP_LOCATIONPOSTS_SCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_MAP],
             self::MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
             self::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_SCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_MAP],
@@ -47,19 +47,19 @@ class GD_Custom_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Pr
             self::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP => [PoP_LocationPosts_Module_Processor_CustomScrollMaps::class, PoP_LocationPosts_Module_Processor_CustomScrollMaps::MODULE_SCROLL_LOCATIONPOSTS_HORIZONTALMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getMapDirection(array $componentVariation, array &$props)
+    public function getMapDirection(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_LOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHORLOCATIONPOSTS_HORIZONTALSCROLLMAP:
             case self::MODULE_SCROLLMAP_TAGLOCATIONPOSTS_HORIZONTALSCROLLMAP:
                 return 'horizontal';
         }
 
-        return parent::getMapDirection($componentVariation, $props);
+        return parent::getMapDirection($component, $props);
     }
 }
 

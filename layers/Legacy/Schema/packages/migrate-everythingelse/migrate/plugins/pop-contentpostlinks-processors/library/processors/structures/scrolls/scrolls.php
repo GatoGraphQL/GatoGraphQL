@@ -11,7 +11,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
     public final const MODULE_SCROLL_LINKS_THUMBNAIL = 'scroll-links-thumbnail';
     public final const MODULE_SCROLL_LINKS_LIST = 'scroll-links-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_LINKS_NAVIGATOR],
@@ -26,7 +26,7 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_LINKS_NAVIGATOR => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_LINKS_NAVIGATOR],
@@ -39,14 +39,14 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
             self::MODULE_SCROLL_AUTHORLINKS_FULLVIEW => [PoP_ContentPostLinks_Module_Processor_CustomScrollInners::class, PoP_ContentPostLinks_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_AUTHORLINKS_FULLVIEW],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
@@ -74,31 +74,31 @@ class PoP_ContentPostLinks_Module_Processor_CustomScrolls extends PoP_Module_Pro
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $navigators)) {
+        if (in_array($component, $navigators)) {
             $extra_class = 'navigator text-inverse';
-        } elseif (in_array($componentVariation, $addons)) {
+        } elseif (in_array($component, $addons)) {
             $extra_class = 'addons';
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($componentVariation, $details)) {
+        } elseif (in_array($component, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
 
-        $inner = $this->getInnerSubmodule($componentVariation);
-        if (in_array($componentVariation, $navigators)) {
+        $inner = $this->getInnerSubmodule($component);
+        if (in_array($component, $navigators)) {
             // Make it activeItem: highlight on viewing the corresponding fullview
             $this->appendProp($inner, $props, 'class', 'pop-activeitem');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

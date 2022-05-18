@@ -7,7 +7,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
     public final const MODULE_PAGESECTIONCONTAINER_HOLE = 'pagesectioncontainer-hole';
     public final const MODULE_PAGESECTIONCONTAINER_MODALS = 'pagesectioncontainer-modals';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_PAGESECTIONCONTAINER_HOLE],
@@ -15,34 +15,34 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_PAGESECTIONCONTAINER_HOLE:
             case self::MODULE_PAGESECTIONCONTAINER_MODALS:
-                $load_componentVariation = true;
+                $load_component = true;
                 if (PoPThemeWassup_Utils::checkLoadingPagesectionModule()) {
-                    $load_componentVariation = $componentVariation == $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
+                    $load_component = $component == $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION);
                 }
 
-                $subComponentVariations = array(
+                $subComponents = array(
                     self::MODULE_PAGESECTIONCONTAINER_HOLE => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_HOLE],
                     self::MODULE_PAGESECTIONCONTAINER_MODALS => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_MODALS],
                 );
-                $subComponentVariation = $subComponentVariations[$componentVariation[1]];
+                $subComponent = $subComponents[$component[1]];
 
-                if ($load_componentVariation) {
-                    $ret[] = $subComponentVariation;
+                if ($load_component) {
+                    $ret[] = $subComponent;
                 } else {
                     // Tell the pageSections to have no pages inside
                     $moduleAtts = array('empty' => true);
                     $ret[] = [
-                        $subComponentVariation[0],
-                        $subComponentVariation[1],
+                        $subComponent[0],
+                        $subComponent[1],
                         $moduleAtts
                     ];
                 }
@@ -52,15 +52,15 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_PAGESECTIONCONTAINER_HOLE:
-                $this->appendProp($componentVariation, $props, 'class', 'pagesection-group-after');
+                $this->appendProp($component, $props, 'class', 'pagesection-group-after');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

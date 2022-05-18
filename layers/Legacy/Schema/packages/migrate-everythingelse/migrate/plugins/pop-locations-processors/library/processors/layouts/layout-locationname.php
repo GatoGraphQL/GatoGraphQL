@@ -5,7 +5,7 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
     public final const MODULE_EM_LAYOUT_LOCATIONNAME = 'em-layout-locationname';
     public final const MODULE_EM_LAYOUT_LOCATIONICONNAME = 'em-layout-locationiconname';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_LAYOUT_LOCATIONNAME],
@@ -13,21 +13,21 @@ class PoP_Module_Processor_LocationNameLayouts extends PoP_Module_Processor_Loca
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_LAYOUT_LOCATIONICONNAME:
                 return 'fa-fw fa-map-marker';
         }
         
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($fontawesome = $this->getFontawesome($componentVariation, $props)) {
+        if ($fontawesome = $this->getFontawesome($component, $props)) {
             $ret[GD_JS_FONTAWESOME] = $fontawesome;
         }
 

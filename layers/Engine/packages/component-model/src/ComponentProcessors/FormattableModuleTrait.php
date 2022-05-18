@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 trait FormattableModuleTrait
 {
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
         return null;
     }

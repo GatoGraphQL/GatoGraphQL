@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
     public final const MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP = 'dataload-organizations-scrollmap';
     public final const MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP = 'dataload-individuals-scrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP],
@@ -15,28 +15,28 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP => POP_COMMONUSERROLES_ROUTE_INDIVIDUALS,
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP => POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP => [GD_URE_Module_Processor_CustomScrollMapSections::class, GD_URE_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_ORGANIZATIONS_SCROLLMAP],
             self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP => [GD_URE_Module_Processor_CustomScrollMapSections::class, GD_URE_Module_Processor_CustomScrollMapSections::MODULE_SCROLLMAP_INDIVIDUALS_SCROLLMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP:
                 return [PoP_CommonUserRoles_Module_Processor_CustomFilters::class, PoP_CommonUserRoles_Module_Processor_CustomFilters::MODULE_FILTER_INDIVIDUALS];
 
@@ -44,27 +44,27 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
                 return [PoP_CommonUserRoles_Module_Processor_CustomFilters::class, PoP_CommonUserRoles_Module_Processor_CustomFilters::MODULE_FILTER_ORGANIZATIONS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
         $maps = array(
             [self::class, self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP],
             [self::class, self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP],
         );
-        if (in_array($componentVariation, $maps)) {
+        if (in_array($component, $maps)) {
             $format = POP_FORMAT_MAP;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
                 $ret['role'] = GD_URE_ROLE_ORGANIZATION;
                 break;
@@ -77,20 +77,20 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
             case self::MODULE_DATALOAD_INDIVIDUALS_SCROLLMAP:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_ORGANIZATIONS_SCROLLMAP:
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('organizations', 'poptheme-wassup'));
                 break;
@@ -99,7 +99,7 @@ class GD_URE_Module_Processor_CustomScrollMapSectionDataloads extends GD_EM_Modu
                 $this->setProp([PoP_Module_Processor_DomainFeedbackMessageLayouts::class, PoP_Module_Processor_DomainFeedbackMessageLayouts::MODULE_LAYOUT_FEEDBACKMESSAGE_ITEMLIST], $props, 'pluralname', TranslationAPIFacade::getInstance()->__('individuals', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

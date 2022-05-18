@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
     public final const MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW = 'scrollinner-organizations-fullview';
     public final const MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW = 'scrollinner-individuals-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS],
@@ -17,9 +17,9 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS:
             case self::MODULE_SCROLLINNER_INDIVIDUALS_DETAILS:
             case self::MODULE_SCROLLINNER_ORGANIZATIONS_FULLVIEW:
@@ -30,12 +30,12 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomPreviewUserLayouts::class, GD_URE_Module_Processor_CustomPreviewUserLayouts::MODULE_LAYOUT_PREVIEWUSER_ORGANIZATION_DETAILS],
@@ -45,7 +45,7 @@ class GD_URE_Module_Processor_CustomScrollInners extends PoP_Module_Processor_Sc
             self::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomFullUserLayouts::class, GD_URE_Module_Processor_CustomFullUserLayouts::MODULE_LAYOUT_FULLUSER_INDIVIDUAL],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

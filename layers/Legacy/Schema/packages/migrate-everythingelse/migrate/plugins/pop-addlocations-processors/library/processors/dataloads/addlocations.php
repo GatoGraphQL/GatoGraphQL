@@ -10,7 +10,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
     public final const MODULE_DATALOAD_CREATELOCATION = 'dataload-createlocation';
     public final const MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION = 'dataload-triggertypeaheadselect-location';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_CREATELOCATION],
@@ -18,39 +18,39 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_CREATELOCATION => POP_ADDLOCATIONS_ROUTE_ADDLOCATION,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getRelevantRouteCheckpointTarget(array $componentVariation, array &$props): string
+    public function getRelevantRouteCheckpointTarget(array $component, array &$props): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
                 return \PoP\ComponentModel\Constants\DataLoading::ACTION_EXECUTION_CHECKPOINTS;
         }
 
-        return parent::getRelevantRouteCheckpointTarget($componentVariation, $props);
+        return parent::getRelevantRouteCheckpointTarget($component, $props);
     }
 
-    public function getComponentMutationResolverBridge(array $componentVariation): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
+    public function getComponentMutationResolverBridge(array $component): ?\PoP\ComponentModel\MutationResolverBridges\ComponentMutationResolverBridgeInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
                 return $this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class);
         }
 
-        return parent::getComponentMutationResolverBridge($componentVariation);
+        return parent::getComponentMutationResolverBridge($component);
     }
 
-    public function prepareDataPropertiesAfterMutationExecution(array $componentVariation, array &$props, array &$data_properties): void
+    public function prepareDataPropertiesAfterMutationExecution(array $component, array &$props, array &$data_properties): void
     {
-        parent::prepareDataPropertiesAfterMutationExecution($componentVariation, $props, $data_properties);
+        parent::prepareDataPropertiesAfterMutationExecution($component, $props, $data_properties);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
                 if ($target_id = App::getMutationResolutionStore()->getResult($this->instanceManager->getInstance(CreateLocationMutationResolverBridge::class))) {
                     $data_properties[DataloadingConstants::QUERYARGS]['include'] = array($target_id);
@@ -61,21 +61,21 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         }
     }
 
-    protected function getFeedbackmessageModule(array $componentVariation)
+    protected function getFeedbackmessageModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
                 return [PoP_Module_Processor_CreateLocationFeedbackMessages::class, PoP_Module_Processor_CreateLocationFeedbackMessages::MODULE_FEEDBACKMESSAGE_CREATELOCATION];
         }
 
-        return parent::getFeedbackmessageModule($componentVariation);
+        return parent::getFeedbackmessageModule($component);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_CREATELOCATION:
                 $ret[] = [GD_EM_Module_Processor_CreateLocationFrames::class, GD_EM_Module_Processor_CreateLocationFrames::MODULE_FRAME_CREATELOCATIONMAP];
                 break;
@@ -88,31 +88,31 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
         return $ret;
     }
 
-    protected function getStatusSubmodule(array $componentVariation)
+    protected function getStatusSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
                 return null;
         }
 
-        return parent::getStatusSubmodule($componentVariation);
+        return parent::getStatusSubmodule($component);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
                 return $this->instanceManager->getInstance(LocationObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_TRIGGERTYPEAHEADSELECT_LOCATION:
-                $this->appendProp($componentVariation, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
                 break;
 
             case self::MODULE_DATALOAD_CREATELOCATION:
@@ -121,7 +121,7 @@ class GD_EM_Module_Processor_CreateLocationDataloads extends PoP_Module_Processo
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

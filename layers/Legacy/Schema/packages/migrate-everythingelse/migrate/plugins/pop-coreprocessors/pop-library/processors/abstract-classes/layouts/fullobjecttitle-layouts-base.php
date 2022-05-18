@@ -3,7 +3,7 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_FULLOBJECTTITLE];
     }
@@ -13,65 +13,65 @@ abstract class PoP_Module_Processor_FullObjectTitleLayoutsBase extends PoPEngine
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array_merge(
-            parent::getDataFields($componentVariation, $props),
+            parent::getDataFields($component, $props),
             array(
-                $this->getTitleConditionField($componentVariation, $props),
-                $this->getUrlField($componentVariation, $props),
-                $this->getTitleField($componentVariation, $props),
-                $this->getTitleattrField($componentVariation, $props),
+                $this->getTitleConditionField($component, $props),
+                $this->getUrlField($component, $props),
+                $this->getTitleField($component, $props),
+                $this->getTitleattrField($component, $props),
             )
         );
     }
 
-    // function getTitleClass(array $componentVariation, array &$props) {
+    // function getTitleClass(array $component, array &$props) {
         
     //     return 'title';
     // }
     
-    public function getTitleConditionField(array $componentVariation, array &$props)
+    public function getTitleConditionField(array $component, array &$props)
     {
         
         // By returning 'id', the condition will always be true by default since all objects have an id >= 1
         return 'id';
     }
 
-    public function getUrlField(array $componentVariation, array &$props)
+    public function getUrlField(array $component, array &$props)
     {
         return 'url';
     }
     
-    public function getTitleField(array $componentVariation, array &$props)
+    public function getTitleField(array $component, array &$props)
     {
         return '';
     }
     
-    public function getTitleattrField(array $componentVariation, array &$props)
+    public function getTitleattrField(array $component, array &$props)
     {
-        return $this->getTitleField($componentVariation, $props);
+        return $this->getTitleField($component, $props);
     }
 
-    public function getHtmlmarkup(array $componentVariation, array &$props)
+    public function getHtmlmarkup(array $component, array &$props)
     {
         return 'h1';
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         $ret[GD_JS_CLASSES]['title'] = 'title';
 
-        $ret['html-markup'] = $this->getHtmlmarkup($componentVariation, $props);
+        $ret['html-markup'] = $this->getHtmlmarkup($component, $props);
 
-        $ret['url-field'] = $this->getUrlField($componentVariation, $props);
-        $ret['title-condition-field'] = $this->getTitleConditionField($componentVariation, $props);
-        $ret['title-field'] = $this->getTitleField($componentVariation, $props);
-        if ($titleattr_field = $this->getTitleattrField($componentVariation, $props)) {
+        $ret['url-field'] = $this->getUrlField($component, $props);
+        $ret['title-condition-field'] = $this->getTitleConditionField($component, $props);
+        $ret['title-field'] = $this->getTitleField($component, $props);
+        if ($titleattr_field = $this->getTitleattrField($component, $props)) {
             $ret['titleattr-field'] = $titleattr_field;
         }
 

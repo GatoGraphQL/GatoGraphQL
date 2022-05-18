@@ -9,7 +9,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
     public final const MODULE_BUTTON_POSTSTANCES_NEUTRAL = 'button-poststances-neutral';
     public final const MODULE_BUTTON_POSTSTANCES_AGAINST = 'button-poststances-against';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_STANCEEDIT],
@@ -20,7 +20,7 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
         );
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_STANCEEDIT => [PoP_ContentCreation_Module_Processor_ButtonInners::class, PoP_ContentCreation_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTEDIT],
@@ -29,14 +29,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_NEUTRAL],
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => [UserStance_Module_Processor_ButtonInners::class, UserStance_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTSTANCE_AGAINST],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
         $fields = array(
             self::MODULE_BUTTON_STANCEEDIT => 'editURL',
@@ -44,14 +44,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => 'postStancesNeutralURL',
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => 'postStancesAgainstURL',
         );
-        if ($field = $fields[$componentVariation[1]] ?? null) {
+        if ($field = $fields[$component[1]] ?? null) {
             return $field;
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         $titles = array(
             self::MODULE_BUTTON_STANCEEDIT => TranslationAPIFacade::getInstance()->__('Edit', 'pop-userstance-processors'),
@@ -60,16 +60,16 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
             self::MODULE_BUTTON_POSTSTANCES_NEUTRAL => TranslationAPIFacade::getInstance()->__('Neutral', 'pop-userstance-processors'),
             self::MODULE_BUTTON_POSTSTANCES_AGAINST => TranslationAPIFacade::getInstance()->__('Against', 'pop-userstance-processors'),
         );
-        if ($title = $titles[$componentVariation[1]] ?? null) {
+        if ($title = $titles[$component[1]] ?? null) {
             return $title;
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_STANCEEDIT:
                 return POP_TARGET_ADDONS;
 
@@ -79,14 +79,14 @@ class UserStance_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBa
                 return POP_TARGET_QUICKVIEW;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_STANCEVIEW:
             case self::MODULE_BUTTON_STANCEEDIT:
                 $ret .= ' btn btn-xs btn-default';

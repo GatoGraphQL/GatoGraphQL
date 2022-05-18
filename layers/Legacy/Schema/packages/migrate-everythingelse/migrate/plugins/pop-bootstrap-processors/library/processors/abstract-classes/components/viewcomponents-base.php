@@ -3,95 +3,95 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_BootstrapViewComponentsBase extends PoP_Module_Processor_BootstrapComponentsBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::class, PoP_BootstrapWebPlatform_TemplateResourceLoaderProcessor::RESOURCE_BOOTSTRAPCOMPONENT_VIEWCOMPONENT];
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponentVariations($componentVariation),
-            $this->getInnerSubmodules($componentVariation)
+            parent::getSubComponents($component),
+            $this->getInnerSubmodules($component)
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
         return array();
     }
 
-    public function getBootstrapcomponentType(array $componentVariation)
+    public function getBootstrapcomponentType(array $component)
     {
-        return $this->getType($componentVariation);
+        return $this->getType($component);
     }
 
-    public function getType(array $componentVariation)
+    public function getType(array $component)
     {
         return '';
     }
-    public function getViewcomponentClass(array $componentVariation)
+    public function getViewcomponentClass(array $component)
     {
         return '';
     }
-    public function getViewcomponentParams(array $componentVariation, array &$props)
+    public function getViewcomponentParams(array $component, array &$props)
     {
-        $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($componentVariation, $props), $this->getType($componentVariation));
+        $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getType($component));
         return array(
             'data-initjs-targets' =>  '#'.$frontend_id.'-container > div.pop-block'
         );
     }
 
-    protected function getInitjsBlockbranches(array $componentVariation, array &$props)
+    protected function getInitjsBlockbranches(array $component, array &$props)
     {
-        $ret = parent::getInitjsBlockbranches($componentVariation, $props);
+        $ret = parent::getInitjsBlockbranches($component, $props);
         
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         
-        $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($componentVariation, $props), $this->getType($componentVariation));
+        $frontend_id = PoP_Bootstrap_Utils::getFrontendId($this->getFrontendId($component, $props), $this->getType($component));
         $ret[] = '#'.$frontend_id.'-container > div.pop-block';
 
         return $ret;
     }
 
-    public function getDialogClass(array $componentVariation)
+    public function getDialogClass(array $component)
     {
         return '';
     }
-    public function getHeaderTitle(array $componentVariation)
+    public function getHeaderTitle(array $component)
     {
         return null;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inner_componentVariations = $this->getInnerSubmodules($componentVariation)) {
+        if ($inner_components = $this->getInnerSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
-                $inner_componentVariations
+                $inner_components
             );
         }
 
         // Fill in all the properties
-        $ret[GD_JS_CLASSES]['viewcomponent'] = $this->getViewcomponentClass($componentVariation);
-        $ret['type'] = $this->getType($componentVariation);
+        $ret[GD_JS_CLASSES]['viewcomponent'] = $this->getViewcomponentClass($component);
+        $ret['type'] = $this->getType($component);
         $ret[GD_JS_TITLES] = array();
 
-        if ($dialog_class = $this->getDialogClass($componentVariation)) {
+        if ($dialog_class = $this->getDialogClass($component)) {
             $ret[GD_JS_CLASSES]['dialog'] = $dialog_class;
         }
-        if ($header_title = $this->getHeaderTitle($componentVariation)) {
+        if ($header_title = $this->getHeaderTitle($component)) {
             $ret[GD_JS_TITLES]['header'] = $header_title;
         }
         
         return $ret;
     }
 
-    public function addWebPlatformModuleConfiguration(&$ret, array $componentVariation, array &$props)
+    public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
     {
-        if ($viewcomponent_params = $this->getViewcomponentParams($componentVariation, $props)) {
+        if ($viewcomponent_params = $this->getViewcomponentParams($component, $props)) {
             $ret['viewcomponent-params'] = $viewcomponent_params;
         }
     }

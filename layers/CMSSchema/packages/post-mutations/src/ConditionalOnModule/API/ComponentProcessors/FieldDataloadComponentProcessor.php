@@ -39,7 +39,7 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         return $this->listQueryInputOutputHandler ??= $this->instanceManager->getInstance(ListQueryInputOutputHandler::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST],
@@ -47,36 +47,36 @@ class FieldDataloadComponentProcessor extends AbstractRelationalFieldDataloadCom
         );
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
                 return $this->getPostObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
                 return $this->getListQueryInputOutputHandler();
         }
 
-        return parent::getQueryInputOutputHandler($componentVariation);
+        return parent::getQueryInputOutputHandler($component);
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTLIST:
                 return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTS];
             case self::MODULE_DATALOAD_RELATIONALFIELDS_MYPOSTCOUNT:
                 return [PostMutationFilterInputContainerComponentProcessor::class, PostMutationFilterInputContainerComponentProcessor::MODULE_FILTERINPUTCONTAINER_MYPOSTCOUNT];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 }

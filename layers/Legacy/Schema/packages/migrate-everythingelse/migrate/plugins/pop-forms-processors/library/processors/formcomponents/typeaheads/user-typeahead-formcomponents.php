@@ -24,54 +24,54 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
         return $this->idScalarTypeResolver ??= $this->instanceManager->getInstance(IDScalarTypeResolver::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
         );
     }
 
-    public function getFilterInput(array $componentVariation): ?array
+    public function getFilterInput(array $component): ?array
     {
         $filterInputs = [
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => [PoP_Module_Processor_FormsFilterInputProcessor::class, PoP_Module_Processor_FormsFilterInputProcessor::FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES],
         ];
-        return $filterInputs[$componentVariation[1]] ?? null;
+        return $filterInputs[$component[1]] ?? null;
     }
 
-    // public function isFiltercomponent(array $componentVariation)
+    // public function isFiltercomponent(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
     //             return true;
     //     }
 
-    //     return parent::isFiltercomponent($componentVariation);
+    //     return parent::isFiltercomponent($component);
     // }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return TranslationAPIFacade::getInstance()->__('Authors', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputSubmodule(array $componentVariation)
+    public function getInputSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_TypeaheadTextFormInputs::class, PoP_Module_Processor_TypeaheadTextFormInputs::MODULE_FORMINPUT_TEXT_TYPEAHEADPROFILES];
         }
 
-        return parent::getInputSubmodule($componentVariation);
+        return parent::getInputSubmodule($component);
     }
 
-    public function getComponentSubmodules(array $componentVariation)
+    public function getComponentSubmodules(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 // Allow PoP Common User Roles to change this
                 return \PoP\Root\App::applyFilters(
@@ -82,50 +82,50 @@ class PoP_Module_Processor_UserSelectableTypeaheadFilterInputs extends PoP_Modul
                 );
         }
 
-        return parent::getComponentSubmodules($componentVariation);
+        return parent::getComponentSubmodules($component);
     }
 
-    public function getTriggerLayoutSubmodule(array $componentVariation)
+    public function getTriggerLayoutSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 return [PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::class, PoP_Module_Processor_UserSelectableTypeaheadTriggerFormComponents::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEADTRIGGER_PROFILES];
         }
 
-        return parent::getTriggerLayoutSubmodule($componentVariation);
+        return parent::getTriggerLayoutSubmodule($component);
     }
 
-    public function getName(array $componentVariation): string
+    public function getName(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES:
                 // Calling it either 'authors' or 'users' for some reason doesn't work!
                 return 'profiles';
         }
 
-        return parent::getName($componentVariation);
+        return parent::getName($component);
     }
 
-    public function getFilterInputTypeResolver(array $componentVariation): InputTypeResolverInterface
+    public function getFilterInputTypeResolver(array $component): InputTypeResolverInterface
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => $this->idScalarTypeResolver,
             default => $this->getDefaultSchemaFilterInputTypeResolver(),
         };
     }
 
-    public function getFilterInputTypeModifiers(array $componentVariation): int
+    public function getFilterInputTypeModifiers(array $component): int
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => SchemaTypeModifiers::IS_ARRAY,
             default => SchemaTypeModifiers::NONE,
         };
     }
 
-    public function getFilterInputDescription(array $componentVariation): ?string
+    public function getFilterInputDescription(array $component): ?string
     {
         $translationAPI = TranslationAPIFacade::getInstance();
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_FILTERCOMPONENT_SELECTABLETYPEAHEAD_PROFILES => $translationAPI->__('', ''),
             default => null,
         };

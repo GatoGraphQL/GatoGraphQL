@@ -4,20 +4,20 @@ class GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionBlocks extends GD
 {
     public final const MODULE_BLOCK_WHOWEARE_SCROLLMAP = 'block-whoweare-scrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_WHOWEARE_SCROLLMAP],
         );
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_WHOWEARE_SCROLLMAP => [GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::class, GD_CommonPages_EM_Module_Processor_CustomScrollMapSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLLMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 }
 

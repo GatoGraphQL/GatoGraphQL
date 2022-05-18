@@ -5,41 +5,41 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs exten
 {
     public final const MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY = 'ure-cup-iscommunity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Does your organization accept members?', 'ure-popprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return GD_FormInput_YesNo::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY:
                 return 'isCommunity';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

@@ -5,34 +5,34 @@ class GD_CommonUserRoles_UserCommunities_Module_Processor_ProfileFormGroups exte
 {
     public final const MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY = 'ure-forminputgroup-cup-iscommunity';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY],
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY => [GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function getInfo(array $componentVariation, array &$props)
+    public function getInfo(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUTGROUP_CUP_ISCOMMUNITY:
                 return TranslationAPIFacade::getInstance()->__('Become a Community: all the content posted by your members will also appear under your Organization\'s profile.');
         }
 
-        return parent::getInfo($componentVariation, $props);
+        return parent::getInfo($component, $props);
     }
 }
 

@@ -15,7 +15,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
     public final const MODULE_BUTTONGROUP_TAGS = 'buttongroup-tags';
     public final const MODULE_BUTTONGROUP_AUTHORTAGS = 'buttongroup-authortags';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_SECTION],
@@ -33,7 +33,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
         );
     }
 
-    protected function getHeadersdataScreen(array $componentVariation, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
         $screens = array(
             self::MODULE_BUTTONGROUP_SECTION => POP_SCREEN_SECTION,
@@ -49,16 +49,16 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
             self::MODULE_BUTTONGROUP_TAGS => POP_SCREEN_TAGS,
             self::MODULE_BUTTONGROUP_AUTHORTAGS => POP_SCREEN_AUTHORTAGS,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getHeadersdataScreen($componentVariation, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataformatsHasmap(array $componentVariation, array &$props)
+    protected function getHeadersdataformatsHasmap(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONGROUP_USERS:
             case self::MODULE_BUTTONGROUP_SECTIONWITHMAP:
             case self::MODULE_BUTTONGROUP_TAGSECTIONWITHMAP:
@@ -67,7 +67,7 @@ class GD_Custom_Module_Processor_ButtonGroups extends PoP_Module_Processor_Custo
                 return true;
         }
 
-        return parent::getHeadersdataformatsHasmap($componentVariation, $props);
+        return parent::getHeadersdataformatsHasmap($component, $props);
     }
 }
 

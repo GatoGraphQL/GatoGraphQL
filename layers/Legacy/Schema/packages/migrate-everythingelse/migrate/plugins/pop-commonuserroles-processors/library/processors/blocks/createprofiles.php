@@ -6,7 +6,7 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
     public final const MODULE_BLOCK_PROFILEORGANIZATION_CREATE = 'block-profileorganization-create';
     public final const MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE = 'block-profileindividual-create';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE],
@@ -14,20 +14,20 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEINDIVIDUAL,
             self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE => POP_COMMONUSERROLES_ROUTE_ADDPROFILEORGANIZATION,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
                 $ret[] = [GD_URE_Module_Processor_CreateProfileDataloads::class, GD_URE_Module_Processor_CreateProfileDataloads::MODULE_DATALOAD_PROFILEORGANIZATION_CREATE];
                 $ret[] = [PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT];
@@ -42,33 +42,33 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_CREATEACCOUNT];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getSubmenuSubmodule(array $componentVariation)
+    public function getSubmenuSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 return [PoP_Module_Processor_SubMenus::class, PoP_Module_Processor_SubMenus::MODULE_SUBMENU_ACCOUNT];
         }
 
-        return parent::getSubmenuSubmodule($componentVariation);
+        return parent::getSubmenuSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_PROFILEORGANIZATION_CREATE:
             case self::MODULE_BLOCK_PROFILEINDIVIDUAL_CREATE:
                 $this->setProp(
@@ -79,13 +79,13 @@ class GD_URE_Module_Processor_CreateProfileBlocks extends PoP_Module_Processor_B
                     ),
                     $props,
                     'target',
-                    '#'.$this->getFrontendId($componentVariation, $props).' .collapse'
+                    '#'.$this->getFrontendId($component, $props).' .collapse'
                 );
                 $this->appendProp([PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINPROMPT], $props, 'class', 'well');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

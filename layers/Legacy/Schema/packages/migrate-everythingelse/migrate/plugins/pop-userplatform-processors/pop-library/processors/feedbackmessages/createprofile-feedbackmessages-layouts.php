@@ -4,7 +4,7 @@ class PoP_Module_Processor_CreateProfileFeedbackMessageLayouts extends PoP_Modul
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_CREATEPROFILE = 'layout-feedbackmessage-createprofile';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CREATEPROFILE],

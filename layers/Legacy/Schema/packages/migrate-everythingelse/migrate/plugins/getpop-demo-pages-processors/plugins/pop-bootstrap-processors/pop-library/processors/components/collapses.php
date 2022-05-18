@@ -6,18 +6,18 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
 {
     public final const MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP = 'getpopdemo-collapsecomponent-hometop';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP],
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR];
@@ -29,37 +29,37 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         return $ret;
     }
 
-    protected function lazyLoadInactivePanels(array $componentVariation, array &$props)
+    protected function lazyLoadInactivePanels(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return true;
         }
 
-        return parent::lazyLoadInactivePanels($componentVariation, $props);
+        return parent::lazyLoadInactivePanels($component, $props);
     }
 
-    public function getPanelHeaderType(array $componentVariation)
+    public function getPanelHeaderType(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'heading';
         }
 
-        return parent::getPanelHeaderType($componentVariation);
+        return parent::getPanelHeaderType($component);
     }
 
-    public function closeParent(array $componentVariation)
+    public function closeParent(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return false;
         }
 
-        return parent::closeParent($componentVariation);
+        return parent::closeParent($component);
     }
 
-    public function getPanelTitle(array $componentVariation)
+    public function getPanelTitle(array $component)
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $placeholder =
@@ -76,7 +76,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
         '</div>'.
         '</div>';
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 $ret = array();
                 if (defined('POP_EVENTSPROCESSORS_INITIALIZED')) {
@@ -99,24 +99,24 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
                 return $ret;
         }
 
-        return parent::getPanelTitle($componentVariation);
+        return parent::getPanelTitle($component);
     }
 
-    public function getPaneltitleHtmltag(array $componentVariation)
+    public function getPaneltitleHtmltag(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
                 return 'span';
         }
 
-        return parent::getPaneltitleHtmltag($componentVariation);
+        return parent::getPaneltitleHtmltag($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GETPOPDEMO_COLLAPSECOMPONENT_HOMETOP:
-                $this->appendProp($componentVariation, $props, 'class', 'collapse-hometop');
+                $this->appendProp($component, $props, 'class', 'collapse-hometop');
 
                 // Format
                 $this->setProp([[PoP_Events_Module_Processor_CustomSectionBlocks::class, PoP_Events_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_EVENTSCALENDAR_CALENDAR]], $props, 'title-htmltag', 'h3');
@@ -127,7 +127,7 @@ class GetPoPDemo_Module_Processor_TopLevelCollapseComponents extends PoP_Module_
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

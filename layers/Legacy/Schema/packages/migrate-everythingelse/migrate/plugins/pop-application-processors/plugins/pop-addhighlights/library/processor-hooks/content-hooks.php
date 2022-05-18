@@ -7,22 +7,22 @@ class PoPTheme_AddHighlights_Processors_ContentHooks
     public function __construct()
     {
         \PoP\Root\App::addFilter(
-            'PoP_Module_Processor_Contents:inner_componentVariation',
+            'PoP_Module_Processor_Contents:inner_component',
             $this->contentInner(...),
             10,
             2
         );
     }
 
-    public function contentInner($inner, array $componentVariation)
+    public function contentInner($inner, array $component)
     {
-        if ($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
+        if ($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE] || $component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION]) {
             $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
             if ($customPostTypeAPI->getCustomPostType($post_id) == POP_ADDHIGHLIGHTS_POSTTYPE_HIGHLIGHT) {
-                if (($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
+                if (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_SINGLE])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_HIGHLIGHTSINGLE];
-                } elseif (($componentVariation == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION])) {
+                } elseif (($component == [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_USERPOSTINTERACTION])) {
                     return [PoP_Module_Processor_SingleContentInners::class, PoP_Module_Processor_SingleContentInners::MODULE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION];
                 }
             }

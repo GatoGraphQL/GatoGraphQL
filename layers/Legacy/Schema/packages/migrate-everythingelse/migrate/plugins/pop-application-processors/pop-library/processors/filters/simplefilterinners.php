@@ -18,7 +18,7 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS = 'simplefilterinputcontainer-mycategoryposts';
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT = 'simplefilterinputcontainer-tagcontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS],
@@ -39,9 +39,9 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_POSTS => [
@@ -141,20 +141,20 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
                 [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Blog:SimpleFilterInners:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGS => POP_FILTER_TAGS,
@@ -173,11 +173,11 @@ class PoP_Module_Processor_CustomSimpleFilterInners extends PoP_Module_Processor
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYCATEGORYPOSTS => POP_FILTER_MYCATEGORYPOSTS,
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_TAGCONTENT => POP_FILTER_TAGCONTENT,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

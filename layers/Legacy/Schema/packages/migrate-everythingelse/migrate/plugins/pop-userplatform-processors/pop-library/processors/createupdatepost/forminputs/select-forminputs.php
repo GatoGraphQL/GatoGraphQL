@@ -6,7 +6,7 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
     public final const MODULE_FORMINPUT_CUP_STATUS = 'forminput-cup-status';
     public final const MODULE_CONTENTPOSTLINKS_FORMINPUT_LINKACCESS = 'forminput-linkaccess';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_CUP_STATUS],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 return TranslationAPIFacade::getInstance()->__('Publishing status', 'poptheme-wassup');
 
@@ -24,12 +24,12 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
                 return TranslationAPIFacade::getInstance()->__('Access type', 'poptheme-wassup');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 return GD_FormInput_ModeratedStatusDescription::class;
 
@@ -37,23 +37,23 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
                 return GD_FormInput_LinkAccessDescription::class;
         }
 
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
-                $this->appendProp($componentVariation, $props, 'class', 'form-input-status');
+                $this->appendProp($component, $props, 'class', 'form-input-status');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 return 'status';
 
@@ -61,14 +61,14 @@ class PoP_Module_Processor_CreateUpdatePostSelectFormInputs extends PoP_Module_P
                 return 'linkaccess';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_STATUS:
                 $this->addJsmethod($ret, 'manageStatus');
                 break;

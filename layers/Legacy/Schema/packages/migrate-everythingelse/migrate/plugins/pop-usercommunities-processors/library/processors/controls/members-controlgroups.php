@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
     public final const MODULE_CONTROLGROUP_MYMEMBERS = 'controlgroup-mymembers';
     public final const MODULE_CONTROLGROUP_MYBLOCKMEMBERS = 'controlgroup-myblockmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLGROUP_MYMEMBERS],
@@ -13,11 +13,11 @@ class GD_URE_Module_Processor_CustomControlGroups extends PoP_Module_Processor_C
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLGROUP_MYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_CustomControlButtonGroups::class, GD_URE_Module_Processor_CustomControlButtonGroups::MODULE_CONTROLBUTTONGROUP_INVITENEWMEMBERS];
                 $ret[] = [PoP_Module_Processor_ControlButtonGroups::class, PoP_Module_Processor_ControlButtonGroups::MODULE_CONTROLBUTTONGROUP_RELOADBLOCKGROUP];

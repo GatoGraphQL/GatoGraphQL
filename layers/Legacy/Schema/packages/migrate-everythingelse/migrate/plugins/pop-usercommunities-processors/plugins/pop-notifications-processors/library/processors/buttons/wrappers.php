@@ -6,7 +6,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
     public final const MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP = 'ure-aal-buttonwrapper-editmembership';
     public final const MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS = 'ure-aal-buttonwrapper-viewallmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP],
@@ -14,11 +14,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
                 $ret[] = [Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::class, Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP];
                 break;
@@ -31,11 +31,11 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
             case self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
                 $ret[] = [PoP_Module_Processor_HideIfEmpties::class, PoP_Module_Processor_HideIfEmpties::MODULE_HIDEIFEMPTY];
@@ -45,9 +45,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonWrappers extends PoP_M
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTONWRAPPER_EDITMEMBERSHIP:
             case self::MODULE_UREAAL_BUTTONWRAPPER_VIEWALLMEMBERS:
                 $fieldQueryInterpreter = FieldQueryInterpreterFacade::getInstance();

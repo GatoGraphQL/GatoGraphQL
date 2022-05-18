@@ -20,7 +20,7 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
     public final const MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTLIST = 'filterinputcontainer-admincustompostlist';
     public final const MODULE_FILTERINPUTCONTAINER_ADMINCUSTOMPOSTLISTCOUNT = 'filterinputcontainer-admincustompostcount';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST],
@@ -34,10 +34,10 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
         $customPostFilterInputModules = [
-            ...$this->getIDFilterInputComponentVariations(),
+            ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
         ];
         $unionCustomPostFilterInputModules = [
@@ -46,8 +46,8 @@ class CustomPostFilterInputContainerComponentProcessor extends AbstractCustomPos
         $adminCustomPostFilterInputModules = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
-        return match ($componentVariation[1]) {
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_UNIONCUSTOMPOSTLIST => [
                 ...$customPostFilterInputModules,
                 ...$unionCustomPostFilterInputModules,

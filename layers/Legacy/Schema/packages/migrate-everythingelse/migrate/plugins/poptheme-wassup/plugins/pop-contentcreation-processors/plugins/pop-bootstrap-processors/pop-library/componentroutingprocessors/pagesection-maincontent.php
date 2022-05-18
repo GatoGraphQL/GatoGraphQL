@@ -14,9 +14,9 @@ class PoPTheme_Wassup_ContentCreation_Bootstrap_Module_MainPageSectionComponentR
         $routemodules = array(
             POP_CONTENTCREATION_ROUTE_MYCONTENT => [PoP_Module_Processor_TabPanelSectionBlocks::class, PoP_Module_Processor_TabPanelSectionBlocks::MODULE_BLOCK_TABPANEL_MYCONTENT],
         );
-        foreach ($routemodules as $route => $componentVariation) {
+        foreach ($routemodules as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

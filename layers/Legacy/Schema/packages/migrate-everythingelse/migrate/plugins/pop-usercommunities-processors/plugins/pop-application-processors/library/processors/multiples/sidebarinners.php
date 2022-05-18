@@ -6,7 +6,7 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
     public final const MODULE_MULTIPLE_SECTIONINNER_COMMUNITIES_SIDEBAR = 'multiple-sectioninner-communities-sidebar';
     public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_COMMUNITYMEMBERS_SIDEBAR = 'multiple-authorsectioninner-communitymembers-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR],
@@ -15,11 +15,11 @@ class PoP_UserCommunities_Module_Processor_SectionSidebarInners extends PoP_Modu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_MYMEMBERS_SIDEBAR:
                 $ret[] = [PoP_UserCommunities_ComponentProcessor_ButtonGroups::class, PoP_UserCommunities_ComponentProcessor_ButtonGroups::MODULE_BUTTONGROUP_MYUSERS];
                 $ret[] = [PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::class, PoP_UserCommunities_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_MYMEMBERS];

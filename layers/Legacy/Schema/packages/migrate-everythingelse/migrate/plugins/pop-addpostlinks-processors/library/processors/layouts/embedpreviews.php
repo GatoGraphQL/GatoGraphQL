@@ -4,40 +4,40 @@ class PoP_AddPostLinks_Module_Processor_EmbedPreviewLayouts extends PoP_Module_P
 {
     public final const MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK = 'layout-addpostlinks-embedpreview-link';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK],
         );
     }
-    public function getFrameSrcField(array $componentVariation, array &$props)
+    public function getFrameSrcField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return 'link';
         }
 
-        return parent::getFrameSrcField($componentVariation, $props);
+        return parent::getFrameSrcField($component, $props);
     }
-    public function getFrameHeight(array $componentVariation, array &$props)
+    public function getFrameHeight(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
                 return '400';
         }
 
-        return parent::getFrameHeight($componentVariation, $props);
+        return parent::getFrameHeight($component, $props);
     }
-    // function printSource(array $componentVariation, array &$props) {
+    // function printSource(array $component, array &$props) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
             
     //         case self::MODULE_ADDPOSTLINKS_LAYOUT_EMBEDPREVIEW_LINK:
 
     //             return true;
     //     }
 
-    //     return parent::printSource($componentVariation, $props);
+    //     return parent::printSource($component, $props);
     // }
 }
 

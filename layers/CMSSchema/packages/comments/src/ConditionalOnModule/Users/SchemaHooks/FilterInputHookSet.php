@@ -16,20 +16,20 @@ class FilterInputHookSet extends AbstractHookSet
     {
         App::addFilter(
             CommentFilterInputContainerComponentProcessor::HOOK_FILTER_INPUTS,
-            $this->getFilterInputComponentVariations(...)
+            $this->getFilterInputComponents(...)
         );
     }
 
-    public function getFilterInputComponentVariations(array $filterInputModules): array
+    public function getFilterInputComponents(array $filterInputModules): array
     {
         return [
             ...$filterInputModules,
-            ...$this->getAuthorFilterInputComponentVariations(),
-            ...$this->getCustomPostAuthorFilterInputComponentVariations(),
+            ...$this->getAuthorFilterInputComponents(),
+            ...$this->getCustomPostAuthorFilterInputComponents(),
         ];
     }
 
-    public function getAuthorFilterInputComponentVariations(): array
+    public function getAuthorFilterInputComponents(): array
     {
         return [
             [
@@ -43,7 +43,7 @@ class FilterInputHookSet extends AbstractHookSet
         ];
     }
 
-    public function getCustomPostAuthorFilterInputComponentVariations(): array
+    public function getCustomPostAuthorFilterInputComponents(): array
     {
         return [
             [

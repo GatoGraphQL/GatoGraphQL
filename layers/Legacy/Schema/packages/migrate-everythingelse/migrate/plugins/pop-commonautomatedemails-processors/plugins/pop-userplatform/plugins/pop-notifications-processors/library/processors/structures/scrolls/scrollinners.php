@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
     public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS = 'scrollinner-automatedemails-notifications-details';
     public final const MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST = 'scrollinner-automatedemails-notifications-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS],
@@ -13,9 +13,9 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS:
             case self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST:
                 return array(
@@ -24,18 +24,18 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrollInners extends PoP_Module_Pro
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS => [PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::class, PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_DETAILS],
             self::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST => [PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::class, PoP_Module_Processor_AutomatedEmailsPreviewNotificationLayouts::MODULE_LAYOUT_AUTOMATEDEMAILS_PREVIEWNOTIFICATION_LIST],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

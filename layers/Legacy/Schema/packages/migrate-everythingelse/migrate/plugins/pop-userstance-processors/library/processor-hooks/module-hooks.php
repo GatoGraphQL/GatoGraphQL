@@ -12,7 +12,7 @@ class PoPTheme_UserStance_ModuleHooks
         );
     }
 
-    public function getSingleSubmodules($componentVariations)
+    public function getSingleSubmodules($components)
     {
 
         // Only for Links/Posts/Stories/Discussions/Announcements/Events
@@ -28,10 +28,10 @@ class PoPTheme_UserStance_ModuleHooks
         if ($add) {
             // Add the "What do you think about TPP" Create Block
             array_splice(
-                $componentVariations,
+                $components,
                 array_search(
                     [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_SINGLE_CONTENT],
-                    $componentVariations
+                    $components
                 )+1,
                 0,
                 array(
@@ -39,7 +39,7 @@ class PoPTheme_UserStance_ModuleHooks
                 )
             );
         }
-        return $componentVariations;
+        return $components;
     }
 }
 

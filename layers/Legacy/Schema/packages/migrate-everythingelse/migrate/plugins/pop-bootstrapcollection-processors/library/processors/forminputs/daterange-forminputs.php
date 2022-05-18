@@ -6,7 +6,7 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
     public final const MODULE_FORMINPUT_DATERANGEPICKER = 'forminput-daterangepicker';
     public final const MODULE_FORMINPUT_DATERANGETIMEPICKER = 'forminput-daterangetimepicker';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_DATERANGEPICKER],
@@ -14,19 +14,19 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
         );
     }
 
-    public function useTime(array $componentVariation)
+    public function useTime(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
 
-        return parent::useTime($componentVariation);
+        return parent::useTime($component);
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_DATERANGEPICKER:
                 return TranslationAPIFacade::getInstance()->__('Dates', 'pop-coreprocessors');
 
@@ -34,17 +34,17 @@ class PoP_Module_Processor_DateRangeComponentInputs extends PoP_Module_Processor
                 return TranslationAPIFacade::getInstance()->__('Date/Time', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_DATERANGETIMEPICKER:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 }
 

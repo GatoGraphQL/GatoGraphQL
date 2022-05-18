@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
     public final const MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST = 'layout-postsidebar-horizontal-locationpost';
     public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST = 'layout-postsidebarcompact-horizontal-locationpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST],
@@ -16,7 +16,7 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_VERTICAL_LOCATIONPOST],
@@ -24,27 +24,27 @@ class GD_Custom_EM_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST => [GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::class, GD_Custom_EM_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_LOCATIONPOST],
         );
 
-        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_LOCATIONPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'vertical');
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL_LOCATIONPOST:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_LOCATIONPOST:
-                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

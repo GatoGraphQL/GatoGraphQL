@@ -1,7 +1,7 @@
 <?php
 use PoPCMSSchema\Events\Facades\EventTypeAPIFacade;
 
-\PoP\Root\App::addFilter('pop_componentVariation:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
+\PoP\Root\App::addFilter('pop_component:allcontent:tax_query_items', 'popEmAllcontentTaxqueryItems');
 function popEmAllcontentTaxqueryItems($tax_query_items)
 {
     if (POP_EVENTS_CAT_ALL) {

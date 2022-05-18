@@ -23,7 +23,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
     public final const MODULE_SCROLL_CATEGORYPOSTS18_SIMPLEVIEW = 'scroll-categoryposts18-simpleview';
     public final const MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW = 'scroll-categoryposts19-simpleview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -50,7 +50,7 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_CATEGORYPOSTS00_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::MODULE_SCROLLINNER_CATEGORYPOSTS00_SIMPLEVIEW],
@@ -75,14 +75,14 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
             self::MODULE_SCROLL_CATEGORYPOSTS19_SIMPLEVIEW => [PoP_CategoryPosts_Module_Processor_ScrollInners::class, PoP_CategoryPosts_Module_Processor_ScrollInners::MODULE_SCROLLINNER_CATEGORYPOSTS19_SIMPLEVIEW],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
@@ -110,12 +110,12 @@ class PoP_CategoryPosts_Module_Processor_Scrolls extends PoP_Module_Processor_Sc
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $simpleviews)) {
+        if (in_array($component, $simpleviews)) {
             $extra_class = 'simpleview';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

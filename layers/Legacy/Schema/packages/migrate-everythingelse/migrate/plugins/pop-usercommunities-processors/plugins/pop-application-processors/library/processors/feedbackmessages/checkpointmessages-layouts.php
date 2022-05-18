@@ -6,7 +6,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY = 'layout-checkpointmessage-profilecommunity';
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP = 'layout-checkpointmessage-profilecommunityeditmembership';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY],
@@ -14,14 +14,14 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITY:
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
-                $action = $this->getProp($componentVariation, $props, 'action');
+                $action = $this->getProp($component, $props, 'action');
                 $ret['usernotloggedin'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('You are not logged in yet, please %1$s first to %2$s.', 'poptheme-wassup'),
                     gdGetLoginHtml(),
@@ -38,7 +38,7 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILECOMMUNITYEDITMEMBERSHIP:
                 $ret['editingnotcommunitymember'] = TranslationAPIFacade::getInstance()->__('This user is not a member of your community.', 'ure-popprocessors');
                 $ret['nonceinvalid'] = TranslationAPIFacade::getInstance()->__('The URL is invalid, please reload the page and try again.', 'pop-coreprocessors');
@@ -48,10 +48,10 @@ class GD_UserCommunities_Module_Processor_UserCheckpointMessageLayouts extends P
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->setProp($componentVariation, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
-        parent::initModelProps($componentVariation, $props);
+        $this->setProp($component, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
+        parent::initModelProps($component, $props);
     }
 }
 

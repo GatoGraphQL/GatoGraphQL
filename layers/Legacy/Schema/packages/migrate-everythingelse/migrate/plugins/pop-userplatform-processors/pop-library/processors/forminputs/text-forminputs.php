@@ -10,7 +10,7 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
     public final const MODULE_FORMINPUT_CUP_YOUTUBE = 'forminput-cup-youtube';
     public final const MODULE_FORMINPUT_CUP_INSTAGRAM = 'forminput-cup-instagram';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION],
@@ -22,9 +22,9 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Short description', 'pop-coreprocessors');
 
@@ -44,12 +44,12 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
                 return TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUP_SHORTDESCRIPTION:
                 return 'shortDescription';
 
@@ -69,11 +69,11 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
                 return 'instagram';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         // Remove the html code from the placeholder
         $placeholders = array(
@@ -83,11 +83,11 @@ class PoP_Module_Processor_CreateUpdateProfileTextFormInputs extends PoP_Module_
             self::MODULE_FORMINPUT_CUP_YOUTUBE => TranslationAPIFacade::getInstance()->__('Youtube URL', 'pop-coreprocessors'),
             self::MODULE_FORMINPUT_CUP_INSTAGRAM => TranslationAPIFacade::getInstance()->__('Instagram URL', 'pop-coreprocessors'),
         );
-        if ($placeholder = $placeholders[$componentVariation[1]] ?? null) {
-            $this->setProp($componentVariation, $props, 'placeholder', $placeholder);
+        if ($placeholder = $placeholders[$component[1]] ?? null) {
+            $this->setProp($component, $props, 'placeholder', $placeholder);
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

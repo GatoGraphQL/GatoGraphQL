@@ -146,11 +146,11 @@ class PoP_SSR_EngineInitialization_Hooks
             $dynamic_data_properties = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES);
         }
         if ($dynamic_data_properties === null) {
-            global $pop_componentVariation_processordynamicdatadecorator_manager;
+            global $pop_component_processordynamicdatadecorator_manager;
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $engineState = App::getEngineState();
             $entry_model_props = $engineState->model_props;
-            $dynamic_data_properties = $pop_componentVariation_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetmoduletree($entryComponent, $entry_model_props);
+            $dynamic_data_properties = $pop_component_processordynamicdatadecorator_manager->getProcessorDecorator($componentprocessor_manager->getProcessor($entryComponent))->getDynamicDataFieldsDatasetmoduletree($entryComponent, $entry_model_props);
 
             if ($useCache) {
                 $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_DYNAMICDATAPROPERTIES, $dynamic_data_properties);

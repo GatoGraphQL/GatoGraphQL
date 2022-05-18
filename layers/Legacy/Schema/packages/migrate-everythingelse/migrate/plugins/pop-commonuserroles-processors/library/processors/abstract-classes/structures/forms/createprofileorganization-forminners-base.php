@@ -3,13 +3,13 @@ use PoP\Root\Facades\Translation\TranslationAPIFacade;
 
 abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase extends PoP_Module_Processor_CreateProfileFormInnersBase
 {
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         // Add common Create/Update components
-        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubmodules($componentVariation, $ret, $this);
-        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubmodules($componentVariation, $ret, $this);
+        PoP_Module_Processor_CreatProfileFormsUtils::getFormSubmodules($component, $ret, $this);
+        PoP_Module_Processor_CreateUpdateProfileOrganizationFormsUtils::getFormSubmodules($component, $ret, $this);
 
         if (defined('POP_USERCOMMUNITIES_INITIALIZED')) {
             // Add extra components
@@ -30,7 +30,7 @@ abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase e
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Change the label
@@ -40,6 +40,6 @@ abstract class GD_URE_Module_Processor_CreateProfileOrganizationFormInnersBase e
         // Make it a Community by default
         $this->setProp([GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::class, GD_CommonUserRoles_UserCommunities_Module_Processor_SelectFormInputs::MODULE_URE_FORMINPUT_CUP_ISCOMMUNITY], $props, 'default-value', true);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

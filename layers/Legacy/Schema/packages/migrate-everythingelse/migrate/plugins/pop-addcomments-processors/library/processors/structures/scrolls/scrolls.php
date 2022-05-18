@@ -9,7 +9,7 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
     public final const MODULE_SCROLLLAYOUT_POSTCOMMENT = 'layout-postcomment-scroll';
     public final const MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE = 'layout-postcomment-scroll-appendable';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_COMMENTS_LIST],
@@ -19,9 +19,9 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_SCROLLINNER_COMMENTS_LIST];
 
@@ -35,27 +35,27 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                 return [PoP_Module_Processor_CommentScrollInners::class, PoP_Module_Processor_CommentScrollInners::MODULE_LAYOUTSCROLLINNER_POSTCOMMENTS_APPENDABLE];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function addFetchedData(array $componentVariation, array &$props)
+    public function addFetchedData(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT:
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
                 return false;
         }
 
-        return parent::addFetchedData($componentVariation, $props);
+        return parent::addFetchedData($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
                 $post_id = \PoP\Root\App::getState(['routing', 'queried-object-id']);
-                $this->appendProp($componentVariation, $props, 'class', 'pop-commentpost-'.$post_id);
-                $this->appendProp($componentVariation, $props, 'class', 'pop-postcomment');
+                $this->appendProp($component, $props, 'class', 'pop-commentpost-'.$post_id);
+                $this->appendProp($component, $props, 'class', 'pop-postcomment');
                 break;
 
             case self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE:
@@ -63,24 +63,24 @@ class PoP_Module_Processor_CommentScrolls extends PoP_Module_Processor_ScrollsBa
                     self::MODULE_SCROLLLAYOUT_POSTCOMMENT_APPENDABLE => 'comments',
                 );
 
-                $this->setProp($componentVariation, $props, 'appendable', true);
-                $this->setProp($componentVariation, $props, 'appendable-class', $classes[$componentVariation[1]] ?? null);
+                $this->setProp($component, $props, 'appendable', true);
+                $this->setProp($component, $props, 'appendable-class', $classes[$component[1]] ?? null);
 
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getFetchmoreButtonSubmodule(array $componentVariation)
+    public function getFetchmoreButtonSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLL_COMMENTS_LIST:
             case self::MODULE_SCROLL_COMMENTS_ADD:
                 return null;
         }
 
-        return parent::getFetchmoreButtonSubmodule($componentVariation);
+        return parent::getFetchmoreButtonSubmodule($component);
     }
 }
 

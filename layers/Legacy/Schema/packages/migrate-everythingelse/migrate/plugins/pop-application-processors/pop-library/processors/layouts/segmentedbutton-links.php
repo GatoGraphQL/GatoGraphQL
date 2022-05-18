@@ -5,7 +5,7 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
     public final const MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR = 'layout-segmentedbutton-navigator';
     public final const MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR = 'layout-dropdownsegmentedbutton-navigator';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR],
@@ -13,24 +13,24 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
             case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 return 'fa-folder-open-o';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
             case self::MODULE_LAYOUT_DROPDOWNSEGMENTEDBUTTON_NAVIGATOR:
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -41,13 +41,13 @@ class PoP_Module_Processor_SegmentedButtonLinks extends PoP_Module_Processor_Seg
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_SEGMENTEDBUTTON_NAVIGATOR:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-default btn-background');
+                $this->appendProp($component, $props, 'class', 'btn btn-default btn-background');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

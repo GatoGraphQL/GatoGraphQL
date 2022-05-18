@@ -14,8 +14,8 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionComponentRoutingProcessor
         $routemodules = array(
             POP_USERAVATAR_ROUTE_EDITAVATAR => [PoP_UserAvatarProcessors_Module_Processor_UserBlocks::class, PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

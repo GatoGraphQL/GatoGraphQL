@@ -13,7 +13,7 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
     public final const MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-myevents-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'dataload-mypastevents-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT],
@@ -25,22 +25,22 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
             self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             /*********************************************
              * My Content Tables
@@ -58,12 +58,12 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_CustomScrolls::class, PoP_EventsCreation_Module_Processor_CustomScrolls::MODULE_SCROLL_MYPASTEVENTS_FULLVIEWPREVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -73,10 +73,10 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
                 return [PoP_EventsCreation_Module_Processor_CustomFilters::class, PoP_EventsCreation_Module_Processor_CustomFilters::MODULE_FILTER_MYEVENTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -92,22 +92,22 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             [self::class, self::MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
             [self::class, self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($componentVariation, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -118,9 +118,9 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -130,10 +130,10 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
                 return $this->instanceManager->getInstance(EventObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Events: choose to only select past/future
@@ -147,16 +147,16 @@ class PoP_EventsCreation_Module_Processor_MySectionDataloads extends PoP_EventsC
             [self::class, self::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
             [self::class, self::MODULE_DATALOAD_MYEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($componentVariation, $past)) {
+        if (in_array($component, $past)) {
             $daterange_class = 'daterange-past opens-right';
-        } elseif (in_array($componentVariation, $future)) {
+        } elseif (in_array($component, $future)) {
             $daterange_class = 'daterange-future opens-right';
         }
         if ($daterange_class) {
             $this->setProp([PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE], $props, 'daterange-class', $daterange_class);
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

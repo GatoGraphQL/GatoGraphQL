@@ -10,7 +10,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
     public final const MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD = 'forminput-lostpwdreset-newpassword';
     public final const MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT = 'forminput-lostpwdreset-passwordrepeat';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_LOGIN_USERNAME],
@@ -22,9 +22,9 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOGIN_USERNAME:
                 return TranslationAPIFacade::getInstance()->__('Username or email', 'pop-coreprocessors');
             
@@ -44,48 +44,48 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
                 return TranslationAPIFacade::getInstance()->__('Repeat password', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function isMandatory(array $componentVariation, array &$props)
+    public function isMandatory(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
             case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
             case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return true;
         }
         
-        return parent::isMandatory($componentVariation, $props);
+        return parent::isMandatory($component, $props);
     }
 
-    // function getName(array $componentVariation) {
+    // function getName(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //         case self::MODULE_FORMINPUT_LOSTPWDRESET_CODE:
                 
     //             return 'code';
     //     }
         
-    //     return parent::getName($componentVariation);
+    //     return parent::getName($component);
     // }
 
-    public function getType(array $componentVariation, array &$props)
+    public function getType(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOGIN_PWD:
             case self::MODULE_FORMINPUT_LOSTPWDRESET_NEWPASSWORD:
             case self::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT:
                 return 'password';
         }
         
-        return parent::getType($componentVariation, $props);
+        return parent::getType($component, $props);
     }
 
-    public function clearInput(array $componentVariation, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_LOGIN_USERNAME:
             case self::MODULE_FORMINPUT_LOGIN_PWD:
             case self::MODULE_FORMINPUT_LOSTPWD_USERNAME:
@@ -95,7 +95,7 @@ class PoP_Module_Processor_LoginTextFormInputs extends PoP_Module_Processor_Text
                 return true;
         }
 
-        return parent::clearInput($componentVariation, $props);
+        return parent::clearInput($component, $props);
     }
 }
 

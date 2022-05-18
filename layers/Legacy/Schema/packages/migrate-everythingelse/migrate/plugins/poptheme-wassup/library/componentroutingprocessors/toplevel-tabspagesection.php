@@ -10,14 +10,14 @@ class PoP_Module_TabsPageSectionTopLevelComponentRoutingProcessor extends PoP_Mo
         $ret = array();
 
         $ret[] = [
-        	'component-variation' => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS],
+        	'component' => [PoP_Module_Processor_PageSections::class, PoP_Module_Processor_PageSections::MODULE_PAGESECTION_ADDONTABS],
         	'conditions' => [
 	            'target' => POP_TARGET_ADDONS,
 	        ],
         ];
 
         $ret[] = [
-        	'component-variation' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODYTABS],
+        	'component' => [PoP_Module_Processor_Offcanvas::class, PoP_Module_Processor_Offcanvas::MODULE_OFFCANVAS_BODYTABS],
         ];
 
         return $ret;

@@ -7,7 +7,7 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
     public final const MODULE_BUTTONINNER_POSTVIEW = 'buttoninner-postview';
     public final const MODULE_BUTTONINNER_POSTPREVIEW = 'buttoninner-postpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONINNER_POSTEDIT],
@@ -16,9 +16,9 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_POSTPREVIEW:
                 return 'fa-fw fa-eye';
             
@@ -29,12 +29,12 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
                 return 'fa-fw fa-link';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONINNER_POSTEDIT:
                 return TranslationAPIFacade::getInstance()->__('Edit', 'pop-coreprocessors');
             
@@ -45,7 +45,7 @@ class PoP_ContentCreation_Module_Processor_ButtonInners extends PoP_Module_Proce
                 return TranslationAPIFacade::getInstance()->__('Preview', 'pop-coreprocessors');
         }
 
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

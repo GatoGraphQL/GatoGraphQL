@@ -23,15 +23,15 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
             $dataStructureManager = DataStructureManagerFacade::getInstance();
             $engine = EngineFacade::getInstance();
             $serverside_rendering = PoP_ServerSideRenderingFactory::getInstance();
-            $componentVariation = $engine->getEntryComponent();
-            $processor = $componentprocessor_manager->getProcessor($componentVariation);
+            $component = $engine->getEntryComponent();
+            $processor = $componentprocessor_manager->getProcessor($component);
             $formatter = $dataStructureManager->getDataStructureFormatter();
             $request = $_GET;
 
             // In order to obtain the dbobjectids from the results, located under pssId and bsId
             $pagesection_settings_id = $this->getPagesectionSettingsid();
-            $block_componentVariation = $this->getBlockModule();
-            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_componentVariation);
+            $block_component = $this->getBlockModule();
+            $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_component);
 
             // Set the recipient as the "current-user-id", pretending this user is logged in
             $vars = &ApplicationState::$vars;
@@ -62,7 +62,7 @@ class PoP_LoopUsersProcessorAutomatedEmailsBase extends PoP_ProcessorAutomatedEm
                 $request['hist_time'] = ($lastaccess && $lastaccess > $yesterday) ? $lastaccess : $yesterday;
 
                 // Regenerate the data
-                $data = $engine->getModuleData($componentVariation, $processor, $engineState->props, $formatter, $request);
+                $data = $engine->getModuleData($component, $processor, $engineState->props, $formatter, $request);
 
                 // If the user has no notifications, then skip it
                 // Simply check if the dbobjectids for the user is empty, for the main block

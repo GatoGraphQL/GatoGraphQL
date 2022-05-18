@@ -4,18 +4,18 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
 {
     public final const MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS = 'em-dropdownbuttonquicklink-downloadlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
@@ -25,24 +25,24 @@ class GD_EM_Module_Processor_DropdownButtonQuicklinks extends PoP_Module_Process
         return $ret;
     }
 
-    public function getBtnClass(array $componentVariation)
+    public function getBtnClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'btn btn-compact btn-link';
         }
         
-        return parent::getBtnClass($componentVariation);
+        return parent::getBtnClass($component);
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_DROPDOWNBUTTONQUICKLINK_DOWNLOADLINKS:
                 return 'fa-thumb-tack';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 }
 

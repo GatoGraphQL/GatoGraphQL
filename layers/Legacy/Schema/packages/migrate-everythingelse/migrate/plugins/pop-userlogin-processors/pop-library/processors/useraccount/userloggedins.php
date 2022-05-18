@@ -6,7 +6,7 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
     public final const MODULE_USERACCOUNT_USERLOGGEDINWELCOME = 'useraccount-userloggedinwelcome';
     public final const MODULE_USERACCOUNT_USERLOGGEDINPROMPT = 'useraccount-userloggedinprompt';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         );
     }
 
-    public function getTitleTop(array $componentVariation, array &$props)
+    public function getTitleTop(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 return TranslationAPIFacade::getInstance()->__('Welcome', 'pop-coreprocessors');
 
@@ -24,13 +24,13 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                 return TranslationAPIFacade::getInstance()->__('You are already logged in as', 'pop-coreprocessors');
         }
 
-        return parent::getTitleTop($componentVariation, $props);
+        return parent::getTitleTop($component, $props);
     }
 
-    public function getTitleBottom(array $componentVariation, array &$props)
+    public function getTitleBottom(array $component, array &$props)
     {
         $cmsuseraccountapi = \PoP\UserAccount\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINPROMPT:
                 return sprintf(
                     '<p><a href="%s">%s</a></p>',
@@ -39,14 +39,14 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
                 );
         }
 
-        return parent::getTitleBottom($componentVariation, $props);
+        return parent::getTitleBottom($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 $this->addJsmethod($ret, 'addDomainClass');
                 break;
@@ -54,11 +54,11 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
 
         return $ret;
     }
-    public function getImmutableJsconfiguration(array $componentVariation, array &$props): array
+    public function getImmutableJsconfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableJsconfiguration($componentVariation, $props);
+        $ret = parent::getImmutableJsconfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
                 // For function addDomainClass
                 $ret['addDomainClass']['prefix'] = 'visible-loggedin-';
@@ -68,15 +68,15 @@ class PoP_Module_Processor_UserLoggedIns extends PoP_Module_Processor_UserLogged
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_USERACCOUNT_USERLOGGEDINWELCOME:
-                $this->appendProp($componentVariation, $props, 'class', 'visible-loggedin');
+                $this->appendProp($component, $props, 'class', 'visible-loggedin');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

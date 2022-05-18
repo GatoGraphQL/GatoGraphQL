@@ -8,7 +8,7 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
     public final const MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW = 'dataload-mycontent-scroll-simpleviewpreview';
     public final const MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW = 'dataload-mycontent-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT],
@@ -17,41 +17,41 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW => POP_CONTENTCREATION_ROUTE_MYCONTENT,
             self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT => POP_CONTENTCREATION_ROUTE_MYCONTENT,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT => [PoP_Module_Processor_Tables::class, PoP_Module_Processor_Tables::MODULE_TABLE_MYCONTENT],
             self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_CONTENT_SIMPLEVIEW],
             self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_CONTENT_FULLVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCONTENT];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -64,22 +64,22 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
         $fullviews = array(
             [self::class, self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($componentVariation, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
@@ -90,28 +90,28 @@ class PoP_ContentCreation_Module_Processor_MySectionDataloads extends PoP_Module
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
                 return CustomPostUnionTypeHelpers::getCustomPostUnionOrTargetObjectTypeResolver();
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCONTENT_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCONTENT_SCROLL_FULLVIEWPREVIEW:
                 $this->setProp([GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::class, GD_UserLogin_Module_Processor_UserCheckpointMessageLayouts::MODULE_LAYOUT_CHECKPOINTMESSAGE_LOGGEDIN], $props, 'action', TranslationAPIFacade::getInstance()->__('access your content', 'poptheme-wassup'));
                 break;
         }
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

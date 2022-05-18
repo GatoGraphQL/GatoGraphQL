@@ -3,65 +3,65 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_StructuresBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         // Sometimes there's no inner. Eg: self::MODULE_CONTENT_ADDCONTENTFAQ
-        if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner = $this->getInnerSubmodule($component)) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function addFetchedData(array $componentVariation, array &$props)
+    public function addFetchedData(array $component, array &$props)
     {
         return true;
     }
 
-    public function addWebPlatformModuleConfiguration(&$ret, array $componentVariation, array &$props)
+    public function addWebPlatformModuleConfiguration(&$ret, array $component, array &$props)
     {
-        if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner = $this->getInnerSubmodule($component)) {
             // Add 'pop-merge' + inside module classes, so the processBlock knows where to insert the new html code
-            if ($this->addFetchedData($componentVariation, $props)) {
+            if ($this->addFetchedData($component, $props)) {
                 $ret['class-merge'] = PoP_WebPlatformEngine_Module_Utils::getMergeClass($inner);
             }
         }
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner = $this->getInnerSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($inner);
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // // Make the inner module callback updatable
-        // if ($this->addFetchedData($componentVariation, $props)) {
+        // if ($this->addFetchedData($component, $props)) {
 
-        //     if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        //     if ($inner = $this->getInnerSubmodule($component)) {
         //         $this->setProp($inner, $props, 'module-cb', true);
         //     }
         // }
 
         // Artificial property added to identify the module when adding module-resources
-        $this->setProp($componentVariation, $props, 'resourceloader', 'structure');
+        $this->setProp($component, $props, 'resourceloader', 'structure');
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

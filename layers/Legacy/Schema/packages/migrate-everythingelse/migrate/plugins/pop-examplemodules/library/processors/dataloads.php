@@ -24,7 +24,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     public final const MODULE_EXAMPLE_PAGE = 'example-page';
     public final const MODULE_EXAMPLE_HOMESTATICPAGE = 'example-homestaticpage';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_LATESTPOSTS],
@@ -38,11 +38,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
                 $ret[] = [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_AUTHORPROPERTIES];
                 break;
@@ -55,25 +55,25 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_SINGLE:
             case self::MODULE_EXAMPLE_PAGE:
             case self::MODULE_EXAMPLE_TAGDESCRIPTION:
             case self::MODULE_EXAMPLE_AUTHORDESCRIPTION:
-                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
             case self::MODULE_EXAMPLE_HOMESTATICPAGE:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 return $pageTypeAPI->getHomeStaticPageID();
         }
 
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
             case self::MODULE_EXAMPLE_TAGLATESTPOSTS:
@@ -91,14 +91,14 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
                 return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
                 $ret['authors'] = [\PoP\Root\App::getState(['routing', 'queried-object-id'])];
                 break;
@@ -114,11 +114,11 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
-        $ret = parent::getRelationalSubmodules($componentVariation);
+        $ret = parent::getRelationalSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_SINGLE:
             case self::MODULE_EXAMPLE_LATESTPOSTS:
             case self::MODULE_EXAMPLE_AUTHORLATESTPOSTS:
@@ -146,7 +146,7 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         $data_fields = array(
             self::MODULE_EXAMPLE_LATESTPOSTS => array('title', 'content', 'url'),
@@ -157,8 +157,8 @@ class ComponentProcessor_Dataloads extends AbstractDataloadComponentProcessor
             self::MODULE_EXAMPLE_HOMESTATICPAGE => array('title', 'content', 'date'),
         );
         return array_merge(
-            parent::getDataFields($componentVariation, $props),
-            $data_fields[$componentVariation[1]] ?? array()
+            parent::getDataFields($component, $props),
+            $data_fields[$component[1]] ?? array()
         );
     }
 }

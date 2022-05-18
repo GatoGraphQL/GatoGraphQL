@@ -6,7 +6,7 @@ class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_P
     public final const MODULE_CONTROLBUTTONGROUP_STANCESTATS_ARTICLE = 'controlbuttongroup-stancestats-article';
     public final const MODULE_CONTROLBUTTONGROUP_STANCESTATS = 'controlbuttongroup-stancestats';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL],
@@ -15,11 +15,11 @@ class UserStance_Module_Processor_CustomControlButtonGroups extends PoP_Module_P
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_STANCESTATS_GENERAL:
                 $ret[] = [UserStance_Custom_Module_Processor_Codes::class, UserStance_Custom_Module_Processor_Codes::MODULE_CODE_STANCECOUNT_GENERAL];
                 $ret[] = [UserStance_Module_Processor_CustomAnchorControls::class, UserStance_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_STANCE_PRO_GENERALCOUNT];

@@ -5,7 +5,7 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
     public final const MODULE_SIDEBARMULTICOMPONENT_GENERICUSER = 'sidebarmulticomponent-genericuser';
     public final const MODULE_SIDEBARMULTICOMPONENT_AVATAR = 'sidebarmulticomponent-avatar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIDEBARMULTICOMPONENT_GENERICUSER],
@@ -13,11 +13,11 @@ class GD_Custom_Module_Processor_UserMultipleSidebarComponents extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SIDEBARMULTICOMPONENT_GENERICUSER:
                 $ret[] = [PoP_Module_Processor_CustomPostWidgets::class, GD_Custom_Module_Processor_UserWidgets::MODULE_WIDGETCOMPACT_GENERICUSERINFO];
                 break;

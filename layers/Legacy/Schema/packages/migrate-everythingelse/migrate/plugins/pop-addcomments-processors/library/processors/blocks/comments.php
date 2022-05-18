@@ -5,7 +5,7 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
     public final const MODULE_BLOCK_COMMENTS_SCROLL = 'block-comments-scroll';
     public final const MODULE_BLOCK_ADDCOMMENT = 'block-addcomment';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_COMMENTS_SCROLL],
@@ -13,30 +13,30 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_ADDCOMMENT => POP_ADDCOMMENTS_ROUTE_ADDCOMMENT,
             self::MODULE_BLOCK_COMMENTS_SCROLL => POP_BLOG_ROUTE_COMMENTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_COMMENTS_SCROLL:
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_COMMENTS];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_COMMENTS_SCROLL:
                 $ret[] = [PoP_Module_Processor_CommentsDataloads::class, PoP_Module_Processor_CommentsDataloads::MODULE_DATALOAD_COMMENTS_SCROLL];
                 break;
@@ -49,15 +49,15 @@ class PoP_Module_Processor_CommentsBlocks extends PoP_Module_Processor_BlocksBas
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_COMMENTS_SCROLL:
-                $this->appendProp($componentVariation, $props, 'class', 'block-comments');
+                $this->appendProp($component, $props, 'class', 'block-comments');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

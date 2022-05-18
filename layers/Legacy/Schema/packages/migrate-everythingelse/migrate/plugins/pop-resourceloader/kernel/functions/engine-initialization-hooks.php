@@ -40,7 +40,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 		return $scripts;
 	}
 
-	function generateHelperCalculations($helper_calculations_in_array, array $componentVariation, $props_in_array) {
+	function generateHelperCalculations($helper_calculations_in_array, array $component, $props_in_array) {
 
 		if (RequestUtils::loadingSite() && PoP_ResourceLoader_ServerUtils::useCodeSplitting()) {
 
@@ -49,7 +49,7 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$props = &$props_in_array[0];
 			$helperCalculations = &$helper_calculations_in_array[0];
 
-			$processor = $componentprocessor_manager->getProcessor($componentVariation);
+			$processor = $componentprocessor_manager->getProcessor($component);
 			$processorresourcedecorator = $pop_resourcemoduledecoratorprocessor_manager->getProcessorDecorator($processor);
 			
 			// Do array_merge because it may already contain data from doing 'extra-uris'
@@ -57,14 +57,14 @@ class PoP_ResourceLoader_EngineInitialization_Hooks {
 			$helperCalculations['template-resources'] = array_unique(
 				array_merge(
 					$helperCalculations['template-resources'] ?? array(),
-					$processor->getTemplateResourcesMergedmoduletree($componentVariation, $props)
+					$processor->getTemplateResourcesMergedmoduletree($component, $props)
 				),
 				SORT_REGULAR
 			);
 			$helperCalculations['module-resources'] = array_unique(
 				array_merge(
 					$helperCalculations['module-resources'] ?? array(),
-					$processorresourcedecorator->getResourcesMergedmoduletree($componentVariation, $props)
+					$processorresourcedecorator->getResourcesMergedmoduletree($component, $props)
 				),
 				SORT_REGULAR
 			);

@@ -23,7 +23,7 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
     public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS18 = 'tabpanel-authorcategoryposts18';
     public final const MODULE_TABPANEL_AUTHORCATEGORYPOSTS19 = 'tabpanel-authorcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_AUTHORCATEGORYPOSTS00],
@@ -49,11 +49,11 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_AUTHORCATEGORYPOSTS00:
                 $ret = array(
                     [
@@ -722,7 +722,7 @@ class CPP_Module_Processor_AuthorSectionTabPanelComponents extends PoP_Module_Pr
                 break;
         }
 
-        return $ret ?? parent::getPanelHeaders($componentVariation, $props);
+        return $ret ?? parent::getPanelHeaders($component, $props);
     }
 }
 

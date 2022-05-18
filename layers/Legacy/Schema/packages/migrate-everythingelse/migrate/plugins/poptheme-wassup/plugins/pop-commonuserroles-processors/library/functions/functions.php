@@ -1,6 +1,6 @@
 <?php
 
-\PoP\Root\App::addFilter('pop_componentVariation:sidebar_author:components', 'gdCommonuserrolesAuthorsidebarsComponents', 0, 2);
+\PoP\Root\App::addFilter('pop_component:sidebar_author:components', 'gdCommonuserrolesAuthorsidebarsComponents', 0, 2);
 function gdCommonuserrolesAuthorsidebarsComponents($components, $section)
 {
     if (PoP_ApplicationProcessors_Utils::addAuthorWidgetDetails()) {

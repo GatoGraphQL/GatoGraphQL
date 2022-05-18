@@ -3,39 +3,39 @@ use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 
 abstract class PoP_Module_Processor_PageContentDataloadsBase extends PoP_Module_Processor_DataloadsBase
 {
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
     }
 
-    public function getPage(array $componentVariation, array &$props)
+    public function getPage(array $component, array &$props)
     {
         return null;
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
-        if ($page = $this->getPage($componentVariation, $props)) {
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
+        if ($page = $this->getPage($component, $props)) {
             $ret['include'] = [$page];
         }
         return $ret;
     }
 
-    public function getDatasource(array $componentVariation, array &$props): string
+    public function getDatasource(array $component, array &$props): string
     {
         return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
     }
 
-    protected function getContentSubmodule(array $componentVariation)
+    protected function getContentSubmodule(array $component)
     {
         return [PoP_Module_Processor_Contents::class, PoP_Module_Processor_Contents::MODULE_CONTENT_PAGECONTENT];
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
-        $ret[] = $this->getContentSubmodule($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
+        $ret[] = $this->getContentSubmodule($component);
         return $ret;
     }
 }

@@ -5,7 +5,7 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
     public final const MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW = 'scrollinner-mylinks-simpleviewpreview';
     public final const MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW = 'scrollinner-mylinks-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW],
@@ -13,9 +13,9 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW:
             case self::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW:
                 return array(
@@ -24,19 +24,19 @@ class PoP_ContentPostLinksCreation_Module_Processor_CustomScrollInners extends P
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_MYLINKS_SIMPLEVIEWPREVIEW => [PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::class, PoP_Module_Processor_CustomSimpleViewPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_SIMPLEVIEW],
             self::MODULE_SCROLLINNER_MYLINKS_FULLVIEWPREVIEW => [PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_LINK],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

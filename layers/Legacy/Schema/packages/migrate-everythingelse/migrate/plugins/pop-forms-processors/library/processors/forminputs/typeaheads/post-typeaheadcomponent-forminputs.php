@@ -8,63 +8,63 @@ class PoP_Module_Processor_PostTypeaheadComponentFormInputs extends PoP_Module_P
 {
     public final const MODULE_TYPEAHEAD_COMPONENT_CONTENT = 'forminput-typeaheadcomponent-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TYPEAHEAD_COMPONENT_CONTENT],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
                 return getRouteIcon(POP_BLOG_ROUTE_CONTENT, true).TranslationAPIFacade::getInstance()->__('Content:', 'pop-coreprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
+    protected function getTypeaheadDataloadSource(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TYPEAHEAD_COMPONENT_CONTENT:
                 return RouteUtils::getRouteURL(POP_BLOG_ROUTE_CONTENT);
         }
 
-        return parent::getTypeaheadDataloadSource($componentVariation, $props);
+        return parent::getTypeaheadDataloadSource($component, $props);
     }
 
 
-    // protected function getSourceFilter(array $componentVariation, array &$props)
+    // protected function getSourceFilter(array $component, array &$props)
     // {
     //     return POP_FILTER_CONTENT;
     // }
-    protected function getSourceFilterParams(array $componentVariation, array &$props)
+    protected function getSourceFilterParams(array $component, array &$props)
     {
-        $ret = parent::getSourceFilterParams($componentVariation, $props);
+        $ret = parent::getSourceFilterParams($component, $props);
 
         // bring the posts ordering by comment count
         if (defined('POP_COMMENTS_INITIALIZED')) {
             $ret[] = [
-                'component-variation' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
+                'component' => [PoP_Module_Processor_SelectFilterInputs::class, PoP_Module_Processor_SelectFilterInputs::MODULE_FILTERINPUT_ORDERPOST],
                 'value' => NameResolverFacade::getInstance()->getName('popcms:dbcolumn:orderby:customposts:comment-count').'|DESC',
             ];
         }
 
         return $ret;
     }
-    protected function getRemoteUrl(array $componentVariation, array &$props)
+    protected function getRemoteUrl(array $component, array &$props)
     {
-        $url = parent::getRemoteUrl($componentVariation, $props);
+        $url = parent::getRemoteUrl($component, $props);
 
         $dataloadHelperService = DataloadHelperServiceFacade::getInstance();
         return $dataloadHelperService->addFilterParams(
             $url,
             [
                 [
-                    'component-variation' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
+                    'component' => [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_SEARCH],
                     'value' => GD_JSPLACEHOLDER_QUERY,
                 ],
             ]

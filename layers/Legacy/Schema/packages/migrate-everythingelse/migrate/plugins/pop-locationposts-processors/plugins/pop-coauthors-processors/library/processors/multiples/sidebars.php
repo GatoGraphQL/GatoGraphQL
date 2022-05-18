@@ -4,23 +4,23 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
 {
     public final const MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR = 'multiple-single-locationpost-postauthorssidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR],
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 $filters = array(
                     self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_SECTIONINNER_USERS_NOFILTER_SIDEBAR],
                 );
-                $ret[] = $filters[$componentVariation[1]];
+                $ret[] = $filters[$component[1]];
                 $ret[] = [PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::class, PoP_LocationPosts_Module_Processor_CustomSidebarDataloads::MODULE_DATALOAD_SINGLE_LOCATIONPOST_SIDEBAR];
                 break;
         }
@@ -28,24 +28,24 @@ class PoP_LocationPosts_Coauthors_Module_Processor_SidebarMultiples extends PoP_
         return $ret;
     }
 
-    public function getScreen(array $componentVariation)
+    public function getScreen(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREEN_SINGLEUSERS;
         }
         
-        return parent::getScreen($componentVariation);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $componentVariation)
+    public function getScreengroup(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SINGLE_LOCATIONPOST_POSTAUTHORSSIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
         
-        return parent::getScreengroup($componentVariation);
+        return parent::getScreengroup($component);
     }
 }
 

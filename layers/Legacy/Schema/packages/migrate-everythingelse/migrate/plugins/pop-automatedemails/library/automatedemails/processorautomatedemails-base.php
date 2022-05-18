@@ -13,8 +13,8 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
 
     protected function getBlockModule()
     {
-        $pop_componentVariation_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
-        return $pop_componentVariation_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
+        $pop_component_componentroutingprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
+        return $pop_component_componentroutingprocessor_manager->getRoutingComponentByMostAllMatchingStateProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
     }
     
     protected function getContent()
@@ -32,8 +32,8 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
         $pagesection_settings_id = $this->getPagesectionSettingsid();
-        $block_componentVariation = $this->getBlockModule();
-        $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_componentVariation);
+        $block_component = $this->getBlockModule();
+        $block_settings_id = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($block_component);
         $json = PoP_ServerSideRenderingFactory::getInstance()->getJson();
         return !empty($json['datasetmoduledata']['combinedstate']['dbobjectids'][$pagesection_settings_id][$block_settings_id]);
     }

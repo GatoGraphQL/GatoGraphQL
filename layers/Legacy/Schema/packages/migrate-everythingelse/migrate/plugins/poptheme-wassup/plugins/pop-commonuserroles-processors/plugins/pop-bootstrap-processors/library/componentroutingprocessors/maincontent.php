@@ -11,13 +11,13 @@ class PoP_CommonUserRolesProcessors_Bootstrap_Module_MainContentComponentRouting
     {
         $ret = array();
 
-        $componentVariations = array(
+        $components = array(
             POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_ORGANIZATIONS],
             POP_COMMONUSERROLES_ROUTE_INDIVIDUALS => [GD_URE_Module_Processor_SectionTabPanelBlocks::class, GD_URE_Module_Processor_SectionTabPanelBlocks::MODULE_BLOCK_TABPANEL_INDIVIDUALS],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
+        foreach ($components as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'themestyle' => GD_THEMESTYLE_WASSUP_EXPANSIVE,
                 ],

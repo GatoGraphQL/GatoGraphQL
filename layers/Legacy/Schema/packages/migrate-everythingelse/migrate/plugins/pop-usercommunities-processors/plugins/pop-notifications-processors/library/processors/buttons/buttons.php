@@ -6,7 +6,7 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
     public final const MODULE_UREAAL_BUTTON_EDITMEMBERSHIP = 'ure-aal-button-editmembership';
     public final const MODULE_UREAAL_BUTTON_VIEWALLMEMBERS = 'ure-aal-button-viewallmembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP],
@@ -14,9 +14,9 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
         );
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_UREAAL_BUTTONINNER_EDITMEMBERSHIP];
 
@@ -24,12 +24,12 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
                 return [Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::class, Custom_URE_AAL_PoPProcessors_Module_Processor_ButtonInners::MODULE_UREAAL_BUTTONINNER_VIEWALLMEMBERS];
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return 'editUserMembershipURL';
         
@@ -37,12 +37,12 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
                 return 'communityMembersURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return TranslationAPIFacade::getInstance()->__('Edit membership', 'poptheme-wassup');
         
@@ -50,24 +50,24 @@ class Custom_URE_AAL_PoPProcessors_Module_Processor_Buttons extends PoP_Module_P
                 return TranslationAPIFacade::getInstance()->__('View all members', 'poptheme-wassup');
         }
         
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
                 return POP_TARGET_ADDONS;
         }
         
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_BUTTON_EDITMEMBERSHIP:
             case self::MODULE_UREAAL_BUTTON_VIEWALLMEMBERS:
                 $ret .= ' btn btn-xs btn-link';

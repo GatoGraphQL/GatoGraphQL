@@ -3,29 +3,29 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 trait PoP_Engine_Module_Processor_InnerModules_Trait
 {
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
         return array();
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
         return array_merge(
-            parent::getSubComponentVariations($componentVariation),
-            $this->getInnerSubmodules($componentVariation)
+            parent::getSubComponents($component),
+            $this->getInnerSubmodules($component)
         );
     }
     
-    public function getMutableonmodelConfiguration(array $componentVariation, array &$props): array
+    public function getMutableonmodelConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getMutableonmodelConfiguration($componentVariation, $props);
+        $ret = parent::getMutableonmodelConfiguration($component, $props);
 
-        if ($subComponentVariations = $this->getInnerSubmodules($componentVariation)) {
+        if ($subComponents = $this->getInnerSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $subComponentVariations
+                $subComponents
             );
         }
         

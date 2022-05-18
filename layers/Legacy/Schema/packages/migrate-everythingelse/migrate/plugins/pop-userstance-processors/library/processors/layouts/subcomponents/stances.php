@@ -5,7 +5,7 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
     public final const MODULE_SUBCOMPONENT_STANCES = 'subcomponent-stances';
     public final const MODULE_LAZYSUBCOMPONENT_STANCES = 'lazysubcomponent-stances';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBCOMPONENT_STANCES],
@@ -13,9 +13,9 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         );
     }
 
-    public function getSubcomponentField(array $componentVariation)
+    public function getSubcomponentField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
                 return 'stances';
 
@@ -24,11 +24,11 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         }
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
                 $ret[] = [UserStance_Module_Processor_LayoutContents::class, UserStance_Module_Processor_LayoutContents::MODULE_CONTENTLAYOUT_STANCES];
                 break;
@@ -41,27 +41,27 @@ class UserStance_Module_Processor_StanceReferencedbyLayouts extends PoP_Module_P
         return $ret;
     }
 
-    public function isIndividual(array $componentVariation, array &$props)
+    public function isIndividual(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
                 return false;
         }
 
-        return parent::isIndividual($componentVariation, $props);
+        return parent::isIndividual($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBCOMPONENT_STANCES:
             case self::MODULE_LAZYSUBCOMPONENT_STANCES:
-                $this->appendProp($componentVariation, $props, 'class', 'referencedby clearfix');
+                $this->appendProp($component, $props, 'class', 'referencedby clearfix');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -30,7 +30,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         return $this->cmsService ??= $this->instanceManager->getInstance(CMSServiceInterface::class);
     }
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID],
@@ -41,9 +41,9 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
-        return match ($componentVariation[1]) {
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID => [
                 [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_ID],
             ],
@@ -64,9 +64,9 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
         };
     }
 
-    public function getFieldFilterInputDefaultValue(array $componentVariation, string $fieldArgName): mixed
+    public function getFieldFilterInputDefaultValue(array $component, string $fieldArgName): mixed
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_DATE_AS_STRING:
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $formatFilterInputName = FilterInputHelper::getFilterInputName([
@@ -78,7 +78,7 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
                 }
                 break;
         }
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE:
             case self::MODULE_FILTERINPUTCONTAINER_GMTDATE_AS_STRING:
                 $gmtFilterInputName = FilterInputHelper::getFilterInputName([
@@ -90,13 +90,13 @@ class CommonFilterInputContainerComponentProcessor extends AbstractFilterInputCo
                 }
                 break;
         }
-        return parent::getFieldFilterInputDefaultValue($componentVariation, $fieldArgName);
+        return parent::getFieldFilterInputDefaultValue($component, $fieldArgName);
     }
 
-    public function getFieldFilterInputTypeModifiers(array $componentVariation, string $fieldArgName): int
+    public function getFieldFilterInputTypeModifiers(array $component, string $fieldArgName): int
     {
-        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($componentVariation, $fieldArgName);
-        switch ($componentVariation[1]) {
+        $fieldFilterInputTypeModifiers = parent::getFieldFilterInputTypeModifiers($component, $fieldArgName);
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTCONTAINER_ENTITY_BY_ID:
                 $idFilterInputName = FilterInputHelper::getFilterInputName([
                     CommonFilterInputComponentProcessor::class,

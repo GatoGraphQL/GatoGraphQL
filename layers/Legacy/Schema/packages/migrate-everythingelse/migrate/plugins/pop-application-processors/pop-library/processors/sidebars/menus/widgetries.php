@@ -5,18 +5,18 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
 {
     public final const MODULE_WIDGET_MENU_ABOUT = 'widget-menu-about';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_WIDGET_MENU_ABOUT],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_MENU_ABOUT:
                 $ret[] = [PoP_Module_Processor_IndentMenuLayouts::class, PoP_Module_Processor_IndentMenuLayouts::MODULE_LAYOUT_MENU_INDENT];
                 break;
@@ -25,7 +25,7 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
         return $ret;
     }
 
-    public function getMenuTitle(array $componentVariation, array &$props)
+    public function getMenuTitle(array $component, array &$props)
     {
         $menu = TranslationAPIFacade::getInstance()->__('Section links', 'poptheme-wassup');
 
@@ -33,9 +33,9 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $titles[$componentVariation[1]] ?? null;
+        return $titles[$component[1]] ?? null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
         $menu = 'fa-sitemap';
 
@@ -43,26 +43,26 @@ class GD_Custom_Module_Processor_MenuWidgets extends PoP_Module_Processor_Widget
             self::MODULE_WIDGET_MENU_ABOUT => $menu,
         );
 
-        return $fontawesomes[$componentVariation[1]] ?? null;
+        return $fontawesomes[$component[1]] ?? null;
     }
 
-    public function getBodyClass(array $componentVariation, array &$props)
+    public function getBodyClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_MENU_ABOUT:
                 return 'panel-body';
         }
 
-        return parent::getBodyClass($componentVariation, $props);
+        return parent::getBodyClass($component, $props);
     }
-    public function getItemWrapper(array $componentVariation, array &$props)
+    public function getItemWrapper(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_WIDGET_MENU_ABOUT:
                 return '';
         }
 
-        return parent::getItemWrapper($componentVariation, $props);
+        return parent::getItemWrapper($component, $props);
     }
 }
 

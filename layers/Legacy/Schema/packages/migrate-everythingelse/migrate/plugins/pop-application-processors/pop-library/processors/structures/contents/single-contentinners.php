@@ -8,7 +8,7 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
     public final const MODULE_CONTENTINNER_USERPOSTINTERACTION = 'contentinner-userpostinteraction';
     public final const MODULE_CONTENTINNER_USERHIGHLIGHTPOSTINTERACTION = 'contentinner-userhighlightpostinteraction';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_AUTHOR],
@@ -19,11 +19,11 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_AUTHOR:
                 $ret[] = [PoP_Module_Processor_AuthorContentLayouts::class, PoP_Module_Processor_AuthorContentLayouts::MODULE_LAYOUTAUTHOR_CONTENT];
                 break;
@@ -45,16 +45,16 @@ class PoP_Module_Processor_SingleContentInners extends PoP_Module_Processor_Cont
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_HIGHLIGHTSINGLE:
                 // Highlights: it has a different set-up
-                $this->appendProp($componentVariation, $props, 'class', 'well');
+                $this->appendProp($component, $props, 'class', 'well');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

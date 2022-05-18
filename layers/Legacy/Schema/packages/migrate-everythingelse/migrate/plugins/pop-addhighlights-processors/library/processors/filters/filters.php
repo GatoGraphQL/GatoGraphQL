@@ -6,7 +6,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
     public final const MODULE_FILTER_AUTHORHIGHLIGHTS = 'filter-authorhighlights';
     public final const MODULE_FILTER_MYHIGHLIGHTS = 'filter-myhighlights';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTER_HIGHLIGHTS],
@@ -15,7 +15,7 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FILTER_HIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_HIGHLIGHTS],
@@ -23,11 +23,11 @@ class PoP_AddHighlights_Module_Processor_CustomFilters extends PoP_Module_Proces
             self::MODULE_FILTER_MYHIGHLIGHTS => [PoP_AddHighlights_Module_Processor_CustomFilterInners::class, PoP_AddHighlights_Module_Processor_CustomFilterInners::MODULE_FILTERINPUTCONTAINER_MYHIGHLIGHTS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

@@ -15,27 +15,27 @@ class GD_WSL_ProcessorHooks
         );
     }
 
-    public function loginchannels($componentVariations)
+    public function loginchannels($components)
     {
 
         // Only if there are service providers
         if (!getSocialloginNetworklinks()) {
-            return $componentVariations;
+            return $components;
         }
 
         // Add Facebook, Twitter, etc, after the Login Block
         array_splice(
-            $componentVariations, 
+            $components, 
             array_search(
                 [PoP_UserLogin_Module_Processor_Blocks::class, PoP_UserLogin_Module_Processor_Blocks::MODULE_BLOCK_LOGIN], 
-                $componentVariations
+                $components
             )+1, 
             0, 
             array(
                 [PoP_Module_Processor_SocialLoginElements::class, PoP_Module_Processor_SocialLoginElements::MODULE_SOCIALLOGIN_NETWORKLINKS],
             )
         );
-        return $componentVariations;
+        return $components;
     }
 
     public function addHook($hooks)
@@ -50,14 +50,14 @@ class GD_WSL_ProcessorHooks
         return $hooks;
     }
 
-    public function setModelProps(array $componentVariation, &$props, $processor)
+    public function setModelProps(array $component, &$props, $processor)
     {
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
         // Method called by the PoP_Module_Processor_LoginGroups::MODULE_GROUP_LOGIN processor to allow hooks to set $props
         // Make PoP_Module_Processor_LoginGroups::MODULE_GROUP_LOGIN the block to have a Disabled Layer on top
         // while waiting for the server authenticating the FB/Twitter user
         if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
-            $blocktarget = '#'.$processor->getFrontendId($componentVariation, $props);
+            $blocktarget = '#'.$processor->getFrontendId($component, $props);
             $processor->setProp([[PoP_Module_Processor_SocialLoginElements::class, PoP_Module_Processor_SocialLoginElements::MODULE_SOCIALLOGIN_NETWORKLINKS]], $props, 'loginblock-target', $blocktarget);
         }
         $processor->setProp(

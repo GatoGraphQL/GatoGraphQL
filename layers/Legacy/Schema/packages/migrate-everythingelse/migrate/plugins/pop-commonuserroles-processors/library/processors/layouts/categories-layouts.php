@@ -6,7 +6,7 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
     public final const MODULE_LAYOUT_ORGANIZATIONTYPES = 'layout-organizationtypes';
     public final const MODULE_LAYOUT_INDIVIDUALINTERESTS = 'layout-individualinterests';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES],
@@ -15,9 +15,9 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
         );
     }
 
-    public function getCategoriesField(array $componentVariation, array &$props)
+    public function getCategoriesField(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_ORGANIZATIONCATEGORIES:
                 return 'organizationCategoriesByName';
 
@@ -28,16 +28,16 @@ class GD_URE_Module_Processor_CategoriesLayouts extends PoP_Module_Processor_Cat
                 return 'individualInterestsByName';
         }
         
-        return parent::getCategoriesField($componentVariation, $props);
+        return parent::getCategoriesField($component, $props);
     }
-    public function getLabelClass(array $componentVariation, array &$props)
+    public function getLabelClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_ORGANIZATIONTYPES:
                 return 'label-primary';
         }
         
-        return parent::getLabelClass($componentVariation, $props);
+        return parent::getLabelClass($component, $props);
     }
 }
 

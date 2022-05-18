@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Processor_StructureInnersBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Events_TemplateResourceLoaderProcessor::class, PoP_Events_TemplateResourceLoaderProcessor::RESOURCE_CALENDAR_INNER];
     }
@@ -12,9 +12,9 @@ abstract class PoP_Module_Processor_CalendarInnersBase extends PoP_Module_Proces
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
-        $ret = parent::getDataFields($componentVariation, $props);
+        $ret = parent::getDataFields($component, $props);
 
         $ret = array_merge(
             $ret,

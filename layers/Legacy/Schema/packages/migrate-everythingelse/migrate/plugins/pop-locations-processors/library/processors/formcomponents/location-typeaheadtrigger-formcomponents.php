@@ -5,7 +5,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS = 'formcomponent-selectabletypeaheadtrigger-locations';
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION = 'formcomponent-selectabletypeaheadtrigger-location';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS],
@@ -13,24 +13,24 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
         );
     }
 
-    public function getTriggerSubmodule(array $componentVariation): ?array
+    public function getTriggerSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION:
                 $layouts = array(
                     self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS => [PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATIONS],
                     self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATION => [PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::class, PoP_Module_Processor_LocationSelectableTypeaheadAlertFormComponents::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_LOCATION],
                 );
-                return $layouts[$componentVariation[1]];
+                return $layouts[$component[1]];
         }
 
-        return parent::getTriggerSubmodule($componentVariation);
+        return parent::getTriggerSubmodule($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADTRIGGER_LOCATIONS:
                 return 'locations';
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_LocationSelectableTypeaheadTriggerFormComponents exte
                 return 'location';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

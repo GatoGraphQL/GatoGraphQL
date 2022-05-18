@@ -17,7 +17,7 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTS = 'filterinputcontainer-adminposts';
     public final const MODULE_FILTERINPUTCONTAINER_ADMINPOSTCOUNT = 'filterinputcontainer-adminpostcount';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTCONTAINER_POSTS],
@@ -27,17 +27,17 @@ abstract class AbstractPostFilterInputContainerComponentProcessor extends Abstra
         );
     }
 
-    public function getFilterInputComponentVariations(array $componentVariation): array
+    public function getFilterInputComponents(array $component): array
     {
         $postFilterInputModules = [
-            ...$this->getIDFilterInputComponentVariations(),
+            ...$this->getIDFilterInputComponents(),
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SEARCH],
         ];
         $statusFilterInputModules = [
             [FilterInputComponentProcessor::class, FilterInputComponentProcessor::MODULE_FILTERINPUT_CUSTOMPOSTSTATUS],
         ];
-        $paginationFilterInputModules = $this->getPaginationFilterInputComponentVariations();
-        return match ($componentVariation[1]) {
+        $paginationFilterInputModules = $this->getPaginationFilterInputComponents();
+        return match ($component[1]) {
             self::MODULE_FILTERINPUTCONTAINER_POSTS => [
                 ...$postFilterInputModules,
                 ...$paginationFilterInputModules,

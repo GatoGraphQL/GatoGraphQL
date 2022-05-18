@@ -4,28 +4,28 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
 {
     public final const MODULE_BUTTONGROUP_MYUSERS = 'ure-buttongroup-myusers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTONGROUP_MYUSERS],
         );
     }
 
-    protected function getHeadersdataScreen(array $componentVariation, array &$props)
+    protected function getHeadersdataScreen(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTONGROUP_MYUSERS:
                 return POP_URE_SCREEN_MYUSERS;
         }
 
-        return parent::getHeadersdataScreen($componentVariation, $props);
+        return parent::getHeadersdataScreen($component, $props);
     }
 
-    protected function getHeadersdataFormats(array $componentVariation, array &$props)
+    protected function getHeadersdataFormats(array $component, array &$props)
     {
 
         // We can initially have a common format scheme depending on the screen
-        $screen = $this->getHeadersdataScreen($componentVariation, $props);
+        $screen = $this->getHeadersdataScreen($component, $props);
         switch ($screen) {
             case POP_URE_SCREEN_MYUSERS:
                 return array(
@@ -34,7 +34,7 @@ class PoP_UserCommunities_ComponentProcessor_ButtonGroups extends PoP_Module_Pro
                 );
         }
 
-        return parent::getHeadersdataFormats($componentVariation, $props);
+        return parent::getHeadersdataFormats($component, $props);
     }
 }
 

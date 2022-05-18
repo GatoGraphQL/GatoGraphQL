@@ -6,7 +6,7 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
     public final const MODULE_GF_SUBMITBUTTON_SUBSCRIBE = 'gf-submitbutton-subscribe';
     public final const MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION = 'gf-submitbutton-confirmunsubscription';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE],
@@ -14,9 +14,9 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
                 return TranslationAPIFacade::getInstance()->__('Subscribe', 'pop-genericforms');
 
@@ -24,29 +24,29 @@ class PoP_Newsletter_Module_Processor_SubmitButtons extends PoP_Module_Processor
                 return TranslationAPIFacade::getInstance()->__('Confirm unsubscription', 'pop-genericforms');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
     
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return 'btn btn-info';
         }
 
-        return parent::getBtnClass($componentVariation, $props);
+        return parent::getBtnClass($component, $props);
     }
 
-    public function getLoadingText(array $componentVariation, array &$props)
+    public function getLoadingText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GF_SUBMITBUTTON_SUBSCRIBE:
             case self::MODULE_GF_SUBMITBUTTON_CONFIRMUNSUBSCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Sending...', 'pop-genericforms');
         }
         
-        return parent::getLoadingText($componentVariation, $props);
+        return parent::getLoadingText($component, $props);
     }
 }
 

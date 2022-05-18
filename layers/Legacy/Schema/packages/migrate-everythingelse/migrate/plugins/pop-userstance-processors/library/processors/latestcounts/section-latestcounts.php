@@ -19,7 +19,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
     public final const MODULE_LATESTCOUNT_TAG_STANCES_NEUTRAL = 'latestcount-tag-stances-neutral';
     public final const MODULE_LATESTCOUNT_SINGLE_STANCES_NEUTRAL = 'latestcount-single-stances-neutral';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_STANCES],
@@ -41,9 +41,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         );
     }
 
-    public function getObjectName(array $componentVariation, array &$props)
+    public function getObjectName(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_STANCES:
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES:
             case self::MODULE_LATESTCOUNT_TAG_STANCES:
@@ -63,12 +63,12 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
                 return PoP_UserStance_PostNameUtils::getNameLc();
         }
     
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $componentVariation, array &$props)
+    public function getObjectNames(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_STANCES:
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES:
             case self::MODULE_LATESTCOUNT_TAG_STANCES:
@@ -88,14 +88,14 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
                 return PoP_UserStance_PostNameUtils::getNamesLc();
         }
     
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getSectionClasses(array $componentVariation, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($componentVariation, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_STANCES:
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES:
             case self::MODULE_LATESTCOUNT_TAG_STANCES:
@@ -130,9 +130,9 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
         return $ret;
     }
 
-    public function isAuthor(array $componentVariation, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES:
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES_PRO:
             case self::MODULE_LATESTCOUNT_AUTHOR_STANCES_AGAINST:
@@ -140,12 +140,12 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
                 return true;
         }
     
-        return parent::isAuthor($componentVariation, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $componentVariation, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_STANCES:
             case self::MODULE_LATESTCOUNT_TAG_STANCES_PRO:
             case self::MODULE_LATESTCOUNT_TAG_STANCES_AGAINST:
@@ -153,12 +153,12 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
                 return true;
         }
     
-        return parent::isTag($componentVariation, $props);
+        return parent::isTag($component, $props);
     }
 
-    public function isSingle(array $componentVariation, array &$props)
+    public function isSingle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_SINGLE_STANCES:
             case self::MODULE_LATESTCOUNT_SINGLE_STANCES_PRO:
             case self::MODULE_LATESTCOUNT_SINGLE_STANCES_AGAINST:
@@ -166,7 +166,7 @@ class PoPThemeWassup_UserStance_Module_Processor_SectionLatestCounts extends PoP
                 return true;
         }
     
-        return parent::isSingle($componentVariation, $props);
+        return parent::isSingle($component, $props);
     }
 }
 

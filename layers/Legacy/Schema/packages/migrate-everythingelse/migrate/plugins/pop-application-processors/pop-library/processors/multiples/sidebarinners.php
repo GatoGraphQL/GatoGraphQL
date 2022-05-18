@@ -23,7 +23,7 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
     public final const MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR = 'multiple-authorsectioninner-categoryposts-sidebar';
     public final const MODULE_MULTIPLE_HOMESECTIONINNER_CONTENT_SIDEBAR = 'multiple-homesectioninner-content-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_CONTENT_SIDEBAR],
@@ -49,11 +49,11 @@ class PoP_Module_Processor_SidebarMultipleInners extends PoP_Module_Processor_Mu
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Trending Tags has no filter
             case self::MODULE_MULTIPLE_SECTIONINNER_TRENDINGTAGS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_TAGS];

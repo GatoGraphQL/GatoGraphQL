@@ -5,32 +5,32 @@ abstract class PoP_Module_Processor_FormComponentGroupsBase extends PoP_Module_P
 {
     use FormComponentModuleDelegatorTrait;
 
-    public function getFormcomponentModule(array $componentVariation)
+    public function getFormcomponentModule(array $component)
     {
-        return $this->getComponentSubmodule($componentVariation);
+        return $this->getComponentSubmodule($component);
     }
 
-    public function getComponentName(array $componentVariation)
+    public function getComponentName(array $component)
     {
         // Because this class is a FormComponentComponentProcessorInterface, input_name is the inner components input_name
-        return $this->getInputName($componentVariation);
+        return $this->getInputName($component);
     }
 
-    public function initRequestProps(array $componentVariation, array &$props): void
+    public function initRequestProps(array $component, array &$props): void
     {
-        $this->metaFormcomponentInitModuleRequestProps($componentVariation, $props);
-        parent::initRequestProps($componentVariation, $props);
+        $this->metaFormcomponentInitModuleRequestProps($component, $props);
+        parent::initRequestProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $component = $this->getComponentSubmodule($componentVariation);
+        $component = $this->getComponentSubmodule($component);
 
         // Show the label in the FormComponentGroup, and not in the Input
-        $this->setProp($componentVariation, $props, 'label', $this->getLabel($componentVariation, $props));
+        $this->setProp($component, $props, 'label', $this->getLabel($component, $props));
         $this->setProp($component, $props, 'label', '');
         $this->setProp($component, $props, 'placeholder', '');
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

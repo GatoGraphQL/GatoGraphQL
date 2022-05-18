@@ -70,7 +70,7 @@ class PoP_MultiDomain_Utils
 
             // Allow to add the language, and then change the default language on a domain by domain basis
             $properties['locale'] = \PoP\Root\App::applyFilters(
-                'pop_componentVariationmanager:multidomain:locale',
+                'pop_componentmanager:multidomain:locale',
                 $domain,
                 $domain
             );

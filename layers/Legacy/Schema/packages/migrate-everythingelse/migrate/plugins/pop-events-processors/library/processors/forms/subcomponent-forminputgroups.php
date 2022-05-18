@@ -4,18 +4,18 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 {
     public final const MODULE_FILTERINPUTGROUP_EVENTSCOPE = 'filterinputgroup-eventscope';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FILTERINPUTGROUP_EVENTSCOPE],
         );
     }
 
-    public function getLabelClass(array $componentVariation)
+    public function getLabelClass(array $component)
     {
-        $ret = parent::getLabelClass($componentVariation);
+        $ret = parent::getLabelClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-2';
                 break;
@@ -23,11 +23,11 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
 
         return $ret;
     }
-    public function getFormcontrolClass(array $componentVariation)
+    public function getFormcontrolClass(array $component)
     {
-        $ret = parent::getFormcontrolClass($componentVariation);
+        $ret = parent::getFormcontrolClass($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
                 $ret .= ' col-sm-10';
                 break;
@@ -36,27 +36,27 @@ class PoP_Events_Module_Processor_SubcomponentFormInputGroups extends PoP_Module
         return $ret;
     }
 
-    public function getComponentSubname(array $componentVariation)
+    public function getComponentSubname(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FILTERINPUTGROUP_EVENTSCOPE:
                 return 'readable';
         }
 
-        return parent::getComponentSubname($componentVariation);
+        return parent::getComponentSubname($component);
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FILTERINPUTGROUP_EVENTSCOPE => [PoP_Events_Module_Processor_DateRangeComponentFilterInputs::class, PoP_Events_Module_Processor_DateRangeComponentFilterInputs::MODULE_FILTERINPUT_EVENTSCOPE],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

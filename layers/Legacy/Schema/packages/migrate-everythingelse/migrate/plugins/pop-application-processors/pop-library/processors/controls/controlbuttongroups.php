@@ -4,18 +4,18 @@ class PoP_Module_Processor_CustomControlButtonGroups extends PoP_Module_Processo
 {
     public final const MODULE_CONTROLBUTTONGROUP_ADDPOST = 'controlbuttongroup-addpost';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTROLBUTTONGROUP_ADDPOST],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTROLBUTTONGROUP_ADDPOST:
                 $ret[] = [PoP_Module_Processor_CustomAnchorControls::class, PoP_Module_Processor_CustomAnchorControls::MODULE_ANCHORCONTROL_ADDPOST];
                 if (defined('POP_CONTENTPOSTLINKSCREATIONPROCESSORS_INITIALIZED')) {

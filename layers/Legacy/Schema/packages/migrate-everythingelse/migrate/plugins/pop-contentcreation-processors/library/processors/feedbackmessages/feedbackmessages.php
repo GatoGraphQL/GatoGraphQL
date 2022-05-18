@@ -6,7 +6,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
     public final const MODULE_FEEDBACKMESSAGE_CREATECONTENT = 'feedbackmessage-createcontent';
     public final const MODULE_FEEDBACKMESSAGE_UPDATECONTENT = 'feedbackmessage-updatecontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FEEDBACKMESSAGE_FLAG],
@@ -15,7 +15,7 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FEEDBACKMESSAGE_FLAG => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_FLAG],
@@ -23,11 +23,11 @@ class PoP_ContentCreation_Module_Processor_FeedbackMessages extends PoP_Module_P
             self::MODULE_FEEDBACKMESSAGE_UPDATECONTENT => [PoP_ContentCreation_Module_Processor_FeedbackMessageInners::class, PoP_ContentCreation_Module_Processor_FeedbackMessageInners::MODULE_FEEDBACKMESSAGEINNER_UPDATECONTENT],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

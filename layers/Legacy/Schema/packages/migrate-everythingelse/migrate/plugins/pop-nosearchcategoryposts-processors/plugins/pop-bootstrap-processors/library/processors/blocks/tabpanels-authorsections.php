@@ -25,7 +25,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
     public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 = 'block-tabpanel-authornosearchcategoryposts18';
     public final const MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 = 'block-tabpanel-authornosearchcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00],
@@ -51,14 +51,14 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
             if (gdUreIsCommunity($author)) {
-                switch ($componentVariation[1]) {
+                switch ($component[1]) {
                     case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
                     case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:
@@ -107,16 +107,16 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
             self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_AuthorSectionTabPanelComponents::class, NSCPP_Module_Processor_AuthorSectionTabPanelComponents::MODULE_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_AUTHORNOSEARCHCATEGORYPOSTS02:
@@ -130,7 +130,7 @@ class NSCPP_Module_Processor_AuthorSectionTabPanelBlocks extends PoP_Module_Proc
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORCATEGORYPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

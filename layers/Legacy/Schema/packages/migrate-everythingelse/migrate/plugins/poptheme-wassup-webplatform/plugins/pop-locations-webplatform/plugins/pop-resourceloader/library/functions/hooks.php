@@ -12,7 +12,7 @@ class PoPTheme_Wassup_EM_ResourceLoaderProcessor_Hooks
         );
     }
 
-    public function getModuleCssResources($resources, array $componentVariation, array $templateResource, $template, array $props, $processor)
+    public function getModuleCssResources($resources, array $component, array $templateResource, $template, array $props, $processor)
     {
         switch ($template) {
             case POP_TEMPLATE_MAP_DIV:
@@ -21,7 +21,7 @@ class PoPTheme_Wassup_EM_ResourceLoaderProcessor_Hooks
         }
 
         // Artificial property added to identify the template when adding module-resources
-        if ($resourceloader_att = $processor->getProp($componentVariation, $props, 'resourceloader')) {
+        if ($resourceloader_att = $processor->getProp($component, $props, 'resourceloader')) {
             if ($resourceloader_att == 'map' || $resourceloader_att == 'calendarmap') {
                 $resources[] = [PoPTheme_Wassup_EM_CSSResourceLoaderProcessor::class, PoPTheme_Wassup_EM_CSSResourceLoaderProcessor::RESOURCE_CSS_MAP];
             }

@@ -15,7 +15,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
     public final const MODULE_SCROLLMAP_TAGPASTEVENTS_SCROLLMAP = 'scrollmap-tagpastevents-scrollmap';
     public final const MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP = 'scrollmap-tagevents-horizontalscrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_EVENTS_SCROLLMAP],
@@ -33,9 +33,9 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
             self::MODULE_SCROLLMAP_USERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
             self::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_HORIZONTALMAP],
@@ -50,24 +50,24 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
             self::MODULE_SCROLLMAP_TAGEVENTS_HORIZONTALSCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_EVENTS_HORIZONTALMAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function isUserMap(array $componentVariation)
+    protected function isUserMap(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_SEARCHUSERS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_USERS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP:
                 return true;
         }
 
-        return parent::isUserMap($componentVariation);
+        return parent::isUserMap($component);
     }
 
-    protected function isPostMap(array $componentVariation)
+    protected function isPostMap(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_EVENTS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_PASTEVENTS_SCROLLMAP:
             case self::MODULE_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP:
@@ -80,12 +80,12 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
                 return true;
         }
 
-        return parent::isPostMap($componentVariation);
+        return parent::isPostMap($component);
     }
 
-    public function getMapDirection(array $componentVariation, array &$props)
+    public function getMapDirection(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_USERS_HORIZONTALSCROLLMAP:
             case self::MODULE_SCROLLMAP_EVENTS_HORIZONTALSCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHOREVENTS_HORIZONTALSCROLLMAP:
@@ -93,7 +93,7 @@ class GD_EM_Module_Processor_CustomScrollMapSections extends GD_EM_Module_Proces
                 return 'horizontal';
         }
 
-        return parent::getMapDirection($componentVariation, $props);
+        return parent::getMapDirection($component, $props);
     }
 }
 

@@ -5,7 +5,7 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_
     public final const MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP = 'scrollmap-communities-scrollmap';
     public final const MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP = 'scrollmap-authormembers-scrollmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP],
@@ -13,25 +13,25 @@ class PoP_UserCommunities_ComponentProcessor_CustomScrollMapSections extends GD_
         );
     }
 
-    protected function isUserMap(array $componentVariation)
+    protected function isUserMap(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP:
             case self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP:
                 return true;
         }
 
-        return parent::isUserMap($componentVariation);
+        return parent::isUserMap($component);
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_SCROLLMAP_COMMUNITIES_SCROLLMAP => [PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::class, PoP_UserCommunities_EM_ComponentProcessor_CustomScrollMaps::MODULE_SCROLL_COMMUNITIES_MAP],
             self::MODULE_SCROLLMAP_AUTHORCOMMUNITYMEMBERS_SCROLLMAP => [PoP_Locations_Module_Processor_CustomScrollMaps::class, PoP_Locations_Module_Processor_CustomScrollMaps::MODULE_SCROLL_USERS_MAP],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 }
 

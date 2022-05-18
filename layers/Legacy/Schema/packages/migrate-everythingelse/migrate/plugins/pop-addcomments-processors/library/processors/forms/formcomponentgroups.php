@@ -7,7 +7,7 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
     public final const MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST = 'formcomponentgroup-card-commentpost';
     public final const MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT = 'formcomponentgroup-card-parentcomment';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST],
@@ -15,9 +15,9 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
                 return [PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENTPOST];
 
@@ -25,15 +25,15 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 return [PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::class, PoP_Application_Module_Processor_CommentTriggerLayoutFormComponentValues::MODULE_FORMCOMPONENT_CARD_COMMENT];
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
             case self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
-                $component = $this->getComponentSubmodule($componentVariation);
+                $component = $this->getComponentSubmodule($component);
 
                 $alert_classes = array(
                     self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST => 'alert-sm alert-warning',
@@ -49,24 +49,24 @@ class PoP_AddComment_Module_Processor_FormInputGroups extends PoP_Module_Process
                 );
                 $description = sprintf(
                     '<em><label><strong>%s</strong></label></em>',
-                    $descriptions[$componentVariation[1]]
+                    $descriptions[$component[1]]
                 );
                 $this->setProp($trigger, $props, 'description', $description);
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENTGROUP_CARD_COMMENTPOST:
             case self::MODULE_FORMCOMPONENTGROUP_CARD_PARENTCOMMENT:
                 return '';
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 }
 

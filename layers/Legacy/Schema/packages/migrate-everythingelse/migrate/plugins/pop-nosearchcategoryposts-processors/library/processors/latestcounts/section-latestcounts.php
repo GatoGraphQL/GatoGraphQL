@@ -63,7 +63,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
     public final const MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 = 'latestcount-tag-nosearchcategoryposts18';
     public final const MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 = 'latestcount-tag-nosearchcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00],
@@ -129,7 +129,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
         );
     }
 
-    public function getObjectName(array $componentVariation, array &$props)
+    public function getObjectName(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00,
@@ -193,14 +193,14 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'lc');
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function getObjectNames(array $componentVariation, array &$props)
+    public function getObjectNames(array $component, array &$props)
     {
         $cats = array(
             self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS00,
@@ -264,16 +264,16 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS18 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS18,
             self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS19 => POP_NOSEARCHCATEGORYPOSTS_CAT_NOSEARCHCATEGORYPOSTS19,
         );
-        if ($cat = $cats[$componentVariation[1]] ?? null) {
+        if ($cat = $cats[$component[1]] ?? null) {
             return gdGetCategoryname($cat, 'plural-lc');
         }
 
-        return parent::getObjectNames($componentVariation, $props);
+        return parent::getObjectNames($component, $props);
     }
 
-    public function isAuthor(array $componentVariation, array &$props)
+    public function isAuthor(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS02:
@@ -297,12 +297,12 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
                 return true;
         }
 
-        return parent::isAuthor($componentVariation, $props);
+        return parent::isAuthor($component, $props);
     }
 
-    public function isTag(array $componentVariation, array &$props)
+    public function isTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS02:
@@ -326,14 +326,14 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
                 return true;
         }
 
-        return parent::isTag($componentVariation, $props);
+        return parent::isTag($component, $props);
     }
 
-    public function getSectionClasses(array $componentVariation, array &$props)
+    public function getSectionClasses(array $component, array &$props)
     {
-        $ret = parent::getSectionClasses($componentVariation, $props);
+        $ret = parent::getSectionClasses($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LATESTCOUNT_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_AUTHOR_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_LATESTCOUNT_TAG_NOSEARCHCATEGORYPOSTS00:
@@ -459,7 +459,7 @@ class NoSearchCategoryProcessors_Module_Processor_SectionLatestCounts extends Po
         $ret = \PoP\Root\App::applyFilters(
             'latestcounts:nosearchcategoryposts:classes',
             $ret,
-            $componentVariation,
+            $component,
             $props
         );
 

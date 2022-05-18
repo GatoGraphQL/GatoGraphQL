@@ -2,38 +2,38 @@
 
 abstract class GD_EM_Module_Processor_LocationMapConditionWrappersBase extends PoP_Module_Processor_ConditionWrapperBase
 {
-    public function getLocationlinksTemplate(array $componentVariation)
+    public function getLocationlinksTemplate(array $component)
     {
         return null;
     }
 
-    public function getMapSubmodule(array $componentVariation)
+    public function getMapSubmodule(array $component)
     {
         return [PoP_Module_Processor_MapIndividuals::class, PoP_Module_Processor_MapIndividuals::MODULE_MAP_SIDEBARINDIVIDUAL];
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        if ($locationslinks = $this->getLocationlinksTemplate($componentVariation)) {
+        if ($locationslinks = $this->getLocationlinksTemplate($component)) {
             $ret[] = $locationslinks;
         }
-        if ($map = $this->getMapSubmodule($componentVariation)) {
+        if ($map = $this->getMapSubmodule($component)) {
             $ret[] = $map;
         }
 
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
         return 'hasLocation';
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
         $ret[] = [GD_EM_Module_Processor_WidgetMessages::class, GD_EM_Module_Processor_WidgetMessages::MODULE_EM_MESSAGE_NOLOCATION];
 

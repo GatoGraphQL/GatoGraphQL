@@ -8,7 +8,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
     public final const MODULE_BLOCK_WHOWEARE_SCROLL_LIST = 'block-whoweare-scroll-list';
     public final const MODULE_BLOCK_WHOWEARE_SCROLL_FULLVIEW = 'block-whoweare-scroll-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS],
@@ -18,32 +18,32 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::MODULE_BLOCK_WHOWEARE_SCROLL_THUMBNAIL => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::MODULE_BLOCK_WHOWEARE_SCROLL_LIST => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
             self::MODULE_BLOCK_WHOWEARE_SCROLL_FULLVIEW => POP_COMMONPAGES_ROUTE_ABOUT_WHOWEARE,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLL_DETAILS],
             self::MODULE_BLOCK_WHOWEARE_SCROLL_THUMBNAIL => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLL_THUMBNAIL],
             self::MODULE_BLOCK_WHOWEARE_SCROLL_LIST => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLL_LIST],
             self::MODULE_BLOCK_WHOWEARE_SCROLL_FULLVIEW => [GD_Custom_Module_Processor_CustomSectionDataloads::class, GD_Custom_Module_Processor_CustomSectionDataloads::MODULE_DATALOAD_WHOWEARE_SCROLL_FULLVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_WHOWEARE_SCROLL_DETAILS:
             case self::MODULE_BLOCK_WHOWEARE_SCROLL_THUMBNAIL:
             case self::MODULE_BLOCK_WHOWEARE_SCROLL_LIST:
@@ -51,7 +51,7 @@ class GD_Custom_Module_Processor_CustomSectionBlocks extends PoP_Module_Processo
                 return TranslationAPIFacade::getInstance()->__('Who we are', 'poptheme-wassup');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 }
 

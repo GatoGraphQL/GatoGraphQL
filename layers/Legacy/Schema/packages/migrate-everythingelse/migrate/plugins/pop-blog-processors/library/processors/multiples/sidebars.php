@@ -9,7 +9,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
     public final const MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR = 'multiple-authorposts-sidebar';
     public final const MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR = 'multiple-authorcategoryposts-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_AUTHOR_SIDEBAR],
@@ -20,11 +20,11 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // Add also the filter block for the Single Related Content, etc
             case self::MODULE_MULTIPLE_AUTHOR_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
@@ -39,7 +39,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_POSTS_SIDEBAR],
                     self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => [PoP_Module_Processor_SidebarMultipleInners::class, PoP_Module_Processor_SidebarMultipleInners::MODULE_MULTIPLE_AUTHORSECTIONINNER_CATEGORYPOSTS_SIDEBAR],
                 );
-                if ($filter = $filters[$componentVariation[1]] ?? null) {
+                if ($filter = $filters[$component[1]] ?? null) {
                     $ret[] = $filter;
                 }
 
@@ -48,7 +48,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                     'PoP_UserCommunities_Module_Processor_SidebarMultiples:sidebar-layouts',
                     $ret,
                     $author,
-                    $componentVariation
+                    $component
                 );
                 break;
         }
@@ -56,7 +56,7 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
         return $ret;
     }
 
-    public function getScreen(array $componentVariation)
+    public function getScreen(array $component)
     {
         $screens = array(
             self::MODULE_MULTIPLE_AUTHOR_SIDEBAR => POP_SCREEN_AUTHOR,
@@ -65,16 +65,16 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
             self::MODULE_MULTIPLE_AUTHORPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
             self::MODULE_MULTIPLE_AUTHORCATEGORYPOSTS_SIDEBAR => POP_SCREEN_AUTHORSECTION,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($componentVariation);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $componentVariation)
+    public function getScreengroup(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_AUTHOR_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
             case self::MODULE_MULTIPLE_AUTHORCONTENT_SIDEBAR:
@@ -83,37 +83,37 @@ class PoP_Blog_Module_Processor_SidebarMultiples extends PoP_Module_Processor_Si
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($componentVariation);
+        return parent::getScreengroup($component);
     }
 
-    public function initWebPlatformModelProps(array $componentVariation, array &$props)
+    public function initWebPlatformModelProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_AUTHORMAINCONTENT_SIDEBAR:
-                $subComponentVariations = array_diff(
-                    $this->getSubComponentVariations($componentVariation),
-                    $this->getPermanentSubmodules($componentVariation)
+                $subComponents = array_diff(
+                    $this->getSubComponents($component),
+                    $this->getPermanentSubmodules($component)
                 );
-                foreach ($subComponentVariations as $subComponentVariation) {
+                foreach ($subComponents as $subComponent) {
                       // Comment Leo 10/12/2016: in the past, we did .active, however that doesn't work anymore for when alt+click to open a link, instead must pick the last added .tab-pane with selector "last-child"
                     $mainblock_taget = '#'.POP_MODULEID_PAGESECTIONCONTAINERID_BODY.' .pop-pagesection-page.toplevel:last-child > .blockgroup-author > .blocksection-extensions > .pop-block.withfilter';
 
                     // Make the block be collapsible, open it when the main feed is reached, with waypoints
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'collapse');
+                    $this->appendProp([$subComponent], $props, 'class', 'collapse');
                     $this->mergeProp(
-                        [$subComponentVariation],
+                        [$subComponent],
                         $props,
                         'params',
                         array(
                             'data-collapse-target' => $mainblock_taget
                         )
                     );
-                    $this->mergeJsmethodsProp([$subComponentVariation], $props, array('waypointsToggleCollapse'));
+                    $this->mergeJsmethodsProp([$subComponent], $props, array('waypointsToggleCollapse'));
                 }
                 break;
         }
 
-        parent::initWebPlatformModelProps($componentVariation, $props);
+        parent::initWebPlatformModelProps($component, $props);
     }
 }
 

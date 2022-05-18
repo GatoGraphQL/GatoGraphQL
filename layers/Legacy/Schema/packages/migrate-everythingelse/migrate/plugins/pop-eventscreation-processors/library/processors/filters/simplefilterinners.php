@@ -4,16 +4,16 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
 {
     public final const MODULE_SIMPLEFILTERINPUTCONTAINER_MYEVENTS = 'simplefilterinputcontainer-myevents';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYEVENTS],
         );
     }
 
-    protected function getInputSubmodules(array $componentVariation)
+    protected function getInputSubmodules(array $component)
     {
-        $ret = parent::getInputSubmodules($componentVariation);
+        $ret = parent::getInputSubmodules($component);
 
         $inputmodules = [
             self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYEVENTS => [
@@ -28,29 +28,29 @@ class PoP_EventsCreation_Module_Processor_CustomSimpleFilterInners extends PoP_M
                 // [PoP_Module_Processor_TextFilterInputs::class, PoP_Module_Processor_TextFilterInputs::MODULE_FILTERINPUT_HASHTAGS],
             ],
         ];
-        if ($componentVariations = \PoP\Root\App::applyFilters(
+        if ($components = \PoP\Root\App::applyFilters(
             'Events:FilterInnerComponentProcessor:inputmodules',
-            $inputmodules[$componentVariation[1]],
-            $componentVariation
+            $inputmodules[$component[1]],
+            $component
         )) {
             $ret = array_merge(
                 $ret,
-                $componentVariations
+                $components
             );
         }
         return $ret;
     }
 
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     $filters = array(
     //         self::MODULE_SIMPLEFILTERINPUTCONTAINER_MYEVENTS => POP_FILTER_MYEVENTS,
     //     );
-    //     if ($filter = $filters[$componentVariation[1]] ?? null) {
+    //     if ($filter = $filters[$component[1]] ?? null) {
     //         return $filter;
     //     }
 
-    //     return parent::getFilter($componentVariation);
+    //     return parent::getFilter($component);
     // }
 }
 

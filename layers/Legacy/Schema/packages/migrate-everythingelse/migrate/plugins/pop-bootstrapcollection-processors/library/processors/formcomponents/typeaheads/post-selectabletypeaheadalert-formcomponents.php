@@ -4,31 +4,31 @@ class PoP_Module_Processor_PostSelectableTypeaheadAlertFormComponents extends Po
 {
     public final const MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES = 'formcomponent-selectabletypeaheadalert-references';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES],
         );
     }
     
-    public function getHiddeninputModule(array $componentVariation)
+    public function getHiddeninputModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
                 return [GD_Processor_SelectableHiddenInputFormInputs::class, GD_Processor_SelectableHiddenInputFormInputs::MODULE_FORMINPUT_HIDDENINPUT_SELECTABLEREFERENCES];
         }
 
-        return parent::getHiddeninputModule($componentVariation);
+        return parent::getHiddeninputModule($component);
     }
 
-    public function isMultiple(array $componentVariation): bool
+    public function isMultiple(array $component): bool
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_SELECTABLETYPEAHEADALERT_REFERENCES:
                 return true;
         }
 
-        return parent::isMultiple($componentVariation);
+        return parent::isMultiple($component);
     }
 }
 

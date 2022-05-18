@@ -8,7 +8,7 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
     public final const MODULE_LAYOUT_CONTENT_COMMENT = 'layout-content-comment';
     public final const MODULE_LAYOUT_CONTENT_PAGE = 'layout-content-page';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CONTENT_POST],
@@ -19,11 +19,11 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         );
     }
 
-    protected function getUsermentionsLayout(array $componentVariation)
+    protected function getUsermentionsLayout(array $component)
     {
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
             case self::MODULE_LAYOUT_CONTENT_POSTFEED:
             case self::MODULE_LAYOUT_CONTENT_POSTCOMPACT:
@@ -36,11 +36,11 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return null;
     }
 
-    public function getAbovecontentSubmodules(array $componentVariation)
+    public function getAbovecontentSubmodules(array $component)
     {
-        $ret = parent::getAbovecontentSubmodules($componentVariation);
+        $ret = parent::getAbovecontentSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
                 if (defined('POP_ADDPOSTLINKSPROCESSORS_INITIALIZED')) {
                     $ret[] = [PoP_AddPostLinks_Module_Processor_LayoutWrappers::class, PoP_AddPostLinks_Module_Processor_LayoutWrappers::MODULE_ADDPOSTLINKS_LAYOUTWRAPPER_LINKFRAMEVISIBLE];
@@ -55,34 +55,34 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         }
 
         // Add the layout below to preload the popover content for user @mentions, coupled with js function 'contentPopover'
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
             case self::MODULE_LAYOUT_CONTENT_POSTFEED:
             case self::MODULE_LAYOUT_CONTENT_POSTCOMPACT:
             case self::MODULE_LAYOUT_CONTENT_COMMENT:
-                $ret[] = $this->getUsermentionsLayout($componentVariation);
+                $ret[] = $this->getUsermentionsLayout($component);
                 break;
         }
 
         return $ret;
     }
 
-    public function getContentMaxlength(array $componentVariation, array &$props)
+    public function getContentMaxlength(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POSTCOMPACT:
                 // Length: 400 characters max
                 return 400;
         }
 
-        return parent::getContentMaxlength($componentVariation, $props);
+        return parent::getContentMaxlength($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
             case self::MODULE_LAYOUT_CONTENT_POSTFEED:
             case self::MODULE_LAYOUT_CONTENT_POSTCOMPACT:
@@ -98,28 +98,28 @@ class PoP_Module_Processor_ContentLayouts extends PoP_Module_Processor_ContentLa
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Hide the @mentions popover code
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
             case self::MODULE_LAYOUT_CONTENT_POSTFEED:
             case self::MODULE_LAYOUT_CONTENT_POSTCOMPACT:
             case self::MODULE_LAYOUT_CONTENT_COMMENT:
-                $usermentions = $this->getUsermentionsLayout($componentVariation);
+                $usermentions = $this->getUsermentionsLayout($component);
                 $this->appendProp($usermentions, $props, 'class', 'hidden');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CONTENT_POST:
             case self::MODULE_LAYOUT_CONTENT_POSTFEED:
-                $this->appendProp($componentVariation, $props, 'class', 'readable');
+                $this->appendProp($component, $props, 'class', 'readable');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -53,5 +53,5 @@ class PoP_Module_RuntimeContentManager
 /**
  * Initialization
  */
-global $pop_componentVariation_runtimecontentmanager;
-$pop_componentVariation_runtimecontentmanager = new PoP_Module_RuntimeContentManager();
+global $pop_component_runtimecontentmanager;
+$pop_component_runtimecontentmanager = new PoP_Module_RuntimeContentManager();

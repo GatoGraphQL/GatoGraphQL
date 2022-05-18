@@ -3,47 +3,47 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ViewComponentButtonsBase extends PoP_Module_Processor_PreloadTargetDataButtonsBase
 {
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($header = $this->getHeaderSubmodule($componentVariation)) {
+        if ($header = $this->getHeaderSubmodule($component)) {
             $ret[] = $header;
         }
 
         return $ret;
     }
 
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_VIEWCOMPONENT_BUTTON];
     }
 
-    public function getHeaderSubmodule(array $componentVariation): ?array
+    public function getHeaderSubmodule(array $component): ?array
     {
         return null;
     }
-    public function getUrl(array $componentVariation, array &$props)
+    public function getUrl(array $component, array &$props)
     {
         return null;
     }
 
-    public function headerShowUrl(array $componentVariation)
+    public function headerShowUrl(array $component)
     {
         return false;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($url = $this->getUrl($componentVariation, $props)) {
+        if ($url = $this->getUrl($component, $props)) {
             $ret['url'] = $url;
         }
 
-        if ($header = $this->getHeaderSubmodule($componentVariation)) {
+        if ($header = $this->getHeaderSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['header'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($header);
         }
 

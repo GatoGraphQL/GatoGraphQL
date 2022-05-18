@@ -4,18 +4,18 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
 {
     public final const MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS = 'multicomponent-organizationdetails';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONTYPES];
                 $ret[] = [GD_URE_Module_Processor_CategoriesLayouts::class, GD_URE_Module_Processor_CategoriesLayouts::MODULE_LAYOUT_ORGANIZATIONCATEGORIES];
@@ -25,18 +25,18 @@ class GD_URE_Module_Processor_LayoutMultipleComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_ORGANIZATIONDETAILS:
-                $componentVariations = $this->getSubComponentVariations($componentVariation);
-                foreach ($componentVariations as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'inline');
+                $components = $this->getSubComponents($component);
+                foreach ($components as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

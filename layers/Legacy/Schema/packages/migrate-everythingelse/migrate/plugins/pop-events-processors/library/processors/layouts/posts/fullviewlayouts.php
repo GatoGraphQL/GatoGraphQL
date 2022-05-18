@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_FULLVIEW_EVENT = 'layout-fullview-event';
     public final const MODULE_LAYOUT_FULLVIEW_PASTEVENT = 'layout-fullview-pastevent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FULLVIEW_EVENT],
@@ -13,11 +13,11 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getFooterSubmodules(array $componentVariation)
+    public function getFooterSubmodules(array $component)
     {
-        $ret = parent::getFooterSubmodules($componentVariation);
+        $ret = parent::getFooterSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_EVENT:
             case self::MODULE_LAYOUT_FULLVIEW_PASTEVENT:
                 $ret[] = [PoP_Module_Processor_ViewComponentButtonWrappers::class, PoP_Module_Processor_ViewComponentButtonWrappers::MODULE_LAYOUTWRAPPER_POSTCONCLUSIONSIDEBAR_HORIZONTAL];
@@ -27,7 +27,7 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                 $ret = \PoP\Root\App::applyFilters(
                     'GD_EM_Module_Processor_CustomFullViewLayouts:footer-modules',
                     $ret,
-                    $componentVariation
+                    $component
                 );
                 break;
         }
@@ -35,9 +35,9 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getSidebarSubmodule(array $componentVariation)
+    public function getSidebarSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FULLVIEW_EVENT:
             case self::MODULE_LAYOUT_FULLVIEW_PASTEVENT:
                 $sidebars = array(
@@ -45,10 +45,10 @@ class GD_EM_Module_Processor_CustomFullViewLayouts extends PoP_Module_Processor_
                     self::MODULE_LAYOUT_FULLVIEW_PASTEVENT => [GD_EM_Module_Processor_CustomPostLayoutSidebars::class, GD_EM_Module_Processor_CustomPostLayoutSidebars::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_PASTEVENT],
                 );
 
-                return $sidebars[$componentVariation[1]];
+                return $sidebars[$component[1]];
         }
 
-        return parent::getSidebarSubmodule($componentVariation);
+        return parent::getSidebarSubmodule($component);
     }
 }
 

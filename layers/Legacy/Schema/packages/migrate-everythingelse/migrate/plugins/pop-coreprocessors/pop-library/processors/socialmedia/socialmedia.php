@@ -11,7 +11,7 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
     public final const MODULE_TAGSOCIALMEDIA = 'tag-socialmedia';
     public final const MODULE_TAGSOCIALMEDIA_COUNTER = 'tag-socialmedia-counter';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_POSTSOCIALMEDIA],
@@ -25,21 +25,21 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
         );
     }
 
-    public function useCounter(array $componentVariation)
+    public function useCounter(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA_COUNTER:
             case self::MODULE_SUBJUGATEDPOSTSOCIALMEDIA_COUNTER:
             case self::MODULE_USERSOCIALMEDIA_COUNTER:
             case self::MODULE_TAGSOCIALMEDIA_COUNTER:
                 return true;
         }
-        return parent::useCounter($componentVariation);
+        return parent::useCounter($component);
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_POSTSOCIALMEDIA:
             case self::MODULE_POSTSOCIALMEDIA_COUNTER:
                 return array(
@@ -73,7 +73,7 @@ class PoP_Module_Processor_SocialMedia extends PoP_Module_Processor_SocialMediaB
                 );
         }
         
-        return parent::getSubComponentVariations($componentVariation);
+        return parent::getSubComponents($component);
     }
 }
 

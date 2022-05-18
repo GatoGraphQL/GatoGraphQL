@@ -12,7 +12,7 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
     public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_TAGSTANCES_STANCE_SIDEBAR = 'multiple-sectioninner-tagstances-sidebar-stance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR],
@@ -27,11 +27,11 @@ class PoPVP_Module_Processor_CustomSectionSidebarInners extends PoP_Module_Proce
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_STANCES_SIDEBAR:
                 $ret[] = [PoPVP_Module_Processor_ButtonGroups::class, PoPVP_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_STANCES];
                 $ret[] = [PoPVP_Module_Processor_CustomDelegatorFilters::class, PoPVP_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_STANCES];

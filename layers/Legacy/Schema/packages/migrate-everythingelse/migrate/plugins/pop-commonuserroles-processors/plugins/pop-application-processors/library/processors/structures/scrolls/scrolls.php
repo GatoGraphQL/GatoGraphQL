@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     public final const MODULE_SCROLL_ORGANIZATIONS_FULLVIEW = 'scroll-organizations-fullview';
     public final const MODULE_SCROLL_INDIVIDUALS_FULLVIEW = 'scroll-individuals-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_ORGANIZATIONS_DETAILS],
@@ -18,7 +18,7 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_ORGANIZATIONS_DETAILS => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_ORGANIZATIONS_DETAILS],
@@ -27,14 +27,14 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
             self::MODULE_SCROLL_INDIVIDUALS_FULLVIEW => [GD_URE_Module_Processor_CustomScrollInners::class, GD_URE_Module_Processor_CustomScrollInners::MODULE_SCROLLINNER_INDIVIDUALS_FULLVIEW],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
@@ -48,14 +48,14 @@ class GD_URE_Module_Processor_CustomScrolls extends PoP_Module_Processor_Scrolls
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $fullviews)) {
+        if (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($componentVariation, $details)) {
+        } elseif (in_array($component, $details)) {
             $extra_class = 'details';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

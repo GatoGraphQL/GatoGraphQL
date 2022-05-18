@@ -6,7 +6,7 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
     public final const MODULE_CAROUSEL_AUTHORSTANCES = 'carousel-authorstances';
     public final const MODULE_CAROUSEL_TAGSTANCES = 'carousel-tagstances';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSEL_STANCES],
@@ -15,24 +15,24 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
         );
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSEL_STANCES:
             case self::MODULE_CAROUSEL_AUTHORSTANCES:
             case self::MODULE_CAROUSEL_TAGSTANCES:
-                $this->appendProp($componentVariation, $props, 'class', 'slide');
-                // $this->appendProp($componentVariation, $props, 'class', 'widget widget-info');
-                $this->appendProp($componentVariation, $props, 'class', 'widget');
+                $this->appendProp($component, $props, 'class', 'slide');
+                // $this->appendProp($component, $props, 'class', 'widget widget-info');
+                $this->appendProp($component, $props, 'class', 'widget');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSEL_STANCES:
                 return [UserStance_Module_Processor_CustomCarouselInners::class, UserStance_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_STANCES];
 
@@ -43,25 +43,25 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
                 return [UserStance_Module_Processor_CustomCarouselInners::class, UserStance_Module_Processor_CustomCarouselInners::MODULE_CAROUSELINNER_TAGSTANCES];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function getMode(array $componentVariation, array &$props)
+    public function getMode(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSEL_STANCES:
             case self::MODULE_CAROUSEL_AUTHORSTANCES:
             case self::MODULE_CAROUSEL_TAGSTANCES:
                 return 'static';
         }
 
-        return parent::getMode($componentVariation, $props);
+        return parent::getMode($component, $props);
     }
 
 
-    public function getControlsTopSubmodule(array $componentVariation)
+    public function getControlsTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSEL_STANCES:
                 return [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_STANCES];
 
@@ -72,7 +72,7 @@ class UserStance_Module_Processor_CustomCarousels extends PoP_Module_Processor_C
                 return [UserStance_Module_Processor_CustomCarouselControls::class, UserStance_Module_Processor_CustomCarouselControls::MODULE_CAROUSELCONTROLS_TAGSTANCES];
         }
 
-        return parent::getControlsTopSubmodule($componentVariation);
+        return parent::getControlsTopSubmodule($component);
     }
 }
 

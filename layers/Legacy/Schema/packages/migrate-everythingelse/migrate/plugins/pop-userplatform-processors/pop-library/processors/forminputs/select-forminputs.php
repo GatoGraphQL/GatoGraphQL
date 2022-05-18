@@ -5,31 +5,31 @@ class GD_UserPlatform_Module_Processor_SelectFormInputs extends PoP_Module_Proce
 {
     public final const MODULE_FORMINPUT_SETTINGSFORMAT = 'forminput-settingsformat';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_SETTINGSFORMAT],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_SETTINGSFORMAT:
                 return TranslationAPIFacade::getInstance()->__('Default view', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_SETTINGSFORMAT:
                 return GD_FormInput_SettingsFormat::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 }
 

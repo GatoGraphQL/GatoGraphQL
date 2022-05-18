@@ -5,7 +5,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
     public final const MODULE_FORMCOMPONENT_CARD_POST = 'forminput-post-card';
     public final const MODULE_FORMCOMPONENT_CARD_COMMENTPOST = 'forminput-commentpost-card';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMCOMPONENT_CARD_POST],
@@ -13,9 +13,9 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
         );
     }
 
-    public function getTriggerSubmodule(array $componentVariation): ?array
+    public function getTriggerSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_POST:
                 return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTPOST];
 
@@ -23,12 +23,12 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
                 return [PoP_Module_Processor_PostHiddenInputAlertFormComponents::class, PoP_Module_Processor_PostHiddenInputAlertFormComponents::MODULE_FORMCOMPONENT_HIDDENINPUTALERT_LAYOUTCOMMENTPOST];
         }
 
-        return parent::getTriggerSubmodule($componentVariation);
+        return parent::getTriggerSubmodule($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMCOMPONENT_CARD_POST:
                 return 'self';
 
@@ -36,7 +36,7 @@ class PoP_Application_Module_Processor_PostTriggerLayoutFormComponentValues exte
                 return 'customPost';
         }
 
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

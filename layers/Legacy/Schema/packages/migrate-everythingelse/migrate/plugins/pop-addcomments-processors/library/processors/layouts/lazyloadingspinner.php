@@ -4,7 +4,7 @@ class PoP_Module_Processor_LazyLoadingSpinnerLayouts extends PoP_Module_Processo
 {
     public final const MODULE_LAYOUT_LAZYLOADINGSPINNER = 'layout-lazyloading-spinner';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_LAZYLOADINGSPINNER],

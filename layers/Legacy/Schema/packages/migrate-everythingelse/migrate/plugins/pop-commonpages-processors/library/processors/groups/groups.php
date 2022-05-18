@@ -4,18 +4,18 @@ class GD_CommonPages_Module_Processor_CustomGroups extends PoP_Module_Processor_
 {
     public final const MODULE_GROUP_WHOWEARE = 'group-whoweare';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GROUP_WHOWEARE],
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_WHOWEARE:
                 // Allow to override with custom blocks
                 $ret = array_merge(

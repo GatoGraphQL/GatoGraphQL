@@ -10,7 +10,7 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
     public final const MODULE_FORMINPUTGROUP_EM_LOCATIONREGION = 'forminputgroup-location_region';
     public final const MODULE_FORMINPUTGROUP_EM_LOCATIONCOUNTRY = 'forminputgroup-location_country';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_EM_LOCATIONNAME],
@@ -23,7 +23,7 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_EM_LOCATIONNAME => [GD_EM_Module_Processor_CreateLocationTextFormInputs::class, GD_EM_Module_Processor_CreateLocationTextFormInputs::MODULE_FORMINPUT_EM_LOCATIONNAME],
@@ -35,11 +35,11 @@ class GD_EM_Module_Processor_CreateLocationFormGroups extends PoP_Module_Process
             self::MODULE_FORMINPUTGROUP_EM_LOCATIONCOUNTRY => [GD_EM_Module_Processor_CreateLocationSelectFormInputs::class, GD_EM_Module_Processor_CreateLocationSelectFormInputs::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

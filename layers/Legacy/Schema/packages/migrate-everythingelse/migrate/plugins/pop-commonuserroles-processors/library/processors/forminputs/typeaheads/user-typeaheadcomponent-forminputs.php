@@ -7,7 +7,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION = 'ure-typeahead-component-organization';
     public final const MODULE_URE_TYPEAHEAD_COMPONENT_INDIVIDUAL = 'ure-typeahead-component-individual';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION],
@@ -15,9 +15,9 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('Organizations', 'ure-popprocessors');
 
@@ -25,13 +25,13 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
                 return TranslationAPIFacade::getInstance()->__('Individuals', 'ure-popprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    protected function getTypeaheadDataloadSource(array $componentVariation, array &$props)
+    protected function getTypeaheadDataloadSource(array $component, array &$props)
     {
         $cmsengineapi = \PoP\Engine\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return RouteUtils::getRouteURL(POP_COMMONUSERROLES_ROUTE_ORGANIZATIONS);
 
@@ -39,14 +39,14 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
                 return RouteUtils::getRouteURL(POP_COMMONUSERROLES_ROUTE_INDIVIDUALS);
         }
 
-        return parent::getTypeaheadDataloadSource($componentVariation, $props);
+        return parent::getTypeaheadDataloadSource($component, $props);
     }
 
-    protected function getThumbprintQuery(array $componentVariation, array &$props)
+    protected function getThumbprintQuery(array $component, array &$props)
     {
-        $ret = parent::getThumbprintQuery($componentVariation, $props);
+        $ret = parent::getThumbprintQuery($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 $ret['role'] = GD_URE_ROLE_ORGANIZATION;
                 break;
@@ -59,9 +59,9 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
         return $ret;
     }
 
-    protected function getPendingMsg(array $componentVariation)
+    protected function getPendingMsg(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('Loading Organizations', 'ure-popprocessors');
 
@@ -69,12 +69,12 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
                 return TranslationAPIFacade::getInstance()->__('Loading Individuals', 'ure-popprocessors');
         }
 
-        return parent::getPendingMsg($componentVariation);
+        return parent::getPendingMsg($component);
     }
 
-    protected function getNotfoundMsg(array $componentVariation)
+    protected function getNotfoundMsg(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_TYPEAHEAD_COMPONENT_ORGANIZATION:
                 return TranslationAPIFacade::getInstance()->__('No Organizations found', 'ure-popprocessors');
 
@@ -82,7 +82,7 @@ class PoP_CommonUserRoles_Module_Processor_UserTypeaheadComponentFormInputs exte
                 return TranslationAPIFacade::getInstance()->__('No Individuals found', 'ure-popprocessors');
         }
 
-        return parent::getNotfoundMsg($componentVariation);
+        return parent::getNotfoundMsg($component);
     }
 }
 

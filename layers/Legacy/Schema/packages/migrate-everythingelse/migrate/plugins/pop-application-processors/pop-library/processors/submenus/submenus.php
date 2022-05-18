@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
     public final const MODULE_SUBMENU_TAG = 'submenu-tag';
     public final const MODULE_SUBMENU_SINGLE = 'submenu-single';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMENU_AUTHOR],
@@ -20,48 +20,48 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
             [self::class, self::MODULE_SUBMENU_SINGLE],
         );
     }
-    public function getClass(array $componentVariation)
+    public function getClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
             case self::MODULE_SUBMENU_TAG:
             case self::MODULE_SUBMENU_SINGLE:
                 return 'btn btn-default btn-sm';
         }
 
-        return parent::getClass($componentVariation);
+        return parent::getClass($component);
     }
-    public function getXsClass(array $componentVariation)
+    public function getXsClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
             case self::MODULE_SUBMENU_TAG:
             case self::MODULE_SUBMENU_SINGLE:
                 return 'btn btn-default btn-sm btn-block';
         }
 
-        return parent::getClass($componentVariation);
+        return parent::getClass($component);
     }
-    public function getDropdownClass(array $componentVariation)
+    public function getDropdownClass(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
             case self::MODULE_SUBMENU_TAG:
             case self::MODULE_SUBMENU_SINGLE:
                 return 'btn-default';
         }
 
-        return parent::getDropdownClass($componentVariation);
+        return parent::getDropdownClass($component);
     }
 
-    public function getRoutes(array $componentVariation, array &$props)
+    public function getRoutes(array $component, array &$props)
     {
-        $ret = parent::getRoutes($componentVariation, $props);
+        $ret = parent::getRoutes($component, $props);
 
         // Potentially, add an extra header level if the current page is one of the subheaders
         $route = \PoP\Root\App::getState('route');
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $ret[RoutingRoutes::$MAIN] = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomSubMenus:author:mainsubheaders',
@@ -112,12 +112,12 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
         return $ret;
     }
 
-    public function getUrl(array $componentVariation, $route, array &$props)
+    public function getUrl(array $component, $route, array &$props)
     {
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
         $postTagTypeAPI = PostTagTypeAPIFacade::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMENU_AUTHOR:
                 $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
                 $url = $userTypeAPI->getUserURL($author);
@@ -135,7 +135,7 @@ class PoP_Module_Processor_CustomSubMenus extends PoP_Module_Processor_SubMenusB
                 return RequestUtils::addRoute($url, $route);
         }
 
-        return parent::getUrl($componentVariation, $route, $props);
+        return parent::getUrl($component, $route, $props);
     }
 }
 

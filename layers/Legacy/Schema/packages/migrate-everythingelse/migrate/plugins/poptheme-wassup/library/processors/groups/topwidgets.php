@@ -15,7 +15,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
     public final const MODULE_GROUP_AUTHOR_WIDGETAREA = 'group-author-widgetarea';
     public final const MODULE_GROUP_TAG_WIDGETAREA = 'group-tag-widgetarea';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_GROUP_HOMETOP],
@@ -30,11 +30,11 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOME:
                 $ret[] = [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::MODULE_HTMLCODE_HOMEWELCOMETOP];
                 $ret[] = [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME];
@@ -62,45 +62,45 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
 
             case self::MODULE_GROUP_HOME_WIDGETAREA:
                 // Add the blocks
-                if ($componentVariations = \PoP\Root\App::applyFilters(
+                if ($components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:home_widgetarea',
                     array(),
-                    $componentVariation
+                    $component
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $componentVariations
+                        $components
                     );
                 }
                 break;
 
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
                 // Add the blocks
-                if ($componentVariations = \PoP\Root\App::applyFilters(
+                if ($components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:author_widgetarea',
                     array(),
-                    $componentVariation
+                    $component
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $componentVariations
+                        $components
                     );
                 }
                 break;
 
             case self::MODULE_GROUP_TAG_WIDGETAREA:
-                $componentVariations = array();
-                $componentVariations[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
+                $components = array();
+                $components[] = [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_TAG_CONTENT];
 
                 // Allow to add the Featured Carousel
-                if ($componentVariations = \PoP\Root\App::applyFilters(
+                if ($components = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomGroups:modules:tag_widgetarea',
-                    $componentVariations,
-                    $componentVariation
+                    $components,
+                    $component
                 )) {
                     $ret = array_merge(
                         $ret,
-                        $componentVariations
+                        $components
                     );
                 }
                 break;
@@ -133,11 +133,11 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOME:
             case self::MODULE_GROUP_HOME_COMPACTWELCOME:
                 // It will add class "in" through .js if there is no cookie
@@ -148,9 +148,9 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
         return $ret;
     }
 
-    public function initWebPlatformRequestProps(array $componentVariation, array &$props)
+    public function initWebPlatformRequestProps(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOME:
             case self::MODULE_GROUP_HOME_COMPACTWELCOME:
             case self::MODULE_GROUP_AUTHOR_DESCRIPTION:
@@ -161,9 +161,9 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                     self::MODULE_GROUP_HOME_COMPACTWELCOME => [PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME],
                     self::MODULE_GROUP_AUTHOR_DESCRIPTION => [PoP_Module_Processor_CustomContentBlocks::class, PoP_Module_Processor_CustomContentBlocks::MODULE_BLOCK_AUTHOR_CONTENT],
                 );
-                $frontend_id = $this->getFrontendId($componentVariation, $props);
+                $frontend_id = $this->getFrontendId($component, $props);
                 $collapsible_frontend_id = $frontend_id.'collapse';
-                $this->setProp([$collapsible_submodules[$componentVariation[1]]], $props, 'frontend-id', $collapsible_frontend_id);
+                $this->setProp([$collapsible_submodules[$component[1]]], $props, 'frontend-id', $collapsible_frontend_id);
 
                 // Then set the frontend-id to the labels
                 $label_submodules_set = array(
@@ -180,20 +180,20 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                         [PoP_Module_Processor_HTMLCodes::class, PoP_Module_Processor_HTMLCodes::MODULE_HTMLCODE_AUTHORDESCRIPTIONBOTTOM],
                     ),
                 );
-                foreach ($label_submodules_set[$componentVariation[1]] as $subComponentVariation) {
-                    $this->setProp([$subComponentVariation], $props, 'target-id', $collapsible_frontend_id);
+                foreach ($label_submodules_set[$component[1]] as $subComponent) {
+                    $this->setProp([$subComponent], $props, 'target-id', $collapsible_frontend_id);
                 }
                 break;
         }
 
-        parent::initWebPlatformRequestProps($componentVariation, $props);
+        parent::initWebPlatformRequestProps($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOMEACCOUNT:
-                $this->appendProp($componentVariation, $props, 'class', 'row');
+                $this->appendProp($component, $props, 'class', 'row');
                 break;
 
             case self::MODULE_GROUP_HOME_WELCOME:
@@ -207,46 +207,46 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_AUTHOR_DESCRIPTION:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-author-description');
+                $this->appendProp($component, $props, 'class', 'blockgroup-author-description');
                 break;
 
             case self::MODULE_GROUP_HOMETOP:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-hometop');
+                $this->appendProp($component, $props, 'class', 'blockgroup-hometop');
                 break;
 
             case self::MODULE_GROUP_AUTHORTOP:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-authortop');
+                $this->appendProp($component, $props, 'class', 'blockgroup-authortop');
                 break;
 
             case self::MODULE_GROUP_HOME_WELCOMEACCOUNT:
                 // Do not show if the user is logged in
                 // Notice that it works for the domain from wherever this block is being fetched from!
                 $cmsService = CMSServiceFacade::getInstance();
-                $this->appendProp($componentVariation, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainId($cmsService->getSiteURL()));
+                $this->appendProp($component, $props, 'class', 'visible-notloggedin-'.RequestUtils::getDomainId($cmsService->getSiteURL()));
 
                 // Give it some formatting
-                $this->appendProp($componentVariation, $props, 'class', 'well well-sm');
+                $this->appendProp($component, $props, 'class', 'well well-sm');
                 break;
 
             case self::MODULE_GROUP_HOME_WELCOME:
             case self::MODULE_GROUP_HOME_COMPACTWELCOME:
-                $this->appendProp($componentVariation, $props, 'class', 'blockgroup-home-welcome');
+                $this->appendProp($component, $props, 'class', 'blockgroup-home-welcome');
 
                 // If PoP Engine Web Platform is not defined, then there is no `getFrontendId`
                 if (defined('POP_ENGINEWEBPLATFORM_INITIALIZED')) {
                      // Set the params for the cookie: show the welcome message, until the user clicks on "Close"
-                    $frontend_id = $this->getFrontendId($componentVariation, $props);
+                    $frontend_id = $this->getFrontendId($component, $props);
                     $target = '#'.$frontend_id.'>.blocksection-extensions';
                     $deletecookiebtn = '#'.$frontend_id.'-expand>a';
                     $setcookiebtn = '#'.$frontend_id.'-collapse>a';/*, #'.$frontend_id.'-collapsebottom>a';*/
                     $this->mergeProp(
-                        $componentVariation,
+                        $component,
                         $props,
                         'params',
                         array(
-                            'data-cookieid' => $componentVariation,
+                            'data-cookieid' => $component,
                             'data-cookietarget' => $target,
                             'data-cookieclass' => 'in',
                             'data-deletecookiebtn' => $deletecookiebtn,
@@ -258,14 +258,14 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WIDGETAREA:
             case self::MODULE_GROUP_AUTHOR_WIDGETAREA:
             case self::MODULE_GROUP_TAG_WIDGETAREA:
                 // External Injection
                 \PoP\Root\App::doAction(
                     'PoP_Module_Processor_CustomGroups:modules:props',
-                    $componentVariation,
+                    $component,
                     array(&$props),
                     $this
                 );
@@ -288,14 +288,14 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOME:
             case self::MODULE_GROUP_HOME_COMPACTWELCOME:
                 $this->appendProp([[PoP_Module_Processor_Codes::class, PoP_Module_Processor_Codes::MODULE_CODE_HOMEWELCOME]], $props, 'class', 'jumbotron text-center');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_GROUP_HOME_WELCOME:
                 $this->appendProp([[PoP_Module_Processor_UserLoggedIns::class, PoP_Module_Processor_UserLoggedIns::MODULE_USERACCOUNT_USERLOGGEDINWELCOME]], $props, 'class', 'well well-sm');
                 break;
@@ -307,7 +307,7 @@ class PoP_Module_Processor_CustomGroups extends PoP_Module_Processor_MultiplesBa
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

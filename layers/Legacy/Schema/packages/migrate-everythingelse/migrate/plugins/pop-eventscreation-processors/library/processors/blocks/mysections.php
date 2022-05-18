@@ -9,7 +9,7 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
     public final const MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-myevents-scroll-fullviewpreview';
     public final const MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW = 'block-mypastevents-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_MYEVENTS_TABLE_EDIT],
@@ -21,22 +21,22 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_BLOCK_MYEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYEVENTS,
             self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
             self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_SIMPLEVIEWPREVIEW => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
             self::MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT => POP_EVENTSCREATION_ROUTE_MYPASTEVENTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_BLOCK_MYEVENTS_TABLE_EDIT => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYEVENTS_TABLE_EDIT],
             self::MODULE_BLOCK_MYPASTEVENTS_TABLE_EDIT => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYPASTEVENTS_TABLE_EDIT],
             self::MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW],
@@ -45,12 +45,12 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
             self::MODULE_BLOCK_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW => [PoP_EventsCreation_Module_Processor_MySectionDataloads::class, PoP_EventsCreation_Module_Processor_MySectionDataloads::MODULE_DATALOAD_MYPASTEVENTS_SCROLL_FULLVIEWPREVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_MYEVENTS_TABLE_EDIT:
             case self::MODULE_BLOCK_MYEVENTS_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_BLOCK_MYEVENTS_SCROLL_FULLVIEWPREVIEW:
@@ -62,7 +62,7 @@ class PoP_EventsCreation_Module_Processor_MySectionBlocks extends PoP_Module_Pro
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYBLOCKCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 }
 

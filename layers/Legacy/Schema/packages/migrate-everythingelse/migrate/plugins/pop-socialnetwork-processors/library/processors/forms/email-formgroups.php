@@ -11,7 +11,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
     public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminputgroup-emailnotifications-subscribedtopic-createdcontent';
     public final const MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminputgroup-emailnotifications-subscribedtopic-addedcomment';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
@@ -25,7 +25,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT => [PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
@@ -38,16 +38,16 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
             self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => [PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function useModuleConfiguration(array $componentVariation)
+    public function useModuleConfiguration(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::MODULE_FORMINPUTGROUP_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -59,7 +59,7 @@ class PoP_SocialNetwork_Module_Processor_EmailFormGroups extends PoP_Module_Proc
                 return false;
         }
 
-        return parent::useModuleConfiguration($componentVariation);
+        return parent::useModuleConfiguration($component);
     }
 }
 

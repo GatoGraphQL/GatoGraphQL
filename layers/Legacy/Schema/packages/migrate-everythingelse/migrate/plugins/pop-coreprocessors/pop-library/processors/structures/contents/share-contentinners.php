@@ -7,7 +7,7 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
     public final const MODULE_CONTENTINNER_API = 'contentinner-api';
     public final const MODULE_CONTENTINNER_COPYSEARCHURL = 'contentinner-copysearchurl';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_EMBEDPREVIEW],
@@ -17,11 +17,11 @@ class PoP_Module_Processor_ShareContentInners extends PoP_Module_Processor_Conte
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CONTENTINNER_EMBEDPREVIEW:
                 $ret[] = [PoP_Module_Processor_EmbedPreviewLayouts::class, PoP_Module_Processor_EmbedPreviewLayouts::MODULE_LAYOUT_EMBEDPREVIEW];
                 break;

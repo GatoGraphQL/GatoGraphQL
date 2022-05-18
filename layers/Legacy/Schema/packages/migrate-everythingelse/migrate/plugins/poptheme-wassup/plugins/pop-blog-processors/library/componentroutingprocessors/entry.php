@@ -20,7 +20,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
     //     if (!\PoPAPI\API\Environment::disableAPI()) {
     //         // Home
     //         $ret[RequestNature::HOME][] = [
-    //             'component-variation' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
+    //             'component' => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
     //             'conditions' => [
     //                 'scheme' => APISchemes::API,
     //             ],
@@ -44,9 +44,9 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             $routemodules = array(
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
-            foreach ($routemodules as $route => $componentVariation) {
+            foreach ($routemodules as $route => $component) {
                 $ret[RequestNature::GENERIC][$route][] = [
-                    'component-variation' => $componentVariation,
+                    'component' => $component,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -57,9 +57,9 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             $routemodules = array(
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_CUSTOMPOSTLIST],
             );
-            foreach ($routemodules as $route => $componentVariation) {
+            foreach ($routemodules as $route => $component) {
                 $ret[RequestNature::GENERIC][$route][] = [
-                    'component-variation' => $componentVariation,
+                    'component' => $component,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                         'datastructure' => $this->restDataStructureFormatter->getName(),
@@ -71,9 +71,9 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             $routemodules = array(
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_AUTHORCONTENTLIST],
             );
-            foreach ($routemodules as $route => $componentVariation) {
+            foreach ($routemodules as $route => $component) {
                 $ret[UserRequestNature::USER][$route][] = [
-                    'component-variation' => $componentVariation,
+                    'component' => $component,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -84,9 +84,9 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             $routemodules = array(
                 POP_BLOG_ROUTE_CONTENT => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_TAGCONTENTLIST],
             );
-            foreach ($routemodules as $route => $componentVariation) {
+            foreach ($routemodules as $route => $component) {
                 $ret[TagRequestNature::TAG][$route][] = [
-                    'component-variation' => $componentVariation,
+                    'component' => $component,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],
@@ -97,9 +97,9 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
             $routemodules = array(
                 POP_ROUTE_AUTHORS => [PoP_Blog_Module_Processor_FieldDataloads::class, PoP_Blog_Module_Processor_FieldDataloads::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEAUTHORLIST],
             );
-            foreach ($routemodules as $route => $componentVariation) {
+            foreach ($routemodules as $route => $component) {
                 $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                    'component-variation' => $componentVariation,
+                    'component' => $component,
                     'conditions' => [
                         'scheme' => APISchemes::API,
                     ],

@@ -9,7 +9,7 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
     public final const MODULE_FORMINPUTGROUP_LOSTPWDRESET_NEWPASSWORD = 'forminputgroup-lostpwdreset-newpassword';
     public final const MODULE_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT = 'forminputgroup-lostpwdreset-passwordrepeat';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_LOGIN_USERNAME],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_LOGIN_USERNAME => [PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOGIN_USERNAME],
@@ -32,11 +32,11 @@ class PoP_Module_Processor_LoginFormGroups extends PoP_Module_Processor_FormComp
             self::MODULE_FORMINPUTGROUP_LOSTPWDRESET_PASSWORDREPEAT => [PoP_Module_Processor_LoginTextFormInputs::class, PoP_Module_Processor_LoginTextFormInputs::MODULE_FORMINPUT_LOSTPWDRESET_PASSWORDREPEAT],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 }
 

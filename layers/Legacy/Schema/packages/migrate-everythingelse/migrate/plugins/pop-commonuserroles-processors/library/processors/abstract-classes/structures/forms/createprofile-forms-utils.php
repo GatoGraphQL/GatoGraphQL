@@ -2,7 +2,7 @@
 
 abstract class PoP_Module_Processor_CreatProfileFormsUtils
 {
-    public static function getFormSubmodules(array $componentVariation, &$components, $processor)
+    public static function getFormSubmodules(array $component, &$components, $processor)
     {
         if (defined('POP_USERCOMMUNITIESPROCESSORS_INITIALIZED')) {
             // Add extra components

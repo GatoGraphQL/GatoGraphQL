@@ -5,16 +5,16 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
 {
     public final const MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL = 'code-updownvoteundoupdownvotepost-label';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL],
         );
     }
 
-    public function getCode(array $componentVariation, array &$props)
+    public function getCode(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Allow TPP Debate website to override this label with "Agree?"
                 $labels = array(
@@ -23,23 +23,23 @@ class PoP_Module_Processor_CustomCodes extends PoP_Module_Processor_HTMLCodesBas
 
                 return sprintf(
                     '<span class="btn btn-link btn-compact btn-span pop-functionbutton">%s</span>',
-                    $labels[$componentVariation[1]]
+                    $labels[$component[1]]
                 );
         }
 
-        return parent::getCode($componentVariation, $props);
+        return parent::getCode($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_UPDOWNVOTEUNDOUPDOWNVOTEPOST_LABEL:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'functionbutton');
+                $this->setProp($component, $props, 'resourceloader', 'functionbutton');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

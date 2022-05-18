@@ -523,7 +523,7 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
     public final const MODULE_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT = 'block-tagcategoryposts18-carousel-content';
     public final const MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT = 'block-tagcategoryposts19-carousel-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_NAVIGATOR],
@@ -1074,9 +1074,9 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_CAROUSEL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
             self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_FULLVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS00,
@@ -1557,13 +1557,13 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_LIST => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_SIMPLEVIEW => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_SCROLL_THUMBNAIL => POP_CATEGORYPOSTS_ROUTE_CATEGORYPOSTS19,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_NAVIGATOR => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS00_SCROLL_NAVIGATOR],
             self::MODULE_BLOCK_CATEGORYPOSTS01_SCROLL_NAVIGATOR => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_CATEGORYPOSTS01_SCROLL_NAVIGATOR],
@@ -2112,12 +2112,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT => [CPP_Module_Processor_SectionDataloads::class, CPP_Module_Processor_SectionDataloads::MODULE_DATALOAD_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS01_SCROLL_DETAILS:
             case self::MODULE_BLOCK_AUTHORCATEGORYPOSTS02_SCROLL_DETAILS:
@@ -2445,12 +2445,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_BLOCKPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getLatestcountSubmodule(array $componentVariation)
+    public function getLatestcountSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_DETAILS:
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_SIMPLEVIEW:
             case self::MODULE_BLOCK_CATEGORYPOSTS00_SCROLL_FULLVIEW:
@@ -2932,12 +2932,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
                 return [PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::class, PoPThemeWassup_CategoryProcessors_Module_Processor_SectionLatestCounts::MODULE_LATESTCOUNT_TAG_CATEGORYPOSTS19];
         }
 
-        return parent::getLatestcountSubmodule($componentVariation);
+        return parent::getLatestcountSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_CATEGORYPOSTS00_CAROUSEL:
             case self::MODULE_BLOCK_CATEGORYPOSTS01_CAROUSEL:
             case self::MODULE_BLOCK_CATEGORYPOSTS02_CAROUSEL:
@@ -3059,12 +3059,12 @@ class CPP_Module_Processor_SectionBlocks extends PoP_Module_Processor_SectionBlo
             case self::MODULE_BLOCK_TAGCATEGORYPOSTS18_CAROUSEL_CONTENT:
             case self::MODULE_BLOCK_TAGCATEGORYPOSTS19_CAROUSEL_CONTENT:
                 // Artificial property added to identify the template when adding module-resources
-                // $this->setProp($componentVariation, $props, 'resourceloader', 'block-carousel');
-                $this->appendProp($componentVariation, $props, 'class', 'pop-block-carousel block-posts-carousel');
+                // $this->setProp($component, $props, 'resourceloader', 'block-carousel');
+                $this->appendProp($component, $props, 'class', 'pop-block-carousel block-posts-carousel');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

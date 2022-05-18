@@ -4,34 +4,34 @@ class PoP_Events_Module_Processor_EmailFormGroups extends PoP_Module_Processor_N
 {
     public final const MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS = 'forminputgroup-emaildigests-weeklyupcomingevents';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
         );
     }
 
-    public function getComponentSubmodule(array $componentVariation)
+    public function getComponentSubmodule(array $component)
     {
         $components = array(
             self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS => [PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::class, PoP_Events_Module_Processor_UserProfileCheckboxFormInputs::MODULE_FORMINPUT_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS],
         );
 
-        if ($component = $components[$componentVariation[1]] ?? null) {
+        if ($component = $components[$component[1]] ?? null) {
             return $component;
         }
 
-        return parent::getComponentSubmodule($componentVariation);
+        return parent::getComponentSubmodule($component);
     }
 
-    public function useModuleConfiguration(array $componentVariation)
+    public function useModuleConfiguration(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUTGROUP_EMAILDIGESTS_WEEKLYUPCOMINGEVENTS:
                 return false;
         }
 
-        return parent::useModuleConfiguration($componentVariation);
+        return parent::useModuleConfiguration($component);
     }
 }
 

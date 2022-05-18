@@ -14,7 +14,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
     public final const MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE = 'block-stances-neutral-article-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_MYSTANCES = 'block-mystances-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_STANCES],
@@ -31,9 +31,9 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
         );
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_STANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES],
@@ -48,16 +48,16 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
             self::MODULE_BLOCK_TABPANEL_STANCES_NEUTRAL_ARTICLE => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_STANCES_NEUTRAL_ARTICLE],
             self::MODULE_BLOCK_TABPANEL_MYSTANCES => [UserStance_Module_Processor_SectionTabPanelComponents::class, UserStance_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_MYSTANCES],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_STANCES:
             case self::MODULE_BLOCK_TABPANEL_STANCES_PRO:
             case self::MODULE_BLOCK_TABPANEL_STANCES_AGAINST:
@@ -74,12 +74,12 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_MYCUSTOMPOSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_STANCES:
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_STANCES];
 
@@ -100,7 +100,7 @@ class UserStance_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Proce
                 return [UserStance_Module_Processor_CustomFilters::class, UserStance_Module_Processor_CustomFilters::MODULE_FILTER_MYSTANCES];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

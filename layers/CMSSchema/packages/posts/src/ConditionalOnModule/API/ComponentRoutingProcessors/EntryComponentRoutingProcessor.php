@@ -22,7 +22,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     {
         $ret = array();
         $ret[CustomPostRequestNature::CUSTOMPOST][] = [
-            'component-variation' => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
+            'component' => [FieldDataloadComponentProcessor::class, FieldDataloadComponentProcessor::MODULE_DATALOAD_RELATIONALFIELDS_SINGLEPOST],
             'conditions' => [
                 'scheme' => APISchemes::API,
             ],
@@ -43,7 +43,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
         );
         foreach ($routeComponents as $route => $component) {
             $ret[RequestNature::GENERIC][$route][] = [
-                'component-variation' => $component,
+                'component' => $component,
                 'conditions' => [
                     'scheme' => APISchemes::API,
                 ],

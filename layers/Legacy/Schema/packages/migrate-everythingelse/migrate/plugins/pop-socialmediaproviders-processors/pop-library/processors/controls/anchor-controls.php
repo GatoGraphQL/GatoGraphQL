@@ -12,7 +12,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
     public final const MODULE_ANCHORCONTROL_FIXEDSHARE_TWITTER = 'anchorcontrol-fixedshare-twitter';
     public final const MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN = 'anchorcontrol-fixedshare-linkedin';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK],
@@ -24,9 +24,9 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return TranslationAPIFacade::getInstance()->__('Facebook', 'pop-coreprocessors');
@@ -40,11 +40,11 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                 return TranslationAPIFacade::getInstance()->__('LinkedIn', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
                 return 'fa-facebook';
@@ -58,14 +58,14 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                 return 'fa-linkedin';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $cmsService = CMSServiceFacade::getInstance();
         $cmsapplicationapi = \PoP\Application\FunctionAPIFactory::getInstance();
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_SHARE_TWITTER:
@@ -81,12 +81,12 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     self::MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN => GD_SOCIALMEDIA_PROVIDER_LINKEDIN,
                 );
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
-                        'data-provider' => $providers[$componentVariation[1]],
-                        'data-blocktarget' => $this->getProp($componentVariation, $props, 'control-target')
+                        'data-provider' => $providers[$component[1]],
+                        'data-blocktarget' => $this->getProp($component, $props, 'control-target')
                     )
                 );
 
@@ -95,7 +95,7 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                     [self::class, self::MODULE_ANCHORCONTROL_FIXEDSHARE_TWITTER],
                     [self::class, self::MODULE_ANCHORCONTROL_FIXEDSHARE_LINKEDIN],
                 );
-                if (in_array($componentVariation, $fixed)) {
+                if (in_array($component, $fixed)) {
                       // Share the website URL
                     $title = sprintf(
                         '%s | %s',
@@ -103,29 +103,29 @@ class GD_SocialMediaProviders_Module_Processor_AnchorControls extends PoP_Module
                         $cmsapplicationapi->getSiteDescription()
                     );
                     // Allow parent modules to override the share url and the title (eg: GetPoP Campaign)
-                    $this->setProp($componentVariation, $props, 'title', $title);
-                    $this->setProp($componentVariation, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()));
+                    $this->setProp($component, $props, 'title', $title);
+                    $this->setProp($component, $props, 'shareURL', GeneralUtils::maybeAddTrailingSlash($cmsService->getHomeURL()));
                     $this->mergeProp(
-                        $componentVariation,
+                        $component,
                         $props,
                         'params',
                         array(
-                            'data-shareurl' => $this->getProp($componentVariation, $props, 'shareURL'),
-                            'data-sharetitle' => str_replace(array('"', "'"), '', $this->getProp($componentVariation, $props, 'title')),
+                            'data-shareurl' => $this->getProp($component, $props, 'shareURL'),
+                            'data-sharetitle' => str_replace(array('"', "'"), '', $this->getProp($component, $props, 'title')),
                         )
                     );
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_ANCHORCONTROL_SHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_FIXEDSHARE_FACEBOOK:
             case self::MODULE_ANCHORCONTROL_SHARE_TWITTER:

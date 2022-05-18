@@ -13,7 +13,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
     public final const MODULE_CONTENTINNER_DOWNVOTESPOSTS = 'contentinner-downvotesposts';
     public final const MODULE_CONTENTINNER_UNDODOWNVOTESPOSTS = 'contentinner-undodownvotesposts';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CONTENTINNER_FOLLOWSUSERS],
@@ -29,11 +29,11 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // When up-voting (and similar for down-voting), it must also do an undo down-vote had the post been down-voted
             case self::MODULE_CONTENTINNER_UPVOTESPOSTS:
                 $ret[] = [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UPVOTEPOST_STYLES];
@@ -58,7 +58,7 @@ class PoP_Module_Processor_FunctionsContentMultipleInners extends PoP_Module_Pro
                     // self::MODULE_CONTENTINNER_UPVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_UPVOTEPOST_STYLES],
                     // self::MODULE_CONTENTINNER_DOWNVOTESPOSTS => [PoP_Module_Processor_ShowHideElemMultiStyleLayouts::class, PoP_Module_Processor_ShowHideElemMultiStyleLayouts::MODULE_LAYOUT_DOWNVOTEPOST_STYLES],
                 );
-                if ($layout = $layouts[$componentVariation[1]] ?? null) {
+                if ($layout = $layouts[$component[1]] ?? null) {
                     $ret[] = $layout;
                 }
                 break;

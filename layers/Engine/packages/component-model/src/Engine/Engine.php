@@ -469,12 +469,12 @@ class Engine implements EngineInterface
         return $data;
     }
 
-    public function getModelPropsModuletree(array $componentVariation): array
+    public function getModelPropsModuletree(array $component): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
         // Important: cannot use it if doing POST, because the request may have to be handled by a different block than the one whose data was cached
         // Eg: doing GET on /add-post/ will show the form BLOCK_ADDPOST_CREATE, but doing POST on /add-post/ will bring the action ACTION_ADDPOST_CREATE
@@ -487,7 +487,7 @@ class Engine implements EngineInterface
         // If there is no cached one, or not using the cache, generate the props and cache it
         if ($model_props === null) {
             $model_props = [];
-            $processor->initModelPropsModuletree($componentVariation, $model_props, [], []);
+            $processor->initModelPropsModuletree($component, $model_props, [], []);
 
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_PROPS, $model_props);
@@ -498,12 +498,12 @@ class Engine implements EngineInterface
     }
 
     // Notice that $props is passed by copy, this way the input $model_props and the returned $immutable_plus_request_props are different objects
-    public function addRequestPropsModuletree(array $componentVariation, array $props): array
+    public function addRequestPropsModuletree(array $component, array $props): array
     {
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
         // The input $props is the model_props. We add, on object, the mutableonrequest props, resulting in a "static + mutableonrequest" props object
-        $processor->initRequestPropsModuletree($componentVariation, $props, [], []);
+        $processor->initRequestPropsModuletree($component, $props, [], []);
 
         return $props;
     }
@@ -517,26 +517,26 @@ class Engine implements EngineInterface
         $datasourceselector = App::getState('datasourceselector');
 
         // Get the entry module based on the application configuration and the nature
-        $componentVariation = $this->getEntryComponent();
+        $component = $this->getEntryComponent();
 
         $engineState = App::getEngineState();
 
         // Save it to be used by the children class
         // Static props are needed for both static/mutableonrequest operations, so build it always
-        $engineState->model_props = $this->getModelPropsModuletree($componentVariation);
+        $engineState->model_props = $this->getModelPropsModuletree($component);
 
         // If only getting static content, then no need to add the mutableonrequest props
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $engineState->props = $engineState->model_props;
         } else {
-            $engineState->props = $this->addRequestPropsModuletree($componentVariation, $engineState->model_props);
+            $engineState->props = $this->addRequestPropsModuletree($component, $engineState->model_props);
         }
 
         // Allow for extra operations (eg: calculate resources)
         App::doAction(
             '\PoP\ComponentModel\Engine:helperCalculations',
             array(&$engineState->helperCalculations),
-            $componentVariation,
+            $component,
             array(&$engineState->props)
         );
 
@@ -544,7 +544,7 @@ class Engine implements EngineInterface
         if (in_array(DataOutputItems::DATASET_MODULE_SETTINGS, $dataoutputitems)) {
             $data = array_merge(
                 $data,
-                $this->getModuleDatasetSettings($componentVariation, $engineState->model_props, $engineState->props)
+                $this->getModuleDatasetSettings($component, $engineState->model_props, $engineState->props)
             );
         }
 
@@ -559,7 +559,7 @@ class Engine implements EngineInterface
         ) {
             $data = array_merge(
                 $data,
-                $this->getModuleData($componentVariation, $engineState->model_props, $engineState->props)
+                $this->getModuleData($component, $engineState->model_props, $engineState->props)
             );
 
             if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
@@ -644,13 +644,13 @@ class Engine implements EngineInterface
         }
     }
 
-    public function getModuleDatasetSettings(array $componentVariation, $model_props, array &$props): array
+    public function getModuleDatasetSettings(array $component, $model_props, array &$props): array
     {
         $ret = [];
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -667,7 +667,7 @@ class Engine implements EngineInterface
         if ($immutable_datasetsettings !== null) {
             $engineState->cachedsettings = true;
         } else {
-            $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($componentVariation, $model_props);
+            $immutable_datasetsettings = $processor->getImmutableSettingsDatasetmoduletree($component, $model_props);
 
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_IMMUTABLEDATASETSETTINGS, $immutable_datasetsettings);
@@ -710,15 +710,15 @@ class Engine implements EngineInterface
             $meta[Response::BACKGROUND_LOAD_URLS] = $engineState->backgroundload_urls;
         };
 
-        // Starting from what component variations must do the rendering. Allow for empty arrays (eg: componentVariationPaths[]=somewhatevervalue)
-        $not_excluded_componentVariation_sets = $this->getComponentFilterManager()->getNotExcludedComponentVariationSets();
-        if (!is_null($not_excluded_componentVariation_sets)) {
+        // Starting from what components must do the rendering. Allow for empty arrays (eg: componentPaths[]=somewhatevervalue)
+        $not_excluded_component_sets = $this->getComponentFilterManager()->getNotExcludedComponentSets();
+        if (!is_null($not_excluded_component_sets)) {
             // Print the settings id of each module. Then, a module can feed data to another one by sharing the same settings id (eg: self::MODULE_BLOCK_USERAVATAR_EXECUTEUPDATE and PoP_UserAvatarProcessors_Module_Processor_UserBlocks::MODULE_BLOCK_USERAVATAR_UPDATE)
             $filteredsettings = [];
-            foreach ($not_excluded_componentVariation_sets as $componentVariations) {
+            foreach ($not_excluded_component_sets as $components) {
                 $filteredsettings[] = array_map(
                     [$this->getModuleHelpers(), 'getModuleOutputName'],
-                    $componentVariations
+                    $components
                 );
             }
             $meta['filteredcomponents'] = $filteredsettings;
@@ -893,32 +893,32 @@ class Engine implements EngineInterface
         $this->doAddDatasetToDatabase($database, $dbKey, $dataitems);
     }
 
-    protected function getInterreferencedComponentVariationFullPaths(array $componentVariation, array &$props): array
+    protected function getInterreferencedComponentFullPaths(array $component, array &$props): array
     {
         $paths = [];
-        $this->addInterreferencedComponentVariationFullPaths($paths, [], $componentVariation, $props);
+        $this->addInterreferencedComponentFullPaths($paths, [], $component, $props);
         return $paths;
     }
 
-    private function addInterreferencedComponentVariationFullPaths(
+    private function addInterreferencedComponentFullPaths(
         array &$paths,
         array $module_path,
-        array $componentVariation,
+        array $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
+        // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
             // If the current module loads data, then add its path to the list
-            if ($interreferenced_componentVariationPath = $processor->getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props)) {
-                $referenced_componentVariationPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentVariationPath);
-                $paths[$referenced_componentVariationPath] = $paths[$referenced_componentVariationPath] ?? [];
-                $paths[$referenced_componentVariationPath][] = array_merge(
+            if ($interreferenced_componentPath = $processor->getDataFeedbackInterreferencedComponentPath($component, $props)) {
+                $referenced_componentPath = $this->getModulePathHelpers()->stringifyModulePath($interreferenced_componentPath);
+                $paths[$referenced_componentPath] = $paths[$referenced_componentPath] ?? [];
+                $paths[$referenced_componentPath][] = array_merge(
                     $module_path,
                     array(
-                        $componentVariation
+                        $component
                     )
                 );
             }
@@ -927,46 +927,46 @@ class Engine implements EngineInterface
         $submodule_path = array_merge(
             $module_path,
             array(
-                $componentVariation,
+                $component,
             )
         );
 
         // Propagate to its inner modules
-        $subComponentVariations = $processor->getAllSubmodules($componentVariation);
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $processor->getAllSubmodules($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $subComponentVariation) {
-            $this->addInterreferencedComponentVariationFullPaths($paths, $submodule_path, $subComponentVariation, $props[$moduleFullName][Props::SUBMODULES]);
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        foreach ($subComponents as $subComponent) {
+            $this->addInterreferencedComponentFullPaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
-    protected function getDataloadingModuleFullpaths(array $componentVariation, array &$props): array
+    protected function getDataloadingModuleFullpaths(array $component, array &$props): array
     {
         $paths = [];
-        $this->addDataloadingModuleFullpaths($paths, [], $componentVariation, $props);
+        $this->addDataloadingModuleFullpaths($paths, [], $component, $props);
         return $paths;
     }
 
     private function addDataloadingModuleFullpaths(
         array &$paths,
         array $module_path,
-        array $componentVariation,
+        array $component,
         array &$props
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
-        // If componentVariationPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
-        if (!$this->getComponentFilterManager()->excludeModule($componentVariation, $props)) {
+        // If componentPaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level
+        if (!$this->getComponentFilterManager()->excludeModule($component, $props)) {
             // If the current module loads data, then add its path to the list
-            if ($processor->moduleLoadsData($componentVariation)) {
+            if ($processor->moduleLoadsData($component)) {
                 $paths[] = array_merge(
                     $module_path,
                     array(
-                        $componentVariation
+                        $component
                     )
                 );
             }
@@ -975,26 +975,26 @@ class Engine implements EngineInterface
         $submodule_path = array_merge(
             $module_path,
             array(
-                $componentVariation,
+                $component,
             )
         );
 
         // Propagate to its inner modules
-        $subComponentVariations = $processor->getAllSubmodules($componentVariation);
-        $subComponentVariations = $this->getComponentFilterManager()->removeExcludedSubmodules($componentVariation, $subComponentVariations);
+        $subComponents = $processor->getAllSubmodules($component);
+        $subComponents = $this->getComponentFilterManager()->removeExcludedSubmodules($component, $subComponents);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
-        $this->getComponentFilterManager()->prepareForPropagation($componentVariation, $props);
-        foreach ($subComponentVariations as $subComponentVariation) {
-            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponentVariation, $props[$moduleFullName][Props::SUBMODULES]);
+        $this->getComponentFilterManager()->prepareForPropagation($component, $props);
+        foreach ($subComponents as $subComponent) {
+            $this->addDataloadingModuleFullpaths($paths, $submodule_path, $subComponent, $props[$moduleFullName][Props::SUBMODULES]);
         }
-        $this->getComponentFilterManager()->restoreFromPropagation($componentVariation, $props);
+        $this->getComponentFilterManager()->restoreFromPropagation($component, $props);
     }
 
     protected function assignValueForModule(
         array &$array,
         array $module_path,
-        array $componentVariation,
+        array $component,
         string $key,
         mixed $value,
     ): void {
@@ -1002,9 +1002,9 @@ class Engine implements EngineInterface
         $moduleInfo = App::getModule(Module::class)->getInfo();
         $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
         $array_pointer = &$array;
-        foreach ($module_path as $subComponentVariation) {
-            // Notice that when generating the array for the response, we don't use $componentVariation anymore, but $moduleOutputName
-            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponentVariation);
+        foreach ($module_path as $subComponent) {
+            // Notice that when generating the array for the response, we don't use $component anymore, but $moduleOutputName
+            $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
 
             // If the path doesn't exist, create it
             if (!isset($array_pointer[$submoduleOutputName][$submodulesOutputProperty])) {
@@ -1015,7 +1015,7 @@ class Engine implements EngineInterface
             $array_pointer = &$array_pointer[$submoduleOutputName][$submodulesOutputProperty];
         }
 
-        $moduleOutputName = $this->getModuleHelpers()->getModuleOutputName($componentVariation);
+        $moduleOutputName = $this->getModuleHelpers()->getModuleOutputName($component);
         $array_pointer[$moduleOutputName][$key] = $value;
     }
 
@@ -1032,19 +1032,19 @@ class Engine implements EngineInterface
         return null;
     }
 
-    protected function getModulePathKey(array $module_path, array $componentVariation): string
+    protected function getModulePathKey(array $module_path, array $component): string
     {
-        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+        $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
         return $moduleFullName . '-' . implode('.', $module_path);
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_componentVariation, array $root_model_props, array $root_props): array
+    public function getModuleData(array $root_component, array $root_model_props, array $root_props): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $useCache = $moduleConfiguration->useComponentModelCache();
-        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_componentVariation);
+        $root_processor = $this->getComponentProcessorManager()->getProcessor($root_component);
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
@@ -1053,7 +1053,7 @@ class Engine implements EngineInterface
         $dataoutputitems = App::getState('dataoutputitems');
         $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
 
-        $immutable_componentVariationdata = $mutableonmodel_componentVariationdata = $mutableonrequest_componentVariationdata = [];
+        $immutable_componentdata = $mutableonmodel_componentdata = $mutableonrequest_componentdata = [];
         $immutable_datasetmoduledata = $mutableonmodel_datasetmoduledata = $mutableonrequest_datasetmoduledata = [];
         if ($add_meta) {
             $immutable_datasetmodulemeta = $mutableonmodel_datasetmodulemeta = $mutableonrequest_datasetmodulemeta = [];
@@ -1069,7 +1069,7 @@ class Engine implements EngineInterface
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:start',
-            $root_componentVariation,
+            $root_component,
             array(&$root_model_props),
             array(&$root_props),
             array(&$engineState->helperCalculations),
@@ -1085,13 +1085,13 @@ class Engine implements EngineInterface
 
         // If there is no cached one, generate the props and cache it
         if ($immutable_data_properties === null) {
-            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_componentVariation, $root_model_props);
+            $immutable_data_properties = $root_processor->getImmutableDataPropertiesDatasetmoduletree($root_component, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATICDATAPROPERTIES, $immutable_data_properties);
             }
         }
         if ($mutableonmodel_data_properties === null) {
-            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_componentVariation, $root_model_props);
+            $mutableonmodel_data_properties = $root_processor->getMutableonmodelDataPropertiesDatasetmoduletree($root_component, $root_model_props);
             if ($useCache) {
                 $this->getPersistentCache()->storeCacheByModelInstance(self::CACHETYPE_STATEFULDATAPROPERTIES, $mutableonmodel_data_properties);
             }
@@ -1105,7 +1105,7 @@ class Engine implements EngineInterface
         if ($datasourceselector == DataSourceSelectors::ONLYMODEL) {
             $root_data_properties = $model_data_properties;
         } else {
-            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_componentVariation, $root_props);
+            $mutableonrequest_data_properties = $root_processor->getMutableonrequestDataPropertiesDatasetmoduletree($root_component, $root_props);
             $root_data_properties = array_merge_recursive(
                 $model_data_properties,
                 $mutableonrequest_data_properties
@@ -1113,10 +1113,10 @@ class Engine implements EngineInterface
         }
 
         // Get the list of all modules which calculate their data feedback using another module's results
-        $interreferenced_componentVariationfullpaths = $this->getInterreferencedComponentVariationFullPaths($root_componentVariation, $root_props);
+        $interreferenced_componentfullpaths = $this->getInterreferencedComponentFullPaths($root_component, $root_props);
 
         // Get the list of all modules which load data, as a list of the module path starting from the top element (the entry module)
-        $module_fullpaths = $this->getDataloadingModuleFullpaths($root_componentVariation, $root_props);
+        $module_fullpaths = $this->getDataloadingModuleFullpaths($root_component, $root_props);
 
         /** @var ModuleInfo */
         $moduleInfo = App::getModule(Module::class)->getInfo();
@@ -1127,16 +1127,16 @@ class Engine implements EngineInterface
         foreach ($module_fullpaths as $module_path) {
             // The module is the last element in the path.
             // Notice that the module is removed from the path, providing the path to all its properties
-            $componentVariation = array_pop($module_path);
-            $moduleFullName = $this->getModuleHelpers()->getModuleFullName($componentVariation);
+            $component = array_pop($module_path);
+            $moduleFullName = $this->getModuleHelpers()->getModuleFullName($component);
 
             // Artificially set the current path on the path manager. It will be needed in getDatasetmeta, which calls getDataloadSource, which needs the current path
             $this->getModulePathManager()->setPropagationCurrentPath($module_path);
 
             // Data Properties: assign by reference, so that changes to this variable are also performed in the original variable
             $data_properties = &$root_data_properties;
-            foreach ($module_path as $subComponentVariation) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
+            foreach ($module_path as $subComponent) {
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
                 $data_properties = &$data_properties[$submoduleFullName][$submodulesOutputProperty];
             }
             $data_properties = &$data_properties[$moduleFullName][DataLoading::DATA_PROPERTIES];
@@ -1164,8 +1164,8 @@ class Engine implements EngineInterface
             // The $props is directly moving the array to the corresponding path
             $props = &$root_props;
             $model_props = &$root_model_props;
-            foreach ($module_path as $subComponentVariation) {
-                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
+            foreach ($module_path as $subComponent) {
+                $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
                 $props = &$props[$submoduleFullName][Props::SUBMODULES];
                 $model_props = &$model_props[$submoduleFullName][Props::SUBMODULES];
             }
@@ -1185,10 +1185,10 @@ class Engine implements EngineInterface
                 $module_props = &$props;
             }
 
-            $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+            $processor = $this->getComponentProcessorManager()->getProcessor($component);
 
             // The module path key is used for storing temporary results for later retrieval
-            $module_path_key = $this->getModulePathKey($module_path, $componentVariation);
+            $module_path_key = $this->getModulePathKey($module_path, $component);
 
             // If data is not loaded, then an empty array will be saved for the dbobject ids
             $dataset_meta = $objectIDs = $typeDBObjectIDs = [];
@@ -1201,8 +1201,8 @@ class Engine implements EngineInterface
                 // Execute at the very beginning, so the result of the execution can also be fetched later below
                 // (Eg: creation of a new location => retrieving its data / Adding a new comment)
                 // Pass data_properties so these can also be modified (eg: set id of newly created Location)
-                $componentMutationResolverBridge = $processor->getComponentMutationResolverBridge($componentVariation);
-                if ($componentMutationResolverBridge !== null && $processor->shouldExecuteMutation($componentVariation, $props)) {
+                $componentMutationResolverBridge = $processor->getComponentMutationResolverBridge($component);
+                if ($componentMutationResolverBridge !== null && $processor->shouldExecuteMutation($component, $props)) {
                     // Validate that the actionexecution must be triggered through its own checkpoints
                     $execute = true;
                     $mutation_checkpoint_validation = null;
@@ -1217,19 +1217,19 @@ class Engine implements EngineInterface
                 }
 
                 // Allow modules to change their data_properties based on the actionexecution of previous modules.
-                $processor->prepareDataPropertiesAfterMutationExecution($componentVariation, $module_props, $data_properties);
+                $processor->prepareDataPropertiesAfterMutationExecution($component, $module_props, $data_properties);
 
                 // Re-calculate $data_load, it may have been changed by `prepareDataPropertiesAfterMutationExecution`
                 $load_data = !isset($data_properties[DataloadingConstants::SKIPDATALOAD]) || !$data_properties[DataloadingConstants::SKIPDATALOAD];
                 if ($load_data) {
-                    $relationalTypeResolver = $processor->getRelationalTypeResolver($componentVariation);
+                    $relationalTypeResolver = $processor->getRelationalTypeResolver($component);
                     $isUnionTypeResolver = $relationalTypeResolver instanceof UnionTypeResolverInterface;
                     $relationalTypeOutputDBKey = $relationalTypeResolver->getTypeOutputDBKey();
                     // ------------------------------------------
                     // Data Properties Query Args: add mutableonrequest data
                     // ------------------------------------------
                     // Execute and get the ids and the meta
-                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($componentVariation, $module_props, $data_properties);
+                    $dbObjectIDOrIDs = $processor->getObjectIDOrIDs($component, $module_props, $data_properties);
                     // To simplify the logic, deal with arrays only
                     if ($dbObjectIDOrIDs === null) {
                         $dbObjectIDOrIDs = [];
@@ -1260,11 +1260,11 @@ class Engine implements EngineInterface
                     // Eg: Locations Map for the Create Individual Profile: it allows to pre-select locations,
                     // these ones must be fetched even if the block has a static typeResolver
                     // If it has extend, add those ids under its relationalTypeOutputDBKey
-                    $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataModuletree($componentVariation, $model_props);
+                    $dataload_extend_settings = $processor->getModelSupplementaryDBObjectDataModuletree($component, $model_props);
                     if ($datasource == DataSources::MUTABLEONREQUEST) {
                         $dataload_extend_settings = array_merge_recursive(
                             $dataload_extend_settings,
-                            $processor->getMutableonrequestSupplementaryDBObjectDataModuletree($componentVariation, $props)
+                            $processor->getMutableonrequestSupplementaryDBObjectDataModuletree($component, $props)
                         );
                     }
                     foreach ($dataload_extend_settings as $extendTypeOutputDBKey => $extend_data_properties) {
@@ -1292,48 +1292,48 @@ class Engine implements EngineInterface
                 if ($add_meta) {
                     $datasetmodulemeta = &$immutable_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$immutable_componentVariationdata;
+                $engineState->moduledata = &$immutable_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONMODEL) {
                 $datasetmoduledata = &$mutableonmodel_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonmodel_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonmodel_componentVariationdata;
+                $engineState->moduledata = &$mutableonmodel_componentdata;
             } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
                 $datasetmoduledata = &$mutableonrequest_datasetmoduledata;
                 if ($add_meta) {
                     $datasetmodulemeta = &$mutableonrequest_datasetmodulemeta;
                 }
-                $engineState->moduledata = &$mutableonrequest_componentVariationdata;
+                $engineState->moduledata = &$mutableonrequest_componentdata;
             }
 
             // Integrate the dbobjectids into $datasetmoduledata
             // ALWAYS print the $dbobjectids, even if its an empty array. This to indicate that this is a dataloading module, so the application in the webplatform knows if to load a new batch of dbobjectids, or reuse the ones from the previous module when iterating down
             if ($datasetmoduledata !== null) {
-                $this->assignValueForModule($datasetmoduledata, $module_path, $componentVariation, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
+                $this->assignValueForModule($datasetmoduledata, $module_path, $component, DataLoading::DB_OBJECT_IDS, $typeDBObjectIDOrIDs);
             }
 
             // Save the meta into $datasetmodulemeta
             if ($add_meta) {
                 if (!is_null($datasetmodulemeta)) {
-                    if ($dataset_meta = $processor->getDatasetmeta($componentVariation, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
-                        $this->assignValueForModule($datasetmodulemeta, $module_path, $componentVariation, DataLoading::META, $dataset_meta);
+                    if ($dataset_meta = $processor->getDatasetmeta($component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
+                        $this->assignValueForModule($datasetmodulemeta, $module_path, $component, DataLoading::META, $dataset_meta);
                     }
                 }
             }
 
             // Integrate the feedback into $moduledata
-            $this->processAndAddModuleData($module_path, $componentVariation, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+            $this->processAndAddModuleData($module_path, $component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
 
             // Allow other modules to produce their own feedback using this module's data results
-            if ($referencer_componentVariationfullpaths = $interreferenced_componentVariationfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($componentVariation)))] ?? null) {
-                foreach ($referencer_componentVariationfullpaths as $referencer_componentVariationPath) {
-                    $referencer_componentVariation = array_pop($referencer_componentVariationPath);
+            if ($referencer_componentfullpaths = $interreferenced_componentfullpaths[$this->getModulePathHelpers()->stringifyModulePath(array_merge($module_path, array($component)))] ?? null) {
+                foreach ($referencer_componentfullpaths as $referencer_componentPath) {
+                    $referencer_component = array_pop($referencer_componentPath);
 
                     $referencer_props = &$root_props;
                     $referencer_model_props = &$root_model_props;
-                    foreach ($referencer_componentVariationPath as $subComponentVariation) {
-                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponentVariation);
+                    foreach ($referencer_componentPath as $subComponent) {
+                        $submoduleFullName = $this->getModuleHelpers()->getModuleFullName($subComponent);
                         $referencer_props = &$referencer_props[$submoduleFullName][Props::SUBMODULES];
                         $referencer_model_props = &$referencer_model_props[$submoduleFullName][Props::SUBMODULES];
                     }
@@ -1347,24 +1347,24 @@ class Engine implements EngineInterface
                             )
                         )
                     ) {
-                        $referencer_componentVariation_props = &$referencer_model_props;
+                        $referencer_component_props = &$referencer_model_props;
                     } elseif ($datasource == DataSources::MUTABLEONREQUEST) {
-                        $referencer_componentVariation_props = &$referencer_props;
+                        $referencer_component_props = &$referencer_props;
                     }
-                    $this->processAndAddModuleData($referencer_componentVariationPath, $referencer_componentVariation, $referencer_componentVariation_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
+                    $this->processAndAddModuleData($referencer_componentPath, $referencer_component, $referencer_component_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs);
                 }
             }
 
             // Incorporate the background URLs
             $engineState->backgroundload_urls = array_merge(
                 $engineState->backgroundload_urls,
-                $processor->getBackgroundurlsMergeddatasetmoduletree($componentVariation, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
+                $processor->getBackgroundurlsMergeddatasetmoduletree($component, $module_props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)
             );
 
             // Allow PoP UserState to add the lazy-loaded userstate data triggers
             App::doAction(
                 '\PoP\ComponentModel\Engine:getModuleData:dataloading-module',
-                $componentVariation,
+                $component,
                 array(&$module_props),
                 array(&$data_properties),
                 $dataaccess_checkpoint_validation,
@@ -1388,16 +1388,16 @@ class Engine implements EngineInterface
 
             if ($dataoutputmode == DataOutputModes::SPLITBYSOURCES) {
                 /** @phpstan-ignore-next-line */
-                if ($immutable_componentVariationdata) {
-                    $ret['moduledata']['immutable'] = $immutable_componentVariationdata;
+                if ($immutable_componentdata) {
+                    $ret['moduledata']['immutable'] = $immutable_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonmodel_componentVariationdata) {
-                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_componentVariationdata) : $mutableonmodel_componentVariationdata;
+                if ($mutableonmodel_componentdata) {
+                    $ret['moduledata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $mutableonmodel_componentdata) : $mutableonmodel_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
-                if ($mutableonrequest_componentVariationdata) {
-                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_componentVariationdata) : $mutableonrequest_componentVariationdata;
+                if ($mutableonrequest_componentdata) {
+                    $ret['moduledata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $mutableonrequest_componentdata) : $mutableonrequest_componentdata;
                 }
                 /** @phpstan-ignore-next-line */
                 if ($immutable_datasetmoduledata) {
@@ -1429,13 +1429,13 @@ class Engine implements EngineInterface
             } elseif ($dataoutputmode == DataOutputModes::COMBINED) {
                 // If everything is combined, then it belongs under "mutableonrequest"
                 if (
-                    $combined_componentVariationdata = array_merge_recursive(
-                        $immutable_componentVariationdata,
-                        $mutableonmodel_componentVariationdata,
-                        $mutableonrequest_componentVariationdata
+                    $combined_componentdata = array_merge_recursive(
+                        $immutable_componentdata,
+                        $mutableonmodel_componentdata,
+                        $mutableonrequest_componentdata
                     )
                 ) {
-                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_componentVariationdata) : $combined_componentVariationdata;
+                    $ret['moduledata'] = $has_extra_routes ? array($current_uri => $combined_componentdata) : $combined_componentdata;
                 }
                 if (
                     $combined_datasetmoduledata = array_merge_recursive(
@@ -1463,7 +1463,7 @@ class Engine implements EngineInterface
         // Allow PoP UserState to add the lazy-loaded userstate data triggers
         App::doAction(
             '\PoP\ComponentModel\Engine:getModuleData:end',
-            $root_componentVariation,
+            $root_component,
             array(&$root_model_props),
             array(&$root_props),
             array(&$engineState->helperCalculations),
@@ -2440,7 +2440,7 @@ class Engine implements EngineInterface
 
     protected function processAndAddModuleData(
         array $module_path,
-        array $componentVariation,
+        array $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -2448,7 +2448,7 @@ class Engine implements EngineInterface
         $executed,
         $objectIDs
     ): void {
-        $processor = $this->getComponentProcessorManager()->getProcessor($componentVariation);
+        $processor = $this->getComponentProcessorManager()->getProcessor($component);
         $engineState = App::getEngineState();
 
         // Integrate the feedback into $moduledata
@@ -2456,14 +2456,14 @@ class Engine implements EngineInterface
             $moduledata = &$engineState->moduledata;
 
             // Add the feedback into the object
-            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
+            if ($feedback = $processor->getDataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $mutation_checkpoint_validation, $executed, $objectIDs)) {
                 /** @var ModuleInfo */
                 $moduleInfo = App::getModule(Module::class)->getInfo();
                 $submodulesOutputProperty = $moduleInfo->getSubmodulesOutputProperty();
 
                 // Advance the position of the array into the current module
-                foreach ($module_path as $subComponentVariation) {
-                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponentVariation);
+                foreach ($module_path as $subComponent) {
+                    $submoduleOutputName = $this->getModuleHelpers()->getModuleOutputName($subComponent);
                     $moduledata[$submoduleOutputName][$submodulesOutputProperty] = $moduledata[$submoduleOutputName][$submodulesOutputProperty] ?? [];
                     $moduledata = &$moduledata[$submoduleOutputName][$submodulesOutputProperty];
                 }

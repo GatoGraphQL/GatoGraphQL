@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups extends PoP_Modul
     public final const MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT = 'quicklinkbuttongroup-highlightedit';
     public final const MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW = 'quicklinkbuttongroup-highlightview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT],
@@ -13,11 +13,11 @@ class PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT:
                 $ret[] = [PoP_AddHighlights_Module_Processor_Buttons::class, PoP_AddHighlights_Module_Processor_Buttons::MODULE_BUTTON_HIGHLIGHTEDIT];
                 break;

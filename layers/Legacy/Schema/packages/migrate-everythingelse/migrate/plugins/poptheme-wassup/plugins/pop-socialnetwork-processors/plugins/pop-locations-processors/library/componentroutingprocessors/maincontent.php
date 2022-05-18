@@ -18,15 +18,15 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
             POP_SOCIALNETWORK_ROUTE_FOLLOWERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORFOLLOWERS_SCROLLMAP],
             POP_SOCIALNETWORK_ROUTE_FOLLOWINGUSERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_AUTHORFOLLOWINGUSERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $componentVariation) {
+        foreach ($routemodules_map as $route => $component) {
             $ret[UserRequestNature::USER][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_authorusers == POP_FORMAT_MAP) {
-                $ret[UserRequestNature::USER][$route][] = ['component-variation' => $componentVariation];
+                $ret[UserRequestNature::USER][$route][] = ['component' => $component];
             }
         }
 
@@ -37,15 +37,15 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
             POP_SOCIALNETWORK_ROUTE_UPVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEUPVOTEDBY_SCROLLMAP],
             POP_SOCIALNETWORK_ROUTE_DOWNVOTEDBY => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_SINGLEDOWNVOTEDBY_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $componentVariation) {
+        foreach ($routemodules_map as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_singleusers == POP_FORMAT_MAP) {
-                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component-variation' => $componentVariation];
+                $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = ['component' => $component];
             }
         }
 
@@ -54,15 +54,15 @@ class Wassup_EM_SocialNetwork_Module_MainContentComponentRoutingProcessor extend
         $routemodules_map = array(
             POP_SOCIALNETWORK_ROUTE_SUBSCRIBERS => [PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::class, PoP_Locations_SocialNetwork_Module_Processor_CustomScrollMapSectionBlocks::MODULE_BLOCK_TAGSUBSCRIBERS_SCROLLMAP],
         );
-        foreach ($routemodules_map as $route => $componentVariation) {
+        foreach ($routemodules_map as $route => $component) {
             $ret[TagRequestNature::TAG][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'format' => POP_FORMAT_MAP,
                 ],
             ];
             if ($default_format_tagusers == POP_FORMAT_MAP) {
-                $ret[TagRequestNature::TAG][$route][] = ['component-variation' => $componentVariation];
+                $ret[TagRequestNature::TAG][$route][] = ['component' => $component];
             }
         }
 

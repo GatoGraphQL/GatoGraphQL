@@ -5,7 +5,7 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
     public final const MODULE_FORM_INVITENEWUSERS = 'form-inviteusers';
     public final const MODULE_FORM_MYPREFERENCES = 'form-mypreferences';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_INVITENEWUSERS],
@@ -13,9 +13,9 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_INVITENEWUSERS:
                 return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_INVITENEWUSERS];
 
@@ -23,19 +23,19 @@ class PoP_Module_Processor_UserForms extends PoP_Module_Processor_FormsBase
                 return [PoP_Module_Processor_UserFormInners::class, PoP_Module_Processor_UserFormInners::MODULE_FORMINNER_MYPREFERENCES];
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_MYPREFERENCES:
                 // For security reasons: delete passwords (more since introducing Login block in offcanvas, so that it will stay there forever and other users could re-login using the exisiting filled-in info)
-                $this->appendProp($componentVariation, $props, 'class', 'form-mypreferences');
+                $this->appendProp($component, $props, 'class', 'form-mypreferences');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

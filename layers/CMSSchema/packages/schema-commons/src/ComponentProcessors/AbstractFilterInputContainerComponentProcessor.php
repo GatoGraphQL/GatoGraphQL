@@ -25,7 +25,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     /**
      * @return array<array<mixed>>
      */
-    protected function getPaginationFilterInputComponentVariations(): array
+    protected function getPaginationFilterInputComponents(): array
     {
         return [
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_SORT],
@@ -37,7 +37,7 @@ abstract class AbstractFilterInputContainerComponentProcessor extends UpstreamAb
     /**
      * @return array<array<mixed>>
      */
-    protected function getIDFilterInputComponentVariations(): array
+    protected function getIDFilterInputComponents(): array
     {
         return [
             [CommonFilterInputComponentProcessor::class, CommonFilterInputComponentProcessor::MODULE_FILTERINPUT_IDS],

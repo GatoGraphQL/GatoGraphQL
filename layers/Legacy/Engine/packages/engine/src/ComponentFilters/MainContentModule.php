@@ -14,8 +14,8 @@ class MainContentModule extends AbstractComponentFilter
         return 'maincontentmodule';
     }
 
-    public function excludeModule(array $componentVariation, array &$props): bool
+    public function excludeModule(array $component, array &$props): bool
     {
-        return App::getState('maincontentmodule') !== $componentVariation;
+        return App::getState('maincontentmodule') !== $component;
     }
 }

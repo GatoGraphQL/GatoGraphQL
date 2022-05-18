@@ -7,7 +7,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
     public final const MODULE_MULTICOMPONENT_LOCATIONVOLUNTEER = 'multicomponent-locationvolunteer';
     public final const MODULE_MULTICOMPONENT_LOCATION = 'multicomponent-location';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS],
@@ -17,11 +17,11 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_DateTimeLayouts::class, GD_EM_Module_Processor_DateTimeLayouts::MODULE_EM_LAYOUT_DATETIMEDOWNLOADLINKS];
                 $ret[] = [PoP_Module_Processor_LocationViewComponentButtonWrapperss::class, PoP_Module_Processor_LocationViewComponentButtonWrapperss::MODULE_VIEWCOMPONENT_BUTTONWRAPPER_POSTLOCATIONS];
@@ -53,9 +53,9 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATION:
             case self::MODULE_MULTICOMPONENT_LOCATIONVOLUNTEER:
@@ -67,12 +67,12 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
                     self::MODULE_MULTICOMPONENT_LOCATION => 'location',
                 );
 
-                $this->appendProp($componentVariation, $props, 'class', $classes[$componentVariation[1]] ?? null);
+                $this->appendProp($component, $props, 'class', $classes[$component[1]] ?? null);
                 $this->appendProp([PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTLOCATIONS], $props, 'btn-class', 'btn btn-link btn-nopadding');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATIONDOWNLOADLINKS:
             case self::MODULE_MULTICOMPONENT_EVENT_DATELOCATION:
                 if (defined('POP_VOLUNTEERINGPROCESSORS_INITIALIZED')) {
@@ -81,7 +81,7 @@ class GD_EM_Module_Processor_EventMultipleComponents extends PoP_Module_Processo
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

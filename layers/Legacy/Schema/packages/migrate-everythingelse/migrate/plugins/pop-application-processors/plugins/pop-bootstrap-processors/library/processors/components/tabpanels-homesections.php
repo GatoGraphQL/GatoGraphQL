@@ -4,18 +4,18 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
 {
     public final const MODULE_TABPANEL_HOMECONTENT = 'tabpanel-homecontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_HOMECONTENT],
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_HOMECONTENT:
                 $ret = array_merge(
                     $ret,
@@ -33,9 +33,9 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_HOMECONTENT:
                 return [
                     [
@@ -56,7 +56,7 @@ class PoP_Module_Processor_HomeSectionTabPanelComponents extends PoP_Module_Proc
                 ];
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

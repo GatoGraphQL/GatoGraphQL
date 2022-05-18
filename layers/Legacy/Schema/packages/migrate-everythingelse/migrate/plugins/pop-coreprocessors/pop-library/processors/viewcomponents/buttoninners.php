@@ -7,7 +7,7 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT = 'viewcomponent-buttoninner-addcomment';
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_ADDCOMMENT_FULL = 'viewcomponent-buttoninner-addcomment-full';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT],
@@ -16,9 +16,9 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
         );
     }
     
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return 'fa-fw fa-reply';
 
@@ -27,12 +27,12 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
                 return 'fa-fw fa-comments';
         }
         
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_REPLYCOMMENT:
                 return TranslationAPIFacade::getInstance()->__('Reply', 'pop-coreprocessors');
 
@@ -41,7 +41,7 @@ class PoP_Module_Processor_ViewComponentButtonInners extends PoP_Module_Processo
                 return TranslationAPIFacade::getInstance()->__('Write a comment', 'pop-coreprocessors');
         }
         
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

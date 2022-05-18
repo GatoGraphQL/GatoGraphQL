@@ -9,7 +9,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
     public final const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION = 'layout-usersidebar-compacthorizontal-organization';
     public final const MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL = 'layout-usersidebar-compacthorizontal-individual';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION],
@@ -21,7 +21,7 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_VERTICAL_ORGANIZATION],
@@ -32,30 +32,30 @@ class GD_URE_Module_Processor_CustomUserLayoutSidebars extends PoP_Module_Proces
             self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL => [GD_URE_Module_Processor_CustomUserLayoutSidebarInners::class, GD_URE_Module_Processor_CustomUserLayoutSidebarInners::MODULE_LAYOUT_USERSIDEBARINNER_COMPACTHORIZONTAL_INDIVIDUAL],
         );
 
-        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBAR_VERTICAL_INDIVIDUAL:
-                $this->appendProp($componentVariation, $props, 'class', 'vertical');
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBAR_HORIZONTAL_INDIVIDUAL:
             case self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_ORGANIZATION:
             case self::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL_INDIVIDUAL:
-                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -5,7 +5,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
     public final const MODULE_TABPANEL_ORGANIZATIONS = 'tabpanel-organizations';
     public final const MODULE_TABPANEL_INDIVIDUALS = 'tabpanel-individuals';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_ORGANIZATIONS],
@@ -13,22 +13,22 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
         );
     }
 
-    protected function getDefaultActivepanelFormat(array $componentVariation)
+    protected function getDefaultActivepanelFormat(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_ORGANIZATIONS:
             case self::MODULE_TABPANEL_INDIVIDUALS:
                 return PoP_Application_Utils::getDefaultformatByScreen(POP_SCREEN_USERS);
         }
 
-        return parent::getDefaultActivepanelFormat($componentVariation);
+        return parent::getDefaultActivepanelFormat($component);
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_ORGANIZATIONS:
                 $ret = array_merge(
                     $ret,
@@ -59,9 +59,9 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_ORGANIZATIONS:
                 return array(
                     [
@@ -99,7 +99,7 @@ class GD_URE_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proce
                 );
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

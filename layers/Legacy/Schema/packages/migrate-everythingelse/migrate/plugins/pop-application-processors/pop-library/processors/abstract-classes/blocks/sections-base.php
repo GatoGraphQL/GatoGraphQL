@@ -17,22 +17,22 @@ use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
 abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Processor_BlocksBase implements FormattableModuleInterface
 {
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     if ($inner = $this->getInnerSubmodule($componentVariation)) {
+    //     if ($inner = $this->getInnerSubmodule($component)) {
     //         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
     //         $processor = $componentprocessor_manager->getProcessor($inner);
     //         return $processor->getNature($inner);
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    public function getSubmenuSubmodule(array $componentVariation)
+    public function getSubmenuSubmodule(array $component)
     {
 
         // Add only if the current nature is the one expected by the block
-        // if (\PoP\Root\App::getState('nature') == $this->getNature($componentVariation)) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($component)) {
         switch (\PoP\Root\App::getState('nature')) {
             case UserRequestNature::USER:
                 return [PoP_Module_Processor_CustomSubMenus::class, PoP_Module_Processor_CustomSubMenus::MODULE_SUBMENU_AUTHOR];
@@ -45,14 +45,14 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         }
         // }
 
-        return parent::getSubmenuSubmodule($componentVariation);
+        return parent::getSubmenuSubmodule($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
 
         // Add only if the current nature is the one expected by the block
-        // if (\PoP\Root\App::getState('nature') == $this->getNature($componentVariation)) {
+        // if (\PoP\Root\App::getState('nature') == $this->getNature($component)) {
         switch (\PoP\Root\App::getState('nature')) {
             case UserRequestNature::USER:
                 return PoP_Module_Processor_CustomSectionBlocksUtils::getAuthorTitle();
@@ -65,12 +65,12 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         }
         // }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    protected function getTitleLink(array $componentVariation, array &$props)
+    protected function getTitleLink(array $component, array &$props)
     {
-        if ($route = $this->getRelevantRoute($componentVariation, $props)) {
+        if ($route = $this->getRelevantRoute($component, $props)) {
             $cmsService = CMSServiceFacade::getInstance();
             $userTypeAPI = UserTypeAPIFacade::getInstance();
             $customPostTypeAPI = CustomPostTypeAPIFacade::getInstance();
@@ -95,12 +95,12 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             }
         }
 
-        return parent::getTitleLink($componentVariation, $props);
+        return parent::getTitleLink($component, $props);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
-        if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner = $this->getInnerSubmodule($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof FormattableModuleInterface) {
@@ -111,25 +111,25 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
         return null;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         // If the inner module is a DataloadingModule, then transfer dataloading properties to its contained module
-        if ($inner_componentVariation = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner_component = $this->getInnerSubmodule($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-            if ($componentprocessor_manager->getProcessor($inner_componentVariation) instanceof DataloadingModuleInterface) {
+            if ($componentprocessor_manager->getProcessor($inner_component) instanceof DataloadingModuleInterface) {
 
-                $skip_data_load = $this->getProp($componentVariation, $props, 'skip-data-load');
+                $skip_data_load = $this->getProp($component, $props, 'skip-data-load');
                 if (!is_null($skip_data_load)) {
-                    $this->setProp([$inner_componentVariation], $props, 'skip-data-load', $skip_data_load);
+                    $this->setProp([$inner_component], $props, 'skip-data-load', $skip_data_load);
                 }
-                $lazy_load = $this->getProp($componentVariation, $props, 'lazy-load');
+                $lazy_load = $this->getProp($component, $props, 'lazy-load');
                 if (!is_null($lazy_load)) {
-                    $this->setProp([$inner_componentVariation], $props, 'lazy-load', $lazy_load);
+                    $this->setProp([$inner_component], $props, 'lazy-load', $lazy_load);
                 }
             }
         }
 
-        if ($format = $this->getFormat($componentVariation)) {
+        if ($format = $this->getFormat($component)) {
             $classes = array(
                 POP_FORMAT_SIMPLEVIEW => 'feed',
                 POP_FORMAT_FULLVIEW => 'feed',
@@ -146,7 +146,7 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
                 POP_FORMAT_CALENDARMAP => 'map pop-block-map pop-block-calendarmap pop-block-calendar',
             );
             if ($class = $classes[$format] ?? null) {
-                $this->appendProp($componentVariation, $props, 'class', $class);
+                $this->appendProp($component, $props, 'class', $class);
             }
 
             $resourceloaders = array(
@@ -158,65 +158,65 @@ abstract class PoP_Module_Processor_SectionBlocksBase extends PoP_Module_Process
             );
             if ($resourceloader = $resourceloaders[$format] ?? null) {
                    // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', $resourceloader);
+                $this->setProp($component, $props, 'resourceloader', $resourceloader);
             }
         }
 
-        if ($sectionfilter = $this->getSectionfilterModule($componentVariation)) {
+        if ($sectionfilter = $this->getSectionfilterModule($component)) {
             // Class needed to push the "Loading" status a tiny bit down, so it doesn't show on top of the sectionfilter
-            $this->appendProp($componentVariation, $props, 'class', 'withsectionfilter');
+            $this->appendProp($component, $props, 'class', 'withsectionfilter');
 
             // Check if the filter needs to be hidden (eg: GetPoP homepage)
-            if ($this->getProp($componentVariation, $props, 'hide-sectionfilter')) {
+            if ($this->getProp($component, $props, 'hide-sectionfilter')) {
                 $this->appendProp($sectionfilter, $props, 'class', 'hidden');
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        if ($sectionfilter_componentVariation = $this->getSectionfilterModule($componentVariation)) {
-            $ret[] = $sectionfilter_componentVariation;
+        if ($sectionfilter_component = $this->getSectionfilterModule($component)) {
+            $ret[] = $sectionfilter_component;
         }
 
-        if ($inner_componentVariation = $this->getInnerSubmodule($componentVariation)) {
-            $ret[] = $inner_componentVariation;
+        if ($inner_component = $this->getInnerSubmodule($component)) {
+            $ret[] = $inner_component;
         }
 
         return $ret;
     }
 
-    protected function getSectionfilterModule(array $componentVariation)
+    protected function getSectionfilterModule(array $component)
     {
         return null;
     }
 
-    protected function getInnerSubmodule(array $componentVariation)
+    protected function getInnerSubmodule(array $component)
     {
         return null;
     }
 
-    public function getDataFeedbackInterreferencedComponentVariationPath(array $componentVariation, array &$props): ?array
+    public function getDataFeedbackInterreferencedComponentPath(array $component, array &$props): ?array
     {
 
         // If the inner module is a DataloadingModule, then calculate the datafeedback of this module
         // based on the results from the inner dataloading module. Then, can calculate "do-not-render-if-no-results"
-        if ($inner = $this->getInnerSubmodule($componentVariation)) {
+        if ($inner = $this->getInnerSubmodule($component)) {
             $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
             $processor = $componentprocessor_manager->getProcessor($inner);
             if ($processor instanceof DataloadingModuleInterface) {
                 $module_path_manager = ModulePathManagerFacade::getInstance();
                 $module_propagation_current_path = $module_path_manager->getPropagationCurrentPath();
-                $module_propagation_current_path[] = $componentVariation;
+                $module_propagation_current_path[] = $component;
                 $module_propagation_current_path[] = $inner;
                 return $module_propagation_current_path;
             }
         }
 
-        return parent::getDataFeedbackInterreferencedComponentVariationPath($componentVariation, $props);
+        return parent::getDataFeedbackInterreferencedComponentPath($component, $props);
     }
 }

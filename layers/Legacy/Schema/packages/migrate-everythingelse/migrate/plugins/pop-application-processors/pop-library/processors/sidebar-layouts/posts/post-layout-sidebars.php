@@ -12,7 +12,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
     public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT = 'layout-postsidebarcompact-horizontal-highlight';
     public final const MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST = 'layout-postsidebarcompact-horizontal-post';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL],
@@ -28,7 +28,7 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $sidebarinners = array(
             self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_HORIZONTAL],
@@ -42,20 +42,20 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
             self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST => [PoP_Module_Processor_CustomPostLayoutSidebarInners::class, PoP_Module_Processor_CustomPostLayoutSidebarInners::MODULE_LAYOUT_POSTSIDEBARINNER_COMPACTHORIZONTAL_POST],
         );
 
-        if ($inner = $sidebarinners[$componentVariation[1]] ?? null) {
+        if ($inner = $sidebarinners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL:
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_HIGHLIGHT:
             case self::MODULE_LAYOUT_POSTSIDEBAR_VERTICAL_POST:
-                $this->appendProp($componentVariation, $props, 'class', 'vertical');
+                $this->appendProp($component, $props, 'class', 'vertical');
                 break;
 
             case self::MODULE_LAYOUT_POSTSIDEBAR_HORIZONTAL:
@@ -64,11 +64,11 @@ class PoP_Module_Processor_CustomPostLayoutSidebars extends PoP_Module_Processor
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_HIGHLIGHT:
             case self::MODULE_LAYOUT_POSTSIDEBARCOMPACT_HORIZONTAL_POST:
-                $this->appendProp($componentVariation, $props, 'class', 'horizontal');
+                $this->appendProp($component, $props, 'class', 'horizontal');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

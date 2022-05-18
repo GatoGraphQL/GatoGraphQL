@@ -5,41 +5,41 @@ class PoP_Module_Processor_CreateUpdateUserTextareaFormInputs extends PoP_Module
 {
     public final const MODULE_FORMINPUT_CUU_DESCRIPTION = 'forminput-cuu-description';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_CUU_DESCRIPTION],
         );
     }
 
-    public function getRows(array $componentVariation, array &$props)
+    public function getRows(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return 10;
         }
 
-        return parent::getRows($componentVariation, $props);
+        return parent::getRows($component, $props);
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return TranslationAPIFacade::getInstance()->__('Description', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_CUU_DESCRIPTION:
                 return 'description';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

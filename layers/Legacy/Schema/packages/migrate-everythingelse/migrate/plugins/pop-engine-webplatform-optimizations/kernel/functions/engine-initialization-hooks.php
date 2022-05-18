@@ -61,9 +61,9 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
             );
             
             // Check if this file has already been generated. If not, then save it
-            global $pop_componentVariation_runtimecontentmanager;
-            $componentVariation = $processor->getEntryComponent();
-            if (!$pop_componentVariation_runtimecontentmanager->fileWithModelInstanceFilenameExists($type)) {
+            global $pop_component_runtimecontentmanager;
+            $component = $processor->getEntryComponent();
+            if (!$pop_component_runtimecontentmanager->fileWithModelInstanceFilenameExists($type)) {
                    // Generate and save the JS code
                 $placeholder = '%1$s = %2$s;';
                 if ($do_replacements) {
@@ -80,20 +80,20 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
                         json_encode($value)
                     );
                 }
-                $pop_componentVariation_runtimecontentmanager->generateFileWithModelInstanceFilename($type, $value_js);
+                $pop_component_runtimecontentmanager->generateFileWithModelInstanceFilename($type, $value_js);
 
                 // In addition, this file must be uploaded to AWS S3 bucket, so that this scheme of generating the file on runtime
                 // can also work when hosting the website at multiple servers
                 \PoP\Root\App::doAction(
                     '\PoP\ComponentModel\Engine:optimizeEncodedData:file_stored',
-                    $componentVariation,
+                    $component,
                     $property_path,
                     $type
                 );
             }
 
             // Enqueue the .js file
-            if ($file_url = $pop_componentVariation_runtimecontentmanager->getFileUrlByModelInstance($type)) {
+            if ($file_url = $pop_component_runtimecontentmanager->getFileUrlByModelInstance($type)) {
                 // Comment Leo 07/11/2017: if enqueuing bundle/bundlegroup scripts, then we don't have the pop-manager.js file enqueued,
                 // Then, move the functionality below to `enqueueScripts`, as to wait until the corresponding scripts have been enqueued
                 // Comment Leo 06/01/2018: We need to add 'crossorigin="anonymous"' because the file will be uploaded to S3, and when accessing this file
@@ -111,7 +111,7 @@ class PoP_WebPlatformEngineOptimizations_EngineInitialization_Hooks
 
             // We must also do the replacements on the JS code (getLoadFileCacheReplacements)
             if ($do_replacements) {
-                if ($replacements = $pop_componentVariation_runtimecontentmanager->getLoadFileCacheReplacements()) {
+                if ($replacements = $pop_component_runtimecontentmanager->getLoadFileCacheReplacements()) {
                     $from = $replacements['from'];
                     $to = $replacements['to'];
                     if ($from && $to) {

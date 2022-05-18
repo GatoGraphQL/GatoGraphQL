@@ -11,7 +11,7 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
     public final const MODULE_CODE_STANCECOUNT = 'code-stancecount';
     public final const MODULE_CODE_POSTSTANCE = 'code-poststance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CODE_REFERENCEDAFTERREADING],
@@ -23,9 +23,9 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
         );
     }
 
-    public function getCode(array $componentVariation, array &$props)
+    public function getCode(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_REFERENCEDAFTERREADING:
                 return TranslationAPIFacade::getInstance()->__('After reading', 'pop-userstance-processors');
 
@@ -66,12 +66,12 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 );
         }
 
-        return parent::getCode($componentVariation, $props);
+        return parent::getCode($component, $props);
     }
 
-    public function getHtmlTag(array $componentVariation, array &$props)
+    public function getHtmlTag(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_REFERENCEDAFTERREADING:
             case self::MODULE_CODE_AUTHORREFERENCEDAFTERREADING:
                 // case self::MODULE_CODE_STANCECOUNT_GENERAL:
@@ -81,29 +81,29 @@ class UserStance_Custom_Module_Processor_Codes extends PoP_Module_Processor_HTML
                 return 'span';
         }
 
-        return parent::getHtmlTag($componentVariation, $props);
+        return parent::getHtmlTag($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
          // case self::MODULE_CODE_STANCECOUNT_GENERAL:
          // case self::MODULE_CODE_STANCECOUNT_ARTICLE:
          // case self::MODULE_CODE_STANCECOUNT:
             case self::MODULE_CODE_POSTSTANCE:
-                $this->appendProp($componentVariation, $props, 'class', 'btn btn-span');
+                $this->appendProp($component, $props, 'class', 'btn btn-span');
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CODE_STANCECOUNT:
-                $this->appendProp($componentVariation, $props, 'class', 'pop-stance-combined');
+                $this->appendProp($component, $props, 'class', 'pop-stance-combined');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

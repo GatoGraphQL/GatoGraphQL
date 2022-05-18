@@ -5,7 +5,7 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
     public final const MODULE_VIEWCOMPONENT_HEADER_POST = 'viewcomponent-header-post-';
     public final const MODULE_VIEWCOMPONENT_HEADER_POST_URL = 'viewcomponent-header-post-url';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_HEADER_POST],
@@ -13,25 +13,25 @@ class PoP_Module_Processor_PostViewComponentHeaders extends PoP_Module_Processor
         );
     }
 
-    public function headerShowUrl(array $componentVariation, array &$props)
+    public function headerShowUrl(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_POST_URL:
                 return true;
         }
 
-        return parent::headerShowUrl($componentVariation, $props);
+        return parent::headerShowUrl($component, $props);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_HEADER_POST_URL:
-                $this->appendProp($componentVariation, $props, 'class', 'alert alert-warning alert-sm');
+                $this->appendProp($component, $props, 'class', 'alert alert-warning alert-sm');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

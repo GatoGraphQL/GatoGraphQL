@@ -5,7 +5,7 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS = 'scroll-automatedemails-notifications-details';
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST = 'scroll-automatedemails-notifications-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS],
@@ -14,21 +14,21 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS => [GD_AAL_Module_Processor_AutomatedEmailsScrollInners::class, GD_AAL_Module_Processor_AutomatedEmailsScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS],
             self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST => [GD_AAL_Module_Processor_AutomatedEmailsScrollInners::class, GD_AAL_Module_Processor_AutomatedEmailsScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_NOTIFICATIONS_LIST],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
@@ -40,21 +40,21 @@ class GD_AAL_Module_Processor_AutomatedEmailsScrolls extends PoP_Module_Processo
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $details)) {
+        if (in_array($component, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_DETAILS:
             case self::MODULE_SCROLL_AUTOMATEDEMAILS_NOTIFICATIONS_LIST:
-                $this->appendProp($componentVariation, $props, 'class', 'scroll-notifications');
+                $this->appendProp($component, $props, 'class', 'scroll-notifications');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

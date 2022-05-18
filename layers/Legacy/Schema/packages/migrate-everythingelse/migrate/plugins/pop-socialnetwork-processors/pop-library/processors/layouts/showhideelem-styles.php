@@ -23,7 +23,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
     public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_SHOW_STYLES = 'layout-undodownvoteposts-show-styles';
     public final const MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES = 'layout-undodownvoteposts-hide-styles';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES],
@@ -49,7 +49,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
         );
     }
 
-    public function getElemTarget(array $componentVariation, array &$props)
+    public function getElemTarget(array $component, array &$props)
     {
         $targets = array(
             self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES => GD_CLASS_FOLLOWUSER,
@@ -73,16 +73,16 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
             self::MODULE_LAYOUT_DOWNVOTEPOST_HIDE_STYLES => GD_CLASS_DOWNVOTEPOST,
             self::MODULE_LAYOUT_UNDODOWNVOTEPOST_HIDE_STYLES => GD_CLASS_UNDODOWNVOTEPOST,
         );
-        if ($target = $targets[$componentVariation[1]] ?? null) {
+        if ($target = $targets[$component[1]] ?? null) {
             return '.'.$target;
         }
 
-        return parent::getElemTarget($componentVariation, $props);
+        return parent::getElemTarget($component, $props);
     }
 
-    public function getElemStyles(array $componentVariation, array &$props)
+    public function getElemStyles(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FOLLOWUSER_SHOW_STYLES:
             case self::MODULE_LAYOUT_UNFOLLOWUSER_SHOW_STYLES:
             case self::MODULE_LAYOUT_RECOMMENDPOST_SHOW_STYLES:
@@ -112,7 +112,7 @@ class PoP_Module_Processor_FunctionLayouts extends PoP_Module_Processor_StylesLa
                 );
         }
 
-        return parent::getElemStyles($componentVariation, $props);
+        return parent::getElemStyles($component, $props);
     }
 }
 

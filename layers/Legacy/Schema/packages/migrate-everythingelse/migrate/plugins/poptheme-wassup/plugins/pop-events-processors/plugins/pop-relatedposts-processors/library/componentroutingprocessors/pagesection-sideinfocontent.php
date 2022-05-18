@@ -15,12 +15,12 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionCompo
         $eventTypeAPI = EventTypeAPIFacade::getInstance();
 
         // Past single event
-        $componentVariations = array(
+        $components = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples::class, PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_PASTEVENT_RELATEDCONTENTSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
+        foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),
@@ -31,12 +31,12 @@ class PoPTheme_Wassup_Events_RelatedPosts_Module_SideInfoContentPageSectionCompo
         }
 
         // Future and current single event
-        $componentVariations = array(
+        $components = array(
             POP_RELATEDPOSTS_ROUTE_RELATEDCONTENT => [PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples::class, PoP_Events_RelatedPosts_Module_Processor_SidebarMultiples::MODULE_MULTIPLE_SINGLE_EVENT_RELATEDCONTENTSIDEBAR],
         );
-        foreach ($componentVariations as $route => $componentVariation) {
+        foreach ($components as $route => $component) {
             $ret[CustomPostRequestNature::CUSTOMPOST][$route][] = [
-                'component-variation' => $componentVariation,
+                'component' => $component,
                 'conditions' => [
                     'routing' => [
                         'queried-object-post-type' => $eventTypeAPI->getEventCustomPostType(),

@@ -13,7 +13,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
     public final const MODULE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL = 'scrollinner-locationposts-thumbnail';
     public final const MODULE_SCROLLINNER_LOCATIONPOSTS_LIST = 'scrollinner-locationposts-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_LOCATIONPOSTS_MAP],
@@ -29,9 +29,9 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_LOCATIONPOSTS_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -57,12 +57,12 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_SCROLLINNER_LOCATIONPOSTS_MAP => [GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::class, GD_Custom_EM_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_LOCATIONPOST_MAPDETAILS],
@@ -77,7 +77,7 @@ class PoP_LocationPosts_Module_Processor_CustomScrollInners extends PoP_Module_P
             self::MODULE_SCROLLINNER_AUTHORLOCATIONPOSTS_FULLVIEW => [GD_Custom_EM_Module_Processor_CustomFullViewLayouts::class, GD_Custom_EM_Module_Processor_CustomFullViewLayouts::MODULE_LAYOUT_FULLVIEW_LOCATIONPOST],
         );
 
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] = $layout;
         }
 

@@ -9,7 +9,7 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
     public final const MODULE_BUTTON_POSTCOMMENTS = 'postbutton-comments';
     public final const MODULE_BUTTON_POSTCOMMENTS_LABEL = 'postbutton-comments-label';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN],
@@ -20,9 +20,9 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         );
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_PRINT_PREVIEWDROPDOWN];
 
@@ -39,12 +39,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return [PoP_Module_Processor_ButtonInners::class, PoP_Module_Processor_ButtonInners::MODULE_BUTTONINNER_POSTCOMMENTS_LABEL];
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return 'printURL';
@@ -54,12 +54,12 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return 'commentsURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return TranslationAPIFacade::getInstance()->__('Print', 'pop-coreprocessors');
@@ -78,25 +78,25 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
                 return TranslationAPIFacade::getInstance()->__('Comments', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_PREVIEWDROPDOWN:
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 return GD_URLPARAM_TARGET_PRINT;
         }
 
-        return parent::getLinktarget($componentVariation, $props);
+        return parent::getLinktarget($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 $ret .= ' socialmedia-item socialmedia-print';
                 break;
@@ -111,16 +111,16 @@ class PoP_Module_Processor_Buttons extends PoP_Module_Processor_ButtonsBase
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_PRINT_SOCIALMEDIA:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'socialmedia');
+                $this->setProp($component, $props, 'resourceloader', 'socialmedia');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

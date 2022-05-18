@@ -5,7 +5,7 @@ class Wassup_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
     public final const MODULE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT = 'quicklinkbuttongroup-addonspostedit';
     public final const MODULE_QUICKLINKBUTTONGROUP_ADDONSORMAINPOSTEDIT = 'quicklinkbuttongroup-addonsormainpostedit';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT],
@@ -13,11 +13,11 @@ class Wassup_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
     
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKBUTTONGROUP_ADDONSPOSTEDIT:
                 $ret[] = [Wassup_Module_Processor_Buttons::class, Wassup_Module_Processor_Buttons::MODULE_BUTTON_ADDONSPOSTEDIT];
                 break;

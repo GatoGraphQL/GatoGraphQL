@@ -54,26 +54,26 @@ A single component is also able to have many sources of data, each of them comin
 We can instruct a dataloading module to be lazy-loaded (i.e. instead of fetching its database data immediately, it is fetched on a subsequent request from the client) simply by setting its prop `"lazy-load"` to `true`:
 
 ```php
-function initModelProps($componentVariation, &$props) 
+function initModelProps($component, &$props) 
 {
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_AUTHORARTICLES:
 
       // Set the content lazy
-      $this->setProp($componentVariation, $props, 'lazy-load', true);
+      $this->setProp($component, $props, 'lazy-load', true);
       break;
   }
 
-  parent::initModelProps($componentVariation, $props);
+  parent::initModelProps($component, $props);
 }
 ```
 
 Being a prop, this value can be set either by the dataloading module itself, or by any of its ancestor modules:
 
 ```php
-function initModelProps($componentVariation, &$props) 
+function initModelProps($component, &$props) 
 {
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_AUTHORARTICLESWRAPPER:
 
       // Set the content lazy
@@ -81,7 +81,7 @@ function initModelProps($componentVariation, &$props)
       break;
   }
 
-  parent::initModelProps($componentVariation, $props);
+  parent::initModelProps($component, $props);
 }
 ```
 
@@ -97,13 +97,13 @@ Among others, the following are several uses cases for lazy-loading the data for
 By default, a module will fetch its data from the domain where the application is hosted. To change this to a different domain(s) or subdomain(s) is done by setting prop `"dataload-multidomain-sources"` on the module:
 
 ```php
-function initModelProps($componentVariation, &$props) {
+function initModelProps($component, &$props) {
     
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_SOMENAME:
 
       $this->setProp(
-        $componentVariation, 
+        $component, 
         $props, 
         'dataload-multidomain-sources', 
         'https://anotherdomain.com'
@@ -111,20 +111,20 @@ function initModelProps($componentVariation, &$props) {
       break;
   }
 
-  parent::initModelProps($componentVariation, $props);
+  parent::initModelProps($component, $props);
 }
 ```
 
 We can also pass an array of domains, in which case the module will fetch its data from all of them:
 
 ```php
-function initModelProps($componentVariation, &$props) {
+function initModelProps($component, &$props) {
     
-  switch ($componentVariation[1]) {
+  switch ($component[1]) {
     case self::MODULE_SOMENAME:
 
       $this->setProp(
-        $componentVariation, 
+        $component, 
         $props, 
         'dataload-multidomain-sources', 
         array(
@@ -135,7 +135,7 @@ function initModelProps($componentVariation, &$props) {
       break;
   }
 
-  parent::initModelProps($componentVariation, $props);
+  parent::initModelProps($component, $props);
 }
 ```
 

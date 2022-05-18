@@ -6,7 +6,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'layout-checkpointmessage-profileorganization';
     public final const MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'layout-checkpointmessage-profileindividual';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
@@ -14,12 +14,12 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
-        $action = $this->getProp($componentVariation, $props, 'action');
-        switch ($componentVariation[1]) {
+        $action = $this->getProp($component, $props, 'action');
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL:
                 $ret['usernotloggedin'] = sprintf(
@@ -34,7 +34,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_CHECKPOINTMESSAGE_PROFILEORGANIZATION:
                 $ret['profilenotorganization'] = sprintf(
                     TranslationAPIFacade::getInstance()->__('Your user account is not an organization, as such you cannot %1$s under this URL.', 'poptheme-wassup'),
@@ -53,10 +53,10 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageLayouts extends 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->setProp($componentVariation, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
-        parent::initModelProps($componentVariation, $props);
+        $this->setProp($component, $props, 'action', TranslationAPIFacade::getInstance()->__('execute this operation', 'poptheme-wassup'));
+        parent::initModelProps($component, $props);
     }
 }
 

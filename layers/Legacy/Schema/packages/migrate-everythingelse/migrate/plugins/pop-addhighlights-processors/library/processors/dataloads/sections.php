@@ -19,7 +19,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
     public final const MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL = 'dataload-singlerelatedhighlightcontent-scroll-thumbnail';
     public final const MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST = 'dataload-singlerelatedhighlightcontent-scroll-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD],
@@ -37,9 +37,9 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
@@ -52,13 +52,13 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_FULLVIEW => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
             self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_THUMBNAIL => POP_ADDHIGHLIGHTS_ROUTE_HIGHLIGHTS,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
             self::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD => [PoP_Module_Processor_PostTypeaheadComponentLayouts::class, PoP_Module_Processor_PostTypeaheadComponentLayouts::MODULE_LAYOUTPOST_TYPEAHEAD_COMPONENT],
             self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_HIGHLIGHTS_NAVIGATOR],
             self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_HIGHLIGHTS_ADDONS],
@@ -73,12 +73,12 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
             self::MODULE_DATALOAD_SINGLERELATEDHIGHLIGHTCONTENT_SCROLL_LIST => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_HIGHLIGHTS_LIST],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_THUMBNAIL:
@@ -94,10 +94,10 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
                 return [PoP_AddHighlights_Module_Processor_CustomFilters::class, PoP_AddHighlights_Module_Processor_CustomFilters::MODULE_FILTER_AUTHORHIGHLIGHTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -125,26 +125,26 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
         $typeaheads = array(
             [self::class, self::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD],
         );
-        if (in_array($componentVariation, $navigators)) {
+        if (in_array($component, $navigators)) {
             $format = POP_FORMAT_NAVIGATOR;
-        } elseif (in_array($componentVariation, $addons)) {
+        } elseif (in_array($component, $addons)) {
             $format = POP_FORMAT_ADDONS;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $format = POP_FORMAT_THUMBNAIL;
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $format = POP_FORMAT_LIST;
-        } elseif (in_array($componentVariation, $typeaheads)) {
+        } elseif (in_array($component, $typeaheads)) {
             $format = POP_FORMAT_TYPEAHEAD;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
     //         case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST:
@@ -156,14 +156,14 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getMutableonrequestDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_THUMBNAIL:
             case self::MODULE_DATALOAD_AUTHORHIGHLIGHTS_SCROLL_LIST:
@@ -180,9 +180,9 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHTS_TYPEAHEAD:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR:
@@ -198,12 +198,12 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
                 return $this->instanceManager->getInstance(HighlightObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_NAVIGATOR:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_ADDONS:
             case self::MODULE_DATALOAD_HIGHLIGHTS_SCROLL_FULLVIEW:
@@ -219,7 +219,7 @@ class PoP_AddHighlights_Module_Processor_CustomSectionDataloads extends PoP_Modu
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

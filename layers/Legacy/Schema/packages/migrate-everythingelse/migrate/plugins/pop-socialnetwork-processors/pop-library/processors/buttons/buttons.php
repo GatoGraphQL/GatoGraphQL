@@ -24,7 +24,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
     public final const MODULE_BUTTON_UNDODOWNVOTEPOST_FULL = 'button-undodownvotepost-full';
     public final const MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW = 'button-undodownvotepost-preview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BUTTON_FOLLOWUSER_PREVIEW],
@@ -50,7 +50,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         );
     }
 
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         $buttoninners = array(
             self::MODULE_BUTTON_FOLLOWUSER_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::MODULE_BUTTONINNER_FOLLOWUSER_PREVIEW],
@@ -74,16 +74,16 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             self::MODULE_BUTTON_UNDODOWNVOTEPOST_FULL => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_FULL],
             self::MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW => [PoP_SocialNetwork_Module_Processor_ButtonInners::class, PoP_SocialNetwork_Module_Processor_ButtonInners::MODULE_BUTTONINNER_UNDODOWNVOTEPOST_PREVIEW],
         );
-        if ($buttoninner = $buttoninners[$componentVariation[1]] ?? null) {
+        if ($buttoninner = $buttoninners[$component[1]] ?? null) {
             return $buttoninner;
         }
 
-        return parent::getButtoninnerSubmodule($componentVariation);
+        return parent::getButtoninnerSubmodule($component);
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
                 return 'followUserURL';
@@ -125,12 +125,12 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 return 'undoDownvotePostURL';
         }
 
-        return parent::getUrlField($componentVariation);
+        return parent::getUrlField($component);
     }
 
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
                 return TranslationAPIFacade::getInstance()->__('Follow', 'pop-coreprocessors');
@@ -172,14 +172,14 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 return TranslationAPIFacade::getInstance()->__('Down-voted', 'pop-coreprocessors');
         }
 
-        return parent::getTitle($componentVariation, $props);
+        return parent::getTitle($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        $ret = parent::getBtnClass($componentVariation, $props);
+        $ret = parent::getBtnClass($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
@@ -207,14 +207,14 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
                 $ret .= ' pop-hidden-print';
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
                 $ret .= ' '.GD_CLASS_FOLLOWUSER;
@@ -266,7 +266,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
@@ -291,7 +291,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
@@ -320,7 +320,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         }
 
         // Make the classes 'active' as to make them appear as they've been clicked from the previous state
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_UNFOLLOWUSER_FULL:
             case self::MODULE_BUTTON_UNFOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_UNRECOMMENDPOST_FULL:
@@ -338,9 +338,9 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BUTTON_FOLLOWUSER_FULL:
             case self::MODULE_BUTTON_FOLLOWUSER_PREVIEW:
             case self::MODULE_BUTTON_RECOMMENDPOST_FULL:
@@ -362,11 +362,11 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
             case self::MODULE_BUTTON_UNDODOWNVOTEPOST_PREVIEW:
             case self::MODULE_BUTTON_UNDODOWNVOTEPOST_FULL:
                 // Artificial property added to identify the template when adding module-resources
-                $this->setProp($componentVariation, $props, 'resourceloader', 'functionbutton');
+                $this->setProp($component, $props, 'resourceloader', 'functionbutton');
 
                 // Tell the Search engines to not follow the link
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -376,7 +376,7 @@ class PoP_Module_Processor_FunctionButtons extends PoP_Module_Processor_ButtonsB
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

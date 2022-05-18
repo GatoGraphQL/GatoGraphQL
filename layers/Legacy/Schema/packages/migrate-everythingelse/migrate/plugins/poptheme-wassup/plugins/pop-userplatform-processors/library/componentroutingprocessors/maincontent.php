@@ -19,8 +19,8 @@ class PoPTheme_Wassup_UserPlatform_Module_MainContentComponentRoutingProcessor e
             POP_USERPLATFORM_ROUTE_EDITPROFILE => [PoP_UserLogin_Module_Processor_HTMLCodes::class, PoP_UserLogin_Module_Processor_HTMLCodes::MODULE_HTMLCODE_USERMUSTBELOGGEDIN],
             POP_USERPLATFORM_ROUTE_MYPROFILE => [PoP_UserLogin_Module_Processor_HTMLCodes::class, PoP_UserLogin_Module_Processor_HTMLCodes::MODULE_HTMLCODE_USERMUSTBELOGGEDIN],
         );
-        foreach ($routemodules as $route => $componentVariation) {
-            $ret[RequestNature::GENERIC][$route][] = ['component-variation' => $componentVariation];
+        foreach ($routemodules as $route => $component) {
+            $ret[RequestNature::GENERIC][$route][] = ['component' => $component];
         }
 
         return $ret;

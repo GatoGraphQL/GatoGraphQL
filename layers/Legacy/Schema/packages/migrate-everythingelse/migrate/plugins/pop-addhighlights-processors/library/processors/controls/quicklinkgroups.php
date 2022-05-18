@@ -5,7 +5,7 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
     public final const MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT = 'quicklinkgroup-highlightedit';
     public final const MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT = 'quicklinkgroup-highlightcontent';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT],
@@ -13,11 +13,11 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKGROUP_HIGHLIGHTEDIT:
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTEDIT];
                 $ret[] = [PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::class, PoP_AddHighlights_Module_Processor_QuicklinkButtonGroups::MODULE_QUICKLINKBUTTONGROUP_HIGHLIGHTVIEW];
@@ -33,19 +33,19 @@ class PoP_AddHighlights_Module_Processor_CustomQuicklinkGroups extends PoP_Modul
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT:
                 // Make the level below also a 'btn-group' so it shows inline
                 $downlevels = array(
                     self::MODULE_QUICKLINKGROUP_HIGHLIGHTCONTENT => [PoP_Module_Processor_CustomQuicklinkGroups::class, PoP_Module_Processor_CustomQuicklinkGroups::MODULE_QUICKLINKGROUP_UPDOWNVOTEUNDOUPDOWNVOTEPOST],
                 );
-                $this->appendProp($downlevels[$componentVariation[1]], $props, 'class', 'btn-group');
+                $this->appendProp($downlevels[$component[1]], $props, 'class', 'btn-group');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

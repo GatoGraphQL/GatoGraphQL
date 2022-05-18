@@ -5,29 +5,29 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
 {
     public final const MODULE_FORM_CONTACTUS = 'form-contactus';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_CONTACTUS],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FORM_CONTACTUS => [PoP_ContactUs_Module_Processor_GFFormInners::class, PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_CONTACTUS:
                 $email = '';
                 if (defined('POP_EMAILSENDER_INITIALIZED')) {
@@ -50,12 +50,12 @@ class PoP_ContactUs_Module_Processor_GFForms extends PoP_Module_Processor_FormsB
                             $email
                         )
                     );
-                    $this->setProp($componentVariation, $props, 'description', $description);
+                    $this->setProp($component, $props, 'description', $description);
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

@@ -5,7 +5,7 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
     public final const MODULE_CHECKPOINTMESSAGE_PROFILEORGANIZATION = 'checkpointmessage-profileorganization';
     public final const MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL = 'checkpointmessage-profileindividual';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CHECKPOINTMESSAGE_PROFILEORGANIZATION],
@@ -13,18 +13,18 @@ class PoP_CommonUserRoles_Module_Processor_UserCheckpointMessages extends PoP_Mo
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_CHECKPOINTMESSAGE_PROFILEORGANIZATION => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILEORGANIZATION],
             self::MODULE_CHECKPOINTMESSAGE_PROFILEINDIVIDUAL => [PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::class, PoP_CommonUserRoles_Module_Processor_UserCheckpointMessageInners::MODULE_CHECKPOINTMESSAGEINNER_PROFILEINDIVIDUAL],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 }
 

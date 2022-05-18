@@ -6,40 +6,40 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
 {
     public final const MODULE_DATALOAD_INITIALIZEDOMAIN = 'dataload-initializedomain';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_INITIALIZEDOMAIN],
         );
     }
 
-    protected function getCheckpointmessageModule(array $componentVariation)
+    protected function getCheckpointmessageModule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 return [PoP_Application_Module_Processor_UserCheckpointMessages::class, PoP_Application_Module_Processor_UserCheckpointMessages::MODULE_CHECKPOINTMESSAGE_DOMAIN];
         }
 
-        return parent::getCheckpointmessageModule($componentVariation);
+        return parent::getCheckpointmessageModule($component);
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_INITIALIZEDOMAIN => POP_DOMAIN_ROUTE_LOADERS_INITIALIZEDOMAIN,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 $ret = array_merge(
                     $ret,
-                    PoP_ApplicationProcessors_Utils::getInitializedomainComponentVariations()
+                    PoP_ApplicationProcessors_Utils::getInitializedomainComponents()
                 );
 
                 break;
@@ -48,11 +48,11 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function getBackgroundurls(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
+    public function getBackgroundurls(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $objectIDs): array
     {
-        $ret = parent::getBackgroundurls($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
+        $ret = parent::getBackgroundurls($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 // Allow PoP SPA to set the backgroundload URLs
                 $domain = PoP_Application_Utils::getRequestDomain();
@@ -68,16 +68,16 @@ class PoP_MultidomainProcessors_Module_Processor_Dataloads extends PoP_Module_Pr
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_INITIALIZEDOMAIN:
                 // Make it invisible, nothing to show
-                $this->appendProp($componentVariation, $props, 'class', 'hidden');
+                $this->appendProp($component, $props, 'class', 'hidden');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

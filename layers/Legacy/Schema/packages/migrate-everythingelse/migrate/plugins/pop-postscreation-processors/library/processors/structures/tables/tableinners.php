@@ -4,19 +4,19 @@ class PoP_ContentPostLinksCreation_Module_Processor_TableInners extends PoP_Modu
 {
     public final const MODULE_TABLEINNER_MYLINKS = 'tableinner-mylinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLEINNER_MYLINKS],
         );
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         // Main layout
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLEINNER_MYLINKS:
                 $ret[] = [PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::class, PoP_ContentPostLinks_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_CONTENTPOSTLINK_EDIT];
                 $ret[] = [PoP_Module_Processor_PostDateLayouts::class, PoP_Module_Processor_PostDateLayouts::MODULE_LAYOUTPOST_DATE];

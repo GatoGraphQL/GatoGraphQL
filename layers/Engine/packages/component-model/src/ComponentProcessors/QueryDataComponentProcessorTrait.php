@@ -18,68 +18,68 @@ trait QueryDataComponentProcessorTrait
 
     abstract protected function getActionExecutionQueryInputOutputHandler(): ActionExecutionQueryInputOutputHandler;
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
         return array();
     }
-    protected function getMutableonrequestDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getMutableonrequestDataloadQueryArgs(array $component, array &$props): array
     {
         return array();
     }
-    public function getQueryInputOutputHandler(array $componentVariation): ?QueryInputOutputHandlerInterface
+    public function getQueryInputOutputHandler(array $component): ?QueryInputOutputHandlerInterface
     {
         return $this->getActionExecutionQueryInputOutputHandler();
     }
-    // public function getFilter(array $componentVariation)
+    // public function getFilter(array $component)
     // {
     //     return null;
     // }
 
-    public function getImmutableHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getImmutableHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($componentVariation, $props);
+        $ret = parent::getImmutableHeaddatasetmoduleDataProperties($component, $props);
 
         // Attributes to pass to the query
-        $ret[DataloadingConstants::QUERYARGS] = $this->getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret[DataloadingConstants::QUERYARGS] = $this->getImmutableDataloadQueryArgs($component, $props);
 
         return $ret;
     }
 
-    public function getQueryArgsFilteringComponentVariations(array $componentVariation, array &$props): array
+    public function getQueryArgsFilteringComponents(array $component, array &$props): array
     {
         // Attributes overriding the query args, taken from the request
         return [
-            $componentVariation,
+            $component,
         ];
     }
 
-    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getMutableonmodelHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonmodelHeaddatasetmoduleDataProperties($componentVariation, $props);
+        $ret = parent::getMutableonmodelHeaddatasetmoduleDataProperties($component, $props);
 
         // Attributes overriding the query args, taken from the request
         if (!isset($ret[DataloadingConstants::IGNOREREQUESTPARAMS]) || !$ret[DataloadingConstants::IGNOREREQUESTPARAMS]) {
-            $ret[DataloadingConstants::QUERYARGSFILTERINGMODULES] = $this->getQueryArgsFilteringComponentVariations($componentVariation, $props);
+            $ret[DataloadingConstants::QUERYARGSFILTERINGMODULES] = $this->getQueryArgsFilteringComponents($component, $props);
         }
 
         // // Set the filter if it has one
-        // if ($filter = $this->getFilter($componentVariation)) {
+        // if ($filter = $this->getFilter($component)) {
         //     $ret[GD_DATALOAD_FILTER] = $filter;
         // }
 
         return $ret;
     }
 
-    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $componentVariation, array &$props): array
+    public function getMutableonrequestHeaddatasetmoduleDataProperties(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($componentVariation, $props);
+        $ret = parent::getMutableonrequestHeaddatasetmoduleDataProperties($component, $props);
 
-        $ret[DataloadingConstants::QUERYARGS] = $this->getMutableonrequestDataloadQueryArgs($componentVariation, $props);
+        $ret[DataloadingConstants::QUERYARGS] = $this->getMutableonrequestDataloadQueryArgs($component, $props);
 
         return $ret;
     }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array | null
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array | null
     {
         // Prepare the Query to get data from the DB
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
@@ -115,22 +115,22 @@ trait QueryDataComponentProcessorTrait
             );
         }
 
-        if ($queryHandler = $this->getQueryInputOutputHandler($componentVariation)) {
+        if ($queryHandler = $this->getQueryInputOutputHandler($component)) {
             // Allow the queryHandler to override/normalize the query args
             $queryHandler->prepareQueryArgs($data_properties[DataloadingConstants::QUERYARGS]);
         }
 
-        $relationalTypeResolver = $this->getRelationalTypeResolver($componentVariation);
+        $relationalTypeResolver = $this->getRelationalTypeResolver($component);
         /** @var ObjectTypeQueryableDataLoaderInterface */
         $typeDataLoader = $relationalTypeResolver->getRelationalTypeDataLoader();
         return $typeDataLoader->findIDs($data_properties);
     }
 
-    public function getDatasetmeta(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
+    public function getDatasetmeta(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbObjectIDOrIDs): array
     {
-        $ret = parent::getDatasetmeta($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
+        $ret = parent::getDatasetmeta($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs);
 
-        if ($queryHandler = $this->getQueryInputOutputHandler($componentVariation)) {
+        if ($queryHandler = $this->getQueryInputOutputHandler($component)) {
             if ($query_state = $queryHandler->getQueryState($data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbObjectIDOrIDs)) {
                 $ret['querystate'] = $query_state;
             }

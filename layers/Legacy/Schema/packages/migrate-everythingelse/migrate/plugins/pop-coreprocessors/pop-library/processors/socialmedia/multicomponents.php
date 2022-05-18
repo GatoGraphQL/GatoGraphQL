@@ -12,7 +12,7 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
     public final const MODULE_MULTICOMPONENT_USEROPTIONS = 'multicomponent-useroptions';
     public final const MODULE_MULTICOMPONENT_TAGOPTIONS = 'multicomponent-tagoptions';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA],
@@ -27,85 +27,85 @@ class PoP_Module_Processor_SocialMediaMultipleComponents extends PoP_Module_Proc
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $componentVariations = array();
-        switch ($componentVariation[1]) {
+        $components = array();
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $componentVariations[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
+                $components[] = [PoP_Module_Processor_Buttons::class, PoP_Module_Processor_Buttons::MODULE_BUTTON_PRINT_SOCIALMEDIA];
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA];
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS];
                 break;
 
             case self::MODULE_MULTICOMPONENT_USEROPTIONS:
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA];
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS];
                 break;
 
             case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA];
-                $componentVariations[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA];
+                $components[] = [self::class, self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS];
                 break;
         }
 
         // Allow PoP Generic Forms Processors to add modules
-        $componentVariations = \PoP\Root\App::applyFilters(
+        $components = \PoP\Root\App::applyFilters(
             'PoP_Module_Processor_SocialMediaMultipleComponents:modules',
-            $componentVariations,
-            $componentVariation
+            $components,
+            $component
         );
         $ret = array_merge(
             $ret,
-            $componentVariations
+            $components
         );
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTICOMPONENT_POSTSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_USERSOCIALMEDIA:
             case self::MODULE_MULTICOMPONENT_TAGSOCIALMEDIA:
-                $this->appendProp($componentVariation, $props, 'class', 'sm-group');
+                $this->appendProp($component, $props, 'class', 'sm-group');
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTSECINTERACTIONS:
             case self::MODULE_MULTICOMPONENT_USERSECINTERACTIONS:
             case self::MODULE_MULTICOMPONENT_TAGSECINTERACTIONS:
-                $this->appendProp($componentVariation, $props, 'class', 'secinteractions-group');
+                $this->appendProp($component, $props, 'class', 'secinteractions-group');
                 break;
 
             case self::MODULE_MULTICOMPONENT_POSTOPTIONS:
             case self::MODULE_MULTICOMPONENT_USEROPTIONS:
             case self::MODULE_MULTICOMPONENT_TAGOPTIONS:
-                $this->appendProp($componentVariation, $props, 'class', 'options-group');
-                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'inline');
+                $this->appendProp($component, $props, 'class', 'options-group');
+                foreach ($this->getSubComponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'inline');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

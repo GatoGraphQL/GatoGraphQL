@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
     public final const MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN = 'em-quicklinkbuttongroup-downloadlinksdropdown';
     public final const MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS = 'em-quicklinkbuttongroup-downloadlinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKSDROPDOWN],
@@ -13,11 +13,11 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_GOOGLECALENDAR];
                 $ret[] = [GD_EM_Module_Processor_Buttons::class, GD_EM_Module_Processor_Buttons::MODULE_EM_BUTTON_ICAL];
@@ -31,17 +31,17 @@ class GD_EM_Module_Processor_QuicklinkButtonGroups extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_QUICKLINKBUTTONGROUP_DOWNLOADLINKS:
-                foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                    $this->appendProp([$subComponentVariation], $props, 'class', 'btn btn-link btn-compact');
+                foreach ($this->getSubComponents($component) as $subComponent) {
+                    $this->appendProp([$subComponent], $props, 'class', 'btn btn-link btn-compact');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

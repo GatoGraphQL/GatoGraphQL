@@ -4,18 +4,18 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents extends
 {
     public final const MODULE_TABPANEL_TAGLINKS = 'tabpanel-taglinks';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_TAGLINKS],
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_TAGLINKS:
                 $ret = array_merge(
                     $ret,
@@ -33,9 +33,9 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents extends
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_TAGLINKS:
                 $ret = array(
                     [
@@ -57,7 +57,7 @@ class PoP_ContentPostLinks_Module_Processor_TagSectionTabPanelComponents extends
                 break;
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

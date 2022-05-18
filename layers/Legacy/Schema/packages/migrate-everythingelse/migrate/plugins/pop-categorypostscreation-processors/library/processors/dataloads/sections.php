@@ -65,7 +65,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
     public final const MODULE_DATALOAD_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW = 'dataload-mycategoryposts18-scroll-fullviewpreview';
     public final const MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW = 'dataload-mycategoryposts19-scroll-fullviewpreview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT],
@@ -133,9 +133,9 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
             self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS00,
@@ -196,13 +196,13 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_SIMPLEVIEWPREVIEW => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_TABLE_EDIT => POP_CATEGORYPOSTSCREATION_ROUTE_MYCATEGORYPOSTS19,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
-        $inner_componentVariations = array(
+        $inner_components = array(
 
             /*********************************************
          * My Content Tables
@@ -274,12 +274,12 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW => [PoP_Module_Processor_CustomScrolls::class, PoP_Module_Processor_CustomScrolls::MODULE_SCROLL_POSTS_FULLVIEW],
         );
 
-        return $inner_componentVariations[$componentVariation[1]] ?? null;
+        return $inner_components[$component[1]] ?? null;
     }
 
-    public function getFilterSubmodule(array $componentVariation): ?array
+    public function getFilterSubmodule(array $component): ?array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS01_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS02_TABLE_EDIT:
@@ -343,10 +343,10 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_MYCATEGORYPOSTS];
         }
 
-        return parent::getFilterSubmodule($componentVariation);
+        return parent::getFilterSubmodule($component);
     }
 
-    public function getFormat(array $componentVariation): ?string
+    public function getFormat(array $component): ?string
     {
 
         // Add the format attr
@@ -416,22 +416,22 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             [self::class, self::MODULE_DATALOAD_MYCATEGORYPOSTS18_SCROLL_FULLVIEWPREVIEW],
             [self::class, self::MODULE_DATALOAD_MYCATEGORYPOSTS19_SCROLL_FULLVIEWPREVIEW],
         );
-        if (in_array($componentVariation, $tables)) {
+        if (in_array($component, $tables)) {
             $format = POP_FORMAT_TABLE;
-        } elseif (in_array($componentVariation, $simpleviews)) {
+        } elseif (in_array($component, $simpleviews)) {
             $format = POP_FORMAT_SIMPLEVIEW;
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $format = POP_FORMAT_FULLVIEW;
         }
 
-        return $format ?? parent::getFormat($componentVariation);
+        return $format ?? parent::getFormat($component);
     }
 
-    protected function getImmutableDataloadQueryArgs(array $componentVariation, array &$props): array
+    protected function getImmutableDataloadQueryArgs(array $component, array &$props): array
     {
-        $ret = parent::getImmutableDataloadQueryArgs($componentVariation, $props);
+        $ret = parent::getImmutableDataloadQueryArgs($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_FULLVIEWPREVIEW:
@@ -556,14 +556,14 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
         return $ret;
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
         return $this->instanceManager->getInstance(PostObjectTypeResolver::class);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_TABLE_EDIT:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SCROLL_SIMPLEVIEWPREVIEW:
             case self::MODULE_DATALOAD_MYCATEGORYPOSTS00_SCROLL_FULLVIEWPREVIEW:
@@ -700,7 +700,7 @@ class LPPC_Module_Processor_MySectionDataloads extends PoP_Module_Processor_MySe
             );
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

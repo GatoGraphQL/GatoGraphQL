@@ -7,7 +7,7 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
     public final const MODULE_SCROLLINNER_WHOWEARE_LIST = 'scrollinner-whoweare-list';
     public final const MODULE_SCROLLINNER_WHOWEARE_FULLVIEW = 'scrollinner-whoweare-fullview';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLLINNER_WHOWEARE_DETAILS],
@@ -17,9 +17,9 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 // Allow ThemeStyle Expansive to override the grid
                 return \PoP\Root\App::applyFilters(
@@ -39,14 +39,14 @@ class GD_Custom_Module_Processor_CustomScrollInners extends PoP_Module_Processor
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCROLLINNER_WHOWEARE_THUMBNAIL:
                 $ret[] = [PoP_Module_Processor_MultipleUserLayouts::class, PoP_Module_Processor_MultipleUserLayouts::MODULE_LAYOUT_MULTIPLEUSER_THUMBNAIL];
                 break;

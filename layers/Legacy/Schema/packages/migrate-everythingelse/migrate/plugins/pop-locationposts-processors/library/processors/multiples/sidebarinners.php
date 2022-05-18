@@ -6,7 +6,7 @@ class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Modul
     public final const MODULE_MULTIPLE_SECTIONINNER_TAGLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-taglocationposts-sidebar';
     public final const MODULE_MULTIPLE_SECTIONINNER_AUTHORLOCATIONPOSTS_SIDEBAR = 'multiple-sectioninner-authorlocationposts-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR],
@@ -15,11 +15,11 @@ class GD_Custom_EM_Module_Processor_CustomSectionSidebarInners extends PoP_Modul
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTIONINNER_LOCATIONPOSTS_SIDEBAR:
                 $ret[] = [GD_Custom_Module_Processor_ButtonGroups::class, GD_Custom_Module_Processor_ButtonGroups::MODULE_BUTTONGROUP_SECTIONWITHMAP];
                 $ret[] = [PoP_LocationPosts_Module_Processor_CustomDelegatorFilters::class, PoP_LocationPosts_Module_Processor_CustomDelegatorFilters::MODULE_DELEGATORFILTER_LOCATIONPOSTS];

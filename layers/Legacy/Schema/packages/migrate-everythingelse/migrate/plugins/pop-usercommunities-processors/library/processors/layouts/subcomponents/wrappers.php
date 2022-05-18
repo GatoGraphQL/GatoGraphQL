@@ -4,18 +4,18 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
 {
     public final const MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS = 'ure-layoutwrapper-communitymembers';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 $ret[] = [GD_URE_Module_Processor_Codes::class, GD_URE_Module_Processor_Codes::MODULE_URE_CODE_MEMBERSLABEL];
                 $ret[] = [GD_URE_Module_Processor_MembersLayoutMultipleComponents::class, GD_URE_Module_Processor_MembersLayoutMultipleComponents::MODULE_URE_MULTICOMPONENT_COMMUNITYMEMBERS];
@@ -25,9 +25,9 @@ class GD_URE_Module_Processor_MembersLayoutWrappers extends PoP_Module_Processor
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_LAYOUTWRAPPER_COMMUNITYMEMBERS:
                 return 'hasMembers';
         }

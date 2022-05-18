@@ -2,7 +2,7 @@
 
 abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_Locations_TemplateResourceLoaderProcessor::class, PoP_Locations_TemplateResourceLoaderProcessor::RESOURCE_LAYOUT_LOCATIONS];
     }
@@ -12,7 +12,7 @@ abstract class GD_EM_Module_Processor_LocationLayoutsBase extends PoPEngine_Quer
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         return array('id', 'name', 'address', 'coordinates');
     }

@@ -5,25 +5,25 @@ use PoP\Root\Feedback\FeedbackItemResolution;
 
 abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Processor_DataloadsBase
 {
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_DATALOAD];
     }
 
-    protected function getStatusSubmodule(array $componentVariation)
+    protected function getStatusSubmodule(array $component)
     {
         return [PoP_Module_Processor_Status::class, PoP_Module_Processor_Status::MODULE_STATUS];
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($this->getStatusSubmodule($componentVariation)) {
-            $ret[] = $this->getStatusSubmodule($componentVariation);
+        if ($this->getStatusSubmodule($component)) {
+            $ret[] = $this->getStatusSubmodule($component);
         }
 
-        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($componentVariation)) {
+        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $feedbackmessages
@@ -33,30 +33,30 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        if ($subComponentVariations = $this->getInnerSubmodules($componentVariation)) {
+        if ($subComponents = $this->getInnerSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['inners'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
-                $subComponentVariations
+                $subComponents
             );
         }
 
-        if ($status = $this->getStatusSubmodule($componentVariation)) {
+        if ($status = $this->getStatusSubmodule($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['status'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($status);
         }
 
-        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($componentVariation)) {
+        if ($feedbackmessages = $this->getFeedbackmessageSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['feedbackmessages'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'],
                 $feedbackmessages
             );
 
-            $feedbackmessages_pos = $this->getFeedbackmessagesPosition($componentVariation);
+            $feedbackmessages_pos = $this->getFeedbackmessagesPosition($component);
             if ($feedbackmessages_pos == 'top') {
                 $ret['feedbackmessages-top'] = true;
             } elseif ($feedbackmessages_pos == 'bottom') {
@@ -67,51 +67,51 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Allow Skeleton Screens: if setting $att 'use-skeletonscreen' then do not validate if the content is loaded
         // Then, the content will be loaded nevertheless, and this content will be used for the skeleton screen effect,
         // simply adding some extra styles together with style '.pop-block.pop-loadingcontent'
-        if ($this->queriesExternalDomain($componentVariation, $props) && PoP_BaseCollectionProcessors_Utils::useSkeletonscreenForExternalDomain()) {
+        if ($this->queriesExternalDomain($component, $props) && PoP_BaseCollectionProcessors_Utils::useSkeletonscreenForExternalDomain()) {
             // If proxy => Content not loaded => Make it use the Skeleton screen
-            $this->setProp($componentVariation, $props, 'use-skeletonscreen', true);
+            $this->setProp($component, $props, 'use-skeletonscreen', true);
 
             // Inform pop-engine to use mock data, needed for the Skeleton Screen effect
-            $this->setProp($componentVariation, $props, 'use-mock-dbobject-data', true);
+            $this->setProp($component, $props, 'use-mock-dbobject-data', true);
         }
 
-        $this->setProp($componentVariation, $props, 'use-skeletonscreen', false);
-        if ($this->getProp($componentVariation, $props, 'use-skeletonscreen')) {
+        $this->setProp($component, $props, 'use-skeletonscreen', false);
+        if ($this->getProp($component, $props, 'use-skeletonscreen')) {
             // Add extra class to the block
-            $this->appendProp($componentVariation, $props, 'class', 'pop-skeletonscreen');
+            $this->appendProp($component, $props, 'class', 'pop-skeletonscreen');
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 
-    protected function getFeedbackmessageSubmodules(array $componentVariation)
+    protected function getFeedbackmessageSubmodules(array $component)
     {
         $ret = array();
-        if ($feedbackmessage = $this->getFeedbackmessageModule($componentVariation)) {
+        if ($feedbackmessage = $this->getFeedbackmessageModule($component)) {
             $ret[] = $feedbackmessage;
         }
-        if ($checkpointmessage = $this->getCheckpointmessageModule($componentVariation)) {
+        if ($checkpointmessage = $this->getCheckpointmessageModule($component)) {
             $ret[] = $checkpointmessage;
         }
         return $ret;
     }
-    protected function getFeedbackmessageModule(array $componentVariation)
+    protected function getFeedbackmessageModule(array $component)
     {
         return null;
     }
-    protected function getCheckpointmessageModule(array $componentVariation)
+    protected function getCheckpointmessageModule(array $component)
     {
         return null;
     }
 
-    protected function getFeedbackmessagesPosition(array $componentVariation)
+    protected function getFeedbackmessagesPosition(array $component)
     {
         return 'top';
     }
@@ -120,11 +120,11 @@ abstract class PoP_Module_Processor_DataloadsBase extends PoP_Engine_Module_Proc
     // Feedback
     //-------------------------------------------------
 
-    public function getDataFeedback(array $componentVariation, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
+    public function getDataFeedback(array $component, array &$props, array $data_properties, ?FeedbackItemResolution $dataaccess_checkpoint_validation, ?FeedbackItemResolution $actionexecution_checkpoint_validation, ?array $executed, array $dbobjectids): array
     {
-        $ret = parent::getDataFeedback($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
+        $ret = parent::getDataFeedback($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $dbobjectids);
 
-        if ($this->getProp($componentVariation, $props, 'do-not-render-if-no-results') && !(($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null)) && !$dbobjectids) {
+        if ($this->getProp($component, $props, 'do-not-render-if-no-results') && !(($data_properties[DataloadingConstants::LAZYLOAD] ?? null) || ($data_properties[DataloadingConstants::EXTERNALLOAD] ?? null)) && !$dbobjectids) {
             $ret['do-not-render'] = true;
         }
 

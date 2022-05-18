@@ -12,7 +12,7 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
     public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT = 'forminput-emailnotifications-subscribedtopic-createdcontent';
     public final const MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT = 'forminput-emailnotifications-subscribedtopic-addedcomment';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT],
@@ -26,9 +26,9 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
                 return TranslationAPIFacade::getInstance()->__('Created content', 'pop-coreprocessors');
             
@@ -54,12 +54,12 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                 return TranslationAPIFacade::getInstance()->__('Has a comment added', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getCheckboxValue(array $componentVariation, array &$props)
+    public function getCheckboxValue(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_CREATEDCONTENT:
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_RECOMMENDEDPOST:
             case self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_NETWORK_FOLLOWEDUSER:
@@ -78,10 +78,10 @@ class PoP_SocialNetwork_Module_Processor_UserProfileCheckboxFormInputs extends P
                     self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_CREATEDCONTENT,
                     self::MODULE_FORMINPUT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT => POP_USERPREFERENCES_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC_ADDEDCOMMENT,
                 );
-                return $values[$componentVariation[1]];
+                return $values[$component[1]];
         }
 
-        return parent::getCheckboxValue($componentVariation, $props);
+        return parent::getCheckboxValue($component, $props);
     }
 }
 

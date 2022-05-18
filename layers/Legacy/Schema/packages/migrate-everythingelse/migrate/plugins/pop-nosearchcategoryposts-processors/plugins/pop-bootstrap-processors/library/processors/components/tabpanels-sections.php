@@ -23,7 +23,7 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
     public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'tabpanel-nosearchcategoryposts18';
     public final const MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'tabpanel-nosearchcategoryposts19';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00],
@@ -49,11 +49,11 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         );
     }
 
-    public function getPanelSubmodules(array $componentVariation)
+    public function getPanelSubmodules(array $component)
     {
-        $ret = parent::getPanelSubmodules($componentVariation);
+        $ret = parent::getPanelSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 $ret = array_merge(
                     $ret,
@@ -318,9 +318,9 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
         return $ret;
     }
 
-    public function getPanelHeaders(array $componentVariation, array &$props)
+    public function getPanelHeaders(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00:
                 return array(
                     [
@@ -702,7 +702,7 @@ class NSCPP_Module_Processor_SectionTabPanelComponents extends PoP_Module_Proces
                 );
         }
 
-        return parent::getPanelHeaders($componentVariation, $props);
+        return parent::getPanelHeaders($component, $props);
     }
 }
 

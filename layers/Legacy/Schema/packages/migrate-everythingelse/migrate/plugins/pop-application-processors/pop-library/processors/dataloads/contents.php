@@ -17,7 +17,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     public final const MODULE_DATALOAD_SINGLEINTERACTION_CONTENT = 'dataload-singleinteraction-content';
     public final const MODULE_DATALOAD_PAGE_CONTENT = 'dataload-page-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_DATALOAD_AUTHOR_CONTENT],
@@ -29,29 +29,29 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         );
     }
 
-    public function getRelevantRoute(array $componentVariation, array &$props): ?string
+    public function getRelevantRoute(array $component, array &$props): ?string
     {
-        return match($componentVariation[1]) {
+        return match($component[1]) {
             // The Page Content block uses whichever is the current page
             self::MODULE_DATALOAD_PAGE_CONTENT => POP_ROUTE_DESCRIPTION,//\PoP\Root\App::getState('route'),
             self::MODULE_DATALOAD_AUTHOR_CONTENT => POP_ROUTE_DESCRIPTION,
             self::MODULE_DATALOAD_TAG_CONTENT => POP_ROUTE_DESCRIPTION,
-            default => parent::getRelevantRoute($componentVariation, $props),
+            default => parent::getRelevantRoute($component, $props),
         };
     }
 
-    protected function getInnerSubmodules(array $componentVariation): array
+    protected function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
                 // Add the Sidebar on the top
                 if ($sidebar = \PoP\Root\App::applyFilters(
                     'PoP_Module_Processor_CustomContentBlocks:author:sidebar',
                     [PoP_Module_Processor_CustomUserLayoutSidebars::class, PoP_Module_Processor_CustomUserLayoutSidebars::MODULE_LAYOUT_USERSIDEBAR_COMPACTHORIZONTAL],
-                    $componentVariation
+                    $component
                 )) {
                     $ret[] = $sidebar;
                 }
@@ -98,9 +98,9 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
         return $ret;
     }
 
-    // public function getNature(array $componentVariation)
+    // public function getNature(array $component)
     // {
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
     //         case self::MODULE_DATALOAD_AUTHOR_CONTENT:
     //         case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
     //             return UserRequestNature::USER;
@@ -113,27 +113,27 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
     //             return CustomPostRequestNature::CUSTOMPOST;
     //     }
 
-    //     return parent::getNature($componentVariation);
+    //     return parent::getNature($component);
     // }
 
-    public function getObjectIDOrIDs(array $componentVariation, array &$props, &$data_properties): string | int | array
+    public function getObjectIDOrIDs(array $component, array &$props, &$data_properties): string | int | array
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_SINGLE_CONTENT:
             case self::MODULE_DATALOAD_SINGLEINTERACTION_CONTENT:
             case self::MODULE_DATALOAD_PAGE_CONTENT:
             case self::MODULE_DATALOAD_TAG_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
-                return $this->getQueriedDBObjectID($componentVariation, $props, $data_properties);
+                return $this->getQueriedDBObjectID($component, $props, $data_properties);
         }
 
-        return parent::getObjectIDOrIDs($componentVariation, $props, $data_properties);
+        return parent::getObjectIDOrIDs($component, $props, $data_properties);
     }
 
-    public function getRelationalTypeResolver(array $componentVariation): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
+    public function getRelationalTypeResolver(array $component): ?\PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_DATALOAD_AUTHOR_CONTENT:
             case self::MODULE_DATALOAD_AUTHOR_SUMMARYCONTENT:
                 return $this->instanceManager->getInstance(UserObjectTypeResolver::class);
@@ -149,7 +149,7 @@ class PoP_Module_Processor_CustomContentDataloads extends PoP_Module_Processor_D
                 return $this->instanceManager->getInstance(PageObjectTypeResolver::class);
         }
 
-        return parent::getRelationalTypeResolver($componentVariation);
+        return parent::getRelationalTypeResolver($component);
     }
 }
 

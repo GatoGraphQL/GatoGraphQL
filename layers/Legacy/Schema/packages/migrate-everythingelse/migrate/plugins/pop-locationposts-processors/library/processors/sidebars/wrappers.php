@@ -4,18 +4,18 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
 {
     public final const MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES = 'layoutwrapper-locationpost-categories';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES],
         );
     }
 
-    public function getConditionSucceededSubmodules(array $componentVariation)
+    public function getConditionSucceededSubmodules(array $component)
     {
-        $ret = parent::getConditionSucceededSubmodules($componentVariation);
+        $ret = parent::getConditionSucceededSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_EM_Module_Processor_Layouts::class, GD_Custom_EM_Module_Processor_Layouts::MODULE_LAYOUT_LOCATIONPOST_CATEGORIES];
                 break;
@@ -24,11 +24,11 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getConditionFailedSubmodules(array $componentVariation)
+    public function getConditionFailedSubmodules(array $component)
     {
-        $ret = parent::getConditionFailedSubmodules($componentVariation);
+        $ret = parent::getConditionFailedSubmodules($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 $ret[] = [GD_Custom_Module_Processor_WidgetMessages::class, GD_Custom_Module_Processor_WidgetMessages::MODULE_MESSAGE_NOCATEGORIES];
                 break;
@@ -37,9 +37,9 @@ class GD_Custom_EM_Module_Processor_WidgetWrappers extends PoP_Module_Processor_
         return $ret;
     }
 
-    public function getConditionField(array $componentVariation): ?string
+    public function getConditionField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTWRAPPER_LOCATIONPOST_CATEGORIES:
                 return 'has-locationpostcategories';
         }

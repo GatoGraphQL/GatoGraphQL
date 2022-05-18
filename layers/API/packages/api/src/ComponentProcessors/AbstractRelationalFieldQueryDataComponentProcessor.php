@@ -34,7 +34,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     {
         if ($moduleAtts === null) {
             /**
-             * There are not virtual component variation atts when loading the component variation
+             * There are not virtual component atts when loading the component
              * the first time (i.e. for the fields at the root level).
              */
             $executableDocument = App::getState('executable-document-ast');
@@ -62,7 +62,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         }
 
         /**
-         * When the virtual component variation has atts, the field IDs are coded within.
+         * When the virtual component has atts, the field IDs are coded within.
          */
         return $this->retrieveAstFieldFragmentModelsTuplesFromAppState($moduleAtts[self::MODULE_ATTS_FIELD_IDS]);
     }
@@ -149,13 +149,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $componentVariation[2] ?? null;
+        $moduleAtts = $component[2] ?? null;
         $leafFieldFragmentModelsTuples = $this->getLeafFieldFragmentModelsTuples($moduleAtts);
 
         if ($this->ignoreConditionalFields($moduleAtts)) {
@@ -182,7 +182,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     }
 
     /**
-     * Flag used to process the conditional field from the component variation or not
+     * Flag used to process the conditional field from the component or not
      */
     public function ignoreConditionalFields(?array $moduleAtts): bool
     {
@@ -204,13 +204,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     /**
      * @return RelationalModuleField[]
      */
-    public function getRelationalSubmodules(array $componentVariation): array
+    public function getRelationalSubmodules(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $componentVariation[2] ?? null;
+        $moduleAtts = $component[2] ?? null;
         $relationalFieldFragmentModelsTuples = $this->getRelationalFieldFragmentModelsTuples($moduleAtts);
 
         if ($this->ignoreConditionalFields($moduleAtts)) {
@@ -240,8 +240,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
         $ret = [];
 
         /**
-         * Create a "virtual" component variation with the fields
-         * corresponding to the next level component variation.
+         * Create a "virtual" component with the fields
+         * corresponding to the next level component.
          */
         foreach ($relationalFields as $relationalField) {
             $allFieldFragmentModelsFromFieldsOrFragmentBonds = $this->getAllFieldFragmentModelsTuplesFromFieldsOrFragmentBonds(
@@ -258,8 +258,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $nestedFields
             );
             $nestedModule = [
-                $componentVariation[0],
-                $componentVariation[1],
+                $component[0],
+                $component[1],
                 [
                     self::MODULE_ATTS_FIELD_IDS => $nestedFieldIDs,
                 ]
@@ -291,7 +291,7 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      * relational fields (eg: "author").
      *
      * Using `getConditionalOnDataFieldRelationalSubmodules` to
-     * load relational fields does not work, because the component variation to
+     * load relational fields does not work, because the component to
      * process entry "author" is added twice
      * (once "ignoreConditionalFields" => true, once => false) and both
      * of them will add their entry "author" under 'conditional-data-fields',
@@ -306,13 +306,13 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
      *
      * @todo Remove all commented code below this function
      */
-    public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
+    public function getConditionalOnDataFieldSubmodules(array $component): array
     {
         if (App::getState('does-api-query-have-errors')) {
             return [];
         }
 
-        $moduleAtts = $componentVariation[2] ?? null;
+        $moduleAtts = $component[2] ?? null;
         if (!$this->ignoreConditionalFields($moduleAtts)) {
             return [];
         }
@@ -355,8 +355,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
                 $fragmentModelListFields,
             );
             $fragmentModelListNestedModule = [
-                $componentVariation[0],
-                $componentVariation[1],
+                $component[0],
+                $component[1],
                 [
                     self::MODULE_ATTS_FIELD_IDS => $fragmentModelListFieldIDs,
                     self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -417,9 +417,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalLeafModuleField[]
     //  */
-    // public function getConditionalOnDataFieldSubmodules(array $componentVariation): array
+    // public function getConditionalOnDataFieldSubmodules(array $component): array
     // {
-    //     $moduleAtts = $componentVariation[2] ?? null;
+    //     $moduleAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($moduleAtts)) {
     //         return [];
     //     }
@@ -439,8 +439,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $field = $fieldFragmentModelsTuple->getField();
     //         $location = $field->getLocation();
     //         $nestedModule = [
-    //             $componentVariation[0],
-    //             $componentVariation[1],
+    //             $component[0],
+    //             $component[1],
     //             [
     //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($field)],
     //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,
@@ -479,9 +479,9 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     // /**
     //  * @return ConditionalRelationalModuleField[]
     //  */
-    // public function getConditionalOnDataFieldRelationalSubmodules(array $componentVariation): array
+    // public function getConditionalOnDataFieldRelationalSubmodules(array $component): array
     // {
-    //     $moduleAtts = $componentVariation[2] ?? null;
+    //     $moduleAtts = $component[2] ?? null;
     //     if (!$this->ignoreConditionalFields($moduleAtts)) {
     //         return [];
     //     }
@@ -502,8 +502,8 @@ abstract class AbstractRelationalFieldQueryDataComponentProcessor extends Abstra
     //         $relationalField = $fieldFragmentModelsTuple->getField();
     //         $location = $relationalField->getLocation();
     //         $nestedModule = [
-    //             $componentVariation[0],
-    //             $componentVariation[1],
+    //             $component[0],
+    //             $component[1],
     //             [
     //                 self::MODULE_ATTS_FIELD_IDS => [$this->getFieldUniqueID($relationalField)],
     //                 self::MODULE_ATTS_IGNORE_CONDITIONAL_FIELDS => false,

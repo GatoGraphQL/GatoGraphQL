@@ -8,7 +8,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_THUMBNAIL = 'scroll-automatedemails-events-thumbnail';
     public final const MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST = 'scroll-automatedemails-events-list';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS],
@@ -20,7 +20,7 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
     }
 
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_DETAILS => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_DETAILS],
@@ -30,14 +30,14 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
             self::MODULE_SCROLL_AUTOMATEDEMAILS_EVENTS_LIST => [PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::class, PoPTheme_Wassup_EM_AE_Module_Processor_ScrollInners::MODULE_SCROLLINNER_AUTOMATEDEMAILS_EVENTS_LIST],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
 
         // Extra classes
@@ -58,20 +58,20 @@ class PoPTheme_Wassup_EM_AE_Module_Processor_Scrolls extends PoP_Module_Processo
         );
 
         $extra_class = '';
-        if (in_array($componentVariation, $simpleviews)) {
+        if (in_array($component, $simpleviews)) {
             $extra_class = 'simpleview';
-        } elseif (in_array($componentVariation, $fullviews)) {
+        } elseif (in_array($component, $fullviews)) {
             $extra_class = 'fullview';
-        } elseif (in_array($componentVariation, $details)) {
+        } elseif (in_array($component, $details)) {
             $extra_class = 'details';
-        } elseif (in_array($componentVariation, $thumbnails)) {
+        } elseif (in_array($component, $thumbnails)) {
             $extra_class = 'thumb';
-        } elseif (in_array($componentVariation, $lists)) {
+        } elseif (in_array($component, $lists)) {
             $extra_class = 'list';
         }
-        $this->appendProp($componentVariation, $props, 'class', $extra_class);
+        $this->appendProp($component, $props, 'class', $extra_class);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

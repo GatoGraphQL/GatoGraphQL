@@ -23,7 +23,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
     public final const MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS18 = 'block-nosearchcategoryposts18-tabpanel';
     public final const MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19 = 'block-nosearchcategoryposts19-tabpanel';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00],
@@ -49,9 +49,9 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         $inners = array(
             self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS00],
@@ -75,16 +75,16 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
             self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS18 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS18],
             self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS19 => [NSCPP_Module_Processor_SectionTabPanelComponents::class, NSCPP_Module_Processor_SectionTabPanelComponents::MODULE_TABPANEL_NOSEARCHCATEGORYPOSTS19],
         );
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             $ret[] = $inner;
         }
 
         return $ret;
     }
 
-    protected function getControlgroupTopSubmodule(array $componentVariation)
+    protected function getControlgroupTopSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS02:
@@ -108,12 +108,12 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Module_Processor_CustomControlGroups::class, PoP_Module_Processor_CustomControlGroups::MODULE_CONTROLGROUP_POSTLIST];
         }
 
-        return parent::getControlgroupTopSubmodule($componentVariation);
+        return parent::getControlgroupTopSubmodule($component);
     }
 
-    public function getDelegatorfilterSubmodule(array $componentVariation)
+    public function getDelegatorfilterSubmodule(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_BLOCK_TABPANEL_NOSEARCHCATEGORYPOSTS02:
@@ -137,7 +137,7 @@ class NSCPP_Module_Processor_SectionTabPanelBlocks extends PoP_Module_Processor_
                 return [PoP_Module_Processor_CustomFilters::class, PoP_Module_Processor_CustomFilters::MODULE_FILTER_CATEGORYPOSTS];
         }
 
-        return parent::getDelegatorfilterSubmodule($componentVariation);
+        return parent::getDelegatorfilterSubmodule($component);
     }
 }
 

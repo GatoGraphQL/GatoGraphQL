@@ -2,14 +2,14 @@
 
 abstract class PoP_Module_Processor_SidebarsBase extends PoP_Module_Processor_ContentsBase
 {
-    public function addFetchedData(array $componentVariation, array &$props)
+    public function addFetchedData(array $component, array &$props)
     {
         return false;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        $this->appendProp($componentVariation, $props, 'class', 'sidebar');
-        parent::initModelProps($componentVariation, $props);
+        $this->appendProp($component, $props, 'class', 'sidebar');
+        parent::initModelProps($component, $props);
     }
 }

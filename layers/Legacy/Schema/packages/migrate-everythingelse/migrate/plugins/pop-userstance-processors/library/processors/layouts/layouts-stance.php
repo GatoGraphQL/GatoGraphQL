@@ -4,7 +4,7 @@ class UserStance_Module_Processor_Layouts extends UserStance_Module_Processor_St
 {
     public final const MODULE_LAYOUTSTANCE = 'layout-stance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTSTANCE],

@@ -2,82 +2,82 @@
 
 abstract class PoP_Module_Processor_ControlsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
         return null;
     }
-    public function getText(array $componentVariation, array &$props)
+    public function getText(array $component, array &$props)
     {
-        return $this->getLabel($componentVariation, $props);
+        return $this->getLabel($component, $props);
     }
-    public function getMutableonrequestText(array $componentVariation, array &$props)
-    {
-        return null;
-    }
-    public function getIcon(array $componentVariation)
+    public function getMutableonrequestText(array $component, array &$props)
     {
         return null;
     }
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getIcon(array $component)
     {
         return null;
     }
-    public function showTooltip(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
+    {
+        return null;
+    }
+    public function showTooltip(array $component, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->getLabel($componentVariation, $props) && $this->showTooltip($componentVariation, $props)) {
+        if ($this->getLabel($component, $props) && $this->showTooltip($component, $props)) {
             $this->addJsmethod($ret, 'tooltip');
         }
 
         return $ret;
     }
 
-    public function getMutableonrequestConfiguration(array $componentVariation, array &$props): array
+    public function getMutableonrequestConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getMutableonrequestConfiguration($componentVariation, $props);
+        $ret = parent::getMutableonrequestConfiguration($component, $props);
 
         // If there is a runtime configuration for the text, it overrides the configuration
-        if ($text = $this->getMutableonrequestText($componentVariation, $props)) {
+        if ($text = $this->getMutableonrequestText($component, $props)) {
             $ret['text'] = $text;
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($label = $this->getLabel($componentVariation, $props)) {
+        if ($label = $this->getLabel($component, $props)) {
             $ret['label'] = $label;
         }
-        if ($text = $this->getText($componentVariation, $props)) {
+        if ($text = $this->getText($component, $props)) {
             $ret['text'] = $text;
         }
-        if ($icon = $this->getIcon($componentVariation)) {
+        if ($icon = $this->getIcon($component)) {
             $ret['icon'] = $icon;
         }
-        if ($fontawesome = $this->getFontawesome($componentVariation, $props)) {
+        if ($fontawesome = $this->getFontawesome($component, $props)) {
             $ret[GD_JS_FONTAWESOME] = $fontawesome;
         }
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($blocktarget = $this->getProp($componentVariation, $props, 'control-target')) {
-            foreach ($this->getSubComponentVariations($componentVariation) as $subComponentVariation) {
-                $this->setProp([$subComponentVariation], $props, 'control-target', $blocktarget);
+        if ($blocktarget = $this->getProp($component, $props, 'control-target')) {
+            foreach ($this->getSubComponents($component) as $subComponent) {
+                $this->setProp([$subComponent], $props, 'control-target', $blocktarget);
             }
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

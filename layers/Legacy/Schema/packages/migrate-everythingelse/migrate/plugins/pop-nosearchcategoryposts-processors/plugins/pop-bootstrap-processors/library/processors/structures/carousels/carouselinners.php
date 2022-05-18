@@ -43,7 +43,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
     public final const MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT = 'carouselinner-nosearchcategoryposts18-content';
     public final const MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT = 'carouselinner-nosearchcategoryposts19-content';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00],
@@ -89,9 +89,9 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
         );
     }
 
-    public function getLayoutGrid(array $componentVariation, array &$props)
+    public function getLayoutGrid(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS01:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS02:
@@ -112,7 +112,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19:
-                // if ($grid = $this->getProp($componentVariation, $props, 'layout-grid')) {
+                // if ($grid = $this->getProp($component, $props, 'layout-grid')) {
                 //     return $grid;
                 // }
 
@@ -142,7 +142,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS17_CONTENT:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT:
             case self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT:
-                // if ($grid = $this->getProp($componentVariation, $props, 'layout-grid')) {
+                // if ($grid = $this->getProp($component, $props, 'layout-grid')) {
                 //     return $grid;
                 // }
 
@@ -153,12 +153,12 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
                 );
         }
 
-        return parent::getLayoutGrid($componentVariation, $props);
+        return parent::getLayoutGrid($component, $props);
     }
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
-        $ret = parent::getLayoutSubmodules($componentVariation);
+        $ret = parent::getLayoutSubmodules($component);
 
         $layouts = array(
             self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS00 => [PoP_Module_Processor_CustomPreviewPostLayouts::class, PoP_Module_Processor_CustomPreviewPostLayouts::MODULE_LAYOUT_PREVIEWPOST_POST_LIST],
@@ -202,7 +202,7 @@ class NSCPP_Module_Processor_CarouselInners extends PoP_Module_Processor_Carouse
             self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS18_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
             self::MODULE_CAROUSELINNER_NOSEARCHCATEGORYPOSTS19_CONTENT => [PoP_Module_Processor_ContentLayouts::class, PoP_Module_Processor_ContentLayouts::MODULE_LAYOUT_CONTENT_POST],
         );
-        if ($layout = $layouts[$componentVariation[1]] ?? null) {
+        if ($layout = $layouts[$component[1]] ?? null) {
             $ret[] =$layout;
         }
 

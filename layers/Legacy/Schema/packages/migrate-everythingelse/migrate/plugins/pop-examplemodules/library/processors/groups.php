@@ -9,7 +9,7 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
     public final const MODULE_EXAMPLE_AUTHOR = 'example-author';
     public final const MODULE_EXAMPLE_TAG = 'example-tag';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EXAMPLE_HOME],
@@ -18,11 +18,11 @@ class ComponentProcessor_Groups extends AbstractComponentProcessor
         );
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EXAMPLE_HOME:
                 $pageTypeAPI = PageTypeAPIFacade::getInstance();
                 if ($pageTypeAPI->getHomeStaticPageID()) {

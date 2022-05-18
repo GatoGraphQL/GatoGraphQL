@@ -6,7 +6,7 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
     public final const MODULE_CALENDARBUTTONCONTROL_CALENDARPREV = 'calendarbuttoncontrol-calendarprev';
     public final const MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT = 'calendarbuttoncontrol-calendarnext';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV:
                 return TranslationAPIFacade::getInstance()->__('Previous month', 'em-popprocessors');
 
@@ -24,11 +24,11 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
                 return TranslationAPIFacade::getInstance()->__('Next month', 'em-popprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getIcon(array $componentVariation)
+    public function getIcon(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV:
                 return 'glyphicon-chevron-left';
 
@@ -36,45 +36,45 @@ class PoP_Module_Processor_CalendarButtonControls extends PoP_Module_Processor_B
                 return 'glyphicon-chevron-right';
         }
 
-        return parent::getIcon($componentVariation);
+        return parent::getIcon($component);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV:
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT:
                 $classes = array(
                     self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV => 'calendar-prev',
                     self::MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT => 'calendar-next'
                 );
-                $class = $classes[$componentVariation[1]];
+                $class = $classes[$component[1]];
 
-                $this->appendProp($componentVariation, $props, 'class', $class . ' fetchmore-btn-disable');
-                // $calendar_target = $this->getProp($componentVariation, $props, 'calendar-target');
-                // $this->mergeProp($componentVariation, $props, 'params', array(
+                $this->appendProp($component, $props, 'class', $class . ' fetchmore-btn-disable');
+                // $calendar_target = $this->getProp($component, $props, 'calendar-target');
+                // $this->mergeProp($component, $props, 'params', array(
                 //     'data-target' => $calendar_target
                 // ));
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
-    public function getText(array $componentVariation, array &$props)
+    public function getText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV:
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARNEXT:
                 return null;
         }
 
-        return parent::getText($componentVariation, $props);
+        return parent::getText($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CALENDARBUTTONCONTROL_CALENDARPREV:
                 $this->addJsmethod($ret, 'controlCalendarPrev');
                 break;

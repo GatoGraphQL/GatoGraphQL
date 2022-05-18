@@ -10,10 +10,10 @@ class PoP_SocialNetworkProcessors_Hooks_MyPreferences
         );
     }
 
-    public function getEmailnotificationsForminputgroups($componentVariations)
+    public function getEmailnotificationsForminputgroups($components)
     {
         return array_merge(
-            $componentVariations,
+            $components,
             array(
                 [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_NETWORK],
                 [PoP_SocialNetwork_Module_Processor_UserMultipleComponents::class, PoP_SocialNetwork_Module_Processor_UserMultipleComponents::MODULE_MULTICOMPONENT_EMAILNOTIFICATIONS_SUBSCRIBEDTOPIC],

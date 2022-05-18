@@ -7,7 +7,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
     public final const MODULE_URE_FORMINPUT_ORGANIZATIONCATEGORIES = 'forminput-organizationcategories';
     public final const MODULE_URE_FORMINPUT_ORGANIZATIONTYPES = 'forminput-organizationtypes';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS],
@@ -16,9 +16,9 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return TranslationAPIFacade::getInstance()->__('Interests', 'poptheme-wassup');
                 
@@ -37,12 +37,12 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 );
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_INDIVIDUALINTERESTS:
                 return GD_FormInput_IndividualInterests::class;
                 
@@ -53,12 +53,12 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 return GD_FormInput_OrganizationTypes::class;
         }
         
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    public function getDbobjectField(array $componentVariation): ?string
+    public function getDbobjectField(array $component): ?string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_URE_FORMINPUT_ORGANIZATIONTYPES:
                 return 'organizationtypes';
 
@@ -69,7 +69,7 @@ class GD_URE_Module_Processor_MultiSelectFormInputs extends PoP_Module_Processor
                 return 'individualinterests';
         }
         
-        return parent::getDbobjectField($componentVariation);
+        return parent::getDbobjectField($component);
     }
 }
 

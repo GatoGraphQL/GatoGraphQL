@@ -4,33 +4,33 @@ class PoP_Module_Processor_StanceScriptsLayouts extends PoP_Module_Processor_App
 {
     public final const MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON = 'script-createorupdatestancebutton';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON],
         );
     }
 
-    public function getOperation(array $componentVariation, array &$props)
+    public function getOperation(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 return 'replace';
         }
 
-        return parent::getOperation($componentVariation, $props);
+        return parent::getOperation($component, $props);
     }
     
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON:
                 $classes = array(
                     self::MODULE_SCRIPT_CREATEORUPDATESTANCEBUTTON => 'createorupdatestance',
                 );
-                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$componentVariation[1]];
+                $ret[GD_JS_CLASSES][GD_JS_APPENDABLE] = $classes[$component[1]];
                 break;
         }
         

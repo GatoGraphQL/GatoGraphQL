@@ -3,74 +3,74 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class GD_EM_Module_Processor_ScrollMapsBase extends PoP_Module_Processor_MultiplesBase
 {
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         return null;
     }
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
         // if it's a map, add the Map block. Do it before adding the Scroll, because otherwise there's an error:
         // The map is not created yet, however the links in the elements are already trying to add the markers
-        $ret[] = $this->getMapSubmodule($componentVariation);
-        $ret[] = $this->getInnerSubmodule($componentVariation);
+        $ret[] = $this->getMapSubmodule($component);
+        $ret[] = $this->getInnerSubmodule($component);
 
         return $ret;
     }
 
-    public function getMapSubmodule(array $componentVariation)
+    public function getMapSubmodule(array $component)
     {
-        if ($this->isPostMap($componentVariation)) {
+        if ($this->isPostMap($component)) {
             return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_POST];
-        } elseif ($this->isUserMap($componentVariation)) {
+        } elseif ($this->isUserMap($component)) {
             return [GD_EM_Module_Processor_Maps::class, GD_EM_Module_Processor_Maps::MODULE_EM_MAP_USER];
         }
 
         return null;
     }
 
-    protected function isPostMap(array $componentVariation)
+    protected function isPostMap(array $component)
     {
         return false;
     }
 
-    protected function isUserMap(array $componentVariation)
+    protected function isUserMap(array $component)
     {
         return false;
     }
 
-    public function getMapDirection(array $componentVariation, array &$props)
+    public function getMapDirection(array $component, array &$props)
     {
         return 'vertical';
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
         // Artificial property added to identify the template when adding module-resources
-        $this->setProp($componentVariation, $props, 'resourceloader', 'map');
-        $this->appendProp($componentVariation, $props, 'class', 'map');
+        $this->setProp($component, $props, 'resourceloader', 'map');
+        $this->appendProp($component, $props, 'class', 'map');
 
-        if ($this->isUserMap($componentVariation)) {
-            $this->appendProp($componentVariation, $props, 'class', 'userscrollmap');
-        } elseif ($this->isPostMap($componentVariation)) {
-            $this->appendProp($componentVariation, $props, 'class', 'postscrollmap');
+        if ($this->isUserMap($component)) {
+            $this->appendProp($component, $props, 'class', 'userscrollmap');
+        } elseif ($this->isPostMap($component)) {
+            $this->appendProp($component, $props, 'class', 'postscrollmap');
         }
 
         // By default the scrollmap is vertical
-        $this->setProp($componentVariation, $props, 'direction', $this->getMapDirection($componentVariation, $props));
-        $direction = $this->getProp($componentVariation, $props, 'direction');
+        $this->setProp($component, $props, 'direction', $this->getMapDirection($component, $props));
+        $direction = $this->getProp($component, $props, 'direction');
 
         // Set the class on the block, so the vertical scrollMap will appear to the left of the map
-        $this->appendProp($componentVariation, $props, 'class', $direction);
+        $this->appendProp($component, $props, 'class', $direction);
 
         // Set the direction on the ScrollMap
-        $inner_componentVariation = $this->getInnerSubmodule($componentVariation);
-        $this->setProp($inner_componentVariation, $props, 'direction', $direction);
+        $inner_component = $this->getInnerSubmodule($component);
+        $this->setProp($inner_component, $props, 'direction', $direction);
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

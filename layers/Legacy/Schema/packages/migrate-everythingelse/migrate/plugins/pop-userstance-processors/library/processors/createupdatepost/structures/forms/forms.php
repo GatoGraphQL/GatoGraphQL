@@ -4,40 +4,40 @@ class UserStance_Module_Processor_CreateUpdatePostForms extends PoP_Module_Proce
 {
     public final const MODULE_FORM_STANCE = 'form-stance';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_STANCE],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FORM_STANCE => [UserStance_Module_Processor_CreateUpdatePostFormInners::class, UserStance_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_STANCE],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_STANCE:
                 // Make it horizontal? If set by above (most likely the block)
-                if ($this->getProp($componentVariation, $props, 'horizontal')) {
-                    $this->appendProp($componentVariation, $props, 'class', 'row');
+                if ($this->getProp($component, $props, 'horizontal')) {
+                    $this->appendProp($component, $props, 'class', 'row');
                     $this->appendProp([UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBELEFTSIDE], $props, 'class', 'col-sm-8');
                     $this->appendProp([UserStance_Module_Processor_FormMultipleComponents::class, UserStance_Module_Processor_FormMultipleComponents::MODULE_MULTICOMPONENT_FORM_STANCE_MAYBERIGHTSIDE], $props, 'class', 'col-sm-4');
                 }
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

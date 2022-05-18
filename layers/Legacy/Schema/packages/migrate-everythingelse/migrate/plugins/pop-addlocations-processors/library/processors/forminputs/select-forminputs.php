@@ -5,36 +5,36 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
 {
     public final const MODULE_FORMINPUT_EM_LOCATIONCOUNTRY = 'forminput-locationcountry';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return TranslationAPIFacade::getInstance()->__('Country', 'em-popprocessors');
         }
 
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function getInputClass(array $componentVariation): string
+    public function getInputClass(array $component): string
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
                 return GD_FormInput_EM_LocationCountries::class;
         }
 
-        return parent::getInputClass($componentVariation);
+        return parent::getInputClass($component);
     }
 
-    // function getName(array $componentVariation) {
+    // function getName(array $component) {
 
-    //     switch ($componentVariation[1]) {
+    //     switch ($component[1]) {
 
     //          // Names needed by EM to create the Location
     //         case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
@@ -42,18 +42,18 @@ class GD_EM_Module_Processor_CreateLocationSelectFormInputs extends PoP_Module_P
     //             return 'location_country';
     //     }
 
-    //     return parent::getName($componentVariation);
+    //     return parent::getName($component);
     // }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_EM_LOCATIONCOUNTRY:
-                $this->appendProp($componentVariation, $props, 'class', 'address-input');
+                $this->appendProp($component, $props, 'class', 'address-input');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

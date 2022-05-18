@@ -5,18 +5,18 @@ class PoP_SocialNetwork_Module_Processor_FeedbackMessageLayouts extends PoP_Modu
 {
     public final const MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER = 'layout-feedbackmessage-contactuser';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER],
         );
     }
 
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_FEEDBACKMESSAGE_CONTACTUSER:
                 $ret['success-header'] = TranslationAPIFacade::getInstance()->__('Message sent successfully!', 'pop-genericforms');
                 $ret['success'] = TranslationAPIFacade::getInstance()->__("Your message has been sent to the user by email.", 'pop-genericforms');

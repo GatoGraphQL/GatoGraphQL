@@ -4,39 +4,39 @@ class PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostForms extend
 {
     public final const MODULE_FORM_CONTENTPOSTLINK = 'form-contentpostlink';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORM_CONTENTPOSTLINK],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_FORM_CONTENTPOSTLINK => [PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::class, PoP_ContentPostLinksCreation_Module_Processor_CreateUpdatePostFormInners::MODULE_FORMINNER_CONTENTPOSTLINK],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORM_CONTENTPOSTLINK:
                 // Allow to override the classes, so it can be set for the Addons pageSection without the col-sm styles, but one on top of the other
-                if (!($form_row_classs = $this->getProp($componentVariation, $props, 'form-row-class')/*$this->get_general_prop($props, 'form-row-class')*/)) {
+                if (!($form_row_classs = $this->getProp($component, $props, 'form-row-class')/*$this->get_general_prop($props, 'form-row-class')*/)) {
                     $form_row_classs = 'row';
                 }
-                $this->appendProp($componentVariation, $props, 'class', $form_row_classs);
+                $this->appendProp($component, $props, 'class', $form_row_classs);
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

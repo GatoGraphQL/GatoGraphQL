@@ -5,31 +5,31 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
 {
     public final const MODULE_TABLE_MYSTANCES = 'table-mystances';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_TABLE_MYSTANCES],
         );
     }
 
-    public function getInnerSubmodule(array $componentVariation)
+    public function getInnerSubmodule(array $component)
     {
         $inners = array(
             self::MODULE_TABLE_MYSTANCES => [UserStance_Module_Processor_TableInners::class, UserStance_Module_Processor_TableInners::MODULE_TABLEINNER_MYSTANCES],
         );
 
-        if ($inner = $inners[$componentVariation[1]] ?? null) {
+        if ($inner = $inners[$component[1]] ?? null) {
             return $inner;
         }
 
-        return parent::getInnerSubmodule($componentVariation);
+        return parent::getInnerSubmodule($component);
     }
 
-    public function getHeaderTitles(array $componentVariation)
+    public function getHeaderTitles(array $component)
     {
-        $ret = parent::getHeaderTitles($componentVariation);
+        $ret = parent::getHeaderTitles($component);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYSTANCES:
                 $ret[] = PoP_UserStance_PostNameUtils::getNameUc();
                 $ret[] = TranslationAPIFacade::getInstance()->__('Date', 'pop-userstance-processors');
@@ -40,15 +40,15 @@ class UserStance_Module_Processor_Tables extends PoP_Module_Processor_TablesBase
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_TABLE_MYSTANCES:
-                $this->appendProp($componentVariation, $props, 'class', 'table-mystances');
+                $this->appendProp($component, $props, 'class', 'table-mystances');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

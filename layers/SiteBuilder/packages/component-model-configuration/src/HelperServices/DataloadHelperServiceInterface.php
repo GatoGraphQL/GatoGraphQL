@@ -7,7 +7,7 @@ namespace PoP\ConfigurationComponentModel\HelperServices;
 interface DataloadHelperServiceInterface
 {
     /**
-     * @param array<array<string, mixed>> $componentVariationValues
+     * @param array<array<string, mixed>> $componentValues
      */
-    public function addFilterParams(string $url, array $componentVariationValues = []): string;
+    public function addFilterParams(string $url, array $componentValues = []): string;
 }

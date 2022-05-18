@@ -6,7 +6,7 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
     public final const MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV = 'carouselbuttoncontrol-carouselprev';
     public final const MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT = 'carouselbuttoncontrol-carouselnext';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV],
@@ -14,9 +14,9 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 return TranslationAPIFacade::getInstance()->__('Previous', 'pop-coreprocessors');
 
@@ -24,11 +24,11 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
                 return TranslationAPIFacade::getInstance()->__('Next', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
-    public function getIcon(array $componentVariation)
+    public function getIcon(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 return 'glyphicon-chevron-left';
 
@@ -36,23 +36,23 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
                 return 'glyphicon-chevron-right';
         }
 
-        return parent::getIcon($componentVariation);
+        return parent::getIcon($component);
     }
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV:
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT:
                 $classes = array(
                     self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV => 'carousel-prev',
                     self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT => 'carousel-next'
                 );
-                $class = $classes[$componentVariation[1]];
+                $class = $classes[$component[1]];
 
-                $this->appendProp($componentVariation, $props, 'class', $class . ' fetchmore-btn-disable');
-                $carousel_target = $this->getProp($componentVariation, $props, 'carousel-target');
+                $this->appendProp($component, $props, 'class', $class . ' fetchmore-btn-disable');
+                $carousel_target = $this->getProp($component, $props, 'carousel-target');
                 $this->mergeProp(
-                    $componentVariation,
+                    $component,
                     $props,
                     'params',
                     array(
@@ -62,24 +62,24 @@ class PoP_Module_Processor_CarouselButtonControls extends PoP_Module_Processor_B
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
-    public function getText(array $componentVariation, array &$props)
+    public function getText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV:
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELNEXT:
                 return null;
         }
 
-        return parent::getText($componentVariation, $props);
+        return parent::getText($component, $props);
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_CAROUSELBUTTONCONTROL_CAROUSELPREV:
                 $this->addJsmethod($ret, 'controlCarouselPrev');
                 $this->addJsmethod($ret, 'fetchMoreDisable');

@@ -5,16 +5,16 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
 {
     public final const MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS = 'ure-aal-layoutuser-membertags-desc';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS],
         );
     }
 
-    public function getDescription(array $componentVariation, array &$props)
+    public function getDescription(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_UREAAL_LAYOUTUSER_MEMBERTAGS:
                 return sprintf(
                     '<em>%s</em>',
@@ -22,7 +22,7 @@ class Wassup_URE_AAL_Module_Processor_MemberTagsLayouts extends GD_URE_Module_Pr
                 );
         }
     
-        return parent::getDescription($componentVariation, $props);
+        return parent::getDescription($component, $props);
     }
 }
 

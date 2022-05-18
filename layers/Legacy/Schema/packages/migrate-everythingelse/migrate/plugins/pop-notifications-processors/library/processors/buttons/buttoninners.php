@@ -8,7 +8,7 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
     public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASREAD = 'notifications-buttoninner-notification-markasread';
     public final const MODULE_AAL_BUTTONINNER_NOTIFICATION_MARKASUNREAD = 'notifications-buttoninner-notification-markasunread';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_AAL_BUTTONINNER_NOTIFICATIONPREVIEWLINK],
@@ -18,9 +18,9 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
         );
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_BUTTONINNER_USERVIEW:
                 return 'fa-fw fa-eye';
 
@@ -31,17 +31,17 @@ class AAL_PoPProcessors_Module_Processor_ButtonInners extends PoP_Module_Process
                 return 'fa-fw fa-circle';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_AAL_BUTTONINNER_USERVIEW:
                 return TranslationAPIFacade::getInstance()->__('View', 'pop-notifications-processors');
         }
 
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

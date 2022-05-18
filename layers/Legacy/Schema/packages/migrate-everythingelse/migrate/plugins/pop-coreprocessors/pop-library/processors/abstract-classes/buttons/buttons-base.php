@@ -3,16 +3,16 @@ use PoP\ComponentModel\Facades\ComponentProcessors\ComponentProcessorManagerFaca
 
 abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataComponentProcessorBase
 {
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        $ret[] = $this->getButtoninnerSubmodule($componentVariation);
+        $ret[] = $this->getButtoninnerSubmodule($component);
 
         return $ret;
     }
 
-    public function getTemplateResource(array $componentVariation, array &$props): ?array
+    public function getTemplateResource(array $component, array &$props): ?array
     {
         return [PoP_CoreProcessors_TemplateResourceLoaderProcessor::class, PoP_CoreProcessors_TemplateResourceLoaderProcessor::RESOURCE_BUTTON];
     }
@@ -22,100 +22,100 @@ abstract class PoP_Module_Processor_ButtonsBase extends PoPEngine_QueryDataCompo
      *
      * @return \PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafModuleField[]
      */
-    public function getDataFields(array $componentVariation, array &$props): array
+    public function getDataFields(array $component, array &$props): array
     {
         $ret = array();
-        if ($url = $this->getUrlField($componentVariation)) {
+        if ($url = $this->getUrlField($component)) {
             $ret[] = $url;
         }
-        if ($target = $this->getLinktargetField($componentVariation)) {
+        if ($target = $this->getLinktargetField($component)) {
             $ret[] = $target;
         }
 
         return $ret;
     }
 
-    public function getUrlField(array $componentVariation)
+    public function getUrlField(array $component)
     {
         return 'url';
     }
-    public function getLinktargetField(array $componentVariation)
+    public function getLinktargetField(array $component)
     {
         return null;
     }
-    public function getButtoninnerSubmodule(array $componentVariation)
+    public function getButtoninnerSubmodule(array $component)
     {
         return null;
     }
-    public function getTitle(array $componentVariation, array &$props)
+    public function getTitle(array $component, array &$props)
     {
         return null;
     }
-    public function getLinktarget(array $componentVariation, array &$props)
+    public function getLinktarget(array $component, array &$props)
     {
         return null;
     }
-    public function getLinkClass(array $componentVariation)
+    public function getLinkClass(array $component)
     {
         return '';
     }
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
         return '';
     }
-    public function showTitle(array $componentVariation, array &$props)
+    public function showTitle(array $component, array &$props)
     {
         return false;
     }
-    public function showTooltip(array $componentVariation, array &$props)
+    public function showTooltip(array $component, array &$props)
     {
         return false;
     }
 
-    public function getJsmethods(array $componentVariation, array &$props)
+    public function getJsmethods(array $component, array &$props)
     {
-        $ret = parent::getJsmethods($componentVariation, $props);
+        $ret = parent::getJsmethods($component, $props);
 
-        if ($this->showTooltip($componentVariation, $props)) {
+        if ($this->showTooltip($component, $props)) {
             $this->addJsmethod($ret, 'tooltip');
         }
 
         return $ret;
     }
 
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($this->showTitle($componentVariation, $props) || $this->showTooltip($componentVariation, $props)) {
-            if ($title = $this->getTitle($componentVariation, $props)) {
+        if ($this->showTitle($component, $props) || $this->showTooltip($component, $props)) {
+            if ($title = $this->getTitle($component, $props)) {
                 $ret['title'] = $title;
             }
         }
 
-        $ret['url-field'] = $this->getUrlField($componentVariation);
-        if ($linktarget = $this->getLinktarget($componentVariation, $props)) {
+        $ret['url-field'] = $this->getUrlField($component);
+        if ($linktarget = $this->getLinktarget($component, $props)) {
             $ret['linktarget'] = $linktarget;
-        } elseif ($linktarget = $this->getLinktargetField($componentVariation)) {
+        } elseif ($linktarget = $this->getLinktargetField($component)) {
             $ret['linktarget-field'] = $linktarget;
         }
-        $ret[GD_JS_CLASSES]['link'] = $this->getLinkClass($componentVariation);
-        if ($btn_class = $this->getProp($componentVariation, $props, 'btn-class')) {
+        $ret[GD_JS_CLASSES]['link'] = $this->getLinkClass($component);
+        if ($btn_class = $this->getProp($component, $props, 'btn-class')) {
             $ret[GD_JS_CLASSES]['btn'] = $btn_class;
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $buttoninner = $this->getButtoninnerSubmodule($componentVariation);
+        $buttoninner = $this->getButtoninnerSubmodule($component);
         $ret[GD_JS_SUBMODULEOUTPUTNAMES]['buttoninner'] = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($buttoninner);
 
         return $ret;
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        if ($btn_class = $this->getBtnClass($componentVariation, $props)) {
-            $this->appendProp($componentVariation, $props, 'btn-class', $btn_class);
+        if ($btn_class = $this->getBtnClass($component, $props)) {
+            $this->appendProp($component, $props, 'btn-class', $btn_class);
         }
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }

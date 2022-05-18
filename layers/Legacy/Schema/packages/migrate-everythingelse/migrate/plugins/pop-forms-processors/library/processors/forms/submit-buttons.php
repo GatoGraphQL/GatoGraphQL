@@ -10,7 +10,7 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
     public final const MODULE_SUBMITBUTTON_UPDATE = 'submitbutton-update';
     public final const MODULE_SUBMITBUTTON_SEARCH = 'submitbutton-search';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_SUBMITBUTTON_SUBMIT],
@@ -22,9 +22,9 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
         );
     }
 
-    public function getLabel(array $componentVariation, array &$props)
+    public function getLabel(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_SUBMIT:
                 return TranslationAPIFacade::getInstance()->__('Submit', 'pop-coreprocessors');
 
@@ -44,32 +44,32 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
                 return TranslationAPIFacade::getInstance()->__('Search', 'pop-coreprocessors');
         }
 
-        return parent::getLabel($componentVariation, $props);
+        return parent::getLabel($component, $props);
     }
 
-    public function getBtnClass(array $componentVariation, array &$props)
+    public function getBtnClass(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_SEARCH:
                 return 'btn btn-info';
         }
 
-        return parent::getBtnClass($componentVariation, $props);
+        return parent::getBtnClass($component, $props);
     }
 
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_SEARCH:
                 return 'fa fa-search';
         }
 
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getLoadingText(array $componentVariation, array &$props)
+    public function getLoadingText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_SUBMITBUTTON_SUBMIT:
             case self::MODULE_SUBMITBUTTON_SEND:
             case self::MODULE_SUBMITBUTTON_SAVE:
@@ -81,10 +81,10 @@ class PoP_Module_Processor_SubmitButtons extends PoP_Module_Processor_SubmitButt
                     self::MODULE_SUBMITBUTTON_UPDATE => TranslationAPIFacade::getInstance()->__('Updating...', 'pop-forms-processors'),
                 );
 
-                return $loadings[$componentVariation[1]];
+                return $loadings[$component[1]];
         }
         
-        return parent::getLoadingText($componentVariation, $props);
+        return parent::getLoadingText($component, $props);
     }
 }
 

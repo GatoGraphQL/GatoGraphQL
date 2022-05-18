@@ -8,7 +8,7 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUTPOST_AUTHORAVATAR82 = 'layoutpost-authoravatar82';
     public final const MODULE_LAYOUTPOST_AUTHORAVATAR120 = 'layoutpost-authoravatar120';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUTPOST_AUTHORAVATAR],
@@ -19,9 +19,9 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getAvatarSize(array $componentVariation, array &$props)
+    public function getAvatarSize(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUTPOST_AUTHORAVATAR:
                 return GD_AVATAR_SIZE_40;
 
@@ -38,7 +38,7 @@ class PoP_Module_Processor_PostAuthorAvatarLayouts extends PoP_Module_Processor_
                 return GD_AVATAR_SIZE_120;
         }
         
-        return parent::getAvatarSize($componentVariation, $props);
+        return parent::getAvatarSize($component, $props);
     }
 }
 

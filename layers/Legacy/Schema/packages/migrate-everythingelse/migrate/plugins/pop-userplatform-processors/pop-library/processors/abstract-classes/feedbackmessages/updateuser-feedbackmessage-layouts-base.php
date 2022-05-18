@@ -5,9 +5,9 @@ use PoPCMSSchema\Users\Facades\UserTypeAPIFacade;
 
 abstract class PoP_Module_Processor_UpdateUserFormMesageFeedbackLayoutsBase extends PoP_Module_Processor_FormFeedbackMessageLayoutsBase
 {
-    public function getMessages(array $componentVariation, array &$props)
+    public function getMessages(array $component, array &$props)
     {
-        $ret = parent::getMessages($componentVariation, $props);
+        $ret = parent::getMessages($component, $props);
             
         $userTypeAPI = UserTypeAPIFacade::getInstance();
         $ret['success-header'] = TranslationAPIFacade::getInstance()->__('User Account updated successfully.', 'pop-coreprocessors');

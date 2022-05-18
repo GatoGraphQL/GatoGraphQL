@@ -12,18 +12,18 @@ class GetPoPDemo_URE_GroupHooks
         );
     }
 
-    public function getAuthortopWidgetSubmodules($componentVariations)
+    public function getAuthortopWidgetSubmodules($components)
     {
 
         // Add the members only for communities
         $author = \PoP\Root\App::getState(['routing', 'queried-object-id']);
         if (gdUreIsCommunity($author)) {
             if (defined('POP_APPLICATIONPROCESSORS_INITIALIZED')) {
-                $componentVariations[] = [PoP_UserCommunities_Module_Processor_CustomSectionBlocks::class, PoP_UserCommunities_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL];
+                $components[] = [PoP_UserCommunities_Module_Processor_CustomSectionBlocks::class, PoP_UserCommunities_Module_Processor_CustomSectionBlocks::MODULE_BLOCK_AUTHORCOMMUNITYMEMBERS_CAROUSEL];
             }
         }
         
-        return $componentVariations;
+        return $components;
     }
 }
 

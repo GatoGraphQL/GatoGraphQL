@@ -16,9 +16,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     public $enqueue;
     public $scripttag_attributes;
     public $intercept_urls;
-    public $immutable_componentVariationjsdata;
-    public $mutableonmodel_componentVariationjsdata;
-    public $mutableonrequest_componentVariationjsdata;
+    public $immutable_componentjsdata;
+    public $mutableonmodel_componentjsdata;
+    public $mutableonrequest_componentjsdata;
 
     public function __construct()
     {
@@ -37,9 +37,9 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         );
     }
 
-    public function getModuleSettings(array $componentVariation, $model_props, array &$props)
+    public function getModuleSettings(array $component, $model_props, array &$props)
     {
-        $ret = parent::getModuleSettings($componentVariation, $model_props, $props);
+        $ret = parent::getModuleSettings($component, $model_props, $props);
 
         // Validate that the strata includes the required stratum
         if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
@@ -47,7 +47,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($componentVariation);
+        $processor = $componentprocessor_manager->getProcessor($component);
 
         $cachemanager = null;
         if ($useCache = ComponentModelModuleConfiguration::useComponentModelCache()) {
@@ -68,20 +68,20 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
                 $mutableonmodel_jssettings = $cachemanager->getCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS);
             }
             if ($immutable_jssettings === null) {
-                $immutable_jssettings = $processor->getImmutableJssettingsModuletree($componentVariation, $model_props);
+                $immutable_jssettings = $processor->getImmutableJssettingsModuletree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATICJSSETTINGS, $immutable_jssettings);
                 }
             }
             if ($mutableonmodel_jssettings === null) {
-                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsModuletree($componentVariation, $model_props);
+                $mutableonmodel_jssettings = $processor->getMutableonmodelJssettingsModuletree($component, $model_props);
                 if ($useCache) {
                     $cachemanager->storeCacheByModelInstance(POP_CACHETYPE_STATEFULJSSETTINGS, $mutableonmodel_jssettings);
                 }
             }
 
             if ($datasourceselector == \PoP\ComponentModel\Constants\DataSourceSelectors::MODELANDREQUEST) {
-                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($componentVariation, $props);
+                $mutableonrequest_jssettings = $processor->getMutableonrequestJssettingsModuletree($component, $props);
             }
 
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
@@ -118,19 +118,19 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
     protected function processAndGenerateData(): void
     {
         // Initialize/Reset the JS module data
-        $this->immutable_componentVariationjsdata = $this->mutableonmodel_componentVariationjsdata = $this->mutableonrequest_componentVariationjsdata = array();
+        $this->immutable_componentjsdata = $this->mutableonmodel_componentjsdata = $this->mutableonrequest_componentjsdata = array();
 
         parent::processAndGenerateData();
     }
 
     // This function is not private, so it can be accessed by the automated emails to regenerate the html for each user
-    public function getModuleData(array $root_componentVariation, array $root_model_props, array $root_props): array
+    public function getModuleData(array $root_component, array $root_model_props, array $root_props): array
     {
-        $ret = parent::getModuleData($root_componentVariation, $root_model_props, $root_props);
+        $ret = parent::getModuleData($root_component, $root_model_props, $root_props);
 
         // Only add the extra information if the entry-module is of the right object class
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $root_processor = $componentprocessor_manager->getProcessor($root_componentVariation);
+        $root_processor = $componentprocessor_manager->getProcessor($root_component);
 
         // Only add the extra information if the entry-module is of the right object class
         if ($root_processor instanceof PoP_WebPlatformQueryDataComponentProcessorBase) {
@@ -141,29 +141,29 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
             if ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::SPLITBYSOURCES) {
-                if ($this->immutable_componentVariationjsdata) {
-                    $ret['modulejsdata']['immutable'] = $this->immutable_componentVariationjsdata;
+                if ($this->immutable_componentjsdata) {
+                    $ret['modulejsdata']['immutable'] = $this->immutable_componentjsdata;
                 }
-                if ($this->mutableonmodel_componentVariationjsdata) {
-                    $ret['modulejsdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $this->mutableonmodel_componentVariationjsdata) : $this->mutableonmodel_componentVariationjsdata;
+                if ($this->mutableonmodel_componentjsdata) {
+                    $ret['modulejsdata']['mutableonmodel'] = $has_extra_routes ? array($model_instance_id => $this->mutableonmodel_componentjsdata) : $this->mutableonmodel_componentjsdata;
                 }
-                if ($this->mutableonrequest_componentVariationjsdata) {
-                    $ret['modulejsdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $this->mutableonrequest_componentVariationjsdata) : $this->mutableonrequest_componentVariationjsdata;
+                if ($this->mutableonrequest_componentjsdata) {
+                    $ret['modulejsdata']['mutableonrequest'] = $has_extra_routes ? array($current_uri => $this->mutableonrequest_componentjsdata) : $this->mutableonrequest_componentjsdata;
                 }
             } elseif ($dataoutputmode == \PoP\ComponentModel\Constants\DataOutputModes::COMBINED) {
 
                 // If everything is combined, then it belongs under "mutableonrequest"
-                if ($combined_componentVariationjsdata = array_merge_recursive(
-                    $this->immutable_componentVariationjsdata,
-                    $this->mutableonmodel_componentVariationjsdata,
-                    $this->mutableonrequest_componentVariationjsdata
+                if ($combined_componentjsdata = array_merge_recursive(
+                    $this->immutable_componentjsdata,
+                    $this->mutableonmodel_componentjsdata,
+                    $this->mutableonrequest_componentjsdata
                 )) {
-                    $ret['modulejsdata'] = $has_extra_routes ? array($current_uri => $combined_componentVariationjsdata) : $combined_componentVariationjsdata;
+                    $ret['modulejsdata'] = $has_extra_routes ? array($current_uri => $combined_componentjsdata) : $combined_componentjsdata;
                 }
             }
 
             // Specify all the URLs to be intercepted by the current page. This is needed to obtain their configuration in the webplatform, under this page's URL
-            $this->intercept_urls = $root_processor->getIntercepturlsMergedmoduletree($root_componentVariation, $root_props);
+            $this->intercept_urls = $root_processor->getIntercepturlsMergedmoduletree($root_component, $root_props);
         }
 
         return $ret;
@@ -171,7 +171,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
 
     protected function processAndAddModuleData(
         array $module_path,
-        array $componentVariation,
+        array $component,
         array &$props,
         array $data_properties,
         ?FeedbackItemResolution $dataaccess_checkpoint_validation,
@@ -179,7 +179,7 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         $executed,
         $objectIDs
     ): void {
-        parent::processAndAddModuleData($module_path, $componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
+        parent::processAndAddModuleData($module_path, $component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs);
 
         // Validate that the strata includes the required stratum
         if (!in_array(POP_STRATUM_WEB, App::getState('strata'))) {
@@ -187,28 +187,28 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
 
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
-        $processor = $componentprocessor_manager->getProcessor($componentVariation);
+        $processor = $componentprocessor_manager->getProcessor($component);
 
         $datasource = $data_properties[DataloadingConstants::DATASOURCE];
 
         // Save the results on either the static or mutableonrequest branches
         if ($datasource == \PoP\ComponentModel\Constants\DataSources::IMMUTABLE) {
-            $modulejsdata = &$this->immutable_componentVariationjsdata;
+            $modulejsdata = &$this->immutable_componentjsdata;
         } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONMODEL) {
-            $modulejsdata = &$this->mutableonmodel_componentVariationjsdata;
+            $modulejsdata = &$this->mutableonmodel_componentjsdata;
         } elseif ($datasource == \PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST) {
-            $modulejsdata = &$this->mutableonrequest_componentVariationjsdata;
+            $modulejsdata = &$this->mutableonrequest_componentjsdata;
         }
 
         // Integrate the JS feedback into $modulejsdata
         if (!is_null($modulejsdata)) {
 
             // Add the feedback into the object
-            if ($feedback = $processor->getJsdataFeedbackDatasetmoduletree($componentVariation, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
+            if ($feedback = $processor->getJsdataFeedbackDatasetmoduletree($component, $props, $data_properties, $dataaccess_checkpoint_validation, $actionexecution_checkpoint_validation, $executed, $objectIDs)) {
 
                 // Advance the position of the array into the current module
-                foreach ($module_path as $subComponentVariation) {
-                    $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponentVariation);
+                foreach ($module_path as $subComponent) {
+                    $submoduleOutputName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleOutputName($subComponent);
                     $modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] = $modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')] ?? array();
                     $modulejsdata = &$modulejsdata[$submoduleOutputName][ComponentModelModuleInfo::get('response-prop-submodules')];
                 }
@@ -340,43 +340,43 @@ class PoPWebPlatform_Engine extends \PoP\ConfigurationComponentModel\Engine\Engi
         }
     }
 
-    // protected function getJsonModuleImmutableSettings(array $componentVariation, array &$props) {
+    // protected function getJsonModuleImmutableSettings(array $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$json_settings = parent::getJsonModuleImmutableSettings($componentVariation, $props);
+    // 	$json_settings = parent::getJsonModuleImmutableSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($componentVariation);
+    // 	$processor = $componentprocessor_manager->getProcessor($component);
 
-    // 	$json_settings['modules-cbs'] = $processor->getModulesCbs($componentVariation, $props);
-    // 	$json_settings['modules-paths'] = $processor->getModulesPaths($componentVariation, $props);
-    // 	$json_settings['js-settings'] = $processor->get_js_settings($componentVariation, $props);
+    // 	$json_settings['modules-cbs'] = $processor->getModulesCbs($component, $props);
+    // 	$json_settings['modules-paths'] = $processor->getModulesPaths($component, $props);
+    // 	$json_settings['js-settings'] = $processor->get_js_settings($component, $props);
     // 	$json_settings['jsmethods'] = array(
-    // 		'pagesection' => $processor->getPagesectionJsmethods($componentVariation, $props),
-    // 		'block' => $processor->get_block_jsmethods($componentVariation, $props)
+    // 		'pagesection' => $processor->getPagesectionJsmethods($component, $props),
+    // 		'block' => $processor->get_block_jsmethods($component, $props)
     // 	);
-    // 	$json_settings['templates'] = $processor->getTemplates($componentVariation, $props);
+    // 	$json_settings['templates'] = $processor->getTemplates($component, $props);
 
     // 	return \PoP\Root\App::applyFilters(
     // 		'PoPWebPlatform_Engine:json-module-immutable-settings',
     // 		$json_settings,
-    // 		$componentVariation,
+    // 		$component,
     // 		$props,
     // 		$processor
     // 	);
     // }
 
-    // protected function getJsonModuleMutableonrequestSettings(array $componentVariation, array &$props) {
+    // protected function getJsonModuleMutableonrequestSettings(array $component, array &$props) {
 
     // 	$componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-    // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($componentVariation, $props);
+    // 	$json_runtimesettings = parent::getJsonModuleMutableonrequestSettings($component, $props);
 
     // 	// Otherwise, get the dynamic configuration
-    // 	$processor = $componentprocessor_manager->getProcessor($componentVariation);
+    // 	$processor = $componentprocessor_manager->getProcessor($component);
 
-    // 	$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($componentVariation, $props);
+    // 	$json_runtimesettings['js-settings'] = $processor->get_js_runtimesettings($component, $props);
 
     // 	return $json_runtimesettings;
     // }

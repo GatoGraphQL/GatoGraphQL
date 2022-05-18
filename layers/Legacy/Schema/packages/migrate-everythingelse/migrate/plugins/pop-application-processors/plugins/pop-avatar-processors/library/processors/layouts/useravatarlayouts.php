@@ -9,7 +9,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
     public final const MODULE_LAYOUT_USERAVATAR_150 = 'layout-useravatar-150';
     public final const MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE = 'layout-useravatar-150-responsive';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_LAYOUT_USERAVATAR_40],
@@ -21,7 +21,7 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
         );
     }
 
-    public function getAvatarSize(array $componentVariation)
+    public function getAvatarSize(array $component)
     {
         $avatars = array(
             self::MODULE_LAYOUT_USERAVATAR_40 => GD_AVATAR_SIZE_40,
@@ -32,24 +32,24 @@ class PoP_Module_Processor_CustomUserAvatarLayouts extends PoP_Module_Processor_
             self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE => GD_AVATAR_SIZE_150,
         );
 
-        if ($avatar = $avatars[$componentVariation[1]] ?? null) {
+        if ($avatar = $avatars[$component[1]] ?? null) {
             return $avatar;
         }
 
-        return parent::getAvatarSize($componentVariation);
+        return parent::getAvatarSize($component);
     }
 
-    public function initModelProps(array $componentVariation, array &$props): void
+    public function initModelProps(array $component, array &$props): void
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_LAYOUT_USERAVATAR_40_RESPONSIVE:
             case self::MODULE_LAYOUT_USERAVATAR_120_RESPONSIVE:
             case self::MODULE_LAYOUT_USERAVATAR_150_RESPONSIVE:
-                $this->appendProp($componentVariation, $props, 'class', 'img-responsive');
+                $this->appendProp($component, $props, 'class', 'img-responsive');
                 break;
         }
 
-        parent::initModelProps($componentVariation, $props);
+        parent::initModelProps($component, $props);
     }
 }
 

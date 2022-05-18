@@ -5,7 +5,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
     public final const MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP = 'em-layoutwrapper-postlocationsmap';
     public final const MODULE_EM_LAYOUTWRAPPER_USERLOCATIONSMAP = 'em-layoutwrapper-userlocationsmap';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP],
@@ -13,9 +13,9 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
         );
     }
 
-    public function getLocationlinksTemplate(array $componentVariation)
+    public function getLocationlinksTemplate(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_EM_LAYOUTWRAPPER_POSTLOCATIONSMAP:
                 return [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_POSTSIDEBARLOCATIONS];
             ;
@@ -24,7 +24,7 @@ class GD_EM_Module_Processor_LocationMapConditionWrappers extends GD_EM_Module_P
                 return [PoP_Module_Processor_LocationViewComponentButtons::class, PoP_Module_Processor_LocationViewComponentButtons::MODULE_VIEWCOMPONENT_BUTTON_USERSIDEBARLOCATIONS];
         }
         
-        return parent::getLocationlinksTemplate($componentVariation);
+        return parent::getLocationlinksTemplate($component);
     }
 }
 

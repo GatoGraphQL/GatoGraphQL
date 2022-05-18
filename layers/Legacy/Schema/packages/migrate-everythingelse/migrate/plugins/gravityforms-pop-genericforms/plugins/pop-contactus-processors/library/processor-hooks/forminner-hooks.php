@@ -18,9 +18,9 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
         );
     }
 
-    public function getLayoutSubmodules($layouts, array $componentVariation)
+    public function getLayoutSubmodules($layouts, array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS:
                 $layouts[] = [GD_GF_Module_Processor_TextFormInputs::class, GD_GF_Module_Processor_TextFormInputs::MODULE_GF_FORMINPUT_FORMID];
                 break;
@@ -29,10 +29,10 @@ class PoP_ContactUs_Module_Processor_GFFormInnerHooks
         return $layouts;
     }
 
-    public function initModelProps(array $componentVariation, $props_in_array, $processor)
+    public function initModelProps(array $component, $props_in_array, $processor)
     {
         $props = &$props_in_array[0];
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case PoP_ContactUs_Module_Processor_GFFormInners::MODULE_FORMINNER_CONTACTUS:
                 // Form ID
                 $form_id = PoP_ContactUs_GFHelpers::getContactusFormId();

@@ -8,7 +8,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_API_SOCIALMEDIA = 'viewcomponent-buttoninner-api-socialmedia';
     public final const MODULE_VIEWCOMPONENT_BUTTONINNER_API_PREVIEWDROPDOWN = 'viewcomponent-buttoninner-api-socialmedia-previewdropdown';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA],
@@ -18,9 +18,9 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
         );
     }
     
-    public function getFontawesome(array $componentVariation, array &$props)
+    public function getFontawesome(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_SOCIALMEDIA:
                 return 'fa-fw fa-code fa-lg';
 
@@ -34,12 +34,12 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
                 return 'fa-fw fa-cog';
         }
         
-        return parent::getFontawesome($componentVariation, $props);
+        return parent::getFontawesome($component, $props);
     }
 
-    public function getBtnTitle(array $componentVariation)
+    public function getBtnTitle(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_VIEWCOMPONENT_BUTTONINNER_EMBED_PREVIEWDROPDOWN:
                 return TranslationAPIFacade::getInstance()->__('Embed', 'pop-coreprocessors');
 
@@ -47,7 +47,7 @@ class GD_Core_Bootstrap_Module_Processor_ViewComponentButtonInners extends PoP_M
                 return TranslationAPIFacade::getInstance()->__('API Data', 'pop-coreprocessors');
         }
         
-        return parent::getBtnTitle($componentVariation);
+        return parent::getBtnTitle($component);
     }
 }
 

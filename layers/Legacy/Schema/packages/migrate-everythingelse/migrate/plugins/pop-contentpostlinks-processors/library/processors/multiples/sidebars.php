@@ -4,47 +4,47 @@ class PoP_ContentPostLinks_Module_Processor_SidebarMultiples extends PoP_Module_
 {
     public final const MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR = 'multiple-section-contentpostlinks-sidebar';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR],
         );
     }
 
-    public function getInnerSubmodules(array $componentVariation): array
+    public function getInnerSubmodules(array $component): array
     {
-        $ret = parent::getInnerSubmodules($componentVariation);
+        $ret = parent::getInnerSubmodules($component);
 
         $blocks = array(
             self::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR => [PoP_ContentPostLinks_Module_Processor_SidebarInners::class, PoP_ContentPostLinks_Module_Processor_SidebarInners::MODULE_MULTIPLE_SECTIONINNER_POSTLINKS_SIDEBAR],
         );
-        if ($block = $blocks[$componentVariation[1]] ?? null) {
+        if ($block = $blocks[$component[1]] ?? null) {
             $ret[] = $block;
         }
 
         return $ret;
     }
 
-    public function getScreen(array $componentVariation)
+    public function getScreen(array $component)
     {
         $screens = array(
             self::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR => POP_SCREEN_SECTION,
         );
-        if ($screen = $screens[$componentVariation[1]] ?? null) {
+        if ($screen = $screens[$component[1]] ?? null) {
             return $screen;
         }
 
-        return parent::getScreen($componentVariation);
+        return parent::getScreen($component);
     }
 
-    public function getScreengroup(array $componentVariation)
+    public function getScreengroup(array $component)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_MULTIPLE_SECTION_POSTLINKS_SIDEBAR:
                 return POP_SCREENGROUP_CONTENTREAD;
         }
 
-        return parent::getScreengroup($componentVariation);
+        return parent::getScreengroup($component);
     }
 }
 

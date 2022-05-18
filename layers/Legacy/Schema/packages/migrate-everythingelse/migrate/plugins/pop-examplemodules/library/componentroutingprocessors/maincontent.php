@@ -16,32 +16,32 @@ class MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMain
         return array(
             RequestNature::HOME => [
                 [
-                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_HOME],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_HOME],
                 ],
             ],
             RequestNature::NOTFOUND => [
                 [
-                    'component-variation' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_404],
+                    'component' => [ComponentProcessor_Layouts::class, ComponentProcessor_Layouts::MODULE_EXAMPLE_404],
                 ],
             ],
             TagRequestNature::TAG => [
                 [
-                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_TAG],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_TAG],
                 ],
             ],
             UserRequestNature::USER => [
                 [
-                    'component-variation' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
+                    'component' => [ComponentProcessor_Groups::class, ComponentProcessor_Groups::MODULE_EXAMPLE_AUTHOR],
                 ],
             ],
             CustomPostRequestNature::CUSTOMPOST => [
                 [
-                    'component-variation' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
+                    'component' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_SINGLE],
                 ],
             ],
             PageRequestNature::PAGE => [
                 [
-                    'component-variation' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
+                    'component' => [ComponentProcessor_Dataloads::class, ComponentProcessor_Dataloads::MODULE_EXAMPLE_PAGE],
                 ],
             ],
         );

@@ -8,7 +8,7 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Functions
     //-------------------------------------------------
 
-    public function getLayoutSubmodules(array $componentVariation)
+    public function getLayoutSubmodules(array $component)
     {
         return array();
     }
@@ -17,11 +17,11 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
     // PUBLIC Overriding Functions
     //-------------------------------------------------
 
-    public function getSubComponentVariations(array $componentVariation): array
+    public function getSubComponents(array $component): array
     {
-        $ret = parent::getSubComponentVariations($componentVariation);
+        $ret = parent::getSubComponents($component);
 
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret = array_merge(
                 $ret,
                 $layouts
@@ -31,13 +31,13 @@ abstract class PoP_Module_Processor_StructureInnersBase extends PoPEngine_QueryD
         return $ret;
     }
     
-    public function getImmutableConfiguration(array $componentVariation, array &$props): array
+    public function getImmutableConfiguration(array $component, array &$props): array
     {
         $componentprocessor_manager = ComponentProcessorManagerFacade::getInstance();
 
-        $ret = parent::getImmutableConfiguration($componentVariation, $props);
+        $ret = parent::getImmutableConfiguration($component, $props);
 
-        if ($layouts = $this->getLayoutSubmodules($componentVariation)) {
+        if ($layouts = $this->getLayoutSubmodules($component)) {
             $ret[GD_JS_SUBMODULEOUTPUTNAMES]['layouts'] = array_map(
                 [\PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance(), 'getModuleOutputName'], 
                 $layouts

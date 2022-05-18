@@ -5,21 +5,21 @@ class GD_CAP_Module_Processor_TypeaheadTextFormInputs extends PoP_Module_Process
 {
     public final const MODULE_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS = 'forminput-text-typeaheadpostauthors';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_TEXT_TYPEAHEADPOSTAUTHORS:
                 return TranslationAPIFacade::getInstance()->__('Author(s)', 'pop-coreprocessors');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 }
 

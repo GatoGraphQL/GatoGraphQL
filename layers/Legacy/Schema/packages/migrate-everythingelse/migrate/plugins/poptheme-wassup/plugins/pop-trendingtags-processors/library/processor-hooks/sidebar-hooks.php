@@ -12,13 +12,13 @@ class PoP_TrendingTags_SidebarHooks
         );
     }
 
-    public function getSidebarSubmodules($componentVariations, $screengroup, $screen, array $componentVariation)
+    public function getSidebarSubmodules($components, $screengroup, $screen, array $component)
     {
 
         // Add the Trending Tags to all Groups in the Sideinfo
         // Allow GetPoP to remove it
         $includeScreengroups = \PoP\Root\App::applyFilters(
-            'PoPTheme_Wassup_SidebarHooks:sidebar_componentVariations:includeScreengroups',
+            'PoPTheme_Wassup_SidebarHooks:sidebar_components:includeScreengroups',
             array(
                 POP_SCREENGROUP_CONTENTREAD,
             )
@@ -27,10 +27,10 @@ class PoP_TrendingTags_SidebarHooks
             POP_SCREEN_TAGS,
         );
         if (in_array($screengroup, $includeScreengroups) && !in_array($screen, $exclude_screens)) {
-            $componentVariations[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
+            $components[] = [PoP_TrendingTags_Module_Processor_SectionBlocks::class, PoP_TrendingTags_Module_Processor_SectionBlocks::MODULE_BLOCK_TRENDINGTAGS_SCROLL_LIST];
         }
 
-        return $componentVariations;
+        return $components;
     }
 }
 

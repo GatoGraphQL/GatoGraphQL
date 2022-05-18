@@ -5,31 +5,31 @@ class PoP_SocialNetwork_Module_Processor_TextFormInputs extends PoP_Module_Proce
 {
     public final const MODULE_FORMINPUT_MESSAGESUBJECT = 'gf-field-messagesubject';
 
-    public function getComponentVariationsToProcess(): array
+    public function getComponentsToProcess(): array
     {
         return array(
             [self::class, self::MODULE_FORMINPUT_MESSAGESUBJECT],
         );
     }
 
-    public function getLabelText(array $componentVariation, array &$props)
+    public function getLabelText(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_MESSAGESUBJECT:
                 return  TranslationAPIFacade::getInstance()->__('Subject', 'pop-genericforms');
         }
         
-        return parent::getLabelText($componentVariation, $props);
+        return parent::getLabelText($component, $props);
     }
 
-    public function clearInput(array $componentVariation, array &$props)
+    public function clearInput(array $component, array &$props)
     {
-        switch ($componentVariation[1]) {
+        switch ($component[1]) {
             case self::MODULE_FORMINPUT_MESSAGESUBJECT:
                 return true;
         }
 
-        return parent::clearInput($componentVariation, $props);
+        return parent::clearInput($component, $props);
     }
 }
 
