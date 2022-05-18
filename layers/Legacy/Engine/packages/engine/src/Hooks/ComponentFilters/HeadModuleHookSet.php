@@ -40,14 +40,13 @@ class HeadModuleHookSet extends AbstractHookSet
         );
     }
     
-    public function maybeAddComponent($components)
+    public function maybeAddComponent(array $components): array
     {
         if (App::getState('componentFilter') === $this->headComponent->getName()) {
             if ($headComponent = App::getState('headComponent')) {
                 $components[] = $this->getTranslationAPI()->__('head component:', 'engine') . $this->getModuleHelpers()->getModuleFullName($headComponent);
             }
         }
-
         return $components;
     }
 }
