@@ -11,7 +11,7 @@ class PoP_Module_TabContentPageSectionComponentRoutingProcessor extends PoP_Modu
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

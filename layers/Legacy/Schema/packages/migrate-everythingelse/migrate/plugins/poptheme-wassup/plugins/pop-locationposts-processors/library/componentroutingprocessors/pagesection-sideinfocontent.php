@@ -10,7 +10,7 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionComponentRo
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -48,7 +48,7 @@ class PoPTheme_Wassup_LocationPosts_Module_SideInfoContentPageSectionComponentRo
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

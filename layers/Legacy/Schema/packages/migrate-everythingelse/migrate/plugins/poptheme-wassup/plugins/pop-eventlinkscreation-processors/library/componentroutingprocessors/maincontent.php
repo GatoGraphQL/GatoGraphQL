@@ -7,7 +7,7 @@ class PoP_EventLinksCreation_Module_MainContentComponentRoutingProcessor extends
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

@@ -8,7 +8,7 @@ class Wassup_URE_RoleProcessors_Bootstrap_Module_MainPageSectionComponentRouting
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

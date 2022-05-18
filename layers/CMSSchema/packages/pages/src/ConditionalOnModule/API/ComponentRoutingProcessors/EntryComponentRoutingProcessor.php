@@ -14,7 +14,7 @@ class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProces
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

@@ -7,7 +7,7 @@ class PoPTheme_Wassup_UserLogin_Module_ContentPageSectionTopLevelComponentRoutin
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

@@ -7,7 +7,7 @@ class PoPTheme_Wassup_UserAvatar_Module_MainPageSectionComponentRoutingProcessor
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

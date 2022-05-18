@@ -7,7 +7,7 @@ class PoP_Application_ClusterCommonPages_Module_MainContentComponentRoutingProce
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

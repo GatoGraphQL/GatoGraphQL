@@ -8,7 +8,7 @@ class PoP_Module_BodyFrameBottomOptionsPageSectionComponentRoutingProcessor exte
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

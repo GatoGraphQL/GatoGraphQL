@@ -7,7 +7,7 @@ class PoP_Module_BodyFrameTopOptionsPageSectionComponentRoutingProcessor extends
     /**
      * @return array<array<string, string[]>>
      */
-    public function getModulesVarsProperties(): array
+    public function getStatePropertiesToSelectComponent(): array
     {
         $ret = array();
 

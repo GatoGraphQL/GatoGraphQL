@@ -10,7 +10,7 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -38,7 +38,7 @@ class PoP_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_Mai
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

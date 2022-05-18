@@ -9,7 +9,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends Po
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

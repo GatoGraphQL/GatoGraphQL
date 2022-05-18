@@ -7,7 +7,7 @@ class PoP_CommonPages_UserPlatform_Module_MainContentComponentRoutingProcessor e
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

@@ -12,7 +12,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
     // /**
     //  * @return array<string, array<array>>
     //  */
-    // public function getModulesVarsPropertiesByNature(): array
+    // public function getStatePropertiesToSelectComponentByNature(): array
     // {
     //     $ret = array();
 
@@ -33,7 +33,7 @@ class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends Abstrac
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

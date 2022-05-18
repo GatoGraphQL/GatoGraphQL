@@ -7,7 +7,7 @@ class PoPTheme_Wassup_CPLC_Bootstrap_Module_MainPageSectionComponentRoutingProce
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

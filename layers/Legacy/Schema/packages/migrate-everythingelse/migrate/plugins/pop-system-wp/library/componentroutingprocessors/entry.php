@@ -7,7 +7,7 @@ class PoPSystem_WP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentR
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

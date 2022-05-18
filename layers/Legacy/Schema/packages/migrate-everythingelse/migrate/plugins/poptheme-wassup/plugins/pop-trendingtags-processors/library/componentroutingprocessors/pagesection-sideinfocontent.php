@@ -7,7 +7,7 @@ class PoPTheme_Wassup_TrendingTags_Module_SideInfoContentPageSectionComponentRou
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

@@ -11,7 +11,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -43,7 +43,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 
@@ -78,7 +78,7 @@ class PoP_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP
     /**
      * @return array<array<string, string[]>>
      */
-    public function getModulesVarsProperties(): array
+    public function getStatePropertiesToSelectComponent(): array
     {
         $ret = array();
 

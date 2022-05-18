@@ -9,7 +9,7 @@ class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComp
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

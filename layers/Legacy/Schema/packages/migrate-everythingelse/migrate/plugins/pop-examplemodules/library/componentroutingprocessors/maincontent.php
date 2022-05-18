@@ -11,7 +11,7 @@ class MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMain
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         return array(
             RequestNature::HOME => [

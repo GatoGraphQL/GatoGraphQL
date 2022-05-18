@@ -7,7 +7,7 @@ class PoPTheme_Wassup_SocialNetwork_SocialNetwork_Module_SideInfoContentPageSect
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

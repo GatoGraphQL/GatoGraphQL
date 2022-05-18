@@ -51,7 +51,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
         $most_matching_properties_count = -1; // Start with -1, since 0 matches is possible
 
         foreach ($processors as $processor) {
-            $nature_route_vars_properties = $processor->getModulesVarsPropertiesByNatureAndRoute();
+            $nature_route_vars_properties = $processor->getStatePropertiesToSelectComponentByNatureAndRoute();
 
             // Check if this processor implements modules for this nature and route
             if ($route_vars_properties = $nature_route_vars_properties[$nature] ?? null) {
@@ -82,7 +82,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
 
         // Otherwise, repeat the procedure checking for one level lower: with only the nature
         foreach ($processors as $processor) {
-            $nature_vars_properties = $processor->getModulesVarsPropertiesByNature();
+            $nature_vars_properties = $processor->getStatePropertiesToSelectComponentByNature();
             if ($vars_properties = $nature_vars_properties[$nature] ?? null) {
                 foreach ($vars_properties as $vars_properties_set) {
                     // Check if the all the $vars_properties are satisfied <= if all those key/values are also present in the application state
@@ -104,7 +104,7 @@ abstract class AbstractComponentRoutingProcessorManager implements ComponentRout
 
         // Finally, check without nature or route
         foreach ($processors as $processor) {
-            if ($vars_properties = $processor->getModulesVarsProperties()) {
+            if ($vars_properties = $processor->getStatePropertiesToSelectComponent()) {
                 foreach ($vars_properties as $vars_properties_set) {
                     // Check if the all the $vars_properties are satisfied <= if all those key/values are also present in the application state
                     $conditions = $vars_properties_set['conditions'] ?? [];

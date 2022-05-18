@@ -38,7 +38,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
         $ret[TagRequestNature::TAG][] = [
@@ -66,7 +66,7 @@ class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingPr
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
         /** @var ModuleConfiguration */

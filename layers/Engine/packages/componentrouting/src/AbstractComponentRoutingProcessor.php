@@ -21,7 +21,7 @@ abstract class AbstractComponentRoutingProcessor
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         return array();
     }
@@ -29,7 +29,7 @@ abstract class AbstractComponentRoutingProcessor
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         return array();
     }
@@ -37,7 +37,7 @@ abstract class AbstractComponentRoutingProcessor
     /**
      * @return array<array<string, string[]>>
      */
-    public function getModulesVarsProperties(): array
+    public function getStatePropertiesToSelectComponent(): array
     {
         return array();
     }

@@ -7,7 +7,7 @@ class PoP_LocationPostsCreation_Module_MainContentComponentRoutingProcessor exte
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

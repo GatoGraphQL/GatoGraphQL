@@ -11,7 +11,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 
@@ -95,7 +95,7 @@ class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\A
     /**
      * @return array<string, array<array>>
      */
-    public function getModulesVarsPropertiesByNature(): array
+    public function getStatePropertiesToSelectComponentByNature(): array
     {
         $ret = array();
 

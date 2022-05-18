@@ -7,7 +7,7 @@ class Domain_Module_MainContentComponentRoutingProcessor extends \PoP\Applicatio
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

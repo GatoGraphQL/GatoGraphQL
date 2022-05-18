@@ -8,7 +8,7 @@ class PoPTheme_Wassup_Events_CAP_Module_SideInfoContentPageSectionComponentRouti
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

@@ -9,7 +9,7 @@ class PoP_CategoryPostsProcessors_Module_MainContentComponentRoutingProcessor ex
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

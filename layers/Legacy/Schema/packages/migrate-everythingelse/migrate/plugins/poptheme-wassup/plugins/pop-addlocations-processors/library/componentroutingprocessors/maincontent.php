@@ -7,7 +7,7 @@ class PoP_AddLocations_Module_MainContentComponentRoutingProcessor extends \PoP\
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 

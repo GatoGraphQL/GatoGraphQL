@@ -5,7 +5,7 @@ class PoP_Module_TopContentPageSectionComponentRoutingProcessor extends PoP_Modu
     /**
      * @return array<array<string, string[]>>
      */
-    public function getModulesVarsProperties(): array
+    public function getStatePropertiesToSelectComponent(): array
     {
         $ret = array();
 

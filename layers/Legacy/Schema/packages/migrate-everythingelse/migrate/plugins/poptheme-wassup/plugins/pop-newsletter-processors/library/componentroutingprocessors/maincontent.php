@@ -7,7 +7,7 @@ class Wassup_Newsletter_Module_MainContentComponentRoutingProcessor extends \PoP
     /**
      * @return array<string, array<string, array<array>>>
      */
-    public function getModulesVarsPropertiesByNatureAndRoute(): array
+    public function getStatePropertiesToSelectComponentByNatureAndRoute(): array
     {
         $ret = array();
 
