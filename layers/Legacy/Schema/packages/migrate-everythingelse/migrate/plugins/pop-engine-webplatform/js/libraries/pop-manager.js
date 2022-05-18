@@ -3491,7 +3491,7 @@ window.pop.Manager = {
 		var that = this;
 
 		// Needed for the calendar to know when the element is finally inserted into the DOM, to be able to operate with it
-		$(document).triggerHandler('module:merged');
+		$(document).triggerHandler('component:merged');
 	},
 
 	renderPageSection : function(domain, pageSection, priority, options) {

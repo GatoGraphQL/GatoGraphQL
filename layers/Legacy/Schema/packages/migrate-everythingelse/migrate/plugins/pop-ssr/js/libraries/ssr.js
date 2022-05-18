@@ -12,7 +12,7 @@ window.pop.SSR = {
 
 		if (options['init'] && pop.c.USESERVERSIDERENDERING) {
 
-			// Trigger 'module:merged' for the Events Map to add the markers
+			// Trigger 'component:merged' for the Events Map to add the markers
 			// It must come before the next line, which will execute the JS on all elements
 			// (Eg: then layout-initjs-delay.tmpl works fine)
 			pop.Manager.triggerHTMLMerged();

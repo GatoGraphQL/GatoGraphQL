@@ -201,7 +201,7 @@ window.pop.FullCalendar = {
 		var that = this;
 		var mempage = pop.FullCalendarMemory.getRuntimeMemoryPage(pageSection, block);
 
-		// Upon triggering merged, the popover scripts with code $(document).one('module:merged', ... will get executed
+		// Upon triggering merged, the popover scripts with code $(document).one('component:merged', ... will get executed
 		// run this before executing the JS
 		pop.Manager.triggerHTMLMerged();
 
