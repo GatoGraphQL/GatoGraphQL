@@ -24,7 +24,7 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     use BasicServiceTrait;
 
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
-    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final public function setFieldQueryInterpreter(FieldQueryInterpreterInterface $fieldQueryInterpreter): void
     {
@@ -34,13 +34,13 @@ class DataloadHelperService implements DataloadHelperServiceInterface
     {
         return $this->fieldQueryInterpreter ??= $this->instanceManager->getInstance(FieldQueryInterpreterInterface::class);
     }
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     /**
@@ -107,8 +107,8 @@ class DataloadHelperService implements DataloadHelperServiceInterface
             $module = $moduleValue['module'];
             $value = $moduleValue['value'];
             /** @var FilterInputComponentProcessorInterface */
-            $moduleProcessor = $this->getComponentProcessorManager()->getProcessor($module);
-            $args[$moduleProcessor->getName($module)] = $value;
+            $componentProcessor = $this->getComponentProcessorManager()->getProcessor($module);
+            $args[$componentProcessor->getName($module)] = $value;
         }
         return GeneralUtils::addQueryArgs($args, $url);
     }

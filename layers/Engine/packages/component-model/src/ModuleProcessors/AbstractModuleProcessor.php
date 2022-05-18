@@ -45,7 +45,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModulePathHelpersInterface $modulePathHelpers = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
     private ?NameResolverInterface $nameResolver = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
@@ -76,13 +76,13 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
     {
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {

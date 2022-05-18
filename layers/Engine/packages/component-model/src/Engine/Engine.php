@@ -72,7 +72,7 @@ class Engine implements EngineInterface
     private ?ModulePathManagerInterface $modulePathManager = null;
     private ?FieldQueryInterpreterInterface $fieldQueryInterpreter = null;
     private ?ModuleFilterManagerInterface $moduleFilterManager = null;
-    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
     private ?CheckpointProcessorManagerInterface $checkpointProcessorManager = null;
     private ?DataloadHelperServiceInterface $dataloadHelperService = null;
     private ?EntryComponentManagerInterface $entryComponentManager = null;
@@ -149,13 +149,13 @@ class Engine implements EngineInterface
     {
         return $this->moduleFilterManager ??= $this->instanceManager->getInstance(ModuleFilterManagerInterface::class);
     }
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
     final public function setCheckpointProcessorManager(CheckpointProcessorManagerInterface $checkpointProcessorManager): void
     {

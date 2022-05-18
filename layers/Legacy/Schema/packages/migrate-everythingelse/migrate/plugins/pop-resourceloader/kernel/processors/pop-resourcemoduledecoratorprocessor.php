@@ -29,7 +29,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
     function getResources(array $module, array &$props) {
 
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
 
         // Allow the theme to hook in the needed CSS resources. It could be based on the $module, or its module source, then pass both these values
         global $pop_resourceloaderprocessor_manager;
@@ -75,7 +75,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
         // If not, then keep iterating down the road
         $ret = array();
 
-        $submodules = $this->getDecoratedmoduleProcessor($module)->getAllSubmodules($module);
+        $submodules = $this->getDecoratedcomponentProcessor($module)->getAllSubmodules($module);
         $submodules = $modulefilter_manager->removeExcludedSubmodules($module, $submodules);
 
         // This function must be called always, to register matching modules into requestmeta.filtermodules even when the module has no submodules
@@ -101,8 +101,8 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     function isDynamicModule(array $module, array &$props) {
 
         // // By default: does it have a path?
-        // return $this->getDecoratedmoduleProcessor($module)->getModulePath($module, $props);
-        return $this->getDecoratedmoduleProcessor($module)->getProp($module, $props, 'dynamic-module');
+        // return $this->getDecoratedcomponentProcessor($module)->getModulePath($module, $props);
+        return $this->getDecoratedcomponentProcessor($module)->getProp($module, $props, 'dynamic-module');
     }
 
     // function getModulesResources(array $module, array &$props) {
@@ -113,7 +113,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
     //         $ret[$module[1]] = $resources;
     //     }
 
-    //     foreach ($this->getDecoratedmoduleProcessor($module)->get_descendant_modules_to_propagate($module) as $submodule) {
+    //     foreach ($this->getDecoratedcomponentProcessor($module)->get_descendant_modules_to_propagate($module) as $submodule) {
 
     //         if ($submodule_ret = $this->getComponentProcessordecorator($submodule)->getModulesResources($submodule, $props[$moduleFullName][ComponentModelModuleInfo::get('response-prop-submodules')])) {
 
@@ -129,7 +129,7 @@ class PoP_ResourceModuleDecoratorProcessor extends AbstractModuleDecoratorProces
 
     function getDynamicTemplateResourcesMergedmoduletree(array $module, array &$props) {
 
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If modulepaths is provided, and we haven't reached the destination module yet, then do not execute the function at this level

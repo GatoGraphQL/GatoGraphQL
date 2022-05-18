@@ -11,9 +11,9 @@ class FilterInputHelper
 {
     public static function getFilterInputName(array $filterInputModule): string
     {
-        $moduleProcessorManager = ComponentProcessorManagerFacade::getInstance();
+        $componentProcessorManager = ComponentProcessorManagerFacade::getInstance();
         /** @var FilterInputComponentProcessorInterface */
-        $filterInputComponentProcessor = $moduleProcessorManager->getProcessor($filterInputModule);
+        $filterInputComponentProcessor = $componentProcessorManager->getProcessor($filterInputModule);
         return $filterInputComponentProcessor->getName($filterInputModule);
     }
 }

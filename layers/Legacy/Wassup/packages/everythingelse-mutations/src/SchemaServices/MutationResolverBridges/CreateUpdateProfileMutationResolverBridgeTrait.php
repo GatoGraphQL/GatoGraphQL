@@ -23,8 +23,8 @@ trait CreateUpdateProfileMutationResolverBridgeTrait
     {
         $inputs = MutationResolverUtils::getMyCommunityFormInputs();
         /** @var FormComponentComponentProcessorInterface */
-        $moduleProcessor = $this->getComponentProcessorManager()->getProcessor($inputs['communities']);
-        $communities = $moduleProcessor->getValue($inputs['communities']);
+        $componentProcessor = $this->getComponentProcessorManager()->getProcessor($inputs['communities']);
+        $communities = $componentProcessor->getValue($inputs['communities']);
         return array(
             'communities' => $communities ?? array(),
         );

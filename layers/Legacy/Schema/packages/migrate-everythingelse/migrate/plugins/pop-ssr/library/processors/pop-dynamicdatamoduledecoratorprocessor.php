@@ -22,7 +22,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
 
     public function needsDynamicData(array $module, array &$props)
     {
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
         $needsDynamicData = $processor->getProp($module, $props, 'needs-dynamic-data');
         if (!is_null($needsDynamicData)) {
             return $needsDynamicData;
@@ -44,7 +44,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $ret = array();
 
         // Only if this module loads data
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
         if ($relationalTypeResolver = $processor->getRelationalTypeResolver($module)) {
             if ($properties = $this->getDynamicDatasetmoduletreeSectionFlattenedDataFields($module, $props)) {
                 $ret[POP_CONSTANT_DYNAMICDATAPROPERTIES] = array(
@@ -92,7 +92,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
     //     $ret = array();
 
     //     // Only if this module has a typeResolver
-    //     $processor = $this->getDecoratedmoduleProcessor($module);
+    //     $processor = $this->getDecoratedcomponentProcessor($module);
     //     if ($relationalTypeResolver = $processor->getRelationalTypeResolver($module)) {
 
     //         if ($properties = $this->getMutableonrequestDynamicDataPropertiesDatasetmoduletreeSection($module, $props)) {
@@ -133,7 +133,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // Exclude the subcomponent modules here
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
         if ($submodules = $processor->getModulesToPropagateDataProperties($module)) {
@@ -167,7 +167,7 @@ class PoP_DynamicDataModuleDecoratorProcessor extends AbstractModuleDecoratorPro
         $moduleFullName = \PoP\ComponentModel\Facades\Modules\ModuleHelpersFacade::getInstance()->getModuleFullName($module);
 
         // If it has subcomponent modules, integrate them under 'subcomponents'
-        $processor = $this->getDecoratedmoduleProcessor($module);
+        $processor = $this->getDecoratedcomponentProcessor($module);
         $modulefilter_manager = ModuleFilterManagerFacade::getInstance();
         $modulefilter_manager->prepareForPropagation($module, $props);
         foreach ($processor->getRelationalSubmodules($module) as $relationalModuleField) {

@@ -16,15 +16,15 @@ abstract class AbstractQueryableObjectTypeFieldResolver extends AbstractObjectTy
 {
     use QueryableFieldResolverTrait;
 
-    private ?ComponentProcessorManagerInterface $moduleProcessorManager = null;
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
-    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $moduleProcessorManager): void
+    final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
     {
-        $this->moduleProcessorManager = $moduleProcessorManager;
+        $this->componentProcessorManager = $componentProcessorManager;
     }
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
-        return $this->moduleProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
+        return $this->componentProcessorManager ??= $this->instanceManager->getInstance(ComponentProcessorManagerInterface::class);
     }
 
     public function getFieldFilterInputContainerModule(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?array
