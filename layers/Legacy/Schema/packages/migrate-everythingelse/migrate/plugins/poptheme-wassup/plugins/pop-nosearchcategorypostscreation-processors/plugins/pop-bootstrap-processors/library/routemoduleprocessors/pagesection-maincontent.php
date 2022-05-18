@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class PoP_NoSearchCategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
+class PoP_NoSearchCategoryPostsCreation_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_MainPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -51,7 +51,7 @@ class PoP_NoSearchCategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteMod
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_NoSearchCategoryPostsCreation_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_NoSearchCategoryPostsCreation_Bootstrap_Module_MainPageSectionComponentRoutingProcessor()
 	);
 }, 200);

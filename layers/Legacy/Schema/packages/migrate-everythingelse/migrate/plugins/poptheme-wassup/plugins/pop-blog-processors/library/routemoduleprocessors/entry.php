@@ -1,13 +1,13 @@
 <?php
 
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     // /**
     //  * @return array<string, array<array>>
@@ -115,7 +115,7 @@ class PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor extends AbstractEntr
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-    new PoPTheme_Wassup_Blog_Module_EntryRouteModuleProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+    new PoPTheme_Wassup_Blog_Module_EntryComponentRoutingProcessor(new \PoPAPI\RESTAPI\DataStructureFormatters\RESTDataStructureFormatter())
 	);
 }, 888200);

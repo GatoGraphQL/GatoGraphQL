@@ -7,14 +7,14 @@ namespace PoP\ComponentRouting;
 use PoP\ComponentRouting\Helpers\Methods;
 use PoP\Root\App;
 
-abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcessorManagerInterface
+abstract class AbstractComponentRoutingProcessorManager implements ComponentRoutingProcessorManagerInterface
 {
     /**
-     * @var array<string, AbstractRouteModuleProcessor[]>
+     * @var array<string, AbstractComponentRoutingProcessor[]>
      */
     protected array $processors = [];
 
-    public function addRouteModuleProcessor(AbstractRouteModuleProcessor $processor): void
+    public function addComponentRoutingProcessor(AbstractComponentRoutingProcessor $processor): void
     {
         foreach ($processor->getGroups() as $group) {
             $this->processors[$group] ??= [];
@@ -23,7 +23,7 @@ abstract class AbstractRouteModuleProcessorManager implements RouteModuleProcess
     }
 
     /**
-     * @return AbstractRouteModuleProcessor[]
+     * @return AbstractComponentRoutingProcessor[]
      */
     public function getProcessors(string $group = null): array
     {

@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Application;
 
-class RouteModuleProcessorManager extends \PoP\ComponentModel\ComponentRouting\RouteModuleProcessorManager
+class ComponentRoutingProcessorManager extends \PoP\ComponentModel\ComponentRouting\ComponentRoutingProcessorManager
 {
     public function getDefaultGroup(): string
     {
@@ -14,5 +14,5 @@ add_action('init', function() {
 	/**
 	 * Initialization
 	 */
-	new RouteModuleProcessorManager();
+	new ComponentRoutingProcessorManager();
 }, 200);

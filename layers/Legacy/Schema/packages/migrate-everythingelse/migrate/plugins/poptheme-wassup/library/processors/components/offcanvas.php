@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
 {
@@ -32,7 +32,7 @@ class PoP_Module_Processor_Offcanvas extends PoP_Module_Processor_OffcanvasBase
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_OFFCANVAS_HOVER:

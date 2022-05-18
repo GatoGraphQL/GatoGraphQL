@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class PoPSystem_Module_EntryRouteModuleProcessor extends \PoP\ComponentRouting\AbstractEntryRouteModuleProcessor
+class PoPSystem_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -28,7 +28,7 @@ class PoPSystem_Module_EntryRouteModuleProcessor extends \PoP\ComponentRouting\A
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoPSystem_Module_EntryRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoPSystem_Module_EntryComponentRoutingProcessor()
 	);
 }, 200);

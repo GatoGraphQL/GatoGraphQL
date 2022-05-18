@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Users\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\Users\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Module;
 use PoPCMSSchema\Users\ModuleConfiguration;
 use PoPCMSSchema\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
     protected function getInitialRESTFields(): string
     {

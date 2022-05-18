@@ -1,6 +1,6 @@
 <?php
 
-class PoP_Module_EntryRouteModuleProcessor extends \PoP\ComponentRouting\AbstractEntryRouteModuleProcessor
+class PoP_Module_EntryComponentRoutingProcessor extends \PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor
 {
     /**
      * @return array<array<string, string[]>>
@@ -36,7 +36,7 @@ class PoP_Module_EntryRouteModuleProcessor extends \PoP\ComponentRouting\Abstrac
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-    new PoP_Module_EntryRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+    new PoP_Module_EntryComponentRoutingProcessor()
 	);
 }, 200);

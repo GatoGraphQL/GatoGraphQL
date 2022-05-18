@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\API\RouteModuleProcessors;
+namespace PoPAPI\API\ComponentRoutingProcessors;
 
 use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
      * @return array<string, array<array>>

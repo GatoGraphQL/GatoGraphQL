@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\Posts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use PoP\Root\Routing\RequestNature;
-use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
+use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\AbstractCustomPostRESTEntryComponentRoutingProcessor;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 
-class EntryRouteModuleProcessor extends AbstractCustomPostRESTEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractCustomPostRESTEntryComponentRoutingProcessor
 {
     /**
      * @return array<string, array<array>>

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
-use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
 
-class AbstractCustomPostRESTEntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class AbstractCustomPostRESTEntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
     protected function getInitialRESTFields(): string
     {

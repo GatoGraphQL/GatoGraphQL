@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPAPI\RESTAPI\RouteModuleProcessors;
+namespace PoPAPI\RESTAPI\ComponentRoutingProcessors;
 
 use PoPAPI\API\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoP\Root\App;
 
-class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
     protected function getInitialRESTFields(): string
     {

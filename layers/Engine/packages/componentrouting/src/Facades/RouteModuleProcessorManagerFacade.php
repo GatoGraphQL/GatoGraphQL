@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace PoP\ComponentRouting\Facades;
 
 use PoP\Root\App;
-use PoP\ComponentRouting\RouteModuleProcessorManagerInterface;
+use PoP\ComponentRouting\ComponentRoutingProcessorManagerInterface;
 
-class RouteModuleProcessorManagerFacade
+class ComponentRoutingProcessorManagerFacade
 {
-    public static function getInstance(): RouteModuleProcessorManagerInterface
+    public static function getInstance(): ComponentRoutingProcessorManagerInterface
     {
         /**
-         * @var RouteModuleProcessorManagerInterface
+         * @var ComponentRoutingProcessorManagerInterface
          */
-        $service = App::getContainer()->get(RouteModuleProcessorManagerInterface::class);
+        $service = App::getContainer()->get(ComponentRoutingProcessorManagerInterface::class);
         return $service;
     }
 }

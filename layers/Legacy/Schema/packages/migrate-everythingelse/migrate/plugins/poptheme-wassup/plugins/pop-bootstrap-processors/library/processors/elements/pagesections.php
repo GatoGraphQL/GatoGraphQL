@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 const POP_MODULEID_PAGESECTIONCONTAINERID_HOLE = 'ps-hole';
 const POP_MODULEID_PAGESECTIONCONTAINERID_FRAMECOMPONENTS = 'ps-framecomponents';
@@ -54,7 +54,7 @@ class PoP_Module_Processor_PageSections extends PoP_Module_Processor_MultiplesBa
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGESECTION_QUICKVIEW:

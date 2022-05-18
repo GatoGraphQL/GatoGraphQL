@@ -3,7 +3,7 @@
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -221,7 +221,7 @@ class Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor extends \
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new Wassup_URE_RoleProcessors_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new Wassup_URE_RoleProcessors_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

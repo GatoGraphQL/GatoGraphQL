@@ -6,7 +6,7 @@ use PoPCMSSchema\Pages\Routing\RequestNature as PageRequestNature;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class PoP_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class PoP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -122,7 +122,7 @@ class PoP_Module_MainContentRouteModuleProcessor extends \PoP\Application\Abstra
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

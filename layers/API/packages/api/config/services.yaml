@@ -25,8 +25,8 @@ services:
     PoPAPI\API\Hooks\:
         resource: '../src/Hooks/*'
 
-    PoPAPI\API\RouteModuleProcessors\:
-        resource: '../src/RouteModuleProcessors/*'
+    PoPAPI\API\ComponentRoutingProcessors\:
+        resource: '../src/ComponentRoutingProcessors/*'
 
     PoPAPI\API\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'

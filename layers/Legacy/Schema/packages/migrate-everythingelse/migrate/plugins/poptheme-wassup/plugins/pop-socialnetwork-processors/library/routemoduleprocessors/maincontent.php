@@ -5,7 +5,7 @@ use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -336,7 +336,7 @@ class PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor exten
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoPTheme_Wassup_SocialNetwork_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoPTheme_Wassup_SocialNetwork_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

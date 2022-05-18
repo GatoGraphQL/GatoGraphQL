@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-abstract class AbstractEntryRouteModuleProcessor extends AbstractRouteModuleProcessor
+abstract class AbstractEntryComponentRoutingProcessor extends AbstractComponentRoutingProcessor
 {
     /**
      * @return string[]

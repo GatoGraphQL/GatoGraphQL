@@ -1,6 +1,6 @@
 <?php
 
-abstract class PoP_Module_TabsPageSectionTopLevelRouteModuleProcessorBase extends \PoP\ComponentRouting\AbstractRouteModuleProcessor
+abstract class PoP_Module_TabsPageSectionTopLevelComponentRoutingProcessorBase extends \PoP\ComponentRouting\AbstractComponentRoutingProcessor
 {
     /**
      * @return string[]

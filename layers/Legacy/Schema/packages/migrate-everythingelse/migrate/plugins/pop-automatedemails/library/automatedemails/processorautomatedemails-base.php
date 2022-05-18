@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
 {
@@ -13,7 +13,7 @@ class PoP_ProcessorAutomatedEmailsBase extends PoP_AutomatedEmailsBase
 
     protected function getBlockModule()
     {
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
         return $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
     }
     

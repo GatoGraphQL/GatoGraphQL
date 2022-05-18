@@ -2,7 +2,7 @@
 
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
-class Wassup_EM_CAP_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -36,7 +36,7 @@ class Wassup_EM_CAP_Module_MainContentRouteModuleProcessor extends \PoP\Applicat
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new Wassup_EM_CAP_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new Wassup_EM_CAP_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

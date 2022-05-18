@@ -4,7 +4,7 @@ use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
+class EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_MainPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -63,7 +63,7 @@ class EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Mod
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new EMPoP_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new EMPoP_Bootstrap_Module_MainPageSectionComponentRoutingProcessor()
 	);
 }, 200);

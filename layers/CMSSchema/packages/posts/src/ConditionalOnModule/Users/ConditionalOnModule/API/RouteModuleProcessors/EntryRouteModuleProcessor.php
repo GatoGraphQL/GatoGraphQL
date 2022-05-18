@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\RouteModuleProcessors;
+namespace PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoPCMSSchema\Posts\Module;
 use PoPCMSSchema\Posts\ModuleConfiguration;
 use PoPCMSSchema\Posts\ConditionalOnModule\Users\ConditionalOnModule\API\ModuleProcessors\FieldDataloadModuleProcessor;
 use PoPCMSSchema\Users\Routing\RequestNature;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>

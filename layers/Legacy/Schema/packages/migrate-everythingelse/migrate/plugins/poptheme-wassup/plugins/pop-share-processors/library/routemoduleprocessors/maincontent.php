@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class Wassup_Share_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class Wassup_Share_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -26,7 +26,7 @@ class Wassup_Share_Module_MainContentRouteModuleProcessor extends \PoP\Applicati
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new Wassup_Share_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new Wassup_Share_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

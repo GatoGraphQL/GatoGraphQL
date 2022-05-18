@@ -1,6 +1,6 @@
 <?php
 
-class PoP_Module_SideContentPageSectionRouteModuleProcessor extends PoP_Module_SideContentPageSectionRouteModuleProcessorBase
+class PoP_Module_SideContentPageSectionComponentRoutingProcessor extends PoP_Module_SideContentPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<array<string, string[]>>
@@ -21,7 +21,7 @@ class PoP_Module_SideContentPageSectionRouteModuleProcessor extends PoP_Module_S
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_Module_SideContentPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Module_SideContentPageSectionComponentRoutingProcessor()
 	);
 }, 200);

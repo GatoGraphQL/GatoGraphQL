@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
 {
@@ -31,7 +31,7 @@ class PoP_Module_Processor_Modals extends PoP_Module_Processor_ModalsBase
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_MODAL_QUICKVIEW:

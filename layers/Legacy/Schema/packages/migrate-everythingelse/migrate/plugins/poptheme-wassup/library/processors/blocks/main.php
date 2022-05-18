@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\Root\Facades\Translation\TranslationAPIFacade;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Types\Status;
@@ -191,7 +191,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
 
                 // When loading the whole site, only the main content can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the top widgets
-                $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+                $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
                     $this->getSubmodules($module),
                     [
@@ -285,7 +285,7 @@ class PoP_Module_Processor_MainBlocks extends PoP_Module_Processor_BlocksBase
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_BLOCK_HOME:

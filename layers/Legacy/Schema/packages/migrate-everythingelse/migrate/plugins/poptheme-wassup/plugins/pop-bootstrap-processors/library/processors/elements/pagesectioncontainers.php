@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_MultiplesBase
 {
@@ -19,7 +19,7 @@ class PoP_Module_Processor_PageSectionContainers extends PoP_Module_Processor_Mu
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGESECTIONCONTAINER_HOLE:

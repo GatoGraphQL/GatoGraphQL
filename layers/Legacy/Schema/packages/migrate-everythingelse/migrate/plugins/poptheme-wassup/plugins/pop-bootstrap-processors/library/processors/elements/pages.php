@@ -1,6 +1,6 @@
 <?php
 use PoP\ComponentModel\Misc\RequestUtils;
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\SPA\Modules\PageInterface;
 
 class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_MultiplePageBase implements PageInterface
@@ -41,7 +41,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_ADDONS:
@@ -101,7 +101,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getFrametopoptionsSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:
@@ -138,7 +138,7 @@ class PoP_Module_Processor_Pages extends PoPTheme_Wassup_Module_Processor_Multip
     {
         $ret = parent::getFramebottomoptionsSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_BODY:

@@ -1,6 +1,6 @@
 <?php
 
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
 class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
 {
@@ -77,7 +77,7 @@ class PoP_Module_Processor_Entries extends PoP_Module_Processor_MultiplesBase
 
                 // When loading the whole site, only the main pageSection can have components retrieve params from the $_GET
                 // This way, passing &limit=4 doesn't affect the results on the widgets
-                $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+                $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                 $submodules = array_diff(
                     $this->getSubmodules($module),
                     [

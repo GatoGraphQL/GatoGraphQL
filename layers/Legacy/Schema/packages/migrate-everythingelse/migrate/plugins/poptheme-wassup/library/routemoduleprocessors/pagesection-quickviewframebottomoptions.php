@@ -1,9 +1,9 @@
 <?php
 
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 
-class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionRouteModuleProcessorBase
+class PoP_Module_QuickviewFrameBottomOptionsPageSectionComponentRoutingProcessor extends PoP_Module_QuickviewFrameTopOptionsPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<string, array<array>>
@@ -12,7 +12,7 @@ class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor exte
     {
         $ret = array();
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         // Get the value of the SideInfo Content. If it is not the "Close Sideinfo" module, then we need to add support to toggle the SideInfo
         $load_module = true;
@@ -34,7 +34,7 @@ class PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor exte
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_Module_QuickviewFrameBottomOptionsPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Module_QuickviewFrameBottomOptionsPageSectionComponentRoutingProcessor()
 	);
 }, 200);

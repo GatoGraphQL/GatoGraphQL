@@ -7,7 +7,7 @@ namespace PoP\Root\Helpers;
 class Methods
 {
     /**
-     * This function is an implementation of a recursive `array_intersect_assoc`, so that in the RouteModuleProcessor we can ask for conditions recursively (eg: array('routing' => array('postType' => 'event')))
+     * This function is an implementation of a recursive `array_intersect_assoc`, so that in the ComponentRoutingProcessor we can ask for conditions recursively (eg: array('routing' => array('postType' => 'event')))
      * Modified from https://stackoverflow.com/questions/4627076/php-question-how-to-array-intersect-assoc-recursively
      */
     public static function arrayIntersectAssocRecursive(mixed &$arr1, mixed &$arr2): mixed

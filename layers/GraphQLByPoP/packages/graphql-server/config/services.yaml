@@ -22,8 +22,8 @@ services:
     GraphQLByPoP\GraphQLServer\ModuleProcessors\:
         resource: '../src/ModuleProcessors/*'
 
-    GraphQLByPoP\GraphQLServer\RouteModuleProcessors\:
-        resource: '../src/RouteModuleProcessors/*'
+    GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors\:
+        resource: '../src/ComponentRoutingProcessors/*'
 
     GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot:
         class: \GraphQLByPoP\GraphQLServer\ObjectModels\QueryRoot

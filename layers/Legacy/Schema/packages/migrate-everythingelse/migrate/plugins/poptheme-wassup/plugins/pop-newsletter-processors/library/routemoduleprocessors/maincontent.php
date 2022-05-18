@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class Wassup_Newsletter_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -27,7 +27,7 @@ class Wassup_Newsletter_Module_MainContentRouteModuleProcessor extends \PoP\Appl
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new Wassup_Newsletter_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new Wassup_Newsletter_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

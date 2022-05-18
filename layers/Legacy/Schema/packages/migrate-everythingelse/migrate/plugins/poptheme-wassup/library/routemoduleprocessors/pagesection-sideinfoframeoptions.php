@@ -1,6 +1,6 @@
 <?php
 
-class PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor extends PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessorBase
+class PoP_Module_SideInfoFrameOptionsPageSectionComponentRoutingProcessor extends PoP_Module_SideInfoFrameOptionsPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<array<string, string[]>>
@@ -22,7 +22,7 @@ class PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor extends PoP
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_Module_SideInfoFrameOptionsPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Module_SideInfoFrameOptionsPageSectionComponentRoutingProcessor()
 	);
 }, 200);

@@ -1,8 +1,8 @@
 <?php
 
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 
-class PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessor extends PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessorBase
+class PoP_Module_BodyFrameTopOptionsPageSectionComponentRoutingProcessor extends PoP_Module_BodyFrameTopOptionsPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<array<string, string[]>>
@@ -11,7 +11,7 @@ class PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessor extends PoP_
     {
         $ret = array();
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         // Get the value of the SideInfo Content. If it is not the "Close Sideinfo" block, then we need to add support to toggle the SideInfo
         $load_module = true;
@@ -43,7 +43,7 @@ class PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessor extends PoP_
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoP_Module_BodyFrameTopOptionsPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoP_Module_BodyFrameTopOptionsPageSectionComponentRoutingProcessor()
 	);
 }, 200);

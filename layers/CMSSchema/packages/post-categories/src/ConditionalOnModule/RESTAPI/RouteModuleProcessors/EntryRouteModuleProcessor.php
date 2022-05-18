@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\RouteModuleProcessors;
+namespace PoPCMSSchema\PostCategories\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoPAPI\RESTAPI\RouteModuleProcessors\AbstractRESTEntryRouteModuleProcessor;
+use PoPAPI\RESTAPI\ComponentRoutingProcessors\AbstractRESTEntryComponentRoutingProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Categories\Routing\RequestNature as CategoryRequestNature;
 use PoPCMSSchema\PostCategories\Module;
@@ -17,7 +17,7 @@ use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
 
-class EntryRouteModuleProcessor extends AbstractRESTEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractRESTEntryComponentRoutingProcessor
 {
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 

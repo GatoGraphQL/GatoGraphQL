@@ -6,7 +6,7 @@ use PoP\ComponentModel\Facades\Engine\EngineFacade;
 use PoP\ComponentModel\Facades\ModuleProcessors\ModuleProcessorManagerFacade;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Facades\CustomPostTypeAPIFacade;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
@@ -105,7 +105,7 @@ class PoP_ResourceLoaderProcessorUtils {
         $route_formats = array();
 
         $settingsprocessor_manager = \PoP\ComponentModel\Settings\SettingsProcessorManagerFactory::getInstance();
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
         $routemoduleprocessors = $pop_module_routemoduleprocessor_manager->getProcessors(POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE);
         foreach ($routemoduleprocessors as $routemoduleprocessor) {
             foreach ($routemoduleprocessor->getModulesVarsPropertiesByNatureAndRoute() as $nature => $route_vars_properties) {

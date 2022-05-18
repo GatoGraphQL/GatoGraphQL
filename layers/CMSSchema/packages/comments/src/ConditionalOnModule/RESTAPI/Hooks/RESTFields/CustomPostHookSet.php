@@ -7,7 +7,7 @@ namespace PoPCMSSchema\Comments\ConditionalOnModule\RESTAPI\Hooks\RESTFields;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoPAPI\RESTAPI\Helpers\HookHelpers;
-use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\RouteModuleProcessors\AbstractCustomPostRESTEntryRouteModuleProcessor;
+use PoPCMSSchema\CustomPosts\ConditionalOnModule\RESTAPI\ComponentRoutingProcessors\AbstractCustomPostRESTEntryComponentRoutingProcessor;
 
 class CustomPostHookSet extends AbstractHookSet
 {
@@ -16,7 +16,7 @@ class CustomPostHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addFilter(
-            HookHelpers::getHookName(AbstractCustomPostRESTEntryRouteModuleProcessor::class),
+            HookHelpers::getHookName(AbstractCustomPostRESTEntryComponentRoutingProcessor::class),
             $this->getRESTFields(...)
         );
     }

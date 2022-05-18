@@ -26,7 +26,7 @@ class AppStateProvider extends AbstractAppStateProvider
         $nature = $state['nature'];
         $state['routing']['is-custompost'] = $nature === RequestNature::CUSTOMPOST;
 
-        // Attributes needed to match the RouteModuleProcessor vars conditions
+        // Attributes needed to match the ComponentRoutingProcessor vars conditions
         if ($nature === RequestNature::CUSTOMPOST) {
             $customPostID = $state['routing']['queried-object-id'];
             $state['routing']['queried-object-post-type'] = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);

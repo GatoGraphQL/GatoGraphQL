@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor extends PoP_Module_SideInfoContentPageSectionRouteModuleProcessorBase
+class PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionComponentRoutingProcessor extends PoP_Module_SideInfoContentPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -47,7 +47,7 @@ class PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSe
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoPTheme_Wassup_NoSearchCategoryPostsCreation_Module_SideInfoContentPageSectionComponentRoutingProcessor()
 	);
 }, 200);

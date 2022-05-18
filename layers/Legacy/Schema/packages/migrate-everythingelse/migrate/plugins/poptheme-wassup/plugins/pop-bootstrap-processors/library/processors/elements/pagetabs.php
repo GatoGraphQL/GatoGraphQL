@@ -1,5 +1,5 @@
 <?php
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\SPA\Modules\PageInterface;
 
 class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSectionsBase implements PageInterface
@@ -18,7 +18,7 @@ class PoP_Module_Processor_PageTabs extends PoP_Module_Processor_PageTabPageSect
     {
         $ret = parent::getInnerSubmodules($module);
 
-        $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+        $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
 
         switch ($module[1]) {
             case self::MODULE_PAGE_ADDONTABS:

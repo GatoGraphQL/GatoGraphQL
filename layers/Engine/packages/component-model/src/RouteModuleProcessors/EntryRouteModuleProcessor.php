@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\RouteModuleProcessors;
+namespace PoP\ComponentModel\ComponentRoutingProcessors;
 
 use PoP\ComponentModel\ModuleProcessors\RootModuleProcessors;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     /**
      * @return array<array<string, string[]>>

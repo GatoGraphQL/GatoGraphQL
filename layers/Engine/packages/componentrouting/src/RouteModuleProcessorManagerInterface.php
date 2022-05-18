@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoP\ComponentRouting;
 
-interface RouteModuleProcessorManagerInterface
+interface ComponentRoutingProcessorManagerInterface
 {
-    public function addRouteModuleProcessor(AbstractRouteModuleProcessor $processor): void;
+    public function addComponentRoutingProcessor(AbstractComponentRoutingProcessor $processor): void;
     /**
-     * @return AbstractRouteModuleProcessor[]
+     * @return AbstractComponentRoutingProcessor[]
      */
     public function getProcessors(string $group = null): array;
     public function getDefaultGroup(): string;

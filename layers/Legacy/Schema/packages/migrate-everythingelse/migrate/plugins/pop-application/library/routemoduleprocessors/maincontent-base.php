@@ -1,7 +1,7 @@
 <?php
 namespace PoP\Application;
 
-abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ComponentRouting\AbstractRouteModuleProcessor
+abstract class AbstractMainContentComponentRoutingProcessor extends \PoP\ComponentRouting\AbstractComponentRoutingProcessor
 {
     /**
      * @return string[]
@@ -12,7 +12,7 @@ abstract class AbstractMainContentRouteModuleProcessor extends \PoP\ComponentRou
         // If no group specified, then use the "Content Module" one (initially representing the entry module, and overridable)
         // Is it overridable, so the theme can also set group "Page Section Main Content" in addition
         return \PoP\Root\App::applyFilters(
-            '\PoP\Application\AbstractMainContentRouteModuleProcessor:maincontentgroups',
+            '\PoP\Application\AbstractMainContentComponentRoutingProcessor:maincontentgroups',
             array(
                 POP_PAGEMODULEGROUPPLACEHOLDER_MAINCONTENTMODULE,
             )

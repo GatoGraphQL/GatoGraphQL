@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\RouteModuleProcessors;
+namespace PoPCMSSchema\PostTags\ConditionalOnModule\API\ComponentRoutingProcessors;
 
 use PoP\Root\App;
 use PoPAPI\API\Response\Schemes as APISchemes;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\Posts\Module as PostsModule;
 use PoPCMSSchema\Posts\ModuleConfiguration as PostsModuleConfiguration;
@@ -17,7 +17,7 @@ use PoPCMSSchema\PostTags\ConditionalOnModule\API\ModuleProcessors\TagPostFieldD
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\Routing\RequestNature as TagRequestNature;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 

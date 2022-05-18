@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\ComponentRouting;
 
-use PoP\ComponentRouting\AbstractRouteModuleProcessorManager;
+use PoP\ComponentRouting\AbstractComponentRoutingProcessorManager;
 
-class RouteModuleProcessorManager extends AbstractRouteModuleProcessorManager
+class ComponentRoutingProcessorManager extends AbstractComponentRoutingProcessorManager
 {
 }

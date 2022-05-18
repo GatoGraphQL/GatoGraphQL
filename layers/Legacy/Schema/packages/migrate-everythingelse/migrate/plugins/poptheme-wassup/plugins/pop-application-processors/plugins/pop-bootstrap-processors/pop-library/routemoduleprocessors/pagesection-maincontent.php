@@ -4,7 +4,7 @@ use PoP\Root\Routing\RequestNature;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature as CustomPostRequestNature;
 use PoPCMSSchema\Users\Routing\RequestNature as UserRequestNature;
 
-class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionRouteModuleProcessor extends PoP_Module_MainPageSectionRouteModuleProcessorBase
+class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComponentRoutingProcessor extends PoP_Module_MainPageSectionComponentRoutingProcessorBase
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -59,7 +59,7 @@ class PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionRout
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new PoPTheme_Wassup_ApplicationProcessors_Bootstrap_Module_MainPageSectionComponentRoutingProcessor()
 	);
 }, 200);

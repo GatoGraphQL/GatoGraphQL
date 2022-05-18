@@ -2,7 +2,7 @@
 
 use PoP\Root\Routing\RequestNature;
 
-class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Application\AbstractMainContentRouteModuleProcessor
+class UserStance_URE_Module_MainContentComponentRoutingProcessor extends \PoP\Application\AbstractMainContentComponentRoutingProcessor
 {
     /**
      * @return array<string, array<string, array<array>>>
@@ -83,7 +83,7 @@ class UserStance_URE_Module_MainContentRouteModuleProcessor extends \PoP\Applica
  * Initialization
  */
 add_action('init', function() {
-	\PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade::getInstance()->addRouteModuleProcessor(
-		new UserStance_URE_Module_MainContentRouteModuleProcessor()
+	\PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade::getInstance()->addComponentRoutingProcessor(
+		new UserStance_URE_Module_MainContentComponentRoutingProcessor()
 	);
 }, 200);

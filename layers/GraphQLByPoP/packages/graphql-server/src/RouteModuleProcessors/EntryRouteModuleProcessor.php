@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace GraphQLByPoP\GraphQLServer\RouteModuleProcessors;
+namespace GraphQLByPoP\GraphQLServer\ComponentRoutingProcessors;
 
 use GraphQLByPoP\GraphQLQuery\Schema\OperationTypes;
 use GraphQLByPoP\GraphQLServer\ModuleProcessors\RootRelationalFieldDataloadModuleProcessor;
 use PoPAPI\API\Response\Schemes as APISchemes;
 use PoPAPI\API\Routing\RequestNature;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
-use PoP\ComponentRouting\AbstractEntryRouteModuleProcessor;
+use PoP\ComponentRouting\AbstractEntryComponentRoutingProcessor;
 
-class EntryRouteModuleProcessor extends AbstractEntryRouteModuleProcessor
+class EntryComponentRoutingProcessor extends AbstractEntryComponentRoutingProcessor
 {
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 

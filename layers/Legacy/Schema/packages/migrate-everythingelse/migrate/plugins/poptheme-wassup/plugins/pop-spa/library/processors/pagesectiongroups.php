@@ -2,7 +2,7 @@
 
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\State\ApplicationState;
-use PoP\ComponentRouting\Facades\RouteModuleProcessorManagerFacade;
+use PoP\ComponentRouting\Facades\ComponentRoutingProcessorManagerFacade;
 use PoP\SPA\ModuleFilters\Page;
 
 class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
@@ -18,7 +18,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 
             switch ($module[1]) {
                 case self::MODULE_ENTRY_DEFAULT:
-                    $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+                    $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                     if ($content_pagesection_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)) {
                         $ret[] = $content_pagesection_module;
 
@@ -43,7 +43,7 @@ class PoP_SPA_Module_Processor_Entries extends PoP_Module_Processor_Entries
 
                 case self::MODULE_ENTRY_PRINT:
                 case self::MODULE_ENTRY_EMBED:
-                    $pop_module_routemoduleprocessor_manager = RouteModuleProcessorManagerFacade::getInstance();
+                    $pop_module_routemoduleprocessor_manager = ComponentRoutingProcessorManagerFacade::getInstance();
                     if ($content_pagesection_module = $pop_module_routemoduleprocessor_manager->getRouteModuleByMostAllmatchingVarsProperties(POP_PAGEMODULEGROUP_TOPLEVEL_CONTENTPAGESECTION)) {
                         $ret[] = $content_pagesection_module;
                     }
