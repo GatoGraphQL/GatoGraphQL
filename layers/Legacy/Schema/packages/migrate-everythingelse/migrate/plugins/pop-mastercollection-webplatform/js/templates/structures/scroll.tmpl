@@ -1,4 +1,4 @@
-<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} scroll" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. module=this}}"{{/each}}>
+<div {{#generateId}}{{id}}{{/generateId}} class="{{class}} scroll" style="{{style}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
 	{{{description}}}
 	<div class="{{#each templates.class-extensions}}{{enterTemplate . context=../.}}{{/each}} {{class-merge}} {{classes.inner}} scroll-inner clearfix" style="{{styles.inner}}">
 		{{#withModule . "inner"}}

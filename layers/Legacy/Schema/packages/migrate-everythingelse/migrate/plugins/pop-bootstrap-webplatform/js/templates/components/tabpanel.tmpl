@@ -91,7 +91,7 @@
 					<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.container}}" style="{{../styles.container}}">
 						{{#withModule ../. this}}
 							{{enterModule ../../.}}
-							<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="tab" role="tab" data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../module}}{{/withSublevel}}"></a>
+							<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="tab" role="tab" data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../component}}{{/withSublevel}}"></a>
 						{{/withModule}}
 					</div>
 				</div>

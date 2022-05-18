@@ -1,9 +1,9 @@
 <script type="text/javascript">
 (function($){
-	$(document).one('module:merged', function() {
+	$(document).one('component:merged', function() {
 
-		{{! the "mapdiv-module" gets drawn on the block-toplevel-domain, not on the data domain }}
-		var mapDiv = $('#{{lastGeneratedId module=mapdiv-module domain=bs.toplevel-domain}}');
+		{{! the "mapdiv-component" gets drawn on the block-toplevel-domain, not on the data domain }}
+		var mapDiv = $('#{{lastGeneratedId component=mapdiv-component domain=bs.toplevel-domain}}');
 		var block = pop.Manager.getBlock(mapDiv);
 		var pageSection = pop.Manager.getPageSection(block);
 

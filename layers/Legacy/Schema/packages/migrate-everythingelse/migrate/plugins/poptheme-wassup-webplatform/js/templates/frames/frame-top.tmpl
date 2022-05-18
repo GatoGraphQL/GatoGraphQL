@@ -2,7 +2,7 @@
 	{{#withModule . "block-oursponsors"}}
 		{{#if bs.dbobjectids}}
 			<li class="dropdown nav-sponsors nav-dropdown visiblesearch-visible">
-				<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId module=../module group="void-link"}}{{../id}}-sponsors{{/generateId}} title="{{../titles.sponsors}}">
+				<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId component=../component group="void-link"}}{{../id}}-sponsors{{/generateId}} title="{{../titles.sponsors}}">
 					<span class="glyphicon {{../icons.sponsors}}"></span>
 				</a>
 				<div class="dropdown-menu pull-right" role="menu">
@@ -194,13 +194,13 @@
 	</li>
 	{{#withModule . "block-notifications"}}
 		<li class="dropdown nav-notifications nav-dropdown">
-			<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId module=../module group="notification-link"}}{{../id}}-notificationslink{{/generateId}} title="{{../titles.notifications}}" {{#each ../params.notifications-link}} {{@key}}="{{this}}"{{/each}}>
+			<a href="#" class="dropdown-toggle" {{#generateId targetId=../pss.pssId component=../component group="notification-link"}}{{../id}}-notificationslink{{/generateId}} title="{{../titles.notifications}}" {{#each ../params.notifications-link}} {{@key}}="{{this}}"{{/each}}>
 				<span class="glyphicon {{../icons.notifications}}"></span>
 				<span id="{{../ids.notifications-count}}" class="hidden {{../classes.notifications-count}}" style="{{../styles.notifications-count}}"></span>
 			</a>
 			<div class="dropdown-menu" role="menu">
 				<div class="col-xs-12" id="{{../id}}-notifications">
-					<div {{#generateId targetId=../pss.pssId module=../module group="notifications"}}{{../id}}{{/generateId}} class="{{../classes.notifications}}" style="{{../styles.notifications}}">
+					<div {{#generateId targetId=../pss.pssId component=../component group="notifications"}}{{../id}}{{/generateId}} class="{{../classes.notifications}}" style="{{../styles.notifications}}">
 						{{enterModule .}}
 					</div>
 					<hr/>

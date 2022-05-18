@@ -20,7 +20,7 @@
 	{{/each}}
 
 	{{! The elements below dont exist yet, we must wait until they are inserted into the DOM }}
-	$(document).one('module:merged', function() {
+	$(document).one('component:merged', function() {
 
 		var block = pop.Manager.getBlock($('#{{bs.bId}}'));
 		var pageSection = pop.Manager.getPageSection(block);

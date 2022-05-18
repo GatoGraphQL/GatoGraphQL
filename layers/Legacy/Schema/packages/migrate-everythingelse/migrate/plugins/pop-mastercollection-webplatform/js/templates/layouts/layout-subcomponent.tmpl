@@ -4,12 +4,12 @@
 			{{#withModule ../../../. this}}
 				{{#if ../../../../individual}}
 					{{#each (maybe_make_array ../../.)}}
-						<{{../../../../../html-tag}} class="{{../../../../../class}}" style="{{../../../../../style}}"  {{#each ../../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../../. module=this}}"{{/each}}>
+						<{{../../../../../html-tag}} class="{{../../../../../class}}" style="{{../../../../../style}}"  {{#each ../../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../../. component=this}}"{{/each}}>
 							{{enterModule ../../../../../. subcomponent=../../../../../subcomponent-field objectID=. context=../.}}
 						</{{../../../../../html-tag}}>
 					{{/each}}
 				{{else}}
-					<{{../../../../html-tag}} class="{{../../../../class}}" style="{{../../../../style}}" {{#each ../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. module=this}}"{{/each}}>
+					<{{../../../../html-tag}} class="{{../../../../class}}" style="{{../../../../style}}" {{#each ../../../../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../../../../. component=this}}"{{/each}}>
 						{{enterModule ../../../../. subcomponent=../../../../subcomponent-field dbObjectIDs=../../.}}
 					</{{../../../../html-tag}}>
 				{{/if}}

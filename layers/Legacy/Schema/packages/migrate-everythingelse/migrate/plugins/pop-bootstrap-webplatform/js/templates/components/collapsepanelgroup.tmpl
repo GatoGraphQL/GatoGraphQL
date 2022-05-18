@@ -47,7 +47,7 @@
 				<div id="{{lastGeneratedId context=../. group=../bootstrap-type}}-{{this}}-container" class="body {{get ../body-class this}} {{../classes.body}}" style="{{../styles.body}}">
 					{{#withModule ../. this}}
 						{{enterModule ../../.}}
-						<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="collapse" {{#if ../../close-parent}}data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}"{{/if}} data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../module}}{{/withSublevel}}"></a>
+						<a {{interceptAttr context=../../.}} {{#generateId context=../../. group='interceptor'}}{{../../id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}-{{../this}}" data-toggle="collapse" {{#if ../../close-parent}}data-parent="#{{lastGeneratedId context=../../. group=../../bootstrap-type}}"{{/if}} data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../component}}{{/withSublevel}}"></a>
 					{{/withModule}}
 				</div>
 			</div>

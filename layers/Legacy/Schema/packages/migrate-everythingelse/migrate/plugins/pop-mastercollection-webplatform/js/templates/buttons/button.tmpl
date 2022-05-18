@@ -1,5 +1,5 @@
 {{#with dbObject}}
-	<a {{#if ../url-field}}href="{{get . ../url-field}}"{{/if}} {{#if (or ../linktarget ../linktarget-field)}}target="{{#if ../linktarget}}{{../linktarget}}{{else}}{{get . ../linktarget-field}}{{/if}}"{{/if}} class="{{../classes.link}} {{../classes.btn}} {{../class}} target-{{id}}-{{../tls.domain-id}}" style="{{../styles.link}}{{../styles.btn}}{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../. module=this}}"{{/each}}>
+	<a {{#if ../url-field}}href="{{get . ../url-field}}"{{/if}} {{#if (or ../linktarget ../linktarget-field)}}target="{{#if ../linktarget}}{{../linktarget}}{{else}}{{get . ../linktarget-field}}{{/if}}"{{/if}} class="{{../classes.link}} {{../classes.btn}} {{../class}} target-{{id}}-{{../tls.domain-id}}" style="{{../styles.link}}{{../styles.btn}}{{../style}}" {{#generateId context=../.}}{{../id}}-{{id}}{{/generateId}} title="{{../title}}" {{#each ../params}} {{@key}}="{{this}}"{{/each}} {{#each ../previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../../. component=this}}"{{/each}}>
 		{{#withModule ../. "buttoninner"}}
 			{{enterModule ../../.}}
 		{{/withModule}}

@@ -2,21 +2,21 @@
 	{{#withModule ../. this}}
 		<div {{#generateId context=../../. targetId=../../pss.pssId group='tab'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} role="tabpanel" class="tab-pane {{../../class}}" style="{{../../style}}" {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="pop-header hidden">
-				{{#ifget ../../titles.headers module}}
-					{{{get ../../titles.headers module}}}
+				{{#ifget ../../titles.headers component}}
+					{{{get ../../titles.headers component}}}
 				{{/ifget}}
 			</div>
 			{{enterModule ../../.}}
-			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../../../module}}{{/withSublevel}}" data-title="{{{requestmeta.title}}}"></a>
-			{{#withSublevel ../../module context=../../extra-intercept-urls}}
-				{{#withget . ../../../module}}
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} href="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../../../component}}{{/withSublevel}}" data-title="{{{requestmeta.title}}}"></a>
+			{{#withSublevel ../../component context=../../extra-intercept-urls}}
+				{{#withget . ../../../component}}
 					{{#each .}}
 						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="interceptor"}}{{../../../../../id}}{{../../../../../requestmeta.unique-id}}-{{../../../../this}}-{{@index}}{{/generateId}} href="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='tab'}}" data-toggle="tab" role="tab" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}" data-title="{{{../../../requestmeta.title}}}"></a>
 					{{/each}}
 				{{/withget}}
 			{{/withSublevel}}
 
-			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='tab'}}" data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{#withSublevel ../../../module}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='tab'}}" data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{#withSublevel ../../../component}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
 			{{#each ../../templates.extensions}}
 				{{enterTemplate . context=../../../.}}
 			{{/each}}

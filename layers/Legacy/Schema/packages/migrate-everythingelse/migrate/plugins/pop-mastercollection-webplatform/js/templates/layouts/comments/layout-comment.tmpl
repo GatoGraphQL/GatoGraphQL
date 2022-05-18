@@ -1,5 +1,5 @@
 {{#with dbObject}}
-	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}} pop-comment-{{id}} module-comment" style="{{../style}}">
+	<div {{#generateId context=../.}}{{../id}}{{/generateId}} class="{{../class}} pop-comment-{{id}} component-comment" style="{{../style}}">
 		<div class="comment-layout">
 			<div class="media">
 				{{#withModule ../. "authoravatar"}}
@@ -10,7 +10,7 @@
 					</div>
 				{{/withModule}}
 				<div class="media-body">
-					<div class="module-remove pull-right">
+					<div class="component-remove pull-right">
 						{{#withModule ../. "btn-replycomment"}}
 							{{enterModule ../../.}}
 						{{/withModule}}

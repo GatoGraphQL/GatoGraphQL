@@ -2,12 +2,12 @@
 	<script type="text/javascript">
 	(function($){
 		{{! Use append => newer posts show at the bottom}}
-		$(document).one('module:merged', function() {
+		$(document).one('component:merged', function() {
 			var destination = $('div.pop-append-{{../dbObjectDBKey}}-{{id}}.{{../classes.appendable}}');
 			var controlClass = 'pop-appended-{{../dbKey}}-{{id}}';
 			destination = destination.not('.'+controlClass);
 			{{#if ../do-append}}
-				var current = $('#{{lastGeneratedId context=../. module=../frame-module}}');	
+				var current = $('#{{lastGeneratedId context=../. component=../frame-component}}');	
 				var target = current.closest('.pop-lazyloaded-layout');
 				{{!Allow for customizations. Eg: comments can add in a different destination when the comment is a response to another one}}
 				{{#withModule ../. "layout"}}

@@ -2,23 +2,23 @@
 	{{#withModule ../. this}}
 		<div class="{{../../class}}" style="{{../../style}}" {{#generateId context=../../. targetId=../../pss.pssId group='unit'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}}  {{#each ../../params}} {{@key}}="{{this}}"{{/each}}>
 			<div class="btn-group">
-				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../../../module}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{#iffirstload context=../../.}}active{{/iffirstload}} {{../../classes.btn}} {{../../classes.btn-tab}}" style="{{../../styles.btn}}">
+				<a {{#generateId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} href="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../../../component}}{{/withSublevel}}" role="button" class="pop-pagetab-btn {{#iffirstload context=../../.}}active{{/iffirstload}} {{../../classes.btn}} {{../../classes.btn-tab}}" style="{{../../styles.btn}}">
 					{{enterModule ../../.}}
 				</a>
-				<button type="button" class="pop-closepagetab-btn {{../../classes.btn}} btn-narrow" style="{{../../styles.btn}}" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../../../module}}{{/withSublevel}}">
+				<button type="button" class="pop-closepagetab-btn {{../../classes.btn}} btn-narrow" style="{{../../styles.btn}}" {{#generateId context=../../. targetId=../../pss.pssId group='remove'}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../../../component}}{{/withSublevel}}">
 					<small><span class="glyphicon glyphicon-remove"></span></small>
 				</button>
 			</div>
-			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="activate-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{get . ../../../module}}{{/withSublevel}}" data-title="{{{../../requestmeta.title}}}"></a>
-			{{#withSublevel ../../module context=../../extra-intercept-urls}}
-				{{#withget . ../../../module}}
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="activate-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='pagetab-btn'}}" {{#if ../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{get . ../../../component}}{{/withSublevel}}" data-title="{{{../../requestmeta.title}}}"></a>
+			{{#withSublevel ../../component context=../../extra-intercept-urls}}
+				{{#withget . ../../../component}}
 					{{#each .}}
 						<a {{interceptAttr context=../../../../../.}} {{#generateId context=../../../../../. targetId=../../../../../pss.pssId group="activate-interceptor"}}{{../../../../../id}}{{../../../../../requestmeta.unique-id}}-{{../../../../this}}-{{@index}}{{/generateId}} data-target="#{{lastGeneratedId context=../../../../../. targetId=../../../../../pss.pssId group='pagetab-btn'}}" {{#if ../../../../../intercept-skipstateupdate}}data-intercept-skipstateupdate="true"{{/if}} data-intercept-url="{{this}}" data-title="{{{../../../requestmeta.title}}}"></a>
 					{{/each}}
 				{{/withget}}
 			{{/withSublevel}}
 
-			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='unit'}}" data-intercept-url="{{#withSublevel ../../module context=../../intercept-urls}}{{#withSublevel ../../../module}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
+			<a {{interceptAttr context=../../.}} {{#generateId context=../../. targetId=../../pss.pssId group="destroy-interceptor"}}{{../../id}}{{../../requestmeta.unique-id}}-{{../this}}{{/generateId}} data-target="#{{lastGeneratedId context=../../. targetId=../../pss.pssId group='unit'}}" data-intercept-url="{{#withSublevel ../../component context=../../intercept-urls}}{{#withSublevel ../../../component}}{{destroyUrl this}}{{/withSublevel}}{{/withSublevel}}" data-intercept-skipstateupdate="true"></a>
 			{{#each ../../templates.extensions}}
 				{{enterTemplate . context=../../../.}}
 			{{/each}}

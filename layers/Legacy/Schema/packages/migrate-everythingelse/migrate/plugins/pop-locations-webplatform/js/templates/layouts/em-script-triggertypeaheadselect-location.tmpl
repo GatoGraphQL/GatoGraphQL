@@ -2,8 +2,8 @@
 	<div {{#generateId context=../.}}{{../id}}{{/generateId}} style="display: none;"></div>
 	<script type="text/javascript">
 	(function($){
-		{{! Comment Leo 11/06/2017: do it inside "module:merged", so that it works also for server-side rendering (object pop.Manager is only available at the end)}}
-		$(document).one('module:merged', function() {
+		{{! Comment Leo 11/06/2017: do it inside "component:merged", so that it works also for server-side rendering (object pop.Manager is only available at the end)}}
+		$(document).one('component:merged', function() {
 			var myself = $('#{{lastGeneratedId context=../.}}');
 			var createlocation = myself.closest('.pop-createlocation');
 			var typeahead = $(createlocation.data('typeahead-target'));

@@ -1,3 +1,3 @@
-<button {{#generateId}}{{id}}{{/generateId}} type="{{type}}" class="{{class}}" style="{{style}}" title="{{label}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. module=this}}"{{/each}}>
+<button {{#generateId}}{{id}}{{/generateId}} type="{{type}}" class="{{class}}" style="{{style}}" title="{{label}}" {{#each params}} {{@key}}="{{this}}"{{/each}} {{#each previousmodules-ids}} {{@key}}="#{{lastGeneratedId context=../. component=this}}"{{/each}}>
 	{{#if icon}}<span class="glyphicon {{icon}}"></span> {{/if}}{{#if fontawesome}}<i class="fa fa-fw {{fontawesome}}"></i>{{/if}}{{#if text}}<span class="{{classes.text}} pop-btn-title" style="{{styles.text}}">{{text}}</span>{{/if}}
 </button>

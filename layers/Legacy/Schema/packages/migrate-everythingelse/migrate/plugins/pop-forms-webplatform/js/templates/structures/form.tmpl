@@ -7,6 +7,6 @@
 	</div>
 	{{{description-bottom}}}
 </form>
-{{#ifget intercept-urls module}}
-	<a data-target="#{{lastGeneratedId}}" {{interceptAttr}} {{#generateId group='interceptor'}}{{id}}{{/generateId}} href="#" data-intercept-url="{{#withSublevel module context=intercept-urls}}{{get . ../module}}{{/withSublevel}}"></a>
+{{#ifget intercept-urls component}}
+	<a data-target="#{{lastGeneratedId}}" {{interceptAttr}} {{#generateId group='interceptor'}}{{id}}{{/generateId}} href="#" data-intercept-url="{{#withSublevel component context=intercept-urls}}{{get . ../component}}{{/withSublevel}}"></a>
 {{/ifget}}
