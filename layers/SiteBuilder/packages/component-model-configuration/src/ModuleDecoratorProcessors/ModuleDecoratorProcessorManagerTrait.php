@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\ComponentModel\ModuleDecoratorProcessors;
+namespace PoP\ConfigurationComponentModel\ModuleDecoratorProcessors;
 
 trait ModuleDecoratorProcessorManagerTrait
 {
