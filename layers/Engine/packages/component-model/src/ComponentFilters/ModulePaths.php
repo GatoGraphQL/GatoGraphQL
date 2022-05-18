@@ -94,33 +94,33 @@ class ModulePaths extends AbstractComponentFilter
             return $subComponentVariations;
         }
 
-        // $module_unsettled_path: Start only from the specified module. It is passed under URL param "modulepaths", and it's the list of module paths
+        // $componentVariation_unsettled_path: Start only from the specified module. It is passed under URL param "modulepaths", and it's the list of module paths
         // starting from the entry, and joined by ".", like this: modulepaths[]=toplevel.pagesection-top.frame-top.block-notifications-scroll-list
         // This way, the component can interact with itself to fetch or post data, etc
-        $matching_submodules = array();
+        $matching_subComponentVariations = array();
         foreach ($this->propagation_unsettled_paths as $unsettled_path) {
             // Validate that the current module is at the head of the path
             // This validation will work for the entry module only, since the array_intersect below will guarantee that only the path modules are returned
-            $unsettled_path_module = $unsettled_path[0];
+            $unsettled_path_componentVariation = $unsettled_path[0];
             if (count($unsettled_path) == 1) {
                 // We reached the end of the unsettled path => from now on, all modules must be included
-                if ($unsettled_path_module == $componentVariation) {
+                if ($unsettled_path_componentVariation == $componentVariation) {
                     return $subComponentVariations;
                 }
             } else {
-                // Then, check that the following element in the unsettled_path, which is the submodule, is on the submodules
-                $unsettled_path_submodule = $unsettled_path[1];
-                if ($unsettled_path_module == $componentVariation && in_array($unsettled_path_submodule, $subComponentVariations) && !in_array($unsettled_path_submodule, $matching_submodules)) {
-                    $matching_submodules[] = $unsettled_path_submodule;
+                // Then, check that the following element in the unsettled_path, which is the subComponentVariation, is on the subComponentVariations
+                $unsettled_path_subComponentVariation = $unsettled_path[1];
+                if ($unsettled_path_componentVariation == $componentVariation && in_array($unsettled_path_subComponentVariation, $subComponentVariations) && !in_array($unsettled_path_subComponentVariation, $matching_subComponentVariations)) {
+                    $matching_subComponentVariations[] = $unsettled_path_subComponentVariation;
                 }
             }
         }
 
-        return $matching_submodules;
+        return $matching_subComponentVariations;
     }
 
     /**
-     * The `prepare` function advances the modulepath one level down, when interating into the submodules, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the modulepath one level down, when interating into the subComponentVariations, and then calling `restore` the value goes one level up again
      */
     public function prepareForPropagation(array $componentVariation, array &$props): void
     {
@@ -133,8 +133,8 @@ class ModulePaths extends AbstractComponentFilter
 
             $matching_unsettled_paths = array();
             foreach ($this->propagation_unsettled_paths as $unsettled_path) {
-                $module_unsettled_path = $unsettled_path[0];
-                if ($module_unsettled_path == $componentVariation) {
+                $componentVariation_unsettled_path = $unsettled_path[0];
+                if ($componentVariation_unsettled_path == $componentVariation) {
                     array_shift($unsettled_path);
                     // If there are still elements, then add it to the list
                     if ($unsettled_path) {
